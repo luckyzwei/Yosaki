@@ -1,0 +1,408 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using BackEnd;
+using LitJson;
+using System;
+using UniRx;
+
+public enum StatusWhere
+{
+    gold, statpoint, memory
+}
+
+
+
+public class StatusTable
+{
+    public static string Indate;
+    public const string tableName = "Status";
+    public const string Level = "Level";
+    public const string SkillPoint = "SkillPoint";
+    public const string StatPoint = "StatPoint";
+    public const string Memory = "memory";
+
+    public const string IntLevel_Gold = "IntLevel_Gold";
+    public const string CriticalLevel_Gold = "CriticalLevel_Gold";
+    public const string CriticalDamLevel_Gold = "CriticalDamLevel_Gold";
+    public const string HpLevel_Gold = "HpLevel_Gold";
+    public const string MpLevel_Gold = "MpLevel_Gold";
+    public const string HpRecover_Gold = "HpRecover_Gold";
+    public const string MpRecover_Gold = "MpRecover_Gold";
+
+    public const string IntLevelAddPer_StatPoint = "IntLevelAddPer_StatPoint";
+    public const string CriticalLevel_StatPoint = "CriticalLevel_StatPoint";
+    public const string CriticalDamLevel_StatPoint = "CriticalDamLevel_StatPoint";
+    public const string GoldGain_StatPoint = "GoldGain_StatPoint";
+    public const string ExpGain_StatPoint = "ExpGain_StatPoint";
+    public const string HpPer_StatPoint = "HpPer_StatPoint";
+    public const string MpPer_StatPoint = "MpPer_StatPoint";
+
+    public const string DamageBalance_memory = "DamageBalance_memory";
+    public const string SkillDamage_memory = "SkillDamage_memory";
+    public const string SkillCoolTime_memory = "SkillCoolTime_memory";
+    public const string CriticalLevel_memory = "CriticalLevel_memory";
+    public const string CriticalDamLevel_memory = "CriticalDamLevel_memory";
+
+
+
+
+
+    private Dictionary<string, int> tableSchema = new Dictionary<string, int>()
+    {
+        {Level,1},
+        {SkillPoint,GameBalance.SkillPointGet},
+        {StatPoint,0},
+        {Memory,0},
+
+        {IntLevel_Gold,1},
+        {CriticalLevel_Gold,1},
+        {CriticalDamLevel_Gold,1},
+        {HpLevel_Gold,1},
+        {MpLevel_Gold,1},
+        {HpRecover_Gold,1},
+        {MpRecover_Gold,1},
+
+        //스텟초기화도 같이추가해
+        {IntLevelAddPer_StatPoint,1},
+        {CriticalLevel_StatPoint,1},
+        {CriticalDamLevel_StatPoint,1},
+        {GoldGain_StatPoint,1},
+        {ExpGain_StatPoint,1},
+        {HpPer_StatPoint,1},
+        {MpPer_StatPoint,1},
+        //스텟초기화도 같이추가해
+
+        {DamageBalance_memory,1},
+        {SkillDamage_memory,1},
+        {SkillCoolTime_memory,1},
+        {CriticalLevel_memory,1},
+        {CriticalDamLevel_memory,1},
+    };
+
+    private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();
+
+    public void SyncAllData()
+    {
+        Param param = new Param();
+
+        var e = tableSchema.GetEnumerator();
+        while (e.MoveNext())
+        {
+            param.Add(e.Current.Key, tableDatas[e.Current.Key].Value);
+        }
+
+        SendQueue.Enqueue(Backend.GameData.Update, tableName, Indate, param, bro =>
+        {
+            if (bro.IsSuccess() == false)
+            {
+                PopupManager.Instance.ShowAlarmMessage("데이터 동기화 실패\n재접속 후에 다시 시도해보세요");
+                return;
+            }
+        });
+    }
+
+    public ReactiveProperty<int> GetTableData(string key)
+    {
+        return tableDatas[key];
+    }
+    public float GetStatusValue(string key)
+    {
+        return GetStatusValue(key, tableDatas[key].Value);
+    }
+    public float GetStatusValue(string key, float level)
+    {
+        if (TableManager.Instance.StatusDatas.TryGetValue(key, out var data))
+        {
+            switch (key)
+            {
+                #region Gold
+                case IntLevel_Gold:
+                    {
+                        return Mathf.Pow(level, 1.07f) + 10;
+                    }
+                    break;
+                case CriticalLevel_Gold:
+                    {
+                        return level * 0.0002f;
+                    }
+                    break;
+                case CriticalDamLevel_Gold:
+                    {
+                        return level * 0.003f;
+                    }
+                    break;
+
+                case HpLevel_Gold:
+                    {
+                        return GameBalance.initHp + level * 50f;
+                    }
+                    break;
+                case MpLevel_Gold:
+                    {
+                        //합 무조건 100
+                        return GameBalance.initMp + level * 50f;
+                    }
+                    break;
+                case HpRecover_Gold:
+                    {
+                        return level * 0.0001f;
+                    }
+                    break;
+                case MpRecover_Gold:
+                    {
+                        return level * 0.0001f;
+                    }
+                    break;
+                #endregion
+                #region Stat
+                case IntLevelAddPer_StatPoint:
+                    {
+                        return level * 0.01f;
+                    }
+                    break;
+                case CriticalLevel_StatPoint:
+                    {
+                        return level * 0.0005f;
+                    }
+                    break;
+                case CriticalDamLevel_StatPoint:
+                    {
+                        return level * 0.01f;
+                    }
+                    break;
+                case GoldGain_StatPoint:
+                    {
+                        return level * 0.005f;
+                    }
+                    break;
+                case ExpGain_StatPoint:
+                    {
+                        return level * 0.005f;
+                    }
+                    break;
+                case HpPer_StatPoint:
+                    {
+                        return level * 0.005f;
+                    }
+                    break;
+                case MpPer_StatPoint:
+                    {
+                        return level * 0.005f;
+                    }
+                    break;
+                #endregion
+                #region Memory
+                case DamageBalance_memory:
+                    {
+                        return level * 0.002f;
+                    }
+                    break;
+                case SkillDamage_memory:
+                    {
+                        return level * 0.003f;
+                    }
+                    break;
+                case SkillCoolTime_memory:
+                    {
+                        return level * 0.0005f;
+                    }
+                    break;
+                case CriticalLevel_memory:
+                    {
+                        return level * 0.001f;
+                    }
+                    break;
+                case CriticalDamLevel_memory:
+                    {
+                        return level * 0.01f;
+                    }
+                    break;
+
+                #endregion
+                default:
+                    {
+                        return 0f;
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            return 0f;
+        }
+
+        return 0f;
+    }
+
+    public float GetStatusUpgradePrice(string key, int level)
+    {
+        if (TableManager.Instance.StatusDatas.TryGetValue(key, out var data))
+        {
+            switch (key)
+            {
+                case IntLevel_Gold:
+                    {
+                        return (Mathf.Pow(level, 2.9f + (level / 1000) * 0.1f));
+                    }
+                    break;
+                case CriticalDamLevel_Gold:
+                case CriticalLevel_Gold:
+                case HpLevel_Gold:
+                case MpLevel_Gold:
+                case HpRecover_Gold:
+                case MpRecover_Gold:
+                    {
+                        return Mathf.Pow(level, 3.0f + (level / 100) * 0.1f);
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            Debug.LogError($"key {key} is not exist in GetStatusUpgradePrice");
+            return -1f;
+        }
+
+        return -1f;
+    }
+
+    public void Initialize()
+    {
+        tableDatas.Clear();
+
+        SendQueue.Enqueue(Backend.GameData.GetMyData, tableName, new Where(), callback =>
+         {
+             // 이후 처리
+             if (callback.IsSuccess() == false)
+             {
+                 Debug.LogError("LoadStatusFailed");
+                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, CommonString.DataLoadFailedRetry, Initialize);
+                 return;
+             }
+
+             var rows = callback.Rows();
+
+             //맨처음 초기화
+             if (rows.Count <= 0)
+             {
+                 Param defultValues = new Param();
+
+                 var e = tableSchema.GetEnumerator();
+
+                 while (e.MoveNext())
+                 {
+                     defultValues.Add(e.Current.Key, e.Current.Value);
+                     tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(e.Current.Value));
+                 }
+
+                 var bro = Backend.GameData.Insert(tableName, defultValues);
+
+                 if (bro.IsSuccess() == false)
+                 {
+                     // 이후 처리
+                     DatabaseManager.ShowCommonErrorPopup(bro, Initialize);
+                     return;
+                 }
+                 else
+                 {
+
+                     var jsonData = bro.GetReturnValuetoJSON();
+                     if (jsonData.Keys.Count > 0)
+                     {
+
+                         Indate = jsonData[0].ToString();
+
+                     }
+
+                     // data.
+                     // statusIndate = data[DatabaseManager.inDate_str][DatabaseManager.format_string].ToString();
+                 }
+
+                 return;
+             }
+             //나중에 칼럼 추가됐을때 업데이트
+             else
+             {
+                 Param defultValues = new Param();
+                 int paramCount = 0;
+
+                 JsonData data = rows[0];
+
+                 if (data.Keys.Contains(DatabaseManager.inDate_str))
+                 {
+                     Indate = data[DatabaseManager.inDate_str][DatabaseManager.format_string].ToString();
+                 }
+
+                 var e = tableSchema.GetEnumerator();
+
+                 for (int i = 0; i < data.Keys.Count; i++)
+                 {
+                     while (e.MoveNext())
+                     {
+                         if (data.Keys.Contains(e.Current.Key))
+                         {
+                             //값로드
+                             var value = data[e.Current.Key][DatabaseManager.format_Number].ToString();
+                             tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(Int32.Parse(value)));
+                         }
+                         else
+                         {
+                             defultValues.Add(e.Current.Key, e.Current.Value);
+                             tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(e.Current.Value));
+                             paramCount++;
+                         }
+                     }
+                 }
+
+                 if (paramCount != 0)
+                 {
+                     var bro = Backend.GameData.Update(tableName, Indate, defultValues);
+
+                     if (bro.IsSuccess() == false)
+                     {
+                         DatabaseManager.ShowCommonErrorPopup(bro, Initialize);
+                         return;
+                     }
+                 }
+
+             }
+         });
+    }
+
+    public void UpData(string key, bool localOnly)
+    {
+        if (tableDatas.ContainsKey(key) == false)
+        {
+            Debug.Log($"Status {key} is not exist");
+            return;
+        }
+
+        UpData(key, tableDatas[key].Value, localOnly);
+    }
+
+    public void UpData(string key, int data, bool localOnly)
+    {
+        if (tableDatas.ContainsKey(key) == false)
+        {
+            Debug.Log($"Status {key} is not exist");
+            return;
+        }
+        tableDatas[key].Value = data;
+
+        if (localOnly == false)
+        {
+            Param param = new Param();
+            param.Add(key, tableDatas[key].Value);
+
+            SendQueue.Enqueue(Backend.GameData.Update, tableName, Indate, param, e =>
+            {
+                if (e.IsSuccess() == false)
+                {
+                    Debug.Log($"Status {key} up failed");
+                    return;
+                }
+            });
+        }
+    }
+}

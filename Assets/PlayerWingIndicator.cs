@@ -1,0 +1,35 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UniRx;
+public class PlayerWingIndicator : MonoBehaviour
+{
+    private GameObject currentWingObject;
+
+    void Start()
+    {
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).AsObservable().Subscribe(e =>
+        {
+            if (e == -1)
+            {
+
+            }
+            else
+            {
+                if (currentWingObject != null)
+                {
+                    GameObject.Destroy(currentWingObject);
+                }
+
+                currentWingObject = Instantiate<GameObject>(CommonUiContainer.Instance.wingList[(int)e], this.transform);
+
+                currentWingObject.transform.localPosition = Vector3.zero;
+            }
+        }).AddTo(this);
+    }
+}

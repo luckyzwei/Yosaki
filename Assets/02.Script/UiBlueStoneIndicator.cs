@@ -1,0 +1,24 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UniRx;
+
+public class UiBlueStoneIndicator : MonoBehaviour
+{
+    [SerializeField]
+    private TextMeshProUGUI goldText;
+
+    void Start()
+    {
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).AsObservable().Subscribe(blueStone =>
+        {
+            goldText.SetText($"{Utils.ConvertBigFloat(blueStone)}");
+        }).AddTo(this);
+    }
+}

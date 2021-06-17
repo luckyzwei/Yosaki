@@ -1,0 +1,207 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf09807de0f3bd41b198ba99e3c82f1, type: 3}
+  m_Name: StatusSetting
+  m_EditorClassIdentifier: 
+  SheetName: Assets/06.Table/StatusSetting.xlsx
+  WorksheetName: StatusSetting
+  dataArray:
+  - key: IntLevel_Gold
+    description: "\uB9C8\uBC95\uACF5\uACA9\uB825"
+    statuswhere: 0
+    maxlv: 35000
+    active: 1
+    ispercent: 0
+    basevalue: 10
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 11
+  - key: CriticalLevel_Gold
+    description: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960"
+    statuswhere: 0
+    maxlv: 1000
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 1
+  - key: CriticalDamLevel_Gold
+    description: "\uD06C\uB9AC\uD2F0\uCEEC \uB370\uBBF8\uC9C0"
+    statuswhere: 0
+    maxlv: 1500
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 2
+  - key: HpLevel_Gold
+    description: "\uCCB4\uB825"
+    statuswhere: 0
+    maxlv: 2500
+    active: 1
+    ispercent: 0
+    basevalue: 10
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 12
+  - key: MpLevel_Gold
+    description: "\uB9C8\uB825"
+    statuswhere: 0
+    maxlv: 2000
+    active: 1
+    ispercent: 0
+    basevalue: 10
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 13
+  - key: HpRecover_Gold
+    description: "\uCCB4\uB825\uD68C\uBCF5"
+    statuswhere: 0
+    maxlv: 2000
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: 
+    statustype: 14
+  - key: MpRecover_Gold
+    description: "\uB9C8\uB825\uD68C\uBCF5"
+    statuswhere: 0
+    maxlv: 1000
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: 
+    statustype: 15
+  - key: IntLevelAddPer_StatPoint
+    description: "\uACF5\uACA9\uB825\uC99D\uAC00"
+    statuswhere: 1
+    maxlv: 4000
+    active: 1
+    ispercent: 1
+    basevalue: 10
+    addvalue: 0
+    destable: 
+    statustype: 0
+  - key: CriticalLevel_StatPoint
+    description: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960"
+    statuswhere: 1
+    maxlv: 400
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 1
+  - key: CriticalDamLevel_StatPoint
+    description: "\uD06C\uB9AC\uD2F0\uCEEC \uB370\uBBF8\uC9C0"
+    statuswhere: 1
+    maxlv: 2000
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 2
+  - key: GoldGain_StatPoint
+    description: "\uACE8\uB4DC \uD68D\uB4DD\uB7C9(\uC801\uCC98\uCE58)"
+    statuswhere: 1
+    maxlv: 400
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 9
+  - key: ExpGain_StatPoint
+    description: "\uACBD\uD5D8\uCE58 \uD68D\uB4DD\uB7C9(\uC801\uCC98\uCE58)"
+    statuswhere: 1
+    maxlv: 400
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 10
+  - key: HpPer_StatPoint
+    description: "\uCCB4\uB825 \uC99D\uAC00(%)"
+    statuswhere: 1
+    maxlv: 400
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 0.5
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 7
+  - key: MpPer_StatPoint
+    description: "\uB9C8\uB825 \uC99D\uAC00(%)"
+    statuswhere: 1
+    maxlv: 250
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 0.5
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 8
+  - key: DamageBalance_memory
+    description: "\uB370\uBBF8\uC9C0 \uBC38\uB7F0\uC2A4"
+    statuswhere: 2
+    maxlv: 100
+    active: 1
+    ispercent: 1
+    basevalue: 10
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644\uB8CC/\uAE30\uBCF8\uAC12 0.8~1.2"
+    statustype: 6
+  - key: SkillDamage_memory
+    description: "\uC2A4\uD0AC\uB370\uBBF8\uC9C0"
+    statuswhere: 2
+    maxlv: 1500
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 4
+  - key: SkillCoolTime_memory
+    description: "\uC2A4\uD0AC\uCFE8\uD0C0\uC784"
+    statuswhere: 2
+    maxlv: 200
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 3
+  - key: CriticalLevel_memory
+    description: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960"
+    statuswhere: 2
+    maxlv: 300
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: 
+    statustype: 1
+  - key: CriticalDamLevel_memory
+    description: "\uD06C\uB9AC\uD2F0\uCEEC \uB370\uBBF8\uC9C0"
+    statuswhere: 2
+    maxlv: 2000
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 1
+    destable: "\uAD6C\uD604\uC644"
+    statustype: 2

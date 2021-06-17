@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: fx_wing_x_shaderforge
+  m_Shader: {fileID: 4800000, guid: b43218703b3a4ea41a1caacba0b4ee26, type: 3}
+  m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _wing
+        second:
+          m_Texture: {fileID: 2800000, guid: d1a8e1718773b9b498c9762874c0a5e9, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _dust
+        second:
+          m_Texture: {fileID: 2800000, guid: ff2e77283ac27c54d8b818dc6c5bfee8, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _mask
+        second:
+          m_Texture: {fileID: 2800000, guid: 23c004c54d157db45ab409248b7034d0, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _wing_intensity
+        second: 1
+      data:
+        first:
+          name: _wing_speed
+        second: 1
+      data:
+        first:
+          name: _dust_UV
+        second: .5
+      data:
+        first:
+          name: _dust_intensity
+        second: 2
+      data:
+        first:
+          name: _dust_speed
+        second: .100000001
+      data:
+        first:
+          name: _dust_select
+        second: 0
+    m_Colors:
+      data:
+        first:
+          name: _wing_color
+        second: {r: .604462504, g: .448529422, b: 1, a: 1}
+      data:
+        first:
+          name: _dust_color
+        second: {r: .446247518, g: .227941155, b: 1, a: 1}
+      data:
+        first:
+          name: _node_2884
+        second: {r: .5, g: .5, b: .5, a: 1}
