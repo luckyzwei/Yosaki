@@ -58,6 +58,9 @@ public class UiStatusUpgradeCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI upgradeText;
 
+    [SerializeField]
+    private GameObject allUpgradeButton;
+
     private void OnDestroy()
     {
         if (CoroutineExecuter.Instance == null) return;
@@ -84,6 +87,8 @@ public class UiStatusUpgradeCell : MonoBehaviour
     public void Initialize(StatusSettingData statusData)
     {
         this.statusData = statusData;
+
+        allUpgradeButton.SetActive(statusData.STATUSWHERE != StatusWhere.gold);
 
         memoryIcon.SetActive(statusData.STATUSWHERE == StatusWhere.memory);
 
@@ -366,10 +371,90 @@ public class UiStatusUpgradeCell : MonoBehaviour
         }
     }
 
+    public void OnClickAllUpgradeButton()
+    {
+        if (statusData.STATUSWHERE == StatusWhere.statpoint)
+        {
+            int currentStatPoint = DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).Value;
+
+            if (currentStatPoint <= 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("스텟포인트가 부족합니다.");
+                return;
+            }
+
+            if (IsMaxLevel())
+            {
+                PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
+                return;
+            }
+
+            int currentLevel = DatabaseManager.statusTable.GetTableData(statusData.Key).Value;
+            int maxLevel = statusData.Maxlv;
+            int upgradableAmount = maxLevel - currentLevel;
+
+            //맥스렙 가능
+            if (currentStatPoint >= upgradableAmount)
+            {
+                DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).Value -= upgradableAmount;
+                DatabaseManager.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+            }
+            else
+            {
+                DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).Value -= currentStatPoint;
+                DatabaseManager.statusTable.GetTableData(statusData.Key).Value += currentStatPoint;
+            }
+        }
+        else if (statusData.STATUSWHERE == StatusWhere.memory)
+        {
+            int currentMemoryPoint = DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value;
+
+            if (currentMemoryPoint <= 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("기억의 조각이 부족합니다.");
+                return;
+            }
+
+            if (IsMaxLevel())
+            {
+                PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
+                return;
+            }
+
+            int currentLevel = DatabaseManager.statusTable.GetTableData(statusData.Key).Value;
+            int maxLevel = statusData.Maxlv;
+            int upgradableAmount = maxLevel - currentLevel;
+
+            //맥스렙 가능
+            if (currentMemoryPoint >= upgradableAmount)
+            {
+                DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value -= upgradableAmount;
+                DatabaseManager.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+            }
+            else
+            {
+                DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value -= currentMemoryPoint;
+                DatabaseManager.statusTable.GetTableData(statusData.Key).Value += currentMemoryPoint;
+            }
+        }
+
+        //싱크
+        SyncData();
+
+        SetUpgradeButtonState(CanUpgrade());
+    }
+
     private IEnumerator SaveRoutine()
     {
         yield return autuSaveDelay;
 
+        SyncData();
+
+        saveRoutine = null;
+    }
+
+    private void SyncData() 
+    {
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         Param statusParam = new Param();
@@ -397,7 +482,5 @@ public class UiStatusUpgradeCell : MonoBehaviour
         transactionList.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
 
         DatabaseManager.SendTransaction(transactionList);
-
-        saveRoutine = null;
     }
 }

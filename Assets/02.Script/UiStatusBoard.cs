@@ -64,7 +64,7 @@ public class UiStatusBoard : MonoBehaviour
 
     public void OnClickStatResetButton()
     {
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "스텟 능력치를 초기화 합니까?", () => 
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "스텟 능력치를 초기화 합니까?", () =>
         {
             DatabaseManager.statusTable.GetTableData(StatusTable.IntLevelAddPer_StatPoint).Value = 1;
             DatabaseManager.statusTable.GetTableData(StatusTable.CriticalLevel_StatPoint).Value = 1;
@@ -79,5 +79,33 @@ public class UiStatusBoard : MonoBehaviour
         }, null);
 
 
+    }
+
+    public void OnClickMemoryResetButton()
+    {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "기억 능력치를 초기화 합니까?", () =>
+        {
+            string log = $"보유 {DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value}";
+
+            var e = TableManager.Instance.StatusDatas.GetEnumerator();
+
+            int usedPoint = 0;
+
+            while (e.MoveNext())
+            {
+                if (e.Current.Value.STATUSWHERE != StatusWhere.memory) continue;
+                usedPoint += (DatabaseManager.statusTable.GetTableData(e.Current.Value.Key).Value - 1);
+                DatabaseManager.statusTable.GetTableData(e.Current.Value.Key).Value = 1;
+            }
+
+            log += $"획득수량 {usedPoint}";
+
+            DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value += usedPoint;
+            log += $"최종 {DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value}";
+
+            DatabaseManager.statusTable.SyncAllData();
+
+            LogManager.Instance.SendLog("기억 능력치 초기화", log);
+        }, null);
     }
 }
