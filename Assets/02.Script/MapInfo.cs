@@ -108,6 +108,12 @@ public class MapInfo : SingletonMono<MapInfo>
         //초기딜레이
         yield return new WaitForSeconds(2.0f);
 
+        if (UiAutoRevive.autoRevive)
+        {
+            UiAutoRevive.autoRevive = false;
+            AutoManager.Instance.SetAuto(true);
+        }
+
         WaitForSeconds spawnDelay = new WaitForSeconds(GameManager.Instance.CurrentStageData.Spawndelay);
         WaitForSeconds spawnInterval = new WaitForSeconds(3f);
         while (true)

@@ -22,7 +22,7 @@ public class AutoManager : Singleton<AutoManager>
     {
         GameManager.Instance.whenSceneChanged.Subscribe(e =>
         {
-            if (IsAutoMode)
+            if (IsAutoMode && UiAutoRevive.autoRevive == false)
             {
                 SetAuto(false);
             }

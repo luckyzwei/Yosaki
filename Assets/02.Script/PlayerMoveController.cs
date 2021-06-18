@@ -38,7 +38,10 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
     private void Start()
     {
         Initialize();
+     
     }
+
+
 
     private void Initialize()
     {

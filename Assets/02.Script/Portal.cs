@@ -24,17 +24,24 @@ public class Portal : MonoBehaviour
 
     private void SetPlayerPosToPortal()
     {
-        if (isNextPortal && GameManager.Instance.initPlayerPortalPosit == InitPlayerPortalPosit.Right)
+        if (UiAutoRevive.autoRevive)
         {
-            PlayerMoveController.Instance.transform.position = this.transform.position;
-            PlayerMoveController.Instance.transform.position += Vector3.left * 2f;
+            PlayerMoveController.Instance.transform.position = UiAutoRevive.spawnPos;
         }
-
-
-        if (isNextPortal == false && GameManager.Instance.initPlayerPortalPosit == InitPlayerPortalPosit.Left)
+        else
         {
-            PlayerMoveController.Instance.transform.position = this.transform.position;
-            PlayerMoveController.Instance.transform.position += Vector3.right * 2f;
+            if (isNextPortal && GameManager.Instance.initPlayerPortalPosit == InitPlayerPortalPosit.Right)
+            {
+                PlayerMoveController.Instance.transform.position = this.transform.position;
+                PlayerMoveController.Instance.transform.position += Vector3.left * 2f;
+            }
+
+
+            if (isNextPortal == false && GameManager.Instance.initPlayerPortalPosit == InitPlayerPortalPosit.Left)
+            {
+                PlayerMoveController.Instance.transform.position = this.transform.position;
+                PlayerMoveController.Instance.transform.position += Vector3.right * 2f;
+            }
         }
     }
 
