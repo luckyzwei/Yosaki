@@ -1344,7 +1344,8 @@ GameObject:
   - component: {fileID: 4056031668832943555}
   - component: {fileID: 4056031668832943553}
   - component: {fileID: 4056031668832943552}
-  - component: {fileID: 4657570109492937676}
+  - component: {fileID: 6105507271937177162}
+  - component: {fileID: 524277905055949311}
   m_Layer: 5
   m_Name: SkillMain
   m_TagString: Untagged
@@ -1409,7 +1410,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4657570109492937676
+--- !u!114 &6105507271937177162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1426,9 +1427,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: OnClickSkillSlot
-          m_Mode: 3
+        - m_Target: {fileID: 524277905055949311}
+          m_MethodName: PointerDown
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1437,6 +1438,37 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 524277905055949311}
+          m_MethodName: PointerUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &524277905055949311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4056031668832943554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6944bd183ef5c34189f80c1f8b33d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useSkillFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  slotIdx: 0
 --- !u!1 &4056031669005255599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,7 +1554,8 @@ GameObject:
   - component: {fileID: 4056031669226272568}
   - component: {fileID: 4056031669226272574}
   - component: {fileID: 4056031669226272569}
-  - component: {fileID: 8634275509776835905}
+  - component: {fileID: 8467955087374257399}
+  - component: {fileID: 5211891774486294331}
   m_Layer: 5
   m_Name: Skill2
   m_TagString: Untagged
@@ -1589,7 +1622,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8634275509776835905
+--- !u!114 &8467955087374257399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4056031669226272571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6944bd183ef5c34189f80c1f8b33d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useSkillFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  slotIdx: 0
+--- !u!114 &5211891774486294331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1606,13 +1655,28 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: OnClickSkillSlot
-          m_Mode: 3
+        - m_Target: {fileID: 8467955087374257399}
+          m_MethodName: PointerDown
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8467955087374257399}
+          m_MethodName: PointerUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -2482,7 +2546,8 @@ GameObject:
   - component: {fileID: 8923791102891833829}
   - component: {fileID: 7200551979975924386}
   - component: {fileID: 8018537378424847070}
-  - component: {fileID: 3254120476506806283}
+  - component: {fileID: 6204563097261942595}
+  - component: {fileID: 7794261548545957340}
   m_Layer: 5
   m_Name: SKill3
   m_TagString: Untagged
@@ -2549,7 +2614,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3254120476506806283
+--- !u!114 &6204563097261942595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5327585783903468818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6944bd183ef5c34189f80c1f8b33d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useSkillFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  slotIdx: 0
+--- !u!114 &7794261548545957340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2566,13 +2647,28 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: OnClickSkillSlot
-          m_Mode: 3
+        - m_Target: {fileID: 6204563097261942595}
+          m_MethodName: PointerDown
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 3
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6204563097261942595}
+          m_MethodName: PointerUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -2985,7 +3081,8 @@ GameObject:
   - component: {fileID: 2965896163602658360}
   - component: {fileID: 4154593004345019874}
   - component: {fileID: 4385946699766082526}
-  - component: {fileID: 74361451802920135}
+  - component: {fileID: 5317709007534469326}
+  - component: {fileID: 5691808112412099263}
   m_Layer: 5
   m_Name: Skill1
   m_TagString: Untagged
@@ -3052,7 +3149,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &74361451802920135
+--- !u!114 &5317709007534469326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408407929507019591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6944bd183ef5c34189f80c1f8b33d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useSkillFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  slotIdx: 0
+--- !u!114 &5691808112412099263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3069,13 +3182,28 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: OnClickSkillSlot
-          m_Mode: 3
+        - m_Target: {fileID: 5317709007534469326}
+          m_MethodName: PointerDown
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5317709007534469326}
+          m_MethodName: PointerUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -3441,9 +3569,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18dacc3f05b2c924693ae20bea6fe2d3, type: 3}
---- !u!1 &9138749646921353508 stripped
+--- !u!1 &5884765319351332258 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8832949451434804493, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
+  m_CorrespondingSourceObject: {fileID: 6191691070871495051, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
     type: 3}
   m_PrefabInstance: {fileID: 308405144691248169}
   m_PrefabAsset: {fileID: 0}
@@ -3453,9 +3581,9 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 308405144691248169}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5884765319351332258 stripped
+--- !u!1 &9138749646921353508 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6191691070871495051, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
+  m_CorrespondingSourceObject: {fileID: 8832949451434804493, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
     type: 3}
   m_PrefabInstance: {fileID: 308405144691248169}
   m_PrefabAsset: {fileID: 0}
@@ -3629,15 +3757,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4419767091522584156}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5170935542311484241 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8832949451434804493, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
-    type: 3}
-  m_PrefabInstance: {fileID: 4419767091522584156}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8600766404134010270 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5335118186997040066, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 4419767091522584156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5170935542311484241 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8832949451434804493, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
     type: 3}
   m_PrefabInstance: {fileID: 4419767091522584156}
   m_PrefabAsset: {fileID: 0}
@@ -3978,15 +4106,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7505850819553428919}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4451647377258734652 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6191691070871495051, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
-    type: 3}
-  m_PrefabInstance: {fileID: 7505850819553428919}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2458972217189451381 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5335118186997040066, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7505850819553428919}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4451647377258734652 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6191691070871495051, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
     type: 3}
   m_PrefabInstance: {fileID: 7505850819553428919}
   m_PrefabAsset: {fileID: 0}
@@ -4149,9 +4277,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18dacc3f05b2c924693ae20bea6fe2d3, type: 3}
---- !u!1 &437317942236162153 stripped
+--- !u!1 &2983657682040524015 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8832949451434804493, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
+  m_CorrespondingSourceObject: {fileID: 6191691070871495051, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
     type: 3}
   m_PrefabInstance: {fileID: 8972677767286287716}
   m_PrefabAsset: {fileID: 0}
@@ -4161,9 +4289,9 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8972677767286287716}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2983657682040524015 stripped
+--- !u!1 &437317942236162153 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6191691070871495051, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
+  m_CorrespondingSourceObject: {fileID: 8832949451434804493, guid: 18dacc3f05b2c924693ae20bea6fe2d3,
     type: 3}
   m_PrefabInstance: {fileID: 8972677767286287716}
   m_PrefabAsset: {fileID: 0}
