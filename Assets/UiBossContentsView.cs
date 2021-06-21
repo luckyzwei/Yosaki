@@ -164,6 +164,8 @@ public class UiBossContentsView : MonoBehaviour
 
     private void InstantClearReceive(float score,int clearAmount) 
     {
+        LogManager.Instance.SendLog("보스소탕요청", $"{clearAmount}회");
+
         var rewardList = SingleRaidManager.GetRewawrdData(bossTableData, score, clearAmount);
 
         if (rewardList.Find(element => element.itemType == Item_Type.Ticket) == null)
@@ -185,6 +187,7 @@ public class UiBossContentsView : MonoBehaviour
             clearButton.interactable = true;
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.RewardedBossContents, clearAmount);
             WhenClearSuccess(rewardList);
+            LogManager.Instance.SendLog("보스소탕성공", $"{clearAmount}회");
         });
     }
 

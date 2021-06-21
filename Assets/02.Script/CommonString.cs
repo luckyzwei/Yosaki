@@ -41,7 +41,7 @@ public static class CommonString
     public static string RankPrefix_Boss1 = "바엘";
     public static string RankPrefix_Infinity = ContentsName_InfinityTower;
 
-    public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채","지옥숲"};
+    public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
 
     public static string GetContentsName(ContentsType contentsType)
     {
@@ -151,6 +151,9 @@ public static class CommonString
                 break;
             case StatusType.MagicStoneAddPer:
                 ret = "기억의 파편 획득 증가(%)";
+                break;
+            case StatusType.Damdecrease:
+                ret = "피해 감소(%)";
                 break;
         }
 

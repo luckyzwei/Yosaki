@@ -60,4 +60,24 @@ public class BossTableData
   float[] rewardmaxvalues = new float[0];
   public float[] Rewardmaxvalues { get {return rewardmaxvalues; } set { this.rewardmaxvalues = value;} }
   
+  [SerializeField]
+  int abilitytype;
+  public int Abilitytype { get {return abilitytype; } set { this.abilitytype = value;} }
+  
+  [SerializeField]
+  float abilityvalue;
+  public float Abilityvalue { get {return abilityvalue; } set { this.abilityvalue = value;} }
+  
+  [SerializeField]
+  int maxlevel;
+  public int Maxlevel { get {return maxlevel; } set { this.maxlevel = value;} }
+  
+  [SerializeField]
+  string abilname;
+  public string Abilname { get {return abilname; } set { this.abilname = value;} }
+  
+  [SerializeField]
+  int upgradeprice;
+  public int Upgradeprice { get {return upgradeprice; } set { this.upgradeprice = value;} }
+  
 }

@@ -21,7 +21,9 @@ public enum StatusType
     Mp,//icon
     HpRecover,//icon
     MpRecover, //icon
-    MagicStoneAddPer //icon
+    MagicStoneAddPer, //icon
+    Damdecrease
+
 }
 
 
@@ -56,7 +58,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.PassiveSkill.dataArray;
 
-        for(int i = 0; i < tableData.Length; i++) 
+        for (int i = 0; i < tableData.Length; i++)
         {
             if (tableData[i].Abilitytype != (int)statusType) continue;
 
@@ -64,7 +66,7 @@ public static class PlayerStats
 
             int level = serverData.level.Value;
 
-            if (level != 0) 
+            if (level != 0)
             {
                 ret += level * tableData[i].Abilityvalue;
             }
@@ -439,7 +441,7 @@ public static class PlayerStats
         ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.HpPer_StatPoint);
         ret += GetWingAbilValue(StatusType.HpAddPer);
         ret += GetPassiveSkillValue(StatusType.HpAddPer);
-        
+
         return ret;
     }
     public static float GetMaxMp()
