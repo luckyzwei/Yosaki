@@ -17,7 +17,7 @@ public class UiSkillPointResetButton : MonoBehaviour
 
     private void SetPriceText()
     {
-        priceText.SetText(Utils.ConvertBigFloat(GameBalance.SkillPointResetPrice));
+        priceText.SetText(Utils.ConvertBigNum(GameBalance.SkillPointResetPrice));
     }
 
     public void OnClickResetSkillPoint()
@@ -28,7 +28,7 @@ public class UiSkillPointResetButton : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.BlueStone)} {Utils.ConvertBigFloat(GameBalance.SkillPointResetPrice)}개를 사용해서\n스킬 포인트를 초기화 하시겠습니까?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.BlueStone)} {Utils.ConvertBigNum(GameBalance.SkillPointResetPrice)}개를 사용해서\n스킬 포인트를 초기화 하시겠습니까?", () =>
           {
               PurchaseProcess();
           }, null);

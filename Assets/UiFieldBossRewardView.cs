@@ -16,6 +16,6 @@ public class UiFieldBossRewardView : SingletonMono<UiFieldBossRewardView>
     {
         SoundManager.Instance.PlaySound("BonusEnd");
         rootObject.gameObject.SetActive(true);
-        this.rewardAmount.SetText(Utils.ConvertBigFloat(rewardAmount));
+        this.rewardAmount.SetText(Utils.ConvertBigNum(rewardAmount));
     }
 }

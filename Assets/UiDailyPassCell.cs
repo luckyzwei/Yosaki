@@ -92,8 +92,8 @@ public class UiDailyPassCell : MonoBehaviour
 
     private void SetAmount()
     {
-        itemAmount_free.SetText(Utils.ConvertBigFloat(passInfo.rewardTypeValue_Free));
-        itemAmount_ad.SetText(Utils.ConvertBigFloat(passInfo.rewardTypeValue_IAP));
+        itemAmount_free.SetText(Utils.ConvertBigNum(passInfo.rewardTypeValue_Free));
+        itemAmount_ad.SetText(Utils.ConvertBigNum(passInfo.rewardTypeValue_IAP));
     }
 
     private void SetItemIcon()

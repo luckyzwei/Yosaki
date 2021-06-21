@@ -18,6 +18,6 @@ public class BossHpBar : MonoBehaviour
 
         gauge.fillAmount = currentHp / maxHp;
 
-        gaugeDescription.SetText($"{Utils.ConvertBigFloat(currentHp)}/{Utils.ConvertBigFloat(maxHp)}");
+        gaugeDescription.SetText($"{Utils.ConvertBigNum(currentHp)}/{Utils.ConvertBigNum(maxHp)}");
     }
 }

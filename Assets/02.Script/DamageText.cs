@@ -47,7 +47,7 @@ public class DamageText : PoolItem
 
         criticalIcon.SetActive(isCritical);
 
-        damageText.SetText(Utils.ConvertBigFloat(damage));
+        damageText.SetText(Utils.ConvertBigNum(damage));
 
         Invoke(DisableFuncName, disableTime);
     }

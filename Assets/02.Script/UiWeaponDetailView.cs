@@ -258,7 +258,7 @@ public class UiWeaponDetailView : MonoBehaviour
             currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.MagicStone);
         }
 
-        levelUpPrice.SetText(Utils.ConvertBigFloat(price));
+        levelUpPrice.SetText(Utils.ConvertBigNum(price));
         levelUpButton.interactable = currentMagicStoneAmount >= price;
     }
 

@@ -122,7 +122,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
             {
                 price = DatabaseManager.statusTable.GetStatusUpgradePrice(statusData.Key, currentLevel);
 
-                priceText.SetText(Utils.ConvertBigFloat(price));
+                priceText.SetText(Utils.ConvertBigNum(price));
 
                 upgradePrice_gold = price;
             }

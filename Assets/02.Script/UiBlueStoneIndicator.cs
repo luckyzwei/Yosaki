@@ -18,7 +18,7 @@ public class UiBlueStoneIndicator : MonoBehaviour
     {
         DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).AsObservable().Subscribe(blueStone =>
         {
-            goldText.SetText($"{Utils.ConvertBigFloat(blueStone)}");
+            goldText.SetText($"{Utils.ConvertBigNum(blueStone)}");
         }).AddTo(this);
     }
 }

@@ -21,7 +21,7 @@ public class UiPlayerStatBoard : MonoBehaviour
     {
         string description = string.Empty;
         //전투력
-        description += $"전투력 : {Utils.ConvertBigFloat(PlayerStats.GetTotalPower())}\n";
+        description += $"전투력 : {Utils.ConvertBigNum(PlayerStats.GetTotalPower())}\n";
         //공격력
         description += "-------------------\n";
         description += $"{CommonString.GetStatusName(StatusType.IntAdd)} : {(int)PlayerStats.GetBaseAttackPower()}\n";

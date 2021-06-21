@@ -121,7 +121,7 @@ public class UiBossContentsView : MonoBehaviour
             {
                 if (e != null)
                 {
-                    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigFloat(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
+                    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
                     {
                         InstantClearReceive(e.Score, clearAmount);
                     },
@@ -143,7 +143,7 @@ public class UiBossContentsView : MonoBehaviour
             {
                 if (e != null)
                 {
-                    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigFloat(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
+                    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
                     {
                         InstantClearReceive(e.Score, clearAmount);
                     },

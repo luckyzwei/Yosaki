@@ -195,7 +195,7 @@ public class UiPetView : MonoBehaviour
             //미보유
             else
             {
-                buttonDescription.SetText($"{Utils.ConvertBigFloat(petData.Price)}");
+                buttonDescription.SetText($"{Utils.ConvertBigNum(petData.Price)}");
             }
         }
         else if (petData.PETGETTYPE == PetGetType.Shop)

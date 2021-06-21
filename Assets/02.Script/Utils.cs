@@ -38,7 +38,7 @@ public static class Utils
                 type == Item_Type.Feather ||
                 type == Item_Type.Ticket;
     }
-    
+
     public static bool IsStatusItem(this Item_Type type)
     {
         return type == Item_Type.Memory;
@@ -141,85 +141,53 @@ public static class Utils
     }
 
     #region BigFloat
-    static string[] arrDecimal = { "", "만", "억", "조", "경", "해", "자", "양" };
-    static string zero = "0";
-    static string sharp = "#";
-    static string line = "-";
-    public static string ConvertBigFloat(float data)
+    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "가", "구", "간" };
+    private static int p = (int)Mathf.Pow(10, 4);
+    private static List<int> numList = new List<int>();
+    private static List<string> numStringList = new List<string>();
+    public static string ConvertBigNum(float data)
     {
-        var displayNum = string.Empty;
-        if (data == 0f)
+        System.Numerics.BigInteger value = (System.Numerics.BigInteger)data;
+
+        numList.Clear();
+        numStringList.Clear();
+
+        do
         {
-            return zero;
+            numList.Add((int)(value % p));
+            value /= p;
         }
+        while (value >= 1);
 
-        if (data < 0f)
+        string retStr = "";
+
+        if (numList.Count >= 3)
         {
-            data = -data;
-            var goldDouble = (double)data;
-            int stringLength;
+            for (int i = 2; i >= 1; i--)
+            {
+                if (numList[i] == 0) continue;
 
-            if (goldDouble.ToString(sharp).Length % 4 != 0)
-            {
-                stringLength = goldDouble.ToString(sharp).Length + 4 - goldDouble.ToString(sharp).Length % 4;
-            }
-            else
-            {
-                stringLength = goldDouble.ToString(sharp).Length;
+                numStringList.Add(numList[i] + goldUnitArr[i]);
             }
 
-            var sNum = goldDouble.ToString(sharp).PadLeft(stringLength);
-            var j = 0;
-            for (var i = 0; i < sNum.Length >> 2 && j < 2; i++)
+            for (int i = 0; i < numStringList.Count; i++)
             {
-                j++;
-                var part = sNum.Substring(i << 2, 4);
-                var stringFormat = int.Parse(part);
-                if (stringFormat == 0)
-                {
-                    continue;
-                }
-
-                displayNum += stringFormat + arrDecimal[(sNum.Length >> 2) - i - 1];
-                // if (sNum.Length >> 2 - 1 != i) displayNum += empty;
+                retStr += numStringList[i];
             }
 
-            displayNum = line + displayNum.TrimEnd();
+            return retStr;
         }
         else
         {
-            var goldDouble = (double)(decimal)data;
-            int stringLength;
-
-            if (goldDouble.ToString(sharp).Length % 4 != 0)
+            for (int i = 0; i < numList.Count; i++)
             {
-                stringLength = goldDouble.ToString(sharp).Length + 4 - goldDouble.ToString(sharp).Length % 4;
-            }
-            else
-            {
-                stringLength = goldDouble.ToString(sharp).Length;
+                if (numList[i] == 0) continue;
+                retStr = numList[i] + goldUnitArr[i] + retStr;
             }
 
-            var sNum = goldDouble.ToString(sharp).PadLeft(stringLength);
-            var j = 0;
-            for (var i = 0; i < sNum.Length >> 2 && j < 2; i++)
-            {
-                j++;
-                var part = sNum.Substring(i << 2, 4);
-                var stringFormat = int.Parse(part);
-                if (stringFormat == 0)
-                {
-                    continue;
-                }
-
-                displayNum += stringFormat + arrDecimal[(sNum.Length >> 2) - i - 1];
-                // if (sNum.Length >> 2 - 1 != i) displayNum += empty;
-            }
-
-            displayNum = displayNum.TrimEnd();
+            return retStr;
         }
 
-        return displayNum;
     }
     #endregion
 

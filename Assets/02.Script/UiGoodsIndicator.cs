@@ -21,7 +21,7 @@ public class UiGoodsIndicator : MonoBehaviour
     {
         DatabaseManager.goodsTable.GetTableData(goodsKey).AsObservable().Subscribe(goods =>
         {
-            goodsText.SetText($"{Utils.ConvertBigFloat(goods).ToString()}");
+            goodsText.SetText($"{Utils.ConvertBigNum(goods).ToString()}");
         }).AddTo(this);
     }
 }

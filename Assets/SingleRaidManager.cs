@@ -124,7 +124,7 @@ public class SingleRaidManager : ContentsManagerBase
 
     private void whenDamageAmountChanged(ObscuredFloat hp)
     {
-        damageIndicator.SetText(Utils.ConvertBigFloat(hp));
+        damageIndicator.SetText(Utils.ConvertBigNum(hp));
         damagedAnim.SetTrigger(DamageAnimName);
     }
 

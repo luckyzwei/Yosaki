@@ -17,7 +17,7 @@ public class UiBossResultPopup : MonoBehaviour
 
     public void Initialize(float damagedAmount, float bossRemainHpPer, List<RewardData> rewardDatas)
     {
-        scoreText.SetText(Utils.ConvertBigFloat(damagedAmount));
+        scoreText.SetText(Utils.ConvertBigNum(damagedAmount));
         remainHpText.SetText(((bossRemainHpPer * 100f).ToString("F7")).ToString());
 
         MakeRewardView(rewardDatas);

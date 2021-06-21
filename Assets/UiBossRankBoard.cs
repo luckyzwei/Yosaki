@@ -61,7 +61,7 @@ public class UiBossRankBoard : MonoBehaviour
             {
                 if (e != null)
                 {
-                    myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigFloat(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+                    myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
                 }
                 else
                 {
@@ -76,7 +76,7 @@ public class UiBossRankBoard : MonoBehaviour
             {
                 if (e != null)
                 {
-                    myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigFloat(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+                    myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
                 }
                 else
                 {
@@ -164,7 +164,7 @@ public class UiBossRankBoard : MonoBehaviour
                             color1 = Color.yellow;
                         }
 
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigFloat(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
                     }
                     else
                     {

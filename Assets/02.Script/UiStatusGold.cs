@@ -18,7 +18,7 @@ public class UiStatusGold : MonoBehaviour
     {
         DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).AsObservable().Subscribe(e =>
         {
-            goldText.SetText(Utils.ConvertBigFloat(e));
+            goldText.SetText(Utils.ConvertBigNum(e));
         }).AddTo(this);
     }
 }

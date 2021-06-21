@@ -50,7 +50,7 @@ public class UiWingIndicator : MonoBehaviour
         if (currentGrade + 1 < TableManager.Instance.WingTable.dataArray.Length)
         {
             var nextTableData = TableManager.Instance.WingTable.dataArray[currentGrade + 1];
-            priceText.SetText($"승급:{Utils.ConvertBigFloat(nextTableData.Requirejump)}개");
+            priceText.SetText($"승급:{Utils.ConvertBigNum(nextTableData.Requirejump)}개");
         }
         else
         {
@@ -67,7 +67,7 @@ public class UiWingIndicator : MonoBehaviour
     {
         if (this.gameObject.activeInHierarchy == false) return;
 
-        this.featherCount.SetText(Utils.ConvertBigFloat(featherCount));
+        this.featherCount.SetText(Utils.ConvertBigNum(featherCount));
     }
 
     public void OnClickUpgradeButton()

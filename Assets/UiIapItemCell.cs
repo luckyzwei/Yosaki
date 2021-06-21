@@ -101,8 +101,8 @@ public class UiIapItemCell : MonoBehaviour
             //골드,파편버프 표시 X
             if ((Item_Type)productData.Rewardtypes[i] != 0 && (Item_Type)productData.Rewardtypes[i] != 0)
             {
-                itemDetailDesc += $"{CommonString.GetItemName((Item_Type)productData.Rewardtypes[i])} {Utils.ConvertBigFloat(productData.Rewardvalues[i])}개";
-                itemAmount += $"{Utils.ConvertBigFloat(productData.Rewardvalues[i])}개";
+                itemDetailDesc += $"{CommonString.GetItemName((Item_Type)productData.Rewardtypes[i])} {Utils.ConvertBigNum(productData.Rewardvalues[i])}개";
+                itemAmount += $"{Utils.ConvertBigNum(productData.Rewardvalues[i])}개";
 
                 if (i != productData.Rewardtypes.Length - 1)
                 {

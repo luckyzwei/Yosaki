@@ -61,7 +61,7 @@ public class UiAttendanceCell : MonoBehaviour
             itemIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)attendanceRewardData.Reward_Type);
         }
 
-        amountText.SetText($"{Utils.ConvertBigFloat(attendanceRewardData.Reward_Value)}개");
+        amountText.SetText($"{Utils.ConvertBigNum(attendanceRewardData.Reward_Value)}개");
 
         Subscribe();
     }
