@@ -106,8 +106,6 @@ public class Enemy : PoolItem
 
         UpdateCollection();
 
-        UpdateFieldKillCount();
-
         enemyDeadCallBack?.Invoke(this);
 
         if (this.isFieldBossEnemy)
@@ -119,19 +117,10 @@ public class Enemy : PoolItem
     private void WhenFieldBossEnemyDead()
     {
         //보상처리
-        MapInfo.Instance.RewardFieldBoss();
+        MapInfo.Instance.SetFieldClear();
         //
 
         UiStageNameIndicater.Instance.StopFieldBossTimer();
-    }
-
-    private void UpdateFieldKillCount()
-    {
-        if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField) return;
-
-        string stageKey = GameManager.Instance.CurrentStageData.Stagestringkey;
-
-        DatabaseManager.fieldBossTable.TableDatas[stageKey].killCount.Value++;
     }
 
     private void UpdateCollection()

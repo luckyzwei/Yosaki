@@ -34,7 +34,7 @@ public static class DatabaseManager
     public static BossServerTable bossServerTable { get; private set; } = new BossServerTable();
     public static AttendanceServerTable attendanceServerTable { get; private set; } = new AttendanceServerTable();
 
-    public static FieldBossServerTable fieldBossTable { get; private set; } = new FieldBossServerTable();
+   // public static FieldBossServerTable fieldBossTable { get; private set; } = new FieldBossServerTable();
 
     public static BuffServerTable buffServerTable { get; private set; } = new BuffServerTable();
     public static PassiveServerTable passiveServerTable { get; private set; } = new PassiveServerTable();
@@ -78,7 +78,7 @@ public static class DatabaseManager
         rankTable_InfinityTower.Initialize();
         bossServerTable.Initialize();
         attendanceServerTable.Initialize();
-        fieldBossTable.Initialize();
+        //fieldBossTable.Initialize();
         buffServerTable.Initialize();
         passiveServerTable.Initialize();
         rankTables_Boss1.Initialize();

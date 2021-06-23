@@ -24,8 +24,6 @@ public class GameManager : SingletonMono<GameManager>
 
     public ContentsType contentsType { get; private set; }
 
-    public InitPlayerPortalPosit initPlayerPortalPosit { get; private set; } = InitPlayerPortalPosit.Left;
-
     public ReactiveCommand whenSceneChanged = new ReactiveCommand();
 
     public ObscuredInt bossId { get; private set; }
@@ -81,7 +79,7 @@ public class GameManager : SingletonMono<GameManager>
         SettingData.FrameRateOption.AsObservable().Subscribe(SetFrameRate).AddTo(this);
     }
 
-    private void SetMapData()
+    private void ClearStage()
     {
         currentMapIdx.Value = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.LastMap).Value;
         CurrentStageData = TableManager.Instance.StageMapData[currentMapIdx.Value];
@@ -100,8 +98,6 @@ public class GameManager : SingletonMono<GameManager>
 
     public void LoadBackScene()
     {
-        initPlayerPortalPosit = InitPlayerPortalPosit.Right;
-
         if (IsFirstScene() == false)
         {
             currentMapIdx.Value--;
@@ -111,8 +107,6 @@ public class GameManager : SingletonMono<GameManager>
 
     public void LoadNextScene()
     {
-        initPlayerPortalPosit = InitPlayerPortalPosit.Left;
-
         if (IsLastScene() == false)
         {
             currentMapIdx.Value++;
@@ -130,18 +124,13 @@ public class GameManager : SingletonMono<GameManager>
     {
        contentsType = ContentsType.NormalField;
 
-        SetMapData();
+        ClearStage();
 
         ChangeScene();
     }
 
     public void LoadContents(ContentsType type)
     {
-        if (type != ContentsType.NormalField) 
-        {
-            initPlayerPortalPosit = InitPlayerPortalPosit.Left;
-        }
-
         if (type == ContentsType.BonusDefense)
         {
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);

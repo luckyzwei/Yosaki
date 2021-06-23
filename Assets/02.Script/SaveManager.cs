@@ -96,11 +96,6 @@ public class SaveManager : SingletonMono<SaveManager>
 
         DatabaseManager.growthTable.UpData(GrowthTable.Exp, false);
 
-        if (GameManager.Instance != null && GameManager.Instance.contentsType == GameManager.ContentsType.NormalField)
-        {
-            DatabaseManager.fieldBossTable.SyncCurrentStageKillCount();
-        }
-
         CollectionManager.Instance.SyncToServer();
 
         if (BuffManager.Instance != null)
@@ -119,17 +114,11 @@ public class SaveManager : SingletonMono<SaveManager>
     //동기로 저장
     public void SyncDatasForce()
     {
-    
         DatabaseManager.goodsTable.SyncAllDataForce();
 
         CollectionManager.Instance.SyncToServerForce();
 
         DatabaseManager.growthTable.SyncDataForce();
-
-        if (GameManager.Instance != null && GameManager.Instance.contentsType == GameManager.ContentsType.NormalField)
-        {
-            DatabaseManager.fieldBossTable.SyncCurrentStageKillCountForce();
-        }
 
         if (BuffManager.Instance != null)
         {

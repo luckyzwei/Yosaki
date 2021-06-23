@@ -10,12 +10,17 @@ public class UiFieldBossRewardView : SingletonMono<UiFieldBossRewardView>
     private GameObject rootObject;
 
     [SerializeField]
-    private TextMeshProUGUI rewardAmount; 
+    private TextMeshProUGUI rewardAmount;
 
-    public void Initialize(int rewardAmount) 
+    public void Initialize(int rewardAmount)
     {
         SoundManager.Instance.PlaySound("BonusEnd");
         rootObject.gameObject.SetActive(true);
         this.rewardAmount.SetText(Utils.ConvertBigNum(rewardAmount));
+    }
+
+    public void OnClickNextStage()
+    {
+        GameManager.Instance.LoadNextScene();
     }
 }

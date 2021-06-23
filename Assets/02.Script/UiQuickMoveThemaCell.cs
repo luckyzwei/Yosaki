@@ -10,6 +10,9 @@ public class UiQuickMoveThemaCell : MonoBehaviour
 
     private int mapIdx;
 
+    [SerializeField]
+    private GameObject notClearMask;
+
     public void Initialize(int mapIdx)
     {
         if (mapIdx == 0)
@@ -25,10 +28,21 @@ public class UiQuickMoveThemaCell : MonoBehaviour
         }
 
         this.mapIdx = mapIdx;
+
+        int lastClearStageId = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+        notClearMask.SetActive(this.mapIdx > lastClearStageId + 1); 
     }
 
     public void OnClickButton()
     {
+        int lastClearStageId = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+
+        if (this.mapIdx > lastClearStageId + 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("현재 스테이지를 클리어 하지 못했습니다.");
+            return;
+        }
+
         GameManager.Instance.MoveMapByIdx(this.mapIdx);
     }
 }

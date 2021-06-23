@@ -12,9 +12,12 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
 
     private string CurrentAnimation;
 
-    private const string Anim_Idle = "Idle";
-    private const string Anim_Run = "walk";
-    private const string Anim_Attack = "attack";
+    private const string Anim_Idle = "idle";
+    private const string Anim_Run = "run";
+    private const string Anim_Attack = "attack1";
+    private const string Anim_Attack2 = "attack2";
+    private const string Anim_Attack3 = "attack3";
+    private const string Attack = "attack";
 
     private Coroutine attackAnimEndRoutine;
 
@@ -33,9 +36,9 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
 
     private void SetAnimation(string animName)
     {
-        if (attackAnimEndRoutine != null || (CurrentAnimation == animName && animName != Anim_Attack)) return;
+        if (attackAnimEndRoutine != null || (CurrentAnimation == animName && animName.Contains(Attack) == false)) return;
 
-        if (animName == Anim_Attack)
+        if (animName.Contains(Attack))
         {
             if (attackAnimEndRoutine != null)
             {
@@ -52,7 +55,7 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
 
         CurrentAnimation = animName;
     }
-
+    int attackIdx = 0;
     public void SetCurrentAnimation(AnimState state)
     {
         //attack idle run
@@ -60,7 +63,22 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
         {
             case AnimState.attack:
                 {
-                    SetAnimation(Anim_Attack);
+                    if (attackIdx == 0) 
+                    {
+                        SetAnimation(Anim_Attack);
+                        attackIdx++;
+                    }
+                    else if (attackIdx == 1) 
+                    {
+                        SetAnimation(Anim_Attack2);
+                        attackIdx++;
+                    }
+                    else 
+                    {
+                        SetAnimation(Anim_Attack3);
+                        attackIdx = 0;
+                    }
+      
                 }
                 break;
             case AnimState.idle:

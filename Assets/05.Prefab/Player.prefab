@@ -105,10 +105,10 @@ RectTransform:
   m_GameObject: {fileID: 1001567107978775588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 6021001959540605472}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  skeletonDataAsset: {fileID: 11400000, guid: 908bdc7d2f0936a46b69ae04bb1c9400, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 02dab12d83f13ee40a11c7b48606fd49, type: 2}
   initialSkinName: default
   initialFlipX: 0
   initialFlipY: 0
@@ -404,16 +404,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3104043380453143570}
-  m_LocalRotation: {x: 0, y: 0, z: -0.41254792, w: 0.91093594}
+  m_LocalRotation: {x: 0, y: 0, z: 0.24149853, w: 0.9704012}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 339513224898458901}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -48.73}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 27.95}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 186, y: -10}
+  m_AnchoredPosition: {x: 125, y: -365}
   m_SizeDelta: {x: 650, y: 650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3807824760767480220
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 80dc23ac3a0b38644af9486c7bca6fe5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -556,8 +556,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 0.0025, y: 0.0025, z: 1}
   m_Children:
-  - {fileID: 339513224898458901}
   - {fileID: 4336831154747075696}
+  - {fileID: 339513224898458901}
   m_Father: {fileID: 6598544888420517189}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -612,18 +612,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5668903314635448098}
-  m_LocalRotation: {x: -0, y: -0, z: -0.957697, w: 0.28777853}
+  m_LocalRotation: {x: -0, y: -0, z: -0.8016192, w: 0.597835}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6356778282180337804}
   - {fileID: 4947407277719700946}
   m_Father: {fileID: 6021001959540605472}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -146.81104, y: 277.7177}
+  m_AnchoredPosition: {x: -43.82323, y: 539.0447}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4559932576194916864
@@ -640,7 +640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skeletonGraphic: {fileID: 7581039556941568629}
   initializeOnAwake: 1
-  boneName: Weapon1
+  boneName: bone13
   followBoneRotation: 1
   followSkeletonFlip: 1
   followLocalScale: 0
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 5.85
+  m_fontSize: 6.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1128,15 +1128,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 411410f9528530540bdec97694c0e4f8, type: 3}
---- !u!224 &4947407277719700946 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5083144887238438487, guid: 411410f9528530540bdec97694c0e4f8,
-    type: 3}
-  m_PrefabInstance: {fileID: 153770974672251781}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &153770974690673359 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 19851594, guid: 411410f9528530540bdec97694c0e4f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 153770974672251781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &4947407277719700946 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5083144887238438487, guid: 411410f9528530540bdec97694c0e4f8,
     type: 3}
   m_PrefabInstance: {fileID: 153770974672251781}
   m_PrefabAsset: {fileID: 0}

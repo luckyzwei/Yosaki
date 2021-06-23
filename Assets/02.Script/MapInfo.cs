@@ -5,6 +5,7 @@ using System.Linq;
 using Cinemachine;
 using UniRx;
 using CodeStage.AntiCheat.ObscuredTypes;
+using BackEnd;
 
 public class MapInfo : SingletonMono<MapInfo>
 {
@@ -236,7 +237,7 @@ public class MapInfo : SingletonMono<MapInfo>
         }
         return false;
     }
-    private void DisableFieldBoss() 
+    private void DisableFieldBoss()
     {
         for (int i = 0; i < spawnedEnemyList.Count; i++)
         {
@@ -248,24 +249,40 @@ public class MapInfo : SingletonMono<MapInfo>
         }
     }
 
-    public void RewardFieldBoss()
+    public void SetFieldClear()
     {
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        Param goodsParam = new Param();
+
+        //보상지급
         int rewardValue = GameManager.Instance.CurrentStageData.Bossrewardvalue;
-
         DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value += rewardValue;
+        goodsParam.Add(GoodsTable.MagicStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value);
 
-        DatabaseManager.goodsTable.UpData(GoodsTable.MagicStone, false);
+        transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-        UiFieldBossRewardView.Instance.Initialize(rewardValue);
+        Param stageParam = new Param();
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value = GameManager.Instance.CurrentStageData.Id;
+        stageParam.Add(UserInfoTable.topClearStageId, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
+
+        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, stageParam));
+
+        DatabaseManager.SendTransaction(transactions, successCallBack: () =>
+          {
+              LogManager.Instance.SendLog("스테이지클리어", GameManager.Instance.CurrentStageData.Id.ToString());
+            //결과표시
+            UiFieldBossRewardView.Instance.Initialize(rewardValue);
+          });
     }
 
-//#if UNITY_EDITOR
-//    private void Update()
-//    {
-//        if (Input.GetKeyDown(KeyCode.W)) 
-//        {
-//            DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).Value++;
-//        }
-//    }
-//#endif
+    //#if UNITY_EDITOR
+    //    private void Update()
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.W)) 
+    //        {
+    //            DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).Value++;
+    //        }
+    //    }
+    //#endif
 }

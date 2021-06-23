@@ -146,6 +146,22 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
     }
     public void OnClickRightButton()
     {
+        int lastClearStage = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+
+        if (lastClearStage == TableManager.Instance.GetLastStageIdx())
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고 단계 입니다. 다음 업데이트를 기다려주세요!");
+            return;
+        }
+
+        int nextStageId = GameManager.Instance.CurrentStageData.Id + 1;
+
+        if (nextStageId > lastClearStage + 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("현재 스테이지를 클리어 하지 못했습니다.");
+            return;
+        }
+
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "다음 스테이지로 이동합니까?", () =>
         {
             SoundManager.Instance.PlayButtonSound();

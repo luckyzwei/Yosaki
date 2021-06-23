@@ -11,11 +11,11 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     public int Horizontal { get; private set; }
     public int Vertical { get; private set; }
 
-    [SerializeField]
-    private GameObject autoObject;
+    //[SerializeField]
+    //private GameObject autoObject;
 
-    [SerializeField]
-    private GameObject autoToggleObject;
+    //[SerializeField]
+    //private GameObject autoToggleObject;
 
     private void Start()
     {
@@ -24,17 +24,18 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
 
     private void Subscribe()
     {
-        AutoManager.Instance.AutoMode.AsObservable().Subscribe(WhenAutoModeChanged).AddTo(this);
+        //AutoManager.Instance.AutoMode.AsObservable().Subscribe(WhenAutoModeChanged).AddTo(this);
 
-        SkillCoolTimeManager.moveAutoValue.AsObservable().Subscribe(e =>
-        {
-            autoToggleObject.SetActive(e == 1);
-        }).AddTo(this);
+        //SkillCoolTimeManager.moveAutoValue.AsObservable().Subscribe(e =>
+        //{
+        //    autoToggleObject.SetActive(e == 1);
+        //}).AddTo(this);
     }
 
     private void WhenAutoModeChanged(bool auto)
     {
-        autoObject.SetActive(auto);
+        return;
+        //autoObject.SetActive(auto);
 
         if (auto)
         {
