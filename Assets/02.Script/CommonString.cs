@@ -80,11 +80,11 @@ public static class CommonString
             case Item_Type.MagicStone: return "기억의파편";
             case Item_Type.Memory: return "기억의조각";
             case Item_Type.Ticket: return "마계티켓";
-            case Item_Type.costume0: return TableManager.Instance.CostumeData[0].Name;
-            case Item_Type.costume1: return TableManager.Instance.CostumeData[1].Name;
-            case Item_Type.costume2: return TableManager.Instance.CostumeData[2].Name;
-            case Item_Type.costume3: return TableManager.Instance.CostumeData[3].Name;
-            case Item_Type.costume4: return TableManager.Instance.CostumeData[4].Name;
+            case Item_Type.costume0: return "미등록";
+            case Item_Type.costume1: return "미등록";
+            case Item_Type.costume2: return "미등록";
+            case Item_Type.costume3: return "미등록";
+            case Item_Type.costume4: return "미등록";
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;

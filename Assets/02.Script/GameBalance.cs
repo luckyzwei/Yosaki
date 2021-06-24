@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerBalance
 {
-    public readonly static ObscuredFloat moveSpeed = 5f;
+    public readonly static ObscuredFloat moveSpeed = 8f;
     public readonly static ObscuredFloat jumpPower = 17f;
     public readonly static ObscuredFloat doubleJumpPower = 20f;
 }

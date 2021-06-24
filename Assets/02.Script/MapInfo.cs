@@ -87,13 +87,11 @@ public class MapInfo : SingletonMono<MapInfo>
 
         maxEnemy = spawnPlatforms.Count * GameManager.Instance.CurrentStageData.Spawnamountperplatform;
     }
-    [Header("init at script")]
-    public Transform min;
-    public Transform max;
 
     public Vector3 GetRandomPos()
     {
-        return new Vector2(Random.Range(min.position.x, max.position.x), Random.Range(min.position.y, max.position.y));
+        return Vector3.zero;
+        //return new Vector2(Random.Range(min.position.x, max.position.x), Random.Range(min.position.y, max.position.y));
     }
 
     private bool IsEnemyMax()
@@ -271,8 +269,8 @@ public class MapInfo : SingletonMono<MapInfo>
         DatabaseManager.SendTransaction(transactions, successCallBack: () =>
           {
               LogManager.Instance.SendLog("스테이지클리어", GameManager.Instance.CurrentStageData.Id.ToString());
-            //결과표시
-            UiFieldBossRewardView.Instance.Initialize(rewardValue);
+              //결과표시
+              UiFieldBossRewardView.Instance.Initialize(rewardValue);
           });
     }
 
