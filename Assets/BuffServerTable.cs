@@ -124,7 +124,7 @@ public class BuffServerTable
                     //매직스톤버프
                     if (table[i].Bufftype != (int)StatusType.MagicStoneAddPer)
                     {
-                        buffData.remainSec = new ReactiveProperty<int>(table[i].Buffseconds);
+                        buffData.remainSec = new ReactiveProperty<int>(0);
                     }
                     else
                     {

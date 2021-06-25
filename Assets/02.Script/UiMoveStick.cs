@@ -49,8 +49,11 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         SetMoveAuto();
     }
 
+    //기능 꺼둠
     private void SetMoveAuto()
     {
+        return;
+
         if (SkillCoolTimeManager.moveAutoValue.Value == 0)
         {
             SkillCoolTimeManager.SetMoveAuto(true);
