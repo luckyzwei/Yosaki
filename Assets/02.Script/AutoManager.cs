@@ -128,7 +128,10 @@ public class AutoManager : Singleton<AutoManager>
 
                         //위아래 체크
                         bool needToUpDown = xDist < jumpWidth && yDist > jumpHeight;
-                        bool needToHorizontalJump = xDist > horizontalJumpDistance;
+
+                        //박치기 꺼둠
+                        //bool needToHorizontalJump = xDist > horizontalJumpDistance;
+                        bool needToHorizontalJump = false;
 
                         if (needToHorizontalJump)
                         {

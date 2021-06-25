@@ -21,7 +21,7 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
 
     private Coroutine attackAnimEndRoutine;
 
-    private WaitForSeconds attackAnimDelay = new WaitForSeconds(0.3f);
+    private WaitForSeconds attackAnimDelay = new WaitForSeconds(0.2f);
     private IEnumerator AttackAnimEndRoutine()
     {
         yield return attackAnimDelay;
@@ -40,12 +40,17 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
 
         if (animName.Contains(Attack))
         {
+            skeletonGraphic.timeScale = 4f;
             if (attackAnimEndRoutine != null)
             {
                 StopCoroutine(attackAnimEndRoutine);
             }
 
             attackAnimEndRoutine = StartCoroutine(AttackAnimEndRoutine());
+        }
+        else
+        {
+            skeletonGraphic.timeScale = 2f;
         }
 
         bool loop = animName.Equals(Anim_Idle) || animName.Equals(Anim_Run);
@@ -63,22 +68,22 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
         {
             case AnimState.attack:
                 {
-                    if (attackIdx == 0) 
+                    if (attackIdx == 0)
                     {
                         SetAnimation(Anim_Attack);
                         attackIdx++;
                     }
-                    else if (attackIdx == 1) 
+                    else if (attackIdx == 1)
                     {
                         SetAnimation(Anim_Attack2);
                         attackIdx++;
                     }
-                    else 
+                    else
                     {
                         SetAnimation(Anim_Attack3);
                         attackIdx = 0;
                     }
-      
+
                 }
                 break;
             case AnimState.idle:

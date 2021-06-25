@@ -37,17 +37,15 @@ public class Skill1 : SkillBase
         //파티클
         CoroutineExecuter.Instance.StartCoroutine(SpawnLineEffect());
 
-
-
-        //캐릭터 이동
-        if (wallHitPoint == Vector2.zero)
-        {
-            playerTr.position += (playerSkillCaster.PlayerMoveController.MoveDirection == MoveDirection.Right ? Vector3.right : Vector3.left) * skillInfo.Targetrange;
-        }
-        else
-        {
-            playerTr.position = wallHitPoint;
-        }
+        ////캐릭터 이동
+        //if (wallHitPoint == Vector2.zero)
+        //{
+        //    playerTr.position += (playerSkillCaster.PlayerMoveController.MoveDirection == MoveDirection.Right ? Vector3.right : Vector3.left) * skillInfo.Targetrange;
+        //}
+        //else
+        //{
+        //    playerTr.position = wallHitPoint;
+        //}
 
         //이동후 파티클
         //EffectManager.SpawnEffect("FeatherExplosion", PlayerMoveController.Instance.transform.position);

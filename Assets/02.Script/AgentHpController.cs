@@ -99,7 +99,7 @@ public class AgentHpController : MonoBehaviour
     {
         this.enemyTableData = enemyTableData;
 
-        SetHp(isFieldBossEnemy == false ? enemyTableData.Hp : enemyTableData.Hp * GameBalance.fieldBossHpValue);
+        SetHp(isFieldBossEnemy == false ? enemyTableData.Hp : enemyTableData.Hp * GameManager.Instance.CurrentStageData.Bosshpratio);
 
         SetHardIcon();
     }

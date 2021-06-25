@@ -11,11 +11,11 @@ public class UiAutoSkillSelector : MonoBehaviour
     [SerializeField]
     private List<GameObject> toggleCheckBoxObject;
 
-    [SerializeField]
-    private GameObject jumpAutoObject;
+    //[SerializeField]
+    //private GameObject jumpAutoObject;
 
-    [SerializeField]
-    private GameObject jumpToggleObject;
+    //[SerializeField]
+    //private GameObject jumpToggleObject;
 
 
     void Start()
@@ -26,12 +26,12 @@ public class UiAutoSkillSelector : MonoBehaviour
 
     private void Subscribe()
     {
-        AutoManager.Instance.AutoMode.AsObservable().Subscribe(e =>
-        {
-            toggleObject.ForEach(element => element.gameObject.SetActive(e));
+        //AutoManager.Instance.AutoMode.AsObservable().Subscribe(e =>
+        //{
+        //    toggleObject.ForEach(element => element.gameObject.SetActive(e));
 
-            jumpAutoObject.gameObject.SetActive(e);
-        }).AddTo(this);
+        //    jumpAutoObject.gameObject.SetActive(e);
+        //}).AddTo(this);
 
         var list = SkillCoolTimeManager.registeredSkillIdx;
 
@@ -45,10 +45,10 @@ public class UiAutoSkillSelector : MonoBehaviour
         }
 
 
-        SkillCoolTimeManager.jumpAutoValue.AsObservable().Subscribe(e =>
-        {
-            jumpToggleObject.SetActive(e == 1);
-        }).AddTo(this);
+        //SkillCoolTimeManager.jumpAutoValue.AsObservable().Subscribe(e =>
+        //{
+        //    jumpToggleObject.SetActive(e == 1);
+        //}).AddTo(this);
 
     }
 
