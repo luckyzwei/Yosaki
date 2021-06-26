@@ -43,8 +43,9 @@ public class StatusTable
     public const string SkillCoolTime_memory = "SkillCoolTime_memory";
     public const string CriticalLevel_memory = "CriticalLevel_memory";
     public const string CriticalDamLevel_memory = "CriticalDamLevel_memory";
+    public const string IgnoreDefense_memory = "IgnoreDefense_memory";
 
-
+    
 
 
 
@@ -55,29 +56,30 @@ public class StatusTable
         {StatPoint,0},
         {Memory,0},
 
-        {IntLevel_Gold,1},
-        {CriticalLevel_Gold,1},
-        {CriticalDamLevel_Gold,1},
-        {HpLevel_Gold,1},
-        {MpLevel_Gold,1},
-        {HpRecover_Gold,1},
-        {MpRecover_Gold,1},
+        {IntLevel_Gold,0},
+        {CriticalLevel_Gold,0},
+        {CriticalDamLevel_Gold,0},
+        {HpLevel_Gold,0},
+        {MpLevel_Gold,0},
+        {HpRecover_Gold,0},
+        {MpRecover_Gold,0},
 
         //스텟초기화도 같이추가해
-        {IntLevelAddPer_StatPoint,1},
-        {CriticalLevel_StatPoint,1},
-        {CriticalDamLevel_StatPoint,1},
-        {GoldGain_StatPoint,1},
-        {ExpGain_StatPoint,1},
-        {HpPer_StatPoint,1},
-        {MpPer_StatPoint,1},
+        {IntLevelAddPer_StatPoint,0},
+        {CriticalLevel_StatPoint,0},
+        {CriticalDamLevel_StatPoint,0},
+        {GoldGain_StatPoint,0},
+        {ExpGain_StatPoint,0},
+        {HpPer_StatPoint,0},
+        {MpPer_StatPoint,0},
         //스텟초기화도 같이추가해
 
-        {DamageBalance_memory,1},
-        {SkillDamage_memory,1},
-        {SkillCoolTime_memory,1},
-        {CriticalLevel_memory,1},
-        {CriticalDamLevel_memory,1},
+        {DamageBalance_memory,0},
+        {SkillDamage_memory,0},
+        {SkillCoolTime_memory,0},
+        {CriticalLevel_memory,0},
+        {CriticalDamLevel_memory,0},
+        {IgnoreDefense_memory,0},
     };
 
     private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();
@@ -216,6 +218,11 @@ public class StatusTable
                 case CriticalDamLevel_memory:
                     {
                         return level * 0.01f;
+                    }
+                    break;
+                case IgnoreDefense_memory:
+                    {
+                        return level;
                     }
                     break;
 

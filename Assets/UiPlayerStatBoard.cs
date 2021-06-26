@@ -73,6 +73,9 @@ public class UiPlayerStatBoard : MonoBehaviour
         //경험치 추가 획득
         description += $"{CommonString.GetStatusName(StatusType.ExpGainPer)} : {PlayerStats.GetExpPlusValue() * 100f}\n";
 
+        //방무 GetIgnoreDefenseValue
+        description += $"{CommonString.GetStatusName(StatusType.IgnoreDefense)} : {PlayerStats.GetIgnoreDefenseValue()}\n";
+
         //기억의파편 추가 획득
         description += $"{CommonString.GetStatusName(StatusType.MagicStoneAddPer)} : {PlayerStats.GetMagicStonePlusValue() * 100f}\n";
         description += "-------------------";

@@ -81,7 +81,7 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.IntLevel_Gold);
-      //  ret += GetCollectionAbilValue(StatusType.IntAdd);
+        //  ret += GetCollectionAbilValue(StatusType.IntAdd);
         ret += DatabaseManager.petTable.GetStatusValue(StatusType.IntAdd);
         ret += GetWeaponEquipPercentValue(StatusType.IntAdd);
         ret += GetMagicBookCollectionValue(StatusType.IntAdd);
@@ -485,6 +485,10 @@ public static class PlayerStats
 
     public static float GetIgnoreDefenseValue()
     {
-        return 0f;
+        float ret = 0f;
+
+        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.IgnoreDefense_memory);
+
+        return ret;
     }
 }
