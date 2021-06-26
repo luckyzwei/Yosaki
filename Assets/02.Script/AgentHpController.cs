@@ -99,7 +99,7 @@ public class AgentHpController : MonoBehaviour
     {
         this.enemyTableData = enemyTableData;
 
-        SetHp(isFieldBossEnemy == false ? enemyTableData.Hp : enemyTableData.Hp * GameManager.Instance.CurrentStageData.Bosshpratio);
+        SetHp(isFieldBossEnemy == false ? enemyTableData.Hp : enemyTableData.Hp * enemyTableData.Bosshpratio);
 
         SetHardIcon();
     }
@@ -177,6 +177,7 @@ public class AgentHpController : MonoBehaviour
         }
     }
 
+    //안씀, 골드 드랍으로 바꿈
     private void GetHitGold(float value)
     {
         //데미지는 -값임
@@ -193,8 +194,13 @@ public class AgentHpController : MonoBehaviour
         }
 
     }
+
     public void UpdateHp(float value)
     {
+        //방어력 적용
+        ApplyDefense(ref value);
+        //
+
         value *= DamageBalance.GetRandomDamageRange();
 
         ApplyCriticalAndDamText(ref value);
@@ -206,7 +212,7 @@ public class AgentHpController : MonoBehaviour
             WhenAgentDamaged.Execute(-value);
         }
 
-        GetHitGold(value);
+        //GetHitGold(value);
 
         currentHp.Value += value;
 
@@ -219,6 +225,14 @@ public class AgentHpController : MonoBehaviour
             return;
         }
     }
+    private void ApplyDefense(ref float value)
+    {
+        float ignoreDefense = PlayerStats.GetIgnoreDefenseValue();
+
+        float enemyDefense = enemyTableData.Defense - ignoreDefense;
+
+        value -= value * enemyDefense * 0.01f;
+    }
 
     private void EnemyDead()
     {
@@ -227,6 +241,8 @@ public class AgentHpController : MonoBehaviour
         isEnemyDead = true;
 
         AddEnemyDeadCount();
+
+        GetGoldByEnemy(enemyTableData.Gold);
 
         this.gameObject.SetActive(false);
     }

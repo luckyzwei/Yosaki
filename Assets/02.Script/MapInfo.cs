@@ -172,11 +172,6 @@ public class MapInfo : SingletonMono<MapInfo>
 
         enemyObject.SetReturnCallBack(EnemyRemoveCallBack);
 
-        //능력치 스테이지 테이블에서 가져옴
-        spawnEnemyData[0].Hp = GameManager.Instance.CurrentStageData.Enemyhp;
-        spawnEnemyData[0].Attackpower = GameManager.Instance.CurrentStageData.Enemyattackpower;
-        //
-
         enemyObject.Initialize(spawnEnemyData[0], isBossEnemy);
 
         spawnedEnemyList.Add(enemyObject);

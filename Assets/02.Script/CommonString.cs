@@ -111,7 +111,7 @@ public static class CommonString
                 ret = "크리티컬 데미지(%)";
                 break;
             case StatusType.SkillCoolTime:
-                ret = "스킬 쿨타임 감소(%)";
+                ret = "공격 속도(%)";
                 break;
             case StatusType.SkillDamage:
                 ret = "추가 스킬 데미지(%)";
@@ -154,6 +154,9 @@ public static class CommonString
                 break;
             case StatusType.Damdecrease:
                 ret = "피해 감소(%)";
+                break;
+            case StatusType.IgnoreDefense:
+                ret = "방어력 무시";
                 break;
         }
 

@@ -64,7 +64,7 @@ public static class DatabaseManager
         weaponTable.Initialize();
         skillServerTable.Initialize();
         dailyMissionTable.Initialize();
-        collectionTable.Initialize();
+        //collectionTable.Initialize();
         equipmentTable.Initialize();
         magicBookTable.Initialize();
         petTable.Initialize();

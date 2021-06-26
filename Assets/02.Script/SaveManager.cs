@@ -96,7 +96,7 @@ public class SaveManager : SingletonMono<SaveManager>
 
         DatabaseManager.growthTable.UpData(GrowthTable.Exp, false);
 
-        CollectionManager.Instance.SyncToServer();
+        //CollectionManager.Instance.SyncToServer();
 
         if (BuffManager.Instance != null)
         {
@@ -116,7 +116,7 @@ public class SaveManager : SingletonMono<SaveManager>
     {
         DatabaseManager.goodsTable.SyncAllDataForce();
 
-        CollectionManager.Instance.SyncToServerForce();
+        //CollectionManager.Instance.SyncToServerForce();
 
         DatabaseManager.growthTable.SyncDataForce();
 

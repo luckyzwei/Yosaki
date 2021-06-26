@@ -53,28 +53,14 @@ public class CollectionTable
                     if (table[i].Usecollection == false) continue;
                     if (table[i].Ishardenemy == true) continue;
 
-                    if (i == 0)
-                    {
-                        defultValues.Add(table[i].Collectionkey, "0,0,0");
+                    defultValues.Add(table[i].Collectionkey, $"{table[i].Id},0,0");
 
-                        var enemyData = new CollectionServerData();
-                        enemyData.idx = table[i].Id;
-                        enemyData.level = new ReactiveProperty<int>(0);
-                        enemyData.amount = new ReactiveProperty<int>(0);
+                    var enemyData = new CollectionServerData();
+                    enemyData.idx = table[i].Id;
+                    enemyData.level = new ReactiveProperty<int>(0);
+                    enemyData.amount = new ReactiveProperty<int>(0);
 
-                        tableDatas.Add(table[i].Collectionkey, enemyData);
-                    }
-                    else
-                    {
-                        defultValues.Add(table[i].Collectionkey, $"{table[i].Id},0,0");
-
-                        var enemyData = new CollectionServerData();
-                        enemyData.idx = table[i].Id;
-                        enemyData.level = new ReactiveProperty<int>(0);
-                        enemyData.amount = new ReactiveProperty<int>(0);
-
-                        tableDatas.Add(table[i].Collectionkey, enemyData);
-                    }
+                    tableDatas.Add(table[i].Collectionkey, enemyData);
                 }
 
                 var bro = Backend.GameData.Insert(tableName, defultValues);

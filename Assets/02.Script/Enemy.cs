@@ -104,7 +104,7 @@ public class Enemy : PoolItem
 
         SpawnMagicStone();
 
-        UpdateCollection();
+        //UpdateCollection();
 
         enemyDeadCallBack?.Invoke(this);
 
@@ -123,12 +123,12 @@ public class Enemy : PoolItem
         UiStageNameIndicater.Instance.StopFieldBossTimer();
     }
 
-    private void UpdateCollection()
-    {
-        if (tableData.Usecollection == false) return;
-        var collectionData = CollectionManager.Instance.GetCollectionData(tableData.Collectionkey, true);
-        collectionData.amount.Value++;
-    }
+    //private void UpdateCollection()
+    //{
+    //    if (tableData.Usecollection == false) return;
+    //    var collectionData = CollectionManager.Instance.GetCollectionData(tableData.Collectionkey, true);
+    //    collectionData.amount.Value++;
+    //}
 
     private void SpawnMagicStone()
     {
@@ -151,7 +151,14 @@ public class Enemy : PoolItem
 
         if (enemyHitObject != null)
         {
-            enemyHitObject.SetDamage(tableData.Attackpower);
+            if (isFieldBossEnemy == false)
+            {
+                enemyHitObject.SetDamage(tableData.Attackpower);
+            }
+            else
+            {
+                enemyHitObject.SetDamage(tableData.Attackpower * tableData.Bossattackratio);
+            }
         }
     }
 

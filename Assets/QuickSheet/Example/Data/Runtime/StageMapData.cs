@@ -52,20 +52,4 @@ public class StageMapData
   int bossrewardvalue;
   public int Bossrewardvalue { get {return bossrewardvalue; } set { this.bossrewardvalue = value;} }
   
-  [SerializeField]
-  float enemyhp;
-  public float Enemyhp { get {return enemyhp; } set { this.enemyhp = value;} }
-  
-  [SerializeField]
-  float enemyattackpower;
-  public float Enemyattackpower { get {return enemyattackpower; } set { this.enemyattackpower = value;} }
-  
-  [SerializeField]
-  float bosshpratio;
-  public float Bosshpratio { get {return bosshpratio; } set { this.bosshpratio = value;} }
-  
-  [SerializeField]
-  float bosspowerratio;
-  public float Bosspowerratio { get {return bosspowerratio; } set { this.bosspowerratio = value;} }
-  
 }

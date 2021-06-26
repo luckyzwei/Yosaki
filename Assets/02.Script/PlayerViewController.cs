@@ -22,6 +22,13 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
     private Coroutine attackAnimEndRoutine;
 
     private WaitForSeconds attackAnimDelay = new WaitForSeconds(0.2f);
+
+    [SerializeField]
+    private GameObject attackWeapon;
+
+    [SerializeField]
+    private GameObject idleWeapon;
+
     private IEnumerator AttackAnimEndRoutine()
     {
         yield return attackAnimDelay;
@@ -38,7 +45,12 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
     {
         if (attackAnimEndRoutine != null || (CurrentAnimation == animName && animName.Contains(Attack) == false)) return;
 
-        if (animName.Contains(Attack))
+        bool isAttackAnim = animName.Contains(Attack);
+
+        attackWeapon.SetActive(isAttackAnim);
+        idleWeapon.SetActive(!isAttackAnim);
+
+        if (isAttackAnim)
         {
             skeletonGraphic.timeScale = 4f;
             if (attackAnimEndRoutine != null)

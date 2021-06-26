@@ -88,4 +88,16 @@ public class EnemyTableData
   string collectionkey;
   public string Collectionkey { get {return collectionkey; } set { this.collectionkey = value;} }
   
+  [SerializeField]
+  int defense;
+  public int Defense { get {return defense; } set { this.defense = value;} }
+  
+  [SerializeField]
+  float bosshpratio;
+  public float Bosshpratio { get {return bosshpratio; } set { this.bosshpratio = value;} }
+  
+  [SerializeField]
+  float bossattackratio;
+  public float Bossattackratio { get {return bossattackratio; } set { this.bossattackratio = value;} }
+  
 }
