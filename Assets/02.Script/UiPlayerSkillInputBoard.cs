@@ -10,6 +10,9 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
     private List<Image> skillIcons;
 
     [SerializeField]
+    private List<GameObject> maskObjects;
+
+    [SerializeField]
     private Sprite emptySprite;
 
     private List<ReactiveProperty<int>> selectedSkillIdxList;
@@ -48,9 +51,13 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
                 skillIcons[i].sprite = emptySprite;
 
                 skillIcons[i].fillAmount = 0f;
+
+              //  maskObjects[i].SetActive(false);
             }
             else
             {
+               // maskObjects[i].SetActive(true);
+
                 skillIcons[i].sprite = CommonResourceContainer.GetSkillIconSprite(list[i].Value);
 
                 //쿨타임 관리
@@ -75,7 +82,7 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
         }).AddTo(disposables);
     }
 
-    public void OnClickSkillSlot(int idx)
+    public void OnClickSKillToggle(int idx) 
     {
         if (AutoManager.Instance.IsAutoMode)
         {
@@ -98,7 +105,10 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
             }
             return;
         }
+    }
 
+    public void OnClickSkillSlot(int idx)
+    {
 
         if (selectedSkillIdxList[idx].Value == -1)
         {

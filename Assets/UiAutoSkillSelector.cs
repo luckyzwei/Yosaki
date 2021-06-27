@@ -26,12 +26,11 @@ public class UiAutoSkillSelector : MonoBehaviour
 
     private void Subscribe()
     {
-        //AutoManager.Instance.AutoMode.AsObservable().Subscribe(e =>
-        //{
-        //    toggleObject.ForEach(element => element.gameObject.SetActive(e));
-
-        //    jumpAutoObject.gameObject.SetActive(e);
-        //}).AddTo(this);
+        AutoManager.Instance.AutoMode.AsObservable().Subscribe(e =>
+        {
+            toggleObject.ForEach(element => element.gameObject.SetActive(e));
+            //jumpAutoObject.gameObject.SetActive(e);
+        }).AddTo(this);
 
         var list = SkillCoolTimeManager.registeredSkillIdx;
 

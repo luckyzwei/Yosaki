@@ -28,6 +28,8 @@ public class UiSkillBoard : MonoBehaviour
     {
         UpdateView();
         UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.skillBoardDescription);
+
+        ShowSkillDescriptionPopup(TableManager.Instance.SkillData[0]);
     }
 
     private void ShowSkillDescriptionPopup(SkillTableData data)
