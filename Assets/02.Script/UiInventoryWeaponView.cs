@@ -77,7 +77,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].AsObservable().Subscribe(WhenEquipMagicBookChanged).AddTo(this);
             DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].hasItem.AsObservable().Subscribe(WhenHasStageChanged).AddTo(this);
             DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
-        
+
         }
 
         if (weaponData != null)
@@ -130,7 +130,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         levelUpButton.interactable = currentMagicStoneAmount >= price;
     }
 
-    private void WhenAmountChanged(int amount) 
+    private void WhenAmountChanged(int amount)
     {
         if (weaponData != null)
         {
@@ -145,6 +145,10 @@ public class UiInventoryWeaponView : MonoBehaviour
     private void WhenHasStageChanged(int state)
     {
         hasMask.SetActive(state == 0);
+
+        equipButton.gameObject.SetActive(state == 1);
+
+        levelUpButton.gameObject.SetActive(state == 1);
     }
     private void WhenEquipWeaponChanged(int idx)
     {
@@ -373,7 +377,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             equipButton.interactable = equipIdx != id;
             //equipDescription.SetText(equipIdx == id ? "장착중" : "장착");
         }
-      // ShowSubDetailView();
+        // ShowSubDetailView();
     }
     public void OnClickLevelUpButton()
     {
