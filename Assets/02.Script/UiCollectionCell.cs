@@ -114,7 +114,7 @@ public class UiCollectionCell : MonoBehaviour
 
     public void OnClickCollectionByGemButton()
     {
-        if (DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value < tableData.Stoneprice)
+        if (DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value < tableData.Stoneprice)
         {
             PopupManager.Instance.ShowAlarmMessage("재료가 부족합니다.");
             return;
@@ -131,7 +131,7 @@ public class UiCollectionCell : MonoBehaviour
 
     private void CollectByGem()
     {
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value -= tableData.Stoneprice;
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= tableData.Stoneprice;
 
         CollectionManager.Instance.GetCollectionData(tableData.Collectionkey, true).level.Value++;
 
@@ -139,7 +139,7 @@ public class UiCollectionCell : MonoBehaviour
 
         //재화
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         //컬렉션 레벨
         Param collectionParam = new Param();

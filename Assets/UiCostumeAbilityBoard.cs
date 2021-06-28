@@ -167,7 +167,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
     {
         if (CanGacha() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.BlueStone)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
             return;
         }
 
@@ -250,7 +250,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
         }
 
         //재화 차감
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value -= price;
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
 
 
         if (syncRoutine != null)
@@ -278,7 +278,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
         DatabaseManager.costumeServerTable.SyncCostumeData(key);
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         Param costumeParam = new Param();
@@ -290,7 +290,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
     private bool CanGacha()
     {
-        int currentBlueStoneNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value;
+        int currentBlueStoneNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         return currentBlueStoneNum >= price;
     }

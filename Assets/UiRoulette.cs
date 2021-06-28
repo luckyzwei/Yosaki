@@ -178,16 +178,16 @@ public class UiRoulette : MonoBehaviour
             goodsParam.Add(GoodsTable.Ticket, DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value);
         }
         //매직스톤
-        else if (rewardType == Item_Type.MagicStone)
+        else if (rewardType == Item_Type.GrowThStone)
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value += rewardAmount;
-            goodsParam.Add(GoodsTable.MagicStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value);
+            DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardAmount;
+            goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         }
         //보석
-        else if (rewardType == Item_Type.BlueStone)
+        else if (rewardType == Item_Type.Jade)
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value += rewardAmount;
-            goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+            DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardAmount;
+            goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
         }
 
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));

@@ -115,11 +115,11 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
     }
     private void BonusDefenseEnterRoutine()
     {
-        int currentBlueStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value;
+        int currentBlueStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         if (currentBlueStone < GameBalance.contentsEnterprice)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.BlueStone)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}가 부족합니다.");
             return;
         }
 
@@ -132,14 +132,14 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
         enterButton.interactable = false;
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value -= GameBalance.contentsEnterprice;
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.contentsEnterprice;
         DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value++;
 
         //데이터 싱크
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         Param userInfoParam = new Param();
@@ -159,19 +159,19 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
     private void InfiniteTowerEnterRoutine()
     {
-        int currentBlueStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value;
+        int currentBlueStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         if (currentBlueStone < GameBalance.contentsEnterprice)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.BlueStone)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}가 부족합니다.");
             return;
         }
 
         enterButton.interactable = false;
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value -= GameBalance.contentsEnterprice;
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.contentsEnterprice;
 
-        DatabaseManager.goodsTable.SyncToServerEach(GoodsTable.BlueStone, () =>
+        DatabaseManager.goodsTable.SyncToServerEach(GoodsTable.Jade, () =>
         {
             GameManager.Instance.LoadContents(contentsType);
         },
@@ -182,7 +182,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
        //실패
        () =>
        {
-           DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value += GameBalance.contentsEnterprice;
+           DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += GameBalance.contentsEnterprice;
            enterButton.interactable = true;
            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "서버가 불안정 합니다. 잠시후 다시 시도해 주세요.", null);
        });
@@ -210,13 +210,13 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
             int rewardNum = killCount * GameBalance.bonusDungeonGemPerEnemy;
             DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value++;
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value += killCount * GameBalance.bonusDungeonGemPerEnemy;
+            DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += killCount * GameBalance.bonusDungeonGemPerEnemy;
 
             //데이터 싱크
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+            goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param userInfoParam = new Param();
@@ -233,7 +233,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
                     enterButton.interactable = true;
                 });
 
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.BlueStone)} {rewardNum}개 획득!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)} {rewardNum}개 획득!");
             SoundManager.Instance.PlaySound("GoldUse");
         }, null);
     }

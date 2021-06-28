@@ -22,13 +22,13 @@ public class UiSkillPointResetButton : MonoBehaviour
 
     public void OnClickResetSkillPoint()
     {
-        if (DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value < GameBalance.SkillPointResetPrice)
+        if (DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value < GameBalance.SkillPointResetPrice)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.BlueStone)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.BlueStone)} {Utils.ConvertBigNum(GameBalance.SkillPointResetPrice)}개를 사용해서\n스킬 포인트를 초기화 하시겠습니까?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertBigNum(GameBalance.SkillPointResetPrice)}개를 사용해서\n스킬 포인트를 초기화 하시겠습니까?", () =>
           {
               PurchaseProcess();
           }, null);
@@ -69,7 +69,7 @@ public class UiSkillPointResetButton : MonoBehaviour
         DatabaseManager.statusTable.GetTableData(StatusTable.SkillPoint).Value = currentLevel;
 
         //비용 차감
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value -= GameBalance.SkillPointResetPrice;
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.SkillPointResetPrice;
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
@@ -78,7 +78,7 @@ public class UiSkillPointResetButton : MonoBehaviour
         skillParam.Add(SkillServerTable.SkillSlotIdx, DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx].Select(e => e.Value).ToList());
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         Param statusParam = new Param();
         statusParam.Add(StatusTable.SkillPoint, DatabaseManager.statusTable.GetTableData(StatusTable.SkillPoint).Value);

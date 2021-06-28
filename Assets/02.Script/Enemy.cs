@@ -138,7 +138,7 @@ public class Enemy : PoolItem
 
         float magicStoneSpawnAmount = GameManager.Instance.CurrentStageData.Magicstoneamount;
 
-        dropItem.Initialize(Item_Type.MagicStone, magicStoneSpawnAmount);
+        dropItem.Initialize(Item_Type.GrowThStone, magicStoneSpawnAmount);
         dropItem.transform.position = this.transform.position;
     }
 

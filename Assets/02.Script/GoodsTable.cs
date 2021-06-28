@@ -11,8 +11,8 @@ public class GoodsTable
     public static string Indate;
     public const string tableName = "Goods";
     public static string Gold = "Gold";
-    public static string BlueStone = "BlueStone";
-    public static string MagicStone = "MagicStone";
+    public static string Jade = "Jade";
+    public static string GrowthStone = "GrowthStone";
     public static string Ticket = "Ticket";
     public static string BonusSpinKey = "BonusSpin";
     public static string FeatherKey = "FeatherKey";
@@ -29,11 +29,11 @@ public class GoodsTable
             case Item_Type.Gold:
                 return Gold;
                 break;
-            case Item_Type.BlueStone:
-                return BlueStone;
+            case Item_Type.Jade:
+                return Jade;
                 break;
-            case Item_Type.MagicStone:
-                return MagicStone;
+            case Item_Type.GrowThStone:
+                return GrowthStone;
                 break;
             case Item_Type.Ticket:
                 return Ticket;
@@ -45,8 +45,8 @@ public class GoodsTable
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
         {Gold,GameBalance.StartingMoney},
-        {BlueStone,0f},
-        {MagicStone,0f},
+        {Jade,0f},
+        {GrowthStone,0f},
         {Ticket,0f},
         {Potion_0,0f},
         {Potion_1,0f},
@@ -91,12 +91,12 @@ public class GoodsTable
 
     public void GetMagicStone(float amount)
     {
-        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.MagicStone)} 획득(+{(int)amount})");
-        tableDatas[MagicStone].Value += amount;
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowThStone)} 획득(+{(int)amount})");
+        tableDatas[GrowthStone].Value += amount;
     }
     public void GetBlueStone(float amount)
     {
-        tableDatas[BlueStone].Value += amount;
+        tableDatas[Jade].Value += amount;
     }
 
     public void Initialize()

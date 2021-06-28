@@ -241,7 +241,7 @@ public class UiPetView : MonoBehaviour
             //미보유
             else
             {
-                int currentBlueStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value;
+                int currentBlueStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
                 if (currentBlueStone >= petData.Price)
                 {
@@ -249,7 +249,7 @@ public class UiPetView : MonoBehaviour
                 }
                 else
                 {
-                    PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.BlueStone)}가 부족합니다.");
+                    PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}가 부족합니다.");
                 }
             }
         }
@@ -289,12 +289,12 @@ public class UiPetView : MonoBehaviour
         else if (petData.PETGETTYPE == PetGetType.Gem)
         {
             DatabaseManager.petTable.TableDatas[petData.Stringid].hasItem.Value = 1;
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value -= petData.Price;
+            DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= petData.Price;
             //
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+            goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param petParam = new Param();

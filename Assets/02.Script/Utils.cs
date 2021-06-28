@@ -33,8 +33,8 @@ public static class Utils
     public static bool IsGoodsItem(this Item_Type type)
     {
         return type == Item_Type.Gold ||
-                type == Item_Type.BlueStone ||
-                type == Item_Type.MagicStone ||
+                type == Item_Type.Jade ||
+                type == Item_Type.GrowThStone ||
                 type == Item_Type.Feather ||
                 type == Item_Type.Ticket;
     }

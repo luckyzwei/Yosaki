@@ -57,7 +57,7 @@ public class UIMemoryStatusView : MonoBehaviour
         }
         else
         {
-            levelUpText.SetText($"레벨업\n{CommonString.GetItemName(Item_Type.MagicStone)} {Utils.ConvertBigNum(bossTableData.Upgradeprice)}개");
+            levelUpText.SetText($"레벨업\n{CommonString.GetItemName(Item_Type.GrowThStone)} {Utils.ConvertBigNum(bossTableData.Upgradeprice)}개");
         }
 
         skillTitle.SetText($"LV:{skillLevel}");
@@ -82,11 +82,11 @@ public class UIMemoryStatusView : MonoBehaviour
 
     public void OnClickUpgradeButton()
     {
-        int currentMagicStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value;
+        int currentMagicStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value;
 
         if (currentMagicStone < bossTableData.Upgradeprice)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.MagicStone)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GrowThStone)}이 부족합니다.");
             return;
         }
 
@@ -99,13 +99,13 @@ public class UIMemoryStatusView : MonoBehaviour
 
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말 레벨업 합니까?", () => 
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value -= bossTableData.Upgradeprice;
+            DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= bossTableData.Upgradeprice;
             DatabaseManager.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.Value++;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.MagicStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value);
+            goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param bossParam = new Param();

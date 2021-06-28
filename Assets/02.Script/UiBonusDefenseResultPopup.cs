@@ -33,10 +33,10 @@ public class UiBonusDefenseResultPopup : MonoBehaviour
         var blueStoneReward = Instantiate<UiRewardView>(prefab, rewardParent);
 
 
-        RewardData rewardData = new RewardData(Item_Type.BlueStone, blueStoneRewardNum);
+        RewardData rewardData = new RewardData(Item_Type.Jade, blueStoneRewardNum);
         blueStoneReward.Initialize(rewardData);
 
-        RewardManager.Instance.GetReward(Item_Type.BlueStone, blueStoneRewardNum);
+        RewardManager.Instance.GetReward(Item_Type.Jade, blueStoneRewardNum);
 
         int prefMaxKillCount = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
 

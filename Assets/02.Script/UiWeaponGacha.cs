@@ -74,7 +74,7 @@ public class UiWeaponGacha : MonoBehaviour
 
     private bool CanGacha(int price)
     {
-        int currentBlueStoneNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value;
+        int currentBlueStoneNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
         return currentBlueStoneNum >= price;
     }
 
@@ -87,7 +87,7 @@ public class UiWeaponGacha : MonoBehaviour
         //재화 체크
         if (CanGacha(price) == false)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.BlueStone)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
             UiGachaResultView.Instance.autoToggle.isOn = false;
             return;
         }
@@ -133,7 +133,7 @@ public class UiWeaponGacha : MonoBehaviour
         //로컬 데이터 갱신
 
         //재화
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value -= price;
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
 
         //가챠갯수
         DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum).Value += amount;
@@ -172,7 +172,7 @@ public class UiWeaponGacha : MonoBehaviour
 
         //재화
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         //가챠횟수
         Param gachaNumParam = new Param();

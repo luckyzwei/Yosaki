@@ -10,13 +10,13 @@ public class RewardManager : SingletonMono<RewardManager>
         {
             case Item_Type.Gold:
                 break;
-            case Item_Type.BlueStone:
-                DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value += amount;
-                DatabaseManager.goodsTable.UpData(GoodsTable.BlueStone, false);
+            case Item_Type.Jade:
+                DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += amount;
+                DatabaseManager.goodsTable.UpData(GoodsTable.Jade, false);
                 break;
-            case Item_Type.MagicStone:
-                DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value += amount;
-                DatabaseManager.goodsTable.UpData(GoodsTable.MagicStone, false);
+            case Item_Type.GrowThStone:
+                DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
+                DatabaseManager.goodsTable.UpData(GoodsTable.GrowthStone, false);
                 break;
             case Item_Type.Memory:
                 DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value += amount;

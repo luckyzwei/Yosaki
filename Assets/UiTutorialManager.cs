@@ -128,7 +128,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
 
         int rewardAmount = (TutorialStep)tutorialStep.Value != TutorialStep._12_ClearGoblin ? (int)rewardGemNum : (int)lastRewardGemNum;
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value += rewardAmount;
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardAmount;
 
         TutorialStep nextStep = (TutorialStep)(tutorialStep.Value * 2f);
 
@@ -137,7 +137,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
         List<TransactionValue> transactions = new List<TransactionValue>();
         //보상루틴
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         Param userInfoParam = new Param();
         userInfoParam.Add(UserInfoTable.tutorialCurrentStep, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.tutorialCurrentStep).Value);
@@ -214,7 +214,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
                 return $"캐릭터 레벨 20을 달성해 보세요";
                 break;
             case TutorialStep._12_ClearGoblin:
-                return $"레벨 {GameBalance.bonusDungeonUnlockLevel}달성 후에\n오른쪽 상단 전투 메뉴에서\n{CommonString.GetContentsName(GameManager.ContentsType.BonusDefense)}를 클리어 해보세요\n보상 : <color=yellow>{CommonString.GetItemName(Item_Type.BlueStone)} {lastRewardGemNum}개</color>";
+                return $"레벨 {GameBalance.bonusDungeonUnlockLevel}달성 후에\n오른쪽 상단 전투 메뉴에서\n{CommonString.GetContentsName(GameManager.ContentsType.BonusDefense)}를 클리어 해보세요\n보상 : <color=yellow>{CommonString.GetItemName(Item_Type.Jade)} {lastRewardGemNum}개</color>";
                 break;
             case TutorialStep.Clear:
                 break;

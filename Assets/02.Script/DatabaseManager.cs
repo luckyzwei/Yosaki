@@ -149,11 +149,11 @@ public static class DatabaseManager
                 //로컬
                 DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value += rewardValue;
                 break;
-            case Item_Type.BlueStone:
-                DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value += rewardValue;
+            case Item_Type.Jade:
+                DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardValue;
                 break;
-            case Item_Type.MagicStone:
-                DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value += rewardValue;
+            case Item_Type.GrowThStone:
+                DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardValue;
                 break;
             case Item_Type.Memory:
                 DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value += (int)rewardValue;
@@ -183,12 +183,12 @@ public static class DatabaseManager
                 passParam.Add(GoodsTable.Gold, DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
                 break;
-            case Item_Type.BlueStone:
-                passParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+            case Item_Type.Jade:
+                passParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
                 break;
-            case Item_Type.MagicStone:
-                passParam.Add(GoodsTable.MagicStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value);
+            case Item_Type.GrowThStone:
+                passParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
                 break;
             case Item_Type.Memory:
@@ -220,14 +220,14 @@ public static class DatabaseManager
 
         switch (type)
         {
-            case Item_Type.BlueStone:
-                DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value += amount;
-                param.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+            case Item_Type.Jade:
+                DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += amount;
+                param.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
                 break;
-            case Item_Type.MagicStone:
-                DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value += amount;
-                param.Add(GoodsTable.MagicStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value);
+            case Item_Type.GrowThStone:
+                DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
+                param.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
                 break;
             case Item_Type.Memory:
@@ -325,13 +325,13 @@ public static class DatabaseManager
                     if (goodsParam.ContainsKey(GoodsTable.Gold) == false)
                         goodsParam.Add(GoodsTable.Gold, DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value);
                     break;
-                case Item_Type.BlueStone:
-                    if (goodsParam.ContainsKey(GoodsTable.BlueStone) == false)
-                        goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+                case Item_Type.Jade:
+                    if (goodsParam.ContainsKey(GoodsTable.Jade) == false)
+                        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
                     break;
-                case Item_Type.MagicStone:
-                    if (goodsParam.ContainsKey(GoodsTable.MagicStone) == false)
-                        goodsParam.Add(GoodsTable.MagicStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value);
+                case Item_Type.GrowThStone:
+                    if (goodsParam.ContainsKey(GoodsTable.GrowthStone) == false)
+                        goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
                     break;
                 case Item_Type.Memory:
                     if (statusParam.ContainsKey(StatusTable.Memory) == false)
@@ -363,11 +363,11 @@ public static class DatabaseManager
             case Item_Type.Gold:
                 DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value += amount;
                 break;
-            case Item_Type.BlueStone:
-                DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value += amount;
+            case Item_Type.Jade:
+                DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += amount;
                 break;
-            case Item_Type.MagicStone:
-                DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value += amount;
+            case Item_Type.GrowThStone:
+                DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
                 break;
             case Item_Type.Ticket:
                 DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value += amount;

@@ -23,11 +23,16 @@ public class UiCostumeCell : MonoBehaviour
     [SerializeField]
     private SkeletonGraphic skeletonGraphic;
 
+    [SerializeField]
+    private TextMeshProUGUI costumeName;
+
     public void Initialize(CostumeData costumeData)
     {
         this.costumeData = costumeData;
 
         SetCostumeSpine(costumeData.Id);
+
+        costumeName.SetText(costumeData.Name);
 
         if (subscribed == false)
         {

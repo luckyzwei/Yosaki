@@ -136,16 +136,16 @@ public class UiShop : MonoBehaviour
 
         switch (type)
         {
-            case Item_Type.BlueStone:
+            case Item_Type.Jade:
                 {
-                    DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value += amount;
-                    param.Add(GoodsTable.BlueStone, amount);
+                    DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += amount;
+                    param.Add(GoodsTable.Jade, amount);
                 }
                 break;
-            case Item_Type.MagicStone:
+            case Item_Type.GrowThStone:
                 {
-                    DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value += amount;
-                    param.Add(GoodsTable.MagicStone, amount);
+                    DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
+                    param.Add(GoodsTable.GrowthStone, amount);
 
                 }
                 break;

@@ -52,7 +52,7 @@ public class UiConsumableItemView : MonoBehaviour
 
     public void OnClickBuyButton()
     {
-        var currentBlueStone = DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone);
+        var currentBlueStone = DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade);
 
         if (currentBlueStone.Value < price)
         {
@@ -69,13 +69,13 @@ public class UiConsumableItemView : MonoBehaviour
         }
 
         syncDatList.Clear();
-        syncDatList.Add(GoodsTable.BlueStone);
+        syncDatList.Add(GoodsTable.Jade);
         syncDatList.Add(goodsId);
 
         //로컬
         data.Value += amount;
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value -= price;
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
         //서버 업데이트
 
         if (syncRoutine != null)

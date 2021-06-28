@@ -205,7 +205,7 @@ public class UiWeaponDetailView : MonoBehaviour
     {
         disposables.Clear();
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).AsObservable().Subscribe(WhenMagicStoneAmountChanged).AddTo(disposables);
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).AsObservable().Subscribe(WhenMagicStoneAmountChanged).AddTo(disposables);
 
         if (weaponData != null)
         {
@@ -250,12 +250,12 @@ public class UiWeaponDetailView : MonoBehaviour
         if (weaponData != null)
         {
             price = DatabaseManager.weaponTable.GetWeaponLevelUpPrice(weaponData.Stringid);
-            currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.MagicStone);
+            currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
         }
         else
         {
             price = DatabaseManager.magicBookTable.GetMagicBookLevelUpPrice(magicBookData.Stringid);
-            currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.MagicStone);
+            currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
         }
 
         levelUpPrice.SetText(Utils.ConvertBigNum(price));
@@ -535,7 +535,7 @@ public class UiWeaponDetailView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            float currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.MagicStone);
+            float currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
             float levelUpPrice = DatabaseManager.weaponTable.GetWeaponLevelUpPrice(weaponData.Stringid);
 
             if (DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].level.Value >= weaponData.Maxlevel)
@@ -552,7 +552,7 @@ public class UiWeaponDetailView : MonoBehaviour
 #endif
             SoundManager.Instance.PlayButtonSound();
             //재화 차감
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value -= levelUpPrice;
+            DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= levelUpPrice;
             //레벨 상승
             DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].level.Value++;
             //일일 미션
@@ -563,7 +563,7 @@ public class UiWeaponDetailView : MonoBehaviour
         }
         else
         {
-            float currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.MagicStone);
+            float currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
             float levelUpPrice = DatabaseManager.magicBookTable.GetMagicBookLevelUpPrice(magicBookData.Stringid);
 
             if (DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].level.Value >= magicBookData.Maxlevel)
@@ -579,7 +579,7 @@ public class UiWeaponDetailView : MonoBehaviour
             }
 
             //재화 차감
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value -= levelUpPrice;
+            DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= levelUpPrice;
             //레벨 상승
             DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].level.Value++;
             //일일 미션
@@ -622,7 +622,7 @@ public class UiWeaponDetailView : MonoBehaviour
         Param weaponParam = new Param();
 
         //재화 차감
-        goodsParam.Add(GoodsTable.MagicStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value);
+        goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         //레벨 상승
@@ -670,7 +670,7 @@ public class UiWeaponDetailView : MonoBehaviour
         Param magicBookParam = new Param();
 
         //재화 차감
-        goodsParam.Add(GoodsTable.MagicStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value);
+        goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         //레벨 상승

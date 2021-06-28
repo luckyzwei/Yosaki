@@ -78,7 +78,7 @@ public class UiDailyMissionCell : MonoBehaviour
         int rewardGemNum = tableData.Rewardvalue * amountFactor;
         //로컬 갱신
         DailyMissionManager.UpdateDailyMission((DailyMissionKey)(tableData.Id), -tableData.Rewardrequire * amountFactor);
-        DatabaseManager.goodsTable.AddLocalData(GoodsTable.BlueStone, rewardGemNum);
+        DatabaseManager.goodsTable.AddLocalData(GoodsTable.Jade, rewardGemNum);
 
         PopupManager.Instance.ShowAlarmMessage($"보석 {rewardGemNum}개 획득!!");
         SoundManager.Instance.PlaySound("GoldUse");
@@ -109,7 +109,7 @@ public class UiDailyMissionCell : MonoBehaviour
         transactionList.Add(TransactionValue.SetUpdate(DailyMissionTable.tableName, DailyMissionTable.Indate, dailyMissionParam));
 
         //재화 추가
-        goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         DatabaseManager.SendTransaction(transactionList);

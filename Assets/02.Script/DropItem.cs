@@ -6,8 +6,8 @@ using UnityEngine;
 public enum Item_Type
 {
     Gold,
-    BlueStone,
-    MagicStone,
+    Jade,
+    GrowThStone,
     Memory,
     Ticket,
     Feather,
@@ -109,7 +109,7 @@ public class DropItem : PoolItem
     {
         switch (type)
         {
-            case Item_Type.MagicStone:
+            case Item_Type.GrowThStone:
                 {
                     icon.sprite = CommonUiContainer.Instance.magicStone;
                 }
@@ -167,7 +167,7 @@ public class DropItem : PoolItem
     {
         switch (type)
         {
-            case Item_Type.MagicStone:
+            case Item_Type.GrowThStone:
                 {
                     DatabaseManager.goodsTable.GetMagicStone(amount);
                 }

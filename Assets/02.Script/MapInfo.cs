@@ -255,8 +255,8 @@ public class MapInfo : SingletonMono<MapInfo>
 
         //보상지급
         int rewardValue = GameManager.Instance.CurrentStageData.Bossrewardvalue;
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value += rewardValue;
-        goodsParam.Add(GoodsTable.MagicStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.MagicStone).Value);
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardValue;
+        goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
 
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 

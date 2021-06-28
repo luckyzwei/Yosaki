@@ -45,10 +45,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Gold:
                 return gold;
                 break;
-            case Item_Type.BlueStone:
+            case Item_Type.Jade:
                 return blueStone;
                 break;
-            case Item_Type.MagicStone:
+            case Item_Type.GrowThStone:
                 return magicStone;
                 break;
             case Item_Type.Memory:

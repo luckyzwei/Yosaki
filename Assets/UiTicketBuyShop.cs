@@ -116,7 +116,7 @@ public class UiTicketBuyShop : MonoBehaviour
     {
         //로컬 갱신
         DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value++;
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value -= GameBalance.ticketPrice;
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.ticketPrice;
         DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value++;
 
         if (syncToServerRoutine != null)
@@ -135,7 +135,7 @@ public class UiTicketBuyShop : MonoBehaviour
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.BlueStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value);
+        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
         goodsParam.Add(GoodsTable.Ticket, DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
