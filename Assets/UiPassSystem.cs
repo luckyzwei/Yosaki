@@ -47,16 +47,7 @@ public class UiPassSystem : MonoBehaviour
 
     private ObscuredString passShopId;
 
-    [SerializeField]
-    private TextMeshProUGUI passTitle;
-
     private int currentIdx = 0;
-
-    private void OnEnable()
-    {
-        passTitle.SetText("성장패스");
-    }
-
     private void Start()
     {
         Subscribe();

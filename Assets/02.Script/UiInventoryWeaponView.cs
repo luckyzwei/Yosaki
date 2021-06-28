@@ -13,9 +13,6 @@ public class UiInventoryWeaponView : MonoBehaviour
     private TextMeshProUGUI title;
 
     [SerializeField]
-    private TextMeshProUGUI amountText;
-
-    [SerializeField]
     private WeaponView weaponView;
 
     [SerializeField]
@@ -43,9 +40,6 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     [SerializeField]
     private Button equipButton;
-
-    [SerializeField]
-    private TextMeshProUGUI equipDescription;
 
     public void Initialize(WeaponData weaponData, MagicBookData magicBookData, Action<WeaponData, MagicBookData> onClickCallBack)
     {
@@ -309,7 +303,7 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value_max = equipValue2_max;
                 StatusType type = (StatusType)effectData.Equipeffecttype2;
 
-                description += $"{CommonString.GetStatusName(type)} {value}\n";
+                description += $"{CommonString.GetStatusName(type)} {value}";
             }
 
         }
@@ -396,7 +390,7 @@ public class UiInventoryWeaponView : MonoBehaviour
 #if !UNITY_EDITOR
             if (currentMagicStoneAmount < levelUpPrice)
             {
-                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.MagicStone)} 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GrowThStone)} 부족합니다.");
                 return;
             }
 #endif

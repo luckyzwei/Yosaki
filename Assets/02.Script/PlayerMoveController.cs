@@ -38,7 +38,8 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
     private void Start()
     {
         Initialize();
-     
+
+        AutoManager.Instance.SetPlayerTr();
     }
 
 

@@ -110,10 +110,11 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
         {
             if (selectedSkillIdx[i] == -1)
             {
-                skillSlots[i].sprite = emptyIcon;
+                skillSlots[i].color = new Color(0f, 0f, 0f, 0f);
             }
             else
             {
+                skillSlots[i].color = Color.white;
                 skillSlots[i].sprite = CommonResourceContainer.GetSkillIconSprite(selectedSkillIdx[i]);
             }
         }

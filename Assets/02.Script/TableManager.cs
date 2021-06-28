@@ -75,7 +75,7 @@ public class TableManager : SingletonMono<TableManager>
 
     public WeaponData GetWeaponDataByStringId(string id)
     {
-        var e = weaponData.GetEnumerator();
+        var e = WeaponData.GetEnumerator();
         while (e.MoveNext())
         {
             if (e.Current.Value.Stringid == id) return e.Current.Value;

@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UnityEngine.EventSystems;
 
 public class UiMoveStick : SingletonMono<UiMoveStick>
 {
     [SerializeField]
     private List<GameObject> arrowSprites;
+
+    [SerializeField]
+    private GameObject handleObject;
 
     public int Horizontal { get; private set; }
     public int Vertical { get; private set; }
@@ -44,7 +48,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         }
     }
 
-    public void OnPointerDown() 
+    public void OnPointerDown()
     {
         SetMoveAuto();
     }
@@ -135,6 +139,8 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         {
             arrowSprites[i].SetActive(i == idx);
         }
+
+        handleObject.transform.position = Input.mousePosition;
     }
     private void OffArrowSprites()
     {
@@ -144,4 +150,5 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         }
     }
 
+ 
 }

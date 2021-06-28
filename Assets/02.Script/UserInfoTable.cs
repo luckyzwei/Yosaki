@@ -61,7 +61,7 @@ public class UserInfoTable
     {
         {Hp,100f},
         {Mp,100f},
-        {LastMap,0f},
+        {LastMap,1f},
         {LastLogin,0f},
         {removeAd,0f},
         {gachaNum,0f},

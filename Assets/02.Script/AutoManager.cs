@@ -18,8 +18,14 @@ public class AutoManager : Singleton<AutoManager>
 
     private WaitForSeconds skillDelay = new WaitForSeconds(0.35f);
 
+    public void SetPlayerTr() 
+    {
+        playerTr = PlayerSkillCaster.Instance.PlayerMoveController.transform;
+    }
+
     public void Subscribe()
     {
+
         GameManager.Instance.whenSceneChanged.Subscribe(e =>
         {
             if (IsAutoMode && UiAutoRevive.autoRevive == false)
@@ -100,7 +106,6 @@ public class AutoManager : Singleton<AutoManager>
     WaitForEndOfFrame updateTick = new WaitForEndOfFrame();
     private IEnumerator AutoPlayRoutine()
     {
-        playerTr = PlayerSkillCaster.Instance.PlayerMoveController.transform;
         while (true)
         {
             yield return updateTick;
@@ -282,8 +287,26 @@ public class AutoManager : Singleton<AutoManager>
         {
             currentTarget = GetBonusDefenseTarget();
         }
+    }
 
+    public Transform GetNeariestEnemy()
+    {
+        Transform neariestEnemy = null;
 
+        var spawnedEnemy = MapInfo.Instance.SpawnedEnemyList;
+
+        SortEnemy(spawnedEnemy);
+
+        if (spawnedEnemy.Count == 0)
+        {
+            neariestEnemy = null;
+        }
+        else
+        {
+            neariestEnemy = spawnedEnemy[0].transform;
+        }
+
+        return neariestEnemy;
     }
 
     private Transform GetBonusDefenseTarget()

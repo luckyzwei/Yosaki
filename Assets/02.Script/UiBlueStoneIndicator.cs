@@ -16,9 +16,9 @@ public class UiBlueStoneIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).AsObservable().Subscribe(blueStone =>
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).AsObservable().Subscribe(Jade =>
         {
-            goldText.SetText($"{Utils.ConvertBigNum(blueStone)}");
+            goldText.SetText($"{Utils.ConvertBigNum(Jade)}");
         }).AddTo(this);
     }
 }

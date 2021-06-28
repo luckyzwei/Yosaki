@@ -19,20 +19,11 @@ public class UiDailyPassSystem : MonoBehaviour
 
     private ObscuredString passShopId;
 
-    [SerializeField]
-    private TextMeshProUGUI passTitle;
-
     private void Start()
     {
         Initialize();
         UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.dailyPassDescription);
     }
-
-    private void OnEnable()
-    {
-        passTitle.SetText("일일패스");
-    }
-
     private void Initialize()
     {
         var tableData = TableManager.Instance.DailyPass.dataArray;

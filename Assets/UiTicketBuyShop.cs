@@ -61,20 +61,20 @@ public class UiTicketBuyShop : MonoBehaviour
         int currentBuyCount = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value;
 
 #if !UNITY_EDITOR
+
         if (currentBuyCount >= GameBalance.dailyTickBuyCountMax)
         {
             PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 구매할 수 없습니다.");
             return;
         }
 
-                int currentBlueStoneNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.BlueStone).Value;
+                int currentBlueStoneNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         if (currentBlueStoneNum < GameBalance.ticketPrice)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.BlueStone)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
             return;
         }
-
 #endif
 
 

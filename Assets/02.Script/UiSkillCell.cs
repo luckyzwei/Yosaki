@@ -26,6 +26,15 @@ public class UiSkillCell : MonoBehaviour
     private TextMeshProUGUI slotButtonDesc;
 
     [SerializeField]
+    private Image registerButtonImage;
+
+    [SerializeField]
+    private Sprite hasSkill;
+
+    [SerializeField]
+    private Sprite needToLearn;
+
+    [SerializeField]
     private TextMeshProUGUI levelDescription;
 
     [SerializeField]
@@ -113,6 +122,7 @@ public class UiSkillCell : MonoBehaviour
         if (setSlotButton.interactable == false)
         {
             slotButtonDesc.SetText($"미습득");
+
             SetRemoveButton(false);
         }
         else
@@ -122,6 +132,8 @@ public class UiSkillCell : MonoBehaviour
 
             SetRemoveButton(DatabaseManager.skillServerTable.AlreadyEquipedSkill(skillData.Id));
         }
+
+        registerButtonImage.sprite = setSlotButton.interactable ? hasSkill : needToLearn;
     }
 
     public void OnClickSlotSettingButton()

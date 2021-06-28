@@ -84,7 +84,7 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
         int stageId = GameManager.Instance.CurrentStageData.Id;
 
-        description.SetText($"{stageId + 1}");
+        description.SetText($"스테이지 {stageId + 1}");
 
         monsterCountView.SetActive(GameManager.Instance.contentsType == GameManager.ContentsType.NormalField);
 
