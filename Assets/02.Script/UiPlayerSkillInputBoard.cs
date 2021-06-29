@@ -86,12 +86,6 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
     {
         if (AutoManager.Instance.IsAutoMode)
         {
-            if (selectedSkillIdxList[idx].Value == -1)
-            {
-                PopupManager.Instance.ShowAlarmMessage("스킬이 없습니다.");
-                return;
-            }
-
             //체크박스
             if (SkillCoolTimeManager.registeredSkillIdx[idx].Value == 0)
             {
@@ -103,6 +97,12 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
                 SkillCoolTimeManager.RemoveUseSkill(idx);
                 PopupManager.Instance.ShowAlarmMessage($"자동 스킬 등록 해제!");
             }
+
+            if (selectedSkillIdxList[idx].Value == -1)
+            {
+                PopupManager.Instance.ShowAlarmMessage("스킬이 없습니다.");
+            }
+
             return;
         }
     }
