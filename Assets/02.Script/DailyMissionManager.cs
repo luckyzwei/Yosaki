@@ -18,7 +18,8 @@ public enum DailyMissionKey
     Collection,//영혼흡수 ★
     Attendance,//출석 ★
     WeaponUpgrade, //★
-    MagicbookUpgrade //★
+    MagicbookUpgrade, //★
+    GachaSkillBook,//스킬뽑기  ★
 }
 
 public static class DailyMissionManager

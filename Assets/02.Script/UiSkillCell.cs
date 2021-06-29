@@ -10,14 +10,17 @@ using System.Linq;
 
 public class UiSkillCell : MonoBehaviour
 {
-    [SerializeField]
-    private Image skillIcon;
+    //[SerializeField]
+    //private Image skillIcon;
 
     [SerializeField]
-    private TextMeshProUGUI skillName;
+    private WeaponView weaponView;
 
-    [SerializeField]
-    private TextMeshProUGUI skillDescription;
+    //[SerializeField]
+    //private TextMeshProUGUI skillName;
+
+    //[SerializeField]
+    //private TextMeshProUGUI skillDescription;
 
     [SerializeField]
     private Button setSlotButton;
@@ -34,8 +37,8 @@ public class UiSkillCell : MonoBehaviour
     [SerializeField]
     private Sprite needToLearn;
 
-    [SerializeField]
-    private TextMeshProUGUI levelDescription;
+    //[SerializeField]
+    //private TextMeshProUGUI levelDescription;
 
     [SerializeField]
     private Button removeInSlotButton;
@@ -52,16 +55,18 @@ public class UiSkillCell : MonoBehaviour
 
     public void Initialize(SkillTableData skillData, Action<int> onClickSlotSettingButton, Action<SkillTableData> showDescriptionPopup)
     {
+        weaponView.Initialize(null, null, skillData: skillData);
+
         this.showDescriptionPopup = showDescriptionPopup;
 
         this.skillData = skillData;
 
-        skillIcon.sprite = CommonResourceContainer.GetSkillIconSprite(skillData);
+       // skillIcon.sprite = CommonResourceContainer.GetSkillIconSprite(skillData);
 
-        this.skillName.SetText($"{skillData.Skillname}({skillData.Skilltype})");
-        this.skillName.color = CommonUiContainer.Instance.itemGradeColor[skillData.Skillgrade];
+        //this.skillName.SetText($"{skillData.Skillname}({skillData.Skilltype})");
+        //this.skillName.color = CommonUiContainer.Instance.itemGradeColor[skillData.Skillgrade];
 
-        this.skillDescription.SetText(skillData.Skilldesc);
+        //this.skillDescription.SetText(skillData.Skilldesc);
 
         this.onClickSlotSettingButton = onClickSlotSettingButton;
 
@@ -110,7 +115,7 @@ public class UiSkillCell : MonoBehaviour
         int skillLevel = DatabaseManager.skillServerTable.GetSkillCurrentLevel(skillData.Id);
         int maxLevel = DatabaseManager.skillServerTable.GetSkillMaxLevel(skillData.Id);
 
-        levelDescription.SetText(string.Format(lvTextFormat, skillLevel, maxLevel));
+       // levelDescription.SetText(string.Format(lvTextFormat, skillLevel, maxLevel));
     }
 
 

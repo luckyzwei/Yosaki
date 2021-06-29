@@ -24,16 +24,17 @@ public class UiSkillBoard : MonoBehaviour
     [SerializeField]
     private UiSkillDescriptionPopup uiSkillDescriptionPopup;
 
+    private bool initialized = false;
+
     private void Start()
     {
         UpdateView();
         UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.skillBoardDescription);
-
-        ShowSkillDescriptionPopup(TableManager.Instance.SkillData[0]);
     }
 
-    private void ShowSkillDescriptionPopup(SkillTableData data)
+    private void UpdateSkillDescriptionPopup(SkillTableData data)
     {
+        uiSkillDescriptionPopup.gameObject.SetActive(true);
         uiSkillDescriptionPopup.Initialize(data);
     }
 
@@ -53,7 +54,7 @@ public class UiSkillBoard : MonoBehaviour
         {
             var cell = Instantiate<UiSkillCell>(skillCellPrefab, skillCellParent);
 
-            cell.Initialize(skillList[i], OnCliCkSlotSettingButton, ShowSkillDescriptionPopup);
+            cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
         }
 
         var passiveSkillList = TableManager.Instance.PassiveSkill.dataArray.ToList();

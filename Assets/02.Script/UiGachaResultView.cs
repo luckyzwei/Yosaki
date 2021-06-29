@@ -10,6 +10,7 @@ public class UiGachaResultView : SingletonMono<UiGachaResultView>
     {
         public WeaponData weaponData;
         public MagicBookData magicBookData;
+        public SkillTableData skillData;
         public int amount;
     }
 
@@ -126,7 +127,7 @@ public class UiGachaResultView : SingletonMono<UiGachaResultView>
 
                 if (i < results.Count)
                 {
-                    GachaResultViewCellContainer[i].Initialzie(results[i].weaponData, results[i].magicBookData, results[i].amount);
+                    GachaResultViewCellContainer[i].Initialzie(results[i].weaponData, results[i].magicBookData, results[i].skillData, results[i].amount);
                 }
 
                 if (isAuto == false)
@@ -181,7 +182,7 @@ public class UiGachaResultView : SingletonMono<UiGachaResultView>
 
             if (i < results.Count)
             {
-                GachaResultViewCellContainer[i].Initialzie(results[i].weaponData, results[i].magicBookData, results[i].amount);
+                GachaResultViewCellContainer[i].Initialzie(results[i].weaponData, results[i].magicBookData, results[i].skillData, results[i].amount);
             }
         }
 

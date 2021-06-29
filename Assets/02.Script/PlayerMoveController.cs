@@ -141,7 +141,7 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
             }
             else
             {
-                jumpDirection = (Vector3.right * directionX * PlayerBalance.doubleJumpPower) + Vector3.up * 7f;
+                jumpDirection = (Vector3.right * directionX * (PlayerBalance.doubleJumpPower + 5)) + Vector3.up * 2f;
             }
 
             SoundManager.Instance.PlaySound(jumpSoundName);

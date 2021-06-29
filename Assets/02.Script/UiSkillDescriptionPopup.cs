@@ -68,11 +68,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         UpdateSkillAwakeText();
 
-
-        if (TableManager.Instance.WeaponData.TryGetValue(skillTableData.Awakeweaponidx, out var weaponTableData))
-        {
-            weaponView.Initialize(weaponTableData, null);
-        }
+        weaponView.Initialize(null, null, skillTableData);
 
         Subscribe();
 
@@ -113,15 +109,25 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         var weaponData = TableManager.Instance.WeaponData[skillTableData.Awakeweaponidx];
 
-        DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].amount.AsObservable().Subscribe(WhenAwakeWeaponAmountChanged).AddTo(disposables);
-
+        // DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].amount.AsObservable().Subscribe(WhenAwakeWeaponAmountChanged).AddTo(disposables);
+        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].AsObservable().Subscribe(WhenAwakeWeaponAmountChanged).AddTo(disposables);
     }
 
     private void WhenAwakeWeaponAmountChanged(int amount)
     {
-        awakeButtonDescription.SetText($"{amount}/{skillTableData.Awakeweaponreqcount}");
+        int skillAwakeNum = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
 
-        awakeButton.interactable = amount >= skillTableData.Awakeweaponreqcount;
+        //최초에는 1개로 스킬 배울수있음.
+        if (skillAwakeNum == 0)
+        {
+            awakeButton.interactable = amount >= GameBalance.firstSkillAwakeNum;
+            awakeButtonDescription.SetText($"{amount}/{GameBalance.firstSkillAwakeNum}");
+        }
+        else
+        {
+            awakeButton.interactable = amount >= skillTableData.Awakeweaponreqcount;
+            awakeButtonDescription.SetText($"{amount}/{skillTableData.Awakeweaponreqcount}");
+        }
     }
 
     private void WhenSkillAwake(int awakeNum)
@@ -269,36 +275,43 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         //로컬 데이터 갱신
 
+
+        //스킬북 차감 맨처음에는 1개만 차감
+        if (currentAwakeNum == 0)
+        {
+            DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value -= 1;
+        }
+        else
+        {
+            DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value -= skillTableData.Awakeweaponreqcount;
+        }
+
         //각성 +1
         DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value++;
-
-        //무기 차감
-        var weaponData = TableManager.Instance.WeaponData[skillTableData.Awakeweaponidx];
-        DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].amount.Value -= skillTableData.Awakeweaponreqcount;
-
 
         Initialize(skillTableData);
 
         //서버 싱크
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
-        //무기 카운트 차감
-        Param weaeponParam = new Param();
-        var weaponServerData = DatabaseManager.weaponTable.TableDatas[weaponData.Stringid];
-        string weaponStringData = $"{weaponServerData.idx},{weaponServerData.hasItem.Value},{weaponServerData.level.Value},{weaponServerData.amount.Value}";
-        weaeponParam.Add(weaponData.Stringid, weaponStringData);
-        transactionList.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaeponParam));
-
         //스킬 각성 횟수 증가
         Param skillParam = new Param();
         List<int> skillAWakeData = new List<int>();
         var currentAwakeData = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum];
         skillParam.Add(SkillServerTable.SkillAwakeNum, currentAwakeData.Select(e => e.Value).ToList());
+
+        //스킬북 차감
+        List<int> skillAmountSyncData = new List<int>();
+        for (int i = 0; i < DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount].Count; i++)
+        {
+            skillAmountSyncData.Add(DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][i].Value);
+        }
+        skillParam.Add(SkillServerTable.SkillHasAmount, skillAmountSyncData);
+
         transactionList.Add(TransactionValue.SetUpdate(SkillServerTable.tableName, SkillServerTable.Indate, skillParam));
 
 
         DatabaseManager.SendTransaction(transactionList);
-
 
         UpdateSkillAwakeText();
 

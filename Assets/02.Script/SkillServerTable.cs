@@ -12,12 +12,16 @@ public class SkillServerTable
     public static string Indate;
     public static string tableName = "Skill";
 
+    public static string SkillHasAmount = "SkillHasAmount";
+    public static string SkillAlreadyHas = "SkillAlreadyHas";
     public static string SkillAwakeNum = "SkillAwakeNum";
     public static string SkillLevel = "SkillLevel";
     public static string SkillSlotIdx = "SkillSlotIdx";
 
     private Dictionary<string, List<int>> tableSchema = new Dictionary<string, List<int>>()
     {
+        {SkillHasAmount,new List<int>()},
+        {SkillAlreadyHas,new List<int>()},
         {SkillAwakeNum,new List<int>()},
         {SkillLevel,new List<int>()},
         {SkillSlotIdx,new List<int>(){0,-1,-1,-1 }}
@@ -256,6 +260,7 @@ public class SkillServerTable
     }
 
     private List<int> skillSlotSyncData = new List<int>();
+    private List<int> skillAmountSyncData = new List<int>();
     public void SyncSkillSlotIdxToServer()
     {
         skillSlotSyncData.Clear();
@@ -315,5 +320,34 @@ public class SkillServerTable
         float ret = originDamage + originDamage * addDamageValue;
 
         return ret;
+    }
+
+    public void UpdateSkillAmountLocal(SkillTableData skillData, int addAmount)
+    {
+        tableDatas[SkillHasAmount][skillData.Id].Value += addAmount;
+        tableDatas[SkillAlreadyHas][skillData.Id].Value = 1;
+    }
+
+    public void UpdateSKillAmount()
+    {
+        skillAmountSyncData.Clear();
+
+        Param param = new Param();
+
+        for (int i = 0; i < tableDatas[SkillHasAmount].Count; i++)
+        {
+            skillAmountSyncData.Add(tableDatas[SkillHasAmount][i].Value);
+        }
+
+        param.Add(SkillHasAmount, skillAmountSyncData);
+
+        SendQueue.Enqueue(Backend.GameData.Update, tableName, Indate, param, e =>
+        {
+            if (e.IsSuccess() == false)
+            {
+                Debug.LogError($"Skill slot update failed");
+                return;
+            }
+        });
     }
 }

@@ -19,7 +19,10 @@ public class UserInfoTable
     public const string LastLogin = "LastLogin";
     public const string removeAd = "removeAd";
 
-    public const string gachaNum = "gachaNum";
+    public const string gachaNum_Weapon = "gachaNum_Weapon";
+    public const string gachaNum_MagicBook = "gachaNum_MagicBook";
+    public const string gachaNum_Skill = "gachaNum_Skill";
+
     public const string hackingCount = "hackingCount";
 
     public const string passSelectedIdx = "passSelectedIdx";
@@ -64,7 +67,9 @@ public class UserInfoTable
         {LastMap,1f},
         {LastLogin,0f},
         {removeAd,0f},
-        {gachaNum,0f},
+        {gachaNum_Weapon,0f},
+        {gachaNum_MagicBook,0f},
+        {gachaNum_Skill,0f},
         {hackingCount,0f},
         {passSelectedIdx,0f},
         {currentFloorIdx,0f},

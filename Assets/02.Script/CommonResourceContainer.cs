@@ -55,6 +55,25 @@ public static class CommonResourceContainer
         }
     }
 
+    public static Sprite GetSkillSprite(int idx)
+    {
+        if (magicBookSprites == null)
+        {
+            var magicBookIcons = Resources.LoadAll<Sprite>("Skill/");
+            magicBookSprites = magicBookIcons.ToList();
+        }
+
+        if (idx < magicBookSprites.Count)
+        {
+            return magicBookSprites[idx];
+        }
+        else
+        {
+            Debug.LogError($"Skill icon {idx} is not exist");
+            return null;
+        }
+    }
+
     public static Sprite GetSkillIconSprite(int idx)
     {
         return GetSkillIconSprite(TableManager.Instance.SkillData[idx]);

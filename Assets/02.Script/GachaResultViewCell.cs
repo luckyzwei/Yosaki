@@ -19,9 +19,9 @@ public class GachaResultViewCell : MonoBehaviour
     private GameObject uniqueEffect;
 
     private static string GetUniqueKey = "GetUnique";
-    public void Initialzie(WeaponData weaponData, MagicBookData magicBookData, int amount)
+    public void Initialzie(WeaponData weaponData, MagicBookData magicBookData, SkillTableData skillData, int amount)
     {
-        weaponView.Initialize(weaponData, magicBookData);
+        weaponView.Initialize(weaponData, magicBookData, skillData);
         amountText.SetText($"{amount}개");
 
         if (weaponData != null)

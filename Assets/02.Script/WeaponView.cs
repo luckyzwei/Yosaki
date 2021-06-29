@@ -15,6 +15,9 @@ public class WeaponView : MonoBehaviour
     private Image weaponIcon;
 
     [SerializeField]
+    private Image skillIcon;
+
+    [SerializeField]
     private TextMeshProUGUI gradeText;
 
     [SerializeField]
@@ -28,21 +31,55 @@ public class WeaponView : MonoBehaviour
 
     private WeaponData weaponData;
     private MagicBookData magicBookData;
+    private SkillTableData skillData;
 
     private bool initialized = false;
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
     [SerializeField]
+    private GameObject weaponMagicBookObject;
+
+    [SerializeField]
+    private GameObject skillObject;
+
+    [SerializeField]
     private UIShiny uishiny;
 
-    public void Initialize(WeaponData weaponData, MagicBookData magicBookData)
+    public void Initialize(WeaponData weaponData, MagicBookData magicBookData, SkillTableData skillData = null)
     {
+        weaponMagicBookObject.SetActive(skillData == null);
+
+        skillObject.SetActive(skillData != null);
+
         this.weaponData = weaponData;
         this.magicBookData = magicBookData;
+        this.skillData = skillData;
 
-        int grade = weaponData != null ? weaponData.Grade : magicBookData.Grade;
-        int id = weaponData != null ? weaponData.Id : magicBookData.Id;
+        int grade = 0;
+        int id = 0;
+
+        if (weaponData != null)
+        {
+            grade = weaponData.Grade;
+            id = weaponData.Id;
+            weaponIcon.sprite = CommonResourceContainer.GetWeaponSprite(id);
+
+        }
+        else if (magicBookData != null)
+        {
+            grade = magicBookData.Grade;
+            id = magicBookData.Id;
+            weaponIcon.sprite = CommonResourceContainer.GetMagicBookSprite(id);
+        }
+        else if (skillData != null)
+        {
+            grade = skillData.Skillgrade;
+            id = skillData.Id;
+            skillIcon.sprite = CommonResourceContainer.GetSkillIconSprite(id);
+        }
+
+        lvText.gameObject.SetActive(skillData == null);
 
         this.gradeText.SetText(CommonUiContainer.Instance.ItemGradeName[grade]);
 
@@ -56,20 +93,15 @@ public class WeaponView : MonoBehaviour
 
         if (weaponData != null)
         {
-            weaponIcon.sprite = CommonResourceContainer.GetWeaponSprite(id);
-        }
-        else
-        {
-            weaponIcon.sprite = CommonResourceContainer.GetMagicBookSprite(id);
-        }
-
-        if (weaponData != null)
-        {
             SubscribeWeapon();
         }
-        else
+        else if (magicBookData != null)
         {
             SubscribeMagicBook();
+        }
+        else
+        {
+            SubscribeSkill();
         }
 
         uishiny.width = ((float)grade / 3f) * 0.8f;
@@ -97,6 +129,13 @@ public class WeaponView : MonoBehaviour
 
     }
 
+    private void SubscribeSkill()
+    {
+        disposable.Clear();
+
+        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].AsObservable().Subscribe(WhenCountChanged).AddTo(disposable);
+    }
+
 
     private void WhenLevelChanged(int level)
     {
@@ -114,9 +153,13 @@ public class WeaponView : MonoBehaviour
         {
             amountText.SetText($"({DatabaseManager.weaponTable.GetCurrentWeaponCount(weaponData.Stringid)}/{weaponData.Requireupgrade})");
         }
-        else
+        else if (magicBookData != null)
         {
             amountText.SetText($"({DatabaseManager.magicBookTable.GetCurrentMagicBookCount(magicBookData.Stringid)}/{magicBookData.Requireupgrade})");
+        }
+        else
+        {
+            amountText.SetText($"({DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value}/{skillData.Requireupgrade})");
         }
     }
 

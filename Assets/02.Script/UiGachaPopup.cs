@@ -14,13 +14,13 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     private ReactiveProperty<int> gachaLevel = new ReactiveProperty<int>();
 
     [SerializeField]
-    private Image gaugeImage;
+    private List<Image> gaugeImage;
 
     [SerializeField]
-    private TextMeshProUGUI gaugeDescription;
+    private List<TextMeshProUGUI> gaugeDescription;
 
     [SerializeField]
-    private TextMeshProUGUI gachaLevelText;
+    private List<TextMeshProUGUI> gachaLevelText;
 
     private void Start()
     {
@@ -29,14 +29,16 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
 
     private void Subscribe()
     {
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum).AsObservable().Subscribe(WhenGachaNumChanged).AddTo(this);
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_Weapon).AsObservable().Subscribe(WhenGachaNumChanged_Weapon).AddTo(this);
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_MagicBook).AsObservable().Subscribe(WhenGachaNumChanged_MagicBook).AddTo(this);
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).AsObservable().Subscribe(WhenGachaNumChanged_SKill).AddTo(this);
     }
 
-    private void WhenGachaNumChanged(float num)
+    private void WhenGachaNumChanged_Weapon(float num)
     {
-        int gachaLevel = GachaLevel();
+        int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Weapon);
 
-        gachaLevelText.text = $"LV : {gachaLevel + 1}";
+        gachaLevelText[0].text = $"LV : {gachaLevel + 1}";
 
         int current = (int)num;
 
@@ -46,18 +48,76 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
             int prefMaxCount = gachaLevelMinNum[gachaLevel];
             int nextMaxCount = gachaLevelMinNum[gachaLevel + 1];
 
-            gaugeDescription.text = $"{current - prefMaxCount}/{nextMaxCount - prefMaxCount}";
+            gaugeDescription[0].text = $"{current - prefMaxCount}/{nextMaxCount - prefMaxCount}";
 
-            gaugeImage.fillAmount = (float)(current - prefMaxCount) / (float)(nextMaxCount - prefMaxCount);
+            gaugeImage[0].fillAmount = (float)(current - prefMaxCount) / (float)(nextMaxCount - prefMaxCount);
         }
         //만렙일때
         else
         {
-            gaugeDescription.text = $"LV : {gachaLevel + 1}(MAX)";
+            gaugeDescription[0].text = $"LV : {gachaLevel + 1}(MAX)";
 
-            gachaLevelText.text = $"MAX";
+            gachaLevelText[0].text = $"MAX";
 
-            gaugeImage.fillAmount = 1f;
+            gaugeImage[0].fillAmount = 1f;
+        }
+    }
+
+    private void WhenGachaNumChanged_MagicBook(float num)
+    {
+        int gachaLevel = GachaLevel(UserInfoTable.gachaNum_MagicBook);
+
+        gachaLevelText[1].text = $"LV : {gachaLevel + 1}";
+
+        int current = (int)num;
+
+        //만렙아닐때
+        if (gachaLevel < gachaLevelMinNum.Count - 1)
+        {
+            int prefMaxCount = gachaLevelMinNum[gachaLevel];
+            int nextMaxCount = gachaLevelMinNum[gachaLevel + 1];
+
+            gaugeDescription[1].text = $"{current - prefMaxCount}/{nextMaxCount - prefMaxCount}";
+
+            gaugeImage[1].fillAmount = (float)(current - prefMaxCount) / (float)(nextMaxCount - prefMaxCount);
+        }
+        //만렙일때
+        else
+        {
+            gaugeDescription[1].text = $"LV : {gachaLevel + 1}(MAX)";
+
+            gachaLevelText[1].text = $"MAX";
+
+            gaugeImage[1].fillAmount = 1f;
+        }
+    }
+
+    private void WhenGachaNumChanged_SKill(float num)
+    {
+        int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Skill);
+
+        gachaLevelText[2].text = $"LV : {gachaLevel + 1}";
+
+        int current = (int)num;
+
+        //만렙아닐때
+        if (gachaLevel < gachaLevelMinNum.Count - 1)
+        {
+            int prefMaxCount = gachaLevelMinNum[gachaLevel];
+            int nextMaxCount = gachaLevelMinNum[gachaLevel + 1];
+
+            gaugeDescription[2].text = $"{current - prefMaxCount}/{nextMaxCount - prefMaxCount}";
+
+            gaugeImage[2].fillAmount = (float)(current - prefMaxCount) / (float)(nextMaxCount - prefMaxCount);
+        }
+        //만렙일때
+        else
+        {
+            gaugeDescription[2].text = $"LV : {gachaLevel + 1}(MAX)";
+
+            gachaLevelText[2].text = $"MAX";
+
+            gaugeImage[2].fillAmount = 1f;
         }
     }
 
@@ -81,9 +141,9 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     /// 0부터 시작
     /// </summary>
     /// <returns></returns>
-    public int GachaLevel()
+    public int GachaLevel(string key)
     {
-        int gachaNum = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum).Value;
+        int gachaNum = (int)DatabaseManager.userInfoTable.GetTableData(key).Value;
 
         int gachaLevel = 0;
 

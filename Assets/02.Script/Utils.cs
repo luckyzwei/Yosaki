@@ -145,8 +145,14 @@ public static class Utils
     private static int p = (int)Mathf.Pow(10, 4);
     private static List<int> numList = new List<int>();
     private static List<string> numStringList = new List<string>();
+    private static string zeroString = "0";
     public static string ConvertBigNum(float data)
     {
+        if (data == 0f)
+        {
+            return zeroString;
+        }
+
         System.Numerics.BigInteger value = (System.Numerics.BigInteger)data;
 
         numList.Clear();

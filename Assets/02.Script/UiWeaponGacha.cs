@@ -100,7 +100,7 @@ public class UiWeaponGacha : MonoBehaviour
 
         var e = weaponTable.GetEnumerator();
 
-        int gachaLevel = UiGachaPopup.Instance.GachaLevel();
+        int gachaLevel = UiGachaPopup.Instance.GachaLevel(UserInfoTable.gachaNum_Weapon);
 
         while (e.MoveNext())
         {
@@ -136,7 +136,7 @@ public class UiWeaponGacha : MonoBehaviour
         DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
 
         //가챠갯수
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum).Value += amount;
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_Weapon).Value += amount;
 
         //무기
         for (int i = 0; i < amount; i++)
@@ -176,7 +176,7 @@ public class UiWeaponGacha : MonoBehaviour
 
         //가챠횟수
         Param gachaNumParam = new Param();
-        gachaNumParam.Add(UserInfoTable.gachaNum, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum).Value);
+        gachaNumParam.Add(UserInfoTable.gachaNum_Weapon, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_Weapon).Value);
 
         //무기
         Param weaponParam = new Param();

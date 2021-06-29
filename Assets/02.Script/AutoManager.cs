@@ -159,7 +159,7 @@ public class AutoManager : Singleton<AutoManager>
                                 PlayerMoveController.Instance.JumpPlayer();
 
                                 //최대높이로 점프
-                                while (PlayerMoveController.Instance.Rb.velocity.y > 0)
+                                while (PlayerMoveController.Instance.Rb.velocity.y > 2f)
                                 {
                                     // UiMoveStick.Instance.SetHorizontalAxsis(UiMoveStick.Instance.Horizontal);
                                     yield return null;

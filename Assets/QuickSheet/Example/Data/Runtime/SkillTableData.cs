@@ -104,4 +104,28 @@ public class SkillTableData
   string soundname;
   public string Soundname { get {return soundname; } set { this.soundname = value;} }
   
+  [SerializeField]
+  float gachalv1;
+  public float Gachalv1 { get {return gachalv1; } set { this.gachalv1 = value;} }
+  
+  [SerializeField]
+  float gachalv2;
+  public float Gachalv2 { get {return gachalv2; } set { this.gachalv2 = value;} }
+  
+  [SerializeField]
+  float gachalv3;
+  public float Gachalv3 { get {return gachalv3; } set { this.gachalv3 = value;} }
+  
+  [SerializeField]
+  float gachalv4;
+  public float Gachalv4 { get {return gachalv4; } set { this.gachalv4 = value;} }
+  
+  [SerializeField]
+  float gachalv5;
+  public float Gachalv5 { get {return gachalv5; } set { this.gachalv5 = value;} }
+  
+  [SerializeField]
+  int requireupgrade;
+  public int Requireupgrade { get {return requireupgrade; } set { this.requireupgrade = value;} }
+  
 }

@@ -18,36 +18,19 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
     [SerializeField]
     private Toggle termsAgreeToggle;
 
-    private ReactiveProperty<bool> termsAgree = new ReactiveProperty<bool>(false);
     private ReactiveProperty<bool> nowConnection = new ReactiveProperty<bool>(false);
 
-    private void Start()
-    {
-        Subscribe();
-    }
-
-    private void Subscribe()
-    {
-        termsAgree.AsObservable().Subscribe(e =>
-        {
-            UpdateButtonState();
-        }).AddTo(this);
-
-        termsAgree.AsObservable().Subscribe(e =>
-        {
-            UpdateButtonState();
-        }).AddTo(this);
-
-    }
+    [SerializeField]
+    private GameObject termsPopup;
 
     public void WhenTermsToggleChanged(bool isOn)
     {
-        this.termsAgree.Value = isOn;
+        termsPopup.SetActive(!isOn);
     }
 
     private void UpdateButtonState()
     {
-        confirmButton.interactable = termsAgree.Value && nowConnection.Value == false;
+        confirmButton.interactable = nowConnection.Value == false;
     }
 
     private bool HasSuckSsoText()
@@ -136,7 +119,7 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
         return isRightRangeChar && hasBadWorld == false;
     }
 
-    public void OnClickTermsViewButton() 
+    public void OnClickTermsViewButton()
     {
         Application.OpenURL("https://cafe.naver.com/madaki/2");
     }
