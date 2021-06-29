@@ -98,10 +98,10 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
                 PopupManager.Instance.ShowAlarmMessage($"자동 스킬 등록 해제!");
             }
 
-            if (selectedSkillIdxList[idx].Value == -1)
-            {
-                PopupManager.Instance.ShowAlarmMessage("스킬이 없습니다.");
-            }
+            //if (selectedSkillIdxList[idx].Value == -1)
+            //{
+            //    PopupManager.Instance.ShowAlarmMessage("스킬이 없습니다.");
+            //}
 
             return;
         }
