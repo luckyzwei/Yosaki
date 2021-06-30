@@ -21,12 +21,26 @@ public class MapInfo : SingletonMono<MapInfo>
     public ReactiveCommand whenSpawnedEnemyCountChanged = new ReactiveCommand();
     public ReactiveProperty<float> spawnGaugeValue = new ReactiveProperty<float>();
 
+    public Dictionary<int, int> spawnedEnemyPlatforms = new Dictionary<int, int>();
+
     private new void Awake()
     {
         m_DontDestroy = false;
         Initialize();
         base.Awake();
         SetCameraCollider();
+    }
+
+    private bool IsEnemyEmpty()
+    {
+        var e = spawnedEnemyPlatforms.GetEnumerator();
+
+        while (e.MoveNext())
+        {
+            if (e.Current.Value > 0) return false;
+        }
+
+        return true;
     }
 
     private void SetCameraCollider()
@@ -114,35 +128,74 @@ public class MapInfo : SingletonMono<MapInfo>
         }
 
         WaitForSeconds spawnDelay = new WaitForSeconds(GameManager.Instance.CurrentStageData.Spawndelay);
-        WaitForSeconds spawnInterval = new WaitForSeconds(3f);
+
+        //스폰 간격
+        WaitForSeconds spawnInterval = new WaitForSeconds(GameBalance.spawnIntervalTime);
         while (true)
         {
-            int spawnNum = maxEnemy - spawnedEnemyList.Count;
-
-            for (int i = 0; i < spawnNum; i++)
-            {
-                SpawnEnemy();
-
-                whenSpawnedEnemyCountChanged.Execute();
-
-                if (i == spawnNum / 2)
-                {
-                    yield return spawnInterval;
-                }
-            }
-
             if (gaugeRoutine != null)
             {
                 StopCoroutine(gaugeRoutine);
             }
 
-            gaugeRoutine = StartCoroutine(UpdateGauge(GameManager.Instance.CurrentStageData.Spawndelay));
+            gaugeRoutine = StartCoroutine(UpdateGauge(GameManager.Instance.CurrentStageData.Spawndelay + GameBalance.spawnIntervalTime * GameBalance.spawnDivideNum));
+
+            bool isEnemyEmpty = IsEnemyEmpty();
+
+            int spawnNum = maxEnemy - spawnedEnemyList.Count;
+
+            for (int i = 0; i < spawnNum; i++)
+            {
+                SpawnEnemy(false, isEnemyEmpty);
+
+                whenSpawnedEnemyCountChanged.Execute();
+
+                if (i == spawnNum / GameBalance.spawnDivideNum)
+                {
+                    yield return spawnInterval;
+                }
+            }
 
             yield return spawnDelay;
         }
     }
 
-    private void SpawnEnemy(bool isBossEnemy = false)
+    private int GetMinimalSpawnedPlatformIdx()
+    {
+        int platformId = 0;
+        int currentEnemyCount = int.MaxValue;
+
+        var e = spawnedEnemyPlatforms.GetEnumerator();
+
+        while (e.MoveNext())
+        {
+            if (e.Current.Value < currentEnemyCount)
+            {
+                currentEnemyCount = e.Current.Value;
+                platformId = e.Current.Key;
+            }
+
+        }
+
+        return platformId;
+    }
+
+    private void AddEnemyCountInPlatform(int platformId)
+    {
+        if (spawnedEnemyPlatforms.ContainsKey(platformId) == false)
+        {
+            spawnedEnemyPlatforms.Add(platformId, 0);
+        }
+
+        spawnedEnemyPlatforms[platformId]++;
+    }
+
+    private void RemoveEnemyCountInPlatform(int platformId)
+    {
+        spawnedEnemyPlatforms[platformId]--;
+    }
+
+    private void SpawnEnemy(bool isBossEnemy, bool isRandomTurn)
     {
         if (spawnEnemyData.Count == 0)
         {
@@ -151,10 +204,23 @@ public class MapInfo : SingletonMono<MapInfo>
         }
 
         var enemyObject = BattleObjectManager.Instance.GetItem($"Enemy/{spawnEnemyData[0].Prefabname}") as Enemy;
+        int spawnedIdx = 0;
 
         if (isBossEnemy == false)
         {
-            Vector3 spawnPos = spawnPlatforms[Random.Range(0, spawnPlatforms.Count)].GetRandomSpawnPos();
+            if (isRandomTurn)
+            {
+                spawnedIdx = Random.Range(0, spawnPlatforms.Count);
+            }
+            else
+            {
+                spawnedIdx = GetMinimalSpawnedPlatformIdx();
+            }
+
+            AddEnemyCountInPlatform(spawnedIdx);
+
+            Vector3 spawnPos = spawnPlatforms[spawnedIdx].GetRandomSpawnPos();
+
             enemyObject.transform.position = spawnPos;
         }
         else
@@ -172,7 +238,7 @@ public class MapInfo : SingletonMono<MapInfo>
 
         enemyObject.SetReturnCallBack(EnemyRemoveCallBack);
 
-        enemyObject.Initialize(spawnEnemyData[0], isBossEnemy);
+        enemyObject.Initialize(spawnEnemyData[0], isBossEnemy, spawnedIdx);
 
         spawnedEnemyList.Add(enemyObject);
     }
@@ -208,6 +274,8 @@ public class MapInfo : SingletonMono<MapInfo>
 
     private void EnemyRemoveCallBack(Enemy enemy)
     {
+        RemoveEnemyCountInPlatform(enemy.spawnedPlatformIdx);
+
         spawnedEnemyList.Remove(enemy);
         whenSpawnedEnemyCountChanged.Execute();
     }
@@ -221,7 +289,7 @@ public class MapInfo : SingletonMono<MapInfo>
             return;
         }
 
-        SpawnEnemy(true);
+        SpawnEnemy(true, false);
     }
 
     public bool HasSpawnedBossEnemy()

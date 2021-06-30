@@ -49,9 +49,10 @@ public class RemainEnemyView : MonoBehaviour
 
         if (GameManager.Instance.contentsType == GameManager.ContentsType.NormalField && spawnDelay != 0f)
         {
+            float divideNum = spawnDelay + GameBalance.spawnIntervalTime * GameBalance.spawnDivideNum;
             MapInfo.Instance.spawnGaugeValue.AsObservable().Subscribe(e =>
             {
-                spawnGauge.fillAmount = e / spawnDelay;
+                spawnGauge.fillAmount = e / divideNum;
             }).AddTo(this);
         }
         else
@@ -69,7 +70,7 @@ public class RemainEnemyView : MonoBehaviour
     private void UpdateText()
     {
         if (MapInfo.Instance == null) return;
-        animator.SetTrigger(animName);
+      //  animator.SetTrigger(animName);
         remainEnemyText.SetText($"몹 {MapInfo.Instance.SpawnedEnemyList.Count.ToString()}");
     }
 }

@@ -60,6 +60,9 @@ public static class GameBalance
     public readonly static ObscuredInt bonusDungeonGemPerEnemy = 300;
     public readonly static ObscuredInt effectActiveDistance = 15;
     public readonly static ObscuredInt firstSkillAwakeNum = 1;
+
+    public readonly static ObscuredInt spawnIntervalTime = 1;
+    public readonly static ObscuredInt spawnDivideNum = 2;
 }
 
 public static class DamageBalance

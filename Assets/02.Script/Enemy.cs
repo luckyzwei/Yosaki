@@ -31,6 +31,8 @@ public class Enemy : PoolItem
 
     public ObscuredBool isFieldBossEnemy { get; private set; } = false;
 
+    public int spawnedPlatformIdx = 0;
+
     private void Awake()
     {
         SetOriginScale();
@@ -65,8 +67,10 @@ public class Enemy : PoolItem
         Subscribe();
     }
 
-    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false)
+    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false, int spawnedPlatformIdx = 0)
     {
+        this.spawnedPlatformIdx = spawnedPlatformIdx;
+
         this.isFieldBossEnemy = isFieldBossEnemy;
 
         this.tableData = enemyTableData;
