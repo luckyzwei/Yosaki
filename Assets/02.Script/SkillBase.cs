@@ -17,7 +17,7 @@ public abstract class SkillBase
 
     public bool CanUseSkill()
     {
-                                                                        //mp계산 뒤에서해야됨.실제 엠피 차감해서
+        //mp계산 뒤에서해야됨.실제 엠피 차감해서
         return !SkillCoolTimeManager.HasSkillCooltime(skillInfo.Id) && CheckMp();
     }
 
@@ -41,7 +41,7 @@ public abstract class SkillBase
         PlaySoundEfx(skillInfo.Soundname);
     }
 
-    private void PlaySoundEfx(string soundKey) 
+    private void PlaySoundEfx(string soundKey)
     {
         SoundManager.Instance.PlaySound(soundKey);
     }
@@ -71,22 +71,45 @@ public abstract class SkillBase
 
         if (string.IsNullOrEmpty(skillInfo.Activeeffectname1) == false)
         {
-            var effect = EffectManager.SpawnEffect(skillInfo.Activeeffectname1, activeEffectSpawnPos, PlayerMoveController.Instance.transform);
+            Transform parent = skillInfo.Iseffectrootplayer ? PlayerMoveController.Instance.transform : null;
+            var effect = EffectManager.SpawnEffect(skillInfo.Activeeffectname1, activeEffectSpawnPos, parent);
 
             if (effect != null)
             {
-                effect.transform.localScale = new Vector3(Mathf.Abs(effect.transform.localScale.x) * (moveDirection == MoveDirection.Right ? 1f : -1f), effect.transform.localScale.y, effect.transform.localScale.z);
+
+                if (skillInfo.Iseffectrootplayer == false)
+                {
+                    effect.transform.position = PlayerMoveController.Instance.transform.position;
+                    effect.transform.localScale = new Vector3(1f, 1f, 1f);
+                }
+                else
+                {
+                    effect.transform.localScale = new Vector3(Mathf.Abs(effect.transform.localScale.x) * (moveDirection == MoveDirection.Right ? 1f : -1f), effect.transform.localScale.y, effect.transform.localScale.z);
+
+                }
             }
         }
         Vector3 activeEffectSpawnPos2 = PlayerMoveController.Instance.transform.position + Vector3.up * 0.5f - Vector3.forward * 5f;
 
         if (string.IsNullOrEmpty(skillInfo.Activeeffectname2) == false)
         {
-            var effect = EffectManager.SpawnEffect(skillInfo.Activeeffectname2, activeEffectSpawnPos2, PlayerMoveController.Instance.transform);
+            Transform parent = skillInfo.Iseffectrootplayer ? PlayerMoveController.Instance.transform : null;
+
+            var effect = EffectManager.SpawnEffect(skillInfo.Activeeffectname2, activeEffectSpawnPos2, parent);
 
             if (effect != null)
             {
-                effect.transform.localScale = new Vector3(Mathf.Abs(effect.transform.localScale.x) * (moveDirection == MoveDirection.Right ? 1f : -1f), effect.transform.localScale.y, effect.transform.localScale.z);
+
+                if (skillInfo.Iseffectrootplayer == false)
+                {
+                    effect.transform.position = PlayerMoveController.Instance.transform.position;
+                    effect.transform.localScale = new Vector3(1f, 1f, 1f);
+                }
+                else
+                {
+                    effect.transform.localScale = new Vector3(Mathf.Abs(effect.transform.localScale.x) * (moveDirection == MoveDirection.Right ? 1f : -1f), effect.transform.localScale.y, effect.transform.localScale.z);
+
+                }
             }
         }
     }

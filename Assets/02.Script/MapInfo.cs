@@ -195,6 +195,24 @@ public class MapInfo : SingletonMono<MapInfo>
         spawnedEnemyPlatforms[platformId]--;
     }
 
+    //제일 하단 발판
+    private int GetBossSpawnPlatformIdx()
+    {
+        int ret = 0;
+        float yPos = float.MaxValue;
+
+        for (int i = 0; i < spawnPlatforms.Count; i++)
+        {
+            if (spawnPlatforms[i].transform.position.y < yPos)
+            {
+                yPos = spawnPlatforms[i].transform.position.y;
+                ret = i;
+            }
+        }
+
+        return ret;
+    }
+
     private void SpawnEnemy(bool isBossEnemy, bool isRandomTurn)
     {
         if (spawnEnemyData.Count == 0)
@@ -229,7 +247,8 @@ public class MapInfo : SingletonMono<MapInfo>
 
             PopupManager.Instance.ShowAlarmMessage("필드보스 출현!");
 
-            enemyObject.transform.position = PlayerMoveController.Instance.transform.position;
+            //첫번째 발판에 소환
+            enemyObject.transform.position = spawnPlatforms[GetBossSpawnPlatformIdx()].GetRandomSpawnPos();
 
             EffectManager.SpawnEffect("Circle1", enemyObject.transform.position);
             SoundManager.Instance.PlaySound("4-1");

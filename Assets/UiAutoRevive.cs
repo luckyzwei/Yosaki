@@ -24,10 +24,10 @@ public class UiAutoRevive : MonoBehaviour
     {
         spawnPos = PlayerMoveController.Instance.transform.position;
 
-        if (SettingData.ShakeCamera.Value == 1)
-        {
-            StartCoroutine(ReviveRoutine());
-        }
+        //if (SettingData.ShakeCamera.Value == 1)
+        //{
+        //    StartCoroutine(ReviveRoutine());
+        //}
     }
 
     private IEnumerator ReviveRoutine()

@@ -9,7 +9,7 @@ public class Skill0 : SkillBase
 
     public Skill0()
     {
-        damageApplyInterval = new WaitForSeconds(0.07f);
+        damageApplyInterval = new WaitForSeconds(0.1f);
     }
 
     //매직클로

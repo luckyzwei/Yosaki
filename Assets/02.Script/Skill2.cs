@@ -12,7 +12,7 @@ public class Skill2 : SkillBase
 
     public Skill2()
     {
-        damageApplyInterval = new WaitForSeconds(0.07f);
+        damageApplyInterval = new WaitForSeconds(0.1f);
     }
 
     public override void UseSkill()

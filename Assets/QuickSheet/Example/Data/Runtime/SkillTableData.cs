@@ -128,4 +128,8 @@ public class SkillTableData
   int requireupgrade;
   public int Requireupgrade { get {return requireupgrade; } set { this.requireupgrade = value;} }
   
+  [SerializeField]
+  bool iseffectrootplayer;
+  public bool Iseffectrootplayer { get {return iseffectrootplayer; } set { this.iseffectrootplayer = value;} }
+  
 }

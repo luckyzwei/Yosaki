@@ -420,6 +420,8 @@ GameObject:
   - component: {fileID: 1392184761}
   - component: {fileID: 1392184763}
   - component: {fileID: 1392184760}
+  - component: {fileID: 1392184764}
+  - component: {fileID: 1392184765}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -492,7 +494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392184759}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.36, z: -10}
+  m_LocalPosition: {x: 0, y: 2.36, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -532,6 +534,33 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1392184764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392184759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d811b40fab893842ae120d86955273a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RenderTextureResolutoinFactor: 0.2
+  Intensity: 0.05
+--- !u!114 &1392184765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392184759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780c9603c513098498059611d482c116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobileBloom: {fileID: 1392184764}
 --- !u!1 &1479257351
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897836209}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.36, z: -10}
+  m_LocalPosition: {x: 0, y: 2.36, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1925582561}
@@ -866,7 +895,7 @@ MonoBehaviour:
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 10
+  m_CameraDistance: 30
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
@@ -4107,6 +4136,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6645299283017253672, guid: 449c5a07fd1614442889ae0a0787888f,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645299283017253672, guid: 449c5a07fd1614442889ae0a0787888f,
+        type: 3}
       propertyPath: m_padding
       value: 0
       objectReference: {fileID: 0}
@@ -4624,6 +4658,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865530487277882115, guid: 449c5a07fd1614442889ae0a0787888f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7883139583303524310, guid: 449c5a07fd1614442889ae0a0787888f,
         type: 3}

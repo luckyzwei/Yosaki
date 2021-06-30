@@ -42,6 +42,14 @@ public static class CommonResourceContainer
         {
             var magicBookIcons = Resources.LoadAll<Sprite>("MagicBook/");
             magicBookSprites = magicBookIcons.ToList();
+
+            magicBookSprites.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
         }
 
         if (idx < magicBookSprites.Count)

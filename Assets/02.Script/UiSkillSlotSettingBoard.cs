@@ -53,31 +53,31 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
     {
         var skillTableData = TableManager.Instance.SkillData[currentSelectedSkillIdx];
 
-        for (int i = 0; i < selectedSkillIdx.Count; i++)
-        {
-            var prefSetSkillIdx = selectedSkillIdx[i];
+        //for (int i = 0; i < selectedSkillIdx.Count; i++)
+        //{
+        //    var prefSetSkillIdx = selectedSkillIdx[i];
 
-            if (prefSetSkillIdx != -1)
-            {
-                var prefSkillData = TableManager.Instance.SkillData[prefSetSkillIdx];
+        //    if (prefSetSkillIdx != -1)
+        //    {
+        //        var prefSkillData = TableManager.Instance.SkillData[prefSetSkillIdx];
 
-                if (skillTableData.Id != prefSkillData.Id && skillTableData.Skilltype == prefSkillData.Skilltype)
-                {
-                    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "같은 타입의 스킬은 등록이 불가능 합니다.\n 등록된 스킬을 제거하고 등록 합니까?",
-                                    () =>
-                                    {
-                                        selectedSkillIdx[i] = -1;
-                                        OnClickSkillSlot(idx);
-                                    },
-                                    () =>
-                                    {
+        //        if (skillTableData.Id != prefSkillData.Id && skillTableData.Skilltype == prefSkillData.Skilltype)
+        //        {
+        //            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "같은 타입의 스킬은 등록이 불가능 합니다.\n 등록된 스킬을 제거하고 등록 합니까?",
+        //                            () =>
+        //                            {
+        //                                selectedSkillIdx[i] = -1;
+        //                                OnClickSkillSlot(idx);
+        //                            },
+        //                            () =>
+        //                            {
 
-                                    });
+        //                            });
 
-                    return;
-                }
-            }
-        }
+        //            return;
+        //        }
+        //    }
+        //}
 
 
 

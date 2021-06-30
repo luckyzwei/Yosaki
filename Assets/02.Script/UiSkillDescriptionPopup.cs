@@ -52,6 +52,26 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
+    [SerializeField]
+    private UiSkillSlotSettingBoard uiSkillSlotSettingBoard;
+
+    [SerializeField]
+    private Button equipButton;
+
+    public void OnClickEquipButton()
+    {
+        int skillAwakeNum = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
+
+        if (skillAwakeNum == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("스킬을 배워야 등록할 수 있습니다.");
+            return;
+        }
+
+        uiSkillSlotSettingBoard.gameObject.SetActive(true);
+        uiSkillSlotSettingBoard.SetSkillIdx(skillTableData.Id);
+    }
+
     public void Initialize(SkillTableData skillTableData)
     {
         this.gameObject.SetActive(true);
@@ -139,6 +159,8 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         WhenAwakeWeaponAmountChanged(DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].amount.Value);
 
         RefreshSkillLvText();
+
+        equipButton.interactable = awakeNum != 0;
     }
 
     private void WhenSkillUpgraded(int skillLevel)

@@ -25,6 +25,7 @@ public class UiSettingBoard : MonoBehaviour
     [SerializeField]
     private Toggle showEffectToggle;
 
+    //Glow 효과임
     [SerializeField]
     private Toggle shakeCameraToggle;
 
@@ -49,7 +50,7 @@ public class UiSettingBoard : MonoBehaviour
 
         showEffectToggle.isOn = PlayerPrefs.GetInt(SettingKey.ShowEffect) == 1;
 
-        shakeCameraToggle.isOn = PlayerPrefs.GetInt(SettingKey.ShakeCamera) == 1;
+        shakeCameraToggle.isOn = PlayerPrefs.GetInt(SettingKey.GlowEffect) == 1;
 
         initialized = true;
     }
@@ -183,7 +184,7 @@ public class UiSettingBoard : MonoBehaviour
             SoundManager.Instance.PlayButtonSound();
         }
 
-        SettingData.ShakeCamera.Value = on ? 1 : 0;
+        SettingData.GlowEffect.Value = on ? 1 : 0;
     }
 
     public void OnClickStory()
@@ -235,7 +236,7 @@ public static class SettingKey
     public static string FrameRateOption = "FrameRateOption";
     public static string ShowDamageFont = "ShowDamageFont";
     public static string ShowEffect = "ShowEffect";
-    public static string ShakeCamera = "ShakeCamera";
+    public static string GlowEffect = "GlowEffect"; 
     public static string PotionUseHpOption = "PotionUseHpOption";
 }
 
@@ -249,7 +250,7 @@ public static class SettingData
     public static ReactiveProperty<int> FrameRateOption = new ReactiveProperty<int>(); //30 45 60
     public static ReactiveProperty<int> ShowDamageFont = new ReactiveProperty<int>();
     public static ReactiveProperty<int> ShowEffect = new ReactiveProperty<int>();
-    public static ReactiveProperty<int> ShakeCamera = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> GlowEffect = new ReactiveProperty<int>();
     public static ReactiveProperty<int> PotionUseHpOption = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
     public static int screenWidth = Screen.width;
@@ -283,8 +284,8 @@ public static class SettingData
         if (PlayerPrefs.HasKey(SettingKey.ShowEffect) == false)
             PlayerPrefs.SetInt(SettingKey.ShowEffect, 1);
 
-        if (PlayerPrefs.HasKey(SettingKey.ShakeCamera) == false)
-            PlayerPrefs.SetInt(SettingKey.ShakeCamera, 1);
+        if (PlayerPrefs.HasKey(SettingKey.GlowEffect) == false)
+            PlayerPrefs.SetInt(SettingKey.GlowEffect, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.PotionUseHpOption) == false)
             PlayerPrefs.SetInt(SettingKey.PotionUseHpOption, 1);
@@ -299,7 +300,7 @@ public static class SettingData
         FrameRateOption.Value = PlayerPrefs.GetInt(SettingKey.FrameRateOption, 2);
         ShowDamageFont.Value = PlayerPrefs.GetInt(SettingKey.ShowDamageFont, 1);
         ShowEffect.Value = PlayerPrefs.GetInt(SettingKey.ShowEffect, 1);
-        ShakeCamera.Value = PlayerPrefs.GetInt(SettingKey.ShakeCamera, 1);
+        GlowEffect.Value = PlayerPrefs.GetInt(SettingKey.GlowEffect, 1);
         PotionUseHpOption.Value = PlayerPrefs.GetInt(SettingKey.PotionUseHpOption, 1);
         Subscribe();
     }
@@ -326,7 +327,7 @@ public static class SettingData
 
         ShowDamageFont.AsObservable().Subscribe(e => { PlayerPrefs.SetInt(SettingKey.ShowDamageFont, e); });
         ShowEffect.AsObservable().Subscribe(e => { PlayerPrefs.SetInt(SettingKey.ShowEffect, e); });
-        ShakeCamera.AsObservable().Subscribe(e => { PlayerPrefs.SetInt(SettingKey.ShakeCamera, e); });
+        GlowEffect.AsObservable().Subscribe(e => { PlayerPrefs.SetInt(SettingKey.GlowEffect, e); });
         PotionUseHpOption.AsObservable().Subscribe(e =>
         {
             Debug.LogError($"Potion optionChanged {e}");
