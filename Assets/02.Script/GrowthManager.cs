@@ -131,7 +131,8 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
     public void WhenPlayerDeadInNormalField()
     {
-        //경험치 절반 감소
+        //경험치 절반 감소 안시킴
+        return;
         DatabaseManager.growthTable.GetTableData(GrowthTable.Exp).Value = DatabaseManager.growthTable.GetTableData(GrowthTable.Exp).Value * 0.5f;
         DatabaseManager.growthTable.UpData(GrowthTable.Exp,false);
     }

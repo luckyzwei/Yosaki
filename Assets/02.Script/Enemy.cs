@@ -97,14 +97,14 @@ public class Enemy : PoolItem
     {
         enemyMoveController.SetMoveState(EnemyMoveController.MoveState.FollowPlayer);
     }
-
+    private static string DeadEfxName = "Dead";
     private void WhenEnemyDead(Unit unit)
     {
         GrowthManager.Instance.GetExp(tableData.Exp);
 
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.KillEnemy, 1);
 
-        EffectManager.SpawnEffect("GenericDeath", this.transform.position + Vector3.up * 1f);
+        EffectManager.SpawnEffect(DeadEfxName, this.transform.position + Vector3.up * 1f);
 
         SpawnMagicStone();
 

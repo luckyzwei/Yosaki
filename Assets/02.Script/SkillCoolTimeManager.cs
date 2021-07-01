@@ -15,7 +15,7 @@ public static class SkillCoolTimeManager
 
     private static WaitForSeconds delay = new WaitForSeconds(updateTick);
 
-    public static List<ReactiveProperty<int>> registeredSkillIdx = new List<ReactiveProperty<int>>() { new ReactiveProperty<int>(1), new ReactiveProperty<int>(0), new ReactiveProperty<int>(0), new ReactiveProperty<int>(0) };
+    public static List<ReactiveProperty<int>> registeredSkillIdx = new List<ReactiveProperty<int>>() { new ReactiveProperty<int>(1), new ReactiveProperty<int>(0), new ReactiveProperty<int>(0), new ReactiveProperty<int>(0), new ReactiveProperty<int>(0) };
     public static ReactiveProperty<int> jumpAutoValue = new ReactiveProperty<int>();
     public static ReactiveProperty<int> moveAutoValue = new ReactiveProperty<int>();
 

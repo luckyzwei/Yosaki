@@ -78,7 +78,7 @@ public class MapInfo : SingletonMono<MapInfo>
             //경험치 절반 감소
             GrowthManager.Instance.WhenPlayerDeadInNormalField();
 
-            PopupManager.Instance.ShowDeadConfirmPopup(CommonString.Notice, "플레이어가 사망했습니다.\n경험치 50%를 잃습니다.", () =>
+            PopupManager.Instance.ShowDeadConfirmPopup(CommonString.Notice, "사망했습니다.", () =>
             {
                 GameManager.Instance.LoadNormalField();
             });
@@ -250,6 +250,8 @@ public class MapInfo : SingletonMono<MapInfo>
             //첫번째 발판에 소환
             enemyObject.transform.position = spawnPlatforms[GetBossSpawnPlatformIdx()].GetRandomSpawnPos();
 
+            EffectManager.SpawnEffect("FieldBossSpawn", enemyObject.transform.position);
+
             EffectManager.SpawnEffect("Circle1", enemyObject.transform.position);
             SoundManager.Instance.PlaySound("4-1");
         }
@@ -342,8 +344,8 @@ public class MapInfo : SingletonMono<MapInfo>
 
         //보상지급
         int rewardValue = GameManager.Instance.CurrentStageData.Bossrewardvalue;
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardValue;
-        goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardValue;
+        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
@@ -360,14 +362,4 @@ public class MapInfo : SingletonMono<MapInfo>
               UiFieldBossRewardView.Instance.Initialize(rewardValue);
           });
     }
-
-    //#if UNITY_EDITOR
-    //    private void Update()
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.W)) 
-    //        {
-    //            DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).Value++;
-    //        }
-    //    }
-    //#endif
 }

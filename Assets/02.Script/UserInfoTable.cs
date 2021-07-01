@@ -64,7 +64,7 @@ public class UserInfoTable
     {
         {Hp,100f},
         {Mp,100f},
-        {LastMap,1f},
+        {LastMap,0f},
         {LastLogin,0f},
         {removeAd,0f},
         {gachaNum_Weapon,0f},
@@ -92,7 +92,7 @@ public class UserInfoTable
         {buff_exp2,0f},
         {bonusDungeonMaxKillCount,0f},
         {wingPackageRewardReceive,0f},
-        {topClearStageId,0f}
+        {topClearStageId,-1f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();

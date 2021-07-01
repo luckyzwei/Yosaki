@@ -114,6 +114,11 @@ public class TableManager : SingletonMono<TableManager>
         return stageMapTable.dataArray[stageMapTable.dataArray.Length - 1].Id;
     }
 
+    public int GetLastStagePreset()
+    {
+        return stageMapTable.dataArray[stageMapTable.dataArray.Length - 1].Mappreset;
+    }
+
     private void LoadStageMapData()
     {
         if (stageMapData != null) return;

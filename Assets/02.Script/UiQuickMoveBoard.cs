@@ -1,44 +1,87 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using System.Linq;
+using UnityEngine.UI;
 
 public class UiQuickMoveBoard : MonoBehaviour
 {
     [SerializeField]
-    private UiQuickMoveThemaSet uiQuickMoveThemaSet;
+    private UiStageCell stageCellPrefab;
 
     [SerializeField]
-    private Transform themaSetparent;
+    private Transform cellParent;
+
+    private List<UiStageCell> stageCellList = new List<UiStageCell>();
+
+    private ReactiveProperty<int> currentPresetId = new ReactiveProperty<int>(1);
+
+    [SerializeField]
+    private Button leftButton;
+
+    [SerializeField]
+    private Button rightButton;
+
 
     void Start()
     {
-        Initialize();
+        RefreshStage(currentPresetId.Value);
+        Subscribe();
     }
 
-    private void Initialize()
+    private void Subscribe()
     {
-        var e = TableManager.Instance.StageMapData.GetEnumerator();
-
-        Dictionary<int, List<StageMapData>> datas = new Dictionary<int, List<StageMapData>>();
-
-        while (e.MoveNext())
+        currentPresetId.AsObservable().Subscribe(e =>
         {
+            int lastPreset = TableManager.Instance.GetLastStagePreset();
 
-            if (datas.ContainsKey(e.Current.Value.Mapthema) == false)
+            rightButton.interactable = e != lastPreset;
+            leftButton.interactable = e != 1;
+        }
+        ).AddTo(this);
+    }
+    public void RefreshStage(int mapPreset)
+    {
+        var stageDatas = TableManager.Instance.StageMapTable.dataArray;
+
+        var selectedPresets = stageDatas.ToList().Where(e => e.Mappreset == mapPreset).Select(cell => cell).ToList();
+
+        int makeCount = selectedPresets.Count - stageCellList.Count;
+
+        for (int i = 0; i < makeCount; i++)
+        {
+            stageCellList.Add(Instantiate<UiStageCell>(stageCellPrefab, cellParent));
+        }
+
+        for (int i = 0; i < stageCellList.Count; i++)
+        {
+            if (i < selectedPresets.Count)
             {
-                datas.Add(e.Current.Value.Mapthema, new List<StageMapData>());
+                stageCellList[i].gameObject.SetActive(true);
+                stageCellList[i].Initialize(selectedPresets[i]);
             }
-
-            datas[e.Current.Value.Mapthema].Add(e.Current.Value);
+            else
+            {
+                stageCellList[i].gameObject.SetActive(false);
+            }
         }
 
-        var e2 = datas.GetEnumerator();
+    }
 
-        while (e2.MoveNext())
-        {
-            var themaSet = Instantiate<UiQuickMoveThemaSet>(uiQuickMoveThemaSet, themaSetparent);
-            themaSet.Initialize(e2.Current.Value);
-        }
+    public void OnClickLeftButton()
+    {
+        if (currentPresetId.Value == 1) return;
+        currentPresetId.Value--;
+        RefreshStage(currentPresetId.Value);
+    }
+
+    public void OnClickRightButton()
+    {
+        int lastThema = TableManager.Instance.GetLastStagePreset();
+        if (currentPresetId.Value == lastThema) return;
+        currentPresetId.Value++;
+        RefreshStage(currentPresetId.Value);
     }
 
 }

@@ -24,7 +24,7 @@ public class SkillServerTable
         {SkillAlreadyHas,new List<int>()},
         {SkillAwakeNum,new List<int>()},
         {SkillLevel,new List<int>()},
-        {SkillSlotIdx,new List<int>(){0,-1,-1,-1 }}
+        {SkillSlotIdx,new List<int>(){0,-1,-1,-1,-1 }}
     };
 
     private Dictionary<string, List<ReactiveProperty<int>>> tableDatas = new Dictionary<string, List<ReactiveProperty<int>>>();
