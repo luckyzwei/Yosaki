@@ -63,6 +63,11 @@ public static class GameBalance
 
     public readonly static ObscuredInt spawnIntervalTime = 1;
     public readonly static ObscuredInt spawnDivideNum = 2;
+
+    //1시간
+   // public readonly static ObscuredInt sleepRewardMinValue = 3600;
+    public readonly static ObscuredInt sleepRewardMinValue = 10;
+    public readonly static ObscuredInt sleepRewardRatio = 1;
 }
 
 public static class DamageBalance

@@ -96,6 +96,7 @@ public class UserInfoTable
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
+    public Dictionary<string, ReactiveProperty<float>> TableDatas => tableDatas;
     public ReactiveProperty<float> GetTableData(string key)
     {
         return tableDatas[key];
@@ -288,6 +289,8 @@ public class UserInfoTable
                 //day check
                 DateTime savedDate = Utils.ConvertFromUnixTimestamp(tableDatas[LastLogin].Value);
 
+                SleepRewardReceiver.Instance.SetElapsedSecond((int)(currentServerTime - savedDate).TotalSeconds);
+
                 //week check
                 int currentWeek = Utils.GetWeekNumber(currentServerTime);
 
@@ -298,8 +301,25 @@ public class UserInfoTable
                     //날짜 바뀜
                     DateChanged(savedWeek != currentWeek, savedDate.Month != currentServerTime.Month);
                 }
+                else
+                {
+                    UpdateLastLoginOnly();
+                }
             }
         });
+    }
+
+    private void UpdateLastLoginOnly()
+    {
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
+
+        Param userInfoParam = new Param();
+        userInfoParam.Add(UserInfoTable.LastLogin, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
+        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+        DatabaseManager.SendTransaction(transactionList, true);
     }
 
 

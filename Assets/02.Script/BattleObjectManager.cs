@@ -40,11 +40,16 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
         SpawnMap();
     }
 
+    public static GameObject GetMapPrefabObject(int preset) 
+    {
+        return Resources.Load<GameObject>($"StageMap/{preset}");
+    }
+
     private void SpawnMap()
     {
         if (GameManager.Instance.IsNormalField)
         {
-            GameObject mapObject = Resources.Load<GameObject>($"StageMap/{GameManager.Instance.CurrentStageData.Mappreset}");
+            GameObject mapObject = GetMapPrefabObject(GameManager.Instance.CurrentStageData.Mappreset);
             Instantiate<GameObject>(mapObject);
         }
         else

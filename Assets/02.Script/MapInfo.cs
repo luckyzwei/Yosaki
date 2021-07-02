@@ -9,7 +9,7 @@ using BackEnd;
 
 public class MapInfo : SingletonMono<MapInfo>
 {
-    private List<EnemySpawnPlatform> spawnPlatforms;
+    public List<EnemySpawnPlatform> spawnPlatforms;
     private List<EnemyTableData> spawnEnemyData;
     private List<Enemy> spawnedEnemyList = new List<Enemy>();
     public List<Enemy> SpawnedEnemyList => spawnedEnemyList;
@@ -22,6 +22,14 @@ public class MapInfo : SingletonMono<MapInfo>
     public ReactiveProperty<float> spawnGaugeValue = new ReactiveProperty<float>();
 
     public Dictionary<int, int> spawnedEnemyPlatforms = new Dictionary<int, int>();
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        spawnPlatforms = GetComponentsInChildren<EnemySpawnPlatform>().ToList();
+    }
+#endif
+
 
     private new void Awake()
     {
@@ -50,12 +58,7 @@ public class MapInfo : SingletonMono<MapInfo>
     }
     private void Initialize()
     {
-
-        spawnPlatforms = GetComponentsInChildren<EnemySpawnPlatform>().ToList();
-
         SetEnemyData();
-
-
     }
     void Start()
     {

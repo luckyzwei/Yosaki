@@ -29,8 +29,9 @@ public class SystemMessage : SingletonMono<SystemMessage>
     [SerializeField]
     private GameObject rootObject;
 
-    private void Start()
+    private new void Awake()
     {
+        base.Awake();
         Initialize();
     }
 
