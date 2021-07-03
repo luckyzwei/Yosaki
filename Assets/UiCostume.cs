@@ -10,7 +10,16 @@ public class UiCostume : SingletonMono<UiCostume>
     [SerializeField]
     private Transform cellParent;
 
+    [SerializeField]
+    private UiCostumeSlotView costumeSlotViewPrefab;
+
+    [SerializeField]
+    private Transform costumeSlotParent;
+
     private List<UiCostumeCell> uiCostumeCells = new List<UiCostumeCell>();
+
+    [SerializeField]
+    private UiCostumeAbilityBoard uiCostumeAbilityBoard;
 
     void Start()
     {
@@ -24,29 +33,22 @@ public class UiCostume : SingletonMono<UiCostume>
 
         var tableData = TableManager.Instance.Costume.dataArray;
 
-        int currentSelectedIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].Value;
+        int currentSelectedIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value;
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            var costumeCell = Instantiate<UiCostumeCell>(costumeCellPrefab, cellParent);
-            costumeCell.Initialize(tableData[i]);
-            uiCostumeCells.Add(costumeCell);
+            var costumeLookCell = Instantiate<UiCostumeCell>(costumeCellPrefab, cellParent);
+            costumeLookCell.Initialize(tableData[i]);
+            uiCostumeCells.Add(costumeLookCell);
+
+            var costumeSlotCell = Instantiate<UiCostumeSlotView>(costumeSlotViewPrefab, costumeSlotParent);
+            costumeSlotCell.Initialize(tableData[i]);
 
             //디폴트 선택
             if (tableData[i].Id == currentSelectedIdx)
             {
-                UiCostumeAbilityBoard.Instance.Initialize(tableData[i]);
+                uiCostumeAbilityBoard.Initialize(tableData[i]);
             }
-        }
-
-        WhenSelectIdxChanged(currentSelectedIdx);
-    }
-
-    public void WhenSelectIdxChanged(int idx)
-    {
-        for (int i = 0; i < uiCostumeCells.Count; i++)
-        {
-            uiCostumeCells[i].ShowSelectFrame(i == idx);
         }
     }
 }

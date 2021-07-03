@@ -192,7 +192,7 @@ public class ChatManager : SingletonMono<ChatManager>
 
     private void AddCostumeInfo(ref string message)
     {
-        message = $"{(int)DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].Value}{CommonString.ChatSplitChar}{message}";
+        message = $"{(int)DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value}{CommonString.ChatSplitChar}{message}";
     }
 
     private void AddRankInfo(ref string message)

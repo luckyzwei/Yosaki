@@ -106,10 +106,7 @@ public class AgentHpController : MonoBehaviour
 
     private void SetHardIcon()
     {
-        if (enemyTableData.Ishardenemy)
-        {
-            enemyHpBar.SetHardIcon();
-        }
+        enemyHpBar.SetHardIcon(enemyTableData.Enemygrade);
     }
 
     public void SetHp(float hp)

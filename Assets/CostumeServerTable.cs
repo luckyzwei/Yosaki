@@ -85,6 +85,10 @@ public class CostumeServerData
 
         costumeData.idx = tableData.Id;
         costumeData.hasCostume.Value = (tableData.Id == 0); //0번인덱스는 항상 보유
+
+#if UNITY_EDITOR
+        costumeData.hasCostume.Value = true; //0번인덱스는 항상 보유
+#endif
         costumeData.abilityIdx = abilityIdx;
         costumeData.lockIdx = lockIdx;
 
@@ -104,7 +108,7 @@ public class CostumeServerTable
 
     public float GetCostumeAbility(StatusType type)
     {
-        int currentCostumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].Value;
+        int currentCostumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value;
 
         var costumeTableData = TableManager.Instance.CostumeData[currentCostumeIdx];
 

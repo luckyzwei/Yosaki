@@ -13,7 +13,8 @@ public class EquipmentTable
     public static string Pet = "Pet";
     public static string MagicBook = "MagicBook";
     public static string Potion = "Potion";
-    public static string Costume = "Costume";
+    public static string CostumeSlot = "CostumeSlot";
+    public static string CostumeLook = "CostumeLook";
 
     private Dictionary<string, int> tableSchema = new Dictionary<string, int>()
     {
@@ -21,7 +22,8 @@ public class EquipmentTable
         {Pet,0},
         {MagicBook,-1},
         {Potion,0},
-        {Costume,0}
+        {CostumeSlot,0},
+        {CostumeLook,0}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<int>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<int>>();

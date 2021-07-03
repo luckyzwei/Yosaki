@@ -36,8 +36,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
     private CostumeServerData CurrentServerData => DatabaseManager.costumeServerTable.TableDatas[costumeData.Stringid];
 
-    [SerializeField]
-    private SkeletonGraphic skeletonGraphic;
+
 
     [SerializeField]
     private TextMeshProUGUI priceText;
@@ -46,7 +45,12 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
     private ContinueOpenButton continueOpenButton;
 
     [SerializeField]
-    private UiDescriptionBoard uidescriptionBoard;
+    private TextMeshProUGUI currentSelectedSlotDesc;
+
+    private void SetCurrentSelectedSlotDesc()
+    {
+        currentSelectedSlotDesc.SetText($"{this.costumeData.Id}번 슬롯");
+    }
 
     private ObscuredInt price;
 
@@ -105,7 +109,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
     {
         this.costumeData = costumeData;
 
-        uidescriptionBoard.SetDescription(costumeData.Description);
+        SetCurrentSelectedSlotDesc();
 
         nameText.SetText(costumeData.Name);
 
@@ -152,15 +156,15 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
             return;
         }
 
-        if (DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].Value == costumeData.Id)
+        if (DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value == costumeData.Id)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 장착중입니다.");
             return;
         }
 
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].Value = costumeData.Id;
+        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value = costumeData.Id;
 
-        DatabaseManager.equipmentTable.SyncData(EquipmentTable.Costume);
+        DatabaseManager.equipmentTable.SyncData(EquipmentTable.CostumeSlot);
     }
 
     public void OnClickGachaButton()
@@ -322,8 +326,6 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
                 abilityCells[i].gameObject.SetActive(false);
             }
         }
-
-
     }
 
     public void RefreshUi()
@@ -334,16 +336,5 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
         {
             abilityCells[i].Initialize(costumeData, costumeServerData.abilityIdx[i].Value, i, OnCostumeLocked);
         }
-
-        SetCostumeSpine(costumeData.Id);
     }
-
-    private void SetCostumeSpine(int idx)
-    {
-        skeletonGraphic.Clear();
-        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
-        skeletonGraphic.Initialize(true);
-        skeletonGraphic.SetMaterialDirty();
-    }
-
 }

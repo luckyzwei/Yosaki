@@ -273,7 +273,7 @@ public class UserInfoTable
     {
         // UpData(jumpCount, false);
     }
-
+    private bool isFirstInit = true;
     public void UpdateLastLoginTime()
     {
         SendQueue.Enqueue(Backend.Utils.GetServerTime, (bro) =>
@@ -289,7 +289,11 @@ public class UserInfoTable
                 //day check
                 DateTime savedDate = Utils.ConvertFromUnixTimestamp(tableDatas[LastLogin].Value);
 
-                SleepRewardReceiver.Instance.SetElapsedSecond((int)(currentServerTime - savedDate).TotalSeconds);
+                if (isFirstInit)
+                {
+                    isFirstInit = false;
+                    SleepRewardReceiver.Instance.SetElapsedSecond((int)(currentServerTime - savedDate).TotalSeconds);
+                }
 
                 //week check
                 int currentWeek = Utils.GetWeekNumber(currentServerTime);

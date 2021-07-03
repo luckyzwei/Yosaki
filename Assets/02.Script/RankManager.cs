@@ -126,7 +126,7 @@ public class RankManager : SingletonMono<RankManager>
         Param param = new Param();
         param.Add("Level", DatabaseManager.statusTable.GetTableData(StatusTable.Level).Value);
 
-        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].Value;
+        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
         int magicBookIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
@@ -216,7 +216,7 @@ public class RankManager : SingletonMono<RankManager>
         Param param = new Param();
         param.Add("Score", score);
 
-        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].Value;
+        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
         int magicBookIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
@@ -303,7 +303,7 @@ public class RankManager : SingletonMono<RankManager>
         Param param = new Param();
         param.Add("Score", score);
 
-        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].Value;
+        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
         int magicBookIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
@@ -377,7 +377,7 @@ public class RankManager : SingletonMono<RankManager>
         Param param = new Param();
         param.Add("Floor", floor);
 
-        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].Value;
+        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
         int magicBookIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;

@@ -33,7 +33,6 @@ public class CollectionManager : Singleton<CollectionManager>
         for (int i = 0; i < table.Length; i++)
         {
             if (table[i].Usecollection == false) continue;
-            if (table[i].Ishardenemy == true) continue;
             if (updatedCollectionKeys.Contains(table[i].Collectionkey) == false) continue;
 
             string key = table[i].Collectionkey;
@@ -71,7 +70,6 @@ public class CollectionManager : Singleton<CollectionManager>
         for (int i = 0; i < table.Length; i++)
         {
             if (table[i].Usecollection == false) continue;
-            if (table[i].Ishardenemy == true) continue;
             if (updatedCollectionKeys.Contains(table[i].Collectionkey) == false) continue;
 
             string key = table[i].Collectionkey;

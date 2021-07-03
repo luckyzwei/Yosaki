@@ -81,8 +81,8 @@ public class EnemyTableData
   public bool Useonedamage { get {return useonedamage; } set { this.useonedamage = value;} }
   
   [SerializeField]
-  bool ishardenemy;
-  public bool Ishardenemy { get {return ishardenemy; } set { this.ishardenemy = value;} }
+  int enemygrade;
+  public int Enemygrade { get {return enemygrade; } set { this.enemygrade = value;} }
   
   [SerializeField]
   string collectionkey;

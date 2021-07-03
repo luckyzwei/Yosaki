@@ -106,7 +106,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         }).AddTo(this);
 
         //코스튬 인덱스 바뀔때
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].AsObservable().Subscribe(e =>
+        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].AsObservable().Subscribe(e =>
         {
             UpdateHpMax();
             UpdateMpMax();

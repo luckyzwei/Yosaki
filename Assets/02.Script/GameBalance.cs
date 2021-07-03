@@ -7,7 +7,7 @@ public class PlayerBalance
 {
     public readonly static ObscuredFloat moveSpeed = 8f;
     public readonly static ObscuredFloat jumpPower = 17f;
-    public readonly static ObscuredFloat doubleJumpPower = 20f;
+    public readonly static ObscuredFloat doubleJumpPower = 30f;
 }
 
 public class PotionBalance
@@ -67,6 +67,8 @@ public static class GameBalance
     //1시간
    // public readonly static ObscuredInt sleepRewardMinValue = 3600;
     public readonly static ObscuredInt sleepRewardMinValue = 10;
+    //10시간
+    public readonly static ObscuredInt sleepRewardMaxValue = 36000;
     public readonly static ObscuredInt sleepRewardRatio = 1;
 }
 

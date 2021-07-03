@@ -51,7 +51,6 @@ public class CollectionTable
                 for (int i = 0; i < table.Length; i++)
                 {
                     if (table[i].Usecollection == false) continue;
-                    if (table[i].Ishardenemy == true) continue;
 
                     defultValues.Add(table[i].Collectionkey, $"{table[i].Id},0,0");
 
@@ -100,7 +99,6 @@ public class CollectionTable
                 for (int i = 0; i < table.Length; i++)
                 {
                     if (table[i].Usecollection == false) continue;
-                    if (table[i].Ishardenemy == true) continue;
 
                     if (data.Keys.Contains(table[i].Collectionkey))
                     {

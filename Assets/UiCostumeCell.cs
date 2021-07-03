@@ -16,10 +16,6 @@ public class UiCostumeCell : MonoBehaviour
     [SerializeField]
     private GameObject selectedObject;
 
-    //슬롯에서 선택됨
-    [SerializeField]
-    private GameObject selectframe;
-
     [SerializeField]
     private SkeletonGraphic skeletonGraphic;
 
@@ -49,10 +45,9 @@ public class UiCostumeCell : MonoBehaviour
         skeletonGraphic.SetMaterialDirty();
     }
 
-
     private void Subscribe()
     {
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].AsObservable().Subscribe(idx =>
+        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(idx =>
         {
             selectedObject.SetActive(idx == costumeData.Id);
         }).AddTo(this);
@@ -60,25 +55,23 @@ public class UiCostumeCell : MonoBehaviour
 
     public void OnClickCostume()
     {
-        //if (DatabaseManager.costumeServerTable.TableDatas[costumeData.Stringid].hasCostume.Value == true)
-        //{
-        //    DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].Value = costumeData.Id;
+        if (DatabaseManager.costumeServerTable.TableDatas[costumeData.Stringid].hasCostume.Value == true)
+        {
+            DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value = costumeData.Id;
 
-        //    //서버 저장
-        //    DatabaseManager.equipmentTable.SyncData(EquipmentTable.Costume);
-        //}
+            //서버 저장
+            DatabaseManager.equipmentTable.SyncData(EquipmentTable.CostumeLook);
+        }
+        else 
+        {
+            PopupManager.Instance.ShowAlarmMessage("외형이 없습니다.");
+        }
 
-        InitBoard();
+      //  InitBoard();
     }
-
-    public void ShowSelectFrame(bool show)
-    {
-        selectframe.SetActive(show);
-    }
-
     private void InitBoard()
     {
-        UiCostume.Instance.WhenSelectIdxChanged(costumeData.Id);
+       // UiCostume.Instance.WhenSelectIdxChanged(costumeData.Id);
         UiCostumeAbilityBoard.Instance.Initialize(costumeData);
     }
 }

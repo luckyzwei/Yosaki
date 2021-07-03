@@ -18,7 +18,7 @@ public class PlayerCostumeView : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Costume].AsObservable().Subscribe(WhenCostumeChanged).AddTo(this);
+        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(WhenCostumeChanged).AddTo(this);
     }
 
     private void WhenCostumeChanged(int idx)

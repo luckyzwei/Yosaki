@@ -45,7 +45,7 @@ public class BossSpawnButton : SingletonMono<BossSpawnButton>
     {
         int lastClearStage = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
 
-        if (lastClearStage == TableManager.Instance.GetLastStageIdx())
+        if (GameManager.Instance.CurrentStageData.Id == TableManager.Instance.GetLastStageIdx())
         {
             PopupManager.Instance.ShowAlarmMessage("최고 단계 입니다. 다음 업데이트를 기다려주세요!");
             return;
