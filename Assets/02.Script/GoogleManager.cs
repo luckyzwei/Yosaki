@@ -201,7 +201,7 @@ public class GoogleManager : MonoBehaviour
 #if UNITY_EDITOR
        // return "mayotestguest@gmail.com";
        // return "mabw222ei3no24gi233d0312@n3aver.com"; //GM도비
-        return "w@gma223il.com"; //GM도비
+        return "w@gma22223il.com"; //GM도비
 #endif
         return ((PlayGamesLocalUser)Social.localUser).Email;
         //return Social.localUser.id;

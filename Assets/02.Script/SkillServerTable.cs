@@ -219,7 +219,7 @@ public class SkillServerTable
                  e = tableSchema.GetEnumerator();
                  while (e.MoveNext())
                  {
-                     if (e.Current.Key == SkillAwakeNum || e.Current.Key == SkillLevel)
+                     if (e.Current.Key ==SkillHasAmount || e.Current.Key == SkillAlreadyHas || e.Current.Key == SkillAwakeNum || e.Current.Key == SkillLevel)
                      {
                          //신규스킬
                          List<ReactiveProperty<int>> firstData = new List<ReactiveProperty<int>>();

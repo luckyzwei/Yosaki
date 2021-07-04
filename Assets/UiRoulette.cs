@@ -8,15 +8,6 @@ using BackEnd;
 
 public class UiRoulette : MonoBehaviour
 {
-    [SerializeField]
-    private Transform rotateObject;
-
-    [SerializeField]
-    private float spinSpeed = 100f;
-
-    [SerializeField]
-    private List<Image> itemIcons;
-
     private Coroutine spinRoutine;
 
     [SerializeField]
@@ -28,6 +19,9 @@ public class UiRoulette : MonoBehaviour
 
     private List<BonusRouletteData> tableDataShuffled;
 
+    [SerializeField]
+    private Animator animator;
+
     private void Start()
     {
         SetItemIcon();
@@ -38,11 +32,6 @@ public class UiRoulette : MonoBehaviour
         tableDataShuffled = TableManager.Instance.BonusRoulette.dataArray.ToList();
 
         tableDataShuffled.Shuffle();
-
-        for (int i = 0; i < tableDataShuffled.Count; i++)
-        {
-            itemIcons[i].sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableDataShuffled[i].Itemtype);
-        }
     }
 
     public void WhenToggleChanged(bool isOn)
@@ -119,16 +108,15 @@ public class UiRoulette : MonoBehaviour
         RewardItem(rewardType, rewardAmount);
 
         float tick = 0f;
-        float spinTime = 0.2f;
+        float spinTime = 0.15f;
+
+        animator.SetTrigger("Play");
 
         while (tick < spinTime)
         {
             tick += Time.deltaTime;
-            rotateObject.Rotate(Vector3.forward * spinSpeed);
             yield return null;
         }
-
-        rotateObject.transform.localRotation = Quaternion.Euler(0f, 0f, randIdx * 45f);
 
         string description = $"{CommonString.GetItemName(rewardType)} {(int)rewardAmount}획득!!";
 
@@ -152,7 +140,6 @@ public class UiRoulette : MonoBehaviour
     private void OnEnable()
     {
         spinRoutine = null;
-        rotateObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
 
     private void RewardItem(Item_Type rewardType, float rewardAmount)

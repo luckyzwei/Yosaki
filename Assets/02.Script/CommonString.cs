@@ -26,7 +26,7 @@ public static class CommonString
     public static string WeaponGrade_4 = "전설";
 
     public static string GoldItemName = "골드";
-    public static string BonusSpinCoin = "마계코인";
+    public static string BonusSpinCoin = "복주머니 뽑기권";
 
     public static string ContentsName_Boss = "공주 구출";
     public static string ContentsName_GoblinDefense = "고블린 도적단 소탕";

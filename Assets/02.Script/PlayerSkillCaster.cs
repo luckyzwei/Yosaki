@@ -100,6 +100,20 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         return Vector2.zero;
     }
 
+    public Vector2 GetRayHitPlatformPoint(Vector2 origin, Vector2 rayDirection, float length)
+    {
+        int hitLayer = LayerMasks.PlatformLayerMask_Ray + LayerMasks.EnemyWallLayerMask;
+
+        var rayHits = Physics2D.RaycastAll(origin, rayDirection, length, hitLayer);
+
+        for (int i = 0; i < rayHits.Length; i++)
+        {
+            return rayHits[i].point;
+        }
+        return Vector2.zero;
+    }
+
+
     public void PlayAttackAnim()
     {
         PlayerViewController.Instance.SetCurrentAnimation(PlayerViewController.AnimState.attack);

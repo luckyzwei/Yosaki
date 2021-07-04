@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UiCostume : SingletonMono<UiCostume>
@@ -17,9 +18,12 @@ public class UiCostume : SingletonMono<UiCostume>
     private Transform costumeSlotParent;
 
     private List<UiCostumeCell> uiCostumeCells = new List<UiCostumeCell>();
+    private List<UiCostumeSlotView> uiCostumeSlotCells = new List<UiCostumeSlotView>();
 
     [SerializeField]
     private UiCostumeAbilityBoard uiCostumeAbilityBoard;
+
+
 
     void Start()
     {
@@ -42,13 +46,24 @@ public class UiCostume : SingletonMono<UiCostume>
             uiCostumeCells.Add(costumeLookCell);
 
             var costumeSlotCell = Instantiate<UiCostumeSlotView>(costumeSlotViewPrefab, costumeSlotParent);
-            costumeSlotCell.Initialize(tableData[i]);
+            costumeSlotCell.Initialize(tableData[i], WhenCurrentSelectChanged);
+            uiCostumeSlotCells.Add(costumeSlotCell);
 
             //디폴트 선택
             if (tableData[i].Id == currentSelectedIdx)
             {
                 uiCostumeAbilityBoard.Initialize(tableData[i]);
             }
+        }
+
+        WhenCurrentSelectChanged(currentSelectedIdx);
+    }
+
+    private void WhenCurrentSelectChanged(int idx)
+    {
+        for (int i = 0; i < uiCostumeSlotCells.Count; i++)
+        {
+            uiCostumeSlotCells[i].SetCurrentSelect(idx == i);
         }
     }
 }

@@ -3,17 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using UnityEngine.EventSystems;
+using CodeStage.AntiCheat.ObscuredTypes;
+using UnityEngine.UI;
 
 public class UiMoveStick : SingletonMono<UiMoveStick>
 {
+    public enum InputType
+    {
+        Top, Down, Left, Right, Common
+    }
     [SerializeField]
     private List<GameObject> arrowSprites;
 
-    [SerializeField]
-    private GameObject handleObject;
-
     public int Horizontal { get; private set; }
     public int Vertical { get; private set; }
+
+    private Transform playerTr;
+
+    private ObscuredFloat quickMoveRange = 10f;
+
+    private readonly WaitForSeconds doubleInputDelay = new WaitForSeconds(0.5f);
+    private const float quickMoveDelaySec = 0.5f;
+    private readonly WaitForSeconds quickMoveDelay = new WaitForSeconds(quickMoveDelaySec);
+
+    [SerializeField]
+    private Image quickMoveDelayGauge;
 
     //[SerializeField]
     //private GameObject autoObject;
@@ -23,6 +37,8 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
 
     private void Start()
     {
+        playerTr = PlayerMoveController.Instance.transform;
+
         Subscribe();
     }
 
@@ -66,6 +82,150 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         {
             SkillCoolTimeManager.SetMoveAuto(false);
         }
+    }
+
+    private Dictionary<InputType, bool> downInputContainter = new Dictionary<InputType, bool>()
+    {
+        { InputType.Top,false},
+        { InputType.Down,false},
+        { InputType.Left,false},
+        { InputType.Right,false}
+    };
+
+    private Dictionary<InputType, bool> QuickMoveDelayContainter = new Dictionary<InputType, bool>()
+    {
+        { InputType.Common,false},
+    };
+
+    private IEnumerator InputDelay(InputType type)
+    {
+        downInputContainter[type] = true;
+        yield return doubleInputDelay;
+        downInputContainter[type] = false;
+    }
+
+    private IEnumerator QuickMoveDelay(InputType type)
+    {
+        float tick = 0f;
+
+        QuickMoveDelayContainter[type] = true;
+
+        while (tick < quickMoveDelaySec)
+        {
+            tick += Time.deltaTime;
+            quickMoveDelayGauge.fillAmount = tick / quickMoveDelaySec;
+            yield return null;
+        }
+
+        quickMoveDelayGauge.fillAmount = 0f;
+        QuickMoveDelayContainter[type] = false;
+    }
+
+    private void ReceiveDownEvent(InputType type)
+    {
+        if (AutoManager.Instance.IsAutoMode == true) return;
+
+        if (QuickMoveDelayContainter[InputType.Common] == true) return;
+
+        if (downInputContainter[type] == true)
+        {
+            StartCoroutine(QuickMoveDelay(InputType.Common));
+
+            QuickMove(type);
+        }
+        else
+        {
+            StartCoroutine(InputDelay(type));
+        }
+    }
+
+    private const string TeleportEfxName = "Teleport";
+    private void QuickMove(InputType type)
+    {
+        EffectManager.SpawnEffect(TeleportEfxName, playerTr.position + Vector3.down * 1f);
+
+        switch (type)
+        {
+            case InputType.Top:
+                {
+                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.up, quickMoveRange);
+
+                    if (wallHitPoint != Vector2.zero)
+                    {
+                        playerTr.position = wallHitPoint + Vector2.up * 3f;
+                    }
+                    else
+                    {
+                        playerTr.position += Vector3.up * quickMoveRange;
+                    }
+                }
+                break;
+            case InputType.Down:
+                {
+                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.down, quickMoveRange);
+
+                    if (wallHitPoint != Vector2.zero)
+                    {
+                        playerTr.position = wallHitPoint + Vector2.up * 2f;
+                    }
+                    else
+                    {
+                        playerTr.position += Vector3.down * quickMoveRange;
+                    }
+                }
+                break;
+            case InputType.Left:
+                {
+                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitWallPoint(playerTr.position, Vector2.left, quickMoveRange);
+
+                    //캐릭터 이동
+                    if (wallHitPoint == Vector2.zero)
+                    {
+                        playerTr.position += Vector3.left * quickMoveRange;
+                    }
+                    else
+                    {
+                        playerTr.position = wallHitPoint;
+                    }
+                }
+                break;
+            case InputType.Right:
+                {
+                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitWallPoint(playerTr.position, Vector2.right, quickMoveRange);
+
+                    //캐릭터 이동
+                    if (wallHitPoint == Vector2.zero)
+                    {
+                        playerTr.position += Vector3.right * quickMoveRange;
+                    }
+                    else
+                    {
+                        playerTr.position = wallHitPoint;
+                    }
+                }
+                break;
+        }
+
+        EffectManager.SpawnEffect(TeleportEfxName, playerTr.position + Vector3.down * 1f);
+    }
+
+    public void Top_downEvent()
+    {
+        ReceiveDownEvent(InputType.Top);
+    }
+    public void Down_downEvent()
+    {
+        ReceiveDownEvent(InputType.Down);
+    }
+
+    public void Left_downEvent()
+    {
+        ReceiveDownEvent(InputType.Left);
+    }
+
+    public void Right_downEvent()
+    {
+        ReceiveDownEvent(InputType.Right);
     }
 
     public void Top()
@@ -139,8 +299,6 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         {
             arrowSprites[i].SetActive(i == idx);
         }
-
-        handleObject.transform.position = Input.mousePosition;
     }
     private void OffArrowSprites()
     {
@@ -150,5 +308,27 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         }
     }
 
- 
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Top_downEvent();
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Down_downEvent();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Left_downEvent();
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Right_downEvent();
+        }
+    }
+#endif
+
+
 }
