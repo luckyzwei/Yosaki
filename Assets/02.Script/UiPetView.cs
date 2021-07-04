@@ -51,7 +51,7 @@ public class UiPetView : MonoBehaviour
     {
         skeletonGraphic.Clear();
         skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[idx];
-        skeletonGraphic.startingAnimation = "Walk";
+        skeletonGraphic.startingAnimation = "walk";
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
     }

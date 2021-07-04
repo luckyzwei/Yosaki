@@ -86,9 +86,10 @@ public class CostumeServerData
         costumeData.idx = tableData.Id;
         costumeData.hasCostume.Value = (tableData.Id == 0); //0번인덱스는 항상 보유
 
-#if UNITY_EDITOR
+        //테스트
         costumeData.hasCostume.Value = true; //0번인덱스는 항상 보유
-#endif
+        //테스트
+
         costumeData.abilityIdx = abilityIdx;
         costumeData.lockIdx = lockIdx;
 
