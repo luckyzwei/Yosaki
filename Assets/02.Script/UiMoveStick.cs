@@ -20,7 +20,8 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
 
     private Transform playerTr;
 
-    private ObscuredFloat quickMoveRange = 10f;
+    private ObscuredFloat quickMoveRange_Common = 8f;
+    private ObscuredFloat quickMoveRange_Down = 5f;
 
     private readonly WaitForSeconds doubleInputDelay = new WaitForSeconds(0.5f);
     private const float quickMoveDelaySec = 0.5f;
@@ -148,7 +149,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         {
             case InputType.Top:
                 {
-                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.up, quickMoveRange);
+                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.up, quickMoveRange_Common);
 
                     if (wallHitPoint != Vector2.zero)
                     {
@@ -156,32 +157,39 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
                     }
                     else
                     {
-                        playerTr.position += Vector3.up * quickMoveRange;
+                        playerTr.position += Vector3.up * quickMoveRange_Common;
                     }
                 }
                 break;
             case InputType.Down:
                 {
-                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.down, quickMoveRange);
-
-                    if (wallHitPoint != Vector2.zero)
+                    if (BottomTeleportDetector.Instance.triggered == false) 
                     {
-                        playerTr.position = wallHitPoint + Vector2.up * 2f;
+                        playerTr.position += Vector3.down * quickMoveRange_Down;
                     }
-                    else
+                    else 
                     {
-                        playerTr.position += Vector3.down * quickMoveRange;
+                        var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.down, quickMoveRange_Down);
+
+                        if (wallHitPoint != Vector2.zero)
+                        {
+                            playerTr.position = wallHitPoint + Vector2.up * 1f;
+                        }
+                        else
+                        {
+                            playerTr.position += Vector3.down * quickMoveRange_Down;
+                        }
                     }
                 }
                 break;
             case InputType.Left:
                 {
-                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitWallPoint(playerTr.position, Vector2.left, quickMoveRange);
+                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitWallPoint(playerTr.position, Vector2.left, quickMoveRange_Common);
 
                     //캐릭터 이동
                     if (wallHitPoint == Vector2.zero)
                     {
-                        playerTr.position += Vector3.left * quickMoveRange;
+                        playerTr.position += Vector3.left * quickMoveRange_Common;
                     }
                     else
                     {
@@ -191,12 +199,12 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
                 break;
             case InputType.Right:
                 {
-                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitWallPoint(playerTr.position, Vector2.right, quickMoveRange);
+                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitWallPoint(playerTr.position, Vector2.right, quickMoveRange_Common);
 
                     //캐릭터 이동
                     if (wallHitPoint == Vector2.zero)
                     {
-                        playerTr.position += Vector3.right * quickMoveRange;
+                        playerTr.position += Vector3.right * quickMoveRange_Common;
                     }
                     else
                     {
