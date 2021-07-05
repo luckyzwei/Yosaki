@@ -20,10 +20,16 @@ public class DamageText : PoolItem
     private readonly string DisableFuncName = "DisableObject";
 
     [SerializeField]
-    private TMP_FontAsset normalfont;
+    private Color normalColor;
 
     [SerializeField]
-    private TMP_FontAsset ciriticalfont;
+    private Color criticalColor;
+
+    //[SerializeField]
+    //private TMP_FontAsset normalfont;
+
+    //[SerializeField]
+    //private TMP_FontAsset ciriticalfont;
 
     [SerializeField]
     private GameObject criticalIcon;
@@ -36,12 +42,20 @@ public class DamageText : PoolItem
     private VertexGradient redGradient;
 
 
+    [SerializeField]
+    private RuntimeAnimatorController leftAnim;
+
+    [SerializeField]
+    private RuntimeAnimatorController rightAnim;
+
+    [SerializeField]
+    private Animator animator;
 
     //   private readonly string Format = "N1";
 
     public void Initialize(float damage, bool isCritical, DamTextType type = DamTextType.Normal)
     {
-        damageText.font = isCritical ? ciriticalfont : normalfont;
+        damageText.color = isCritical ? criticalColor : normalColor;
 
         SetColor(type);
 
@@ -50,6 +64,11 @@ public class DamageText : PoolItem
         damageText.SetText(Utils.ConvertBigNum(damage));
 
         Invoke(DisableFuncName, disableTime);
+
+        bool isLeft = Random.Range(0, 2) == 0;
+
+        animator.runtimeAnimatorController = isLeft ? leftAnim : rightAnim;
+
     }
 
 

@@ -15,17 +15,36 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
     [SerializeField]
     private Button confirmButton;
 
-    [SerializeField]
-    private Toggle termsAgreeToggle;
-
     private ReactiveProperty<bool> nowConnection = new ReactiveProperty<bool>(false);
 
     [SerializeField]
     private GameObject termsPopup;
 
+    [SerializeField]
+    private Button termsAgreeButton;
+
+    [SerializeField]
+    private GameObject nickNamePopupRoot;
+
+    private void Start()
+    {
+        SetDefatult();
+    }
+
+    private void SetDefatult()
+    {
+        termsAgreeButton.interactable = false;
+        nickNamePopupRoot.SetActive(false);
+    }
+
     public void WhenTermsToggleChanged(bool isOn)
     {
-        termsPopup.SetActive(!isOn);
+        termsAgreeButton.interactable = isOn;
+    }
+    public void OnClickTermsAgreeButton()
+    {
+        termsPopup.SetActive(false);
+        nickNamePopupRoot.SetActive(true);
     }
 
     private void UpdateButtonState()

@@ -5,6 +5,7 @@ using BackEnd;
 using LitJson;
 using System;
 using UniRx;
+using System.Linq;
 
 //성장패스 관리
 public class PassServerTable
@@ -13,18 +14,28 @@ public class PassServerTable
     public const string tableName = "LevelPass";
 
 
-    public static string levelpassFreeReward = "levelpassFreeReward";
-    public static string levelpassIAPReward = "levelpassIAPReward";
+    public static string stagePassReward = "stagePassReward";
+    public static string stagePassAdReward = "stagePassAdReward";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { levelpassFreeReward,string.Empty},
-        { levelpassIAPReward,string.Empty}
+        { stagePassReward,string.Empty},
+        { stagePassAdReward,string.Empty}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
     public ReactiveDictionary<string, ReactiveProperty<string>> TableDatas => tableDatas;
 
+    public bool HasReward(string key,int data)
+    {
+        var splitData = GetSplitData(key);
+        return splitData.Contains(data.ToString());
+    }
+
+    public List<string> GetSplitData(string key)
+    {
+        return TableDatas[key].Value.Split(',').ToList();
+    }
 
     public void Initialize()
     {

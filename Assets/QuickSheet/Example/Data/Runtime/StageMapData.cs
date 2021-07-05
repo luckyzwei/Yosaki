@@ -52,4 +52,20 @@ public class StageMapData
   int bossrewardvalue;
   public int Bossrewardvalue { get {return bossrewardvalue; } set { this.bossrewardvalue = value;} }
   
+  [SerializeField]
+  int pre_bossrewardtype;
+  public int Pre_Bossrewardtype { get {return pre_bossrewardtype; } set { this.pre_bossrewardtype = value;} }
+  
+  [SerializeField]
+  int pre_bossrewardvalue;
+  public int Pre_Bossrewardvalue { get {return pre_bossrewardvalue; } set { this.pre_bossrewardvalue = value;} }
+  
+  [SerializeField]
+  int ad_bossrewardtype;
+  public int Ad_Bossrewardtype { get {return ad_bossrewardtype; } set { this.ad_bossrewardtype = value;} }
+  
+  [SerializeField]
+  int ad_bossrewardvalue;
+  public int Ad_Bossrewardvalue { get {return ad_bossrewardvalue; } set { this.ad_bossrewardvalue = value;} }
+  
 }

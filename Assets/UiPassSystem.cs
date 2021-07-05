@@ -115,11 +115,11 @@ public class UiPassSystem : MonoBehaviour
 
                 passInfo.rewardType_Free = tableData[i].Reward1;
                 passInfo.rewardTypeValue_Free = tableData[i].Reward1_Value;
-                passInfo.rewardType_Free_Key = PassServerTable.levelpassFreeReward;
+                passInfo.rewardType_Free_Key = PassServerTable.stagePassReward;
 
                 passInfo.rewardType_IAP = tableData[i].Reward2;
                 passInfo.rewardTypeValue_IAP = tableData[i].Reward2_Value;
-                passInfo.rewardType_IAP_Key = PassServerTable.levelpassIAPReward;
+              //  passInfo.rewardType_IAP_Key = PassServerTable.levelpassIAPReward;
 
                 passInfo.shopId = tableData[i].Shopid;
 

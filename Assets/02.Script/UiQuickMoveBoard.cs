@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using System.Linq;
 using UnityEngine.UI;
+using TMPro;
 
 public class UiQuickMoveBoard : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class UiQuickMoveBoard : MonoBehaviour
 
     [SerializeField]
     private Button rightButton;
-
 
     void Start()
     {

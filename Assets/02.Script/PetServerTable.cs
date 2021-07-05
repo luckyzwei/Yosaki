@@ -95,10 +95,7 @@ public class PetServerTable
                 {
                     var petData = new PetServerData();
                     petData.idx = table[i].Id;
-                    //petData.hasItem = new ReactiveProperty<int>(0);
-                    //테스트
-                    petData.hasItem = new ReactiveProperty<int>(1);
-                    //테스트
+                    petData.hasItem = new ReactiveProperty<int>(0);
                     petData.level = new ReactiveProperty<int>(0);
                     petData.remainSec = new ReactiveProperty<int>(0);
 

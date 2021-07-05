@@ -146,12 +146,7 @@ public class AgentHpController : MonoBehaviour
             damTextRoutine = StartCoroutine(DamTextRoutine());
         }
 
-
-
-        if (attackCount == 0)
-        {
-            damTextspawnPos = this.transform.position;
-        }
+        damTextspawnPos = this.transform.position + Vector3.up * 1f + Vector3.right * UnityEngine.Random.Range(-0.4f, 0.4f) + Vector3.up * UnityEngine.Random.Range(-0.2f, 0.2f);
 
         attackCount++;
 
@@ -164,8 +159,8 @@ public class AgentHpController : MonoBehaviour
 
 
         //spawnPos += this.transform.position;
-        damTextspawnPos += Vector3.up * ((attackCount * damTextOffsetY) + damTextStartOffectY);
-        damTextspawnPos += Vector3.back * attackCount * damTextOffsetZ;
+        //damTextspawnPos += Vector3.up * ((attackCount * damTextOffsetY) + damTextStartOffectY);
+        //damTextspawnPos += Vector3.back * attackCount * damTextOffsetZ;
         //damTextspawnPos += Vector3.right * UnityEngine.Random.Range(-0.2f, 0.2f);
 
         if (Vector3.Distance(playerPos.position, this.transform.position) < GameBalance.effectActiveDistance)

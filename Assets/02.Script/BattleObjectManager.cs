@@ -27,6 +27,7 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
     private DropItem dropItemPrefab;
     public ObjectProperty<DropItem> dropItemProperty { get; set; }
 
+    private Transform playerTr;
 
 
     private new void Awake()
@@ -38,9 +39,15 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
     private void Start()
     {
         SpawnMap();
+        SetPlayerTr();
     }
 
-    public static GameObject GetMapPrefabObject(int preset) 
+    private void SetPlayerTr()
+    {
+        playerTr = PlayerMoveController.Instance.transform;
+    }
+
+    public static GameObject GetMapPrefabObject(int preset)
     {
         return Resources.Load<GameObject>($"StageMap/{preset}");
     }
