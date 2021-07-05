@@ -1,4 +1,5 @@
 ﻿using BackEnd;
+using CodeStage.AntiCheat.ObscuredTypes;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using System.Collections;
@@ -11,6 +12,8 @@ public class GoogleManager : MonoBehaviour
     private UiNickNameInputBoard nickNameInputBoard;
 
     private bool isSignIn = false;
+
+    private ObscuredString loginId;
 
     private void Awake()
     {
@@ -111,6 +114,7 @@ public class GoogleManager : MonoBehaviour
 
                 Debug.Log($"Hash {Backend.Utils.GetGoogleHash()}");
                 // 로그인이 성공되었습니다.
+                loginId = Social.localUser.id;
                 Debug.Log("Email - " + ((PlayGamesLocalUser)Social.localUser).Email);
                 Debug.Log("GoogleId - " + Social.localUser.id);
                 Debug.Log("UserName - " + Social.localUser.userName);
@@ -193,17 +197,23 @@ public class GoogleManager : MonoBehaviour
                     Debug.Log("차단된 사용자 입니다. 차단 사유 : " + BRO.GetErrorCode());
                     break;
             }
+
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "로그인 실패 재시도 합니까?", () =>
+             {
+                 SignIn();
+             });
         }
     }
 
     private string GetGoogleLoginKey()
     {
 #if UNITY_EDITOR
-       // return "mayotestguest@gmail.com";
-       // return "mabw222ei3no24gi233d0312@n3aver.com"; //GM도비
-        return "w@g2ma22223il.com"; //GM도비
+        // return "mayotestguest@gmail.com";
+        // return "mabw222ei3no24gi233d0312@n3aver.com"; //GM도비
+        return "a_3231404848993373217"; //GM도비
 #endif
-        return ((PlayGamesLocalUser)Social.localUser).Email;
+        Debug.LogError($"GetGoogleLoginKey {loginId}");
+        return loginId;
         //return Social.localUser.id;
     }
 }

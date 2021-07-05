@@ -29,6 +29,7 @@ public class ChatManager : SingletonMono<ChatManager>
 
     public void ConnectToChattingServer()
     {
+        return;
         LinkChatCallBacks();
 
         var bro = Backend.Chat.GetGroupChannelList(chatGroupName);
