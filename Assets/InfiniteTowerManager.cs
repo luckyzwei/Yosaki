@@ -112,8 +112,8 @@ public class InfiniteTowerManager : ContentsManagerBase
 
     private void SendScore()
     {
-        int currentScore = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
-        RankManager.Instance.UpdatInfinityTower_Score(currentScore);
+        //int currentScore = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
+        //RankManager.Instance.UpdatInfinityTower_Score(currentScore);
     }
 
     private void EndInfiniteTower()

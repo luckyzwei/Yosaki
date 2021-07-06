@@ -24,9 +24,7 @@ public class UiStatus : SingletonMono<UiStatus>
     private void RequestMyRank()
     {
         RankManager.Instance.RequestMyLevelRank();
-        RankManager.Instance.RequestMyBoss0Rank();
-        RankManager.Instance.RequestMyBoss1Rank();
-        RankManager.Instance.RequestInfinityTowerRank();
+        RankManager.Instance.RequestMyStageRank();
     }
     private void Subscribe()
     {

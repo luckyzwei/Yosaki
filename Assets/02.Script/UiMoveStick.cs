@@ -118,7 +118,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
             yield return null;
         }
 
-        quickMoveDelayGauge.fillAmount = 0f;
+        quickMoveDelayGauge.fillAmount = 1f;
         QuickMoveDelayContainter[type] = false;
     }
 

@@ -49,22 +49,14 @@ public class RankManager : SingletonMono<RankManager>
         public int fightPointIdx;
     }
 
-    public const string Rank_Level_Uuid = "17624b40-96ef-11eb-82e9-ed26b867d4c8";
+    public const string Rank_Level_Uuid = "c1d70840-de7f-11eb-bc74-95875190be29";
     public const string Rank_Level_TableName = "Rank_Level";
 
-    public const string Rank_Boss_0_Uuid = "076d54b0-af67-11eb-89ee-792d48360867";
-    public const string Rank_Boss_0_TableName = "Rank_Boss_0";
-
-    public const string Rank_Boss_1_Uuid = "8bca2780-cddd-11eb-afd6-dbb065845072";
-    public const string Rank_Boss_1_TableName = "Rank_Boss_1";
-
-    public const string Rank_Infinity_Uuid = "c97b5160-b2e1-11eb-8e06-7129a9ed3736";
-    public const string Rank_Infinity_TableName = "Rank_Infinity";
+    public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
+    public const string Rank_Stage = "Rank_Stage";
 
     public ReactiveCommand<RankInfo> WhenMyLevelRankLoadComplete = new ReactiveCommand<RankInfo>();
-    public ReactiveCommand<RankInfo> WhenMyBoss0RankLoadComplete = new ReactiveCommand<RankInfo>();
-    public ReactiveCommand<RankInfo> WhenMyBoss1RankLoadComplete = new ReactiveCommand<RankInfo>();
-    public ReactiveCommand<RankInfo> WhenInfinityRankLoadComplete = new ReactiveCommand<RankInfo>();
+    public ReactiveCommand<RankInfo> WhenMyStageRankLoadComplete = new ReactiveCommand<RankInfo>();
 
     public void Subscribe()
     {
@@ -119,10 +111,6 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateUserRank_Level()
     {
-#if UNITY_EDITOR
-        return;
-#endif
-
         Param param = new Param();
         param.Add("Level", DatabaseManager.statusTable.GetTableData(StatusTable.Level).Value);
 
@@ -151,16 +139,15 @@ public class RankManager : SingletonMono<RankManager>
     }
     #endregion
 
-    #region bossRank0
-    private ObscuredFloat prefBoss0Score = 0f;
-    private Action<RankInfo> whenLoadSuccess_Boss0;
-    public void RequestMyBoss0Rank(Action<RankInfo> whenLoadSuccess = null)
+    #region Stage
+    private Action<RankInfo> whenLoadSuccess_Stage;
+    public void RequestMyStageRank(Action<RankInfo> whenLoadSuccess = null)
     {
-        this.whenLoadSuccess_Boss0 = whenLoadSuccess;
+        this.whenLoadSuccess_Stage = whenLoadSuccess;
 
-        Backend.URank.User.GetMyRank(RankManager.Rank_Boss_0_Uuid, MyBoss0RankLoadComplete);
+        Backend.URank.User.GetMyRank(RankManager.Rank_Stage_Uuid, MyStageRankLoadComplete);
     }
-    private void MyBoss0RankLoadComplete(BackendReturnObject bro)
+    private void MyStageRankLoadComplete(BackendReturnObject bro)
     {
         RankInfo myRankInfo = null;
 
@@ -187,32 +174,17 @@ public class RankManager : SingletonMono<RankManager>
             }
         }
 
-        if (myRankInfo != null)
-        {
-            prefBoss0Score = myRankInfo.Score;
-        }
-
-        whenLoadSuccess_Boss0?.Invoke(myRankInfo);
-        WhenMyBoss0RankLoadComplete.Execute(myRankInfo);
+        whenLoadSuccess_Stage?.Invoke(myRankInfo);
+        WhenMyStageRankLoadComplete.Execute(myRankInfo);
 
         this.myRankInfo[RankType.Boss] = myRankInfo;
     }
 
-    public void UpdateBoss0_Score(float score)
+    public void UpdateStage_Score(float score)
     {
 #if UNITY_EDITOR
         //return;
 #endif
-
-        //이전점수랑 비교
-        if (score < prefBoss0Score)
-        {
-            return;
-        }
-
-        prefBoss0Score = score;
-        //
-
         Param param = new Param();
         param.Add("Score", score);
 
@@ -225,7 +197,7 @@ public class RankManager : SingletonMono<RankManager>
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
 
-        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Boss_0_Uuid, Rank_Boss_0_TableName, RankTable_Boss0.Indate, param, bro =>
+        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Stage_Uuid, Rank_Stage, RankTable_Stage.Indate, param, bro =>
         {
             // 이후처리
             if (bro.IsSuccess())
@@ -240,168 +212,4 @@ public class RankManager : SingletonMono<RankManager>
         });
     }
     #endregion
-
-    #region bossRank1
-    private ObscuredFloat prefBoss1Score = 0f;
-    private Action<RankInfo> whenLoadSuccess_Boss1;
-    public void RequestMyBoss1Rank(Action<RankInfo> whenLoadSuccess = null)
-    {
-        this.whenLoadSuccess_Boss1 = whenLoadSuccess;
-
-        Backend.URank.User.GetMyRank(RankManager.Rank_Boss_1_Uuid, MyBoss1RankLoadComplete);
-    }
-    private void MyBoss1RankLoadComplete(BackendReturnObject bro)
-    {
-        RankInfo myRankInfo = null;
-
-        if (bro.IsSuccess())
-        {
-            var rows = bro.Rows();
-
-            if (rows.Count > 0)
-            {
-                JsonData data = rows[0];
-
-                var splitData = data["NickName"][DatabaseManager.format_string].ToString().Split(CommonString.ChatSplitChar);
-
-                string nickName = splitData[5];
-                int rank = int.Parse(data["rank"][DatabaseManager.format_Number].ToString());
-                float score = float.Parse(data["score"][DatabaseManager.format_Number].ToString());
-                int costumeId = int.Parse(splitData[0]);
-                int petId = int.Parse(splitData[1]);
-                int weaponId = int.Parse(splitData[2]);
-                int magicBookId = int.Parse(splitData[3]);
-                int fightPoint = int.Parse(splitData[4]);
-
-                myRankInfo = new RankInfo(nickName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
-            }
-        }
-
-        if (myRankInfo != null)
-        {
-            prefBoss1Score = myRankInfo.Score;
-        }
-
-        whenLoadSuccess_Boss1?.Invoke(myRankInfo);
-        WhenMyBoss1RankLoadComplete.Execute(myRankInfo);
-
-        this.myRankInfo[RankType.Boss1] = myRankInfo;
-    }
-
-    public void UpdateBoss1_Score(float score)
-    {
-
-        //이전점수랑 비교
-        if (score < prefBoss1Score)
-        {
-            return;
-        }
-
-        prefBoss1Score = score;
-        //
-
-        Param param = new Param();
-        param.Add("Score", score);
-
-        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
-        int petIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
-        int weaponIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
-        int magicBookIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
-        int fightPoint = (int)PlayerStats.GetTotalPower();
-        int wingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).Value;
-
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
-
-        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Boss_1_Uuid, Rank_Boss_1_TableName, RankTable_Boss1.Indate, param, bro =>
-        {
-            // 이후처리
-            if (bro.IsSuccess())
-            {
-                Debug.LogError($"랭킹 등록 성공! UpdateBoss0_Score");
-            }
-            else
-            {
-                Debug.LogError($"랭킹 등록 실패 UpdateBoss0_Score {bro.GetStatusCode()}");
-            }
-
-        });
-    }
-    #endregion
-
-    #region InfinityTower
-    private Action<RankInfo> whenLoadSuccess_InfinityTower;
-    public void RequestInfinityTowerRank(Action<RankInfo> whenLoadSuccess = null)
-    {
-        this.whenLoadSuccess_InfinityTower = whenLoadSuccess;
-
-        Backend.URank.User.GetMyRank(RankManager.Rank_Infinity_Uuid, MyInfinityTowerRankLoadComplete);
-    }
-    private void MyInfinityTowerRankLoadComplete(BackendReturnObject bro)
-    {
-        RankInfo myRankInfo = null;
-
-        if (bro.IsSuccess())
-        {
-            var rows = bro.Rows();
-
-            if (rows.Count > 0)
-            {
-                JsonData data = rows[0];
-
-                var splitData = data["NickName"][DatabaseManager.format_string].ToString().Split(CommonString.ChatSplitChar);
-
-                string nickName = splitData[5];
-                int rank = int.Parse(data["rank"][DatabaseManager.format_Number].ToString());
-                float score = float.Parse(data["score"][DatabaseManager.format_Number].ToString());
-                int costumeId = int.Parse(splitData[0]);
-                int petId = int.Parse(splitData[1]);
-                int weaponId = int.Parse(splitData[2]);
-                int magicBookId = int.Parse(splitData[3]);
-                int fightPoint = int.Parse(splitData[4]);
-
-                myRankInfo = new RankInfo(nickName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
-            }
-        }
-
-        whenLoadSuccess_InfinityTower?.Invoke(myRankInfo);
-        WhenInfinityRankLoadComplete.Execute(myRankInfo);
-        this.myRankInfo[RankType.Infinity] = myRankInfo;
-    }
-
-    public void UpdatInfinityTower_Score(float floor)
-    {
-#if UNITY_EDITOR
-        return;
-#endif
-
-        Param param = new Param();
-        param.Add("Floor", floor);
-
-        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
-        int petIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
-        int weaponIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
-        int magicBookIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
-        int fightPoint = (int)PlayerStats.GetTotalPower();
-        int wingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).Value;
-
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
-
-        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Infinity_Uuid, RankTable_InfinityTower.tableName_InfinityTower, RankTable_InfinityTower.Indate, param, bro =>
-        {
-            // 이후처리
-            if (bro.IsSuccess())
-            {
-                Debug.LogError($"랭킹 등록 성공! InfinityTower");
-            }
-            else
-            {
-                Debug.LogError($"랭킹 등록 실패 InfinityTower {bro.GetStatusCode()}");
-            }
-
-        });
-    }
-    #endregion
-
-
-
 }

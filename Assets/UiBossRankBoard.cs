@@ -55,55 +55,55 @@ public class UiBossRankBoard : MonoBehaviour
     }
     private void Subscribe()
     {
-        if (bossId == 0) 
-        {
-            RankManager.Instance.WhenMyBoss0RankLoadComplete.AsObservable().Subscribe(e =>
-            {
-                if (e != null)
-                {
-                    myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
-                }
-                else
-                {
-                    myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
-                }
+        //if (bossId == 0) 
+        //{
+        //    RankManager.Instance.WhenMyStageRankLoadComplete.AsObservable().Subscribe(e =>
+        //    {
+        //        if (e != null)
+        //        {
+        //            myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+        //        }
+        //        else
+        //        {
+        //            myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
+        //        }
 
-            }).AddTo(this);
-        }
-        else if (bossId == 1) 
-        {
-            RankManager.Instance.WhenMyBoss1RankLoadComplete.AsObservable().Subscribe(e =>
-            {
-                if (e != null)
-                {
-                    myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
-                }
-                else
-                {
-                    myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
-                }
+        //    }).AddTo(this);
+        //}
+        //else if (bossId == 1) 
+        //{
+        //    RankManager.Instance.WhenMyBoss1RankLoadComplete.AsObservable().Subscribe(e =>
+        //    {
+        //        if (e != null)
+        //        {
+        //            myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+        //        }
+        //        else
+        //        {
+        //            myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
+        //        }
 
-            }).AddTo(this);
-        }
+        //    }).AddTo(this);
+        //}
 
     }
     private void LoadRankInfo()
     {
-        rankViewParent.gameObject.SetActive(false);
-        loadingMask.SetActive(false);
-        failObject.SetActive(false);
-        noDataObject.SetActive(false);
+        //rankViewParent.gameObject.SetActive(false);
+        //loadingMask.SetActive(false);
+        //failObject.SetActive(false);
+        //noDataObject.SetActive(false);
 
-        if (bossId == 0)
-        {
-            RankManager.Instance.GetRankerList_level(RankManager.Rank_Boss_0_Uuid, 100, WhenAllRankerLoadComplete);
-            RankManager.Instance.RequestMyBoss0Rank();
-        }
-        else if (bossId == 1)
-        {
-            RankManager.Instance.GetRankerList_level(RankManager.Rank_Boss_1_Uuid, 100, WhenAllRankerLoadComplete);
-            RankManager.Instance.RequestMyBoss1Rank();
-        }
+        //if (bossId == 0)
+        //{
+        //    RankManager.Instance.GetRankerList_level(RankManager.Rank_Stage_Uuid, 100, WhenAllRankerLoadComplete);
+        //    RankManager.Instance.RequestMyStageRank();
+        //}
+        //else if (bossId == 1)
+        //{
+        //    RankManager.Instance.GetRankerList_level(RankManager.Rank_Boss_1_Uuid, 100, WhenAllRankerLoadComplete);
+        //    RankManager.Instance.RequestMyBoss1Rank();
+        //}
     }
 
     private void WhenAllRankerLoadComplete(BackendReturnObject bro)

@@ -49,27 +49,27 @@ public class UiInfinityRankBoard : MonoBehaviour
     }
     private void Subscribe()
     {
-        RankManager.Instance.WhenInfinityRankLoadComplete.AsObservable().Subscribe(e =>
-        {
-            if (e != null)
-            {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"지하 {e.Score + 1}층", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
-            }
-            else
-            {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
-            }
+        //RankManager.Instance.WhenInfinityRankLoadComplete.AsObservable().Subscribe(e =>
+        //{
+        //    if (e != null)
+        //    {
+        //        myRankView.Initialize($"{e.Rank}", e.NickName, $"지하 {e.Score + 1}층", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+        //    }
+        //    else
+        //    {
+        //        myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
+        //    }
 
-        }).AddTo(this);
+        //}).AddTo(this);
     }
     private void LoadRankInfo()
     {
-        rankViewParent.gameObject.SetActive(false);
-        loadingMask.SetActive(false);
-        failObject.SetActive(false);
-        noDataObject.SetActive(false);
-        RankManager.Instance.GetRankerList_level(RankManager.Rank_Infinity_Uuid, 100, WhenAllRankerLoadComplete);
-        RankManager.Instance.RequestInfinityTowerRank();
+        //rankViewParent.gameObject.SetActive(false);
+        //loadingMask.SetActive(false);
+        //failObject.SetActive(false);
+        //noDataObject.SetActive(false);
+        //RankManager.Instance.GetRankerList_level(RankManager.Rank_Infinity_Uuid, 100, WhenAllRankerLoadComplete);
+        //RankManager.Instance.RequestInfinityTowerRank();
     }
 
     private void WhenAllRankerLoadComplete(BackendReturnObject bro)

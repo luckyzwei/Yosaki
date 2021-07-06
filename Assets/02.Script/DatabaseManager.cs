@@ -20,9 +20,7 @@ public static class DatabaseManager
     public static MagicBookTable magicBookTable { get; private set; } = new MagicBookTable();
     public static PetServerTable petTable { get; private set; } = new PetServerTable();
     public static RankTable_Level rankTables_level { get; private set; } = new RankTable_Level();
-    public static RankTable_Boss0 rankTables_Boss0 { get; private set; } = new RankTable_Boss0();
-    public static RankTable_Boss1 rankTables_Boss1 { get; private set; } = new RankTable_Boss1();
-
+    public static RankTable_Stage rankTables_Boss0 { get; private set; } = new RankTable_Stage();
     public static PassServerTable passServerTable { get; private set; } = new PassServerTable();
 
     public static CostumeServerTable costumeServerTable { get; private set; } = new CostumeServerTable();
@@ -30,7 +28,6 @@ public static class DatabaseManager
     public static DailyPassServerTable dailyPassServerTable { get; private set; } = new DailyPassServerTable();
     public static IAPServerTable iapServerTable { get; private set; } = new IAPServerTable();
 
-    public static RankTable_InfinityTower rankTable_InfinityTower { get; private set; } = new RankTable_InfinityTower();
     public static BossServerTable bossServerTable { get; private set; } = new BossServerTable();
     public static AttendanceServerTable attendanceServerTable { get; private set; } = new AttendanceServerTable();
 
@@ -75,13 +72,13 @@ public static class DatabaseManager
         costumeServerTable.Initialize();
         dailyPassServerTable.Initialize();
         iapServerTable.Initialize();
-        rankTable_InfinityTower.Initialize();
+        //rankTable_InfinityTower.Initialize();
         bossServerTable.Initialize();
         attendanceServerTable.Initialize();
         //fieldBossTable.Initialize();
         buffServerTable.Initialize();
         passiveServerTable.Initialize();
-        rankTables_Boss1.Initialize();
+        //rankTables_Boss1.Initialize();
     }
 
     public static void GetUserInfo()

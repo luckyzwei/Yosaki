@@ -203,15 +203,15 @@ public class SingleRaidManager : ContentsManagerBase
 
     private void SendScore()
     {
-        int bossIdx = GameManager.Instance.bossId;
-        if (bossIdx == 0)
-        {
-            RankManager.Instance.UpdateBoss0_Score(damageAmount.Value);
-        }
-        else if (bossIdx == 1)
-        {
-            RankManager.Instance.UpdateBoss1_Score(damageAmount.Value);
-        }
+        //int bossIdx = GameManager.Instance.bossId;
+        //if (bossIdx == 0)
+        //{
+        //    RankManager.Instance.UpdateStage_Score(damageAmount.Value);
+        //}
+        //else if (bossIdx == 1)
+        //{
+        //    RankManager.Instance.UpdateBoss1_Score(damageAmount.Value);
+        //}
     }
 
     public static List<RewardData> GetRewawrdData(BossTableData bossTableData, float damagedHp, int clearCount = 1)

@@ -65,6 +65,13 @@ public class MapInfo : SingletonMono<MapInfo>
         StartCoroutine(EnemySpawnRoutine());
 
         Subscribe();
+
+        UpdateStageRank();
+    }
+
+    private void UpdateStageRank() 
+    {
+        RankManager.Instance.UpdateStage_Score(DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
     }
 
     private void Subscribe()
@@ -364,5 +371,8 @@ public class MapInfo : SingletonMono<MapInfo>
               //결과표시
               UiFieldBossRewardView.Instance.Initialize(rewardValue);
           });
+
+
+        UpdateStageRank();
     }
 }

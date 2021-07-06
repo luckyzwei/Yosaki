@@ -101,6 +101,8 @@ public class UiBossContentsView : MonoBehaviour
 
     public void OnClickInstantClearButton()
     {
+        PopupManager.Instance.ShowAlarmMessage("구현필요");
+        return;
         int price = 1;
 
         int currentTicketNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value;
@@ -115,50 +117,50 @@ public class UiBossContentsView : MonoBehaviour
 
         int clearAmount = Mathf.Min(instantOpenAmount, currentTicketNum);
 
-        if (bossTableData.Id == 0) 
-        {
-            RankManager.Instance.RequestMyBoss0Rank(e =>
-            {
-                if (e != null)
-                {
-                    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
-                    {
-                        InstantClearReceive(e.Score, clearAmount);
-                    },
-                    () =>
-                    {
-                        clearButton.interactable = true;
-                    });
-                }
-                else
-                {
-                    PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
-                    clearButton.interactable = true;
-                }
-            });
-        }
-        else if (bossTableData.Id == 1) 
-        {
-            RankManager.Instance.RequestMyBoss1Rank(e =>
-            {
-                if (e != null)
-                {
-                    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
-                    {
-                        InstantClearReceive(e.Score, clearAmount);
-                    },
-                    () =>
-                    {
-                        clearButton.interactable = true;
-                    });
-                }
-                else
-                {
-                    PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
-                    clearButton.interactable = true;
-                }
-            });
-        } 
+        //if (bossTableData.Id == 0) 
+        //{
+        //    RankManager.Instance.RequestMyStageRank(e =>
+        //    {
+        //        if (e != null)
+        //        {
+        //            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
+        //            {
+        //                InstantClearReceive(e.Score, clearAmount);
+        //            },
+        //            () =>
+        //            {
+        //                clearButton.interactable = true;
+        //            });
+        //        }
+        //        else
+        //        {
+        //            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
+        //            clearButton.interactable = true;
+        //        }
+        //    });
+        //}
+        //else if (bossTableData.Id == 1) 
+        //{
+        //    RankManager.Instance.RequestMyBoss1Rank(e =>
+        //    {
+        //        if (e != null)
+        //        {
+        //            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
+        //            {
+        //                InstantClearReceive(e.Score, clearAmount);
+        //            },
+        //            () =>
+        //            {
+        //                clearButton.interactable = true;
+        //            });
+        //        }
+        //        else
+        //        {
+        //            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
+        //            clearButton.interactable = true;
+        //        }
+        //    });
+        //} 
     
     }
 

@@ -26,9 +26,6 @@ public class UiLevelRankBoard : MonoBehaviour
     private GameObject failObject;
 
     [SerializeField]
-    private GameObject noDataObject;
-
-    [SerializeField]
     private TextMeshProUGUI title;
 
 
@@ -70,7 +67,6 @@ public class UiLevelRankBoard : MonoBehaviour
         rankViewParent.gameObject.SetActive(false);
         loadingMask.SetActive(false);
         failObject.SetActive(false);
-        noDataObject.SetActive(false);
         RankManager.Instance.GetRankerList_level(RankManager.Rank_Level_Uuid, 100, WhenAllRankerLoadComplete);
         RankManager.Instance.RequestMyLevelRank();
     }
@@ -83,8 +79,6 @@ public class UiLevelRankBoard : MonoBehaviour
 
             if (rows.Count > 0)
             {
-                noDataObject.SetActive(false);
-
                 rankViewParent.gameObject.SetActive(true);
 
                 int interval = rows.Count - rankViewContainer.Count;
@@ -143,7 +137,7 @@ public class UiLevelRankBoard : MonoBehaviour
             }
             else
             {
-                noDataObject.SetActive(true);
+                //데이터 없을때
             }
 
         }

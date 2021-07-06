@@ -17,9 +17,6 @@ public class UiRankView : MonoBehaviour
     private TextMeshProUGUI text3;
 
     [SerializeField]
-    private UIShiny uiShiny;
-
-    [SerializeField]
     private List<GameObject> rankList;
 
 
@@ -29,10 +26,8 @@ public class UiRankView : MonoBehaviour
         this.text2.SetText(text2);
         this.text3.SetText(text3);
 
-        uiShiny.enabled = rank != 0 && rank < 11;
-
-
         this.text1.gameObject.SetActive(rank != 1 && rank != 2 && rank != 3);
+
         rankList[0].SetActive(rank == 1);
         rankList[1].SetActive(rank == 2);
         rankList[2].SetActive(rank == 3);
