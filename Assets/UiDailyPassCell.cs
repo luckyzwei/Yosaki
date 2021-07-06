@@ -104,7 +104,7 @@ public class UiDailyPassCell : MonoBehaviour
 
     private void SetDescriptionText()
     {
-        descriptionText.SetText($"몹 처치 {passInfo.require}");
+        descriptionText.SetText($"{passInfo.require}");
     }
 
     public List<string> GetSplitData(string key)

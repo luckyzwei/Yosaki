@@ -52,7 +52,7 @@ public class SubMenu_MoreButton : MonoBehaviour
     {
         expandObject.SetActive(state == State.Opened);
         icon.sprite = state == State.Opened ? closeSprite : openSprite;
-        buttonText.SetText(state == State.Opened ? "닫기" : "더보기");
+        buttonText.SetText(state == State.Opened ? "닫기" : "메뉴");
 
         if (state == State.Opened)
         {

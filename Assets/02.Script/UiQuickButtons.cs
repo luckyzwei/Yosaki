@@ -143,8 +143,8 @@ public class UiQuickButtons : MonoBehaviour
         {
             if (i == idx)
             {
-                selectText[i].SetText("장착중");
-                selectText[i].color = Color.green;
+                selectText[i].SetText("사용중");
+                selectText[i].color = Color.white;
             }
             else
             {
