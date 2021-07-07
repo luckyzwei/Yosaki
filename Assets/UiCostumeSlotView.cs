@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UniRx;
+using UnityEngine;
+
+public class UiCostumeSlotView : MonoBehaviour
+{
+    [SerializeField]
+    private TextMeshProUGUI slotNum;
+
+    private CostumeData costumeData;
+
+    [SerializeField]
+    private GameObject equpObject;
+
+    [SerializeField]
+    private GameObject currentSelectedObject;
+
+    private Action<int> selectCallBack;
+
+    public void SetCurrentSelect(bool show)
+    {
+        currentSelectedObject.SetActive(show);
+    }
+
+    public void Initialize(CostumeData costumeData, Action<int> selectCallBack)
+    {
+        this.selectCallBack = selectCallBack;
+
+        this.costumeData = costumeData;
+        slotNum.SetText(costumeData.Id.ToString());
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].AsObservable().Subscribe(e =>
+        {
+            equpObject.SetActive(e == this.costumeData.Id);
+        }).AddTo(this);
+    }
+
+    public void OnClickSlotButton()
+    {
+        selectCallBack?.Invoke(this.costumeData.Id);
+
+        CostumeData costumeData = TableManager.Instance.CostumeData[this.costumeData.Id];
+
+        UiCostumeAbilityBoard.Instance.Initialize(costumeData);
+    }
+}
