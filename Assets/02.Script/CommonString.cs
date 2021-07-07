@@ -28,9 +28,9 @@ public static class CommonString
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
 
-    public static string ContentsName_Boss = "공주 구출";
-    public static string ContentsName_GoblinDefense = "고블린 도적단 소탕";
-    public static string ContentsName_InfinityTower = "지하던전";
+    public static string ContentsName_Boss = "12간지";
+    public static string ContentsName_FireFly = "반딧불 모아 태산";
+    public static string ContentsName_InfinityTower = "도장깨기";
 
     public static string ChatConnectString = "채팅 채널에 입장했습니다.";
 
@@ -51,12 +51,12 @@ public static class CommonString
                 {
                 }
                 break;
-            case ContentsType.BonusDefense:
+            case ContentsType.FireFly:
                 {
-                    return ContentsName_GoblinDefense;
+                    return ContentsName_FireFly;
                 }
                 break;
-            case ContentsType.SingleRaid:
+            case ContentsType.Boss:
                 {
                     return ContentsName_Boss;
                 }

@@ -63,7 +63,7 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
         {
             GameObject mapObject = null;
 
-            if (GameManager.Instance.contentsType != GameManager.ContentsType.SingleRaid)
+            if (GameManager.Instance.contentsType != GameManager.ContentsType.Boss)
             {
                 mapObject = Resources.Load<GameObject>($"ContentsMap/{GameManager.Instance.contentsType.ToString()}");
             }

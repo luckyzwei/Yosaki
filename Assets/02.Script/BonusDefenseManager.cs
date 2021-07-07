@@ -8,9 +8,9 @@ using UniRx;
 
 public class BonusDefenseManager : ContentsManagerBase
 {
-    private ObscuredFloat spawnDelay1 = 0.3f;
+    private ObscuredFloat spawnDelay1 = 0.5f;
     //20초남았을때
-    private ObscuredFloat spawnDelay2 = 0.2f;
+    private ObscuredFloat spawnDelay2 = 0.35f;
 
     [SerializeField]
     private ObscuredFloat enemyHp = 0.3f;
@@ -22,10 +22,7 @@ public class BonusDefenseManager : ContentsManagerBase
     private BonusDefenseEnemy bonusDefenseEnemyPrefab;
 
     [SerializeField]
-    private List<Transform> spawnPointsLeft;
-
-    [SerializeField]
-    private List<Transform> spawnPointsRight;
+    private List<Transform> spawnPoints;
 
     private ReactiveProperty<ObscuredInt> enemyDeadCount = new ReactiveProperty<ObscuredInt>();
 
@@ -96,22 +93,12 @@ public class BonusDefenseManager : ContentsManagerBase
         Vector3 moveDir = Vector3.zero;
         Vector3 spawnPos = Vector3.zero;
 
-        if (directionRand == 0)
-        {
-            int randIdx = Random.Range(0, spawnPointsLeft.Count);
-            moveDir = Vector3.right;
-            spawnPos = spawnPointsLeft[randIdx].transform.position;
-        }
-        else if (directionRand == 1)
-        {
-            int randIdx = Random.Range(0, spawnPointsRight.Count);
-            moveDir = Vector3.left;
-            spawnPos = spawnPointsRight[randIdx].transform.position;
-        }
+        int randIdx = Random.Range(0, spawnPoints.Count);
+        spawnPos = spawnPoints[randIdx].transform.position;
 
         var enemy = BattleObjectManager.Instance.GetItem(poolName).GetComponent<BonusDefenseEnemy>();
 
-        enemy.Initialize(enemyHp, moveSpeed, moveDir, WhenEnemyDead);
+        enemy.Initialize(enemyHp, moveSpeed, WhenEnemyDead);
 
         enemy.transform.position = spawnPos;
     }

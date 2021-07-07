@@ -43,6 +43,8 @@ public class FlyingEnemyMoveController : MonoBehaviour
 
         agentHpController.whenEnemyDamaged.AsObservable().Subscribe(e =>
         {
+            //유저한테 맞아도 안쫒아오게
+            return;
             isDamaged = true;
         }).AddTo(this);
     }

@@ -90,7 +90,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
         if (currentLevel == GameBalance.bonusDungeonUnlockLevel)
         {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"({CommonString.ContentsName_GoblinDefense}) 해금됐습니다!\n전투 탭에서 도전 가능 합니다.", null);
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"({CommonString.ContentsName_FireFly}) 해금됐습니다!\n전투 탭에서 도전 가능 합니다.", null);
         }
         else if (currentLevel == GameBalance.InfinityDungeonUnlockLevel)
         {

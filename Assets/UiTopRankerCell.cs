@@ -10,8 +10,6 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private SkeletonGraphic costumeGraphic;
     [SerializeField]
-    private BoneFollowerGraphic boneFollowerGraphic;
-    [SerializeField]
     private SkeletonGraphic petGraphic;
     [SerializeField]
     private TextMeshProUGUI nickName;
@@ -53,7 +51,7 @@ public class UiTopRankerCell : MonoBehaviour
         petGraphic.gameObject.SetActive(true);
         petGraphic.Clear();
         petGraphic.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[idx];
-        petGraphic.startingAnimation = "Walk";
+        petGraphic.startingAnimation = "walk";
         petGraphic.Initialize(true);
         petGraphic.SetMaterialDirty();
     }
@@ -65,6 +63,6 @@ public class UiTopRankerCell : MonoBehaviour
         costumeGraphic.Initialize(true);
         costumeGraphic.SetMaterialDirty();
 
-        boneFollowerGraphic.SetBone("Weapon1");
+        //boneFollowerGraphic.SetBone("Weapon1");
     }
 }

@@ -67,10 +67,10 @@ public class SoundManager : SingletonMono<SoundManager>
                 case ContentsType.NormalField:
                   //  clip = stageBgms[GameManager.Instance.CurrentStageData.Mapthema];
                     break;
-                case ContentsType.BonusDefense:
+                case ContentsType.FireFly:
                     clip = bonusDefenseBgm;
                     break;
-                case ContentsType.SingleRaid:
+                case ContentsType.Boss:
                     clip = bossBgm;
                     break;
                 case ContentsType.InfiniteTower:

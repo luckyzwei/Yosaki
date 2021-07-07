@@ -27,12 +27,12 @@ public class UiContentsLockMask : MonoBehaviour
     {
         switch (contentsType)
         {
-            case ContentsType.BonusDefense:
+            case ContentsType.FireFly:
                 {
                     description.SetText($"{GameBalance.bonusDungeonUnlockLevel}레벨에 오픈!");
                 }
                 break;
-            case ContentsType.SingleRaid:
+            case ContentsType.Boss:
                 {
                     description.SetText($"{GameBalance.bossUnlockLevel}레벨에 오픈!");
                 }
@@ -50,13 +50,13 @@ public class UiContentsLockMask : MonoBehaviour
         {
             switch (contentsType)
             {
-                case ContentsType.BonusDefense:
+                case ContentsType.FireFly:
                     {
                         rootObject.SetActive(currentLevel < GameBalance.bonusDungeonUnlockLevel);
                         description.SetText($"{GameBalance.bonusDungeonUnlockLevel}레벨에 오픈!");
                     }
                     break;
-                case ContentsType.SingleRaid:
+                case ContentsType.Boss:
                     {
                         rootObject.SetActive(currentLevel < GameBalance.bossUnlockLevel);
                         description.SetText($"{GameBalance.bossUnlockLevel}레벨에 오픈!");

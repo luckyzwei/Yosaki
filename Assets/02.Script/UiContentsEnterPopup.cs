@@ -22,9 +22,6 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
     private GameObject bonusDungeonObject;
 
     [SerializeField]
-    private GameObject bossObject;
-
-    [SerializeField]
     private GameObject infinityTowerObject;
 
     private ContentsType contentsType;
@@ -73,13 +70,11 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
         ticketPrice.SetText($"X{GameBalance.contentsEnterprice}");
 
-        bonusDungeonObject.SetActive(contentsType == ContentsType.BonusDefense);
-
-        bossObject.SetActive(contentsType == ContentsType.SingleRaid);
+        bonusDungeonObject.SetActive(contentsType == ContentsType.FireFly);
 
         infinityTowerObject.SetActive(contentsType == ContentsType.InfiniteTower);
 
-        if (contentsType == ContentsType.BonusDefense)
+        if (contentsType == ContentsType.FireFly)
         {
             UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.bonusDungeonDescription);
         }
@@ -101,7 +96,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
     {
         switch (contentsType)
         {
-            case ContentsType.BonusDefense:
+            case ContentsType.FireFly:
                 {
                     BonusDefenseEnterRoutine();
                 }

@@ -10,11 +10,11 @@ public class BonusDefenseEnemy : PoolItem
     private AgentHpController agentHpController;
 
     [SerializeField]
-    private BonusDefenseEnemyMoveController bonusDefenseEnemyMoveController;
+    private FlyingEnemyMoveController bonusDefenseEnemyMoveController;
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public void Initialize(float hp, float moveSpeed, Vector3 moveDir, Action enemyDeadCallBack)
+    public void Initialize(float hp, float moveSpeed, Action enemyDeadCallBack)
     {
         EnemyTableData data = new EnemyTableData();
         data.Hp = hp;
@@ -23,9 +23,9 @@ public class BonusDefenseEnemy : PoolItem
         data.Attackpower = 0f;
 
         agentHpController.Initialize(data);
-        bonusDefenseEnemyMoveController.Initialize(moveDir, data.Movespeed);
+        bonusDefenseEnemyMoveController.Initialize(Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f)) * Vector3.right, data.Movespeed);
         //공겨력 0
-        GetComponentInChildren<EnemyHitObject>().SetDamage(0f);
+     //   GetComponentInChildren<EnemyHitObject>().SetDamage(0f);
 
         disposable.Clear();
         agentHpController.whenEnemyDead.AsObservable().Subscribe(e =>

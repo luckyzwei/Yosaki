@@ -90,7 +90,7 @@ public class UiBossContentsView : MonoBehaviour
             //로그
 
             GameManager.Instance.SetBossId(bossTableData.Id);
-            GameManager.Instance.LoadContents(GameManager.ContentsType.SingleRaid);
+            GameManager.Instance.LoadContents(GameManager.ContentsType.Boss);
         },
         () =>
         {

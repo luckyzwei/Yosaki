@@ -283,7 +283,7 @@ public class AutoManager : Singleton<AutoManager>
                 currentTarget = spawnedEnemy[0].transform;
             }
         }
-        else if (GameManager.Instance.contentsType == GameManager.ContentsType.BonusDefense)
+        else if (GameManager.Instance.contentsType == GameManager.ContentsType.FireFly)
         {
             currentTarget = GetBonusDefenseTarget();
         }

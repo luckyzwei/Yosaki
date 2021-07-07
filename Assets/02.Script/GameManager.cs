@@ -12,7 +12,7 @@ public class GameManager : SingletonMono<GameManager>
     }
     public enum ContentsType
     {
-        NormalField, BonusDefense, SingleRaid, InfiniteTower
+        NormalField, FireFly, Boss, InfiniteTower
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;
@@ -131,7 +131,7 @@ public class GameManager : SingletonMono<GameManager>
 
     public void LoadContents(ContentsType type)
     {
-        if (type == ContentsType.BonusDefense)
+        if (type == ContentsType.FireFly)
         {
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
         }

@@ -143,12 +143,12 @@ public class UiQuickButtons : MonoBehaviour
         {
             if (i == idx)
             {
-                selectText[i].SetText("사용중");
+                selectText[i].SetText("등록됨");
                 selectText[i].color = Color.white;
             }
             else
             {
-                selectText[i].SetText("선택");
+                selectText[i].SetText("등록");
                 selectText[i].color = Color.white;
             }
         }
@@ -169,7 +169,7 @@ public class UiQuickButtons : MonoBehaviour
     public void UsePotion(bool showAlarmText)
     {
         if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField &&
-            GameManager.Instance.contentsType != GameManager.ContentsType.BonusDefense)
+            GameManager.Instance.contentsType != GameManager.ContentsType.FireFly)
         {
             if (showAlarmText)
             {

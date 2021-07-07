@@ -214,7 +214,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
                 return $"캐릭터 레벨 20을 달성해 보세요";
                 break;
             case TutorialStep._12_ClearGoblin:
-                return $"레벨 {GameBalance.bonusDungeonUnlockLevel}달성 후에\n오른쪽 상단 전투 메뉴에서\n{CommonString.GetContentsName(GameManager.ContentsType.BonusDefense)}를 클리어 해보세요\n보상 : <color=yellow>{CommonString.GetItemName(Item_Type.Jade)} {lastRewardGemNum}개</color>";
+                return $"레벨 {GameBalance.bonusDungeonUnlockLevel}달성 후에\n오른쪽 상단 전투 메뉴에서\n{CommonString.GetContentsName(GameManager.ContentsType.FireFly)}를 클리어 해보세요\n보상 : <color=yellow>{CommonString.GetItemName(Item_Type.Jade)} {lastRewardGemNum}개</color>";
                 break;
             case TutorialStep.Clear:
                 break;

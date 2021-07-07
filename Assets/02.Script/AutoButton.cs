@@ -27,7 +27,7 @@ public class AutoButton : MonoBehaviour
     public void OnClickAutoButton()
     {
         if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField &&
-GameManager.Instance.contentsType != GameManager.ContentsType.BonusDefense)
+GameManager.Instance.contentsType != GameManager.ContentsType.FireFly)
         {
             PopupManager.Instance.ShowAlarmMessage("자동전투가 불가능한 던전 입니다.");
             return;
