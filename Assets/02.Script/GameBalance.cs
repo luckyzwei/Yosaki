@@ -43,7 +43,7 @@ public static class GameBalance
     public readonly static ObscuredFloat potionUseDelay = 2.0f;
 
     public readonly static ObscuredInt ticketPrice = 500;
-    public readonly static ObscuredInt contentsEnterprice = 500;
+    public readonly static ObscuredInt contentsEnterprice = 0;
     public readonly static ObscuredInt dailyTickBuyCountMax = 5;
     public readonly static ObscuredInt bonusDungeonEnterCount = 30;
 
