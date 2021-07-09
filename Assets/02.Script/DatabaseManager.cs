@@ -195,7 +195,7 @@ public static class DatabaseManager
             case Item_Type.Ticket:
                 passParam.Add(GoodsTable.Ticket, DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
-            case Item_Type.Feather:
+            case Item_Type.Marble:
                 passParam.Add(GoodsTable.FeatherKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.costume1:
@@ -369,7 +369,7 @@ public static class DatabaseManager
             case Item_Type.Ticket:
                 DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value += amount;
                 break;
-            case Item_Type.Feather:
+            case Item_Type.Marble:
                 DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value += amount;
                 break;
         }

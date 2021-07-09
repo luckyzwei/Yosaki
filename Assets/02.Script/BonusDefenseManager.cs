@@ -57,7 +57,7 @@ public class BonusDefenseManager : ContentsManagerBase
     {
         base.TimerEnd();
 
-        UiTutorialManager.Instance.SetClear(TutorialStep._12_ClearGoblin);
+      //  UiTutorialManager.Instance.SetClear(TutorialStep._12_ClearGoblin);
 
         StopCoroutine(spawnRoutine);
 

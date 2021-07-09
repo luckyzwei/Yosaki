@@ -30,8 +30,6 @@ public class UiQuickButtons : MonoBehaviour
 
     public void ShowSelectPopup()
     {
-        UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.potionDescription);
-
         SoundManager.Instance.PlayButtonSound();
         selectPopup.SetActive(true);
         selectPopup.transform.parent = InGameCanvas.Instance.transform;

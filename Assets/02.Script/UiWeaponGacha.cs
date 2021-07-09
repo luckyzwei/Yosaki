@@ -162,7 +162,7 @@ public class UiWeaponGacha : MonoBehaviour
             OnClickOpenButton(lastGachaIdx);
         });
 
-        UiTutorialManager.Instance.SetClear(TutorialStep._10_GetWeaponInShop);
+      //  UiTutorialManager.Instance.SetClear(TutorialStep._10_GetWeaponInShop);
     }
 
     //서버 갱신만

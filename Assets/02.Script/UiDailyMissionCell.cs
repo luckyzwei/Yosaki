@@ -92,7 +92,7 @@ public class UiDailyMissionCell : MonoBehaviour
 
         this.transform.SetAsLastSibling();
 
-        UiTutorialManager.Instance.SetClear(TutorialStep._7_MissionReward);
+       // UiTutorialManager.Instance.SetClear(TutorialStep._7_MissionReward);
     }
 
     private IEnumerator SyncDataRoutine()

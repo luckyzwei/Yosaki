@@ -271,19 +271,10 @@ public class UiPetView : MonoBehaviour
 
     private void BuyPetRoutine()
     {
-        bool isTutorialStep = (TutorialStep)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.tutorialCurrentStep).Value == TutorialStep._8_GetPet;
         //무료펫
         if (petData.PETGETTYPE == PetGetType.Ad)
         {
-            if (isTutorialStep == false)
-            {
-                AdManager.Instance.ShowRewardedReward(BuyFreePet);
-            }
-            else
-            {
-                BuyFreePet();
-            }
-
+            AdManager.Instance.ShowRewardedReward(BuyFreePet);
         }
         //유료펫
         else if (petData.PETGETTYPE == PetGetType.Gem)
@@ -317,7 +308,6 @@ public class UiPetView : MonoBehaviour
         PlayerPet.Instance.WhenPetEquipIdxChanged(0);
         UpdateUi();
 
-        UiTutorialManager.Instance.SetClear(TutorialStep._8_GetPet);
-        UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.blackDragon);
+
     }
 }

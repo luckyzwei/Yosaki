@@ -13,8 +13,6 @@ public class UiBossContentsBoard : MonoBehaviour
     void Start()
     {
         Initialize();
-
-        UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.bossContentsDescription);
     }
 
     private void Initialize() 

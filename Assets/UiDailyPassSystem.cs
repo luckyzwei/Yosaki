@@ -22,7 +22,6 @@ public class UiDailyPassSystem : MonoBehaviour
     private void Start()
     {
         Initialize();
-        UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.dailyPassDescription);
     }
     private void Initialize()
     {

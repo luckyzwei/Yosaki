@@ -256,7 +256,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         //Ui갱신
         Initialize(skillTableData);
 
-        UiTutorialManager.Instance.SetClear(TutorialStep._5_SkillLevelUp);
+     //   UiTutorialManager.Instance.SetClear(TutorialStep._5_SkillLevelUp);
     }
 
     private IEnumerator SyncDataRoutine()
@@ -284,7 +284,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     public void OnClickAwakeButton()
     {
-        UiTutorialManager.Instance.SetClear(TutorialStep._10_GetSkill);
+       // UiTutorialManager.Instance.SetClear(TutorialStep._10_GetSkill);
 
         int currentAwakeNum = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
         int maxAwakeNum = skillTableData.Awakemaxnum;

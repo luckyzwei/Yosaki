@@ -69,7 +69,7 @@ public class UiRoulette : MonoBehaviour
             return;
         }
 
-        UiTutorialManager.Instance.SetClear(TutorialStep._9_GetBonusReward);
+      //  UiTutorialManager.Instance.SetClear(TutorialStep._9_GetBonusReward);
 
         spinRoutine = CoroutineExecuter.Instance.StartCoroutine(SlotSpinRoutine());
     }

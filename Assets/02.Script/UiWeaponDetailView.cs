@@ -694,7 +694,7 @@ public class UiWeaponDetailView : MonoBehaviour
         if (weaponData != null)
         {
             DatabaseManager.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
-            UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
+          //  UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
         }
         else
         {

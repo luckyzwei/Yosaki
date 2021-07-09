@@ -22,7 +22,7 @@ public class StatusTable
     public const string StatPoint = "StatPoint";
     public const string Memory = "memory";
 
-    public const string IntLevel_Gold = "IntLevel_Gold";
+    public const string AttackLevel_Gold = "AttackLevel_Gold";
     public const string CriticalLevel_Gold = "CriticalLevel_Gold";
     public const string CriticalDamLevel_Gold = "CriticalDamLevel_Gold";
     public const string HpLevel_Gold = "HpLevel_Gold";
@@ -56,7 +56,7 @@ public class StatusTable
         {StatPoint,0},
         {Memory,0},
 
-        {IntLevel_Gold,0},
+        {AttackLevel_Gold,0},
         {CriticalLevel_Gold,0},
         {CriticalDamLevel_Gold,0},
         {HpLevel_Gold,0},
@@ -119,7 +119,7 @@ public class StatusTable
             switch (key)
             {
                 #region Gold
-                case IntLevel_Gold:
+                case AttackLevel_Gold:
                     {
                         return Mathf.Pow(level, 1.07f) + 10;
                     }
@@ -248,7 +248,7 @@ public class StatusTable
         {
             switch (key)
             {
-                case IntLevel_Gold:
+                case AttackLevel_Gold:
                     {
                         return (Mathf.Pow(level, 2.9f + (level / 1000) * 0.1f));
                     }

@@ -75,11 +75,11 @@ public static class CommonString
     {
         switch (item_type)
         {
-            case Item_Type.Gold: return "골드";
-            case Item_Type.Jade: return "마나스톤";
-            case Item_Type.GrowThStone: return "기억의파편";
-            case Item_Type.Memory: return "기억의조각";
-            case Item_Type.Ticket: return "마계티켓";
+            case Item_Type.Gold: return "금화";
+            case Item_Type.Jade: return "옥";
+            case Item_Type.GrowThStone: return "수련의돌";
+            case Item_Type.Memory: return "무공비급";
+            case Item_Type.Ticket: return "두루마리";
             case Item_Type.costume0: return "미등록";
             case Item_Type.costume1: return "미등록";
             case Item_Type.costume2: return "미등록";
@@ -89,7 +89,7 @@ public static class CommonString
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;
             case Item_Type.pet3: return TableManager.Instance.PetDatas[3].Name;
-            case Item_Type.Feather: return "악마깃털";
+            case Item_Type.Marble: return "악마깃털";
             case Item_Type.MagicStoneBuff: return "기억의파편 버프 +50%(드랍)";
         }
         return "미등록";
@@ -101,8 +101,8 @@ public static class CommonString
 
         switch (type)
         {
-            case StatusType.IntAddPer:
-                ret = "마법공격력 증가(%)";
+            case StatusType.AttackAddPer:
+                ret = "공격력 증가(%)";
                 break;
             case StatusType.CriticalProb:
                 ret = "크리티컬 확률(%)";
@@ -135,7 +135,7 @@ public static class CommonString
                 ret = "경험치 획득 증가(%)";
                 break;
             case StatusType.IntAdd:
-                ret = "마법공격력";
+                ret = "공격력";
                 break;
             case StatusType.Hp:
                 ret = "체력";

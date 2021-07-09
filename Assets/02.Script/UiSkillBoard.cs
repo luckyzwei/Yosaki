@@ -29,7 +29,6 @@ public class UiSkillBoard : MonoBehaviour
     private void Start()
     {
         UpdateView();
-        UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.skillBoardDescription);
     }
 
     private void UpdateSkillDescriptionPopup(SkillTableData data)

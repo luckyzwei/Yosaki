@@ -15,7 +15,7 @@ public class UiCollectionBoard : MonoBehaviour
     void Start()
     {
         Initialize();
-        UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.monsterCollection);
+     //   UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.monsterCollection);
     }
 
     private void Initialize()

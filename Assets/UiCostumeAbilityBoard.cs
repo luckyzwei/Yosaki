@@ -129,7 +129,6 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
     private void Start()
     {
-        UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.costumeGachaDesc);
     }
 
     private void Subscribe()

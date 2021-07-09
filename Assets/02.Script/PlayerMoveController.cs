@@ -124,7 +124,7 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
         //2단점프
         if (jumpCount == 1 && isDoubleJump == false)
         {
-            UiTutorialManager.Instance.SetClear(TutorialStep._2_Jump);
+           // UiTutorialManager.Instance.SetClear(TutorialStep._2_Jump);
 
             //이펙트
             EffectManager.SpawnEffect("FeatherExplosion", PlayerMoveController.Instance.transform.position);
@@ -166,7 +166,7 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
             if (rayHit.collider != null && rayHit.collider.gameObject.name.Equals(CommonString.BottomBlock) == false)
             {
                 collider2D.isTrigger = true;
-                UiTutorialManager.Instance.SetClear(TutorialStep._3_Down);
+             //   UiTutorialManager.Instance.SetClear(TutorialStep._3_Down);
             }
             else
             {

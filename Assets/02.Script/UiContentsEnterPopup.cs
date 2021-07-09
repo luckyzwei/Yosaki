@@ -73,15 +73,6 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
         bonusDungeonObject.SetActive(contentsType == ContentsType.FireFly);
 
         infinityTowerObject.SetActive(contentsType == ContentsType.InfiniteTower);
-
-        if (contentsType == ContentsType.FireFly)
-        {
-            UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.bonusDungeonDescription);
-        }
-        else if (contentsType == ContentsType.InfiniteTower)
-        {
-            UiManagerDescription.Instance.SetManagerDescription(ManagerDescriptionType.infinityTowerDescription);
-        }
     }
 
     private void UpdateUi()

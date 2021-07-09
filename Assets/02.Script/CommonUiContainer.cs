@@ -56,7 +56,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.Ticket:
                 return ticket;
-            case Item_Type.Feather:
+            case Item_Type.Marble:
                 return feather;
             case Item_Type.costume1:
                 return costumeThumbnail[1];

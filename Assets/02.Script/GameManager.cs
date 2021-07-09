@@ -151,7 +151,7 @@ public class GameManager : SingletonMono<GameManager>
         {
             if (currentMapIdx.Value != 0 && UiTutorialManager.Instance != null)
             {
-                UiTutorialManager.Instance.SetClear(TutorialStep._1_MoveField);
+             //   UiTutorialManager.Instance.SetClear(TutorialStep._1_MoveField);
             }
         }
 

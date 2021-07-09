@@ -19,10 +19,15 @@ public class UiStatusBoard : MonoBehaviour
     [SerializeField]
     private Transform memoryParent;
 
+    [SerializeField]
+    private UiTopRankerCell topRankerCell;
+
     private void Awake()
     {
         Initialize();
     }
+
+
 
     private void Initialize()
     {
@@ -60,6 +65,16 @@ public class UiStatusBoard : MonoBehaviour
     private void OnEnable()
     {
         this.transform.SetAsLastSibling();
+        UpdatePlayerView();
+    }
+
+    private void UpdatePlayerView()
+    {
+        int costumeId = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
+        int petId = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
+        int weaponId = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
+        int magicBookId = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        topRankerCell.Initialize(string.Empty, string.Empty, costumeId, petId, weaponId, magicBookId, 0);
     }
 
     public void OnClickStatResetButton()

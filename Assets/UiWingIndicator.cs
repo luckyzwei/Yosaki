@@ -82,7 +82,7 @@ public class UiWingIndicator : MonoBehaviour
 
         if (DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value < nextTableData.Requirejump)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Feather)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Marble)}이 부족합니다.");
             return;
         }
 

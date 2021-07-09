@@ -100,11 +100,11 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
         if (IsMaxLevel())
         {
-            upgradeText.SetText("최고레벨");
+            upgradeText.SetText("최고단계");
         }
         else
         {
-            upgradeText.SetText("업그레이드");
+            upgradeText.SetText("수련");
         }
 
         statusIcon.sprite = CommonUiContainer.Instance.statusIcon[statusData.Statustype];
@@ -192,6 +192,11 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
     public void PointerDown()
     {
+        if (autoUpRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(autoUpRoutine);
+        }
+
         autoUpRoutine = CoroutineExecuter.Instance.StartCoroutine(AutuUpgradeRoutine());
 
     }
@@ -275,7 +280,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         {
             DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value -= upgradePrice_gold;
 
-            UiTutorialManager.Instance.SetClear(TutorialStep._4_AbilityUp);
+         //   UiTutorialManager.Instance.SetClear(TutorialStep._4_AbilityUp);
         }
         else if (statusData.STATUSWHERE == StatusWhere.statpoint)
         {
@@ -379,7 +384,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
             if (currentStatPoint <= 0)
             {
-                PopupManager.Instance.ShowAlarmMessage("스텟포인트가 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage("스텟이 부족합니다.");
                 return;
             }
 

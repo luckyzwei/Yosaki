@@ -35,7 +35,7 @@ public static class Utils
         return type == Item_Type.Gold ||
                 type == Item_Type.Jade ||
                 type == Item_Type.GrowThStone ||
-                type == Item_Type.Feather ||
+                type == Item_Type.Marble ||
                 type == Item_Type.Ticket;
     }
 

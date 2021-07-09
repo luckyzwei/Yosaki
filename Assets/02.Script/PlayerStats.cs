@@ -5,7 +5,7 @@ using UnityEngine;
 //삭제하거나순서절대바꾸면안됨
 public enum StatusType
 {
-    IntAddPer,// icon
+    AttackAddPer,// icon
     CriticalProb,//icon
     CriticalDam,//
     SkillCoolTime,///icon
@@ -80,7 +80,7 @@ public static class PlayerStats
     {
         float ret = 0f;
 
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.IntLevel_Gold);
+        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.AttackLevel_Gold);
         //  ret += GetCollectionAbilValue(StatusType.IntAdd);
         ret += DatabaseManager.petTable.GetStatusValue(StatusType.IntAdd);
         ret += GetWeaponEquipPercentValue(StatusType.IntAdd);
@@ -113,18 +113,18 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.IntLevelAddPer_StatPoint);
-        ret += GetWeaponHasPercentValue(StatusType.IntAddPer);
-        ret += GetMagicBookHasPercentValue(StatusType.IntAddPer);
+        ret += GetWeaponHasPercentValue(StatusType.AttackAddPer);
+        ret += GetMagicBookHasPercentValue(StatusType.AttackAddPer);
         ret += GetCostumeAttackPowerValue();
-        ret += GetMagicBookCollectionValue(StatusType.IntAddPer);
-        ret += GetWingAbilValue(StatusType.IntAddPer);
-        ret += GetPassiveSkillValue(StatusType.IntAddPer);
+        ret += GetMagicBookCollectionValue(StatusType.AttackAddPer);
+        ret += GetWingAbilValue(StatusType.AttackAddPer);
+        ret += GetPassiveSkillValue(StatusType.AttackAddPer);
         return ret;
     }
 
     public static float GetCostumeAttackPowerValue()
     {
-        float ret = DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.IntAddPer);
+        float ret = DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.AttackAddPer);
         return ret;
     }
 

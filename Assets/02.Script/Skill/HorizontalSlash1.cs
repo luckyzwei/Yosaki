@@ -30,9 +30,10 @@ public class HorizontalSlash1 : HorizontalSlash0
         //데미지
         float damage = GetSkillDamage(skillInfo);
 
+        Vector3 skillDir = PlayerMoveController.Instance.MoveDirection == MoveDirection.Right ? Vector3.right : Vector3.left;
 
-        var hitEnemies_1 = playerSkillCaster.GetEnemiesInBoxcast(playerTr.position, Vector3.right, skillInfo.Targetrange, boxSize);
-        var hitEnemies_2 = playerSkillCaster.GetEnemiesInBoxcast(playerTr.position, Vector3.left, skillInfo.Targetrange, boxSize);
+        var hitEnemies_1 = playerSkillCaster.GetEnemiesInBoxcast(playerTr.position, skillDir, skillInfo.Targetrange, boxSize);
+        //var hitEnemies_2 = playerSkillCaster.GetEnemiesInBoxcast(playerTr.position, Vector3.left, skillInfo.Targetrange, boxSize);
 
 
         Dictionary<int, RaycastHit2D> hitEnemiesDic = new Dictionary<int, RaycastHit2D>();
@@ -42,16 +43,16 @@ public class HorizontalSlash1 : HorizontalSlash0
             hitEnemiesDic.Add(hitEnemies_1[i].collider.gameObject.GetInstanceID(), hitEnemies_1[i]);
         }
 
-        for (int i = 0; i < hitEnemies_2.Length; i++)
-        {
-            int instanceId = hitEnemies_2[i].collider.gameObject.GetInstanceID();
+        //for (int i = 0; i < hitEnemies_2.Length; i++)
+        //{
+        //    int instanceId = hitEnemies_2[i].collider.gameObject.GetInstanceID();
 
-            if (hitEnemiesDic.ContainsKey(instanceId) == true) continue;
+        //    if (hitEnemiesDic.ContainsKey(instanceId) == true) continue;
 
-            hitEnemiesDic.Add(hitEnemies_2[i].collider.gameObject.GetInstanceID(), hitEnemies_2[i]);
-        }
+        //    hitEnemiesDic.Add(hitEnemies_2[i].collider.gameObject.GetInstanceID(), hitEnemies_2[i]);
+        //}
 
-        List<RaycastHit2D> hitEnemies = hitEnemiesDic.Select(e=>e.Value).ToList();
+        List<RaycastHit2D> hitEnemies = hitEnemiesDic.Select(e => e.Value).ToList();
 
         //파티클
         CoroutineExecuter.Instance.StartCoroutine(SpawnLineEffect());
