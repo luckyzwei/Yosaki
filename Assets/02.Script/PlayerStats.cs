@@ -23,7 +23,11 @@ public enum StatusType
     MpRecover, //icon
     MagicStoneAddPer, //icon
     Damdecrease,
-    IgnoreDefense
+    IgnoreDefense,
+    DashCount,
+    DropProbAddPer,
+    BossDamAddPer,
+    SkillAttackCount
 }
 
 
@@ -278,7 +282,10 @@ public static class PlayerStats
 
     public static float GetWingAbilValue(StatusType type)
     {
-        int currentWingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).Value;
+        //사용안함
+        return 0f;
+
+        int currentWingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
         if (currentWingIdx < 0f || currentWingIdx >= TableManager.Instance.WingTable.dataArray.Length) return 0f;
 
@@ -291,6 +298,28 @@ public static class PlayerStats
             if (tableData.Abilitytype[i] == (int)type)
             {
                 ret += tableData.Abilityvalue[i];
+            }
+        }
+
+        return ret;
+    }
+
+    public static float GetMarbleValue(StatusType type)
+    {
+        float ret = 0f;
+
+        bool isMarbleAwaked = DatabaseManager.userInfoTable.TableDatas[UserInfoTable.marbleAwake].Value == 1;
+
+        var tableDatas = TableManager.Instance.MarbleTable.dataArray;
+
+        for (int i = 0; i < tableDatas.Length; i++)
+        {
+            for (int j = 0; j < tableDatas[i].Abilitytype.Length; j++)
+            {
+                if (tableDatas[i].Abilitytype[j] == (int)type)
+                {
+                    ret += isMarbleAwaked == false ? tableDatas[i].Abilityvalue[j] : tableDatas[i].Abilityvalue[j] * tableDatas[i].Awakevalue;
+                }
             }
         }
 

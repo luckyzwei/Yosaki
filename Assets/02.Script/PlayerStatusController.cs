@@ -132,7 +132,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         }
 
         //날개 렙업
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).AsObservable().Subscribe(e =>
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(e =>
         {
             UpdateHpMax();
             UpdateMpMax();

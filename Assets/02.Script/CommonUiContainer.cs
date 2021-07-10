@@ -34,7 +34,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public Sprite ticket;
 
-    public Sprite feather;
+    public Sprite marble;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -57,7 +57,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Ticket:
                 return ticket;
             case Item_Type.Marble:
-                return feather;
+                return marble;
             case Item_Type.costume1:
                 return costumeThumbnail[1];
             case Item_Type.costume2:

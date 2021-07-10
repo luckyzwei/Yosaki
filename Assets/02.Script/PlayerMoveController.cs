@@ -150,7 +150,7 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
 
             //  Invoke("ResetJump", 0.3f);
 
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value++;
+            //DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value++;
 
             return;
         }

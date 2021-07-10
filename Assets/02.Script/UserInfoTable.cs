@@ -44,7 +44,7 @@ public class UserInfoTable
     public const string managerDescriptionFlags = "managerDescriptionFlags";
     public const string attendanceCount = "attendanceCount";
 
-    public const string wingGrade = "featherGrade";
+    public const string marbleAwake = "marbleAwake";
     public const string resetStat = "resetStat";
 
     public const string buff_gold1 = "gold1_new_new";
@@ -83,7 +83,7 @@ public class UserInfoTable
         {tutorialClearFlags,0f},
         {managerDescriptionFlags,0f},
         {attendanceCount,1f},
-        {wingGrade,-1f},
+        {marbleAwake,-1f},
         {resetStat,0f},
         //버프
         {buff_gold1,0f},

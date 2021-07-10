@@ -31,11 +31,13 @@ public static class DatabaseManager
     public static BossServerTable bossServerTable { get; private set; } = new BossServerTable();
     public static AttendanceServerTable attendanceServerTable { get; private set; } = new AttendanceServerTable();
 
-   // public static FieldBossServerTable fieldBossTable { get; private set; } = new FieldBossServerTable();
+    // public static FieldBossServerTable fieldBossTable { get; private set; } = new FieldBossServerTable();
 
     public static BuffServerTable buffServerTable { get; private set; } = new BuffServerTable();
     public static PassiveServerTable passiveServerTable { get; private set; } = new PassiveServerTable();
-    
+
+    public static MarbleServerTable marbleServerTable { get; private set; } = new MarbleServerTable();
+
     #region string
     public static string inDate_str = "inDate";
     public static string format_string = "S";
@@ -79,6 +81,7 @@ public static class DatabaseManager
         buffServerTable.Initialize();
         passiveServerTable.Initialize();
         //rankTables_Boss1.Initialize();
+        marbleServerTable.Initialize();
     }
 
     public static void GetUserInfo()
@@ -196,7 +199,7 @@ public static class DatabaseManager
                 passParam.Add(GoodsTable.Ticket, DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.Marble:
-                passParam.Add(GoodsTable.FeatherKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value);
+                passParam.Add(GoodsTable.MarbleKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.costume1:
                 string costumeKey = type.ToString();
@@ -370,7 +373,7 @@ public static class DatabaseManager
                 DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value += amount;
                 break;
             case Item_Type.Marble:
-                DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value += amount;
+                DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += amount;
                 break;
         }
 

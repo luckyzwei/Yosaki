@@ -88,8 +88,8 @@ public class DropItem : PoolItem
     {
         this.type = type;
 
-        this.amount = amount+ amount * PlayerStats.GetMagicStonePlusValue();
-        
+        this.amount = amount + amount * PlayerStats.GetMagicStonePlusValue();
+
         SetIcon();
         SetLifeTime();
     }
@@ -107,14 +107,7 @@ public class DropItem : PoolItem
 
     private void SetIcon()
     {
-        switch (type)
-        {
-            case Item_Type.GrowThStone:
-                {
-                    icon.sprite = CommonUiContainer.Instance.magicStone;
-                }
-                break;
-        }
+        icon.sprite = CommonUiContainer.Instance.GetItemIcon(Item_Type.GrowThStone);
     }
 
     private void Spawned()
@@ -168,6 +161,11 @@ public class DropItem : PoolItem
         switch (type)
         {
             case Item_Type.GrowThStone:
+                {
+                    DatabaseManager.goodsTable.GetMagicStone(amount);
+                }
+                break;
+            case Item_Type.Marble:
                 {
                     DatabaseManager.goodsTable.GetMagicStone(amount);
                 }

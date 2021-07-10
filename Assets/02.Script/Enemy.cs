@@ -106,7 +106,7 @@ public class Enemy : PoolItem
 
         EffectManager.SpawnEffect(DeadEfxName, this.transform.position + Vector3.up * 1f);
 
-        SpawnMagicStone();
+        SpawnDropItem();
 
         //UpdateCollection();
 
@@ -134,16 +134,23 @@ public class Enemy : PoolItem
     //    collectionData.amount.Value++;
     //}
 
-    private void SpawnMagicStone()
+    private void SpawnDropItem()
     {
         if (GameManager.Instance.SpawnMagicStone == false) return;
 
-        var dropItem = BattleObjectManager.Instance.dropItemProperty.GetItem();
-
+        //GrowthStone
+        var growthStone = BattleObjectManager.Instance.dropItemProperty.GetItem();
         float magicStoneSpawnAmount = GameManager.Instance.CurrentStageData.Magicstoneamount;
+        growthStone.Initialize(Item_Type.GrowThStone, magicStoneSpawnAmount);
+        growthStone.transform.position = this.transform.position;
 
-        dropItem.Initialize(Item_Type.GrowThStone, magicStoneSpawnAmount);
-        dropItem.transform.position = this.transform.position;
+        //여우구슬
+        var marble = BattleObjectManager.Instance.dropItemProperty.GetItem();
+        float marbleSpawnAmount = GameManager.Instance.CurrentStageData.Marbleamount;
+        marble.Initialize(Item_Type.Marble, marbleSpawnAmount);
+        marble.transform.position = this.transform.position + UnityEngine.Random.Range(-0.1f, 0.1f) * Vector3.right;
+
+
     }
 
     private void SetBaseInfo()

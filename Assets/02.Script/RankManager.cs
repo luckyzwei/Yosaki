@@ -119,7 +119,7 @@ public class RankManager : SingletonMono<RankManager>
         int weaponIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
         int magicBookIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
         int fightPoint = (int)PlayerStats.GetTotalPower();
-        int wingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).Value;
+        int wingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
 
@@ -193,7 +193,7 @@ public class RankManager : SingletonMono<RankManager>
         int weaponIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
         int magicBookIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
         int fightPoint = (int)PlayerStats.GetTotalPower();
-        int wingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).Value;
+        int wingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
 

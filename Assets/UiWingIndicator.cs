@@ -33,9 +33,9 @@ public class UiWingIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).AsObservable().Subscribe(WhenFeatherCountChanged).AddTo(this);
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).AsObservable().Subscribe(WhenFeatherCountChanged).AddTo(this);
 
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).AsObservable().Subscribe(WhenWingGradeChanged).AddTo(this);
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(WhenWingGradeChanged).AddTo(this);
     }
 
     private void WhenWingGradeChanged(float grade)
@@ -60,7 +60,7 @@ public class UiWingIndicator : MonoBehaviour
 
     private void OnEnable()
     {
-        WhenFeatherCountChanged(DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value);
+        WhenFeatherCountChanged(DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
     }
 
     private void WhenFeatherCountChanged(float featherCount)
@@ -80,7 +80,7 @@ public class UiWingIndicator : MonoBehaviour
 
         var nextTableData = TableManager.Instance.WingTable.dataArray[currentGrade + 1];
 
-        if (DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value < nextTableData.Requirejump)
+        if (DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value < nextTableData.Requirejump)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Marble)}이 부족합니다.");
             return;
@@ -88,16 +88,16 @@ public class UiWingIndicator : MonoBehaviour
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value -= nextTableData.Requirejump;
+        DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= nextTableData.Requirejump;
 
         Param featherParam = new Param();
-        featherParam.Add(GoodsTable.FeatherKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value);
+        featherParam.Add(GoodsTable.MarbleKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, featherParam));
 
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).Value += 1f;
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value += 1f;
 
         Param gradeParam = new Param();
-        gradeParam.Add(UserInfoTable.wingGrade, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).Value);
+        gradeParam.Add(UserInfoTable.marbleAwake, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, gradeParam));
 
         SoundManager.Instance.PlaySound("GoldUse");
@@ -113,7 +113,7 @@ public class UiWingIndicator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value += 100000;
+            DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += 100000;
         }
     }
 #endif

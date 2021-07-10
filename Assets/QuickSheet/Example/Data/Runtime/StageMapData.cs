@@ -68,4 +68,8 @@ public class StageMapData
   int ad_bossrewardvalue;
   public int Ad_Bossrewardvalue { get {return ad_bossrewardvalue; } set { this.ad_bossrewardvalue = value;} }
   
+  [SerializeField]
+  float marbleamount;
+  public float Marbleamount { get {return marbleamount; } set { this.marbleamount = value;} }
+  
 }

@@ -51,7 +51,9 @@ public static class Utils
             type != StatusType.DamBalance &&
             type != StatusType.IntAdd &&
             type != StatusType.Hp &&
-            type != StatusType.Mp;
+            type != StatusType.Mp &&
+            type != StatusType.IgnoreDefense&&
+            type != StatusType.DashCount;
     }
 
     public static int GetRandomIdx(List<float> inputDatas)

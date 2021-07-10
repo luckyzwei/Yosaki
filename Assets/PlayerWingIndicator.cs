@@ -13,7 +13,7 @@ public class PlayerWingIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingGrade).AsObservable().Subscribe(e =>
+        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(e =>
         {
             if (e == -1)
             {

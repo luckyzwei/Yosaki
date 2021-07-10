@@ -29,13 +29,13 @@ public class WingPackageReceiver : MonoBehaviour
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value += getTicketCount;
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value += getFeatherCount;
+            DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += getFeatherCount;
 
             DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingPackageRewardReceive).Value = 1;
 
             Param goodsParam = new Param();
             goodsParam.Add(GoodsTable.Ticket, DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value);
-            goodsParam.Add(GoodsTable.FeatherKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value);
+            goodsParam.Add(GoodsTable.MarbleKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param userInfoParam = new Param();

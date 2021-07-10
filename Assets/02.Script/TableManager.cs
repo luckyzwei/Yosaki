@@ -481,5 +481,10 @@ public class TableManager : SingletonMono<TableManager>
     private PassiveSkill passiveSkill;
 
     public PassiveSkill PassiveSkill => passiveSkill;
+
+    [SerializeField]
+    private MarbleTable marbleTable;
+
+    public MarbleTable MarbleTable => marbleTable;
 }
 

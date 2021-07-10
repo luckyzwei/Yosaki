@@ -65,11 +65,13 @@ public static class GameBalance
     public readonly static ObscuredInt spawnDivideNum = 2;
 
     //1시간
-   // public readonly static ObscuredInt sleepRewardMinValue = 3600;
+    // public readonly static ObscuredInt sleepRewardMinValue = 3600;
     public readonly static ObscuredInt sleepRewardMinValue = 10;
     //10시간
     public readonly static ObscuredInt sleepRewardMaxValue = 36000;
     public readonly static ObscuredInt sleepRewardRatio = 1;
+
+    public readonly static ObscuredFloat marbleSpawnProb = 1;
 }
 
 public static class DamageBalance

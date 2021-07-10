@@ -15,32 +15,13 @@ public class GoodsTable
     public static string GrowthStone = "GrowthStone";
     public static string Ticket = "Ticket";
     public static string BonusSpinKey = "BonusSpin";
-    public static string FeatherKey = "FeatherKey";
+    public static string MarbleKey = "Marble";
 
     //포션
     public static string Potion_0 = "Potion_0";
     public static string Potion_1 = "Potion_1";
     public static string Potion_2 = "Potion_2";
 
-    public string GetGoodsKey(Item_Type goodsType)
-    {
-        switch (goodsType)
-        {
-            case Item_Type.Gold:
-                return Gold;
-                break;
-            case Item_Type.Jade:
-                return Jade;
-                break;
-            case Item_Type.GrowThStone:
-                return GrowthStone;
-                break;
-            case Item_Type.Ticket:
-                return Ticket;
-                break;
-        }
-        return "미등록";
-    }
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -52,7 +33,7 @@ public class GoodsTable
         {Potion_1,0f},
         {Potion_2,0f},
         {BonusSpinKey,0f},
-        {FeatherKey,0f}
+        {MarbleKey,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -93,6 +74,11 @@ public class GoodsTable
     {
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowThStone)} 획득(+{(int)amount})");
         tableDatas[GrowthStone].Value += amount;
+    }
+    public void GetMarble(float amount)
+    {
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Marble)} 획득(+{(int)amount})");
+        tableDatas[MarbleKey].Value += amount;
     }
     public void GetBlueStone(float amount)
     {
@@ -251,7 +237,7 @@ public class GoodsTable
                 if (whenRequestFailed != null)
                 {
                     whenRequestFailed.Invoke();
-        
+
                 }
                 Debug.Log($"Growth {key} sync failed");
                 return;

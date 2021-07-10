@@ -157,8 +157,8 @@ public class UiShop : MonoBehaviour
                 break;
             case Item_Type.Marble:
                 {
-                    DatabaseManager.goodsTable.GetTableData(GoodsTable.FeatherKey).Value += amount;
-                    param.Add(GoodsTable.FeatherKey, amount);
+                    DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += amount;
+                    param.Add(GoodsTable.MarbleKey, amount);
                 }
                 break;
 

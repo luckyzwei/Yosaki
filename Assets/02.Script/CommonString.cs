@@ -97,70 +97,80 @@ public static class CommonString
 
     public static string GetStatusName(StatusType type)
     {
-        string ret = "등록필요";
-
         switch (type)
         {
             case StatusType.AttackAddPer:
-                ret = "공격력 증가(%)";
+                return "공격력 증가(%)";
                 break;
             case StatusType.CriticalProb:
-                ret = "크리티컬 확률(%)";
+                return "크리티컬 확률(%)";
                 break;
             case StatusType.CriticalDam:
-                ret = "크리티컬 데미지(%)";
+                return "크리티컬 데미지(%)";
                 break;
             case StatusType.SkillCoolTime:
-                ret = "공격 속도(%)";
+                return "기술 시전 속도(%)";
                 break;
             case StatusType.SkillDamage:
-                ret = "추가 스킬 데미지(%)";
+                return "추가 스킬 데미지(%)";
                 break;
             case StatusType.MoveSpeed:
-                ret = "이동 속도";
+                return "이동 속도";
                 break;
             case StatusType.DamBalance:
-                ret = "최소데미지 보정(%)";
+                return "최소데미지 보정(%)";
                 break;
             case StatusType.HpAddPer:
-                ret = "체력 증가(%)";
+                return "체력 증가(%)";
                 break;
             case StatusType.MpAddPer:
-                ret = "마력 증가(%)";
+                return "마력 증가(%)";
                 break;
             case StatusType.GoldGainPer:
-                ret = "골드 획득 증가(%)";
+                return "골드 획득 증가(%)";
                 break;
             case StatusType.ExpGainPer:
-                ret = "경험치 획득 증가(%)";
+                return "경험치 획득 증가(%)";
                 break;
             case StatusType.IntAdd:
-                ret = "공격력";
+                return "공격력";
                 break;
             case StatusType.Hp:
-                ret = "체력";
+                return "체력";
                 break;
             case StatusType.Mp:
-                ret = "마력";
+                return "마력";
                 break;
             case StatusType.HpRecover:
-                ret = "5초당 체력 회복(%)";
+                return "5초당 체력 회복(%)";
                 break;
             case StatusType.MpRecover:
-                ret = "5초당 마력 회복(%)";
+                return "5초당 마력 회복(%)";
                 break;
             case StatusType.MagicStoneAddPer:
-                ret = "기억의 파편 획득 증가(%)";
+                return "기억의 파편 획득 증가(%)";
                 break;
             case StatusType.Damdecrease:
-                ret = "피해 감소(%)";
+                return "피해 감소(%)";
                 break;
             case StatusType.IgnoreDefense:
-                ret = "방어력 무시";
+                return "방어력 무시";
+                break;
+            case StatusType.DashCount:
+                return "점멸 횟수";
+                break;
+            case StatusType.DropProbAddPer:
+                return "몬스터 전리품 수량 증가(%)";
+                break;
+            case StatusType.BossDamAddPer:
+                return "보스 데미지 증가(%)";
+                break;
+            case StatusType.SkillAttackCount:
+                return "기술 공격 횟수 증가";
                 break;
         }
 
-        return ret;
+        return "등록필요";
     }
 
     public static string GetDialogTextName(DialogCharcterType type)
