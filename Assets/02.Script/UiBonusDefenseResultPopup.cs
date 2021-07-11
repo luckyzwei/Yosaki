@@ -38,12 +38,12 @@ public class UiBonusDefenseResultPopup : MonoBehaviour
 
         RewardManager.Instance.GetReward(Item_Type.Jade, blueStoneRewardNum);
 
-        int prefMaxKillCount = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
+        int prefMaxKillCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
 
         if (defeatEnemiesNum > prefMaxKillCount)
         {
-            DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonMaxKillCount).Value = defeatEnemiesNum;
-            DatabaseManager.userInfoTable.UpData(UserInfoTable.bonusDungeonMaxKillCount, false);
+            ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonMaxKillCount).Value = defeatEnemiesNum;
+            ServerData.userInfoTable.UpData(UserInfoTable.bonusDungeonMaxKillCount, false);
         }
     }
 }

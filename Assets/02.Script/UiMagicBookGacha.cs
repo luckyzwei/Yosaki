@@ -75,7 +75,7 @@ public class UiMagicBookGacha : MonoBehaviour
 
     private bool CanGacha(int price)
     {
-        int currentBlueStoneNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
+        int currentBlueStoneNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
         return currentBlueStoneNum >= price;
     }
 
@@ -127,16 +127,36 @@ public class UiMagicBookGacha : MonoBehaviour
             {
                 probs.Add(e.Current.Value.Gachalv5);
             }
+            else if (gachaLevel == 5)
+            {
+                probs.Add(e.Current.Value.Gachalv6);
+            }
+            else if (gachaLevel == 6)
+            {
+                probs.Add(e.Current.Value.Gachalv7);
+            }
+            else if (gachaLevel == 7)
+            {
+                probs.Add(e.Current.Value.Gachalv8);
+            }
+            else if (gachaLevel == 8)
+            {
+                probs.Add(e.Current.Value.Gachalv9);
+            }
+            else if (gachaLevel == 9)
+            {
+                probs.Add(e.Current.Value.Gachalv10);
+            }
         }
 
         List<int> serverUpdateList = new List<int>();
 
         //로컬 데이터 갱신
         //재화
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
 
         //가챠갯수
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_MagicBook).Value += amount;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_MagicBook).Value += amount;
 
         //마법책
         for (int i = 0; i < amount; i++)
@@ -148,7 +168,7 @@ public class UiMagicBookGacha : MonoBehaviour
             cellInfo.magicBookData = this.magicBookDatas[randomIdx];
             gachaResultCellInfos.Add(cellInfo);
 
-            DatabaseManager.magicBookTable.UpData(this.magicBookDatas[randomIdx], cellInfo.amount);
+            ServerData.magicBookTable.UpData(this.magicBookDatas[randomIdx], cellInfo.amount);
             serverUpdateList.Add(magicBookDatas[randomIdx].Id);
         }
 
@@ -177,16 +197,16 @@ public class UiMagicBookGacha : MonoBehaviour
 
         //재화
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         //가챠횟수
         Param gachaNumParam = new Param();
-        gachaNumParam.Add(UserInfoTable.gachaNum_MagicBook, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_MagicBook).Value);
+        gachaNumParam.Add(UserInfoTable.gachaNum_MagicBook, ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_MagicBook).Value);
 
         //마법책
         Param magicBookParam = new Param();
         var table = TableManager.Instance.MagicBookTable.dataArray;
-        var tableDatas = DatabaseManager.magicBookTable.TableDatas;
+        var tableDatas = ServerData.magicBookTable.TableDatas;
         for (int i = 0; i < table.Length; i++)
         {
             if (serverUpdateList != null && serverUpdateList.Contains(table[i].Id) == false) continue;
@@ -204,6 +224,6 @@ public class UiMagicBookGacha : MonoBehaviour
         //마법책
         transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
 }

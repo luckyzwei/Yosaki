@@ -95,12 +95,12 @@ public class UiLevelRankBoard : MonoBehaviour
                     {
                         JsonData data = rows[i];
 
-                        var splitData = data["NickName"][DatabaseManager.format_string].ToString().Split(CommonString.ChatSplitChar);
+                        var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
 
                         rankViewContainer[i].gameObject.SetActive(true);
                         string nickName = splitData[5];
-                        int rank = int.Parse(data["rank"][DatabaseManager.format_Number].ToString());
-                        int level = int.Parse(data["score"][DatabaseManager.format_Number].ToString());
+                        int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
+                        int level = int.Parse(data["score"][ServerData.format_Number].ToString());
                         int costumeId = int.Parse(splitData[0]);
                         int petId = int.Parse(splitData[1]);
                         int weaponId = int.Parse(splitData[2]);

@@ -19,7 +19,7 @@ public class CollectionManager : Singleton<CollectionManager>
             }
         }
 
-        return DatabaseManager.collectionTable.TableDatas[key];
+        return ServerData.collectionTable.TableDatas[key];
     }
 
     public void SyncToServer()
@@ -28,7 +28,7 @@ public class CollectionManager : Singleton<CollectionManager>
 
         var table = TableManager.Instance.EnemyTable.dataArray;
 
-        var tableDatas = DatabaseManager.collectionTable.TableDatas;
+        var tableDatas = ServerData.collectionTable.TableDatas;
 
         for (int i = 0; i < table.Length; i++)
         {
@@ -65,7 +65,7 @@ public class CollectionManager : Singleton<CollectionManager>
 
         var table = TableManager.Instance.EnemyTable.dataArray;
 
-        var tableDatas = DatabaseManager.collectionTable.TableDatas;
+        var tableDatas = ServerData.collectionTable.TableDatas;
 
         for (int i = 0; i < table.Length; i++)
         {

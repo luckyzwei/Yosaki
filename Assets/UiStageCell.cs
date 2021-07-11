@@ -45,12 +45,12 @@ public class UiStageCell : MonoBehaviour
 
     private bool HasStagePassItem()
     {
-        return DatabaseManager.iapServerTable.TableDatas["stagepass"].buyCount.Value > 0;
+        return ServerData.iapServerTable.TableDatas["stagepass"].buyCount.Value > 0;
     }
 
     public void OnClickRewardButton()
     {
-        int lastClearData = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+        int lastClearData = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
 
         if (lastClearData < stageMapData.Id)
         {
@@ -64,26 +64,26 @@ public class UiStageCell : MonoBehaviour
             return;
         }
 
-        if (DatabaseManager.passServerTable.HasReward(PassServerTable.stagePassReward, stageMapData.Id))
+        if (ServerData.passServerTable.HasReward(PassServerTable.stagePassReward, stageMapData.Id))
         {
             PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다.");
             return;
         }
 
         //로컬
-        DatabaseManager.AddLocalValue((Item_Type)(int)stageMapData.Pre_Bossrewardtype, stageMapData.Pre_Bossrewardvalue);
-        DatabaseManager.passServerTable.TableDatas[PassServerTable.stagePassReward].Value += $",{stageMapData.Id}";
+        ServerData.AddLocalValue((Item_Type)(int)stageMapData.Pre_Bossrewardtype, stageMapData.Pre_Bossrewardvalue);
+        ServerData.passServerTable.TableDatas[PassServerTable.stagePassReward].Value += $",{stageMapData.Id}";
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
         Param passParam = new Param();
-        passParam.Add(PassServerTable.stagePassReward, DatabaseManager.passServerTable.TableDatas[PassServerTable.stagePassReward].Value);
+        passParam.Add(PassServerTable.stagePassReward, ServerData.passServerTable.TableDatas[PassServerTable.stagePassReward].Value);
         transactions.Add(TransactionValue.SetUpdate(PassServerTable.tableName, PassServerTable.Indate, passParam));
 
-        var rewardTransactionValue = DatabaseManager.GetItemTypeTransactionValue((Item_Type)(int)stageMapData.Pre_Bossrewardtype);
+        var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)stageMapData.Pre_Bossrewardtype);
         transactions.Add(rewardTransactionValue);
 
-        DatabaseManager.SendTransaction(transactions, successCallBack: () =>
+        ServerData.SendTransaction(transactions, successCallBack: () =>
           {
               PopupManager.Instance.ShowAlarmMessage("보상 획득!");
           });
@@ -91,7 +91,7 @@ public class UiStageCell : MonoBehaviour
 
     public void OnClickRewardButton_Ad()
     {
-        int lastClearData = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+        int lastClearData = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
 
         if (lastClearData < stageMapData.Id)
         {
@@ -99,7 +99,7 @@ public class UiStageCell : MonoBehaviour
             return;
         }
 
-        if (DatabaseManager.passServerTable.HasReward(PassServerTable.stagePassAdReward, stageMapData.Id))
+        if (ServerData.passServerTable.HasReward(PassServerTable.stagePassAdReward, stageMapData.Id))
         {
             PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다.");
             return;
@@ -108,19 +108,19 @@ public class UiStageCell : MonoBehaviour
         AdManager.Instance.ShowRewardedReward(() =>
         {
             //로컬
-            DatabaseManager.AddLocalValue((Item_Type)(int)stageMapData.Ad_Bossrewardtype, stageMapData.Ad_Bossrewardvalue);
-            DatabaseManager.passServerTable.TableDatas[PassServerTable.stagePassAdReward].Value += $",{stageMapData.Id}";
+            ServerData.AddLocalValue((Item_Type)(int)stageMapData.Ad_Bossrewardtype, stageMapData.Ad_Bossrewardvalue);
+            ServerData.passServerTable.TableDatas[PassServerTable.stagePassAdReward].Value += $",{stageMapData.Id}";
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             Param passParam = new Param();
-            passParam.Add(PassServerTable.stagePassAdReward, DatabaseManager.passServerTable.TableDatas[PassServerTable.stagePassAdReward].Value);
+            passParam.Add(PassServerTable.stagePassAdReward, ServerData.passServerTable.TableDatas[PassServerTable.stagePassAdReward].Value);
             transactions.Add(TransactionValue.SetUpdate(PassServerTable.tableName, PassServerTable.Indate, passParam));
 
-            var rewardTransactionValue = DatabaseManager.GetItemTypeTransactionValue((Item_Type)(int)stageMapData.Ad_Bossrewardtype);
+            var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)stageMapData.Ad_Bossrewardtype);
             transactions.Add(rewardTransactionValue);
 
-            DatabaseManager.SendTransaction(transactions, successCallBack: () =>
+            ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 PopupManager.Instance.ShowAlarmMessage("보상 획득!");
             });
@@ -137,7 +137,7 @@ public class UiStageCell : MonoBehaviour
         rewardIcon_ad.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)stageMapData.Ad_Bossrewardtype);
         rewardAmount_ad.SetText(Utils.ConvertBigNum(stageMapData.Ad_Bossrewardvalue));
 
-        int lastClearData = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+        int lastClearData = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
 
         string sufix = stageMapData.Id <= lastClearData ? "(클리어)" : "";
 
@@ -155,27 +155,27 @@ public class UiStageCell : MonoBehaviour
     {
         compositDisposable.Clear();
 
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(topClearStageId =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(topClearStageId =>
         {
             lockMask.SetActive(stageMapData.Id - 1 > topClearStageId);
 
         }).AddTo(compositDisposable);
 
-        DatabaseManager.iapServerTable.TableDatas["stagepass"].buyCount.AsObservable().Subscribe(e =>
+        ServerData.iapServerTable.TableDatas["stagepass"].buyCount.AsObservable().Subscribe(e =>
         {
             rewardlockMask.SetActive(e == 0);
 
         }).AddTo(compositDisposable);
 
-        DatabaseManager.passServerTable.TableDatas[PassServerTable.stagePassReward].AsObservable().Subscribe(e =>
+        ServerData.passServerTable.TableDatas[PassServerTable.stagePassReward].AsObservable().Subscribe(e =>
         {
-            rewardCompleteObject.SetActive(DatabaseManager.passServerTable.HasReward(PassServerTable.stagePassReward, stageMapData.Id));
+            rewardCompleteObject.SetActive(ServerData.passServerTable.HasReward(PassServerTable.stagePassReward, stageMapData.Id));
 
         }).AddTo(compositDisposable);
 
-        DatabaseManager.passServerTable.TableDatas[PassServerTable.stagePassAdReward].AsObservable().Subscribe(e =>
+        ServerData.passServerTable.TableDatas[PassServerTable.stagePassAdReward].AsObservable().Subscribe(e =>
         {
-            rewardCompleteObject_Ad.SetActive(DatabaseManager.passServerTable.HasReward(PassServerTable.stagePassAdReward, stageMapData.Id));
+            rewardCompleteObject_Ad.SetActive(ServerData.passServerTable.HasReward(PassServerTable.stagePassAdReward, stageMapData.Id));
 
         }).AddTo(compositDisposable);
     }
@@ -187,7 +187,7 @@ public class UiStageCell : MonoBehaviour
         return;
 #endif
 
-        int lastClearData = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+        int lastClearData = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
 
         if (GameManager.Instance.CurrentStageData.Id == stageMapData.Id)
         {

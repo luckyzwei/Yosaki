@@ -75,7 +75,7 @@ public class UiSkillGacha : MonoBehaviour
 
     private bool CanGacha(int price)
     {
-        int currentBlueStoneNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
+        int currentBlueStoneNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
         return currentBlueStoneNum >= price;
     }
 
@@ -127,14 +127,34 @@ public class UiSkillGacha : MonoBehaviour
             {
                 probs.Add(e.Current.Value.Gachalv5);
             }
+            else if (gachaLevel == 5)
+            {
+                probs.Add(e.Current.Value.Gachalv6);
+            }
+            else if (gachaLevel == 6)
+            {
+                probs.Add(e.Current.Value.Gachalv7);
+            }
+            else if (gachaLevel == 7)
+            {
+                probs.Add(e.Current.Value.Gachalv8);
+            }
+            else if (gachaLevel == 8)
+            {
+                probs.Add(e.Current.Value.Gachalv9);
+            }
+            else if (gachaLevel == 9)
+            {
+                probs.Add(e.Current.Value.Gachalv10);
+            }
         }
 
         //로컬 데이터 갱신
         //재화
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
 
         //가챠갯수
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).Value += amount;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).Value += amount;
 
         //마법책
         for (int i = 0; i < amount; i++)
@@ -146,7 +166,7 @@ public class UiSkillGacha : MonoBehaviour
             cellInfo.skillData = this.skillTableDatas[randomIdx];
             gachaResultCellInfos.Add(cellInfo);
 
-            DatabaseManager.skillServerTable.UpdateSkillAmountLocal(this.skillTableDatas[randomIdx], cellInfo.amount);
+            ServerData.skillServerTable.UpdateSkillAmountLocal(this.skillTableDatas[randomIdx], cellInfo.amount);
         }
 
         SyncServer();
@@ -165,21 +185,21 @@ public class UiSkillGacha : MonoBehaviour
 
         //재화
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         //가챠횟수
         Param gachaNumParam = new Param();
-        gachaNumParam.Add(UserInfoTable.gachaNum_Skill, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).Value);
+        gachaNumParam.Add(UserInfoTable.gachaNum_Skill, ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).Value);
 
         //스킬북
         Param skillParam = new Param();
         List<int> skillAmountSyncData = new List<int>();
         List<int> skillAlreadyHasSyncData = new List<int>();
 
-        for (int i = 0; i < DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount].Count; i++)
+        for (int i = 0; i < ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount].Count; i++)
         {
-            skillAmountSyncData.Add(DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][i].Value);
-            skillAlreadyHasSyncData.Add(DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAlreadyHas][i].Value);
+            skillAmountSyncData.Add(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][i].Value);
+            skillAlreadyHasSyncData.Add(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAlreadyHas][i].Value);
         }
 
         skillParam.Add(SkillServerTable.SkillHasAmount, skillAmountSyncData);
@@ -192,6 +212,6 @@ public class UiSkillGacha : MonoBehaviour
         //스킬
         transactionList.Add(TransactionValue.SetUpdate(SkillServerTable.tableName, SkillServerTable.Indate, skillParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
 }

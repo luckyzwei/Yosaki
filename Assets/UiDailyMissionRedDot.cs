@@ -18,7 +18,7 @@ public class UiDailyMissionRedDot : UiRedDotBase
 
             if (tableData.Enable == false) continue;
 
-            var serverTableData = DatabaseManager.dailyMissionTable.TableDatas[tableData.Stringid];
+            var serverTableData = ServerData.dailyMissionTable.TableDatas[tableData.Stringid];
 
             if (hasActive == false)
             {

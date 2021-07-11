@@ -159,7 +159,7 @@ public class InfiniteTowerManager : ContentsManagerBase
 
     private void SpawnEnemy()
     {
-        int stageId = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
+        int stageId = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
 
         var towerTableData = TableManager.Instance.TowerTableData[stageId];
         EnemyTableData spawnEnemyData = GetSpawnedEnemy(stageId);
@@ -184,7 +184,7 @@ public class InfiniteTowerManager : ContentsManagerBase
     }
     private EnemyTableData GetSpawnedEnemy(int stageId)
     {
-        stageId = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
+        stageId = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
 
         if (TableManager.Instance.TowerTableData.TryGetValue(stageId, out var tableData) == false)
         {
@@ -207,7 +207,7 @@ public class InfiniteTowerManager : ContentsManagerBase
     private void SetClear()
     {
         //보상지급
-        int currentFloor = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
+        int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
 
         if (TableManager.Instance.TowerTableData.TryGetValue(currentFloor, out var towerTableData) == false)
         {
@@ -237,23 +237,23 @@ public class InfiniteTowerManager : ContentsManagerBase
                 syncDataList.Add((int)rewardDatas[i].itemType);
             }
 
-            DatabaseManager.AddLocalValue(rewardDatas[i].itemType, rewardDatas[i].amount);
+            ServerData.AddLocalValue(rewardDatas[i].itemType, rewardDatas[i].amount);
 
             //서버 트랙잭션
-            var rewardTransactionValue = DatabaseManager.GetItemTypeTransactionValue((Item_Type)(int)rewardDatas[i].itemType);
+            var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)rewardDatas[i].itemType);
             transactionList.Add(rewardTransactionValue);
         }
 
         //단계상승
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value++;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value++;
 
         Param floorParam = new Param();
 
-        floorParam.Add(UserInfoTable.currentFloorIdx, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value);
+        floorParam.Add(UserInfoTable.currentFloorIdx, ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value);
 
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, floorParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
 
 

@@ -86,7 +86,7 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
             Backend.BMember.CreateNickname(inputField.text, MakeNickNameCallBack);
         }
 
-        DatabaseManager.userInfoTable.ClearDailyMission();
+        ServerData.userInfoTable.ClearDailyMission();
     }
 
     //빈 닉네임 혹은 string.empty로 닉네임 생성&수정을 시도 한 경우

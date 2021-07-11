@@ -18,7 +18,7 @@ public class BossSpawnButton : SingletonMono<BossSpawnButton>
 
     private void Subscribe()
     {
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e=> 
+        ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e=> 
         {
             int nextStageId = GameManager.Instance.CurrentStageData.Id + 1;
 
@@ -43,7 +43,7 @@ public class BossSpawnButton : SingletonMono<BossSpawnButton>
 
     public void OnClickSpawnButton()
     {
-        int lastClearStage = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+        int lastClearStage = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
 
         if (GameManager.Instance.CurrentStageData.Id == TableManager.Instance.GetLastStageIdx())
         {

@@ -61,11 +61,11 @@ public class UiMarbleForceIndicator : MonoBehaviour
         {
             int currentIdx = i;
 
-            DatabaseManager.marbleServerTable.TableDatas[tableDatas[i].Stringid].hasItem.AsObservable().Subscribe(e =>
+            ServerData.marbleServerTable.TableDatas[tableDatas[i].Stringid].hasItem.AsObservable().Subscribe(e =>
             {
                 if (isInventoryBoard == true)
                 {
-                    circleActibeObject[currentIdx].color = new Color(circleActibeObject[currentIdx].color.r, circleActibeObject[currentIdx].color.g, circleActibeObject[currentIdx].color.b, (e == 1 ? 1f : 0.25f));
+                    circleActibeObject[currentIdx].color = new Color(circleActibeObject[currentIdx].color.r, circleActibeObject[currentIdx].color.g, circleActibeObject[currentIdx].color.b, (e == 1 ? 1f : 0.15f));
                 }
                 else
                 {

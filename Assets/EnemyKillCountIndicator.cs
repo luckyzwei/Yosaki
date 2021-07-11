@@ -16,7 +16,7 @@ public class EnemyKillCountIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).AsObservable().Subscribe(e =>
         {
             killCountText.SetText($"오늘 처치 : {(int)e}");
         }).AddTo(this);

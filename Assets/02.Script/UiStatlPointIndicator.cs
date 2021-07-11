@@ -16,7 +16,7 @@ public class UiStatlPointIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).AsObservable().Subscribe(remainStatPoint =>
+        ServerData.statusTable.GetTableData(StatusTable.StatPoint).AsObservable().Subscribe(remainStatPoint =>
         {
             countText.SetText($"남은 스탯 포인트 : {remainStatPoint}");
         }).AddTo(this);

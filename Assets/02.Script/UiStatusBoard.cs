@@ -70,10 +70,10 @@ public class UiStatusBoard : MonoBehaviour
 
     private void UpdatePlayerView()
     {
-        int costumeId = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
-        int petId = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
-        int weaponId = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
-        int magicBookId = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int costumeId = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
+        int petId = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
+        int weaponId = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
+        int magicBookId = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
         topRankerCell.Initialize(string.Empty, string.Empty, costumeId, petId, weaponId, magicBookId, 0);
     }
 
@@ -81,16 +81,16 @@ public class UiStatusBoard : MonoBehaviour
     {
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "스텟 능력치를 초기화 합니까?", () =>
         {
-            DatabaseManager.statusTable.GetTableData(StatusTable.IntLevelAddPer_StatPoint).Value = 1;
-            DatabaseManager.statusTable.GetTableData(StatusTable.CriticalLevel_StatPoint).Value = 1;
-            DatabaseManager.statusTable.GetTableData(StatusTable.CriticalDamLevel_StatPoint).Value = 1;
-            DatabaseManager.statusTable.GetTableData(StatusTable.GoldGain_StatPoint).Value = 1;
-            DatabaseManager.statusTable.GetTableData(StatusTable.ExpGain_StatPoint).Value = 1;
-            DatabaseManager.statusTable.GetTableData(StatusTable.HpPer_StatPoint).Value = 1;
-            DatabaseManager.statusTable.GetTableData(StatusTable.MpPer_StatPoint).Value = 1;
-            DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).Value = (DatabaseManager.statusTable.GetTableData(StatusTable.Level).Value - 1) * GameBalance.StatPoint;
+            ServerData.statusTable.GetTableData(StatusTable.IntLevelAddPer_StatPoint).Value = 1;
+            ServerData.statusTable.GetTableData(StatusTable.CriticalLevel_StatPoint).Value = 1;
+            ServerData.statusTable.GetTableData(StatusTable.CriticalDamLevel_StatPoint).Value = 1;
+            ServerData.statusTable.GetTableData(StatusTable.GoldGain_StatPoint).Value = 1;
+            ServerData.statusTable.GetTableData(StatusTable.ExpGain_StatPoint).Value = 1;
+            ServerData.statusTable.GetTableData(StatusTable.HpPer_StatPoint).Value = 1;
+            ServerData.statusTable.GetTableData(StatusTable.MpPer_StatPoint).Value = 1;
+            ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value = (ServerData.statusTable.GetTableData(StatusTable.Level).Value - 1) * GameBalance.StatPoint;
 
-            DatabaseManager.statusTable.SyncAllData();
+            ServerData.statusTable.SyncAllData();
         }, null);
 
 
@@ -100,7 +100,7 @@ public class UiStatusBoard : MonoBehaviour
     {
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "기억 능력치를 초기화 합니까?", () =>
         {
-            string log = $"보유 {DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value}";
+            string log = $"보유 {ServerData.statusTable.GetTableData(StatusTable.Memory).Value}";
 
             var e = TableManager.Instance.StatusDatas.GetEnumerator();
 
@@ -109,16 +109,16 @@ public class UiStatusBoard : MonoBehaviour
             while (e.MoveNext())
             {
                 if (e.Current.Value.STATUSWHERE != StatusWhere.memory) continue;
-                usedPoint += (DatabaseManager.statusTable.GetTableData(e.Current.Value.Key).Value - 1);
-                DatabaseManager.statusTable.GetTableData(e.Current.Value.Key).Value = 1;
+                usedPoint += (ServerData.statusTable.GetTableData(e.Current.Value.Key).Value - 1);
+                ServerData.statusTable.GetTableData(e.Current.Value.Key).Value = 1;
             }
 
             log += $"획득수량 {usedPoint}";
 
-            DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value += usedPoint;
-            log += $"최종 {DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value}";
+            ServerData.statusTable.GetTableData(StatusTable.Memory).Value += usedPoint;
+            log += $"최종 {ServerData.statusTable.GetTableData(StatusTable.Memory).Value}";
 
-            DatabaseManager.statusTable.SyncAllData();
+            ServerData.statusTable.SyncAllData();
 
             LogManager.Instance.SendLog("기억 능력치 초기화", log);
         }, null);

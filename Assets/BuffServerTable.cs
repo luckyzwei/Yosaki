@@ -140,7 +140,7 @@ public class BuffServerTable
                 if (bro.IsSuccess() == false)
                 {
                     // 이후 처리
-                    DatabaseManager.ShowCommonErrorPopup(bro, Initialize);
+                    ServerData.ShowCommonErrorPopup(bro, Initialize);
                     return;
                 }
                 else
@@ -162,9 +162,9 @@ public class BuffServerTable
 
                 JsonData data = rows[0];
 
-                if (data.Keys.Contains(DatabaseManager.inDate_str))
+                if (data.Keys.Contains(ServerData.inDate_str))
                 {
-                    Indate = data[DatabaseManager.inDate_str][DatabaseManager.format_string].ToString();
+                    Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
                 var table = TableManager.Instance.BuffTable.dataArray;
@@ -174,7 +174,7 @@ public class BuffServerTable
                     if (data.Keys.Contains(table[i].Stringid))
                     {
                         //값로드
-                        var value = data[table[i].Stringid][DatabaseManager.format_string].ToString();
+                        var value = data[table[i].Stringid][ServerData.format_string].ToString();
 
                         var buffData = new BuffServerData();
 
@@ -214,7 +214,7 @@ public class BuffServerTable
 
                     if (bro.IsSuccess() == false)
                     {
-                        DatabaseManager.ShowCommonErrorPopup(bro, Initialize);
+                        ServerData.ShowCommonErrorPopup(bro, Initialize);
                         return;
                     }
                 }

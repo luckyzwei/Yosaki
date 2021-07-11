@@ -72,6 +72,8 @@ public static class GameBalance
     public readonly static ObscuredInt sleepRewardRatio = 1;
 
     public readonly static ObscuredFloat marbleSpawnProb = 1;
+
+    public readonly static ObscuredInt marbleAwakePrice = 1000000;
 }
 
 public static class DamageBalance

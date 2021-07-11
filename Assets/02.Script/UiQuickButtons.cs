@@ -43,9 +43,9 @@ public class UiQuickButtons : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_0).AsObservable().Subscribe(e =>
+        ServerData.goodsTable.GetTableData(GoodsTable.Potion_0).AsObservable().Subscribe(e =>
         {
-            if (DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Potion].Value == 0)
+            if (ServerData.equipmentTable.TableDatas[EquipmentTable.Potion].Value == 0)
             {
                 SetCurrentSelectPotionAmount((int)e);
             }
@@ -53,9 +53,9 @@ public class UiQuickButtons : MonoBehaviour
             remainText[0].SetText(e.ToString());
         }).AddTo(this);
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_1).AsObservable().Subscribe(e =>
+        ServerData.goodsTable.GetTableData(GoodsTable.Potion_1).AsObservable().Subscribe(e =>
         {
-            if (DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Potion].Value == 1)
+            if (ServerData.equipmentTable.TableDatas[EquipmentTable.Potion].Value == 1)
             {
                 SetCurrentSelectPotionAmount((int)e);
             }
@@ -64,9 +64,9 @@ public class UiQuickButtons : MonoBehaviour
 
         }).AddTo(this);
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_2).AsObservable().Subscribe(e =>
+        ServerData.goodsTable.GetTableData(GoodsTable.Potion_2).AsObservable().Subscribe(e =>
         {
-            if (DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Potion].Value == 2)
+            if (ServerData.equipmentTable.TableDatas[EquipmentTable.Potion].Value == 2)
             {
                 SetCurrentSelectPotionAmount((int)e);
             }
@@ -74,7 +74,7 @@ public class UiQuickButtons : MonoBehaviour
             remainText[2].SetText(e.ToString());
         }).AddTo(this);
 
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Potion].AsObservable().Subscribe(WhenSelectedIdxChanged).AddTo(this);
+        ServerData.equipmentTable.TableDatas[EquipmentTable.Potion].AsObservable().Subscribe(WhenSelectedIdxChanged).AddTo(this);
 
         //자동사용
 
@@ -91,9 +91,9 @@ public class UiQuickButtons : MonoBehaviour
         }).AddTo(this);
 
         //포션 구매했을때
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_0).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e => { AutoPotion(); }).AddTo(this);
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_1).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e => { AutoPotion(); }).AddTo(this);
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_2).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e => { AutoPotion(); }).AddTo(this);
+        ServerData.goodsTable.GetTableData(GoodsTable.Potion_0).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e => { AutoPotion(); }).AddTo(this);
+        ServerData.goodsTable.GetTableData(GoodsTable.Potion_1).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e => { AutoPotion(); }).AddTo(this);
+        ServerData.goodsTable.GetTableData(GoodsTable.Potion_2).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e => { AutoPotion(); }).AddTo(this);
     }
 
     private void AutoPotion()
@@ -123,15 +123,15 @@ public class UiQuickButtons : MonoBehaviour
 
         if (idx == 0)
         {
-            remainCount = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_0).Value;
+            remainCount = (int)ServerData.goodsTable.GetTableData(GoodsTable.Potion_0).Value;
         }
         else if (idx == 1)
         {
-            remainCount = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_1).Value;
+            remainCount = (int)ServerData.goodsTable.GetTableData(GoodsTable.Potion_1).Value;
         }
         else if (idx == 2)
         {
-            remainCount = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_2).Value;
+            remainCount = (int)ServerData.goodsTable.GetTableData(GoodsTable.Potion_2).Value;
 
         }
 
@@ -155,7 +155,7 @@ public class UiQuickButtons : MonoBehaviour
 
     public void OnClickSelect(int idx)
     {
-        DatabaseManager.equipmentTable.ChangeEquip(EquipmentTable.Potion, idx);
+        ServerData.equipmentTable.ChangeEquip(EquipmentTable.Potion, idx);
     }
 
     public void UsePotion()
@@ -191,7 +191,7 @@ public class UiQuickButtons : MonoBehaviour
             return;
         }
 
-        int currentSelectIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Potion].Value;
+        int currentSelectIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Potion].Value;
 
         if (HasPotion(currentSelectIdx) == false)
         {
@@ -232,15 +232,15 @@ public class UiQuickButtons : MonoBehaviour
 
         if (idx == 0)
         {
-            currentPotionAmount = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_0).Value;
+            currentPotionAmount = (int)ServerData.goodsTable.GetTableData(GoodsTable.Potion_0).Value;
         }
         else if (idx == 1)
         {
-            currentPotionAmount = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_1).Value;
+            currentPotionAmount = (int)ServerData.goodsTable.GetTableData(GoodsTable.Potion_1).Value;
         }
         else
         {
-            currentPotionAmount = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Potion_2).Value;
+            currentPotionAmount = (int)ServerData.goodsTable.GetTableData(GoodsTable.Potion_2).Value;
         }
 
         return currentPotionAmount > 0;
@@ -260,6 +260,6 @@ public class UiQuickButtons : MonoBehaviour
         PlayerStatusController.Instance.UpdateMp(mpRecoverAmount);
 
         //포션 차감
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.GetPosionKey(idx)).Value--;
+        ServerData.goodsTable.GetTableData(GoodsTable.GetPosionKey(idx)).Value--;
     }
 }

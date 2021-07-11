@@ -16,7 +16,7 @@ public enum StatusType
     MpAddPer,//icon
     GoldGainPer,//icon
     ExpGainPer,//icon
-    IntAdd,//icon
+    AttackAdd,//icon
     Hp,//icon
     Mp,//icon
     HpRecover,//icon
@@ -25,9 +25,9 @@ public enum StatusType
     Damdecrease,
     IgnoreDefense,
     DashCount,
-    DropProbAddPer,
+    DropAmountAddPer,
     BossDamAddPer,
-    SkillAttackCount
+    SkillAttackCount,
 }
 
 
@@ -56,6 +56,47 @@ public static class PlayerStats
         return totalPower * 0.01f;
     }
 
+    public static float GetMoveSpeedValue()
+    {
+        float ret = 0f;
+        ret += GetMarbleValue(StatusType.MoveSpeed);
+
+        return ret;
+    }
+    public static float GetDropAmountAddValue()
+    {
+        float ret = 0f;
+
+        ret += GetMarbleValue(StatusType.DropAmountAddPer);
+
+        return ret;
+    }
+
+    public static float GetDamDecreaseValue()
+    {
+        float ret = 0f;
+
+        ret += GetMarbleValue(StatusType.Damdecrease);
+
+        return 0f;
+    }
+    public static float GetBossDamAddValue()
+    {
+        float ret = 0f;
+
+        ret += GetMarbleValue(StatusType.BossDamAddPer);
+
+        return 0f;
+    }
+    public static int GetSkillHitAddValue()
+    {
+        int ret = 0;
+
+        ret += (int)GetMarbleValue(StatusType.SkillAttackCount);
+
+        return ret;
+    }
+
     public static float GetPassiveSkillValue(StatusType statusType)
     {
         float ret = 0f;
@@ -66,7 +107,7 @@ public static class PlayerStats
         {
             if (tableData[i].Abilitytype != (int)statusType) continue;
 
-            var serverData = DatabaseManager.passiveServerTable.TableDatas[tableData[i].Stringid];
+            var serverData = ServerData.passiveServerTable.TableDatas[tableData[i].Stringid];
 
             int level = serverData.level.Value;
 
@@ -84,13 +125,14 @@ public static class PlayerStats
     {
         float ret = 0f;
 
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.AttackLevel_Gold);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.AttackLevel_Gold);
         //  ret += GetCollectionAbilValue(StatusType.IntAdd);
-        ret += DatabaseManager.petTable.GetStatusValue(StatusType.IntAdd);
-        ret += GetWeaponEquipPercentValue(StatusType.IntAdd);
-        ret += GetMagicBookCollectionValue(StatusType.IntAdd);
-        ret += GetWingAbilValue(StatusType.IntAdd);
-        ret += GetPassiveSkillValue(StatusType.IntAdd);
+        ret += ServerData.petTable.GetStatusValue(StatusType.AttackAdd);
+        ret += GetWeaponEquipPercentValue(StatusType.AttackAdd);
+        ret += GetMagicBookCollectionValue(StatusType.AttackAdd);
+        ret += GetWingAbilValue(StatusType.AttackAdd);
+        ret += GetPassiveSkillValue(StatusType.AttackAdd);
+        ret += GetMarbleValue(StatusType.AttackAdd);
 
         return ret;
     }
@@ -104,7 +146,7 @@ public static class PlayerStats
         {
             if ((StatusType)enemyTable[i].Collectionabiltype == type)
             {
-                ret += DatabaseManager.collectionTable.GetCollectionAbilValue(enemyTable[i]);
+                ret += ServerData.collectionTable.GetCollectionAbilValue(enemyTable[i]);
             }
         }
 
@@ -116,7 +158,7 @@ public static class PlayerStats
     {
         float ret = 0f;
 
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.IntLevelAddPer_StatPoint);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.IntLevelAddPer_StatPoint);
         ret += GetWeaponHasPercentValue(StatusType.AttackAddPer);
         ret += GetMagicBookHasPercentValue(StatusType.AttackAddPer);
         ret += GetCostumeAttackPowerValue();
@@ -128,7 +170,7 @@ public static class PlayerStats
 
     public static float GetCostumeAttackPowerValue()
     {
-        float ret = DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.AttackAddPer);
+        float ret = ServerData.costumeServerTable.GetCostumeAbility(StatusType.AttackAddPer);
         return ret;
     }
 
@@ -149,7 +191,7 @@ public static class PlayerStats
 
     public static float GetWeaponEquipPercentValue(StatusType type)
     {
-        int equipId = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
+        int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
 
         var e = TableManager.Instance.WeaponData.GetEnumerator();
 
@@ -159,7 +201,7 @@ public static class PlayerStats
             if (e.Current.Value.Id != equipId) continue;
             if (TableManager.Instance.WeaponEffectDatas.TryGetValue(e.Current.Value.Weaponeffectid, out var effectData) == false) continue;
 
-            int currentLevel = DatabaseManager.weaponTable.GetWeaponData(e.Current.Value.Stringid).level.Value;
+            int currentLevel = ServerData.weaponTable.GetWeaponData(e.Current.Value.Stringid).level.Value;
 
             if (effectData.Equipeffecttype1 == (int)type)
             {
@@ -187,7 +229,7 @@ public static class PlayerStats
         {
             if (TableManager.Instance.WeaponEffectDatas.TryGetValue(e.Current.Value.Weaponeffectid, out var effectData) == false) continue;
 
-            int currentLevel = DatabaseManager.weaponTable.GetWeaponData(e.Current.Value.Stringid).level.Value;
+            int currentLevel = ServerData.weaponTable.GetWeaponData(e.Current.Value.Stringid).level.Value;
 
             if (effectData.Haseffecttype1 == (int)type)
             {
@@ -208,7 +250,7 @@ public static class PlayerStats
     {
         var e = TableManager.Instance.MagicBoocDatas.GetEnumerator();
 
-        int equipId = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
 
         float ret = 0f;
         while (e.MoveNext())
@@ -216,7 +258,7 @@ public static class PlayerStats
             if (e.Current.Value.Id != equipId) continue;
             if (TableManager.Instance.WeaponEffectDatas.TryGetValue(e.Current.Value.Magicbookeffectid, out var effectData) == false) continue;
 
-            int currentLevel = DatabaseManager.magicBookTable.GetMagicBookData(e.Current.Value.Stringid).level.Value;
+            int currentLevel = ServerData.magicBookTable.GetMagicBookData(e.Current.Value.Stringid).level.Value;
 
             if (effectData.Equipeffecttype1 == (int)type)
             {
@@ -243,7 +285,7 @@ public static class PlayerStats
         {
             if (TableManager.Instance.WeaponEffectDatas.TryGetValue(e.Current.Value.Magicbookeffectid, out var effectData) == false) continue;
 
-            int currentLevel = DatabaseManager.magicBookTable.GetMagicBookData(e.Current.Value.Stringid).level.Value;
+            int currentLevel = ServerData.magicBookTable.GetMagicBookData(e.Current.Value.Stringid).level.Value;
 
             if (effectData.Haseffecttype1 == (int)type)
             {
@@ -269,7 +311,7 @@ public static class PlayerStats
         {
             if ((StatusType)e.Current.Value.Collectionabiltype != type) continue;
 
-            var magicBookServerData = DatabaseManager.magicBookTable.GetMagicBookData(e.Current.Value.Stringid);
+            var magicBookServerData = ServerData.magicBookTable.GetMagicBookData(e.Current.Value.Stringid);
 
             if (magicBookServerData.collectLevel.Value != 0)
             {
@@ -285,7 +327,7 @@ public static class PlayerStats
         //사용안함
         return 0f;
 
-        int currentWingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+        int currentWingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
         if (currentWingIdx < 0f || currentWingIdx >= TableManager.Instance.WingTable.dataArray.Length) return 0f;
 
@@ -308,12 +350,14 @@ public static class PlayerStats
     {
         float ret = 0f;
 
-        bool isMarbleAwaked = DatabaseManager.userInfoTable.TableDatas[UserInfoTable.marbleAwake].Value == 1;
+        bool isMarbleAwaked = ServerData.userInfoTable.TableDatas[UserInfoTable.marbleAwake].Value == 1;
 
         var tableDatas = TableManager.Instance.MarbleTable.dataArray;
 
         for (int i = 0; i < tableDatas.Length; i++)
         {
+            if (ServerData.marbleServerTable.TableDatas[tableDatas[i].Stringid].hasItem.Value == 0) continue;
+
             for (int j = 0; j < tableDatas[i].Abilitytype.Length; j++)
             {
                 if (tableDatas[i].Abilitytype[j] == (int)type)
@@ -335,8 +379,8 @@ public static class PlayerStats
 
         ret += GetWeaponEquipPercentValue(StatusType.SkillDamage);
         ret += GetMagicBookEquipPercentValue(StatusType.SkillDamage);
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.SkillDamage_memory);
-        ret += DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.SkillDamage);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.SkillDamage_memory);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.SkillDamage);
         ret += GetMagicBookCollectionValue(StatusType.SkillDamage);
         ret += GetWingAbilValue(StatusType.SkillDamage);
         ret += GetPassiveSkillValue(StatusType.SkillDamage);
@@ -351,8 +395,8 @@ public static class PlayerStats
 
         ret += GetWeaponEquipPercentValue(StatusType.SkillCoolTime);
         ret += GetMagicBookEquipPercentValue(StatusType.SkillCoolTime);
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.SkillCoolTime_memory);
-        ret += DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.SkillCoolTime);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.SkillCoolTime_memory);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.SkillCoolTime);
 
         return ret;
     }
@@ -360,7 +404,7 @@ public static class PlayerStats
     #region DamBalance
     public static float GetDamBalanceAddValue()
     {
-        float addValue1 = DatabaseManager.statusTable.GetStatusValue(StatusTable.DamageBalance_memory);
+        float addValue1 = ServerData.statusTable.GetStatusValue(StatusTable.DamageBalance_memory);
         return addValue1;
     }
 
@@ -373,11 +417,11 @@ public static class PlayerStats
     public static float GetCriticalProb()
     {
         float ret = 0f;
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.CriticalLevel_Gold);
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.CriticalLevel_StatPoint);
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.CriticalLevel_memory);
-        ret += DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.CriticalProb);
-        ret += DatabaseManager.petTable.GetStatusValue(StatusType.CriticalProb);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.CriticalLevel_Gold);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.CriticalLevel_StatPoint);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.CriticalLevel_memory);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.CriticalProb);
+        ret += ServerData.petTable.GetStatusValue(StatusType.CriticalProb);
         ret += GetMagicBookCollectionValue(StatusType.CriticalProb);
 
         return ret;
@@ -387,10 +431,10 @@ public static class PlayerStats
     {
         float ret = 0f;
 
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.CriticalDamLevel_Gold);
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.CriticalDamLevel_StatPoint);
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.CriticalDamLevel_memory);
-        ret += DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.CriticalDam);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.CriticalDamLevel_Gold);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.CriticalDamLevel_StatPoint);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.CriticalDamLevel_memory);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.CriticalDam);
         ret += GetWeaponHasPercentValue(StatusType.CriticalDam);
         ret += GetMagicBookHasPercentValue(StatusType.CriticalDam);
         ret += GetMagicBookCollectionValue(StatusType.CriticalDam);
@@ -403,17 +447,18 @@ public static class PlayerStats
     public static float GetGoldPlusValue()
     {
         float ret = 0f;
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.GoldGain_StatPoint);
-        ret += DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.GoldGainPer);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.GoldGain_StatPoint);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.GoldGainPer);
         ret += GetBuffValue(StatusType.GoldGainPer);
         return ret;
     }
     public static float GetExpPlusValue()
     {
         float ret = 0f;
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.ExpGain_StatPoint);
-        ret += DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.ExpGainPer);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.ExpGain_StatPoint);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.ExpGainPer);
         ret += GetBuffValue(StatusType.ExpGainPer);
+        ret += GetMarbleValue(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -435,7 +480,7 @@ public static class PlayerStats
             if ((int)type == tableData[i].Bufftype)
             {
                 //-1은 무한
-                if (DatabaseManager.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.Value != 0f)
+                if (ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.Value != 0f)
                 {
                     ret += tableData[i].Buffvalue;
                 }
@@ -458,16 +503,16 @@ public static class PlayerStats
     public static float GetOriginHp()
     {
         float ret = 0f;
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.HpLevel_Gold);
-        ret += DatabaseManager.petTable.GetStatusValue(StatusType.Hp);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.HpLevel_Gold);
+        ret += ServerData.petTable.GetStatusValue(StatusType.Hp);
         return ret;
     }
     public static float GetMaxHpPercentAddValue()
     {
         float ret = 0f;
-        ret += DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.HpAddPer);
-        ret += DatabaseManager.petTable.GetStatusValue(StatusType.HpAddPer);
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.HpPer_StatPoint);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.HpAddPer);
+        ret += ServerData.petTable.GetStatusValue(StatusType.HpAddPer);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.HpPer_StatPoint);
         ret += GetWingAbilValue(StatusType.HpAddPer);
         ret += GetPassiveSkillValue(StatusType.HpAddPer);
 
@@ -484,29 +529,29 @@ public static class PlayerStats
     public static float GetOriginMp()
     {
         float ret = 0f;
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.MpLevel_Gold);
-        ret += DatabaseManager.petTable.GetStatusValue(StatusType.Mp);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.MpLevel_Gold);
+        ret += ServerData.petTable.GetStatusValue(StatusType.Mp);
         return ret;
     }
     public static float GetMaxMpPercentAddValue()
     {
         float ret = 0f;
-        ret += DatabaseManager.costumeServerTable.GetCostumeAbility(StatusType.MpAddPer);
-        ret += DatabaseManager.petTable.GetStatusValue(StatusType.MpAddPer);
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.MpPer_StatPoint);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.MpAddPer);
+        ret += ServerData.petTable.GetStatusValue(StatusType.MpAddPer);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.MpPer_StatPoint);
         return ret;
     }
 
     public static float GetHpRecover()
     {
         float ret = 0f;
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.HpRecover_Gold);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.HpRecover_Gold);
         return ret;
     }
     public static float GetMpRecover()
     {
         float ret = 0f;
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.MpRecover_Gold);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.MpRecover_Gold);
         return ret;
     }
 
@@ -516,7 +561,7 @@ public static class PlayerStats
     {
         float ret = 0f;
 
-        ret += DatabaseManager.statusTable.GetStatusValue(StatusTable.IgnoreDefense_memory);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.IgnoreDefense_memory);
 
         return ret;
     }

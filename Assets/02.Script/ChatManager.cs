@@ -168,7 +168,7 @@ public class ChatManager : SingletonMono<ChatManager>
             return;
         }
 
-        if (DatabaseManager.userInfoTable.GetTableData(UserInfoTable.chatBan).Value == 1f)
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.chatBan).Value == 1f)
         {
             PopupManager.Instance.ShowAlarmMessage("채팅이 차단된 상태입니다.");
             return;
@@ -193,7 +193,7 @@ public class ChatManager : SingletonMono<ChatManager>
 
     private void AddCostumeInfo(ref string message)
     {
-        message = $"{(int)DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value}{CommonString.ChatSplitChar}{message}";
+        message = $"{(int)ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value}{CommonString.ChatSplitChar}{message}";
     }
 
     private void AddRankInfo(ref string message)

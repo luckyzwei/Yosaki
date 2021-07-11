@@ -99,21 +99,21 @@ public class UiShop : MonoBehaviour
             transactionList.Add(TransactionValue.SetUpdate(BuffServerTable.tableName, BuffServerTable.Indate, magicStoneBuffParam));
         }
 
-        if (DatabaseManager.iapServerTable.TableDatas.ContainsKey(tableData.Productid) == false)
+        if (ServerData.iapServerTable.TableDatas.ContainsKey(tableData.Productid) == false)
         {
             Debug.LogError($"@@@product Id {tableData.Productid}");
             return;
         }
         else
         {
-            DatabaseManager.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
+            ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
         }
 
-        iapParam.Add(tableData.Productid, DatabaseManager.iapServerTable.TableDatas[tableData.Productid].ConvertToString());
+        iapParam.Add(tableData.Productid, ServerData.iapServerTable.TableDatas[tableData.Productid].ConvertToString());
 
         transactionList.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
 
-        DatabaseManager.SendTransaction(transactionList, successCallBack: WhenRewardSuccess);
+        ServerData.SendTransaction(transactionList, successCallBack: WhenRewardSuccess);
 
         currentItemIdx = productId;
     }
@@ -138,26 +138,26 @@ public class UiShop : MonoBehaviour
         {
             case Item_Type.Jade:
                 {
-                    DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += amount;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += amount;
                     param.Add(GoodsTable.Jade, amount);
                 }
                 break;
             case Item_Type.GrowThStone:
                 {
-                    DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
+                    ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
                     param.Add(GoodsTable.GrowthStone, amount);
 
                 }
                 break;
             case Item_Type.Ticket:
                 {
-                    DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value += amount;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += amount;
                     param.Add(GoodsTable.Ticket, amount);
                 }
                 break;
             case Item_Type.Marble:
                 {
-                    DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += amount;
+                    ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += amount;
                     param.Add(GoodsTable.MarbleKey, amount);
                 }
                 break;
@@ -174,7 +174,7 @@ public class UiShop : MonoBehaviour
 
         string key = type.ToString();
 
-        if (DatabaseManager.costumeServerTable.TableDatas.TryGetValue(key, out var serverData) == false)
+        if (ServerData.costumeServerTable.TableDatas.TryGetValue(key, out var serverData) == false)
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"미등록된 아이디 {key}", null);
             return;
@@ -194,7 +194,7 @@ public class UiShop : MonoBehaviour
 
         string key = type.ToString();
 
-        if (DatabaseManager.petTable.TableDatas.TryGetValue(key, out var serverData) == false)
+        if (ServerData.petTable.TableDatas.TryGetValue(key, out var serverData) == false)
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"미등록된 아이디 {key}", null);
             return;
@@ -218,9 +218,9 @@ public class UiShop : MonoBehaviour
         {
             if (buffTableData[i].Bufftype == (int)StatusType.MagicStoneAddPer)
             {
-                DatabaseManager.buffServerTable.TableDatas[buffTableData[i].Stringid].remainSec.Value = -1;
+                ServerData.buffServerTable.TableDatas[buffTableData[i].Stringid].remainSec.Value = -1;
 
-                param.Add(buffTableData[i].Stringid, DatabaseManager.buffServerTable.TableDatas[buffTableData[i].Stringid].ConvertToString());
+                param.Add(buffTableData[i].Stringid, ServerData.buffServerTable.TableDatas[buffTableData[i].Stringid].ConvertToString());
                 return;
             }
         }

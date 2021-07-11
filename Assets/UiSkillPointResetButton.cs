@@ -22,7 +22,7 @@ public class UiSkillPointResetButton : MonoBehaviour
 
     public void OnClickResetSkillPoint()
     {
-        if (DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value < GameBalance.SkillPointResetPrice)
+        if (ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value < GameBalance.SkillPointResetPrice)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
             return;
@@ -42,11 +42,11 @@ public class UiSkillPointResetButton : MonoBehaviour
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            DatabaseManager.passiveServerTable.TableDatas[tableData[i].Stringid].level.Value = 0;
+            ServerData.passiveServerTable.TableDatas[tableData[i].Stringid].level.Value = 0;
         }
         //
 
-        var skillLevelList = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillLevel];
+        var skillLevelList = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel];
 
         for (int i = 0; i < skillLevelList.Count; i++)
         {
@@ -54,41 +54,41 @@ public class UiSkillPointResetButton : MonoBehaviour
             skillLevelList[i].Value = 0;
         }
 
-        var skillSlotList = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx];
+        var skillSlotList = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx];
 
         for (int i = 0; i < skillSlotList.Count; i++)
         {
             skillSlotList[i].Value = -1;
         }
 
-        DatabaseManager.skillServerTable.UpdateSelectedSkillIdx(DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx].Select(e => e.Value).ToList());
+        ServerData.skillServerTable.UpdateSelectedSkillIdx(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx].Select(e => e.Value).ToList());
 
-        int currentLevel = DatabaseManager.statusTable.GetTableData(StatusTable.Level).Value;
+        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
         //리셋한 데이터 적용
-        DatabaseManager.statusTable.GetTableData(StatusTable.SkillPoint).Value = currentLevel;
+        ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value = currentLevel;
 
         //비용 차감
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.SkillPointResetPrice;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.SkillPointResetPrice;
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         Param skillParam = new Param();
-        skillParam.Add(SkillServerTable.SkillLevel, DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillLevel].Select(e => e.Value).ToList());
-        skillParam.Add(SkillServerTable.SkillSlotIdx, DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx].Select(e => e.Value).ToList());
+        skillParam.Add(SkillServerTable.SkillLevel, ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel].Select(e => e.Value).ToList());
+        skillParam.Add(SkillServerTable.SkillSlotIdx, ServerData.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx].Select(e => e.Value).ToList());
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         Param statusParam = new Param();
-        statusParam.Add(StatusTable.SkillPoint, DatabaseManager.statusTable.GetTableData(StatusTable.SkillPoint).Value);
+        statusParam.Add(StatusTable.SkillPoint, ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value);
 
         Param passiveSkillParam = new Param();
         var passiveTableData = TableManager.Instance.PassiveSkill.dataArray;
 
         for (int i = 0; i < passiveTableData.Length; i++)
         {
-            passiveSkillParam.Add(passiveTableData[i].Stringid, DatabaseManager.passiveServerTable.TableDatas[passiveTableData[i].Stringid].ConvertToString());
+            passiveSkillParam.Add(passiveTableData[i].Stringid, ServerData.passiveServerTable.TableDatas[passiveTableData[i].Stringid].ConvertToString());
         }
 
         transactionList.Add(TransactionValue.SetUpdate(SkillServerTable.tableName, SkillServerTable.Indate, skillParam));
@@ -96,7 +96,7 @@ public class UiSkillPointResetButton : MonoBehaviour
         transactionList.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
         transactionList.Add(TransactionValue.SetUpdate(PassiveServerTable.tableName, PassiveServerTable.Indate, passiveSkillParam));
 
-        DatabaseManager.SendTransaction(transactionList, successCallBack: () =>
+        ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "스킬포인트 초기화 성공!", null);
         });

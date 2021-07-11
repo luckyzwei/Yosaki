@@ -46,7 +46,7 @@ public class UiContentsLockMask : MonoBehaviour
     }
     private void Subscribe()
     {
-        DatabaseManager.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(currentLevel =>
+        ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(currentLevel =>
         {
             switch (contentsType)
             {

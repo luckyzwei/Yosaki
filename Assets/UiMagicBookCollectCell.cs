@@ -39,7 +39,7 @@ public class UiMagicBookCollectCell : MonoBehaviour
     public void Initialize(MagicBookData magicBookData)
     {
         this.magicBookData = magicBookData;
-        this.magicBookServerData = DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid];
+        this.magicBookServerData = ServerData.magicBookTable.TableDatas[magicBookData.Stringid];
 
         weaponView.Initialize(null, this.magicBookData);
 
@@ -131,7 +131,7 @@ public class UiMagicBookCollectCell : MonoBehaviour
     private IEnumerator SyncRoutine()
     {
         yield return syncDelay;
-        DatabaseManager.magicBookTable.SyncToServerEach(magicBookData.Stringid);
+        ServerData.magicBookTable.SyncToServerEach(magicBookData.Stringid);
         syncRoutine = null;
     }
 }

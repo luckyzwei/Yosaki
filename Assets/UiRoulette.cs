@@ -60,7 +60,7 @@ public class UiRoulette : MonoBehaviour
 
     public void SpinSlot()
     {
-        int spinNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value;
+        int spinNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value;
 
         if (spinNum <= 0)
         {
@@ -144,42 +144,42 @@ public class UiRoulette : MonoBehaviour
 
     private void RewardItem(Item_Type rewardType, float rewardAmount)
     {
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value--;
+        ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value--;
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         //재화
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.BonusSpinKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value);
+        goodsParam.Add(GoodsTable.BonusSpinKey, ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value);
 
         //골드
         if (rewardType == Item_Type.Gold)
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value += rewardAmount;
-            goodsParam.Add(GoodsTable.Gold, DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value);
+            ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += rewardAmount;
+            goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
         }
         //티켓
         else if (rewardType == Item_Type.Ticket)
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value += rewardAmount;
-            goodsParam.Add(GoodsTable.Ticket, DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value);
+            ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += rewardAmount;
+            goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
         }
         //매직스톤
         else if (rewardType == Item_Type.GrowThStone)
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardAmount;
-            goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
+            ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardAmount;
+            goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         }
         //보석
         else if (rewardType == Item_Type.Jade)
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardAmount;
-            goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+            ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardAmount;
+            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
         }
 
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
 
 #if UNITY_EDITOR
@@ -187,7 +187,7 @@ public class UiRoulette : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value += 10;
+            ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value += 10;
         }
     }
 #endif

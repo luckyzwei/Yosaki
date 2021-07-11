@@ -59,7 +59,7 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         skillName.SetText(passiveSkillData.Skillname);
 
-        int currentSkillLevel = DatabaseManager.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value;
+        int currentSkillLevel = ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value;
 
         var statusType = (StatusType)passiveSkillData.Abilitytype;
 
@@ -87,7 +87,7 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         magicBookData = TableManager.Instance.MagicBoocDatas[passiveSkillData.Requiremagicbookidx];
 
-        magicBookServerData = DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid];
+        magicBookServerData = ServerData.magicBookTable.TableDatas[magicBookData.Stringid];
 
         if (magicBookServerData.hasItem.Value == 0)
         {
@@ -115,7 +115,7 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         }).AddTo(this);
 
-        DatabaseManager.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.AsObservable().Subscribe(e =>
+        ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.AsObservable().Subscribe(e =>
         {
             Refresh(this.passiveSkillData);
         }).AddTo(this);
@@ -123,7 +123,7 @@ public class UiPassiveSkillCell : MonoBehaviour
 
     public void OnClickUpgradeButton()
     {
-        int currentLevel = DatabaseManager.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value;
+        int currentLevel = ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value;
 
         if (currentLevel >= passiveSkillData.Maxlevel)
         {
@@ -138,14 +138,14 @@ public class UiPassiveSkillCell : MonoBehaviour
         }
 
         //스킬포인트 체크
-        var skillPoint = DatabaseManager.statusTable.GetTableData(StatusTable.SkillPoint);
+        var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
         if (skillPoint.Value <= 0)
         {
             PopupManager.Instance.ShowAlarmMessage("스킬포인트가 부족합니다.");
             return;
         }
         //로컬
-        DatabaseManager.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value++;
+        ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value++;
         skillPoint.Value--;
 
         if (syncRoutine != null)
@@ -160,18 +160,18 @@ public class UiPassiveSkillCell : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
 
-        var skillPoint = DatabaseManager.statusTable.GetTableData(StatusTable.SkillPoint);
+        var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
         Param passiveParam = new Param();
-        passiveParam.Add(passiveSkillData.Stringid, DatabaseManager.passiveServerTable.TableDatas[passiveSkillData.Stringid].ConvertToString());
+        passiveParam.Add(passiveSkillData.Stringid, ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].ConvertToString());
         transactions.Add(TransactionValue.SetUpdate(PassiveServerTable.tableName, PassiveServerTable.Indate, passiveParam));
 
         Param skillPointParam = new Param();
         skillPointParam.Add(StatusTable.SkillPoint, skillPoint.Value);
         transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, skillPointParam));
 
-        DatabaseManager.SendTransaction(transactions);
+        ServerData.SendTransaction(transactions);
     }
 }

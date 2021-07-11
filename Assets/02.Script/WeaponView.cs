@@ -113,9 +113,9 @@ public class WeaponView : MonoBehaviour
     {
         disposable.Clear();
 
-        DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].amount.AsObservable().Subscribe(WhenCountChanged).AddTo(disposable);
+        ServerData.weaponTable.TableDatas[weaponData.Stringid].amount.AsObservable().Subscribe(WhenCountChanged).AddTo(disposable);
 
-        DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].level.AsObservable().Subscribe(WhenLevelChanged).AddTo(disposable);
+        ServerData.weaponTable.TableDatas[weaponData.Stringid].level.AsObservable().Subscribe(WhenLevelChanged).AddTo(disposable);
 
     }
 
@@ -123,9 +123,9 @@ public class WeaponView : MonoBehaviour
     {
         disposable.Clear();
 
-        DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].amount.AsObservable().Subscribe(WhenCountChanged).AddTo(disposable);
+        ServerData.magicBookTable.TableDatas[magicBookData.Stringid].amount.AsObservable().Subscribe(WhenCountChanged).AddTo(disposable);
 
-        DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].level.AsObservable().Subscribe(WhenLevelChanged).AddTo(disposable);
+        ServerData.magicBookTable.TableDatas[magicBookData.Stringid].level.AsObservable().Subscribe(WhenLevelChanged).AddTo(disposable);
 
     }
 
@@ -133,7 +133,7 @@ public class WeaponView : MonoBehaviour
     {
         disposable.Clear();
 
-        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].AsObservable().Subscribe(WhenCountChanged).AddTo(disposable);
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].AsObservable().Subscribe(WhenCountChanged).AddTo(disposable);
     }
 
 
@@ -151,15 +151,15 @@ public class WeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            amountText.SetText($"({DatabaseManager.weaponTable.GetCurrentWeaponCount(weaponData.Stringid)}/{weaponData.Requireupgrade})");
+            amountText.SetText($"({ServerData.weaponTable.GetCurrentWeaponCount(weaponData.Stringid)}/{weaponData.Requireupgrade})");
         }
         else if (magicBookData != null)
         {
-            amountText.SetText($"({DatabaseManager.magicBookTable.GetCurrentMagicBookCount(magicBookData.Stringid)}/{magicBookData.Requireupgrade})");
+            amountText.SetText($"({ServerData.magicBookTable.GetCurrentMagicBookCount(magicBookData.Stringid)}/{magicBookData.Requireupgrade})");
         }
         else
         {
-            amountText.SetText($"({DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value}/{skillData.Requireupgrade})");
+            amountText.SetText($"({ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value}/{skillData.Requireupgrade})");
         }
     }
 

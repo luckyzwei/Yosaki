@@ -38,7 +38,7 @@ public class UiBuffIndicator : MonoBehaviour
         {
             Image buffImage = buffIconList[i];
 
-            DatabaseManager.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.AsObservable().Subscribe(e =>
+            ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.AsObservable().Subscribe(e =>
             {
                 buffImage.gameObject.SetActive(e == -1f || e > 0);
             }).AddTo(this);

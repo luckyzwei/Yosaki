@@ -55,7 +55,7 @@ public class UiPassSystem : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.passSelectedIdx).AsObservable().Subscribe(WhenSelectedIdxChanged).AddTo(this);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.passSelectedIdx).AsObservable().Subscribe(WhenSelectedIdxChanged).AddTo(this);
 
         IAPManager.Instance.WhenBuyComplete.AsObservable().Subscribe(WhenBuyComplete).AddTo(this);
     }
@@ -64,7 +64,7 @@ public class UiPassSystem : MonoBehaviour
     {
         if (args.purchasedProduct.definition.id == passShopId)
         {
-            WhenSelectedIdxChanged(DatabaseManager.userInfoTable.GetTableData(UserInfoTable.passSelectedIdx).Value);
+            WhenSelectedIdxChanged(ServerData.userInfoTable.GetTableData(UserInfoTable.passSelectedIdx).Value);
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "구매 성공!", null);
         }
     }
@@ -164,6 +164,6 @@ public class UiPassSystem : MonoBehaviour
     public void RefreshPassView(int groupId)
     {
         SoundManager.Instance.PlayButtonSound();
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.passSelectedIdx).Value = groupId;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.passSelectedIdx).Value = groupId;
     }
 }

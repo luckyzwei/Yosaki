@@ -30,12 +30,12 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 
     private void LoadSkillSlotData()
     {
-        WhenSelectedSkillIdxChanged(DatabaseManager.skillServerTable.SelectedSkillIdx);
+        WhenSelectedSkillIdxChanged(ServerData.skillServerTable.SelectedSkillIdx);
     }
 
     private void Subscribe()
     {
-        DatabaseManager.skillServerTable.whenSelectedSkillIdxChanged.AsObservable().Subscribe(WhenSelectedSkillIdxChanged).AddTo(this);
+        ServerData.skillServerTable.whenSelectedSkillIdxChanged.AsObservable().Subscribe(WhenSelectedSkillIdxChanged).AddTo(this);
     }
 
     private void WhenSelectedSkillIdxChanged(List<ReactiveProperty<int>> list)

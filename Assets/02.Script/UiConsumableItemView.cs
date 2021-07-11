@@ -52,7 +52,7 @@ public class UiConsumableItemView : MonoBehaviour
 
     public void OnClickBuyButton()
     {
-        var currentBlueStone = DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade);
+        var currentBlueStone = ServerData.goodsTable.GetTableData(GoodsTable.Jade);
 
         if (currentBlueStone.Value < price)
         {
@@ -60,7 +60,7 @@ public class UiConsumableItemView : MonoBehaviour
             return;
         }
 
-        var data = DatabaseManager.goodsTable.GetTableData(goodsId);
+        var data = ServerData.goodsTable.GetTableData(goodsId);
 
         if (data == null)
         {
@@ -75,7 +75,7 @@ public class UiConsumableItemView : MonoBehaviour
         //로컬
         data.Value += amount;
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
         //서버 업데이트
 
         if (syncRoutine != null)
@@ -93,7 +93,7 @@ public class UiConsumableItemView : MonoBehaviour
     {
         yield return syncWaitTime;
 
-        DatabaseManager.goodsTable.SyncAllData(syncDatList);
+        ServerData.goodsTable.SyncAllData(syncDatList);
 
         syncRoutine = null;
     }

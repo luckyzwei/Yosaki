@@ -7,7 +7,7 @@ public class UiBonusRoulletRedDot : UiRedDotBase
 {
     protected override void Subscribe()
     {
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.BonusSpinKey).AsObservable().Subscribe(e =>
+        ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).AsObservable().Subscribe(e =>
         {
             rootObject.SetActive(e > 0f);
         }).AddTo(this);

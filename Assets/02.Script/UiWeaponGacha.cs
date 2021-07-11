@@ -74,7 +74,7 @@ public class UiWeaponGacha : MonoBehaviour
 
     private bool CanGacha(int price)
     {
-        int currentBlueStoneNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
+        int currentBlueStoneNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
         return currentBlueStoneNum >= price;
     }
 
@@ -126,6 +126,26 @@ public class UiWeaponGacha : MonoBehaviour
             {
                 probs.Add(e.Current.Value.Gachalv5);
             }
+            else if (gachaLevel == 5)
+            {
+                probs.Add(e.Current.Value.Gachalv6);
+            }
+            else if (gachaLevel == 6)
+            {
+                probs.Add(e.Current.Value.Gachalv7);
+            }
+            else if (gachaLevel == 7)
+            {
+                probs.Add(e.Current.Value.Gachalv8);
+            }
+            else if (gachaLevel == 8)
+            {
+                probs.Add(e.Current.Value.Gachalv9);
+            }
+            else if (gachaLevel == 9)
+            {
+                probs.Add(e.Current.Value.Gachalv10);
+            }
         }
 
         List<int> serverUpdateList = new List<int>();
@@ -133,10 +153,10 @@ public class UiWeaponGacha : MonoBehaviour
         //로컬 데이터 갱신
 
         //재화
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
 
         //가챠갯수
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_Weapon).Value += amount;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Weapon).Value += amount;
 
         //무기
         for (int i = 0; i < amount; i++)
@@ -148,7 +168,7 @@ public class UiWeaponGacha : MonoBehaviour
             cellInfo.weaponData = weaponDatas[randomIdx];
             gachaResultCellInfos.Add(cellInfo);
 
-            DatabaseManager.weaponTable.UpData(weaponDatas[randomIdx], cellInfo.amount);
+            ServerData.weaponTable.UpData(weaponDatas[randomIdx], cellInfo.amount);
             serverUpdateList.Add(weaponDatas[randomIdx].Id);
         }
 
@@ -172,16 +192,16 @@ public class UiWeaponGacha : MonoBehaviour
 
         //재화
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         //가챠횟수
         Param gachaNumParam = new Param();
-        gachaNumParam.Add(UserInfoTable.gachaNum_Weapon, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_Weapon).Value);
+        gachaNumParam.Add(UserInfoTable.gachaNum_Weapon, ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Weapon).Value);
 
         //무기
         Param weaponParam = new Param();
         var table = TableManager.Instance.WeaponTable.dataArray;
-        var tableDatas = DatabaseManager.weaponTable.TableDatas;
+        var tableDatas = ServerData.weaponTable.TableDatas;
         for (int i = 0; i < table.Length; i++)
         {
             if (serverUpdateList != null && serverUpdateList.Contains(table[i].Id) == false) continue;
@@ -199,6 +219,6 @@ public class UiWeaponGacha : MonoBehaviour
         //무기
         transactionList.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
 }

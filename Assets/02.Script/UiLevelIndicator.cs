@@ -15,7 +15,7 @@ public class UiLevelIndicator : MonoBehaviour
     }
     private void Subscribe()
     {
-        DatabaseManager.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(WhenLevelChanged).AddTo(this);
+        ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(WhenLevelChanged).AddTo(this);
     }
 
     private void WhenLevelChanged(int level)

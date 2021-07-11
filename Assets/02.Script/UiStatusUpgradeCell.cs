@@ -112,15 +112,15 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.statusTable.GetTableData(statusData.Key).AsObservable().Subscribe(currentLevel =>
+        ServerData.statusTable.GetTableData(statusData.Key).AsObservable().Subscribe(currentLevel =>
         {
-            float currentStatusValue = DatabaseManager.statusTable.GetStatusValue(statusData.Key, currentLevel);
-            float nextStatusValue = DatabaseManager.statusTable.GetStatusValue(statusData.Key, currentLevel + 1);
+            float currentStatusValue = ServerData.statusTable.GetStatusValue(statusData.Key, currentLevel);
+            float nextStatusValue = ServerData.statusTable.GetStatusValue(statusData.Key, currentLevel + 1);
 
             float price = 0f;
             if (statusData.STATUSWHERE == StatusWhere.gold)
             {
-                price = DatabaseManager.statusTable.GetStatusUpgradePrice(statusData.Key, currentLevel);
+                price = ServerData.statusTable.GetStatusUpgradePrice(statusData.Key, currentLevel);
 
                 priceText.SetText(Utils.ConvertBigNum(price));
 
@@ -169,21 +169,21 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
         if (this.statusData.STATUSWHERE == StatusWhere.gold)
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).AsObservable().Subscribe(e =>
+            ServerData.goodsTable.GetTableData(GoodsTable.Gold).AsObservable().Subscribe(e =>
             {
                 SetUpgradeButtonState(CanUpgrade());
             }).AddTo(this);
         }
         else if (this.statusData.STATUSWHERE == StatusWhere.statpoint)
         {
-            DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).AsObservable().Subscribe(e =>
+            ServerData.statusTable.GetTableData(StatusTable.StatPoint).AsObservable().Subscribe(e =>
             {
                 SetUpgradeButtonState(CanUpgrade());
             }).AddTo(this);
         }
         else if (this.statusData.STATUSWHERE == StatusWhere.memory)
         {
-            DatabaseManager.statusTable.GetTableData(StatusTable.Memory).AsObservable().Subscribe(e =>
+            ServerData.statusTable.GetTableData(StatusTable.Memory).AsObservable().Subscribe(e =>
             {
                 SetUpgradeButtonState(CanUpgrade());
             }).AddTo(this);
@@ -269,7 +269,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
         UsePoint();
 
-        DatabaseManager.statusTable.GetTableData(statusData.Key).Value += 1;
+        ServerData.statusTable.GetTableData(statusData.Key).Value += 1;
 
         return true;
     }
@@ -278,23 +278,23 @@ public class UiStatusUpgradeCell : MonoBehaviour
     {
         if (statusData.STATUSWHERE == StatusWhere.gold)
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value -= upgradePrice_gold;
+            ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value -= upgradePrice_gold;
 
          //   UiTutorialManager.Instance.SetClear(TutorialStep._4_AbilityUp);
         }
         else if (statusData.STATUSWHERE == StatusWhere.statpoint)
         {
-            DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).Value -= 1;
+            ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= 1;
         }
         else if (statusData.STATUSWHERE == StatusWhere.memory)
         {
-            DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value -= 1;
+            ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= 1;
         }
     }
 
     private bool IsMaxLevel()
     {
-        return statusData.Maxlv <= DatabaseManager.statusTable.GetTableData(statusData.Key).Value;
+        return statusData.Maxlv <= ServerData.statusTable.GetTableData(statusData.Key).Value;
     }
 
     private bool CanUpgrade(bool showPopup = false)
@@ -314,7 +314,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         //구현필요
         if (statusData.STATUSWHERE == StatusWhere.gold)
         {
-            bool ret = DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value >= upgradePrice_gold;
+            bool ret = ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value >= upgradePrice_gold;
 
             if (showPopup && ret == false)
             {
@@ -325,7 +325,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         }
         else if (statusData.STATUSWHERE == StatusWhere.statpoint)
         {
-            bool ret = DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).Value > 0;
+            bool ret = ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value > 0;
 
             if (showPopup && ret == false)
             {
@@ -336,7 +336,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         }
         else if (statusData.STATUSWHERE == StatusWhere.memory)
         {
-            bool ret = DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value > 0;
+            bool ret = ServerData.statusTable.GetTableData(StatusTable.Memory).Value > 0;
 
             if (showPopup && ret == false)
             {
@@ -380,7 +380,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
     {
         if (statusData.STATUSWHERE == StatusWhere.statpoint)
         {
-            int currentStatPoint = DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).Value;
+            int currentStatPoint = ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value;
 
             if (currentStatPoint <= 0)
             {
@@ -394,25 +394,25 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 return;
             }
 
-            int currentLevel = DatabaseManager.statusTable.GetTableData(statusData.Key).Value;
+            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
             int upgradableAmount = maxLevel - currentLevel;
 
             //맥스렙 가능
             if (currentStatPoint >= upgradableAmount)
             {
-                DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).Value -= upgradableAmount;
-                DatabaseManager.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= upgradableAmount;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
             }
             else
             {
-                DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).Value -= currentStatPoint;
-                DatabaseManager.statusTable.GetTableData(statusData.Key).Value += currentStatPoint;
+                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= currentStatPoint;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += currentStatPoint;
             }
         }
         else if (statusData.STATUSWHERE == StatusWhere.memory)
         {
-            int currentMemoryPoint = DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value;
+            int currentMemoryPoint = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
 
             if (currentMemoryPoint <= 0)
             {
@@ -426,20 +426,20 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 return;
             }
 
-            int currentLevel = DatabaseManager.statusTable.GetTableData(statusData.Key).Value;
+            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
             int upgradableAmount = maxLevel - currentLevel;
 
             //맥스렙 가능
             if (currentMemoryPoint >= upgradableAmount)
             {
-                DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value -= upgradableAmount;
-                DatabaseManager.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+                ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= upgradableAmount;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
             }
             else
             {
-                DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value -= currentMemoryPoint;
-                DatabaseManager.statusTable.GetTableData(statusData.Key).Value += currentMemoryPoint;
+                ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= currentMemoryPoint;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += currentMemoryPoint;
             }
         }
 
@@ -466,26 +466,26 @@ public class UiStatusUpgradeCell : MonoBehaviour
         Param goodesParam = new Param();
 
         //능력치
-        statusParam.Add(statusData.Key, DatabaseManager.statusTable.GetTableData(statusData.Key).Value);
+        statusParam.Add(statusData.Key, ServerData.statusTable.GetTableData(statusData.Key).Value);
 
         //스킬포인트
         if (statusData.STATUSWHERE == StatusWhere.statpoint)
         {
-            statusParam.Add(StatusTable.StatPoint, DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).Value);
+            statusParam.Add(StatusTable.StatPoint, ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value);
         }
         else if (statusData.STATUSWHERE == StatusWhere.memory)
         {
-            statusParam.Add(StatusTable.Memory, DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value);
-            LogManager.Instance.SendLog("기억능력치", $"key:{statusData.Key} level:{DatabaseManager.statusTable.GetTableData(statusData.Key).Value} memory:{DatabaseManager.statusTable.GetTableData(StatusTable.Memory).Value}");
+            statusParam.Add(StatusTable.Memory, ServerData.statusTable.GetTableData(StatusTable.Memory).Value);
+            LogManager.Instance.SendLog("기억능력치", $"key:{statusData.Key} level:{ServerData.statusTable.GetTableData(statusData.Key).Value} memory:{ServerData.statusTable.GetTableData(StatusTable.Memory).Value}");
         }
         else if (statusData.STATUSWHERE == StatusWhere.gold)
         {
-            goodesParam.Add(GoodsTable.Gold, DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value);
+            goodesParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodesParam));
         }
 
         transactionList.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
 }

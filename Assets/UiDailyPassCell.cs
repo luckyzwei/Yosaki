@@ -53,7 +53,7 @@ public class UiDailyPassCell : MonoBehaviour
         disposables.Clear();
 
         //무료보상 데이터 변경시
-        DatabaseManager.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Subscribe(e =>
+        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Subscribe(e =>
         {
             bool rewarded = HasReward(passInfo.rewardType_Free_Key, passInfo.id);
             rewardedObject_Free.SetActive(rewarded);
@@ -61,7 +61,7 @@ public class UiDailyPassCell : MonoBehaviour
         }).AddTo(disposables);
 
         //광고보상 데이터 변경시
-        DatabaseManager.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Subscribe(e =>
+        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Subscribe(e =>
         {
             bool rewarded = HasReward(passInfo.rewardType_IAP_Key, passInfo.id);
             rewardedObject_Ad.SetActive(rewarded);
@@ -69,7 +69,7 @@ public class UiDailyPassCell : MonoBehaviour
         }).AddTo(disposables);
 
         //킬카운트 변경될때
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).AsObservable().Subscribe(e =>
         {
             lockIcon_Free.SetActive(!CanGetReward());
             lockIcon_Ad.SetActive(!CanGetReward());
@@ -109,7 +109,7 @@ public class UiDailyPassCell : MonoBehaviour
 
     public List<string> GetSplitData(string key)
     {
-        return DatabaseManager.dailyPassServerTable.TableDatas[key].Value.Split(',').ToList();
+        return ServerData.dailyPassServerTable.TableDatas[key].Value.Split(',').ToList();
     }
 
     public bool HasReward(string key, int data)
@@ -167,48 +167,48 @@ public class UiDailyPassCell : MonoBehaviour
     private void GetFreeReward()
     {
         //로컬
-        DatabaseManager.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
-        DatabaseManager.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
+        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
+        ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         //패스 보상
         Param passParam = new Param();
-        passParam.Add(passInfo.rewardType_Free_Key, DatabaseManager.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value);
+        passParam.Add(passInfo.rewardType_Free_Key, ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value);
         transactionList.Add(TransactionValue.SetUpdate(DailyPassServerTable.tableName, DailyPassServerTable.Indate, passParam));
 
-        var rewardTransactionValue = DatabaseManager.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
+        var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
         transactionList.Add(rewardTransactionValue);
 
         //킬카운트
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value);
+        userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
     private void GetAdReward()
     {
         //로컬
-        DatabaseManager.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
-        DatabaseManager.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
+        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
+        ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         //패스 보상
         Param passParam = new Param();
-        passParam.Add(passInfo.rewardType_IAP_Key, DatabaseManager.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value);
+        passParam.Add(passInfo.rewardType_IAP_Key, ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value);
         transactionList.Add(TransactionValue.SetUpdate(DailyPassServerTable.tableName, DailyPassServerTable.Indate, passParam));
 
-        var rewardTransactionValue = DatabaseManager.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_IAP);
+        var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_IAP);
         transactionList.Add(rewardTransactionValue);
 
         //킬카운트
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value);
+        userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        DatabaseManager.SendTransaction(transactionList,successCallBack:()=> 
+        ServerData.SendTransaction(transactionList,successCallBack:()=> 
         {
             LogManager.Instance.SendLog("패스 광고보상", "보상획득");
         });
@@ -218,7 +218,7 @@ public class UiDailyPassCell : MonoBehaviour
 
     private bool CanGetReward()
     {
-        int dailyMobKillCount = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value;
+        int dailyMobKillCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value;
         return dailyMobKillCount >= passInfo.require;
     }
 }

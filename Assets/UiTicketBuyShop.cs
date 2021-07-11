@@ -33,8 +33,8 @@ public class UiTicketBuyShop : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).AsObservable().Subscribe(WhenTicketBuyCountChanged).AddTo(this);
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).AsObservable().Subscribe(WhenAdRewardReceived).AddTo(this);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).AsObservable().Subscribe(WhenTicketBuyCountChanged).AddTo(this);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).AsObservable().Subscribe(WhenAdRewardReceived).AddTo(this);
     }
 
     private void WhenAdRewardReceived(float received)
@@ -58,7 +58,7 @@ public class UiTicketBuyShop : MonoBehaviour
 
     public void OnClickBuyButton()
     {
-        int currentBuyCount = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value;
+        int currentBuyCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value;
 
 #if !UNITY_EDITOR
 
@@ -85,7 +85,7 @@ public class UiTicketBuyShop : MonoBehaviour
 
     public void OnClickAdButton()
     {
-        bool received = DatabaseManager.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value == 1;
+        bool received = ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value == 1;
         if (received) 
         {
             PopupManager.Instance.ShowAlarmMessage("내일 다시 획득 가능합니다.");
@@ -97,27 +97,27 @@ public class UiTicketBuyShop : MonoBehaviour
 
     private void RewardAdFinished()
     {
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value++;
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value = 1f;
+        ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value++;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value = 1f;
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Ticket, DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value);
+        goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.receivedTicketReward, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value);
+        userInfoParam.Add(UserInfoTable.receivedTicketReward, ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
 
     private void BuyProcess()
     {
         //로컬 갱신
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value++;
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.ticketPrice;
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value++;
+        ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value++;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.ticketPrice;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value++;
 
         if (syncToServerRoutine != null)
         {
@@ -135,14 +135,14 @@ public class UiTicketBuyShop : MonoBehaviour
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
-        goodsParam.Add(GoodsTable.Ticket, DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.dailyTicketBuyCount, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value);
+        userInfoParam.Add(UserInfoTable.dailyTicketBuyCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
 }

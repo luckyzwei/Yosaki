@@ -62,7 +62,7 @@ public class UiPetView : MonoBehaviour
     public void Initialize(PetTableData petData)
     {
         this.petData = petData;
-        this.petServerData = DatabaseManager.petTable.TableDatas[petData.Stringid];
+        this.petServerData = ServerData.petTable.TableDatas[petData.Stringid];
 
         SetPetSpine(petData.Id);
 
@@ -111,7 +111,7 @@ public class UiPetView : MonoBehaviour
         //무료펫
         if (petData.Id == 0)
         {
-            DatabaseManager.petTable.TableDatas[petData.Stringid].remainSec.AsObservable().Subscribe(e =>
+            ServerData.petTable.TableDatas[petData.Stringid].remainSec.AsObservable().Subscribe(e =>
             {
                 if (e == 0)
                 {
@@ -120,7 +120,7 @@ public class UiPetView : MonoBehaviour
             }).AddTo(this);
         }
 
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].AsObservable().Subscribe(e =>
+        ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].AsObservable().Subscribe(e =>
         {
             UpdateUi();
         }).AddTo(this);
@@ -143,7 +143,7 @@ public class UiPetView : MonoBehaviour
         button.sprite = normalButtonSprite;
 
         //장착중
-        if (DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value == petData.Id)
+        if (ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value == petData.Id)
         {
             if (petData.PETGETTYPE != PetGetType.Ad)
             {
@@ -222,7 +222,7 @@ public class UiPetView : MonoBehaviour
             //보유
             if (petServerData.hasItem.Value == 1 && petServerData.remainSec.Value > 0)
             {
-                DatabaseManager.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
             }
             //미보유
             else
@@ -236,12 +236,12 @@ public class UiPetView : MonoBehaviour
             //보유
             if (petServerData.hasItem.Value == 1)
             {
-                DatabaseManager.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
             }
             //미보유
             else
             {
-                int currentBlueStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
+                int currentBlueStone = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
                 if (currentBlueStone >= petData.Price)
                 {
@@ -257,7 +257,7 @@ public class UiPetView : MonoBehaviour
         {
             if (petServerData.hasItem.Value == 1)
             {
-                DatabaseManager.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
             }
             //미보유
             else
@@ -279,21 +279,21 @@ public class UiPetView : MonoBehaviour
         //유료펫
         else if (petData.PETGETTYPE == PetGetType.Gem)
         {
-            DatabaseManager.petTable.TableDatas[petData.Stringid].hasItem.Value = 1;
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= petData.Price;
+            ServerData.petTable.TableDatas[petData.Stringid].hasItem.Value = 1;
+            ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= petData.Price;
             //
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param petParam = new Param();
-            petParam.Add(petData.Stringid, DatabaseManager.petTable.TableDatas[petData.Stringid].ConvertToString());
+            petParam.Add(petData.Stringid, ServerData.petTable.TableDatas[petData.Stringid].ConvertToString());
             transactionList.Add(TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, petParam));
 
-            DatabaseManager.SendTransaction(transactionList, successCallBack: UpdateUi);
-            DatabaseManager.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
+            ServerData.SendTransaction(transactionList, successCallBack: UpdateUi);
+            ServerData.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
         }
 
     }
@@ -301,10 +301,10 @@ public class UiPetView : MonoBehaviour
     public void BuyFreePet()
     {
         var localTableData = TableManager.Instance.PetDatas[petData.Id];
-        DatabaseManager.petTable.TableDatas[petData.Stringid].hasItem.Value = 1;
-        DatabaseManager.petTable.TableDatas[petData.Stringid].remainSec.Value = (int)petData.Time;
-        DatabaseManager.petTable.UpdateData(petData.Stringid);
-        DatabaseManager.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
+        ServerData.petTable.TableDatas[petData.Stringid].hasItem.Value = 1;
+        ServerData.petTable.TableDatas[petData.Stringid].remainSec.Value = (int)petData.Time;
+        ServerData.petTable.UpdateData(petData.Stringid);
+        ServerData.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
         PlayerPet.Instance.WhenPetEquipIdxChanged(0);
         UpdateUi();
 

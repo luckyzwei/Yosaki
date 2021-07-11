@@ -53,7 +53,7 @@ public class UiPassCell : MonoBehaviour
         disposables.Clear();
 
         //무료보상 데이터 갱신
-        DatabaseManager.passServerTable.TableDatas[passInfo.rewardType_Free_Key].Subscribe(e =>
+        ServerData.passServerTable.TableDatas[passInfo.rewardType_Free_Key].Subscribe(e =>
         {
             bool rewarded = HasReward(passInfo.rewardType_Free_Key, passInfo.id);
             rewardedObject_Free.SetActive(rewarded);
@@ -61,7 +61,7 @@ public class UiPassCell : MonoBehaviour
         }).AddTo(disposables);
 
         //패스보상 데이터 변경시
-        DatabaseManager.passServerTable.TableDatas[passInfo.rewardType_IAP_Key].Subscribe(e =>
+        ServerData.passServerTable.TableDatas[passInfo.rewardType_IAP_Key].Subscribe(e =>
         {
             bool rewarded = HasReward(passInfo.rewardType_IAP_Key, passInfo.id);
             rewardedObject_Ad.SetActive(rewarded);
@@ -69,7 +69,7 @@ public class UiPassCell : MonoBehaviour
         }).AddTo(disposables);
 
         //레벨 변할때
-        DatabaseManager.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(e =>
+        ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(e =>
         {
             lockIcon_Free.SetActive(!CanGetReward());
             lockIcon_Ad.SetActive(!CanGetReward());
@@ -109,7 +109,7 @@ public class UiPassCell : MonoBehaviour
 
     public List<string> GetSplitData(string key)
     {
-        return DatabaseManager.passServerTable.TableDatas[key].Value.Split(',').ToList();
+        return ServerData.passServerTable.TableDatas[key].Value.Split(',').ToList();
     }
 
     public bool HasReward(string key, int data)
@@ -172,43 +172,43 @@ public class UiPassCell : MonoBehaviour
     private void GetFreeReward()
     {
         //로컬
-        DatabaseManager.passServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
-        DatabaseManager.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
+        ServerData.passServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
+        ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         //패스 보상
         Param passParam = new Param();
-        passParam.Add(passInfo.rewardType_Free_Key, DatabaseManager.passServerTable.TableDatas[passInfo.rewardType_Free_Key].Value);
+        passParam.Add(passInfo.rewardType_Free_Key, ServerData.passServerTable.TableDatas[passInfo.rewardType_Free_Key].Value);
         transactionList.Add(TransactionValue.SetUpdate(PassServerTable.tableName, PassServerTable.Indate, passParam));
 
-        var rewardTransactionValue = DatabaseManager.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
+        var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
         transactionList.Add(rewardTransactionValue);
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
     private void GetAdReward()
     {
         //로컬
-        DatabaseManager.passServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
-        DatabaseManager.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
+        ServerData.passServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
+        ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         //패스 보상
         Param passParam = new Param();
-        passParam.Add(passInfo.rewardType_IAP_Key, DatabaseManager.passServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value);
+        passParam.Add(passInfo.rewardType_IAP_Key, ServerData.passServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value);
         transactionList.Add(TransactionValue.SetUpdate(PassServerTable.tableName, PassServerTable.Indate, passParam));
 
-        var rewardTransactionValue = DatabaseManager.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_IAP);
+        var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_IAP);
         transactionList.Add(rewardTransactionValue);
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
 
     private bool CanGetReward()
     {
-        int currentLevel = DatabaseManager.statusTable.GetTableData(StatusTable.Level).Value;
+        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
         return currentLevel >= passInfo.require;
     }
 }

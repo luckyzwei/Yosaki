@@ -37,7 +37,7 @@ public class UiCostume : SingletonMono<UiCostume>
 
         var tableData = TableManager.Instance.Costume.dataArray;
 
-        int currentSelectedIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value;
+        int currentSelectedIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value;
 
         for (int i = 0; i < tableData.Length; i++)
         {

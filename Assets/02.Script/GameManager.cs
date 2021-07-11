@@ -73,7 +73,7 @@ public class GameManager : SingletonMono<GameManager>
 
         currentMapIdx.AsObservable().Subscribe(e =>
         {
-            DatabaseManager.userInfoTable.UpData(UserInfoTable.LastMap, e, false);
+            ServerData.userInfoTable.UpData(UserInfoTable.LastMap, e, false);
         }).AddTo(this);
 
         SettingData.FrameRateOption.AsObservable().Subscribe(SetFrameRate).AddTo(this);
@@ -81,7 +81,7 @@ public class GameManager : SingletonMono<GameManager>
 
     private void ClearStage()
     {
-        currentMapIdx.Value = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.LastMap).Value;
+        currentMapIdx.Value = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.LastMap).Value;
         CurrentStageData = TableManager.Instance.StageMapData[currentMapIdx.Value];
         MapThemaInfo = Resources.Load<MapThemaInfo>($"MapThema/{CurrentStageData.Mapthema}");
     }

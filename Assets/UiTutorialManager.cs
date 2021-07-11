@@ -34,8 +34,8 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
 
     [SerializeField]
     private Animator animator;
-    private ReactiveProperty<float> tutorialStep => DatabaseManager.userInfoTable.GetTableData(UserInfoTable.tutorialCurrentStep);
-    private ReactiveProperty<float> tutorialClearFlags => DatabaseManager.userInfoTable.GetTableData(UserInfoTable.tutorialClearFlags);
+    private ReactiveProperty<float> tutorialStep => ServerData.userInfoTable.GetTableData(UserInfoTable.tutorialCurrentStep);
+    private ReactiveProperty<float> tutorialClearFlags => ServerData.userInfoTable.GetTableData(UserInfoTable.tutorialClearFlags);
 
     private bool isAllCleared = false;
 
@@ -56,12 +56,12 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
             tutorialStep.AsObservable().Subscribe(WhenTutorialStepChanged).AddTo(this);
             tutorialClearFlags.AsObservable().Subscribe(WhenTutorialClearFlag).AddTo(this);
 
-            DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e =>
+            ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e =>
             {
              //   SetClear(TutorialStep._3_KillEnemy);
             }).AddTo(this);
 
-            DatabaseManager.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(e =>
+            ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(e =>
             {
                 if (e == 5)
                 {
@@ -113,24 +113,24 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
 
         int rewardAmount = (int)rewardGemNum;
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardAmount;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardAmount;
 
         TutorialStep nextStep = (TutorialStep)(tutorialStep.Value * 2f);
 
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.tutorialCurrentStep).Value = (float)nextStep;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.tutorialCurrentStep).Value = (float)nextStep;
 
         List<TransactionValue> transactions = new List<TransactionValue>();
         //보상루틴
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.tutorialCurrentStep, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.tutorialCurrentStep).Value);
+        userInfoParam.Add(UserInfoTable.tutorialCurrentStep, ServerData.userInfoTable.GetTableData(UserInfoTable.tutorialCurrentStep).Value);
 
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        DatabaseManager.SendTransaction(transactions);
+        ServerData.SendTransaction(transactions);
     }
 
     public void SetClear(TutorialStep state)
@@ -143,7 +143,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
 
         tutorialClearFlags.Value = (float)prefValue;
 
-        DatabaseManager.userInfoTable.UpData(UserInfoTable.tutorialClearFlags, tutorialClearFlags.Value, false);
+        ServerData.userInfoTable.UpData(UserInfoTable.tutorialClearFlags, tutorialClearFlags.Value, false);
     }
 
     private string GetDescription(TutorialStep step)

@@ -13,13 +13,13 @@ public class WingPackageReceiver : MonoBehaviour
 
     private void ReceivePackageReward()
     {
-        int receivedReward = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingPackageRewardReceive).Value;
+        int receivedReward = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.wingPackageRewardReceive).Value;
 
 
         //보상 안받음
         if (receivedReward == 0)
         {
-            int packageBuyCount = DatabaseManager.iapServerTable.TableDatas["wingpackage1"].buyCount.Value;
+            int packageBuyCount = ServerData.iapServerTable.TableDatas["wingpackage1"].buyCount.Value;
 
             if (packageBuyCount == 0) return;
 
@@ -28,22 +28,22 @@ public class WingPackageReceiver : MonoBehaviour
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value += getTicketCount;
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += getFeatherCount;
+            ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += getTicketCount;
+            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += getFeatherCount;
 
-            DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingPackageRewardReceive).Value = 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.wingPackageRewardReceive).Value = 1;
 
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.Ticket, DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value);
-            goodsParam.Add(GoodsTable.MarbleKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+            goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
+            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param userInfoParam = new Param();
-            userInfoParam.Add(UserInfoTable.wingPackageRewardReceive, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.wingPackageRewardReceive).Value);
+            userInfoParam.Add(UserInfoTable.wingPackageRewardReceive, ServerData.userInfoTable.GetTableData(UserInfoTable.wingPackageRewardReceive).Value);
 
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-            DatabaseManager.SendTransaction(transactions, successCallBack: () =>
+            ServerData.SendTransaction(transactions, successCallBack: () =>
               {
                   PopupManager.Instance.ShowConfirmPopup("보석 패키지 소급 보상", $"티켓 {getTicketCount}개\n깃털 {getFeatherCount}개", null);
 

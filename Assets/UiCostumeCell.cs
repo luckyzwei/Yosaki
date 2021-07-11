@@ -47,7 +47,7 @@ public class UiCostumeCell : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(idx =>
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(idx =>
         {
             selectedObject.SetActive(idx == costumeData.Id);
         }).AddTo(this);
@@ -55,12 +55,12 @@ public class UiCostumeCell : MonoBehaviour
 
     public void OnClickCostume()
     {
-        if (DatabaseManager.costumeServerTable.TableDatas[costumeData.Stringid].hasCostume.Value == true)
+        if (ServerData.costumeServerTable.TableDatas[costumeData.Stringid].hasCostume.Value == true)
         {
-            DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value = costumeData.Id;
+            ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value = costumeData.Id;
 
             //서버 저장
-            DatabaseManager.equipmentTable.SyncData(EquipmentTable.CostumeLook);
+            ServerData.equipmentTable.SyncData(EquipmentTable.CostumeLook);
         }
         else 
         {

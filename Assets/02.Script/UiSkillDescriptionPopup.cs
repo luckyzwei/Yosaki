@@ -60,7 +60,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     public void OnClickEquipButton()
     {
-        int skillAwakeNum = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
+        int skillAwakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
 
         if (skillAwakeNum == 0)
         {
@@ -99,13 +99,13 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     private void UpdateSkillAwakeText()
     {
-        awakeText.SetText(DatabaseManager.skillServerTable.GetSkillMaxLevel(skillTableData.Id) == 0 ? "배우기" : "각성");
+        awakeText.SetText(ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id) == 0 ? "배우기" : "각성");
     }
 
     private void UpdateUi()
     {
         string desc = string.Empty;
-        desc += $"데미지 : {(DatabaseManager.skillServerTable.GetSkillDamagePer(skillTableData.Id, applySkillDamAbility: false) * 100f).ToString("F1")}% -> {(DatabaseManager.skillServerTable.GetSkillDamagePer(skillTableData.Id, 1, applySkillDamAbility: false) * 100f).ToString("F1")}%\n";
+        desc += $"데미지 : {(ServerData.skillServerTable.GetSkillDamagePer(skillTableData.Id, applySkillDamAbility: false) * 100f).ToString("F1")}% -> {(ServerData.skillServerTable.GetSkillDamagePer(skillTableData.Id, 1, applySkillDamAbility: false) * 100f).ToString("F1")}%\n";
         desc += $"쿨타임 : {skillTableData.Cooltime}\n";
         desc += $"타겟수 : {skillTableData.Targetcount}\n";
         desc += $"히트수 : {skillTableData.Hitcount}\n";
@@ -121,21 +121,21 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         disposables.Clear();
 
         //스킬 각성시
-        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].AsObservable().Subscribe(WhenSkillAwake).AddTo(disposables);
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].AsObservable().Subscribe(WhenSkillAwake).AddTo(disposables);
 
         //스킬 레벨업시
-        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].AsObservable().Subscribe(WhenSkillUpgraded).AddTo(disposables);
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].AsObservable().Subscribe(WhenSkillUpgraded).AddTo(disposables);
 
 
         var weaponData = TableManager.Instance.WeaponData[skillTableData.Awakeweaponidx];
 
         // DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].amount.AsObservable().Subscribe(WhenAwakeWeaponAmountChanged).AddTo(disposables);
-        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].AsObservable().Subscribe(WhenAwakeWeaponAmountChanged).AddTo(disposables);
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].AsObservable().Subscribe(WhenAwakeWeaponAmountChanged).AddTo(disposables);
     }
 
     private void WhenAwakeWeaponAmountChanged(int amount)
     {
-        int skillAwakeNum = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
+        int skillAwakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
 
         //최초에는 1개로 스킬 배울수있음.
         if (skillAwakeNum == 0)
@@ -156,7 +156,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         var weaponData = TableManager.Instance.WeaponData[skillTableData.Awakeweaponidx];
 
-        WhenAwakeWeaponAmountChanged(DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].amount.Value);
+        WhenAwakeWeaponAmountChanged(ServerData.weaponTable.TableDatas[weaponData.Stringid].amount.Value);
 
         RefreshSkillLvText();
 
@@ -170,18 +170,18 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     private void RefreshSkillLvText()
     {
-        int skillLevel = DatabaseManager.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
-        int maxLevel = DatabaseManager.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
+        int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
+        int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
 
         levelDescription.SetText(string.Format(lvTextFormat, skillLevel, maxLevel));
     }
 
     private void RefreshUpgradeButton()
     {
-        int skillLevel = DatabaseManager.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
-        int maxLevel = DatabaseManager.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
-        var skillPoint = DatabaseManager.statusTable.GetTableData(StatusTable.SkillPoint);
-        int awakeNum = DatabaseManager.skillServerTable.GetSkillAwakeNum(skillTableData.Id);
+        int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
+        int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
+        var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
+        int awakeNum = ServerData.skillServerTable.GetSkillAwakeNum(skillTableData.Id);
 
         levelUpButton.interactable = skillPoint.Value >= 0 && skillLevel < maxLevel;
 
@@ -216,8 +216,8 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     public void OnClickSkillUpgradeButton()
     {
-        int maxLevel = DatabaseManager.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
-        int skillLevel = DatabaseManager.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
+        int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
+        int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
 
         if (skillLevel >= maxLevel)
         {
@@ -225,7 +225,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
             return;
         }
 
-        var skillPoint = DatabaseManager.statusTable.GetTableData(StatusTable.SkillPoint);
+        var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
 
 #if UNITY_EDITOR
         SkillLevelUp(skillPoint);
@@ -248,7 +248,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         skillPoint.Value--;
 
         //스킬 레벨 증가
-        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].Value++;
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].Value++;
 
         //서버 업데이트 요청
         SyncServerRoutine();
@@ -271,13 +271,13 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         Param skillParam = new Param();
 
         //스킬포인트
-        statusParam.Add(StatusTable.SkillPoint, DatabaseManager.statusTable.GetTableData(StatusTable.SkillPoint).Value);
+        statusParam.Add(StatusTable.SkillPoint, ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value);
         transactionList.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
         //스킬레벨
-        skillParam.Add(SkillServerTable.SkillLevel, DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillLevel].Select(e => e.Value).ToList());
+        skillParam.Add(SkillServerTable.SkillLevel, ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel].Select(e => e.Value).ToList());
         transactionList.Add(TransactionValue.SetUpdate(SkillServerTable.tableName, SkillServerTable.Indate, skillParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
 
         SyncRoutine = null;
     }
@@ -286,7 +286,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     {
        // UiTutorialManager.Instance.SetClear(TutorialStep._10_GetSkill);
 
-        int currentAwakeNum = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
+        int currentAwakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
         int maxAwakeNum = skillTableData.Awakemaxnum;
 
         if (currentAwakeNum >= maxAwakeNum)
@@ -301,15 +301,15 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         //스킬북 차감 맨처음에는 1개만 차감
         if (currentAwakeNum == 0)
         {
-            DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value -= 1;
+            ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value -= 1;
         }
         else
         {
-            DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value -= skillTableData.Awakeweaponreqcount;
+            ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value -= skillTableData.Awakeweaponreqcount;
         }
 
         //각성 +1
-        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value++;
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value++;
 
         Initialize(skillTableData);
 
@@ -319,21 +319,21 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         //스킬 각성 횟수 증가
         Param skillParam = new Param();
         List<int> skillAWakeData = new List<int>();
-        var currentAwakeData = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum];
+        var currentAwakeData = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum];
         skillParam.Add(SkillServerTable.SkillAwakeNum, currentAwakeData.Select(e => e.Value).ToList());
 
         //스킬북 차감
         List<int> skillAmountSyncData = new List<int>();
-        for (int i = 0; i < DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount].Count; i++)
+        for (int i = 0; i < ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount].Count; i++)
         {
-            skillAmountSyncData.Add(DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][i].Value);
+            skillAmountSyncData.Add(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][i].Value);
         }
         skillParam.Add(SkillServerTable.SkillHasAmount, skillAmountSyncData);
 
         transactionList.Add(TransactionValue.SetUpdate(SkillServerTable.tableName, SkillServerTable.Indate, skillParam));
 
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
 
         UpdateSkillAwakeText();
 

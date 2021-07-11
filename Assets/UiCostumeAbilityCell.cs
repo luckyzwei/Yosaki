@@ -75,7 +75,7 @@ public class UiCostumeAbilityCell : MonoBehaviour
     {
         disposable.Clear();
 
-        var serverData = DatabaseManager.costumeServerTable.TableDatas[costumeData.Stringid];
+        var serverData = ServerData.costumeServerTable.TableDatas[costumeData.Stringid];
 
         serverData.lockIdx[slotId].AsObservable().Subscribe(e =>
         {
@@ -91,7 +91,7 @@ public class UiCostumeAbilityCell : MonoBehaviour
 
     public void OnClickLockButton()
     {
-        var serverData = DatabaseManager.costumeServerTable.TableDatas[costumeData.Stringid];
+        var serverData = ServerData.costumeServerTable.TableDatas[costumeData.Stringid];
 
         if (serverData.hasCostume.Value == false)
         {
@@ -119,7 +119,7 @@ public class UiCostumeAbilityCell : MonoBehaviour
     {
         yield return syncDelay;
 
-        DatabaseManager.costumeServerTable.SyncCostumeData(key);
+        ServerData.costumeServerTable.SyncCostumeData(key);
 
         lockSyncRoutine = null;
     }

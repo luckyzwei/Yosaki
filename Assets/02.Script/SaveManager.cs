@@ -90,18 +90,18 @@ public class SaveManager : SingletonMono<SaveManager>
     public void SyncDatasInQueue()
     {
        
-        DatabaseManager.goodsTable.SyncAllData();
+        ServerData.goodsTable.SyncAllData();
 
-        DatabaseManager.userInfoTable.AutoUpdateRoutine();
+        ServerData.userInfoTable.AutoUpdateRoutine();
 
-        DatabaseManager.growthTable.UpData(GrowthTable.Exp, false);
+        ServerData.growthTable.UpData(GrowthTable.Exp, false);
 
         //CollectionManager.Instance.SyncToServer();
 
         if (BuffManager.Instance != null)
         {
             BuffManager.Instance.UpdateBuffTime();
-            DatabaseManager.buffServerTable.SyncAllData();
+            ServerData.buffServerTable.SyncAllData();
         }
 
 
@@ -114,16 +114,16 @@ public class SaveManager : SingletonMono<SaveManager>
     //동기로 저장
     public void SyncDatasForce()
     {
-        DatabaseManager.goodsTable.SyncAllDataForce();
+        ServerData.goodsTable.SyncAllDataForce();
 
         //CollectionManager.Instance.SyncToServerForce();
 
-        DatabaseManager.growthTable.SyncDataForce();
+        ServerData.growthTable.SyncDataForce();
 
         if (BuffManager.Instance != null)
         {
             BuffManager.Instance.UpdateBuffTime();
-            DatabaseManager.buffServerTable.SyncAllDataForce();
+            ServerData.buffServerTable.SyncAllDataForce();
         }
     }
 }

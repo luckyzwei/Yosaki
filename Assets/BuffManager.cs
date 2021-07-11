@@ -44,16 +44,16 @@ public class BuffManager : SingletonMono<BuffManager>
             if (tableDatas[i].Buffseconds <= 0f) continue;
 
             //시간끝난버프
-            if (DatabaseManager.buffServerTable.TableDatas[tableDatas[i].Stringid].remainSec.Value == 0) continue;
+            if (ServerData.buffServerTable.TableDatas[tableDatas[i].Stringid].remainSec.Value == 0) continue;
 
-            DatabaseManager.buffServerTable.TableDatas[tableDatas[i].Stringid].remainSec.Value -= elapsedSeconds;
+            ServerData.buffServerTable.TableDatas[tableDatas[i].Stringid].remainSec.Value -= elapsedSeconds;
 
-            if (DatabaseManager.buffServerTable.TableDatas[tableDatas[i].Stringid].remainSec.Value <= 0f)
+            if (ServerData.buffServerTable.TableDatas[tableDatas[i].Stringid].remainSec.Value <= 0f)
             {
-                DatabaseManager.buffServerTable.TableDatas[tableDatas[i].Stringid].remainSec.Value = 0;
+                ServerData.buffServerTable.TableDatas[tableDatas[i].Stringid].remainSec.Value = 0;
 
                 //서버에 저장
-                DatabaseManager.buffServerTable.SyncData(tableDatas[i].Stringid);
+                ServerData.buffServerTable.SyncData(tableDatas[i].Stringid);
             }
         }
     }

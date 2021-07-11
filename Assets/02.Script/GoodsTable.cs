@@ -119,7 +119,7 @@ public class GoodsTable
                   if (bro.IsSuccess() == false)
                   {
                       // 이후 처리
-                      DatabaseManager.ShowCommonErrorPopup(bro, Initialize);
+                      ServerData.ShowCommonErrorPopup(bro, Initialize);
                       return;
                   }
                   else
@@ -147,9 +147,9 @@ public class GoodsTable
 
                   JsonData data = rows[0];
 
-                  if (data.Keys.Contains(DatabaseManager.inDate_str))
+                  if (data.Keys.Contains(ServerData.inDate_str))
                   {
-                      Indate = data[DatabaseManager.inDate_str][DatabaseManager.format_string].ToString();
+                      Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                   }
 
                   var e = tableSchema.GetEnumerator();
@@ -161,7 +161,7 @@ public class GoodsTable
                           if (data.Keys.Contains(e.Current.Key))
                           {
                               //값로드
-                              var value = data[e.Current.Key][DatabaseManager.format_Number].ToString();
+                              var value = data[e.Current.Key][ServerData.format_Number].ToString();
                               tableDatas.Add(e.Current.Key, new ReactiveProperty<float>(float.Parse(value)));
                           }
                           else
@@ -179,7 +179,7 @@ public class GoodsTable
 
                       if (bro.IsSuccess() == false)
                       {
-                          DatabaseManager.ShowCommonErrorPopup(bro, Initialize);
+                          ServerData.ShowCommonErrorPopup(bro, Initialize);
                           return;
                       }
                   }

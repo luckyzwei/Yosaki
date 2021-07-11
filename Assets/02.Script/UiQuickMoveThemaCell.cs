@@ -29,13 +29,13 @@ public class UiQuickMoveThemaCell : MonoBehaviour
 
         this.mapIdx = mapIdx;
 
-        int lastClearStageId = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+        int lastClearStageId = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
         notClearMask.SetActive(this.mapIdx > lastClearStageId + 1); 
     }
 
     public void OnClickButton()
     {
-        int lastClearStageId = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+        int lastClearStageId = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
 
         if (this.mapIdx > lastClearStageId + 1)
         {

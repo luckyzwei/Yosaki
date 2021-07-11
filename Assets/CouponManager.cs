@@ -39,7 +39,7 @@ public class CouponManager : SingletonMono<CouponManager>
                     itemCount = int.Parse(data["itemsCount"].ToString());
                 }
 
-                DatabaseManager.GetPostItem((Item_Type)itemType, itemCount);
+                ServerData.GetPostItem((Item_Type)itemType, itemCount);
 
             }
             else

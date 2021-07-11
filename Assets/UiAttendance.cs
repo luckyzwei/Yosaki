@@ -34,7 +34,7 @@ public class UiAttendance : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
-            DatabaseManager.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
         }
     }
 #endif

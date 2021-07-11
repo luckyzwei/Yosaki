@@ -19,6 +19,10 @@ public class GachaResultViewCell : MonoBehaviour
     private GameObject uniqueEffect;
 
     private static string GetUniqueKey = "GetUnique";
+
+    [SerializeField]
+    private Image openMask;
+
     public void Initialzie(WeaponData weaponData, MagicBookData magicBookData, SkillTableData skillData, int amount)
     {
         weaponView.Initialize(weaponData, magicBookData, skillData);
@@ -27,23 +31,40 @@ public class GachaResultViewCell : MonoBehaviour
         if (weaponData != null)
         {
             // rareEffect.gameObject.SetActive(weaponData.Grade == 2);
-            uniqueEffect.gameObject.SetActive(weaponData.Grade == 3);
+            //uniqueEffect.gameObject.SetActive(weaponData.Grade == 3);
             if (weaponData.Grade == 3)
             {
                 SoundManager.Instance.PlaySound(GetUniqueKey);
                 PopupManager.Instance.ShowWhiteEffect();
             }
+
+            openMask.color = CommonUiContainer.Instance.itemGradeColor[weaponData.Grade];
         }
         else if (magicBookData != null)
         {
             // rareEffect.gameObject.SetActive(magicBookData.Grade == 2);
-            uniqueEffect.gameObject.SetActive(magicBookData.Grade == 3);
+            //uniqueEffect.gameObject.SetActive(magicBookData.Grade == 3);
 
             if (magicBookData.Grade == 3)
             {
                 SoundManager.Instance.PlaySound(GetUniqueKey);
                 PopupManager.Instance.ShowWhiteEffect();
             }
+
+            openMask.color = CommonUiContainer.Instance.itemGradeColor[magicBookData.Grade];
+        }
+        else if (skillData != null)
+        {
+            // rareEffect.gameObject.SetActive(magicBookData.Grade == 2);
+            //uniqueEffect.gameObject.SetActive(magicBookData.Grade == 3);
+
+            if (skillData.Skillgrade == 3)
+            {
+                SoundManager.Instance.PlaySound(GetUniqueKey);
+                PopupManager.Instance.ShowWhiteEffect();
+            }
+
+            openMask.color = CommonUiContainer.Instance.itemGradeColor[skillData.Skillgrade];
         }
     }
 }

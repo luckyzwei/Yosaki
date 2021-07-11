@@ -68,25 +68,25 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].AsObservable().Subscribe(WhenEquipWeaponChanged).AddTo(this);
-            DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].hasItem.AsObservable().Subscribe(WhenHasStageChanged).AddTo(this);
-            DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
+            ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].AsObservable().Subscribe(WhenEquipWeaponChanged).AddTo(this);
+            ServerData.weaponTable.TableDatas[weaponData.Stringid].hasItem.AsObservable().Subscribe(WhenHasStageChanged).AddTo(this);
+            ServerData.weaponTable.TableDatas[weaponData.Stringid].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
         }
         else if (magicBookData != null)
         {
-            DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].AsObservable().Subscribe(WhenEquipMagicBookChanged).AddTo(this);
-            DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].hasItem.AsObservable().Subscribe(WhenHasStageChanged).AddTo(this);
-            DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
+            ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].AsObservable().Subscribe(WhenEquipMagicBookChanged).AddTo(this);
+            ServerData.magicBookTable.TableDatas[magicBookData.Stringid].hasItem.AsObservable().Subscribe(WhenHasStageChanged).AddTo(this);
+            ServerData.magicBookTable.TableDatas[magicBookData.Stringid].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
 
         }
 
         if (weaponData != null)
         {
-            DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].level.AsObservable().Subscribe(WhenItemLevelChanged).AddTo(this);
+            ServerData.weaponTable.TableDatas[weaponData.Stringid].level.AsObservable().Subscribe(WhenItemLevelChanged).AddTo(this);
         }
         else
         {
-            DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].level.AsObservable().Subscribe(WhenItemLevelChanged).AddTo(this);
+            ServerData.magicBookTable.TableDatas[magicBookData.Stringid].level.AsObservable().Subscribe(WhenItemLevelChanged).AddTo(this);
         }
     }
 
@@ -102,8 +102,8 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData == null && magicBookData == null) return;
 
-        if ((weaponData != null && DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].level.Value >= weaponData.Maxlevel) ||
-            (magicBookData != null && DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].level.Value >= magicBookData.Maxlevel)
+        if ((weaponData != null && ServerData.weaponTable.TableDatas[weaponData.Stringid].level.Value >= weaponData.Maxlevel) ||
+            (magicBookData != null && ServerData.magicBookTable.TableDatas[magicBookData.Stringid].level.Value >= magicBookData.Maxlevel)
             )
         {
             levelUpButton.interactable = false;
@@ -117,13 +117,13 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         if (weaponData != null)
         {
-            price = DatabaseManager.weaponTable.GetWeaponLevelUpPrice(weaponData.Stringid);
-            currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
+            price = ServerData.weaponTable.GetWeaponLevelUpPrice(weaponData.Stringid);
+            currentMagicStoneAmount = ServerData.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
         }
         else
         {
-            price = DatabaseManager.magicBookTable.GetMagicBookLevelUpPrice(magicBookData.Stringid);
-            currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
+            price = ServerData.magicBookTable.GetMagicBookLevelUpPrice(magicBookData.Stringid);
+            currentMagicStoneAmount = ServerData.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
         }
 
         levelUpPrice.SetText(Utils.ConvertBigNum(price));
@@ -174,16 +174,16 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             if (TableManager.Instance.WeaponData.TryGetValue(weaponData.Id + 1, out var nextWeaponData))
             {
-                int currentWeaponCount = DatabaseManager.weaponTable.GetCurrentWeaponCount(weaponData.Stringid);
-                int nextWeaponCount = DatabaseManager.weaponTable.GetCurrentWeaponCount(nextWeaponData.Stringid);
+                int currentWeaponCount = ServerData.weaponTable.GetCurrentWeaponCount(weaponData.Stringid);
+                int nextWeaponCount = ServerData.weaponTable.GetCurrentWeaponCount(nextWeaponData.Stringid);
 
                 int upgradeNum = currentWeaponCount / weaponData.Requireupgrade;
 
-                DatabaseManager.weaponTable.UpData(weaponData, upgradeNum * weaponData.Requireupgrade * -1);
-                DatabaseManager.weaponTable.UpData(nextWeaponData, upgradeNum);
+                ServerData.weaponTable.UpData(weaponData, upgradeNum * weaponData.Requireupgrade * -1);
+                ServerData.weaponTable.UpData(nextWeaponData, upgradeNum);
 
                 DailyMissionManager.UpdateDailyMission(DailyMissionKey.WeaponUpgrade, upgradeNum);
-                DatabaseManager.weaponTable.SyncToServerAll(new List<int>() { weaponData.Id, nextWeaponData.Id });
+                ServerData.weaponTable.SyncToServerAll(new List<int>() { weaponData.Id, nextWeaponData.Id });
             }
             else
             {
@@ -195,16 +195,16 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             if (TableManager.Instance.MagicBoocDatas.TryGetValue(magicBookData.Id + 1, out var nextMagicBook))
             {
-                int currentWeaponCount = DatabaseManager.magicBookTable.GetCurrentMagicBookCount(magicBookData.Stringid);
-                int nextWeaponCount = DatabaseManager.magicBookTable.GetCurrentMagicBookCount(nextMagicBook.Stringid);
+                int currentWeaponCount = ServerData.magicBookTable.GetCurrentMagicBookCount(magicBookData.Stringid);
+                int nextWeaponCount = ServerData.magicBookTable.GetCurrentMagicBookCount(nextMagicBook.Stringid);
 
                 int upgradeNum = currentWeaponCount / magicBookData.Requireupgrade;
 
-                DatabaseManager.magicBookTable.UpData(magicBookData, upgradeNum * magicBookData.Requireupgrade * -1);
-                DatabaseManager.magicBookTable.UpData(nextMagicBook, upgradeNum);
+                ServerData.magicBookTable.UpData(magicBookData, upgradeNum * magicBookData.Requireupgrade * -1);
+                ServerData.magicBookTable.UpData(nextMagicBook, upgradeNum);
 
                 DailyMissionManager.UpdateDailyMission(DailyMissionKey.MagicbookUpgrade, upgradeNum);
-                DatabaseManager.magicBookTable.SyncToServerAll(new List<int>() { magicBookData.Id, nextMagicBook.Id });
+                ServerData.magicBookTable.SyncToServerAll(new List<int>() { magicBookData.Id, nextMagicBook.Id });
             }
             else
             {
@@ -242,13 +242,13 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (weaponData != null)
         {
             effectData = TableManager.Instance.WeaponEffectDatas[this.weaponData.Weaponeffectid];
-            weaponLevel = DatabaseManager.weaponTable.TableDatas[this.weaponData.Stringid].level.Value;
+            weaponLevel = ServerData.weaponTable.TableDatas[this.weaponData.Stringid].level.Value;
             stringid = this.weaponData.Stringid;
         }
         else
         {
             effectData = TableManager.Instance.WeaponEffectDatas[this.magicBookData.Magicbookeffectid];
-            weaponLevel = DatabaseManager.magicBookTable.TableDatas[this.magicBookData.Stringid].level.Value;
+            weaponLevel = ServerData.magicBookTable.TableDatas[this.magicBookData.Stringid].level.Value;
             stringid = this.magicBookData.Stringid;
 
         }
@@ -257,17 +257,17 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         description += "<color=#ff00ffff>장착 효과</color>\n";
 
-        float equipValue1 = weaponData != null ? DatabaseManager.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1) : DatabaseManager.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1);
-        float equipValue1_max = weaponData != null ? DatabaseManager.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1, this.weaponData.Maxlevel) : DatabaseManager.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1, magicBookData.Maxlevel);
+        float equipValue1 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1);
+        float equipValue1_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1, magicBookData.Maxlevel);
 
-        float equipValue2 = weaponData != null ? DatabaseManager.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2) : DatabaseManager.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2);
-        float equipValue2_max = weaponData != null ? DatabaseManager.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2, this.weaponData.Maxlevel) : DatabaseManager.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2, magicBookData.Maxlevel);
+        float equipValue2 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2);
+        float equipValue2_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2, magicBookData.Maxlevel);
 
-        float hasValue1 = weaponData != null ? DatabaseManager.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1) : DatabaseManager.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1);
-        float hasValue1_max = weaponData != null ? DatabaseManager.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1, this.weaponData.Maxlevel) : DatabaseManager.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1, magicBookData.Maxlevel);
+        float hasValue1 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1);
+        float hasValue1_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1, magicBookData.Maxlevel);
 
-        float hasValue2 = weaponData != null ? DatabaseManager.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2) : DatabaseManager.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2);
-        float hasValue2_max = weaponData != null ? DatabaseManager.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, this.weaponData.Maxlevel) : DatabaseManager.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, magicBookData.Maxlevel);
+        float hasValue2 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2);
+        float hasValue2_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, magicBookData.Maxlevel);
 
         if (effectData.Equipeffecttype1 != -1)
         {
@@ -340,12 +340,12 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            DatabaseManager.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
+            ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
          //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
         }
         else
         {
-            DatabaseManager.equipmentTable.ChangeEquip(EquipmentTable.MagicBook, magicBookData.Id);
+            ServerData.equipmentTable.ChangeEquip(EquipmentTable.MagicBook, magicBookData.Id);
         }
 
         UpdateEquipButton();
@@ -359,11 +359,11 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         if (weaponData != null)
         {
-            has = DatabaseManager.weaponTable.GetWeaponData(weaponData.Stringid).hasItem.Value;
+            has = ServerData.weaponTable.GetWeaponData(weaponData.Stringid).hasItem.Value;
         }
         else
         {
-            has = DatabaseManager.magicBookTable.GetMagicBookData(magicBookData.Stringid).hasItem.Value;
+            has = ServerData.magicBookTable.GetMagicBookData(magicBookData.Stringid).hasItem.Value;
         }
 
         equipButton.gameObject.SetActive(has == 1);
@@ -372,7 +372,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (equipButton.gameObject.activeSelf)
         {
             string key = weaponData != null ? EquipmentTable.Weapon : EquipmentTable.MagicBook;
-            int equipIdx = DatabaseManager.equipmentTable.TableDatas[key].Value;
+            int equipIdx = ServerData.equipmentTable.TableDatas[key].Value;
 
             equipButton.interactable = equipIdx != id;
             //equipDescription.SetText(equipIdx == id ? "장착중" : "장착");
@@ -383,10 +383,10 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            float currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
-            float levelUpPrice = DatabaseManager.weaponTable.GetWeaponLevelUpPrice(weaponData.Stringid);
+            float currentMagicStoneAmount = ServerData.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
+            float levelUpPrice = ServerData.weaponTable.GetWeaponLevelUpPrice(weaponData.Stringid);
 
-            if (DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].level.Value >= weaponData.Maxlevel)
+            if (ServerData.weaponTable.TableDatas[weaponData.Stringid].level.Value >= weaponData.Maxlevel)
             {
                 PopupManager.Instance.ShowAlarmMessage("최대레벨 입니다.");
                 return;
@@ -400,9 +400,9 @@ public class UiInventoryWeaponView : MonoBehaviour
 #endif
             SoundManager.Instance.PlayButtonSound();
             //재화 차감
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= levelUpPrice;
+            ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= levelUpPrice;
             //레벨 상승
-            DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].level.Value++;
+            ServerData.weaponTable.TableDatas[weaponData.Stringid].level.Value++;
             //일일 미션
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.WeaponLevelUp, 1);
 
@@ -411,10 +411,10 @@ public class UiInventoryWeaponView : MonoBehaviour
         }
         else
         {
-            float currentMagicStoneAmount = DatabaseManager.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
-            float levelUpPrice = DatabaseManager.magicBookTable.GetMagicBookLevelUpPrice(magicBookData.Stringid);
+            float currentMagicStoneAmount = ServerData.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
+            float levelUpPrice = ServerData.magicBookTable.GetMagicBookLevelUpPrice(magicBookData.Stringid);
 
-            if (DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].level.Value >= magicBookData.Maxlevel)
+            if (ServerData.magicBookTable.TableDatas[magicBookData.Stringid].level.Value >= magicBookData.Maxlevel)
             {
                 PopupManager.Instance.ShowAlarmMessage("최대레벨 입니다.");
                 return;
@@ -427,9 +427,9 @@ public class UiInventoryWeaponView : MonoBehaviour
             }
 
             //재화 차감
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= levelUpPrice;
+            ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= levelUpPrice;
             //레벨 상승
-            DatabaseManager.magicBookTable.TableDatas[magicBookData.Stringid].level.Value++;
+            ServerData.magicBookTable.TableDatas[magicBookData.Stringid].level.Value++;
             //일일 미션
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.MagicBookLevelUp, 1);
             //서버에 반영
@@ -485,15 +485,15 @@ public class UiInventoryWeaponView : MonoBehaviour
         Param weaponParam = new Param();
 
         //재화 차감
-        goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
+        goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         //레벨 상승
-        string updateValue = DatabaseManager.weaponTable.TableDatas[weapon.Stringid].ConvertToString();
+        string updateValue = ServerData.weaponTable.TableDatas[weapon.Stringid].ConvertToString();
         weaponParam.Add(weapon.Stringid, updateValue);
         transactionList.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
 
         if (SyncRoutine_weapon != null)
         {
@@ -514,17 +514,17 @@ public class UiInventoryWeaponView : MonoBehaviour
         Param magicBookParam = new Param();
 
         //재화 차감
-        goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
+        goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         //레벨 상승
-        string updateValue = DatabaseManager.magicBookTable.TableDatas[magicbook.Stringid].ConvertToString();
+        string updateValue = ServerData.magicBookTable.TableDatas[magicbook.Stringid].ConvertToString();
         magicBookParam.Add(magicbook.Stringid, updateValue);
 
         transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
 
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
 
         if (SyncRoutineMagicBook != null)
         {

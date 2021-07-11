@@ -40,14 +40,14 @@ public class UiDailyMissionCell : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.dailyMissionTable.TableDatas[tableData.Stringid].AsObservable().Subscribe(WhenMissionAccountChanged).AddTo(this);
+        ServerData.dailyMissionTable.TableDatas[tableData.Stringid].AsObservable().Subscribe(WhenMissionAccountChanged).AddTo(this);
     }
 
     private void OnEnable()
     {
         if (tableData != null)
         {
-            WhenMissionAccountChanged(DatabaseManager.dailyMissionTable.TableDatas[tableData.Stringid].Value);
+            WhenMissionAccountChanged(ServerData.dailyMissionTable.TableDatas[tableData.Stringid].Value);
         }
     }
 
@@ -78,7 +78,7 @@ public class UiDailyMissionCell : MonoBehaviour
         int rewardGemNum = tableData.Rewardvalue * amountFactor;
         //로컬 갱신
         DailyMissionManager.UpdateDailyMission((DailyMissionKey)(tableData.Id), -tableData.Rewardrequire * amountFactor);
-        DatabaseManager.goodsTable.AddLocalData(GoodsTable.Jade, rewardGemNum);
+        ServerData.goodsTable.AddLocalData(GoodsTable.Jade, rewardGemNum);
 
         PopupManager.Instance.ShowAlarmMessage($"보석 {rewardGemNum}개 획득!!");
         SoundManager.Instance.PlaySound("GoldUse");
@@ -105,14 +105,14 @@ public class UiDailyMissionCell : MonoBehaviour
         Param goodsParam = new Param();
 
         //미션 카운트 차감
-        dailyMissionParam.Add(tableData.Stringid, DatabaseManager.dailyMissionTable.TableDatas[tableData.Stringid].Value);
+        dailyMissionParam.Add(tableData.Stringid, ServerData.dailyMissionTable.TableDatas[tableData.Stringid].Value);
         transactionList.Add(TransactionValue.SetUpdate(DailyMissionTable.tableName, DailyMissionTable.Indate, dailyMissionParam));
 
         //재화 추가
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
 
         SyncRoutine = null;
     }

@@ -45,7 +45,7 @@ public class PlayerPet : SingletonMono<PlayerPet>
 
     private void Subscribe()
     {
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].AsObservable().Subscribe(e =>
+        ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].AsObservable().Subscribe(e =>
         {
             //무료펫 아닐떄
             if (e != 0)
@@ -69,7 +69,7 @@ public class PlayerPet : SingletonMono<PlayerPet>
     {
         petTableData.Value = TableManager.Instance.PetDatas[idx];
 
-        var petServerData = DatabaseManager.petTable.TableDatas[petTableData.Value.Stringid];
+        var petServerData = ServerData.petTable.TableDatas[petTableData.Value.Stringid];
 
         moveSpeed = petTableData.Value.Movespeed;
 
@@ -130,7 +130,7 @@ public class PlayerPet : SingletonMono<PlayerPet>
         int updateTick = 0;
 
         string key = TableManager.Instance.PetTable.dataArray[0].Stringid;
-        var remainSec = DatabaseManager.petTable.TableDatas[key].remainSec;
+        var remainSec = ServerData.petTable.TableDatas[key].remainSec;
 
         while (remainSec.Value > 0)
         {
@@ -144,7 +144,7 @@ public class PlayerPet : SingletonMono<PlayerPet>
             {
                 updateTick = 0;
                 //서버 싱크
-                DatabaseManager.petTable.UpdateData(key);
+                ServerData.petTable.UpdateData(key);
             }
         }
     }
@@ -154,7 +154,7 @@ public class PlayerPet : SingletonMono<PlayerPet>
     {
         petTimerDisposable.Clear();
 
-        var petServerData = DatabaseManager.petTable.TableDatas[petTableData.Value.Stringid];
+        var petServerData = ServerData.petTable.TableDatas[petTableData.Value.Stringid];
         petServerData.remainSec.AsObservable().Subscribe(WhenPetRemainSecDecrease).AddTo(petTimerDisposable);
     }
 

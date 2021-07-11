@@ -49,7 +49,7 @@ public static class Utils
         return
             type != StatusType.MoveSpeed &&
             type != StatusType.DamBalance &&
-            type != StatusType.IntAdd &&
+            type != StatusType.AttackAdd &&
             type != StatusType.Hp &&
             type != StatusType.Mp &&
             type != StatusType.IgnoreDefense&&

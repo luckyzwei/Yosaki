@@ -32,7 +32,7 @@ public class UIMemoryStatusView : MonoBehaviour
     {
         compositeDisposable.Clear();
 
-        DatabaseManager.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.AsObservable().Subscribe(e =>
+        ServerData.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.AsObservable().Subscribe(e =>
         {
             UpdateUi();
         }).AddTo(compositeDisposable);
@@ -49,7 +49,7 @@ public class UIMemoryStatusView : MonoBehaviour
 
     private void UpdateUi()
     {
-        int skillLevel = DatabaseManager.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.Value;
+        int skillLevel = ServerData.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.Value;
 
         if (skillLevel >= bossTableData.Maxlevel)
         {
@@ -82,7 +82,7 @@ public class UIMemoryStatusView : MonoBehaviour
 
     public void OnClickUpgradeButton()
     {
-        int currentMagicStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value;
+        int currentMagicStone = (int)ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value;
 
         if (currentMagicStone < bossTableData.Upgradeprice)
         {
@@ -90,7 +90,7 @@ public class UIMemoryStatusView : MonoBehaviour
             return;
         }
 
-        int currentLevel = DatabaseManager.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.Value;
+        int currentLevel = ServerData.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.Value;
         if (currentLevel >= bossTableData.Maxlevel)
         {
             PopupManager.Instance.ShowAlarmMessage($"최고레벨 입니다.");
@@ -99,20 +99,20 @@ public class UIMemoryStatusView : MonoBehaviour
 
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말 레벨업 합니까?", () => 
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= bossTableData.Upgradeprice;
-            DatabaseManager.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.Value++;
+            ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= bossTableData.Upgradeprice;
+            ServerData.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.Value++;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
+            goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param bossParam = new Param();
-            bossParam.Add(bossTableData.Stringid, DatabaseManager.bossServerTable.TableDatas[bossTableData.Stringid].ConvertToString());
+            bossParam.Add(bossTableData.Stringid, ServerData.bossServerTable.TableDatas[bossTableData.Stringid].ConvertToString());
             transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
-            DatabaseManager.SendTransaction(transactions, successCallBack: () =>
+            ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 LogManager.Instance.SendLog("기억능력치레벨업",$"{bossTableData.Id.ToString()}");
             });

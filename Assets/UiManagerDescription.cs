@@ -38,7 +38,7 @@ public class UiManagerDescription : SingletonMono<UiManagerDescription>
         //
         return;
         //
-        var savedFlags = (ManagerDescriptionType)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.managerDescriptionFlags).Value;
+        var savedFlags = (ManagerDescriptionType)ServerData.userInfoTable.GetTableData(UserInfoTable.managerDescriptionFlags).Value;
 
         if (savedFlags.IsSet(type) == true)
         {
@@ -47,7 +47,7 @@ public class UiManagerDescription : SingletonMono<UiManagerDescription>
 
         savedFlags |= type;
 
-        DatabaseManager.userInfoTable.UpData(UserInfoTable.managerDescriptionFlags, (float)savedFlags, false);
+        ServerData.userInfoTable.UpData(UserInfoTable.managerDescriptionFlags, (float)savedFlags, false);
 
         rootObject.SetActive(true);
 

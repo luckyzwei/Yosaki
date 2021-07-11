@@ -52,12 +52,12 @@ public class UiMarbleIndicator : MonoBehaviour
     {
         disposable.Clear();
 
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(e =>
         {
 
         }).AddTo(disposable);
 
-        DatabaseManager.marbleServerTable.TableDatas[currentTableData.Stringid].hasItem.AsObservable().Subscribe(e =>
+        ServerData.marbleServerTable.TableDatas[currentTableData.Stringid].hasItem.AsObservable().Subscribe(e =>
         {
             unlockButton.gameObject.SetActive(e == 0);
         }).AddTo(disposable);
@@ -71,7 +71,7 @@ public class UiMarbleIndicator : MonoBehaviour
 
         priceText.SetText(Utils.ConvertBigNum(currentTableData.Unlockprice));
 
-        bool marbleAwaked = DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value == 1f;
+        bool marbleAwaked = ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value == 1f;
 
         string abilDesc = null;
         //능력치 한개짜리
@@ -120,17 +120,63 @@ public class UiMarbleIndicator : MonoBehaviour
     public void OnClickAwakeButton()
     {
         //전부 열려있는지 체크
-        if (DatabaseManager.marbleServerTable.AllMarblesUnlocked() == false)
+        if (ServerData.marbleServerTable.AllMarblesUnlocked() == false)
         {
             PopupManager.Instance.ShowAlarmMessage($"모든 구슬이 해방되어야 합니다.");
             return;
         }
+
+        bool isMarbleAwaked = ServerData.userInfoTable.TableDatas[UserInfoTable.marbleAwake].Value == 1;
+
+        if (isMarbleAwaked == true)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"이미 각성 했습니다.");
+            return;
+        }
+
+
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertBigNum(GameBalance.marbleAwakePrice)}개를 사용해서 각성 합니까?",
+            () =>
+            {
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value < GameBalance.marbleAwakePrice)
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.", null);
+                    return;
+                }
+                else
+                {
+                    List<TransactionValue> transactions = new List<TransactionValue>();
+
+                    ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.marbleAwakePrice;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value = 1;
+
+                    Param goodsParam = new Param();
+                    goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+
+                    Param userinfoParam = new Param();
+                    userinfoParam.Add(UserInfoTable.marbleAwake, ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value);
+
+                    transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userinfoParam));
+
+                    ServerData.SendTransaction(transactions, successCallBack: () =>
+                    {
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구슬이 각성됐습니다.\n(능력치 2배)", null);
+                        LogManager.Instance.SendLog("구슬 각성", "각성 완료");
+                    });
+                }
+            },
+            () =>
+            {
+
+            });
     }
 
     public void OnClickUpgradeButton()
     {
 
-        var serverData = DatabaseManager.marbleServerTable.TableDatas[currentTableData.Stringid];
+        var serverData = ServerData.marbleServerTable.TableDatas[currentTableData.Stringid];
 
         if (serverData.hasItem.Value == 1)
         {
@@ -138,7 +184,7 @@ public class UiMarbleIndicator : MonoBehaviour
             return;
         }
 
-        if (DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value < currentTableData.Unlockprice)
+        if (ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value < currentTableData.Unlockprice)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Marble)}이 부족합니다.");
             return;
@@ -146,19 +192,20 @@ public class UiMarbleIndicator : MonoBehaviour
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= currentTableData.Unlockprice;
-        DatabaseManager.marbleServerTable.TableDatas[currentTableData.Stringid].hasItem.Value = 1;
+        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= currentTableData.Unlockprice;
+        ServerData.marbleServerTable.TableDatas[currentTableData.Stringid].hasItem.Value = 1;
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.MarbleKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+        goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         Param marbleParam = new Param();
-        marbleParam.Add(currentTableData.Stringid, DatabaseManager.marbleServerTable.TableDatas[currentTableData.Stringid].ConvertToString());
+        marbleParam.Add(currentTableData.Stringid, ServerData.marbleServerTable.TableDatas[currentTableData.Stringid].ConvertToString());
         transactionList.Add(TransactionValue.SetUpdate(MarbleServerTable.tableName, MarbleServerTable.Indate, marbleParam));
 
-        DatabaseManager.SendTransaction(transactionList, successCallBack: () =>
+        ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
+            LogManager.Instance.SendLog("구슬 개방", $"{currentTableData.Name}");
             PopupManager.Instance.ShowAlarmMessage($"{currentTableData.Name} 획득!!");
         });
     }
@@ -168,7 +215,7 @@ public class UiMarbleIndicator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += 100000;
+            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += 100000;
         }
     }
 

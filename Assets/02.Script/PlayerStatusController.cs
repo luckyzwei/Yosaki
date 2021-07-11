@@ -8,7 +8,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 {
     private bool canHit = true;
 
-    private WaitForSeconds hitDelay = new WaitForSeconds(0.3f);
+    private WaitForSeconds hitDelay = new WaitForSeconds(1f);
     public ReactiveProperty<float> maxHp { get; private set; } = new ReactiveProperty<float>(GameBalance.initHp);
     public ReactiveProperty<float> hp { get; private set; } = new ReactiveProperty<float>();
 
@@ -69,51 +69,51 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
     private void Subscribe()
     {
-        DatabaseManager.statusTable.GetTableData(StatusTable.HpLevel_Gold).Subscribe(e =>
+        ServerData.statusTable.GetTableData(StatusTable.HpLevel_Gold).Subscribe(e =>
         {
             UpdateHpMax();
         }).AddTo(this);
 
-        DatabaseManager.statusTable.GetTableData(StatusTable.HpPer_StatPoint).Subscribe(e =>
+        ServerData.statusTable.GetTableData(StatusTable.HpPer_StatPoint).Subscribe(e =>
         {
             UpdateHpMax();
         }).AddTo(this);
 
-        DatabaseManager.statusTable.GetTableData(StatusTable.MpLevel_Gold).Subscribe(e =>
+        ServerData.statusTable.GetTableData(StatusTable.MpLevel_Gold).Subscribe(e =>
         {
             UpdateMpMax();
         }).AddTo(this);
 
-        DatabaseManager.statusTable.GetTableData(StatusTable.MpPer_StatPoint).Subscribe(e =>
+        ServerData.statusTable.GetTableData(StatusTable.MpPer_StatPoint).Subscribe(e =>
         {
             UpdateMpMax();
         }).AddTo(this);
 
         hp.AsObservable().Subscribe(e =>
         {
-            DatabaseManager.userInfoTable.GetTableData(UserInfoTable.Hp).Value = e;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.Hp).Value = e;
         }).AddTo(this);
 
         mp.AsObservable().Subscribe(e =>
         {
-            DatabaseManager.userInfoTable.GetTableData(UserInfoTable.Mp).Value = e;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.Mp).Value = e;
         }).AddTo(this);
 
         //레벨업때
-        DatabaseManager.statusTable.GetTableData(StatusTable.Level).Subscribe(e =>
+        ServerData.statusTable.GetTableData(StatusTable.Level).Subscribe(e =>
         {
             SetHpMpFull();
         }).AddTo(this);
 
         //코스튬 인덱스 바뀔때
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].AsObservable().Subscribe(e =>
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].AsObservable().Subscribe(e =>
         {
             UpdateHpMax();
             UpdateMpMax();
         }).AddTo(this);
 
         //코스튬 새로운 능력치 뽑기 했을때
-        DatabaseManager.costumeServerTable.WhenCostumeOptionChanged.AsObservable().Subscribe(e =>
+        ServerData.costumeServerTable.WhenCostumeOptionChanged.AsObservable().Subscribe(e =>
         {
             UpdateHpMax();
             UpdateMpMax();
@@ -121,7 +121,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
         //펫 획득 했을때
 
-        var iter = DatabaseManager.petTable.TableDatas.GetEnumerator();
+        var iter = ServerData.petTable.TableDatas.GetEnumerator();
         while (iter.MoveNext())
         {
             iter.Current.Value.hasItem.AsObservable().Subscribe(e =>
@@ -132,7 +132,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         }
 
         //날개 렙업
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(e =>
         {
             UpdateHpMax();
             UpdateMpMax();
@@ -145,7 +145,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         {
             if (tableData[i].Abilitytype != (int)StatusType.HpAddPer) continue;
 
-            var serverData = DatabaseManager.passiveServerTable.TableDatas[tableData[i].Stringid];
+            var serverData = ServerData.passiveServerTable.TableDatas[tableData[i].Stringid];
 
             serverData.level.AsObservable().Subscribe(e =>
             {
@@ -167,8 +167,8 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         }
         else
         {
-            hp.Value = DatabaseManager.userInfoTable.GetTableData(UserInfoTable.Hp).Value;
-            mp.Value = DatabaseManager.userInfoTable.GetTableData(UserInfoTable.Mp).Value;
+            hp.Value = ServerData.userInfoTable.GetTableData(UserInfoTable.Hp).Value;
+            mp.Value = ServerData.userInfoTable.GetTableData(UserInfoTable.Mp).Value;
         }
     }
 
@@ -194,6 +194,10 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         if (value < 0)
         {
             if (canHit == false || IsPlayerDead()) return;
+
+            float damDecreaseValue = PlayerStats.GetDamDecreaseValue();
+
+            value += value * damDecreaseValue;
 
             StartCoroutine(HitDelayRoutine());
         }

@@ -23,7 +23,7 @@ public class UiCostumeLookIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
         {
             CostumeData costumeData = TableManager.Instance.CostumeData[e];
             uidescriptionBoard.SetDescription(costumeData.Description);

@@ -45,7 +45,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         SetComplete = true;
 
         //맨처음
-        if (DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value == -1)
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value == -1)
         {
             return;
         }
@@ -62,7 +62,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         Debug.LogError($"Elapsed {elapsedSeconds}");
 
-        var stageTableData = TableManager.Instance.StageMapData[(int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value];
+        var stageTableData = TableManager.Instance.StageMapData[(int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value];
 
         MapInfo mapInfo = BattleObjectManager.GetMapPrefabObject(stageTableData.Mappreset).GetComponent<MapInfo>();
 
@@ -96,20 +96,20 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         GrowthManager.Instance.GetExp(sleepRewardInfo.exp);
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value += sleepRewardInfo.gold;
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += sleepRewardInfo.jade;
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += sleepRewardInfo.GrowthStone;
+        ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += sleepRewardInfo.gold;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += sleepRewardInfo.jade;
+        ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += sleepRewardInfo.GrowthStone;
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Gold, DatabaseManager.goodsTable.GetTableData(GoodsTable.Gold).Value);
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
-        goodsParam.Add(GoodsTable.GrowthStone, DatabaseManager.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
+        goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
 
         List<TransactionValue> transantions = new List<TransactionValue>();
 
         transantions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-        DatabaseManager.SendTransaction(transantions, successCallBack: () =>
+        ServerData.SendTransaction(transantions, successCallBack: () =>
           {
               successCallBack?.Invoke();
           });

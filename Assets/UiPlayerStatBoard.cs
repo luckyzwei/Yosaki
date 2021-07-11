@@ -30,7 +30,7 @@ public class UiPlayerStatBoard : MonoBehaviour
         fightPoint.SetText($"무력 : {Utils.ConvertBigNum(PlayerStats.GetTotalPower())}");
 
         //공격력
-        description1 += $"{CommonString.GetStatusName(StatusType.IntAdd)} : {(int)PlayerStats.GetBaseAttackPower()}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.AttackAdd)} : {(int)PlayerStats.GetBaseAttackPower()}\n";
         //공격력증가(%)
         description2 += $"{CommonString.GetStatusName(StatusType.AttackAddPer)} : {PlayerStats.GetBaseAttackAddPercentValue() * 100f}\n";
 
@@ -72,6 +72,24 @@ public class UiPlayerStatBoard : MonoBehaviour
 
         //경험치 추가 획득
         description2 += $"{CommonString.GetStatusName(StatusType.ExpGainPer)} : {PlayerStats.GetExpPlusValue() * 100f}\n";
+
+        //아이템 획득량
+        description1 += $"{CommonString.GetStatusName(StatusType.DropAmountAddPer)} : {PlayerStats.GetDropAmountAddValue()}\n";
+
+        //이동속도
+        description2 += $"{CommonString.GetStatusName(StatusType.MoveSpeed)} : {PlayerStats.GetMoveSpeedValue()}\n";
+
+        //피해 감소
+        description2 += $"{CommonString.GetStatusName(StatusType.Damdecrease)} : {PlayerStats.GetDamDecreaseValue()}\n";
+
+        //보스피해
+        description1 += $"{CommonString.GetStatusName(StatusType.BossDamAddPer)} : {PlayerStats.GetBossDamAddValue()}\n";
+
+        //방어도 무시
+        description2 += $"{CommonString.GetStatusName(StatusType.IgnoreDefense)} : {PlayerStats.GetIgnoreDefenseValue()}\n";
+
+        //히트수
+        description1 += $"{CommonString.GetStatusName(StatusType.SkillAttackCount)} : {PlayerStats.GetSkillHitAddValue()}\n";
 
         //방무 GetIgnoreDefenseValue
 

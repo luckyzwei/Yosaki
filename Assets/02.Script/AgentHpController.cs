@@ -241,7 +241,7 @@ public class AgentHpController : MonoBehaviour
 
     private void AddEnemyDeadCount()
     {
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value++;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value++;
     }
 
     private void OnEnable()
@@ -253,6 +253,6 @@ public class AgentHpController : MonoBehaviour
     {
         gold += gold * PlayerStats.GetGoldPlusValue();
 
-        DatabaseManager.goodsTable.GetGold(gold);
+        ServerData.goodsTable.GetGold(gold);
     }
 }

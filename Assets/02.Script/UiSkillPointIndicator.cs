@@ -16,7 +16,7 @@ public class UiSkillPointIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.statusTable.GetTableData(StatusTable.SkillPoint).AsObservable().Subscribe(remainSkillPoint =>
+        ServerData.statusTable.GetTableData(StatusTable.SkillPoint).AsObservable().Subscribe(remainSkillPoint =>
         {
             countText.SetText($"남은 스킬 포인트 : {remainSkillPoint}");
         }).AddTo(this);

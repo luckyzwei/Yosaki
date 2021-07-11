@@ -14,9 +14,9 @@ public class UiReviewPopup : MonoBehaviour
 
         SoundManager.Instance.PlayButtonSound();
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += 1000;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += 1000;
 
-        DatabaseManager.goodsTable.SyncToServerEach(GoodsTable.Jade, whenSyncSuccess: () =>
+        ServerData.goodsTable.SyncToServerEach(GoodsTable.Jade, whenSyncSuccess: () =>
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상 수령 성공! 리뷰 남겨주실꺼죠...?", () =>
             {

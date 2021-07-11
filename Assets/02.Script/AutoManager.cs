@@ -44,7 +44,7 @@ public class AutoManager : Singleton<AutoManager>
     {
         if (skillQueue.Count != 0) return;
 
-        var selectedSkill = DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx];
+        var selectedSkill = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx];
 
         for (int i = 0; i < selectedSkill.Count; i++)
         {

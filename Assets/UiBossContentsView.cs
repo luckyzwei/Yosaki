@@ -68,7 +68,7 @@ public class UiBossContentsView : MonoBehaviour
     public void OnClickEnterButton()
     {
         int price = 1;
-        int currentTicketNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value;
+        int currentTicketNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value;
 
         if (currentTicketNum < price)
         {
@@ -78,13 +78,13 @@ public class UiBossContentsView : MonoBehaviour
 
         enterButton.interactable = false;
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value--;
+        ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value--;
 
-        DatabaseManager.goodsTable.SyncToServerEach(GoodsTable.Ticket, () =>
+        ServerData.goodsTable.SyncToServerEach(GoodsTable.Ticket, () =>
         {
             //
             Param param = new Param();
-            param.Add("티켓사용함", $"남은 갯수 : { DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value}");
+            param.Add("티켓사용함", $"남은 갯수 : { ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value}");
 
             SendQueue.Enqueue(Backend.GameLog.InsertLog, "Ticket", param, (brk) => { });
             //로그
@@ -105,7 +105,7 @@ public class UiBossContentsView : MonoBehaviour
         return;
         int price = 1;
 
-        int currentTicketNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value;
+        int currentTicketNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value;
 
         if (currentTicketNum < price)
         {
@@ -177,9 +177,9 @@ public class UiBossContentsView : MonoBehaviour
         }
 
         //티켓차감
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Ticket).Value -= clearAmount;
+        ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value -= clearAmount;
 
-        DatabaseManager.SendTransaction(rewardList, addValue: null,
+        ServerData.SendTransaction(rewardList, addValue: null,
          completeCallBack: () =>
          {
              clearButton.interactable = true;

@@ -9,12 +9,12 @@ public class UiStatusRedDot : UiRedDotBase
 
     protected override void Subscribe()
     {
-        DatabaseManager.statusTable.GetTableData(StatusTable.StatPoint).AsObservable().Subscribe(e =>
+        ServerData.statusTable.GetTableData(StatusTable.StatPoint).AsObservable().Subscribe(e =>
         {
             hasRedDot.Value |= e > 0;
         }).AddTo(this);
 
-        DatabaseManager.statusTable.GetTableData(StatusTable.Memory).AsObservable().Subscribe(e =>
+        ServerData.statusTable.GetTableData(StatusTable.Memory).AsObservable().Subscribe(e =>
         {
             hasRedDot.Value |= e > 0;
         }).AddTo(this);

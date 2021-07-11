@@ -33,9 +33,9 @@ public class UiWingIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).AsObservable().Subscribe(WhenFeatherCountChanged).AddTo(this);
+        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).AsObservable().Subscribe(WhenFeatherCountChanged).AddTo(this);
 
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(WhenWingGradeChanged).AddTo(this);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(WhenWingGradeChanged).AddTo(this);
     }
 
     private void WhenWingGradeChanged(float grade)
@@ -60,7 +60,7 @@ public class UiWingIndicator : MonoBehaviour
 
     private void OnEnable()
     {
-        WhenFeatherCountChanged(DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+        WhenFeatherCountChanged(ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
     }
 
     private void WhenFeatherCountChanged(float featherCount)
@@ -80,7 +80,7 @@ public class UiWingIndicator : MonoBehaviour
 
         var nextTableData = TableManager.Instance.WingTable.dataArray[currentGrade + 1];
 
-        if (DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value < nextTableData.Requirejump)
+        if (ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value < nextTableData.Requirejump)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Marble)}이 부족합니다.");
             return;
@@ -88,21 +88,21 @@ public class UiWingIndicator : MonoBehaviour
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= nextTableData.Requirejump;
+        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= nextTableData.Requirejump;
 
         Param featherParam = new Param();
-        featherParam.Add(GoodsTable.MarbleKey, DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+        featherParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, featherParam));
 
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value += 1f;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value += 1f;
 
         Param gradeParam = new Param();
-        gradeParam.Add(UserInfoTable.marbleAwake, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value);
+        gradeParam.Add(UserInfoTable.marbleAwake, ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, gradeParam));
 
         SoundManager.Instance.PlaySound("GoldUse");
 
-        DatabaseManager.SendTransaction(transactionList, successCallBack: () =>
+        ServerData.SendTransaction(transactionList, successCallBack: () =>
           {
               PopupManager.Instance.ShowAlarmMessage($"{nextTableData.Id + 1}단계 날계 획득!!");
           });
@@ -113,7 +113,7 @@ public class UiWingIndicator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += 100000;
+            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += 100000;
         }
     }
 #endif

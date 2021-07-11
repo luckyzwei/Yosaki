@@ -58,8 +58,8 @@ public class UiCollectionCell : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.collectionTable.TableDatas[tableData.Collectionkey].level.AsObservable().Subscribe(WhenLevelChanged).AddTo(this);
-        DatabaseManager.collectionTable.TableDatas[tableData.Collectionkey].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
+        ServerData.collectionTable.TableDatas[tableData.Collectionkey].level.AsObservable().Subscribe(WhenLevelChanged).AddTo(this);
+        ServerData.collectionTable.TableDatas[tableData.Collectionkey].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
     }
 
     private void WhenAmountChanged(int amount)
@@ -86,18 +86,18 @@ public class UiCollectionCell : MonoBehaviour
             updateGemButtonText.SetText($"{tableData.Stoneprice}");
         }
 
-        abilityText.SetText($"{CommonString.GetStatusName((StatusType)tableData.Collectionabiltype)} + {DatabaseManager.collectionTable.GetCollectionAbilValue(tableData)}");
+        abilityText.SetText($"{CommonString.GetStatusName((StatusType)tableData.Collectionabiltype)} + {ServerData.collectionTable.GetCollectionAbilValue(tableData)}");
     }
 
     public void OnClickCollectButton()
     {
-        if (DatabaseManager.collectionTable.TableDatas[tableData.Collectionkey].amount.Value < tableData.Collectionneedamount)
+        if (ServerData.collectionTable.TableDatas[tableData.Collectionkey].amount.Value < tableData.Collectionneedamount)
         {
             PopupManager.Instance.ShowAlarmMessage("영혼이 부족 합니다.");
             return;
         }
 
-        if (DatabaseManager.collectionTable.TableDatas[tableData.Collectionkey].level.Value >= tableData.Collectionmaxlevel)
+        if (ServerData.collectionTable.TableDatas[tableData.Collectionkey].level.Value >= tableData.Collectionmaxlevel)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 최고레벨 입니다.");
             return;
@@ -114,13 +114,13 @@ public class UiCollectionCell : MonoBehaviour
 
     public void OnClickCollectionByGemButton()
     {
-        if (DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value < tableData.Stoneprice)
+        if (ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value < tableData.Stoneprice)
         {
             PopupManager.Instance.ShowAlarmMessage("재료가 부족합니다.");
             return;
         }
 
-        if (DatabaseManager.collectionTable.TableDatas[tableData.Collectionkey].level.Value >= tableData.Collectionmaxlevel)
+        if (ServerData.collectionTable.TableDatas[tableData.Collectionkey].level.Value >= tableData.Collectionmaxlevel)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 최고레벨 입니다.");
             return;
@@ -131,7 +131,7 @@ public class UiCollectionCell : MonoBehaviour
 
     private void CollectByGem()
     {
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= tableData.Stoneprice;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= tableData.Stoneprice;
 
         CollectionManager.Instance.GetCollectionData(tableData.Collectionkey, true).level.Value++;
 
@@ -139,18 +139,18 @@ public class UiCollectionCell : MonoBehaviour
 
         //재화
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         //컬렉션 레벨
         Param collectionParam = new Param();
-        var collectionServerData = DatabaseManager.collectionTable.TableDatas[tableData.Collectionkey];
+        var collectionServerData = ServerData.collectionTable.TableDatas[tableData.Collectionkey];
 
         collectionParam.Add(tableData.Collectionkey, $"{collectionServerData.idx},{collectionServerData.level.Value},{collectionServerData.amount.Value}");
 
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactionList.Add(TransactionValue.SetUpdate(CollectionTable.tableName, CollectionTable.Indate, collectionParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
 
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.Collection, 1);
     }

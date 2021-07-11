@@ -69,8 +69,8 @@ public class UiAttendanceCell : MonoBehaviour
     private void Subscribe()
     {
         compositeDisposable.Clear();
-        DatabaseManager.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey].AsObservable().Subscribe(WhenRewardInfoChanged).AddTo(compositeDisposable);
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.attendanceCount).AsObservable().Subscribe(WhenDayChanged).AddTo(compositeDisposable);
+        ServerData.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey].AsObservable().Subscribe(WhenRewardInfoChanged).AddTo(compositeDisposable);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).AsObservable().Subscribe(WhenDayChanged).AddTo(compositeDisposable);
     }
 
     private void WhenDayChanged(float attendanceCount)
@@ -102,7 +102,7 @@ public class UiAttendanceCell : MonoBehaviour
 
     public void OnClickRewardButton()
     {
-        var receivedRewardList = DatabaseManager.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey].Value;
+        var receivedRewardList = ServerData.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey].Value;
         var rewards = receivedRewardList.Split(',');
 
         bool hasReward = false;
@@ -120,7 +120,7 @@ public class UiAttendanceCell : MonoBehaviour
             return;
         }
 
-        int attendanceCount = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value;
+        int attendanceCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value;
 
         bool canReceiveReward = attendanceRewardData.Id < attendanceCount;
 
@@ -132,16 +132,16 @@ public class UiAttendanceCell : MonoBehaviour
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
-        transactions.Add(DatabaseManager.GetItemTypeTransactionValueForAttendance((Item_Type)attendanceRewardData.Reward_Type, attendanceRewardData.Reward_Value));
+        transactions.Add(ServerData.GetItemTypeTransactionValueForAttendance((Item_Type)attendanceRewardData.Reward_Type, attendanceRewardData.Reward_Value));
 
         Param rewardParam = new Param();
 
-        DatabaseManager.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey].Value += $",{attendanceRewardData.Id}";
-        rewardParam.Add(AttendanceServerTable.rewardKey, DatabaseManager.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey].Value);
+        ServerData.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey].Value += $",{attendanceRewardData.Id}";
+        rewardParam.Add(AttendanceServerTable.rewardKey, ServerData.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey].Value);
 
         transactions.Add(TransactionValue.SetUpdate(AttendanceServerTable.tableName, AttendanceServerTable.Indate, rewardParam));
 
-        DatabaseManager.SendTransaction(transactions, successCallBack: () =>
+        ServerData.SendTransaction(transactions, successCallBack: () =>
           {
               PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
               SoundManager.Instance.PlaySound("RoulletSpin");

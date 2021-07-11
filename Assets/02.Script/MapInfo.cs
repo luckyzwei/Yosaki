@@ -71,7 +71,7 @@ public class MapInfo : SingletonMono<MapInfo>
 
     private void UpdateStageRank() 
     {
-        RankManager.Instance.UpdateStage_Score(DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
+        RankManager.Instance.UpdateStage_Score(ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
     }
 
     private void Subscribe()
@@ -354,18 +354,18 @@ public class MapInfo : SingletonMono<MapInfo>
 
         //보상지급
         int rewardValue = GameManager.Instance.CurrentStageData.Bossrewardvalue;
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardValue;
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardValue;
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
 
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         Param stageParam = new Param();
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value = GameManager.Instance.CurrentStageData.Id;
-        stageParam.Add(UserInfoTable.topClearStageId, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value = GameManager.Instance.CurrentStageData.Id;
+        stageParam.Add(UserInfoTable.topClearStageId, ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
 
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, stageParam));
 
-        DatabaseManager.SendTransaction(transactions, successCallBack: () =>
+        ServerData.SendTransaction(transactions, successCallBack: () =>
           {
               LogManager.Instance.SendLog("스테이지클리어", GameManager.Instance.CurrentStageData.Id.ToString());
               //결과표시

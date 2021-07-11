@@ -26,7 +26,7 @@ public class InfiniteTowerEnterView : MonoBehaviour
 
     private bool IsAllClear()
     {
-        int currentFloor = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
+        int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
 
         return currentFloor >= TableManager.Instance.TowerTableData.Count;
     }
@@ -35,7 +35,7 @@ public class InfiniteTowerEnterView : MonoBehaviour
     {
         if (IsAllClear() == false)
         {
-            int currentFloor = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
+            int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
             currentStageText.SetText($"{currentFloor + 1}층 도전");
         }
         else
@@ -54,7 +54,7 @@ public class InfiniteTowerEnterView : MonoBehaviour
 
         if (isAllClear == false)
         {
-            int currentFloor = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
+            int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value;
 
             if (TableManager.Instance.TowerTableData.TryGetValue(currentFloor, out var towerTableData) == false)
             {

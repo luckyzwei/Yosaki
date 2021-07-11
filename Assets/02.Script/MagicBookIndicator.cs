@@ -34,7 +34,7 @@ public class MagicBookIndicator : MonoBehaviour
     }
     private void Subscribe()
     {
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].AsObservable().Subscribe(WhenMagicBookEquipInfoChanged).AddTo(this);
+        ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].AsObservable().Subscribe(WhenMagicBookEquipInfoChanged).AddTo(this);
     }
     private void WhenMagicBookEquipInfoChanged(int idx)
     {

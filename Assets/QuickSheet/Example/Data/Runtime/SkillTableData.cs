@@ -125,6 +125,26 @@ public class SkillTableData
   public float Gachalv5 { get {return gachalv5; } set { this.gachalv5 = value;} }
   
   [SerializeField]
+  float gachalv6;
+  public float Gachalv6 { get {return gachalv6; } set { this.gachalv6 = value;} }
+  
+  [SerializeField]
+  float gachalv7;
+  public float Gachalv7 { get {return gachalv7; } set { this.gachalv7 = value;} }
+  
+  [SerializeField]
+  float gachalv8;
+  public float Gachalv8 { get {return gachalv8; } set { this.gachalv8 = value;} }
+  
+  [SerializeField]
+  float gachalv9;
+  public float Gachalv9 { get {return gachalv9; } set { this.gachalv9 = value;} }
+  
+  [SerializeField]
+  float gachalv10;
+  public float Gachalv10 { get {return gachalv10; } set { this.gachalv10 = value;} }
+  
+  [SerializeField]
   int requireupgrade;
   public int Requireupgrade { get {return requireupgrade; } set { this.requireupgrade = value;} }
   

@@ -32,12 +32,12 @@ public class UiBossIconCell : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.AsObservable().Subscribe(e =>
+        ServerData.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.AsObservable().Subscribe(e =>
         {
             description.SetText($"LV{e} {bossTableData.Name}");
         }).AddTo(this);
 
-        DatabaseManager.bossServerTable.TableDatas[bossTableData.Stringid].clear.AsObservable().Subscribe(e =>
+        ServerData.bossServerTable.TableDatas[bossTableData.Stringid].clear.AsObservable().Subscribe(e =>
         {
             notExistObject.SetActive(e == 0);
         }).AddTo(this);

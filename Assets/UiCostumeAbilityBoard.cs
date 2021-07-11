@@ -34,7 +34,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    private CostumeServerData CurrentServerData => DatabaseManager.costumeServerTable.TableDatas[costumeData.Stringid];
+    private CostumeServerData CurrentServerData => ServerData.costumeServerTable.TableDatas[costumeData.Stringid];
 
 
 
@@ -155,15 +155,15 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
             return;
         }
 
-        if (DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value == costumeData.Id)
+        if (ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value == costumeData.Id)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 장착중입니다.");
             return;
         }
 
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value = costumeData.Id;
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value = costumeData.Id;
 
-        DatabaseManager.equipmentTable.SyncData(EquipmentTable.CostumeSlot);
+        ServerData.equipmentTable.SyncData(EquipmentTable.CostumeSlot);
     }
 
     public void OnClickGachaButton()
@@ -234,7 +234,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
         }
 
         CurrentServerData.hasCostume.Value = true;
-        DatabaseManager.costumeServerTable.SyncCostumeData(costumeData.Stringid);
+        ServerData.costumeServerTable.SyncCostumeData(costumeData.Stringid);
 
     }
 
@@ -253,7 +253,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
         }
 
         //재화 차감
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
 
 
         if (syncRoutine != null)
@@ -278,22 +278,22 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         //서버저장
-        DatabaseManager.costumeServerTable.SyncCostumeData(key);
+        ServerData.costumeServerTable.SyncCostumeData(key);
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         Param costumeParam = new Param();
-        costumeParam.Add(key, DatabaseManager.costumeServerTable.TableDatas[key].ConvertToString());
+        costumeParam.Add(key, ServerData.costumeServerTable.TableDatas[key].ConvertToString());
         transactionList.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
 
-        DatabaseManager.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList);
     }
 
     private bool CanGacha()
     {
-        int currentBlueStoneNum = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
+        int currentBlueStoneNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         return currentBlueStoneNum >= price;
     }
@@ -329,7 +329,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
     public void RefreshUi()
     {
-        var costumeServerData = DatabaseManager.costumeServerTable.TableDatas[costumeData.Stringid];
+        var costumeServerData = ServerData.costumeServerTable.TableDatas[costumeData.Stringid];
 
         for (int i = 0; i < costumeServerData.abilityIdx.Count; i++)
         {

@@ -19,7 +19,7 @@ public class UiGoodsIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.goodsTable.GetTableData(goodsKey).AsObservable().Subscribe(goods =>
+        ServerData.goodsTable.GetTableData(goodsKey).AsObservable().Subscribe(goods =>
         {
             goodsText.SetText($"{Utils.ConvertBigNum(goods).ToString()}");
         }).AddTo(this);

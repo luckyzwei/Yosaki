@@ -149,7 +149,7 @@ public class SkillServerTable
                  if (bro.IsSuccess() == false)
                  {
                      // 이후 처리
-                     DatabaseManager.ShowCommonErrorPopup(bro, Initialize);
+                     ServerData.ShowCommonErrorPopup(bro, Initialize);
                      return;
                  }
                  else
@@ -174,9 +174,9 @@ public class SkillServerTable
 
                  JsonData data = rows[0];
 
-                 if (data.Keys.Contains(DatabaseManager.inDate_str))
+                 if (data.Keys.Contains(ServerData.inDate_str))
                  {
-                     Indate = data[DatabaseManager.inDate_str][DatabaseManager.format_string].ToString();
+                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                  }
 
                  var e = tableSchema.GetEnumerator();
@@ -188,13 +188,13 @@ public class SkillServerTable
                          if (data.Keys.Contains(e.Current.Key))
                          {
                              //값로드
-                             var value = data[e.Current.Key][DatabaseManager.format_list];
+                             var value = data[e.Current.Key][ServerData.format_list];
                              if (value.IsArray)
                              {
                                  List<ReactiveProperty<int>> loadedData = new List<ReactiveProperty<int>>();
                                  for (int j = 0; j < value.Count; j++)
                                  {
-                                     var intData = Int32.Parse(value[j][DatabaseManager.format_Number].ToString());
+                                     var intData = Int32.Parse(value[j][ServerData.format_Number].ToString());
                                      loadedData.Add(new ReactiveProperty<int>(intData));
                                  }
 
@@ -250,7 +250,7 @@ public class SkillServerTable
 
                      if (bro.IsSuccess() == false)
                      {
-                         DatabaseManager.ShowCommonErrorPopup(bro, Initialize);
+                         ServerData.ShowCommonErrorPopup(bro, Initialize);
                          return;
                      }
                  }

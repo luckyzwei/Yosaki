@@ -33,7 +33,7 @@ public static class DailyMissionManager
         string key = TableManager.Instance.DailyMissionDatas[(int)missionKey].Stringid;
 
         //로컬 데이터 갱신
-        DatabaseManager.dailyMissionTable.UpdateMissionData(key, count);
+        ServerData.dailyMissionTable.UpdateMissionData(key, count);
 
 
 
@@ -55,7 +55,7 @@ public static class DailyMissionManager
     {
         yield return syncDelay;
 
-        DatabaseManager.dailyMissionTable.SyncToServerEach(key);
+        ServerData.dailyMissionTable.SyncToServerEach(key);
 
         SyncRoutines[missionKey] = null;
     }

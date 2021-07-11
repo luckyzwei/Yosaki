@@ -60,7 +60,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void Subscribe()
     {
-        DatabaseManager.statusTable.GetTableData(StatusTable.Level).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e =>
+        ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e =>
              {
                  UpdateUserRank_Level();
              }).AddTo(this);
@@ -89,11 +89,11 @@ public class RankManager : SingletonMono<RankManager>
             {
                 JsonData data = rows[0];
 
-                var splitData = data["NickName"][DatabaseManager.format_string].ToString().Split(CommonString.ChatSplitChar);
+                var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
 
                 string nickName = splitData[5];
-                int rank = int.Parse(data["rank"][DatabaseManager.format_Number].ToString());
-                int level = int.Parse(data["score"][DatabaseManager.format_Number].ToString());
+                int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
+                int level = int.Parse(data["score"][ServerData.format_Number].ToString());
                 int costumeId = int.Parse(splitData[0]);
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
@@ -112,14 +112,14 @@ public class RankManager : SingletonMono<RankManager>
     public void UpdateUserRank_Level()
     {
         Param param = new Param();
-        param.Add("Level", DatabaseManager.statusTable.GetTableData(StatusTable.Level).Value);
+        param.Add("Level", ServerData.statusTable.GetTableData(StatusTable.Level).Value);
 
-        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
-        int petIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
-        int weaponIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
-        int magicBookIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
+        int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
+        int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
         int fightPoint = (int)PlayerStats.GetTotalPower();
-        int wingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
 
@@ -159,11 +159,11 @@ public class RankManager : SingletonMono<RankManager>
             {
                 JsonData data = rows[0];
 
-                var splitData = data["NickName"][DatabaseManager.format_string].ToString().Split(CommonString.ChatSplitChar);
+                var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
 
                 string nickName = splitData[5];
-                int rank = int.Parse(data["rank"][DatabaseManager.format_Number].ToString());
-                float score = float.Parse(data["score"][DatabaseManager.format_Number].ToString());
+                int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
+                float score = float.Parse(data["score"][ServerData.format_Number].ToString());
                 int costumeId = int.Parse(splitData[0]);
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
@@ -188,12 +188,12 @@ public class RankManager : SingletonMono<RankManager>
         Param param = new Param();
         param.Add("Score", score);
 
-        int costumeIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
-        int petIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
-        int weaponIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
-        int magicBookIdx = DatabaseManager.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
+        int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
+        int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
         int fightPoint = (int)PlayerStats.GetTotalPower();
-        int wingIdx = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
 

@@ -25,7 +25,7 @@ public abstract class SkillBase
     {
         float apDamage = PlayerStats.GetCalculatedAttackPower();
 
-        float skillDamagePer = DatabaseManager.skillServerTable.GetSkillDamagePer(skillInfo.Id);
+        float skillDamagePer = ServerData.skillServerTable.GetSkillDamagePer(skillInfo.Id);
 
         return apDamage * skillDamagePer;
     }
@@ -48,7 +48,7 @@ public abstract class SkillBase
 
     private bool CheckMp()
     {
-        var currentMp = DatabaseManager.userInfoTable.GetTableData(UserInfoTable.Mp);
+        var currentMp = ServerData.userInfoTable.GetTableData(UserInfoTable.Mp);
         if (currentMp.Value >= skillInfo.Usecost)
         {
             PlayerStatusController.Instance.UpdateMp(-skillInfo.Usecost);

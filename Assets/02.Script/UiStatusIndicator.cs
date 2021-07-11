@@ -23,7 +23,7 @@ public class UiStatusIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.statusTable.GetTableData(statusKey).AsObservable().Subscribe(statusPoint =>
+        ServerData.statusTable.GetTableData(statusKey).AsObservable().Subscribe(statusPoint =>
         {
             countText.SetText($"{prefixDesc}{statusPoint}");
         }).AddTo(this);

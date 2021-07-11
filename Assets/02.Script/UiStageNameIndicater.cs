@@ -135,7 +135,7 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
     }
     public void OnClickRightButton()
     {
-        int lastClearStage = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+        int lastClearStage = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
 
         if (lastClearStage == TableManager.Instance.GetLastStageIdx())
         {

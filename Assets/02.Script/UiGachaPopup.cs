@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class UiGachaPopup : SingletonMono<UiGachaPopup>
 {
     //누적
-    private List<ObscuredInt> gachaLevelMinNum = new List<ObscuredInt>() { 0, 500, 3000, 6000, 25000 };
+   // private List<ObscuredInt> gachaLevelMinNum = new List<ObscuredInt>() { 0, 500, 3000, 6000, 25000, 30000, 35000, 40000, 45000, 50000 };
+    private List<ObscuredInt> gachaLevelMinNum = new List<ObscuredInt>() { 0,50, 100, 150, 200, 250, 300, 350, 400, 450 };
 
     private ReactiveProperty<int> gachaLevel = new ReactiveProperty<int>();
 
@@ -29,9 +30,9 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
 
     private void Subscribe()
     {
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_Weapon).AsObservable().Subscribe(WhenGachaNumChanged_Weapon).AddTo(this);
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_MagicBook).AsObservable().Subscribe(WhenGachaNumChanged_MagicBook).AddTo(this);
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).AsObservable().Subscribe(WhenGachaNumChanged_SKill).AddTo(this);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Weapon).AsObservable().Subscribe(WhenGachaNumChanged_Weapon).AddTo(this);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_MagicBook).AsObservable().Subscribe(WhenGachaNumChanged_MagicBook).AddTo(this);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).AsObservable().Subscribe(WhenGachaNumChanged_SKill).AddTo(this);
     }
 
     private void WhenGachaNumChanged_Weapon(float num)
@@ -143,7 +144,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     /// <returns></returns>
     public int GachaLevel(string key)
     {
-        int gachaNum = (int)DatabaseManager.userInfoTable.GetTableData(key).Value;
+        int gachaNum = (int)ServerData.userInfoTable.GetTableData(key).Value;
 
         int gachaLevel = 0;
 

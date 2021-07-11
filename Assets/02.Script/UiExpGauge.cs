@@ -24,7 +24,7 @@ public class UiExpGauge : MonoBehaviour
         //    WhenGrowthValueChanged();
         //}).AddTo(this);
 
-        DatabaseManager.growthTable.GetTableData(GrowthTable.Exp).AsObservable().Subscribe(e =>
+        ServerData.growthTable.GetTableData(GrowthTable.Exp).AsObservable().Subscribe(e =>
         {
             WhenGrowthValueChanged();
         }).AddTo(this);
@@ -32,7 +32,7 @@ public class UiExpGauge : MonoBehaviour
 
     private void WhenGrowthValueChanged()
     {
-        Initialize(DatabaseManager.growthTable.GetTableData(GrowthTable.Exp).Value, GrowthManager.Instance.maxExp.Value);
+        Initialize(ServerData.growthTable.GetTableData(GrowthTable.Exp).Value, GrowthManager.Instance.maxExp.Value);
     }
 
     public void Initialize(float currentExp, float maxExp)

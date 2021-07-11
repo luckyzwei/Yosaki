@@ -75,16 +75,18 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
 
         Vector3 moveDirection;
 
+        float moveSpeed = PlayerBalance.moveSpeed + PlayerStats.GetMoveSpeedValue();
+
         if (PlayerSkillCaster.Instance.isSkillMoveRestriction == false)
         {
-            moveDirection = new Vector3(GetHorizontalAxis(), rb.velocity.y / PlayerBalance.moveSpeed);
+            moveDirection = new Vector3(GetHorizontalAxis(), rb.velocity.y / moveSpeed);
         }
         else
         {
-            moveDirection = new Vector3(0f, rb.velocity.y / PlayerBalance.moveSpeed);
+            moveDirection = new Vector3(0f, rb.velocity.y / moveSpeed);
         }
 
-        rb.velocity = moveDirection * PlayerBalance.moveSpeed;
+        rb.velocity = moveDirection * moveSpeed;
 
         if (rb.velocity.magnitude != 0)
         {

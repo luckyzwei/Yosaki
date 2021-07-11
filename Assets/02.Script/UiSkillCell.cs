@@ -83,16 +83,16 @@ public class UiSkillCell : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillData.Id].AsObservable().Subscribe(CheckUnlock).AddTo(this);
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillData.Id].AsObservable().Subscribe(CheckUnlock).AddTo(this);
 
         //스킬 각성시
-        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillData.Id].AsObservable().Subscribe(WhenSkillAwake).AddTo(this);
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillData.Id].AsObservable().Subscribe(WhenSkillAwake).AddTo(this);
 
         //스킬 레벨업시
-        DatabaseManager.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillData.Id].AsObservable().Subscribe(WhenSkillUpgraded).AddTo(this);
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillData.Id].AsObservable().Subscribe(WhenSkillUpgraded).AddTo(this);
 
 
-        DatabaseManager.skillServerTable.whenSelectedSkillIdxChanged.AsObservable().Subscribe(WhenSelectedSkillIdxChanged).AddTo(this);
+        ServerData.skillServerTable.whenSelectedSkillIdxChanged.AsObservable().Subscribe(WhenSelectedSkillIdxChanged).AddTo(this);
     }
 
     private void WhenSkillAwake(int awakeNum)
@@ -107,13 +107,13 @@ public class UiSkillCell : MonoBehaviour
 
     private void WhenSelectedSkillIdxChanged(List<ReactiveProperty<int>> skillList)
     {
-        SetRemoveButton(DatabaseManager.skillServerTable.AlreadyEquipedSkill(skillData.Id));
+        SetRemoveButton(ServerData.skillServerTable.AlreadyEquipedSkill(skillData.Id));
     }
 
     private void RefreshSkillLvText()
     {
-        int skillLevel = DatabaseManager.skillServerTable.GetSkillCurrentLevel(skillData.Id);
-        int maxLevel = DatabaseManager.skillServerTable.GetSkillMaxLevel(skillData.Id);
+        int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillData.Id);
+        int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillData.Id);
 
        // levelDescription.SetText(string.Format(lvTextFormat, skillLevel, maxLevel));
     }
@@ -121,7 +121,7 @@ public class UiSkillCell : MonoBehaviour
 
     private void CheckUnlock(int currentLevel)
     {
-        int maxLevel = DatabaseManager.skillServerTable.GetSkillMaxLevel(skillData.Id);
+        int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillData.Id);
         setSlotButton.interactable = maxLevel > 0;
 
         if (setSlotButton.interactable == false)
@@ -135,7 +135,7 @@ public class UiSkillCell : MonoBehaviour
             slotButtonDesc.SetText("슬롯에 등록");
 
 
-            SetRemoveButton(DatabaseManager.skillServerTable.AlreadyEquipedSkill(skillData.Id));
+            SetRemoveButton(ServerData.skillServerTable.AlreadyEquipedSkill(skillData.Id));
         }
 
         registerButtonImage.sprite = setSlotButton.interactable ? hasSkill : needToLearn;
@@ -149,7 +149,7 @@ public class UiSkillCell : MonoBehaviour
 
     public void OnClickRemoveButton()
     {
-        DatabaseManager.skillServerTable.RemoveSkillInEquipList(skillData.Id);
+        ServerData.skillServerTable.RemoveSkillInEquipList(skillData.Id);
 
         if (AutoManager.Instance.IsAutoMode)
         {

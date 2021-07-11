@@ -101,7 +101,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
     }
     private void BonusDefenseEnterRoutine()
     {
-        int currentBlueStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
+        int currentBlueStone = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         if (currentBlueStone < GameBalance.contentsEnterprice)
         {
@@ -109,7 +109,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
             return;
         }
 
-        int currentEnterCount = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
+        int currentEnterCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
         if (currentEnterCount >= GameBalance.bonusDungeonEnterCount)
         {
             PopupManager.Instance.ShowAlarmMessage($"오늘은 더이상 입장할 수 없습니다.");
@@ -118,21 +118,21 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
         enterButton.interactable = false;
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.contentsEnterprice;
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value++;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.contentsEnterprice;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value++;
 
         //데이터 싱크
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
+        userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        DatabaseManager.SendTransaction(transactionList,
+        ServerData.SendTransaction(transactionList,
             successCallBack: () =>
             {
                 GameManager.Instance.LoadContents(contentsType);
@@ -145,7 +145,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
     private void InfiniteTowerEnterRoutine()
     {
-        int currentBlueStone = (int)DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value;
+        int currentBlueStone = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         if (currentBlueStone < GameBalance.contentsEnterprice)
         {
@@ -155,9 +155,9 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
         enterButton.interactable = false;
 
-        DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.contentsEnterprice;
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.contentsEnterprice;
 
-        DatabaseManager.goodsTable.SyncToServerEach(GoodsTable.Jade, () =>
+        ServerData.goodsTable.SyncToServerEach(GoodsTable.Jade, () =>
         {
             GameManager.Instance.LoadContents(contentsType);
         },
@@ -168,7 +168,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
        //실패
        () =>
        {
-           DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += GameBalance.contentsEnterprice;
+           ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += GameBalance.contentsEnterprice;
            enterButton.interactable = true;
            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "서버가 불안정 합니다. 잠시후 다시 시도해 주세요.", null);
        });
@@ -176,13 +176,13 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
     public void BonusDungeonInstantClear() 
     {
-        if (DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value >= GameBalance.bonusDungeonEnterCount)
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value >= GameBalance.bonusDungeonEnterCount)
         {
             PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 소탕할 수 없습니다.");
             return;
         }
 
-        int killCount = (int)DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonMaxKillCount).Value;
+        int killCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonMaxKillCount).Value;
 
         if (killCount==0)
         {
@@ -195,21 +195,21 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
             enterButton.interactable = false;
 
             int rewardNum = killCount * GameBalance.bonusDungeonGemPerEnemy;
-            DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value++;
-            DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value += killCount * GameBalance.bonusDungeonGemPerEnemy;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value++;
+            ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += killCount * GameBalance.bonusDungeonGemPerEnemy;
 
             //데이터 싱크
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.Jade, DatabaseManager.goodsTable.GetTableData(GoodsTable.Jade).Value);
+            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param userInfoParam = new Param();
-            userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
+            userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
             transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-            DatabaseManager.SendTransaction(transactionList,
+            ServerData.SendTransaction(transactionList,
                 successCallBack: () =>
                 {
 

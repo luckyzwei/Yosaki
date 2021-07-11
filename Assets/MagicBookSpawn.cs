@@ -27,7 +27,7 @@ public class MagicBookSpawn : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
         {
             if (prefIndicator != null)
             {

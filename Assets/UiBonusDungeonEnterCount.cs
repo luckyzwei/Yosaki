@@ -16,7 +16,7 @@ public class UiBonusDungeonEnterCount : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).AsObservable().Subscribe(WhenEnterCountChanged).AddTo(this);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).AsObservable().Subscribe(WhenEnterCountChanged).AddTo(this);
     }
 
     private void WhenEnterCountChanged(float enterCount)

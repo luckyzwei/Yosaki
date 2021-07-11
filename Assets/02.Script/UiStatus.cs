@@ -28,7 +28,7 @@ public class UiStatus : SingletonMono<UiStatus>
     }
     private void Subscribe()
     {
-        DatabaseManager.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(WhenLevelChanged).AddTo(this);
+        ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(WhenLevelChanged).AddTo(this);
 
         RankManager.Instance.WhenMyLevelRankLoadComplete.AsObservable().Subscribe(e =>
         {
@@ -36,7 +36,7 @@ public class UiStatus : SingletonMono<UiStatus>
             {
                 loadedMyRank = e.Rank;
 
-                WhenLevelChanged(DatabaseManager.statusTable.GetTableData(StatusTable.Level).Value);
+                WhenLevelChanged(ServerData.statusTable.GetTableData(StatusTable.Level).Value);
 
             }
         }).AddTo(this);

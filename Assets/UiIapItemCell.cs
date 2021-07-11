@@ -138,7 +138,7 @@ public class UiIapItemCell : MonoBehaviour
 
     private bool CanBuyProduct()
     {
-        int buyCount = DatabaseManager.iapServerTable.TableDatas[productData.Productid].buyCount.Value;
+        int buyCount = ServerData.iapServerTable.TableDatas[productData.Productid].buyCount.Value;
 
         return buyCount < GetBuyCount();
     }
@@ -222,7 +222,7 @@ public class UiIapItemCell : MonoBehaviour
     {
         disposable.Clear();
 
-        DatabaseManager.iapServerTable.TableDatas[productData.Productid].buyCount.AsObservable().Subscribe(e =>
+        ServerData.iapServerTable.TableDatas[productData.Productid].buyCount.AsObservable().Subscribe(e =>
         {
             string text = null;
 

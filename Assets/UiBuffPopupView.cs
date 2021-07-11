@@ -52,7 +52,7 @@ public class UiBuffPopupView : MonoBehaviour
     {
         if (initialized == false) return;
 
-        WhenRemainSecChanged(DatabaseManager.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.Value);
+        WhenRemainSecChanged(ServerData.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.Value);
     }
 
     private void WhenRemainSecChanged(float remainSec)
@@ -80,12 +80,12 @@ public class UiBuffPopupView : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.AsObservable().Subscribe(e =>
+        ServerData.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.AsObservable().Subscribe(e =>
         {
             WhenRemainSecChanged(e);
         }).AddTo(this);
 
-        DatabaseManager.userInfoTable.GetTableData(buffTableData.Stringid).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(buffTableData.Stringid).AsObservable().Subscribe(e =>
         {
             buffGetButton.sprite = e == 0f ? getEnable : getDisable;
         }).AddTo(this);
@@ -93,7 +93,7 @@ public class UiBuffPopupView : MonoBehaviour
 
     public void OnClickGetBuffButton()
     {
-        if (DatabaseManager.userInfoTable.GetTableData(buffTableData.Stringid).Value == 1)
+        if (ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value == 1)
         {
             PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 획득할 수 없습니다.");
             return;
@@ -108,23 +108,23 @@ public class UiBuffPopupView : MonoBehaviour
 
     private void BuffGetRoutine() 
     {
-        DatabaseManager.userInfoTable.GetTableData(buffTableData.Stringid).Value = 1;
-        DatabaseManager.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.Value += buffTableData.Buffseconds;
+        ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value = 1;
+        ServerData.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.Value += buffTableData.Buffseconds;
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
         Param userInfoParam = new Param();
 
-        userInfoParam.Add(buffTableData.Stringid, DatabaseManager.userInfoTable.GetTableData(buffTableData.Stringid).Value);
+        userInfoParam.Add(buffTableData.Stringid, ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value);
 
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         Param buffParam = new Param();
 
-        buffParam.Add(buffTableData.Stringid, DatabaseManager.buffServerTable.TableDatas[buffTableData.Stringid].ConvertToString());
+        buffParam.Add(buffTableData.Stringid, ServerData.buffServerTable.TableDatas[buffTableData.Stringid].ConvertToString());
 
         transactions.Add(TransactionValue.SetUpdate(BuffServerTable.tableName, BuffServerTable.Indate, buffParam));
 
-        DatabaseManager.SendTransaction(transactions);
+        ServerData.SendTransaction(transactions);
     }
 }

@@ -16,7 +16,7 @@ public class WeaponEquipView : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.Weapon].AsObservable().Subscribe(WhenEquipIdxChanged).AddTo(this);
+        ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].AsObservable().Subscribe(WhenEquipIdxChanged).AddTo(this);
 
     }
 

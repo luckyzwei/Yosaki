@@ -132,7 +132,7 @@ public static class CommonString
             case StatusType.ExpGainPer:
                 return "경험치 획득 증가(%)";
                 break;
-            case StatusType.IntAdd:
+            case StatusType.AttackAdd:
                 return "공격력";
                 break;
             case StatusType.Hp:
@@ -159,14 +159,14 @@ public static class CommonString
             case StatusType.DashCount:
                 return "점멸 횟수";
                 break;
-            case StatusType.DropProbAddPer:
+            case StatusType.DropAmountAddPer:
                 return "몬스터 전리품 수량 증가(%)";
                 break;
             case StatusType.BossDamAddPer:
                 return "보스 데미지 증가(%)";
                 break;
             case StatusType.SkillAttackCount:
-                return "기술 공격 횟수 증가";
+                return "기술 타격 횟수 증가";
                 break;
         }
 

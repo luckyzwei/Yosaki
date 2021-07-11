@@ -59,7 +59,7 @@ public class AdManager : SingletonMono<AdManager>
 
     private bool HasRemoveAdProduct()
     {
-        bool hasIapProduct = DatabaseManager.iapServerTable.TableDatas["removead"].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas["removead"].buyCount.Value > 0;
 
         bool hasReceipt = IAPManager.Instance.HasProduct("removead");
 

@@ -53,7 +53,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         {
             var SkillTableData = TableManager.Instance.SkillTable.dataArray[i];
 
-            if (DatabaseManager.skillServerTable.HasSkill(SkillTableData.Id))
+            if (ServerData.skillServerTable.HasSkill(SkillTableData.Id))
             {
                 Type elementType = Type.GetType(SkillTableData.Skillclassname);
 
@@ -128,7 +128,9 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     {
         AgentHpController agentHpController = hitEnemie.gameObject.GetComponent<AgentHpController>();
 
-        for (int hit = 0; hit < skillInfo.Hitcount; hit++)
+        int hitCount = skillInfo.Hitcount + PlayerStats.GetSkillHitAddValue();
+
+        for (int hit = 0; hit < hitCount; hit++)
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 

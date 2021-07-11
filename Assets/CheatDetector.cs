@@ -6,8 +6,8 @@ public class CheatDetector : SingletonMono<CheatDetector>
 {
     public void WhenCheatDetected()
     {
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.hackingCount).Value++;
-        DatabaseManager.userInfoTable.UpData(UserInfoTable.hackingCount, false);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.hackingCount).Value++;
+        ServerData.userInfoTable.UpData(UserInfoTable.hackingCount, false);
         
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "불법 프로그램이 감지되었습니다.\n 검토후 계정이 정지됩니다.\n 계속 사용시 민 형사상의 책임을 지게될 수 있습니다.", Restart);
     }

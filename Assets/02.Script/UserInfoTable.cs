@@ -153,7 +153,7 @@ public class UserInfoTable
                  if (bro.IsSuccess() == false)
                  {
                      // 이후 처리
-                     DatabaseManager.ShowCommonErrorPopup(bro, Initialize);
+                     ServerData.ShowCommonErrorPopup(bro, Initialize);
                      return;
                  }
                  else
@@ -181,9 +181,9 @@ public class UserInfoTable
 
                  JsonData data = rows[0];
 
-                 if (data.Keys.Contains(DatabaseManager.inDate_str))
+                 if (data.Keys.Contains(ServerData.inDate_str))
                  {
-                     Indate = data[DatabaseManager.inDate_str][DatabaseManager.format_string].ToString();
+                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                  }
 
                  var e = tableSchema.GetEnumerator();
@@ -195,7 +195,7 @@ public class UserInfoTable
                          if (data.Keys.Contains(e.Current.Key))
                          {
                              //값로드
-                             var value = data[e.Current.Key][DatabaseManager.format_Number].ToString();
+                             var value = data[e.Current.Key][ServerData.format_Number].ToString();
                              tableDatas.Add(e.Current.Key, new ReactiveProperty<float>(float.Parse(value)));
                          }
                          else
@@ -213,7 +213,7 @@ public class UserInfoTable
 
                      if (bro.IsSuccess() == false)
                      {
-                         DatabaseManager.ShowCommonErrorPopup(bro, Initialize);
+                         ServerData.ShowCommonErrorPopup(bro, Initialize);
                          return;
                      }
                  }
@@ -317,13 +317,13 @@ public class UserInfoTable
     {
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
 
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.LastLogin, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
+        userInfoParam.Add(UserInfoTable.LastLogin, ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        DatabaseManager.SendTransaction(transactionList, true);
+        ServerData.SendTransaction(transactionList, true);
     }
 
 
@@ -337,39 +337,39 @@ public class UserInfoTable
 
         //일일초기화
         Param dailyPassParam = new Param();
-        DatabaseManager.dailyPassServerTable.ResetDailyPassLocal();
-        dailyPassParam.Add(DailyPassServerTable.DailypassFreeReward, DatabaseManager.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassFreeReward].Value);
-        dailyPassParam.Add(DailyPassServerTable.DailypassAdReward, DatabaseManager.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassAdReward].Value);
+        ServerData.dailyPassServerTable.ResetDailyPassLocal();
+        dailyPassParam.Add(DailyPassServerTable.DailypassFreeReward, ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassFreeReward].Value);
+        dailyPassParam.Add(DailyPassServerTable.DailypassAdReward, ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassAdReward].Value);
         transactionList.Add(TransactionValue.SetUpdate(DailyPassServerTable.tableName, DailyPassServerTable.Indate, dailyPassParam));
 
         //일일초기화
         Param userInfoParam = new Param();
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value = 0;
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value = 0;
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value = 0;
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value = 0;
 
         //버프
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value = 0;
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.buff_exp1).Value = 0;
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.buff_exp2).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp1).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp2).Value = 0;
         //
 
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
-        DatabaseManager.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
 
-        userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value);
-        userInfoParam.Add(UserInfoTable.dailyTicketBuyCount, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value);
-        userInfoParam.Add(UserInfoTable.receivedTicketReward, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value);
-        userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
-        userInfoParam.Add(UserInfoTable.LastLogin, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
-        userInfoParam.Add(UserInfoTable.attendanceCount, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value);
+        userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value);
+        userInfoParam.Add(UserInfoTable.dailyTicketBuyCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value);
+        userInfoParam.Add(UserInfoTable.receivedTicketReward, ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value);
+        userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
+        userInfoParam.Add(UserInfoTable.LastLogin, ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
+        userInfoParam.Add(UserInfoTable.attendanceCount, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value);
 
-        userInfoParam.Add(UserInfoTable.buff_gold1, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);
-        userInfoParam.Add(UserInfoTable.buff_gold2, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);
-        userInfoParam.Add(UserInfoTable.buff_exp1, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.buff_exp1).Value);
-        userInfoParam.Add(UserInfoTable.buff_exp2, DatabaseManager.userInfoTable.GetTableData(UserInfoTable.buff_exp2).Value);
+        userInfoParam.Add(UserInfoTable.buff_gold1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);
+        userInfoParam.Add(UserInfoTable.buff_gold2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);
+        userInfoParam.Add(UserInfoTable.buff_exp1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp1).Value);
+        userInfoParam.Add(UserInfoTable.buff_exp2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp2).Value);
 
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
@@ -390,8 +390,8 @@ public class UserInfoTable
                     iapParam = new Param();
                 }
 
-                DatabaseManager.iapServerTable.TableDatas[iapTable[i].Productid].buyCount.Value = 0;
-                iapParam.Add(iapTable[i].Productid, DatabaseManager.iapServerTable.TableDatas[iapTable[i].Productid].ConvertToString());
+                ServerData.iapServerTable.TableDatas[iapTable[i].Productid].buyCount.Value = 0;
+                iapParam.Add(iapTable[i].Productid, ServerData.iapServerTable.TableDatas[iapTable[i].Productid].ConvertToString());
             }
         }
 
@@ -400,7 +400,7 @@ public class UserInfoTable
             transactionList.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
         }
 
-        DatabaseManager.SendTransaction(transactionList, true);
+        ServerData.SendTransaction(transactionList, true);
     }
     private void WeekChanged()
     {

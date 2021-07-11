@@ -163,13 +163,13 @@ public class SingleRaidManager : ContentsManagerBase
 
     private void SendClearInfo()
     {
-        var serverData = DatabaseManager.bossServerTable.TableDatas[bossTableData.Stringid];
+        var serverData = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
 
         if (serverData.clear.Value != 1)
         {
             serverData.clear.Value = 1;
 
-            DatabaseManager.bossServerTable.UpdateData(bossTableData.Stringid);
+            ServerData.bossServerTable.UpdateData(bossTableData.Stringid);
         }
     }
 
@@ -231,7 +231,7 @@ public class SingleRaidManager : ContentsManagerBase
         //데이터 적용(로컬)
         for (int i = 0; i < rewardDatas.Count; i++)
         {
-            DatabaseManager.AddLocalValue(rewardDatas[i].itemType, rewardDatas[i].amount);
+            ServerData.AddLocalValue(rewardDatas[i].itemType, rewardDatas[i].amount);
         }
 
         return rewardDatas;
@@ -246,7 +246,7 @@ public class SingleRaidManager : ContentsManagerBase
         List<RewardData> rewardDatas = GetRewawrdData(bossTableData, damagedHp);
 
         //데이터 적용(서버)
-        DatabaseManager.SendTransaction(rewardDatas);
+        ServerData.SendTransaction(rewardDatas);
 
         //결과 UI
         uiBossResultPopup.gameObject.SetActive(true);

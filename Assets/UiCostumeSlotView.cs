@@ -36,7 +36,7 @@ public class UiCostumeSlotView : MonoBehaviour
 
     private void Subscribe()
     {
-        DatabaseManager.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].AsObservable().Subscribe(e =>
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].AsObservable().Subscribe(e =>
         {
             equpObject.SetActive(e == this.costumeData.Id);
         }).AddTo(this);
