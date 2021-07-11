@@ -19,11 +19,11 @@ public static class CommonString
     public static string NickNameError_400 = "잘못된 닉네임 입니다.";
     public static string NickNameError_409 = "이미 존재하는 닉네임 입니다.";
 
-    public static string WeaponGrade_0 = "하급";
-    public static string WeaponGrade_1 = "중급";
-    public static string WeaponGrade_2 = "상급";
-    public static string WeaponGrade_3 = "특급";
-    public static string WeaponGrade_4 = "전설";
+    public static string ItemGrade_0 = "하급";
+    public static string ItemGrade_1 = "중급";
+    public static string ItemGrade_2 = "상급";
+    public static string ItemGrade_3 = "특급";
+    public static string ItemGrade_4 = "전설";
 
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
