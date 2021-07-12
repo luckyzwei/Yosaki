@@ -9,8 +9,7 @@ using UnityEngine.UI;
 public class UiGachaPopup : SingletonMono<UiGachaPopup>
 {
     //누적
-   // private List<ObscuredInt> gachaLevelMinNum = new List<ObscuredInt>() { 0, 500, 3000, 6000, 25000, 30000, 35000, 40000, 45000, 50000 };
-    private List<ObscuredInt> gachaLevelMinNum = new List<ObscuredInt>() { 0,50, 100, 150, 200, 250, 300, 350, 400, 450 };
+    private List<ObscuredInt> gachaLevelMinNum = new List<ObscuredInt>() { 0,500, 3000, 6000, 30000, 50000, 80000, 120000, 160000, 200000 };
 
     private ReactiveProperty<int> gachaLevel = new ReactiveProperty<int>();
 
