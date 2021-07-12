@@ -152,4 +152,8 @@ public class SkillTableData
   bool iseffectrootplayer;
   public bool Iseffectrootplayer { get {return iseffectrootplayer; } set { this.iseffectrootplayer = value;} }
   
+  [SerializeField]
+  string name;
+  public string Name { get {return name; } set { this.name = value;} }
+  
 }
