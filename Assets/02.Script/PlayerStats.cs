@@ -133,6 +133,7 @@ public static class PlayerStats
         ret += GetWingAbilValue(StatusType.AttackAdd);
         ret += GetPassiveSkillValue(StatusType.AttackAdd);
         ret += GetMarbleValue(StatusType.AttackAdd);
+        ret += GetSkillHasValue(StatusType.AttackAdd);
 
         return ret;
     }
@@ -341,6 +342,26 @@ public static class PlayerStats
             {
                 ret += tableData.Abilityvalue[i];
             }
+        }
+
+        return ret;
+    }
+    public static float GetSkillHasValue(StatusType type) 
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.SkillTable.dataArray;
+
+        for(int i = 0; i < tableDatas.Length; i++) 
+        {
+            if (tableDatas[i].Haseffecttype != (int)type) continue;
+
+            int awakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][tableDatas[i].Id].Value;
+
+            if (awakeNum==0) continue;
+
+
+            ret += awakeNum * tableDatas[i].Haseffectvalue;
         }
 
         return ret;

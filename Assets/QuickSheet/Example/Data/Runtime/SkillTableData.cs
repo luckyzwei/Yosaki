@@ -156,4 +156,12 @@ public class SkillTableData
   string name;
   public string Name { get {return name; } set { this.name = value;} }
   
+  [SerializeField]
+  int haseffecttype;
+  public int Haseffecttype { get {return haseffecttype; } set { this.haseffecttype = value;} }
+  
+  [SerializeField]
+  float haseffectvalue;
+  public float Haseffectvalue { get {return haseffectvalue; } set { this.haseffectvalue = value;} }
+  
 }

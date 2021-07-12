@@ -58,6 +58,9 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     [SerializeField]
     private Button equipButton;
 
+    [SerializeField]
+    private TextMeshProUGUI hasEffectDesc;
+
     public void OnClickEquipButton()
     {
         int skillAwakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
@@ -154,13 +157,15 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     {
         awakeDescription.SetText($"현재 각성 {awakeNum}회 스킬 최대레벨 {(awakeNum) * GameBalance.SkillAwakePlusNum}");
 
-        var weaponData = TableManager.Instance.WeaponData[skillTableData.Awakeweaponidx];
+        //var weaponData = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id];
 
-        WhenAwakeWeaponAmountChanged(ServerData.weaponTable.TableDatas[weaponData.Stringid].amount.Value);
+        //WhenAwakeWeaponAmountChanged(ServerData.weaponTable.TableDatas[weaponData.Stringid].amount.Value);
 
         RefreshSkillLvText();
 
         equipButton.interactable = awakeNum != 0;
+
+        hasEffectDesc.SetText($"보유효과 : {CommonString.GetStatusName((StatusType)skillTableData.Haseffecttype)} {awakeNum * skillTableData.Haseffectvalue}\n(스킬 각성시 보유 효과가 상승합니다))");
     }
 
     private void WhenSkillUpgraded(int skillLevel)
@@ -256,7 +261,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         //Ui갱신
         Initialize(skillTableData);
 
-     //   UiTutorialManager.Instance.SetClear(TutorialStep._5_SkillLevelUp);
+        //   UiTutorialManager.Instance.SetClear(TutorialStep._5_SkillLevelUp);
     }
 
     private IEnumerator SyncDataRoutine()
@@ -284,7 +289,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     public void OnClickAwakeButton()
     {
-       // UiTutorialManager.Instance.SetClear(TutorialStep._10_GetSkill);
+        // UiTutorialManager.Instance.SetClear(TutorialStep._10_GetSkill);
 
         int currentAwakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
         int maxAwakeNum = skillTableData.Awakemaxnum;
