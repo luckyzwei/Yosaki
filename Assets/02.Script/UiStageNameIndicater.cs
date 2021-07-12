@@ -26,6 +26,9 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
     private GameObject fieldBossRemainObj;
 
     [SerializeField]
+    private GameObject stageObj;
+
+    [SerializeField]
     private TextMeshProUGUI fieldBossRemainSec;
 
     public ReactiveCommand whenFieldBossTimerEnd = new ReactiveCommand();
@@ -40,6 +43,7 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
         StopFieldBossTimer();
 
         fieldBossRemainObj.SetActive(true);
+        stageObj.SetActive(false);
 
         bossTimerRoutine = StartCoroutine(FieldBossRoutine(timer));
     }
@@ -47,7 +51,7 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
     public void StopFieldBossTimer()
     {
         fieldBossRemainObj.SetActive(false);
-
+        stageObj.SetActive(true);
         if (bossTimerRoutine != null)
         {
             StopCoroutine(bossTimerRoutine);
@@ -90,6 +94,7 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
         SetArrowButtons();
 
+        stageObj.SetActive(true);
         fieldBossRemainObj.SetActive(false);
     }
 
