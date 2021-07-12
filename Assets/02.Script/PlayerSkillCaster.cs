@@ -21,7 +21,6 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
         if (canUserSkill)
         {
-
             UserSkills[skillIdx].UseSkill();
         }
 

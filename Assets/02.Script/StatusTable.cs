@@ -250,7 +250,10 @@ public class StatusTable
             {
                 case AttackLevel_Gold:
                     {
-                        return (Mathf.Pow(level, 2.9f + (level / 1000) * 0.1f));
+                        //7월 12일버전
+                        //return (Mathf.Pow(level, 2.9f + (level / 1000) * 0.1f));
+
+                        return (Mathf.Pow(level, 2.7f + (level / 1000) * 0.1f));
                     }
                     break;
                 case CriticalDamLevel_Gold:
@@ -260,7 +263,9 @@ public class StatusTable
                 case HpRecover_Gold:
                 case MpRecover_Gold:
                     {
-                        return Mathf.Pow(level, 3.0f + (level / 100) * 0.1f);
+                        //7월 12일버전
+                        //return Mathf.Pow(level, 3.0f + (level / 100) * 0.1f);
+                        return Mathf.Pow(level, 2.9f + (level / 100) * 0.1f);
                     }
                     break;
             }

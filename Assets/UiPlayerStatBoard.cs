@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiPlayerStatBoard : MonoBehaviour
+public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 {
     [SerializeField]
     private TextMeshProUGUI descriptionBoard1;
@@ -22,7 +22,7 @@ public class UiPlayerStatBoard : MonoBehaviour
         Refresh();
     }
 
-    private void Refresh()
+    public void Refresh()
     {
         string description1 = string.Empty;
         string description2 = string.Empty;

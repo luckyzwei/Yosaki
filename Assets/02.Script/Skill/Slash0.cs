@@ -23,7 +23,9 @@ public class Slash0 : SkillBase
 
         Vector3 rayDirection = playerSkillCaster.PlayerMoveController.MoveDirection == MoveDirection.Right ? Vector3.right : Vector3.left;
 
-        var hitEnemies = playerSkillCaster.GetEnemiesInBoxcast(playerTr.position, rayDirection, skillInfo.Targetrange, 4f).Select(e => e.collider).ToArray();
+        Vector3 skillCastPos = playerTr.position + rayDirection;
+
+        var hitEnemies = playerSkillCaster.GetEnemiesInBoxcast(skillCastPos, rayDirection, skillInfo.Targetrange, 4f).Select(e => e.collider).ToArray();
 
         //발동 이펙트
         //+이펙트

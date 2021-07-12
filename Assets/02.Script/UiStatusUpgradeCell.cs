@@ -487,5 +487,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         transactionList.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
 
         ServerData.SendTransaction(transactionList);
+
+        UiPlayerStatBoard.Instance.Refresh();
     }
 }
