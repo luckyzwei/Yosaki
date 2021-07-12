@@ -7,7 +7,7 @@ public class PlayerBalance
 {
     public readonly static ObscuredFloat moveSpeed = 8f;
     public readonly static ObscuredFloat jumpPower = 17f;
-    public readonly static ObscuredFloat doubleJumpPower = 30f;
+    public readonly static ObscuredFloat doubleJumpPower = 25f;
 }
 
 public class PotionBalance

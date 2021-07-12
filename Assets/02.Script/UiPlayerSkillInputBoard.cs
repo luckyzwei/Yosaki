@@ -19,6 +19,9 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
+    [SerializeField]
+    private GameObject autoDesc;
+
     private new void Awake()
     {
         base.Awake();
@@ -36,6 +39,11 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
     private void Subscribe()
     {
         ServerData.skillServerTable.whenSelectedSkillIdxChanged.AsObservable().Subscribe(WhenSelectedSkillIdxChanged).AddTo(this);
+
+        AutoManager.Instance.AutoMode.AsObservable().Subscribe(e =>
+        {
+            autoDesc.SetActive(e);
+        }).AddTo(this);
     }
 
     private void WhenSelectedSkillIdxChanged(List<ReactiveProperty<int>> list)
@@ -52,11 +60,11 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 
                 skillIcons[i].fillAmount = 0f;
 
-              //  maskObjects[i].SetActive(false);
+                //  maskObjects[i].SetActive(false);
             }
             else
             {
-               // maskObjects[i].SetActive(true);
+                // maskObjects[i].SetActive(true);
 
                 skillIcons[i].sprite = CommonResourceContainer.GetSkillIconSprite(list[i].Value);
 
@@ -82,7 +90,7 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
         }).AddTo(disposables);
     }
 
-    public void OnClickSKillToggle(int idx) 
+    public void OnClickSKillToggle(int idx)
     {
         if (AutoManager.Instance.IsAutoMode)
         {
