@@ -210,7 +210,8 @@ public class GoogleManager : MonoBehaviour
 #if UNITY_EDITOR
         // return "mayotestguest@gmail.com";
         // return "mabw222ei3no24gi233d0312@n3aver.com"; //GM도비
-        return "222322"; //GM도비
+        //  return "a_3961873472804492579"; //GM도비
+        return "zeroro";
 #endif
         Debug.LogError($"GetGoogleLoginKey {loginId}");
         return loginId;

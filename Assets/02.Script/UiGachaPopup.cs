@@ -9,7 +9,9 @@ using UnityEngine.UI;
 public class UiGachaPopup : SingletonMono<UiGachaPopup>
 {
     //누적
-    private List<ObscuredInt> gachaLevelMinNum = new List<ObscuredInt>() { 0,500, 3000, 6000, 30000, 50000, 80000, 120000, 160000, 200000 };
+    private List<ObscuredInt> gachaLevelMinNum_weapon = new List<ObscuredInt>() { 0, 500, 2000, 5000, 20000, 50000, 80000, 120000, 160000, 200000 };
+    private List<ObscuredInt> gachaLevelMinNum_norigae = new List<ObscuredInt>() { 0, 500, 2000, 5000, 20000, 50000, 80000, 120000, 160000, 200000 };
+    private List<ObscuredInt> gachaLevelMinNum_skill = new List<ObscuredInt>() { 0, 250, 1000, 2500, 10000, 25000, 40000, 60000, 80000, 100000 };
 
     private ReactiveProperty<int> gachaLevel = new ReactiveProperty<int>();
 
@@ -30,7 +32,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     private void Subscribe()
     {
         ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Weapon).AsObservable().Subscribe(WhenGachaNumChanged_Weapon).AddTo(this);
-        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_MagicBook).AsObservable().Subscribe(WhenGachaNumChanged_MagicBook).AddTo(this);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Norigae).AsObservable().Subscribe(WhenGachaNumChanged_Norigae).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).AsObservable().Subscribe(WhenGachaNumChanged_SKill).AddTo(this);
     }
 
@@ -43,10 +45,10 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         int current = (int)num;
 
         //만렙아닐때
-        if (gachaLevel < gachaLevelMinNum.Count - 1)
+        if (gachaLevel < gachaLevelMinNum_weapon.Count - 1)
         {
-            int prefMaxCount = gachaLevelMinNum[gachaLevel];
-            int nextMaxCount = gachaLevelMinNum[gachaLevel + 1];
+            int prefMaxCount = gachaLevelMinNum_weapon[gachaLevel];
+            int nextMaxCount = gachaLevelMinNum_weapon[gachaLevel + 1];
 
             gaugeDescription[0].text = $"{current - prefMaxCount}/{nextMaxCount - prefMaxCount}";
 
@@ -63,19 +65,19 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         }
     }
 
-    private void WhenGachaNumChanged_MagicBook(float num)
+    private void WhenGachaNumChanged_Norigae(float num)
     {
-        int gachaLevel = GachaLevel(UserInfoTable.gachaNum_MagicBook);
+        int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Norigae);
 
         gachaLevelText[1].text = $"LV : {gachaLevel + 1}";
 
         int current = (int)num;
 
         //만렙아닐때
-        if (gachaLevel < gachaLevelMinNum.Count - 1)
+        if (gachaLevel < gachaLevelMinNum_norigae.Count - 1)
         {
-            int prefMaxCount = gachaLevelMinNum[gachaLevel];
-            int nextMaxCount = gachaLevelMinNum[gachaLevel + 1];
+            int prefMaxCount = gachaLevelMinNum_norigae[gachaLevel];
+            int nextMaxCount = gachaLevelMinNum_norigae[gachaLevel + 1];
 
             gaugeDescription[1].text = $"{current - prefMaxCount}/{nextMaxCount - prefMaxCount}";
 
@@ -101,10 +103,10 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         int current = (int)num;
 
         //만렙아닐때
-        if (gachaLevel < gachaLevelMinNum.Count - 1)
+        if (gachaLevel < gachaLevelMinNum_skill.Count - 1)
         {
-            int prefMaxCount = gachaLevelMinNum[gachaLevel];
-            int nextMaxCount = gachaLevelMinNum[gachaLevel + 1];
+            int prefMaxCount = gachaLevelMinNum_skill[gachaLevel];
+            int nextMaxCount = gachaLevelMinNum_skill[gachaLevel + 1];
 
             gaugeDescription[2].text = $"{current - prefMaxCount}/{nextMaxCount - prefMaxCount}";
 
@@ -132,7 +134,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
 
         while (true)
         {
-            gachaLevelMinNum.ForEach(e => e.RandomizeCryptoKey());
+            gachaLevelMinNum_weapon.ForEach(e => e.RandomizeCryptoKey());
             yield return randomizeDelay;
         }
     }
@@ -147,9 +149,24 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
 
         int gachaLevel = 0;
 
-        for (int i = 0; i < gachaLevelMinNum.Count; i++)
+        List<ObscuredInt> gacbaLevelInfo = null;
+
+        if (key == UserInfoTable.gachaNum_Weapon)
         {
-            if (gachaNum >= gachaLevelMinNum[i])
+            gacbaLevelInfo = gachaLevelMinNum_weapon;
+        }
+        else if (key == UserInfoTable.gachaNum_Norigae)
+        {
+            gacbaLevelInfo = gachaLevelMinNum_norigae;
+        }
+        else if (key == UserInfoTable.gachaNum_Skill)
+        {
+            gacbaLevelInfo = gachaLevelMinNum_skill;
+        }
+
+        for (int i = 0; i < gacbaLevelInfo.Count; i++)
+        {
+            if (gachaNum >= gacbaLevelInfo[i])
             {
                 gachaLevel = i;
             }

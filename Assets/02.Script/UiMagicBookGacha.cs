@@ -101,7 +101,7 @@ public class UiMagicBookGacha : MonoBehaviour
 
         var e = magicBookData.GetEnumerator();
 
-        int gachaLevel = UiGachaPopup.Instance.GachaLevel(UserInfoTable.gachaNum_MagicBook);
+        int gachaLevel = UiGachaPopup.Instance.GachaLevel(UserInfoTable.gachaNum_Norigae);
 
         while (e.MoveNext())
         {
@@ -156,7 +156,7 @@ public class UiMagicBookGacha : MonoBehaviour
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
 
         //가챠갯수
-        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_MagicBook).Value += amount;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Norigae).Value += amount;
 
         //마법책
         for (int i = 0; i < amount; i++)
@@ -201,7 +201,7 @@ public class UiMagicBookGacha : MonoBehaviour
 
         //가챠횟수
         Param gachaNumParam = new Param();
-        gachaNumParam.Add(UserInfoTable.gachaNum_MagicBook, ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_MagicBook).Value);
+        gachaNumParam.Add(UserInfoTable.gachaNum_Norigae, ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Norigae).Value);
 
         //마법책
         Param magicBookParam = new Param();

@@ -20,7 +20,7 @@ public class UserInfoTable
     public const string removeAd = "removeAd";
 
     public const string gachaNum_Weapon = "gachaNum_Weapon";
-    public const string gachaNum_MagicBook = "gachaNum_MagicBook";
+    public const string gachaNum_Norigae = "gachaNum_Norigae";
     public const string gachaNum_Skill = "gachaNum_Skill";
 
     public const string hackingCount = "hackingCount";
@@ -68,7 +68,7 @@ public class UserInfoTable
         {LastLogin,0f},
         {removeAd,0f},
         {gachaNum_Weapon,0f},
-        {gachaNum_MagicBook,0f},
+        {gachaNum_Norigae,0f},
         {gachaNum_Skill,0f},
         {hackingCount,0f},
         {passSelectedIdx,0f},
