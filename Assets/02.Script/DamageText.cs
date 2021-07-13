@@ -31,15 +31,15 @@ public class DamageText : PoolItem
     //[SerializeField]
     //private TMP_FontAsset ciriticalfont;
 
-    [SerializeField]
-    private GameObject criticalIcon;
+    //[SerializeField]
+    //private GameObject criticalIcon;
 
-    [SerializeField]
-    private VertexGradient greenGradient;
-    [SerializeField]
-    private VertexGradient whiteGradient;
-    [SerializeField]
-    private VertexGradient redGradient;
+    //[SerializeField]
+    //private VertexGradient greenGradient;
+    //[SerializeField]
+    //private VertexGradient whiteGradient;
+    //[SerializeField]
+    //private VertexGradient redGradient;
 
 
     [SerializeField]
@@ -57,9 +57,9 @@ public class DamageText : PoolItem
     {
         damageText.color = isCritical ? criticalColor : normalColor;
 
-        SetColor(type);
+        //SetColor(type);
 
-        criticalIcon.SetActive(isCritical);
+        //criticalIcon.SetActive(isCritical);
 
         damageText.SetText(Utils.ConvertBigNum(damage));
 
@@ -72,21 +72,21 @@ public class DamageText : PoolItem
     }
 
 
-    private void SetColor(DamTextType type)
-    {
-        switch (type)
-        {
-            case DamTextType.Normal:
-                damageText.colorGradient = whiteGradient;
-                break;
-            case DamTextType.Green:
-                damageText.colorGradient = greenGradient;
-                break;
-            case DamTextType.Red:
-                damageText.colorGradient = redGradient;
-                break;
-        }
-    }
+    //private void SetColor(DamTextType type)
+    //{
+    //    switch (type)
+    //    {
+    //        case DamTextType.Normal:
+    //            damageText.colorGradient = whiteGradient;
+    //            break;
+    //        case DamTextType.Green:
+    //            damageText.colorGradient = greenGradient;
+    //            break;
+    //        case DamTextType.Red:
+    //            damageText.colorGradient = redGradient;
+    //            break;
+    //    }
+    //}
 
     private void DisableObject()
     {
