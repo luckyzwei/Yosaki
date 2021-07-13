@@ -54,7 +54,12 @@ public class SkillServerTable
 
         SyncSkillSlotIdxToServer(groupId);
 
-        whenSelectedSkillIdxChanged.Execute(tableDatas[GetSkillGroupKey(groupId)]);
+
+        int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
+        if (currentSelectedGroupId == groupId)
+        {
+            whenSelectedSkillIdxChanged.Execute(tableDatas[GetSkillGroupKey(groupId)]);
+        }
     }
 
     public static string GetSkillGroupKey(int groupId)
@@ -73,11 +78,6 @@ public class SkillServerTable
         }
     }
 
-    public void ApplySkillSlotGroup(int groupId)
-    {
-        whenSelectedSkillIdxChanged.Execute(tableDatas[GetSkillGroupKey(groupId)]);
-    }
-
     public void RemoveSkillInEquipList(int idx, int groupId)
     {
         for (int i = 0; i < tableDatas[GetSkillGroupKey(groupId)].Count; i++)
@@ -88,18 +88,27 @@ public class SkillServerTable
             }
         }
 
-        whenSelectedSkillIdxChanged.Execute(tableDatas[GetSkillGroupKey(groupId)]);
+        int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
+        if (currentSelectedGroupId == groupId)
+        {
+            whenSelectedSkillIdxChanged.Execute(tableDatas[GetSkillGroupKey(groupId)]);
+        }
 
         SyncSkillSlotIdxToServer(groupId);
     }
 
     public bool AlreadyEquipedSkill(int idx)
     {
-        for (int i = 0; i < tableDatas[SkillSlotIdx_0].Count; i++)
+        for (int i = 0; i < GameBalance.skillSlotGroupNum; i++)
         {
-            if (tableDatas[SkillSlotIdx_0][i].Value == idx)
+            string key = GetSkillGroupKey(i);
+
+            for (int j = 0; j < tableDatas[key].Count; j++)
             {
-                return true;
+                if (tableDatas[key][j].Value == idx)
+                {
+                    return true;
+                }
             }
         }
 

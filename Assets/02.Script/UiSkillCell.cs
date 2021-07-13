@@ -61,7 +61,7 @@ public class UiSkillCell : MonoBehaviour
 
         this.skillData = skillData;
 
-       // skillIcon.sprite = CommonResourceContainer.GetSkillIconSprite(skillData);
+        // skillIcon.sprite = CommonResourceContainer.GetSkillIconSprite(skillData);
 
         //this.skillName.SetText($"{skillData.Skillname}({skillData.Skilltype})");
         //this.skillName.color = CommonUiContainer.Instance.itemGradeColor[skillData.Skillgrade];
@@ -91,8 +91,7 @@ public class UiSkillCell : MonoBehaviour
         //스킬 레벨업시
         ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillData.Id].AsObservable().Subscribe(WhenSkillUpgraded).AddTo(this);
 
-
-        ServerData.skillServerTable.whenSelectedSkillIdxChanged.AsObservable().Subscribe(WhenSelectedSkillIdxChanged).AddTo(this);
+        //ServerData.skillServerTable.whenSelectedSkillIdxChanged.AsObservable().Subscribe(WhenSelectedSkillIdxChanged).AddTo(this);
     }
 
     private void WhenSkillAwake(int awakeNum)
@@ -107,7 +106,7 @@ public class UiSkillCell : MonoBehaviour
 
     private void WhenSelectedSkillIdxChanged(List<ReactiveProperty<int>> skillList)
     {
-        SetRemoveButton(ServerData.skillServerTable.AlreadyEquipedSkill(skillData.Id));
+        //SetRemoveButton(ServerData.skillServerTable.AlreadyEquipedSkill(skillData.Id));
     }
 
     private void RefreshSkillLvText()
@@ -115,7 +114,7 @@ public class UiSkillCell : MonoBehaviour
         int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillData.Id);
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillData.Id);
 
-       // levelDescription.SetText(string.Format(lvTextFormat, skillLevel, maxLevel));
+        // levelDescription.SetText(string.Format(lvTextFormat, skillLevel, maxLevel));
     }
 
 
@@ -128,14 +127,21 @@ public class UiSkillCell : MonoBehaviour
         {
             slotButtonDesc.SetText($"미습득");
 
-            SetRemoveButton(false);
+            //SetRemoveButton(false);
         }
         else
         {
-            slotButtonDesc.SetText("슬롯에 등록");
+            if (ServerData.skillServerTable.AlreadyEquipedSkill(skillData.Id) == false)
+            {
+                slotButtonDesc.SetText("슬롯에 등록");
+            }
+            else
+            {
+                slotButtonDesc.SetText("등록됨");
+            }
 
 
-            SetRemoveButton(ServerData.skillServerTable.AlreadyEquipedSkill(skillData.Id));
+            //SetRemoveButton(ServerData.skillServerTable.AlreadyEquipedSkill(skillData.Id));
         }
 
         registerButtonImage.sprite = setSlotButton.interactable ? hasSkill : needToLearn;
@@ -157,9 +163,9 @@ public class UiSkillCell : MonoBehaviour
     //    }
     //}
 
-    private void SetRemoveButton(bool onOff)
-    {
-        removeInSlotButton.gameObject.SetActive(onOff);
-    }
+    //private void SetRemoveButton(bool onOff)
+    //{
+    //    removeInSlotButton.gameObject.SetActive(onOff);
+    //}
 
 }

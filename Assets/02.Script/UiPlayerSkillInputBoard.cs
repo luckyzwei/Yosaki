@@ -31,7 +31,7 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
     {
         currentSelectedSkillGroup = group;
 
-         ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
+        ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
 
         LoadSkillSlotData();
         // RefreshUi();

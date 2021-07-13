@@ -15,7 +15,7 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
     [SerializeField]
     private Sprite emptyIcon;
 
-    private int currentSelectedSkillGroup = 0;
+    public static int currentSelectedSkillGroup = 0;
 
     [SerializeField]
     private List<Toggle> skillGroupToggles;
@@ -24,7 +24,7 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
     {
         currentSelectedSkillGroup = group;
 
-       // ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
+        // ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
 
         RefreshUi();
 
@@ -143,5 +143,7 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
         {
             AutoManager.Instance.ResetSkillQueue();
         }
+
+        WhenSkillGroupChanged(currentSelectedSkillGroup);
     }
 }
