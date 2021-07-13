@@ -7,6 +7,7 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
 {
     [SerializeField]
     private List<Image> skillSlots;
+
     private List<int> selectedSkillIdx = new List<int>();
 
     private int currentSelectedSkillIdx;
@@ -14,26 +15,48 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
     [SerializeField]
     private Sprite emptyIcon;
 
-    private void Awake()
-    {
-        Initialize();
+    private int currentSelectedSkillGroup = 0;
 
-        UpdateSkillIcon();
+    [SerializeField]
+    private List<Toggle> skillGroupToggles;
+
+    public void WhenSkillGroupChanged(int group)
+    {
+        currentSelectedSkillGroup = group;
+
+       // ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
+
+        RefreshUi();
+
+        if (AutoManager.Instance.IsAutoMode)
+        {
+            AutoManager.Instance.ResetSkillQueue();
+        }
     }
 
-    private void Initialize()
+    private void Start()
     {
-        LoadPrefSavedData();
+        SetSkillGroup();
+    }
+    private void SetSkillGroup()
+    {
+        int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
+
+        skillGroupToggles[currentSelectedGroupId].isOn = true;
+
+        WhenSkillGroupChanged(currentSelectedGroupId);
     }
 
-    private void LoadPrefSavedData()
+    private void RefreshUi()
     {
         selectedSkillIdx.Clear();
-        var savedSlotData = ServerData.skillServerTable.SelectedSkillIdx;
+        var savedSlotData = ServerData.skillServerTable.GetSelectedSkillIdx(currentSelectedSkillGroup);
         for (int i = 0; i < savedSlotData.Count; i++)
         {
             selectedSkillIdx.Add(savedSlotData[i].Value);
         }
+
+        UpdateSkillIcon();
     }
 
     public void SetSkillIdx(int currentSelectedSkillIdx)
@@ -41,48 +64,37 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
         this.currentSelectedSkillIdx = currentSelectedSkillIdx;
     }
 
-    private void OnEnable()
-    {
-        LoadPrefSavedData();
-        UpdateSkillIcon();
-    }
-
-
     //새로운 스킬이 등록될때
     public void OnClickSkillSlot(int idx)
     {
-        var skillTableData = TableManager.Instance.SkillData[currentSelectedSkillIdx];
+        //var skillTableData = TableManager.Instance.SkillData[currentSelectedSkillIdx];
+        //#if !UNITY_EDITOR
+        //        for (int i = 0; i < selectedSkillIdx.Count; i++)
+        //        {
+        //            var prefSetSkillIdx = selectedSkillIdx[i];
 
-#if !UNITY_EDITOR
-        for (int i = 0; i < selectedSkillIdx.Count; i++)
-        {
-            var prefSetSkillIdx = selectedSkillIdx[i];
+        //            if (prefSetSkillIdx != -1)
+        //            {
+        //                var prefSkillData = TableManager.Instance.SkillData[prefSetSkillIdx];
 
-            if (prefSetSkillIdx != -1)
-            {
-                var prefSkillData = TableManager.Instance.SkillData[prefSetSkillIdx];
+        //                if (skillTableData.Id != prefSkillData.Id && skillTableData.Skilltype == prefSkillData.Skilltype)
+        //                {
+        //                    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "같은 타입의 스킬은 등록이 불가능 합니다.\n 등록된 스킬을 제거하고 등록 합니까?",
+        //                                    () =>
+        //                                    {
+        //                                        selectedSkillIdx[i] = -1;
+        //                                        OnClickSkillSlot(idx);
+        //                                    },
+        //                                    () =>
+        //                                    {
 
-                if (skillTableData.Id != prefSkillData.Id && skillTableData.Skilltype == prefSkillData.Skilltype)
-                {
-                    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "같은 타입의 스킬은 등록이 불가능 합니다.\n 등록된 스킬을 제거하고 등록 합니까?",
-                                    () =>
-                                    {
-                                        selectedSkillIdx[i] = -1;
-                                        OnClickSkillSlot(idx);
-                                    },
-                                    () =>
-                                    {
+        //                                    });
 
-                                    });
-
-                    return;
-                }
-            }
-        }
-#endif
-
-
-
+        //                    return;
+        //                }
+        //            }
+        //        }
+        //#endif
 
         if (AutoManager.Instance.IsAutoMode)
         {
@@ -101,7 +113,7 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
             }
         }
 
-        ServerData.skillServerTable.UpdateSelectedSkillIdx(selectedSkillIdx);
+        ServerData.skillServerTable.UpdateSelectedSkillIdx(selectedSkillIdx, currentSelectedSkillGroup);
 
         UpdateSkillIcon();
     }
@@ -119,6 +131,17 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
                 skillSlots[i].color = Color.white;
                 skillSlots[i].sprite = CommonResourceContainer.GetSkillIconSprite(selectedSkillIdx[i]);
             }
+        }
+    }
+
+    public void RemoveSkillInSlot(int id)
+    {
+        //
+        ServerData.skillServerTable.RemoveSkillInEquipList(selectedSkillIdx[id], currentSelectedSkillGroup);
+
+        if (AutoManager.Instance.IsAutoMode)
+        {
+            AutoManager.Instance.ResetSkillQueue();
         }
     }
 }

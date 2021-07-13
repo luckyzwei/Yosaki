@@ -56,6 +56,7 @@ public class UserInfoTable
 
     public const string wingPackageRewardReceive = "wingPackageRewardReceive";
     public const string topClearStageId = "topClearStageId";
+    public const string selectedSkillGroupId = "selectedSkillGroupId";
 
     // public ObscuredDouble currentServerDate;
     public double currentServerDate;
@@ -92,7 +93,8 @@ public class UserInfoTable
         {buff_exp2,0f},
         {bonusDungeonMaxKillCount,0f},
         {wingPackageRewardReceive,0f},
-        {topClearStageId,-1f}
+        {topClearStageId,-1f},
+        {selectedSkillGroupId,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();

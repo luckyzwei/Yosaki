@@ -16,7 +16,9 @@ public class SkillServerTable
     public static string SkillAlreadyHas = "SkillAlreadyHas";
     public static string SkillAwakeNum = "SkillAwakeNum";
     public static string SkillLevel = "SkillLevel";
-    public static string SkillSlotIdx = "SkillSlotIdx";
+    public static string SkillSlotIdx_0 = "SkillSlotIdx_0";
+    public static string SkillSlotIdx_1 = "SkillSlotIdx_1";
+    public static string SkillSlotIdx_2 = "SkillSlotIdx_2";
 
     private Dictionary<string, List<int>> tableSchema = new Dictionary<string, List<int>>()
     {
@@ -24,15 +26,22 @@ public class SkillServerTable
         {SkillAlreadyHas,new List<int>()},
         {SkillAwakeNum,new List<int>()},
         {SkillLevel,new List<int>()},
-        {SkillSlotIdx,new List<int>(){0,-1,-1,-1,-1 }}
+        {SkillSlotIdx_0,new List<int>(){0,-1,-1,-1,-1 }},
+        {SkillSlotIdx_1,new List<int>(){-1,-1,-1,-1,-1 }},
+        {SkillSlotIdx_2,new List<int>(){-1,-1,-1,-1,-1 }}
     };
 
     private Dictionary<string, List<ReactiveProperty<int>>> tableDatas = new Dictionary<string, List<ReactiveProperty<int>>>();
     public Dictionary<string, List<ReactiveProperty<int>>> TableDatas => tableDatas;
 
-    public List<ReactiveProperty<int>> SelectedSkillIdx => tableDatas[SkillSlotIdx];
+    public ReactiveCommand<List<ReactiveProperty<int>>> whenSelectedSkillIdxChanged = new ReactiveCommand<List<ReactiveProperty<int>>>();
 
-    public void UpdateSelectedSkillIdx(List<int> selectedSkillIdx)
+    public List<ReactiveProperty<int>> GetSelectedSkillIdx(int skillGroup)
+    {
+        return tableDatas[GetSkillGroupKey(skillGroup)];
+    }
+
+    public void UpdateSelectedSkillIdx(List<int> selectedSkillIdx, int groupId)
     {
         List<ReactiveProperty<int>> skillData = new List<ReactiveProperty<int>>();
 
@@ -41,33 +50,54 @@ public class SkillServerTable
             skillData.Add(new ReactiveProperty<int>(selectedSkillIdx[i]));
         }
 
-        tableDatas[SkillSlotIdx] = skillData;
+        tableDatas[GetSkillGroupKey(groupId)] = skillData;
 
-        whenSelectedSkillIdxChanged.Execute(tableDatas[SkillSlotIdx]);
+        SyncSkillSlotIdxToServer(groupId);
 
-        SyncSkillSlotIdxToServer();
+        whenSelectedSkillIdxChanged.Execute(tableDatas[GetSkillGroupKey(groupId)]);
     }
 
-    public void RemoveSkillInEquipList(int idx)
+    public static string GetSkillGroupKey(int groupId)
     {
-        for (int i = 0; i < tableDatas[SkillSlotIdx].Count; i++)
+        if (groupId == 0)
         {
-            if (tableDatas[SkillSlotIdx][i].Value == idx)
+            return SkillSlotIdx_0;
+        }
+        else if (groupId == 1)
+        {
+            return SkillSlotIdx_1;
+        }
+        else
+        {
+            return SkillSlotIdx_2;
+        }
+    }
+
+    public void ApplySkillSlotGroup(int groupId)
+    {
+        whenSelectedSkillIdxChanged.Execute(tableDatas[GetSkillGroupKey(groupId)]);
+    }
+
+    public void RemoveSkillInEquipList(int idx, int groupId)
+    {
+        for (int i = 0; i < tableDatas[GetSkillGroupKey(groupId)].Count; i++)
+        {
+            if (tableDatas[GetSkillGroupKey(groupId)][i].Value == idx)
             {
-                tableDatas[SkillSlotIdx][i].Value = -1;
+                tableDatas[GetSkillGroupKey(groupId)][i].Value = -1;
             }
         }
 
-        whenSelectedSkillIdxChanged.Execute(tableDatas[SkillSlotIdx]);
+        whenSelectedSkillIdxChanged.Execute(tableDatas[GetSkillGroupKey(groupId)]);
 
-        SyncSkillSlotIdxToServer();
+        SyncSkillSlotIdxToServer(groupId);
     }
 
     public bool AlreadyEquipedSkill(int idx)
     {
-        for (int i = 0; i < tableDatas[SkillSlotIdx].Count; i++)
+        for (int i = 0; i < tableDatas[SkillSlotIdx_0].Count; i++)
         {
-            if (tableDatas[SkillSlotIdx][i].Value == idx)
+            if (tableDatas[SkillSlotIdx_0][i].Value == idx)
             {
                 return true;
             }
@@ -76,7 +106,6 @@ public class SkillServerTable
         return false;
     }
 
-    public ReactiveCommand<List<ReactiveProperty<int>>> whenSelectedSkillIdxChanged = new ReactiveCommand<List<ReactiveProperty<int>>>();
 
     public void Initialize()
     {
@@ -105,7 +134,7 @@ public class SkillServerTable
                  {
                      List<ReactiveProperty<int>> firstData = new List<ReactiveProperty<int>>();
 
-                     if (e.Current.Key != SkillSlotIdx)
+                     if (e.Current.Key != SkillSlotIdx_0 && e.Current.Key != SkillSlotIdx_1 && e.Current.Key != SkillSlotIdx_2)
                      {
                          var tableData = TableManager.Instance.SkillData.GetEnumerator();
 
@@ -219,7 +248,7 @@ public class SkillServerTable
                  e = tableSchema.GetEnumerator();
                  while (e.MoveNext())
                  {
-                     if (e.Current.Key ==SkillHasAmount || e.Current.Key == SkillAlreadyHas || e.Current.Key == SkillAwakeNum || e.Current.Key == SkillLevel)
+                     if (e.Current.Key == SkillHasAmount || e.Current.Key == SkillAlreadyHas || e.Current.Key == SkillAwakeNum || e.Current.Key == SkillLevel)
                      {
                          //신규스킬
                          List<ReactiveProperty<int>> firstData = new List<ReactiveProperty<int>>();
@@ -261,18 +290,18 @@ public class SkillServerTable
 
     private List<int> skillSlotSyncData = new List<int>();
     private List<int> skillAmountSyncData = new List<int>();
-    public void SyncSkillSlotIdxToServer()
+    public void SyncSkillSlotIdxToServer(int groupId)
     {
         skillSlotSyncData.Clear();
 
         Param param = new Param();
 
-        for (int i = 0; i < tableDatas[SkillSlotIdx].Count; i++)
+        for (int i = 0; i < tableDatas[GetSkillGroupKey(groupId)].Count; i++)
         {
-            skillSlotSyncData.Add(tableDatas[SkillSlotIdx][i].Value);
+            skillSlotSyncData.Add(tableDatas[GetSkillGroupKey(groupId)][i].Value);
         }
 
-        param.Add(SkillSlotIdx, skillSlotSyncData);
+        param.Add(GetSkillGroupKey(groupId), skillSlotSyncData);
 
         SendQueue.Enqueue(Backend.GameData.Update, tableName, Indate, param, e =>
         {

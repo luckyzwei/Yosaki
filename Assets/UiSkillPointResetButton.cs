@@ -54,14 +54,17 @@ public class UiSkillPointResetButton : MonoBehaviour
             skillLevelList[i].Value = 0;
         }
 
-        var skillSlotList = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx];
+        var skillSlotList = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx_0];
 
         for (int i = 0; i < skillSlotList.Count; i++)
         {
             skillSlotList[i].Value = -1;
         }
 
-        ServerData.skillServerTable.UpdateSelectedSkillIdx(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx].Select(e => e.Value).ToList());
+        for (int i = 0; i < GameBalance.skillSlotGroupNum; i++)
+        {
+            ServerData.skillServerTable.UpdateSelectedSkillIdx(ServerData.skillServerTable.TableDatas[SkillServerTable.GetSkillGroupKey(i)].Select(e => e.Value).ToList(), i);
+        }
 
         int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
@@ -75,7 +78,7 @@ public class UiSkillPointResetButton : MonoBehaviour
 
         Param skillParam = new Param();
         skillParam.Add(SkillServerTable.SkillLevel, ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel].Select(e => e.Value).ToList());
-        skillParam.Add(SkillServerTable.SkillSlotIdx, ServerData.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx].Select(e => e.Value).ToList());
+        skillParam.Add(SkillServerTable.SkillSlotIdx_0, ServerData.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx_0].Select(e => e.Value).ToList());
 
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);

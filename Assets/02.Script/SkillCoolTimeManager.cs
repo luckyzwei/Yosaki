@@ -15,7 +15,7 @@ public static class SkillCoolTimeManager
 
     private static WaitForSeconds delay = new WaitForSeconds(updateTick);
 
-    public static List<ReactiveProperty<int>> registeredSkillIdx = new List<ReactiveProperty<int>>() { new ReactiveProperty<int>(1), new ReactiveProperty<int>(0), new ReactiveProperty<int>(0), new ReactiveProperty<int>(0), new ReactiveProperty<int>(0) };
+    public static List<ReactiveProperty<int>> registeredSkillIdx = new List<ReactiveProperty<int>>() { new ReactiveProperty<int>(1), new ReactiveProperty<int>(1), new ReactiveProperty<int>(1), new ReactiveProperty<int>(1), new ReactiveProperty<int>(1) };
     public static ReactiveProperty<int> jumpAutoValue = new ReactiveProperty<int>();
     public static ReactiveProperty<int> moveAutoValue = new ReactiveProperty<int>();
 
@@ -27,13 +27,9 @@ public static class SkillCoolTimeManager
         for (int i = 0; i < registeredSkillIdx.Count; i++)
         {
             //맨처음은 자동등록
-            if (i == 0 && PlayerPrefs.HasKey(registerSkillNameKey + i.ToString()) == false)
+            if (PlayerPrefs.HasKey(registerSkillNameKey + i.ToString()) == false)
             {
                 registeredSkillIdx[i].Value = 1;
-            }
-            else if (PlayerPrefs.HasKey(registerSkillNameKey + i.ToString()) == false)
-            {
-                registeredSkillIdx[i].Value = 0;
             }
             else
             {

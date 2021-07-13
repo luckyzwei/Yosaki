@@ -15,85 +15,46 @@ MonoBehaviour:
   SheetName: Assets/06.Table/InAppPurchase.xlsx
   WorksheetName: InAppPurchase
   dataArray:
-  - id: 0
-    productid: gem1
-    issubscribeitem: 0
-    title: "\uBCF4\uC11D \uD55C\uC90C"
-    description: 
-    rewardtypes: 01000000
-    rewardvalues: 10270000
-    buytype: 0
-    price: 1000
-    shopcategory: 0
-    grade: 0
-    bonusratio: 0
-    active: 1
   - id: 1
-    productid: gem2
-    issubscribeitem: 0
-    title: "\uBCF4\uC11D \uB2E4\uC12F\uC90C"
-    description: 
-    rewardtypes: 01000000
-    rewardvalues: 50c30000
-    buytype: 0
-    price: 5000
-    shopcategory: 0
-    grade: 0
-    bonusratio: 0
-    active: 1
-  - id: 2
-    productid: gem3
-    issubscribeitem: 0
-    title: "\uBCF4\uC11D \uC8FC\uBA38\uB2C8"
-    description: 
-    rewardtypes: 01000000
-    rewardvalues: a0860100
-    buytype: 0
-    price: 10000
-    shopcategory: 0
-    grade: 1
-    bonusratio: 0
-    active: 1
-  - id: 3
-    productid: gem4
+    productid: oak1
     issubscribeitem: 0
     title: "\uBCF4\uC11D \uD55C\uD1B5"
     description: 
     rewardtypes: 01000000
     rewardvalues: 407e0500
     buytype: 0
-    price: 30000
+    price: 10000
     shopcategory: 0
     grade: 2
     bonusratio: +20%
     active: 1
-  - id: 4
-    productid: gem5
+  - id: 2
+    productid: oak2
     issubscribeitem: 0
     title: "\uBCF4\uC11D \uC0C1\uC790"
     description: 
     rewardtypes: 01000000
     rewardvalues: 10eb0900
     buytype: 0
-    price: 50000
+    price: 30000
     shopcategory: 0
     grade: 3
     bonusratio: +30%
     active: 1
-  - id: 5
-    productid: gem6
+  - id: 3
+    productid: oak3
     issubscribeitem: 0
     title: "\uBCF4\uC11D \uD669\uAE08\uC0C1\uC790"
     description: 
     rewardtypes: 01000000
     rewardvalues: c05c1500
     buytype: 0
-    price: 100000
+    price: 50000
     shopcategory: 0
     grade: 4
     bonusratio: +40%
     active: 1
-  - id: 6
+  - id: 4
     productid: removead
     issubscribeitem: 1
     title: "\uAD11\uACE0 \uC81C\uAC70"
@@ -106,7 +67,20 @@ MonoBehaviour:
     grade: 1
     bonusratio: 0
     active: 1
-  - id: 7
+  - id: 5
+    productid: infinitysam
+    issubscribeitem: 1
+    title: "\uC0B0\uC0BC \uBB34\uD55C"
+    description: "\uC0B0\uC0BC \uBB34\uD55C"
+    rewardtypes: f4010000
+    rewardvalues: 00000000
+    buytype: 4
+    price: 5000
+    shopcategory: 1
+    grade: 0
+    bonusratio: 0
+    active: 1
+  - id: 6
     productid: dailypackage1
     issubscribeitem: 0
     title: "\uC77C\uC77C \uD328\uD0A4\uC9C0"
@@ -119,7 +93,7 @@ MonoBehaviour:
     grade: 0
     bonusratio: +50%
     active: 1
-  - id: 8
+  - id: 7
     productid: weeklypackage1
     issubscribeitem: 0
     title: "\uC8FC\uAC04 \uD328\uD0A4\uC9C0"
@@ -132,8 +106,8 @@ MonoBehaviour:
     grade: 1
     bonusratio: +50%
     active: 1
-  - id: 9
-    productid: monthlypackage
+  - id: 8
+    productid: monthlypackage1
     issubscribeitem: 0
     title: "\uC6D4\uAC04 \uD328\uD0A4\uC9C0"
     description: 
@@ -145,7 +119,7 @@ MonoBehaviour:
     grade: 2
     bonusratio: +50%
     active: 1
-  - id: 10
+  - id: 9
     productid: petpackage1
     issubscribeitem: 0
     title: "\uD3AB \uD328\uD0A4\uC9C01"
@@ -198,45 +172,32 @@ MonoBehaviour:
     bonusratio: 0
     active: 1
   - id: 13
-    productid: magicstonebuff1
-    issubscribeitem: 1
-    title: "\uAE30\uC5B5\uC758\uD30C\uD3B8 \uBC84\uD504"
-    description: "\uAE30\uC5B5\uC758\uD30C\uD3B8 \uD68D\uB4DD +50%(\uB4DC\uB78D)"
-    rewardtypes: f4010000
-    rewardvalues: 00000000
-    buytype: 4
-    price: 3000
-    shopcategory: 1
-    grade: 0
-    bonusratio: 0
-    active: 0
-  - id: 14
-    productid: wingpackage2
+    productid: marblepackage1
     issubscribeitem: 0
-    title: "\uAE43\uD138 \uD328\uD0A4\uC9C0"
+    title: "\uAD6C\uC2AC\uD328\uD0A4\uC9C0"
     description: 
     rewardtypes: 01000000020000000500000004000000
     rewardvalues: a0bb0d0080f0fa02f04902000a000000
-    buytype: 5
+    buytype: 6
     price: 30000
     shopcategory: 1
     grade: 1
     bonusratio: 0
     active: 1
-  - id: 15
-    productid: wingpackage1
+  - id: 14
+    productid: marblepackage2
     issubscribeitem: 0
-    title: "\uAE43\uD138 \uD328\uD0A4\uC9C0"
+    title: "\uAD6C\uC2AC\uD328\uD0A4\uC9C0"
     description: 
     rewardtypes: 01000000020000000500000004000000
     rewardvalues: a0bb0d0080f0fa02f04902000a000000
     buytype: 5
-    price: 30000
+    price: 50000
     shopcategory: 1
     grade: 1
     bonusratio: 0
-    active: 0
-  - id: 16
+    active: 1
+  - id: 15
     productid: stagepass
     issubscribeitem: 1
     title: "\uC2A4\uD14C\uC774\uC9C0\uD328\uC2A4"
@@ -248,4 +209,43 @@ MonoBehaviour:
     shopcategory: 1
     grade: 1
     bonusratio: 0
+    active: 1
+  - id: 16
+    productid: newbiepack
+    issubscribeitem: 0
+    title: "\uCD08\uBCF4\uC790\uD328\uD0A4\uC9C0"
+    description: 
+    rewardtypes: 010000000200000004000000
+    rewardvalues: f04902008096980002000000
+    buytype: 7
+    price: 10000
+    shopcategory: 1
+    grade: 0
+    bonusratio: +50%
+    active: 1
+  - id: 17
+    productid: middlepack
+    issubscribeitem: 0
+    title: "\uC911\uAE09\uC790\uD328\uD0A4\uC9C0"
+    description: 
+    rewardtypes: 010000000200000004000000
+    rewardvalues: d0dd060080c3c90107000000
+    buytype: 6
+    price: 30000
+    shopcategory: 1
+    grade: 1
+    bonusratio: +50%
+    active: 1
+  - id: 18
+    productid: highpack
+    issubscribeitem: 0
+    title: "\uC0C1\uAE09\uC790\uD328\uD0A4\uC9C0"
+    description: 
+    rewardtypes: 010000000200000004000000
+    rewardvalues: 60e3160000e1f50519000000
+    buytype: 5
+    price: 50000
+    shopcategory: 1
+    grade: 2
+    bonusratio: +50%
     active: 1

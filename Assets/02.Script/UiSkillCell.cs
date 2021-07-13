@@ -147,15 +147,15 @@ public class UiSkillCell : MonoBehaviour
         onClickSlotSettingButton.Invoke(skillData.Id);
     }
 
-    public void OnClickRemoveButton()
-    {
-        ServerData.skillServerTable.RemoveSkillInEquipList(skillData.Id);
+    //public void OnClickRemoveButton()
+    //{
+    //    ServerData.skillServerTable.RemoveSkillInEquipList(skillData.Id);
 
-        if (AutoManager.Instance.IsAutoMode)
-        {
-            AutoManager.Instance.ResetSkillQueue();
-        }
-    }
+    //    if (AutoManager.Instance.IsAutoMode)
+    //    {
+    //        AutoManager.Instance.ResetSkillQueue();
+    //    }
+    //}
 
     private void SetRemoveButton(bool onOff)
     {

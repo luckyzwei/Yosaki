@@ -44,7 +44,9 @@ public class AutoManager : Singleton<AutoManager>
     {
         if (skillQueue.Count != 0) return;
 
-        var selectedSkill = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillSlotIdx];
+        int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
+
+        var selectedSkill = ServerData.skillServerTable.TableDatas[SkillServerTable.GetSkillGroupKey(currentSelectedGroupId)];
 
         for (int i = 0; i < selectedSkill.Count; i++)
         {

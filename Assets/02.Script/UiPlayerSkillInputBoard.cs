@@ -22,18 +22,50 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
     [SerializeField]
     private GameObject autoDesc;
 
+    [SerializeField]
+    private List<Toggle> skillGroupToggles;
+
+    private int currentSelectedSkillGroup = 0;
+
+    public void WhenSkillGroupChanged(int group)
+    {
+        currentSelectedSkillGroup = group;
+
+         ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
+
+        LoadSkillSlotData();
+        // RefreshUi();
+
+        if (AutoManager.Instance.IsAutoMode)
+        {
+            AutoManager.Instance.ResetSkillQueue();
+        }
+    }
+
     private new void Awake()
     {
         base.Awake();
 
         Subscribe();
 
-        LoadSkillSlotData();
+        SetSkillGroup();
     }
+
+    private void SetSkillGroup()
+    {
+        int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
+
+        skillGroupToggles[currentSelectedGroupId].isOn = true;
+
+        WhenSkillGroupChanged(currentSelectedGroupId);
+    }
+
 
     private void LoadSkillSlotData()
     {
-        WhenSelectedSkillIdxChanged(ServerData.skillServerTable.SelectedSkillIdx);
+        int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
+
+        WhenSelectedSkillIdxChanged(ServerData.skillServerTable.GetSelectedSkillIdx(currentSelectedGroupId));
     }
 
     private void Subscribe()
