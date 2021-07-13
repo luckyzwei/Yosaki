@@ -18,7 +18,7 @@ public class AutoManager : Singleton<AutoManager>
 
     private WaitForSeconds skillDelay = new WaitForSeconds(0.1f);
 
-    public void SetPlayerTr() 
+    public void SetPlayerTr()
     {
         playerTr = PlayerSkillCaster.Instance.PlayerMoveController.transform;
     }
@@ -274,6 +274,15 @@ public class AutoManager : Singleton<AutoManager>
 
             SortEnemy(spawnedEnemy);
 
+            //보스 우선
+            var bossEnemy = GetBossEnemy(spawnedEnemy);
+
+            if (bossEnemy != null)
+            {
+                currentTarget = bossEnemy;
+                return;
+            }
+
             if (spawnedEnemy.Count == 0)
             {
                 currentTarget = null;
@@ -295,6 +304,14 @@ public class AutoManager : Singleton<AutoManager>
 
         var spawnedEnemy = MapInfo.Instance.SpawnedEnemyList;
 
+        var bossEnemy = GetBossEnemy(spawnedEnemy);
+
+        if (bossEnemy != null)
+        {
+            neariestEnemy = bossEnemy;
+            return neariestEnemy;
+        }
+
         SortEnemy(spawnedEnemy);
 
         if (spawnedEnemy.Count == 0)
@@ -307,6 +324,19 @@ public class AutoManager : Singleton<AutoManager>
         }
 
         return neariestEnemy;
+    }
+
+    public Transform GetBossEnemy(List<Enemy> spawnedEnemy)
+    {
+        for (int i = 0; i < spawnedEnemy.Count; i++)
+        {
+            if (spawnedEnemy[i].isFieldBossEnemy == true)
+            {
+                return spawnedEnemy[i].transform;
+            }
+        }
+
+        return null;
     }
 
     private Transform GetBonusDefenseTarget()
