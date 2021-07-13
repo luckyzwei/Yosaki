@@ -53,8 +53,12 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
         rewards[1].SetText(Utils.ConvertBigNum(reward.jade));
         //growthstone
         rewards[2].SetText(Utils.ConvertBigNum(reward.GrowthStone));
+
+        //여우구슬
+        rewards[3].SetText(Utils.ConvertBigNum(reward.marble));
+
         //exp
-        rewards[3].SetText(Utils.ConvertBigNum(reward.exp));
+        rewards[4].SetText(Utils.ConvertBigNum(reward.exp));
 
         SleepRewardReceiver.Instance.GetRewardSuccess();
     }

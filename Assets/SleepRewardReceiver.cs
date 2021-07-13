@@ -15,17 +15,21 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         public readonly float GrowthStone;
 
+        public readonly float marble;
+
         public readonly float exp;
 
         public readonly int elapsedSeconds;
 
-        public SleepRewardInfo(float gold, float jade, float GrowthStone, float exp, int elapsedSeconds)
+        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float exp, int elapsedSeconds)
         {
             this.gold = gold;
 
             this.jade = jade;
 
             this.GrowthStone = GrowthStone;
+
+            this.marble = marble;
 
             this.exp = exp;
 
@@ -85,9 +89,11 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         float GrowthStone = killedEnemyPerMin * stageTableData.Magicstoneamount * GameBalance.sleepRewardRatio * elapsedMinutes;
 
+        float marble = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
+
         float exp = killedEnemyPerMin * spawnedEnemyData.Exp * GameBalance.sleepRewardRatio * elapsedMinutes;
 
-        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, exp: exp, elapsedSeconds: elapsedSeconds);
+        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, exp: exp, elapsedSeconds: elapsedSeconds);
     }
 
     public void GetSleepReward(Action successCallBack)
@@ -98,6 +104,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += sleepRewardInfo.gold;
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += sleepRewardInfo.jade;
+        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += sleepRewardInfo.marble;
         ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += sleepRewardInfo.GrowthStone;
 
         Param goodsParam = new Param();
@@ -115,7 +122,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
           });
     }
 
-    public void GetRewardSuccess() 
+    public void GetRewardSuccess()
     {
         sleepRewardInfo = null;
     }
