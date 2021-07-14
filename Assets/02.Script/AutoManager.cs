@@ -7,7 +7,7 @@ public class AutoManager : Singleton<AutoManager>
 {
     private Transform playerTr;
 
-    private float moveDistMax = 2f;
+    private float moveDistMax = 4f;
     private float jumpHeight = 2f;
     private float jumpWidth = 0.1f;
     private float newFindDistance = 3f;
@@ -205,14 +205,43 @@ public class AutoManager : Singleton<AutoManager>
                         }
                     }
 
+                    ////광역기 우선
+                    //if (skillQueue.Count > 0)
+                    //{
+                    //    int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
+                    //    var selectedSkill = ServerData.skillServerTable.TableDatas[SkillServerTable.GetSkillGroupKey(currentSelectedGroupId)];
+
+                    //    for (int i = 0; i < selectedSkill.Count; i++)
+                    //    {
+                    //        int skillIdx = selectedSkill[i].Value;
+
+                    //        if (skillIdx != -1 &&
+                    //            SkillCoolTimeManager.HasSkillCooltime(skillIdx) == false &&
+                    //            SkillCoolTimeManager.registeredSkillIdx[i].Value == 1
+                    //            )
+                    //        {
+                    //            var skillTableData = TableManager.Instance.SkillData[selectedSkill[i].Value];
+
+                    //            if (skillTableData.Skilltype.Equals(skillType2))
+                    //            {
+                    //                skillQueue.Clear();
+                    //                continue;
+                    //            }
+                    //        }
+                    //    }
+                    //}
 
                     if (skillQueue.Count == 0)
                     {
                         SetSkillQueue();
                     }
 
+
+                    SetFrontType2Skill();
+
                     if (skillQueue.Count > 0)
                     {
+
                         //스킬 발동 방향 
                         bool isEnemyOnRight = currentTarget.transform.position.x > this.playerTr.position.x;
                         UiMoveStick.Instance.SetHorizontalAxsis(0);
@@ -228,6 +257,8 @@ public class AutoManager : Singleton<AutoManager>
 
                         skillQueue.RemoveAt(0);
 
+
+
                         if (skillCast)
                         {
                             yield return skillDelay;
@@ -239,6 +270,32 @@ public class AutoManager : Singleton<AutoManager>
 
                 }
             }
+        }
+    }
+    private const string skillType2 = "2";
+    List<int> fronSkillContainer = new List<int>();
+
+    //이동광역기 우선으로 앞으로 빼주도록
+    private void SetFrontType2Skill()
+    {
+        if (skillQueue.Count == 0) return;
+
+        fronSkillContainer.Clear();
+
+        for (int i = 0; i < skillQueue.Count; i++)
+        {
+            var skillTableData = TableManager.Instance.SkillData[skillQueue[i]];
+
+            if (skillTableData.Skilltype.Equals(skillType2))
+            {
+                fronSkillContainer.Add(skillQueue[i]);
+            }
+        }
+
+        for (int i = 0; i < fronSkillContainer.Count; i++)
+        {
+            skillQueue.Remove(fronSkillContainer[i]);
+            skillQueue.Insert(0, fronSkillContainer[i]);
         }
     }
 

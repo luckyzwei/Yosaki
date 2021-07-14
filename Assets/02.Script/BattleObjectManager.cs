@@ -90,12 +90,12 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
 
     private float zOffset = 0f;
 
-    public void SpawnDamageText(float damage, bool isCiritcal, Vector3 position, DamTextType type = DamTextType.Normal)
+    public void SpawnDamageText(float damage, Vector3 position, DamTextType type = DamTextType.Normal)
     {
         if (SettingData.ShowDamageFont.Value == 0) return;
 
         var damageText = damageTextProperty.GetItem();
-        damageText.Initialize(damage, isCiritcal, type);
+        damageText.Initialize(damage, type);
         damageText.transform.position = new Vector3(position.x, position.y, position.z + zOffset);
 
         zOffset += 0.001f;

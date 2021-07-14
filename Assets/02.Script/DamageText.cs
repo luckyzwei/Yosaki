@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public enum DamTextType
 {
-    Normal, Green, Red
+    Normal, Critical, Green, Red
 }
 
 public class DamageText : PoolItem
@@ -24,6 +24,12 @@ public class DamageText : PoolItem
 
     [SerializeField]
     private Color criticalColor;
+
+    [SerializeField]
+    private Color redColor;
+
+    [SerializeField]
+    private Color greenColor;
 
     //[SerializeField]
     //private TMP_FontAsset normalfont;
@@ -53,9 +59,9 @@ public class DamageText : PoolItem
 
     //   private readonly string Format = "N1";
 
-    public void Initialize(float damage, bool isCritical, DamTextType type = DamTextType.Normal)
+    public void Initialize(float damage, DamTextType type = DamTextType.Normal)
     {
-        damageText.color = isCritical ? criticalColor : normalColor;
+        SetColor(type);
 
         //SetColor(type);
 
@@ -72,21 +78,24 @@ public class DamageText : PoolItem
     }
 
 
-    //private void SetColor(DamTextType type)
-    //{
-    //    switch (type)
-    //    {
-    //        case DamTextType.Normal:
-    //            damageText.colorGradient = whiteGradient;
-    //            break;
-    //        case DamTextType.Green:
-    //            damageText.colorGradient = greenGradient;
-    //            break;
-    //        case DamTextType.Red:
-    //            damageText.colorGradient = redGradient;
-    //            break;
-    //    }
-    //}
+    private void SetColor(DamTextType type)
+    {
+        switch (type)
+        {
+            case DamTextType.Normal:
+                damageText.color = normalColor;
+                break;
+            case DamTextType.Green:
+                damageText.color = greenColor;
+                break;
+            case DamTextType.Red:
+                damageText.color = redColor;
+                break;
+            case DamTextType.Critical:
+                damageText.color = criticalColor;
+                break;
+        }
+    }
 
     private void DisableObject()
     {

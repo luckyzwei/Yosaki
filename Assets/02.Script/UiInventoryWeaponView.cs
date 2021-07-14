@@ -316,20 +316,43 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         if (effectData.Haseffecttype1 != -1)
         {
-            float value = hasValue1 * 100f;
-            float value_max = hasValue1_max * 100f;
             StatusType type = (StatusType)effectData.Haseffecttype1;
 
-            description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%\n";
+            if (type.IsPercentStat()) 
+            {
+                float value = hasValue1 * 100f;
+                float value_max = hasValue1_max * 100f;
+
+                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%\n";
+            }
+            else
+            {
+                float value = hasValue1;
+                float value_max = hasValue1_max;
+
+                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}\n";
+            }
         }
 
         if (effectData.Haseffecttype2 != -1)
         {
-            float value = hasValue2 * 100f;
-            float value_max = hasValue2_max * 100f;
             StatusType type = (StatusType)effectData.Haseffecttype2;
 
-            description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%";
+            if (type.IsPercentStat()) 
+            {
+                float value = hasValue2 * 100f;
+                float value_max = hasValue2_max * 100f;
+
+                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%";
+            }
+            else 
+            {
+                float value = hasValue2;
+                float value_max = hasValue2_max ;
+
+                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}";
+            }
+
         }
 
         weaponAbilityDescription.SetText(description);
