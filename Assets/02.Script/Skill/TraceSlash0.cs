@@ -17,16 +17,16 @@ public class TraceSlash0 : SkillBase
 
     public override void UseSkill()
     {
-        Transform neariestEnemy = AutoManager.Instance.GetNeariestEnemy();
+        //Transform neariestEnemy = AutoManager.Instance.GetNeariestEnemy();
 
-        if (neariestEnemy == null)
-        {
-            if (AutoManager.Instance.IsAutoMode == false)
-            {
-                PopupManager.Instance.ShowAlarmMessage("근처에 적이 없습니다.");
-            }
-            return;
-        }
+        //if (neariestEnemy == null)
+        //{
+        //    if (AutoManager.Instance.IsAutoMode == false)
+        //    {
+        //        PopupManager.Instance.ShowAlarmMessage("근처에 적이 없습니다.");
+        //    }
+        //    return;
+        //}
 
         base.UseSkill();
 
@@ -37,7 +37,7 @@ public class TraceSlash0 : SkillBase
         CoroutineExecuter.Instance.StartCoroutine(SpawnLineEffect());
 
         //캐릭터 이동
-        playerTr.position = neariestEnemy.position;
+        //playerTr.position = neariestEnemy.position;
 
         //데미지
         float damage = GetSkillDamage(skillInfo);

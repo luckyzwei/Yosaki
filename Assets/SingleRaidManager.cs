@@ -48,6 +48,9 @@ public class SingleRaidManager : ContentsManagerBase
     [SerializeField]
     private GameObject portalObject;
 
+    [SerializeField]
+    private Transform bossSpawnParent;
+
     #region Security
     private void OnEnable()
     {
@@ -117,7 +120,8 @@ public class SingleRaidManager : ContentsManagerBase
 
         var prefab = Resources.Load<BossEnemyBase>($"Boss/{GameManager.Instance.bossId}");
 
-        singleRaidEnemy = Instantiate<BossEnemyBase>(prefab);
+        singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent);
+        singleRaidEnemy.transform.localPosition = Vector3.zero;
         singleRaidEnemy.gameObject.SetActive(false);
         bossHpController = singleRaidEnemy.GetComponent<AgentHpController>();
     }

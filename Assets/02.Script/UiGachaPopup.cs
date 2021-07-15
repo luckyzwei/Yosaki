@@ -11,7 +11,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     //누적
     private List<ObscuredInt> gachaLevelMinNum_weapon = new List<ObscuredInt>() { 0, 500, 2000, 5000, 20000, 50000, 80000, 120000, 160000, 200000 };
     private List<ObscuredInt> gachaLevelMinNum_norigae = new List<ObscuredInt>() { 0, 500, 2000, 5000, 20000, 50000, 80000, 120000, 160000, 200000 };
-    private List<ObscuredInt> gachaLevelMinNum_skill = new List<ObscuredInt>() { 0, 250, 1000, 2500, 10000, 25000, 40000, 60000, 80000, 100000 };
+    private List<ObscuredInt> gachaLevelMinNum_skill = new List<ObscuredInt>() { 0, 125, 500, 1275, 5000, 12500, 20000, 30000, 40000, 50000 };
 
     private ReactiveProperty<int> gachaLevel = new ReactiveProperty<int>();
 

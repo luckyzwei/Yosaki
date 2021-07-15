@@ -15,20 +15,6 @@ public class AgentHpController : MonoBehaviour
 
     private EnemyTableData enemyTableData;
 
-    #region DamText
-    private int attackCount = 0;
-    private int attackCountMax = 8;
-    private float attackResetCount = 0f;
-    private float damTextStartOffectY = 0f;
-    private float damTextOffsetY = 0.1f;
-    private float damTextOffsetZ = 0.01f;
-    private float damTextMergeTime = 0.5f;
-    private const float damTextCountAddValue = 0.1f;
-    private readonly WaitForSeconds DamTextDelay = new WaitForSeconds(damTextCountAddValue);
-    private Coroutine damTextRoutine;
-    #endregion
-    private readonly WaitForSeconds waitEffectDelay = new WaitForSeconds(0.2f);
-
     [SerializeField]
     private EnemyHpBar enemyHpBar;
 
@@ -42,17 +28,13 @@ public class AgentHpController : MonoBehaviour
 
     private ObscuredFloat defense;
 
+    [SerializeField]
+    private Transform damTextSpawnPos;
+
     private void Awake()
     {
         GetRequireComponents();
-        Initialize();
     }
-
-    private void Initialize()
-    {
-        damTextStartOffectY = UnityEngine.Random.Range(0.5f, 1f);
-    }
-
     private void GetRequireComponents()
     {
         enemyMoveController = GetComponent<EnemyMoveController>();
@@ -76,29 +58,10 @@ public class AgentHpController : MonoBehaviour
     private void ResetEnemy()
     {
         currentHp.Value = maxHp;
-        ResetDamTextValue();
         isEnemyDead = false;
     }
 
-    private void ResetDamTextValue()
-    {
-        attackCount = 0;
-        attackResetCount = 0f;
-        damTextRoutine = null;
-    }
-
-    private IEnumerator DamTextRoutine()
-    {
-        while (attackResetCount < damTextMergeTime)
-        {
-            yield return DamTextDelay;
-            attackResetCount += 0.1f;
-        }
-
-        ResetDamTextValue();
-    }
-
-    public void SetDefense(float defense) 
+    public void SetDefense(float defense)
     {
         this.defense = defense;
     }
@@ -130,7 +93,6 @@ public class AgentHpController : MonoBehaviour
         if (enemyMoveController == null) return;
         enemyMoveController.SetKnockBack();
     }
-    private Vector3 damTextspawnPos;
     private static string hitSfxName = "EnemyHitted";
     private void ApplyCriticalAndDamText(ref float value)
     {
@@ -151,27 +113,20 @@ public class AgentHpController : MonoBehaviour
             value = -1f;
         }
 
-        if (damTextRoutine == null)
+
+        Vector3 spawnPos = Vector3.zero;
+
+        if (damTextSpawnPos != null) 
         {
-            damTextRoutine = StartCoroutine(DamTextRoutine());
+            spawnPos = damTextSpawnPos.position;
+        }
+        else 
+        {
+            spawnPos = this.transform.position;
         }
 
-        damTextspawnPos = this.transform.position + Vector3.up * 1f + Vector3.right * UnityEngine.Random.Range(-0.4f, 0.4f) + Vector3.up * UnityEngine.Random.Range(-0.2f, 0.2f);
+       Vector3 damTextspawnPos = spawnPos + Vector3.up * 1f + Vector3.right * UnityEngine.Random.Range(-0.4f, 0.4f) + Vector3.up * UnityEngine.Random.Range(-0.2f, 0.2f);
 
-        attackCount++;
-
-        if (attackCount == attackCountMax)
-        {
-            attackCount = 0;
-        }
-
-        attackResetCount = 0f;
-
-
-        //spawnPos += this.transform.position;
-        //damTextspawnPos += Vector3.up * ((attackCount * damTextOffsetY) + damTextStartOffectY);
-        //damTextspawnPos += Vector3.back * attackCount * damTextOffsetZ;
-        //damTextspawnPos += Vector3.right * UnityEngine.Random.Range(-0.2f, 0.2f);
 
         if (Vector3.Distance(playerPos.position, this.transform.position) < GameBalance.effectActiveDistance)
         {
