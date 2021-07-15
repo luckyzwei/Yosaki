@@ -5,6 +5,11 @@ using UniRx;
 using UnityEngine.Purchasing;
 using BackEnd;
 
+public enum SellWhere
+{
+    Shop, StagePass
+}
+
 public class UiShop : MonoBehaviour
 {
     private void Start()
@@ -41,6 +46,8 @@ public class UiShop : MonoBehaviour
         {
             // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} 구매 성공!", null);
         }
+
+        if (tableData.SELLWHERE != SellWhere.Shop) return;
 
         //아이템 수령처리
         Param goodsParam = null;

@@ -129,7 +129,7 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
            // UiTutorialManager.Instance.SetClear(TutorialStep._2_Jump);
 
             //이펙트
-            EffectManager.SpawnEffect("FeatherExplosion", PlayerMoveController.Instance.transform.position);
+            EffectManager.SpawnEffect("LeafExplosion", PlayerMoveController.Instance.transform.position);
 
             rb.velocity = Vector3.zero;
 

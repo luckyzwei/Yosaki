@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 13.23, y: -10.299999}
-  m_SizeDelta: {x: -61.325134, y: -58.10388}
+  m_AnchoredPosition: {x: 15.42, y: -11.9}
+  m_SizeDelta: {x: -56.938805, y: -49.331238}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7684716135465520516
 CanvasRenderer:
@@ -93,14 +93,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 19.3
+  m_fontSize: 21.7
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
   m_fontSizeMax: 21.7
   m_fontStyle: 0
-  m_textAlignment: 516
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -191,8 +191,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -30.8, y: -9.480005}
-  m_SizeDelta: {x: 33.10852, y: 33.10852}
+  m_AnchoredPosition: {x: -53.8, y: -12.8}
+  m_SizeDelta: {x: 41.332886, y: 41.332886}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2205312318523762786
 CanvasRenderer:
@@ -266,7 +266,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 21.8}
-  m_SizeDelta: {x: -18.937988, y: -51.80078}
+  m_SizeDelta: {x: -18.937988, y: -50.000824}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8949191285129007552
 CanvasRenderer:
@@ -324,12 +324,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 19.4
+  m_fontSize: 23.04
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
-  m_fontSizeMax: 19.4
+  m_fontSizeMax: 23.04
   m_fontStyle: 0
   m_textAlignment: 514
   m_characterSpacing: 0
@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: 1174079848529203324}
   - component: {fileID: 645920625343197000}
   - component: {fileID: 7025196997608379800}
+  - component: {fileID: 3470695690302240327}
   m_Layer: 5
   m_Name: GachaButton
   m_TagString: Untagged
@@ -414,7 +415,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8694612104639564838}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -510,7 +511,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: 
+        m_MethodName: OnClickOpenButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -520,3 +521,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3470695690302240327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8694612104639564838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53335d2a5289dc644b8b72145e95e817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonKey: 

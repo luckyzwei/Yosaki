@@ -21,6 +21,9 @@ public class BeeBossEnemy : BossEnemyBase
         //  enemyHitObjects = GetComponentsInChildren<AlarmHitObject>().ToList();
 
         agentHpController.SetHp(float.MaxValue);
+
+        var bossTableData = TableManager.Instance.BossTableData[GameManager.Instance.bossId];
+        agentHpController.SetDefense(bossTableData.Defense);
         //enemyHitObjects.ForEach(e => e.SetDamage(1f));
 
         StartCoroutine(BossAttackPowerUpdateRoutine());

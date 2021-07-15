@@ -24,16 +24,31 @@ public class UiQuickMoveBoard : MonoBehaviour
     [SerializeField]
     private Button rightButton;
 
+    [SerializeField]
+    private TextMeshProUGUI titleText;
+
     void Start()
     {
-        RefreshStage(currentPresetId.Value);
         Subscribe();
+
+        SetMyStageInfo();
+    }
+
+    private void SetMyStageInfo()
+    {
+        int myLastStageId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.topClearStageId].Value;
+        var stageTableData = TableManager.Instance.StageMapData[myLastStageId];
+        currentPresetId.Value = stageTableData.Mappreset+1;
+
+        RefreshStage(currentPresetId.Value);
     }
 
     private void Subscribe()
     {
         currentPresetId.AsObservable().Subscribe(e =>
         {
+            titleText.SetText($"{e}단계");
+
             int lastPreset = TableManager.Instance.GetLastStagePreset();
 
             rightButton.interactable = e != lastPreset;

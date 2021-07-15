@@ -60,4 +60,8 @@ public class InAppPurchaseData
   bool active;
   public bool Active { get {return active; } set { this.active = value;} }
   
+  [SerializeField]
+  SellWhere sellwhere;
+  public SellWhere SELLWHERE { get {return sellwhere; } set { this.sellwhere = value;} }
+  
 }

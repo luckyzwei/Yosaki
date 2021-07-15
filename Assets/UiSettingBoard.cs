@@ -270,7 +270,7 @@ public static class SettingData
             PlayerPrefs.SetFloat(SettingKey.efxVolume, 1f);
 
         if (PlayerPrefs.HasKey(SettingKey.view) == false)
-            PlayerPrefs.SetFloat(SettingKey.view, 0.5f);
+            PlayerPrefs.SetFloat(SettingKey.view, 1f);
 
         if (PlayerPrefs.HasKey(SettingKey.GraphicOption) == false)
             PlayerPrefs.SetInt(SettingKey.GraphicOption, 2);

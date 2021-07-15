@@ -54,7 +54,7 @@ public class SystemMessage : SingletonMono<SystemMessage>
 
         maskImage.color = new Color(maskImage.color.r, maskImage.color.g, maskImage.color.b, mask.enabled ? 1f : 0f);
 
-        rootObject.transform.localScale = mask.enabled ? Vector3.one : Vector3.one * 1.2f;
+        rootObject.transform.localScale = mask.enabled ? Vector3.one*1.1f : Vector3.one * 1.1f /*1.2f*/;
     }
 
 

@@ -140,13 +140,15 @@ public class IAPServerTable
         });
     }
 
-    public void UpData(string key, bool LocalOnly)
+    public void UpData(string key)
     {
-        throw new System.NotImplementedException();
-    }
+        List<TransactionValue> transactions = new List<TransactionValue>();
 
-    public void UpData(string key, float data, bool LocalOnly)
-    {
+        Param param = new Param();
+        param.Add(key, tableDatas[key].ConvertToString());
 
+        transactions.Add(TransactionValue.SetUpdate(tableName, Indate, param));
+
+        ServerData.SendTransaction(transactions);
     }
 }

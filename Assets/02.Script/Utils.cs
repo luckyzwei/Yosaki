@@ -52,7 +52,7 @@ public static class Utils
             type != StatusType.AttackAdd &&
             type != StatusType.Hp &&
             type != StatusType.Mp &&
-            type != StatusType.IgnoreDefense&&
+            type != StatusType.IgnoreDefense &&
             type != StatusType.DashCount;
     }
 
@@ -150,6 +150,14 @@ public static class Utils
     private static string zeroString = "0";
     public static string ConvertBigNum(float data)
     {
+#if UNITY_EDITOR
+        bool isUnderZero = data < 0;
+        if (data < 0)
+        {
+            data *= -1f;
+        }
+#endif
+
         if (data == 0f)
         {
             return zeroString;
@@ -182,7 +190,12 @@ public static class Utils
             {
                 retStr += numStringList[i];
             }
-
+#if UNITY_EDITOR
+            if (isUnderZero) 
+            {
+                return "-" + retStr;
+            }
+#endif
             return retStr;
         }
         else
@@ -192,7 +205,12 @@ public static class Utils
                 if (numList[i] == 0) continue;
                 retStr = numList[i] + goldUnitArr[i] + retStr;
             }
-
+#if UNITY_EDITOR
+            if (isUnderZero)
+            {
+                return "-" + retStr;
+            }
+#endif
             return retStr;
         }
 

@@ -80,4 +80,8 @@ public class BossTableData
   int upgradeprice;
   public int Upgradeprice { get {return upgradeprice; } set { this.upgradeprice = value;} }
   
+  [SerializeField]
+  float defense;
+  public float Defense { get {return defense; } set { this.defense = value;} }
+  
 }

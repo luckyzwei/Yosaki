@@ -89,7 +89,7 @@ public static class CommonString
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;
             case Item_Type.pet3: return TableManager.Instance.PetDatas[3].Name;
-            case Item_Type.Marble: return "악마깃털";
+            case Item_Type.Marble: return "여우구슬";
             case Item_Type.MagicStoneBuff: return "기억의파편 버프 +50%(드랍)";
         }
         return "미등록";

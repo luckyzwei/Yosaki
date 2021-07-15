@@ -9560,7 +9560,8 @@ MonoBehaviour:
   greenRenderer: {fileID: 5973517115586508254}
   greyRenderer: {fileID: 2139117327366479931}
   minOrderInLayer: 99
-  hardIcon: {fileID: 0}
+  hardIcon:
+  - {fileID: 0}
 --- !u!1 &1756403433459737826
 GameObject:
   m_ObjectHideFlags: 0
@@ -9589,7 +9590,7 @@ Transform:
   m_GameObject: {fileID: 1756403433459737826}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -10.56, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 5581732115957161459}
   m_RootOrder: 0
@@ -9620,7 +9621,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dfdfaac725cf4b14bb177fe3a95a219a, type: 2}
+  - {fileID: 2100000, guid: 2d9f07df350959c48a2d7bbdee72dd97, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9653,7 +9654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 0db70e1ca4758944d8837195f64b3d26, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 21968b18140fc9f44a58c6c5441b692d, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -9675,7 +9676,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: Idle
+  _animationName: idle
   loop: 1
   timeScale: 1
 --- !u!1 &2270316712598793051
@@ -43382,7 +43383,7 @@ GameObject:
   - component: {fileID: 98765117791228503}
   - component: {fileID: 5547692842442255892}
   m_Layer: 12
-  m_Name: SingleRaidBoss
+  m_Name: 0
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43489,6 +43490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentHpController: {fileID: 5910196173677751451}
+  skeletonAnimation: {fileID: 2631492268237598399}
   hitObject: {fileID: 737284451186877808}
   alarmHitObject_1:
   - {fileID: 2661672482798815867}
@@ -43513,7 +43515,6 @@ MonoBehaviour:
   alarmHitObjectSpawnPos:
   - {fileID: 6104739875147121443}
   - {fileID: 6394559990543171295}
-  skeletonAnimation: {fileID: 2631492268237598399}
 --- !u!95 &5547692842442255892
 Animator:
   serializedVersion: 3

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeStage.AntiCheat.ObscuredTypes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
@@ -38,6 +39,8 @@ public class AgentHpController : MonoBehaviour
     public ReactiveCommand<float> WhenAgentDamaged = new ReactiveCommand<float>();
 
     private Transform playerPos;
+
+    private ObscuredFloat defense;
 
     private void Awake()
     {
@@ -95,9 +98,16 @@ public class AgentHpController : MonoBehaviour
         ResetDamTextValue();
     }
 
+    public void SetDefense(float defense) 
+    {
+        this.defense = defense;
+    }
+
     public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false)
     {
         this.enemyTableData = enemyTableData;
+
+        SetDefense(enemyTableData.Defense);
 
         SetHp(isFieldBossEnemy == false ? enemyTableData.Hp : enemyTableData.Hp * enemyTableData.Bosshpratio);
 
@@ -221,7 +231,7 @@ public class AgentHpController : MonoBehaviour
     {
         float ignoreDefense = PlayerStats.GetIgnoreDefenseValue();
 
-        float enemyDefense = enemyTableData.Defense - ignoreDefense;
+        float enemyDefense = Mathf.Max(0f, defense - ignoreDefense);
 
         value -= value * enemyDefense * 0.01f;
     }

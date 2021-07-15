@@ -45,7 +45,7 @@ public class UiStageCell : MonoBehaviour
 
     private bool HasStagePassItem()
     {
-        return ServerData.iapServerTable.TableDatas["stagepass"].buyCount.Value > 0;
+        return ServerData.iapServerTable.TableDatas[UiStagePassBuyButton.stagePassKey].buyCount.Value > 0;
     }
 
     public void OnClickRewardButton()
@@ -161,7 +161,7 @@ public class UiStageCell : MonoBehaviour
 
         }).AddTo(compositDisposable);
 
-        ServerData.iapServerTable.TableDatas["stagepass"].buyCount.AsObservable().Subscribe(e =>
+        ServerData.iapServerTable.TableDatas[UiStagePassBuyButton.stagePassKey].buyCount.AsObservable().Subscribe(e =>
         {
             rewardlockMask.SetActive(e == 0);
 
