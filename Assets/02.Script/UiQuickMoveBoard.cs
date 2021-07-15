@@ -37,8 +37,14 @@ public class UiQuickMoveBoard : MonoBehaviour
     private void SetMyStageInfo()
     {
         int myLastStageId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.topClearStageId].Value;
+
+        if (myLastStageId == -1) 
+        {
+            myLastStageId = 0;
+        }
+
         var stageTableData = TableManager.Instance.StageMapData[myLastStageId];
-        currentPresetId.Value = stageTableData.Mappreset+1;
+        currentPresetId.Value = stageTableData.Mappreset;
 
         RefreshStage(currentPresetId.Value);
     }

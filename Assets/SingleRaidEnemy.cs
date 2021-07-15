@@ -10,9 +10,6 @@ public class SingleRaidEnemy : BossEnemyBase
     private List<AlarmHitObject> enemyHitObjects;
 
     [SerializeField]
-    private List<AlarmHitObject> alarmHitObject_1;
-
-    [SerializeField]
     private AlarmHitObject alarmHitObject_2;
 
     [SerializeField]
@@ -81,17 +78,13 @@ public class SingleRaidEnemy : BossEnemyBase
 
             if (attackType == 0)
             {
-                yield return StartCoroutine(AttackRoutine_1(1f, Random.Range(5, 10)));
+                yield return StartCoroutine(AttackRoutine_2(1f));
             }
             else if (attackType == 1)
             {
-                yield return StartCoroutine(AttackRoutine_2(1f));
-            }
-            else if (attackType == 2)
-            {
                 yield return StartCoroutine(AttackRoutine_3(1.5f));
             }
-            else if (attackType == 3)
+            else if (attackType == 2)
             {
                 yield return StartCoroutine(AttackRoutine_4(1.5f));
             }
@@ -125,22 +118,6 @@ public class SingleRaidEnemy : BossEnemyBase
         StartCoroutine(AttackRoutine());
     }
 
-    //하늘에서 비쏟아냄
-    private IEnumerator AttackRoutine_1(float delay, int count)
-    {
-        alarmHitObject_1.Shuffle();
-
-        for (int i = 0; i < count; i++)
-        {
-            alarmHitObject_1[i].transform.position = new Vector3(Random.Range(atk_minPos.position.x, atk_maxPos.position.x), alarmHitObject_1[i].transform.position.y, alarmHitObject_1[i].transform.position.z);
-
-            alarmHitObject_1[i].AttackStart();
-
-            StartCoroutine(PlaySoundDelay(1f, "BossSkill1"));
-
-            yield return new WaitForSeconds(delay / (float)count);
-        }
-    }
 
     private IEnumerator PlaySoundDelay(float delay, string name)
     {
