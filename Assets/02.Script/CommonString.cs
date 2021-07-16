@@ -28,9 +28,9 @@ public static class CommonString
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
 
-    public static string ContentsName_Boss = "12간지";
-    public static string ContentsName_FireFly = "형설지공";
-    public static string ContentsName_InfinityTower = "도장깨기";
+    public static string ContentsName_Boss = "12지신 요괴";
+    public static string ContentsName_FireFly = "반딧불의 숲";
+    public static string ContentsName_InfinityTower = "요괴도장";
 
     public static string ChatConnectString = "채팅 채널에 입장했습니다.";
 

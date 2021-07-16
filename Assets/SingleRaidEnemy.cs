@@ -76,18 +76,18 @@ public class SingleRaidEnemy : BossEnemyBase
             Debug.LogError($"AttackType {attackType}");
 #endif
 
-            if (attackType == 0)
-            {
-                yield return StartCoroutine(AttackRoutine_2(1f));
-            }
-            else if (attackType == 1)
-            {
-                yield return StartCoroutine(AttackRoutine_3(1.5f));
-            }
-            else if (attackType == 2)
-            {
-                yield return StartCoroutine(AttackRoutine_4(1.5f));
-            }
+            yield return StartCoroutine(AttackRoutine_2(1f));
+            //if (attackType == 0)
+            //{
+            //}
+            //else if (attackType == 1)
+            //{
+            //    yield return StartCoroutine(AttackRoutine_3(1.5f));
+            //}
+            //else if (attackType == 2)
+            //{
+            //    yield return StartCoroutine(AttackRoutine_4(1.5f));
+            //}
 
             StartCoroutine(PlayAttackAnim());
 
@@ -127,19 +127,9 @@ public class SingleRaidEnemy : BossEnemyBase
 
 
     //?
-    int attack2Count = 0;
     private IEnumerator AttackRoutine_2(float delay)
     {
-        attack2Count++;
-        if (attack2Count % 3 == 0)
-        {
-            //맨위스폰
-            alarmHitObject_2.transform.position = attack2SpawnPos[attack2SpawnPos.Count - 1].position;
-        }
-        else
-        {
-            alarmHitObject_2.transform.position = attack2SpawnPos[Random.Range(0, attack2SpawnPos.Count)].position;
-        }
+        alarmHitObject_2.transform.position = attack2SpawnPos[Random.Range(0, attack2SpawnPos.Count)].position;
 
         alarmHitObject_2.AttackStart();
 
