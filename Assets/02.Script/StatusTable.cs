@@ -121,7 +121,7 @@ public class StatusTable
                 #region Gold
                 case AttackLevel_Gold:
                     {
-                        return Mathf.Pow(level, 1.07f) + 10;
+                        return Mathf.Pow(level, 1.07f)*2f + 10;
                     }
                     break;
                 case CriticalLevel_Gold:
