@@ -31,6 +31,8 @@ public class AgentHpController : MonoBehaviour
     [SerializeField]
     private Transform damTextSpawnPos;
 
+    private bool updateSubHpBar = false;
+
     private void Awake()
     {
         GetRequireComponents();
@@ -52,6 +54,11 @@ public class AgentHpController : MonoBehaviour
         currentHp.AsObservable().Subscribe(e =>
         {
             enemyHpBar.UpdateGauge(e, maxHp);
+
+            if (updateSubHpBar)
+            {
+                UiSubHpBar.Instance.UpdateGauge(e, maxHp);
+            }
         }).AddTo(this);
     }
 
@@ -69,6 +76,8 @@ public class AgentHpController : MonoBehaviour
     public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false)
     {
         this.enemyTableData = enemyTableData;
+
+        this.updateSubHpBar = isFieldBossEnemy;
 
         SetDefense(enemyTableData.Defense);
 
@@ -116,16 +125,16 @@ public class AgentHpController : MonoBehaviour
 
         Vector3 spawnPos = Vector3.zero;
 
-        if (damTextSpawnPos != null) 
+        if (damTextSpawnPos != null)
         {
             spawnPos = damTextSpawnPos.position;
         }
-        else 
+        else
         {
             spawnPos = this.transform.position;
         }
 
-       Vector3 damTextspawnPos = spawnPos + Vector3.up * 1f + Vector3.right * UnityEngine.Random.Range(-0.4f, 0.4f) + Vector3.up * UnityEngine.Random.Range(-0.2f, 0.2f);
+        Vector3 damTextspawnPos = spawnPos + Vector3.up * 1f + Vector3.right * UnityEngine.Random.Range(-0.4f, 0.4f) + Vector3.up * UnityEngine.Random.Range(-0.2f, 0.2f);
 
 
         if (Vector3.Distance(playerPos.position, this.transform.position) < GameBalance.effectActiveDistance)
