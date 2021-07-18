@@ -123,7 +123,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         return tableData.Activeoffset * Vector2.right * (playerMoveController.MoveDirection == MoveDirection.Right ? 1 : -1);
     }
 
-    public IEnumerator ApplyDamage(Collider2D hitEnemie, SkillTableData skillInfo, float damage, WaitForSeconds damageApplyInterval)
+    public IEnumerator ApplyDamage(Collider2D hitEnemie, SkillTableData skillInfo, float damage, WaitForSeconds damageApplyInterval,bool playSound)
     {
         AgentHpController agentHpController = hitEnemie.gameObject.GetComponent<AgentHpController>();
 
@@ -148,6 +148,13 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                 spawnPos += (Vector3)UnityEngine.Random.insideUnitCircle * 0.5f;
                 spawnPos += (Vector3)Vector3.back;
                 EffectManager.SpawnEffect(skillInfo.Hiteffectname, spawnPos);
+            }
+
+            //사운드
+            //시전할때 사운드 있어서 따로재생X
+            if (hit != 0 && playSound) 
+            {
+                SoundManager.Instance.PlaySound(skillInfo.Soundname);
             }
 
             yield return damageApplyInterval;

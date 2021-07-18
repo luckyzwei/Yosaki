@@ -39,7 +39,7 @@ public class Slash0 : SkillBase
         //데미지적용
         for (int i = 0; i < hitEnemies.Length && i < skillInfo.Targetcount; i++)
         {
-            PlayerSkillCaster.Instance.StartCoroutine(playerSkillCaster.ApplyDamage(hitEnemies[i], skillInfo, damage, damageApplyInterval));
+            PlayerSkillCaster.Instance.StartCoroutine(playerSkillCaster.ApplyDamage(hitEnemies[i], skillInfo, damage, damageApplyInterval, i == 0));
         }
     }
 

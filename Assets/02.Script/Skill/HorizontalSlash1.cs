@@ -60,7 +60,7 @@ public class HorizontalSlash1 : HorizontalSlash0
         //데미지적용
         for (int i = 0; i < hitEnemies.Count && i < skillInfo.Targetcount; i++)
         {
-            PlayerSkillCaster.Instance.StartCoroutine(playerSkillCaster.ApplyDamage(hitEnemies[i].collider, skillInfo, damage, damageApplyInterval));
+            PlayerSkillCaster.Instance.StartCoroutine(playerSkillCaster.ApplyDamage(hitEnemies[i].collider, skillInfo, damage, damageApplyInterval, i == 0));
 
             //끌어모음
             if (attractEnemy && hitEnemies[i].transform.tag.Equals(Tags.Boss) == false)

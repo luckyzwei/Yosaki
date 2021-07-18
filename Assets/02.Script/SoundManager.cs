@@ -65,7 +65,7 @@ public class SoundManager : SingletonMono<SoundManager>
             switch (currentContents)
             {
                 case ContentsType.NormalField:
-                  //  clip = stageBgms[GameManager.Instance.CurrentStageData.Mapthema];
+                    clip = stageBgms[GameManager.Instance.CurrentStageData.Mapthema];
                     break;
                 case ContentsType.FireFly:
                     clip = bonusDefenseBgm;
