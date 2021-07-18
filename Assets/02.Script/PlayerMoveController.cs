@@ -31,7 +31,7 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
     private bool isDoubleJump = false;
     private bool isUpJump = false;
     private int jumpCount = 0;
-    private string jumpSoundName = "Jump";
+    private string jumpSoundName = "Teleport";
 
     public MoveDirection MoveDirection { get; private set; }
 
@@ -182,7 +182,7 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
 
         rb.velocity = Vector3.zero;
         rb.AddForce(Vector3.up * PlayerBalance.jumpPower, ForceMode2D.Impulse);
-        SoundManager.Instance.PlaySound(jumpSoundName);
+        //SoundManager.Instance.PlaySound(jumpSoundName);
         jumpCount++;
     }
 

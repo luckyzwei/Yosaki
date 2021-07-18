@@ -7,7 +7,6 @@ public abstract class UiRedDotBase : MonoBehaviour
     [SerializeField]
     protected GameObject rootObject;
 
-    [HideInInspector]
     public Transform moreButton;
 
     [SerializeField]

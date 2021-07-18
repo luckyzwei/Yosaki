@@ -164,4 +164,16 @@ public class SkillTableData
   float haseffectvalue;
   public float Haseffectvalue { get {return haseffectvalue; } set { this.haseffectvalue = value;} }
   
+  [SerializeField]
+  int collectionabiltype;
+  public int Collectionabiltype { get {return collectionabiltype; } set { this.collectionabiltype = value;} }
+  
+  [SerializeField]
+  int collectionabiltmaxlevel;
+  public int Collectionabiltmaxlevel { get {return collectionabiltmaxlevel; } set { this.collectionabiltmaxlevel = value;} }
+  
+  [SerializeField]
+  float collectionvalue;
+  public float Collectionvalue { get {return collectionvalue; } set { this.collectionvalue = value;} }
+  
 }

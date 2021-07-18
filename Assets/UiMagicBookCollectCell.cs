@@ -4,15 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using BackEnd;
 
 public class UiMagicBookCollectCell : MonoBehaviour
 {
     [SerializeField]
     private WeaponView weaponView;
 
-    private MagicBookData magicBookData;
-
-    private MagicBookServerData magicBookServerData;
+    private SkillTableData skillData;
 
     [SerializeField]
     private Image upgradeButton;
@@ -36,33 +35,32 @@ public class UiMagicBookCollectCell : MonoBehaviour
     private TextMeshProUGUI buttonText;
 
 
-    public void Initialize(MagicBookData magicBookData)
+    public void Initialize(SkillTableData skillData)
     {
-        this.magicBookData = magicBookData;
-        this.magicBookServerData = ServerData.magicBookTable.TableDatas[magicBookData.Stringid];
+        this.skillData = skillData;
 
-        weaponView.Initialize(null, this.magicBookData);
+        weaponView.Initialize(null,null, this.skillData);
 
         Subscribe();
     }
 
     private void Subscribe()
     {
-        magicBookServerData.collectLevel.AsObservable().Subscribe(WhenCollectionLevelChanged).AddTo(this);
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillCollectionLevel][skillData.Id].AsObservable().Subscribe(WhenCollectionLevelChanged).AddTo(this);
     }
 
     private void WhenCollectionLevelChanged(int level)
     {
-        if (level >= magicBookData.Collectionabiltmaxlevel)
+        if (level >= skillData.Collectionabiltmaxlevel)
         {
             upgradeButton.sprite = maxLevelSprite;
 
             levelText.SetText($"LV : {level}(MAX)");
             buttonText.SetText("최고레벨");
 
-            float collectionAbilValue = magicBookData.Collectionvalue * magicBookServerData.collectLevel.Value;
+            float collectionAbilValue = skillData.Collectionvalue * level;
 
-            StatusType statusType = (StatusType)magicBookData.Collectionabiltype;
+            StatusType statusType = (StatusType)skillData.Collectionabiltype;
             abilName.SetText(CommonString.GetStatusName(statusType));
             if (statusType.IsPercentStat() == false)
             {
@@ -80,10 +78,10 @@ public class UiMagicBookCollectCell : MonoBehaviour
             levelText.SetText($"LV : {level}");
             buttonText.SetText("레벨업");
 
-            float collectionAbilValue = magicBookData.Collectionvalue * magicBookServerData.collectLevel.Value;
-            float collectionAbilNextValue = magicBookData.Collectionvalue * (magicBookServerData.collectLevel.Value + 1);
+            float collectionAbilValue = skillData.Collectionvalue * level;
+            float collectionAbilNextValue = skillData.Collectionvalue * (level + 1);
 
-            StatusType statusType = (StatusType)magicBookData.Collectionabiltype;
+            StatusType statusType = (StatusType)skillData.Collectionabiltype;
             abilName.SetText(CommonString.GetStatusName(statusType));
             if (statusType.IsPercentStat() == false)
             {
@@ -100,22 +98,25 @@ public class UiMagicBookCollectCell : MonoBehaviour
 
     public void OnClickUpgradeButton()
     {
-        if (magicBookServerData.collectLevel.Value >= this.magicBookData.Collectionabiltmaxlevel)
+        int currentSkillCollectionLevel = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillCollectionLevel][skillData.Id].Value;
+        int currentSkillHasAmount = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value;
+
+        if (currentSkillCollectionLevel >= this.skillData.Collectionabiltmaxlevel)
         {
             PopupManager.Instance.ShowAlarmMessage("최대레벨 입니다.");
             return;
         }
 
-        if (magicBookServerData.amount.Value <= 0)
+        if (currentSkillHasAmount <= 0)
         {
-            PopupManager.Instance.ShowAlarmMessage("마도서가 부족 합니다.");
+            PopupManager.Instance.ShowAlarmMessage("기술이 부족 합니다.");
             return;
         }
 
         SoundManager.Instance.PlayButtonSound();
 
-        magicBookServerData.amount.Value--;
-        magicBookServerData.collectLevel.Value++;
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value--;
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillCollectionLevel][skillData.Id].Value++;
 
         if (syncRoutine != null)
         {
@@ -131,7 +132,27 @@ public class UiMagicBookCollectCell : MonoBehaviour
     private IEnumerator SyncRoutine()
     {
         yield return syncDelay;
-        ServerData.magicBookTable.SyncToServerEach(magicBookData.Stringid);
+
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+        Param skillParam = new Param();
+        List<int> skillAmountSyncData = new List<int>();
+        List<int> collectionLevel = new List<int>();
+
+        for (int i = 0; i < ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount].Count; i++)
+        {
+            skillAmountSyncData.Add(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][i].Value);
+            collectionLevel.Add(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillCollectionLevel][i].Value);
+        }
+
+        skillParam.Add(SkillServerTable.SkillHasAmount, skillAmountSyncData);
+        skillParam.Add(SkillServerTable.SkillCollectionLevel, collectionLevel);
+
+        //스킬
+        transactionList.Add(TransactionValue.SetUpdate(SkillServerTable.tableName, SkillServerTable.Indate, skillParam));
+
+        ServerData.SendTransaction(transactionList);
+
         syncRoutine = null;
     }
 }

@@ -144,6 +144,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     private void QuickMove(InputType type)
     {
         EffectManager.SpawnEffect(TeleportEfxName, playerTr.position + Vector3.down * 1f);
+        SoundManager.Instance.PlaySound(TeleportEfxName);
 
         switch (type)
         {

@@ -16,6 +16,7 @@ public class SkillServerTable
     public static string SkillAlreadyHas = "SkillAlreadyHas";
     public static string SkillAwakeNum = "SkillAwakeNum";
     public static string SkillLevel = "SkillLevel";
+    public static string SkillCollectionLevel = "SkillCollectionLevel";
     public static string SkillSlotIdx_0 = "SkillSlotIdx_0";
     public static string SkillSlotIdx_1 = "SkillSlotIdx_1";
     public static string SkillSlotIdx_2 = "SkillSlotIdx_2";
@@ -26,6 +27,7 @@ public class SkillServerTable
         {SkillAlreadyHas,new List<int>()},
         {SkillAwakeNum,new List<int>()},
         {SkillLevel,new List<int>()},
+        {SkillCollectionLevel,new List<int>()},
         {SkillSlotIdx_0,new List<int>(){0,-1,-1,-1,-1 }},
         {SkillSlotIdx_1,new List<int>(){-1,-1,-1,-1,-1 }},
         {SkillSlotIdx_2,new List<int>(){-1,-1,-1,-1,-1 }}
@@ -257,7 +259,7 @@ public class SkillServerTable
                  e = tableSchema.GetEnumerator();
                  while (e.MoveNext())
                  {
-                     if (e.Current.Key == SkillHasAmount || e.Current.Key == SkillAlreadyHas || e.Current.Key == SkillAwakeNum || e.Current.Key == SkillLevel)
+                     if (e.Current.Key == SkillHasAmount || e.Current.Key == SkillAlreadyHas || e.Current.Key == SkillAwakeNum || e.Current.Key == SkillLevel || e.Current.Key == SkillCollectionLevel)
                      {
                          //신규스킬
                          List<ReactiveProperty<int>> firstData = new List<ReactiveProperty<int>>();

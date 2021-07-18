@@ -28,7 +28,7 @@ public static class CommonString
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
 
-    public static string ContentsName_Boss = "12지신 요괴";
+    public static string ContentsName_Boss = "십이신장";
     public static string ContentsName_FireFly = "반딧불의 숲";
     public static string ContentsName_InfinityTower = "요괴도장";
 
@@ -79,7 +79,7 @@ public static class CommonString
             case Item_Type.Jade: return "옥";
             case Item_Type.GrowThStone: return "수련의돌";
             case Item_Type.Memory: return "무공비급";
-            case Item_Type.Ticket: return "두루마리";
+            case Item_Type.Ticket: return "소환권";
             case Item_Type.costume0: return "미등록";
             case Item_Type.costume1: return "미등록";
             case Item_Type.costume2: return "미등록";

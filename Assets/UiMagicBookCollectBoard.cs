@@ -16,7 +16,7 @@ public class UiMagicBookCollectBoard : MonoBehaviour
 
     private void Initialize()
     {
-        var tableData = TableManager.Instance.MagicBookTable.dataArray;
+        var tableData = TableManager.Instance.SkillTable.dataArray;
 
         for (int i = 0; i < tableData.Length; i++)
         {
