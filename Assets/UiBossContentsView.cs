@@ -101,8 +101,6 @@ public class UiBossContentsView : MonoBehaviour
 
     public void OnClickInstantClearButton()
     {
-        PopupManager.Instance.ShowAlarmMessage("구현필요");
-        return;
         int price = 1;
 
         int currentTicketNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value;
@@ -117,54 +115,21 @@ public class UiBossContentsView : MonoBehaviour
 
         int clearAmount = Mathf.Min(instantOpenAmount, currentTicketNum);
 
-        //if (bossTableData.Id == 0) 
-        //{
-        //    RankManager.Instance.RequestMyStageRank(e =>
-        //    {
-        //        if (e != null)
-        //        {
-        //            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
-        //            {
-        //                InstantClearReceive(e.Score, clearAmount);
-        //            },
-        //            () =>
-        //            {
-        //                clearButton.interactable = true;
-        //            });
-        //        }
-        //        else
-        //        {
-        //            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
-        //            clearButton.interactable = true;
-        //        }
-        //    });
-        //}
-        //else if (bossTableData.Id == 1) 
-        //{
-        //    RankManager.Instance.RequestMyBoss1Rank(e =>
-        //    {
-        //        if (e != null)
-        //        {
-        //            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
-        //            {
-        //                InstantClearReceive(e.Score, clearAmount);
-        //            },
-        //            () =>
-        //            {
-        //                clearButton.interactable = true;
-        //            });
-        //        }
-        //        else
-        //        {
-        //            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
-        //            clearButton.interactable = true;
-        //        }
-        //    });
-        //} 
-    
+        var bossServerTable = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
+
+        float currentScore = float.Parse(bossServerTable.score.Value);
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(currentScore)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
+                    {
+                        InstantClearReceive(currentScore, clearAmount);
+                    },
+                    () =>
+                    {
+                        clearButton.interactable = true;
+                    });
     }
 
-    private void InstantClearReceive(float score,int clearAmount) 
+    private void InstantClearReceive(float score, int clearAmount)
     {
         LogManager.Instance.SendLog("보스소탕요청", $"{clearAmount}회");
 

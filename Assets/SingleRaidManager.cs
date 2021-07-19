@@ -199,23 +199,17 @@ public class SingleRaidManager : ContentsManagerBase
         //점수 전송
         SendScore();
 
-
-
         //보상팝업
         RewardItem();
     }
 
     private void SendScore()
     {
-        //int bossIdx = GameManager.Instance.bossId;
-        //if (bossIdx == 0)
-        //{
-        //    RankManager.Instance.UpdateStage_Score(damageAmount.Value);
-        //}
-        //else if (bossIdx == 1)
-        //{
-        //    RankManager.Instance.UpdateBoss1_Score(damageAmount.Value);
-        //}
+        var serverData = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
+
+        serverData.score.Value = damageAmount.Value.ToString();
+
+        ServerData.bossServerTable.UpdateData(bossTableData.Stringid);
     }
 
     public static List<RewardData> GetRewawrdData(BossTableData bossTableData, float damagedHp, int clearCount = 1)

@@ -69,7 +69,7 @@ public class UiSkillPointResetButton : MonoBehaviour
         int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
         //리셋한 데이터 적용
-        ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value = currentLevel;
+        ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value = currentLevel * GameBalance.SkillPointGet;
 
         //비용 차감
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.SkillPointResetPrice;

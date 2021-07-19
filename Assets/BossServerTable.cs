@@ -11,10 +11,11 @@ public class BossServerData
     public int idx;
     public ReactiveProperty<int> clear;
     public ReactiveProperty<int> artifactLevel;
+    public ReactiveProperty<string> score;
 
     public string ConvertToString()
     {
-        return $"{idx},{clear.Value},{artifactLevel.Value}";
+        return $"{idx},{clear.Value},{artifactLevel.Value},{score.Value}";
     }
 }
 
@@ -27,7 +28,7 @@ public class BossServerTable
 
     public ReactiveDictionary<string, BossServerData> TableDatas => tableDatas;
 
-    public void UpdateData(string key) 
+    public void UpdateData(string key)
     {
         Param defultValues = new Param();
 

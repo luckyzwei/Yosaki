@@ -24,7 +24,7 @@ public static class GameBalance
     //레벨업시 얻는 스탯포인트
     public readonly static ObscuredInt StatPoint = 3;
     //레벨업시 얻는 스킬포인트
-    public readonly static ObscuredInt SkillPointGet = 1;
+    public readonly static ObscuredInt SkillPointGet = 2;
     public readonly static ObscuredInt SkillPointResetPrice = 100000;
 
     //시작골드
