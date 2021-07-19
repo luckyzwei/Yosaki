@@ -30,6 +30,8 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     [SerializeField]
     private Image quickMoveDelayGauge;
 
+    public bool nowTouching { get; private set; } = false;
+
     //[SerializeField]
     //private GameObject autoObject;
 
@@ -124,8 +126,6 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
 
     private void ReceiveDownEvent(InputType type)
     {
-        if (AutoManager.Instance.IsAutoMode == true) return;
-
         if (QuickMoveDelayContainter[InputType.Common] == true) return;
 
         if (downInputContainter[type] == true)
@@ -164,11 +164,11 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
                 break;
             case InputType.Down:
                 {
-                    if (BottomTeleportDetector.Instance.triggered == false) 
+                    if (BottomTeleportDetector.Instance.triggered == false)
                     {
                         playerTr.position += Vector3.down * quickMoveRange_Down;
                     }
-                    else 
+                    else
                     {
                         var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.down, quickMoveRange_Down);
 
@@ -218,6 +218,17 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         EffectManager.SpawnEffect(TeleportEfxName, playerTr.position + Vector3.down * 1f);
     }
 
+    public void TeleportToTop()
+    {
+        Top_downEvent();
+        Top_downEvent();
+    }
+    public void TeleportToBottom()
+    {
+        Down_downEvent();
+        Down_downEvent();
+    }
+
     public void Top_downEvent()
     {
         ReceiveDownEvent(InputType.Top);
@@ -239,11 +250,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
 
     public void Top()
     {
-        if (AutoManager.Instance.IsAutoMode == true)
-        {
-            return;
-        }
-
+        nowTouching = true;
         Vertical = 1;
         Horizontal = 0;
 
@@ -251,11 +258,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     }
     public void Down()
     {
-        if (AutoManager.Instance.IsAutoMode == true)
-        {
-            return;
-        }
-
+        nowTouching = true;
         Vertical = -1;
         Horizontal = 0;
 
@@ -263,11 +266,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     }
     public void Left()
     {
-        if (AutoManager.Instance.IsAutoMode == true)
-        {
-            return;
-        }
-
+        nowTouching = true;
         Horizontal = -1;
         Vertical = 0;
 
@@ -275,11 +274,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     }
     public void Right()
     {
-        if (AutoManager.Instance.IsAutoMode == true)
-        {
-            return;
-        }
-
+        nowTouching = true;
         Horizontal = 1;
         Vertical = 0;
 
@@ -290,6 +285,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     {
         Vertical = 0;
         Horizontal = 0;
+        nowTouching = false;
         OffArrowSprites();
     }
 
@@ -335,6 +331,40 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             Right_downEvent();
+        }
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            Top();
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            Down();
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            Left();
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            Right();
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            EndTouch();
+        }
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            EndTouch();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            EndTouch();
+        }
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            EndTouch();
         }
     }
 #endif

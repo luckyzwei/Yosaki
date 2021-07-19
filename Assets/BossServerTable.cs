@@ -71,6 +71,7 @@ public class BossServerTable
                     bossTable.idx = table[i].Id;
                     bossTable.clear = new ReactiveProperty<int>(0);
                     bossTable.artifactLevel = new ReactiveProperty<int>(0);
+                    bossTable.score = new ReactiveProperty<string>(string.Empty);
 
                     defultValues.Add(table[i].Stringid, bossTable.ConvertToString());
                     tableDatas.Add(table[i].Stringid, bossTable);
@@ -124,6 +125,7 @@ public class BossServerTable
                         bossData.idx = int.Parse(splitData[0]);
                         bossData.clear = new ReactiveProperty<int>(int.Parse(splitData[1]));
                         bossData.artifactLevel = new ReactiveProperty<int>(int.Parse(splitData[2]));
+                        bossData.score = new ReactiveProperty<string>(string.Empty);
 
                         tableDatas.Add(table[i].Stringid, bossData);
                     }
@@ -134,6 +136,7 @@ public class BossServerTable
                         bossData.idx = table[i].Id;
                         bossData.clear = new ReactiveProperty<int>(0);
                         bossData.artifactLevel = new ReactiveProperty<int>(0);
+                        bossData.score = new ReactiveProperty<string>(string.Empty);
 
                         defultValues.Add(table[i].Stringid, bossData.ConvertToString());
 

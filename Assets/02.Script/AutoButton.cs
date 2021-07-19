@@ -26,12 +26,12 @@ public class AutoButton : MonoBehaviour
 
     public void OnClickAutoButton()
     {
-        if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField &&
-GameManager.Instance.contentsType != GameManager.ContentsType.FireFly)
-        {
-            PopupManager.Instance.ShowAlarmMessage("자동전투가 불가능한 던전 입니다.");
-            return;
-        }
+//        if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField &&
+//GameManager.Instance.contentsType != GameManager.ContentsType.FireFly)
+//        {
+//            PopupManager.Instance.ShowAlarmMessage("자동전투가 불가능한 던전 입니다.");
+//            return;
+//        }
 
         if (AutoManager.Instance.AutoMode.Value == true)
         {

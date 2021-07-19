@@ -44,8 +44,10 @@ public class StatusTable
     public const string CriticalLevel_memory = "CriticalLevel_memory";
     public const string CriticalDamLevel_memory = "CriticalDamLevel_memory";
     public const string IgnoreDefense_memory = "IgnoreDefense_memory";
+    public const string BossDamage_memory = "BossDamage_memory";
 
-    
+
+
 
 
 
@@ -80,6 +82,7 @@ public class StatusTable
         {CriticalLevel_memory,0},
         {CriticalDamLevel_memory,0},
         {IgnoreDefense_memory,0},
+        {BossDamage_memory,0}
     };
 
     private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();
@@ -121,7 +124,7 @@ public class StatusTable
                 #region Gold
                 case AttackLevel_Gold:
                     {
-                        return Mathf.Pow(level, 1.07f)*2f + 10;
+                        return Mathf.Pow(level, 1.07f) * 2f + 10;
                     }
                     break;
                 case CriticalLevel_Gold:
@@ -225,6 +228,10 @@ public class StatusTable
                         return level;
                     }
                     break;
+                case BossDamage_memory:
+                    {
+                        return level * 0.1f;
+                    }
 
                 #endregion
                 default:
