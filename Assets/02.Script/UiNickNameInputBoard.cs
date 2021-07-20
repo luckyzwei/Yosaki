@@ -40,6 +40,8 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
     public void WhenTermsToggleChanged(bool isOn)
     {
         termsAgreeButton.interactable = isOn;
+
+        SoundManager.Instance.PlayButtonSound();
     }
     public void OnClickTermsAgreeButton()
     {

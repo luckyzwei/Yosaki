@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,15 @@ public class UiSettingBoard : MonoBehaviour
     [SerializeField]
     private Toggle shakeCameraToggle;
 
+    [SerializeField]
+    private TextMeshProUGUI bgmDesc;
+
+    [SerializeField]
+    private TextMeshProUGUI sfxDesc;
+
+    [SerializeField]
+    private TextMeshProUGUI viewDesc;
+
     private void Awake()
     {
         Initialize();
@@ -53,6 +63,15 @@ public class UiSettingBoard : MonoBehaviour
         shakeCameraToggle.isOn = PlayerPrefs.GetInt(SettingKey.GlowEffect) == 1;
 
         initialized = true;
+
+        SetSliderTexts();
+    }
+
+    private void SetSliderTexts() 
+    {
+        bgmDesc.SetText(((int)(bgmSlider.value * 100)).ToString());
+        sfxDesc.SetText(((int)(efxSlider.value * 100)).ToString());
+        viewDesc.SetText(((int)(vierSlider.value * 100)).ToString());
     }
 
 
@@ -60,18 +79,21 @@ public class UiSettingBoard : MonoBehaviour
     {
         if (initialized == false) return;
         SettingData.bgmVolume.Value = value;
+        bgmDesc.SetText(((int)(value * 100)).ToString());
     }
 
     public void WhenEfxSliderChanged(float value)
     {
         if (initialized == false) return;
         SettingData.efxVolume.Value = value;
+        sfxDesc.SetText(((int)(value * 100)).ToString());
     }
 
     public void WhenViewSliderChanged(float value)
     {
         if (initialized == false) return;
         SettingData.view.Value = value;
+        viewDesc.SetText(((int)(value * 100)).ToString());
     }
 
     public void Graphic_Low_Select(bool on)
@@ -264,10 +286,10 @@ public static class SettingData
     static void FirstInit()
     {
         if (PlayerPrefs.HasKey(SettingKey.bgmVolume) == false)
-            PlayerPrefs.SetFloat(SettingKey.bgmVolume, 1f);
+            PlayerPrefs.SetFloat(SettingKey.bgmVolume, 0.5f);
 
         if (PlayerPrefs.HasKey(SettingKey.efxVolume) == false)
-            PlayerPrefs.SetFloat(SettingKey.efxVolume, 1f);
+            PlayerPrefs.SetFloat(SettingKey.efxVolume, 0.5f);
 
         if (PlayerPrefs.HasKey(SettingKey.view) == false)
             PlayerPrefs.SetFloat(SettingKey.view, 1f);
