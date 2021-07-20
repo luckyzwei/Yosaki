@@ -93,6 +93,8 @@ public class UiSkillGacha : MonoBehaviour
             return;
         }
 
+        UiTutorialManager.Instance.SetClear(TutorialStep.GetSkill);
+
         this.skillTableDatas.Clear();
         probs.Clear();
         gachaResultCellInfos.Clear();
@@ -155,6 +157,8 @@ public class UiSkillGacha : MonoBehaviour
 
         //가챠갯수
         ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).Value += amount;
+
+        UiTutorialManager.Instance.SetClear(TutorialStep.GetSkill);
 
         //마법책
         for (int i = 0; i < amount; i++)

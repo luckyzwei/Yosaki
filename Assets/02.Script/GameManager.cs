@@ -107,6 +107,8 @@ public class GameManager : SingletonMono<GameManager>
 
     public void LoadNextScene()
     {
+        UiTutorialManager.Instance.SetClear(TutorialStep.GoNextStage);
+
         if (IsLastScene() == false)
         {
             currentMapIdx.Value++;
@@ -122,7 +124,7 @@ public class GameManager : SingletonMono<GameManager>
 
     public void LoadNormalField()
     {
-       contentsType = ContentsType.NormalField;
+        contentsType = ContentsType.NormalField;
 
         ClearStage();
 
@@ -151,7 +153,7 @@ public class GameManager : SingletonMono<GameManager>
         {
             if (currentMapIdx.Value != 0 && UiTutorialManager.Instance != null)
             {
-             //   UiTutorialManager.Instance.SetClear(TutorialStep._1_MoveField);
+                //   UiTutorialManager.Instance.SetClear(TutorialStep._1_MoveField);
             }
         }
 

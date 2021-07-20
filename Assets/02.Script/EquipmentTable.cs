@@ -19,7 +19,7 @@ public class EquipmentTable
     private Dictionary<string, int> tableSchema = new Dictionary<string, int>()
     {
         {Weapon,0},
-        {Pet,0},
+        {Pet,-1},
         {MagicBook,-1},
         {Potion,0},
         {CostumeSlot,0},
@@ -31,6 +31,11 @@ public class EquipmentTable
 
     public void ChangeEquip(string key, int idx)
     {
+        if (key == Weapon)
+        {
+            UiTutorialManager.Instance.SetClear(TutorialStep.EquipWeapon);
+        }
+
         tableDatas[key].Value = idx;
 
         SyncData(key);

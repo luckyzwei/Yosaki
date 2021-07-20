@@ -48,7 +48,7 @@ public class UiStagePassBuyButton : MonoBehaviour
             return;
         }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR|| TEST
         GetPackageItem(stagePassKey);
         return;
 #endif

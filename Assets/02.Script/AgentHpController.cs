@@ -82,13 +82,6 @@ public class AgentHpController : MonoBehaviour
         SetDefense(enemyTableData.Defense);
 
         SetHp(isFieldBossEnemy == false ? enemyTableData.Hp : enemyTableData.Hp * enemyTableData.Bosshpratio);
-
-        SetHardIcon();
-    }
-
-    private void SetHardIcon()
-    {
-        enemyHpBar.SetHardIcon(enemyTableData.Enemygrade);
     }
 
     public void SetHp(float hp)
@@ -103,6 +96,7 @@ public class AgentHpController : MonoBehaviour
         enemyMoveController.SetKnockBack();
     }
     private static string hitSfxName = "EnemyHitted";
+    private static string deadSfxName = "EnemyDead";
     private void ApplyCriticalAndDamText(ref float value)
     {
         bool isCritical = PlayerStats.ActiveCritical();
@@ -211,6 +205,8 @@ public class AgentHpController : MonoBehaviour
         GetGoldByEnemy(enemyTableData.Gold);
 
         this.gameObject.SetActive(false);
+
+        SoundManager.Instance.PlaySound(deadSfxName);
     }
 
     private void AddEnemyDeadCount()

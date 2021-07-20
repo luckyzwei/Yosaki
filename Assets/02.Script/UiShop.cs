@@ -28,7 +28,7 @@ public class UiShop : MonoBehaviour
 
     public void BuyProduct(string id)
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || TEST
         GetPackageItem(id);
         return;
 #endif

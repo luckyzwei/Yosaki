@@ -60,7 +60,7 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
         MovePlayer();
 
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.Space) && AutoManager.Instance.IsAutoMode == false)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             JumpPlayer();
         }
@@ -100,28 +100,12 @@ public class PlayerMoveController : SingletonMono<PlayerMoveController>
 
     public void OnClickJumpButton()
     {
-        if (AutoManager.Instance.IsAutoMode == true)
-        {
-            //if (SkillCoolTimeManager.jumpAutoValue.Value == 1)
-            //{
-            //    SkillCoolTimeManager.SetJumpAuto(false);
-            //    PopupManager.Instance.ShowAlarmMessage("점프 해제");
-            //}
-            //else
-            //{
-            //    SkillCoolTimeManager.SetJumpAuto(true);
-            //    PopupManager.Instance.ShowAlarmMessage("점프 사용");
-            //}
-
-            return;
-        }
-
         JumpPlayer();
     }
 
     public void JumpPlayer()
     {
-        if (PlayerSkillCaster.Instance.isSkillMoveRestriction == true) return;
+        //if (PlayerSkillCaster.Instance.isSkillMoveRestriction == true) return;
 
         //2단점프
         if (jumpCount == 1 && isDoubleJump == false)

@@ -129,7 +129,7 @@ public static class PlayerStats
         //  ret += GetCollectionAbilValue(StatusType.IntAdd);
         ret += ServerData.petTable.GetStatusValue(StatusType.AttackAdd);
         ret += GetWeaponEquipPercentValue(StatusType.AttackAdd);
-        ret += GetMagicBookCollectionValue(StatusType.AttackAdd);
+        ret += GetSkillCollectionValue(StatusType.AttackAdd);
         ret += GetWingAbilValue(StatusType.AttackAdd);
         ret += GetPassiveSkillValue(StatusType.AttackAdd);
         ret += GetMarbleValue(StatusType.AttackAdd);
@@ -163,7 +163,7 @@ public static class PlayerStats
         ret += GetWeaponHasPercentValue(StatusType.AttackAddPer);
         ret += GetMagicBookHasPercentValue(StatusType.AttackAddPer);
         ret += GetCostumeAttackPowerValue();
-        ret += GetMagicBookCollectionValue(StatusType.AttackAddPer);
+        ret += GetSkillCollectionValue(StatusType.AttackAddPer);
         ret += GetWingAbilValue(StatusType.AttackAddPer);
         ret += GetPassiveSkillValue(StatusType.AttackAddPer);
         return ret;
@@ -303,20 +303,20 @@ public static class PlayerStats
         return ret;
     }
 
-    public static float GetMagicBookCollectionValue(StatusType type)
+    public static float GetSkillCollectionValue(StatusType type)
     {
-        var e = TableManager.Instance.MagicBoocDatas.GetEnumerator();
+        var e = TableManager.Instance.SkillData.GetEnumerator();
 
         float ret = 0f;
         while (e.MoveNext())
         {
             if ((StatusType)e.Current.Value.Collectionabiltype != type) continue;
 
-            var magicBookServerData = ServerData.magicBookTable.GetMagicBookData(e.Current.Value.Stringid);
+            int skillCurrentLevel = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][e.Current.Value.Id].Value;
 
-            if (magicBookServerData.collectLevel.Value != 0)
+            if (skillCurrentLevel != 0)
             {
-                ret += magicBookServerData.collectLevel.Value * e.Current.Value.Collectionvalue;
+                ret += skillCurrentLevel * e.Current.Value.Collectionvalue;
             }
         }
 
@@ -402,7 +402,7 @@ public static class PlayerStats
         ret += GetMagicBookEquipPercentValue(StatusType.SkillDamage);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.SkillDamage_memory);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.SkillDamage);
-        ret += GetMagicBookCollectionValue(StatusType.SkillDamage);
+        ret += GetSkillCollectionValue(StatusType.SkillDamage);
         ret += GetWingAbilValue(StatusType.SkillDamage);
         ret += GetPassiveSkillValue(StatusType.SkillDamage);
 
@@ -443,7 +443,7 @@ public static class PlayerStats
         ret += ServerData.statusTable.GetStatusValue(StatusTable.CriticalLevel_memory);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.CriticalProb);
         ret += ServerData.petTable.GetStatusValue(StatusType.CriticalProb);
-        ret += GetMagicBookCollectionValue(StatusType.CriticalProb);
+        ret += GetSkillCollectionValue(StatusType.CriticalProb);
 
         return ret;
     }
@@ -458,7 +458,7 @@ public static class PlayerStats
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.CriticalDam);
         ret += GetWeaponHasPercentValue(StatusType.CriticalDam);
         ret += GetMagicBookHasPercentValue(StatusType.CriticalDam);
-        ret += GetMagicBookCollectionValue(StatusType.CriticalDam);
+        ret += GetSkillCollectionValue(StatusType.CriticalDam);
         ret += GetWingAbilValue(StatusType.CriticalDam);
 
         return ret;

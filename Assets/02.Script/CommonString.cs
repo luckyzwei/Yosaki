@@ -75,7 +75,7 @@ public static class CommonString
     {
         switch (item_type)
         {
-            case Item_Type.Gold: return "금화";
+            case Item_Type.Gold: return "엽전";
             case Item_Type.Jade: return "옥";
             case Item_Type.GrowThStone: return "수련의돌";
             case Item_Type.Memory: return "무공비급";

@@ -47,6 +47,9 @@ public class UiPetView : MonoBehaviour
     [SerializeField]
     private Sprite equipButtonSprite;
 
+    [SerializeField]
+    private GameObject tutorialObject;
+
     private void SetPetSpine(int idx)
     {
         skeletonGraphic.Clear();
@@ -77,6 +80,8 @@ public class UiPetView : MonoBehaviour
         }
 
         SetAbilityText();
+
+        tutorialObject.SetActive(petData.PETGETTYPE == PetGetType.Gem && petData.Price == 0f);
     }
 
     private void SetAbilityText()
@@ -108,18 +113,6 @@ public class UiPetView : MonoBehaviour
 
     private void Subscribe()
     {
-        //무료펫
-        if (petData.Id == 0)
-        {
-            ServerData.petTable.TableDatas[petData.Stringid].remainSec.AsObservable().Subscribe(e =>
-            {
-                if (e == 0)
-                {
-                    UpdateUi();
-                }
-            }).AddTo(this);
-        }
-
         ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].AsObservable().Subscribe(e =>
         {
             UpdateUi();
@@ -195,7 +188,14 @@ public class UiPetView : MonoBehaviour
             //미보유
             else
             {
-                buttonDescription.SetText($"{Utils.ConvertBigNum(petData.Price)}");
+                if (petData.Price == 0f)
+                {
+                    buttonDescription.SetText("무료");
+                }
+                else
+                {
+                    buttonDescription.SetText($"{Utils.ConvertBigNum(petData.Price)}");
+                }
             }
         }
         else if (petData.PETGETTYPE == PetGetType.Shop)
@@ -271,6 +271,8 @@ public class UiPetView : MonoBehaviour
 
     private void BuyPetRoutine()
     {
+        UiTutorialManager.Instance.SetClear(TutorialStep.GetPet);
+
         //무료펫
         if (petData.PETGETTYPE == PetGetType.Ad)
         {

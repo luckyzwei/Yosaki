@@ -43,6 +43,9 @@ public class UiSkillCell : MonoBehaviour
     [SerializeField]
     private Button removeInSlotButton;
 
+    [SerializeField]
+    private GameObject tutorialObject;
+
     private SkillTableData skillData;
 
     private Action<int> onClickSlotSettingButton;
@@ -90,6 +93,10 @@ public class UiSkillCell : MonoBehaviour
 
         //스킬 레벨업시
         ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillData.Id].AsObservable().Subscribe(WhenSkillUpgraded).AddTo(this);
+
+        int hasCount = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value;
+        int awakeNum= ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillData.Id].Value;
+        tutorialObject.gameObject.SetActive(hasCount > 0 && awakeNum == 0);
 
         //ServerData.skillServerTable.whenSelectedSkillIdxChanged.AsObservable().Subscribe(WhenSelectedSkillIdxChanged).AddTo(this);
     }

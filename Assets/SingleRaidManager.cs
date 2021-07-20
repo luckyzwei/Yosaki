@@ -20,6 +20,10 @@ public class SingleRaidManager : ContentsManagerBase
     private ReactiveProperty<ObscuredFloat> damageAmount = new ReactiveProperty<ObscuredFloat>();
     private ReactiveProperty<ObscuredFloat> bossRemainHp = new ReactiveProperty<ObscuredFloat>();
 
+    public override Transform GetMainEnemyObjectTransform()
+    {
+        return singleRaidEnemy.transform;
+    }
     public override float GetBossRemainHpRatio()
     {
         return damageAmount.Value / bossRemainHp.Value;

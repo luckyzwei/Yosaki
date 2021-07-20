@@ -215,6 +215,8 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
                 break;
         }
 
+
+        UiTutorialManager.Instance.SetClear(TutorialStep.UseTelePort);
         EffectManager.SpawnEffect(TeleportEfxName, playerTr.position + Vector3.down * 1f);
     }
 

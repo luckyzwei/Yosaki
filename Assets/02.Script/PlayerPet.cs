@@ -47,11 +47,8 @@ public class PlayerPet : SingletonMono<PlayerPet>
     {
         ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].AsObservable().Subscribe(e =>
         {
-            //무료펫 아닐떄
-            if (e != 0)
-            {
-                StopPetTimer();
-            }
+            //디폴트
+            if (e == -1) return;
 
             WhenCostumeChanged(e);
             WhenPetEquipIdxChanged(e);

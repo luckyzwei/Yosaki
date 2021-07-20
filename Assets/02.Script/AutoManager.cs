@@ -106,6 +106,8 @@ public class AutoManager : Singleton<AutoManager>
     private Transform currentTarget;
 
     WaitForEndOfFrame updateTick = new WaitForEndOfFrame();
+
+    private bool needToUpDown = false;
     private IEnumerator AutoPlayRoutine()
     {
         while (true)
@@ -117,7 +119,34 @@ public class AutoManager : Singleton<AutoManager>
             //타겟 없을때 대기
             if (currentTarget == null && UiMoveStick.Instance.nowTouching == false)
             {
-                UiMoveStick.Instance.SetHorizontalAxsis(0);
+                if (GameManager.Instance.contentsType == GameManager.ContentsType.NormalField)
+                {
+                    UiMoveStick.Instance.SetHorizontalAxsis(0);
+                }
+                //허공에 스킬
+                else if (UiMoveStick.Instance.nowTouching == false)
+                {
+                    if (skillQueue.Count == 0)
+                    {
+                        SetSkillQueue();
+                    }
+
+                    SetFrontType2Skill();
+
+                    if (skillQueue.Count > 0)
+                    {
+                        int useSkillIdx = skillQueue[0];
+
+                        bool skillCast = PlayerSkillCaster.Instance.UseSkill(useSkillIdx);
+
+                        skillQueue.RemoveAt(0);
+
+                        if (skillCast)
+                        {
+                            yield return skillDelay;
+                        }
+                    }
+                }
             }
             else if (UiMoveStick.Instance.nowTouching == false)
             {
@@ -128,13 +157,21 @@ public class AutoManager : Singleton<AutoManager>
                     if (SkillCoolTimeManager.moveAutoValue.Value == 1 && SkillCoolTimeManager.jumpAutoValue.Value == 1)
                     {
                         int Horizontal = currentTarget.transform.position.x > playerTr.transform.position.x ? 1 : -1;
-                        UiMoveStick.Instance.SetHorizontalAxsis(Horizontal);
+
+                        if (needToUpDown == false)
+                        {
+                            UiMoveStick.Instance.SetHorizontalAxsis(Horizontal);
+                        }
+                        else
+                        {
+                            UiMoveStick.Instance.SetHorizontalAxsis(0);
+                        }
 
                         float xDist = Mathf.Abs(playerTr.transform.position.x - currentTarget.transform.position.x);
                         float yDist = Mathf.Abs(playerTr.transform.position.y - currentTarget.transform.position.y);
 
                         //위아래 체크
-                        bool needToUpDown = xDist < jumpWidth && yDist > jumpHeight;
+                        needToUpDown =/* xDist < jumpWidth && */yDist > jumpHeight;
 
                         //박치기 꺼둠
                         //bool needToHorizontalJump = xDist > horizontalJumpDistance;
@@ -183,56 +220,17 @@ public class AutoManager : Singleton<AutoManager>
                             }
                         }
                     }
-                    //이동 on 점프 off =>이동만
-                    else if (SkillCoolTimeManager.moveAutoValue.Value == 1 && SkillCoolTimeManager.jumpAutoValue.Value == 0)
-                    {
-                        int Horizontal = currentTarget.transform.position.x > playerTr.transform.position.x ? 1 : -1;
-                        UiMoveStick.Instance.SetHorizontalAxsis(Horizontal);
-                    }
+                    ////이동 on 점프 off =>이동만
+                    //else if (SkillCoolTimeManager.moveAutoValue.Value == 1 && SkillCoolTimeManager.jumpAutoValue.Value == 0)
+                    //{
+                    //    int Horizontal = currentTarget.transform.position.x > playerTr.transform.position.x ? 1 : -1;
+                    //    UiMoveStick.Instance.SetHorizontalAxsis(Horizontal);
+                    //}
 
 
                 }
                 else
                 {
-                    //if (SkillCoolTimeManager.moveAutoValue.Value == 0 && SkillCoolTimeManager.jumpAutoValue.Value == 1)
-                    //{
-                    //    //점프만
-                    //    if (SkillCoolTimeManager.jumpAutoValue.Value == 1)
-                    //    {
-                    //        UiMoveStick.Instance.SetHorizontalAxsis(0);
-                    //        UiMoveStick.Instance.SetVerticalAxsis(1);
-
-                    //        PlayerMoveController.Instance.JumpPlayer();
-                    //        PlayerMoveController.Instance.JumpPlayer();
-                    //    }
-                    //}
-
-                    ////광역기 우선
-                    //if (skillQueue.Count > 0)
-                    //{
-                    //    int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
-                    //    var selectedSkill = ServerData.skillServerTable.TableDatas[SkillServerTable.GetSkillGroupKey(currentSelectedGroupId)];
-
-                    //    for (int i = 0; i < selectedSkill.Count; i++)
-                    //    {
-                    //        int skillIdx = selectedSkill[i].Value;
-
-                    //        if (skillIdx != -1 &&
-                    //            SkillCoolTimeManager.HasSkillCooltime(skillIdx) == false &&
-                    //            SkillCoolTimeManager.registeredSkillIdx[i].Value == 1
-                    //            )
-                    //        {
-                    //            var skillTableData = TableManager.Instance.SkillData[selectedSkill[i].Value];
-
-                    //            if (skillTableData.Skilltype.Equals(skillType2))
-                    //            {
-                    //                skillQueue.Clear();
-                    //                continue;
-                    //            }
-                    //        }
-                    //    }
-                    //}
-
                     if (skillQueue.Count == 0)
                     {
                         SetSkillQueue();
@@ -242,7 +240,6 @@ public class AutoManager : Singleton<AutoManager>
 
                     if (skillQueue.Count > 0)
                     {
-
                         //스킬 발동 방향 
                         bool isEnemyOnRight = currentTarget.transform.position.x > this.playerTr.position.x;
 
@@ -266,12 +263,8 @@ public class AutoManager : Singleton<AutoManager>
                         if (skillCast)
                         {
                             yield return skillDelay;
-                            //후딜대기
-                            //Debug.Log($"Wait {PlayerSkillCaster.Instance.UserSkills[useSkillIdx].skillInfo.Movedelay}");
-                            //yield return new WaitForSeconds(PlayerSkillCaster.Instance.UserSkills[useSkillIdx].skillInfo.Movedelay);
                         }
                     }
-
                 }
             }
         }
@@ -360,6 +353,10 @@ public class AutoManager : Singleton<AutoManager>
         {
             currentTarget = GetBonusDefenseTarget();
         }
+        //else if (GameManager.Instance.contentsType == GameManager.ContentsType.Boss)
+        //{
+        //    currentTarget = SingleRaidManager.Instance.GetMainEnemyObjectTransform();
+        //}
     }
 
     public Transform GetNeariestEnemy()

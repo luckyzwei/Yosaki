@@ -41,12 +41,17 @@ public class UiInventoryWeaponView : MonoBehaviour
     [SerializeField]
     private Button equipButton;
 
+    [SerializeField]
+    private GameObject tutorialObject;
+
     public void Initialize(WeaponData weaponData, MagicBookData magicBookData, Action<WeaponData, MagicBookData> onClickCallBack)
     {
         this.weaponData = weaponData;
         this.magicBookData = magicBookData;
 
         this.onClickCallBack = onClickCallBack;
+
+        tutorialObject.SetActive(weaponData != null && weaponData.Id != 0 && ServerData.weaponTable.TableDatas[weaponData.Stringid].hasItem.Value == 1);
 
         if (weaponData != null)
         {
@@ -318,7 +323,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             StatusType type = (StatusType)effectData.Haseffecttype1;
 
-            if (type.IsPercentStat()) 
+            if (type.IsPercentStat())
             {
                 float value = hasValue1 * 100f;
                 float value_max = hasValue1_max * 100f;
@@ -338,17 +343,17 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             StatusType type = (StatusType)effectData.Haseffecttype2;
 
-            if (type.IsPercentStat()) 
+            if (type.IsPercentStat())
             {
                 float value = hasValue2 * 100f;
                 float value_max = hasValue2_max * 100f;
 
                 description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%";
             }
-            else 
+            else
             {
                 float value = hasValue2;
-                float value_max = hasValue2_max ;
+                float value_max = hasValue2_max;
 
                 description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}";
             }
@@ -364,7 +369,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (weaponData != null)
         {
             ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
-         //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
+            //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
         }
         else
         {

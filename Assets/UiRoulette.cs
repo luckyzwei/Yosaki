@@ -93,10 +93,9 @@ public class UiRoulette : MonoBehaviour
         return (Item_Type)tableData.Itemtype;
     }
 
-    private static string RoulletSpin = "RoulletSpin";
+    private static string RoulletSpin = "Reward";
     private IEnumerator SlotSpinRoutine()
     {
-        SoundManager.Instance.PlaySound(RoulletSpin);
 
         int randIdx = GetRandomIdx();
 
@@ -117,6 +116,7 @@ public class UiRoulette : MonoBehaviour
             tick += Time.deltaTime;
             yield return null;
         }
+        SoundManager.Instance.PlaySound(RoulletSpin);
 
         string description = $"{CommonString.GetItemName(rewardType)} {(int)rewardAmount}획득!!";
 

@@ -22,9 +22,6 @@ public class EnemyHpBar : MonoBehaviour
     [SerializeField]
     private int minOrderInLayer = 99;
 
-    [SerializeField]
-    private List<GameObject> hardIcon;
-
     private void OnEnable()
     {
         ResetGauge();
@@ -80,14 +77,6 @@ public class EnemyHpBar : MonoBehaviour
 
         greyRenderer.transform.localScale = greenRenderer.transform.localScale;
         greyRoutine = null;
-    }
-
-    public void SetHardIcon(int grade)
-    {
-        for (int i = 0; i < hardIcon.Count; i++)
-        {
-            hardIcon[i].gameObject.SetActive(grade == i);
-        }
     }
 
     public void UpdateGauge(float currentHp, float maxHp)

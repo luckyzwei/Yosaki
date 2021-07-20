@@ -69,7 +69,7 @@ public class BossSpawnButton : SingletonMono<BossSpawnButton>
             }
 
             //확인팝업
-            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "스테이지 보스를 소환합니까?\n(처치 제한시간 10초)\n(1층에 소환됩니다.)", () =>
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "스테이지 보스를 소환합니까?\n\n<color=red>(1층에 소환됩니다.)</color>", () =>
             {
                 List<TransactionValue> transactionList = new List<TransactionValue>();
 

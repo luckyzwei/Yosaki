@@ -61,6 +61,9 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI hasEffectDesc;
 
+    [SerializeField]
+    private GameObject tutorialObject;
+
     public void OnClickEquipButton()
     {
         int skillAwakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
@@ -134,6 +137,11 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         // DatabaseManager.weaponTable.TableDatas[weaponData.Stringid].amount.AsObservable().Subscribe(WhenAwakeWeaponAmountChanged).AddTo(disposables);
         ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].AsObservable().Subscribe(WhenAwakeWeaponAmountChanged).AddTo(disposables);
+
+
+        int hasCount = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value;
+        int awakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;
+        tutorialObject.gameObject.SetActive(hasCount > 0 && awakeNum == 0);
     }
 
     private void WhenAwakeWeaponAmountChanged(int amount)
@@ -312,6 +320,8 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         {
             ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value -= skillTableData.Awakeweaponreqcount;
         }
+
+        UiTutorialManager.Instance.SetClear(TutorialStep.LearnSkill);
 
         //각성 +1
         ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value++;

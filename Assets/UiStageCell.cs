@@ -182,10 +182,10 @@ public class UiStageCell : MonoBehaviour
 
     public void OnClickButton()
     {
-#if UNITY_EDITOR
-        GameManager.Instance.MoveMapByIdx(stageMapData.Id);
-        return;
-#endif
+//#if UNITY_EDITOR
+//        GameManager.Instance.MoveMapByIdx(stageMapData.Id);
+//        return;
+//#endif
 
         int lastClearData = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
 
@@ -202,6 +202,11 @@ public class UiStageCell : MonoBehaviour
         }
 
         GameManager.Instance.MoveMapByIdx(stageMapData.Id);
+
+        if (stageMapData.Id != 0)
+        {
+            UiTutorialManager.Instance.SetClear(TutorialStep.GoNextStage);
+        }
     }
 
 }

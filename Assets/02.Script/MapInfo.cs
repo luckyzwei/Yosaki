@@ -69,7 +69,7 @@ public class MapInfo : SingletonMono<MapInfo>
         UpdateStageRank();
     }
 
-    private void UpdateStageRank() 
+    private void UpdateStageRank()
     {
         RankManager.Instance.UpdateStage_Score(ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
     }
@@ -372,6 +372,14 @@ public class MapInfo : SingletonMono<MapInfo>
               UiFieldBossRewardView.Instance.Initialize(rewardValue);
           });
 
+        if (UiTutorialManager.Instance.HasClearFlag(TutorialStep.ClearBoss1) == false)
+        {
+            UiTutorialManager.Instance.SetClear(TutorialStep.ClearBoss1);
+        }
+        else
+        {
+            UiTutorialManager.Instance.SetClear(TutorialStep.ClearBoss2);
+        }
 
         UpdateStageRank();
     }

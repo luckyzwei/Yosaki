@@ -21,9 +21,6 @@ public class UiBossContentsView : MonoBehaviour
     [SerializeField]
     private Image bossIcon;
 
-    [SerializeField]
-    private List<Sprite> bossSprites;
-
     private BossTableData bossTableData;
 
     [SerializeField]

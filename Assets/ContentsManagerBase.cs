@@ -27,7 +27,12 @@ public class ContentsManagerBase : SingletonMono<ContentsManagerBase>
     public ObscuredInt RemainSec => remainSec;
     public ObscuredInt PlayTime => playTime;
 
-    public virtual float GetBossRemainHpRatio() 
+    public virtual Transform GetMainEnemyObjectTransform()
+    {
+        return null;
+    }
+
+    public virtual float GetBossRemainHpRatio()
     {
         return 0f;
     }

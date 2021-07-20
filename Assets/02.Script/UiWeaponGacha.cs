@@ -92,6 +92,8 @@ public class UiWeaponGacha : MonoBehaviour
             return;
         }
 
+        UiTutorialManager.Instance.SetClear(TutorialStep.GetWeapon);
+
         weaponDatas.Clear();
         probs.Clear();
         gachaResultCellInfos.Clear();

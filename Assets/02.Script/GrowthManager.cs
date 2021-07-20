@@ -65,6 +65,8 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
         //일일미션
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.LevelUp, 1);
+
+        SoundManager.Instance.PlaySound("Reward");
     }
 
     private void UpdateLocalData()

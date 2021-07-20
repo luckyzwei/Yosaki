@@ -280,7 +280,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         {
             ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value -= upgradePrice_gold;
 
-         //   UiTutorialManager.Instance.SetClear(TutorialStep._4_AbilityUp);
+            UiTutorialManager.Instance.SetClear(TutorialStep.UpgradeGoldStat);
         }
         else if (statusData.STATUSWHERE == StatusWhere.statpoint)
         {
