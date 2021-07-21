@@ -20,6 +20,9 @@ public class UiCostumeSlotView : MonoBehaviour
 
     private Action<int> selectCallBack;
 
+    [SerializeField]
+    private TextMeshProUGUI costumeHasText;
+
     public void SetCurrentSelect(bool show)
     {
         currentSelectedObject.SetActive(show);
@@ -39,6 +42,11 @@ public class UiCostumeSlotView : MonoBehaviour
         ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].AsObservable().Subscribe(e =>
         {
             equpObject.SetActive(e == this.costumeData.Id);
+        }).AddTo(this);
+
+        ServerData.costumeServerTable.TableDatas[costumeData.Stringid].hasCostume.AsObservable().Subscribe(e =>
+        {
+            costumeHasText.SetText(e ? "보유중" : "");
         }).AddTo(this);
     }
 

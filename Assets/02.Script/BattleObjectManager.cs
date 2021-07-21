@@ -118,7 +118,7 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
             if (prefab == null)
             {
 #if UNITY_EDITOR
-                Debug.LogError($"Pool prefab {name} is not exist");
+               // Debug.LogError($"Pool prefab {name} is not exist");
 #endif
                 return null;
             }

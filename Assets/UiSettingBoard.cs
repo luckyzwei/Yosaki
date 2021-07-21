@@ -307,7 +307,7 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.ShowEffect, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.GlowEffect) == false)
-            PlayerPrefs.SetInt(SettingKey.GlowEffect, 1);
+            PlayerPrefs.SetInt(SettingKey.GlowEffect, 0);
 
         if (PlayerPrefs.HasKey(SettingKey.PotionUseHpOption) == false)
             PlayerPrefs.SetInt(SettingKey.PotionUseHpOption, 1);

@@ -66,7 +66,10 @@ public class Slashes_MobileBloom : MonoBehaviour
         else return RenderTextureFormat.DefaultHDR;
     }
 
-  
+    private const string _Threshold = "_Threshold";
+    private const string _SampleScale = "_SampleScale";
+    private const string _Intensity = "_Intensity";
+    private const string _BaseTex = "_BaseTex";
 
     private void UpdateBloom(RenderTexture source, RenderTexture dest)
     {
@@ -88,12 +91,12 @@ public class Slashes_MobileBloom : MonoBehaviour
         //// update the shader properties
         var threshold = Mathf.GammaToLinearSpace(Threshold);
 
-        bloomMaterial.SetFloat("_Threshold", threshold);
+        bloomMaterial.SetFloat(_Threshold, threshold);
       
         var sampleScale = 0.5f + logh - logh_i;
      
-        bloomMaterial.SetFloat("_SampleScale",  sampleScale * 0.5f);
-        bloomMaterial.SetFloat("_Intensity", Mathf.Max(0.0f, Intensity));
+        bloomMaterial.SetFloat(_SampleScale,  sampleScale * 0.5f);
+        bloomMaterial.SetFloat(_Intensity, Mathf.Max(0.0f, Intensity));
 
         var prefiltered = RenderTexture.GetTemporary(tw, th, 0, rtFormat);
  
@@ -113,7 +116,7 @@ public class Slashes_MobileBloom : MonoBehaviour
         for (var level = iterations - 2; level >= 0; level--)
         {
             var basetex = m_blurBuffer1[level];
-            bloomMaterial.SetTexture("_BaseTex", basetex);
+            bloomMaterial.SetTexture(_BaseTex, basetex);
             m_blurBuffer2[level] = RenderTexture.GetTemporary(basetex.width, basetex.height, 0, rtFormat);
             Graphics.Blit(last, m_blurBuffer2[level], bloomMaterial, 2);
             last = m_blurBuffer2[level];
@@ -122,7 +125,7 @@ public class Slashes_MobileBloom : MonoBehaviour
         //bloomMaterial.SetTexture("_BaseTex", Source);
 
         Graphics.Blit(last, finalBloom, bloomMaterial, 3);
-        bloomMaterial.SetTexture("_BaseTex", source);
+        bloomMaterial.SetTexture(_BaseTex, source);
         Graphics.Blit(finalBloom, dest, bloomMaterial, 4);
 
         for (var i = 0; i < kMaxIterations; i++)

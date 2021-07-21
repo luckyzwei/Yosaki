@@ -61,6 +61,6 @@ public class UiDailyPassSystem : MonoBehaviour
             }
         }
 
-        cellParent.transform.localPosition = new Vector3(0f, cellParent.transform.localPosition.y, cellParent.transform.localPosition.z);
+       // cellParent.transform.localPosition = new Vector3(0f, cellParent.transform.localPosition.y, cellParent.transform.localPosition.z);
     }
 }

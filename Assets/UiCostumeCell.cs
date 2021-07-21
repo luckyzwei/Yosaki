@@ -22,6 +22,9 @@ public class UiCostumeCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI costumeName;
 
+    [SerializeField]
+    private GameObject hasObject;
+
     public void Initialize(CostumeData costumeData)
     {
         this.costumeData = costumeData;
@@ -51,6 +54,11 @@ public class UiCostumeCell : MonoBehaviour
         {
             selectedObject.SetActive(idx == costumeData.Id);
         }).AddTo(this);
+
+        ServerData.costumeServerTable.TableDatas[costumeData.Stringid].hasCostume.AsObservable().Subscribe(e =>
+        {
+            hasObject.SetActive(e);
+        }).AddTo(this);
     }
 
     public void OnClickCostume()
@@ -62,16 +70,16 @@ public class UiCostumeCell : MonoBehaviour
             //서버 저장
             ServerData.equipmentTable.SyncData(EquipmentTable.CostumeLook);
         }
-        else 
+        else
         {
             PopupManager.Instance.ShowAlarmMessage("외형이 없습니다.");
         }
 
-      //  InitBoard();
+        //  InitBoard();
     }
     private void InitBoard()
     {
-       // UiCostume.Instance.WhenSelectIdxChanged(costumeData.Id);
+        // UiCostume.Instance.WhenSelectIdxChanged(costumeData.Id);
         UiCostumeAbilityBoard.Instance.Initialize(costumeData);
     }
 }

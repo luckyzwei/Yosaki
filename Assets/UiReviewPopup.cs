@@ -14,21 +14,6 @@ public class UiReviewPopup : MonoBehaviour
 
         SoundManager.Instance.PlayButtonSound();
 
-        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += 1000;
-
-        ServerData.goodsTable.SyncToServerEach(GoodsTable.Jade, whenSyncSuccess: () =>
-        {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상 수령 성공! 리뷰 남겨주실꺼죠...?", () =>
-            {
-                GameEscapeManager.Instance.ShowReviewPage();
-            });
-        },
-        whenRequestFailed: () =>
-         {
-             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크가 불안정 합니다.", () =>
-             {
-                 this.gameObject.SetActive(false);
-             });
-         });
+        GameEscapeManager.Instance.ShowReviewPage();
     }
 }

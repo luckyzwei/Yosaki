@@ -209,4 +209,9 @@ public class UiStageCell : MonoBehaviour
         }
     }
 
+    public void OnClickPassLockButton() 
+    {
+        PopupManager.Instance.ShowAlarmMessage("스테이지 패스 상품이 필요합니다.");
+    }
+
 }

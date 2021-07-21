@@ -19,6 +19,9 @@ public class UiFieldBossRewardView : SingletonMono<UiFieldBossRewardView>
     [SerializeField]
     private UiStageCell stageCell;
 
+    [SerializeField]
+    private GameObject moreRewardPopup;
+
 
     public void Initialize(int rewardAmount)
     {
@@ -29,9 +32,13 @@ public class UiFieldBossRewardView : SingletonMono<UiFieldBossRewardView>
 
         this.rewardAmount.SetText(Utils.ConvertBigNum(rewardAmount));
 
-        stageCell.Initialize(stageMapData);
-
         rewardIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)stageMapData.Bossrewardtype);
+    }
+
+    public void OnClickMoreRewardButton()
+    {
+        moreRewardPopup.SetActive(true);
+        stageCell.Initialize(GameManager.Instance.CurrentStageData);
     }
 
     public void OnClickNextStage()

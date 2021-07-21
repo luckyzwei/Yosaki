@@ -166,6 +166,7 @@ public static class PlayerStats
         ret += GetSkillCollectionValue(StatusType.AttackAddPer);
         ret += GetWingAbilValue(StatusType.AttackAddPer);
         ret += GetPassiveSkillValue(StatusType.AttackAddPer);
+        ret += ServerData.petTable.GetStatusValue(StatusType.AttackAddPer);
         return ret;
     }
 
