@@ -10,7 +10,7 @@ public enum SellWhere
     Shop, StagePass
 }
 
-public class UiShop : MonoBehaviour
+public class UiShop : SingletonMono<UiShop>
 {
     private void Start()
     {

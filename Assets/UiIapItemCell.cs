@@ -133,6 +133,11 @@ public class UiIapItemCell : MonoBehaviour
             return;
         }
 
+#if TEST
+        UiShop.Instance.BuyProduct(productData.Productid);
+        return;
+#endif
+
         IAPManager.Instance.BuyProduct(productData.Productid);
     }
 
