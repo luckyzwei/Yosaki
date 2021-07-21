@@ -27,8 +27,6 @@ public class UiStatusBoard : MonoBehaviour
         Initialize();
     }
 
-
-
     private void Initialize()
     {
         var e = TableManager.Instance.StatusDatas.GetEnumerator();
@@ -84,8 +82,6 @@ public class UiStatusBoard : MonoBehaviour
             ServerData.statusTable.GetTableData(StatusTable.IntLevelAddPer_StatPoint).Value = 1;
             ServerData.statusTable.GetTableData(StatusTable.CriticalLevel_StatPoint).Value = 1;
             ServerData.statusTable.GetTableData(StatusTable.CriticalDamLevel_StatPoint).Value = 1;
-            ServerData.statusTable.GetTableData(StatusTable.GoldGain_StatPoint).Value = 1;
-            ServerData.statusTable.GetTableData(StatusTable.ExpGain_StatPoint).Value = 1;
             ServerData.statusTable.GetTableData(StatusTable.HpPer_StatPoint).Value = 1;
             ServerData.statusTable.GetTableData(StatusTable.MpPer_StatPoint).Value = 1;
             ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value = (ServerData.statusTable.GetTableData(StatusTable.Level).Value - 1) * GameBalance.StatPoint;

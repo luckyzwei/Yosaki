@@ -112,7 +112,7 @@ public static class CommonString
                 return "기술 시전 속도(%)";
                 break;
             case StatusType.SkillDamage:
-                return "추가 스킬 데미지(%)";
+                return "추가 기술 데미지(%)";
                 break;
             case StatusType.MoveSpeed:
                 return $"이동 속도 증가(기본:{PlayerBalance.moveSpeed}) ";

@@ -33,8 +33,8 @@ public class StatusTable
     public const string IntLevelAddPer_StatPoint = "IntLevelAddPer_StatPoint";
     public const string CriticalLevel_StatPoint = "CriticalLevel_StatPoint";
     public const string CriticalDamLevel_StatPoint = "CriticalDamLevel_StatPoint";
-    public const string GoldGain_StatPoint = "GoldGain_StatPoint";
-    public const string ExpGain_StatPoint = "ExpGain_StatPoint";
+    public const string GoldGain_memory = "GoldGain_memory";
+    public const string ExpGain_memory = "ExpGain_memory";
     public const string HpPer_StatPoint = "HpPer_StatPoint";
     public const string MpPer_StatPoint = "MpPer_StatPoint";
 
@@ -70,8 +70,6 @@ public class StatusTable
         {IntLevelAddPer_StatPoint,0},
         {CriticalLevel_StatPoint,0},
         {CriticalDamLevel_StatPoint,0},
-        {GoldGain_StatPoint,0},
-        {ExpGain_StatPoint,0},
         {HpPer_StatPoint,0},
         {MpPer_StatPoint,0},
         //스텟초기화도 같이추가해
@@ -82,7 +80,9 @@ public class StatusTable
         {CriticalLevel_memory,0},
         {CriticalDamLevel_memory,0},
         {IgnoreDefense_memory,0},
-        {BossDamage_memory,0}
+        {BossDamage_memory,0},
+        {GoldGain_memory,0},
+        {ExpGain_memory,0}
     };
 
     private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();
@@ -176,14 +176,14 @@ public class StatusTable
                         return level * 0.01f;
                     }
                     break;
-                case GoldGain_StatPoint:
+                case ExpGain_memory:
                     {
-                        return level * 0.005f;
+                        return level * 0.01f;
                     }
                     break;
-                case ExpGain_StatPoint:
+                case GoldGain_memory:
                     {
-                        return level * 0.005f;
+                        return level * 0.01f;
                     }
                     break;
                 case HpPer_StatPoint:

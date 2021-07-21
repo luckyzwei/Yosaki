@@ -346,19 +346,19 @@ public static class PlayerStats
 
         return ret;
     }
-    public static float GetSkillHasValue(StatusType type) 
+    public static float GetSkillHasValue(StatusType type)
     {
         float ret = 0f;
 
         var tableDatas = TableManager.Instance.SkillTable.dataArray;
 
-        for(int i = 0; i < tableDatas.Length; i++) 
+        for (int i = 0; i < tableDatas.Length; i++)
         {
             if (tableDatas[i].Haseffecttype != (int)type) continue;
 
             int awakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][tableDatas[i].Id].Value;
 
-            if (awakeNum==0) continue;
+            if (awakeNum == 0) continue;
 
 
             ret += awakeNum * tableDatas[i].Haseffectvalue;
@@ -468,18 +468,20 @@ public static class PlayerStats
     public static float GetGoldPlusValue()
     {
         float ret = 0f;
-        ret += ServerData.statusTable.GetStatusValue(StatusTable.GoldGain_StatPoint);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.GoldGain_memory);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.GoldGainPer);
         ret += GetBuffValue(StatusType.GoldGainPer);
+        ret += ServerData.petTable.GetStatusValue(StatusType.GoldGainPer);
         return ret;
     }
     public static float GetExpPlusValue()
     {
         float ret = 0f;
-        ret += ServerData.statusTable.GetStatusValue(StatusTable.ExpGain_StatPoint);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.ExpGain_memory);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.ExpGainPer);
         ret += GetBuffValue(StatusType.ExpGainPer);
         ret += GetMarbleValue(StatusType.ExpGainPer);
+        ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -583,7 +585,9 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += ServerData.statusTable.GetStatusValue(StatusTable.IgnoreDefense_memory);
-
+        ret += GetWeaponEquipPercentValue(StatusType.IgnoreDefense);
+        ret += GetWeaponHasPercentValue(StatusType.IgnoreDefense);
+        
         return ret;
     }
 }

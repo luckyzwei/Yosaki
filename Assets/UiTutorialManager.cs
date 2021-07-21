@@ -19,12 +19,13 @@ public enum TutorialStep
     ClearBoss1 = 32,//★
     GoNextStage = 64,
     GetWeapon = 128,
-    EquipWeapon= 256,
+    EquipWeapon = 256,
     ClearBoss2 = 512,//★
     GetSkill = 1024,//★
     LearnSkill = 2048,//★
-    Level20 = 4096,//★
-    Clear = int.MaxValue
+    SetPotion = 4096,//★
+    Level20 = 8192,//★
+    Clear = 16384
 }
 
 public class UiTutorialManager : SingletonMono<UiTutorialManager>
@@ -184,7 +185,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
                 return "화면 상단의 <color=#ff00ffff>다음 스테이지</color> 버튼을\n클릭해 다음 스테이지로 이동해 보세요.";
                 break;
             case TutorialStep.GetWeapon:
-                return "오른쪽 상단 <color=yellow>메뉴->상점의 소환탭</color>에서\n<color=blue>무기</color>를 소환해 보세요.";
+                return "오른쪽 상단 <color=yellow>메뉴->상점의 소환탭</color>에서\n<color=yellow>무기</color>를 소환해 보세요.";
                 break;
             case TutorialStep.ClearBoss2:
                 return "화면 상단의  <color=#ff00ffff>보스도전</color> 버튼을 클릭하여 필드 보스를 처치해 보세요";
@@ -202,6 +203,9 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
                 break;
             case TutorialStep.EquipWeapon:
                 return "오른쪽 상단 <color=yellow>메뉴->가방</color>의 무기\n탭에서 무기를 장착 해보세요";
+                break;
+            case TutorialStep.SetPotion:
+                return "오른쪽 하단 <color=yellow>뿌리식물</color> 메뉴에 들어가서\n뿌리식물을 구매해보세요";
                 break;
                 //case TutorialStep._1_MoveField:
                 //    return "맵 오른쪽 끝의 <color=#00ffffff>파란색</color> 포탈을\n이용해 사냥터로 이동하세요\n<color=yellow>(포탈에서 왼쪽패드의</color>\n<color=yellow>위쪽 버튼 입력)</color>";

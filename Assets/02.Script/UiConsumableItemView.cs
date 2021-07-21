@@ -85,6 +85,11 @@ public class UiConsumableItemView : MonoBehaviour
 
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncDataRoutineWeapon());
 
+        if (goodsId.Equals("Potion_1") || goodsId.Equals("Potion_2"))
+        {
+            UiTutorialManager.Instance.SetClear(TutorialStep.SetPotion);
+        }
+
     }
 
     private WaitForSeconds syncWaitTime = new WaitForSeconds(2.0f);
