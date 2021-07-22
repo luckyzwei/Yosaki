@@ -219,7 +219,7 @@ public class GoogleManager : MonoBehaviour
         // return "mayotestguest@gmail.com";
         // return "mabw222ei3no24gi233d0312@n3aver.com"; //GM도비
         //  return "a_3961873472804492579"; //GM도비
-        return "a_396187347280434925792";
+        return "a_396182734728024349252792";
 #endif
         Debug.LogError($"GetGoogleLoginKey {loginId}");
         return loginId;

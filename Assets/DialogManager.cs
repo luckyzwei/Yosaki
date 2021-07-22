@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static DialogCharacterView;
 
 [System.Serializable]
@@ -13,89 +15,79 @@ public class DialogInfo
 public class DialogManager : SingletonMono<DialogManager>
 {
     [SerializeField]
-    private List<DialogInfo> dialogInfo = new List<DialogInfo>();
-
-    private List<DialogInfo> currentDialog;
-
-    private int currentDialogIdx = 0;
-
-    [SerializeField]
-    private DialogCharacterView firstView;
-
-    [SerializeField]
-    private DialogCharacterView secondView;
-
-    [SerializeField]
     private GameObject rootObject;
+
+    [SerializeField]
+    private TextMeshProUGUI dialogText;
+
+    [SerializeField]
+    private Button endInput;
+
+    [SerializeField]
+    private GameObject touchMask;
+
+    private string storyDialog = "스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리";
+
+    private bool setSkip = false;
 
     public void StartDialog()
     {
-        currentDialog = dialogInfo;
-        currentDialogIdx = 0;
+        setSkip = false;
+
+        touchMask.SetActive(true);
+
         rootObject.SetActive(true);
-        NextDialog();
+
+        endInput.interactable = false;
+
+        StartCoroutine(TextingRoutine());
     }
 
-    private void Update()
+    public void SkipText() 
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && rootObject.activeInHierarchy == true)
-        {
-            SoundManager.Instance.PlayButtonSound();
-            NextDialog();
-        }
+        SoundManager.Instance.PlayButtonSound();
+        setSkip = true;
     }
 
-    private void NextDialog()
+    private IEnumerator TextingRoutine()
     {
-        if (currentDialogIdx >= currentDialog.Count)
-        {
-            EndDialog();
-            return;
-        }
+        dialogText.SetText(string.Empty);
 
-        DialogCharcterType characterType = currentDialog[currentDialogIdx].charcterType;
+        WaitForSeconds textingDelay = new WaitForSeconds(0.03f);
 
-        if (characterType == DialogCharcterType.BeforeLuccy || characterType == DialogCharcterType.CurrentLuccy || characterType == DialogCharcterType.LeftManager)
+        int textCount = storyDialog.Length;
+        int currentIdx = 0;
+
+        string message = string.Empty;
+
+        while (currentIdx < textCount)
         {
-            if (firstView.state == State.Texting)
+
+            if (setSkip)
             {
-                firstView.SetEnd();
-                return;
+                dialogText.SetText(storyDialog);
+                break;
             }
-        }
-        else
-        {
-            if (secondView.state == State.Texting)
-            {
-                secondView.SetEnd();
-                return;
-            }
+
+            message += storyDialog[currentIdx];
+            dialogText.SetText(message);
+            currentIdx++;
+            yield return textingDelay;
         }
 
-        firstView.gameObject.SetActive(characterType == DialogCharcterType.BeforeLuccy || characterType == DialogCharcterType.CurrentLuccy);
-        secondView.gameObject.SetActive(characterType == DialogCharcterType.Manager);
+        yield return null;
 
-        if (characterType == DialogCharcterType.BeforeLuccy || characterType == DialogCharcterType.CurrentLuccy)
-        {
-            firstView.Initialize(currentDialog[currentDialogIdx], WhenTextingEnd);
-        }
-        else
-        {
-            secondView.Initialize(currentDialog[currentDialogIdx], WhenTextingEnd);
-        }
+        SetEnd();
     }
 
-    private void WhenTextingEnd()
+    private void SetEnd()
     {
-        currentDialogIdx++;
-
-        if (currentDialogIdx == 9)
-        {
-            PopupManager.Instance.ShowWhiteEffect();
-        }
+        touchMask.SetActive(false);
+        endInput.interactable = true;
     }
 
-    private void EndDialog()
+
+    public void EndDialog()
     {
         rootObject.SetActive(false);
     }

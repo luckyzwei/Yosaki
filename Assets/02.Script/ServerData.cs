@@ -107,7 +107,7 @@ public static class ServerData
 
     public static void SendTransaction(List<TransactionValue> transactionList, bool retry = true, Action completeCallBack = null, Action successCallBack = null)
     {
-        SendQueue.Enqueue(Backend.GameData.TransactionWrite, transactionList, (bro) =>
+         SendQueue.Enqueue(Backend.GameData.TransactionWrite, transactionList, (bro) =>
         {
             if (bro.IsSuccess())
             {
