@@ -127,10 +127,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2400949470193832489}
   - component: {fileID: 2400949470193832488}
-  - component: {fileID: 2400949470193832491}
   - component: {fileID: 4477304810977862465}
   - component: {fileID: 5488405300392861006}
   - component: {fileID: 7502014127788144411}
+  - component: {fileID: 911421954719639228}
   m_Layer: 12
   m_Name: BonusDefenseMob
   m_TagString: Untagged
@@ -176,32 +176,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2400949470193832491
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2400949470193832490}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 5c5450451bb03fb4eae2f48144a70be8, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.5051575}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.8086793, y: 1.6635761}
-  m_EdgeRadius: 0
 --- !u!114 &4477304810977862465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHpBar: {fileID: 5973159137069930182}
+  damTextSpawnPos: {fileID: 0}
 --- !u!114 &5488405300392861006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +219,22 @@ MonoBehaviour:
   rb: {fileID: 2400949470193832488}
   agentHpController: {fileID: 4477304810977862465}
   viewTr: {fileID: 3445190277745758095}
+--- !u!58 &911421954719639228
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400949470193832490}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.4237199}
+  serializedVersion: 2
+  m_Radius: 0.65065813
 --- !u!1 &3889555511983176701
 GameObject:
   m_ObjectHideFlags: 0

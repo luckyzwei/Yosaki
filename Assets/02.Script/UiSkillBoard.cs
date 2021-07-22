@@ -4,10 +4,12 @@ using UnityEngine;
 using System.Linq;
 using BackEnd;
 
-public class UiSkillBoard : MonoBehaviour
+public class UiSkillBoard : SingletonMono<UiSkillBoard>
 {
     [SerializeField]
     private UiSkillCell skillCellPrefab;
+
+    private List<UiSkillCell> skillCells = new List<UiSkillCell>();
 
     [SerializeField]
     private Transform skillCellParent;
@@ -54,15 +56,25 @@ public class UiSkillBoard : MonoBehaviour
             var cell = Instantiate<UiSkillCell>(skillCellPrefab, skillCellParent);
 
             cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
+
+            skillCells.Add(cell);
         }
 
         var passiveSkillList = TableManager.Instance.PassiveSkill.dataArray.ToList();
 
-        for(int i = 0; i < passiveSkillList.Count; i++) 
+        for (int i = 0; i < passiveSkillList.Count; i++)
         {
             var cell = Instantiate<UiPassiveSkillCell>(passiveSkillCellPrefab, passiveSkillCellParent);
 
             cell.Refresh(passiveSkillList[i]);
+        }
+    }
+
+    public void WhenSkillRegistered()
+    {
+        for (int i = 0; i < skillCells.Count; i++)
+        {
+            skillCells[i].CheckUnlock(0);
         }
     }
 

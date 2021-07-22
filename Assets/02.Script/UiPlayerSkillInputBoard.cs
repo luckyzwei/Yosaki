@@ -124,27 +124,21 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 
     public void OnClickSKillToggle(int idx)
     {
-        if (AutoManager.Instance.IsAutoMode)
-        {
-            //체크박스
-            if (SkillCoolTimeManager.registeredSkillIdx[idx].Value == 0)
-            {
-                SkillCoolTimeManager.SetUseSkill(idx);
-                PopupManager.Instance.ShowAlarmMessage($"자동 스킬 등록 완료!");
-            }
-            else
-            {
-                SkillCoolTimeManager.RemoveUseSkill(idx);
-                PopupManager.Instance.ShowAlarmMessage($"자동 스킬 등록 해제!");
-            }
-
-            //if (selectedSkillIdxList[idx].Value == -1)
-            //{
-            //    PopupManager.Instance.ShowAlarmMessage("스킬이 없습니다.");
-            //}
-
-            return;
-        }
+        //if (AutoManager.Instance.IsAutoMode)
+        //{
+        //    //체크박스
+        //    if (SkillCoolTimeManager.registeredSkillIdx[idx].Value == 0)
+        //    {
+        //        SkillCoolTimeManager.SetUseSkill(idx);
+        //        PopupManager.Instance.ShowAlarmMessage($"자동 스킬 등록 완료!");
+        //    }
+        //    else
+        //    {
+        //        SkillCoolTimeManager.RemoveUseSkill(idx);
+        //        PopupManager.Instance.ShowAlarmMessage($"자동 스킬 등록 해제!");
+        //    }
+        //    return;
+        //}
     }
 
     public void OnClickSkillSlot(int idx)

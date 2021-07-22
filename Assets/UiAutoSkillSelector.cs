@@ -21,34 +21,27 @@ public class UiAutoSkillSelector : MonoBehaviour
     void Start()
     {
         SkillCoolTimeManager.LoadSelectedSkill();
-        Subscribe();
+       // Subscribe();
     }
 
     private void Subscribe()
     {
-        AutoManager.Instance.AutoMode.AsObservable().Subscribe(e =>
-        {
-            toggleObject.ForEach(element => element.gameObject.SetActive(e));
-            //jumpAutoObject.gameObject.SetActive(e);
-        }).AddTo(this);
-
-        var list = SkillCoolTimeManager.registeredSkillIdx;
-
-        for (int i = 0; i < list.Count; i++)
-        {
-            int idx = i;
-            list[i].AsObservable().Subscribe(id =>
-            {
-                toggleCheckBoxObject[idx].SetActive(id == 1);
-            }).AddTo(this);
-        }
-
-
-        //SkillCoolTimeManager.jumpAutoValue.AsObservable().Subscribe(e =>
+        //AutoManager.Instance.AutoMode.AsObservable().Subscribe(e =>
         //{
-        //    jumpToggleObject.SetActive(e == 1);
+        //    toggleObject.ForEach(element => element.gameObject.SetActive(e));
+        //    //jumpAutoObject.gameObject.SetActive(e);
         //}).AddTo(this);
 
+        //var list = SkillCoolTimeManager.registeredSkillIdx;
+
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    int idx = i;
+        //    list[i].AsObservable().Subscribe(id =>
+        //    {
+        //        toggleCheckBoxObject[idx].SetActive(id == 1);
+        //    }).AddTo(this);
+        //}
     }
 
 }

@@ -146,4 +146,9 @@ public class UiSkillSlotSettingBoard : MonoBehaviour
 
         WhenSkillGroupChanged(currentSelectedSkillGroup);
     }
+
+    private void OnDisable()
+    {
+        UiSkillBoard.Instance.WhenSkillRegistered();
+    }
 }

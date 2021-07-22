@@ -81,8 +81,9 @@ public class FlyingEnemyMoveController : MonoBehaviour
     {
         if (isDamaged == true) return;
 
-        Vector3 refrectDir = this.transform.position - (Vector3)collision.contacts[0].point;
+        //Vector3 refrectDir = this.transform.position - (Vector3)collision.GetContact(0).point;
 
-        SetMoveDir(refrectDir, this.moveSpeed);
+        SetMoveDir(Quaternion.Euler(0f,0f,Random.Range(200,340))* moveDir, this.moveSpeed);
+        //SetMoveDir(refrectDir, this.moveSpeed);
     }
 }
