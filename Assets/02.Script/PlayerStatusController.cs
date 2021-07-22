@@ -231,7 +231,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
     private void CheckDead()
     {
 #if UNITY_EDITOR
-        //return;
+        return;
 #endif
 
         if (hp.Value <= 0)

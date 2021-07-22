@@ -21,7 +21,7 @@ public class UiLimitShop : MonoBehaviour
 
         while (e.MoveNext())
         {
-            if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit) continue;
+            if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit1) continue;
             if (e.Current.Value.SHOPCATEGORY == ShopCategory.Gem) continue;
             var cell = Instantiate<UiIapItemCell>(iapCellPrefab, cellParent);
             cell.Initialize(e.Current.Value);

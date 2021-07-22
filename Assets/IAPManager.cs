@@ -22,7 +22,7 @@ public enum BuyType
 }
 public enum ShopCategory
 {
-    Gem, Limit, Pet, Costume
+    Gem, Limit1, Limit2, Pet, Costume
 }
 public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 {
@@ -176,7 +176,7 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
         }
         else
         {
-                PopupManager.Instance.ShowAlarmMessage("상품 초기화 안됨");
+            PopupManager.Instance.ShowAlarmMessage("상품 초기화 안됨");
             MyDebug("BuyProductID FAIL. Not initialized.");
         }
     }

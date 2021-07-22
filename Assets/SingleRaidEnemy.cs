@@ -70,24 +70,24 @@ public class SingleRaidEnemy : BossEnemyBase
         while (true)
         {
             Random.InitState((int)System.DateTime.Now.Ticks);
-            int attackType = Random.Range(0, 4);
+            int attackType = Random.Range(0, 3);
 
 #if UNITY_EDITOR
             Debug.LogError($"AttackType {attackType}");
 #endif
 
-            yield return StartCoroutine(AttackRoutine_2(1f));
-            //if (attackType == 0)
-            //{
-            //}
-            //else if (attackType == 1)
-            //{
-            //    yield return StartCoroutine(AttackRoutine_3(1.5f));
-            //}
-            //else if (attackType == 2)
-            //{
-            //    yield return StartCoroutine(AttackRoutine_4(1.5f));
-            //}
+            if (attackType == 0)
+            {
+                yield return StartCoroutine(AttackRoutine_2(1.5f));
+            }
+            else if (attackType == 1)
+            {
+                yield return StartCoroutine(AttackRoutine_3(1.5f));
+            }
+            else if (attackType == 2)
+            {
+                yield return StartCoroutine(AttackRoutine_4(1.5f));
+            }
 
             StartCoroutine(PlayAttackAnim());
 
@@ -141,7 +141,7 @@ public class SingleRaidEnemy : BossEnemyBase
     //?
     private IEnumerator AttackRoutine_3(float delay)
     {
-        alarmHitObject_3.transform.position = alarmHitObjectSpawnPos[Random.Range(0, alarmHitObjectSpawnPos.Count)].position;
+        //  alarmHitObject_3.transform.position = alarmHitObjectSpawnPos[Random.Range(0, alarmHitObjectSpawnPos.Count)].position;
 
         alarmHitObject_3.AttackStart();
 
@@ -150,7 +150,7 @@ public class SingleRaidEnemy : BossEnemyBase
         yield return new WaitForSeconds(delay);
     }
 
-    //전영역 (맨 윗층 점프로만 피할수있음)
+    //
     private IEnumerator AttackRoutine_4(float delay)
     {
         alarmHitObject_4.AttackStart();

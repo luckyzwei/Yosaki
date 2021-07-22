@@ -8,7 +8,13 @@ public class UiPackageShop : MonoBehaviour
     private UiIapItemCell iapCellPrefab;
 
     [SerializeField]
-    private Transform cellParent;
+    private Transform package1Parent;
+
+    [SerializeField]
+    private Transform package2Parent;
+
+    [SerializeField]
+    private Transform petCostumeParent;
 
     private void Start()
     {
@@ -21,9 +27,22 @@ public class UiPackageShop : MonoBehaviour
 
         while (e.MoveNext())
         {
-            if (e.Current.Value.SHOPCATEGORY != ShopCategory.Limit) continue;
-            var cell = Instantiate<UiIapItemCell>(iapCellPrefab, cellParent);
-            cell.Initialize(e.Current.Value);
+            if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit1)
+            {
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, package1Parent);
+                cell.Initialize(e.Current.Value);
+            }
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit2)
+            {
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, package2Parent);
+                cell.Initialize(e.Current.Value);
+            }
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Pet || e.Current.Value.SHOPCATEGORY == ShopCategory.Costume)
+            {
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, petCostumeParent);
+                cell.Initialize(e.Current.Value);
+            }
+
         }
     }
 }
