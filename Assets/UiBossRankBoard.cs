@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using TMPro;
-using System;
-using CodeStage.AntiCheat.ObscuredTypes;
+
 
 public class UiBossRankBoard : MonoBehaviour
 {
@@ -28,13 +27,7 @@ public class UiBossRankBoard : MonoBehaviour
     private GameObject failObject;
 
     [SerializeField]
-    private GameObject noDataObject;
-
-    [SerializeField]
     private TextMeshProUGUI title;
-
-    [SerializeField]
-    private ObscuredInt bossId;
 
 
     private void OnEnable()
@@ -46,64 +39,37 @@ public class UiBossRankBoard : MonoBehaviour
 
     private void SetTitle()
     {
-        title.SetText("랭킹(보스)");
+        title.SetText($"랭킹({CommonString.RankPrefix_Boss})");
     }
 
     private void Start()
     {
         Subscribe();
     }
+
     private void Subscribe()
     {
-        //if (bossId == 0) 
-        //{
-        //    RankManager.Instance.WhenMyStageRankLoadComplete.AsObservable().Subscribe(e =>
-        //    {
-        //        if (e != null)
-        //        {
-        //            myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
-        //        }
-        //        else
-        //        {
-        //            myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
-        //        }
+        RankManager.Instance.WhenMyBossRankLoadComplete.AsObservable().Subscribe(e =>
+        {
+            if (e != null)
+            {
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score.ToString("F0")}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+            }
+            else
+            {
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
+            }
 
-        //    }).AddTo(this);
-        //}
-        //else if (bossId == 1) 
-        //{
-        //    RankManager.Instance.WhenMyBoss1RankLoadComplete.AsObservable().Subscribe(e =>
-        //    {
-        //        if (e != null)
-        //        {
-        //            myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
-        //        }
-        //        else
-        //        {
-        //            myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
-        //        }
 
-        //    }).AddTo(this);
-        //}
-
+        }).AddTo(this);
     }
     private void LoadRankInfo()
     {
-        //rankViewParent.gameObject.SetActive(false);
-        //loadingMask.SetActive(false);
-        //failObject.SetActive(false);
-        //noDataObject.SetActive(false);
-
-        //if (bossId == 0)
-        //{
-        //    RankManager.Instance.GetRankerList_level(RankManager.Rank_Stage_Uuid, 100, WhenAllRankerLoadComplete);
-        //    RankManager.Instance.RequestMyStageRank();
-        //}
-        //else if (bossId == 1)
-        //{
-        //    RankManager.Instance.GetRankerList_level(RankManager.Rank_Boss_1_Uuid, 100, WhenAllRankerLoadComplete);
-        //    RankManager.Instance.RequestMyBoss1Rank();
-        //}
+        rankViewParent.gameObject.SetActive(false);
+        loadingMask.SetActive(false);
+        failObject.SetActive(false);
+        RankManager.Instance.GetRankerList(RankManager.Rank_Boss_Uuid, 100, WhenAllRankerLoadComplete);
+        RankManager.Instance.RequestMyBossRank();
     }
 
     private void WhenAllRankerLoadComplete(BackendReturnObject bro)
@@ -114,8 +80,6 @@ public class UiBossRankBoard : MonoBehaviour
 
             if (rows.Count > 0)
             {
-                noDataObject.SetActive(false);
-
                 rankViewParent.gameObject.SetActive(true);
 
                 int interval = rows.Count - rankViewContainer.Count;
@@ -144,7 +108,6 @@ public class UiBossRankBoard : MonoBehaviour
                         int magicBookId = int.Parse(splitData[3]);
                         int fightPoint = int.Parse(splitData[4]);
 
-
                         Color color1 = Color.white;
                         Color color2 = Color.white;
 
@@ -164,7 +127,8 @@ public class UiBossRankBoard : MonoBehaviour
                             color1 = Color.yellow;
                         }
 
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
+                        //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{score.ToString("F0")}", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
                     }
                     else
                     {
@@ -174,7 +138,7 @@ public class UiBossRankBoard : MonoBehaviour
             }
             else
             {
-                noDataObject.SetActive(true);
+                //데이터 없을때
             }
 
         }

@@ -53,7 +53,7 @@ public static class PlayerStats
             * (Mathf.Max(coolTIme, 0.01f)) * 100)
             + ((hpBase + hpBase * hpAddPer) + (mpBase + mpBase * mpAddPer));
 
-        return totalPower * 0.0001f;
+        return totalPower * 0.01f;
     }
 
     public static float GetMoveSpeedValue()

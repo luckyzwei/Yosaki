@@ -38,9 +38,8 @@ public static class CommonString
     public static char ChatSplitChar = '◙';
 
     public static string RankPrefix_Level = "레벨";
-    public static string RankPrefix_Boss0 = "세이튼";
-    public static string RankPrefix_Boss1 = "바엘";
-    public static string RankPrefix_Infinity = ContentsName_InfinityTower;
+    public static string RankPrefix_Stage = "스테이지";
+    public static string RankPrefix_Boss = "십이지신(묘)";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
 

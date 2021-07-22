@@ -246,18 +246,15 @@ public class ChatManager : SingletonMono<ChatManager>
             case RankType.Level:
                 return CommonString.RankPrefix_Level;
                 break;
+            case RankType.Stage:
+                return CommonString.RankPrefix_Stage;
+                break;
             case RankType.Boss:
-                return CommonString.RankPrefix_Boss0;
-                break;
-            case RankType.Boss1:
-                return CommonString.RankPrefix_Boss1;
-                break;
-            case RankType.Infinity:
-                return CommonString.RankPrefix_Infinity;
+                return CommonString.RankPrefix_Boss;
                 break;
         }
 
-        return null;
+        return "미등록";
     }
 
     public void OnChatReceived(ChatEventArgs args)

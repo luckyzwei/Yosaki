@@ -67,7 +67,7 @@ public class UiLevelRankBoard : MonoBehaviour
         rankViewParent.gameObject.SetActive(false);
         loadingMask.SetActive(false);
         failObject.SetActive(false);
-        RankManager.Instance.GetRankerList_level(RankManager.Rank_Level_Uuid, 100, WhenAllRankerLoadComplete);
+        RankManager.Instance.GetRankerList(RankManager.Rank_Level_Uuid, 100, WhenAllRankerLoadComplete);
         RankManager.Instance.RequestMyLevelRank();
     }
 

@@ -209,11 +209,13 @@ public class SingleRaidManager : ContentsManagerBase
 
     private void SendScore()
     {
-        var serverData = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
+        RankManager.Instance.UpdateBoss_Score(damageAmount.Value);
 
-        serverData.score.Value = damageAmount.Value.ToString();
+        //var serverData = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
 
-        ServerData.bossServerTable.UpdateData(bossTableData.Stringid);
+        //serverData.score.Value = damageAmount.Value.ToString();
+
+        //ServerData.bossServerTable.UpdateData(bossTableData.Stringid);
     }
 
     public static List<RewardData> GetRewawrdData(BossTableData bossTableData, float damagedHp, int clearCount = 1)

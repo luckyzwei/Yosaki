@@ -112,18 +112,25 @@ public class UiBossContentsView : MonoBehaviour
 
         int clearAmount = Mathf.Min(instantOpenAmount, currentTicketNum);
 
-        var bossServerTable = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
-
-        float currentScore = float.Parse(bossServerTable.score.Value);
-
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(currentScore)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
-                    {
-                        InstantClearReceive(currentScore, clearAmount);
-                    },
-                    () =>
-                    {
-                        clearButton.interactable = true;
-                    });
+        RankManager.Instance.RequestMyBossRank(e =>
+        {
+            if (e != null)
+            {
+                PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{Utils.ConvertBigNum(e.Score)}점으로 {clearAmount}번\n소탕 하시겠습니까?", () =>
+                {
+                    InstantClearReceive(e.Score, clearAmount);
+                },
+                () =>
+                {
+                    clearButton.interactable = true;
+                });
+            }
+            else
+            {
+                PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
+                clearButton.interactable = true;
+            }
+        });
     }
 
     private void InstantClearReceive(float score, int clearAmount)
