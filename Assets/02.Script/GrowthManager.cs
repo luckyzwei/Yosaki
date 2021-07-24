@@ -19,9 +19,12 @@ public class GrowthManager : SingletonMono<GrowthManager>
     {
         maxExp.Value = GameDataCalculator.GetMaxExp(ServerData.statusTable.GetTableData(StatusTable.Level).Value);
     }
-    public void GetExp(float exp)
+    public void GetExp(float exp, bool useBuff = true)
     {
-        exp += exp * PlayerStats.GetExpPlusValue();
+        if (useBuff)
+        {
+            exp += exp * PlayerStats.GetExpPlusValue();
+        }
 
         SystemMessage.Instance.SetMessage($"경험치 획득 ({(int)exp})");
 
@@ -136,6 +139,6 @@ public class GrowthManager : SingletonMono<GrowthManager>
         //경험치 절반 감소 안시킴
         return;
         ServerData.growthTable.GetTableData(GrowthTable.Exp).Value = ServerData.growthTable.GetTableData(GrowthTable.Exp).Value * 0.5f;
-        ServerData.growthTable.UpData(GrowthTable.Exp,false);
+        ServerData.growthTable.UpData(GrowthTable.Exp, false);
     }
 }

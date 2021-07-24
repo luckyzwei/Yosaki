@@ -105,21 +105,22 @@ public class CostumeServerTable
 
     public float GetCostumeAbility(StatusType type)
     {
-        int currentCostumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].Value;
-
-        var costumeTableData = TableManager.Instance.CostumeData[currentCostumeIdx];
-
-        var currentCostumeData = tableDatas[costumeTableData.Stringid];
-
         float ret = 0f;
 
-        for (int i = 0; i < currentCostumeData.abilityIdx.Count; i++)
+        for (int j = 0; j < TableManager.Instance.Costume.dataArray.Length; j++)
         {
-            var abilityInfo = TableManager.Instance.CostumeAbilityData[currentCostumeData.abilityIdx[i].Value];
+            var costumeTableData = TableManager.Instance.CostumeData[j];
 
-            if (abilityInfo.Abilitytype == (int)type)
+            var currentCostumeData = tableDatas[costumeTableData.Stringid];
+
+            for (int i = 0; i < currentCostumeData.abilityIdx.Count; i++)
             {
-                ret += abilityInfo.Abilityvalue;
+                var abilityInfo = TableManager.Instance.CostumeAbilityData[currentCostumeData.abilityIdx[i].Value];
+
+                if (abilityInfo.Abilitytype == (int)type)
+                {
+                    ret += abilityInfo.Abilityvalue;
+                }
             }
         }
 

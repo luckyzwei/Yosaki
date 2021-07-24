@@ -202,7 +202,10 @@ public class MapInfo : SingletonMono<MapInfo>
 
     private void RemoveEnemyCountInPlatform(int platformId)
     {
-        spawnedEnemyPlatforms[platformId]--;
+        if (spawnedEnemyPlatforms.ContainsKey(platformId))
+        {
+            spawnedEnemyPlatforms[platformId]--;
+        }
     }
 
     //제일 하단 발판

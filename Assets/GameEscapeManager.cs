@@ -53,4 +53,9 @@ public class GameEscapeManager : SingletonMono<GameEscapeManager>
         };
 #endif
     }
+
+    public void OnClickCafeButton() 
+    {
+        Application.OpenURL(CommonString.CafeURL);
+    }
 }

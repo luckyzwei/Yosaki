@@ -216,7 +216,7 @@ public class UiSettingBoard : MonoBehaviour
 
     public void OnClickCafeButton()
     {
-        Application.OpenURL("https://cafe.naver.com/madaki");
+        Application.OpenURL(CommonString.CafeURL);
     }
 
     private float AutoSaveDelay = 3600f;

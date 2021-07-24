@@ -46,7 +46,7 @@ public class UiCostumeSlotView : MonoBehaviour
 
         ServerData.costumeServerTable.TableDatas[costumeData.Stringid].hasCostume.AsObservable().Subscribe(e =>
         {
-            costumeHasText.SetText(e ? "보유중" : "");
+            costumeHasText.SetText(e ? "적용됨" : "");
         }).AddTo(this);
     }
 

@@ -38,9 +38,20 @@ public class UiQuickMoveBoard : MonoBehaviour
     {
         int myLastStageId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.topClearStageId].Value;
 
-        if (myLastStageId == -1) 
+        if (myLastStageId == -1)
         {
             myLastStageId = 0;
+        }
+        else
+        {
+            myLastStageId++;
+        }
+
+        int lastStageId = TableManager.Instance.GetLastStageIdx();
+
+        if (myLastStageId >= lastStageId)
+        {
+            myLastStageId = lastStageId;
         }
 
         var stageTableData = TableManager.Instance.StageMapData[myLastStageId];

@@ -143,7 +143,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
     private void WhenCostumeHasValueChanged(bool hasCostume)
     {
         abilityGachaButton.SetActive(hasCostume);
-        costumeEquipButton.SetActive(hasCostume);
+       // costumeEquipButton.SetActive(hasCostume);
     }
 
 

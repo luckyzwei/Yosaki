@@ -66,7 +66,14 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         Debug.LogError($"Elapsed {elapsedSeconds}");
 
-        var stageTableData = TableManager.Instance.StageMapData[(int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value];
+        int currentStageIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+
+        if (currentStageIdx == TableManager.Instance.GetLastStageIdx())
+        {
+            currentStageIdx = TableManager.Instance.GetLastStageIdx();
+        }
+
+        var stageTableData = TableManager.Instance.StageMapData[currentStageIdx];
 
         MapInfo mapInfo = BattleObjectManager.GetMapPrefabObject(stageTableData.Mappreset).GetComponent<MapInfo>();
 
@@ -100,7 +107,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
     {
         if (sleepRewardInfo == null) return;
 
-        GrowthManager.Instance.GetExp(sleepRewardInfo.exp);
+        GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false);
 
         ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += sleepRewardInfo.gold;
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += sleepRewardInfo.jade;

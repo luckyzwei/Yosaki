@@ -139,16 +139,22 @@ public class Enemy : PoolItem
         if (GameManager.Instance.SpawnMagicStone == false) return;
 
         //GrowthStone
-        var growthStone = BattleObjectManager.Instance.dropItemProperty.GetItem();
         float magicStoneSpawnAmount = GameManager.Instance.CurrentStageData.Magicstoneamount;
-        growthStone.Initialize(Item_Type.GrowThStone, magicStoneSpawnAmount);
-        growthStone.transform.position = this.transform.position + UnityEngine.Random.Range(-0.3f, 0.3f) * Vector3.right;
+        if (magicStoneSpawnAmount != 0) 
+        {
+            var growthStone = BattleObjectManager.Instance.dropItemProperty.GetItem();
+            growthStone.Initialize(Item_Type.GrowThStone, magicStoneSpawnAmount);
+            growthStone.transform.position = this.transform.position + UnityEngine.Random.Range(-0.3f, 0.3f) * Vector3.right;
+        }
 
         //여우구슬
-        var marble = BattleObjectManager.Instance.dropItemProperty.GetItem();
         float marbleSpawnAmount = GameManager.Instance.CurrentStageData.Marbleamount;
-        marble.Initialize(Item_Type.Marble, marbleSpawnAmount);
-        marble.transform.position = this.transform.position + UnityEngine.Random.Range(-0.3f, 0.3f) * Vector3.right;
+        if (marbleSpawnAmount != 0) 
+        {
+            var marble = BattleObjectManager.Instance.dropItemProperty.GetItem();
+            marble.Initialize(Item_Type.Marble, marbleSpawnAmount);
+            marble.transform.position = this.transform.position + UnityEngine.Random.Range(-0.3f, 0.3f) * Vector3.right;
+        }
     }
 
     private void SetBaseInfo()

@@ -10,10 +10,10 @@ public class UiMarbleLockMask : MonoBehaviour
 
     private void OnEnable()
     {
-        lockMaskDesc.SetText($"{GameBalance.marbleUnlockLevel}레벨에 해방");
+        //lockMaskDesc.SetText($"{GameBalance.marbleUnlockLevel}레벨에 해방");
 
-        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+        //int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
-        this.gameObject.SetActive(currentLevel < GameBalance.marbleUnlockLevel);
+        //this.gameObject.SetActive(currentLevel < GameBalance.marbleUnlockLevel);
     }
 }

@@ -43,6 +43,8 @@ public static class CommonString
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
 
+    public static string CafeURL = "https://cafe.naver.com/madaki";
+
     public static string GetContentsName(ContentsType contentsType)
     {
         switch (contentsType)
@@ -79,7 +81,7 @@ public static class CommonString
             case Item_Type.Jade: return "옥";
             case Item_Type.GrowThStone: return "수련의돌";
             case Item_Type.Memory: return "무공비급";
-            case Item_Type.Ticket: return "소환권";
+            case Item_Type.Ticket: return "소환서";
             case Item_Type.costume0: return "미등록";
             case Item_Type.costume1: return "미등록";
             case Item_Type.costume2: return "미등록";
