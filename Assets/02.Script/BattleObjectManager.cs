@@ -63,14 +63,14 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
         {
             GameObject mapObject = null;
 
-            if (GameManager.Instance.contentsType != GameManager.ContentsType.Boss)
+            if (GameManager.contentsType != GameManager.ContentsType.Boss)
             {
-                mapObject = Resources.Load<GameObject>($"ContentsMap/{GameManager.Instance.contentsType.ToString()}");
+                mapObject = Resources.Load<GameObject>($"ContentsMap/{GameManager.contentsType.ToString()}");
             }
             else
             {
                 int currentBossIdx = GameManager.Instance.bossId;
-                mapObject = Resources.Load<GameObject>($"ContentsMap/{GameManager.Instance.contentsType.ToString() + currentBossIdx.ToString()}");
+                mapObject = Resources.Load<GameObject>($"ContentsMap/{GameManager.contentsType.ToString() + currentBossIdx.ToString()}");
             }
 
             Instantiate<GameObject>(mapObject);

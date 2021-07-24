@@ -98,7 +98,7 @@ public class UiQuickButtons : MonoBehaviour
 
     private void AutoPotion()
     {
-        if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField) return;
+        if (GameManager.contentsType != GameManager.ContentsType.NormalField) return;
 
         float currentHp = PlayerStatusController.Instance.hp.Value;
         float maxhp = PlayerStatusController.Instance.maxHp.Value;
@@ -166,8 +166,8 @@ public class UiQuickButtons : MonoBehaviour
 
     public void UsePotion(bool showAlarmText)
     {
-        if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField &&
-            GameManager.Instance.contentsType != GameManager.ContentsType.FireFly)
+        if (GameManager.contentsType != GameManager.ContentsType.NormalField &&
+            GameManager.contentsType != GameManager.ContentsType.FireFly)
         {
             if (showAlarmText)
             {

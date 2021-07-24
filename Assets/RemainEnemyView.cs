@@ -47,7 +47,7 @@ public class RemainEnemyView : MonoBehaviour
 
         float spawnDelay = GameManager.Instance.CurrentStageData.Spawndelay;
 
-        if (GameManager.Instance.contentsType == GameManager.ContentsType.NormalField && spawnDelay != 0f)
+        if (GameManager.contentsType == GameManager.ContentsType.NormalField && spawnDelay != 0f)
         {
             float divideNum = spawnDelay + GameBalance.spawnIntervalTime * GameBalance.spawnDivideNum;
             MapInfo.Instance.spawnGaugeValue.AsObservable().Subscribe(e =>

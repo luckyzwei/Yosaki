@@ -60,7 +60,7 @@ public class SoundManager : SingletonMono<SoundManager>
             bool sameBgm = false;
             AudioClip clip = null;
 
-            ContentsType currentContents = GameManager.Instance.contentsType;
+            ContentsType currentContents = GameManager.contentsType;
 
             switch (currentContents)
             {

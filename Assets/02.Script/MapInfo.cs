@@ -317,7 +317,7 @@ public class MapInfo : SingletonMono<MapInfo>
 
     public void SpawnBossEnemy()
     {
-        if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField)
+        if (GameManager.contentsType != GameManager.ContentsType.NormalField)
         {
             PopupManager.Instance.ShowAlarmMessage("이곳에서는 소환할 수 없습니다.");
             return;

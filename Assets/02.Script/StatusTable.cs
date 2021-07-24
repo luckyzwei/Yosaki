@@ -230,7 +230,7 @@ public class StatusTable
                     break;
                 case BossDamage_memory:
                     {
-                        return level * 0.1f;
+                        return level * 0.05f;
                     }
 
                 #endregion

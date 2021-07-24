@@ -22,7 +22,7 @@ public class GameManager : SingletonMono<GameManager>
 
     private ReactiveProperty<int> currentMapIdx = new ReactiveProperty<int>();
 
-    public ContentsType contentsType { get; private set; }
+    public static ContentsType contentsType { get; private set; }
 
     public ReactiveCommand whenSceneChanged = new ReactiveCommand();
 

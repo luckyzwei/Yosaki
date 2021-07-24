@@ -356,12 +356,6 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
     private void SetUpgradeButtonState(bool on)
     {
-#if TEST
-        if (on == false)
-        {
-            return;
-        }
-#endif
         if (upgradeButton == null) return;
 
         upgradeButton.raycastTarget = on;

@@ -119,7 +119,7 @@ public class AutoManager : Singleton<AutoManager>
             //타겟 없을때 대기
             if (currentTarget == null && UiMoveStick.Instance.nowTouching == false)
             {
-                if (GameManager.Instance.contentsType == GameManager.ContentsType.NormalField)
+                if (GameManager.contentsType == GameManager.ContentsType.NormalField)
                 {
                     UiMoveStick.Instance.SetHorizontalAxsis(0);
                 }
@@ -325,7 +325,7 @@ public class AutoManager : Singleton<AutoManager>
             }
         }
 
-        if (GameManager.Instance.contentsType == GameManager.ContentsType.NormalField)
+        if (GameManager.contentsType == GameManager.ContentsType.NormalField)
         {
             var spawnedEnemy = MapInfo.Instance.SpawnedEnemyList;
 
@@ -349,7 +349,7 @@ public class AutoManager : Singleton<AutoManager>
                 currentTarget = spawnedEnemy[0].transform;
             }
         }
-        else if (GameManager.Instance.contentsType == GameManager.ContentsType.FireFly)
+        else if (GameManager.contentsType == GameManager.ContentsType.FireFly)
         {
             currentTarget = GetBonusDefenseTarget();
         }

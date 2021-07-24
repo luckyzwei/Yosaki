@@ -85,6 +85,7 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetMarbleValue(StatusType.BossDamAddPer);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.BossDamage_memory);
 
         return 0f;
     }

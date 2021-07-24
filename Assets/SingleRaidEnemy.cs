@@ -40,9 +40,9 @@ public class SingleRaidEnemy : BossEnemyBase
     {
         var bossTableData = TableManager.Instance.BossTableData[GameManager.Instance.bossId];
 
-        float ratio = SingleRaidManager.Instance.GetComponent<SingleRaidManager>().BossRemainHp / bossTableData.Hp;
+        float ratio = SingleRaidManager.Instance.GetComponent<SingleRaidManager>().GetDamagedAmount() / bossTableData.Hp;
 
-        float damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax, 1f - ratio);
+        float damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax,Mathf.Min(1f,ratio));
 
         hitObject.SetDamage(damage);
 

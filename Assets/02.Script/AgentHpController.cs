@@ -97,7 +97,7 @@ public class AgentHpController : MonoBehaviour
     }
     private static string hitSfxName = "EnemyHitted";
     private static string deadSfxName = "EnemyDead";
-    private void ApplyCriticalAndDamText(ref float value)
+    private void ApplyPlusDamage(ref float value)
     {
         bool isCritical = PlayerStats.ActiveCritical();
 
@@ -107,6 +107,11 @@ public class AgentHpController : MonoBehaviour
         if (isCritical)
         {
             value += value * PlayerStats.CriticalDam();
+        }
+
+        if (GameManager.contentsType == GameManager.ContentsType.Boss)
+        {
+            value += value * PlayerStats.GetBossDamAddValue();
         }
 
         //보너스던전등 특수몹
@@ -163,7 +168,7 @@ public class AgentHpController : MonoBehaviour
 
         value *= DamageBalance.GetRandomDamageRange();
 
-        ApplyCriticalAndDamText(ref value);
+        ApplyPlusDamage(ref value);
 
         if (isEnemyDead == true) return;
 

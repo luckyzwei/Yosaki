@@ -56,7 +56,7 @@ public class BossSpawnButton : SingletonMono<BossSpawnButton>
         if (nextStageId > lastClearStage + 1)
         {
 
-            if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField)
+            if (GameManager.contentsType != GameManager.ContentsType.NormalField)
             {
                 PopupManager.Instance.ShowAlarmMessage("필드보스를 소환할 수 없는 곳 입니다.");
                 return;

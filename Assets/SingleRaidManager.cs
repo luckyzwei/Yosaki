@@ -30,6 +30,11 @@ public class SingleRaidManager : ContentsManagerBase
     }
     public float BossRemainHp => bossRemainHp.Value;
 
+    public override float GetDamagedAmount()
+    {
+        return damageAmount.Value;
+    }
+
     [Header("Ui")]
     [SerializeField]
     private TextMeshProUGUI damageIndicator;
@@ -120,7 +125,7 @@ public class SingleRaidManager : ContentsManagerBase
     private void SetBossHp()
     {
         bossTableData = TableManager.Instance.BossTableData[GameManager.Instance.bossId];
-        bossRemainHp.Value = bossTableData.Hp;
+        bossRemainHp.Value = float.MaxValue;
 
         var prefab = Resources.Load<BossEnemyBase>($"Boss/{GameManager.Instance.bossId}");
 

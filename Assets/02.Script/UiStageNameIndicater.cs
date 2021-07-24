@@ -80,7 +80,7 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
     void Start()
     {
-        if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField)
+        if (GameManager.contentsType != GameManager.ContentsType.NormalField)
         {
             this.gameObject.SetActive(false);
             return;
@@ -90,7 +90,7 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
         description.SetText($"스테이지 {stageId + 1}");
 
-        monsterCountView.SetActive(GameManager.Instance.contentsType == GameManager.ContentsType.NormalField);
+        monsterCountView.SetActive(GameManager.contentsType == GameManager.ContentsType.NormalField);
 
         SetArrowButtons();
 
@@ -100,7 +100,7 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
     private void SetArrowButtons()
     {
-        if (GameManager.Instance.contentsType != GameManager.ContentsType.NormalField)
+        if (GameManager.contentsType != GameManager.ContentsType.NormalField)
         {
             buttonRoot.SetActive(false);
         }
@@ -113,7 +113,7 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
     public string GetStageName(int id)
     {
-        if (GameManager.Instance.contentsType == GameManager.ContentsType.NormalField)
+        if (GameManager.contentsType == GameManager.ContentsType.NormalField)
         {
             if (id == 0)
             {
@@ -126,7 +126,7 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
         }
         else
         {
-            return CommonString.GetContentsName(GameManager.Instance.contentsType);
+            return CommonString.GetContentsName(GameManager.contentsType);
         }
     }
 
