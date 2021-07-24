@@ -180,7 +180,7 @@ public static class Utils
 
         if (numList.Count >= 3)
         {
-            for (int i = 2; i >= 1; i--)
+            for (int i = numList.Count - 1; i >= numList.Count - 2; i--)
             {
                 if (numList[i] == 0) continue;
 
@@ -192,7 +192,7 @@ public static class Utils
                 retStr += numStringList[i];
             }
 #if UNITY_EDITOR
-            if (isUnderZero) 
+            if (isUnderZero)
             {
                 return "-" + retStr;
             }
