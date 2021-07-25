@@ -43,6 +43,8 @@ public class BonusDefenseManager : ContentsManagerBase
         spawnRoutine = StartCoroutine(EnemySpawnRoutine());
 
         Subscribe();
+
+        UiTutorialManager.Instance.SetClear(TutorialStep.PlayFireFly);
     }
 
     private void Subscribe()
@@ -57,7 +59,7 @@ public class BonusDefenseManager : ContentsManagerBase
     {
         base.TimerEnd();
 
-      //  UiTutorialManager.Instance.SetClear(TutorialStep._12_ClearGoblin);
+        //  UiTutorialManager.Instance.SetClear(TutorialStep._12_ClearGoblin);
 
         StopCoroutine(spawnRoutine);
 

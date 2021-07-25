@@ -232,6 +232,10 @@ public static class PlayerStats
         {
             if (TableManager.Instance.WeaponEffectDatas.TryGetValue(e.Current.Value.Weaponeffectid, out var effectData) == false) continue;
 
+            var weaponServertable = ServerData.weaponTable.TableDatas[e.Current.Value.Stringid];
+
+            if (weaponServertable.hasItem.Value == 0) continue;
+
             int currentLevel = ServerData.weaponTable.GetWeaponData(e.Current.Value.Stringid).level.Value;
 
             if (effectData.Haseffecttype1 == (int)type)
@@ -287,6 +291,10 @@ public static class PlayerStats
         while (e.MoveNext())
         {
             if (TableManager.Instance.WeaponEffectDatas.TryGetValue(e.Current.Value.Magicbookeffectid, out var effectData) == false) continue;
+
+            var magieBookServerData = ServerData.magicBookTable.TableDatas[e.Current.Value.Stringid];
+
+            if (magieBookServerData.hasItem.Value == 0) continue;
 
             int currentLevel = ServerData.magicBookTable.GetMagicBookData(e.Current.Value.Stringid).level.Value;
 
@@ -589,7 +597,8 @@ public static class PlayerStats
         ret += ServerData.statusTable.GetStatusValue(StatusTable.IgnoreDefense_memory);
         ret += GetWeaponEquipPercentValue(StatusType.IgnoreDefense);
         ret += GetWeaponHasPercentValue(StatusType.IgnoreDefense);
-        
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.IgnoreDefense);
+
         return ret;
     }
 }

@@ -47,8 +47,10 @@ public class UiTicketBuyShop : MonoBehaviour
         }
         else
         {
-            adText.SetText("내일 다시!");
+            adText.SetText("오늘 획득함");
         }
+
+        UiTutorialManager.Instance.SetClear(TutorialStep.BuyTicket);
     }
 
     private void WhenTicketBuyCountChanged(float buyCount)
@@ -114,6 +116,8 @@ public class UiTicketBuyShop : MonoBehaviour
 
     private void BuyProcess()
     {
+        UiTutorialManager.Instance.SetClear(TutorialStep.BuyTicket);
+
         //로컬 갱신
         ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value++;
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.ticketPrice;

@@ -159,7 +159,9 @@ public class WeaponView : MonoBehaviour
         }
         else
         {
-            amountText.SetText($"({ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value}/{skillData.Requireupgrade})");
+            int skillAwakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillData.Id].Value;
+            int requireNum = skillAwakeNum == 0 ? 1 : 10;
+            amountText.SetText($"({ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value}/{requireNum})");
         }
     }
 

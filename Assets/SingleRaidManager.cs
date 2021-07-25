@@ -95,6 +95,8 @@ public class SingleRaidManager : ContentsManagerBase
         base.Start();
         Initialize();
         Subscribe();
+
+        UiTutorialManager.Instance.SetClear(TutorialStep.PlayCatContents);
     }
     private void Initialize()
     {

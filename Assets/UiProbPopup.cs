@@ -50,7 +50,7 @@ public class UiProbPopup : MonoBehaviour
         description_weapon.SetText(GetWeaponText(currentLevel));
         description_magicBook.SetText(GetMagicBookText(currentLevel));
         description_skill.SetText(GetSkillText(currentLevel));
-        currentLevelTitle.SetText($"소환레벨 {currentLevel}");
+        currentLevelTitle.SetText($"소환레벨 {currentLevel - 1}");
     }
 
     private string GetWeaponText(int level)
@@ -68,7 +68,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv1 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv1 / sum*100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv1 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 2)
@@ -80,7 +80,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv2 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv2 / sum*100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv2 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 3)
@@ -92,7 +92,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv3 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv3 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv3 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 4)
@@ -104,7 +104,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv4 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv4 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv4 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 5)
@@ -116,7 +116,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv5 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv5 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv5 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 6)
@@ -128,7 +128,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv6 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv6 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv6 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 7)
@@ -140,7 +140,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv7 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv7 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv7 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 8)
@@ -152,7 +152,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv8 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv8 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv8 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 9)
@@ -164,7 +164,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv9 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv9 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv9 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 10)
@@ -176,7 +176,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv10 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv10 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv10 / sum * 100f).ToString("F7")}%\n";
             }
         }
 
@@ -198,7 +198,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv1 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv1 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv1 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 2)
@@ -210,7 +210,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv2 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv2 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv2 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 3)
@@ -222,7 +222,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv3 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv3 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv3 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 4)
@@ -234,7 +234,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv4 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv4 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv4 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 5)
@@ -246,7 +246,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv5 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv5 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv5 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 6)
@@ -258,7 +258,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv6 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv6 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv6 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 7)
@@ -270,7 +270,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv7 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv7 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv7 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 8)
@@ -282,7 +282,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv8 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv8 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv8 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 9)
@@ -294,7 +294,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv9 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv9 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv9 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 10)
@@ -306,7 +306,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv10 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv10 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Name} {(tableDatas[i].Gachalv10 / sum * 100f).ToString("F7")}%\n";
             }
         }
 
@@ -328,7 +328,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv1 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv1 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv1 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 2)
@@ -340,7 +340,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv2 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv2 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv2 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 3)
@@ -352,7 +352,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv3 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv3 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv3 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 4)
@@ -364,7 +364,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv4 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv4 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv4 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 5)
@@ -376,7 +376,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv5 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv5 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv5 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 6)
@@ -388,7 +388,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv6 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv6 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv6 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 7)
@@ -400,7 +400,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv7 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv7 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv7 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 8)
@@ -412,7 +412,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv8 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv8 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv8 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 9)
@@ -424,7 +424,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv9 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv9 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv9 / sum * 100f).ToString("F7")}%\n";
             }
         }
         else if (level == 10)
@@ -436,7 +436,7 @@ public class UiProbPopup : MonoBehaviour
                 float prob = tableDatas[i].Gachalv10 / sum;
                 if (prob == 0) continue;
 
-                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv10 / sum * 100f).ToString("F2")}%\n";
+                description += $"{tableDatas[i].Skillname} {(tableDatas[i].Gachalv10 / sum * 100f).ToString("F7")}%\n";
             }
         }
 

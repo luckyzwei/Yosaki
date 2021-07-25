@@ -21,6 +21,8 @@ public class InfiniteTowerManager : ContentsManagerBase
     [SerializeField]
     private UiInfinityTowerResult uiInfinityTowerResult;
 
+    public static string poolName;
+
     private new void Start()
     {
         base.Start();
@@ -166,7 +168,9 @@ public class InfiniteTowerManager : ContentsManagerBase
 
         for (int i = 0; i < towerTableData.Spawnnum; i++)
         {
-            var enemyObject = BattleObjectManager.Instance.GetItem($"Enemy/{spawnEnemyData.Prefabname}") as Enemy;
+            poolName = $"Enemy/{spawnEnemyData.Prefabname}";
+
+            var enemyObject = BattleObjectManager.Instance.GetItem(poolName) as Enemy;
 
             Vector3 spawnPos = enemySpawnPos.position + Random.Range(-2f, 2f) * Vector3.right;
 

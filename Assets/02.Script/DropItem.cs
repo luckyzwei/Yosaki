@@ -43,6 +43,16 @@ public enum Item_Type
     magicBook9 = 2009,
     magicBook10 = 2010,
     magicBook11 = 2011,
+    //3000~3100스킬
+    skill0=3000,
+    skill1=3001,
+    skill2=3002,
+    skill3=3003,
+    skill4=3004,
+    skill5=3005,
+    skill6=3006,
+    skill7=3007,
+    skill8=3008,
     //코스튬 테이블 키값임 대소문자 변경X
     costume0 = 1201,
     costume1 = 1202,

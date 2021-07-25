@@ -25,7 +25,10 @@ public enum TutorialStep
     LearnSkill = 2048,//★
     SetPotion = 4096,//★
     Level20 = 8192,//★
-    Clear = 16384
+    PlayFireFly = 16384,//★
+    BuyTicket = 32768,//★
+    PlayCatContents = 65536,//★
+    Clear = 131072
 }
 
 public class UiTutorialManager : SingletonMono<UiTutorialManager>
@@ -208,6 +211,15 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
                 break;
             case TutorialStep.SetPotion:
                 return "오른쪽 하단 <color=yellow>뿌리식물</color> 메뉴에 들어가서\n뿌리식물을 구매해보세요";
+                break;
+            case TutorialStep.PlayFireFly:
+                return "오른쪽 상단 <color=yellow>요괴 사냥</color> 메뉴에서\n반딧불 요괴전을 플레이 해보세요";
+                break;
+            case TutorialStep.BuyTicket:
+                return "오른쪽 상단 <color=yellow>요괴 사냥</color> 메뉴에서\n소환권을 구매해 보세요";
+                break;
+            case TutorialStep.PlayCatContents:
+                return "오른쪽 상단 <color=yellow>요괴 사냥</color> 메뉴에서\n고양이 요괴전을 플레이 해보세요";
                 break;
                 //case TutorialStep._1_MoveField:
                 //    return "맵 오른쪽 끝의 <color=#00ffffff>파란색</color> 포탈을\n이용해 사냥터로 이동하세요\n<color=yellow>(포탈에서 왼쪽패드의</color>\n<color=yellow>위쪽 버튼 입력)</color>";

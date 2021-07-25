@@ -11,7 +11,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     //누적
     private List<ObscuredInt> gachaLevelMinNum_weapon = new List<ObscuredInt>() { 0, 500, 2000, 5000, 20000, 50000, 80000, 120000, 160000, 200000 };
     private List<ObscuredInt> gachaLevelMinNum_norigae = new List<ObscuredInt>() { 0, 500, 2000, 5000, 20000, 50000, 80000, 120000, 160000, 200000 };
-    private List<ObscuredInt> gachaLevelMinNum_skill = new List<ObscuredInt>() { 0, 125, 500, 1275, 5000, 12500, 20000, 30000, 40000, 50000 };
+    private List<ObscuredInt> gachaLevelMinNum_skill = new List<ObscuredInt>() { 0, 125, 500, 1275, 4000, 10000, 15000, 20000, 30000, 40000 };
 
     private ReactiveProperty<int> gachaLevel = new ReactiveProperty<int>();
 
@@ -69,7 +69,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     {
         int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Norigae);
 
-        gachaLevelText[1].text = $"LV : {gachaLevel + 1}";
+        gachaLevelText[1].text = $"LV : {gachaLevel}";
 
         int current = (int)num;
 
@@ -86,7 +86,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         //만렙일때
         else
         {
-            gaugeDescription[1].text = $"LV : {gachaLevel + 1}(MAX)";
+            gaugeDescription[1].text = $"LV : {gachaLevel}(MAX)";
 
             gachaLevelText[1].text = $"MAX";
 
@@ -98,7 +98,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     {
         int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Skill);
 
-        gachaLevelText[2].text = $"LV : {gachaLevel + 1}";
+        gachaLevelText[2].text = $"LV : {gachaLevel}";
 
         int current = (int)num;
 
@@ -115,7 +115,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         //만렙일때
         else
         {
-            gaugeDescription[2].text = $"LV : {gachaLevel + 1}(MAX)";
+            gaugeDescription[2].text = $"LV : {gachaLevel}(MAX)";
 
             gachaLevelText[2].text = $"MAX";
 

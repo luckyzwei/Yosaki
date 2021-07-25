@@ -112,13 +112,13 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     {
         string desc = string.Empty;
         desc += $"데미지 : {(ServerData.skillServerTable.GetSkillDamagePer(skillTableData.Id, applySkillDamAbility: false) * 100f).ToString("F1")}% -> {(ServerData.skillServerTable.GetSkillDamagePer(skillTableData.Id, 1, applySkillDamAbility: false) * 100f).ToString("F1")}%\n";
-        desc += $"쿨타임 : {skillTableData.Cooltime}\n";
+        desc += $"기술 시전 속도 : {skillTableData.Cooltime}\n";
         desc += $"타겟수 : {skillTableData.Targetcount}\n";
         desc += $"히트수 : {skillTableData.Hitcount}\n";
         desc += $"범위 : {skillTableData.Targetrange}\n";
-        desc += $"마나 소모 : {skillTableData.Usecost}\n";
-        desc += $"각성 최대 : {skillTableData.Awakemaxnum}\n";
-        desc += $"스킬 타입 : {skillTableData.Skilltype}";
+      //  desc += $"마나 소모 : {skillTableData.Usecost}\n";
+        desc += $"각성 최대 : {skillTableData.Awakemaxnum}";
+      //  desc += $"기술 타입 : {skillTableData.Skilltype}";
         skillAbility.SetText(desc);
     }
 

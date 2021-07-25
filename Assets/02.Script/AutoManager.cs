@@ -349,9 +349,9 @@ public class AutoManager : Singleton<AutoManager>
                 currentTarget = spawnedEnemy[0].transform;
             }
         }
-        else if (GameManager.contentsType == GameManager.ContentsType.FireFly)
+        else if (GameManager.contentsType == GameManager.ContentsType.FireFly /*||GameManager.contentsType == GameManager.ContentsType.InfiniteTower*/)
         {
-            currentTarget = GetBonusDefenseTarget();
+            currentTarget = GetPoolTarget();
         }
         //else if (GameManager.Instance.contentsType == GameManager.ContentsType.Boss)
         //{
@@ -400,9 +400,25 @@ public class AutoManager : Singleton<AutoManager>
         return null;
     }
 
-    private Transform GetBonusDefenseTarget()
+    private Transform GetPoolTarget()
     {
-        var enemies = BattleObjectManager.Instance.PoolContainer[BonusDefenseManager.poolName].OutPool;
+        string poolName = string.Empty;
+
+        if (GameManager.contentsType == GameManager.ContentsType.FireFly)
+        {
+            poolName = BonusDefenseManager.poolName;
+        }
+        else if (GameManager.contentsType == GameManager.ContentsType.InfiniteTower)
+        {
+            poolName = InfiniteTowerManager.poolName;
+        }
+
+        if (BattleObjectManager.Instance.PoolContainer.ContainsKey(poolName) == false)
+        {
+            return null;
+        }
+
+        var enemies = BattleObjectManager.Instance.PoolContainer[poolName].OutPool;
 
         if (enemies.Count == 0) return null;
 
