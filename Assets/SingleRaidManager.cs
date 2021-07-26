@@ -96,7 +96,7 @@ public class SingleRaidManager : ContentsManagerBase
         Initialize();
         Subscribe();
 
-        UiTutorialManager.Instance.SetClear(TutorialStep.PlayCatContents);
+   
     }
     private void Initialize()
     {
@@ -212,6 +212,8 @@ public class SingleRaidManager : ContentsManagerBase
 
         //보상팝업
         RewardItem();
+
+        UiTutorialManager.Instance.SetClear(TutorialStep.PlayCatContents);
     }
 
     private void SendScore()

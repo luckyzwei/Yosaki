@@ -181,6 +181,8 @@ public class UiSkillGacha : MonoBehaviour
         {
             OnClickOpenButton(lastGachaIdx);
         });
+
+        SoundManager.Instance.PlaySound("Reward");
     }
 
     private void SyncServer()

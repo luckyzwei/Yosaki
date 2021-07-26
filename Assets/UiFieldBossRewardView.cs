@@ -26,8 +26,7 @@ public class UiFieldBossRewardView : SingletonMono<UiFieldBossRewardView>
     public void Initialize(int rewardAmount)
     {
         var stageMapData = GameManager.Instance.CurrentStageData;
-
-        SoundManager.Instance.PlaySound("BonusEnd");
+        SoundManager.Instance.PlaySound("Reward");
         rootObject.gameObject.SetActive(true);
 
         this.rewardAmount.SetText(Utils.ConvertBigNum(rewardAmount));

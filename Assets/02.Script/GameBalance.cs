@@ -33,7 +33,7 @@ public static class GameBalance
     //스킬 각성당 올릴수있는 스킬갯수
     public readonly static ObscuredInt SkillAwakePlusNum = 10;
 
-    public readonly static ObscuredFloat initHp = 100f;
+    public readonly static ObscuredFloat initHp = 1000f;
     public readonly static ObscuredFloat initMp = 100f;
 
     public static ObscuredInt costumeMaxGrade = 5;

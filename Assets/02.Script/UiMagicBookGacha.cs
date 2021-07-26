@@ -189,6 +189,8 @@ public class UiMagicBookGacha : MonoBehaviour
          {
              OnClickOpenButton(lastGachaIdx);
          });
+
+        SoundManager.Instance.PlaySound("Reward");
     }
 
     private void SyncServer(List<int> serverUpdateList, int price, int gachaCount)
