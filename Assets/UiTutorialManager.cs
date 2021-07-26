@@ -121,7 +121,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
 
     public void OnClickReward()
     {
-        if ((TutorialStep)tutorialStep.Value == TutorialStep.Level20)
+        if ((TutorialStep)tutorialStep.Value == TutorialStep.PlayCatContents)
         {
             PopupManager.Instance.ShowReviewPopup();
         }

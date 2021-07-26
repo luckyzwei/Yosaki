@@ -91,6 +91,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
     private void ShowContentsUnlockAlarm()
     {
+        return;
         int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
         if (currentLevel == GameBalance.bonusDungeonUnlockLevel)
