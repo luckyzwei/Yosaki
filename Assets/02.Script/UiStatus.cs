@@ -12,6 +12,9 @@ public class UiStatus : SingletonMono<UiStatus>
     [SerializeField]
     private TextMeshProUGUI nameText;
 
+    [SerializeField]
+    private Image costumeIcon;
+
 
     private int loadedMyRank = -1;
 
@@ -39,6 +42,11 @@ public class UiStatus : SingletonMono<UiStatus>
                 WhenLevelChanged(ServerData.statusTable.GetTableData(StatusTable.Level).Value);
 
             }
+        }).AddTo(this);
+
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
+        {
+            costumeIcon.sprite = CommonUiContainer.Instance.GetCostumeThumbnail((int)e);
         }).AddTo(this);
 
     }
