@@ -322,7 +322,7 @@ public static class PlayerStats
         {
             if ((StatusType)e.Current.Value.Collectionabiltype != type) continue;
 
-            int skillCurrentLevel = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][e.Current.Value.Id].Value;
+            int skillCurrentLevel = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillCollectionLevel][e.Current.Value.Id].Value;
 
             if (skillCurrentLevel != 0)
             {

@@ -45,6 +45,21 @@ public static class Utils
         return type == Item_Type.Memory;
     }
 
+    public static bool IsWeaponItem(this Item_Type type)
+    {
+        return type >= Item_Type.weapon0 && type <= Item_Type.weapon16;
+    }
+
+    public static bool IsNorigaeItem(this Item_Type type)
+    {
+        return type >= Item_Type.magicBook0 && type <= Item_Type.magicBook11;
+    }
+
+    public static bool IsSkillItem(this Item_Type type)
+    {
+        return type >= Item_Type.skill0 && type <= Item_Type.skill8;
+    }
+
     public static bool IsPercentStat(this StatusType type)
     {
         return

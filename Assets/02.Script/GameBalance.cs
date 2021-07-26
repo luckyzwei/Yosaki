@@ -69,7 +69,7 @@ public static class GameBalance
     public readonly static ObscuredInt sleepRewardMinValue = 600;
     //10시간
     public readonly static ObscuredInt sleepRewardMaxValue = 36000;
-    public readonly static ObscuredFloat sleepRewardRatio = 0.4f;
+    public readonly static ObscuredFloat sleepRewardRatio = 0.3f;
 
     public readonly static ObscuredFloat marbleSpawnProb = 1;
 

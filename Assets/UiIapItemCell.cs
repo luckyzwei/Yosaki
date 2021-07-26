@@ -32,6 +32,9 @@ public class UiIapItemCell : MonoBehaviour
     [SerializeField]
     private Image packageIcon;
 
+    [SerializeField]
+    private WeaponView weaponView;
+
     private CompositeDisposable disposable = new CompositeDisposable();
 
     private void Start()
@@ -95,6 +98,7 @@ public class UiIapItemCell : MonoBehaviour
 
         string itemDetailDesc = null;
         string itemAmount = null;
+        weaponView.gameObject.SetActive(false);
 
         for (int i = 0; i < productData.Rewardtypes.Length; i++)
         {
@@ -110,7 +114,32 @@ public class UiIapItemCell : MonoBehaviour
                     itemAmount += "\n";
                 }
             }
+
+            Item_Type itemType = (Item_Type)productData.Rewardtypes[i];
+
+            if (itemType.IsWeaponItem())
+            {
+                weaponView.gameObject.SetActive(true);
+                int itemIdx = productData.Rewardtypes[i] % 1000;
+
+                weaponView.Initialize(TableManager.Instance.WeaponData[itemIdx], null, null);
+            }
+            else if (itemType.IsNorigaeItem())
+            {
+                weaponView.gameObject.SetActive(true);
+                int itemIdx = productData.Rewardtypes[i] % 2000;
+
+                weaponView.Initialize(null,TableManager.Instance.MagicBoocDatas[itemIdx], null);
+            }
+            else if (itemType.IsSkillItem())
+            {
+                weaponView.gameObject.SetActive(true);
+                int itemIdx = productData.Rewardtypes[i] % 3000;
+                weaponView.Initialize(null,null,TableManager.Instance.SkillData[itemIdx]);
+            }
         }
+
+
 
         if (itemDetailText != null)
             itemDetailText.SetText(itemDetailDesc);

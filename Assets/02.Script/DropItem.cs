@@ -53,6 +53,9 @@ public enum Item_Type
     skill6=3006,
     skill7=3007,
     skill8=3008,
+    skill9=3009,
+    skill10=3010,
+    skill11=3011,
     //코스튬 테이블 키값임 대소문자 변경X
     costume0 = 1201,
     costume1 = 1202,

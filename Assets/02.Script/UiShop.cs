@@ -55,6 +55,9 @@ public class UiShop : SingletonMono<UiShop>
         Param petParam = null;
         Param iapParam = new Param();
         Param magicStoneBuffParam = null;
+        Param weaponParam = null;
+        Param norigaeParam = null;
+        Param skillParam = null;
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
@@ -83,6 +86,18 @@ public class UiShop : SingletonMono<UiShop>
             {
                 AddMagicStoneBuffParam(ref magicStoneBuffParam);
             }
+            else if (rewardType.IsWeaponItem())
+            {
+                AddWeaponParam(ref weaponParam, rewardType);
+            }
+            else if (rewardType.IsNorigaeItem())
+            {
+                AddNorigaeParam(ref norigaeParam, rewardType);
+            }
+            else if (rewardType.IsSkillItem())
+            {
+                AddSkillParam(ref skillParam, rewardType);
+            }
         }
 
         //재화
@@ -104,6 +119,21 @@ public class UiShop : SingletonMono<UiShop>
         if (magicStoneBuffParam != null)
         {
             transactionList.Add(TransactionValue.SetUpdate(BuffServerTable.tableName, BuffServerTable.Indate, magicStoneBuffParam));
+        }
+
+        if (weaponParam != null)
+        {
+            transactionList.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
+        }
+
+        if (norigaeParam != null)
+        {
+            transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, norigaeParam));
+        }
+
+        if (skillParam != null)
+        {
+            transactionList.Add(TransactionValue.SetUpdate(SkillServerTable.tableName, SkillServerTable.Indate, skillParam));
         }
 
         if (ServerData.iapServerTable.TableDatas.ContainsKey(tableData.Productid) == false)
@@ -231,6 +261,61 @@ public class UiShop : SingletonMono<UiShop>
                 return;
             }
         }
+    }
+
+    public void AddWeaponParam(ref Param param, Item_Type type)
+    {
+        if (param == null)
+        {
+            param = new Param();
+        }
+
+        string key = type.ToString();
+        var serverTableData = ServerData.weaponTable.TableDatas[key];
+        serverTableData.hasItem.Value = 1;
+        serverTableData.amount.Value += 1;
+
+        param.Add(key, serverTableData.ConvertToString());
+    }
+
+    public void AddNorigaeParam(ref Param param, Item_Type type)
+    {
+        if (param == null)
+        {
+            param = new Param();
+        }
+
+        string key = type.ToString();
+        var serverTableData = ServerData.magicBookTable.TableDatas[key];
+        serverTableData.hasItem.Value = 1;
+        serverTableData.amount.Value += 1;
+
+        param.Add(key, serverTableData.ConvertToString());
+    }
+
+    public void AddSkillParam(ref Param param, Item_Type type)
+    {
+        if (param == null)
+        {
+            param = new Param();
+        }
+
+        int skillIdx = ((int)type) % 3000;
+
+       ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillIdx].Value = 1;
+       ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAlreadyHas][skillIdx].Value = 1;
+
+        List<int> skillAmountSyncData = new List<int>();
+        List<int> skillAlreadyHasSyncData = new List<int>();
+
+        for (int i = 0; i < ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount].Count; i++)
+        {
+            skillAmountSyncData.Add(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][i].Value);
+            skillAlreadyHasSyncData.Add(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAlreadyHas][i].Value);
+        }
+
+        param.Add(SkillServerTable.SkillHasAmount, skillAmountSyncData);
+        param.Add(SkillServerTable.SkillAlreadyHas, skillAlreadyHasSyncData);
     }
 
 }
