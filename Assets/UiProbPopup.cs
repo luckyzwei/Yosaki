@@ -50,7 +50,7 @@ public class UiProbPopup : MonoBehaviour
         description_weapon.SetText(GetWeaponText(currentLevel));
         description_magicBook.SetText(GetMagicBookText(currentLevel));
         description_skill.SetText(GetSkillText(currentLevel));
-        currentLevelTitle.SetText($"소환레벨 {currentLevel - 1}");
+        currentLevelTitle.SetText($"소환레벨 {currentLevel}");
     }
 
     private string GetWeaponText(int level)

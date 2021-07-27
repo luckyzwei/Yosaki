@@ -153,10 +153,24 @@ public class UiDailyPassCell : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "광고를 시청하고 보상을 받으시겠습니까?", () =>
-         {
-             AdManager.Instance.ShowRewardedReward(GetAdReward);
-         }, null);
+        if (HasRemoveAdProduct())
+        {
+            GetAdReward();
+        }
+        else
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "광고를 시청하고 보상을 받으시겠습니까?", () =>
+            {
+                AdManager.Instance.ShowRewardedReward(GetAdReward);
+            }, null);
+        }
+    }
+
+    private bool HasRemoveAdProduct()
+    {
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas["removead"].buyCount.Value > 0;
+
+        return hasIapProduct;
     }
 
     private bool HasPassProduct()
@@ -208,10 +222,10 @@ public class UiDailyPassCell : MonoBehaviour
         userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        ServerData.SendTransaction(transactionList,successCallBack:()=> 
-        {
-            LogManager.Instance.SendLog("패스 광고보상", "보상획득");
-        });
+        ServerData.SendTransaction(transactionList, successCallBack: () =>
+          {
+              LogManager.Instance.SendLog("패스 광고보상", "보상획득");
+          });
 
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
     }
