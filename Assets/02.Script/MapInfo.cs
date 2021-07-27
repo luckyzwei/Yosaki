@@ -256,7 +256,8 @@ public class MapInfo : SingletonMono<MapInfo>
         }
         else
         {
-            UiStageNameIndicater.Instance.StartFieldBossTimer(15);
+            UiStageNameIndicater.Instance.SerFieldBossTimerDefault();
+            //UiStageNameIndicater.Instance.StartFieldBossTimer(15);
 
             PopupManager.Instance.ShowAlarmMessage("필드보스 출현!");
 

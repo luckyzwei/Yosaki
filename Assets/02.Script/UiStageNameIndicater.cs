@@ -47,6 +47,13 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
         bossTimerRoutine = StartCoroutine(FieldBossRoutine(timer));
     }
+    public void SerFieldBossTimerDefault()
+    {
+        fieldBossRemainObj.SetActive(true);
+        stageObj.SetActive(false);
+        fieldBossTimer.fillAmount = 1f;
+        fieldBossRemainSec.SetText("대기중");
+    }
 
     public void StopFieldBossTimer()
     {

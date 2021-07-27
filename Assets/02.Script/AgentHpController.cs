@@ -33,6 +33,9 @@ public class AgentHpController : MonoBehaviour
 
     private bool updateSubHpBar = false;
 
+    private bool isFieldBossEnemy = false;
+    private bool fieldBossTimerStarted = false;
+
     private void Awake()
     {
         GetRequireComponents();
@@ -73,8 +76,12 @@ public class AgentHpController : MonoBehaviour
         this.defense = defense;
     }
 
-    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false,bool updateSubHpBar = false)
+    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false, bool updateSubHpBar = false)
     {
+        fieldBossTimerStarted = false;
+
+        this.isFieldBossEnemy = isFieldBossEnemy;
+
         this.enemyTableData = enemyTableData;
 
         this.updateSubHpBar = isFieldBossEnemy || updateSubHpBar;
@@ -162,9 +169,15 @@ public class AgentHpController : MonoBehaviour
 
     public void UpdateHp(float value)
     {
+        if (value < 0 && isFieldBossEnemy && fieldBossTimerStarted == false)
+        {
+            fieldBossTimerStarted = true;
+            UiStageNameIndicater.Instance.StartFieldBossTimer(15);
+        }
+
         //방어력 적용
         ApplyDefense(ref value);
-        //
+        //1
 
         value *= DamageBalance.GetRandomDamageRange();
 
@@ -229,5 +242,10 @@ public class AgentHpController : MonoBehaviour
         gold += gold * PlayerStats.GetGoldPlusValue();
 
         ServerData.goodsTable.GetGold(gold);
+    }
+
+    private void OnDisable()
+    {
+        updateSubHpBar = false;
     }
 }
