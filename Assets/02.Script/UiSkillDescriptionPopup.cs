@@ -163,7 +163,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     private void WhenSkillAwake(int awakeNum)
     {
-        awakeDescription.SetText($"현재 각성 {awakeNum}회 스킬 최대레벨 {(awakeNum) * GameBalance.SkillAwakePlusNum}");
+        awakeDescription.SetText($"현재 각성 {awakeNum}회 기술 최대레벨 {(awakeNum) * GameBalance.SkillAwakePlusNum}");
 
         //var weaponData = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id];
 
@@ -173,7 +173,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         equipButton.interactable = awakeNum != 0;
 
-        hasEffectDesc.SetText($"보유효과 : {CommonString.GetStatusName((StatusType)skillTableData.Haseffecttype)} {awakeNum * skillTableData.Haseffectvalue}\n(스킬 각성시 보유 효과가 상승합니다))");
+        hasEffectDesc.SetText($"보유효과 : {CommonString.GetStatusName((StatusType)skillTableData.Haseffecttype)} {awakeNum * skillTableData.Haseffectvalue}\n(기술 각성시 보유 효과가 증가합니다))");
     }
 
     private void WhenSkillUpgraded(int skillLevel)
@@ -234,7 +234,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         if (skillLevel >= maxLevel)
         {
-            PopupManager.Instance.ShowAlarmMessage("스킬이 최대 레벨 입니다.");
+            PopupManager.Instance.ShowAlarmMessage("기술이 최대 레벨 입니다.");
             return;
         }
 
@@ -248,7 +248,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         int currentSkillPoint = skillPoint.Value;
         if (currentSkillPoint <= 0)
         {
-            PopupManager.Instance.ShowAlarmMessage("스킬포인트가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("기술포인트가 부족합니다.");
             return;
         }
 
