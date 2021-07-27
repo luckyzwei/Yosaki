@@ -128,7 +128,7 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
 
     private void NickNameMakeComplete()
     {
-        DialogManager.Instance.StartDialog();
+        DialogManager.Instance.SetNextDialog();
         Destroy(this.gameObject);
     }
 

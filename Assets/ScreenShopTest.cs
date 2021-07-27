@@ -5,6 +5,12 @@ using UnityEngine;
 public class ScreenShopTest : MonoBehaviour
 {
     [SerializeField]
+    private Weapon weaponTable;
+
+    [SerializeField]
+    private MagicBook magicBookTable;
+
+    [SerializeField]
     private WeaponView weaponView;
 
     [SerializeField]
@@ -13,8 +19,7 @@ public class ScreenShopTest : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    { 
     }
 
     // Update is called once per frame

@@ -211,7 +211,7 @@ public class UiSettingBoard : MonoBehaviour
 
     public void OnClickStory()
     {
-        DialogManager.Instance.StartDialog();
+        DialogManager.Instance.SetNextDialog();
     }
 
     public void OnClickCafeButton()

@@ -180,7 +180,7 @@ public class InfiniteTowerManager : ContentsManagerBase
 
             enemyObject.SetEnemyDeadCallBack(EnemyDeadCallBack);
 
-            enemyObject.Initialize(spawnEnemyData);
+            enemyObject.Initialize(spawnEnemyData, updateSubHpBar: true);
 
             spawnedEnemyList.Add(enemyObject);
         }

@@ -67,7 +67,7 @@ public class Enemy : PoolItem
         Subscribe();
     }
 
-    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false, int spawnedPlatformIdx = 0)
+    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false, int spawnedPlatformIdx = 0, bool updateSubHpBar = false)
     {
         this.spawnedPlatformIdx = spawnedPlatformIdx;
 
@@ -75,7 +75,7 @@ public class Enemy : PoolItem
 
         this.tableData = enemyTableData;
 
-        agentHpController.Initialize(enemyTableData, isFieldBossEnemy);
+        agentHpController.Initialize(enemyTableData, isFieldBossEnemy, updateSubHpBar);
 
         this.transform.localScale = isFieldBossEnemy == false ? originScale : originScale * bossSize;
     }
@@ -140,7 +140,7 @@ public class Enemy : PoolItem
 
         //GrowthStone
         float magicStoneSpawnAmount = GameManager.Instance.CurrentStageData.Magicstoneamount;
-        if (magicStoneSpawnAmount != 0) 
+        if (magicStoneSpawnAmount != 0)
         {
             var growthStone = BattleObjectManager.Instance.dropItemProperty.GetItem();
             growthStone.Initialize(Item_Type.GrowThStone, magicStoneSpawnAmount);
@@ -149,7 +149,7 @@ public class Enemy : PoolItem
 
         //여우구슬
         float marbleSpawnAmount = GameManager.Instance.CurrentStageData.Marbleamount;
-        if (marbleSpawnAmount != 0) 
+        if (marbleSpawnAmount != 0)
         {
             var marble = BattleObjectManager.Instance.dropItemProperty.GetItem();
             marble.Initialize(Item_Type.Marble, marbleSpawnAmount);
@@ -159,10 +159,10 @@ public class Enemy : PoolItem
 
     private void SetBaseInfo()
     {
-        if (agentHpController != null)
-        {
-            agentHpController.Initialize(tableData, isFieldBossEnemy);
-        }
+        //if (agentHpController != null)
+        //{
+        //    agentHpController.Initialize(tableData, isFieldBossEnemy);
+        //}
 
         if (enemyHitObject != null)
         {

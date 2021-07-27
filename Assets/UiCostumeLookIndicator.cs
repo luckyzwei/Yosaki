@@ -16,6 +16,9 @@ public class UiCostumeLookIndicator : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI costumeName;
 
+    [SerializeField]
+    private TextMeshProUGUI costumeDescription;
+
     private void Start()
     {
         Subscribe();
@@ -29,6 +32,8 @@ public class UiCostumeLookIndicator : MonoBehaviour
             uidescriptionBoard.SetDescription(costumeData.Description);
             SetCostumeSpine(e);
             costumeName.SetText(costumeData.Name);
+            //costumeDescription.SetText(costumeData.Description);
+            costumeDescription.SetText(string.Empty);
         }).AddTo(this);
     }
 

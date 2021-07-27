@@ -33,7 +33,7 @@ public class UiCostumeSlotView : MonoBehaviour
         this.selectCallBack = selectCallBack;
 
         this.costumeData = costumeData;
-        slotNum.SetText(costumeData.Id.ToString());
+        slotNum.SetText((costumeData.Id+1).ToString());
         Subscribe();
     }
 

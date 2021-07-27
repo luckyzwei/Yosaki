@@ -23,72 +23,126 @@ public class DialogManager : SingletonMono<DialogManager>
     [SerializeField]
     private Button endInput;
 
-    [SerializeField]
-    private GameObject touchMask;
+    //[SerializeField]
+    //private GameObject touchMask;
 
-    private string storyDialog = "스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리스토리";
+    [SerializeField]
+    private Image storyImage;
+
+    [SerializeField]
+    private List<Sprite> storySprites;
+
+    [SerializeField]
+    private List<string> storyTexts;
 
     private bool setSkip = false;
 
-    public void StartDialog()
-    {
-        setSkip = false;
+    private int currentIdx = 0;
 
-        touchMask.SetActive(true);
+    private Coroutine textingRoutine;
+
+    private TextingState textingState = TextingState.Playing;
+
+    private enum TextingState
+    {
+        Playing, End
+    }
+
+    private bool isEndIdx()
+    {
+        return currentIdx == storySprites.Count - 1;
+    }
+
+    private new void Awake()
+    {
+        base.Awake();
+
+        currentIdx = 0;
+    }
+
+    public void SetNextDialog()
+    {
+        storyImage.sprite = storySprites[currentIdx];
+
+        setSkip = false;
 
         rootObject.SetActive(true);
 
-        endInput.interactable = false;
+        if (textingRoutine != null)
+        {
+            StopCoroutine(textingRoutine);
+        }
 
-        StartCoroutine(TextingRoutine());
+        textingRoutine = StartCoroutine(TextingRoutine());
     }
 
-    public void SkipText() 
+    public void SkipText()
     {
-        SoundManager.Instance.PlayButtonSound();
-        setSkip = true;
+        if (isEndIdx())
+        {
+            EndDialog();
+            return;
+        }
+
+        if (setSkip == true)
+        {
+            currentIdx++;
+            SetNextDialog();
+        }
+        else
+        {
+            SoundManager.Instance.PlayButtonSound();
+            setSkip = true;
+        }
     }
 
     private IEnumerator TextingRoutine()
     {
+        textingState = TextingState.Playing;
+
         dialogText.SetText(string.Empty);
 
-        WaitForSeconds textingDelay = new WaitForSeconds(0.03f);
+        WaitForSeconds textingDelay = new WaitForSeconds(0.02f);
 
-        int textCount = storyDialog.Length;
-        int currentIdx = 0;
+        int textCount = storyTexts[currentIdx].Length;
+        int currentTextIdx = 0;
 
         string message = string.Empty;
 
-        while (currentIdx < textCount)
+        while (currentTextIdx < textCount)
         {
 
             if (setSkip)
             {
-                dialogText.SetText(storyDialog);
+                dialogText.SetText(storyTexts[currentIdx]);
                 break;
             }
 
-            message += storyDialog[currentIdx];
+            message += storyTexts[currentIdx][currentTextIdx];
             dialogText.SetText(message);
-            currentIdx++;
+            currentTextIdx++;
             yield return textingDelay;
         }
 
-        yield return null;
-
-        SetEnd();
+        textingState = TextingState.End;
+        setSkip = true;
     }
-
-    private void SetEnd()
-    {
-        touchMask.SetActive(false);
-        endInput.interactable = true;
-    }
-
 
     public void EndDialog()
     {
+        if (textingRoutine != null)
+        {
+            StopCoroutine(textingRoutine);
+        }
+
+        if (textingState == TextingState.Playing)
+        {
+            dialogText.SetText(storyTexts[storyTexts.Count - 1]);
+            textingState = TextingState.End;
+            return;
+        }
+
         rootObject.SetActive(false);
+        currentIdx = 0;
     }
 }

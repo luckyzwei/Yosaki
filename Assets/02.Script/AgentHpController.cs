@@ -73,11 +73,11 @@ public class AgentHpController : MonoBehaviour
         this.defense = defense;
     }
 
-    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false)
+    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false,bool updateSubHpBar = false)
     {
         this.enemyTableData = enemyTableData;
 
-        this.updateSubHpBar = isFieldBossEnemy;
+        this.updateSubHpBar = isFieldBossEnemy || updateSubHpBar;
 
         SetDefense(enemyTableData.Defense);
 

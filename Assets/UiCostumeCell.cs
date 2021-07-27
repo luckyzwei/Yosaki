@@ -72,7 +72,7 @@ public class UiCostumeCell : MonoBehaviour
         }
         else
         {
-            PopupManager.Instance.ShowAlarmMessage("외형이 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{costumeData.Description}");
         }
 
         //  InitBoard();
