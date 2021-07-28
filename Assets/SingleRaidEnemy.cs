@@ -78,15 +78,15 @@ public class SingleRaidEnemy : BossEnemyBase
 
             if (attackType == 0)
             {
-                yield return StartCoroutine(AttackRoutine_2(1.5f));
+                yield return StartCoroutine(AttackRoutine_2(1.0f));
             }
             else if (attackType == 1)
             {
-                yield return StartCoroutine(AttackRoutine_3(1.5f));
+                yield return StartCoroutine(AttackRoutine_3(1.0f));
             }
             else if (attackType == 2)
             {
-                yield return StartCoroutine(AttackRoutine_4(1.5f));
+                yield return StartCoroutine(AttackRoutine_4(1.0f));
             }
 
             StartCoroutine(PlayAttackAnim());

@@ -107,6 +107,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
     {
         if (sleepRewardInfo == null) return;
 
+        LogManager.Instance.SendLog("휴식보상 요청", $"gold {sleepRewardInfo.gold} jade {sleepRewardInfo.jade} marble {sleepRewardInfo.marble} growthStone {sleepRewardInfo.GrowthStone} exp {sleepRewardInfo.exp}");
+
         GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false);
 
         ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += sleepRewardInfo.gold;
@@ -123,9 +125,11 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         transantions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
+        successCallBack?.Invoke();
+
         ServerData.SendTransaction(transantions, successCallBack: () =>
           {
-              successCallBack?.Invoke();
+              LogManager.Instance.SendLog("휴식보상 수령", "수령완료");
           });
     }
 

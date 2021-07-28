@@ -19,7 +19,7 @@ public class GoogleManager : MonoBehaviour
     {
         Backend.Initialize(HandleBackendCallBack, true);
 
-        SRDebug.Init();
+       // SRDebug.Init();
     }
 
     private void HandleBackendCallBack()
@@ -221,7 +221,7 @@ public class GoogleManager : MonoBehaviour
         // return "mayotestguest@gmail.com";
         // return "mabw222ei3no24gi233d0312@n3aver.com"; //GM도비
         //  return "a_3961873472804492579"; //GM도비
-        return "a_39618734272222282222204492579";
+        return "a_3961873472804492579";
 #endif
         Debug.LogError($"GetGoogleLoginKey {loginId}");
         return loginId;

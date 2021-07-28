@@ -142,7 +142,7 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
 
     public void OnClickTermsViewButton()
     {
-        Application.OpenURL("https://cafe.naver.com/madaki/2");
+        Application.OpenURL("https://cafe.naver.com/yokiki/2");
     }
 
     public string GetNickNameErrorCode(string statusCode)
