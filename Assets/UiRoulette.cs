@@ -5,73 +5,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using BackEnd;
+using static UiRewardView;
 
 public class UiRoulette : MonoBehaviour
 {
-    private Coroutine spinRoutine;
-
-    [SerializeField]
-    private Toggle toggle;
-
-    private ObscuredBool isAuto;
-
-    private WaitForSeconds stopDelay = new WaitForSeconds(0.4f);
 
     private List<BonusRouletteData> tableDataShuffled;
 
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private UiRewardResultView uiRewardResultView;
+
     private void Start()
     {
-        SetItemIcon();
+        LoadTableData();
     }
 
-    private void SetItemIcon()
+    private void LoadTableData()
     {
         tableDataShuffled = TableManager.Instance.BonusRoulette.dataArray.ToList();
 
         tableDataShuffled.Shuffle();
-    }
-
-    public void WhenToggleChanged(bool isOn)
-    {
-        isAuto = isOn;
-
-        if (isOn && spinRoutine == null)
-        {
-            SpinSlot();
-        }
-    }
-
-    private void ToggleOff()
-    {
-        toggle.isOn = false;
-        WhenToggleChanged(false);
-    }
-
-    private void OnDestroy()
-    {
-        if (spinRoutine != null && CoroutineExecuter.Instance != null)
-        {
-            CoroutineExecuter.Instance.StopCoroutine(spinRoutine);
-        }
-    }
-
-    public void SpinSlot()
-    {
-        int spinNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value;
-
-        if (spinNum <= 0)
-        {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.BonusSpinCoin}이 부족합니다");
-            ToggleOff();
-            return;
-        }
-
-      //  UiTutorialManager.Instance.SetClear(TutorialStep._9_GetBonusReward);
-
-        spinRoutine = CoroutineExecuter.Instance.StartCoroutine(SlotSpinRoutine());
     }
 
     private int GetRandomIdx()
@@ -93,93 +49,113 @@ public class UiRoulette : MonoBehaviour
         return (Item_Type)tableData.Itemtype;
     }
 
-    private static string RoulletSpin = "Reward";
-    private IEnumerator SlotSpinRoutine()
+    public void OnClickAllUseButton()
     {
-
-        int randIdx = GetRandomIdx();
-
-        //아이템 실적용
-        Item_Type rewardType = GetRewardType(randIdx);
-
-        float rewardAmount = GetRewardAmount(randIdx);
-
-        RewardItem(rewardType, rewardAmount);
-
-        float tick = 0f;
-        float spinTime = 0.15f;
-
         animator.SetTrigger("Play");
 
-        while (tick < spinTime)
+        int gachaNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value;
+
+        if (gachaNum == 0)
         {
-            tick += Time.deltaTime;
-            yield return null;
-        }
-        SoundManager.Instance.PlaySound(RoulletSpin);
-
-        string description = $"{CommonString.GetItemName(rewardType)} {(int)rewardAmount}획득!!";
-
-        PopupManager.Instance.ShowAlarmMessage(description);
-
-        yield return stopDelay;
-
-        spinRoutine = null;
-
-        if (isAuto && this.gameObject.activeInHierarchy == true)
-        {
-            SpinSlot();
-        }
-        else
-        {
-            ToggleOff();
+            PopupManager.Instance.ShowAlarmMessage("복주머니가 부족합니다.");
+            return;
         }
 
-    }
+        ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value = 0f;
 
-    private void OnEnable()
-    {
-        spinRoutine = null;
-    }
+        Dictionary<Item_Type, float> rewards = new Dictionary<Item_Type, float>();
 
-    private void RewardItem(Item_Type rewardType, float rewardAmount)
-    {
-        ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value--;
+        for (int i = 0; i < gachaNum; i++)
+        {
+            int randIdx = GetRandomIdx();
+
+            float rewardAmount = GetRewardAmount(randIdx);
+
+            Item_Type rewardType = GetRewardType(randIdx);
+
+            if (rewards.ContainsKey(rewardType) == false)
+            {
+                rewards.Add(rewardType, 0);
+            }
+
+            rewards[rewardType] += rewardAmount;
+
+            if (rewardType == Item_Type.Gold)
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += rewardAmount;
+            }
+            //티켓
+            else if (rewardType == Item_Type.Ticket)
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += rewardAmount;
+            }
+            //매직스톤
+            else if (rewardType == Item_Type.GrowThStone)
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardAmount;
+            }
+            //보석
+            else if (rewardType == Item_Type.Jade)
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardAmount;
+            }
+        }
+
+        //서버
+        List<RewardData> rewardViewData = new List<RewardData>();
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
-        //재화
         Param goodsParam = new Param();
+
         goodsParam.Add(GoodsTable.BonusSpinKey, ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value);
 
-        //골드
-        if (rewardType == Item_Type.Gold)
+        var e = rewards.GetEnumerator();
+
+        while (e.MoveNext())
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += rewardAmount;
-            goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
-        }
-        //티켓
-        else if (rewardType == Item_Type.Ticket)
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += rewardAmount;
-            goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
-        }
-        //매직스톤
-        else if (rewardType == Item_Type.GrowThStone)
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardAmount;
-            goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
-        }
-        //보석
-        else if (rewardType == Item_Type.Jade)
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardAmount;
-            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+            rewardViewData.Add(new RewardData(e.Current.Key, (int)e.Current.Value));
+
+            if (e.Current.Key == Item_Type.Gold)
+            {
+                goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
+            }
+            //티켓
+            else if (e.Current.Key == Item_Type.Ticket)
+            {
+                goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
+            }
+            //매직스톤
+            else if (e.Current.Key == Item_Type.GrowThStone)
+            {
+                goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
+            }
+            //보석
+            else if (e.Current.Key == Item_Type.Jade)
+            {
+                goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+            }
         }
 
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         ServerData.SendTransaction(transactionList);
+
+        //결과화면
+
+        uiRewardResultView.gameObject.SetActive(true);
+
+        uiRewardResultView.Initialize(rewardViewData);
+
+        //로그
+        string log = string.Empty;
+
+        for (int i = 0; i < rewardViewData.Count; i++)
+        {
+            log += $"{rewardViewData[i].itemType}/{rewardViewData[i].amount} ";
+        }
+
+        LogManager.Instance.SendLog("복주머니사용", log);
     }
 
 #if UNITY_EDITOR

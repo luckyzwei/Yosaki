@@ -9,9 +9,9 @@ public class UiRewardView : MonoBehaviour
     public class RewardData
     {
         public Item_Type itemType;
-        public int amount;
+        public float amount;
 
-        public RewardData(Item_Type itemType, int amount)
+        public RewardData(Item_Type itemType, float amount)
         {
             this.itemType = itemType;
             this.amount = amount;
