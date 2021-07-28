@@ -43,7 +43,7 @@ public static class CommonString
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
 
-    public static string CafeURL = "https://cafe.naver.com/madaki";
+    public static string CafeURL = "https://cafe.naver.com/yokiki";
 
     public static string GetContentsName(ContentsType contentsType)
     {
