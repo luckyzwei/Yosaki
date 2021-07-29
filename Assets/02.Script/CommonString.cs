@@ -93,7 +93,7 @@ public static class CommonString
             case Item_Type.pet3: return TableManager.Instance.PetDatas[3].Name;
             case Item_Type.Marble: return "여우구슬";
             case Item_Type.MagicStoneBuff: return "기억의파편 버프 +50%(드랍)";
-            case Item_Type.weapon13: return "특급 1등급 무기";
+            case Item_Type.weapon12: return "특급 4등급 무기";
             case Item_Type.weapon14: return "특급 2등급 무기";
             case Item_Type.magicBook11: return "특급 1등급 노리개";
             case Item_Type.skill3: return "전방베기4형 기술";

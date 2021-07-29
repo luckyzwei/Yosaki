@@ -181,7 +181,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
                 return "오른쪽 상단 메뉴->수련에서\n능력치를 올려보세요";
                 break;
             case TutorialStep.GetPet:
-                return "오른쪽 상단 <color=yellow>메뉴->가방</color>의 환수\n탭에서 <color=yellow>\n아기현무</color>를 얻어보세요\n(무료)";
+                return "오른쪽 상단 <color=yellow>메뉴->가방</color>의 환수탭에서 <color=yellow>\n아기현무</color>를 얻어보세요\n(무료)";
                 break;
             case TutorialStep.ClearBoss1:
                 return "화면 상단의 <color=#ff00ffff>보스도전</color> 버튼을\n클릭하여 필드 보스를 처치해 보세요";

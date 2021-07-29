@@ -5,10 +5,10 @@ using UnityEngine.Advertisements;
 
 public class AdManager : SingletonMono<AdManager>
 {
-    private static string AndroidGameId = "4085691";
-    private static string IOSGameId = "4085690";
+    private static string AndroidGameId = "4235399";
+    private static string IOSGameId = "4235398";
 
-    private string rewardedPlacementId = "rewardedVideo";
+    private string rewardedPlacementId = "Rewarded_Android";
     private string videoPlacementId = "video";
 
     public static string bannerPlacement = "Banner_Weapons";

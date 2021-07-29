@@ -50,7 +50,6 @@ public class UiTicketBuyShop : MonoBehaviour
             adText.SetText("오늘 획득함");
         }
 
-        UiTutorialManager.Instance.SetClear(TutorialStep.BuyTicket);
     }
 
     private void WhenTicketBuyCountChanged(float buyCount)
@@ -61,8 +60,6 @@ public class UiTicketBuyShop : MonoBehaviour
     public void OnClickBuyButton()
     {
         int currentBuyCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value;
-
-#if !UNITY_EDITOR
 
         if (currentBuyCount >= GameBalance.dailyTickBuyCountMax)
         {
@@ -77,12 +74,10 @@ public class UiTicketBuyShop : MonoBehaviour
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
             return;
         }
-#endif
 
-
+        UiTutorialManager.Instance.SetClear(TutorialStep.BuyTicket);
 
         BuyProcess();
-
     }
 
     public void OnClickAdButton()
@@ -99,6 +94,8 @@ public class UiTicketBuyShop : MonoBehaviour
 
     private void RewardAdFinished()
     {
+        UiTutorialManager.Instance.SetClear(TutorialStep.BuyTicket);
+
         ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value++;
         ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value = 1f;
 
