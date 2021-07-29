@@ -18,11 +18,16 @@ public class UiMessageText : MonoBehaviour
     [SerializeField]
     private Image costumeIcon;
 
+    [SerializeField]
+    private Image costumeIconFrame;
+
     public void Initialize(string description, bool isSystem)
     {
         costumeIcon.gameObject.SetActive(isSystem == false);
 
         animator.SetTrigger(fadeAnimName);
+
+        costumeIconFrame.gameObject.SetActive(false);
 
         if (isSystem)
         {
@@ -39,6 +44,8 @@ public class UiMessageText : MonoBehaviour
                     int costumeIdx = int.Parse(split[0]);
                     costumeIcon.gameObject.SetActive(true);
                     costumeIcon.sprite = CommonUiContainer.Instance.GetCostumeThumbnail(costumeIdx);
+
+                    costumeIconFrame.gameObject.SetActive(costumeIdx != 0 && costumeIdx != 1);
                 }
                 else
                 {
@@ -51,12 +58,12 @@ public class UiMessageText : MonoBehaviour
                     this.description.SetText(description.Split(CommonString.ChatSplitChar)[1]);
                 }
             }
-            else 
+            else
             {
                 costumeIcon.gameObject.SetActive(false);
                 this.description.SetText(description);
             }
-           
+
         }
     }
 }

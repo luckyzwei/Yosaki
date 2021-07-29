@@ -74,7 +74,8 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 
         AutoManager.Instance.AutoMode.AsObservable().Subscribe(e =>
         {
-            autoDesc.SetActive(e);
+            //autoDesc.SetActive(e);
+            autoDesc.SetActive(false);
         }).AddTo(this);
     }
 

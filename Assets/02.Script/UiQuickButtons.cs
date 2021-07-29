@@ -171,7 +171,7 @@ public class UiQuickButtons : MonoBehaviour
         {
             if (showAlarmText)
             {
-                PopupManager.Instance.ShowAlarmMessage("포션을 사용할 수 없는 던전 입니다.");
+                PopupManager.Instance.ShowAlarmMessage("이곳에서는 뿌리식물을 사용할수 없습니다.");
             }
             return;
         }
@@ -197,7 +197,7 @@ public class UiQuickButtons : MonoBehaviour
         {
             if (showAlarmText)
             {
-                PopupManager.Instance.ShowAlarmMessage("포션이 부족합니다");
+                PopupManager.Instance.ShowAlarmMessage("뿌리식물이 부족합니다");
             }
             return;
         }
