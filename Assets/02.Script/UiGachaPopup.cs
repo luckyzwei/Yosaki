@@ -46,7 +46,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
 
         //만렙아닐때
         if (gachaLevel < gachaLevelMinNum_weapon.Count - 1)
-        {
+        {   
             int prefMaxCount = gachaLevelMinNum_weapon[gachaLevel];
             int nextMaxCount = gachaLevelMinNum_weapon[gachaLevel + 1];
 
@@ -69,7 +69,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     {
         int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Norigae);
 
-        gachaLevelText[1].text = $"LV : {gachaLevel}";
+        gachaLevelText[1].text = $"LV : {gachaLevel + 1}";
 
         int current = (int)num;
 
@@ -86,7 +86,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         //만렙일때
         else
         {
-            gaugeDescription[1].text = $"LV : {gachaLevel}(MAX)";
+            gaugeDescription[1].text = $"LV : {gachaLevel+1}(MAX)";
 
             gachaLevelText[1].text = $"MAX";
 
@@ -98,7 +98,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     {
         int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Skill);
 
-        gachaLevelText[2].text = $"LV : {gachaLevel}";
+        gachaLevelText[2].text = $"LV : {gachaLevel+1}";
 
         int current = (int)num;
 
@@ -115,7 +115,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         //만렙일때
         else
         {
-            gaugeDescription[2].text = $"LV : {gachaLevel}(MAX)";
+            gaugeDescription[2].text = $"LV : {gachaLevel+1}(MAX)";
 
             gachaLevelText[2].text = $"MAX";
 

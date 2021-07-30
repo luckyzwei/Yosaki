@@ -43,6 +43,24 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         playerTr = PlayerMoveController.Instance.transform;
 
         Subscribe();
+
+        StartCoroutine(TouchCountCheckRoutine());
+    }
+
+    private IEnumerator TouchCountCheckRoutine()
+    {
+        var ws = new WaitForSeconds(1.0f);
+
+        while (true)
+        {
+#if !UNITY_EDITOR
+            if (Input.touchCount == 0)
+            {
+                EndTouch();
+            }
+#endif
+            yield return ws;
+        }
     }
 
     private void Subscribe()

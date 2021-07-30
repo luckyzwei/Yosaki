@@ -21,7 +21,7 @@ public class EquipmentTable
         {Weapon,0},
         {Pet,-1},
         {MagicBook,-1},
-        {Potion,0},
+        {Potion,2},
         {CostumeSlot,0},
         {CostumeLook,0}
     };

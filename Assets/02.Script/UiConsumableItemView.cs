@@ -56,7 +56,7 @@ public class UiConsumableItemView : MonoBehaviour
 
         if (currentBlueStone.Value < price)
         {
-            PopupManager.Instance.ShowAlarmMessage($"재화가 부족합니다 {goodsId}");
+            PopupManager.Instance.ShowAlarmMessage($"옥이 부족합니다.");
             return;
         }
 
