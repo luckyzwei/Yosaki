@@ -280,7 +280,11 @@ public class UserInfoTable
     {
         SendQueue.Enqueue(Backend.Utils.GetServerTime, (bro) =>
         {
-            if (bro.IsSuccess() && bro.GetStatusCode().Equals("200") && bro.GetReturnValuetoJSON() != null)
+            var isSuccess = bro.IsSuccess();
+            var statusCode = bro.GetStatusCode();
+            var returnValue = bro.GetReturnValue();
+
+            if (isSuccess && statusCode.Equals("200") && returnValue != null)
             {
                 string time = bro.GetReturnValuetoJSON()["utcTime"].ToString();
 
@@ -311,6 +315,10 @@ public class UserInfoTable
                 {
                     UpdateLastLoginOnly();
                 }
+            }
+            else 
+            {
+                LogManager.Instance.SendLog("출석", $"{isSuccess}/{statusCode}/{returnValue}");
             }
         });
     }
