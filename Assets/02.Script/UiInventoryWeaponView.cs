@@ -450,7 +450,7 @@ public class UiInventoryWeaponView : MonoBehaviour
 
             if (currentMagicStoneAmount < levelUpPrice)
             {
-                PopupManager.Instance.ShowAlarmMessage("매직스톤이 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage("수련의돌이 부족합니다.");
                 return;
             }
 

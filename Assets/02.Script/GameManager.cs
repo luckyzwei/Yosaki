@@ -103,6 +103,10 @@ public class GameManager : SingletonMono<GameManager>
             currentMapIdx.Value--;
             LoadNormalField();
         }
+        else
+        {
+            PopupManager.Instance.ShowAlarmMessage("첫번째 스테이지 입니다.");
+        }
     }
 
     public void LoadNextScene()

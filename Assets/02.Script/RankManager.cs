@@ -71,6 +71,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void GetRankerList(string uuid, int count, Backend.BackendCallback callback)
     {
+        UiRankView.rank1Count = 0;
         Backend.URank.User.GetRankList(uuid, count, callback);
     }
 

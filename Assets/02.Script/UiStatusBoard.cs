@@ -105,8 +105,8 @@ public class UiStatusBoard : MonoBehaviour
             while (e.MoveNext())
             {
                 if (e.Current.Value.STATUSWHERE != StatusWhere.memory) continue;
-                usedPoint += (ServerData.statusTable.GetTableData(e.Current.Value.Key).Value - 1);
-                ServerData.statusTable.GetTableData(e.Current.Value.Key).Value = 1;
+                usedPoint += (ServerData.statusTable.GetTableData(e.Current.Value.Key).Value);
+                ServerData.statusTable.GetTableData(e.Current.Value.Key).Value = 0;
             }
 
             log += $"획득수량 {usedPoint}";

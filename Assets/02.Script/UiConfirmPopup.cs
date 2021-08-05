@@ -34,8 +34,14 @@ public class UiConfirmPopup : MonoBehaviour
         }
     }
 
-    public void OnClickCafeButton() 
+    public void OnClickCafeButton()
     {
         Application.OpenURL("https://cafe.naver.com/madaki");
+    }
+
+    public void OnClickBackStageButton()
+    {
+        GameManager.Instance.LoadBackScene();
+        GameObject.Destroy(this.gameObject);
     }
 }

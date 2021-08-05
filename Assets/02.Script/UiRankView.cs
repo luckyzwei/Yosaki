@@ -19,6 +19,7 @@ public class UiRankView : MonoBehaviour
     [SerializeField]
     private List<GameObject> rankList;
 
+    public static int rank1Count = 0;
 
     public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int fightpoint)
     {
@@ -36,7 +37,20 @@ public class UiRankView : MonoBehaviour
 
         if (rank == 1)
         {
-            rankerCell = UiTopRankerView.Instance.RankerCellList[0];
+            if (rank1Count == 0)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[0];
+            }
+            else if (rank1Count == 1) 
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[1];
+            }
+            else if (rank1Count == 2) 
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[2];
+            }
+
+            rank1Count++;
         }
         else if (rank == 2)
         {

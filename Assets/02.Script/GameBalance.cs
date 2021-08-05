@@ -15,7 +15,7 @@ public class PotionBalance
     public readonly static List<ObscuredFloat> recover_Potion = new List<ObscuredFloat>() { 0.2f, 0.5f, 1.0f };
     public readonly static List<ObscuredFloat> price_Potion = new List<ObscuredFloat>() { 1, 1, 1 };
 
-    public readonly static ObscuredFloat potionUseDelay = 2f;
+    public readonly static ObscuredFloat potionUseDelay = 0.9f;
 }
 
 
@@ -40,7 +40,7 @@ public static class GameBalance
 
     public readonly static ObscuredInt levelUpSpinGet = 3;
 
-    public readonly static ObscuredFloat potionUseDelay = 2.0f;
+    public readonly static ObscuredFloat potionUseDelay = 0.9f;
 
     public readonly static ObscuredInt ticketPrice = 500;
     public readonly static ObscuredInt contentsEnterprice = 0;
