@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using CodeStage.AntiCheat.ObscuredTypes;
+using System;
 
 public class GameManager : SingletonMono<GameManager>
 {
@@ -126,14 +127,47 @@ public class GameManager : SingletonMono<GameManager>
         LoadNormalField();
     }
 
+    private Coroutine internetConnectCheckRoutine;
+
     public void LoadNormalField()
     {
-        contentsType = ContentsType.NormalField;
+        if (internetConnectCheckRoutine != null)
+        {
+            StopCoroutine(internetConnectCheckRoutine);
+        }
 
-        ClearStage();
+        internetConnectCheckRoutine = StartCoroutine(checkInternetConnection((isConnected) =>
+        {
+            if (isConnected)
+            {
+                contentsType = ContentsType.NormalField;
 
-        ChangeScene();
+                ClearStage();
+
+                ChangeScene();
+            }
+            else
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크가 불안정 합니다.\n잠시 후에 다시 시도해주세요.", null);
+            }
+
+        }));
     }
+
+    IEnumerator checkInternetConnection(Action<bool> action)
+    {
+        WWW www = new WWW("http://google.com");
+        yield return www;
+        if (www.error != null)
+        {
+            action(false);
+        }
+        else
+        {
+            action(true);
+        }
+    }
+
 
     public void LoadContents(ContentsType type)
     {

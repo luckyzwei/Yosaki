@@ -43,9 +43,15 @@ public class Enemy : PoolItem
     {
         this.originScale = this.transform.localScale;
     }
-
+    private bool initialized = false;
     private void SetRequireComponents()
     {
+        if (initialized == true)
+        {
+            return;
+        }
+
+        initialized = true;
         agentHpController = GetComponent<AgentHpController>();
         enemyMoveController = GetComponent<EnemyMoveController>();
         enemyHitObject = GetComponentInChildren<EnemyHitObject>();
@@ -63,12 +69,13 @@ public class Enemy : PoolItem
 
     private void Start()
     {
-        SetBaseInfo();
         Subscribe();
     }
 
     public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false, int spawnedPlatformIdx = 0, bool updateSubHpBar = false)
     {
+        SetRequireComponents();
+
         this.spawnedPlatformIdx = spawnedPlatformIdx;
 
         this.isFieldBossEnemy = isFieldBossEnemy;
@@ -78,6 +85,18 @@ public class Enemy : PoolItem
         agentHpController.Initialize(enemyTableData, isFieldBossEnemy, updateSubHpBar);
 
         this.transform.localScale = isFieldBossEnemy == false ? originScale : originScale * bossSize;
+
+        if (enemyHitObject != null)
+        {
+            if (isFieldBossEnemy == false)
+            {
+                enemyHitObject.SetDamage(tableData.Attackpower);
+            }
+            else
+            {
+                enemyHitObject.SetDamage(tableData.Attackpower * tableData.Bossattackratio);
+            }
+        }
     }
 
     private void SetSkeletonColor()
@@ -157,25 +176,7 @@ public class Enemy : PoolItem
         }
     }
 
-    private void SetBaseInfo()
-    {
-        //if (agentHpController != null)
-        //{
-        //    agentHpController.Initialize(tableData, isFieldBossEnemy);
-        //}
 
-        if (enemyHitObject != null)
-        {
-            if (isFieldBossEnemy == false)
-            {
-                enemyHitObject.SetDamage(tableData.Attackpower);
-            }
-            else
-            {
-                enemyHitObject.SetDamage(tableData.Attackpower * tableData.Bossattackratio);
-            }
-        }
-    }
 
     private new void OnDisable()
     {

@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class SaveManager : SingletonMono<SaveManager>
 {
+#if UNITY_EDITOR
+    private WaitForSeconds updateDelay = new WaitForSeconds(10f);
+#else
     private WaitForSeconds updateDelay = new WaitForSeconds(180.0f);
+#endif
 
     private WaitForSeconds versionCheckDelay = new WaitForSeconds(300.0f);
 
@@ -51,7 +55,7 @@ public class SaveManager : SingletonMono<SaveManager>
 
                     PopupManager.Instance.ShowVersionUpPopup(CommonString.Notice, "업데이트 버전이 있습니다. 스토어로 이동합니다.\n업데이트 버튼이 활성화 되지 않은 경우\n구글 플레이 스토어를 닫았다가 다시 열어 보세요!", () =>
                     {
-                        Application.OpenURL("https://play.google.com/store/apps/details?id=com.DefaultCompany.SinGame");
+                        Application.OpenURL("https://play.google.com/store/apps/details?id=com.DragonGames.yoyo&hl=ko");
                     }, false);
                 }
             }

@@ -56,7 +56,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
         //초당체력회복
         description1 += $"{CommonString.GetStatusName(StatusType.HpRecover)} : {PlayerStats.GetHpRecover() * 100f}\n";
-        description2 += $"{CommonString.GetStatusName(StatusType.IgnoreDefense)} : {PlayerStats.GetIgnoreDefenseValue()}\n";
+        description2 += $"\n";
 
         ////마력
         //description1 += $"{CommonString.GetStatusName(StatusType.Mp)} : {PlayerStats.GetOriginMp()}\n";

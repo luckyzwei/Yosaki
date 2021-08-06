@@ -125,7 +125,7 @@ public static class ServerData
                }
                else
                {
-                   PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "인터넷이 불안정 합니다.\n앱을 재실행 합니다.", () =>
+                   PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크가 불안정 합니다.\n앱을 재실행 합니다.", () =>
                    {
                        Utils.RestartApplication();
                    });

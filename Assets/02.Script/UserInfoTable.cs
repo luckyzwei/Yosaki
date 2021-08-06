@@ -60,6 +60,7 @@ public class UserInfoTable
 
     // public ObscuredDouble currentServerDate;
     public double currentServerDate;
+    public double attendanceUpdatedTime;
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -309,14 +310,15 @@ public class UserInfoTable
                 if (savedDate.Day != currentServerTime.Day)
                 {
                     //날짜 바뀜
-                    DateChanged(savedWeek != currentWeek, savedDate.Month != currentServerTime.Month);
+                    DateChanged(currentServerTime.Day, savedWeek != currentWeek, savedDate.Month != currentServerTime.Month);
+                    attendanceUpdatedTime = currentServerTime.Day;
                 }
                 else
                 {
                     UpdateLastLoginOnly();
                 }
             }
-            else 
+            else
             {
                 LogManager.Instance.SendLog("출석", $"{isSuccess}/{statusCode}/{returnValue}");
             }
@@ -337,7 +339,7 @@ public class UserInfoTable
     }
 
 
-    private void DateChanged(bool weekChanged, bool monthChanged)
+    private void DateChanged(int day, bool weekChanged, bool monthChanged)
     {
         WhenDateChanged.Execute();
 
@@ -367,7 +369,14 @@ public class UserInfoTable
         //
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
+
+        //두번타는거 방지
+        if (attendanceUpdatedTime != day)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
+        }
+
+        attendanceUpdatedTime = ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value;
 
         userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value);
         userInfoParam.Add(UserInfoTable.dailyTicketBuyCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value);
@@ -410,7 +419,7 @@ public class UserInfoTable
             transactionList.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
         }
 
-        ServerData.SendTransaction(transactionList, true);
+        ServerData.SendTransaction(transactionList, false);
     }
     private void WeekChanged()
     {

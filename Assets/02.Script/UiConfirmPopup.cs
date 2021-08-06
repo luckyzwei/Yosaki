@@ -36,7 +36,7 @@ public class UiConfirmPopup : MonoBehaviour
 
     public void OnClickCafeButton()
     {
-        Application.OpenURL("https://cafe.naver.com/madaki");
+        Application.OpenURL(CommonString.CafeURL);
     }
 
     public void OnClickBackStageButton()
