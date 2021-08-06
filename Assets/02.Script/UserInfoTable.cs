@@ -59,7 +59,7 @@ public class UserInfoTable
     public const string selectedSkillGroupId = "selectedSkillGroupId";
 
     // public ObscuredDouble currentServerDate;
-    public double currentServerDate;
+    public float currentServerDate;
     public double attendanceUpdatedTime;
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -143,7 +143,7 @@ public class UserInfoTable
 
                          string time = servertime.GetReturnValuetoJSON()["utcTime"].ToString();
                          DateTime currentServerTime = DateTime.Parse(time).ToUniversalTime().AddHours(9);
-                         currentServerDate = Utils.ConvertToUnixTimestamp(currentServerTime);
+                         currentServerDate = (float)Utils.ConvertToUnixTimestamp(currentServerTime);
 
                          defultValues.Add(e.Current.Key, (float)currentServerDate);
                          tableDatas.Add(e.Current.Key, new ReactiveProperty<float>((float)currentServerDate));
@@ -291,7 +291,7 @@ public class UserInfoTable
 
                 DateTime currentServerTime = DateTime.Parse(time).ToUniversalTime().AddHours(9);
 
-                currentServerDate = Utils.ConvertToUnixTimestamp(currentServerTime);
+                currentServerDate = (float)Utils.ConvertToUnixTimestamp(currentServerTime);
 
                 //day check
                 DateTime savedDate = Utils.ConvertFromUnixTimestamp(tableDatas[LastLogin].Value);

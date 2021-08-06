@@ -139,14 +139,14 @@ public static class Utils
     public static DateTime ConvertFromUnixTimestamp(double timestamp)
     {
         DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-        return origin.AddSeconds(timestamp);
+        return origin.AddSeconds(timestamp + 1620000000f) ;
     }
 
     public static double ConvertToUnixTimestamp(DateTime date)
     {
         DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         TimeSpan diff = date.ToUniversalTime() - origin;
-        return Math.Floor(diff.TotalSeconds);
+        return diff.TotalSeconds- 1620000000f;
     }
 
     public static int GetWeekNumber(DateTime currentDate)

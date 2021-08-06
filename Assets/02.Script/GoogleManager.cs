@@ -221,7 +221,7 @@ public class GoogleManager : MonoBehaviour
         // return "mayotestguest@gmail.com";
         // return "mabw222ei3no24gi233d0312@n3aver.com"; //GM도비
         //  return "a_8846847867697156085"; //블랙핑크
-        return "a_82284684786769712156085";
+        return "wdwdwrr322r333rr33333dwd";
 #endif
         Debug.LogError($"GetGoogleLoginKey {loginId}");
         return loginId;
