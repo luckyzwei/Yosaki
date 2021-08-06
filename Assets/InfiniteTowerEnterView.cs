@@ -18,7 +18,10 @@ public class InfiniteTowerEnterView : MonoBehaviour
     [SerializeField]
     private GameObject allClearRoot;
 
-    void Start()
+    [SerializeField]
+    private GameObject startButtonRoot;
+
+    void OnEnable()
     {
         SetStageText();
         SetReward();
@@ -51,6 +54,7 @@ public class InfiniteTowerEnterView : MonoBehaviour
 
         normalRoot.SetActive(isAllClear == false);
         allClearRoot.SetActive(isAllClear == true);
+        startButtonRoot.SetActive(isAllClear == false);
 
         if (isAllClear == false)
         {

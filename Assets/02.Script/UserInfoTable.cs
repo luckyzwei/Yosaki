@@ -309,6 +309,7 @@ public class UserInfoTable
 
                 if (savedDate.Day != currentServerTime.Day)
                 {
+                    Debug.LogError("@@@Day Changed!");
                     //날짜 바뀜
                     DateChanged(currentServerTime.Day, savedWeek != currentWeek, savedDate.Month != currentServerTime.Month);
                     attendanceUpdatedTime = currentServerTime.Day;
