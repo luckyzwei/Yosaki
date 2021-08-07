@@ -41,7 +41,7 @@ public class GameManager : SingletonMono<GameManager>
 
     public void SetDokebiId(int dokebiId)
     {
-        this.dokebiIdx = dokebiIdx;
+        this.dokebiIdx = dokebiId;
     }
 
     private new void Awake()

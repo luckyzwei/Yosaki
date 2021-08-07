@@ -18,7 +18,7 @@ public class DokebiEnemy : PoolItem
     {
         EnemyTableData data = new EnemyTableData();
         data.Hp = hp;
-        data.Useonedamage = true;
+        data.Useonedamage = false;
         data.Movespeed = moveSpeed;
         data.Attackpower = 0f;
 

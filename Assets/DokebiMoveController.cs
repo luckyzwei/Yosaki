@@ -6,7 +6,7 @@ using CodeStage.AntiCheat.ObscuredTypes;
 
 public class DokebiMoveController : MonoBehaviour
 {
-    private float moveSpeed = 0f;
+    private float originMoveSpeed = 0f;
 
     [SerializeField]
     protected Rigidbody2D rb;
@@ -35,7 +35,7 @@ public class DokebiMoveController : MonoBehaviour
 
     public void Initialize(float moveSpeed)
     {
-        this.moveSpeed = moveSpeed;
+        this.originMoveSpeed = moveSpeed;
 
         if (subscribed == false)
         {
@@ -132,6 +132,8 @@ public class DokebiMoveController : MonoBehaviour
 
     protected virtual void WhenDirectionChanged(MoveDirection moveDirectionType)
     {
+        float moveSpeed = originMoveSpeed;
+
         if (moveState.Value == MoveState.FollowPlayer)
         {
             moveSpeed += followMoveSpeedAddValue;
