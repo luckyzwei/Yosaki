@@ -69,34 +69,33 @@ public class UiMarbleIndicator : MonoBehaviour
 
         marbleName.SetText(currentTableData.Name);
 
-        priceText.SetText(Utils.ConvertBigNum(currentTableData.Unlockprice));
+        if (currentTableData.Islock == true)
+        {
+            priceText.SetText("미공개");
+        }
+        else
+        {
+            priceText.SetText(Utils.ConvertBigNum(currentTableData.Unlockprice));
+        }
+
+        marbleName.color = CommonUiContainer.Instance.itemGradeColor[currentTableData.Grade];
 
         bool marbleAwaked = ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value == 1f;
 
         string abilDesc = null;
-        //능력치 한개짜리
-        if (currentTableData.Abilitytype.Length == 1)
+
+        if (currentTableData.Islock)
         {
-            StatusType statusType = (StatusType)currentTableData.Abilitytype[0];
-
-            float statusValue = currentTableData.Abilityvalue[0] * (marbleAwaked ? currentTableData.Awakevalue : 1f);
-
-            if (statusType.IsPercentStat())
-            {
-                abilDesc += $"{CommonString.GetStatusName(statusType)} {statusValue * 100f}";
-            }
-            else
-            {
-                abilDesc += $"{CommonString.GetStatusName(statusType)} {statusValue}";
-            }
+            marbleDesc.SetText("미공개");
         }
         else
         {
-            for (int i = 0; i < currentTableData.Abilitytype.Length; i++)
+            //능력치 한개짜리
+            if (currentTableData.Abilitytype.Length == 1)
             {
-                StatusType statusType = (StatusType)currentTableData.Abilitytype[i];
+                StatusType statusType = (StatusType)currentTableData.Abilitytype[0];
 
-                float statusValue = currentTableData.Abilityvalue[i] * (marbleAwaked ? currentTableData.Awakevalue : 1f);
+                float statusValue = currentTableData.Abilityvalue[0] * (marbleAwaked ? currentTableData.Awakevalue : 1f);
 
                 if (statusType.IsPercentStat())
                 {
@@ -106,19 +105,39 @@ public class UiMarbleIndicator : MonoBehaviour
                 {
                     abilDesc += $"{CommonString.GetStatusName(statusType)} {statusValue}";
                 }
-
-                if (i != currentTableData.Abilitytype.Length - 1)
+            }
+            else
+            {
+                for (int i = 0; i < currentTableData.Abilitytype.Length; i++)
                 {
-                    abilDesc += "\n";
+                    StatusType statusType = (StatusType)currentTableData.Abilitytype[i];
+
+                    float statusValue = currentTableData.Abilityvalue[i] * (marbleAwaked ? currentTableData.Awakevalue : 1f);
+
+                    if (statusType.IsPercentStat())
+                    {
+                        abilDesc += $"{CommonString.GetStatusName(statusType)} {statusValue * 100f}";
+                    }
+                    else
+                    {
+                        abilDesc += $"{CommonString.GetStatusName(statusType)} {statusValue}";
+                    }
+
+                    if (i != currentTableData.Abilitytype.Length - 1)
+                    {
+                        abilDesc += "\n";
+                    }
                 }
             }
-        }
 
-        marbleDesc.SetText(abilDesc);
+            marbleDesc.SetText(abilDesc);
+        }
     }
 
     public void OnClickAwakeButton()
     {
+
+
         //전부 열려있는지 체크
         if (ServerData.marbleServerTable.AllMarblesUnlocked() == false)
         {
@@ -175,6 +194,11 @@ public class UiMarbleIndicator : MonoBehaviour
 
     public void OnClickUpgradeButton()
     {
+        if (currentTableData.Islock == true)
+        {
+            PopupManager.Instance.ShowAlarmMessage("미공개 구슬 입니다.");
+            return;
+        }
 
         var serverData = ServerData.marbleServerTable.TableDatas[currentTableData.Stringid];
 
@@ -192,8 +216,14 @@ public class UiMarbleIndicator : MonoBehaviour
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
+        string marbledesc = string.Empty;
+
+        marbledesc += $"pref {ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value}";
+
         ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= currentTableData.Unlockprice;
         ServerData.marbleServerTable.TableDatas[currentTableData.Stringid].hasItem.Value = 1;
+
+        marbledesc += $"after {ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value}";
 
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
@@ -205,7 +235,7 @@ public class UiMarbleIndicator : MonoBehaviour
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
-            LogManager.Instance.SendLog("구슬 개방", $"{currentTableData.Name}");
+            LogManager.Instance.SendLog("구슬 개방", $"{currentTableData.Name} {marbledesc}");
             PopupManager.Instance.ShowAlarmMessage($"{currentTableData.Name} 획득!!");
         });
     }

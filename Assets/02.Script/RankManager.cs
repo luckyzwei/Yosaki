@@ -186,9 +186,8 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateStage_Score(float score)
     {
-#if UNITY_EDITOR
-        //return;
-#endif
+        if (PlayerData.Instance.NickName.Equals("블랙핑크")) return;
+
         Param param = new Param();
         param.Add("Score", score);
 
@@ -261,9 +260,8 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateBoss_Score(float score)
     {
-#if UNITY_EDITOR
-        //return;
-#endif
+        if (PlayerData.Instance.NickName.Equals("블랙핑크")) return;
+
         Param param = new Param();
         param.Add("Score", score);
 

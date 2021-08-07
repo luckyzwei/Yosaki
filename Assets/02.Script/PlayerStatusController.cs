@@ -197,7 +197,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
             float damDecreaseValue = PlayerStats.GetDamDecreaseValue();
 
-            value += value * damDecreaseValue;
+            value -= value * damDecreaseValue;
 
             StartCoroutine(HitDelayRoutine());
         }
@@ -230,10 +230,6 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
     private void CheckDead()
     {
-#if UNITY_EDITOR
-        return;
-#endif
-
         if (hp.Value <= 0)
         {
             whenPlayerDead.Execute();

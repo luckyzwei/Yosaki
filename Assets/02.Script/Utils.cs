@@ -69,7 +69,8 @@ public static class Utils
             type != StatusType.Hp &&
             type != StatusType.Mp &&
             type != StatusType.IgnoreDefense &&
-            type != StatusType.DashCount;
+            type != StatusType.DashCount&&
+            type != StatusType.SkillAttackCount;
     }
 
     public static int GetRandomIdx(List<float> inputDatas)

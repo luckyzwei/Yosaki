@@ -40,8 +40,17 @@ public class UiFieldBossRewardView : SingletonMono<UiFieldBossRewardView>
         stageCell.Initialize(GameManager.Instance.CurrentStageData);
     }
 
+    bool buttonClicked = false;
+
     public void OnClickNextStage()
     {
+        if (buttonClicked == true)
+        {
+            return;
+        }
+
+        buttonClicked = true;
+
         GameManager.Instance.LoadNextScene();
     }
 }

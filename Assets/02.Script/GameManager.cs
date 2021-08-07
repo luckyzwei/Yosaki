@@ -13,7 +13,7 @@ public class GameManager : SingletonMono<GameManager>
     }
     public enum ContentsType
     {
-        NormalField, FireFly, Boss, InfiniteTower , 
+        NormalField, FireFly, Boss, InfiniteTower, Dokebi
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;
@@ -30,11 +30,18 @@ public class GameManager : SingletonMono<GameManager>
     public ObscuredInt bossId { get; private set; }
     public ObscuredInt currentTowerId { get; private set; }
 
+    public ObscuredInt dokebiIdx { get; private set; }
+
     public void SetBossId(int bossId)
     {
         this.bossId = bossId;
 
         RandomizeKey();
+    }
+
+    public void SetDokebiId(int dokebiId)
+    {
+        this.dokebiIdx = dokebiIdx;
     }
 
     private new void Awake()

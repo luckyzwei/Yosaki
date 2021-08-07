@@ -36,4 +36,16 @@ public class MarbleTableData
   string name;
   public string Name { get {return name; } set { this.name = value;} }
   
+  [SerializeField]
+  string desc;
+  public string Desc { get {return desc; } set { this.desc = value;} }
+  
+  [SerializeField]
+  bool islock;
+  public bool Islock { get {return islock; } set { this.islock = value;} }
+  
+  [SerializeField]
+  int grade;
+  public int Grade { get {return grade; } set { this.grade = value;} }
+  
 }

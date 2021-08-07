@@ -57,6 +57,7 @@ public class UserInfoTable
     public const string wingPackageRewardReceive = "wingPackageRewardReceive";
     public const string topClearStageId = "topClearStageId";
     public const string selectedSkillGroupId = "selectedSkillGroupId";
+    public const string dokebiEnterCount = "dokebiEnterCount";
 
     // public ObscuredDouble currentServerDate;
     public float currentServerDate;
@@ -95,7 +96,8 @@ public class UserInfoTable
         {bonusDungeonMaxKillCount,0f},
         {wingPackageRewardReceive,0f},
         {topClearStageId,-1f},
-        {selectedSkillGroupId,0f}
+        {selectedSkillGroupId,0f},
+        {dokebiEnterCount,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -294,7 +296,7 @@ public class UserInfoTable
                 currentServerDate = (float)Utils.ConvertToUnixTimestamp(currentServerTime);
 
                 //day check
-                DateTime savedDate = Utils.ConvertFromUnixTimestamp(tableDatas[LastLogin].Value);
+                DateTime savedDate = Utils.ConvertFromUnixTimestamp(tableDatas[LastLogin].Value-2f);
 
                 if (isFirstInit)
                 {
@@ -361,6 +363,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiEnterCount).Value = 0;
 
         //버프
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
@@ -383,6 +386,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.dailyTicketBuyCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value);
         userInfoParam.Add(UserInfoTable.receivedTicketReward, ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value);
         userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
+        userInfoParam.Add(UserInfoTable.dokebiEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiEnterCount).Value);
         userInfoParam.Add(UserInfoTable.LastLogin, ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value);
 

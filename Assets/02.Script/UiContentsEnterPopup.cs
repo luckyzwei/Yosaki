@@ -24,6 +24,9 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
     [SerializeField]
     private GameObject infinityTowerObject;
 
+    [SerializeField]
+    private GameObject dokebiObject;
+
     private ContentsType contentsType;
 
     public ObscuredInt bossId { get; private set; }
@@ -73,6 +76,8 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
         bonusDungeonObject.SetActive(contentsType == ContentsType.FireFly);
 
         infinityTowerObject.SetActive(contentsType == ContentsType.InfiniteTower);
+
+        dokebiObject.SetActive(contentsType == ContentsType.Dokebi);
     }
 
     private void UpdateUi()
@@ -174,7 +179,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
        });
     }
 
-    public void BonusDungeonInstantClear() 
+    public void BonusDungeonInstantClear()
     {
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value >= GameBalance.bonusDungeonEnterCount)
         {
@@ -184,13 +189,13 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
         int killCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonMaxKillCount).Value;
 
-        if (killCount==0)
+        if (killCount == 0)
         {
             PopupManager.Instance.ShowAlarmMessage("기록이 없습니다.");
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 {killCount}로 소탕 합니까?\n보상 : {killCount * GameBalance.bonusDungeonGemPerEnemy}개", () => 
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 {killCount}로 소탕 합니까?\n보상 : {killCount * GameBalance.bonusDungeonGemPerEnemy}개", () =>
         {
             enterButton.interactable = false;
 

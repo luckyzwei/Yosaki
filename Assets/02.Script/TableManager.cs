@@ -486,5 +486,14 @@ public class TableManager : SingletonMono<TableManager>
     private MarbleTable marbleTable;
 
     public MarbleTable MarbleTable => marbleTable;
+
+    [SerializeField]
+    private Dokebi dokebiTable;
+
+    public Dokebi DokebiTable => dokebiTable;
+
+    [SerializeField]
+    private DokebiRewardTable dokebiRewardTable;
+    public DokebiRewardTable DokebiRewardTable=> dokebiRewardTable;
 }
 

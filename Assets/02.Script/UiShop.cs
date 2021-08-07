@@ -61,6 +61,8 @@ public class UiShop : SingletonMono<UiShop>
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
+        string logString = string.Empty;
+
         for (int i = 0; i < tableData.Rewardtypes.Length; i++)
         {
             Item_Type rewardType = (Item_Type)tableData.Rewardtypes[i];
@@ -302,8 +304,8 @@ public class UiShop : SingletonMono<UiShop>
 
         int skillIdx = ((int)type) % 3000;
 
-       ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillIdx].Value = 1;
-       ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAlreadyHas][skillIdx].Value = 1;
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillIdx].Value = 1;
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAlreadyHas][skillIdx].Value = 1;
 
         List<int> skillAmountSyncData = new List<int>();
         List<int> skillAlreadyHasSyncData = new List<int>();

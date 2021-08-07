@@ -80,7 +80,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description2 += $"{CommonString.GetStatusName(StatusType.MoveSpeed)} : {PlayerStats.GetMoveSpeedValue()}\n";
 
         //피해 감소
-        description2 += $"{CommonString.GetStatusName(StatusType.Damdecrease)} : {PlayerStats.GetDamDecreaseValue()}\n";
+        description2 += $"{CommonString.GetStatusName(StatusType.Damdecrease)} : {PlayerStats.GetDamDecreaseValue()*100f}\n";
 
         //보스피해
         description1 += $"{CommonString.GetStatusName(StatusType.BossDamAddPer)} : {PlayerStats.GetBossDamAddValue()}\n";

@@ -121,7 +121,7 @@ public static class CommonString
                 return "추가 기술 데미지(%)";
                 break;
             case StatusType.MoveSpeed:
-                return $"이동 속도 증가(기본:{PlayerBalance.moveSpeed}) ";
+                return $"이동 속도 증가";
                 break;
             case StatusType.DamBalance:
                 return "최소데미지 보정(%)";
@@ -163,7 +163,7 @@ public static class CommonString
                 return "방어력 무시";
                 break;
             case StatusType.DashCount:
-                return "점멸 횟수";
+                return "순보 횟수";
                 break;
             case StatusType.DropAmountAddPer:
                 return "몬스터 전리품 수량 증가(%)";

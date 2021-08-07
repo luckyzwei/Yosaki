@@ -25,7 +25,7 @@ public class BonusDefenseEnemy : PoolItem
         agentHpController.Initialize(data);
         bonusDefenseEnemyMoveController.Initialize(Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f)) * Vector3.right, data.Movespeed);
         //공겨력 0
-     //   GetComponentInChildren<EnemyHitObject>().SetDamage(0f);
+        //   GetComponentInChildren<EnemyHitObject>().SetDamage(0f);
 
         disposable.Clear();
         agentHpController.whenEnemyDead.AsObservable().Subscribe(e =>
@@ -40,5 +40,10 @@ public class BonusDefenseEnemy : PoolItem
         {
             this.gameObject.SetActive(false);
         }
+    }
+
+    private void OnDestroy()
+    {
+        disposable.Dispose();
     }
 }

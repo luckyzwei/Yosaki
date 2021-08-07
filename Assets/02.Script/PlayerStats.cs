@@ -46,6 +46,10 @@ public static class PlayerStats
         float mpBase = GetMaxMp();
         float mpAddPer = GetMaxMpPercentAddValue();
 
+        float ignoreDefense = GetIgnoreDefenseValue();
+        float decreaseDam = GetDamDecreaseValue();
+        float skillAttackCount = GetSkillHitAddValue();
+
         float totalPower =
            ((baseAttack + baseAttack * baseAttackPer)
             * (Mathf.Max(criProb, 0.01f) * 100f * Mathf.Max(criDam, 0.01f))
@@ -78,7 +82,7 @@ public static class PlayerStats
 
         ret += GetMarbleValue(StatusType.Damdecrease);
 
-        return 0f;
+        return ret;
     }
     public static float GetBossDamAddValue()
     {
@@ -87,7 +91,7 @@ public static class PlayerStats
         ret += GetMarbleValue(StatusType.BossDamAddPer);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.BossDamage_memory);
 
-        return 0f;
+        return ret;
     }
     public static int GetSkillHitAddValue()
     {
@@ -168,6 +172,8 @@ public static class PlayerStats
         ret += GetWingAbilValue(StatusType.AttackAddPer);
         ret += GetPassiveSkillValue(StatusType.AttackAddPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.AttackAddPer);
+        ret += GetMarbleValue(StatusType.AttackAddPer);
+
         return ret;
     }
 

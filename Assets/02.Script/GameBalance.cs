@@ -46,6 +46,7 @@ public static class GameBalance
     public readonly static ObscuredInt contentsEnterprice = 0;
     public readonly static ObscuredInt dailyTickBuyCountMax = 5;
     public readonly static ObscuredInt bonusDungeonEnterCount = 5;
+    public readonly static ObscuredInt dokebiEnterCount = 3;
 
     public readonly static List<ObscuredFloat> potion_Option = new List<ObscuredFloat>() { 0.3f, 0.6f, 0.9f };
 
@@ -77,7 +78,7 @@ public static class GameBalance
 
     public readonly static ObscuredInt skillSlotGroupNum = 3;
 
-    public readonly static ObscuredInt marbleUnlockLevel = 100;
+    public readonly static ObscuredInt marbleUnlockLevel = 400;
 }
 
 public static class DamageBalance
