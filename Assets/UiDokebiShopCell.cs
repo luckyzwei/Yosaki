@@ -48,6 +48,8 @@ public class UiDokebiShopCell : MonoBehaviour
             return;
         }
 
+        SoundManager.Instance.PlaySound("Reward");
+
         currentDokebiHornNum.Value -= tableData.Price;
 
         string goodsKey = ((Item_Type)tableData.Itemtype).ToString();

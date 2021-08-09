@@ -214,6 +214,8 @@ public class UiMarbleIndicator : MonoBehaviour
             return;
         }
 
+        SoundManager.Instance.PlaySound("Reward");
+
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         string marbledesc = string.Empty;
