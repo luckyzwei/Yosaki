@@ -39,7 +39,7 @@ public class UiMagicBookCollectCell : MonoBehaviour
     {
         this.skillData = skillData;
 
-        weaponView.Initialize(null,null, this.skillData);
+        weaponView.Initialize(null, null, this.skillData);
 
         Subscribe();
     }
@@ -124,6 +124,50 @@ public class UiMagicBookCollectCell : MonoBehaviour
         }
 
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+    }
+
+    public void OnClickAllLevelUpButton()
+    {
+        int currentSkillCollectionLevel = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillCollectionLevel][skillData.Id].Value;
+        int currentSkillHasAmount = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value;
+
+        if (currentSkillCollectionLevel >= this.skillData.Collectionabiltmaxlevel)
+        {
+            PopupManager.Instance.ShowAlarmMessage("최대레벨 입니다.");
+            return;
+        }
+
+        if (currentSkillHasAmount <= 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("기술이 부족 합니다.");
+            return;
+        }
+
+        SoundManager.Instance.PlayButtonSound();
+
+        int upgradableLevel = this.skillData.Collectionabiltmaxlevel - currentSkillCollectionLevel;
+
+        int upgradeApply = 0;
+
+        if (currentSkillHasAmount >= upgradableLevel)
+        {
+            upgradeApply = upgradableLevel;
+        }
+        else
+        {
+            upgradeApply = currentSkillHasAmount;
+        }
+
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value -= upgradeApply;
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillCollectionLevel][skillData.Id].Value += upgradeApply;
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
     }
 
     private Coroutine syncRoutine;

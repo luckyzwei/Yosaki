@@ -32,6 +32,8 @@ public class GameManager : SingletonMono<GameManager>
 
     public ObscuredInt dokebiIdx { get; private set; }
 
+    public ContentsType lastContentsType { get; private set; } = ContentsType.NormalField;
+
     public void SetBossId(int bossId)
     {
         this.bossId = bossId;
@@ -184,6 +186,11 @@ public class GameManager : SingletonMono<GameManager>
 
     public void LoadContents(ContentsType type)
     {
+        if (type != ContentsType.NormalField)
+        {
+            lastContentsType = type;
+        }
+
         if (type == ContentsType.FireFly)
         {
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
