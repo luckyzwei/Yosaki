@@ -115,6 +115,8 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateUserRank_Level()
     {
+        if (PlayerData.Instance.NickName.Equals("블랙핑크")) return;
+
         Param param = new Param();
         param.Add("Level", ServerData.statusTable.GetTableData(StatusTable.Level).Value);
 

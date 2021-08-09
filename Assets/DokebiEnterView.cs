@@ -43,11 +43,13 @@ public class DokebiEnterView : MonoBehaviour
     {
         int currentEnterCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiEnterCount).Value;
 
+#if !UNITY_EDITOR
         if (currentEnterCount >= GameBalance.dokebiEnterCount)
         {
             PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 입장할수 없습니다.");
             return;
         }
+#endif
 
         dokebiEnterButtons.ForEach(e => e.interactable = false);
 

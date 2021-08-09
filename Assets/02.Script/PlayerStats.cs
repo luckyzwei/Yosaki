@@ -54,6 +54,11 @@ public static class PlayerStats
            ((baseAttack + baseAttack * baseAttackPer)
             * (Mathf.Max(criProb, 0.01f) * 100f * Mathf.Max(criDam, 0.01f))
             * (Mathf.Max(skillDam, 0.01f) * 100f)
+
+            * (Mathf.Max(ignoreDefense, 0.01f) * 100f)
+            * (Mathf.Max(decreaseDam, 0.01f) * 50f)
+            * (Mathf.Max(skillAttackCount, 0.01f) * 200f)
+
             * (Mathf.Max(coolTIme, 0.01f)) * 100)
             + ((hpBase + hpBase * hpAddPer) + (mpBase + mpBase * mpAddPer));
 

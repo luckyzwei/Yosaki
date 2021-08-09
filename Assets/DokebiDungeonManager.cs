@@ -17,13 +17,15 @@ public class DokebiDungeonManager : ContentsManagerBase
     private TextMeshProUGUI enemyKillCount;
 
     [SerializeField]
-    private UiBonusDefenseResultPopup resultPopup;
+    private UiDokebiResultPopup resultPopup;
 
     private Coroutine spawnRoutine;
 
     private DokebiData dokebiData;
 
-    public string poolName;
+    public static string poolName;
+
+    private ObscuredInt currentSpawnedNum = 0;
 
     protected new void Start()
     {
@@ -64,24 +66,26 @@ public class DokebiDungeonManager : ContentsManagerBase
     private IEnumerator EnemySpawnRoutine()
     {
         WaitForSeconds delay1 = new WaitForSeconds(dokebiData.Spawndelay1);
-        WaitForSeconds delay2 = new WaitForSeconds(dokebiData.Spawndelay1);
+
+        yield return new WaitForSeconds(1.5f);
 
         while (true)
         {
-            if (remainSec > 20)
+            int enemySpawnNum = dokebiData.Maxenemynum - currentSpawnedNum;
+
+            for (int i = 0; i < enemySpawnNum; i++)
             {
-                yield return delay1;
+                SpawnEnemy();
             }
-            else
-            {
-                yield return delay2;
-            }
-            SpawnEnemy();
+
+            yield return delay1;
         }
     }
 
     private void SpawnEnemy()
     {
+        currentSpawnedNum++;
+
         int directionRand = Random.Range(0, 2);
         Vector3 moveDir = Vector3.zero;
         Vector3 spawnPos = Vector3.zero;
@@ -103,5 +107,6 @@ public class DokebiDungeonManager : ContentsManagerBase
     private void WhenEnemyDead()
     {
         enemyDeadCount.Value++;
+        currentSpawnedNum--;
     }
 }

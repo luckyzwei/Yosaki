@@ -181,7 +181,7 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.Jade, amount);
                 }
                 break;
-            case Item_Type.GrowThStone:
+            case Item_Type.GrowthStone:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
                     param.Add(GoodsTable.GrowthStone, amount);

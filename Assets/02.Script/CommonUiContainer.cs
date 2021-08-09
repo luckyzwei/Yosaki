@@ -36,6 +36,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public Sprite marble;
 
+    public Sprite dokebi;
+
     public List<SkeletonDataAsset> enemySpineAssets;
 
     public Sprite GetItemIcon(Item_Type type)
@@ -48,7 +50,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Jade:
                 return blueStone;
                 break;
-            case Item_Type.GrowThStone:
+            case Item_Type.GrowthStone:
                 return magicStone;
                 break;
             case Item_Type.Memory:
@@ -58,6 +60,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return ticket;
             case Item_Type.Marble:
                 return marble;
+            case Item_Type.Dokebi:
+                return dokebi;
             case Item_Type.costume1:
                 return costumeThumbnail[1];
             case Item_Type.costume2:

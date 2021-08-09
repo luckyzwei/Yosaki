@@ -36,6 +36,12 @@ public class UserInfoTable
     public const string receivedTicketReward = "receivedTicketReward";
 
     public const string bonusDungeonEnterCount = "bonusDungeonEnterCount";
+
+    public const string dokebiKillCount0 = "dokebiKillCount0";
+    public const string dokebiKillCount1 = "dokebiKillCount1";
+    public const string dokebiKillCount2 = "dokebiKillCount2";
+
+
     public const string chatBan = "chatBan";
 
     public const string tutorialCurrentStep = "tutorialCurrentStep";
@@ -97,7 +103,10 @@ public class UserInfoTable
         {wingPackageRewardReceive,0f},
         {topClearStageId,-1f},
         {selectedSkillGroupId,0f},
-        {dokebiEnterCount,0f}
+        {dokebiEnterCount,0f},
+        {dokebiKillCount0,0f},
+        {dokebiKillCount1,0f},
+        {dokebiKillCount2,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();

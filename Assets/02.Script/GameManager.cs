@@ -117,13 +117,17 @@ public class GameManager : SingletonMono<GameManager>
         }
     }
 
+    private bool CanMoveStage = true;
     public void LoadNextScene()
     {
         UiTutorialManager.Instance.SetClear(TutorialStep.GoNextStage);
 
-        if (IsLastScene() == false)
+        if (IsLastScene() == false && CanMoveStage)
         {
+            CanMoveStage = false;
+
             currentMapIdx.Value++;
+
             LoadNormalField();
         }
     }
@@ -155,9 +159,11 @@ public class GameManager : SingletonMono<GameManager>
             }
             else
             {
+                currentMapIdx.Value--;
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크가 불안정 합니다.\n잠시 후에 다시 시도해주세요.", null);
             }
 
+            CanMoveStage = true;
         }));
     }
 

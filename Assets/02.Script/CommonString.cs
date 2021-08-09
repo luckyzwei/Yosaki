@@ -79,7 +79,7 @@ public static class CommonString
         {
             case Item_Type.Gold: return "금화";
             case Item_Type.Jade: return "옥";
-            case Item_Type.GrowThStone: return "수련의돌";
+            case Item_Type.GrowthStone: return "수련의돌";
             case Item_Type.Memory: return "무공비급";
             case Item_Type.Ticket: return "소환서";
             case Item_Type.costume0: return "";
@@ -97,6 +97,7 @@ public static class CommonString
             case Item_Type.weapon14: return "특급 2등급 무기";
             case Item_Type.magicBook11: return "특급 1등급 노리개";
             case Item_Type.skill3: return "전방베기4형 기술";
+            case Item_Type.Dokebi: return "도깨비 뿔";
         }
         return "미등록";
     }

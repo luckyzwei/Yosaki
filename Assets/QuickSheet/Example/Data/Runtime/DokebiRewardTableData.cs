@@ -20,4 +20,8 @@ public class DokebiRewardTableData
   int price;
   public int Price { get {return price; } set { this.price = value;} }
   
+  [SerializeField]
+  string descforview;
+  public string Descforview { get {return descforview; } set { this.descforview = value;} }
+  
 }

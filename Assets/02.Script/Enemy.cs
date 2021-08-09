@@ -162,7 +162,7 @@ public class Enemy : PoolItem
         if (magicStoneSpawnAmount != 0)
         {
             var growthStone = BattleObjectManager.Instance.dropItemProperty.GetItem();
-            growthStone.Initialize(Item_Type.GrowThStone, magicStoneSpawnAmount);
+            growthStone.Initialize(Item_Type.GrowthStone, magicStoneSpawnAmount);
             growthStone.transform.position = this.transform.position + UnityEngine.Random.Range(-0.3f, 0.3f) * Vector3.right;
         }
 

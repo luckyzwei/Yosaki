@@ -7,10 +7,11 @@ public enum Item_Type
 {
     Gold,
     Jade,
-    GrowThStone,
+    GrowthStone,
     Memory,
     Ticket,
     Marble,
+    Dokebi,
     MagicStoneBuff = 500,
     //1000~1100 무기
     weapon0 = 1000,
@@ -173,7 +174,7 @@ public class DropItem : PoolItem
     {
         switch (type)
         {
-            case Item_Type.GrowThStone:
+            case Item_Type.GrowthStone:
                 {
                     ServerData.goodsTable.GetMagicStone(amount);
                 }

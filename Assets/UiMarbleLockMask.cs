@@ -11,7 +11,7 @@ public class UiMarbleLockMask : MonoBehaviour
 
     private void Start()
     {
-        lockMaskDesc.SetText($"{GameBalance.marbleUnlockLevel}레벨에 해방");
+        lockMaskDesc.SetText($"{GameBalance.marbleUnlockLevel}레벨에 해금");
 
         Subscribe();
     }

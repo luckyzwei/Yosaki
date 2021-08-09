@@ -349,7 +349,7 @@ public class AutoManager : Singleton<AutoManager>
                 currentTarget = spawnedEnemy[0].transform;
             }
         }
-        else if (GameManager.contentsType == GameManager.ContentsType.FireFly /*||GameManager.contentsType == GameManager.ContentsType.InfiniteTower*/)
+        else if (GameManager.contentsType == GameManager.ContentsType.FireFly || GameManager.contentsType == GameManager.ContentsType.Dokebi)
         {
             currentTarget = GetPoolTarget();
         }
@@ -411,6 +411,10 @@ public class AutoManager : Singleton<AutoManager>
         else if (GameManager.contentsType == GameManager.ContentsType.InfiniteTower)
         {
             poolName = InfiniteTowerManager.poolName;
+        }
+        else if (GameManager.contentsType == GameManager.ContentsType.Dokebi)
+        {
+            poolName = DokebiDungeonManager.poolName;
         }
 
         if (BattleObjectManager.Instance.PoolContainer.ContainsKey(poolName) == false)

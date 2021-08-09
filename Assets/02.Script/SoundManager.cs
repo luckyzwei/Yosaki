@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System;
+using System.Linq;
 using static GameManager;
 
 [RequireComponent(typeof(AudioSource))]
@@ -31,6 +32,30 @@ public class SoundManager : SingletonMono<SoundManager>
     [SerializeField]
     private AudioClip infinityBgm;
 
+    [SerializeField]
+    private AudioClip dokebiBgm;
+
+    private const int sameSoundPlayNum = 5;
+
+    private Dictionary<string, int> sameSoundCount = new Dictionary<string, int>();
+
+    private IEnumerator SameSoundClearRoutine()
+    {
+        WaitForSeconds delay = new WaitForSeconds(1.0f);
+
+        while (true)
+        {
+            var keys = sameSoundCount.Keys.ToList();
+
+            for(int i = 0; i < keys.Count; i++) 
+            {
+                sameSoundCount[keys[i]] = 0;
+            }
+     
+            yield return delay;
+        }
+    }
+
     private void SetBgmDefaultOption()
     {
         bgmSource.loop = true;
@@ -49,6 +74,12 @@ public class SoundManager : SingletonMono<SoundManager>
         MakeSoundPool();
         LoadSounds();
         SetBgmDefaultOption();
+        StartSameSoundFilterRoutine();
+    }
+
+    private void StartSameSoundFilterRoutine()
+    {
+        StartCoroutine(SameSoundClearRoutine());
     }
 
     private void Subscribe()
@@ -75,6 +106,9 @@ public class SoundManager : SingletonMono<SoundManager>
                     break;
                 case ContentsType.InfiniteTower:
                     clip = infinityBgm;
+                    break;
+                case ContentsType.Dokebi:
+                    clip = dokebiBgm;
                     break;
             }
 
@@ -148,6 +182,7 @@ public class SoundManager : SingletonMono<SoundManager>
     public void PlaySound(string soundName, bool canCollapsed = false)
     {
         float volume = SettingData.efxVolume.Value;
+
         if (volume == 0f) return;
 
         if (soundEffectPool == null) return;
@@ -156,6 +191,17 @@ public class SoundManager : SingletonMono<SoundManager>
 
         if (soundPool == null) return;
 
+        if (sameSoundCount.ContainsKey(soundName) == false)
+        {
+            sameSoundCount.Add(soundName, 0);
+        }
+        else
+        {
+            if (sameSoundCount[soundName] >= sameSoundPlayNum) return;
+
+            sameSoundCount[soundName]++;
+        }
+
         if (canCollapsed && currentPlayingSounds.Contains(soundName)) return;
 
         EachSound eachSound = soundPool.GetItem();
@@ -163,6 +209,8 @@ public class SoundManager : SingletonMono<SoundManager>
         if (eachSound != null)
         {
             eachSound.Initialize(soundEffectPool[soundName], volume);
+
+
 
             if (canCollapsed)
             {

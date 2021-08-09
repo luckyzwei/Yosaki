@@ -57,7 +57,7 @@ public class UIMemoryStatusView : MonoBehaviour
         }
         else
         {
-            levelUpText.SetText($"레벨업\n{CommonString.GetItemName(Item_Type.GrowThStone)} {Utils.ConvertBigNum(bossTableData.Upgradeprice)}개");
+            levelUpText.SetText($"레벨업\n{CommonString.GetItemName(Item_Type.GrowthStone)} {Utils.ConvertBigNum(bossTableData.Upgradeprice)}개");
         }
 
         skillTitle.SetText($"LV:{skillLevel}");
@@ -86,7 +86,7 @@ public class UIMemoryStatusView : MonoBehaviour
 
         if (currentMagicStone < bossTableData.Upgradeprice)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GrowThStone)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)}이 부족합니다.");
             return;
         }
 

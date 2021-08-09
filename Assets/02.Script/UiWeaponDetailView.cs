@@ -546,7 +546,7 @@ public class UiWeaponDetailView : MonoBehaviour
 #if !UNITY_EDITOR
             if (currentMagicStoneAmount < levelUpPrice)
             {
-                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GrowThStone)} 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)} 부족합니다.");
                 return;
             }
 #endif

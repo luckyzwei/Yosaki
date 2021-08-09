@@ -16,6 +16,7 @@ public class GoodsTable
     public static string Ticket = "Ticket";
     public static string BonusSpinKey = "BonusSpin";
     public static string MarbleKey = "Marble";
+    public static string DokebiKey = "Dokebi";
 
     //포션
     public static string Potion_0 = "Potion_0";
@@ -33,7 +34,8 @@ public class GoodsTable
         {Potion_1,0f},
         {Potion_2,0f},
         {BonusSpinKey,0f},
-        {MarbleKey,0f}
+        {MarbleKey,0f},
+        {DokebiKey,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -72,7 +74,7 @@ public class GoodsTable
 
     public void GetMagicStone(float amount)
     {
-        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowThStone)} 획득(+{(int)amount})");
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)} 획득(+{(int)amount})");
         tableDatas[GrowthStone].Value += amount;
     }
     public void GetMarble(float amount)

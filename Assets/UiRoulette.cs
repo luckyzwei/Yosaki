@@ -90,7 +90,7 @@ public class UiRoulette : MonoBehaviour
                 ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += rewardAmount;
             }
             //매직스톤
-            else if (rewardType == Item_Type.GrowThStone)
+            else if (rewardType == Item_Type.GrowthStone)
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardAmount;
             }
@@ -126,7 +126,7 @@ public class UiRoulette : MonoBehaviour
                 goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
             }
             //매직스톤
-            else if (e.Current.Key == Item_Type.GrowThStone)
+            else if (e.Current.Key == Item_Type.GrowthStone)
             {
                 goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
             }

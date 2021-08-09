@@ -36,4 +36,8 @@ public class DokebiData
   float movespeed;
   public float Movespeed { get {return movespeed; } set { this.movespeed = value;} }
   
+  [SerializeField]
+  int maxenemynum;
+  public int Maxenemynum { get {return maxenemynum; } set { this.maxenemynum = value;} }
+  
 }

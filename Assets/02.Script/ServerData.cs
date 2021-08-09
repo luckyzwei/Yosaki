@@ -154,7 +154,7 @@ public static class ServerData
             case Item_Type.Jade:
                 ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardValue;
                 break;
-            case Item_Type.GrowThStone:
+            case Item_Type.GrowthStone:
                 ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardValue;
                 break;
             case Item_Type.Memory:
@@ -189,7 +189,7 @@ public static class ServerData
                 passParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
                 break;
-            case Item_Type.GrowThStone:
+            case Item_Type.GrowthStone:
                 passParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
                 break;
@@ -202,6 +202,9 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.Marble:
                 passParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.Dokebi:
+                passParam.Add(GoodsTable.DokebiKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.costume1:
                 string costumeKey = type.ToString();
@@ -227,7 +230,7 @@ public static class ServerData
                 param.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
                 break;
-            case Item_Type.GrowThStone:
+            case Item_Type.GrowthStone:
                 ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
                 param.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
@@ -331,7 +334,7 @@ public static class ServerData
                     if (goodsParam.ContainsKey(GoodsTable.Jade) == false)
                         goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
                     break;
-                case Item_Type.GrowThStone:
+                case Item_Type.GrowthStone:
                     if (goodsParam.ContainsKey(GoodsTable.GrowthStone) == false)
                         goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
                     break;
@@ -368,7 +371,7 @@ public static class ServerData
             case Item_Type.Jade:
                 ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += amount;
                 break;
-            case Item_Type.GrowThStone:
+            case Item_Type.GrowthStone:
                 ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
                 break;
             case Item_Type.Ticket:
@@ -376,6 +379,9 @@ public static class ServerData
                 break;
             case Item_Type.Marble:
                 ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += amount;
+                break;
+            case Item_Type.Dokebi:
+                ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value += amount;
                 break;
         }
 
