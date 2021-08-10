@@ -34,6 +34,10 @@ public class GameManager : SingletonMono<GameManager>
 
     public ContentsType lastContentsType { get; private set; } = ContentsType.NormalField;
 
+    public void ResetLastContents()
+    {
+        lastContentsType = ContentsType.NormalField;
+    }
     public void SetBossId(int bossId)
     {
         this.bossId = bossId;

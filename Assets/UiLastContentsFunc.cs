@@ -11,11 +11,19 @@ public class UiLastContentsFunc : MonoBehaviour
 
     public UnityEvent myUnityEvent;
 
+    [SerializeField]
+    private bool resetState = false;
+
     void Start()
     {
         if (GameManager.Instance.IsNormalField && contentsType == GameManager.Instance.lastContentsType)
         {
             myUnityEvent?.Invoke();
+        }
+
+        if (resetState == true)
+        {
+            GameManager.Instance.ResetLastContents();
         }
     }
 }
