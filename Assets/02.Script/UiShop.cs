@@ -178,26 +178,25 @@ public class UiShop : SingletonMono<UiShop>
             case Item_Type.Jade:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += amount;
-                    param.Add(GoodsTable.Jade, amount);
+                    param.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
                 }
                 break;
             case Item_Type.GrowthStone:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
-                    param.Add(GoodsTable.GrowthStone, amount);
-
+                    param.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
                 }
                 break;
             case Item_Type.Ticket:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += amount;
-                    param.Add(GoodsTable.Ticket, amount);
+                    param.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
                 }
                 break;
             case Item_Type.Marble:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += amount;
-                    param.Add(GoodsTable.MarbleKey, amount);
+                    param.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
                 }
                 break;
 
