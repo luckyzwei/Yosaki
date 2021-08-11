@@ -119,6 +119,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
         goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
         goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
 
         List<TransactionValue> transantions = new List<TransactionValue>();
