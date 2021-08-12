@@ -100,4 +100,12 @@ public class EnemyTableData
   float bossattackratio;
   public float Bossattackratio { get {return bossattackratio; } set { this.bossattackratio = value;} }
   
+  [SerializeField]
+  float bosshp;
+  public float Bosshp { get {return bosshp; } set { this.bosshp = value;} }
+  
+  [SerializeField]
+  float bossattackpower;
+  public float Bossattackpower { get {return bossattackpower; } set { this.bossattackpower = value;} }
+  
 }
