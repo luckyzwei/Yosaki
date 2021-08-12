@@ -207,6 +207,11 @@ public class GameManager : SingletonMono<GameManager>
 
     private void ChangeScene()
     {
+        if (UiDeadConfirmPopup.Instance != null)
+        {
+            Destroy(UiDeadConfirmPopup.Instance.gameObject);
+        }
+
         PopupManager.Instance.SetChatBoardPopupManager();
 
         PostManager.Instance.RefreshPost();

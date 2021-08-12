@@ -42,6 +42,14 @@ public class UiStageCell : MonoBehaviour
     [SerializeField]
     private GameObject rewardCompleteObject_Ad;
 
+    [SerializeField]
+    private GameObject rewardParent;
+
+    private void Start()
+    {
+        rewardParent.SetActive(UiDeadConfirmPopup.Instance == null);
+    }
+
 
     private bool HasStagePassItem()
     {

@@ -10,6 +10,9 @@ public class MainTabButtons : MonoBehaviour
 
     private GameObject popupObject;
 
+    [SerializeField]
+    private Transform popupParents;
+
     private void Awake()
     {
         Initialize();
@@ -31,14 +34,14 @@ public class MainTabButtons : MonoBehaviour
 
         if (popupObject == null)
         {
-            popupObject = Instantiate<GameObject>(popupPrefab, InGameCanvas.Instance.transform);
+            popupObject = Instantiate<GameObject>(popupPrefab, popupParents == null ? InGameCanvas.Instance.transform : popupParents);
         }
         else
         {
             popupObject.SetActive(true);
         }
 
-       // UiStatus.Instance.transform.SetAsLastSibling();
+        // UiStatus.Instance.transform.SetAsLastSibling();
     }
 
 }
