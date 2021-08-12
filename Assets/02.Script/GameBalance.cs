@@ -80,6 +80,8 @@ public static class GameBalance
     public readonly static ObscuredInt skillSlotGroupNum = 3;
 
     public readonly static ObscuredInt marbleUnlockLevel = 400;
+
+    public readonly static ObscuredInt skillCraftUnlockGachaLevel = 10;
 }
 
 public static class DamageBalance

@@ -419,13 +419,13 @@ public class UiInventoryWeaponView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("최대레벨 입니다.");
                 return;
             }
-#if !UNITY_EDITOR
+
             if (currentMagicStoneAmount < levelUpPrice)
             {
                 PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)} 부족합니다.");
                 return;
             }
-#endif
+
             SoundManager.Instance.PlayButtonSound();
             //재화 차감
             ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= levelUpPrice;

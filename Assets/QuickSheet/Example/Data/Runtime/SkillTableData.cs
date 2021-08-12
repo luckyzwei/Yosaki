@@ -176,4 +176,12 @@ public class SkillTableData
   float collectionvalue;
   public float Collectionvalue { get {return collectionvalue; } set { this.collectionvalue = value;} }
   
+  [SerializeField]
+  int destroyvalue;
+  public int Destroyvalue { get {return destroyvalue; } set { this.destroyvalue = value;} }
+  
+  [SerializeField]
+  int makerequirevalue;
+  public int Makerequirevalue { get {return makerequirevalue; } set { this.makerequirevalue = value;} }
+  
 }

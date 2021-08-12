@@ -17,6 +17,7 @@ public class GoodsTable
     public static string BonusSpinKey = "BonusSpin";
     public static string MarbleKey = "Marble";
     public static string DokebiKey = "Dokebi";
+    public static string SkillPartion = "SkillPartion";
 
     //포션
     public static string Potion_0 = "Potion_0";
@@ -35,7 +36,8 @@ public class GoodsTable
         {Potion_2,0f},
         {BonusSpinKey,0f},
         {MarbleKey,0f},
-        {DokebiKey,0f}
+        {DokebiKey,0f},
+        {SkillPartion,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

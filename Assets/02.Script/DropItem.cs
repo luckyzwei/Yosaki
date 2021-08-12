@@ -12,6 +12,7 @@ public enum Item_Type
     Ticket,
     Marble,
     Dokebi,
+    SkillPartion,
     MagicStoneBuff = 500,
     //1000~1100 무기
     weapon0 = 1000,

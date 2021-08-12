@@ -98,6 +98,7 @@ public static class CommonString
             case Item_Type.magicBook11: return "특급 1등급 노리개";
             case Item_Type.skill3: return "전방베기4형 기술";
             case Item_Type.Dokebi: return "도깨비 뿔";
+            case Item_Type.SkillPartion: return "기술 조각";
         }
         return "미등록";
     }
