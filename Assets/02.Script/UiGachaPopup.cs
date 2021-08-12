@@ -9,11 +9,9 @@ using UnityEngine.UI;
 public class UiGachaPopup : SingletonMono<UiGachaPopup>
 {
     //누적
-    private List<ObscuredInt> gachaLevelMinNum_weapon = new List<ObscuredInt>() { 0, 500, 2000, 5000, 20000, 50000, 80000, 120000, 160000, 200000 };
-    private List<ObscuredInt> gachaLevelMinNum_norigae = new List<ObscuredInt>() { 0, 500, 2000, 5000, 20000, 50000, 80000, 120000, 160000, 200000 };
-    private List<ObscuredInt> gachaLevelMinNum_skill = new List<ObscuredInt>() { 0, 125, 500, 1275, 4000, 10000, 15000, 20000, 30000, 40000 };
-
-    private ReactiveProperty<int> gachaLevel = new ReactiveProperty<int>();
+    private static List<ObscuredInt> gachaLevelMinNum_weapon = new List<ObscuredInt>() { 0, 500, 2000, 5000, 20000, 50000, 80000, 120000, 160000, 200000 };
+    private static List<ObscuredInt> gachaLevelMinNum_norigae = new List<ObscuredInt>() { 0, 500, 2000, 5000, 20000, 50000, 80000, 120000, 160000, 200000 };
+    private static List<ObscuredInt> gachaLevelMinNum_skill = new List<ObscuredInt>() { 0, 125, 500, 1275, 4000, 10000, 15000, 20000, 30000, 40000 };
 
     [SerializeField]
     private List<Image> gaugeImage;
@@ -46,7 +44,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
 
         //만렙아닐때
         if (gachaLevel < gachaLevelMinNum_weapon.Count - 1)
-        {   
+        {
             int prefMaxCount = gachaLevelMinNum_weapon[gachaLevel];
             int nextMaxCount = gachaLevelMinNum_weapon[gachaLevel + 1];
 
@@ -86,7 +84,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         //만렙일때
         else
         {
-            gaugeDescription[1].text = $"LV : {gachaLevel+1}(MAX)";
+            gaugeDescription[1].text = $"LV : {gachaLevel + 1}(MAX)";
 
             gachaLevelText[1].text = $"MAX";
 
@@ -98,7 +96,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     {
         int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Skill);
 
-        gachaLevelText[2].text = $"LV : {gachaLevel+1}";
+        gachaLevelText[2].text = $"LV : {gachaLevel + 1}";
 
         int current = (int)num;
 
@@ -115,7 +113,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         //만렙일때
         else
         {
-            gaugeDescription[2].text = $"LV : {gachaLevel+1}(MAX)";
+            gaugeDescription[2].text = $"LV : {gachaLevel + 1}(MAX)";
 
             gachaLevelText[2].text = $"MAX";
 
@@ -143,7 +141,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
     /// 0부터 시작
     /// </summary>
     /// <returns></returns>
-    public int GachaLevel(string key)
+    public static int GachaLevel(string key)
     {
         int gachaNum = (int)ServerData.userInfoTable.GetTableData(key).Value;
 
@@ -175,8 +173,6 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
                 break;
             }
         }
-
-        this.gachaLevel.Value = gachaLevel;
 
         return gachaLevel;
     }

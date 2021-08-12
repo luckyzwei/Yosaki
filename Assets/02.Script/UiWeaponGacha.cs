@@ -102,7 +102,7 @@ public class UiWeaponGacha : MonoBehaviour
 
         var e = weaponTable.GetEnumerator();
 
-        int gachaLevel = UiGachaPopup.Instance.GachaLevel(UserInfoTable.gachaNum_Weapon);
+        int gachaLevel = UiGachaPopup.GachaLevel(UserInfoTable.gachaNum_Weapon);
 
         while (e.MoveNext())
         {
