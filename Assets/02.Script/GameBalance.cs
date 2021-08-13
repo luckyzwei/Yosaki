@@ -59,7 +59,7 @@ public static class GameBalance
 
     public readonly static ObscuredFloat fieldBossHpValue = 15f;
 
-    public readonly static ObscuredInt bonusDungeonGemPerEnemy = 300;
+    public readonly static ObscuredInt bonusDungeonGemPerEnemy = 700;
     public readonly static ObscuredInt effectActiveDistance = 15;
     public readonly static ObscuredInt firstSkillAwakeNum = 1;
 

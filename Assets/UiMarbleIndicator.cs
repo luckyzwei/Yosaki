@@ -130,6 +130,11 @@ public class UiMarbleIndicator : MonoBehaviour
                 }
             }
 
+            if (string.IsNullOrEmpty(currentTableData.Description) == false)
+            {
+                abilDesc += $"\n{currentTableData.Description}";
+            }
+
             marbleDesc.SetText(abilDesc);
         }
     }

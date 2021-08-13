@@ -11,9 +11,9 @@ public class UiSkillCraftButton : MonoBehaviour
     {
         int currentSkillGachaLevel = UiGachaPopup.GachaLevel(UserInfoTable.gachaNum_Skill);
 
-        if (currentSkillGachaLevel < 9) 
+        if (currentSkillGachaLevel < 7) 
         {
-            PopupManager.Instance.ShowAlarmMessage("기술 뽑기 레벨 10부터 이용 가능합니다.");
+            PopupManager.Instance.ShowAlarmMessage("기술 뽑기 레벨 8부터 이용 가능합니다.");
             return;
         }
 

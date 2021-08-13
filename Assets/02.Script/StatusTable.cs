@@ -151,7 +151,7 @@ public class StatusTable
                     break;
                 case HpRecover_Gold:
                     {
-                        return level * 0.0001f;
+                        return level * 0.0002f;
                     }
                     break;
                 case MpRecover_Gold:

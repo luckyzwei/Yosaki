@@ -502,6 +502,7 @@ public static class PlayerStats
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.GoldGainPer);
         ret += GetBuffValue(StatusType.GoldGainPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.GoldGainPer);
+        ret += GetMarbleValue(StatusType.GoldGainPer);
         return ret;
     }
     public static float GetExpPlusValue()

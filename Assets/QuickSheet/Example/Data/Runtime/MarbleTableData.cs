@@ -48,4 +48,8 @@ public class MarbleTableData
   int grade;
   public int Grade { get {return grade; } set { this.grade = value;} }
   
+  [SerializeField]
+  string description;
+  public string Description { get {return description; } set { this.description = value;} }
+  
 }

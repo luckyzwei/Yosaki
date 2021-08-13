@@ -116,7 +116,7 @@ public class AgentHpController : MonoBehaviour
             value += value * PlayerStats.CriticalDam();
         }
 
-        if (GameManager.contentsType == GameManager.ContentsType.Boss)
+        if (GameManager.contentsType != GameManager.ContentsType.NormalField || isFieldBossEnemy)
         {
             value += value * PlayerStats.GetBossDamAddValue();
         }
