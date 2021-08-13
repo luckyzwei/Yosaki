@@ -558,6 +558,8 @@ public static class PlayerStats
         float ret = 0f;
         ret += ServerData.statusTable.GetStatusValue(StatusTable.HpLevel_Gold);
         ret += ServerData.petTable.GetStatusValue(StatusType.Hp);
+        ret += GetMagicBookEquipPercentValue(StatusType.Hp);
+
         return ret;
     }
     public static float GetMaxHpPercentAddValue()
