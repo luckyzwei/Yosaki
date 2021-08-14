@@ -2,15 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct PoolSet
-{
-    public string name;
-    public PoolItem prefab;
-    public int initNum;
-}
-
-public class BattleObjectManager : SingletonMono<BattleObjectManager>
+public class BattleObjectManagerAllTime : SingletonMono<BattleObjectManagerAllTime>
 {
     [SerializeField]
     private List<PoolSet> poolSets;
@@ -27,8 +19,6 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
     private DropItem dropItemPrefab;
     public ObjectProperty<DropItem> dropItemProperty { get; set; }
 
-    private Transform playerTr;
-
 
     private new void Awake()
     {
@@ -36,46 +26,6 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
         InitializePool();
     }
 
-    private void Start()
-    {
-        SpawnMap();
-        SetPlayerTr();
-    }
-
-    private void SetPlayerTr()
-    {
-        playerTr = PlayerMoveController.Instance.transform;
-    }
-
-    public static GameObject GetMapPrefabObject(int preset)
-    {
-        return Resources.Load<GameObject>($"StageMap/{preset}");
-    }
-
-    private void SpawnMap()
-    {
-        if (GameManager.Instance.IsNormalField)
-        {
-            GameObject mapObject = GetMapPrefabObject(GameManager.Instance.CurrentStageData.Mappreset);
-            Instantiate<GameObject>(mapObject);
-        }
-        else
-        {
-            GameObject mapObject = null;
-
-            if (GameManager.contentsType != GameManager.ContentsType.Boss)
-            {
-                mapObject = Resources.Load<GameObject>($"ContentsMap/{GameManager.contentsType.ToString()}");
-            }
-            else
-            {
-                int currentBossIdx = GameManager.Instance.bossId;
-                mapObject = Resources.Load<GameObject>($"ContentsMap/{GameManager.contentsType.ToString() + currentBossIdx.ToString()}");
-            }
-
-            Instantiate<GameObject>(mapObject);
-        }
-    }
     private void InitializePool()
     {
         for (int i = 0; i < poolSets.Count; i++)
@@ -90,6 +40,21 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
 
     private float zOffset = 0f;
 
+    public void SpawnDamageText(float damage, Vector3 position, DamTextType type = DamTextType.Normal)
+    {
+        if (SettingData.ShowDamageFont.Value == 0) return;
+
+        var damageText = damageTextProperty.GetItem();
+        damageText.Initialize(damage, type);
+        damageText.transform.position = new Vector3(position.x, position.y, position.z + zOffset);
+
+        zOffset += 0.001f;
+        if (zOffset > 1f)
+        {
+            zOffset = 0f;
+        }
+
+    }
     public PoolItem GetItem(string name)
     {
         if (poolContainer.TryGetValue(name, out var pool))
@@ -103,7 +68,7 @@ public class BattleObjectManager : SingletonMono<BattleObjectManager>
             if (prefab == null)
             {
 #if UNITY_EDITOR
-               // Debug.LogError($"Pool prefab {name} is not exist");
+                // Debug.LogError($"Pool prefab {name} is not exist");
 #endif
                 return null;
             }

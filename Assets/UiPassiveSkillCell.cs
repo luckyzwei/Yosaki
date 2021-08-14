@@ -65,7 +65,7 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         if (statusType.IsPercentStat())
         {
-            skillDesc.SetText($"{CommonString.GetStatusName(statusType)} : {currentSkillLevel * passiveSkillData.Abilityvalue*100f}");
+            skillDesc.SetText($"{CommonString.GetStatusName(statusType)} : {currentSkillLevel * passiveSkillData.Abilityvalue * 100f}");
         }
         else
         {
@@ -144,9 +144,52 @@ public class UiPassiveSkillCell : MonoBehaviour
             PopupManager.Instance.ShowAlarmMessage("스킬포인트가 부족합니다.");
             return;
         }
+
         //로컬
         ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value++;
         skillPoint.Value--;
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+    }
+
+    public void OnClickAllUpgradeButton()
+    {
+        int currentLevel = ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value;
+
+        if (currentLevel >= passiveSkillData.Maxlevel)
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
+            return;
+        }
+
+        if (magicBookServerData.hasItem.Value != 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("마도서가 없습니다.");
+            return;
+        }
+
+        //스킬포인트 체크
+        var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
+        if (skillPoint.Value <= 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("스킬포인트가 부족합니다.");
+            return;
+        }
+
+        int maxLevel = passiveSkillData.Maxlevel;
+
+        int skillPointRemain = skillPoint.Value;
+
+        int upgradableAmount = Mathf.Min(skillPointRemain, passiveSkillData.Maxlevel - currentLevel);
+
+        //로컬
+        ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value += upgradableAmount;
+        skillPoint.Value -= upgradableAmount;
 
         if (syncRoutine != null)
         {

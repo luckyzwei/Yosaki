@@ -64,7 +64,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
         //레벨업 이벤트
         WhenPlayerLevelUp.Execute();
 
-        EffectManager.SpawnEffect("LevelUp", PlayerMoveController.Instance.transform.position, PlayerMoveController.Instance.transform);
+        EffectManager.SpawnEffectAllTime("LevelUp", PlayerMoveController.Instance.transform.position, PlayerMoveController.Instance.transform);
 
         //일일미션
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.LevelUp, 1);

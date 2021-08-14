@@ -264,9 +264,9 @@ public class MapInfo : SingletonMono<MapInfo>
             //첫번째 발판에 소환
             enemyObject.transform.position = spawnPlatforms[GetBossSpawnPlatformIdx()].GetRandomSpawnPos();
 
-            EffectManager.SpawnEffect("FieldBossSpawn", enemyObject.transform.position);
+            EffectManager.SpawnEffectAllTime("FieldBossSpawn", enemyObject.transform.position);
 
-            EffectManager.SpawnEffect("Circle1", enemyObject.transform.position);
+            EffectManager.SpawnEffectAllTime("Circle1", enemyObject.transform.position);
             SoundManager.Instance.PlaySound("4-1");
         }
 

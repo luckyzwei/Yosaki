@@ -123,7 +123,7 @@ public class Enemy : PoolItem
 
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.KillEnemy, 1);
 
-        EffectManager.SpawnEffect(DeadEfxName, this.transform.position + Vector3.up * 1f);
+        EffectManager.SpawnEffectAllTime(DeadEfxName, this.transform.position + Vector3.up * 1f);
 
         SpawnDropItem();
 

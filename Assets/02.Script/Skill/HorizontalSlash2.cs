@@ -78,7 +78,7 @@ public class HorizontalSlash2 : SkillBase
 
     private IEnumerator SpawnLineEffect()
     {
-        var effect = EffectManager.SpawnEffect("LightningFloorYellowTrail", PlayerMoveController.Instance.transform.position);
+        var effect = EffectManager.SpawnEffectAllTime("LightningFloorYellowTrail", PlayerMoveController.Instance.transform.position);
 
         yield return null;
 

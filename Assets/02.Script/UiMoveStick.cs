@@ -161,7 +161,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     private const string TeleportEfxName = "Teleport";
     private void QuickMove(InputType type)
     {
-        EffectManager.SpawnEffect(TeleportEfxName, playerTr.position + Vector3.down * 1f);
+        EffectManager.SpawnEffectAllTime(TeleportEfxName, playerTr.position + Vector3.down * 1f);
         SoundManager.Instance.PlaySound(TeleportEfxName);
 
         switch (type)
@@ -235,7 +235,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
 
 
         UiTutorialManager.Instance.SetClear(TutorialStep.UseTelePort);
-        EffectManager.SpawnEffect(TeleportEfxName, playerTr.position + Vector3.down * 1f);
+        EffectManager.SpawnEffectAllTime(TeleportEfxName, playerTr.position + Vector3.down * 1f);
     }
 
     public void TeleportToTop()

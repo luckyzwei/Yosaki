@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UiEnventoryBoard : MonoBehaviour
+public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 {
     [SerializeField]
     private UiInventoryWeaponView uiInventoryWeaponViewPrefab;
@@ -18,6 +18,22 @@ public class UiEnventoryBoard : MonoBehaviour
 
     private List<UiInventoryWeaponView> weaponViewContainer = new List<UiInventoryWeaponView>();
     private List<UiInventoryWeaponView> magicBookViewContainer = new List<UiInventoryWeaponView>();
+
+    public void AllUpgradeWeapon(int myIdx)
+    {
+        for (int i = 0; i <= myIdx; i++)
+        {
+            weaponViewContainer[i].OnClickUpgradeButton();
+        }
+    }
+
+    public void AllUpgradeMagicBook(int myIdx)
+    {
+        for (int i = 0; i <= myIdx; i++)
+        {
+            magicBookViewContainer[i].OnClickUpgradeButton();
+        }
+    }
 
     public void Start()
     {
@@ -67,11 +83,11 @@ public class UiEnventoryBoard : MonoBehaviour
 
     private List<UiPetView> petViewContainer = new List<UiPetView>();
 
-    private void MakePetBoard() 
+    private void MakePetBoard()
     {
         var e = TableManager.Instance.PetDatas.GetEnumerator();
 
-        while (e.MoveNext()) 
+        while (e.MoveNext())
         {
             var petView = Instantiate<UiPetView>(uiPetViewPrefeab, petViewParent);
 
@@ -106,7 +122,7 @@ public class UiEnventoryBoard : MonoBehaviour
         //}
         //else if (Input.GetKeyUp(KeyCode.Space)) 
         //{
-        
+
         //}
     }
 

@@ -1107,6 +1107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b458526c77787f468a55d47eee4335e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DontDestroy: 1
   uiInventoryWeaponViewPrefab: {fileID: 7270153737267891746, guid: ec2451e5194ba3e46995e299e16c818a,
     type: 3}
   viewParentWeapon: {fileID: 6529129379230245067}
@@ -1304,9 +1305,9 @@ RectTransform:
   m_Father: {fileID: 7217778001837064693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -232}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &3575099586025261065
@@ -1887,7 +1888,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -396.27, y: 0}
-  m_SizeDelta: {x: 790.1544, y: 0}
+  m_SizeDelta: {x: 790.1544, y: 62.355194}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8917978883345422464
 CanvasRenderer:
@@ -2128,10 +2129,10 @@ RectTransform:
   m_Father: {fileID: 6999843970013881845}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 27, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -232}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &8992204215625982519
 MonoBehaviour:
@@ -2722,7 +2723,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -396.27, y: 0}
-  m_SizeDelta: {x: 790.1544, y: 0}
+  m_SizeDelta: {x: 790.1544, y: 62.355194}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1827865066311544988
 CanvasRenderer:
@@ -2836,6 +2837,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.1
       objectReference: {fileID: 0}
+    - target: {fileID: 496852281832591425, guid: 61daf33bdcb5a5549ae02c5043ed3bbe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000005722046
+      objectReference: {fileID: 0}
     - target: {fileID: 607957496814352287, guid: 61daf33bdcb5a5549ae02c5043ed3bbe,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2851,10 +2857,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: MarbleView
       objectReference: {fileID: 0}
+    - target: {fileID: 2715264375343966749, guid: 61daf33bdcb5a5549ae02c5043ed3bbe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3030458358797465836, guid: 61daf33bdcb5a5549ae02c5043ed3bbe,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -212.93958
       objectReference: {fileID: 0}
     - target: {fileID: 4352892894998707049, guid: 61daf33bdcb5a5549ae02c5043ed3bbe,
         type: 3}
@@ -3010,6 +3021,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7530770454572714277, guid: 61daf33bdcb5a5549ae02c5043ed3bbe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 437.66656
+      objectReference: {fileID: 0}
+    - target: {fileID: 7530770454572714277, guid: 61daf33bdcb5a5549ae02c5043ed3bbe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000005722046
       objectReference: {fileID: 0}
     - target: {fileID: 8606720496638851004, guid: 61daf33bdcb5a5549ae02c5043ed3bbe,
         type: 3}

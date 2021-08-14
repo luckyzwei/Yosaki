@@ -4,11 +4,20 @@ using UnityEngine;
 
 public static class EffectManager
 {
-    public static PoolItem SpawnEffect(string effectName, Vector3 position, Transform parent = null)
+    public static PoolItem SpawnEffectAllTime(string effectName, Vector3 position, Transform parent = null)
     {
         if (SettingData.ShowEffect.Value == 0) return null;
 
-        var effect = BattleObjectManager.Instance.GetItem(effectName);
+        PoolItem effect = null;
+
+        if (parent == null)
+        {
+            effect = BattleObjectManagerAllTime.Instance.GetItem(effectName);
+        }
+        else
+        {
+            effect = BattleObjectManager.Instance.GetItem(effectName);
+        }
 
         if (effect == null)
         {

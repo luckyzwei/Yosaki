@@ -16,7 +16,7 @@ public class AutoManager : Singleton<AutoManager>
 
     private List<int> skillQueue = new List<int>();
 
-    private WaitForSeconds skillDelay = new WaitForSeconds(0.1f);
+    private WaitForSeconds skillDelay = new WaitForSeconds(0.05f);
 
     public void SetPlayerTr()
     {

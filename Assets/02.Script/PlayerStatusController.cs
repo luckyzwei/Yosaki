@@ -249,11 +249,11 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
         if (value < 0)
         {
-            BattleObjectManager.Instance.SpawnDamageText(value * -1f, this.transform.position, DamTextType.Red);
+            BattleObjectManagerAllTime.Instance.SpawnDamageText(value * -1f, this.transform.position, DamTextType.Red);
         }
         else
         {
-            BattleObjectManager.Instance.SpawnDamageText(value, this.transform.position, DamTextType.Green);
+            BattleObjectManagerAllTime.Instance.SpawnDamageText(value, this.transform.position, DamTextType.Green);
         }
     }
     private IEnumerator HitDelayRoutine()

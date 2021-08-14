@@ -72,7 +72,7 @@ public abstract class SkillBase
         if (string.IsNullOrEmpty(skillInfo.Activeeffectname1) == false)
         {
             Transform parent = skillInfo.Iseffectrootplayer ? PlayerMoveController.Instance.transform : null;
-            var effect = EffectManager.SpawnEffect(skillInfo.Activeeffectname1, activeEffectSpawnPos, parent);
+            var effect = EffectManager.SpawnEffectAllTime(skillInfo.Activeeffectname1, activeEffectSpawnPos, parent);
 
             if (effect != null)
             {
@@ -95,7 +95,7 @@ public abstract class SkillBase
         {
             Transform parent = skillInfo.Iseffectrootplayer ? PlayerMoveController.Instance.transform : null;
 
-            var effect = EffectManager.SpawnEffect(skillInfo.Activeeffectname2, activeEffectSpawnPos2, parent);
+            var effect = EffectManager.SpawnEffectAllTime(skillInfo.Activeeffectname2, activeEffectSpawnPos2, parent);
 
             if (effect != null)
             {

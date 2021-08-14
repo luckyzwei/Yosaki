@@ -177,6 +177,13 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
+            int amount = ServerData.weaponTable.TableDatas[weaponData.Stringid].amount.Value;
+
+            if (amount < weaponData.Requireupgrade)
+            {
+                return;
+            }
+
             if (TableManager.Instance.WeaponData.TryGetValue(weaponData.Id + 1, out var nextWeaponData))
             {
                 int currentWeaponCount = ServerData.weaponTable.GetCurrentWeaponCount(weaponData.Stringid);
@@ -198,6 +205,13 @@ public class UiInventoryWeaponView : MonoBehaviour
         }
         else
         {
+            int amount = ServerData.magicBookTable.TableDatas[magicBookData.Stringid].amount.Value;
+
+            if (amount < magicBookData.Requireupgrade)
+            {
+                return;
+            }
+
             if (TableManager.Instance.MagicBoocDatas.TryGetValue(magicBookData.Id + 1, out var nextMagicBook))
             {
                 int currentWeaponCount = ServerData.magicBookTable.GetCurrentMagicBookCount(magicBookData.Stringid);
@@ -217,6 +231,22 @@ public class UiInventoryWeaponView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("더이상 승급이 불가능 합니다.");
             }
         }
+    }
+
+    public void OnClickAllUpgradeButton()
+    {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "이전 단계 장비들도 전부 승급 합니까?", () =>
+        {
+            if (weaponData != null)
+            {
+                UiEnventoryBoard.Instance.AllUpgradeWeapon(weaponData.Id);
+            }
+            else
+            {
+                UiEnventoryBoard.Instance.AllUpgradeMagicBook(magicBookData.Id);
+            }
+
+        }, null);
     }
 
     private void SetCurrentWeapon()
