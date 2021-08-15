@@ -13,6 +13,8 @@ public class UiSettingBoard : MonoBehaviour
     private Slider efxSlider;
     [SerializeField]
     private Slider vierSlider;
+    [SerializeField]
+    private Slider uiVierSlider;
 
     [SerializeField]
     private List<Toggle> graphicOptionToggle;
@@ -39,6 +41,9 @@ public class UiSettingBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI viewDesc;
 
+    [SerializeField]
+    private TextMeshProUGUI uiViewDesc;
+
     private void Awake()
     {
         Initialize();
@@ -51,6 +56,7 @@ public class UiSettingBoard : MonoBehaviour
         bgmSlider.value = PlayerPrefs.GetFloat(SettingKey.bgmVolume);
         efxSlider.value = PlayerPrefs.GetFloat(SettingKey.efxVolume);
         vierSlider.value = PlayerPrefs.GetFloat(SettingKey.view);
+        uiVierSlider.value = PlayerPrefs.GetFloat(SettingKey.uiView);
 
         graphicOptionToggle[PlayerPrefs.GetInt(SettingKey.GraphicOption)].isOn = true;
 
@@ -67,11 +73,12 @@ public class UiSettingBoard : MonoBehaviour
         SetSliderTexts();
     }
 
-    private void SetSliderTexts() 
+    private void SetSliderTexts()
     {
         bgmDesc.SetText(((int)(bgmSlider.value * 100)).ToString());
         sfxDesc.SetText(((int)(efxSlider.value * 100)).ToString());
         viewDesc.SetText(((int)(vierSlider.value * 100)).ToString());
+        uiViewDesc.SetText(((int)(uiVierSlider.value * 100)).ToString());
     }
 
 
@@ -94,6 +101,13 @@ public class UiSettingBoard : MonoBehaviour
         if (initialized == false) return;
         SettingData.view.Value = value;
         viewDesc.SetText(((int)(value * 100)).ToString());
+    }
+
+    public void WhenUiViewSliderChanged(float value)
+    {
+        if (initialized == false) return;
+        SettingData.uiView.Value = value;
+        uiViewDesc.SetText(((int)(value * 100)).ToString());
     }
 
     public void Graphic_Low_Select(bool on)
@@ -254,11 +268,12 @@ public static class SettingKey
     public static string bgmVolume = "bgmVolume";
     public static string efxVolume = "efxVolume";
     public static string view = "view";
+    public static string uiView = "uiView";
     public static string GraphicOption = "GraphicOption";
     public static string FrameRateOption = "FrameRateOption";
     public static string ShowDamageFont = "ShowDamageFont";
     public static string ShowEffect = "ShowEffect";
-    public static string GlowEffect = "GlowEffect"; 
+    public static string GlowEffect = "GlowEffect";
     public static string PotionUseHpOption = "PotionUseHpOption";
 }
 
@@ -268,6 +283,7 @@ public static class SettingData
     public static ReactiveProperty<float> bgmVolume = new ReactiveProperty<float>();
     public static ReactiveProperty<float> efxVolume = new ReactiveProperty<float>();
     public static ReactiveProperty<float> view = new ReactiveProperty<float>();
+    public static ReactiveProperty<float> uiView = new ReactiveProperty<float>();
     public static ReactiveProperty<int> GraphicOption = new ReactiveProperty<int>(); //하중상최상
     public static ReactiveProperty<int> FrameRateOption = new ReactiveProperty<int>(); //30 45 60
     public static ReactiveProperty<int> ShowDamageFont = new ReactiveProperty<int>();
@@ -311,6 +327,9 @@ public static class SettingData
 
         if (PlayerPrefs.HasKey(SettingKey.PotionUseHpOption) == false)
             PlayerPrefs.SetInt(SettingKey.PotionUseHpOption, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.uiView) == false)
+            PlayerPrefs.SetFloat(SettingKey.uiView, 0f);
     }
 
     static void Initialize()
@@ -324,6 +343,7 @@ public static class SettingData
         ShowEffect.Value = PlayerPrefs.GetInt(SettingKey.ShowEffect, 1);
         GlowEffect.Value = PlayerPrefs.GetInt(SettingKey.GlowEffect, 1);
         PotionUseHpOption.Value = PlayerPrefs.GetInt(SettingKey.PotionUseHpOption, 1);
+        uiView.Value = PlayerPrefs.GetFloat(SettingKey.uiView, 0f);
         Subscribe();
     }
 
@@ -342,6 +362,11 @@ public static class SettingData
         view.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetFloat(SettingKey.view, e);
+        });
+
+        uiView.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetFloat(SettingKey.uiView, e);
         });
 
         GraphicOption.AsObservable().Subscribe(e => { PlayerPrefs.SetInt(SettingKey.GraphicOption, e); });

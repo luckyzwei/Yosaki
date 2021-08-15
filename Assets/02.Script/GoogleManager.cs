@@ -15,11 +15,13 @@ public class GoogleManager : MonoBehaviour
 
     private ObscuredString loginId;
 
+    public static string email { get; private set; } = "Editor";
+
     private void Awake()
     {
         Backend.Initialize(HandleBackendCallBack, true);
 
-       // SRDebug.Init();
+        // SRDebug.Init();
     }
 
     private void HandleBackendCallBack()
@@ -117,6 +119,7 @@ public class GoogleManager : MonoBehaviour
                 Debug.Log($"Hash {Backend.Utils.GetGoogleHash()}");
                 // 로그인이 성공되었습니다.
                 loginId = Social.localUser.id;
+                email = ((PlayGamesLocalUser)Social.localUser).Email;
                 Debug.Log("Email - " + ((PlayGamesLocalUser)Social.localUser).Email);
                 Debug.Log("GoogleId - " + Social.localUser.id);
                 Debug.Log("UserName - " + Social.localUser.userName);
@@ -221,7 +224,7 @@ public class GoogleManager : MonoBehaviour
         // return "mayotestguest@gmail.com";
         // return "mabw222ei3no24gi233d0312@n3aver.com"; //GM도비
         //  return "a_8846847867697156085"; //블랙핑크
-        return "a_8846847867697156085";
+        return "a_884682247867697156085";
 #endif
         Debug.LogError($"GetGoogleLoginKey {loginId}");
         return loginId;

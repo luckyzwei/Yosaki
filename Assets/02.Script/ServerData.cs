@@ -38,6 +38,7 @@ public static class ServerData
     public static PassiveServerTable passiveServerTable { get; private set; } = new PassiveServerTable();
 
     public static MarbleServerTable marbleServerTable { get; private set; } = new MarbleServerTable();
+    public static EtcServerTable etcServerTable { get; private set; } = new EtcServerTable();
 
     #region string
     public static string inDate_str = "inDate";
@@ -84,6 +85,7 @@ public static class ServerData
         passiveServerTable.Initialize();
         //rankTables_Boss1.Initialize();
         marbleServerTable.Initialize();
+        etcServerTable.Initialize();
     }
 
     public static void GetUserInfo()
