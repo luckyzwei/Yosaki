@@ -27,6 +27,9 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
     [SerializeField]
     private GameObject dokebiObject;
 
+    [SerializeField]
+    private GameObject twelveDungeonObject;
+
     private ContentsType contentsType;
 
     public ObscuredInt bossId { get; private set; }
@@ -78,6 +81,8 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
         infinityTowerObject.SetActive(contentsType == ContentsType.InfiniteTower);
 
         dokebiObject.SetActive(contentsType == ContentsType.Dokebi);
+
+        twelveDungeonObject.SetActive(contentsType == ContentsType.TwelveDungeon);
     }
 
     private void UpdateUi()

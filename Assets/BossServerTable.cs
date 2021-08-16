@@ -9,20 +9,18 @@ using UnityEngine;
 public class BossServerData
 {
     public int idx;
-    public ReactiveProperty<int> clear;
-    public ReactiveProperty<int> artifactLevel;
     public ReactiveProperty<string> score;
 
     public string ConvertToString()
     {
-        return $"{idx},{clear.Value},{artifactLevel.Value},{score.Value}";
+        return $"{idx},{score.Value}";
     }
 }
 
 public class BossServerTable
 {
     public static string Indate;
-    public static string tableName = "BossTable";
+    public static string tableName = "TwelveBoss";
 
     private ReactiveDictionary<string, BossServerData> tableDatas = new ReactiveDictionary<string, BossServerData>();
 
@@ -63,14 +61,12 @@ public class BossServerTable
             {
                 Param defultValues = new Param();
 
-                var table = TableManager.Instance.BossTable.dataArray;
+                var table = TableManager.Instance.TwelveBossTable.dataArray;
 
                 for (int i = 0; i < table.Length; i++)
                 {
                     var bossTable = new BossServerData();
                     bossTable.idx = table[i].Id;
-                    bossTable.clear = new ReactiveProperty<int>(0);
-                    bossTable.artifactLevel = new ReactiveProperty<int>(0);
                     bossTable.score = new ReactiveProperty<string>(string.Empty);
 
                     defultValues.Add(table[i].Stringid, bossTable.ConvertToString());
@@ -123,8 +119,6 @@ public class BossServerTable
                         var splitData = value.Split(',');
 
                         bossData.idx = int.Parse(splitData[0]);
-                        bossData.clear = new ReactiveProperty<int>(int.Parse(splitData[1]));
-                        bossData.artifactLevel = new ReactiveProperty<int>(int.Parse(splitData[2]));
                         bossData.score = new ReactiveProperty<string>(string.Empty);
 
                         tableDatas.Add(table[i].Stringid, bossData);
@@ -134,8 +128,6 @@ public class BossServerTable
 
                         var bossData = new BossServerData();
                         bossData.idx = table[i].Id;
-                        bossData.clear = new ReactiveProperty<int>(0);
-                        bossData.artifactLevel = new ReactiveProperty<int>(0);
                         bossData.score = new ReactiveProperty<string>(string.Empty);
 
                         defultValues.Add(table[i].Stringid, bossData.ConvertToString());

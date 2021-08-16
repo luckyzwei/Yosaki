@@ -22,6 +22,7 @@ public static class ServerData
     public static RankTable_Level rankTables_level { get; private set; } = new RankTable_Level();
     public static RankTable_Stage rankTables_Stage { get; private set; } = new RankTable_Stage();
     public static RankTable_Boss rankTables_Boss { get; private set; } = new RankTable_Boss();
+    public static RankTable_Real_Boss rankTables_Real_Boss { get; private set; } = new RankTable_Real_Boss();
     public static PassServerTable passServerTable { get; private set; } = new PassServerTable();
 
     public static CostumeServerTable costumeServerTable { get; private set; } = new CostumeServerTable();
@@ -73,6 +74,7 @@ public static class ServerData
         rankTables_level.Initialize();
         rankTables_Stage.Initialize();
         rankTables_Boss.Initialize();
+        rankTables_Real_Boss.Initialize();
         passServerTable.Initialize();
         costumeServerTable.Initialize();
         dailyPassServerTable.Initialize();

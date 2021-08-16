@@ -173,20 +173,20 @@ public class SingleRaidManager : ContentsManagerBase
         //클리어 체크
         contentsState.Value = (int)ContentsState.Clear;
 
-        SendClearInfo();
+        //SendClearInfo();
     }
 
-    private void SendClearInfo()
-    {
-        var serverData = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
+    //private void SendClearInfo()
+    //{
+    //    var serverData = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
 
-        if (serverData.clear.Value != 1)
-        {
-            serverData.clear.Value = 1;
+    //    if (serverData.clear.Value != 1)
+    //    {
+    //        serverData.clear.Value = 1;
 
-            ServerData.bossServerTable.UpdateData(bossTableData.Stringid);
-        }
-    }
+    //        ServerData.bossServerTable.UpdateData(bossTableData.Stringid);
+    //    }
+    //}
 
     //클리어조건1 타이머 종료
     protected override void TimerEnd()

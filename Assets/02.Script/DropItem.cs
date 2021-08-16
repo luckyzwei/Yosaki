@@ -13,6 +13,11 @@ public enum Item_Type
     Marble,
     Dokebi,
     SkillPartion,
+
+    RankFrame1_10=100,
+    RankFrame10_100=101,
+    RankFrame100_1000=102,
+
     MagicStoneBuff = 500,
     //1000~1100 무기
     weapon0 = 1000,

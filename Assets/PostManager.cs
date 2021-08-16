@@ -49,14 +49,30 @@ public class PostManager : SingletonMono<PostManager>
                     {
                         var postInfo = fromadmin[i];
 
-                        PostInfo post = new PostInfo();
-                        post.Indate = postInfo["inDate"][ServerData.format_string].ToString();
-                        post.itemCount = int.Parse(postInfo["itemCount"][ServerData.format_Number].ToString());
-                        post.itemType = int.Parse(postInfo["item"][ServerData.format_dic]["ItemType"][ServerData.format_string].ToString());
-                        post.titleText = postInfo["title"][ServerData.format_string].ToString();
-                        post.contentText = postInfo["content"][ServerData.format_string].ToString();
+                        //랭킹보상
+                        if (postInfo.ContainsKey("rankType")) 
+                        {
+                            PostInfo post = new PostInfo();
+                            post.Indate = postInfo["inDate"][ServerData.format_string].ToString();
+                            post.itemCount = int.Parse(postInfo["itemCount"][ServerData.format_string].ToString());
+                            post.itemType = int.Parse(postInfo["item"][ServerData.format_dic]["ItemType"][ServerData.format_string].ToString());
+                            post.titleText = postInfo["title"][ServerData.format_string].ToString();
+                            post.contentText = postInfo["content"][ServerData.format_string].ToString();
 
-                        postList.Add(post);
+                            postList.Add(post);
+                        }
+                        //일반보상
+                        else 
+                        {
+                            PostInfo post = new PostInfo();
+                            post.Indate = postInfo["inDate"][ServerData.format_string].ToString();
+                            post.itemCount = int.Parse(postInfo["itemCount"][ServerData.format_Number].ToString());
+                            post.itemType = int.Parse(postInfo["item"][ServerData.format_dic]["ItemType"][ServerData.format_string].ToString());
+                            post.titleText = postInfo["title"][ServerData.format_string].ToString();
+                            post.contentText = postInfo["content"][ServerData.format_string].ToString();
+
+                            postList.Add(post);
+                        }
                     }
                 }
 

@@ -82,6 +82,8 @@ public static class GameBalance
     public readonly static ObscuredInt marbleUnlockLevel = 400;
 
     public readonly static ObscuredInt skillCraftUnlockGachaLevel = 10;
+
+    public readonly static ObscuredInt twelveDungeonEnterPrice = 50000;
 }
 
 public static class DamageBalance

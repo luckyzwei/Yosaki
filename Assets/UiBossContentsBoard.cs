@@ -5,7 +5,7 @@ using UnityEngine;
 public class UiBossContentsBoard : MonoBehaviour
 {
     [SerializeField]
-    private UiBossContentsView uiBossContentsViewPrefab;
+    private UiTwelveBossContentsView uiBossContentsViewPrefab;
 
     [SerializeField]
     private Transform cellParent;
@@ -17,11 +17,11 @@ public class UiBossContentsBoard : MonoBehaviour
 
     private void Initialize() 
     {
-        var tableDatas = TableManager.Instance.BossTable.dataArray;
+        var tableDatas = TableManager.Instance.TwelveBossTable.dataArray;
 
-        for (int i=0;i< tableDatas.Length; i++) 
+        for (int i = 0; i < tableDatas.Length; i++)
         {
-            var cell = Instantiate<UiBossContentsView>(uiBossContentsViewPrefab, cellParent);
+            var cell = Instantiate<UiTwelveBossContentsView>(uiBossContentsViewPrefab, cellParent);
 
             cell.Initialize(tableDatas[i]);
         }

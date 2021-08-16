@@ -494,6 +494,11 @@ public class TableManager : SingletonMono<TableManager>
 
     [SerializeField]
     private DokebiRewardTable dokebiRewardTable;
-    public DokebiRewardTable DokebiRewardTable=> dokebiRewardTable;
+    public DokebiRewardTable DokebiRewardTable => dokebiRewardTable;
+
+    [SerializeField]
+    private TwelveBossTable twelveBossTable;
+
+    public TwelveBossTable TwelveBossTable => twelveBossTable;
 }
 

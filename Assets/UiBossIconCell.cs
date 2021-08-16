@@ -7,55 +7,55 @@ using UnityEngine.UI;
 
 public class UiBossIconCell : MonoBehaviour
 {
-    [SerializeField]
-    private Image bossIcon;
+    //[SerializeField]
+    //private Image bossIcon;
 
-    [SerializeField]
-    private TextMeshProUGUI description;
+    //[SerializeField]
+    //private TextMeshProUGUI description;
 
-    [SerializeField]
-    private GameObject notExistObject;
+    //[SerializeField]
+    //private GameObject notExistObject;
 
-    private BossTableData bossTableData;
+    //private BossTableData bossTableData;
 
-    [SerializeField]
-    private GameObject selectedFrame;
+    //[SerializeField]
+    //private GameObject selectedFrame;
 
-    public void Initialize(BossTableData bossTableData)
-    {
-        this.bossTableData = bossTableData;
+    //public void Initialize(BossTableData bossTableData)
+    //{
+    //    this.bossTableData = bossTableData;
 
-        bossIcon.sprite = CommonUiContainer.Instance.bossIcon[bossTableData.Id];
+    //    bossIcon.sprite = CommonUiContainer.Instance.bossIcon[bossTableData.Id];
 
-        Subscribe();
-    }
+    //    Subscribe();
+    //}
 
-    private void Subscribe()
-    {
-        ServerData.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.AsObservable().Subscribe(e =>
-        {
-            description.SetText($"LV{e} {bossTableData.Name}");
-        }).AddTo(this);
+    //private void Subscribe()
+    //{
+    //    ServerData.bossServerTable.TableDatas[bossTableData.Stringid].artifactLevel.AsObservable().Subscribe(e =>
+    //    {
+    //        description.SetText($"LV{e} {bossTableData.Name}");
+    //    }).AddTo(this);
 
-        ServerData.bossServerTable.TableDatas[bossTableData.Stringid].clear.AsObservable().Subscribe(e =>
-        {
-            notExistObject.SetActive(e == 0);
-        }).AddTo(this);
-    }
+    //    ServerData.bossServerTable.TableDatas[bossTableData.Stringid].clear.AsObservable().Subscribe(e =>
+    //    {
+    //        notExistObject.SetActive(e == 0);
+    //    }).AddTo(this);
+    //}
 
-    public void SetSelectedFrame(bool onOff)
-    {
-        selectedFrame.SetActive(onOff);
-    }
+    //public void SetSelectedFrame(bool onOff)
+    //{
+    //    selectedFrame.SetActive(onOff);
+    //}
 
-    public void OnClickCell()
-    {
-        if (notExistObject.activeInHierarchy == true)
-        {
-            PopupManager.Instance.ShowAlarmMessage("아직 클리어 하지 못했습니다.");
-            return;
-        }
-        UiMemory.Instance.OnClickCell(bossTableData.Id);
-    }
+    //public void OnClickCell()
+    //{
+    //    if (notExistObject.activeInHierarchy == true)
+    //    {
+    //        PopupManager.Instance.ShowAlarmMessage("아직 클리어 하지 못했습니다.");
+    //        return;
+    //    }
+    //    UiMemory.Instance.OnClickCell(bossTableData.Id);
+    //}
 
 }

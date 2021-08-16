@@ -13,7 +13,7 @@ public class GameManager : SingletonMono<GameManager>
     }
     public enum ContentsType
     {
-        NormalField, FireFly, Boss, InfiniteTower, Dokebi
+        NormalField, FireFly, Boss, InfiniteTower, Dokebi, TwelveDungeon
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;
@@ -95,7 +95,10 @@ public class GameManager : SingletonMono<GameManager>
 
     private void ClearStage()
     {
-        currentMapIdx.Value = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.LastMap).Value;
+        int lastIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.LastMap).Value;
+
+        currentMapIdx.Value = Mathf.Max(lastIdx, 0);
+
         CurrentStageData = TableManager.Instance.StageMapData[currentMapIdx.Value];
         MapThemaInfo = Resources.Load<MapThemaInfo>($"MapThema/{CurrentStageData.Mapthema}");
     }
@@ -115,6 +118,12 @@ public class GameManager : SingletonMono<GameManager>
         if (IsFirstScene() == false)
         {
             currentMapIdx.Value--;
+
+            if (currentMapIdx.Value < 0)
+            {
+                currentMapIdx.Value = 0;
+            }
+
             LoadNormalField();
         }
         else
@@ -166,6 +175,12 @@ public class GameManager : SingletonMono<GameManager>
             else
             {
                 currentMapIdx.Value--;
+
+                if (currentMapIdx.Value < 0)
+                {
+                    currentMapIdx.Value = 0;
+                }
+
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크가 불안정 합니다.\n잠시 후에 다시 시도해주세요.", null);
             }
 
