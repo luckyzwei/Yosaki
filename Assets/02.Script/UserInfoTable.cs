@@ -64,6 +64,7 @@ public class UserInfoTable
     public const string topClearStageId = "topClearStageId";
     public const string selectedSkillGroupId = "selectedSkillGroupId";
     public const string dokebiEnterCount = "dokebiEnterCount";
+    public const string chatFrame = "chatFrame";
 
     // public ObscuredDouble currentServerDate;
     public float currentServerDate;
@@ -106,7 +107,8 @@ public class UserInfoTable
         {dokebiEnterCount,0f},
         {dokebiKillCount0,0f},
         {dokebiKillCount1,0f},
-        {dokebiKillCount2,0f}
+        {dokebiKillCount2,0f},
+        {chatFrame,-1f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -305,7 +307,7 @@ public class UserInfoTable
                 currentServerDate = (float)Utils.ConvertToUnixTimestamp(currentServerTime);
 
                 //day check
-                DateTime savedDate = Utils.ConvertFromUnixTimestamp(tableDatas[LastLogin].Value-2f);
+                DateTime savedDate = Utils.ConvertFromUnixTimestamp(tableDatas[LastLogin].Value - 2f);
 
                 if (isFirstInit)
                 {
@@ -404,9 +406,18 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.buff_exp1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp1).Value);
         userInfoParam.Add(UserInfoTable.buff_exp2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp2).Value);
 
+        //채팅 테두리 초기화
+        if (weekChanged)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = -1f;
+            userInfoParam.Add(UserInfoTable.chatFrame, ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
+        }
+
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         Param iapParam = null;
+
+
 
         var iapTable = TableManager.Instance.InAppPurchase.dataArray;
 

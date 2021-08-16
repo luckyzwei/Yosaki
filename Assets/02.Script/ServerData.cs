@@ -367,33 +367,72 @@ public static class ServerData
 
     public static void GetPostItem(Item_Type type, float amount)
     {
-        switch (type)
+        if (type.IsRankFrameItem())
         {
-            case Item_Type.Gold:
-                ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += amount;
-                break;
-            case Item_Type.Jade:
-                ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += amount;
-                break;
-            case Item_Type.GrowthStone:
-                ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
-                break;
-            case Item_Type.Ticket:
-                ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += amount;
-                break;
-            case Item_Type.Marble:
-                ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += amount;
-                break;
-            case Item_Type.Dokebi:
-                ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value += amount;
-                break;
+            switch (type)
+            {
+                case Item_Type.RankFrame1_10:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_1_10;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 2;
+                    break;
+                case Item_Type.RankFrame10_100:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_10_100;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 1;
+                    break;
+                case Item_Type.RankFrame100_1000:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_100_1000;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 0;
+                    break;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.chatFrame, ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
+
+            transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransaction(transactionList, successCallBack: () =>
+              {
+                  LogManager.Instance.SendLog("랭킹보상 수령완료", $"{type}");
+              });
+        }
+        else
+        {
+            switch (type)
+            {
+                case Item_Type.Gold:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += amount;
+                    break;
+                case Item_Type.Jade:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += amount;
+                    break;
+                case Item_Type.GrowthStone:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
+                    break;
+                case Item_Type.Ticket:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += amount;
+                    break;
+                case Item_Type.Marble:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += amount;
+                    break;
+                case Item_Type.Dokebi:
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value += amount;
+                    break;
+
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            var tramsaction = GetItemTypeTransactionValue(type);
+            transactionList.Add(tramsaction);
+
+            SendTransaction(transactionList);
         }
 
-        List<TransactionValue> transactionList = new List<TransactionValue>();
-
-        var tramsaction = GetItemTypeTransactionValue(type);
-        transactionList.Add(tramsaction);
-
-        SendTransaction(transactionList);
     }
 }

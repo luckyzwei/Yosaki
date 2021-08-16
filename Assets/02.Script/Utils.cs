@@ -73,6 +73,11 @@ public static class Utils
             type != StatusType.SkillAttackCount;
     }
 
+    public static bool IsRankFrameItem(this Item_Type type) 
+    {
+        return type >= Item_Type.RankFrame1_10 && type <= Item_Type.RankFrame100_1000;
+    }
+
     public static int GetRandomIdx(List<float> inputDatas)
     {
         float total = 0;

@@ -84,6 +84,11 @@ public static class GameBalance
     public readonly static ObscuredInt skillCraftUnlockGachaLevel = 10;
 
     public readonly static ObscuredInt twelveDungeonEnterPrice = 50000;
+
+    public readonly static ObscuredInt rankRewardTicket_1_10 = 25;
+    public readonly static ObscuredInt rankRewardTicket_10_100 = 15;
+    public readonly static ObscuredInt rankRewardTicket_100_1000 = 10;
+
 }
 
 public static class DamageBalance

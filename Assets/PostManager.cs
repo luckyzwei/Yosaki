@@ -99,6 +99,8 @@ public class PostManager : SingletonMono<PostManager>
             // 이후 처리
             if (bro.IsSuccess())
             {
+                LogManager.Instance.SendLog("랭킹보상 수령 요청", $"{(Item_Type)((int)post.itemType)}");
+
                 SoundManager.Instance.PlaySound("GoldUse");
                 ServerData.GetPostItem((Item_Type)((int)post.itemType), post.itemCount);
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "우편을 수령했습니다.", null);
