@@ -200,6 +200,11 @@ public class UiMarbleIndicator : MonoBehaviour
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구슬이 각성됐습니다.\n(향상된 능력치로 적용 됩니다.)\n구미호 호연 외형 획득!", null);
                         LogManager.Instance.SendLog("구슬 각성", "각성 완료");
+
+                        //
+                        //ui갱신
+                        OnClickMarbleView(0);
+                        //
                     });
                 }
             },
