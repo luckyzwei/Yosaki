@@ -31,6 +31,9 @@ public class UiMarbleIndicator : MonoBehaviour
     [SerializeField]
     private Button unlockButton;
 
+    [SerializeField]
+    private Animator marbleAwakeAnimator;
+
     private void OnDestroy()
     {
         disposable.Dispose();
@@ -54,13 +57,15 @@ public class UiMarbleIndicator : MonoBehaviour
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(e =>
         {
-
+            marbleAwakeAnimator.enabled = e == 1;
         }).AddTo(disposable);
 
         ServerData.marbleServerTable.TableDatas[currentTableData.Stringid].hasItem.AsObservable().Subscribe(e =>
         {
             unlockButton.gameObject.SetActive(e == 0);
         }).AddTo(disposable);
+
+
     }
 
     private void RefreshMarbleUi()
@@ -95,7 +100,7 @@ public class UiMarbleIndicator : MonoBehaviour
             {
                 StatusType statusType = (StatusType)currentTableData.Abilitytype[0];
 
-                float statusValue = currentTableData.Abilityvalue[0] * (marbleAwaked ? currentTableData.Awakevalue : 1f);
+                float statusValue = marbleAwaked == false ? currentTableData.Abilityvalue[0] : currentTableData.Awakevalue[0];
 
                 if (statusType.IsPercentStat())
                 {
@@ -112,7 +117,7 @@ public class UiMarbleIndicator : MonoBehaviour
                 {
                     StatusType statusType = (StatusType)currentTableData.Abilitytype[i];
 
-                    float statusValue = currentTableData.Abilityvalue[i] * (marbleAwaked ? currentTableData.Awakevalue : 1f);
+                    float statusValue = marbleAwaked == false ? currentTableData.Abilityvalue[i] : currentTableData.Awakevalue[i];
 
                     if (statusType.IsPercentStat())
                     {
@@ -181,12 +186,19 @@ public class UiMarbleIndicator : MonoBehaviour
                     Param userinfoParam = new Param();
                     userinfoParam.Add(UserInfoTable.marbleAwake, ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value);
 
+                    Param costumeParam = new Param();
+                    string key = Item_Type.costume5.ToString();
+                    var serverData = ServerData.costumeServerTable.TableDatas[key];
+                    serverData.hasCostume.Value = true;
+                    costumeParam.Add(key, serverData.ConvertToString());
+
                     transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
                     transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userinfoParam));
+                    transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
 
                     ServerData.SendTransaction(transactions, successCallBack: () =>
                     {
-                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구슬이 각성됐습니다.\n(능력치 2배)", null);
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구슬이 각성됐습니다.\n(향상된 능력치로 적용 됩니다.)\n구미호 호연 외형 획득!", null);
                         LogManager.Instance.SendLog("구슬 각성", "각성 완료");
                     });
                 }

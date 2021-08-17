@@ -144,6 +144,7 @@ public class ChatManager : SingletonMono<ChatManager>
         {
             //에러가 발생했을 경우
             Debug.LogError("입장도중 에러가 발생했습니다 : " + args.ErrInfo.Reason);
+
             chatConnected = false;
         }
     }

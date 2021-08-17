@@ -75,7 +75,7 @@ public static class GameBalance
 
     public readonly static ObscuredFloat marbleSpawnProb = 1;
 
-    public readonly static ObscuredInt marbleAwakePrice = 10000000;
+    public readonly static ObscuredInt marbleAwakePrice = 3000000;
 
     public readonly static ObscuredInt skillSlotGroupNum = 3;
 

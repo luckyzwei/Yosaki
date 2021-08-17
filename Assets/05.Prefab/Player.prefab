@@ -1,48 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &629388732719238715
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5740140324601874251}
-  - component: {fileID: 1752754937687240883}
-  m_Layer: 9
-  m_Name: WingIndicator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5740140324601874251
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629388732719238715}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.04, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6598544888420517189}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1752754937687240883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629388732719238715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c38ded8bca328214ebaa8d2fa0fe8e57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &941257515900407667
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +27,6 @@ Transform:
   m_LocalPosition: {x: -0.065, y: -0.787, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5740140324601874251}
   - {fileID: 4834500250943576864}
   - {fileID: 6021001959540605472}
   m_Father: {fileID: 1413157575216455527}
@@ -648,7 +604,7 @@ Transform:
   m_Children:
   - {fileID: 8071018561830611206}
   m_Father: {fileID: 6598544888420517189}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5277726758570874474
 GameObject:
@@ -683,7 +639,7 @@ RectTransform:
   - {fileID: 339513224898458901}
   - {fileID: 6899061621324896466}
   m_Father: {fileID: 6598544888420517189}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

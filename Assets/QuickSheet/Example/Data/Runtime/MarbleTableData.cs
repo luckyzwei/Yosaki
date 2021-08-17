@@ -29,8 +29,8 @@ public class MarbleTableData
   public float[] Abilityvalue { get {return abilityvalue; } set { this.abilityvalue = value;} }
   
   [SerializeField]
-  float awakevalue;
-  public float Awakevalue { get {return awakevalue; } set { this.awakevalue = value;} }
+  float[] awakevalue = new float[0];
+  public float[] Awakevalue { get {return awakevalue; } set { this.awakevalue = value;} }
   
   [SerializeField]
   string name;

@@ -413,7 +413,7 @@ public static class PlayerStats
             {
                 if (tableDatas[i].Abilitytype[j] == (int)type)
                 {
-                    ret += isMarbleAwaked == false ? tableDatas[i].Abilityvalue[j] : tableDatas[i].Abilityvalue[j] * tableDatas[i].Awakevalue;
+                    ret += isMarbleAwaked == false ? tableDatas[i].Abilityvalue[j] : tableDatas[i].Awakevalue[j];
                 }
             }
         }

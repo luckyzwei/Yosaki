@@ -51,9 +51,9 @@ public class UiChat : MonoBehaviour
 
     public void SendChat(string chat)
     {
-        if (chat.Length > 30)
+        if (chat.Length > 40)
         {
-            chat = chat.Substring(0, 30);
+            chat = chat.Substring(0, 40);
         }
         ChatManager.Instance.SendChat(chat);
         inputfield.text = string.Empty;
