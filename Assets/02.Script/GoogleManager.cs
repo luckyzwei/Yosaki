@@ -166,7 +166,6 @@ public class GoogleManager : MonoBehaviour
         {
             Debug.Log("Login success");
             StartCoroutine(SceneChangeRoutine());
-
         }
         else
         {
@@ -224,7 +223,7 @@ public class GoogleManager : MonoBehaviour
         // return "mayotestguest@gmail.com";
         // return "mabw222ei3no24gi233d0312@n3aver.com"; //GM도비
         //  return "a_8846847867697156085"; //블랙핑크
-        return "a_884684786769223237156085";
+        return "a_884684786769www7156085";
 #endif
         Debug.LogError($"GetGoogleLoginKey {loginId}");
         return loginId;

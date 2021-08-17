@@ -21,8 +21,16 @@ public class UiMessageText : MonoBehaviour
     [SerializeField]
     private Image costumeIconFrame;
 
-    public void Initialize(string description, bool isSystem)
+    [SerializeField]
+    private List<GameObject> frame;
+
+    public void Initialize(string description, bool isSystem, int frameId = 0)
     {
+        for(int i = 0; i < frame.Count; i++) 
+        {
+            frame[i].SetActive(!isSystem && i == frameId);
+        }
+
         costumeIcon.gameObject.SetActive(isSystem == false);
 
         animator.SetTrigger(fadeAnimName);

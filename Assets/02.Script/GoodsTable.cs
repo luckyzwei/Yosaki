@@ -18,6 +18,7 @@ public class GoodsTable
     public static string MarbleKey = "Marble";
     public static string DokebiKey = "Dokebi";
     public static string SkillPartion = "SkillPartion";
+    public static string WeaponUpgradeStone = "WeaponUpgradeStone";
 
     //포션
     public static string Potion_0 = "Potion_0";

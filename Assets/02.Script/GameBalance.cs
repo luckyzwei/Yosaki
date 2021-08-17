@@ -85,9 +85,14 @@ public static class GameBalance
 
     public readonly static ObscuredInt twelveDungeonEnterPrice = 50000;
 
-    public readonly static ObscuredInt rankRewardTicket_1_10 = 25;
-    public readonly static ObscuredInt rankRewardTicket_10_100 = 15;
-    public readonly static ObscuredInt rankRewardTicket_100_1000 = 10;
+    public readonly static ObscuredInt rankRewardTicket_1 = 30;
+    public readonly static ObscuredInt rankRewardTicket_2 = 25;
+    public readonly static ObscuredInt rankRewardTicket_3 = 24;
+    public readonly static ObscuredInt rankRewardTicket_4 = 23;
+    public readonly static ObscuredInt rankRewardTicket_5 = 22;
+    public readonly static ObscuredInt rankRewardTicket_6_20 = 18;
+    public readonly static ObscuredInt rankRewardTicket_21_100 = 15;
+    public readonly static ObscuredInt rankRewardTicket_101_1000 = 7;
 
 }
 

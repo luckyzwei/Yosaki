@@ -75,7 +75,7 @@ public static class Utils
 
     public static bool IsRankFrameItem(this Item_Type type) 
     {
-        return type >= Item_Type.RankFrame1_10 && type <= Item_Type.RankFrame100_1000;
+        return type >= Item_Type.RankFrame1 && type <= Item_Type.RankFrame101_1000;
     }
 
     public static int GetRandomIdx(List<float> inputDatas)

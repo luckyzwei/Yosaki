@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using static ChatManager;
 
 public class UiChat : MonoBehaviour
 {
@@ -32,13 +33,13 @@ public class UiChat : MonoBehaviour
 
         if (ChatManager.Instance.chatConnected)
         {
-            SetMessage(CommonString.ChatConnectString, true);
+            SetMessage(new ChatInfo(CommonString.ChatConnectString), true);
         }
     }
 
-    private void SetMessage(string message, bool isSystem)
+    private void SetMessage(ChatInfo message, bool isSystem)
     {
-        messagePool[currentIdx].Initialize(message, isSystem);
+        messagePool[currentIdx].Initialize(message.message, isSystem, message.frameId);
         messagePool[currentIdx].transform.SetAsFirstSibling();
 
         currentIdx++;

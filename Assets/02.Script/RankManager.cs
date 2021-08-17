@@ -59,7 +59,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss = "Rank_Boss_1";
 
     //public const string Rank_Real_Boss_Uuid = "1438d260-fec6-11eb-b9fc-c9829b653541";
-    public const string Rank_Real_Boss_Uuid = "8274f9a0-fed7-11eb-a543-dd1561206033";
+    public const string Rank_Real_Boss_Uuid = "97521d30-ff36-11eb-b9fc-c9829b653541";
     public const string Rank_Real_Boss = "Rank_Boss_Real";
 
     public ReactiveCommand<RankInfo> WhenMyLevelRankLoadComplete = new ReactiveCommand<RankInfo>();

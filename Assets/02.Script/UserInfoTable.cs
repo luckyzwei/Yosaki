@@ -108,7 +108,7 @@ public class UserInfoTable
         {dokebiKillCount0,0f},
         {dokebiKillCount1,0f},
         {dokebiKillCount2,0f},
-        {chatFrame,-1f}
+        {chatFrame,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -409,7 +409,7 @@ public class UserInfoTable
         //채팅 테두리 초기화
         if (weekChanged)
         {
-            ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = -1f;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 0f;
             userInfoParam.Add(UserInfoTable.chatFrame, ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
         }
 

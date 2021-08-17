@@ -17,7 +17,23 @@ public class ChatManager : SingletonMono<ChatManager>
     private int retryCount = 0;
     WaitForSeconds retryDelay = new WaitForSeconds(3.0f);
 
-    public ReactiveCommand<string> whenChatReceived = new ReactiveCommand<string>();
+    public class ChatInfo
+    {
+        public string message;
+        public int frameId = 0;
+
+        public ChatInfo(string message)
+        {
+            this.message = message;
+        }
+        public ChatInfo(string message, int frameId)
+        {
+            this.message = message;
+            this.frameId = frameId;
+        }
+    }
+
+    public ReactiveCommand<ChatInfo> whenChatReceived = new ReactiveCommand<ChatInfo>();
 
     private Coroutine aliveRoutine;
 
@@ -33,13 +49,13 @@ public class ChatManager : SingletonMono<ChatManager>
 
         var bro = Backend.Chat.GetGroupChannelList(chatGroupName);
 
-        for(int i=0;i< bro.Rows().Count; i++) 
+        for (int i = 0; i < bro.Rows().Count; i++)
         {
             JsonData channel = bro.Rows()[i];
 
             int maxUserNum = int.Parse(channel["maxUserCount"].ToString());
             int joinedUserCount = int.Parse(channel["joinedUserCount"].ToString());
-            if (joinedUserCount >= maxUserNum) 
+            if (joinedUserCount >= maxUserNum)
             {
                 continue;
             }
@@ -57,7 +73,7 @@ public class ChatManager : SingletonMono<ChatManager>
                 retryCount = 0;
 
                 //비속어 필터링
-                whenChatReceived.Execute(CommonString.ChatConnectString);
+                whenChatReceived.Execute(new ChatInfo(CommonString.ChatConnectString));
                 Debug.LogError("채팅  JoinChannel success");
                 chatConnected = true;
                 Backend.Chat.SetFilterUse(true);
@@ -84,7 +100,7 @@ public class ChatManager : SingletonMono<ChatManager>
 
     private void RetryConnect()
     {
-        whenChatReceived.Execute("채팅 서버 연결이 끊겼습니다. 다시 연결 합니다.");
+        whenChatReceived.Execute(new ChatInfo("채팅 서버 연결이 끊겼습니다. 다시 연결 합니다."));
         chatConnected = false;
         StartCoroutine(RetryRoutine());
     }
@@ -93,7 +109,7 @@ public class ChatManager : SingletonMono<ChatManager>
     {
         if (retryCount > retryCountMax)
         {
-            whenChatReceived.Execute("채팅 서버와 연결이 끊겼습니다.");
+            whenChatReceived.Execute(new ChatInfo("채팅 서버와 연결이 끊겼습니다."));
             chatConnected = false;
             yield break;
         }
@@ -173,7 +189,7 @@ public class ChatManager : SingletonMono<ChatManager>
             return;
         }
 
-        if (string.IsNullOrEmpty(message)) 
+        if (string.IsNullOrEmpty(message))
         {
             PopupManager.Instance.ShowAlarmMessage("메세지가 비었습니다.");
             return;
@@ -187,7 +203,14 @@ public class ChatManager : SingletonMono<ChatManager>
 
         AddCostumeInfo(ref message);
 
+        AddFrameInfo(ref message);
+
         Backend.Chat.ChatToChannel(ChannelType.Public, message);
+    }
+
+    private void AddFrameInfo(ref string message)
+    {
+        message = $"{message}{CommonString.ChatSplitChar}{(int)ServerData.userInfoTable.TableDatas[UserInfoTable.chatFrame].Value}";
     }
 
     private void AddCostumeInfo(ref string message)
@@ -252,6 +275,9 @@ public class ChatManager : SingletonMono<ChatManager>
             case RankType.Boss:
                 return CommonString.RankPrefix_Boss;
                 break;
+            case RankType.Real_Boss:
+                return CommonString.RankPrefix_Real_Boss;
+                break;
         }
 
         return "미등록";
@@ -265,13 +291,29 @@ public class ChatManager : SingletonMono<ChatManager>
             if (!args.From.IsRemote)
             {
                 var split = args.Message.Split(CommonString.ChatSplitChar);
-                whenChatReceived.Execute($"{split[0]}{CommonString.ChatSplitChar}{split[1]} 나:{split[2]}");
+
+                if (split.Length >= 4)
+                {
+                    whenChatReceived.Execute(new ChatInfo($"{split[0]}{CommonString.ChatSplitChar}{split[1]} 나:{split[2]}", int.Parse(split[3])));
+                }
+                else
+                {
+                    whenChatReceived.Execute(new ChatInfo($"{split[0]}{CommonString.ChatSplitChar}{split[1]} 나:{split[2]}"));
+                }
             }
             // 다른 유저의 메시지일 경우
             else
             {
                 var split = args.Message.Split(CommonString.ChatSplitChar);
-                whenChatReceived.Execute($"{split[0]}{CommonString.ChatSplitChar}{split[1]} {args.From.NickName}:{split[2]}");
+
+                if (split.Length >= 4)
+                {
+                    whenChatReceived.Execute(new ChatInfo($"{split[0]}{CommonString.ChatSplitChar}{split[1]} {args.From.NickName}:{split[2]}", int.Parse(split[3])));
+                }
+                else
+                {
+                    whenChatReceived.Execute(new ChatInfo($"{split[0]}{CommonString.ChatSplitChar}{split[1]} {args.From.NickName}:{split[2]}"));
+                }
             }
         }
         else if (args.ErrInfo.Category == ErrorCode.BannedChat)

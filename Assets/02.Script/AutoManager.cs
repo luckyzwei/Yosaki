@@ -25,7 +25,6 @@ public class AutoManager : Singleton<AutoManager>
 
     public void Subscribe()
     {
-
         GameManager.Instance.whenSceneChanged.Subscribe(e =>
         {
             if (IsAutoMode && UiAutoRevive.autoRevive == false)

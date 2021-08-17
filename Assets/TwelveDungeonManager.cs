@@ -226,29 +226,6 @@ public class TwelveDungeonManager : ContentsManagerBase
         ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
     }
 
-    public static List<RewardData> GetRewawrdData(TwelveBossTableData bossTableData, float damagedHp, int clearCount = 1)
-    {
-        List<RewardData> rewardDatas = new List<RewardData>();
-        float rewardPer = Mathf.Clamp(damagedHp, bossTableData.Rewardminhp, bossTableData.Rewardmaxhp) / bossTableData.Rewardmaxhp;
-        //보상 산정
-        for (int i = 0; i < bossTableData.Rewardtypes.Length; i++)
-        {
-            Item_Type rewardType = (Item_Type)bossTableData.Rewardtypes[i];
-            int rewardAmount = (int)(Mathf.Ceil(rewardPer * bossTableData.Rewardmaxvalues[i])) * clearCount;
-
-            RewardData viewData = new RewardData(rewardType, rewardAmount);
-            rewardDatas.Add(viewData);
-        }
-
-        //데이터 적용(로컬)
-        for (int i = 0; i < rewardDatas.Count; i++)
-        {
-            ServerData.AddLocalValue(rewardDatas[i].itemType, rewardDatas[i].amount);
-        }
-
-        return rewardDatas;
-    }
-
     private void RewardItem()
     {
        // DailyMissionManager.UpdateDailyMission(DailyMissionKey.RewardedBossContents, 1);

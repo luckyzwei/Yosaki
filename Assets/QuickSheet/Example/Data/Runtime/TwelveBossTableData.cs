@@ -53,15 +53,19 @@ public class TwelveBossTableData
   public bool Islock { get {return islock; } set { this.islock = value;} }
   
   [SerializeField]
-  int[] rewardtypes = new int[0];
-  public int[] Rewardtypes { get {return rewardtypes; } set { this.rewardtypes = value;} }
-  
-  [SerializeField]
-  float[] rewardmaxvalues = new float[0];
-  public float[] Rewardmaxvalues { get {return rewardmaxvalues; } set { this.rewardmaxvalues = value;} }
-  
-  [SerializeField]
   float defense;
   public float Defense { get {return defense; } set { this.defense = value;} }
+  
+  [SerializeField]
+  float[] rewardcut = new float[0];
+  public float[] Rewardcut { get {return rewardcut; } set { this.rewardcut = value;} }
+  
+  [SerializeField]
+  int[] rewardtype = new int[0];
+  public int[] Rewardtype { get {return rewardtype; } set { this.rewardtype = value;} }
+  
+  [SerializeField]
+  float[] rewardvalue = new float[0];
+  public float[] Rewardvalue { get {return rewardvalue; } set { this.rewardvalue = value;} }
   
 }

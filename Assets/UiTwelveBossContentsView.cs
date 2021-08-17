@@ -36,6 +36,11 @@ public class UiTwelveBossContentsView : MonoBehaviour
         bossIcon.sprite = CommonUiContainer.Instance.bossIcon[bossTableData.Id];
     }
 
+    public void OnClickRewardButton()
+    {
+        UiTwelveRewardPopup.Instance.Initialize(bossTableData.Id);
+    }
+
     public void OnClickEnterButton()
     {
         int price = GameBalance.twelveDungeonEnterPrice;

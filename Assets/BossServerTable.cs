@@ -10,10 +10,11 @@ public class BossServerData
 {
     public int idx;
     public ReactiveProperty<string> score;
+    public ReactiveProperty<string> rewardedId;
 
     public string ConvertToString()
     {
-        return $"{idx},{score.Value}";
+        return $"{idx},{score.Value},{rewardedId.Value}";
     }
 }
 
@@ -21,6 +22,7 @@ public class BossServerTable
 {
     public static string Indate;
     public static string tableName = "TwelveBoss";
+    public static char rewardSplit = '#';
 
     private ReactiveDictionary<string, BossServerData> tableDatas = new ReactiveDictionary<string, BossServerData>();
 
@@ -68,6 +70,7 @@ public class BossServerTable
                     var bossTable = new BossServerData();
                     bossTable.idx = table[i].Id;
                     bossTable.score = new ReactiveProperty<string>(string.Empty);
+                    bossTable.rewardedId = new ReactiveProperty<string>(string.Empty);
 
                     defultValues.Add(table[i].Stringid, bossTable.ConvertToString());
                     tableDatas.Add(table[i].Stringid, bossTable);
@@ -119,7 +122,8 @@ public class BossServerTable
                         var splitData = value.Split(',');
 
                         bossData.idx = int.Parse(splitData[0]);
-                        bossData.score = new ReactiveProperty<string>(string.Empty);
+                        bossData.score = new ReactiveProperty<string>(splitData[1]);
+                        bossData.rewardedId = new ReactiveProperty<string>(splitData[2]);
 
                         tableDatas.Add(table[i].Stringid, bossData);
                     }
@@ -129,6 +133,7 @@ public class BossServerTable
                         var bossData = new BossServerData();
                         bossData.idx = table[i].Id;
                         bossData.score = new ReactiveProperty<string>(string.Empty);
+                        bossData.rewardedId = new ReactiveProperty<string>(string.Empty);
 
                         defultValues.Add(table[i].Stringid, bossData.ConvertToString());
 

@@ -248,6 +248,14 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += amount;
                 param.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.Marble:
+                ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += amount;
+                param.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.WeaponUpgradeStone:
+                ServerData.goodsTable.GetTableData(GoodsTable.WeaponUpgradeStone).Value += amount;
+                param.Add(GoodsTable.WeaponUpgradeStone, ServerData.goodsTable.GetTableData(GoodsTable.WeaponUpgradeStone).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             case Item_Type.costume1:
             case Item_Type.costume4:
                 {
@@ -371,17 +379,37 @@ public static class ServerData
         {
             switch (type)
             {
-                case Item_Type.RankFrame1_10:
-                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_1_10;
+                case Item_Type.RankFrame1:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_1;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    break;
+                case Item_Type.RankFrame2:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_2;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    break;
+                case Item_Type.RankFrame3:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_3;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    break;
+                case Item_Type.RankFrame4:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_4;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    break;
+                case Item_Type.RankFrame5:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_5;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    break;
+                case Item_Type.RankFrame6_20:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_6_20;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 3;
+                    break;
+                case Item_Type.RankFrame21_100:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_21_100;
                     ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 2;
                     break;
-                case Item_Type.RankFrame10_100:
-                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_10_100;
+                case Item_Type.RankFrame101_1000:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_101_1000;
                     ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 1;
-                    break;
-                case Item_Type.RankFrame100_1000:
-                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_100_1000;
-                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 0;
                     break;
             }
 
@@ -423,7 +451,9 @@ public static class ServerData
                 case Item_Type.Dokebi:
                     ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value += amount;
                     break;
-
+                case Item_Type.WeaponUpgradeStone:
+                    ServerData.goodsTable.GetTableData(GoodsTable.WeaponUpgradeStone).Value += amount;
+                    break;
             }
 
             List<TransactionValue> transactionList = new List<TransactionValue>();
