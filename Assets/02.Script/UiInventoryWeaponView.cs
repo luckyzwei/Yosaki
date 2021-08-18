@@ -44,6 +44,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     [SerializeField]
     private GameObject tutorialObject;
 
+    [SerializeField]
+    private GameObject yomulDescription;
+
     public void Initialize(WeaponData weaponData, MagicBookData magicBookData, Action<WeaponData, MagicBookData> onClickCallBack)
     {
         this.weaponData = weaponData;
@@ -53,10 +56,15 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         tutorialObject.SetActive(weaponData != null && weaponData.Id != 0 && ServerData.weaponTable.TableDatas[weaponData.Stringid].hasItem.Value == 1);
 
+        //요물 설명
+        yomulDescription.SetActive(weaponData != null && weaponData.Id == 19);
+
         if (weaponData != null)
         {
             title.SetText(weaponData.Name);
             weaponView.Initialize(weaponData, null);
+
+
         }
         else if (magicBookData != null)
         {
@@ -139,7 +147,8 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            upgradeButton.SetActive(amount >= weaponData.Requireupgrade);
+            //요물일때 X
+            upgradeButton.SetActive(amount >= weaponData.Requireupgrade && weaponData.Id != 19 && weaponData.Id != 20);
         }
         else if (magicBookData != null)
         {

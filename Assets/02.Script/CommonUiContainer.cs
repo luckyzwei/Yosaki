@@ -11,7 +11,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public List<Sprite> chatFrames;
 
-    private List<string> itemGradeName = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4 };
+    private List<string> itemGradeName = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5 };
     public List<string> ItemGradeName => itemGradeName;
 
     public List<Color> itemGradeColor;
