@@ -95,12 +95,14 @@ public class UiMarbleIndicator : MonoBehaviour
         }
         else
         {
+            abilDesc += "-각성전-\n";
+
             //능력치 한개짜리
             if (currentTableData.Abilitytype.Length == 1)
             {
                 StatusType statusType = (StatusType)currentTableData.Abilitytype[0];
 
-                float statusValue = marbleAwaked == false ? currentTableData.Abilityvalue[0] : currentTableData.Awakevalue[0];
+                float statusValue = currentTableData.Abilityvalue[0];
 
                 if (statusType.IsPercentStat())
                 {
@@ -117,7 +119,7 @@ public class UiMarbleIndicator : MonoBehaviour
                 {
                     StatusType statusType = (StatusType)currentTableData.Abilitytype[i];
 
-                    float statusValue = marbleAwaked == false ? currentTableData.Abilityvalue[i] : currentTableData.Awakevalue[i];
+                    float statusValue = currentTableData.Abilityvalue[i];
 
                     if (statusType.IsPercentStat())
                     {
@@ -134,6 +136,47 @@ public class UiMarbleIndicator : MonoBehaviour
                     }
                 }
             }
+            abilDesc += "\n<color=red>-각성후-\n";
+            //각성시
+            if (currentTableData.Abilitytype.Length == 1)
+            {
+                StatusType statusType = (StatusType)currentTableData.Abilitytype[0];
+
+                float statusValue = currentTableData.Awakevalue[0];
+
+                if (statusType.IsPercentStat())
+                {
+                    abilDesc += $"{CommonString.GetStatusName(statusType)} {statusValue * 100f}";
+                }
+                else
+                {
+                    abilDesc += $"{CommonString.GetStatusName(statusType)} {statusValue}";
+                }
+            }
+            else
+            {
+                for (int i = 0; i < currentTableData.Abilitytype.Length; i++)
+                {
+                    StatusType statusType = (StatusType)currentTableData.Abilitytype[i];
+
+                    float statusValue = currentTableData.Awakevalue[i];
+
+                    if (statusType.IsPercentStat())
+                    {
+                        abilDesc += $"{CommonString.GetStatusName(statusType)} {statusValue * 100f}";
+                    }
+                    else
+                    {
+                        abilDesc += $"{CommonString.GetStatusName(statusType)} {statusValue}";
+                    }
+
+                    if (i != currentTableData.Abilitytype.Length - 1)
+                    {
+                        abilDesc += "</color>\n";
+                    }
+                }
+            }
+
 
             if (string.IsNullOrEmpty(currentTableData.Description) == false)
             {

@@ -7,7 +7,7 @@ public class UiTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
 {
     public class TwelveBossRewardInfo
     {
-        public TwelveBossRewardInfo(int idx, float damageCut, int rewardType, float rewardAmount, float currentDamage)
+        public TwelveBossRewardInfo(int idx, float damageCut, int rewardType, float rewardAmount, string rewardCutString, float currentDamage)
         {
             this.idx = idx;
 
@@ -17,6 +17,8 @@ public class UiTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
 
             this.rewardAmount = rewardAmount;
 
+            this.rewardCutString = rewardCutString;
+
             this.currentDamage = currentDamage;
         }
 
@@ -25,6 +27,7 @@ public class UiTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
         public int rewardType;
         public float rewardAmount;
         public float currentDamage;
+        public string rewardCutString;
     }
 
     [SerializeField]
@@ -79,7 +82,7 @@ public class UiTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
             {
                 uiTwelveBossRewardViews[i].gameObject.SetActive(true);
 
-                TwelveBossRewardInfo info = new TwelveBossRewardInfo(i, bossTableData.Rewardcut[i], bossTableData.Rewardtype[i], bossTableData.Rewardvalue[i], currentDamage);
+                TwelveBossRewardInfo info = new TwelveBossRewardInfo(i, bossTableData.Rewardcut[i], bossTableData.Rewardtype[i], bossTableData.Rewardvalue[i], bossTableData.Cutstring[i], currentDamage);
 
                 uiTwelveBossRewardViews[i].Initialize(info, bossServerData);
             }

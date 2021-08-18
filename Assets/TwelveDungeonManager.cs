@@ -221,9 +221,27 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         var serverData = ServerData.bossServerTable.TableDatas[twelveBossTable.Stringid];
 
-        serverData.score.Value = damageAmount.Value.ToString();
+        if (string.IsNullOrEmpty(serverData.score.Value) == false) 
+        {
+            if(damageAmount.Value < float.Parse(serverData.score.Value)) 
+            {
+                return;
+            }
+            else 
+            {
+                serverData.score.Value = damageAmount.Value.ToString();
 
-        ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
+                ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
+            }
+        }
+        else 
+        {
+            serverData.score.Value = damageAmount.Value.ToString();
+
+            ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
+        }
+
+    
     }
 
     private void RewardItem()

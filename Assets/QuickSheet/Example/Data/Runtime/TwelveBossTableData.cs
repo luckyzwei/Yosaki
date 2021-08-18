@@ -68,4 +68,8 @@ public class TwelveBossTableData
   float[] rewardvalue = new float[0];
   public float[] Rewardvalue { get {return rewardvalue; } set { this.rewardvalue = value;} }
   
+  [SerializeField]
+  string[] cutstring = new string[0];
+  public string[] Cutstring { get {return cutstring; } set { this.cutstring = value;} }
+  
 }

@@ -28,8 +28,12 @@ public class UiStatus : SingletonMono<UiStatus>
     {
         RankManager.Instance.RequestMyLevelRank();
         RankManager.Instance.RequestMyStageRank();
-        //RankManager.Instance.RequestMyBossRank();
-        //RankManager.Instance.RequestMyRealBossRank();
+
+        if (GameManager.contentsType == GameManager.ContentsType.NormalField) 
+        {
+            RankManager.Instance.RequestMyBossRank();
+            RankManager.Instance.RequestMyRealBossRank();
+        }
     }
     private void Subscribe()
     {

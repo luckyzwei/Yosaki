@@ -106,8 +106,14 @@ public class UiBuffPopupView : MonoBehaviour
 
     }
 
-    private void BuffGetRoutine() 
+    private void BuffGetRoutine()
     {
+        if (ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value == 1)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "중복요청", null);
+            return;
+        }
+
         ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value = 1;
         ServerData.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.Value += buffTableData.Buffseconds;
 
@@ -125,6 +131,9 @@ public class UiBuffPopupView : MonoBehaviour
 
         transactions.Add(TransactionValue.SetUpdate(BuffServerTable.tableName, BuffServerTable.Indate, buffParam));
 
-        ServerData.SendTransaction(transactions);
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+          {
+              LogManager.Instance.SendLog("버프 획득", $"{buffTableData.Stringid}");
+          });
     }
 }

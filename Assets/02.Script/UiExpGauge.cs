@@ -39,7 +39,7 @@ public class UiExpGauge : MonoBehaviour
     {
         gauge.fillAmount = currentExp / maxExp;
 
-        gaugeText.SetText($"{(int)currentExp}/{(int)maxExp}({(int)(currentExp / maxExp *100f)}%)");
+        gaugeText.SetText($"{Utils.ConvertBigNum(currentExp)}/{Utils.ConvertBigNum(maxExp)}({(int)(currentExp / maxExp * 100f)}%)");
     }
 
 }

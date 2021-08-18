@@ -59,7 +59,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss = "Rank_Boss_1";
 
     //public const string Rank_Real_Boss_Uuid = "1438d260-fec6-11eb-b9fc-c9829b653541";
-    public const string Rank_Real_Boss_Uuid = "97521d30-ff36-11eb-b9fc-c9829b653541";
+    public const string Rank_Real_Boss_Uuid = "5144db80-007a-11ec-b9fc-c9829b653541";
     public const string Rank_Real_Boss = "Rank_Boss_Real";
 
     public ReactiveCommand<RankInfo> WhenMyLevelRankLoadComplete = new ReactiveCommand<RankInfo>();
@@ -114,9 +114,12 @@ public class RankManager : SingletonMono<RankManager>
             }
         }
 
-        this.myRankInfo[RankType.Level] = myRankInfo;
+        if (myRankInfo != null)
+        {
+            this.myRankInfo[RankType.Level] = myRankInfo;
 
-        WhenMyLevelRankLoadComplete.Execute(myRankInfo);
+            WhenMyLevelRankLoadComplete.Execute(myRankInfo);
+        }
     }
 
     public void UpdateUserRank_Level()
@@ -186,10 +189,13 @@ public class RankManager : SingletonMono<RankManager>
             }
         }
 
-        whenLoadSuccess_Stage?.Invoke(myRankInfo);
-        WhenMyStageRankLoadComplete.Execute(myRankInfo);
+        if (myRankInfo != null)
+        {
+            whenLoadSuccess_Stage?.Invoke(myRankInfo);
+            WhenMyStageRankLoadComplete.Execute(myRankInfo);
 
-        this.myRankInfo[RankType.Stage] = myRankInfo;
+            this.myRankInfo[RankType.Stage] = myRankInfo;
+        }
     }
 
     public void UpdateStage_Score(float score)
@@ -260,15 +266,24 @@ public class RankManager : SingletonMono<RankManager>
             }
         }
 
-        whenLoadSuccess_Boss?.Invoke(myRankInfo);
-        WhenMyBossRankLoadComplete.Execute(myRankInfo);
+        if (myRankInfo != null)
+        {
+            whenLoadSuccess_Boss?.Invoke(myRankInfo);
+            WhenMyBossRankLoadComplete.Execute(myRankInfo);
 
-        this.myRankInfo[RankType.Boss] = myRankInfo;
+            this.myRankInfo[RankType.Boss] = myRankInfo;
+        }
     }
 
     public void UpdateBoss_Score(float score)
     {
         if (PlayerData.Instance.NickName.Equals("블랙핑크")) return;
+
+        if (this.myRankInfo[RankType.Boss] != null && score < this.myRankInfo[RankType.Boss].Score)
+        {
+            Debug.LogError("점수가 더 낮음");
+            return;
+        }
 
         Param param = new Param();
         param.Add("Score", score);
@@ -333,15 +348,24 @@ public class RankManager : SingletonMono<RankManager>
             }
         }
 
-        whenLoadSuccess_Real_Boss?.Invoke(myRankInfo);
-        WhenMyRealBossRankLoadComplete.Execute(myRankInfo);
+        if (myRankInfo != null)
+        {
+            whenLoadSuccess_Real_Boss?.Invoke(myRankInfo);
+            WhenMyRealBossRankLoadComplete.Execute(myRankInfo);
 
-        this.myRankInfo[RankType.Real_Boss] = myRankInfo;
+            this.myRankInfo[RankType.Real_Boss] = myRankInfo;
+        }
     }
 
     public void UpdateRealBoss_Score(float score)
     {
         if (PlayerData.Instance.NickName.Equals("블랙핑크")) return;
+
+        if (this.myRankInfo[RankType.Real_Boss] != null && score < this.myRankInfo[RankType.Real_Boss].Score)
+        {
+            Debug.LogError("점수가 더 낮음");
+            return;
+        }
 
         Param param = new Param();
         param.Add("Score", score);

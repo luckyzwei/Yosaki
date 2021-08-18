@@ -21,6 +21,9 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private Image magicBook;
 
+    [SerializeField]
+    private GameObject yomulObject;
+
     public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int fightPoint)
     {
         this.nickName.SetText(nickName);
@@ -29,6 +32,9 @@ public class UiTopRankerCell : MonoBehaviour
         SetPetSpine(petId);
 
         weapon.gameObject.SetActive(weaponId != -1);
+
+        yomulObject.SetActive(weaponId == 20);
+
         if (weaponId != -1)
         {
             weapon.sprite = CommonResourceContainer.GetWeaponSprite(weaponId);

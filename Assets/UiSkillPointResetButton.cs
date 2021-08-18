@@ -28,14 +28,74 @@ public class UiSkillPointResetButton : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertBigNum(GameBalance.SkillPointResetPrice)}개를 사용해서\n스킬 포인트를 초기화 하시겠습니까?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertBigNum(GameBalance.SkillPointResetPrice)}개를 사용해서\n모든 기술을 초기화 하시겠습니까?", () =>
           {
-              PurchaseProcess();
+              ResetSkillAll();
           }, null);
 
     }
 
-    private void PurchaseProcess()
+    public void OnClickResetPassiveSkillPoint()
+    {
+        if (ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value < GameBalance.SkillPointResetPrice)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
+            return;
+        }
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertBigNum(GameBalance.SkillPointResetPrice)}개를 사용해서\n패시브 기술을 초기화 하시겠습니까?", () =>
+        {
+            ResetPassiveOnly();
+        }, null);
+
+    }
+
+    private void ResetPassiveOnly() 
+    {
+        //패시브 스킬 초기화
+        var tableData = TableManager.Instance.PassiveSkill.dataArray;
+
+        int passiveSkillPoint = 0;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            passiveSkillPoint += ServerData.passiveServerTable.TableDatas[tableData[i].Stringid].level.Value;
+            ServerData.passiveServerTable.TableDatas[tableData[i].Stringid].level.Value = 0;
+        }
+
+        //리셋한 데이터 적용
+        ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value += passiveSkillPoint;
+
+        //비용 차감
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.SkillPointResetPrice;
+
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+        Param goodsParam = new Param();
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+
+        Param statusParam = new Param();
+        statusParam.Add(StatusTable.SkillPoint, ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value);
+
+        Param passiveSkillParam = new Param();
+        var passiveTableData = TableManager.Instance.PassiveSkill.dataArray;
+
+        for (int i = 0; i < passiveTableData.Length; i++)
+        {
+            passiveSkillParam.Add(passiveTableData[i].Stringid, ServerData.passiveServerTable.TableDatas[passiveTableData[i].Stringid].ConvertToString());
+        }
+
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        transactionList.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
+        transactionList.Add(TransactionValue.SetUpdate(PassiveServerTable.tableName, PassiveServerTable.Indate, passiveSkillParam));
+
+        ServerData.SendTransaction(transactionList, successCallBack: () =>
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "패시브 기술 초기화 성공!", null);
+        });
+    }
+
+    private void ResetSkillAll()
     {
         //패시브 스킬 초기화
         var tableData = TableManager.Instance.PassiveSkill.dataArray;
@@ -101,7 +161,7 @@ public class UiSkillPointResetButton : MonoBehaviour
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "스킬포인트 초기화 성공!", null);
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "기술포인트 초기화 성공!", null);
         });
     }
 }
