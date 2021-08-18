@@ -17,9 +17,13 @@ public class TwelveDungeonEnterView : MonoBehaviour
     [SerializeField]
     private float popupDokebiWidth;
 
+    [SerializeField]
+    private GameObject enterButton;
+
     private void OnEnable()
     {
         popupBg.sizeDelta = new Vector2(popupDokebiWidth, popupBg.sizeDelta.y);
+        enterButton.SetActive(false);
     }
 
     private void OnDisable()

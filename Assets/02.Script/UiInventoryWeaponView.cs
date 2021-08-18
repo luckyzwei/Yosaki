@@ -47,6 +47,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     [SerializeField]
     private GameObject yomulDescription;
 
+    [SerializeField]
+    private GameObject yomulUpgradeButton;
+
     public void Initialize(WeaponData weaponData, MagicBookData magicBookData, Action<WeaponData, MagicBookData> onClickCallBack)
     {
         this.weaponData = weaponData;
@@ -58,6 +61,8 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         //요물 설명
         yomulDescription.SetActive(weaponData != null && weaponData.Id == 19);
+
+        yomulUpgradeButton.SetActive(weaponData != null && weaponData.Id == 20);
 
         if (weaponData != null)
         {

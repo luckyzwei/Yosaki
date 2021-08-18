@@ -38,7 +38,8 @@ public class GoodsTable
         {BonusSpinKey,0f},
         {MarbleKey,0f},
         {DokebiKey,0f},
-        {SkillPartion,0f}
+        {SkillPartion,0f},
+        {WeaponUpgradeStone,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

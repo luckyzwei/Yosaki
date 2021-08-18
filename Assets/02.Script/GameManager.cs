@@ -171,6 +171,8 @@ public class GameManager : SingletonMono<GameManager>
                 ClearStage();
 
                 ChangeScene();
+
+    
             }
             else
             {

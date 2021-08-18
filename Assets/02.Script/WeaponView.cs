@@ -104,7 +104,7 @@ public class WeaponView : MonoBehaviour
             SubscribeSkill();
         }
 
-        uishiny.width = ((float)grade / 3f) * 0.8f;
+        //uishiny.width = ((float)grade / 3f) * 0.6f;
         uishiny.brightness = ((float)grade / 3f) * 0.8f;
     }
 

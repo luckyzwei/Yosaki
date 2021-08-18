@@ -9,8 +9,6 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public List<Sprite> itemGradeFrame;
 
-    public List<Sprite> chatFrames;
-
     private List<string> itemGradeName = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5 };
     public List<string> ItemGradeName => itemGradeName;
 
@@ -42,6 +40,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite marble;
 
     public Sprite dokebi;
+
+    public Sprite WeaponUpgradeStone;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -77,28 +77,31 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return costumeThumbnail[4];
                 break;
             case Item_Type.RankFrame1:
-                return rankFrame[3];
+                return rankFrame[4];
                 break;
             case Item_Type.RankFrame2:
-                return rankFrame[3];
+                return rankFrame[4];
                 break;
             case Item_Type.RankFrame3:
-                return rankFrame[3];
+                return rankFrame[4];
                 break;
             case Item_Type.RankFrame4:
-                return rankFrame[3];
+                return rankFrame[4];
                 break;
             case Item_Type.RankFrame5:
-                return rankFrame[3];
+                return rankFrame[4];
                 break;
             case Item_Type.RankFrame6_20:
-                return rankFrame[2];
+                return rankFrame[3];
                 break;
             case Item_Type.RankFrame21_100:
-                return rankFrame[1];
+                return rankFrame[2];
                 break;
             case Item_Type.RankFrame101_1000:
-                return rankFrame[0];
+                return rankFrame[1];
+                break;
+            case Item_Type.WeaponUpgradeStone:
+                return WeaponUpgradeStone;
                 break;
         }
 
