@@ -59,7 +59,7 @@ public static class GameBalance
 
     public readonly static ObscuredFloat fieldBossHpValue = 15f;
 
-    public readonly static ObscuredInt bonusDungeonGemPerEnemy = 700;
+    public readonly static ObscuredInt bonusDungeonGemPerEnemy = 1000;
     public readonly static ObscuredInt effectActiveDistance = 15;
     public readonly static ObscuredInt firstSkillAwakeNum = 1;
 
@@ -86,8 +86,8 @@ public static class GameBalance
     public readonly static ObscuredInt twelveDungeonEnterPrice = 50000;
 
     public readonly static ObscuredInt rankRewardTicket_1 = 30;
-    public readonly static ObscuredInt rankRewardTicket_2 = 27;
-    public readonly static ObscuredInt rankRewardTicket_3 = 25;
+    public readonly static ObscuredInt rankRewardTicket_2 = 26;
+    public readonly static ObscuredInt rankRewardTicket_3 = 24;
     public readonly static ObscuredInt rankRewardTicket_4 = 22;
     public readonly static ObscuredInt rankRewardTicket_5 = 20;
     public readonly static ObscuredInt rankRewardTicket_6_20 = 16;

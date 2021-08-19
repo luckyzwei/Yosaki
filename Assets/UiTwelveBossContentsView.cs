@@ -29,7 +29,16 @@ public class UiTwelveBossContentsView : MonoBehaviour
     {
         this.bossTableData = bossTableData;
         title.SetText(bossTableData.Name);
-        description.SetText(bossTableData.Description);
+
+        var score = ServerData.bossServerTable.TableDatas[bossTableData.Stringid].score.Value;
+        if (string.IsNullOrEmpty(score) == false)
+        {
+            description.SetText($"최고 피해량 : {Utils.ConvertBigNum(float.Parse(score))}");
+        }
+        else
+        {
+            description.SetText("기록 없음");
+        }
 
         lockObject.SetActive(bossTableData.Islock);
 
@@ -43,29 +52,8 @@ public class UiTwelveBossContentsView : MonoBehaviour
 
     public void OnClickEnterButton()
     {
-        int price = GameBalance.twelveDungeonEnterPrice;
-
-        int currentJadeNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
-
-        if (currentJadeNum < price)
-        {
-            PopupManager.Instance.ShowAlarmMessage($"옥이 부족합니다.");
-            return;
-        }
-
         enterButton.interactable = false;
-
-        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
-
-        ServerData.goodsTable.SyncToServerEach(GoodsTable.Jade, () =>
-        {
-            GameManager.Instance.SetBossId(bossTableData.Id);
-            GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
-        },
-        () =>
-        {
-            enterButton.interactable = true;
-
-        });
+        GameManager.Instance.SetBossId(bossTableData.Id);
+        GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
     }
 }

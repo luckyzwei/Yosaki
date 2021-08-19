@@ -77,16 +77,16 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return costumeThumbnail[4];
                 break;
             case Item_Type.RankFrame1:
-                return rankFrame[4];
+                return rankFrame[8];
                 break;
             case Item_Type.RankFrame2:
-                return rankFrame[4];
+                return rankFrame[7];
                 break;
             case Item_Type.RankFrame3:
-                return rankFrame[4];
+                return rankFrame[6];
                 break;
             case Item_Type.RankFrame4:
-                return rankFrame[4];
+                return rankFrame[5];
                 break;
             case Item_Type.RankFrame5:
                 return rankFrame[4];

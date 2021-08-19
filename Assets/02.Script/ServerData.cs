@@ -381,19 +381,19 @@ public static class ServerData
             {
                 case Item_Type.RankFrame1:
                     ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_1;
-                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 8;
                     break;
                 case Item_Type.RankFrame2:
                     ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_2;
-                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 7;
                     break;
                 case Item_Type.RankFrame3:
                     ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_3;
-                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 6;
                     break;
                 case Item_Type.RankFrame4:
                     ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_4;
-                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 5;
                     break;
                 case Item_Type.RankFrame5:
                     ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_5;

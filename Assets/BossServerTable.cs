@@ -108,7 +108,7 @@ public class BossServerTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var table = TableManager.Instance.BossTable.dataArray;
+                var table = TableManager.Instance.TwelveBossTable.dataArray;
 
                 for (int i = 0; i < table.Length; i++)
                 {
