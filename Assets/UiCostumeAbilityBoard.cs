@@ -54,6 +54,12 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
     private ObscuredInt price;
 
+    private bool showYellowPop = false;
+    public void WhenYellowAbilPopupChanged(bool ison)
+    {
+        showYellowPop = ison;
+    }
+
 
     #region Security
     private void OnEnable()
@@ -143,7 +149,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
     private void WhenCostumeHasValueChanged(bool hasCostume)
     {
         abilityGachaButton.SetActive(hasCostume);
-       // costumeEquipButton.SetActive(hasCostume);
+        // costumeEquipButton.SetActive(hasCostume);
     }
 
 
@@ -182,6 +188,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
         //최고 옵션 있을때 처리
         bool hasMaxOption = false;
+        bool hasYellowOption = false;
         int lockAbilityCount = 0;
 
         for (int i = 0; i < CurrentServerData.abilityIdx.Count; i++)
@@ -200,6 +207,12 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
                 hasMaxOption = true;
                 break;
             }
+
+            if (isLock == false && abilityData.Grade == GameBalance.costumeMaxGrade - 1)
+            {
+                hasYellowOption = true;
+                break;
+            }
         }
 
         //전부잠겼을떄 처리
@@ -214,6 +227,16 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
             continueOpenButton.canExecute = false;
 
             PopupManager.Instance.ShowYesNoPopup("알림", "최고등급 옵션이 있습니다. 그래도 다시 뽑습니까?", GachaSLots,
+                () =>
+                {
+                    continueOpenButton.canExecute = true;
+                });
+        }
+        else if (hasYellowOption && showYellowPop)
+        {
+            continueOpenButton.canExecute = false;
+
+            PopupManager.Instance.ShowYesNoPopup("알림", "노란색등급 옵션이 있습니다. 그래도 다시 뽑습니까?", GachaSLots,
                 () =>
                 {
                     continueOpenButton.canExecute = true;

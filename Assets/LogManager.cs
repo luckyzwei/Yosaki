@@ -9,7 +9,17 @@ public class LogManager : SingletonMono<LogManager>
     {
         Param param = new Param();
         param.Add(prefix, $"{description}");
-        SendQueue.Enqueue(Backend.GameLog.InsertLog,"Normal", param, (callback) =>
+        SendQueue.Enqueue(Backend.GameLog.InsertLog, "Normal", param, (callback) =>
+         {
+            // 이후 처리
+        });
+    }
+
+    public void SendLogType(string type, string prefix, string description)
+    {
+        Param param = new Param();
+        param.Add(prefix, $"{description}");
+        SendQueue.Enqueue(Backend.GameLog.InsertLog, type, param, (callback) =>
         {
             // 이후 처리
         });

@@ -59,7 +59,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss = "Rank_Boss_1";
 
     //public const string Rank_Real_Boss_Uuid = "1438d260-fec6-11eb-b9fc-c9829b653541";
-    public const string Rank_Real_Boss_Uuid = "5144db80-007a-11ec-b9fc-c9829b653541";
+    public const string Rank_Real_Boss_Uuid = "ffb33220-012e-11ec-aafe-876da3cace87";
     public const string Rank_Real_Boss = "Rank_Boss_Real";
 
     public ReactiveCommand<RankInfo> WhenMyLevelRankLoadComplete = new ReactiveCommand<RankInfo>();
@@ -266,9 +266,11 @@ public class RankManager : SingletonMono<RankManager>
             }
         }
 
+        //소탕팝업뜸이래야
+        whenLoadSuccess_Boss?.Invoke(myRankInfo);
+
         if (myRankInfo != null)
         {
-            whenLoadSuccess_Boss?.Invoke(myRankInfo);
             WhenMyBossRankLoadComplete.Execute(myRankInfo);
 
             this.myRankInfo[RankType.Boss] = myRankInfo;

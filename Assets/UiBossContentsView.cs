@@ -79,11 +79,8 @@ public class UiBossContentsView : MonoBehaviour
 
         ServerData.goodsTable.SyncToServerEach(GoodsTable.Ticket, () =>
         {
-            //
-            Param param = new Param();
-            param.Add("티켓사용함", $"남은 갯수 : { ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value}");
+            LogManager.Instance.SendLogType("InstClear", "enter", $"{ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value+1}에서 1개 사용");
 
-            SendQueue.Enqueue(Backend.GameLog.InsertLog, "Ticket", param, (brk) => { });
             //로그
 
             GameManager.Instance.SetBossId(bossTableData.Id);
@@ -158,7 +155,7 @@ public class UiBossContentsView : MonoBehaviour
             clearButton.interactable = true;
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.RewardedBossContents, clearAmount);
             WhenClearSuccess(rewardList);
-            LogManager.Instance.SendLog("보스소탕성공", $"{clearAmount}회");
+            LogManager.Instance.SendLogType("InstClear", "clear", $"{ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value + clearAmount}에서{clearAmount}사용");
         });
     }
 

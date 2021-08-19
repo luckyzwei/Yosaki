@@ -74,6 +74,11 @@ public class UiLevelPassCell : MonoBehaviour
         {
             lockIcon_Free.SetActive(!CanGetReward());
             lockIcon_Ad.SetActive(!CanGetReward());
+
+            //itemAmount_free.color = lockIcon_Free.activeInHierarchy == true ? Color.grey : Color.white;
+            //itemName_free.color = lockIcon_Free.activeInHierarchy == true ? Color.grey : Color.white;
+            //itemAmount_ad.color = lockIcon_Ad.activeInHierarchy == true ? Color.grey : Color.white;
+            //itemName_ad.color = lockIcon_Ad.activeInHierarchy == true ? Color.grey : Color.white;
         });
     }
 
@@ -190,6 +195,7 @@ public class UiLevelPassCell : MonoBehaviour
         ServerData.SendTransaction(transactionList, successCallBack: () =>
           {
               SoundManager.Instance.PlaySound("Reward");
+              LogManager.Instance.SendLogType("Fox", "Normal", $"보상 {passInfo.id}");
               PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
           });
     }
@@ -212,7 +218,7 @@ public class UiLevelPassCell : MonoBehaviour
         ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
             SoundManager.Instance.PlaySound("Reward");
-            LogManager.Instance.SendLog("여우패스", $"보상 {passInfo.id}");
+            LogManager.Instance.SendLogType("Fox", "Premium", $"보상 {passInfo.id}");
             PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
         });
     }

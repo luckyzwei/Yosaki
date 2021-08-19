@@ -51,7 +51,7 @@ public class UiCostumProbView : MonoBehaviour
                 break;
             case 4:
                 {
-                    return "<color=#00ffffff>";
+                    return "<color=yellow>";
                 }
                 break;
             case 5:
