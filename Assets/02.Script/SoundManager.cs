@@ -35,6 +35,9 @@ public class SoundManager : SingletonMono<SoundManager>
     [SerializeField]
     private AudioClip dokebiBgm;
 
+    [SerializeField]
+    private AudioClip twelveBgm;
+
     private const int sameSoundPlayNum = 5;
 
     private Dictionary<string, int> sameSoundCount = new Dictionary<string, int>();
@@ -109,6 +112,9 @@ public class SoundManager : SingletonMono<SoundManager>
                     break;
                 case ContentsType.Dokebi:
                     clip = dokebiBgm;
+                    break;
+                case ContentsType.TwelveDungeon:
+                    clip = twelveBgm;
                     break;
             }
 

@@ -172,7 +172,7 @@ public class UiMarbleIndicator : MonoBehaviour
 
                     if (i != currentTableData.Abilitytype.Length - 1)
                     {
-                        abilDesc += "</color>\n";
+                        abilDesc += "\n";
                     }
                 }
             }
@@ -182,6 +182,8 @@ public class UiMarbleIndicator : MonoBehaviour
             {
                 abilDesc += $"\n{currentTableData.Description}";
             }
+
+            abilDesc += "</color>";
 
             marbleDesc.SetText(abilDesc);
         }
@@ -208,23 +210,23 @@ public class UiMarbleIndicator : MonoBehaviour
 
 
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertBigNum(GameBalance.marbleAwakePrice)}개를 사용해서 각성 합니까?",
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Marble)} {Utils.ConvertBigNum(GameBalance.marbleAwakePrice)}개를 사용해서 각성 합니까?\n\n각성효과\n향상된 능력치 적용\n구미호 호연 외형 획득\n순보 딜레이 감소",
             () =>
             {
-                if (ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value < GameBalance.marbleAwakePrice)
+                if (ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value < GameBalance.marbleAwakePrice)
                 {
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.", null);
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Marble)}이 부족합니다.", null);
                     return;
                 }
                 else
                 {
                     List<TransactionValue> transactions = new List<TransactionValue>();
 
-                    ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.marbleAwakePrice;
+                    ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= GameBalance.marbleAwakePrice;
                     ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value = 1;
 
                     Param goodsParam = new Param();
-                    goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+                    goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
 
                     Param userinfoParam = new Param();
                     userinfoParam.Add(UserInfoTable.marbleAwake, ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value);
@@ -241,7 +243,7 @@ public class UiMarbleIndicator : MonoBehaviour
 
                     ServerData.SendTransaction(transactions, successCallBack: () =>
                     {
-                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구슬이 각성됐습니다.\n(향상된 능력치로 적용 됩니다.)\n구미호 호연 외형 획득!", null);
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구슬이 각성됐습니다.\n향상된 능력치로 적용 됩니다.\n구미호 호연 외형 획득!\n순보 딜레이 감소", null);
                         LogManager.Instance.SendLog("구슬 각성", "각성 완료");
 
                         //

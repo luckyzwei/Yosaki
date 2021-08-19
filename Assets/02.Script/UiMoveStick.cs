@@ -24,8 +24,9 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     private ObscuredFloat quickMoveRange_Down = 5f;
 
     private readonly WaitForSeconds doubleInputDelay = new WaitForSeconds(0.5f);
+    private readonly WaitForSeconds doubleInputDelay_Awake = new WaitForSeconds(0.25f);
     private const float quickMoveDelaySec = 0.5f;
-    private readonly WaitForSeconds quickMoveDelay = new WaitForSeconds(quickMoveDelaySec);
+    private const float quickMoveDelaySec_Awake = 0.25f;
 
     [SerializeField]
     private Image quickMoveDelayGauge;
@@ -121,7 +122,18 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     private IEnumerator InputDelay(InputType type)
     {
         downInputContainter[type] = true;
-        yield return doubleInputDelay;
+
+        bool marbleAwake = ServerData.userInfoTable.TableDatas[UserInfoTable.marbleAwake].Value == 1f;
+
+        if (marbleAwake)
+        {
+            yield return doubleInputDelay_Awake;
+        }
+        else
+        {
+            yield return doubleInputDelay;
+        }
+
         downInputContainter[type] = false;
     }
 
@@ -131,10 +143,23 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
 
         QuickMoveDelayContainter[type] = true;
 
-        while (tick < quickMoveDelaySec)
+        float delay = 0f;
+
+        bool marbleAwake = ServerData.userInfoTable.TableDatas[UserInfoTable.marbleAwake].Value == 1f;
+
+        if (marbleAwake)
+        {
+            delay = quickMoveDelaySec_Awake;
+        }
+        else
+        {
+            delay = quickMoveDelaySec;
+        }
+
+        while (tick < delay)
         {
             tick += Time.deltaTime;
-            quickMoveDelayGauge.fillAmount = tick / quickMoveDelaySec;
+            quickMoveDelayGauge.fillAmount = tick / delay;
             yield return null;
         }
 
