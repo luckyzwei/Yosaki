@@ -27,6 +27,8 @@ public class UiPackageShop : MonoBehaviour
 
         while (e.MoveNext())
         {
+            if (e.Current.Value.Active == false) continue;
+
             if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit1)
             {
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, package1Parent);

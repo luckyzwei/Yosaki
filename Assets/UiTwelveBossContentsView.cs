@@ -25,6 +25,10 @@ public class UiTwelveBossContentsView : MonoBehaviour
     [SerializeField]
     private Button enterButton;
 
+    [SerializeField]
+    private GameObject buttons;
+
+
     public void Initialize(TwelveBossTableData bossTableData)
     {
         this.bossTableData = bossTableData;
@@ -41,6 +45,7 @@ public class UiTwelveBossContentsView : MonoBehaviour
         }
 
         lockObject.SetActive(bossTableData.Islock);
+        buttons.SetActive(bossTableData.Islock == false);
 
         bossIcon.sprite = CommonUiContainer.Instance.bossIcon[bossTableData.Id];
     }

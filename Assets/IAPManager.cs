@@ -18,7 +18,7 @@ using BackEnd;
 
 public enum BuyType
 {
-    NoLimit, DayOfOne, WeekOfTwo, MonthOfOne, AllTimeOne, MonthOfFive, WeekOfFive, DayOfFive
+    NoLimit, DayOfOne, WeekOfTwo, MonthOfOne, AllTimeOne, MonthOfFive, WeekOfFive, DayOfFive, MonthOfTen
 }
 public enum ShopCategory
 {
@@ -65,7 +65,6 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
         AddProductsItem(builder);
-        AddPassItem(builder);
 
         UnityPurchasing.Initialize(this, builder);
     }
@@ -88,26 +87,6 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
             }
         }
 
-    }
-
-    private void AddPassItem(ConfigurationBuilder builder)
-    {
-        var passTable = TableManager.Instance.LevelPass;
-
-        HashSet<string> shopIdList = new HashSet<string>();
-
-        for (int i = 0; i < passTable.dataArray.Length; i++)
-        {
-            string shopid = passTable.dataArray[i].Shopid;
-
-            if (shopIdList.Contains(shopid)) continue;
-
-            shopIdList.Add(shopid);
-
-            builder.AddProduct(shopid, ProductType.NonConsumable);
-
-            //Debug.LogError($"상품 추가됨 {shopid}");
-        }
     }
 
     private bool IsInitialized()

@@ -263,11 +263,6 @@ public class TableManager : SingletonMono<TableManager>
 
     public LevelPass LevelPass => levelPass;
 
-    public List<LevelPassData> GetLevelPassDataByGroup(int group)
-    {
-        return levelPass.dataArray.Where(e => e.Group == group).ToList();
-    }
-
     [SerializeField]
     private Costume costume;
 

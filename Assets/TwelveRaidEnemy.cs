@@ -7,7 +7,14 @@ using Spine.Unity;
 
 public class TwelveRaidEnemy : BossEnemyBase
 {
+    [SerializeField]
     private List<AlarmHitObject> enemyHitObjects;
+
+    [SerializeField]
+    private AlarmHitObject horizontalHit;
+
+    [SerializeField]
+    private AlarmHitObject verticalHit;
 
     private void Start()
     {
@@ -48,7 +55,7 @@ public class TwelveRaidEnemy : BossEnemyBase
         while (true)
         {
             Random.InitState((int)System.DateTime.Now.Ticks);
-            int attackType = Random.Range(0, 3);
+            int attackType = Random.Range(0, 2);
 
 #if UNITY_EDITOR
             Debug.LogError($"AttackType {attackType}");
@@ -56,28 +63,24 @@ public class TwelveRaidEnemy : BossEnemyBase
 
             if (attackType == 0)
             {
-                yield return StartCoroutine(AttackRoutine_2(1.0f));
+                yield return StartCoroutine(AttackRoutine_2(2));
             }
             else if (attackType == 1)
             {
-                yield return StartCoroutine(AttackRoutine_3(1.0f));
-            }
-            else if (attackType == 2)
-            {
-                yield return StartCoroutine(AttackRoutine_4(1.0f));
+                yield return StartCoroutine(AttackRoutine_3(2));
             }
 
             StartCoroutine(PlayAttackAnim());
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
     private IEnumerator PlayAttackAnim()
     {
         skeletonAnimation.AnimationName = "attack";
-        yield return new WaitForSeconds(1.0f);
-        skeletonAnimation.AnimationName = "idle";
+        yield return new WaitForSeconds(1.5f);
+        skeletonAnimation.AnimationName = "walk";
     }
 
     private void Initialize()
@@ -107,9 +110,7 @@ public class TwelveRaidEnemy : BossEnemyBase
     //?
     private IEnumerator AttackRoutine_2(float delay)
     {
-        //alarmHitObject_2.transform.position = attack2SpawnPos[Random.Range(0, attack2SpawnPos.Count)].position;
-
-        //alarmHitObject_2.AttackStart();
+        horizontalHit.AttackStart();
 
         StartCoroutine(PlaySoundDelay(1f, "BossSkill2"));
 
@@ -119,9 +120,7 @@ public class TwelveRaidEnemy : BossEnemyBase
     //?
     private IEnumerator AttackRoutine_3(float delay)
     {
-        //  alarmHitObject_3.transform.position = alarmHitObjectSpawnPos[Random.Range(0, alarmHitObjectSpawnPos.Count)].position;
-
-        //alarmHitObject_3.AttackStart();
+        verticalHit.AttackStart();
 
         StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
 

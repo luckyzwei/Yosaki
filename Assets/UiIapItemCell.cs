@@ -129,13 +129,13 @@ public class UiIapItemCell : MonoBehaviour
                 weaponView.gameObject.SetActive(true);
                 int itemIdx = productData.Rewardtypes[i] % 2000;
 
-                weaponView.Initialize(null,TableManager.Instance.MagicBoocDatas[itemIdx], null);
+                weaponView.Initialize(null, TableManager.Instance.MagicBoocDatas[itemIdx], null);
             }
             else if (itemType.IsSkillItem())
             {
                 weaponView.gameObject.SetActive(true);
                 int itemIdx = productData.Rewardtypes[i] % 3000;
-                weaponView.Initialize(null,null,TableManager.Instance.SkillData[itemIdx]);
+                weaponView.Initialize(null, null, TableManager.Instance.SkillData[itemIdx]);
             }
         }
 
@@ -212,6 +212,8 @@ public class UiIapItemCell : MonoBehaviour
                 break;
             case BuyType.DayOfFive:
                 return 5;
+            case BuyType.MonthOfTen:
+                return 10;
                 break;
         }
 
@@ -246,6 +248,8 @@ public class UiIapItemCell : MonoBehaviour
                 break;
             case BuyType.DayOfFive:
                 return "일 5회 구매가능";
+            case BuyType.MonthOfTen:
+                return "월 10회 구매가능";
                 break;
         }
 

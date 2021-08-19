@@ -40,6 +40,7 @@ public static class ServerData
 
     public static MarbleServerTable marbleServerTable { get; private set; } = new MarbleServerTable();
     public static EtcServerTable etcServerTable { get; private set; } = new EtcServerTable();
+    public static NewLevelPass newLevelPass { get; private set; } = new NewLevelPass();
 
     #region string
     public static string inDate_str = "inDate";
@@ -88,6 +89,8 @@ public static class ServerData
         //rankTables_Boss1.Initialize();
         marbleServerTable.Initialize();
         etcServerTable.Initialize();
+
+        newLevelPass.Initialize();
     }
 
     public static void GetUserInfo()
@@ -157,6 +160,9 @@ public static class ServerData
                 break;
             case Item_Type.Jade:
                 ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardValue;
+                break;
+            case Item_Type.Marble:
+                ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += rewardValue;
                 break;
             case Item_Type.GrowthStone:
                 ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += rewardValue;

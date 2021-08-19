@@ -4,14 +4,14 @@ using TMPro;
 using UnityEngine;
 using UniRx;
 
-public class UiStagePassBuyButton : MonoBehaviour
+public class UiLevelPassBuyButton : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI descText;
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string stagePassKey = "stagepass";
+    public static readonly string stagePassKey = "levelpass";
 
     void Start()
     {
@@ -35,7 +35,7 @@ public class UiStagePassBuyButton : MonoBehaviour
 
         IAPManager.Instance.WhenBuyComplete.AsObservable().Subscribe(e =>
         {
-            SoundManager.Instance.PlaySound("GoldUse");
+            SoundManager.Instance.PlaySound("Reward");
             GetPackageItem(e.purchasedProduct.definition.id);
         }).AddTo(disposable);
     }
@@ -63,12 +63,8 @@ public class UiStagePassBuyButton : MonoBehaviour
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 상품 id {productId}", null);
             return;
         }
-        else
-        {
-            // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} 구매 성공!", null);
-        }
 
-        if (tableData.SELLWHERE != SellWhere.StagePass) return;
+        if (tableData.Productid != stagePassKey) return;
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
 
