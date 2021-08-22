@@ -53,10 +53,10 @@ public class UserInfoTable
     public const string marbleAwake = "marbleAwake";
     public const string resetStat = "resetStat";
 
-    public const string buff_gold1 = "gold1_new_new";
-    public const string buff_gold2 = "gold2_new_new";
-    public const string buff_exp1 = "exp1_new_new";
-    public const string buff_exp2 = "exp2_new_new";
+    public const string buff_gold1 = "gold1_new_new_new";
+    public const string buff_gold2 = "gold2_new_new_new";
+    public const string buff_exp1 = "exp1_new_new_new";
+    public const string buff_exp2 = "exp2_new_new_new";
 
     public const string bonusDungeonMaxKillCount = "bonusDungeonMaxKillCount";
 

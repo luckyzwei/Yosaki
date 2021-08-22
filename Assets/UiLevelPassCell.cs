@@ -79,7 +79,7 @@ public class UiLevelPassCell : MonoBehaviour
             //itemName_free.color = lockIcon_Free.activeInHierarchy == true ? Color.grey : Color.white;
             //itemAmount_ad.color = lockIcon_Ad.activeInHierarchy == true ? Color.grey : Color.white;
             //itemName_ad.color = lockIcon_Ad.activeInHierarchy == true ? Color.grey : Color.white;
-        });
+        }).AddTo(disposables);
     }
 
     public void Initialize(PassInfo passInfo)

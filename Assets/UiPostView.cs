@@ -53,31 +53,31 @@ public class UiPostView : MonoBehaviour
                     break;
                 case Item_Type.RankFrame2:
                     title.SetText("랭킹보상(2위)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_2}개\n채팅 아이콘(1등급)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_2}개\n채팅 아이콘(2등급)");
                     break;
                 case Item_Type.RankFrame3:
                     title.SetText("랭킹보상(3위)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_3}개\n채팅 아이콘(1등급)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_3}개\n채팅 아이콘(3등급)");
                     break;
                 case Item_Type.RankFrame4:
                     title.SetText("랭킹보상(4위)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_4}개\n채팅 아이콘(1등급)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_4}개\n채팅 아이콘(4등급)");
                     break;
                 case Item_Type.RankFrame5:
                     title.SetText("랭킹보상(5위)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_5}개\n채팅 아이콘(1등급)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_5}개\n채팅 아이콘(5등급)");
                     break;
                 case Item_Type.RankFrame6_20:
                     title.SetText("랭킹보상(6~20위)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_6_20}개\n채팅 아이콘(2등급)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_6_20}개\n채팅 아이콘(6등급)");
                     break;
                 case Item_Type.RankFrame21_100:
                     title.SetText("랭킹보상(21~100위)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_21_100}개\n채팅 아이콘(3등급)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_21_100}개\n채팅 아이콘(7등급)");
                     break;
                 case Item_Type.RankFrame101_1000:
-                    title.SetText("랭킹보상(101~1000)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_101_1000}개\n채팅 아이콘(4등급)");
+                    title.SetText("랭킹보상(101~1000위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_101_1000}개\n채팅 아이콘(8등급)");
                     break;
             }
         }

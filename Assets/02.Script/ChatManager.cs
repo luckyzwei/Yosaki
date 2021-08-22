@@ -136,7 +136,7 @@ public class ChatManager : SingletonMono<ChatManager>
             else
             {
 #if UNITY_EDITOR
-                Debug.LogError(args.Session.NickName + "님이 접속했습니다");
+                //Debug.LogError(args.Session.NickName + "님이 접속했습니다");
 #endif
             }
         }
