@@ -19,6 +19,7 @@ public class GoodsTable
     public static string DokebiKey = "Dokebi";
     public static string SkillPartion = "SkillPartion";
     public static string WeaponUpgradeStone = "WeaponUpgradeStone";
+    public static string PetUpgradeSoul = "PetUpgradeSoul";
 
     //포션
     public static string Potion_0 = "Potion_0";
@@ -39,7 +40,8 @@ public class GoodsTable
         {MarbleKey,0f},
         {DokebiKey,0f},
         {SkillPartion,0f},
-        {WeaponUpgradeStone,0f}
+        {WeaponUpgradeStone,0f},
+        {PetUpgradeSoul,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -85,6 +87,10 @@ public class GoodsTable
     {
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Marble)} 획득(+{(int)amount})");
         tableDatas[MarbleKey].Value += amount;
+    }
+    public void GetPetUpgradeSoul(float amount)
+    {
+        tableDatas[PetUpgradeSoul].Value += amount;
     }
     public void GetBlueStone(float amount)
     {

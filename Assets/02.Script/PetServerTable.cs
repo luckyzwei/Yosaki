@@ -40,15 +40,16 @@ public class PetServerTable
             if (e.Current.Value.idx == 0) continue;
             if (e.Current.Value.hasItem.Value == 0) continue;
 
+
             var petTableData = TableManager.Instance.PetDatas[e.Current.Value.idx];
             if (petTableData.Hastype1 == status)
             {
-                ret += petTableData.Hasvalue1;
+                ret += petTableData.Hasvalue1 + e.Current.Value.level.Value * petTableData.Hasaddvalue1;
             }
 
             if (petTableData.Hastype2 == status)
             {
-                ret += petTableData.Hasvalue2;
+                ret += petTableData.Hasvalue2 + e.Current.Value.level.Value * petTableData.Hasaddvalue2;
             }
         }
 

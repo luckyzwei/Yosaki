@@ -25,6 +25,7 @@ public static class CommonString
     public static string ItemGrade_3 = "특급";
     public static string ItemGrade_4 = "전설";
     public static string ItemGrade_5 = "요물";
+    public static string ItemGrade_5_Norigae = "신물";
 
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -102,6 +103,7 @@ public static class CommonString
             case Item_Type.Dokebi: return "도깨비 뿔";
             case Item_Type.SkillPartion: return "기술 조각";
             case Item_Type.WeaponUpgradeStone: return "힘의증표";
+            case Item_Type.PetUpgradeSoul: return "요괴의 영혼";
         }
         return "미등록";
     }

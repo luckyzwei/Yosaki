@@ -64,24 +64,24 @@ public class WeaponView : MonoBehaviour
             grade = weaponData.Grade;
             id = weaponData.Id;
             weaponIcon.sprite = CommonResourceContainer.GetWeaponSprite(id);
-
+            this.gradeText.SetText(CommonUiContainer.Instance.ItemGradeName_Weapon[grade]);
         }
         else if (magicBookData != null)
         {
             grade = magicBookData.Grade;
             id = magicBookData.Id;
             weaponIcon.sprite = CommonResourceContainer.GetMagicBookSprite(id);
+            this.gradeText.SetText(CommonUiContainer.Instance.ItemGradeName_Norigae[grade]);
         }
         else if (skillData != null)
         {
             grade = skillData.Skillgrade;
             id = skillData.Id;
             skillIcon.sprite = CommonResourceContainer.GetSkillIconSprite(id);
+            this.gradeText.SetText(CommonUiContainer.Instance.ItemGradeName_Weapon[grade]);
         }
 
         lvText.gameObject.SetActive(skillData == null);
-
-        this.gradeText.SetText(CommonUiContainer.Instance.ItemGradeName[grade]);
 
         this.gradeText.color = (CommonUiContainer.Instance.itemGradeColor[grade]);
 

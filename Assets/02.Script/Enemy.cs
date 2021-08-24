@@ -127,6 +127,7 @@ public class Enemy : PoolItem
 
         SpawnDropItem();
 
+        GetPetUpgradeGem();
         //UpdateCollection();
 
         enemyDeadCallBack?.Invoke(this);
@@ -135,6 +136,11 @@ public class Enemy : PoolItem
         {
             WhenFieldBossEnemyDead();
         }
+    }
+
+    private void GetPetUpgradeGem()
+    {
+        ServerData.goodsTable.GetPetUpgradeSoul(1);
     }
 
     private void WhenFieldBossEnemyDead()

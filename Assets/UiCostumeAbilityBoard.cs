@@ -157,7 +157,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
     {
         if (CurrentServerData.hasCostume.Value == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("코스튬이 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage("외형이 없습니다.");
             return;
         }
 
@@ -182,7 +182,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
         if (CurrentServerData.hasCostume.Value == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("코스튬이 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage("외형이 없습니다.");
             return;
         }
 

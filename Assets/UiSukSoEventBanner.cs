@@ -50,7 +50,7 @@ public class UiSukSoEventBanner : MonoBehaviour
          {
              if (e.IsSuccess())
              {
-                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "썩연 코스튬 획득!", null);
+                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "썩연 외형 획득!", null);
              }
              else if (e.IsSuccess() == false)
              {

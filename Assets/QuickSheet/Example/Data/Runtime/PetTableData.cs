@@ -52,4 +52,20 @@ public class PetTableData
   PetGetType petgettype;
   public PetGetType PETGETTYPE { get {return petgettype; } set { this.petgettype = value;} }
   
+  [SerializeField]
+  int nextpetid;
+  public int Nextpetid { get {return nextpetid; } set { this.nextpetid = value;} }
+  
+  [SerializeField]
+  int maxlevel;
+  public int Maxlevel { get {return maxlevel; } set { this.maxlevel = value;} }
+  
+  [SerializeField]
+  float hasaddvalue1;
+  public float Hasaddvalue1 { get {return hasaddvalue1; } set { this.hasaddvalue1 = value;} }
+  
+  [SerializeField]
+  float hasaddvalue2;
+  public float Hasaddvalue2 { get {return hasaddvalue2; } set { this.hasaddvalue2 = value;} }
+  
 }

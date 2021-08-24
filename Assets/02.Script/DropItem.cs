@@ -14,6 +14,7 @@ public enum Item_Type
     Dokebi,
     SkillPartion,
     WeaponUpgradeStone,
+    PetUpgradeSoul,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
