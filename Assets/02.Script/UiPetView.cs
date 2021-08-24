@@ -87,9 +87,10 @@ public class UiPetView : MonoBehaviour
 
         SetPetSpine(petData.Id);
 
-        petName.SetText(petData.Name);
+      
+        petName.color = CommonUiContainer.Instance.itemGradeColor[petData.Id / 4];
 
-        awakePrice.SetText(Utils.ConvertBigNum(GameBalance.petAwakePrice));
+        awakePrice.SetText(Utils.ConvertBigNum(petData.Awakeprice));
 
         UpdateUi();
 
@@ -109,19 +110,27 @@ public class UiPetView : MonoBehaviour
         string abilityStr = string.Empty;
 
         int currentLevel = ServerData.petTable.TableDatas[petData.Stringid].level.Value;
+        int maxLevel = petData.Maxlevel;
 
         if (petData.Hasvalue1 != 0f)
         {
             StatusType statusType = (StatusType)petData.Hastype1;
             bool isPercent = statusType.IsPercentStat();
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue1 + currentLevel * petData.Hasaddvalue1) * (isPercent ? 100 : 1f)}\n";
+            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue1 + currentLevel * petData.Hasaddvalue1) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue1 + maxLevel * petData.Hasaddvalue1) * (isPercent ? 100 : 1f)}</color>)\n";
         }
 
         if (petData.Hasvalue2 != 0f)
         {
             StatusType statusType = (StatusType)petData.Hastype2;
             bool isPercent = statusType.IsPercentStat();
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue2 + currentLevel * petData.Hasaddvalue2) * (isPercent ? 100 : 1f)}";
+            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue2 + currentLevel * petData.Hasaddvalue2) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue2 + maxLevel * petData.Hasaddvalue2) * (isPercent ? 100 : 1f)}</color>)\n";
+        }
+
+        if (petData.Hasvalue3 != 0f)
+        {
+            StatusType statusType = (StatusType)petData.Hastype3;
+            bool isPercent = statusType.IsPercentStat();
+            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue3 + currentLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue3 + maxLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}</color>)";
         }
 
 
@@ -146,6 +155,8 @@ public class UiPetView : MonoBehaviour
             {
                 UpdateUi();
             }
+            string defix = e == 1 ? "" : "(미보유)";
+            petName.SetText($"{petData.Name}{defix}");
         }).AddTo(this);
 
         petServerData.level.AsObservable().Subscribe(e =>
@@ -162,9 +173,9 @@ public class UiPetView : MonoBehaviour
             {
                 levelText.SetText($"(LV : {e})");
 
-                levelUpPrice_Soul.SetText(Utils.ConvertBigNum(GetPetLevelUpPrice_Soul(e)));
+                levelUpPrice_Soul.SetText($"{Utils.ConvertBigNum(GetPetLevelUpPrice_Soul(e))}\n레벨업");
 
-                levelUpPrice_Marble.SetText(Utils.ConvertBigNum(GetPetLevelUpPrice_Marble(e)));
+                levelUpPrice_Marble.SetText($"{Utils.ConvertBigNum(GetPetLevelUpPrice_Marble(e))}\n레벨업");
             }
 
             SetAbilityText();
@@ -339,7 +350,7 @@ public class UiPetView : MonoBehaviour
             //미보유
             else
             {
-                PopupManager.Instance.ShowAlarmMessage("상점에서 구매 가능합니다.\n(세트 상품)");
+                PopupManager.Instance.ShowAlarmMessage("상점에서 구매 가능합니다.\n(외형&환수)");
             }
         }
         else if (petData.PETGETTYPE == PetGetType.Evolution)
@@ -512,7 +523,7 @@ public class UiPetView : MonoBehaviour
         }
 
         int currentMarble = (int)ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value;
-        int price_Marble = GameBalance.petAwakePrice;
+        int price_Marble = petData.Awakeprice;
 
         if (currentMarble < price_Marble)
         {
@@ -541,7 +552,7 @@ public class UiPetView : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{nextPetTableData.Name}획득!", null);
+              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{nextPetTableData.Name} 획득!", null);
           });
     }
 

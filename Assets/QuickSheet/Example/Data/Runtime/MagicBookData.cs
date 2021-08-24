@@ -96,4 +96,8 @@ public class MagicBookData
   float collectionvalue;
   public float Collectionvalue { get {return collectionvalue; } set { this.collectionvalue = value;} }
   
+  [SerializeField]
+  int needpetid;
+  public int Needpetid { get {return needpetid; } set { this.needpetid = value;} }
+  
 }

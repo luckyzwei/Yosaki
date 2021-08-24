@@ -37,9 +37,8 @@ public class PetServerTable
         while (e.MoveNext())
         {
             //무료펫 능력치XX
-            if (e.Current.Value.idx == 0) continue;
+            //미보유 X
             if (e.Current.Value.hasItem.Value == 0) continue;
-
 
             var petTableData = TableManager.Instance.PetDatas[e.Current.Value.idx];
             if (petTableData.Hastype1 == status)
@@ -50,6 +49,11 @@ public class PetServerTable
             if (petTableData.Hastype2 == status)
             {
                 ret += petTableData.Hasvalue2 + e.Current.Value.level.Value * petTableData.Hasaddvalue2;
+            }
+
+            if (petTableData.Hastype3 == status)
+            {
+                ret += petTableData.Hasvalue3 + e.Current.Value.level.Value * petTableData.Hasaddvalue3;
             }
         }
 

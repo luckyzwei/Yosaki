@@ -87,7 +87,39 @@ public class WeaponView : MonoBehaviour
 
         int gradeText = 4 - (id % 4);
 
-        gradeNumText.SetText($"{gradeText}등급");
+        if (magicBookData == null)
+        {
+            gradeNumText.SetText($"{gradeText}등급");
+        }
+        else
+        {
+            if (magicBookData.Id / 4 != 4)
+            {
+                gradeNumText.SetText($"{gradeText}등급");
+
+            }
+            else
+            {
+                int remain = magicBookData.Id % 4;
+
+                if (remain == 0)
+                {
+                    gradeNumText.SetText($"<color=green>현무</color>");
+                }
+                else if (remain == 1)
+                {
+                    gradeNumText.SetText($"<color=white>백호</color>");
+                }
+                else if (remain == 2)
+                {
+                    gradeNumText.SetText($"<color=red>주작</color>");
+                }
+                else if (remain == 3)
+                {
+                    gradeNumText.SetText($"<color=blue>청룡</color>");
+                }
+            }
+        }
 
         bg.sprite = CommonUiContainer.Instance.itemGradeFrame[grade];
 

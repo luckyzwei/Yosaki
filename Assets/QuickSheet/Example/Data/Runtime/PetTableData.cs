@@ -68,4 +68,20 @@ public class PetTableData
   float hasaddvalue2;
   public float Hasaddvalue2 { get {return hasaddvalue2; } set { this.hasaddvalue2 = value;} }
   
+  [SerializeField]
+  int hastype3;
+  public int Hastype3 { get {return hastype3; } set { this.hastype3 = value;} }
+  
+  [SerializeField]
+  float hasvalue3;
+  public float Hasvalue3 { get {return hasvalue3; } set { this.hasvalue3 = value;} }
+  
+  [SerializeField]
+  float hasaddvalue3;
+  public float Hasaddvalue3 { get {return hasaddvalue3; } set { this.hasaddvalue3 = value;} }
+  
+  [SerializeField]
+  int awakeprice;
+  public int Awakeprice { get {return awakeprice; } set { this.awakeprice = value;} }
+  
 }

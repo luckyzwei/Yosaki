@@ -67,7 +67,15 @@ public class MagicBookTable
         int id = tableDatas[idx].idx;
         level += 1;
 
-        return Mathf.Pow(level, 3.54f + (float)id * 0.015f);
+        if (id < 16)
+        {
+            return Mathf.Pow(level, 3.54f + (float)id * 0.015f);
+        }
+        else
+        {
+            return Mathf.Pow(level, 3.6f + (float)id * 0.015f);
+        }
+
     }
 
     public void Initialize()

@@ -50,6 +50,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     [SerializeField]
     private GameObject yomulUpgradeButton;
 
+    [SerializeField]
+    private GameObject sinsuCreateButton;
+
     public void Initialize(WeaponData weaponData, MagicBookData magicBookData, Action<WeaponData, MagicBookData> onClickCallBack)
     {
         this.weaponData = weaponData;
@@ -63,6 +66,10 @@ public class UiInventoryWeaponView : MonoBehaviour
         yomulDescription.SetActive(weaponData != null && weaponData.Id == 19);
 
         yomulUpgradeButton.SetActive(weaponData != null && weaponData.Id == 20);
+
+
+        //신수
+        sinsuCreateButton.gameObject.SetActive(magicBookData != null && magicBookData.Id / 4 == 4);
 
         if (weaponData != null)
         {
@@ -602,6 +609,13 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             SyncRoutineMagicBook[id] = null;
         }
+    }
+
+    public void OnClickSinsuCreateButton()
+    {
+        if (magicBookData == null) return;
+
+        UiNorigaeCraftBoard.Instance.Initialize(magicBookData.Id);
     }
 
 }

@@ -435,6 +435,7 @@ public static class PlayerStats
         ret += GetSkillCollectionValue(StatusType.SkillDamage);
         ret += GetWingAbilValue(StatusType.SkillDamage);
         ret += GetPassiveSkillValue(StatusType.SkillDamage);
+        ret += ServerData.petTable.GetStatusValue(StatusType.SkillDamage);
 
         return ret;
     }
@@ -490,6 +491,7 @@ public static class PlayerStats
         ret += GetMagicBookHasPercentValue(StatusType.CriticalDam);
         ret += GetSkillCollectionValue(StatusType.CriticalDam);
         ret += GetWingAbilValue(StatusType.CriticalDam);
+        ret += ServerData.petTable.GetStatusValue(StatusType.CriticalDam);
 
         return ret;
     }
@@ -503,6 +505,7 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.GoldGainPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.GoldGainPer);
         ret += GetMarbleValue(StatusType.GoldGainPer);
+        ret += GetMagicBookHasPercentValue(StatusType.GoldGainPer);
         return ret;
     }
     public static float GetExpPlusValue()
