@@ -64,4 +64,16 @@ public class WeaponEffectData
   float haseffectvalue2;
   public float Haseffectvalue2 { get {return haseffectvalue2; } set { this.haseffectvalue2 = value;} }
   
+  [SerializeField]
+  int haseffecttype3;
+  public int Haseffecttype3 { get {return haseffecttype3; } set { this.haseffecttype3 = value;} }
+  
+  [SerializeField]
+  float haseffectbase3;
+  public float Haseffectbase3 { get {return haseffectbase3; } set { this.haseffectbase3 = value;} }
+  
+  [SerializeField]
+  float haseffectvalue3;
+  public float Haseffectvalue3 { get {return haseffectvalue3; } set { this.haseffectvalue3 = value;} }
+  
 }

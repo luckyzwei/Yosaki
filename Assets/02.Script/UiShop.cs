@@ -54,6 +54,7 @@ public class UiShop : SingletonMono<UiShop>
         Param costumeParam = null;
         Param petParam = null;
         Param iapParam = new Param();
+        Param iapTotalParam = new Param();
         Param magicStoneBuffParam = null;
         Param weaponParam = null;
         Param norigaeParam = null;
@@ -146,11 +147,16 @@ public class UiShop : SingletonMono<UiShop>
         else
         {
             ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
+            ServerData.iAPServerTableTotal.TableDatas[tableData.Productid].buyCount.Value++;
         }
 
         iapParam.Add(tableData.Productid, ServerData.iapServerTable.TableDatas[tableData.Productid].ConvertToString());
 
+        iapTotalParam.Add(tableData.Productid, ServerData.iAPServerTableTotal.TableDatas[tableData.Productid].ConvertToString());
+
         transactionList.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
+
+        transactionList.Add(TransactionValue.SetUpdate(IAPServerTableTotal.tableName, IAPServerTableTotal.Indate, iapTotalParam));
 
         ServerData.SendTransaction(transactionList, successCallBack: WhenRewardSuccess);
 

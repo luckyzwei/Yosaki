@@ -29,7 +29,7 @@ public class UiStatus : SingletonMono<UiStatus>
         RankManager.Instance.RequestMyLevelRank();
         RankManager.Instance.RequestMyStageRank();
 
-        if (GameManager.contentsType == GameManager.ContentsType.NormalField) 
+        if (GameManager.contentsType == GameManager.ContentsType.NormalField)
         {
             RankManager.Instance.RequestMyBossRank();
             RankManager.Instance.RequestMyRealBossRank();
@@ -53,6 +53,11 @@ public class UiStatus : SingletonMono<UiStatus>
         ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
         {
             costumeIcon.sprite = CommonUiContainer.Instance.GetCostumeThumbnail((int)e);
+        }).AddTo(this);
+
+        PlayerData.Instance.whenNickNameChanged.AsObservable().Subscribe(e =>
+        {
+            WhenLevelChanged(ServerData.statusTable.GetTableData(StatusTable.Level).Value);
         }).AddTo(this);
 
     }

@@ -85,6 +85,9 @@ public static class GameBalance
 
     public readonly static ObscuredInt twelveDungeonEnterPrice = 50000;
 
+    public readonly static ObscuredInt nickNameChangeFee = 500000;
+
+
     public readonly static ObscuredInt rankRewardTicket_1 = 30;
     public readonly static ObscuredInt rankRewardTicket_2 = 26;
     public readonly static ObscuredInt rankRewardTicket_3 = 24;

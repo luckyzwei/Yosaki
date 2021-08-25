@@ -41,6 +41,7 @@ public static class ServerData
     public static MarbleServerTable marbleServerTable { get; private set; } = new MarbleServerTable();
     public static EtcServerTable etcServerTable { get; private set; } = new EtcServerTable();
     public static NewLevelPass newLevelPass { get; private set; } = new NewLevelPass();
+    public static IAPServerTableTotal iAPServerTableTotal { get; private set; } = new IAPServerTableTotal();
 
     #region string
     public static string inDate_str = "inDate";
@@ -91,6 +92,8 @@ public static class ServerData
         etcServerTable.Initialize();
 
         newLevelPass.Initialize();
+
+        iAPServerTableTotal.Initialize();
     }
 
     public static void GetUserInfo()

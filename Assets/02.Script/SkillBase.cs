@@ -18,9 +18,8 @@ public abstract class SkillBase
     public bool CanUseSkill()
     {
         //mp계산 뒤에서해야됨.실제 엠피 차감해서
-        return !SkillCoolTimeManager.HasSkillCooltime(skillInfo.Id) && CheckMp();
+        return !SkillCoolTimeManager.HasSkillCooltime(skillInfo.Id) && CheckMp() && PlayerStatusController.Instance.IsPlayerDead() == false;
     }
-
     protected float GetSkillDamage(SkillTableData skillInfo)
     {
         float apDamage = PlayerStats.GetCalculatedAttackPower();

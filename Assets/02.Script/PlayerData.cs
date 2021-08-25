@@ -3,14 +3,23 @@ using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class PlayerData : SingletonMono<PlayerData>
 {
     public string NickName { get; private set; }
     public string Indate { get; private set; }
 
+    public ReactiveCommand<string> whenNickNameChanged = new ReactiveCommand<string>();
+
     [SerializeField]
     private UiNickNameInputBoard uiNickNameInputBoard;
+
+    public void NickNameChanged(string nickName)
+    {
+        NickName = nickName;
+        whenNickNameChanged.Execute(nickName);
+    }
 
     public void LoadUserNickName()
     {

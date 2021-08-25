@@ -101,7 +101,7 @@ public class RankManager : SingletonMono<RankManager>
 
                 var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
 
-                string nickName = splitData[5];
+                string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 int level = int.Parse(data["score"][ServerData.format_Number].ToString());
                 int costumeId = int.Parse(splitData[0]);
@@ -176,7 +176,7 @@ public class RankManager : SingletonMono<RankManager>
 
                 var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
 
-                string nickName = splitData[5];
+                string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 float score = float.Parse(data["score"][ServerData.format_Number].ToString());
                 int costumeId = int.Parse(splitData[0]);
@@ -253,7 +253,7 @@ public class RankManager : SingletonMono<RankManager>
 
                 var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
 
-                string nickName = splitData[5];
+                string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 float score = float.Parse(data["score"][ServerData.format_Number].ToString());
                 int costumeId = int.Parse(splitData[0]);
@@ -337,7 +337,7 @@ public class RankManager : SingletonMono<RankManager>
 
                 var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
 
-                string nickName = splitData[5];
+                string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 float score = float.Parse(data["score"][ServerData.format_Number].ToString());
                 int costumeId = int.Parse(splitData[0]);

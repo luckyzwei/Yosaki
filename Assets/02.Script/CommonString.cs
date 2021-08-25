@@ -102,10 +102,10 @@ public static class CommonString
             case Item_Type.skill3: return "전방베기4형 기술";
             case Item_Type.Dokebi: return "도깨비 뿔";
             case Item_Type.SkillPartion: return "기술 조각";
-            case Item_Type.WeaponUpgradeStone: return "힘의증표";
-            case Item_Type.PetUpgradeSoul: return "요괴의 영혼";
+            case Item_Type.WeaponUpgradeStone: return "힘의 증표";
+            case Item_Type.PetUpgradeSoul: return "요괴의 혼";
         }
-        return "미등록";
+        return "미등록"; 
     }
 
     public static string GetStatusName(StatusType type)

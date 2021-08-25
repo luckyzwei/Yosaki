@@ -64,12 +64,12 @@ public static class PlayerStats
 
            );
 
-   //     float totalPower =
-   //((baseAttack + baseAttack * baseAttackPer)
-   // * (Mathf.Max(criProb, 0.01f) * 100f * Mathf.Max(criDam, 0.01f))
-   // * (Mathf.Max(skillDam, 0.01f) * 100f)
-   // * (Mathf.Max(coolTIme, 0.01f)) * 100)
-   // + ((hpBase + hpBase * hpAddPer) + (mpBase + mpBase * mpAddPer));
+        //     float totalPower =
+        //((baseAttack + baseAttack * baseAttackPer)
+        // * (Mathf.Max(criProb, 0.01f) * 100f * Mathf.Max(criDam, 0.01f))
+        // * (Mathf.Max(skillDam, 0.01f) * 100f)
+        // * (Mathf.Max(coolTIme, 0.01f)) * 100)
+        // + ((hpBase + hpBase * hpAddPer) + (mpBase + mpBase * mpAddPer));
 
         return totalPower * 0.01f;
     }
@@ -104,6 +104,7 @@ public static class PlayerStats
 
         ret += GetMarbleValue(StatusType.BossDamAddPer);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.BossDamage_memory);
+        ret += GetMagicBookHasPercentValue(StatusType.BossDamAddPer);
 
         return ret;
     }
@@ -327,6 +328,11 @@ public static class PlayerStats
             {
                 ret += effectData.Haseffectbase2;
                 ret += currentLevel * effectData.Haseffectvalue2;
+            }
+            if (effectData.Haseffecttype3 == (int)type)
+            {
+                ret += effectData.Haseffectbase3;
+                ret += currentLevel * effectData.Haseffectvalue3;
             }
         }
 

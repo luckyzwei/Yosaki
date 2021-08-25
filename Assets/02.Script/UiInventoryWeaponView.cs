@@ -325,6 +325,10 @@ public class UiInventoryWeaponView : MonoBehaviour
         float hasValue2 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2);
         float hasValue2_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, magicBookData.Maxlevel);
 
+        float hasValue3 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3);
+        float hasValue3_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3, magicBookData.Maxlevel);
+
+
         if (effectData.Equipeffecttype1 != -1)
         {
             //%효과
@@ -399,12 +403,33 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value = hasValue2 * 100f;
                 float value_max = hasValue2_max * 100f;
 
-                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%";
+                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%\n";
             }
             else
             {
                 float value = hasValue2;
                 float value_max = hasValue2_max;
+
+                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}\n";
+            }
+
+        }
+
+        if (effectData.Haseffecttype3 != -1)
+        {
+            StatusType type = (StatusType)effectData.Haseffecttype3;
+
+            if (type.IsPercentStat())
+            {
+                float value = hasValue3 * 100f;
+                float value_max = hasValue3_max * 100f;
+
+                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%";
+            }
+            else
+            {
+                float value = hasValue3;
+                float value_max = hasValue3_max;
 
                 description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}";
             }

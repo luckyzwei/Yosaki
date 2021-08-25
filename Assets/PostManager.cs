@@ -10,7 +10,7 @@ public class PostManager : SingletonMono<PostManager>
     public class PostInfo
     {
         public ObscuredString Indate;
-        public ObscuredInt itemCount;
+        public ObscuredFloat itemCount;
         public ObscuredInt itemType;
         public ObscuredString titleText;
         public ObscuredString contentText;
@@ -54,7 +54,7 @@ public class PostManager : SingletonMono<PostManager>
                         {
                             PostInfo post = new PostInfo();
                             post.Indate = postInfo["inDate"][ServerData.format_string].ToString();
-                            post.itemCount = int.Parse(postInfo["itemCount"][ServerData.format_string].ToString());
+                            post.itemCount = float.Parse(postInfo["itemCount"][ServerData.format_string].ToString());
                             post.itemType = int.Parse(postInfo["item"][ServerData.format_dic]["ItemType"][ServerData.format_string].ToString());
                             post.titleText = postInfo["title"][ServerData.format_string].ToString();
                             post.contentText = postInfo["content"][ServerData.format_string].ToString();
@@ -66,7 +66,7 @@ public class PostManager : SingletonMono<PostManager>
                         {
                             PostInfo post = new PostInfo();
                             post.Indate = postInfo["inDate"][ServerData.format_string].ToString();
-                            post.itemCount = int.Parse(postInfo["itemCount"][ServerData.format_Number].ToString());
+                            post.itemCount = float.Parse(postInfo["itemCount"][ServerData.format_Number].ToString());
                             post.itemType = int.Parse(postInfo["item"][ServerData.format_dic]["ItemType"][ServerData.format_string].ToString());
                             post.titleText = postInfo["title"][ServerData.format_string].ToString();
                             post.contentText = postInfo["content"][ServerData.format_string].ToString();

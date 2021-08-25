@@ -73,7 +73,7 @@ public class MagicBookTable
         }
         else
         {
-            return Mathf.Pow(level, 3.6f + (float)id * 0.015f);
+            return Mathf.Pow(level, 3.65f + (float)id * 0.015f);
         }
 
     }

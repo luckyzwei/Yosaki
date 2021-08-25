@@ -12,8 +12,8 @@ public class DailyPassServerTable
     public const string tableName = "DailyPass";
 
 
-    public static string DailypassFreeReward = "DailypassFreeReward";
-    public static string DailypassAdReward = "DailypassAdReward";
+    public static string DailypassFreeReward = "DailypassFreeReward_new";
+    public static string DailypassAdReward = "DailypassAdReward_new";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
