@@ -74,6 +74,8 @@ public class UiNickNameChangeBoard : MonoBehaviour
             //재화 소모
             ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.nickNameChangeFee;
             ServerData.goodsTable.UpData(GoodsTable.Jade, false);
+
+            
         }
         else
         {

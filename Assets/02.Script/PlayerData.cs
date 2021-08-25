@@ -17,6 +17,8 @@ public class PlayerData : SingletonMono<PlayerData>
 
     public void NickNameChanged(string nickName)
     {
+        LogManager.Instance.SendLogType("NickChange", "pref", NickName);
+
         NickName = nickName;
         whenNickNameChanged.Execute(nickName);
     }
