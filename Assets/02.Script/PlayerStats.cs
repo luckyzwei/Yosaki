@@ -514,12 +514,33 @@ public static class PlayerStats
         ret += GetMagicBookHasPercentValue(StatusType.GoldGainPer);
         return ret;
     }
+    public static float GetGoldPlusValueExclusiveBuff()
+    {
+        float ret = 0f;
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.GoldGain_memory);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.GoldGainPer);
+        ret += ServerData.petTable.GetStatusValue(StatusType.GoldGainPer);
+        ret += GetMarbleValue(StatusType.GoldGainPer);
+        ret += GetMagicBookHasPercentValue(StatusType.GoldGainPer);
+        return ret;
+    }
     public static float GetExpPlusValue()
     {
         float ret = 0f;
         ret += ServerData.statusTable.GetStatusValue(StatusTable.ExpGain_memory);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.ExpGainPer);
         ret += GetBuffValue(StatusType.ExpGainPer);
+        ret += GetMarbleValue(StatusType.ExpGainPer);
+        ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
+
+        return ret;
+    }
+
+    public static float GetExpPlusValueExclusiveBuff()
+    {
+        float ret = 0f;
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.ExpGain_memory);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.ExpGainPer);
         ret += GetMarbleValue(StatusType.ExpGainPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
 

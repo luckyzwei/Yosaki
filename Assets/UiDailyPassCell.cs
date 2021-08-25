@@ -14,7 +14,13 @@ public class UiDailyPassCell : MonoBehaviour
     private Image itemIcon_free;
 
     [SerializeField]
+    private TextMeshProUGUI itemName_free;
+
+    [SerializeField]
     private Image itemIcon_ad;
+
+    [SerializeField]
+    private TextMeshProUGUI itemName_ad;
 
     [SerializeField]
     private TextMeshProUGUI itemAmount_free;
@@ -100,6 +106,9 @@ public class UiDailyPassCell : MonoBehaviour
     {
         itemIcon_free.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)(int)passInfo.rewardType_Free);
         itemIcon_ad.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)(int)passInfo.rewardType_IAP);
+
+        itemName_free.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_Free));
+        itemName_ad.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_IAP));
     }
 
     private void SetDescriptionText()

@@ -189,11 +189,11 @@ public class IAPServerTableTotal
 
                 for (int i = 0; i < table.Length; i++)
                 {
-                    defultValues.Add(table[i].Productid, $"{table[i].Id},{ServerData.iapServerTable.TableDatas[table[i].Productid].buyCount}");
+                    defultValues.Add(table[i].Productid, $"{table[i].Id},{ServerData.iapServerTable.TableDatas[table[i].Productid].buyCount.Value}");
 
                     var iapData = new IAPServerData();
                     iapData.id = table[i].Id;
-                    iapData.buyCount = ServerData.iapServerTable.TableDatas[table[i].Productid].buyCount;
+                    iapData.buyCount = new ReactiveProperty<int>(ServerData.iapServerTable.TableDatas[table[i].Productid].buyCount.Value);
 
                     tableDatas.Add(table[i].Productid, iapData);
                 }
@@ -250,11 +250,11 @@ public class IAPServerTableTotal
                     }
                     else
                     {
-                        defultValues.Add(table[i].Productid, $"{table[i].Id},{TableDatas[table[i].Productid].buyCount}");
+                        defultValues.Add(table[i].Productid, $"{table[i].Id},{ServerData.iapServerTable.TableDatas[table[i].Productid].buyCount.Value}");
 
                         var iapData = new IAPServerData();
                         iapData.id = table[i].Id;
-                        iapData.buyCount = ServerData.iapServerTable.TableDatas[table[i].Productid].buyCount;
+                        iapData.buyCount = new ReactiveProperty<int>(ServerData.iapServerTable.TableDatas[table[i].Productid].buyCount.Value);
 
                         tableDatas.Add(table[i].Productid, iapData);
                         paramCount++;

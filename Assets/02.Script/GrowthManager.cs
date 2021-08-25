@@ -19,12 +19,17 @@ public class GrowthManager : SingletonMono<GrowthManager>
     {
         maxExp.Value = GameDataCalculator.GetMaxExp(ServerData.statusTable.GetTableData(StatusTable.Level).Value);
     }
-    public void GetExp(float exp, bool useBuff = true)
+
+    private bool useEffect = true;
+
+    public void GetExp(float exp, bool useBuff = true, bool useEffect = true)
     {
         if (useBuff)
         {
             exp += exp * PlayerStats.GetExpPlusValue();
         }
+
+        this.useEffect = useEffect;
 
         SystemMessage.Instance.SetMessage($"경험치 획득 ({(int)exp})");
 
@@ -64,12 +69,16 @@ public class GrowthManager : SingletonMono<GrowthManager>
         //레벨업 이벤트
         WhenPlayerLevelUp.Execute();
 
-        EffectManager.SpawnEffectAllTime("LevelUp", PlayerMoveController.Instance.transform.position, PlayerMoveController.Instance.transform);
+        if (useEffect)
+        {
+            EffectManager.SpawnEffectAllTime("LevelUp", PlayerMoveController.Instance.transform.position, PlayerMoveController.Instance.transform);
+            SoundManager.Instance.PlaySound("Reward");
+        }
 
         //일일미션
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.LevelUp, 1);
 
-        SoundManager.Instance.PlaySound("Reward");
+
     }
 
     private void UpdateLocalData()

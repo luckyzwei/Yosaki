@@ -87,7 +87,11 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         float killedEnemyPerMin = spawnEnemyNumPerSec * 60f;
 
+        float goldBuffRatio = PlayerStats.GetGoldPlusValueExclusiveBuff() * 0.5f;
+        float expBuffRatio = PlayerStats.GetExpPlusValueExclusiveBuff() * 0.5f;
+
         float gold = killedEnemyPerMin * spawnedEnemyData.Gold * GameBalance.sleepRewardRatio * elapsedMinutes;
+        gold += gold * goldBuffRatio;
 
         float enemyKilldailyMissionRequire = TableManager.Instance.DailyMissionDatas[0].Rewardrequire;
         float enemyKilldailyMissionReward = TableManager.Instance.DailyMissionDatas[0].Rewardvalue;
@@ -99,6 +103,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         float marble = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
 
         float exp = killedEnemyPerMin * spawnedEnemyData.Exp * GameBalance.sleepRewardRatio * elapsedMinutes;
+        exp += exp * expBuffRatio;
 
         this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, exp: exp, elapsedSeconds: elapsedSeconds);
     }
@@ -109,7 +114,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         LogManager.Instance.SendLog("휴식보상 요청", $"gold {sleepRewardInfo.gold} jade {sleepRewardInfo.jade} marble {sleepRewardInfo.marble} growthStone {sleepRewardInfo.GrowthStone} exp {sleepRewardInfo.exp}");
 
-        GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false);
+        GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false, false);
 
         ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += sleepRewardInfo.gold;
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += sleepRewardInfo.jade;

@@ -84,4 +84,8 @@ public class PetTableData
   int awakeprice;
   public int Awakeprice { get {return awakeprice; } set { this.awakeprice = value;} }
   
+  [SerializeField]
+  float upgradepowvalue;
+  public float Upgradepowvalue { get {return upgradepowvalue; } set { this.upgradepowvalue = value;} }
+  
 }

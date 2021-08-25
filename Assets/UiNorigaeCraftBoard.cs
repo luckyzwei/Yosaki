@@ -71,7 +71,7 @@ public class UiNorigaeCraftBoard : SingletonMono<UiNorigaeCraftBoard>
 
         petGraphic.Clear();
         petGraphic.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[sinsuData.Needpetid];
-        petGraphic.startingAnimation = "walk";
+       // petGraphic.startingAnimation = "walk";
         petGraphic.Initialize(true);
         petGraphic.SetMaterialDirty();
 

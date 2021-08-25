@@ -134,7 +134,7 @@ public class StatusTable
                     break;
                 case CriticalDamLevel_Gold:
                     {
-                        return level * 0.003f;
+                        return level * 0.01f;
                     }
                     break;
 
@@ -205,7 +205,7 @@ public class StatusTable
                     break;
                 case SkillDamage_memory:
                     {
-                        return level * 0.005f;
+                        return level * 0.01f;
                     }
                     break;
                 case SkillCoolTime_memory:

@@ -87,7 +87,7 @@ public class UiPetView : MonoBehaviour
 
         SetPetSpine(petData.Id);
 
-      
+
         petName.color = CommonUiContainer.Instance.itemGradeColor[petData.Id / 4];
 
         awakePrice.SetText(Utils.ConvertBigNum(petData.Awakeprice));
@@ -559,11 +559,12 @@ public class UiPetView : MonoBehaviour
 
     public int GetPetLevelUpPrice_Soul(int level)
     {
-        return (int)Mathf.Pow(level + 1, 2.45f + petData.Id * 0.01f);
+        int ret = GetPetLevelUpPrice_Marble(level);
+        return ret + (int)((float)ret * 0.3f);
     }
 
     public int GetPetLevelUpPrice_Marble(int level)
     {
-        return (int)Mathf.Pow(level + 1, 2.29f);
+        return (int)Mathf.Pow(level + 1, petData.Upgradepowvalue);
     }
 }
