@@ -30,6 +30,12 @@ public class UiNickNameChangeBoard : MonoBehaviour
 
     public void OnClickConfirmButton()
     {
+        if (string.IsNullOrEmpty(inputField.text)) 
+        {
+            PopupManager.Instance.ShowAlarmMessage("닉네임을 입력 해주세요.");
+            return;
+        }
+
         if (PlayerData.Instance.NickName.Equals(inputField.text)) 
         {
             PopupManager.Instance.ShowAlarmMessage("현재 닉네임 입니다.");
