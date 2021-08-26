@@ -24,6 +24,9 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private GameObject yomulObject;
 
+    [SerializeField]
+    private List<GameObject> norigaeEffects;
+
     public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int fightPoint)
     {
         this.nickName.SetText(nickName);
@@ -41,10 +44,26 @@ public class UiTopRankerCell : MonoBehaviour
         }
 
         magicBook.gameObject.SetActive(magicBookId != -1);
+
         if (magicBookId != -1)
         {
             magicBook.sprite = CommonResourceContainer.GetMagicBookSprite(magicBookId);
+
+            if (magicBookId < 16)
+            {
+                norigaeEffects.ForEach(e => e.SetActive(false));
+            }
+            else
+            {
+                int effectIdx = magicBookId % 4;
+                for (int i = 0; i < norigaeEffects.Count; i++)
+                {
+                    norigaeEffects[i].SetActive(i == effectIdx);
+                }
+            }
         }
+
+       
     }
 
     private void SetPetSpine(int idx)

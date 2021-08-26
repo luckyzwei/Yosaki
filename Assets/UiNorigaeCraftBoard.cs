@@ -35,6 +35,9 @@ public class UiNorigaeCraftBoard : SingletonMono<UiNorigaeCraftBoard>
     [SerializeField]
     private TextMeshProUGUI petHasDescription;
 
+    [SerializeField]
+    private TextMeshProUGUI petName;
+
     private new void OnDestroy()
     {
         base.OnDestroy();
@@ -71,16 +74,17 @@ public class UiNorigaeCraftBoard : SingletonMono<UiNorigaeCraftBoard>
 
         petGraphic.Clear();
         petGraphic.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[sinsuData.Needpetid];
-       // petGraphic.startingAnimation = "walk";
+        // petGraphic.startingAnimation = "walk";
         petGraphic.Initialize(true);
         petGraphic.SetMaterialDirty();
-
 
         var petTableData = TableManager.Instance.PetTable.dataArray[needPetId];
 
         bool hasPet = ServerData.petTable.TableDatas[petTableData.Stringid].hasItem.Value == 1;
 
-        petHasDescription.SetText(hasPet ? "<color=green>보유</color>" : "<color=red>미보유</color>");
+        petHasDescription.SetText(hasPet ? "1/1" : "0/1");
+
+        petName.SetText(petTableData.Name);
     }
 
     public void OnClickCraftButton()

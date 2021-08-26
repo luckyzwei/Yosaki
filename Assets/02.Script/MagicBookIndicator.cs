@@ -22,7 +22,10 @@ public class MagicBookIndicator : MonoBehaviour
     [SerializeField]
     private BoneFollowerGraphic boneFollowerGraphic;
 
-    public void Initialize(SkeletonGraphic skeletonGraphic) 
+    [SerializeField]
+    private List<GameObject> sinMulEffect;
+
+    public void Initialize(SkeletonGraphic skeletonGraphic)
     {
         boneFollowerGraphic.skeletonGraphic = skeletonGraphic;
     }
@@ -50,6 +53,20 @@ public class MagicBookIndicator : MonoBehaviour
         }
 
         magicBookIcon.sprite = CommonResourceContainer.GetMagicBookSprite(idx);
+
+        if (idx < 16)
+        {
+            sinMulEffect.ForEach(e => e.SetActive(false));
+        }
+        else
+        {
+            int effectIdx = idx % 4;
+            for (int i = 0; i < sinMulEffect.Count; i++)
+            {
+                sinMulEffect[i].SetActive(i == effectIdx);
+            }
+        }
+
     }
 
     //void Update()

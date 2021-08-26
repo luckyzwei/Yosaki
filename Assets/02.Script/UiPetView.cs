@@ -88,7 +88,7 @@ public class UiPetView : MonoBehaviour
         SetPetSpine(petData.Id);
 
 
-        petName.color = CommonUiContainer.Instance.itemGradeColor[petData.Id / 4];
+        petName.color = CommonUiContainer.Instance.itemGradeColor[(petData.Id / 4) + 1];
 
         awakePrice.SetText(Utils.ConvertBigNum(petData.Awakeprice));
 
@@ -553,6 +553,8 @@ public class UiPetView : MonoBehaviour
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
               PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{nextPetTableData.Name} 획득!", null);
+
+              LogManager.Instance.SendLogType("Pet", "각성", $"{nextPetTableData.Name }");
           });
     }
 

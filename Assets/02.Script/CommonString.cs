@@ -103,7 +103,7 @@ public static class CommonString
             case Item_Type.Dokebi: return "도깨비 뿔";
             case Item_Type.SkillPartion: return "기술 조각";
             case Item_Type.WeaponUpgradeStone: return "힘의 증표";
-            case Item_Type.PetUpgradeSoul: return "요괴의 혼";
+            case Item_Type.PetUpgradeSoul: return "요괴구슬";
         }
         return "미등록"; 
     }
