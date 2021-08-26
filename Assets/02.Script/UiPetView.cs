@@ -199,7 +199,18 @@ public class UiPetView : MonoBehaviour
 
     private void UpdateUi()
     {
-        petAwakeButton.SetActive(petData.Nextpetid != -1);
+        if (petData.Nextpetid != -1)
+        {
+            var nextPetTableData = TableManager.Instance.PetTable.dataArray[petData.Nextpetid];
+
+            var newPetServerData = ServerData.petTable.TableDatas[nextPetTableData.Stringid];
+
+            petAwakeButton.SetActive(newPetServerData.hasItem.Value == 0);
+        }
+        else
+        {
+            petAwakeButton.SetActive(false);
+        }
 
         adIcon.SetActive(petData.PETGETTYPE == PetGetType.Ad);
         gemIcon.SetActive(petData.PETGETTYPE == PetGetType.Gem && ServerData.petTable.TableDatas[petData.Stringid].hasItem.Value != 1);
@@ -513,6 +524,16 @@ public class UiPetView : MonoBehaviour
 
     public void OnClickAwakeButton()
     {
+
+        var nextPetTableData = TableManager.Instance.PetTable.dataArray[petData.Nextpetid];
+        var newPetServerData = ServerData.petTable.TableDatas[nextPetTableData.Stringid];
+
+        if (newPetServerData.hasItem.Value == 1) 
+        {
+            PopupManager.Instance.ShowAlarmMessage("이미 각성 했습니다.");
+            return;
+        }
+
         int currentLevel = ServerData.petTable.TableDatas[petData.Stringid].level.Value;
         int maxLevel = petData.Maxlevel;
 
@@ -533,9 +554,6 @@ public class UiPetView : MonoBehaviour
 
         ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= price_Marble;
 
-        var nextPetTableData = TableManager.Instance.PetTable.dataArray[petData.Nextpetid];
-
-        var newPetServerData = ServerData.petTable.TableDatas[nextPetTableData.Stringid];
 
         newPetServerData.hasItem.Value = 1;
 

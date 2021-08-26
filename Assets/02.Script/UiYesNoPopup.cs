@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiYesNoPopup : MonoBehaviour
 {
@@ -12,12 +13,17 @@ public class UiYesNoPopup : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI description;
 
+    [SerializeField]
+    private Button confirmButton;
+
     private Action yesCallBack;
     private Action noCallBack;
 
 
     public void Initialize(string title, string description, Action yesCallBack, Action noCallBack)
     {
+        confirmButton.interactable = true;
+
         if (this.title != null)
         {
             this.title.SetText(title);
@@ -30,6 +36,7 @@ public class UiYesNoPopup : MonoBehaviour
 
     public void OnClickYesButton()
     {
+        confirmButton.interactable = false;
         yesCallBack?.Invoke();
         GameObject.Destroy(this.gameObject);
     }

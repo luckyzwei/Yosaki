@@ -83,15 +83,43 @@ public class GoodsTable
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)} 획득(+{(int)amount})");
         tableDatas[GrowthStone].Value += amount;
     }
+    static int marbleAddAmount = 0;
+    static float updateRequireNum = 10;
     public void GetMarble(float amount)
     {
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Marble)} 획득(+{(int)amount})");
-        tableDatas[MarbleKey].Value += amount;
+
+        marbleAddAmount++;
+
+        if (marbleAddAmount < updateRequireNum)
+        {
+
+        }
+        else
+        {
+            marbleAddAmount = 0;
+            tableDatas[MarbleKey].Value += updateRequireNum;
+        }
     }
+    static int soulAddAmount = 0;
+
     public void GetPetUpgradeSoul(float amount)
     {
-        tableDatas[PetUpgradeSoul].Value += amount;
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.PetUpgradeSoul)} 획득(+{(int)amount})");
+
+        soulAddAmount++;
+
+        if (soulAddAmount < updateRequireNum)
+        {
+
+        }
+        else
+        {
+            soulAddAmount = 0;
+            tableDatas[PetUpgradeSoul].Value += updateRequireNum;
+        }
     }
+
     public void GetBlueStone(float amount)
     {
         tableDatas[Jade].Value += amount;

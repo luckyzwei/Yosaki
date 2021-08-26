@@ -79,7 +79,7 @@ public class UiBossContentsView : MonoBehaviour
 
         ServerData.goodsTable.SyncToServerEach(GoodsTable.Ticket, () =>
         {
-            LogManager.Instance.SendLogType("InstClear", "enter", $"{ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value+1}에서 1개 사용");
+            LogManager.Instance.SendLogType("InstClear", "enter", $"{ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value + 1}에서 1개 사용");
 
             //로그
 
@@ -132,6 +132,13 @@ public class UiBossContentsView : MonoBehaviour
 
     private void InstantClearReceive(float score, int clearAmount)
     {
+        if (ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value < clearAmount)
+        {
+            PopupManager.Instance.ShowAlarmMessage("티켓이 부족합니다.");
+            clearButton.interactable = true;
+            return;
+        }
+
         LogManager.Instance.SendLog("보스소탕요청", $"{clearAmount}회");
 
         var rewardList = SingleRaidManager.GetRewawrdData(bossTableData, score, clearAmount);
