@@ -136,6 +136,12 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
                 UpdateHpMax();
                 UpdateMpMax();
             }).AddTo(this);
+
+            iter.Current.Value.level.AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
         }
 
         //날개 렙업

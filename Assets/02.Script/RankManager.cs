@@ -55,11 +55,11 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
     public const string Rank_Stage = "Rank_Stage";
 
-    public const string Rank_Boss_Uuid = "867f6be0-eb2f-11eb-b008-47d27fbeb1c5";
+    public const string Rank_Boss_Uuid = "87bf23b0-070e-11ec-85c3-37d5dee7a389";
     public const string Rank_Boss = "Rank_Boss_1";
 
     //public const string Rank_Real_Boss_Uuid = "1438d260-fec6-11eb-b9fc-c9829b653541";
-    public const string Rank_Real_Boss_Uuid = "ffb33220-012e-11ec-aafe-876da3cace87";
+    public const string Rank_Real_Boss_Uuid = "95719bf0-070e-11ec-9f2f-2ba9eabc9e48";
     public const string Rank_Real_Boss = "Rank_Boss_Real";
 
     public ReactiveCommand<RankInfo> WhenMyLevelRankLoadComplete = new ReactiveCommand<RankInfo>();
@@ -257,6 +257,7 @@ public class RankManager : SingletonMono<RankManager>
                 string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 float score = float.Parse(data["score"][ServerData.format_Number].ToString());
+                score *= 1000f;
                 int costumeId = int.Parse(splitData[0]);
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
@@ -287,6 +288,8 @@ public class RankManager : SingletonMono<RankManager>
             Debug.LogError("점수가 더 낮음");
             return;
         }
+
+        score *= 0.001f;
 
         Param param = new Param();
         param.Add("Score", score);
@@ -341,6 +344,7 @@ public class RankManager : SingletonMono<RankManager>
                 string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 float score = float.Parse(data["score"][ServerData.format_Number].ToString());
+                score *= 1000f;
                 int costumeId = int.Parse(splitData[0]);
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
@@ -363,12 +367,13 @@ public class RankManager : SingletonMono<RankManager>
     public void UpdateRealBoss_Score(float score)
     {
         if (PlayerData.Instance.NickName.Equals("블랙핑크")) return;
-        if (PlayerData.Instance.NickName.Equals("테스트용")) return;
         if (this.myRankInfo[RankType.Real_Boss] != null && score < this.myRankInfo[RankType.Real_Boss].Score)
         {
             Debug.LogError("점수가 더 낮음");
             return;
         }
+
+        score *= 0.001f;
 
         Param param = new Param();
         param.Add("Score", score);
