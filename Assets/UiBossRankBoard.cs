@@ -101,6 +101,9 @@ public class UiBossRankBoard : MonoBehaviour
                         rankViewContainer[i].gameObject.SetActive(true);
                         string nickName = data["nickname"][ServerData.format_string].ToString();
                         int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
+
+                        var test = data["score"][ServerData.format_Number].ToString();
+
                         float score = float.Parse(data["score"][ServerData.format_Number].ToString());
                         int costumeId = int.Parse(splitData[0]);
                         int petId = int.Parse(splitData[1]);

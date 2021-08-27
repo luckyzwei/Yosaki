@@ -89,6 +89,12 @@ public class UiNorigaeCraftBoard : SingletonMono<UiNorigaeCraftBoard>
 
     public void OnClickCraftButton()
     {
+        if (ServerData.magicBookTable.TableDatas[sinsuData.Stringid].hasItem.Value == 1) 
+        {
+            PopupManager.Instance.ShowAlarmMessage("이미 보유중");
+            return;
+        }
+
         int legendMagicBookAmount = ServerData.magicBookTable.TableDatas[legendNorigaeData.Stringid].amount.Value;
 
         var petTableData = TableManager.Instance.PetTable.dataArray[needPetId];
