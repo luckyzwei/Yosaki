@@ -65,7 +65,7 @@ public class GoogleManager : MonoBehaviour
 
                 PopupManager.Instance.ShowVersionUpPopup(CommonString.Notice, "업데이트 버전이 있습니다. 스토어로 이동합니다.", () =>
                 {
-                    Application.OpenURL("https://play.google.com/store/apps/details?id=com.DefaultCompany.SinGame");
+                    Application.OpenURL("https://play.google.com/store/apps/details?id=com.DragonGames.yoyo");
                 }, false);
             }
 
