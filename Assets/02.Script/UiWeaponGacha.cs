@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using static UiGachaResultView;
+using UniRx;
 
 public class UiWeaponGacha : MonoBehaviour
 {
@@ -26,9 +27,21 @@ public class UiWeaponGacha : MonoBehaviour
     [SerializeField]
     private List<TextMeshProUGUI> priceTexts;
 
+    [SerializeField]
+    private TextMeshProUGUI freeButtonDesc;
+
+    private void Subscribe()
+    {
+        ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Subscribe(e =>
+        {
+            freeButtonDesc.SetText(e == 0 ? "무료 뽑기!" : "내일 다시!");
+        }).AddTo(this);
+    }
+
     private void Start()
     {
         Initialize();
+        Subscribe();
     }
 
     private void Initialize()
@@ -76,6 +89,44 @@ public class UiWeaponGacha : MonoBehaviour
     {
         int currentBlueStoneNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
         return currentBlueStoneNum >= price;
+    }
+
+    public void OnClickFreeGacha()
+    {
+        bool canFreeGacha = ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value == 0;
+
+        if (canFreeGacha == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 받을 수 없습니다.");
+            return;
+        }
+
+        ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value = 1;
+
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        Param userInfoParam = new Param();
+
+        userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
+
+        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+        {
+            AdManager.Instance.ShowRewardedReward(() =>
+            {
+                this.lastGachaIdx = 2;
+                int amount = gachaAmount[2];
+                int price = gachaPrice[2];
+
+                //무료라
+                ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += price;
+
+                OnClickOpenButton(2);
+
+                LogManager.Instance.SendLogType("FreeGacha", "Weapon", "");
+            });
+        });
     }
 
     public void OnClickOpenButton(int idx)

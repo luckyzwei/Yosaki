@@ -87,8 +87,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         float killedEnemyPerMin = spawnEnemyNumPerSec * 60f;
 
-        float goldBuffRatio = PlayerStats.GetGoldPlusValueExclusiveBuff() * 0.5f;
-        float expBuffRatio = PlayerStats.GetExpPlusValueExclusiveBuff() * 0.5f;
+        float goldBuffRatio = PlayerStats.GetGoldPlusValueExclusiveBuff() * 0.8f;
+        float expBuffRatio = PlayerStats.GetExpPlusValueExclusiveBuff() * 0.8f;
 
         float gold = killedEnemyPerMin * spawnedEnemyData.Gold * GameBalance.sleepRewardRatio * elapsedMinutes;
         gold += gold * goldBuffRatio;

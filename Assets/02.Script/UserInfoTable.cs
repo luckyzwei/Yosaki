@@ -66,6 +66,10 @@ public class UserInfoTable
     public const string dokebiEnterCount = "dokebiEnterCount";
     public const string chatFrame = "chatFrame";
 
+    public const string freeWeapon = "freeWeapon";
+    public const string freeNorigae = "freeNorigae";
+    public const string freeSkill = "freeSkill";
+
     // public ObscuredDouble currentServerDate;
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -108,7 +112,11 @@ public class UserInfoTable
         {dokebiKillCount0,0f},
         {dokebiKillCount1,0f},
         {dokebiKillCount2,0f},
-        {chatFrame,0f}
+        {chatFrame,0f},
+
+        {freeWeapon,0f},
+        {freeNorigae,0f},
+        {freeSkill,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -376,6 +384,10 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiEnterCount).Value = 0;
 
+        ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value = 0;
+
         //버프
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value = 0;
@@ -400,6 +412,10 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.dokebiEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiEnterCount).Value);
         userInfoParam.Add(UserInfoTable.LastLogin, ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value);
+
+        userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
+        userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
+        userInfoParam.Add(UserInfoTable.freeSkill, ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value);
 
         userInfoParam.Add(UserInfoTable.buff_gold1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);
         userInfoParam.Add(UserInfoTable.buff_gold2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);
