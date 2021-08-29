@@ -50,6 +50,16 @@ public class UiGachaResultView : SingletonMono<UiGachaResultView>
 
     private WaitForSeconds autoDelay = new WaitForSeconds(0.35f);
 
+    private void Start()
+    {
+        SetWhiteEffectToggle();
+    }
+
+    private void SetWhiteEffectToggle()
+    {
+        whiteEffectToggle.isOn = SettingData.GachaWhiteEffect.Value == 1 ? true : false;
+    }
+
     private void OnEnable()
     {
         autoToggle.isOn = false;
@@ -198,4 +208,14 @@ public class UiGachaResultView : SingletonMono<UiGachaResultView>
     {
         retryCallback?.Invoke();
     }
+
+    [SerializeField]
+    private Toggle whiteEffectToggle;
+
+    public static string whiteEffectKey = "whiteEffectKey";
+    public void OnGachaWhiteEffectStateChanged(bool state)
+    {
+        SettingData.GachaWhiteEffect.Value = state == true ? 1 : 0;
+    }
+
 }

@@ -95,6 +95,8 @@ public class PopupManager : SingletonMono<PopupManager>
 
     public void ShowWhiteEffect()
     {
+        if (SettingData.GachaWhiteEffect.Value == 0) return;
+
         whiteEffect.SetActive(true);
     }
 }

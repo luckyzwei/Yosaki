@@ -275,6 +275,7 @@ public static class SettingKey
     public static string ShowEffect = "ShowEffect";
     public static string GlowEffect = "GlowEffect";
     public static string PotionUseHpOption = "PotionUseHpOption";
+    public static string GachaWhiteEffect = "GachaWhiteEffect";
 }
 
 public static class SettingData
@@ -290,6 +291,7 @@ public static class SettingData
     public static ReactiveProperty<int> ShowEffect = new ReactiveProperty<int>();
     public static ReactiveProperty<int> GlowEffect = new ReactiveProperty<int>();
     public static ReactiveProperty<int> PotionUseHpOption = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> GachaWhiteEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
@@ -330,6 +332,9 @@ public static class SettingData
 
         if (PlayerPrefs.HasKey(SettingKey.uiView) == false)
             PlayerPrefs.SetFloat(SettingKey.uiView, 0f);
+
+        if (PlayerPrefs.HasKey(SettingKey.GachaWhiteEffect) == false)
+            PlayerPrefs.SetInt(SettingKey.uiView, 1);
     }
 
     static void Initialize()
@@ -344,6 +349,8 @@ public static class SettingData
         GlowEffect.Value = PlayerPrefs.GetInt(SettingKey.GlowEffect, 1);
         PotionUseHpOption.Value = PlayerPrefs.GetInt(SettingKey.PotionUseHpOption, 1);
         uiView.Value = PlayerPrefs.GetFloat(SettingKey.uiView, 0f);
+        GachaWhiteEffect.Value = PlayerPrefs.GetInt(SettingKey.GachaWhiteEffect, 1);
+
         Subscribe();
     }
 
@@ -385,6 +392,11 @@ public static class SettingData
         {
             PlayerPrefs.SetInt(SettingKey.GraphicOption, e);
             SetGraphicOption(e);
+        });
+
+        GachaWhiteEffect.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.GachaWhiteEffect, e);
         });
     }
 
