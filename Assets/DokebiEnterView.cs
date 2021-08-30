@@ -108,6 +108,10 @@ public class DokebiEnterView : MonoBehaviour
         {
             defeatCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiKillCount2).Value;
         }
+        else if (idx == 3)
+        {
+            defeatCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiKillCount3).Value;
+        }
 
         if (defeatCount == 0)
         {

@@ -58,6 +58,10 @@ public class UiDokebiResultPopup : MonoBehaviour
         {
             prefMaxKillCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiKillCount2).Value;
         }
+        else if (dokebiIdx == 3)
+        {
+            prefMaxKillCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiKillCount3).Value;
+        }
 
         if (defeatEnemiesNum > prefMaxKillCount)
         {
@@ -75,6 +79,11 @@ public class UiDokebiResultPopup : MonoBehaviour
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiKillCount2).Value = defeatEnemiesNum;
                 ServerData.userInfoTable.UpData(UserInfoTable.dokebiKillCount2, false);
+            }
+            else if (dokebiIdx == 3)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiKillCount3).Value = defeatEnemiesNum;
+                ServerData.userInfoTable.UpData(UserInfoTable.dokebiKillCount3, false);
             }
         }
     }
