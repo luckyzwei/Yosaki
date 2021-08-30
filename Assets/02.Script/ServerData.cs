@@ -42,6 +42,7 @@ public static class ServerData
     public static EtcServerTable etcServerTable { get; private set; } = new EtcServerTable();
     public static NewLevelPass newLevelPass { get; private set; } = new NewLevelPass();
     public static IAPServerTableTotal iAPServerTableTotal { get; private set; } = new IAPServerTableTotal();
+    public static TitleServerTable titleServerTable { get; private set; } = new TitleServerTable();
 
     #region string
     public static string inDate_str = "inDate";
@@ -94,6 +95,8 @@ public static class ServerData
         newLevelPass.Initialize();
 
         iAPServerTableTotal.Initialize();
+
+        titleServerTable.Initialize();
     }
 
     public static void GetUserInfo()

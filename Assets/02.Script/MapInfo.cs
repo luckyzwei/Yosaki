@@ -23,6 +23,13 @@ public class MapInfo : SingletonMono<MapInfo>
 
     public Dictionary<int, int> spawnedEnemyPlatforms = new Dictionary<int, int>();
 
+    private bool canSpawnEnemy = true;
+
+    public void SetCanSpawnEnemy(bool canSpawnEnemy)
+    {
+        this.canSpawnEnemy = canSpawnEnemy;
+    }
+
 #if UNITY_EDITOR
     private void OnValidate()
     {
@@ -154,8 +161,18 @@ public class MapInfo : SingletonMono<MapInfo>
 
             int spawnNum = maxEnemy - spawnedEnemyList.Count;
 
+            while (canSpawnEnemy == false)
+            {
+                yield return null;
+            }
+
             for (int i = 0; i < spawnNum; i++)
             {
+                while (canSpawnEnemy == false)
+                {
+                    yield return null;
+                }
+
                 SpawnEnemy(false, isEnemyEmpty);
 
                 whenSpawnedEnemyCountChanged.Execute();
@@ -165,6 +182,8 @@ public class MapInfo : SingletonMono<MapInfo>
                     yield return spawnInterval;
                 }
             }
+
+         
 
             yield return spawnDelay;
         }
@@ -286,6 +305,11 @@ public class MapInfo : SingletonMono<MapInfo>
 
         while (spawnGaugeValue.Value < spawnDelay)
         {
+            while (canSpawnEnemy == false)
+            {
+                yield return null;
+            }
+
             spawnGaugeValue.Value += Time.deltaTime;
 
             yield return null;
@@ -324,6 +348,13 @@ public class MapInfo : SingletonMono<MapInfo>
             return;
         }
 
+        //소환된 몹 전부 꺼버림
+        var spawnedEnemies = new List<Enemy>(spawnedEnemyList);
+
+        spawnedEnemies.ForEach(e => e.gameObject.SetActive(false));
+        //
+        //몹생성 막음
+        SetCanSpawnEnemy(false);
         SpawnEnemy(true, false);
     }
 

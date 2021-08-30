@@ -95,6 +95,7 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetMarbleValue(StatusType.Damdecrease);
+        ret += GetMagicBookHasPercentValue(StatusType.Damdecrease);
 
         return ret;
     }
@@ -113,6 +114,7 @@ public static class PlayerStats
         int ret = 0;
 
         ret += (int)GetMarbleValue(StatusType.SkillAttackCount);
+        ret += (int)GetMagicBookHasPercentValue(StatusType.SkillAttackCount);
 
         return ret;
     }

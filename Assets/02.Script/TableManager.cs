@@ -495,5 +495,10 @@ public class TableManager : SingletonMono<TableManager>
     private TwelveBossTable twelveBossTable;
 
     public TwelveBossTable TwelveBossTable => twelveBossTable;
+
+    [SerializeField]
+    private TitleTable titleTable;
+
+    public TitleTable TitleTable => titleTable;
 }
 

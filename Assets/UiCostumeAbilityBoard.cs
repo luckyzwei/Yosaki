@@ -208,7 +208,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
                 break;
             }
 
-            if (isLock == false && abilityData.Grade == GameBalance.costumeMaxGrade - 1)
+            if (isLock == false && abilityData.Grade == GameBalance.costumeMaxGrade - 1 && showYellowPop)
             {
                 hasYellowOption = true;
                 break;

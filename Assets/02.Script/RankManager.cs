@@ -124,8 +124,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateUserRank_Level()
     {
-        if (PlayerData.Instance.NickName.Equals("블랙핑크")) return;
-        if (PlayerData.Instance.NickName.Equals("테스트용")) return;
+        if (UpdateRank() == false) return;
 
         Param param = new Param();
         param.Add("Level", ServerData.statusTable.GetTableData(StatusTable.Level).Value);
@@ -201,8 +200,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateStage_Score(float score)
     {
-        if (PlayerData.Instance.NickName.Equals("블랙핑크")) return;
-        if (PlayerData.Instance.NickName.Equals("테스트용")) return;
+        if (UpdateRank() == false) return;
         Param param = new Param();
         param.Add("Score", score);
 
@@ -281,7 +279,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateBoss_Score(float score)
     {
-        if (PlayerData.Instance.NickName.Equals("블랙핑크")) return;
+        if (UpdateRank() == false) return;
 
         if (this.myRankInfo[RankType.Boss] != null && score < this.myRankInfo[RankType.Boss].Score)
         {
@@ -366,7 +364,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRealBoss_Score(float score)
     {
-        if (PlayerData.Instance.NickName.Equals("블랙핑크")) return;
+        if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.Real_Boss] != null && score < this.myRankInfo[RankType.Real_Boss].Score)
         {
             Debug.LogError("점수가 더 낮음");
@@ -402,4 +400,10 @@ public class RankManager : SingletonMono<RankManager>
     }
 
     #endregion
+
+    private bool UpdateRank()
+    {
+        return !PlayerData.Instance.NickName.Equals("블랙핑크") && !PlayerData.Instance.NickName.Equals("블랙핑크")
+            && !PlayerData.Instance.NickName.Equals("테스트용");
+    }
 }

@@ -17,22 +17,22 @@ public class UiAttendance : MonoBehaviour
     {
         var tableDatas = TableManager.Instance.AttendanceReward.dataArray;
 
-        if (attendanceCellList.Count != tableDatas.Length)
-        {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "출석 데이터 다름", null);
-            return;
-        }
+        int currentAttendance = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value;
 
-        for (int i = 0; i < tableDatas.Length; i++)
+        int startIdx = ((currentAttendance - 1) / 5) * 5;
+        startIdx -= 5;
+        startIdx = Mathf.Max(0, startIdx);
+
+        for (int i = 0; i < attendanceCellList.Count; i++)
         {
-            attendanceCellList[i].Initialize(tableDatas[i]);
+            attendanceCellList[i].Initialize(tableDatas[i + startIdx]);
         }
     }
 
 #if UNITY_EDITOR
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
         }
