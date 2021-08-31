@@ -44,6 +44,8 @@ public static class ServerData
     public static IAPServerTableTotal iAPServerTableTotal { get; private set; } = new IAPServerTableTotal();
     public static TitleServerTable titleServerTable { get; private set; } = new TitleServerTable();
 
+    public static PensionServerTable pensionServerTable { get; private set; } = new PensionServerTable();
+
     #region string
     public static string inDate_str = "inDate";
     public static string format_string = "S";
@@ -97,6 +99,8 @@ public static class ServerData
         iAPServerTableTotal.Initialize();
 
         titleServerTable.Initialize();
+
+        pensionServerTable.Initialize();
     }
 
     public static void GetUserInfo()

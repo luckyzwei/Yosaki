@@ -71,6 +71,9 @@ public class UserInfoTable
     public const string freeNorigae = "freeNorigae";
     public const string freeSkill = "freeSkill";
 
+    public const string oakpensionAttendance = "oakpension";
+    public const string marblepensionAttendance = "marblepension";
+
     // public ObscuredDouble currentServerDate;
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -120,6 +123,9 @@ public class UserInfoTable
         {freeSkill,0f},
 
         {dokebiKillCount3,0f},
+
+        {oakpensionAttendance,0f},
+        {marblepensionAttendance,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -404,6 +410,16 @@ public class UserInfoTable
         if (attendanceUpdatedTime != day)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
+
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f) 
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value++;
+            }
+
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.marblepensionAttendance].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value++;
+            }
         }
 
         attendanceUpdatedTime = ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value;
@@ -415,6 +431,9 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.dokebiEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiEnterCount).Value);
         userInfoParam.Add(UserInfoTable.LastLogin, ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value);
+
+        userInfoParam.Add(UserInfoTable.oakpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value);
+        userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
