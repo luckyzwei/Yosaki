@@ -183,11 +183,13 @@ public class WeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            amountText.SetText($"({ServerData.weaponTable.GetCurrentWeaponCount(weaponData.Stringid)}/{weaponData.Requireupgrade})");
+            int require = weaponData.Id < 20 ? weaponData.Requireupgrade : 1;
+            amountText.SetText($"({ServerData.weaponTable.GetCurrentWeaponCount(weaponData.Stringid)}/{require})");
         }
         else if (magicBookData != null)
         {
-            amountText.SetText($"({ServerData.magicBookTable.GetCurrentMagicBookCount(magicBookData.Stringid)}/{magicBookData.Requireupgrade})");
+            int require = magicBookData.Id < 16 ? magicBookData.Requireupgrade : 1;
+            amountText.SetText($"({ServerData.magicBookTable.GetCurrentMagicBookCount(magicBookData.Stringid)}/{require})");
         }
         else
         {

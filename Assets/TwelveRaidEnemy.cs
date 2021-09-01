@@ -89,8 +89,7 @@ public class TwelveRaidEnemy : BossEnemyBase
 
         agentHpController.SetHp(float.MaxValue);
 
-        var bossTableData = TableManager.Instance.BossTableData[GameManager.Instance.bossId];
-        agentHpController.SetDefense(bossTableData.Defense);
+        agentHpController.SetDefense(0);
 
         enemyHitObjects.ForEach(e => e.SetDamage(1f));
 

@@ -82,7 +82,22 @@ public class UiNorigaeCraftBoard : SingletonMono<UiNorigaeCraftBoard>
 
         bool hasPet = ServerData.petTable.TableDatas[petTableData.Stringid].hasItem.Value == 1;
 
-        petHasDescription.SetText(hasPet ? "1/1" : "0/1");
+        //주작
+        if (sinsuData.Stringid == "magicBook18")
+        {
+            petHasDescription.SetText("또는 현무노리개 보유");
+        }
+        //청룡
+        else if(sinsuData.Stringid == "magicBook19") 
+        {
+            petHasDescription.SetText("또는 백호노리개 보유");
+        }
+        else 
+        {
+            petHasDescription.SetText("보유");
+        }
+
+     
 
         petName.SetText(petTableData.Name);
     }
@@ -101,10 +116,35 @@ public class UiNorigaeCraftBoard : SingletonMono<UiNorigaeCraftBoard>
 
         bool hasPet = ServerData.petTable.TableDatas[petTableData.Stringid].hasItem.Value == 1;
 
-        if (legendMagicBookAmount < 1 || hasPet == false)
+        //주작
+        if (sinsuData.Stringid == "magicBook18")
         {
-            PopupManager.Instance.ShowAlarmMessage("재료가 부족 합니다.");
-            return;
+            bool hasHyunMu = ServerData.magicBookTable.TableDatas["magicBook16"].hasItem.Value == 1;
+
+            if (legendMagicBookAmount < 1 || (hasPet == false && hasHyunMu == false))
+            {
+                PopupManager.Instance.ShowAlarmMessage("재료가 부족 합니다.");
+                return;
+            }
+        }
+        //청룡
+        else if (sinsuData.Stringid == "magicBook19")
+        {
+            bool hasBaekHo = ServerData.magicBookTable.TableDatas["magicBook17"].hasItem.Value == 1;
+
+            if (legendMagicBookAmount < 1 || (hasPet == false && hasBaekHo == false))
+            {
+                PopupManager.Instance.ShowAlarmMessage("재료가 부족 합니다.");
+                return;
+            }
+        }
+        else 
+        {
+            if (legendMagicBookAmount < 1 || hasPet == false)
+            {
+                PopupManager.Instance.ShowAlarmMessage("재료가 부족 합니다.");
+                return;
+            }
         }
 
         List<TransactionValue> transactions = new List<TransactionValue>();
