@@ -80,17 +80,19 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description2 += $"{CommonString.GetStatusName(StatusType.MoveSpeed)} : {PlayerStats.GetMoveSpeedValue()}\n";
 
         //피해 감소
-        description2 += $"{CommonString.GetStatusName(StatusType.Damdecrease)} : {PlayerStats.GetDamDecreaseValue()*100f}\n";
+        description2 += $"{CommonString.GetStatusName(StatusType.Damdecrease)} : {PlayerStats.GetDamDecreaseValue() * 100f}\n";
 
         //보스피해
-        description1 += $"{CommonString.GetStatusName(StatusType.BossDamAddPer)} : {PlayerStats.GetBossDamAddValue()*100f}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.BossDamAddPer)} : {PlayerStats.GetBossDamAddValue() * 100f}\n";
 
         //방어도 무시
-        description2 += $"{CommonString.GetStatusName(StatusType.IgnoreDefense)} : {PlayerStats.GetIgnoreDefenseValue()}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.IgnoreDefense)} : {PlayerStats.GetIgnoreDefenseValue()}\n";
 
-        //히트수
+        //관통
+        description2 += $"{CommonString.GetStatusName(StatusType.PenetrateDefense)} : {(PlayerStats.GetPenetrateDefense() * 100f).ToString("F2")}\n";
+
+        //타격수
         description1 += $"{CommonString.GetStatusName(StatusType.SkillAttackCount)} : {PlayerStats.GetSkillHitAddValue()}\n";
-
         //방무 GetIgnoreDefenseValue
 
         ////기억의파편 추가 획득

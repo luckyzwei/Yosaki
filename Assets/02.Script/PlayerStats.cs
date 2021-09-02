@@ -28,6 +28,7 @@ public enum StatusType
     DropAmountAddPer,
     BossDamAddPer,
     SkillAttackCount,
+    PenetrateDefense
 }
 
 
@@ -49,6 +50,7 @@ public static class PlayerStats
         float ignoreDefense = GetIgnoreDefenseValue();
         float decreaseDam = GetDamDecreaseValue();
         float skillAttackCount = GetSkillHitAddValue();
+        float penetration = GetPenetrateDefense();
 
         float totalPower =
           ((baseAttack + baseAttack * baseAttackPer)
@@ -61,7 +63,7 @@ public static class PlayerStats
            * (Mathf.Max(ignoreDefense, 0.01f)) * 100f
            * (Mathf.Max(decreaseDam, 0.01f)) * 100f
            * (Mathf.Max(skillAttackCount, 0.01f)) * 100f
-
+           * (Mathf.Max(penetration, 0.01f)) * 10f
            );
 
         //     float totalPower =
@@ -653,6 +655,30 @@ public static class PlayerStats
         ret += GetWeaponEquipPercentValue(StatusType.IgnoreDefense);
         ret += GetWeaponHasPercentValue(StatusType.IgnoreDefense);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.IgnoreDefense);
+
+        return ret;
+    }
+
+    public static float GetPenetrateDefense()
+    {
+        float ret = 0f;
+        ret += GetYomulUpgradeValue(StatusType.PenetrateDefense);
+        return ret;
+    }
+
+    public static float GetYomulUpgradeValue(StatusType type)
+    {
+        float ret = 0f;
+        var tableDatas = TableManager.Instance.YomulAbilTable.dataArray;
+
+        for (int i = 0; i < tableDatas.Length; i++)
+        {
+            var serverData = ServerData.yomulServerTable.TableDatas[tableDatas[i].Stringid];
+            if (serverData.hasAbil.Value == 0) continue;
+            if (tableDatas[i].Abiltype != (int)type) continue;
+
+            ret += tableDatas[i].Abilvalue + (serverData.level.Value * tableDatas[i].Abiladdvalue);
+        }
 
         return ret;
     }

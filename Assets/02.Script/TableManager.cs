@@ -500,5 +500,9 @@ public class TableManager : SingletonMono<TableManager>
     private TitleTable titleTable;
 
     public TitleTable TitleTable => titleTable;
+
+    [SerializeField]
+    private YomulAbil yomulAbilTable;
+    public YomulAbil YomulAbilTable => yomulAbilTable;
 }
 

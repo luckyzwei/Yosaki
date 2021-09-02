@@ -172,7 +172,7 @@ public class TwelveDungeonManager : ContentsManagerBase
         //클리어 체크
         contentsState.Value = (int)ContentsState.Clear;
 
-      //  SendClearInfo();
+        //  SendClearInfo();
     }
 
     //private void SendClearInfo()
@@ -217,36 +217,40 @@ public class TwelveDungeonManager : ContentsManagerBase
 
     private void SendScore()
     {
-        RankManager.Instance.UpdateRealBoss_Score(damageAmount.Value);
+        //축만 업데이트
+        if (GameManager.Instance.bossId == 1)
+        {
+            RankManager.Instance.UpdateRealBoss_Score(damageAmount.Value);
+        }
 
         var serverData = ServerData.bossServerTable.TableDatas[twelveBossTable.Stringid];
 
-        if (string.IsNullOrEmpty(serverData.score.Value) == false) 
+        if (string.IsNullOrEmpty(serverData.score.Value) == false)
         {
-            if(damageAmount.Value < float.Parse(serverData.score.Value)) 
+            if (damageAmount.Value < float.Parse(serverData.score.Value))
             {
                 return;
             }
-            else 
+            else
             {
                 serverData.score.Value = damageAmount.Value.ToString();
 
                 ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
             }
         }
-        else 
+        else
         {
             serverData.score.Value = damageAmount.Value.ToString();
 
             ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
         }
 
-    
+
     }
 
     private void RewardItem()
     {
-       // DailyMissionManager.UpdateDailyMission(DailyMissionKey.RewardedBossContents, 1);
+        // DailyMissionManager.UpdateDailyMission(DailyMissionKey.RewardedBossContents, 1);
 
         //float damagedHp = damageAmount.Value;
 

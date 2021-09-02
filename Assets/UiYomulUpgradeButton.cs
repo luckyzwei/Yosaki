@@ -6,6 +6,6 @@ public class UiYomulUpgradeButton : MonoBehaviour
 {
     public void OnClickUpgradeButton()
     {
-        PopupManager.Instance.ShowAlarmMessage("업데이트 예정 입니다!");
+        UiYoumulUpgradeBoard.Instance.ShowUpgradePopup(true);
     }
 }

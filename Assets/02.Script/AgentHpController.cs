@@ -128,6 +128,15 @@ public class AgentHpController : MonoBehaviour
             value = -1f;
         }
 
+        //방어력 초과데미지
+        //방어력 차이
+        float gapDefense = defense - ignoreDefenseValue;
+        if (gapDefense < 0)
+        {
+            float penetrateValue = PlayerStats.GetPenetrateDefense();
+            value += Mathf.Abs(gapDefense) * value * penetrateValue;
+        }
+
 
         Vector3 spawnPos = Vector3.zero;
 
@@ -203,11 +212,13 @@ public class AgentHpController : MonoBehaviour
             return;
         }
     }
+    private float ignoreDefenseValue;
+
     private void ApplyDefense(ref float value)
     {
-        float ignoreDefense = PlayerStats.GetIgnoreDefenseValue();
+        ignoreDefenseValue = PlayerStats.GetIgnoreDefenseValue();
 
-        float enemyDefense = Mathf.Max(0f, defense - ignoreDefense);
+        float enemyDefense = Mathf.Max(0f, defense - ignoreDefenseValue);
 
         value -= value * enemyDefense * 0.01f;
     }

@@ -46,6 +46,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public Sprite WeaponUpgradeStone;
 
+    public Sprite YomulExchangeStone;
+
     public List<SkeletonDataAsset> enemySpineAssets;
 
     public Sprite GetItemIcon(Item_Type type)
@@ -105,6 +107,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.WeaponUpgradeStone:
                 return WeaponUpgradeStone;
+                break;
+            case Item_Type.YomulExchangeStone:
+                return YomulExchangeStone;
                 break;
         }
 

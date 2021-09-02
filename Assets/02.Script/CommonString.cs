@@ -42,7 +42,7 @@ public static class CommonString
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "십이지신(묘)";
-    public static string RankPrefix_Real_Boss = "십이지신(자)";
+    public static string RankPrefix_Real_Boss = "십이지신(축)";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
 
@@ -104,6 +104,7 @@ public static class CommonString
             case Item_Type.SkillPartion: return "기술 조각";
             case Item_Type.WeaponUpgradeStone: return "힘의 증표";
             case Item_Type.PetUpgradeSoul: return "요괴구슬";
+            case Item_Type.YomulExchangeStone: return "탐욕의 증표";
         }
         return "미등록"; 
     }
@@ -169,6 +170,9 @@ public static class CommonString
             case StatusType.IgnoreDefense:
                 return "방어력 무시";
                 break;
+            case StatusType.PenetrateDefense:
+                return "초과 방어력당 추가 피해량(%)";
+                break;
             case StatusType.DashCount:
                 return "순보 횟수";
                 break;
@@ -188,19 +192,6 @@ public static class CommonString
 
     public static string GetDialogTextName(DialogCharcterType type)
     {
-        switch (type)
-        {
-            case DialogCharcterType.BeforeLuccy:
-                return "마왕 루시";
-                break;
-            case DialogCharcterType.CurrentLuccy:
-                return "약해진 루시";
-                break;
-            case DialogCharcterType.Manager:
-                return "관리인 도비";
-                break;
-        }
-
         return "미등록";
     }
 }

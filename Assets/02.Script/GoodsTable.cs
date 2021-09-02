@@ -20,6 +20,7 @@ public class GoodsTable
     public static string SkillPartion = "SkillPartion";
     public static string WeaponUpgradeStone = "WeaponUpgradeStone";
     public static string PetUpgradeSoul = "PetUpgradeSoul";
+    public static string YomulExchangeStone = "YomulExchangeStone";
 
     //포션
     public static string Potion_0 = "Potion_0";
@@ -41,7 +42,8 @@ public class GoodsTable
         {DokebiKey,0f},
         {SkillPartion,0f},
         {WeaponUpgradeStone,0f},
-        {PetUpgradeSoul,0f}
+        {PetUpgradeSoul,0f},
+        {YomulExchangeStone,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

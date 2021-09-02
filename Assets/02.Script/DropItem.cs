@@ -15,6 +15,7 @@ public enum Item_Type
     SkillPartion,
     WeaponUpgradeStone,
     PetUpgradeSoul,
+    YomulExchangeStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

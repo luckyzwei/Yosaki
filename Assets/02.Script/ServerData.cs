@@ -43,8 +43,8 @@ public static class ServerData
     public static NewLevelPass newLevelPass { get; private set; } = new NewLevelPass();
     public static IAPServerTableTotal iAPServerTableTotal { get; private set; } = new IAPServerTableTotal();
     public static TitleServerTable titleServerTable { get; private set; } = new TitleServerTable();
-
     public static PensionServerTable pensionServerTable { get; private set; } = new PensionServerTable();
+    public static YomulServerTable yomulServerTable { get; private set; } = new YomulServerTable();
 
     #region string
     public static string inDate_str = "inDate";
@@ -101,6 +101,8 @@ public static class ServerData
         titleServerTable.Initialize();
 
         pensionServerTable.Initialize();
+
+        yomulServerTable.Initialize();
     }
 
     public static void GetUserInfo()
@@ -272,6 +274,12 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.WeaponUpgradeStone).Value += amount;
                 param.Add(GoodsTable.WeaponUpgradeStone, ServerData.goodsTable.GetTableData(GoodsTable.WeaponUpgradeStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.YomulExchangeStone:
+                ServerData.goodsTable.GetTableData(GoodsTable.YomulExchangeStone).Value += amount;
+                param.Add(GoodsTable.YomulExchangeStone, ServerData.goodsTable.GetTableData(GoodsTable.YomulExchangeStone).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.costume1:
             case Item_Type.costume4:
                 {

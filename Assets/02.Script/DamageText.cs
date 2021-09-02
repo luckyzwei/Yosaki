@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public enum DamTextType
 {
-    Normal, Critical, Green, Red
+    Normal, Critical, Green, Red, Penetration
 }
 
 public class DamageText : PoolItem
@@ -30,6 +30,9 @@ public class DamageText : PoolItem
 
     [SerializeField]
     private Color greenColor;
+
+    [SerializeField]
+    private Color ignoreDefenseColor;
 
     //[SerializeField]
     //private TMP_FontAsset normalfont;

@@ -96,7 +96,7 @@ public class SingleRaidManager : ContentsManagerBase
         Initialize();
         Subscribe();
 
-   
+
     }
     private void Initialize()
     {
