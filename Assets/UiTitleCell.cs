@@ -37,6 +37,8 @@ public class UiTitleCell : MonoBehaviour
 
         title.SetText(tableData.Title);
 
+        title.color = CommonUiContainer.Instance.itemGradeColor[tableData.Grade];
+
         description.SetText(tableData.Description);
 
         itemIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableData.Rewardtype);

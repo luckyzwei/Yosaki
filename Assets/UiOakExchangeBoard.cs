@@ -56,7 +56,7 @@ public class UiOakExchangeBoard : MonoBehaviour
         oakAmountText.SetText($"{Utils.ConvertBigNum(requireOakAmount)}");
         ticketAmountText.SetText($"{Utils.ConvertBigNum(ticketGetAmount)}");
 
-        description.SetText($"{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertBigNum(requireOakAmount)}개를 제물로 바치면 소환서를 주지.");
+        description.SetText($"{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertBigNum(requireOakAmount)}개를 바치면 소환서를 주지.");
     }
     public void OnClickUnlockButton()
     {

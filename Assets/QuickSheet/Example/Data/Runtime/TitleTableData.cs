@@ -56,4 +56,8 @@ public class TitleTableData
   string title;
   public string Title { get {return title; } set { this.title = value;} }
   
+  [SerializeField]
+  int grade;
+  public int Grade { get {return grade; } set { this.grade = value;} }
+  
 }

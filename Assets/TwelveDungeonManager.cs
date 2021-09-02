@@ -59,6 +59,9 @@ public class TwelveDungeonManager : ContentsManagerBase
     [SerializeField]
     private Transform bossSpawnParent;
 
+    [SerializeField]
+    private List<GameObject> mapObjects;
+
     #region Security
     private void OnEnable()
     {
@@ -102,6 +105,16 @@ public class TwelveDungeonManager : ContentsManagerBase
         SoundManager.Instance.PlaySound("BossAppear");
 
         SetBossHp();
+
+        SetBossMap();
+    }
+
+    private void SetBossMap()
+    {
+        for (int i = 0; i < mapObjects.Count; i++)
+        {
+            mapObjects[i].gameObject.SetActive(i == GameManager.Instance.bossId);
+        }
     }
 
     private void Subscribe()

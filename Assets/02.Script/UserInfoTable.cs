@@ -64,7 +64,7 @@ public class UserInfoTable
     public const string wingPackageRewardReceive = "wingPackageRewardReceive";
     public const string topClearStageId = "topClearStageId";
     public const string selectedSkillGroupId = "selectedSkillGroupId";
-    public const string dokebiEnterCount = "dokebiEnterCount";
+    public const string dokebiEnterCount = "dokebiEnterCount2";
     public const string chatFrame = "chatFrame";
 
     public const string freeWeapon = "freeWeapon";
@@ -73,6 +73,8 @@ public class UserInfoTable
 
     public const string oakpensionAttendance = "oakpension";
     public const string marblepensionAttendance = "marblepension";
+
+    public const string marblePackChange = "marblePackChange";
 
     // public ObscuredDouble currentServerDate;
     public float currentServerDate;
@@ -126,6 +128,8 @@ public class UserInfoTable
 
         {oakpensionAttendance,0f},
         {marblepensionAttendance,0f},
+
+        {marblePackChange,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
