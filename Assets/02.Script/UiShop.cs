@@ -48,6 +48,7 @@ public class UiShop : SingletonMono<UiShop>
         }
 
         if (tableData.SELLWHERE != SellWhere.Shop) return;
+        if (tableData.BUYTYPE == BuyType.Pension) return;
 
         //아이템 수령처리
         Param goodsParam = null;

@@ -89,7 +89,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description1 += $"{CommonString.GetStatusName(StatusType.IgnoreDefense)} : {PlayerStats.GetIgnoreDefenseValue()}\n";
 
         //관통
-        description2 += $"{CommonString.GetStatusName(StatusType.PenetrateDefense)} : {(PlayerStats.GetPenetrateDefense() * 100f).ToString("F2")}\n";
+        description2 += $"{CommonString.GetStatusName(StatusType.PenetrateDefense)} : {(PlayerStats.GetPenetrateDefense() * 100f).ToString("F3")}\n";
 
         //타격수
         description1 += $"{CommonString.GetStatusName(StatusType.SkillAttackCount)} : {PlayerStats.GetSkillHitAddValue()}\n";

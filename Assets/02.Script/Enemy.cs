@@ -189,7 +189,7 @@ public class Enemy : PoolItem
         base.OnDisable();
         this.returnCallBack?.Invoke(this);
 
-        if (isFieldBossEnemy)
+        if (isFieldBossEnemy && MapInfo.Instance != null)
         {
             MapInfo.Instance.SetCanSpawnEnemy(true);
         }

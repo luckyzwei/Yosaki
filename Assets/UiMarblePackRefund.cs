@@ -39,13 +39,32 @@ public class UiMarblePackRefund : MonoBehaviour
         int marblePack2Count = ServerData.iAPServerTableTotal.TableDatas["marblepackage2"].buyCount.Value;
         int marblePack3Count = ServerData.iAPServerTableTotal.TableDatas["marblepackage3"].buyCount.Value;
 
-        if (marblePack1Count == 0 && marblePack2Count == 0 && marblePack3Count == 0) return;
+        if (marblePack1Count == 0 && marblePack2Count == 0 && marblePack3Count == 0)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.marblePackChange).Value = 1;
+
+            List<TransactionValue> tr = new List<TransactionValue>();
+
+            Param marbleParam = new Param();
+
+            marbleParam.Add(UserInfoTable.marblePackChange, ServerData.userInfoTable.GetTableData(UserInfoTable.marblePackChange).Value);
+            tr.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, marbleParam));
+
+            ServerData.SendTransaction(tr, successCallBack: () =>
+              {
+#if UNITY_EDITOR
+                Debug.LogError("소급 없음");
+#endif
+            });
+
+            return;
+        }
 
         rootObject.SetActive(true);
 
-        buyCounts[0].SetText(marblePack1Count.ToString());
-        buyCounts[1].SetText(marblePack2Count.ToString());
-        buyCounts[2].SetText(marblePack3Count.ToString());
+        buyCounts[0].SetText(marblePack1Count.ToString() + "회");
+        buyCounts[1].SetText(marblePack2Count.ToString() + "회");
+        buyCounts[2].SetText(marblePack3Count.ToString() + "회");
 
         int _1DiffMarble = 200000;
         int _1DiffTicket = 2;

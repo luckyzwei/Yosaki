@@ -52,7 +52,7 @@ public class UiDefenseBreakBoard : MonoBehaviour
         {
             int upgradePrice = GetUpgradePrice();
 
-            abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {(PlayerStats.GetPenetrateDefense() * 100f).ToString("F2")}%\n(초과된 방어력 수치만큼 추가 데미지)");
+            abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {(PlayerStats.GetPenetrateDefense() * 100f).ToString("F3")}%\n(초과된 방어력 수치만큼 추가 데미지)");
 
             levelText.SetText($"Lv : {e}");
 
@@ -79,9 +79,10 @@ public class UiDefenseBreakBoard : MonoBehaviour
     {
         int currentLevel = yomulServerData.level.Value + 1;
 
-        return (int)Mathf.Pow(currentLevel, 3.45f) +
-            (int)Mathf.Pow(currentLevel, 3.38f) +
-            (int)Mathf.Pow(currentLevel, 3.45f);
+        return (int)Mathf.Pow(currentLevel, 3.3f) +
+            (int)Mathf.Pow(currentLevel, 3.41f) +
+            (int)Mathf.Pow(currentLevel, 3.45f) +
+            (int)Mathf.Pow(currentLevel, 3.3f);
     }
 
     public void OnClickUpgradeButton()
@@ -167,6 +168,8 @@ public class UiDefenseBreakBoard : MonoBehaviour
 
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactions.Add(TransactionValue.SetUpdate(YomulServerTable.tableName, YomulServerTable.Indate, yomulParam));
+
+        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {(PlayerStats.GetPenetrateDefense() * 100f).ToString("F3")}%\n(초과된 방어력 수치만큼 추가 데미지)");
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {

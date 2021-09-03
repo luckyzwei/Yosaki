@@ -253,6 +253,30 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.EvolutionPet);
             }
         }).AddTo(this);
+
+        ServerData.petTable.TableDatas["pet5"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.EvolutionPet);
+            }
+        }).AddTo(this);
+
+        ServerData.petTable.TableDatas["pet6"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.EvolutionPet);
+            }
+        }).AddTo(this);
+
+        ServerData.petTable.TableDatas["pet7"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.EvolutionPet);
+            }
+        }).AddTo(this);
     }
 
     public void ClearTitleMission(TitleMissionId id)

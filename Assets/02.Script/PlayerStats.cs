@@ -63,7 +63,7 @@ public static class PlayerStats
            * (Mathf.Max(ignoreDefense, 0.01f)) * 100f
            * (Mathf.Max(decreaseDam, 0.01f)) * 100f
            * (Mathf.Max(skillAttackCount, 0.01f)) * 100f
-           * (Mathf.Max(penetration, 0.01f)) * 10f
+           * (Mathf.Max(penetration, 0.01f)) * 100f
            );
 
         //     float totalPower =
