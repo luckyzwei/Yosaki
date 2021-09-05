@@ -364,7 +364,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRealBoss_Score(float score)
     {
-       // if (UpdateRank() == false) return;
+        // if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.Real_Boss] != null && score < this.myRankInfo[RankType.Real_Boss].Score)
         {
             Debug.LogError("점수가 더 낮음");
@@ -403,7 +403,7 @@ public class RankManager : SingletonMono<RankManager>
 
     private bool UpdateRank()
     {
-        return !PlayerData.Instance.NickName.Equals("블랙핑크") && !PlayerData.Instance.NickName.Equals("로꼬")
+        return !PlayerData.Instance.NickName.Equals("블랙핑크")
             && !PlayerData.Instance.NickName.Equals("테스트용");
     }
 }

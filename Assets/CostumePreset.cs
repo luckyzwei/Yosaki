@@ -5,64 +5,26 @@ using BackEnd;
 using LitJson;
 using System;
 using UniRx;
-public class EquipmentTable
+using CodeStage.AntiCheat.ObscuredTypes;
+
+public class CostumePreset
 {
     public static string Indate;
-    public const string tableName = "Equipment";
-    public static string Weapon = "Weapon";
-    public static string Pet = "Pet";
-    public static string MagicBook = "MagicBook";
-    public static string Potion = "Potion";
-    public static string CostumeSlot = "CostumeSlot";
-    public static string CostumeLook = "CostumeLook";
-    public static string CostumePresetId = "CostumePresetId";
+    public static string tableName = "CostumePreset";
 
-    private Dictionary<string, int> tableSchema = new Dictionary<string, int>()
+    public const string preset_0 = "preset_0";
+    public const string preset_1 = "preset_1";
+    public const string preset_2 = "preset_2";
+
+    private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        {Weapon,0},
-        {Pet,-1},
-        {MagicBook,-1},
-        {Potion,2},
-        {CostumeSlot,0},
-        {CostumeLook,0},
-        {CostumePresetId,0}
+        {preset_0,""},
+        {preset_1,""},
+        {preset_2,""}
     };
 
-    private ReactiveDictionary<string, ReactiveProperty<int>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<int>>();
-    public ReactiveDictionary<string, ReactiveProperty<int>> TableDatas => tableDatas;
-
-    public void ChangeEquip(string key, int idx)
-    {
-        if (key == Weapon)
-        {
-            UiTutorialManager.Instance.SetClear(TutorialStep.EquipWeapon);
-        }
-
-        tableDatas[key].Value = idx;
-
-        SyncData(key);
-    }
-
-    public void SyncData(string key)
-    {
-        Param param = new Param();
-        param.Add(key, tableDatas[key].Value);
-
-        SendQueue.Enqueue(Backend.GameData.Update, tableName, Indate, param, e =>
-        {
-#if UNITY_EDITOR
-            if (e.IsSuccess() == false)
-            {
-                Debug.Log($"ChangeEquipe {key} {tableDatas[key].Value} up failed");
-                return;
-            }
-            else
-            {
-                Debug.Log($"ChangeEquiped {key} {tableDatas[key].Value} up complete");
-            }
-#endif
-        });
-    }
+    private Dictionary<string, string> tableDatas = new Dictionary<string, string>();
+    public Dictionary<string, string> TableDatas => tableDatas;
 
     public void Initialize()
     {
@@ -89,8 +51,11 @@ public class EquipmentTable
 
                 while (e.MoveNext())
                 {
-                    defultValues.Add(e.Current.Key, e.Current.Value);
-                    tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(e.Current.Value));
+                    string allCostumeInfo = ServerData.costumeServerTable.ConvertAllCostumeDataToString();
+
+                    defultValues.Add(e.Current.Key, allCostumeInfo);
+
+                    tableDatas.Add(e.Current.Key, allCostumeInfo);
                 }
 
                 var bro = Backend.GameData.Insert(tableName, defultValues);
@@ -116,6 +81,8 @@ public class EquipmentTable
                     // statusIndate = data[DatabaseManager.inDate_str][DatabaseManager.format_string].ToString();
                 }
 
+                LoadSavedCostumePreset();
+
                 return;
             }
             //나중에 칼럼 추가됐을때 업데이트
@@ -140,13 +107,17 @@ public class EquipmentTable
                         if (data.Keys.Contains(e.Current.Key))
                         {
                             //값로드
-                            var value = data[e.Current.Key][ServerData.format_Number].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(int.Parse(value)));
+                            var value = data[e.Current.Key][ServerData.format_string].ToString();
+                            tableDatas.Add(e.Current.Key, value);
                         }
                         else
                         {
                             defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(e.Current.Value));
+
+                            string allCostumeInfo = ServerData.costumeServerTable.ConvertAllCostumeDataToString();
+
+                            tableDatas.Add(e.Current.Key, allCostumeInfo);
+
                             paramCount++;
                         }
                     }
@@ -163,27 +134,13 @@ public class EquipmentTable
                     }
                 }
 
+                LoadSavedCostumePreset();
             }
         });
     }
 
-    public string GetCurrentCostumePresetKey()
+    public void LoadSavedCostumePreset()
     {
-        int presetId = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumePresetId].Value;
-
-        if (presetId == 0)
-        {
-            return CostumePreset.preset_0;
-        }
-        else if (presetId == 1)
-        {
-            return CostumePreset.preset_1;
-        }
-        else if (presetId == 2)
-        {
-            return CostumePreset.preset_2;
-        }
-
-        return string.Empty;
+        ServerData.costumeServerTable.ApplyAbilityByCurrentSelectedPreset();
     }
 }

@@ -24,7 +24,6 @@ public class UiCostume : SingletonMono<UiCostume>
     private UiCostumeAbilityBoard uiCostumeAbilityBoard;
 
 
-
     void Start()
     {
         Initialize();

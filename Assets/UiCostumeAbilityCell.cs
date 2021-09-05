@@ -6,6 +6,7 @@ using UniRx;
 using UnityEngine.UI;
 using CodeStage.AntiCheat.ObscuredTypes;
 using System;
+using BackEnd;
 
 public class UiCostumeAbilityCell : MonoBehaviour
 {
@@ -100,7 +101,7 @@ public class UiCostumeAbilityCell : MonoBehaviour
         }
 
         serverData.lockIdx[slotId].Value = serverData.lockIdx[slotId].Value == 1 ? 0 : 1;
-
+        ServerData.costumePreset.TableDatas[ServerData.equipmentTable.GetCurrentCostumePresetKey()] = ServerData.costumeServerTable.ConvertAllCostumeDataToString();
         //서버 싱크
         if (lockSyncRoutine != null)
         {
@@ -114,12 +115,22 @@ public class UiCostumeAbilityCell : MonoBehaviour
 
     private Coroutine lockSyncRoutine;
 
-    private WaitForSeconds syncDelay = new WaitForSeconds(2.0f);
+    private WaitForSeconds syncDelay = new WaitForSeconds(0.5f);
     public IEnumerator LockSyncRoutine(string key)
     {
         yield return syncDelay;
 
-        ServerData.costumeServerTable.SyncCostumeData(key);
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+        Param presetParam = new Param();
+
+        string presetKey = ServerData.equipmentTable.GetCurrentCostumePresetKey();
+
+        presetParam.Add(presetKey, ServerData.costumeServerTable.ConvertAllCostumeDataToString());
+
+        transactionList.Add(TransactionValue.SetUpdate(CostumePreset.tableName, CostumePreset.Indate, presetParam));
+
+        ServerData.SendTransaction(transactionList);
 
         lockSyncRoutine = null;
     }

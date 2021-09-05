@@ -36,8 +36,6 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
     private CostumeServerData CurrentServerData => ServerData.costumeServerTable.TableDatas[costumeData.Stringid];
 
-
-
     [SerializeField]
     private TextMeshProUGUI priceText;
 
@@ -115,6 +113,11 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
     {
         this.costumeData = costumeData;
 
+        RefreshAllData();
+    }
+
+    public void RefreshAllData() 
+    {
         SetCurrentSelectedSlotDesc();
 
         nameText.SetText(costumeData.Name);
@@ -127,6 +130,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
         RefreshUi();
     }
+
 
     private void OnCostumeLocked()
     {
@@ -274,6 +278,9 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
             if (CurrentServerData.lockIdx[i].Value == 1) continue;
             CurrentServerData.abilityIdx[i].Value = costumeAbilities[i];
         }
+        //
+        ServerData.costumePreset.TableDatas[ServerData.equipmentTable.GetCurrentCostumePresetKey()] =ServerData.costumeServerTable.ConvertAllCostumeDataToString();
+        //
 
         //재화 차감
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= price;
@@ -294,22 +301,24 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
     private IEnumerator SyncServerData()
     {
-        string key = costumeData.Stringid;
-
         yield return new WaitForSeconds(0.5f);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         //서버저장
-        ServerData.costumeServerTable.SyncCostumeData(key);
+        //ServerData.costumeServerTable.SyncCostumeData(key);
 
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-        Param costumeParam = new Param();
-        costumeParam.Add(key, ServerData.costumeServerTable.TableDatas[key].ConvertToString());
-        transactionList.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+        Param presetParam = new Param();
+
+        string presetKey =ServerData.equipmentTable.GetCurrentCostumePresetKey();
+
+        presetParam.Add(presetKey, ServerData.costumeServerTable.ConvertAllCostumeDataToString());
+
+        transactionList.Add(TransactionValue.SetUpdate(CostumePreset.tableName, CostumePreset.Indate, presetParam));
 
         ServerData.SendTransaction(transactionList);
     }

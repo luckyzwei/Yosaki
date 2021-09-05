@@ -119,6 +119,11 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
             UpdateMpMax();
         }).AddTo(this);
 
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumePresetId].AsObservable().Subscribe(e =>
+        {
+            StartCoroutine(LateUpdateHp());
+        }).AddTo(this);
+
         //코스튬 새로운 능력치 뽑기 했을때
         ServerData.costumeServerTable.WhenCostumeOptionChanged.AsObservable().Subscribe(e =>
         {
@@ -165,6 +170,13 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
                 UpdateHpMax();
             }).AddTo(this);
         }
+    }
+
+    private IEnumerator LateUpdateHp()
+    {
+        yield return null;
+        UpdateHpMax();
+        UpdateMpMax();
     }
 
     private void Initialize()

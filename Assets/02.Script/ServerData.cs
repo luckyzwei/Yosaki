@@ -45,6 +45,7 @@ public static class ServerData
     public static TitleServerTable titleServerTable { get; private set; } = new TitleServerTable();
     public static PensionServerTable pensionServerTable { get; private set; } = new PensionServerTable();
     public static YomulServerTable yomulServerTable { get; private set; } = new YomulServerTable();
+    public static CostumePreset costumePreset { get; private set; } = new CostumePreset();
 
     #region string
     public static string inDate_str = "inDate";
@@ -103,6 +104,8 @@ public static class ServerData
         pensionServerTable.Initialize();
 
         yomulServerTable.Initialize();
+
+        costumePreset.Initialize();
     }
 
     public static void GetUserInfo()

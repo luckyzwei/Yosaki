@@ -11,8 +11,8 @@ public class CostumeServerData
 {
     public int idx;
     public ReactiveProperty<bool> hasCostume = new ReactiveProperty<bool>();
-    public List<ReactiveProperty<int>> abilityIdx { get; private set; }
-    public List<ReactiveProperty<int>> lockIdx { get; private set; }
+    public List<ReactiveProperty<int>> abilityIdx;
+    public List<ReactiveProperty<int>> lockIdx;
 
 
     public string ConvertToString()
@@ -20,6 +20,41 @@ public class CostumeServerData
         string ret = string.Empty;
 
         ret += $"{idx}#{(bool)hasCostume.Value}#";
+
+        for (int i = 0; i < abilityIdx.Count; i++)
+        {
+            if (i == 0)
+            {
+                ret += $"{abilityIdx[i]}";
+            }
+            else
+            {
+                ret += $",{abilityIdx[i]}";
+            }
+        }
+
+        ret += "#";
+
+        for (int i = 0; i < lockIdx.Count; i++)
+        {
+            if (i == 0)
+            {
+                ret += $"{lockIdx[i]}";
+            }
+            else
+            {
+                ret += $",{lockIdx[i]}";
+            }
+        }
+
+        return ret;
+    }
+
+    public string ConvertToExcludeHasString()
+    {
+        string ret = string.Empty;
+
+        ret += $"{idx}#";
 
         for (int i = 0; i < abilityIdx.Count; i++)
         {
@@ -70,6 +105,23 @@ public class CostumeServerData
         return ret;
     }
 
+    public static List<ReactiveProperty<int>> GetCostumeAbilOnly(string data)
+    {
+        var split = data.Split('#');
+
+        var abilityList = split[1].Split(',').Select(e => int.Parse(e)).ToList().Select(e => new ReactiveProperty<int>(e)).ToList();
+
+        return abilityList;
+    }
+    public static List<ReactiveProperty<int>> GetCostumeLockOnly(string data)
+    {
+        var split = data.Split('#');
+
+        var lockList = split[2].Split(',').Select(e => int.Parse(e)).ToList().Select(e => new ReactiveProperty<int>(e)).ToList();
+
+        return lockList;
+    }
+
     public static CostumeServerData GetDefaultCostumeClass(CostumeData tableData)
     {
         var costumeData = new CostumeServerData();
@@ -102,6 +154,22 @@ public class CostumeServerTable
     public ReactiveDictionary<string, CostumeServerData> TableDatas => tableDatas;
 
     public ReactiveCommand WhenCostumeOptionChanged = new ReactiveCommand();
+
+    public const char SplitText = '|';
+
+    public string ConvertAllCostumeDataToString()
+    {
+        string ret = string.Empty;
+
+        var e = tableDatas.GetEnumerator();
+
+        while (e.MoveNext())
+        {
+            ret += e.Current.Value.ConvertToExcludeHasString() + SplitText;
+        }
+
+        return ret;
+    }
 
     public float GetCostumeAbility(StatusType type)
     {
@@ -196,7 +264,6 @@ public class CostumeServerTable
                         Indate = jsonData[0].ToString();
                     }
                 }
-
                 return;
             }
             //나중에 칼럼 추가됐을때 업데이트
@@ -247,5 +314,22 @@ public class CostumeServerTable
 
             }
         });
+    }
+
+    public void ApplyAbilityByCurrentSelectedPreset()
+    {
+        string currentSelectedData = ServerData.costumePreset.TableDatas[ServerData.equipmentTable.GetCurrentCostumePresetKey()];
+
+        var costumeAbilities = currentSelectedData.Split(SplitText);
+
+        for (int i = 0; i < costumeAbilities.Length; i++)
+        {
+            if (string.IsNullOrEmpty(costumeAbilities[i])) continue;
+
+            var costumeTableData = TableManager.Instance.Costume.dataArray[i];
+
+            tableDatas[costumeTableData.Stringid].abilityIdx = CostumeServerData.GetCostumeAbilOnly(costumeAbilities[i]);
+            tableDatas[costumeTableData.Stringid].lockIdx = CostumeServerData.GetCostumeLockOnly(costumeAbilities[i]);
+        }
     }
 }
