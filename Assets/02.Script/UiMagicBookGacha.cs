@@ -95,19 +95,19 @@ public class UiMagicBookGacha : MonoBehaviour
             return;
         }
 
-        ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value = 1;
-
-        List<TransactionValue> transactions = new List<TransactionValue>();
-
-        Param userInfoParam = new Param();
-
-        userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
-
-        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-
-        ServerData.SendTransaction(transactions, successCallBack: () =>
+        AdManager.Instance.ShowRewardedReward(() =>
         {
-            AdManager.Instance.ShowRewardedReward(() =>
+            ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value = 1;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param userInfoParam = new Param();
+
+            userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 this.lastGachaIdx = 2;
                 int amount = gachaAmount[2];
@@ -121,6 +121,8 @@ public class UiMagicBookGacha : MonoBehaviour
                 LogManager.Instance.SendLogType("FreeGacha", "Norigae", "");
             });
         });
+
+
     }
 
 

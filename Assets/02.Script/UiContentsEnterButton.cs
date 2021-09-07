@@ -42,5 +42,4 @@ public class UiContentsEnterButton : MonoBehaviour
         bossId.RandomizeCryptoKey();
     }
 
-
 }

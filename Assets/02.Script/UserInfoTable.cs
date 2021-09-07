@@ -76,9 +76,9 @@ public class UserInfoTable
 
     public const string marblePackChange = "marblePackChange";
 
-    // public ObscuredDouble currentServerDate;
     public float currentServerDate;
     public double attendanceUpdatedTime;
+    public DateTime currentServerTime { get; private set; }
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -311,6 +311,9 @@ public class UserInfoTable
         // UpData(jumpCount, false);
     }
     private bool isFirstInit = true;
+
+
+
     public void UpdateLastLoginTime()
     {
         SendQueue.Enqueue(Backend.Utils.GetServerTime, (bro) =>
@@ -323,7 +326,7 @@ public class UserInfoTable
             {
                 string time = bro.GetReturnValuetoJSON()["utcTime"].ToString();
 
-                DateTime currentServerTime = DateTime.Parse(time).ToUniversalTime().AddHours(9);
+                currentServerTime = DateTime.Parse(time).ToUniversalTime().AddHours(9);
 
                 currentServerDate = (float)Utils.ConvertToUnixTimestamp(currentServerTime);
 
@@ -506,4 +509,25 @@ public class UserInfoTable
     {
         return tableDatas[removeAd].Value == 1;
     }
+
+    public bool CanSpawnSongPyeon() 
+    {
+        if (currentServerTime.Month != 9) return false;
+        if (currentServerTime.Day >GameBalance.ChuseokDropEndDay) return false;
+        return true;
+    }
+    public bool CanMakeChuseokItem()
+    {
+        if (currentServerTime.Month != 9) return false;
+        if (currentServerTime.Day > GameBalance.ChuseokMakeEndDay) return false;
+        return true;
+    }
+
+    public bool CanBuyChuseokPackage() 
+    {
+        if (currentServerTime.Month != 9) return false;
+        if (currentServerTime.Day > GameBalance.ChuseokPackageSaleEndDay) return false;
+        return true;
+    }
+
 }

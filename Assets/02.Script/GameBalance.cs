@@ -97,6 +97,9 @@ public static class GameBalance
     public readonly static ObscuredInt rankRewardTicket_21_100 = 14;
     public readonly static ObscuredInt rankRewardTicket_101_1000 = 7;
 
+    public readonly static ObscuredInt ChuseokDropEndDay = 24;
+    public readonly static ObscuredInt ChuseokMakeEndDay = 24;
+    public readonly static ObscuredInt ChuseokPackageSaleEndDay = 24;
 }
 
 public static class DamageBalance

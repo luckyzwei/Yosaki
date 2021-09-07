@@ -101,19 +101,19 @@ public class UiWeaponGacha : MonoBehaviour
             return;
         }
 
-        ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value = 1;
-
-        List<TransactionValue> transactions = new List<TransactionValue>();
-
-        Param userInfoParam = new Param();
-
-        userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
-
-        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-
-        ServerData.SendTransaction(transactions, successCallBack: () =>
+        AdManager.Instance.ShowRewardedReward(() =>
         {
-            AdManager.Instance.ShowRewardedReward(() =>
+            ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value = 1;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param userInfoParam = new Param();
+
+            userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 this.lastGachaIdx = 2;
                 int amount = gachaAmount[2];
@@ -126,7 +126,10 @@ public class UiWeaponGacha : MonoBehaviour
 
                 LogManager.Instance.SendLogType("FreeGacha", "Weapon", "");
             });
+
         });
+
+
     }
 
     public void OnClickOpenButton(int idx)

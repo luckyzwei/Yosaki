@@ -206,6 +206,12 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
                 }
                 break;
+            case Item_Type.Songpyeon:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += amount;
+                    param.Add(GoodsTable.Songpyeon, ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value);
+                }
+                break;
 
         }
     }

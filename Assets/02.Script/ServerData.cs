@@ -188,7 +188,12 @@ public static class ServerData
             case Item_Type.Ticket:
                 ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += rewardValue;
                 break;
+            case Item_Type.Songpyeon:
+                ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += rewardValue;
+                break;
             case Item_Type.costume1:
+            case Item_Type.costume6:
+            case Item_Type.costume7:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             default:
@@ -236,6 +241,9 @@ public static class ServerData
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
                 break;
+            case Item_Type.Songpyeon:
+                passParam.Add(GoodsTable.Songpyeon, ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);
@@ -480,6 +488,9 @@ public static class ServerData
                     break;
                 case Item_Type.WeaponUpgradeStone:
                     ServerData.goodsTable.GetTableData(GoodsTable.WeaponUpgradeStone).Value += amount;
+                    break;
+                case Item_Type.Songpyeon:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += amount;
                     break;
             }
 

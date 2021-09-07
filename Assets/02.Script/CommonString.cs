@@ -85,11 +85,14 @@ public static class CommonString
             case Item_Type.GrowthStone: return "수련의돌";
             case Item_Type.Memory: return "무공비급";
             case Item_Type.Ticket: return "소환서";
-            case Item_Type.costume0: return "";
-            case Item_Type.costume1: return "";
-            case Item_Type.costume2: return "";
-            case Item_Type.costume3: return "";
-            case Item_Type.costume4: return "";
+            case Item_Type.costume0: return TableManager.Instance.Costume.dataArray[0].Name;
+            case Item_Type.costume1: return TableManager.Instance.Costume.dataArray[1].Name;
+            case Item_Type.costume2: return TableManager.Instance.Costume.dataArray[2].Name;
+            case Item_Type.costume3: return TableManager.Instance.Costume.dataArray[3].Name;
+            case Item_Type.costume4: return TableManager.Instance.Costume.dataArray[4].Name;
+            case Item_Type.costume5: return TableManager.Instance.Costume.dataArray[5].Name;
+            case Item_Type.costume6: return TableManager.Instance.Costume.dataArray[6].Name;
+            case Item_Type.costume7: return TableManager.Instance.Costume.dataArray[7].Name;
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;
@@ -105,6 +108,7 @@ public static class CommonString
             case Item_Type.WeaponUpgradeStone: return "힘의 증표";
             case Item_Type.PetUpgradeSoul: return "요괴구슬";
             case Item_Type.YomulExchangeStone: return "탐욕의 증표";
+            case Item_Type.Songpyeon: return "송편";
         }
         return "미등록"; 
     }

@@ -21,6 +21,7 @@ public class GoodsTable
     public static string WeaponUpgradeStone = "WeaponUpgradeStone";
     public static string PetUpgradeSoul = "PetUpgradeSoul";
     public static string YomulExchangeStone = "YomulExchangeStone";
+    public static string Songpyeon = "Songpyeon";
 
     //포션
     public static string Potion_0 = "Potion_0";
@@ -43,7 +44,8 @@ public class GoodsTable
         {SkillPartion,0f},
         {WeaponUpgradeStone,0f},
         {PetUpgradeSoul,0f},
-        {YomulExchangeStone,0f}
+        {YomulExchangeStone,0f},
+        {Songpyeon,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -119,6 +121,24 @@ public class GoodsTable
         {
             soulAddAmount = 0;
             tableDatas[PetUpgradeSoul].Value += updateRequireNum;
+        }
+    }
+
+    static int songpyeonAddAmount = 0;
+    public void GetEventSongPyeon(float amount) 
+    {
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Songpyeon)} 획득(+{(int)amount})");
+
+        songpyeonAddAmount++;
+
+        if (songpyeonAddAmount < updateRequireNum)
+        {
+
+        }
+        else
+        {
+            songpyeonAddAmount = 0;
+            tableDatas[Songpyeon].Value += updateRequireNum;
         }
     }
 

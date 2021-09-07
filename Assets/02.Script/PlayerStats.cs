@@ -158,6 +158,7 @@ public static class PlayerStats
         ret += GetPassiveSkillValue(StatusType.AttackAdd);
         ret += GetMarbleValue(StatusType.AttackAdd);
         ret += GetSkillHasValue(StatusType.AttackAdd);
+        ret += GetYomulUpgradeValue(StatusType.AttackAdd);
 
         return ret;
     }

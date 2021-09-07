@@ -22,7 +22,10 @@ public static class Utils
                   type == Item_Type.costume1 ||
                   type == Item_Type.costume2 ||
                   type == Item_Type.costume3 ||
-                  type == Item_Type.costume4;
+                  type == Item_Type.costume4 ||
+                  type == Item_Type.costume5 ||
+                  type == Item_Type.costume6 ||
+                  type == Item_Type.costume7;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -37,7 +40,8 @@ public static class Utils
                 type == Item_Type.Jade ||
                 type == Item_Type.GrowthStone ||
                 type == Item_Type.Marble ||
-                type == Item_Type.Ticket;
+                type == Item_Type.Ticket||
+                type == Item_Type.Songpyeon;
     }
 
     public static bool IsStatusItem(this Item_Type type)
@@ -69,11 +73,11 @@ public static class Utils
             type != StatusType.Hp &&
             type != StatusType.Mp &&
             type != StatusType.IgnoreDefense &&
-            type != StatusType.DashCount&&
+            type != StatusType.DashCount &&
             type != StatusType.SkillAttackCount;
     }
 
-    public static bool IsRankFrameItem(this Item_Type type) 
+    public static bool IsRankFrameItem(this Item_Type type)
     {
         return type >= Item_Type.RankFrame1 && type <= Item_Type.RankFrame101_1000;
     }
@@ -145,14 +149,14 @@ public static class Utils
     public static DateTime ConvertFromUnixTimestamp(double timestamp)
     {
         DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-        return origin.AddSeconds(timestamp + 1620000000f) ;
+        return origin.AddSeconds(timestamp + 1620000000f);
     }
 
     public static double ConvertToUnixTimestamp(DateTime date)
     {
         DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         TimeSpan diff = date.ToUniversalTime() - origin;
-        return diff.TotalSeconds- 1620000000f;
+        return diff.TotalSeconds - 1620000000f;
     }
 
     public static int GetWeekNumber(DateTime currentDate)

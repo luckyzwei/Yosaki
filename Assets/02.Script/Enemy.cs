@@ -128,6 +128,9 @@ public class Enemy : PoolItem
         SpawnDropItem();
 
         GetPetUpgradeGem();
+
+        GetSongPyeon();
+
         //UpdateCollection();
 
         enemyDeadCallBack?.Invoke(this);
@@ -141,6 +144,13 @@ public class Enemy : PoolItem
     private void GetPetUpgradeGem()
     {
         ServerData.goodsTable.GetPetUpgradeSoul(1);
+    }
+
+    private void GetSongPyeon()
+    {
+        if (ServerData.userInfoTable.CanSpawnSongPyeon() == false) return;
+
+        ServerData.goodsTable.GetEventSongPyeon(1);
     }
 
     private void WhenFieldBossEnemyDead()

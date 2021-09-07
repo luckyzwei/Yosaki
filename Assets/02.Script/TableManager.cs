@@ -504,5 +504,10 @@ public class TableManager : SingletonMono<TableManager>
     [SerializeField]
     private YomulAbil yomulAbilTable;
     public YomulAbil YomulAbilTable => yomulAbilTable;
+
+    [SerializeField]
+    private ChuseokEvent chuseokEventTable;
+
+    public ChuseokEvent ChuseokEventTable => chuseokEventTable;
 }
 

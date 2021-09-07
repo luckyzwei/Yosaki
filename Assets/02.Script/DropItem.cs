@@ -16,6 +16,7 @@ public enum Item_Type
     WeaponUpgradeStone,
     PetUpgradeSoul,
     YomulExchangeStone,
+    Songpyeon,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -78,6 +79,8 @@ public enum Item_Type
     costume3 = 1204,
     costume4 = 1205,
     costume5 = 1206,
+    costume6 = 1207,
+    costume7 = 1208,
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,

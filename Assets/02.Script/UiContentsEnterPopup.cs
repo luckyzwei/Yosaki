@@ -232,7 +232,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)} {rewardNum}개 획득!");
             SoundManager.Instance.PlaySound("GoldUse");
 
-     
+
         }, null);
     }
 }

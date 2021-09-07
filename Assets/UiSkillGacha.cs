@@ -102,19 +102,19 @@ public class UiSkillGacha : MonoBehaviour
             return;
         }
 
-        ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value = 1;
-
-        List<TransactionValue> transactions = new List<TransactionValue>();
-
-        Param userInfoParam = new Param();
-
-        userInfoParam.Add(UserInfoTable.freeSkill, ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value);
-
-        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-
-        ServerData.SendTransaction(transactions, successCallBack: () =>
+        AdManager.Instance.ShowRewardedReward(() =>
         {
-            AdManager.Instance.ShowRewardedReward(() =>
+            ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value = 1;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param userInfoParam = new Param();
+
+            userInfoParam.Add(UserInfoTable.freeSkill, ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 this.lastGachaIdx = 2;
                 int amount = gachaAmount[2];
