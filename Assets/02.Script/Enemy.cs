@@ -13,6 +13,7 @@ public class Enemy : PoolItem
     private AgentHpController agentHpController;
 
     private EnemyMoveController enemyMoveController;
+    private FlyMove_Normal flyMove_normal;
 
     private Action<Enemy> returnCallBack;
 
@@ -32,6 +33,9 @@ public class Enemy : PoolItem
     public ObscuredBool isFieldBossEnemy { get; private set; } = false;
 
     public int spawnedPlatformIdx = 0;
+
+    [SerializeField]
+    private bool isFlyingEnemy = false;
 
     private void Awake()
     {
@@ -53,7 +57,16 @@ public class Enemy : PoolItem
 
         initialized = true;
         agentHpController = GetComponent<AgentHpController>();
-        enemyMoveController = GetComponent<EnemyMoveController>();
+
+        if (isFlyingEnemy == false)
+        {
+            enemyMoveController = GetComponent<EnemyMoveController>();
+        }
+        else
+        {
+            flyMove_normal = GetComponent<FlyMove_Normal>();
+        }
+
         enemyHitObject = GetComponentInChildren<EnemyHitObject>();
     }
 
@@ -97,6 +110,11 @@ public class Enemy : PoolItem
                 enemyHitObject.SetDamage(tableData.Attackpower * tableData.Bossattackratio);
             }
         }
+
+        if (isFlyingEnemy) 
+        {
+            flyMove_normal.Initialize(Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f)) * Vector3.right, tableData.Movespeed);
+        }
     }
 
     private void SetSkeletonColor()
@@ -114,7 +132,14 @@ public class Enemy : PoolItem
 
     private void WhenAgentDamaged(float damage)
     {
-        enemyMoveController.SetMoveState(EnemyMoveController.MoveState.FollowPlayer);
+        if (isFlyingEnemy == false)
+        {
+            enemyMoveController.SetMoveState(EnemyMoveController.MoveState.FollowPlayer);
+        }
+        else
+        {
+            //flyMove_normal
+        }
     }
     private static string DeadEfxName = "Dead";
     private void WhenEnemyDead(Unit unit)

@@ -509,5 +509,10 @@ public class TableManager : SingletonMono<TableManager>
     private ChuseokEvent chuseokEventTable;
 
     public ChuseokEvent ChuseokEventTable => chuseokEventTable;
+
+    [SerializeField]
+    private YoguiSogulTable yoguisogulTable;
+
+    public YoguiSogulTable YoguisogulTable => yoguisogulTable;
 }
 

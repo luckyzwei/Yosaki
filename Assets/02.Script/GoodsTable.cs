@@ -82,10 +82,25 @@ public class GoodsTable
         tableDatas[Gold].Value += amount;
     }
 
+    static int growThStoneAddAmount = 0;
+    static float updateRequireNum_GrowthStone = 1000;
+
     public void GetMagicStone(float amount)
     {
-        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)} 획득(+{(int)amount})");
-        tableDatas[GrowthStone].Value += amount;
+        int amount_int = (int)amount;
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)} 획득(+{amount_int})");
+
+        growThStoneAddAmount+= amount_int;
+
+        if (growThStoneAddAmount < updateRequireNum_GrowthStone)
+        {
+
+        }
+        else
+        {
+            tableDatas[GrowthStone].Value += growThStoneAddAmount;
+            growThStoneAddAmount = 0;
+        }
     }
     static int marbleAddAmount = 0;
     static float updateRequireNum = 10;

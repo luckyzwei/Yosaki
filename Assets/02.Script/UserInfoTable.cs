@@ -76,6 +76,8 @@ public class UserInfoTable
 
     public const string marblePackChange = "marblePackChange";
 
+    public const string yoguiSogulLastClear = "yoguiSogulLastClear";
+
     public float currentServerDate;
     public double attendanceUpdatedTime;
     public DateTime currentServerTime { get; private set; }
@@ -130,6 +132,7 @@ public class UserInfoTable
         {marblepensionAttendance,0f},
 
         {marblePackChange,0f},
+        {yoguiSogulLastClear,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -460,9 +463,15 @@ public class UserInfoTable
 
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
+        //요괴소굴
+        Param yoguiSogulParam = new Param();
+
+        //로컬
+        ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value = string.Empty;
+        yoguiSogulParam.Add(EtcServerTable.yoguiSogulReward, ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value);
+        transactionList.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, yoguiSogulParam));
+
         Param iapParam = null;
-
-
 
         var iapTable = TableManager.Instance.InAppPurchase.dataArray;
 

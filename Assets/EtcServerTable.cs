@@ -6,21 +6,30 @@ using LitJson;
 using System;
 using UniRx;
 using CodeStage.AntiCheat.ObscuredTypes;
+using System.Linq;
+
 public class EtcServerTable
 {
     public static string Indate;
     public const string tableName = "Etc";
-
     public const string email = "email";
+    public const string yoguiSogulReward = "yoguiSogulReward";
 
-    private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
+    private Dictionary<string, ReactiveProperty<string>> tableSchema = new Dictionary<string, ReactiveProperty<string>>()
     {
-        {email,GoogleManager.email}
+        {email,new ReactiveProperty<string>(GoogleManager.email)},
+        {yoguiSogulReward,new ReactiveProperty<string>(string.Empty)},
     };
 
-    private Dictionary<string, string> tableDatas = new Dictionary<string, string>();
-    public Dictionary<string, string> TableDatas => tableDatas;
+    private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
+    public Dictionary<string, ReactiveProperty<string>> TableDatas => tableDatas;
 
+    public bool YoguiSoguilRewarded(int stageId) 
+    {
+        var rewards = tableDatas[yoguiSogulReward].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(stageId.ToString());
+    }
     public void Initialize()
     {
         tableDatas.Clear();
@@ -46,19 +55,19 @@ public class EtcServerTable
 
                 while (e.MoveNext())
                 {
-                    if (e.Current.Key.Equals(email)) 
+                    if (e.Current.Key.Equals(email))
                     {
                         defultValues.Add(e.Current.Key, GoogleManager.email);
-                        tableDatas.Add(e.Current.Key, GoogleManager.email);
-                        
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(GoogleManager.email));
+
                     }
-                    else 
+                    else
                     {
-                        defultValues.Add(e.Current.Key, e.Current.Value);
-                        tableDatas.Add(e.Current.Key, string.Empty);
+                        defultValues.Add(e.Current.Key, e.Current.Value.Value);
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(string.Empty));
                     }
 
-      
+
                 }
 
                 var bro = Backend.GameData.Insert(tableName, defultValues);
@@ -109,7 +118,7 @@ public class EtcServerTable
                         {
                             //값로드
                             var value = data[e.Current.Key][ServerData.format_string].ToString();
-                            tableDatas.Add(e.Current.Key, value);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
                         }
                         else
                         {
