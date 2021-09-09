@@ -17,7 +17,7 @@ public class UiCollectionEvent : MonoBehaviour
     {
         string description = string.Empty;
 
-        description += $"<color=red>송편 드랍 9월 {GameBalance.ChuseokDropEndDay}일까지</color>\n";
+        description += $"<color=red>송편 획득 9월 {GameBalance.ChuseokDropEndDay}일까지</color>\n";
         description += $"<color=red>아이템 제작 9월 {GameBalance.ChuseokMakeEndDay}일까지</color>\n";
         description += $"<color=red>상품 판매 9월 {GameBalance.ChuseokPackageSaleEndDay}일까지</color>";
 
@@ -33,5 +33,14 @@ public class UiCollectionEvent : MonoBehaviour
         }
     }
 #endif
+
+    private void OnEnable()
+    {
+        if (ServerData.userInfoTable.CanMakeChuseokItem() == false) 
+        {
+            this.gameObject.SetActive(false);
+            PopupManager.Instance.ShowAlarmMessage("이벤트가 종료됐습니다!");
+        }
+    }
 
 }

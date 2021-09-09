@@ -55,6 +55,11 @@ public class PetServerTable
             {
                 ret += petTableData.Hasvalue3 + e.Current.Value.level.Value * petTableData.Hasaddvalue3;
             }
+
+            if (petTableData.Hastype4 == status)
+            {
+                ret += petTableData.Hasvalue4 + e.Current.Value.level.Value * petTableData.Hasaddvalue4;
+            }
         }
 
         return ret;

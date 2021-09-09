@@ -71,7 +71,7 @@ public static class GameBalance
     public readonly static ObscuredInt sleepRewardMinValue = 600;
     //10시간
     public readonly static ObscuredInt sleepRewardMaxValue = 36000;
-    public readonly static ObscuredFloat sleepRewardRatio = 0.8f;
+    public readonly static ObscuredFloat sleepRewardRatio = 0.9f;
 
     public readonly static ObscuredFloat marbleSpawnProb = 1;
 
@@ -97,9 +97,9 @@ public static class GameBalance
     public readonly static ObscuredInt rankRewardTicket_21_100 = 14;
     public readonly static ObscuredInt rankRewardTicket_101_1000 = 7;
 
-    public readonly static ObscuredInt ChuseokDropEndDay = 24;
-    public readonly static ObscuredInt ChuseokMakeEndDay = 24;
-    public readonly static ObscuredInt ChuseokPackageSaleEndDay = 24;
+    public readonly static ObscuredInt ChuseokDropEndDay = 25;
+    public readonly static ObscuredInt ChuseokMakeEndDay = 26;
+    public readonly static ObscuredInt ChuseokPackageSaleEndDay = 26;
 }
 
 public static class DamageBalance

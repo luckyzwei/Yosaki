@@ -16,6 +16,9 @@ public class UiPackageShop : MonoBehaviour
     [SerializeField]
     private Transform petCostumeParent;
 
+    [SerializeField]
+    private Transform chuseokParent;
+
     private void Start()
     {
         Initialize();
@@ -42,6 +45,11 @@ public class UiPackageShop : MonoBehaviour
             else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Pet || e.Current.Value.SHOPCATEGORY == ShopCategory.Costume)
             {
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, petCostumeParent);
+                cell.Initialize(e.Current.Value);
+            }
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Chuseok)
+            {
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, chuseokParent);
                 cell.Initialize(e.Current.Value);
             }
 

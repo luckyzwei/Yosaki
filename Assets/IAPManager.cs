@@ -18,11 +18,11 @@ using BackEnd;
 
 public enum BuyType
 {
-    NoLimit, DayOfOne, WeekOfTwo, MonthOfOne, AllTimeOne, MonthOfFive, WeekOfFive, DayOfFive, MonthOfTen,Pension
+    NoLimit, DayOfOne, WeekOfTwo, MonthOfOne, AllTimeOne, MonthOfFive, WeekOfFive, DayOfFive, MonthOfTen, Pension
 }
 public enum ShopCategory
 {
-    Gem, Limit1, Limit2, Pet, Costume, Pension
+    Gem, Limit1, Limit2, Pet, Costume, Pension, Chuseok
 }
 public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 {

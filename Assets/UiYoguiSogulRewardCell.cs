@@ -47,7 +47,7 @@ public class UiYoguiSogulRewardCell : MonoBehaviour
 
         itemIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableData.Rewardtype);
 
-        itemDescription.SetText($"{CommonString.GetItemName((Item_Type)tableData.Rewardtype)}");
+        itemDescription.SetText($"{CommonString.GetItemName((Item_Type)tableData.Rewardtype)}({tableData.Stage + 1}단계)");
 
         rewardAmount.SetText($"{Utils.ConvertBigNum(tableData.Rewardvalue)}개");
 

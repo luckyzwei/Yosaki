@@ -41,28 +41,16 @@ public class PetTableData
   public float Hasvalue1 { get {return hasvalue1; } set { this.hasvalue1 = value;} }
   
   [SerializeField]
+  float hasaddvalue1;
+  public float Hasaddvalue1 { get {return hasaddvalue1; } set { this.hasaddvalue1 = value;} }
+  
+  [SerializeField]
   int hastype2;
   public int Hastype2 { get {return hastype2; } set { this.hastype2 = value;} }
   
   [SerializeField]
   float hasvalue2;
   public float Hasvalue2 { get {return hasvalue2; } set { this.hasvalue2 = value;} }
-  
-  [SerializeField]
-  PetGetType petgettype;
-  public PetGetType PETGETTYPE { get {return petgettype; } set { this.petgettype = value;} }
-  
-  [SerializeField]
-  int nextpetid;
-  public int Nextpetid { get {return nextpetid; } set { this.nextpetid = value;} }
-  
-  [SerializeField]
-  int maxlevel;
-  public int Maxlevel { get {return maxlevel; } set { this.maxlevel = value;} }
-  
-  [SerializeField]
-  float hasaddvalue1;
-  public float Hasaddvalue1 { get {return hasaddvalue1; } set { this.hasaddvalue1 = value;} }
   
   [SerializeField]
   float hasaddvalue2;
@@ -79,6 +67,30 @@ public class PetTableData
   [SerializeField]
   float hasaddvalue3;
   public float Hasaddvalue3 { get {return hasaddvalue3; } set { this.hasaddvalue3 = value;} }
+  
+  [SerializeField]
+  int hastype4;
+  public int Hastype4 { get {return hastype4; } set { this.hastype4 = value;} }
+  
+  [SerializeField]
+  float hasvalue4;
+  public float Hasvalue4 { get {return hasvalue4; } set { this.hasvalue4 = value;} }
+  
+  [SerializeField]
+  float hasaddvalue4;
+  public float Hasaddvalue4 { get {return hasaddvalue4; } set { this.hasaddvalue4 = value;} }
+  
+  [SerializeField]
+  PetGetType petgettype;
+  public PetGetType PETGETTYPE { get {return petgettype; } set { this.petgettype = value;} }
+  
+  [SerializeField]
+  int nextpetid;
+  public int Nextpetid { get {return nextpetid; } set { this.nextpetid = value;} }
+  
+  [SerializeField]
+  int maxlevel;
+  public int Maxlevel { get {return maxlevel; } set { this.maxlevel = value;} }
   
   [SerializeField]
   int awakeprice;

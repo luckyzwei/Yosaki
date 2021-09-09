@@ -24,6 +24,13 @@ public class YoguiSoGulManager : SingletonMono<YoguiSoGulManager>
     private Image timerGauge;
 
     private bool clearLastStage = false;
+    private bool deadFlag = false;
+
+    [SerializeField]
+    private Animator currentWaveAnim;
+
+    [SerializeField]
+    private Animator remainTextAnim;
 
     public enum EnemyType
     {
@@ -70,6 +77,7 @@ public class YoguiSoGulManager : SingletonMono<YoguiSoGulManager>
     {
         PlayerStatusController.Instance.whenPlayerDead.AsObservable().Subscribe(e =>
         {
+            deadFlag = true;
             modeState.Value = ModeState.End;
         }).AddTo(this);
 
@@ -156,7 +164,10 @@ public class YoguiSoGulManager : SingletonMono<YoguiSoGulManager>
                 }
                 else
                 {
+                    currentWaveAnim.SetTrigger(PlayStr);
+
                     currentWaveText.SetText($"{currentWave.Value + 1} 단계");
+
                     SpawnEnemies();
                     StartWaveTimer();
 
@@ -259,9 +270,15 @@ public class YoguiSoGulManager : SingletonMono<YoguiSoGulManager>
         UpdateRemainEnemy();
     }
 
+    private static string PlayStr = "Play";
     private void UpdateRemainEnemy()
     {
-        remainEnemyText.SetText($"{spawnedEnemyList.Count}남음");
+        remainEnemyText.SetText($"남은 요괴:{spawnedEnemyList.Count}");
+
+        if (remainTextAnim != null)
+        {
+            remainTextAnim.SetTrigger(PlayStr);
+        }
     }
 
     private void StartWaveTimer()
@@ -331,26 +348,30 @@ public class YoguiSoGulManager : SingletonMono<YoguiSoGulManager>
 
         StopGameRoutines();
 
-        if (clearLastStage==false) 
+        if (clearLastStage == false)
         {
             int pref = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value;
 
             int updateValue = currentWave.Value - 1;
 
-            if (updateValue > pref) 
+            if (updateValue > pref)
             {
                 ServerData.userInfoTable.UpData(UserInfoTable.yoguiSogulLastClear, updateValue, false);
-
-                uiSogulResultPopup.Initialize(currentWave.Value - 1, clearLastStage);
             }
+
+            uiSogulResultPopup.Initialize(currentWave.Value - 1, clearLastStage, deadFlag);
+
+            RankManager.Instance.UpdateYoguiSogul_Score(currentWave.Value - 1);
         }
-        else 
+        else
         {
             ServerData.userInfoTable.UpData(UserInfoTable.yoguiSogulLastClear, currentWave.Value, false);
 
-            uiSogulResultPopup.Initialize(currentWave.Value, clearLastStage);
+            uiSogulResultPopup.Initialize(currentWave.Value, clearLastStage, deadFlag);
+
+            RankManager.Instance.UpdateYoguiSogul_Score(currentWave.Value);
         }
 
- 
+
     }
 }

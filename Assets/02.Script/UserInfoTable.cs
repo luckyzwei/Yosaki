@@ -78,6 +78,8 @@ public class UserInfoTable
 
     public const string yoguiSogulLastClear = "yoguiSogulLastClear";
 
+    public const string dokebiPackRefund = "dokebiPackRefund";
+
     public float currentServerDate;
     public double attendanceUpdatedTime;
     public DateTime currentServerTime { get; private set; }
@@ -133,6 +135,8 @@ public class UserInfoTable
 
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
+
+        {dokebiPackRefund,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();

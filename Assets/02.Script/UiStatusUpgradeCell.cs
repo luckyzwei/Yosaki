@@ -318,7 +318,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
             if (showPopup && ret == false)
             {
-                PopupManager.Instance.ShowAlarmMessage("골드가 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Gold)}가 부족합니다.");
             }
 
             return ret;

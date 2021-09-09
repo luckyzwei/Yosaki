@@ -130,7 +130,14 @@ public class UiPetView : MonoBehaviour
         {
             StatusType statusType = (StatusType)petData.Hastype3;
             bool isPercent = statusType.IsPercentStat();
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue3 + currentLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue3 + maxLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}</color>)";
+            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue3 + currentLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue3 + maxLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}</color>)\n";
+        }
+
+        if (petData.Hasvalue4 != 0f)
+        {
+            StatusType statusType = (StatusType)petData.Hastype4;
+            bool isPercent = statusType.IsPercentStat();
+            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue4 + currentLevel * petData.Hasaddvalue4) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue4 + maxLevel * petData.Hasaddvalue4) * (isPercent ? 100 : 1f)}</color>)";
         }
 
 

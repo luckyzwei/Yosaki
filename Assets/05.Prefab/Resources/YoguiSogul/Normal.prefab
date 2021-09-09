@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4523214542049544738}
   - component: {fileID: 4232653962505790488}
   m_Layer: 12
-  m_Name: 1
+  m_Name: Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.030302763, y: 0.5730202}
+  m_Offset: {x: 0.030302763, y: 0.6499307}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -83,7 +83,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1052033, y: 2.0460405}
+  m_Size: {x: 1.1052033, y: 2.1998615}
   m_EdgeRadius: 0
 --- !u!114 &2724149493777159543
 MonoBehaviour:
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skeletonAnimation: {fileID: 1803025032066403003}
   spawnedPlatformIdx: 0
+  isFlyingEnemy: 0
 --- !u!114 &4232653962505790488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHpBar: {fileID: 5155852821543185269}
+  damTextSpawnPos: {fileID: 0}
 --- !u!1 &2737039238988194739
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +186,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 50bce842747262b46993dd477382ac86, type: 2}
+  - {fileID: 2100000, guid: e5b5194eedd74bf4e9994994b8c5d815, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -217,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: eb0febb2cc3bfb243b46c45e125ed9c0, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 637818fa777f88149ab0292dc61d2e3b, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -425,12 +427,12 @@ PrefabInstance:
     - target: {fileID: 5508970293195110196, guid: 1e2b451ce1e6b834aa1f1b7d63a74abe,
         type: 3}
       propertyPath: m_Size.x
-      value: 1.7186451
+      value: 2.0858998
       objectReference: {fileID: 0}
     - target: {fileID: 5508970293195110196, guid: 1e2b451ce1e6b834aa1f1b7d63a74abe,
         type: 3}
       propertyPath: m_Size.y
-      value: 1.7186451
+      value: 2.0858998
       objectReference: {fileID: 0}
     - target: {fileID: 5508970293195110196, guid: 1e2b451ce1e6b834aa1f1b7d63a74abe,
         type: 3}

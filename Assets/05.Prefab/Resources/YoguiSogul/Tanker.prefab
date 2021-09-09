@@ -72,7 +72,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.030302763, y: 0.5730202}
+  m_Offset: {x: 0.030302763, y: 1.0753376}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -83,7 +83,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1052033, y: 2.0460405}
+  m_Size: {x: 1.1052033, y: 3.0506754}
   m_EdgeRadius: 0
 --- !u!114 &2724149493777159543
 MonoBehaviour:
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skeletonAnimation: {fileID: 1803025032066403003}
   spawnedPlatformIdx: 0
+  isFlyingEnemy: 0
 --- !u!114 &4232653962505790488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +155,7 @@ Transform:
   m_GameObject: {fileID: 2737039238988194739}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.01}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 3121059513577195734}
   m_RootOrder: 0
@@ -185,7 +186,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d456e6c7229239f4ba7433a3e8c3c669, type: 2}
+  - {fileID: 2100000, guid: 56a3591c2c4761c448b095f5eb577ebb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -218,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 701eb75203bb09c4cb5e6aa9385965e8, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 3bf90e11b866d934b84c5bd208d36d96, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0

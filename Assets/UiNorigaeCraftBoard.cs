@@ -82,8 +82,18 @@ public class UiNorigaeCraftBoard : SingletonMono<UiNorigaeCraftBoard>
 
         bool hasPet = ServerData.petTable.TableDatas[petTableData.Stringid].hasItem.Value == 1;
 
+        //현무
+        if (sinsuData.Stringid == "magicBook16")
+        {
+            petHasDescription.SetText("또는 주작노리개 보유");
+        }
+        //백호
+        else if (sinsuData.Stringid == "magicBook17")
+        {
+            petHasDescription.SetText("또는 청룡노리개 보유");
+        }
         //주작
-        if (sinsuData.Stringid == "magicBook18")
+        else if (sinsuData.Stringid == "magicBook18")
         {
             petHasDescription.SetText("또는 현무노리개 보유");
         }
@@ -116,8 +126,30 @@ public class UiNorigaeCraftBoard : SingletonMono<UiNorigaeCraftBoard>
 
         bool hasPet = ServerData.petTable.TableDatas[petTableData.Stringid].hasItem.Value == 1;
 
+        //현무
+        if (sinsuData.Stringid == "magicBook16")
+        {
+            bool hasZuZak = ServerData.magicBookTable.TableDatas["magicBook18"].hasItem.Value == 1;
+
+            if (legendMagicBookAmount < 1 || (hasPet == false && hasZuZak == false))
+            {
+                PopupManager.Instance.ShowAlarmMessage("재료가 부족 합니다.");
+                return;
+            }
+        }
+        //백호
+        else if (sinsuData.Stringid == "magicBook17")
+        {
+            bool hasChungRyoung = ServerData.magicBookTable.TableDatas["magicBook19"].hasItem.Value == 1;
+
+            if (legendMagicBookAmount < 1 || (hasPet == false && hasChungRyoung == false))
+            {
+                PopupManager.Instance.ShowAlarmMessage("재료가 부족 합니다.");
+                return;
+            }
+        }
         //주작
-        if (sinsuData.Stringid == "magicBook18")
+        else if (sinsuData.Stringid == "magicBook18")
         {
             bool hasHyunMu = ServerData.magicBookTable.TableDatas["magicBook16"].hasItem.Value == 1;
 

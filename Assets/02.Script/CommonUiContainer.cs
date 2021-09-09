@@ -48,6 +48,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public Sprite YomulExchangeStone;
 
+    public Sprite Songpyeon;
+
     public List<SkeletonDataAsset> enemySpineAssets;
 
     public Sprite GetItemIcon(Item_Type type)
@@ -110,6 +112,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.YomulExchangeStone:
                 return YomulExchangeStone;
+                break;
+            case Item_Type.Songpyeon:
+                return Songpyeon;
                 break;
         }
 

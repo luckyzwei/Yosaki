@@ -9,7 +9,7 @@ using LitJson;
 
 public enum RankType
 {
-    Level, Stage, Boss, Real_Boss, None
+    Level, Stage, Boss, Real_Boss, YoguiSogul,None
 }
 
 public class RankManager : SingletonMono<RankManager>
@@ -20,7 +20,8 @@ public class RankManager : SingletonMono<RankManager>
         { RankType.Real_Boss,null },
         { RankType.Stage,null },
         { RankType.Level,null },
-        { RankType.Boss,null }
+        { RankType.Boss,null },
+        { RankType.YoguiSogul,null }
     };
 
     public Dictionary<RankType, RankInfo> MyRankInfo => myRankInfo;
@@ -62,10 +63,14 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Real_Boss_Uuid = "9baf8510-0b85-11ec-8132-edeaa3358991";
     public const string Rank_Real_Boss = "Rank_Boss_2";
 
+    public const string YoguiSogul_Uuid = "1a5a6f70-116b-11ec-8c36-c57e66fdaa13";
+    public const string YoguiSogul = "YoguiSogulBoss";
+
     public ReactiveCommand<RankInfo> WhenMyLevelRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyStageRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyBossRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyRealBossRankLoadComplete = new ReactiveCommand<RankInfo>();
+    public ReactiveCommand<RankInfo> WhenMyYoguiSogulRankLoadComplete = new ReactiveCommand<RankInfo>();
 
     public void Subscribe()
     {
@@ -401,9 +406,91 @@ public class RankManager : SingletonMono<RankManager>
 
     #endregion
 
+    #region YoguiSogul
+    private Action<RankInfo> whenLoadSuccess_YoguiSogul;
+    public void RequestMyYoguiSogulRank(Action<RankInfo> whenLoadSuccess = null)
+    {
+        this.whenLoadSuccess_YoguiSogul = whenLoadSuccess;
+
+        Backend.URank.User.GetMyRank(RankManager.YoguiSogul_Uuid, MyYoguiSogulLoadComplete);
+    }
+    private void MyYoguiSogulLoadComplete(BackendReturnObject bro)
+    {
+        RankInfo myRankInfo = null;
+
+        if (bro.IsSuccess())
+        {
+            var rows = bro.Rows();
+
+            if (rows.Count > 0)
+            {
+                JsonData data = rows[0];
+
+                var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
+
+                string nickName = data["nickname"][ServerData.format_string].ToString();
+                int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
+                float score = float.Parse(data["score"][ServerData.format_Number].ToString());
+                int costumeId = int.Parse(splitData[0]);
+                int petId = int.Parse(splitData[1]);
+                int weaponId = int.Parse(splitData[2]);
+                int magicBookId = int.Parse(splitData[3]);
+                int fightPoint = int.Parse(splitData[4]);
+
+                myRankInfo = new RankInfo(nickName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+            }
+        }
+
+        if (myRankInfo != null)
+        {
+            whenLoadSuccess_YoguiSogul?.Invoke(myRankInfo);
+            WhenMyYoguiSogulRankLoadComplete.Execute(myRankInfo);
+
+            this.myRankInfo[RankType.YoguiSogul] = myRankInfo;
+        }
+    }
+
+    public void UpdateYoguiSogul_Score(float score)
+    {
+        // if (UpdateRank() == false) return;
+        if (this.myRankInfo[RankType.YoguiSogul] != null && score < this.myRankInfo[RankType.YoguiSogul].Score)
+        {
+            Debug.LogError("점수가 더 낮음");
+            return;
+        }
+
+        Param param = new Param();
+        param.Add("Score", score);
+
+        int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
+        int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
+        int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int fightPoint = (int)PlayerStats.GetTotalPower();
+        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
+
+        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, YoguiSogul_Uuid, YoguiSogul, RankTable_YoguiSogul.Indate, param, bro =>
+        {
+            // 이후처리
+            if (bro.IsSuccess())
+            {
+                Debug.LogError($"랭킹 등록 성공! UpdateBoss0_Score");
+            }
+            else
+            {
+                Debug.LogError($"랭킹 등록 실패 UpdateBoss0_Score {bro.GetStatusCode()}");
+            }
+        });
+    }
+
+    #endregion
+
     private bool UpdateRank()
     {
         return !PlayerData.Instance.NickName.Equals("블랙핑크")
-            && !PlayerData.Instance.NickName.Equals("테스트용");
+            && !PlayerData.Instance.NickName.Equals("테스트용")
+            && !PlayerData.Instance.NickName.Equals("로꼬");
     }
 }

@@ -656,6 +656,7 @@ public static class PlayerStats
         ret += GetWeaponEquipPercentValue(StatusType.IgnoreDefense);
         ret += GetWeaponHasPercentValue(StatusType.IgnoreDefense);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.IgnoreDefense);
+        ret += ServerData.petTable.GetStatusValue(StatusType.IgnoreDefense);
 
         return ret;
     }
@@ -678,7 +679,15 @@ public static class PlayerStats
             if (serverData.hasAbil.Value == 0) continue;
             if (tableDatas[i].Abiltype != (int)type) continue;
 
-            ret += tableDatas[i].Abilvalue + (serverData.level.Value * tableDatas[i].Abiladdvalue);
+            if (type == StatusType.PenetrateDefense)
+            {
+                float addValue = serverData.level.Value < 80 ? tableDatas[i].Abiladdvalue : tableDatas[i].Abiladdvalue * 2f;
+                ret += tableDatas[i].Abilvalue + (serverData.level.Value * addValue);
+            }
+            else
+            {
+                ret += tableDatas[i].Abilvalue + (serverData.level.Value * tableDatas[i].Abiladdvalue);
+            }
         }
 
         return ret;

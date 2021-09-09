@@ -46,6 +46,7 @@ public static class ServerData
     public static PensionServerTable pensionServerTable { get; private set; } = new PensionServerTable();
     public static YomulServerTable yomulServerTable { get; private set; } = new YomulServerTable();
     public static CostumePreset costumePreset { get; private set; } = new CostumePreset();
+    public static RankTable_YoguiSogul yoguisogul_Rank { get; private set; } = new RankTable_YoguiSogul();
 
     #region string
     public static string inDate_str = "inDate";
@@ -106,6 +107,8 @@ public static class ServerData
         yomulServerTable.Initialize();
 
         costumePreset.Initialize();
+
+        yoguisogul_Rank.Initialize();
     }
 
     public static void GetUserInfo()

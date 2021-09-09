@@ -86,7 +86,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
 
             ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(e =>
             {
-                if (e >= 20)
+                if (e >= 12)
                 {
                     SetClear(TutorialStep.Level20);
                 }
@@ -202,7 +202,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
                 return "오른쪽 상단 <color=yellow>기술메뉴</color> 에서\n기술을 배워보세요.";
                 break;
             case TutorialStep.Level20:
-                return $"<color=yellow>레벨 20</color>을 달성해 해보세요\n보상:{CommonString.GetItemName(Item_Type.Jade)}{lastRewardGemNum}개";
+                return $"<color=yellow>레벨 12</color>을 달성해 해보세요\n보상:{CommonString.GetItemName(Item_Type.Jade)}{lastRewardGemNum}개";
                 break;
             case TutorialStep.Clear:
                 break;
