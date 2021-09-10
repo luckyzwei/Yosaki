@@ -141,7 +141,7 @@ public class UiPassiveSkillCell : MonoBehaviour
         var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
         if (skillPoint.Value <= 0)
         {
-            PopupManager.Instance.ShowAlarmMessage("스킬포인트가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("기술포인트가 부족합니다.");
             return;
         }
 
@@ -156,7 +156,49 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
     }
+    public void OnClickOneHundredUpgradeButton() 
+    {
+        int currentLevel = ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value;
 
+        if (currentLevel >= passiveSkillData.Maxlevel)
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
+            return;
+        }
+
+        if (magicBookServerData.hasItem.Value != 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("마도서가 없습니다.");
+            return;
+        }
+
+        //스킬포인트 체크
+        var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
+        if (skillPoint.Value <= 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("기술포인트가 부족합니다.");
+            return;
+        }
+
+        int maxLevel = passiveSkillData.Maxlevel;
+
+        int skillPointRemain = skillPoint.Value;
+
+        int upgradableAmount = Mathf.Min(skillPointRemain, passiveSkillData.Maxlevel - currentLevel);
+
+        upgradableAmount = Mathf.Min(upgradableAmount, 100);
+
+        //로컬
+        ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value += upgradableAmount;
+        skillPoint.Value -= upgradableAmount;
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+    }
     public void OnClickAllUpgradeButton()
     {
         int currentLevel = ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value;
@@ -177,7 +219,7 @@ public class UiPassiveSkillCell : MonoBehaviour
         var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
         if (skillPoint.Value <= 0)
         {
-            PopupManager.Instance.ShowAlarmMessage("스킬포인트가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("기술포인트가 부족합니다.");
             return;
         }
 
