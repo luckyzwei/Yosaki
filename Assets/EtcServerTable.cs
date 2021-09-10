@@ -122,7 +122,7 @@ public class EtcServerTable
                         }
                         else
                         {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
+                            defultValues.Add(e.Current.Key, e.Current.Value.Value);
                             tableDatas.Add(e.Current.Key, e.Current.Value);
                             paramCount++;
                         }
