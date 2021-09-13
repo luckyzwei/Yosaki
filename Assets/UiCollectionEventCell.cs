@@ -143,6 +143,8 @@ public class UiCollectionEventCell : MonoBehaviour
             costumeParam.Add(costumeKey.ToString(), ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
 
             transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+
+
         }
         else
         {
@@ -163,6 +165,8 @@ public class UiCollectionEventCell : MonoBehaviour
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 획득!!", null);
             }
+
+            LogManager.Instance.SendLogType("chuseokExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
         });
     }
 }
