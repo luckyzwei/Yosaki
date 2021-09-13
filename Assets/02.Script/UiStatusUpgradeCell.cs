@@ -61,6 +61,9 @@ public class UiStatusUpgradeCell : MonoBehaviour
     [SerializeField]
     private GameObject allUpgradeButton;
 
+    [SerializeField]
+    private GameObject _100UpgradeButton;
+
     private void OnDestroy()
     {
         if (CoroutineExecuter.Instance == null) return;
@@ -89,6 +92,8 @@ public class UiStatusUpgradeCell : MonoBehaviour
         this.statusData = statusData;
 
         allUpgradeButton.SetActive(statusData.STATUSWHERE != StatusWhere.gold);
+
+        _100UpgradeButton.SetActive(statusData.STATUSWHERE != StatusWhere.gold);
 
         memoryIcon.SetActive(statusData.STATUSWHERE == StatusWhere.memory);
 
@@ -423,6 +428,83 @@ public class UiStatusUpgradeCell : MonoBehaviour
             int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
             int upgradableAmount = maxLevel - currentLevel;
+
+            //맥스렙 가능
+            if (currentMemoryPoint >= upgradableAmount)
+            {
+                ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= upgradableAmount;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+            }
+            else
+            {
+                ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= currentMemoryPoint;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += currentMemoryPoint;
+            }
+        }
+
+        //싱크
+        SyncData();
+
+        SetUpgradeButtonState(CanUpgrade());
+    }
+
+    public void OnClick100_Upgrade()
+    {
+        if (statusData.STATUSWHERE == StatusWhere.statpoint)
+        {
+            int currentStatPoint = ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value;
+
+            if (currentStatPoint <= 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("스텟이 부족합니다.");
+                return;
+            }
+
+            if (IsMaxLevel())
+            {
+                PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
+                return;
+            }
+
+            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            int maxLevel = statusData.Maxlv;
+            int upgradableAmount = maxLevel - currentLevel;
+
+            upgradableAmount = Mathf.Min(upgradableAmount, 100);
+
+            //맥스렙 가능
+            if (currentStatPoint >= upgradableAmount)
+            {
+                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= upgradableAmount;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+            }
+            else
+            {
+                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= currentStatPoint;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += currentStatPoint;
+            }
+        }
+        else if (statusData.STATUSWHERE == StatusWhere.memory)
+        {
+            int currentMemoryPoint = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
+
+            if (currentMemoryPoint <= 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("기억의 조각이 부족합니다.");
+                return;
+            }
+
+            if (IsMaxLevel())
+            {
+                PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
+                return;
+            }
+
+            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            int maxLevel = statusData.Maxlv;
+            int upgradableAmount = maxLevel - currentLevel;
+
+            upgradableAmount = Mathf.Min(upgradableAmount, 100);
 
             //맥스렙 가능
             if (currentMemoryPoint >= upgradableAmount)
