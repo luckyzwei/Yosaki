@@ -112,6 +112,12 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
             UpdateMpMax();
         }).AddTo(this);
 
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumePresetId].AsObservable().Subscribe(e =>
+        {
+            UpdateHpMax();
+            UpdateMpMax();
+        }).AddTo(this);
+
         //노리개 바뀔때
         ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].AsObservable().Subscribe(e =>
         {

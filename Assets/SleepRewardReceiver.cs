@@ -19,9 +19,13 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         public readonly float exp;
 
+        public readonly float yoguiMarble;
+
+        public readonly float songpyeon;
+
         public readonly int elapsedSeconds;
 
-        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float exp, int elapsedSeconds)
+        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float songpyeon, float exp, int elapsedSeconds)
         {
             this.gold = gold;
 
@@ -30,6 +34,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             this.GrowthStone = GrowthStone;
 
             this.marble = marble;
+
+            this.yoguiMarble = yoguiMarble;
+
+            this.songpyeon = songpyeon;
 
             this.exp = exp;
 
@@ -102,10 +110,24 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         float marble = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
 
+        float yoguimarble = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
+
+        float songpyeon = 0;
+
+        if (ServerData.userInfoTable.CanSpawnSongPyeon())
+        {
+            songpyeon = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
+        }
+        else
+        {
+            songpyeon = 0;
+        }
+
+
         float exp = killedEnemyPerMin * spawnedEnemyData.Exp * GameBalance.sleepRewardRatio * elapsedMinutes;
         exp += exp * expBuffRatio;
 
-        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, exp: exp, elapsedSeconds: elapsedSeconds);
+        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, yoguiMarble: yoguimarble, songpyeon: songpyeon, exp: exp, elapsedSeconds: elapsedSeconds);
     }
 
     public void GetSleepReward(Action successCallBack)
@@ -120,12 +142,18 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += sleepRewardInfo.jade;
         ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += sleepRewardInfo.marble;
         ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += sleepRewardInfo.GrowthStone;
+        //
+        ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value += sleepRewardInfo.yoguiMarble;
+        ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += sleepRewardInfo.songpyeon;
 
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
         goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
         goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
         goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
+        //
+        goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
+        goodsParam.Add(GoodsTable.Songpyeon, ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value);
 
         List<TransactionValue> transantions = new List<TransactionValue>();
 

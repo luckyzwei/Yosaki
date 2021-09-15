@@ -60,6 +60,11 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
         //exp
         rewards[4].SetText(Utils.ConvertBigNum(reward.exp));
 
+        //요괴구슬
+        rewards[5].SetText(Utils.ConvertBigNum(reward.yoguiMarble));
+        //송편
+        rewards[6].SetText(Utils.ConvertBigNum(reward.songpyeon));
+
         SleepRewardReceiver.Instance.GetRewardSuccess();
     }
 }
