@@ -692,4 +692,30 @@ public static class PlayerStats
 
         return ret;
     }
+
+    public static float GetTitleAbilValue(StatusType type) 
+    {
+        var e = ServerData.titleServerTable.TableDatas.GetEnumerator();
+
+        float ret = 0f;
+
+        while (e.MoveNext()) 
+        {
+            if (e.Current.Value.clearFlag.Value == 0) continue;
+
+            var tableData = TableManager.Instance.TitleTable.dataArray[e.Current.Value.idx];
+
+            if (type == (StatusType)tableData.Abiltype1) 
+            {
+                ret += tableData.Abilvalue1;
+            }
+
+            if (type == (StatusType)tableData.Abiltype2) 
+            {
+                ret += tableData.Abilvalue2;
+            }
+        }
+
+        return ret;
+    }
 }

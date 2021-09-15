@@ -15,6 +15,9 @@ public class UiTitleCell : MonoBehaviour
     private TextMeshProUGUI description;
 
     [SerializeField]
+    private TextMeshProUGUI abilDescription;
+
+    [SerializeField]
     private GameObject lockMask;
 
     [SerializeField]
@@ -41,12 +44,33 @@ public class UiTitleCell : MonoBehaviour
 
         description.SetText(tableData.Description);
 
+        abilDescription.SetText(GetAbilDescription());
+
         itemIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableData.Rewardtype);
 
         rewardAmount.SetText(Utils.ConvertBigNum(tableData.Rewardvalue));
 
         Subscribe();
     }
+
+    private string GetAbilDescription()
+    {
+        StatusType type = (StatusType)tableData.Abiltype1;
+
+        string abilValue = string.Empty;
+
+        if (type.IsPercentStat()) 
+        {
+            abilValue = (tableData.Abilvalue1*100).ToString()+"%";
+        }
+        else 
+        {
+            abilValue = tableData.Abilvalue1.ToString();
+        }
+
+        return $"{CommonString.GetStatusName(type)} {abilValue}";
+    }
+
     private void Subscribe()
     {
         serverTable.clearFlag.AsObservable().Subscribe(e =>
