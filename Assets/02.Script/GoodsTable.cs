@@ -22,12 +22,12 @@ public class GoodsTable
     public static string PetUpgradeSoul = "PetUpgradeSoul";
     public static string YomulExchangeStone = "YomulExchangeStone";
     public static string Songpyeon = "Songpyeon";
+    public static string TigerStone = "TigerStone";
 
     //포션
     public static string Potion_0 = "Potion_0";
     public static string Potion_1 = "Potion_1";
     public static string Potion_2 = "Potion_2";
-
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -45,7 +45,8 @@ public class GoodsTable
         {WeaponUpgradeStone,0f},
         {PetUpgradeSoul,0f},
         {YomulExchangeStone,0f},
-        {Songpyeon,0f}
+        {Songpyeon,0f},
+        {TigerStone,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -90,7 +91,7 @@ public class GoodsTable
         int amount_int = (int)amount;
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)} 획득(+{amount_int})");
 
-        growThStoneAddAmount+= amount_int;
+        growThStoneAddAmount += amount_int;
 
         if (growThStoneAddAmount < updateRequireNum_GrowthStone)
         {
@@ -140,7 +141,7 @@ public class GoodsTable
     }
 
     static int songpyeonAddAmount = 0;
-    public void GetEventSongPyeon(float amount) 
+    public void GetEventSongPyeon(float amount)
     {
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Songpyeon)} 획득(+{(int)amount})");
 

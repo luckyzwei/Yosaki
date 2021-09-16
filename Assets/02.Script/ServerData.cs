@@ -294,6 +294,11 @@ public static class ServerData
                 param.Add(GoodsTable.YomulExchangeStone, ServerData.goodsTable.GetTableData(GoodsTable.YomulExchangeStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
+            case Item_Type.TigerBossStone:
+                ServerData.goodsTable.GetTableData(GoodsTable.TigerStone).Value += amount;
+                param.Add(GoodsTable.TigerStone, ServerData.goodsTable.GetTableData(GoodsTable.TigerStone).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.costume1:
             case Item_Type.costume4:
                 {

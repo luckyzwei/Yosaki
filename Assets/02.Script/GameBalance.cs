@@ -100,6 +100,10 @@ public static class GameBalance
     public readonly static ObscuredInt ChuseokDropEndDay = 25;
     public readonly static ObscuredInt ChuseokMakeEndDay = 26;
     public readonly static ObscuredInt ChuseokPackageSaleEndDay = 26;
+
+    public readonly static ObscuredFloat TitleEquipAddPer = 2;
+
+    
 }
 
 public static class DamageBalance

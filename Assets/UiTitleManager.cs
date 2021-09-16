@@ -29,7 +29,14 @@ public enum TitleMissionId
     GetLegendNorigae,//★
     GetSinMulNorigae,//★
     AwakeMarble,//★
-    EvolutionPet//★
+    EvolutionPet,//★
+    Yomul0,//★
+    Yomul1,//★
+    Yomul2,//★
+    Yomul3,//★
+    Stage450,//★
+    Stage500//★
+
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -127,6 +134,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 400 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage400);
+            }
+            if (e >= 450 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage450);
+            }
+            if (e >= 500 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage500);
             }
 
         }).AddTo(this);
@@ -275,6 +290,42 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e == 1)
             {
                 ClearTitleMission(TitleMissionId.EvolutionPet);
+            }
+        }).AddTo(this);
+
+        //영베
+        ServerData.yomulServerTable.TableDatas["yomul0"].level.AsObservable().Subscribe(e =>
+        {
+            if (e >= 100)
+            {
+                ClearTitleMission(TitleMissionId.Yomul0);
+            }
+        }).AddTo(this);
+
+        //제물
+        ServerData.yomulServerTable.TableDatas["yomul1"].hasAbil.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.Yomul1);
+            }
+        }).AddTo(this);
+
+        //한계돌파
+        ServerData.yomulServerTable.TableDatas["yomul2"].level.AsObservable().Subscribe(e =>
+        {
+            if (e >= 1000)
+            {
+                ClearTitleMission(TitleMissionId.Yomul2);
+            }
+        }).AddTo(this);
+
+        //심장베기
+        ServerData.yomulServerTable.TableDatas["yomul3"].level.AsObservable().Subscribe(e =>
+        {
+            if (e >= 1000)
+            {
+                ClearTitleMission(TitleMissionId.Yomul3);
             }
         }).AddTo(this);
     }

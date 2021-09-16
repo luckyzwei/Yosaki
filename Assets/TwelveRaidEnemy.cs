@@ -16,6 +16,21 @@ public class TwelveRaidEnemy : BossEnemyBase
     [SerializeField]
     private AlarmHitObject verticalHit;
 
+    [SerializeField]
+    private int attackTypeMax = 2;
+
+    [SerializeField]
+    private float attackInterval = 1f;
+
+    [SerializeField]
+    private List<AlarmHitObject> HitList_1;
+
+    [SerializeField]
+    private List<AlarmHitObject> HitList_2;
+
+    [SerializeField]
+    private List<AlarmHitObject> HitList_3;
+
     private void Start()
     {
         Initialize();
@@ -55,10 +70,10 @@ public class TwelveRaidEnemy : BossEnemyBase
         while (true)
         {
             Random.InitState((int)System.DateTime.Now.Ticks);
-            int attackType = Random.Range(0, 2);
+            int attackType = Random.Range(0, attackTypeMax);
 
 #if UNITY_EDITOR
-            Debug.LogError($"AttackType {attackType}");
+          //  Debug.LogError($"AttackType {attackType}");
 #endif
 
             if (attackType == 0)
@@ -69,10 +84,14 @@ public class TwelveRaidEnemy : BossEnemyBase
             {
                 yield return StartCoroutine(AttackRoutine_3(2));
             }
+            else if (attackType == 2)
+            {
+                yield return StartCoroutine(AttackRoutine_4(2));
+            }
 
             StartCoroutine(PlayAttackAnim());
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(attackInterval);
         }
     }
 
@@ -109,7 +128,15 @@ public class TwelveRaidEnemy : BossEnemyBase
     //?
     private IEnumerator AttackRoutine_2(float delay)
     {
-        horizontalHit.AttackStart();
+        if (HitList_1.Count == 0)
+        {
+            horizontalHit.AttackStart();
+        }
+
+        for (int i = 0; i < HitList_1.Count; i++)
+        {
+            HitList_1[i].AttackStart();
+        }
 
         StartCoroutine(PlaySoundDelay(1f, "BossSkill2"));
 
@@ -119,7 +146,15 @@ public class TwelveRaidEnemy : BossEnemyBase
     //?
     private IEnumerator AttackRoutine_3(float delay)
     {
-        verticalHit.AttackStart();
+        if (HitList_2.Count == 0)
+        {
+            verticalHit.AttackStart();
+        }
+
+        for (int i = 0; i < HitList_2.Count; i++)
+        {
+            HitList_2[i].AttackStart();
+        }
 
         StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
 
@@ -130,6 +165,11 @@ public class TwelveRaidEnemy : BossEnemyBase
     private IEnumerator AttackRoutine_4(float delay)
     {
         //alarmHitObject_4.AttackStart();
+
+        for (int i = 0; i < HitList_3.Count; i++)
+        {
+            HitList_3[i].AttackStart();
+        }
 
         StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
 

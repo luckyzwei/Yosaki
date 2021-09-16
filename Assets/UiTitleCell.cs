@@ -32,6 +32,21 @@ public class UiTitleCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI rewardAmount;
 
+    [SerializeField]
+    private Image image;
+
+    [SerializeField]
+    private Sprite equiped;
+
+    [SerializeField]
+    private Sprite unEquiped;
+
+    [SerializeField]
+    private TextMeshProUGUI equipText;
+
+    [SerializeField]
+    private GameObject equipButton;
+
     public void Initialize(TitleTableData tableData)
     {
         this.tableData = tableData;
@@ -55,17 +70,23 @@ public class UiTitleCell : MonoBehaviour
 
     private string GetAbilDescription()
     {
+        bool isEquiped = ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].Value == tableData.Id;
+
         StatusType type = (StatusType)tableData.Abiltype1;
 
         string abilValue = string.Empty;
 
-        if (type.IsPercentStat()) 
+        if (type.IsPercentStat())
         {
-            abilValue = (tableData.Abilvalue1*100).ToString()+"%";
+            float abil = isEquiped ? (tableData.Abilvalue1 * 100) * GameBalance.TitleEquipAddPer : (tableData.Abilvalue1 * 100);
+
+            abilValue = abil.ToString() + "%";
         }
-        else 
+        else
         {
-            abilValue = tableData.Abilvalue1.ToString();
+            float abil = isEquiped ? (tableData.Abilvalue1) * GameBalance.TitleEquipAddPer : (tableData.Abilvalue1);
+
+            abilValue = abil.ToString();
         }
 
         return $"{CommonString.GetStatusName(type)} {abilValue}";
@@ -75,13 +96,32 @@ public class UiTitleCell : MonoBehaviour
     {
         serverTable.clearFlag.AsObservable().Subscribe(e =>
         {
+
             lockMask.SetActive(e == 0);
+
+            equipButton.SetActive(e == 1);
+
         }).AddTo(this);
 
         serverTable.rewarded.AsObservable().Subscribe(e =>
         {
+
             completeIcon.SetActive(e == 1);
+
         }).AddTo(this);
+
+        ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].AsObservable().Subscribe(e =>
+        {
+            image.sprite = e == tableData.Id ? equiped : unEquiped;
+
+            equipText.SetText(e == tableData.Id ? "장착중" : "장착");
+
+            abilDescription.color = e == tableData.Id ? Color.green : Color.red;
+
+            abilDescription.SetText(GetAbilDescription());
+
+        }).AddTo(this);
+
     }
 
     public void OnClickRewardButton()
@@ -114,5 +154,16 @@ public class UiTitleCell : MonoBehaviour
 
               LogManager.Instance.SendLogType("TitleReward", tableData.Id.ToString(), "");
           });
+    }
+
+    public void OnClickSelectButton()
+    {
+        if (ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].Value == tableData.Id)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이미 장착 중입니다!");
+            return;
+        }
+
+        ServerData.equipmentTable.ChangeEquip(EquipmentTable.TitleSelectId, tableData.Id);
     }
 }

@@ -25,6 +25,12 @@ public class UiStatusUpgradeCell : MonoBehaviour
     private Image upgradeButton;
 
     [SerializeField]
+    private Image upgradeButton_100;
+
+    [SerializeField]
+    private Image upgradeButton_all;
+
+    [SerializeField]
     private Sprite enableSprite;
 
     [SerializeField]
@@ -368,10 +374,14 @@ public class UiStatusUpgradeCell : MonoBehaviour
         if (IsMaxLevel() == false)
         {
             upgradeButton.sprite = on ? enableSprite : disableSprite;
+            upgradeButton_100.sprite = on ? enableSprite : disableSprite;
+            upgradeButton_all.sprite = on ? enableSprite : disableSprite;
         }
         else
         {
             upgradeButton.sprite = maxLevelSprite;
+            upgradeButton_100.sprite = maxLevelSprite;
+            upgradeButton_all.sprite = maxLevelSprite;
         }
     }
 
@@ -534,7 +544,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         saveRoutine = null;
     }
 
-    private void SyncData() 
+    private void SyncData()
     {
         List<TransactionValue> transactionList = new List<TransactionValue>();
 

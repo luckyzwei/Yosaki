@@ -34,7 +34,7 @@ public class CurrentStageInfoPopup : SingletonMono<CurrentStageInfoPopup>
         desc += $"방어력 : {Utils.ConvertBigNum(enemyTableData.Defense)}\n";
         desc += $"공격력 : {Utils.ConvertBigNum(enemyTableData.Attackpower)}\n\n";
         desc += $"경험치 : {Utils.ConvertBigNum(enemyTableData.Exp)}\n";
-        desc += $"{CommonString.GetItemName(Item_Type.Gold)} : {Utils.ConvertBigNum(enemyTableData.Attackpower * enemyTableData.Bossattackratio)}\n";
+        desc += $"{CommonString.GetItemName(Item_Type.Gold)} : {Utils.ConvertBigNum(enemyTableData.Gold)}\n";
         desc += $"{CommonString.GetItemName(Item_Type.GrowthStone)} : {Utils.ConvertBigNum(stageData.Magicstoneamount)}\n";
         desc += $"{CommonString.GetItemName(Item_Type.Marble)} : {Utils.ConvertBigNum(stageData.Marbleamount)}\n\n";
         desc += $"보스체력 : {Utils.ConvertBigNum(enemyTableData.Hp * enemyTableData.Bosshpratio)}\n";

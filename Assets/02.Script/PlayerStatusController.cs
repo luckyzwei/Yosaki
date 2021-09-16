@@ -125,6 +125,14 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
             UpdateMpMax();
         }).AddTo(this);
 
+        //
+        ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].AsObservable().Subscribe(e =>
+        {
+            UpdateHpMax();
+            UpdateMpMax();
+        }).AddTo(this);
+        //
+
         ServerData.equipmentTable.TableDatas[EquipmentTable.CostumePresetId].AsObservable().Subscribe(e =>
         {
             StartCoroutine(LateUpdateHp());

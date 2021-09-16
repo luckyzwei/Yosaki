@@ -60,8 +60,8 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss = "Rank_Boss_1";
 
     //public const string Rank_Real_Boss_Uuid = "1438d260-fec6-11eb-b9fc-c9829b653541";
-    public const string Rank_Real_Boss_Uuid = "88c84a70-123f-11ec-b68e-efdf87eb7698";
-    public const string Rank_Real_Boss = "Rank_Boss_2";
+    public const string Rank_Real_Boss_Uuid = "e30091f0-16e5-11ec-b68e-efdf87eb7698";
+    public const string Rank_Real_Boss = "Rank_Boss_3";
 
     public const string YoguiSogul_Uuid = "1a5a6f70-116b-11ec-8c36-c57e66fdaa13";
     public const string YoguiSogul = "YoguiSogulBoss";
@@ -284,7 +284,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateBoss_Score(float score)
     {
-        //if (UpdateRank() == false) return;
+        if (UpdateRank() == false) return;
 
         if (this.myRankInfo[RankType.Boss] != null && score < this.myRankInfo[RankType.Boss].Score)
         {

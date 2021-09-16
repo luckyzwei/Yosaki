@@ -16,6 +16,7 @@ public class EquipmentTable
     public static string CostumeSlot = "CostumeSlot";
     public static string CostumeLook = "CostumeLook";
     public static string CostumePresetId = "CostumePresetId";
+    public static string TitleSelectId = "TitleSelectId";
 
     private Dictionary<string, int> tableSchema = new Dictionary<string, int>()
     {
@@ -25,7 +26,8 @@ public class EquipmentTable
         {Potion,2},
         {CostumeSlot,0},
         {CostumeLook,0},
-        {CostumePresetId,0}
+        {CostumePresetId,0},
+        {TitleSelectId,-1}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<int>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<int>>();

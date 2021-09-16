@@ -17,6 +17,7 @@ public enum Item_Type
     PetUpgradeSoul,
     YomulExchangeStone,
     Songpyeon,
+    TigerBossStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

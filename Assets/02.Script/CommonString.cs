@@ -42,7 +42,7 @@ public static class CommonString
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "십이지신(묘)";
-    public static string RankPrefix_Real_Boss = "십이지신(축)";
+    public static string RankPrefix_Real_Boss = "십이지신(인)";
     public static string RankPrefix_YoguiSogul = "백귀야행";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
@@ -110,10 +110,11 @@ public static class CommonString
             case Item_Type.PetUpgradeSoul: return "요괴구슬";
             case Item_Type.YomulExchangeStone: return "탐욕의 증표";
             case Item_Type.Songpyeon: return "송편";
+            case Item_Type.TigerBossStone: return "강함의 증표";
         }
         return "미등록"; 
     }
-
+    
     public static string GetStatusName(StatusType type)
     {
         switch (type)

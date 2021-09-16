@@ -150,7 +150,6 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += ServerData.statusTable.GetStatusValue(StatusTable.AttackLevel_Gold);
-        //  ret += GetCollectionAbilValue(StatusType.IntAdd);
         ret += ServerData.petTable.GetStatusValue(StatusType.AttackAdd);
         ret += GetWeaponEquipPercentValue(StatusType.AttackAdd);
         ret += GetSkillCollectionValue(StatusType.AttackAdd);
@@ -159,6 +158,7 @@ public static class PlayerStats
         ret += GetMarbleValue(StatusType.AttackAdd);
         ret += GetSkillHasValue(StatusType.AttackAdd);
         ret += GetYomulUpgradeValue(StatusType.AttackAdd);
+        ret += GetTitleAbilValue(StatusType.AttackAdd);
 
         return ret;
     }
@@ -448,6 +448,8 @@ public static class PlayerStats
         ret += GetPassiveSkillValue(StatusType.SkillDamage);
         ret += ServerData.petTable.GetStatusValue(StatusType.SkillDamage);
 
+        ret += GetTitleAbilValue(StatusType.SkillDamage);
+
         return ret;
     }
     #endregion
@@ -517,6 +519,9 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.GoldGainPer);
         ret += GetMarbleValue(StatusType.GoldGainPer);
         ret += GetMagicBookHasPercentValue(StatusType.GoldGainPer);
+
+        ret += GetTitleAbilValue(StatusType.GoldGainPer);
+
         return ret;
     }
     public static float GetGoldPlusValueExclusiveBuff()
@@ -537,6 +542,8 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.ExpGainPer);
         ret += GetMarbleValue(StatusType.ExpGainPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
+
+        ret += GetTitleAbilValue(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -607,6 +614,8 @@ public static class PlayerStats
         ret += GetWingAbilValue(StatusType.HpAddPer);
         ret += GetPassiveSkillValue(StatusType.HpAddPer);
 
+        ret += GetTitleAbilValue(StatusType.HpAddPer);
+
         return ret;
     }
     public static float GetMaxMp()
@@ -658,6 +667,9 @@ public static class PlayerStats
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.IgnoreDefense);
         ret += ServerData.petTable.GetStatusValue(StatusType.IgnoreDefense);
 
+        ret += GetTitleAbilValue(StatusType.IgnoreDefense);
+        ret += GetYomulUpgradeValue(StatusType.IgnoreDefense);
+
         return ret;
     }
 
@@ -693,26 +705,40 @@ public static class PlayerStats
         return ret;
     }
 
-    public static float GetTitleAbilValue(StatusType type) 
+    public static float GetTitleAbilValue(StatusType type)
     {
         var e = ServerData.titleServerTable.TableDatas.GetEnumerator();
 
         float ret = 0f;
 
-        while (e.MoveNext()) 
+        while (e.MoveNext())
         {
             if (e.Current.Value.clearFlag.Value == 0) continue;
 
             var tableData = TableManager.Instance.TitleTable.dataArray[e.Current.Value.idx];
 
-            if (type == (StatusType)tableData.Abiltype1) 
+            if (type == (StatusType)tableData.Abiltype1)
             {
-                ret += tableData.Abilvalue1;
+                if (tableData.Id == ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].Value)
+                {
+                    ret += tableData.Abilvalue1 * GameBalance.TitleEquipAddPer;
+                }
+                else
+                {
+                    ret += tableData.Abilvalue1;
+                }
             }
 
-            if (type == (StatusType)tableData.Abiltype2) 
+            if (type == (StatusType)tableData.Abiltype2)
             {
-                ret += tableData.Abilvalue2;
+                if (tableData.Id == ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].Value)
+                {
+                    ret += tableData.Abilvalue2 * GameBalance.TitleEquipAddPer;
+                }
+                else
+                {
+                    ret += tableData.Abilvalue2;
+                }
             }
         }
 
