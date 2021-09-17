@@ -490,7 +490,6 @@ public class RankManager : SingletonMono<RankManager>
     private bool UpdateRank()
     {
         return !PlayerData.Instance.NickName.Equals("블랙핑크")
-            && !PlayerData.Instance.NickName.Equals("테스트용")
-            && !PlayerData.Instance.NickName.Equals("로꼬");
+            && !PlayerData.Instance.NickName.Equals("테스트용");
     }
 }
