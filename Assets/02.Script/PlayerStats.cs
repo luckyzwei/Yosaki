@@ -521,6 +521,7 @@ public static class PlayerStats
         ret += GetMagicBookHasPercentValue(StatusType.GoldGainPer);
 
         ret += GetTitleAbilValue(StatusType.GoldGainPer);
+        ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
 
         return ret;
     }
@@ -532,6 +533,9 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.GoldGainPer);
         ret += GetMarbleValue(StatusType.GoldGainPer);
         ret += GetMagicBookHasPercentValue(StatusType.GoldGainPer);
+
+        ret += GetTitleAbilValue(StatusType.GoldGainPer);
+        ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
         return ret;
     }
     public static float GetExpPlusValue()
@@ -544,6 +548,7 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
 
         ret += GetTitleAbilValue(StatusType.ExpGainPer);
+        ret += GetHotTimeBuffEffect(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -556,12 +561,15 @@ public static class PlayerStats
         ret += GetMarbleValue(StatusType.ExpGainPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
 
+        ret += GetTitleAbilValue(StatusType.ExpGainPer);
+        ret += GetHotTimeBuffEffect(StatusType.ExpGainPer);
+
         return ret;
     }
     public static float GetMagicStonePlusValue()
     {
         float ret = 0f;
-        ret += GetBuffValue(StatusType.MagicStoneAddPer);
+        ret += GetHotTimeBuffEffect(StatusType.MagicStoneAddPer);
         return ret;
     }
 
@@ -740,6 +748,28 @@ public static class PlayerStats
                     ret += tableData.Abilvalue2;
                 }
             }
+        }
+
+        return ret;
+    }
+
+    public static float GetHotTimeBuffEffect(StatusType statusType)
+    {
+        float ret = 0f;
+
+        if (ServerData.userInfoTable.IsHotTime() == false) return 0f;
+
+        if (statusType == StatusType.GoldGainPer)
+        {
+            ret = GameBalance.HotTime_Gold;
+        }
+        else if (statusType == StatusType.ExpGainPer)
+        {
+            ret = GameBalance.HotTime_Exp;
+        }
+        else if (statusType == StatusType.MagicStoneAddPer)
+        {
+            ret = GameBalance.HotTime_GrowthStone;
         }
 
         return ret;

@@ -99,7 +99,9 @@ public class GoodsTable
         }
         else
         {
-            tableDatas[GrowthStone].Value += growThStoneAddAmount;
+            float magicStonePlusValue = PlayerStats.GetMagicStonePlusValue();
+
+            tableDatas[GrowthStone].Value += (growThStoneAddAmount + growThStoneAddAmount * magicStonePlusValue); ;
             growThStoneAddAmount = 0;
         }
     }

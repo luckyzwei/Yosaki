@@ -83,6 +83,7 @@ public class UserInfoTable
     public float currentServerDate;
     public double attendanceUpdatedTime;
     public DateTime currentServerTime { get; private set; }
+    public ReactiveCommand whenServerTimeUpdated = new ReactiveCommand();
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -335,6 +336,8 @@ public class UserInfoTable
 
                 currentServerTime = DateTime.Parse(time).ToUniversalTime().AddHours(9);
 
+                whenServerTimeUpdated.Execute();
+
                 currentServerDate = (float)Utils.ConvertToUnixTimestamp(currentServerTime);
 
                 //day check
@@ -425,7 +428,7 @@ public class UserInfoTable
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
 
-            if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f) 
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value++;
             }
@@ -523,10 +526,10 @@ public class UserInfoTable
         return tableDatas[removeAd].Value == 1;
     }
 
-    public bool CanSpawnSongPyeon() 
+    public bool CanSpawnSongPyeon()
     {
         if (currentServerTime.Month != 9) return false;
-        if (currentServerTime.Day >GameBalance.ChuseokDropEndDay) return false;
+        if (currentServerTime.Day > GameBalance.ChuseokDropEndDay) return false;
         return true;
     }
     public bool CanMakeChuseokItem()
@@ -536,11 +539,17 @@ public class UserInfoTable
         return true;
     }
 
-    public bool CanBuyChuseokPackage() 
+    public bool CanBuyChuseokPackage()
     {
         if (currentServerTime.Month != 9) return false;
         if (currentServerTime.Day > GameBalance.ChuseokPackageSaleEndDay) return false;
         return true;
+    }
+
+    public bool IsHotTime()
+    {
+        int currentHour = currentServerTime.Hour;
+        return currentHour >= GameBalance.HotTime_Start && currentHour <= GameBalance.HotTime_End;
     }
 
 }

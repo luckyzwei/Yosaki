@@ -168,7 +168,7 @@ public static class CommonString
                 return "5초당 마력 회복(%)";
                 break;
             case StatusType.MagicStoneAddPer:
-                return "기억의 파편 획득 증가(%)";
+                return "수련의돌 추가 획득(%)";
                 break;
             case StatusType.Damdecrease:
                 return "피해 감소(%)";

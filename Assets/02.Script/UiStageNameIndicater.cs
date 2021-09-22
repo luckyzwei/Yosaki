@@ -38,6 +38,11 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
     private Coroutine bossTimerRoutine;
 
+    [SerializeField]
+    private GameObject hotTimeBuffObject;
+
+
+
     public void StartFieldBossTimer(int timer)
     {
         StopFieldBossTimer();
@@ -103,6 +108,18 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
         stageObj.SetActive(true);
         fieldBossRemainObj.SetActive(false);
+
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        ServerData.userInfoTable.whenServerTimeUpdated.AsObservable().Subscribe(e =>
+        {
+
+            hotTimeBuffObject.SetActive(ServerData.userInfoTable.IsHotTime());
+
+        }).AddTo(this);
     }
 
     private void SetArrowButtons()

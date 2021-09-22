@@ -103,7 +103,12 @@ public static class GameBalance
 
     public readonly static ObscuredFloat TitleEquipAddPer = 2;
 
-    
+    public readonly static ObscuredFloat HotTime_Start = 13;
+    public readonly static ObscuredFloat HotTime_End = 14;
+
+    public readonly static ObscuredFloat HotTime_Exp = 5;
+    public readonly static ObscuredFloat HotTime_Gold = 5;
+    public readonly static ObscuredFloat HotTime_GrowthStone = 5;
 }
 
 public static class DamageBalance

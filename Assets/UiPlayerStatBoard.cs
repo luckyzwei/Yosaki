@@ -56,7 +56,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
         //초당체력회복
         description1 += $"{CommonString.GetStatusName(StatusType.HpRecover)} : {PlayerStats.GetHpRecover() * 100f}\n";
-        description2 += $"\n";
+        description2 += $"{CommonString.GetStatusName(StatusType.MagicStoneAddPer)} : {PlayerStats.GetMagicStonePlusValue() * 100f}\n";
 
         ////마력
         //description1 += $"{CommonString.GetStatusName(StatusType.Mp)} : {PlayerStats.GetOriginMp()}\n";
