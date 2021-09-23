@@ -1,4 +1,5 @@
 ﻿using BackEnd;
+using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,6 +22,9 @@ public class UiPetEquipmentView : MonoBehaviour
     private TextMeshProUGUI levelUpButtonDesc;
 
     [SerializeField]
+    private TextMeshProUGUI levelUpButtonDesc_marble;
+
+    [SerializeField]
     private TextMeshProUGUI abilDescription;
 
     [SerializeField]
@@ -37,6 +41,9 @@ public class UiPetEquipmentView : MonoBehaviour
     private PetEquipServerData petEquipServerData;
 
     private bool initialized = false;
+
+    private ObscuredFloat marbleDiscountRatio = 0.8f;
+
 
     public void Initialize(PetEquipmentData petEquipmentData)
     {
@@ -73,6 +80,8 @@ public class UiPetEquipmentView : MonoBehaviour
 
             levelUpButtonDesc.SetText(e == petEquipmentData.Maxlevel ? "최고레벨" : Utils.ConvertBigNum(petEquipmentData.Upgradeprice));
 
+            levelUpButtonDesc_marble.SetText(e == petEquipmentData.Maxlevel ? "최고레벨" : Utils.ConvertBigNum(petEquipmentData.Upgradeprice* marbleDiscountRatio));
+
             string abilDesc = string.Empty;
 
             StatusType type1 = (StatusType)petEquipmentData.Abiltype1;
@@ -108,15 +117,15 @@ public class UiPetEquipmentView : MonoBehaviour
             return;
         }
 
-        float currentYoguiMarble = ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value;
+        float currentMarble = ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value;
 
-        if (currentYoguiMarble < petEquipmentData.Unlockprice)
+        if (currentMarble < petEquipmentData.Unlockprice)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.PetUpgradeSoul)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Marble)}이 부족합니다.");
             return;
         }
 
-        ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value -= petEquipmentData.Unlockprice;
+        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= petEquipmentData.Unlockprice;
 
         petEquipServerData.hasAbil.Value = 1;
 
@@ -126,7 +135,7 @@ public class UiPetEquipmentView : MonoBehaviour
         petEquipParam.Add(petEquipmentData.Stringid, petEquipServerData.ConvertToString());
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
+        goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
 
         transactions.Add(TransactionValue.SetUpdate(PetEquipmentServerTable.tableName, PetEquipmentServerTable.Indate, petEquipParam));
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
@@ -168,6 +177,47 @@ public class UiPetEquipmentView : MonoBehaviour
 
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
+
+        transactions.Add(TransactionValue.SetUpdate(PetEquipmentServerTable.tableName, PetEquipmentServerTable.Indate, petEquipParam));
+        transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+        {
+
+        });
+    }
+
+
+    public void OnClickLevelUpButton_Marble()
+    {
+        int currentLevel = petEquipServerData.level.Value;
+
+        if (currentLevel >= petEquipmentData.Maxlevel)
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고 레벨 입니다.");
+            return;
+        }
+
+        float currentMarble = ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value;
+
+        float upgradePrice = petEquipmentData.Upgradeprice * marbleDiscountRatio;
+
+        if (currentMarble < upgradePrice)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Marble)}이 부족합니다.");
+            return;
+        }
+
+        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= upgradePrice;
+        petEquipServerData.level.Value++;
+
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        Param petEquipParam = new Param();
+        petEquipParam.Add(petEquipmentData.Stringid, petEquipServerData.ConvertToString());
+
+        Param goodsParam = new Param();
+        goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
 
         transactions.Add(TransactionValue.SetUpdate(PetEquipmentServerTable.tableName, PetEquipmentServerTable.Indate, petEquipParam));
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
