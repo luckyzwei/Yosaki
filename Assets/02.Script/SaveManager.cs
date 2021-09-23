@@ -8,7 +8,7 @@ public class SaveManager : SingletonMono<SaveManager>
 #if UNITY_EDITOR
     private WaitForSeconds updateDelay = new WaitForSeconds(10f);
 #else
-    private WaitForSeconds updateDelay = new WaitForSeconds(180.0f);
+    private WaitForSeconds updateDelay = new WaitForSeconds(120.0f);
 #endif
 
     private WaitForSeconds versionCheckDelay = new WaitForSeconds(300.0f);
@@ -107,8 +107,6 @@ public class SaveManager : SingletonMono<SaveManager>
             BuffManager.Instance.UpdateBuffTime();
             ServerData.buffServerTable.SyncAllData();
         }
-
-
     }
     private void OnApplicationQuit()
     {

@@ -170,6 +170,18 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
             UpdateMpMax();
         }).AddTo(this);
 
+        ServerData.petEquipmentServerTable.TableDatas["petequip0"].hasAbil.AsObservable().Subscribe(e =>
+        {
+            UpdateHpMax();
+            UpdateMpMax();
+        }).AddTo(this);
+
+        ServerData.petEquipmentServerTable.TableDatas["petequip0"].level.AsObservable().Subscribe(e =>
+        {
+            UpdateHpMax();
+            UpdateMpMax();
+        }).AddTo(this);
+
         //패시브스킬
         var tableData = TableManager.Instance.PassiveSkill.dataArray;
 

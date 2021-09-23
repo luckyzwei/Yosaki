@@ -22,6 +22,7 @@ public class UiBuffPopup : MonoBehaviour
         for (int i = 0; i < tableDatas.Length; i++)
         {
             if (tableDatas[i].Buffseconds < 0) continue;
+            if (tableDatas[i].Isyomulabil == true) continue;
 
             var cell = Instantiate<UiBuffPopupView>(uiBuffPopupView, buffViewParent);
 

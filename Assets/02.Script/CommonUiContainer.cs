@@ -23,6 +23,11 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     [SerializeField]
     private List<Sprite> rankFrame;
 
+    [SerializeField]
+    public List<Sprite> petEquipment;
+    [SerializeField]
+    public List<Color> petEquipColor;
+
     public Sprite GetCostumeThumbnail(int idx)
     {
         if (idx >= costumeThumbnail.Count) return null;

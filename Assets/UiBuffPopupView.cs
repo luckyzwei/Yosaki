@@ -32,6 +32,9 @@ public class UiBuffPopupView : MonoBehaviour
     [SerializeField]
     private Sprite getDisable;
 
+    [SerializeField]
+    private TextMeshProUGUI yomulDesc;
+
     private bool initialized = false;
 
     public void Initalize(BuffTableData buffTableData)
@@ -39,13 +42,35 @@ public class UiBuffPopupView : MonoBehaviour
         this.buffTableData = buffTableData;
 
         TimeSpan ts = TimeSpan.FromSeconds(buffTableData.Buffseconds);
-        buffDescription.SetText($"{CommonString.GetStatusName((StatusType)buffTableData.Bufftype)}+{buffTableData.Buffvalue * 100f}%({ts.TotalMinutes}분)");
+
+
+        StatusType type = (StatusType)buffTableData.Bufftype;
+
+        if (type.IsPercentStat())
+        {
+            buffDescription.SetText($"{CommonString.GetStatusName(type)}+{buffTableData.Buffvalue * 100f}%({ts.TotalMinutes}분)");
+        }
+        else
+        {
+            buffDescription.SetText($"{CommonString.GetStatusName(type)}+{Utils.ConvertBigNum(buffTableData.Buffvalue)}({ts.TotalMinutes}분)");
+        }
 
         buffIcon.sprite = CommonUiContainer.Instance.buffIconList[buffTableData.Id];
 
         Subscribe();
 
         initialized = true;
+
+        if (yomulDesc != null)
+        {
+            yomulDesc.gameObject.SetActive(buffTableData.Isyomulabil);
+        }
+
+        if (buffTableData.Isyomulabil == true)
+        {
+            var yomulTableData = TableManager.Instance.YomulAbilTable.dataArray[buffTableData.Yomulid];
+            yomulDesc.SetText($"{yomulTableData.Abilname} LV:{buffTableData.Unlockyomullevel} 필요");
+        }
     }
 
     private void OnEnable()
@@ -99,11 +124,29 @@ public class UiBuffPopupView : MonoBehaviour
             return;
         }
 
-        AdManager.Instance.ShowRewardedReward(() =>
+        if (buffTableData.Isyomulabil == false)
         {
-            BuffGetRoutine();
-        });
+            AdManager.Instance.ShowRewardedReward(() =>
+            {
+                BuffGetRoutine();
+            });
+        }
+        else
+        {
+            var yomulTableData = TableManager.Instance.YomulAbilTable.dataArray[buffTableData.Yomulid];
+            var yomulServerData = ServerData.yomulServerTable.TableDatas[yomulTableData.Stringid];
 
+            if (yomulServerData.hasAbil.Value == 0 || yomulServerData.level.Value < buffTableData.Unlockyomullevel)
+            {
+                PopupManager.Instance.ShowAlarmMessage("요물 능력치 레벨이 부족합니다.");
+                return;
+            }
+            else
+            {
+                BuffGetRoutine();
+            }
+
+        }
     }
 
     private void BuffGetRoutine()
@@ -133,7 +176,7 @@ public class UiBuffPopupView : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              LogManager.Instance.SendLog("버프 획득", $"{buffTableData.Stringid}");
+              // LogManager.Instance.SendLog("버프 획득", $"{buffTableData.Stringid}");
           });
     }
 }

@@ -122,7 +122,7 @@ public class BuffServerTable
                     buffData.idx = table[i].Id;
 
                     //매직스톤버프
-                    if (table[i].Bufftype != (int)StatusType.MagicStoneAddPer)
+                    if (table[i].Bufftype != (int)StatusType.MagicStoneAddPer && table[i].Isyomulabil == false)
                     {
                         buffData.remainSec = new ReactiveProperty<int>(0);
                     }
@@ -192,7 +192,7 @@ public class BuffServerTable
 
                         buffData.idx = table[i].Id;
 
-                        if (table[i].Bufftype != (int)StatusType.MagicStoneAddPer)
+                        if (table[i].Bufftype != (int)StatusType.MagicStoneAddPer && table[i].Isyomulabil == false)
                         {
                             buffData.remainSec = new ReactiveProperty<int>(table[i].Buffseconds);
                         }

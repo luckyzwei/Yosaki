@@ -58,7 +58,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
         return ((TutorialStep)tutorialClearFlags.Value).IsSet(step);
     }
 
-    private bool isAllCleared = false;
+    public bool isAllCleared { get; private set; } = false;
 
     void Start()
     {

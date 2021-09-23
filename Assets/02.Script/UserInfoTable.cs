@@ -59,6 +59,11 @@ public class UserInfoTable
     public const string buff_exp1 = "exp1_new_new_new";
     public const string buff_exp2 = "exp2_new_new_new";
 
+    public const string yomul0_buff = "yomul0_buff";
+    public const string yomul1_buff = "yomul1_buff";
+    public const string yomul2_buff = "yomul2_buff";
+    public const string yomul3_buff = "yomul3_buff";
+
     public const string bonusDungeonMaxKillCount = "bonusDungeonMaxKillCount";
 
     public const string wingPackageRewardReceive = "wingPackageRewardReceive";
@@ -115,6 +120,7 @@ public class UserInfoTable
         {buff_gold2,0f},
         {buff_exp1,0f},
         {buff_exp2,0f},
+
         {bonusDungeonMaxKillCount,0f},
         {wingPackageRewardReceive,0f},
         {topClearStageId,-1f},
@@ -137,7 +143,12 @@ public class UserInfoTable
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
 
-        {dokebiPackRefund,0f}
+        {dokebiPackRefund,0f},
+
+        {yomul0_buff,0f},
+        {yomul1_buff,0f},
+        {yomul2_buff,0f},
+        {yomul3_buff,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -419,6 +430,11 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp1).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp2).Value = 0;
+
+        ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.yomul2_buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.yomul3_buff).Value = 0;
         //
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
@@ -460,6 +476,11 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.buff_gold2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);
         userInfoParam.Add(UserInfoTable.buff_exp1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp1).Value);
         userInfoParam.Add(UserInfoTable.buff_exp2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp2).Value);
+
+        userInfoParam.Add(UserInfoTable.yomul0_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value);
+        userInfoParam.Add(UserInfoTable.yomul1_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value);
+        userInfoParam.Add(UserInfoTable.yomul2_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul2_buff).Value);
+        userInfoParam.Add(UserInfoTable.yomul3_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul3_buff).Value);
 
         //채팅 테두리 초기화
         if (weekChanged)

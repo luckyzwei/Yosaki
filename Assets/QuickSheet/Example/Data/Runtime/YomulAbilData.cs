@@ -44,4 +44,8 @@ public class YomulAbilData
   int maxlevel;
   public int Maxlevel { get {return maxlevel; } set { this.maxlevel = value;} }
   
+  [SerializeField]
+  string abilname;
+  public string Abilname { get {return abilname; } set { this.abilname = value;} }
+  
 }

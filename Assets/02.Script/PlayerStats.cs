@@ -98,7 +98,7 @@ public static class PlayerStats
 
         ret += GetMarbleValue(StatusType.Damdecrease);
         ret += GetMagicBookHasPercentValue(StatusType.Damdecrease);
-
+        ret += GetSinsuEquipEffect(StatusType.Damdecrease);
         return ret;
     }
     public static float GetBossDamAddValue()
@@ -159,6 +159,8 @@ public static class PlayerStats
         ret += GetSkillHasValue(StatusType.AttackAdd);
         ret += GetYomulUpgradeValue(StatusType.AttackAdd);
         ret += GetTitleAbilValue(StatusType.AttackAdd);
+
+        ret += GetBuffValue(StatusType.AttackAdd);
 
         return ret;
     }
@@ -523,6 +525,8 @@ public static class PlayerStats
         ret += GetTitleAbilValue(StatusType.GoldGainPer);
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
 
+        ret += GetBuffValue(StatusType.GoldGainPer);
+
         return ret;
     }
     public static float GetGoldPlusValueExclusiveBuff()
@@ -611,6 +615,7 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.Hp);
         ret += GetMagicBookEquipPercentValue(StatusType.Hp);
 
+        ret += GetSinsuEquipEffect(StatusType.Hp);
         return ret;
     }
     public static float GetMaxHpPercentAddValue()
@@ -678,13 +683,19 @@ public static class PlayerStats
         ret += GetTitleAbilValue(StatusType.IgnoreDefense);
         ret += GetYomulUpgradeValue(StatusType.IgnoreDefense);
 
+        ret += GetBuffValue(StatusType.IgnoreDefense);
+
         return ret;
     }
 
     public static float GetPenetrateDefense()
     {
         float ret = 0f;
+
         ret += GetYomulUpgradeValue(StatusType.PenetrateDefense);
+
+        ret += GetBuffValue(StatusType.PenetrateDefense);
+
         return ret;
     }
 
@@ -770,6 +781,32 @@ public static class PlayerStats
         else if (statusType == StatusType.MagicStoneAddPer)
         {
             ret = GameBalance.HotTime_GrowthStone;
+        }
+
+        return ret;
+    }
+
+    public static float GetSinsuEquipEffect(StatusType statusType)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.PetEquipment.dataArray;
+
+        for (int i = 0; i < tableDatas.Length; i++)
+        {
+            var serverData = ServerData.petEquipmentServerTable.TableDatas[tableDatas[i].Stringid];
+
+            if (serverData.hasAbil.Value == 0) continue;
+
+            if (tableDatas[i].Abiltype1 == (int)statusType) 
+            {
+                ret += (tableDatas[i].Abilvalue1 + serverData.level.Value * tableDatas[i].Abiladdvalue1);
+            }
+
+            if (tableDatas[i].Abiltype2 == (int)statusType)
+            {
+                ret += (tableDatas[i].Abilvalue2 + serverData.level.Value * tableDatas[i].Abiladdvalue2);
+            }
         }
 
         return ret;

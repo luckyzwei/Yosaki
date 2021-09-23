@@ -48,6 +48,8 @@ public static class ServerData
     public static CostumePreset costumePreset { get; private set; } = new CostumePreset();
     public static RankTable_YoguiSogul yoguisogul_Rank { get; private set; } = new RankTable_YoguiSogul();
 
+    public static PetEquipmentServerTable petEquipmentServerTable { get; private set; } = new PetEquipmentServerTable();
+
     #region string
     public static string inDate_str = "inDate";
     public static string format_string = "S";
@@ -109,6 +111,8 @@ public static class ServerData
         costumePreset.Initialize();
 
         yoguisogul_Rank.Initialize();
+
+        petEquipmentServerTable.Initialize();
     }
 
     public static void GetUserInfo()

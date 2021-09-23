@@ -32,15 +32,19 @@ public class UiBuffIndicator : MonoBehaviour
             buffImage.sprite = CommonUiContainer.Instance.buffIconList[i];
 
             buffIconList.Add(buffImage);
+
+            buffImage.gameObject.SetActive(!tableData[i].Isyomulabil);
         }
 
         for (int i = 0; i < tableData.Length; i++)
         {
             Image buffImage = buffIconList[i];
 
+            var buffTableData = tableData[i];
+
             ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.AsObservable().Subscribe(e =>
             {
-                buffImage.gameObject.SetActive(e == -1f || e > 0);
+                buffImage.gameObject.SetActive((e == -1f || e > 0) && buffTableData.Isyomulabil == false);
             }).AddTo(this);
         }
     }

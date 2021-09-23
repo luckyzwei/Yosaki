@@ -25,7 +25,9 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         public readonly int elapsedSeconds;
 
-        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float songpyeon, float exp, int elapsedSeconds)
+        public readonly int killCount;
+
+        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float songpyeon, float exp, int elapsedSeconds, int killCount)
         {
             this.gold = gold;
 
@@ -42,6 +44,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             this.exp = exp;
 
             this.elapsedSeconds = elapsedSeconds;
+
+            this.killCount = killCount;
         }
     }
 
@@ -127,7 +131,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         float exp = killedEnemyPerMin * spawnedEnemyData.Exp * GameBalance.sleepRewardRatio * elapsedMinutes;
         exp += exp * expBuffRatio;
 
-        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, yoguiMarble: yoguimarble, songpyeon: songpyeon, exp: exp, elapsedSeconds: elapsedSeconds);
+        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, yoguiMarble: yoguimarble, songpyeon: songpyeon, exp: exp, elapsedSeconds: elapsedSeconds, killCount: (int)(elapsedMinutes * killedEnemyPerMin));
     }
 
     public void GetSleepReward(Action successCallBack)
@@ -146,6 +150,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value += sleepRewardInfo.yoguiMarble;
         ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += sleepRewardInfo.songpyeon;
 
+        ServerData.userInfoTable.TableDatas[UserInfoTable.dailyEnemyKillCount].Value += sleepRewardInfo.killCount;
+
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
         goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
@@ -155,9 +161,14 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
         goodsParam.Add(GoodsTable.Songpyeon, ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value);
 
+        Param userInfoParam = new Param();
+        userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.TableDatas[UserInfoTable.dailyEnemyKillCount].Value);
+
         List<TransactionValue> transantions = new List<TransactionValue>();
 
         transantions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+        transantions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         successCallBack?.Invoke();
 

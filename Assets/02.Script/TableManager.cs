@@ -514,5 +514,11 @@ public class TableManager : SingletonMono<TableManager>
     private YoguiSogulTable yoguisogulTable;
 
     public YoguiSogulTable YoguisogulTable => yoguisogulTable;
+
+    [SerializeField]
+    private PetEquipment petEquipment;
+    public PetEquipment PetEquipment => petEquipment;
+
+
 }
 
