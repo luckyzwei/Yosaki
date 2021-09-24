@@ -241,6 +241,7 @@ public class AgentHpController : MonoBehaviour
     private void AddEnemyDeadCount()
     {
         ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value++;
+        ServerData.userInfoTable.GetKillCountTotal();
     }
 
     private void OnEnable()

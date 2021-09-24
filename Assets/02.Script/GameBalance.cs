@@ -103,13 +103,9 @@ public static class GameBalance
 
     public readonly static ObscuredFloat TitleEquipAddPer = 2;
 
-#if UNITY_EDITOR
-    public readonly static ObscuredFloat HotTime_Start = 0;
-    public readonly static ObscuredFloat HotTime_End = 23;
-#else
+
     public readonly static ObscuredFloat HotTime_Start = 19;
     public readonly static ObscuredFloat HotTime_End = 22;
-#endif
 
     public readonly static ObscuredFloat HotTime_Exp = 5;
     public readonly static ObscuredFloat HotTime_Gold = 5;

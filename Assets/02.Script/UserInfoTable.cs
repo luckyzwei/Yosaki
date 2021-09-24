@@ -31,6 +31,7 @@ public class UserInfoTable
     public const string receiveReviewReward = "receiveReviewReward";
 
     public const string dailyEnemyKillCount = "dailyEnemyKillCount";
+  
 
     public const string dailyTicketBuyCount = "dailyTicketBuyCount";
     public const string receivedTicketReward = "receivedTicketReward";
@@ -84,6 +85,8 @@ public class UserInfoTable
     public const string yoguiSogulLastClear = "yoguiSogulLastClear";
 
     public const string dokebiPackRefund = "dokebiPackRefund";
+
+    public const string killCountTotal = "killCountTotal";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -148,7 +151,8 @@ public class UserInfoTable
         {yomul0_buff,0f},
         {yomul1_buff,0f},
         {yomul2_buff,0f},
-        {yomul3_buff,0f}
+        {yomul3_buff,0f},
+        {killCountTotal,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -324,6 +328,7 @@ public class UserInfoTable
     private void UpdatekillCount()
     {
         UpData(dailyEnemyKillCount, false);
+        UpData(killCountTotal, false);
     }
     private void UpdatejumpCount()
     {
@@ -571,6 +576,23 @@ public class UserInfoTable
     {
         int currentHour = currentServerTime.Hour;
         return currentHour >= GameBalance.HotTime_Start && currentHour <= GameBalance.HotTime_End;
+    }
+
+    static int totalKillCount = 0;
+    static float updateRequireNum = 10;
+    public void GetKillCountTotal()
+    {
+        totalKillCount++;
+
+        if (totalKillCount < updateRequireNum)
+        {
+
+        }
+        else
+        {
+            totalKillCount = 0;
+            tableDatas[killCountTotal].Value += updateRequireNum;
+        }
     }
 
 }

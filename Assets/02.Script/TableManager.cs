@@ -520,5 +520,9 @@ public class TableManager : SingletonMono<TableManager>
     public PetEquipment PetEquipment => petEquipment;
 
 
+    [SerializeField]
+    private MonthlyPass monthlyPass;
+    public MonthlyPass MonthlyPass => monthlyPass;
+
 }
 

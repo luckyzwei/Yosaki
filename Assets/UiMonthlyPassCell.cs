@@ -8,7 +8,7 @@ using BackEnd;
 using TMPro;
 
 
-public class UiDailyPassCell : MonoBehaviour
+public class UiMonthlyPassCell : MonoBehaviour
 {
     [SerializeField]
     private Image itemIcon_free;
@@ -59,7 +59,7 @@ public class UiDailyPassCell : MonoBehaviour
         disposables.Clear();
 
         //무료보상 데이터 변경시
-        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Subscribe(e =>
+        ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Subscribe(e =>
         {
             bool rewarded = HasReward(passInfo.rewardType_Free_Key, passInfo.id);
             rewardedObject_Free.SetActive(rewarded);
@@ -67,7 +67,7 @@ public class UiDailyPassCell : MonoBehaviour
         }).AddTo(disposables);
 
         //광고보상 데이터 변경시
-        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Subscribe(e =>
+        ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Subscribe(e =>
         {
             bool rewarded = HasReward(passInfo.rewardType_IAP_Key, passInfo.id);
             rewardedObject_Ad.SetActive(rewarded);
@@ -75,7 +75,7 @@ public class UiDailyPassCell : MonoBehaviour
         }).AddTo(disposables);
 
         //킬카운트 변경될때
-        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotal).AsObservable().Subscribe(e =>
         {
             lockIcon_Free.SetActive(!CanGetReward());
             lockIcon_Ad.SetActive(!CanGetReward());
@@ -118,7 +118,7 @@ public class UiDailyPassCell : MonoBehaviour
 
     public List<string> GetSplitData(string key)
     {
-        return ServerData.dailyPassServerTable.TableDatas[key].Value.Split(',').ToList();
+        return ServerData.monthlyPassServerTable.TableDatas[key].Value.Split(',').ToList();
     }
 
     public bool HasReward(string key, int data)
@@ -162,86 +162,81 @@ public class UiDailyPassCell : MonoBehaviour
             return;
         }
 
-        if (HasRemoveAdProduct())
+        if (HasPassItem())
         {
             GetAdReward();
         }
         else
         {
-            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "광고를 시청하고 보상을 받으시겠습니까?", () =>
-            {
-                AdManager.Instance.ShowRewardedReward(GetAdReward);
-            }, null);
+            PopupManager.Instance.ShowAlarmMessage($"월간 훈련권이 필요합니다.");
         }
     }
 
-    private bool HasRemoveAdProduct()
+    private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas["removead"].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
-    }
-
-    private bool HasPassProduct()
-    {
-        return IAPManager.Instance.HasProduct(passInfo.shopId);
     }
 
     private void GetFreeReward()
     {
         //로컬
-        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
+        ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         //패스 보상
         Param passParam = new Param();
-        passParam.Add(passInfo.rewardType_Free_Key, ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value);
-        transactionList.Add(TransactionValue.SetUpdate(DailyPassServerTable.tableName, DailyPassServerTable.Indate, passParam));
+        passParam.Add(passInfo.rewardType_Free_Key, ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value);
+        transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable.tableName, MonthlyPassServerTable.Indate, passParam));
 
         var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
         transactionList.Add(rewardTransactionValue);
 
         //킬카운트
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value);
+        userInfoParam.Add(UserInfoTable.killCountTotal, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotal).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        ServerData.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList, successCallBack: () =>
+        {
+            LogManager.Instance.SendLogType("월간", "무료", $"{passInfo.id}");
+        });
     }
     private void GetAdReward()
     {
         //로컬
-        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
+        ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         //패스 보상
         Param passParam = new Param();
-        passParam.Add(passInfo.rewardType_IAP_Key, ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value);
-        transactionList.Add(TransactionValue.SetUpdate(DailyPassServerTable.tableName, DailyPassServerTable.Indate, passParam));
+        passParam.Add(passInfo.rewardType_IAP_Key, ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value);
+        transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable.tableName, MonthlyPassServerTable.Indate, passParam));
 
         var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_IAP);
         transactionList.Add(rewardTransactionValue);
 
         //킬카운트
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value);
+        userInfoParam.Add(UserInfoTable.killCountTotal, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotal).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
-          {
-              LogManager.Instance.SendLog("패스 광고보상", "보상획득");
-          });
+        {
+            LogManager.Instance.SendLogType("월간", "유료", $"{passInfo.id}");
+        });
 
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
     }
 
     private bool CanGetReward()
     {
-        int dailyMobKillCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value;
-        return dailyMobKillCount >= passInfo.require;
+        int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotal).Value;
+        return killCountTotal >= passInfo.require;
     }
 }

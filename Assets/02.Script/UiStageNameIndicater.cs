@@ -114,6 +114,8 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
     private void Subscribe()
     {
+        hotTimeBuffObject.SetActive(ServerData.userInfoTable.IsHotTime());
+
         ServerData.userInfoTable.whenServerTimeUpdated.AsObservable().Subscribe(e =>
         {
 

@@ -151,6 +151,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += sleepRewardInfo.songpyeon;
 
         ServerData.userInfoTable.TableDatas[UserInfoTable.dailyEnemyKillCount].Value += sleepRewardInfo.killCount;
+        ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal].Value += sleepRewardInfo.killCount;
 
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
@@ -163,6 +164,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         Param userInfoParam = new Param();
         userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.TableDatas[UserInfoTable.dailyEnemyKillCount].Value);
+        userInfoParam.Add(UserInfoTable.killCountTotal, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal].Value);
 
         List<TransactionValue> transantions = new List<TransactionValue>();
 

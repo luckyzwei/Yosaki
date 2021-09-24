@@ -49,6 +49,8 @@ public static class ServerData
     public static RankTable_YoguiSogul yoguisogul_Rank { get; private set; } = new RankTable_YoguiSogul();
 
     public static PetEquipmentServerTable petEquipmentServerTable { get; private set; } = new PetEquipmentServerTable();
+    public static MonthlyPassServerTable monthlyPassServerTable { get; private set; } = new MonthlyPassServerTable();
+
 
     #region string
     public static string inDate_str = "inDate";
@@ -113,6 +115,8 @@ public static class ServerData
         yoguisogul_Rank.Initialize();
 
         petEquipmentServerTable.Initialize();
+
+        monthlyPassServerTable.Initialize();
     }
 
     public static void GetUserInfo()
@@ -201,6 +205,7 @@ public static class ServerData
             case Item_Type.costume1:
             case Item_Type.costume6:
             case Item_Type.costume7:
+            case Item_Type.costume8:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             default:
@@ -244,6 +249,7 @@ public static class ServerData
                 passParam.Add(GoodsTable.DokebiKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.costume1:
+            case Item_Type.costume8:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
