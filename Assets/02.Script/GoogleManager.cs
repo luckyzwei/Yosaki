@@ -1,7 +1,13 @@
 ﻿using BackEnd;
 using CodeStage.AntiCheat.ObscuredTypes;
+#if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+#endif
+#if UNITY_IOS
+using UnityEngine.iOS;
+using UnityEngine.SocialPlatforms.GameCenter;
+#endif
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -79,6 +85,7 @@ public class GoogleManager : MonoBehaviour
 
     private void WhenVersionCheckSuccess()
     {
+#if UNITY_ANDROID
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
     .Builder()
     .RequestServerAuthCode(false)
@@ -93,14 +100,47 @@ public class GoogleManager : MonoBehaviour
 
         //GPGS 시작.
         PlayGamesPlatform.Activate();
+#endif
 
 #if UNITY_EDITOR
         LoginByCustumId();
-#else 
+#elif UNITY_ANDROID
             GoogleAuth();
+#elif UNITY_IOS
+            GameCenterLogin();
 #endif
     }
+#if UNITY_IOS
+    public void GameCenterLogin()
+    {
+        if (Social.localUser.authenticated == true)
+        {
+            Debug.Log("Success to true");
+        }
+        else
+        {
+            Social.localUser.Authenticate((bool success) =>
+            {
+                if (success)
+                {
+                    loginId = Social.localUser.id;
 
+                    LoginByCustumId();
+                }
+                else
+                {
+                    PopupManager.Instance.ShowYesNoPopup("알림", "로그인 실패 재시도 합니다", GameCenterLogin, () =>
+                    {
+                        Application.Quit();
+                    });
+                    return;
+                }
+            });
+        }
+    }
+#endif
+
+#if UNITY_ANDROID
     private void GoogleAuth()
     {
         if (PlayGamesPlatform.Instance.localUser.authenticated == false)
@@ -128,6 +168,7 @@ public class GoogleManager : MonoBehaviour
             });
         }
     }
+#endif
 
     private IEnumerator SceneChangeRoutine()
     {

@@ -1,4 +1,6 @@
-﻿using Google.Play.Review;
+﻿#if UNITY_ANDROID
+using Google.Play.Review;
+#endif
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
