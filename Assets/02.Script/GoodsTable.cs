@@ -88,7 +88,10 @@ public class GoodsTable
 
     public void GetMagicStone(float amount)
     {
-        int amount_int = (int)amount;
+        float magicStonePlusValue = PlayerStats.GetMagicStonePlusValue();
+
+        int amount_int = (int)(amount + amount * magicStonePlusValue);
+
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)} 획득(+{amount_int})");
 
         growThStoneAddAmount += amount_int;
@@ -99,9 +102,7 @@ public class GoodsTable
         }
         else
         {
-            float magicStonePlusValue = PlayerStats.GetMagicStonePlusValue();
-
-            tableDatas[GrowthStone].Value += (growThStoneAddAmount + growThStoneAddAmount * magicStonePlusValue); ;
+            tableDatas[GrowthStone].Value += growThStoneAddAmount;
             growThStoneAddAmount = 0;
         }
     }
