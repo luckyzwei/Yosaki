@@ -190,6 +190,11 @@ public class GameManager : SingletonMono<GameManager>
 
     IEnumerator checkInternetConnection(Action<bool> action)
     {
+#if UNITY_IOS
+      action(true);
+        return;
+#endif
+
         WWW www = new WWW("http://google.com");
         yield return www;
         if (www.error != null)
