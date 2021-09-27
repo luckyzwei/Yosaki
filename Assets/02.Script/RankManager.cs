@@ -50,20 +50,26 @@ public class RankManager : SingletonMono<RankManager>
         public int fightPointIdx;
     }
 
+#if UNITY_ANDROID
     public const string Rank_Level_Uuid = "c1d70840-de7f-11eb-bc74-95875190be29";
-    public const string Rank_Level_TableName = "Rank_Level";
-
     public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
-    public const string Rank_Stage = "Rank_Stage";
-
     public const string Rank_Boss_Uuid = "552d1420-123f-11ec-aa9a-635827314eb4";
-    public const string Rank_Boss = "Rank_Boss_1";
-
-    //public const string Rank_Real_Boss_Uuid = "1438d260-fec6-11eb-b9fc-c9829b653541";
     public const string Rank_Real_Boss_Uuid = "e30091f0-16e5-11ec-b68e-efdf87eb7698";
-    public const string Rank_Real_Boss = "Rank_Boss_3";
-
     public const string YoguiSogul_Uuid = "1a5a6f70-116b-11ec-8c36-c57e66fdaa13";
+#endif
+
+#if UNITY_IOS
+    public const string Rank_Level_Uuid = "ac807490-1f7f-11ec-8223-8f79bdaec2e4";
+    public const string Rank_Stage_Uuid = "c7ef2910-1f7f-11ec-a199-efc96572d1a5";
+    public const string Rank_Boss_Uuid = "a715ee30-1f80-11ec-a199-efc96572d1a5";
+    public const string Rank_Real_Boss_Uuid = "c0fddba0-1f80-11ec-8223-8f79bdaec2e4";
+    public const string YoguiSogul_Uuid = "e5484870-1f7f-11ec-8223-8f79bdaec2e4";
+#endif
+
+    public const string Rank_Level_TableName = "Rank_Level";
+    public const string Rank_Stage = "Rank_Stage";
+    public const string Rank_Boss = "Rank_Boss_1";
+    public const string Rank_Real_Boss = "Rank_Boss_3";
     public const string YoguiSogul = "YoguiSogulBoss";
 
     public ReactiveCommand<RankInfo> WhenMyLevelRankLoadComplete = new ReactiveCommand<RankInfo>();
@@ -86,7 +92,7 @@ public class RankManager : SingletonMono<RankManager>
         Backend.URank.User.GetRankList(uuid, count, callback);
     }
 
-    #region LevelRank
+#region LevelRank
     public void RequestMyLevelRank()
     {
         Backend.URank.User.GetMyRank(RankManager.Rank_Level_Uuid, MyLevelRankLoadComplete);
@@ -157,9 +163,9 @@ public class RankManager : SingletonMono<RankManager>
 
         });
     }
-    #endregion
+#endregion
 
-    #region Stage
+#region Stage
     private Action<RankInfo> whenLoadSuccess_Stage;
     public void RequestMyStageRank(Action<RankInfo> whenLoadSuccess = null)
     {
@@ -232,10 +238,10 @@ public class RankManager : SingletonMono<RankManager>
 
         });
     }
-    #endregion
+#endregion
 
 
-    #region Boss
+#region Boss
     private Action<RankInfo> whenLoadSuccess_Boss;
     public void RequestMyBossRank(Action<RankInfo> whenLoadSuccess = null)
     {
@@ -320,9 +326,9 @@ public class RankManager : SingletonMono<RankManager>
         });
     }
 
-    #endregion
+#endregion
 
-    #region RealBoss
+#region RealBoss
     private Action<RankInfo> whenLoadSuccess_Real_Boss;
     public void RequestMyRealBossRank(Action<RankInfo> whenLoadSuccess = null)
     {
@@ -404,9 +410,9 @@ public class RankManager : SingletonMono<RankManager>
         });
     }
 
-    #endregion
+#endregion
 
-    #region YoguiSogul
+#region YoguiSogul
     private Action<RankInfo> whenLoadSuccess_YoguiSogul;
     public void RequestMyYoguiSogulRank(Action<RankInfo> whenLoadSuccess = null)
     {
@@ -485,7 +491,7 @@ public class RankManager : SingletonMono<RankManager>
         });
     }
 
-    #endregion
+#endregion
 
     private bool UpdateRank()
     {

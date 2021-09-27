@@ -176,7 +176,7 @@ public class UiBuffPopupView : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              // LogManager.Instance.SendLog("버프 획득", $"{buffTableData.Stringid}");
+              LogManager.Instance.SendLog("버프 획득", $"{buffTableData.Stringid}");
           });
     }
 }
