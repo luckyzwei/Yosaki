@@ -192,7 +192,7 @@ public class GameManager : SingletonMono<GameManager>
     {
 #if UNITY_IOS
       action(true);
-        return;
+      yield break;
 #endif
 
         WWW www = new WWW("http://google.com");
