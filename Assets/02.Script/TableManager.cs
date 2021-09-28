@@ -524,5 +524,10 @@ public class TableManager : SingletonMono<TableManager>
     private MonthlyPass monthlyPass;
     public MonthlyPass MonthlyPass => monthlyPass;
 
+    [SerializeField]
+    private RelicTable rericTable;
+
+    public RelicTable RelicTable;
+
 }
 

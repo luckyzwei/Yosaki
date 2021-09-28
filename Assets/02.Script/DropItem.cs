@@ -18,6 +18,7 @@ public enum Item_Type
     YomulExchangeStone,
     Songpyeon,
     TigerBossStone,
+    Relic,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

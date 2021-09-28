@@ -51,6 +51,7 @@ public static class ServerData
     public static PetEquipmentServerTable petEquipmentServerTable { get; private set; } = new PetEquipmentServerTable();
     public static MonthlyPassServerTable monthlyPassServerTable { get; private set; } = new MonthlyPassServerTable();
 
+    public static RelicServerTable relicServerTable { get; private set; } = new RelicServerTable();
 
     #region string
     public static string inDate_str = "inDate";
@@ -117,6 +118,8 @@ public static class ServerData
         petEquipmentServerTable.Initialize();
 
         monthlyPassServerTable.Initialize();
+
+        relicServerTable.Initialize();
     }
 
     public static void GetUserInfo()
@@ -257,6 +260,11 @@ public static class ServerData
             case Item_Type.Songpyeon:
                 passParam.Add(GoodsTable.Songpyeon, ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Relic:
+                passParam.Add(GoodsTable.Relic, ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);
@@ -509,6 +517,9 @@ public static class ServerData
                     break;
                 case Item_Type.Songpyeon:
                     ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += amount;
+                    break;
+                case Item_Type.Relic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value += amount;
                     break;
             }
 
