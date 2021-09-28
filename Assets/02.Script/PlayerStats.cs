@@ -811,4 +811,24 @@ public static class PlayerStats
 
         return ret;
     }
+
+    public static float GetRelicHasEffect(StatusType statusType) 
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.RelicTable.dataArray;
+
+        for(int i = 0; i < tableDatas.Length; i++) 
+        {
+            var serverData = ServerData.relicServerTable.TableDatas[tableDatas[i].Stringid];
+
+            if (serverData.level.Value == 0) continue;
+            
+            if (tableDatas[i].Abiltype != (int)statusType) continue;
+
+            ret += serverData.level.Value * tableDatas[i].Abilvalue;
+        }
+
+        return ret;
+    }
 }
