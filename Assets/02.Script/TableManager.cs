@@ -527,7 +527,7 @@ public class TableManager : SingletonMono<TableManager>
     [SerializeField]
     private RelicTable rericTable;
 
-    public RelicTable RelicTable;
+    public RelicTable RelicTable => rericTable;
 
 }
 

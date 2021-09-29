@@ -32,4 +32,16 @@ public class RelicTableData
   int maxlevel;
   public int Maxlevel { get {return maxlevel; } set { this.maxlevel = value;} }
   
+  [SerializeField]
+  int requirerelic;
+  public int Requirerelic { get {return requirerelic; } set { this.requirerelic = value;} }
+  
+  [SerializeField]
+  int requirelevel;
+  public int Requirelevel { get {return requirelevel; } set { this.requirelevel = value;} }
+  
+  [SerializeField]
+  string name;
+  public string Name { get {return name; } set { this.name = value;} }
+  
 }

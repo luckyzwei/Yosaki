@@ -52,15 +52,15 @@ public class UiRelicCell : MonoBehaviour
             }
 
             StatusType abilType = (StatusType)relicLocalData.Abiltype;
-            
+
             if (abilType.IsPercentStat())
             {
                 var abilValue = PlayerStats.GetRelicHasEffect(abilType);
 
-                relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {abilValue*100f}%");
+                relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {abilValue * 100f}%");
 
             }
-            else 
+            else
             {
                 var abilValue = PlayerStats.GetRelicHasEffect(abilType);
 
@@ -68,6 +68,8 @@ public class UiRelicCell : MonoBehaviour
             }
 
         }).AddTo(this);
+
+        lockMask.SetActive(false);
 
         if (relicLocalData.Requirerelic != -1)
         {
@@ -80,7 +82,7 @@ public class UiRelicCell : MonoBehaviour
         }
     }
 
-    private void Initialize(RelicTableData relicLocalData)
+    public void Initialize(RelicTableData relicLocalData)
     {
         this.relicLocalData = relicLocalData;
 
