@@ -165,7 +165,7 @@ public class UiSkillCoolTimeUpgrade : MonoBehaviour
         //transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactions.Add(TransactionValue.SetUpdate(YomulServerTable.tableName, YomulServerTable.Indate, yomulParam));
 
-        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.IgnoreDefense)}");
+        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SkillCoolTime)*100f}");
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
