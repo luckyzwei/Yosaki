@@ -23,6 +23,7 @@ public class GoodsTable
     public static string YomulExchangeStone = "YomulExchangeStone";
     public static string Songpyeon = "Songpyeon";
     public static string TigerStone = "TigerStone";
+    public static string RabitStone = "RabitStone";
 
     //포션
     public static string Potion_0 = "Potion_0";
@@ -52,7 +53,8 @@ public class GoodsTable
         {TigerStone,0f},
         {Relic,0f},
 
-        {RelicTicket,GameBalance.DailyRelicTicketGetCount}
+        {RelicTicket,GameBalance.DailyRelicTicketGetCount},
+        {RabitStone,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

@@ -164,7 +164,7 @@ public static class PlayerStats
 
         ret += GetBuffValue(StatusType.AttackAdd);
         ret += GetRelicHasEffect(StatusType.AttackAdd);
-        
+
 
         return ret;
     }
@@ -469,6 +469,8 @@ public static class PlayerStats
         ret += GetMagicBookEquipPercentValue(StatusType.SkillCoolTime);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.SkillCoolTime_memory);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.SkillCoolTime);
+        ret += GetBuffValue(StatusType.SkillCoolTime);
+        ret += GetYomulUpgradeValue(StatusType.SkillCoolTime);
 
         return ret;
     }
@@ -622,7 +624,7 @@ public static class PlayerStats
 
         ret += GetSinsuEquipEffect(StatusType.Hp);
         ret += GetRelicHasEffect(StatusType.Hp);
-        
+
         return ret;
     }
     public static float GetMaxHpPercentAddValue()
@@ -696,7 +698,7 @@ public static class PlayerStats
         ret += GetRelicHasEffect(StatusType.IgnoreDefense);
 
 
-        
+
         return ret;
     }
 
@@ -810,7 +812,7 @@ public static class PlayerStats
 
             if (serverData.hasAbil.Value == 0) continue;
 
-            if (tableDatas[i].Abiltype1 == (int)statusType) 
+            if (tableDatas[i].Abiltype1 == (int)statusType)
             {
                 ret += (tableDatas[i].Abilvalue1 + serverData.level.Value * tableDatas[i].Abiladdvalue1);
             }
@@ -824,18 +826,18 @@ public static class PlayerStats
         return ret;
     }
 
-    public static float GetRelicHasEffect(StatusType statusType) 
+    public static float GetRelicHasEffect(StatusType statusType)
     {
         float ret = 0f;
 
         var tableDatas = TableManager.Instance.RelicTable.dataArray;
 
-        for(int i = 0; i < tableDatas.Length; i++) 
+        for (int i = 0; i < tableDatas.Length; i++)
         {
             var serverData = ServerData.relicServerTable.TableDatas[tableDatas[i].Stringid];
 
             if (serverData.level.Value == 0) continue;
-            
+
             if (tableDatas[i].Abiltype != (int)statusType) continue;
 
             ret += serverData.level.Value * tableDatas[i].Abilvalue;

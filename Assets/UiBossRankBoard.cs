@@ -105,7 +105,7 @@ public class UiBossRankBoard : MonoBehaviour
                         var test = data["score"][ServerData.format_Number].ToString();
 
                         float score = float.Parse(data["score"][ServerData.format_Number].ToString());
-                        score *= 100000f;
+                        score *= 100000000f;
                         int costumeId = int.Parse(splitData[0]);
                         int petId = int.Parse(splitData[1]);
                         int weaponId = int.Parse(splitData[2]);

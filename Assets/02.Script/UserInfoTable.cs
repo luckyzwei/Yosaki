@@ -64,6 +64,7 @@ public class UserInfoTable
     public const string yomul1_buff = "yomul1_buff";
     public const string yomul2_buff = "yomul2_buff";
     public const string yomul3_buff = "yomul3_buff";
+    public const string yomul4_buff = "yomul4_buff";
 
     public const string bonusDungeonMaxKillCount = "bonusDungeonMaxKillCount";
 
@@ -161,7 +162,8 @@ public class UserInfoTable
         {killCountTotal,0f},
         {relicKillCount,0f},
         {usedRelicTicketNum,0f},
-        {relicpensionAttendance,0f}
+        {relicpensionAttendance,0f},
+        {yomul4_buff,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -449,6 +451,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul2_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul3_buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.yomul4_buff).Value = 0;
         //
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
@@ -501,6 +504,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.yomul1_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul2_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul2_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul3_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul3_buff).Value);
+        userInfoParam.Add(UserInfoTable.yomul4_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul4_buff).Value);
 
         //채팅 테두리 초기화
         if (weekChanged)

@@ -53,7 +53,7 @@ public class RankManager : SingletonMono<RankManager>
 #if UNITY_ANDROID
     public const string Rank_Level_Uuid = "c1d70840-de7f-11eb-bc74-95875190be29";
     public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
-    public const string Rank_Boss_Uuid = "552d1420-123f-11ec-aa9a-635827314eb4";
+    public const string Rank_Boss_Uuid = "4373ef80-228c-11ec-9e8b-89cc0dbedc9b";
     public const string Rank_Real_Boss_Uuid = "def2e0e0-2275-11ec-ada7-113996e44262";
     public const string YoguiSogul_Uuid = "1a5a6f70-116b-11ec-8c36-c57e66fdaa13";
 #endif
@@ -68,7 +68,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
-    public const string Rank_Boss = "Rank_Boss_1";
+    public const string Rank_Boss = "Rank_Boss_Cat";
     public const string Rank_Real_Boss = "Rank_Boss_4";
     public const string YoguiSogul = "YoguiSogulBoss";
 
@@ -375,7 +375,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRealBoss_Score(float score)
     {
-        // if (UpdateRank() == false) return;
+         if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.Real_Boss] != null && score < this.myRankInfo[RankType.Real_Boss].Score)
         {
             Debug.LogError("점수가 더 낮음");
