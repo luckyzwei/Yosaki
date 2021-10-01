@@ -19,6 +19,8 @@ public enum Item_Type
     Songpyeon,
     TigerBossStone,
     Relic,
+    RelicTicket,
+    RabitBossStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

@@ -30,6 +30,7 @@ public class GoodsTable
     public static string Potion_2 = "Potion_2";
 
     public static string Relic = "Relic";
+    public static string RelicTicket = "RelicTicket";
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -49,7 +50,9 @@ public class GoodsTable
         {YomulExchangeStone,0f},
         {Songpyeon,0f},
         {TigerStone,0f},
-        {Relic,0f}
+        {Relic,0f},
+
+        {RelicTicket,GameBalance.DailyRelicTicketGetCount}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

@@ -205,7 +205,7 @@ public class StatusTable
                     break;
                 case SkillDamage_memory:
                     {
-                        return level * 0.03f;
+                        return level * 0.05f;
                     }
                     break;
                 case SkillCoolTime_memory:

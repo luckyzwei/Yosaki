@@ -265,6 +265,10 @@ public static class ServerData
                 passParam.Add(GoodsTable.Relic, ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
+            case Item_Type.RelicTicket:
+                passParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);
@@ -317,6 +321,10 @@ public static class ServerData
                 param.Add(GoodsTable.TigerStone, ServerData.goodsTable.GetTableData(GoodsTable.TigerStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
+            case Item_Type.RelicTicket:
+                ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += amount;
+                param.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             case Item_Type.costume1:
             case Item_Type.costume4:
                 {
@@ -520,6 +528,9 @@ public static class ServerData
                     break;
                 case Item_Type.Relic:
                     ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value += amount;
+                    break;
+                case Item_Type.RelicTicket:
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += amount;
                     break;
             }
 

@@ -212,6 +212,12 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.Songpyeon, ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value);
                 }
                 break;
+            case Item_Type.RelicTicket:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += amount;
+                    param.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+                }
+                break;
 
         }
     }

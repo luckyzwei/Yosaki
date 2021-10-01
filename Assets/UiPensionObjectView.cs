@@ -111,6 +111,10 @@ public class UiPensionObjectView : MonoBehaviour
         {
             itemType = Item_Type.Marble;
         }
+        else if (pensionKey == "relicpension")
+        {
+            itemType = Item_Type.RelicTicket;
+        }
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 

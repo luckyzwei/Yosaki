@@ -47,7 +47,7 @@ public class UiPackageShop : MonoBehaviour
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, petCostumeParent);
                 cell.Initialize(e.Current.Value);
             }
-            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Chuseok)
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit3)
             {
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, chuseokParent);
                 cell.Initialize(e.Current.Value);

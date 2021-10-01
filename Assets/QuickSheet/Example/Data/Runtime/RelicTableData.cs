@@ -44,4 +44,8 @@ public class RelicTableData
   string name;
   public string Name { get {return name; } set { this.name = value;} }
   
+  [SerializeField]
+  int grade;
+  public int Grade { get {return grade; } set { this.grade = value;} }
+  
 }

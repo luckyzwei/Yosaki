@@ -40,8 +40,9 @@ public static class Utils
                 type == Item_Type.Jade ||
                 type == Item_Type.GrowthStone ||
                 type == Item_Type.Marble ||
-                type == Item_Type.Ticket||
-                type == Item_Type.Songpyeon;
+                type == Item_Type.Ticket ||
+                type == Item_Type.Songpyeon ||
+                type == Item_Type.RelicTicket;
     }
 
     public static bool IsStatusItem(this Item_Type type)

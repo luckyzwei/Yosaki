@@ -8,7 +8,7 @@ public enum StatusType
     AttackAddPer,// icon
     CriticalProb,//icon
     CriticalDam,//
-    SkillCoolTime,///icon
+    SkillCoolTime,//icon
     SkillDamage, //icon
     MoveSpeed,
     DamBalance,
@@ -99,6 +99,8 @@ public static class PlayerStats
         ret += GetMarbleValue(StatusType.Damdecrease);
         ret += GetMagicBookHasPercentValue(StatusType.Damdecrease);
         ret += GetSinsuEquipEffect(StatusType.Damdecrease);
+        ret += GetRelicHasEffect(StatusType.Damdecrease);
+
         return ret;
     }
     public static float GetBossDamAddValue()
@@ -161,6 +163,8 @@ public static class PlayerStats
         ret += GetTitleAbilValue(StatusType.AttackAdd);
 
         ret += GetBuffValue(StatusType.AttackAdd);
+        ret += GetRelicHasEffect(StatusType.AttackAdd);
+        
 
         return ret;
     }
@@ -451,6 +455,7 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.SkillDamage);
 
         ret += GetTitleAbilValue(StatusType.SkillDamage);
+        ret += GetRelicHasEffect(StatusType.SkillDamage);
 
         return ret;
     }
@@ -616,6 +621,8 @@ public static class PlayerStats
         ret += GetMagicBookEquipPercentValue(StatusType.Hp);
 
         ret += GetSinsuEquipEffect(StatusType.Hp);
+        ret += GetRelicHasEffect(StatusType.Hp);
+        
         return ret;
     }
     public static float GetMaxHpPercentAddValue()
@@ -628,6 +635,7 @@ public static class PlayerStats
         ret += GetPassiveSkillValue(StatusType.HpAddPer);
 
         ret += GetTitleAbilValue(StatusType.HpAddPer);
+        ret += GetRelicHasEffect(StatusType.HpAddPer);
 
         return ret;
     }
@@ -685,6 +693,10 @@ public static class PlayerStats
 
         ret += GetBuffValue(StatusType.IgnoreDefense);
 
+        ret += GetRelicHasEffect(StatusType.IgnoreDefense);
+
+
+        
         return ret;
     }
 

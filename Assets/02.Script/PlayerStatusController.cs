@@ -196,6 +196,19 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
                 UpdateHpMax();
             }).AddTo(this);
         }
+
+        //유물
+        ServerData.relicServerTable.TableDatas["relic1"].level.AsObservable().Subscribe(e =>
+        {
+            UpdateHpMax();
+            UpdateMpMax();
+        }).AddTo(this);
+
+        ServerData.relicServerTable.TableDatas["relic3"].level.AsObservable().Subscribe(e =>
+        {
+            UpdateHpMax();
+            UpdateMpMax();
+        }).AddTo(this);
     }
 
     private IEnumerator LateUpdateHp()

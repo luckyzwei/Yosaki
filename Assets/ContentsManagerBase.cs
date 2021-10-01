@@ -80,4 +80,9 @@ public class ContentsManagerBase : SingletonMono<ContentsManagerBase>
         var cameraConfiner = GameObject.FindObjectOfType<CinemachineConfiner>();
         cameraConfiner.m_BoundingShape2D = cameracollider;
     }
+
+    public virtual void DiscountRelicDungeonHp() 
+    {
+    
+    }
 }

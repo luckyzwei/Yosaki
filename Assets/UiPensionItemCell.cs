@@ -112,6 +112,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             itemType = Item_Type.Marble;
         }
+        else
+        {
+            itemType = Item_Type.RelicTicket;
+        }
 
         SoundManager.Instance.PlaySound("Reward");
 

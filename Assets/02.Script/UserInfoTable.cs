@@ -31,7 +31,7 @@ public class UserInfoTable
     public const string receiveReviewReward = "receiveReviewReward";
 
     public const string dailyEnemyKillCount = "dailyEnemyKillCount";
-  
+
 
     public const string dailyTicketBuyCount = "dailyTicketBuyCount";
     public const string receivedTicketReward = "receivedTicketReward";
@@ -87,6 +87,12 @@ public class UserInfoTable
     public const string dokebiPackRefund = "dokebiPackRefund";
 
     public const string killCountTotal = "killCountTotal";
+
+    public const string relicKillCount = "relicKillCount";
+
+    public const string usedRelicTicketNum = "usedRelicTicketNum";
+
+    public const string relicpensionAttendance = "relicpension";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -152,7 +158,10 @@ public class UserInfoTable
         {yomul1_buff,0f},
         {yomul2_buff,0f},
         {yomul3_buff,0f},
-        {killCountTotal,0f}
+        {killCountTotal,0f},
+        {relicKillCount,0f},
+        {usedRelicTicketNum,0f},
+        {relicpensionAttendance,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -458,6 +467,11 @@ public class UserInfoTable
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value++;
             }
+
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.relicpensionAttendance).Value++;
+            }
         }
 
         attendanceUpdatedTime = ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value;
@@ -472,6 +486,7 @@ public class UserInfoTable
 
         userInfoParam.Add(UserInfoTable.oakpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);
+        userInfoParam.Add(UserInfoTable.relicpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.relicpensionAttendance).Value);
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
@@ -530,6 +545,15 @@ public class UserInfoTable
         {
             transactionList.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
         }
+
+        //티켓
+        ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.DailyRelicTicketGetCount;
+
+        Param goodsParam = new Param();
+
+        goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         ServerData.SendTransaction(transactionList, false);
     }

@@ -22,7 +22,7 @@ public enum BuyType
 }
 public enum ShopCategory
 {
-    Gem, Limit1, Limit2, Pet, Costume, Pension, Chuseok
+    Gem, Limit1, Limit2, Pet, Costume, Pension, Chuseok, Limit3
 }
 public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 {

@@ -35,7 +35,14 @@ public enum TitleMissionId
     Yomul2,//★
     Yomul3,//★
     Stage450,//★
-    Stage500//★
+    Stage500,//★
+    Stage550,//★
+    Stage600,//★
+    Stage650,//★
+
+    Level23000,//★
+    Level26000,//★
+    Level29000//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -103,6 +110,21 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.Level20000);
             }
 
+            if (e >= 23000)
+            {
+                ClearTitleMission(TitleMissionId.Level23000);
+            }
+
+            if (e >= 26000)
+            {
+                ClearTitleMission(TitleMissionId.Level26000);
+            }
+
+            if (e >= 29000)
+            {
+                ClearTitleMission(TitleMissionId.Level29000);
+            }
+
 
         }).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>
@@ -142,6 +164,18 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 500 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage500);
+            }
+            if (e >= 550 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage550);
+            }
+            if (e >= 600 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage600);
+            }
+            if (e >= 650 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage650);
             }
 
         }).AddTo(this);

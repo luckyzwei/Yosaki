@@ -30,6 +30,9 @@ public class UiRelicCell : MonoBehaviour
     [SerializeField]
     private GameObject lockMask;
 
+    [SerializeField]
+    private TextMeshProUGUI lockText;
+
     private bool subscribed = false;
     private bool IsMaxLevel()
     {
@@ -75,9 +78,13 @@ public class UiRelicCell : MonoBehaviour
         {
             var requireServerData = ServerData.relicServerTable.TableDatas[TableManager.Instance.RelicTable.dataArray[relicLocalData.Requirerelic].Stringid];
 
+            lockText.color = CommonUiContainer.Instance.itemGradeColor[TableManager.Instance.RelicTable.dataArray[relicLocalData.Requirerelic].Grade+1];
+
             requireServerData.level.AsObservable().Subscribe(requireLevel =>
             {
-                lockMask.SetActive(relicServerData.level.Value < requireLevel);
+                lockMask.SetActive(requireLevel < relicLocalData.Requirelevel);
+
+                lockText.SetText($"{TableManager.Instance.RelicTable.dataArray[relicLocalData.Requirerelic].Name} {relicLocalData.Requirelevel}레벨 필요");
             }).AddTo(this);
         }
     }
@@ -89,12 +96,47 @@ public class UiRelicCell : MonoBehaviour
         this.relicServerData = ServerData.relicServerTable.TableDatas[this.relicLocalData.Stringid];
 
         relicName.SetText(this.relicLocalData.Name);
+        relicName.color = CommonUiContainer.Instance.itemGradeColor[relicLocalData.Grade+1];
+
+        relicIcon.sprite = CommonUiContainer.Instance.relicIconList[this.relicLocalData.Id];
 
         if (subscribed == false)
         {
             subscribed = true;
             Subscribe();
         }
+    }
+    public void OnClickUpgradeAllButton()
+    {
+        if (IsMaxLevel())
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다!");
+            return;
+        }
+
+        int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
+
+        if (currentRelicNum == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Relic)}이 부족합니다!");
+            return;
+        }
+
+        int upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
+
+        upgradeableNum = Mathf.Min(upgradeableNum, currentRelicNum);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value -= upgradeableNum;
+
+        relicServerData.level.Value += upgradeableNum;
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
     }
     public void OnClickLevelupButton()
     {
@@ -106,7 +148,7 @@ public class UiRelicCell : MonoBehaviour
 
         int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
 
-        if (currentRelicNum <= relicLocalData.Upgradeprice)
+        if (currentRelicNum == 0)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Relic)}이 부족합니다!");
             return;
