@@ -246,6 +246,14 @@ public static class Utils
 
     public static void RestartApplication()
     {
+#if UNITY_IOS
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크 연결이 끊겼습니다.\n앱을 종료합니다.",confirmCallBack:()=>
+        {
+            Application.Quit();
+        });
+
+        return;
+#endif
         using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
         {
             AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
