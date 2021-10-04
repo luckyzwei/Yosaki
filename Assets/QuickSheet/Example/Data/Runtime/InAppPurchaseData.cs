@@ -64,4 +64,12 @@ public class InAppPurchaseData
   SellWhere sellwhere;
   public SellWhere SELLWHERE { get {return sellwhere; } set { this.sellwhere = value;} }
   
+  [SerializeField]
+  int displayorder;
+  public int Displayorder { get {return displayorder; } set { this.displayorder = value;} }
+  
+  [SerializeField]
+  string productidios;
+  public string Productidios { get {return productidios; } set { this.productidios = value;} }
+  
 }

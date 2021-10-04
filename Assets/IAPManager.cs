@@ -75,18 +75,26 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 
         for (int i = 0; i < tableData.Length; i++)
         {
+            string productId = string.Empty;
+
+#if UNITY_ANDROID
+            productId = tableData[i].Productid;
+#endif
+
+#if UNITY_IOS
+            productId = tableData[i].Productidios;
+#endif
             //소모품
             if (tableData[i].Issubscribeitem == false)
             {
-                builder.AddProduct(tableData[i].Productid, ProductType.Consumable);
+                builder.AddProduct(productId, ProductType.Consumable);
             }
             //비소모품            
             else
             {
-                builder.AddProduct(tableData[i].Productid, ProductType.NonConsumable);
+                builder.AddProduct(productId, ProductType.NonConsumable);
             }
         }
-
     }
 
     private bool IsInitialized()
