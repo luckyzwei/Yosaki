@@ -115,7 +115,7 @@ public class GoodsTable
         }
     }
     static int marbleAddAmount = 0;
-    static float updateRequireNum = 10;
+    static float updateRequireNum = 100;
     public void GetMarble(float amount)
     {
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Marble)} 획득(+{(int)amount})");
