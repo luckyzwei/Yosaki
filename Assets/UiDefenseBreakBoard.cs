@@ -52,7 +52,7 @@ public class UiDefenseBreakBoard : MonoBehaviour
         {
             int upgradePrice = GetUpgradePrice();
 
-            abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {(PlayerStats.GetPenetrateDefense() * 100f).ToString("F3")}%\n(초과된 방어력 수치만큼 추가 데미지)");
+            abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {(PlayerStats.GetYomulUpgradeValue((StatusType)yomulAbilData.Abiltype) * 100f).ToString("F3")}%\n(초과된 방어력 수치만큼 추가 데미지)");
 
             levelText.SetText($"Lv : {e}");
 
