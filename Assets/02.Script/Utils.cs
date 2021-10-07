@@ -83,6 +83,11 @@ public static class Utils
         return type >= Item_Type.RankFrame1 && type <= Item_Type.RankFrame101_1000;
     }
 
+    public static bool IsRelicRewardItem(this Item_Type type)
+    {
+        return type >= Item_Type.RankFrame1_relic && type <= Item_Type.RankFrame101_1000_relic;
+    }
+
     public static int GetRandomIdx(List<float> inputDatas)
     {
         float total = 0;

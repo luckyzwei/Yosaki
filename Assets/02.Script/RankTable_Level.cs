@@ -257,7 +257,7 @@ public class RankTable_Real_Boss
 public class RankTable_YoguiSogul
 {
     public static string Indate;
-    public const string tableName_YoguiSogul = RankManager.YoguiSogul;
+    public const string tableName_YoguiSogul = RankManager.Rank_Relic;
 
     public void Initialize()
     {

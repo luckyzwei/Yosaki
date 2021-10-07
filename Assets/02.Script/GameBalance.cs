@@ -97,6 +97,15 @@ public static class GameBalance
     public readonly static ObscuredInt rankRewardTicket_21_100 = 14;
     public readonly static ObscuredInt rankRewardTicket_101_1000 = 7;
 
+    public readonly static ObscuredInt rankRewardTicket_1_relic = 45;
+    public readonly static ObscuredInt rankRewardTicket_2_relic = 40;
+    public readonly static ObscuredInt rankRewardTicket_3_relic = 35;
+    public readonly static ObscuredInt rankRewardTicket_4_relic = 30;
+    public readonly static ObscuredInt rankRewardTicket_5_relic = 25;
+    public readonly static ObscuredInt rankRewardTicket_6_20_relic = 20;
+    public readonly static ObscuredInt rankRewardTicket_21_100_relic = 10;
+    public readonly static ObscuredInt rankRewardTicket_101_1000_relic = 5;
+
     public readonly static ObscuredInt ChuseokDropEndDay = 25;
     public readonly static ObscuredInt ChuseokMakeEndDay = 26;
     public readonly static ObscuredInt ChuseokPackageSaleEndDay = 26;

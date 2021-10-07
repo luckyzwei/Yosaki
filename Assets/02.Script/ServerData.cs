@@ -506,6 +506,48 @@ public static class ServerData
                   LogManager.Instance.SendLog("랭킹보상 수령완료", $"{type}");
               });
         }
+        else if (type.IsRelicRewardItem())
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_relic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_1_relic;
+                    break;
+                case Item_Type.RankFrame2_relic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_2_relic;
+                    break;
+                case Item_Type.RankFrame3_relic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_3_relic;
+                    break;
+                case Item_Type.RankFrame4_relic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_4_relic;
+                    break;
+                case Item_Type.RankFrame5_relic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_5_relic;
+                    break;
+                case Item_Type.RankFrame6_20_relic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_6_20_relic;
+                    break;
+                case Item_Type.RankFrame21_100_relic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_21_100_relic;
+                    break;
+                case Item_Type.RankFrame101_1000_relic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_101_1000_relic;
+                    break;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransaction(transactionList, successCallBack: () =>
+            {
+                LogManager.Instance.SendLogType("RelicReward", type.ToString(), "");
+            });
+        }
         else
         {
             switch (type)

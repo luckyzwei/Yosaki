@@ -9,7 +9,7 @@ using LitJson;
 
 public enum RankType
 {
-    Level, Stage, Boss, Real_Boss, YoguiSogul, None
+    Level, Stage, Boss, Real_Boss, Relic, None
 }
 
 public class RankManager : SingletonMono<RankManager>
@@ -21,7 +21,7 @@ public class RankManager : SingletonMono<RankManager>
         { RankType.Stage,null },
         { RankType.Level,null },
         { RankType.Boss,null },
-        { RankType.YoguiSogul,null }
+        { RankType.Relic,null }
     };
 
     public Dictionary<RankType, RankInfo> MyRankInfo => myRankInfo;
@@ -55,7 +55,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
     public const string Rank_Boss_Uuid = "4373ef80-228c-11ec-9e8b-89cc0dbedc9b";
     public const string Rank_Real_Boss_Uuid = "def2e0e0-2275-11ec-ada7-113996e44262";
-    public const string YoguiSogul_Uuid = "1a5a6f70-116b-11ec-8c36-c57e66fdaa13";
+    public const string Rank_Relic_Uuid = "0453f560-2779-11ec-9b46-299116fee741";
 #endif
 
 #if UNITY_IOS
@@ -70,13 +70,13 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Stage = "Rank_Stage";
     public const string Rank_Boss = "Rank_Boss_Cat";
     public const string Rank_Real_Boss = "Rank_Boss_4";
-    public const string YoguiSogul = "YoguiSogulBoss";
+    public const string Rank_Relic = "Rank_Relic";
 
     public ReactiveCommand<RankInfo> WhenMyLevelRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyStageRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyBossRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyRealBossRankLoadComplete = new ReactiveCommand<RankInfo>();
-    public ReactiveCommand<RankInfo> WhenMyYoguiSogulRankLoadComplete = new ReactiveCommand<RankInfo>();
+    public ReactiveCommand<RankInfo> WhenMyRelicRankLoadComplete = new ReactiveCommand<RankInfo>();
 
     public void Subscribe()
     {
@@ -412,15 +412,15 @@ public class RankManager : SingletonMono<RankManager>
 
 #endregion
 
-#region YoguiSogul
-    private Action<RankInfo> whenLoadSuccess_YoguiSogul;
-    public void RequestMyYoguiSogulRank(Action<RankInfo> whenLoadSuccess = null)
+#region Relic
+    private Action<RankInfo> whenLoadSuccess_Relic;
+    public void RequestMyRelicRank(Action<RankInfo> whenLoadSuccess = null)
     {
-        this.whenLoadSuccess_YoguiSogul = whenLoadSuccess;
+        this.whenLoadSuccess_Relic = whenLoadSuccess;
 
-        Backend.URank.User.GetMyRank(RankManager.YoguiSogul_Uuid, MyYoguiSogulLoadComplete);
+        Backend.URank.User.GetMyRank(RankManager.Rank_Relic_Uuid, MyRelicLoadComplete);
     }
-    private void MyYoguiSogulLoadComplete(BackendReturnObject bro)
+    private void MyRelicLoadComplete(BackendReturnObject bro)
     {
         RankInfo myRankInfo = null;
 
@@ -449,17 +449,17 @@ public class RankManager : SingletonMono<RankManager>
 
         if (myRankInfo != null)
         {
-            whenLoadSuccess_YoguiSogul?.Invoke(myRankInfo);
-            WhenMyYoguiSogulRankLoadComplete.Execute(myRankInfo);
+            whenLoadSuccess_Relic?.Invoke(myRankInfo);
+            WhenMyRelicRankLoadComplete.Execute(myRankInfo);
 
-            this.myRankInfo[RankType.YoguiSogul] = myRankInfo;
+            this.myRankInfo[RankType.Relic] = myRankInfo;
         }
     }
 
-    public void UpdateYoguiSogul_Score(float score)
+    public void UpdateRelic_Score(float score)
     {
         // if (UpdateRank() == false) return;
-        if (this.myRankInfo[RankType.YoguiSogul] != null && score < this.myRankInfo[RankType.YoguiSogul].Score)
+        if (this.myRankInfo[RankType.Relic] != null && score < this.myRankInfo[RankType.Relic].Score)
         {
             Debug.LogError("점수가 더 낮음");
             return;
@@ -477,7 +477,7 @@ public class RankManager : SingletonMono<RankManager>
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
 
-        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, YoguiSogul_Uuid, YoguiSogul, RankTable_YoguiSogul.Indate, param, bro =>
+        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Relic_Uuid, Rank_Relic, RankTable_YoguiSogul.Indate, param, bro =>
         {
             // 이후처리
             if (bro.IsSuccess())

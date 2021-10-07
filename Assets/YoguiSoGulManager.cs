@@ -361,7 +361,6 @@ public class YoguiSoGulManager : SingletonMono<YoguiSoGulManager>
 
             uiSogulResultPopup.Initialize(currentWave.Value - 1, clearLastStage, deadFlag);
 
-            RankManager.Instance.UpdateYoguiSogul_Score(currentWave.Value - 1);
         }
         else
         {
@@ -369,7 +368,6 @@ public class YoguiSoGulManager : SingletonMono<YoguiSoGulManager>
 
             uiSogulResultPopup.Initialize(currentWave.Value, clearLastStage, deadFlag);
 
-            RankManager.Instance.UpdateYoguiSogul_Score(currentWave.Value);
         }
 
 

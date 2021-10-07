@@ -33,7 +33,7 @@ public class UiStatus : SingletonMono<UiStatus>
         {
             RankManager.Instance.RequestMyBossRank();
             RankManager.Instance.RequestMyRealBossRank();
-            RankManager.Instance.RequestMyYoguiSogulRank();
+            RankManager.Instance.RequestMyRelicRank();
         }
     }
     private void Subscribe()

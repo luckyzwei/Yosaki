@@ -123,6 +123,18 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.RankFrame101_1000:
                 return rankFrame[1];
                 break;
+
+            case Item_Type.RankFrame1_relic:
+            case Item_Type.RankFrame2_relic:
+            case Item_Type.RankFrame3_relic:
+            case Item_Type.RankFrame4_relic:
+            case Item_Type.RankFrame5_relic:
+            case Item_Type.RankFrame6_20_relic:
+            case Item_Type.RankFrame21_100_relic:
+            case Item_Type.RankFrame101_1000_relic:
+                return relicEnter;
+                break;
+
             case Item_Type.WeaponUpgradeStone:
                 return WeaponUpgradeStone;
                 break;
@@ -166,4 +178,5 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public List<Sprite> buffIconList;
 
     public List<Sprite> relicIconList;
+
 }
