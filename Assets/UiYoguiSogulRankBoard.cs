@@ -37,7 +37,7 @@ public class UiYoguiSogulRankBoard : MonoBehaviour
 
     private void SetTitle()
     {
-        title.SetText($"랭킹({CommonString.RankPrefix_YoguiSogul})");
+        title.SetText($"랭킹({CommonString.RankPrefix_Relic})");
     }
 
     private void Start()
@@ -47,11 +47,11 @@ public class UiYoguiSogulRankBoard : MonoBehaviour
 
     private void Subscribe()
     {
-        RankManager.Instance.WhenMyYoguiSogulRankLoadComplete.AsObservable().Subscribe(e =>
+        RankManager.Instance.WhenMyRelicRankLoadComplete.AsObservable().Subscribe(e =>
         {
             if (e != null)
             {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}단계", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}점", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
             }
             else
             {
@@ -66,8 +66,8 @@ public class UiYoguiSogulRankBoard : MonoBehaviour
         rankViewParent.gameObject.SetActive(false);
         loadingMask.SetActive(false);
         failObject.SetActive(false);
-        RankManager.Instance.GetRankerList(RankManager.YoguiSogul_Uuid, 100, WhenAllRankerLoadComplete);
-        RankManager.Instance.RequestMyYoguiSogulRank();
+        RankManager.Instance.GetRankerList(RankManager.Rank_Relic_Uuid, 100, WhenAllRankerLoadComplete);
+        RankManager.Instance.RequestMyRelicRank();
     }
 
     private void WhenAllRankerLoadComplete(BackendReturnObject bro)
@@ -127,7 +127,7 @@ public class UiYoguiSogulRankBoard : MonoBehaviour
                         }
 
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}단계", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}점", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
                     }
                     else
                     {

@@ -43,7 +43,6 @@ public static class CommonString
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "십이지신(묘)";
     public static string RankPrefix_Real_Boss = "십이지신(토끼)";
-    public static string RankPrefix_YoguiSogul = "백귀야행";
     public static string RankPrefix_Relic = "영혼의숲";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };

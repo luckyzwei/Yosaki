@@ -279,8 +279,8 @@ public class ChatManager : SingletonMono<ChatManager>
             case RankType.Real_Boss:
                 return CommonString.RankPrefix_Real_Boss;
                 break;
-            case RankType.YoguiSogul:
-                return CommonString.RankPrefix_YoguiSogul;
+            case RankType.Relic:
+                return CommonString.RankPrefix_Relic;
                 break;
         }
 

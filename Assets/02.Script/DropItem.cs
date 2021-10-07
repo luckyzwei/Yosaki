@@ -31,6 +31,15 @@ public enum Item_Type
     RankFrame21_100 = 106,
     RankFrame101_1000 = 107,
 
+    RankFrame1_relic = 200,
+    RankFrame2_relic = 201,
+    RankFrame3_relic = 202,
+    RankFrame4_relic = 203,
+    RankFrame5_relic = 204,
+    RankFrame6_20_relic = 205,
+    RankFrame21_100_relic = 206,
+    RankFrame101_1000_relic = 207,
+
     MagicStoneBuff = 500,
     //1000~1100 무기
     weapon0 = 1000,

@@ -124,7 +124,7 @@ public class UiRelicCell : MonoBehaviour
 
         int upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
 
-        upgradeableNum = Mathf.Min(upgradeableNum, 100);
+        upgradeableNum = Mathf.Min(upgradeableNum, 500);
 
         ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value -= upgradeableNum;
 

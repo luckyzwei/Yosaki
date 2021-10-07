@@ -110,7 +110,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f5b9c5e6f9fef3d48b921fa10644d846, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a15a4c214a4bae14ca9676d544ba928e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -285,6 +285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2031505045465546292}
+  - component: {fileID: 5538458023634756248}
   m_Layer: 9
   m_Name: BaekHoRoot
   m_TagString: Untagged
@@ -307,6 +308,20 @@ Transform:
   m_Father: {fileID: 1413157575216455527}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5538458023634756248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089469536572700232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdbc348db0e1bdd48967b4e614f5d0fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipKey: petequip1
+  rootObject: {fileID: 6956059030473153988}
 --- !u!1 &1413157573863924456
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8982088166443557116}
   - component: {fileID: 4202997487833024987}
-  - component: {fileID: 2507512233250002114}
+  - component: {fileID: 4949522566203335183}
   m_Layer: 9
   m_Name: Armor
   m_TagString: Untagged
@@ -690,7 +705,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3131959633344075875}
   m_CullTransparentMesh: 0
---- !u!114 &2507512233250002114
+--- !u!114 &4949522566203335183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -699,9 +714,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3131959633344075875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99ac56bba6d1e0c498b353ec3c84dd0c, type: 3}
+  m_Script: {fileID: 11500000, guid: fdbc348db0e1bdd48967b4e614f5d0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipKey: petequip0
   rootObject: {fileID: 175089414181204602}
 --- !u!1 &3151130601853259844
 GameObject:
@@ -2909,7 +2925,7 @@ PrefabInstance:
     - target: {fileID: 199088188541219340, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199106859953206790, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
@@ -2919,7 +2935,7 @@ PrefabInstance:
     - target: {fileID: 199106859953206790, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199243204944889906, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
@@ -2929,7 +2945,7 @@ PrefabInstance:
     - target: {fileID: 199243204944889906, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199258576031645312, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
@@ -2939,7 +2955,7 @@ PrefabInstance:
     - target: {fileID: 199258576031645312, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199410048910657248, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
@@ -2949,7 +2965,7 @@ PrefabInstance:
     - target: {fileID: 199410048910657248, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199425662603095836, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
@@ -2959,7 +2975,7 @@ PrefabInstance:
     - target: {fileID: 199425662603095836, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199434857286944112, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
@@ -2974,7 +2990,7 @@ PrefabInstance:
     - target: {fileID: 199663503461609938, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199776484481452420, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
@@ -2984,7 +3000,7 @@ PrefabInstance:
     - target: {fileID: 199776484481452420, guid: 3c19678639bad9e439014c8c901574a3,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c19678639bad9e439014c8c901574a3, type: 3}

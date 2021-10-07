@@ -102,6 +102,8 @@ public class RelicDungeonManager : ContentsManagerBase
 
             ServerData.userInfoTable.UpData(UserInfoTable.relicKillCount, false);
         }
+
+        RankManager.Instance.UpdateRelic_Score(enemyDeadCount.Value);
     }
 
     private IEnumerator EnemySpawnRoutine()

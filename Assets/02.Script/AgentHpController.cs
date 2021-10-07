@@ -116,16 +116,16 @@ public class AgentHpController : MonoBehaviour
             value += value * PlayerStats.CriticalDam();
         }
 
-        if (GameManager.contentsType != GameManager.ContentsType.NormalField || isFieldBossEnemy)
-        {
-            value += value * PlayerStats.GetBossDamAddValue();
-        }
-
         //보너스던전등 특수몹
         if (enemyTableData != null && enemyTableData.Useonedamage)
         {
             isCritical = false;
             value = -1f;
+        }
+
+        if (GameManager.contentsType != GameManager.ContentsType.NormalField || isFieldBossEnemy)
+        {
+            value += value * PlayerStats.GetBossDamAddValue();
         }
 
         //방어력 초과데미지
@@ -136,6 +136,8 @@ public class AgentHpController : MonoBehaviour
             float penetrateValue = PlayerStats.GetPenetrateDefense();
             value += Mathf.Abs(gapDefense) * value * penetrateValue;
         }
+
+    
 
 
         Vector3 spawnPos = Vector3.zero;
