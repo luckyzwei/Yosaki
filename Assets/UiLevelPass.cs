@@ -15,7 +15,14 @@ public class UiLevelPass : MonoBehaviour
     [SerializeField]
     private Transform cellParent;
 
+    private float cellSize = 105.9f;
+
     private List<UiLevelPassCell> uiPassCellContainer = new List<UiLevelPassCell>();
+
+    private bool initialized = false;
+
+    private int scrollId = 0;
+
     private void Start()
     {
         Initialize();
@@ -25,6 +32,8 @@ public class UiLevelPass : MonoBehaviour
         var tableData = TableManager.Instance.LevelPass.dataArray;
 
         int interval = tableData.Length - uiPassCellContainer.Count;
+
+
 
         for (int i = 0; i < interval; i++)
         {
@@ -51,11 +60,50 @@ public class UiLevelPass : MonoBehaviour
 
                 uiPassCellContainer[i].gameObject.SetActive(true);
                 uiPassCellContainer[i].Initialize(passInfo);
+
+
             }
             else
             {
                 uiPassCellContainer[i].gameObject.SetActive(false);
             }
         }
+
+        initialized = true;
+
+        StartCoroutine(scrollRoutine());
+    }
+
+    private void OnEnable()
+    {
+        if (initialized) 
+        {
+            StartCoroutine(scrollRoutine());
+        }
+    }
+
+    private IEnumerator scrollRoutine()
+    {
+        yield return null;
+        yield return null;
+        yield return null;
+
+        var tableData = TableManager.Instance.LevelPass.dataArray;
+
+        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (currentLevel >= tableData[i].Unlocklevel)
+            {
+                scrollId = i;
+            }
+        }
+
+        float scrollPosY = scrollId * cellSize;
+
+        var rc = cellParent.GetComponent<RectTransform>();
+
+        rc.anchoredPosition = new Vector2(rc.anchoredPosition.x, scrollPosY);
     }
 }

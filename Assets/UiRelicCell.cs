@@ -106,6 +106,38 @@ public class UiRelicCell : MonoBehaviour
             Subscribe();
         }
     }
+    public void OnClickUpgrade100Button() 
+    {
+        if (IsMaxLevel())
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다!");
+            return;
+        }
+
+        int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
+
+        if (currentRelicNum == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Relic)}이 부족합니다!");
+            return;
+        }
+
+        int upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
+
+        upgradeableNum = Mathf.Min(upgradeableNum, 100);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value -= upgradeableNum;
+
+        relicServerData.level.Value += upgradeableNum;
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
+    }
     public void OnClickUpgradeAllButton()
     {
         if (IsMaxLevel())

@@ -35,6 +35,9 @@ public class UiBuffPopupView : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI yomulDesc;
 
+    [SerializeField]
+    private TextMeshProUGUI remainUseDesc;
+
     private bool initialized = false;
 
     public void Initalize(BuffTableData buffTableData)
@@ -71,6 +74,8 @@ public class UiBuffPopupView : MonoBehaviour
             var yomulTableData = TableManager.Instance.YomulAbilTable.dataArray[buffTableData.Yomulid];
             yomulDesc.SetText($"{yomulTableData.Abilname} LV:{buffTableData.Unlockyomullevel} 필요");
         }
+
+
     }
 
     private void OnEnable()
@@ -112,13 +117,18 @@ public class UiBuffPopupView : MonoBehaviour
 
         ServerData.userInfoTable.GetTableData(buffTableData.Stringid).AsObservable().Subscribe(e =>
         {
-            buffGetButton.sprite = e == 0f ? getEnable : getDisable;
+            buffGetButton.sprite = e < buffTableData.Usecount ? getEnable : getDisable;
+
+            if (remainUseDesc != null)
+            {
+                remainUseDesc.SetText($"{buffTableData.Usecount - e}/{buffTableData.Usecount}회");
+            }
         }).AddTo(this);
     }
 
     public void OnClickGetBuffButton()
     {
-        if (ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value == 1)
+        if (ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value >= buffTableData.Usecount)
         {
             PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 획득할 수 없습니다.");
             return;
@@ -151,13 +161,13 @@ public class UiBuffPopupView : MonoBehaviour
 
     private void BuffGetRoutine()
     {
-        if (ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value == 1)
+        if (ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value >= buffTableData.Usecount)
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "중복요청", null);
             return;
         }
 
-        ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value = 1;
+        ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value++;
         ServerData.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.Value += buffTableData.Buffseconds;
 
         List<TransactionValue> transactions = new List<TransactionValue>();

@@ -211,6 +211,9 @@ public static class ServerData
             case Item_Type.costume8:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
+            case Item_Type.RelicTicket:
+                ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += rewardValue;
+                break;
             default:
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"Item_Type {type} is not defined", null);

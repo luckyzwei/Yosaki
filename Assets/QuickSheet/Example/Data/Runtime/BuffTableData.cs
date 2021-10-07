@@ -40,4 +40,8 @@ public class BuffTableData
   int unlockyomullevel;
   public int Unlockyomullevel { get {return unlockyomullevel; } set { this.unlockyomullevel = value;} }
   
+  [SerializeField]
+  int usecount;
+  public int Usecount { get {return usecount; } set { this.usecount = value;} }
+  
 }
