@@ -85,16 +85,37 @@ public class UiPetEquipmentView : MonoBehaviour
             string abilDesc = string.Empty;
 
             StatusType type1 = (StatusType)petEquipmentData.Abiltype1;
-            float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * e;
-            float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
 
-            abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1}(<color=red>MAX:{maxAbil1}</color>)\n";
+            if (type1.IsPercentStat() == false) 
+            {
+                float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * e;
+                float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
 
+                abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1}(<color=red>MAX:{maxAbil1}</color>)\n";
+            }
+            else 
+            {
+                float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * e;
+                float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
+
+                abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1*100f}(<color=red>MAX:{maxAbil1*100f}</color>)\n";
+            }
+       
             StatusType type2 = (StatusType)petEquipmentData.Abiltype2;
-            float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * e;
-            float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
+            if (type2.IsPercentStat()) 
+            {
+                float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * e;
+                float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
 
-            abilDesc += $"{CommonString.GetStatusName(type2)} {abilValue2 * 100f}%(<color=red>MAX:{maxAbil2 * 100f}</color>)";
+                abilDesc += $"{CommonString.GetStatusName(type2)} {abilValue2 * 100f}%(<color=red>MAX:{maxAbil2 * 100f}</color>)";
+            }
+            else 
+            {
+                float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * e;
+                float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
+
+                abilDesc += $"{CommonString.GetStatusName(type2)} {abilValue2}(<color=red>MAX:{maxAbil2}</color>)";
+            }
 
             abilDescription.SetText(abilDesc);
 

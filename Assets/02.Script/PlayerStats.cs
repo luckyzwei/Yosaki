@@ -119,6 +119,7 @@ public static class PlayerStats
 
         ret += (int)GetMarbleValue(StatusType.SkillAttackCount);
         ret += (int)GetMagicBookHasPercentValue(StatusType.SkillAttackCount);
+        ret += (int)GetSinsuEquipEffect(StatusType.SkillAttackCount);
 
         return ret;
     }
@@ -456,6 +457,8 @@ public static class PlayerStats
 
         ret += GetTitleAbilValue(StatusType.SkillDamage);
         ret += GetRelicHasEffect(StatusType.SkillDamage);
+
+        ret += GetSinsuEquipEffect(StatusType.SkillDamage);
 
         return ret;
     }
