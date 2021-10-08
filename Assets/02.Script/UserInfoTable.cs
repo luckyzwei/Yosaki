@@ -95,6 +95,8 @@ public class UserInfoTable
 
     public const string relicpensionAttendance = "relicpension";
 
+    public const string relicReset = "relicReset";
+
     public float currentServerDate;
     public double attendanceUpdatedTime;
     public DateTime currentServerTime { get; private set; }
@@ -163,7 +165,8 @@ public class UserInfoTable
         {relicKillCount,0f},
         {usedRelicTicketNum,0f},
         {relicpensionAttendance,0f},
-        {yomul4_buff,0f}
+        {yomul4_buff,0f},
+        {relicReset,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();

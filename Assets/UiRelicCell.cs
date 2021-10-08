@@ -116,7 +116,7 @@ public class UiRelicCell : MonoBehaviour
 
         int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
 
-        if (currentRelicNum == 0)
+        if (currentRelicNum < 500)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Relic)}이 부족합니다!");
             return;
