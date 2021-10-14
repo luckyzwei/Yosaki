@@ -16,9 +16,18 @@ public class UiStageRelicBoard : MonoBehaviour
     //[SerializeField]
     //private TextMeshProUGUI bestScoreText;
 
-    private void Start()
+    private void Awake()
     {
         Initialize();
+    }
+
+    private void OnEnable()
+    {
+        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < GameBalance.StageRelicUnlockLevel) 
+        {
+            this.gameObject.SetActive(false);
+            PopupManager.Instance.ShowAlarmMessage($"{GameBalance.StageRelicUnlockLevel}레벨 이후에 사용 가능합니다!");
+        }
     }
 
     private void Initialize()

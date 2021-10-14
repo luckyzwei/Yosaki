@@ -121,6 +121,7 @@ public static class GameBalance
     public readonly static ObscuredFloat HotTime_GrowthStone = 5;
 
     public readonly static ObscuredInt DailyRelicTicketGetCount = 3;
+    public readonly static ObscuredInt StageRelicUnlockLevel = 3000;
 }
 
 public static class DamageBalance
