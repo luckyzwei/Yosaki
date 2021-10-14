@@ -17,7 +17,10 @@ public class UiPackageShop : MonoBehaviour
     private Transform petCostumeParent;
 
     [SerializeField]
-    private Transform chuseokParent;
+    private Transform relicParent;
+
+    [SerializeField]
+    private Transform eventParent;
 
     private void Start()
     {
@@ -49,10 +52,14 @@ public class UiPackageShop : MonoBehaviour
             }
             else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit3)
             {
-                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, chuseokParent);
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, relicParent);
                 cell.Initialize(e.Current.Value);
             }
-
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Event)
+            {
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, eventParent);
+                cell.Initialize(e.Current.Value);
+            }
         }
     }
 }

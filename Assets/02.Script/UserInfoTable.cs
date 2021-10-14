@@ -96,6 +96,7 @@ public class UserInfoTable
     public const string relicpensionAttendance = "relicpension";
 
     public const string relicReset = "relicReset";
+    public const string marbleReset2 = "marbleReset2";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -166,7 +167,8 @@ public class UserInfoTable
         {usedRelicTicketNum,0f},
         {relicpensionAttendance,0f},
         {yomul4_buff,0f},
-        {relicReset,0f}
+        {relicReset,0f},
+        {marbleReset2,0f}
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -583,24 +585,29 @@ public class UserInfoTable
         return tableDatas[removeAd].Value == 1;
     }
 
-    public bool CanSpawnSongPyeon()
+    public bool CanSpawnEventItem()
     {
-        if (currentServerTime.Month != 9) return false;
-        if (currentServerTime.Day > GameBalance.ChuseokDropEndDay) return false;
+        if (currentServerTime.Month != 10) return false;
         return true;
     }
-    public bool CanMakeChuseokItem()
+    public bool CanMakeEventItem()
     {
-        if (currentServerTime.Month != 9) return false;
-        if (currentServerTime.Day > GameBalance.ChuseokMakeEndDay) return false;
-        return true;
+        //10월
+        if (currentServerTime.Month == 10) return true;
+        //11월
+        else
+        {
+            return currentServerTime.Day < 2;
+        }
     }
 
-    public bool CanBuyChuseokPackage()
+    public bool CanBuyEventPackage()
     {
-        if (currentServerTime.Month != 9) return false;
-        if (currentServerTime.Day > GameBalance.ChuseokPackageSaleEndDay) return false;
-        return true;
+        if (currentServerTime.Month == 10) return true;
+        else
+        {
+            return currentServerTime.Day < 2;
+        }
     }
 
     public bool IsHotTime()

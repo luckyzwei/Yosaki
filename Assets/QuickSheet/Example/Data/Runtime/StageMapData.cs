@@ -72,4 +72,8 @@ public class StageMapData
   float marbleamount;
   public float Marbleamount { get {return marbleamount; } set { this.marbleamount = value;} }
   
+  [SerializeField]
+  int relicspawnamount;
+  public int Relicspawnamount { get {return relicspawnamount; } set { this.relicspawnamount = value;} }
+  
 }

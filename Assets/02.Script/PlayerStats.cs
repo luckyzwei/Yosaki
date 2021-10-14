@@ -716,7 +716,7 @@ public static class PlayerStats
         return ret;
     }
 
-    public static float GetYomulUpgradeValue(StatusType type)
+    public static float GetYomulUpgradeValue(StatusType type, bool onlyType1 = false, bool onlyType2 = false)
     {
         float ret = 0f;
         var tableDatas = TableManager.Instance.YomulAbilTable.dataArray;
@@ -725,17 +725,33 @@ public static class PlayerStats
         {
             var serverData = ServerData.yomulServerTable.TableDatas[tableDatas[i].Stringid];
             if (serverData.hasAbil.Value == 0) continue;
-            if (tableDatas[i].Abiltype != (int)type) continue;
 
-            if (type == StatusType.PenetrateDefense)
+            if (tableDatas[i].Abiltype == (int)type && onlyType2 == false)
             {
-                float addValue = serverData.level.Value < 80 ? tableDatas[i].Abiladdvalue : tableDatas[i].Abiladdvalue * 2f;
-                ret += tableDatas[i].Abilvalue + (serverData.level.Value * addValue);
+                if (type == StatusType.PenetrateDefense)
+                {
+                    float addValue = serverData.level.Value < 80 ? tableDatas[i].Abiladdvalue : tableDatas[i].Abiladdvalue * 2f;
+                    ret += tableDatas[i].Abilvalue + (serverData.level.Value * addValue);
+                }
+                else
+                {
+                    ret += tableDatas[i].Abilvalue + (serverData.level.Value * tableDatas[i].Abiladdvalue);
+                }
             }
-            else
+
+            if (tableDatas[i].Abiltype2 == (int)type && onlyType1 == false)
             {
-                ret += tableDatas[i].Abilvalue + (serverData.level.Value * tableDatas[i].Abiladdvalue);
+                if (type == StatusType.PenetrateDefense)
+                {
+                    float addValue = tableDatas[i].Abiladdvalue2;
+                    ret += tableDatas[i].Abilvalue2 + (serverData.level.Value * addValue);
+                }
+                else
+                {
+                    ret += tableDatas[i].Abilvalue2 + (serverData.level.Value * tableDatas[i].Abiladdvalue2);
+                }
             }
+
         }
 
         return ret;
@@ -830,6 +846,26 @@ public static class PlayerStats
     }
 
     public static float GetRelicHasEffect(StatusType statusType)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.RelicTable.dataArray;
+
+        for (int i = 0; i < tableDatas.Length; i++)
+        {
+            var serverData = ServerData.relicServerTable.TableDatas[tableDatas[i].Stringid];
+
+            if (serverData.level.Value == 0) continue;
+
+            if (tableDatas[i].Abiltype != (int)statusType) continue;
+
+            ret += serverData.level.Value * tableDatas[i].Abilvalue;
+        }
+
+        return ret;
+    }
+
+    public static float GetStageRelicHasEffect(StatusType statusType)
     {
         float ret = 0f;
 

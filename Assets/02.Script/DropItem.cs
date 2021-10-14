@@ -21,6 +21,9 @@ public enum Item_Type
     Relic,
     RelicTicket,
     RabitBossStone,
+    DragonBossStone,
+    Event_Item_0,
+    StageRelic,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -95,6 +98,8 @@ public enum Item_Type
     costume6 = 1207,
     costume7 = 1208,
     costume8 = 1209,
+    costume9 = 1210,
+    costume10 = 1211,
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,

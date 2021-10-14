@@ -98,16 +98,16 @@ public class UiCollectionEventCell : MonoBehaviour
             }
         }
 
-        int currentSongpyeon = (int)ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value;
+        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value;
 
-        if (currentSongpyeon < tableData.Price)
+        if (currentEventItemNum < tableData.Price)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Songpyeon)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Item_0)}이 부족합니다.");
             return;
         }
 
         //로컬
-        ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value -= tableData.Price;
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value -= tableData.Price;
 
         ServerData.AddLocalValue((Item_Type)tableData.Itemtype, tableData.Itemvalue);
 
@@ -152,7 +152,7 @@ public class UiCollectionEventCell : MonoBehaviour
 
             Param goodsParam = new Param();
 
-            goodsParam.Add(GoodsTable.Songpyeon, ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value);
+            goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
 
             goodsParam.Add(itemKey, ServerData.goodsTable.GetTableData(itemKey).Value);
 

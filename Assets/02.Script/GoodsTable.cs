@@ -24,6 +24,7 @@ public class GoodsTable
     public static string Songpyeon = "Songpyeon";
     public static string TigerStone = "TigerStone";
     public static string RabitStone = "RabitStone";
+    public static string DragonStone = "DragonStone";
 
     //포션
     public static string Potion_0 = "Potion_0";
@@ -32,6 +33,10 @@ public class GoodsTable
 
     public static string Relic = "Relic";
     public static string RelicTicket = "RelicTicket";
+
+    //할로윈 도깨비
+    public static string Event_Item_0 = "Event_Item_0";
+    public static string StageRelic = "StageRelic";
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -54,7 +59,10 @@ public class GoodsTable
         {Relic,0f},
 
         {RelicTicket,GameBalance.DailyRelicTicketGetCount},
-        {RabitStone,0f}
+        {RabitStone,0f},
+        {Event_Item_0,0f},
+        {DragonStone,0f},
+        {StageRelic,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -120,7 +128,7 @@ public class GoodsTable
     {
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Marble)} 획득(+{(int)amount})");
 
-        marbleAddAmount++;
+        marbleAddAmount += (int)amount;
 
         if (marbleAddAmount < updateRequireNum)
         {
@@ -138,7 +146,7 @@ public class GoodsTable
     {
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.PetUpgradeSoul)} 획득(+{(int)amount})");
 
-        soulAddAmount++;
+        soulAddAmount += (int)amount;
 
         if (soulAddAmount < updateRequireNum)
         {
@@ -151,27 +159,40 @@ public class GoodsTable
         }
     }
 
-    static int songpyeonAddAmount = 0;
-    public void GetEventSongPyeon(float amount)
+    static int eventItemAddNum = 0;
+    public void GetEventItem(float amount)
     {
-        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Songpyeon)} 획득(+{(int)amount})");
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Item_0)} 획득(+{(int)amount})");
 
-        songpyeonAddAmount++;
+        eventItemAddNum++;
 
-        if (songpyeonAddAmount < updateRequireNum)
+        if (eventItemAddNum < updateRequireNum)
         {
 
         }
         else
         {
-            songpyeonAddAmount = 0;
-            tableDatas[Songpyeon].Value += updateRequireNum;
+            eventItemAddNum = 0;
+            tableDatas[Event_Item_0].Value += updateRequireNum;
         }
     }
 
-    public void GetBlueStone(float amount)
+    static int stageRelicAddNum = 0;
+    public void GetStageRelic(float amount)
     {
-        tableDatas[Jade].Value += amount;
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.StageRelic)} 획득(+{(int)amount})");
+
+        stageRelicAddNum += (int)amount;
+
+        if (stageRelicAddNum < updateRequireNum)
+        {
+
+        }
+        else
+        {
+            stageRelicAddNum = 0;
+            tableDatas[StageRelic].Value += updateRequireNum;
+        }
     }
 
     public void Initialize()

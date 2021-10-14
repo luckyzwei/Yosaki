@@ -48,4 +48,16 @@ public class YomulAbilData
   string abilname;
   public string Abilname { get {return abilname; } set { this.abilname = value;} }
   
+  [SerializeField]
+  int abiltype2;
+  public int Abiltype2 { get {return abiltype2; } set { this.abiltype2 = value;} }
+  
+  [SerializeField]
+  float abilvalue2;
+  public float Abilvalue2 { get {return abilvalue2; } set { this.abilvalue2 = value;} }
+  
+  [SerializeField]
+  float abiladdvalue2;
+  public float Abiladdvalue2 { get {return abiladdvalue2; } set { this.abiladdvalue2 = value;} }
+  
 }

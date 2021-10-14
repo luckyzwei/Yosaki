@@ -244,9 +244,4 @@ public class UIrelicBoard : MonoBehaviour
 
         }, () => { });
     }
-
-    private void ResetAllData() 
-    {
-    
-    }
 }

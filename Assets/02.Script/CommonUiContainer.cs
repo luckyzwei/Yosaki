@@ -57,7 +57,11 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public Sprite RabitBossStone;
 
+    public Sprite DragonBossStone;
+
     public Sprite Songpyeon;
+
+    public Sprite EventCollection;
 
     public Sprite relic;
 
@@ -144,19 +148,21 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Songpyeon:
                 return Songpyeon;
                 break;
-
             case Item_Type.TigerBossStone:
                 return TigerBossStone;
-
             case Item_Type.RabitBossStone:
                 return RabitBossStone;
-
+            case Item_Type.DragonBossStone:
+                return DragonBossStone;
                 break;
             case Item_Type.Relic:
                 return relic;
                 break;
             case Item_Type.RelicTicket:
                 return relicEnter;
+                break;
+            case Item_Type.Event_Item_0:
+                return EventCollection;
                 break;
         }
 
@@ -178,5 +184,6 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public List<Sprite> buffIconList;
 
     public List<Sprite> relicIconList;
+    public List<Sprite> stageRelicIconList;
 
 }

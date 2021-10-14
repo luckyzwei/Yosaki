@@ -21,13 +21,15 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         public readonly float yoguiMarble;
 
-        public readonly float songpyeon;
+        public readonly float eventItem;
 
         public readonly int elapsedSeconds;
 
         public readonly int killCount;
 
-        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float songpyeon, float exp, int elapsedSeconds, int killCount)
+        public readonly float stageRelic;
+
+        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float eventItem, float exp, int elapsedSeconds, int killCount, float stageRelic)
         {
             this.gold = gold;
 
@@ -39,13 +41,15 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
             this.yoguiMarble = yoguiMarble;
 
-            this.songpyeon = songpyeon;
+            this.eventItem = eventItem;
 
             this.exp = exp;
 
             this.elapsedSeconds = elapsedSeconds;
 
             this.killCount = killCount;
+
+            this.stageRelic = stageRelic;
         }
     }
 
@@ -116,22 +120,24 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         float yoguimarble = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
 
-        float songpyeon = 0;
+        float eventItem = 0;
 
-        if (ServerData.userInfoTable.CanSpawnSongPyeon())
+        float stageRelic = killedEnemyPerMin * stageTableData.Relicspawnamount * GameBalance.sleepRewardRatio * elapsedMinutes;
+
+        if (ServerData.userInfoTable.CanSpawnEventItem())
         {
-            songpyeon = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
+            eventItem = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
         }
         else
         {
-            songpyeon = 0;
+            eventItem = 0;
         }
 
 
         float exp = killedEnemyPerMin * spawnedEnemyData.Exp * GameBalance.sleepRewardRatio * elapsedMinutes;
         exp += exp * expBuffRatio;
 
-        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, yoguiMarble: yoguimarble, songpyeon: songpyeon, exp: exp, elapsedSeconds: elapsedSeconds, killCount: (int)(elapsedMinutes * killedEnemyPerMin));
+        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, yoguiMarble: yoguimarble, eventItem: eventItem, exp: exp, elapsedSeconds: elapsedSeconds, killCount: (int)(elapsedMinutes * killedEnemyPerMin), stageRelic: stageRelic);
     }
 
     public void GetSleepReward(Action successCallBack)
@@ -148,7 +154,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += sleepRewardInfo.GrowthStone;
         //
         ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value += sleepRewardInfo.yoguiMarble;
-        ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += sleepRewardInfo.songpyeon;
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += sleepRewardInfo.eventItem;
+        ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += sleepRewardInfo.stageRelic;
 
         ServerData.userInfoTable.TableDatas[UserInfoTable.dailyEnemyKillCount].Value += sleepRewardInfo.killCount;
         ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal].Value += sleepRewardInfo.killCount;
@@ -160,7 +167,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         //
         goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
-        goodsParam.Add(GoodsTable.Songpyeon, ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value);
+        goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+        goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
 
         Param userInfoParam = new Param();
         userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.TableDatas[UserInfoTable.dailyEnemyKillCount].Value);

@@ -25,7 +25,10 @@ public static class Utils
                   type == Item_Type.costume4 ||
                   type == Item_Type.costume5 ||
                   type == Item_Type.costume6 ||
-                  type == Item_Type.costume7;
+                  type == Item_Type.costume7 ||
+                  type == Item_Type.costume8 ||
+                  type == Item_Type.costume9 ||
+                  type == Item_Type.costume10;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -42,6 +45,7 @@ public static class Utils
                 type == Item_Type.Marble ||
                 type == Item_Type.Ticket ||
                 type == Item_Type.Songpyeon ||
+                type == Item_Type.Event_Item_0 ||
                 type == Item_Type.RelicTicket;
     }
 

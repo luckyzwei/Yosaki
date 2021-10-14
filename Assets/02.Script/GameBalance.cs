@@ -88,14 +88,14 @@ public static class GameBalance
     public readonly static ObscuredInt nickNameChangeFee = 500000;
 
 
-    public readonly static ObscuredInt rankRewardTicket_1 = 30;
-    public readonly static ObscuredInt rankRewardTicket_2 = 26;
-    public readonly static ObscuredInt rankRewardTicket_3 = 24;
-    public readonly static ObscuredInt rankRewardTicket_4 = 22;
-    public readonly static ObscuredInt rankRewardTicket_5 = 20;
-    public readonly static ObscuredInt rankRewardTicket_6_20 = 16;
-    public readonly static ObscuredInt rankRewardTicket_21_100 = 14;
-    public readonly static ObscuredInt rankRewardTicket_101_1000 = 7;
+    public readonly static ObscuredInt rankRewardTicket_1 = 60;
+    public readonly static ObscuredInt rankRewardTicket_2 = 52;
+    public readonly static ObscuredInt rankRewardTicket_3 = 48;
+    public readonly static ObscuredInt rankRewardTicket_4 = 44;
+    public readonly static ObscuredInt rankRewardTicket_5 = 40;
+    public readonly static ObscuredInt rankRewardTicket_6_20 = 32;
+    public readonly static ObscuredInt rankRewardTicket_21_100 = 28;
+    public readonly static ObscuredInt rankRewardTicket_101_1000 = 14;
 
     public readonly static ObscuredInt rankRewardTicket_1_relic = 45;
     public readonly static ObscuredInt rankRewardTicket_2_relic = 40;
@@ -106,9 +106,9 @@ public static class GameBalance
     public readonly static ObscuredInt rankRewardTicket_21_100_relic = 10;
     public readonly static ObscuredInt rankRewardTicket_101_1000_relic = 5;
 
-    public readonly static ObscuredInt ChuseokDropEndDay = 25;
-    public readonly static ObscuredInt ChuseokMakeEndDay = 26;
-    public readonly static ObscuredInt ChuseokPackageSaleEndDay = 26;
+    public readonly static ObscuredInt EventDropEndDay = 31;
+    public readonly static ObscuredInt EventMakeEndDay = 1;
+    public readonly static ObscuredInt EventPackageSaleEndDay = 1;
 
     public readonly static ObscuredFloat TitleEquipAddPer = 2;
 

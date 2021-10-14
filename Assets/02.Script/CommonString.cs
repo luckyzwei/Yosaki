@@ -41,8 +41,8 @@ public static class CommonString
 
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
-    public static string RankPrefix_Boss = "십이지신(묘)";
-    public static string RankPrefix_Real_Boss = "십이지신(토끼)";
+    public static string RankPrefix_Boss = "고양이요괴전";
+    public static string RankPrefix_Real_Boss = "십이지신(용)";
     public static string RankPrefix_Relic = "영혼의숲";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
@@ -95,6 +95,8 @@ public static class CommonString
             case Item_Type.costume6: return TableManager.Instance.Costume.dataArray[6].Name;
             case Item_Type.costume7: return TableManager.Instance.Costume.dataArray[7].Name;
             case Item_Type.costume8: return TableManager.Instance.Costume.dataArray[8].Name;
+            case Item_Type.costume9: return TableManager.Instance.Costume.dataArray[9].Name;
+            case Item_Type.costume10: return TableManager.Instance.Costume.dataArray[10].Name;
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;
@@ -116,6 +118,8 @@ public static class CommonString
             case Item_Type.Relic: return "영혼 조각";
             case Item_Type.RelicTicket: return "영혼 열쇠";
             case Item_Type.RabitBossStone: return "영혼의 증표";
+            case Item_Type.Event_Item_0: return "도깨비 방망이";
+            case Item_Type.StageRelic: return "유물 파편";
         }
         return "미등록"; 
     }

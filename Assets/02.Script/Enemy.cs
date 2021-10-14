@@ -154,9 +154,9 @@ public class Enemy : PoolItem
 
         GetPetUpgradeGem();
 
-        GetSongPyeon();
+        GetEventItem();
 
-        //UpdateCollection();
+        GetStageRelicItem();
 
         enemyDeadCallBack?.Invoke(this);
 
@@ -171,11 +171,18 @@ public class Enemy : PoolItem
         ServerData.goodsTable.GetPetUpgradeSoul(1);
     }
 
-    private void GetSongPyeon()
+    private void GetEventItem()
     {
-        if (ServerData.userInfoTable.CanSpawnSongPyeon() == false) return;
+        if (ServerData.userInfoTable.CanSpawnEventItem() == false) return;
 
-        ServerData.goodsTable.GetEventSongPyeon(1);
+        ServerData.goodsTable.GetEventItem(1);
+    }
+
+    private void GetStageRelicItem() 
+    {
+        if (GameManager.Instance.IsNormalField == false) return;
+
+        ServerData.goodsTable.GetStageRelic(GameManager.Instance.CurrentStageData.Relicspawnamount);
     }
 
     private void WhenFieldBossEnemyDead()

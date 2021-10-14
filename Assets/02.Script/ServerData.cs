@@ -52,6 +52,7 @@ public static class ServerData
     public static MonthlyPassServerTable monthlyPassServerTable { get; private set; } = new MonthlyPassServerTable();
 
     public static RelicServerTable relicServerTable { get; private set; } = new RelicServerTable();
+    public static StageRelicServerTable stageRelicServerTable { get; private set; } = new StageRelicServerTable();
 
     #region string
     public static string inDate_str = "inDate";
@@ -120,6 +121,8 @@ public static class ServerData
         monthlyPassServerTable.Initialize();
 
         relicServerTable.Initialize();
+
+        stageRelicServerTable.Initialize();
     }
 
     public static void GetUserInfo()
@@ -205,6 +208,9 @@ public static class ServerData
             case Item_Type.Songpyeon:
                 ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += rewardValue;
                 break;
+            case Item_Type.Event_Item_0:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += rewardValue;
+                break;
             case Item_Type.costume1:
             case Item_Type.costume6:
             case Item_Type.costume7:
@@ -270,6 +276,10 @@ public static class ServerData
 
             case Item_Type.RelicTicket:
                 passParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Event_Item_0:
+                passParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
         }
@@ -581,6 +591,9 @@ public static class ServerData
                     break;
                 case Item_Type.RelicTicket:
                     ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += amount;
+                    break;
+                case Item_Type.Event_Item_0:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += amount;
                     break;
             }
 

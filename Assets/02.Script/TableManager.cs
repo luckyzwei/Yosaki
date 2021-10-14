@@ -529,5 +529,11 @@ public class TableManager : SingletonMono<TableManager>
 
     public RelicTable RelicTable => rericTable;
 
+
+    [SerializeField]
+    private StageRelic stageRelic;
+
+    public StageRelic StageRelic => stageRelic;
+
 }
 
