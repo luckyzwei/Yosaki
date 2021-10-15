@@ -224,6 +224,12 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
                 }
                 break;
+            case Item_Type.StageRelic:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;
+                    param.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
+                }
+                break;
 
         }
     }

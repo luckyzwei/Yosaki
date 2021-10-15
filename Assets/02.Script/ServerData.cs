@@ -222,6 +222,9 @@ public static class ServerData
             case Item_Type.RelicTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += rewardValue;
                 break;
+            case Item_Type.StageRelic:
+                ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += rewardValue;
+                break;
             default:
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"Item_Type {type} is not defined", null);
@@ -282,6 +285,10 @@ public static class ServerData
 
             case Item_Type.Event_Item_0:
                 passParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.StageRelic:
+                passParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
         }
@@ -349,6 +356,17 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += amount;
                 param.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.StageRelic:
+                ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;
+                param.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.Event_Item_0:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += amount;
+                param.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.costume1:
             case Item_Type.costume4:
                 {
@@ -600,6 +618,9 @@ public static class ServerData
                     break;
                 case Item_Type.Event_Item_0:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += amount;
+                    break;
+                case Item_Type.StageRelic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;
                     break;
             }
 

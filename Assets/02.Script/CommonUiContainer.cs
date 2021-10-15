@@ -63,6 +63,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public Sprite EventCollection;
 
+    public Sprite StageRelic;
+
     public Sprite relic;
 
     public Sprite relicEnter;
@@ -163,6 +165,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.Event_Item_0:
                 return EventCollection;
+                break;
+
+            case Item_Type.StageRelic:
+                return StageRelic;
                 break;
         }
 
