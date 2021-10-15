@@ -40,7 +40,7 @@ public class UiPlayerHpBar : MonoBehaviour
         float maxHp = PlayerStatusController.Instance.maxHp.Value;
         float currentHp = PlayerStatusController.Instance.hp.Value;
 
-        hpText.SetText($"{(int)currentHp}/{(int)maxHp}");
+        hpText.SetText($"{Utils.ConvertBigNum(currentHp)}/{Utils.ConvertBigNum(maxHp)}");
         barObject.transform.localScale = new Vector3(currentHp / maxHp, barObject.transform.localScale.y, barObject.transform.localScale.z);
     }
 

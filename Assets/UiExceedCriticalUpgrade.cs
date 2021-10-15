@@ -52,7 +52,7 @@ public class UiExceedCriticalUpgrade : MonoBehaviour
         {
             int upgradePrice = GetUpgradePrice();
 
-            abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1Prob) * 100f}" + "\n(일정 확률로 30%의 추가 데미지)");
+            abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1Prob) * 100f}" + $"\n(일정 확률로 {GameBalance.SuperCriticalDamPer * 100f}%의 추가 데미지)");
 
             levelText.SetText($"Lv : {e}");
 
@@ -167,7 +167,7 @@ public class UiExceedCriticalUpgrade : MonoBehaviour
 
         //abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SkillCoolTime) * 100f}");
 
-        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1Prob) * 100f}"+"\n(일정 확률로 30%의 추가 데미지)");
+        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1Prob) * 100f}"+$"\n(일정 확률로 {GameBalance.SuperCriticalDamPer*100f}%의 추가 데미지)");
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
