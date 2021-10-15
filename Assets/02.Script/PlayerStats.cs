@@ -28,7 +28,8 @@ public enum StatusType
     DropAmountAddPer,
     BossDamAddPer,
     SkillAttackCount,
-    PenetrateDefense
+    PenetrateDefense,
+    SuperCritical1Prob
 }
 
 
@@ -51,6 +52,7 @@ public static class PlayerStats
         float decreaseDam = GetDamDecreaseValue();
         float skillAttackCount = GetSkillHitAddValue();
         float penetration = GetPenetrateDefense();
+        float superCriticalProb = GetSuperCriticalProb();
 
         float totalPower =
           ((baseAttack + baseAttack * baseAttackPer)
@@ -65,6 +67,9 @@ public static class PlayerStats
            * (Mathf.Max(skillAttackCount, 0.01f)) * 100f
            * (Mathf.Max(penetration, 0.01f)) * 100f
            );
+
+        totalPower += totalPower * GameBalance.SuperCriticalDamPer * superCriticalProb;
+
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -166,6 +171,10 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.AttackAdd);
         ret += GetRelicHasEffect(StatusType.AttackAdd);
 
+        ret += GetStageRelicHasEffect(StatusType.AttackAdd);
+
+
+
 
         return ret;
     }
@@ -200,6 +209,7 @@ public static class PlayerStats
         ret += GetPassiveSkillValue(StatusType.AttackAddPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.AttackAddPer);
         ret += GetMarbleValue(StatusType.AttackAddPer);
+        ret += GetStageRelicHasEffect(StatusType.AttackAddPer);
 
         return ret;
     }
@@ -459,6 +469,7 @@ public static class PlayerStats
         ret += GetRelicHasEffect(StatusType.SkillDamage);
 
         ret += GetSinsuEquipEffect(StatusType.SkillDamage);
+        ret += GetStageRelicHasEffect(StatusType.SkillDamage);
 
         return ret;
     }
@@ -491,6 +502,10 @@ public static class PlayerStats
     {
         return Random.value < GetCriticalProb();
     }
+    public static bool ActiveSuperCritical()
+    {
+        return Random.value < GetSuperCriticalProb();
+    }
     public static float GetCriticalProb()
     {
         float ret = 0f;
@@ -517,6 +532,7 @@ public static class PlayerStats
         ret += GetSkillCollectionValue(StatusType.CriticalDam);
         ret += GetWingAbilValue(StatusType.CriticalDam);
         ret += ServerData.petTable.GetStatusValue(StatusType.CriticalDam);
+        ret += GetStageRelicHasEffect(StatusType.CriticalDam);
 
         return ret;
     }
@@ -699,8 +715,7 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.IgnoreDefense);
 
         ret += GetRelicHasEffect(StatusType.IgnoreDefense);
-
-
+        ret += GetStageRelicHasEffect(StatusType.IgnoreDefense);
 
         return ret;
     }
@@ -712,6 +727,18 @@ public static class PlayerStats
         ret += GetYomulUpgradeValue(StatusType.PenetrateDefense);
 
         ret += GetBuffValue(StatusType.PenetrateDefense);
+
+        ret += GetStageRelicHasEffect(StatusType.PenetrateDefense);
+
+        return ret;
+    }
+
+    public static float GetSuperCriticalProb()
+    {
+        float ret = 0f;
+
+        ret += GetYomulUpgradeValue(StatusType.SuperCritical1Prob);
+        ret += GetBuffValue(StatusType.SuperCritical1Prob);
 
         return ret;
     }
@@ -869,11 +896,11 @@ public static class PlayerStats
     {
         float ret = 0f;
 
-        var tableDatas = TableManager.Instance.RelicTable.dataArray;
+        var tableDatas = TableManager.Instance.StageRelic.dataArray;
 
         for (int i = 0; i < tableDatas.Length; i++)
         {
-            var serverData = ServerData.relicServerTable.TableDatas[tableDatas[i].Stringid];
+            var serverData = ServerData.stageRelicServerTable.TableDatas[tableDatas[i].Stringid];
 
             if (serverData.level.Value == 0) continue;
 

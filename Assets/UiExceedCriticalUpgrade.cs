@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UniRx;
 
-public class UiSkillCoolTimeUpgrade : MonoBehaviour
+public class UiExceedCriticalUpgrade : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI unlockPriceText;
@@ -39,7 +39,7 @@ public class UiSkillCoolTimeUpgrade : MonoBehaviour
     }
     private void Initialize()
     {
-        this.yomulAbilData = TableManager.Instance.YomulAbilTable.dataArray[4];
+        this.yomulAbilData = TableManager.Instance.YomulAbilTable.dataArray[5];
 
         yomulServerData = ServerData.yomulServerTable.TableDatas[this.yomulAbilData.Stringid];
 
@@ -52,8 +52,7 @@ public class UiSkillCoolTimeUpgrade : MonoBehaviour
         {
             int upgradePrice = GetUpgradePrice();
 
-            abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SkillCoolTime) * 100f}\n" +
-                $"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype2)} {(PlayerStats.GetYomulUpgradeValue(StatusType.PenetrateDefense, onlyType2: true) * 100f).ToString("F3")}");
+            abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1Prob) * 100f}" + "\n(일정 확률로 30%의 추가 데미지)");
 
             levelText.SetText($"Lv : {e}");
 
@@ -78,7 +77,7 @@ public class UiSkillCoolTimeUpgrade : MonoBehaviour
 
     private int GetUpgradePrice()
     {
-        return 400000;
+        return 500000;
     }
 
     public void OnClickUpgradeButton()
@@ -145,9 +144,9 @@ public class UiSkillCoolTimeUpgrade : MonoBehaviour
             return;
         }
 
-        if (ServerData.goodsTable.GetTableData(GoodsTable.RabitStone).Value < yomulAbilData.Unlockprice)
+        if (ServerData.goodsTable.GetTableData(GoodsTable.DragonStone).Value < yomulAbilData.Unlockprice)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.RabitBossStone)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DragonBossStone)}이 부족합니다.");
             return;
         }
 
@@ -168,8 +167,7 @@ public class UiSkillCoolTimeUpgrade : MonoBehaviour
 
         //abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SkillCoolTime) * 100f}");
 
-        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SkillCoolTime) * 100f}\n" +
-       $"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype2)} {(PlayerStats.GetYomulUpgradeValue(StatusType.PenetrateDefense, onlyType2: true) * 100f).ToString("F3")}");
+        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1Prob) * 100f}"+"\n(일정 확률로 30%의 추가 데미지)");
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {

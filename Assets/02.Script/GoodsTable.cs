@@ -190,8 +190,8 @@ public class GoodsTable
         }
         else
         {
+            tableDatas[StageRelic].Value += stageRelicAddNum;
             stageRelicAddNum = 0;
-            tableDatas[StageRelic].Value += updateRequireNum;
         }
     }
 

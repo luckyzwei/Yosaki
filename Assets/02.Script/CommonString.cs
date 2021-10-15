@@ -42,7 +42,7 @@ public static class CommonString
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "고양이요괴전";
-    public static string RankPrefix_Real_Boss = "십이지신(용)";
+    public static string RankPrefix_Real_Boss = "십이지신(진)";
     public static string RankPrefix_Relic = "영혼의숲";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
@@ -120,6 +120,7 @@ public static class CommonString
             case Item_Type.RabitBossStone: return "영혼의 증표";
             case Item_Type.Event_Item_0: return "도깨비 방망이";
             case Item_Type.StageRelic: return "유물 파편";
+            case Item_Type.DragonBossStone: return "천공의 증표";
         }
         return "미등록"; 
     }
@@ -199,6 +200,9 @@ public static class CommonString
                 break;
             case StatusType.SkillAttackCount:
                 return "기술 타격 횟수 증가";
+                break;
+            case StatusType.SuperCritical1Prob:
+                return "천공베기 확률(%)";
                 break;
         }
 

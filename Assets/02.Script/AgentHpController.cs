@@ -137,8 +137,15 @@ public class AgentHpController : MonoBehaviour
             value += Mathf.Abs(gapDefense) * value * penetrateValue;
         }
 
-    
+        //슈퍼크리티컬
 
+        bool isSuperCritical = PlayerStats.ActiveSuperCritical();
+
+        if (isSuperCritical)
+        {
+            //30% 고정
+            value += value * GameBalance.SuperCriticalDamPer;
+        }
 
         Vector3 spawnPos = Vector3.zero;
 

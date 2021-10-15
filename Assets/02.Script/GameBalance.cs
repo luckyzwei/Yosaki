@@ -122,6 +122,9 @@ public static class GameBalance
 
     public readonly static ObscuredInt DailyRelicTicketGetCount = 3;
     public readonly static ObscuredInt StageRelicUnlockLevel = 3000;
+    public readonly static ObscuredInt StageRelicUpgradePrice = 1000;
+
+    public readonly static ObscuredFloat SuperCriticalDamPer = 0.3f;
 }
 
 public static class DamageBalance

@@ -50,7 +50,7 @@ public class UiStageRelicBoard : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += 10000;
+            ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += 10000000;
         }
     }
 

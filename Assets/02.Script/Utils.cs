@@ -79,7 +79,8 @@ public static class Utils
             type != StatusType.Mp &&
             type != StatusType.IgnoreDefense &&
             type != StatusType.DashCount &&
-            type != StatusType.SkillAttackCount;
+            type != StatusType.SkillAttackCount &&
+            type != StatusType.SuperCritical1Prob;
     }
 
     public static bool IsRankFrameItem(this Item_Type type)

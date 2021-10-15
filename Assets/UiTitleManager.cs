@@ -34,6 +34,7 @@ public enum TitleMissionId
     Yomul1,//★
     Yomul2,//★
     Yomul3,//★
+
     Stage450,//★
     Stage500,//★
     Stage550,//★
@@ -43,7 +44,15 @@ public enum TitleMissionId
     Level23000,//★
     Level26000,//★
     Level29000,//★
-    Stage700//★
+    Stage700,//★
+    Stage750,//★
+    Stage800,//★
+    Stage850,//★
+    Level32000,//★
+    Level35000,//★
+    Level38000,//★
+    Yomul4,//★
+    Yomul5//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -126,6 +135,21 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.Level29000);
             }
 
+            if (e >= 32000)
+            {
+                ClearTitleMission(TitleMissionId.Level32000);
+            }
+
+            if (e >= 35000)
+            {
+                ClearTitleMission(TitleMissionId.Level35000);
+            }
+
+            if (e >= 38000)
+            {
+                ClearTitleMission(TitleMissionId.Level38000);
+            }
+
 
         }).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>
@@ -181,6 +205,18 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 700 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage700);
+            }
+            if (e >= 750 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage750);
+            }
+            if (e >= 800 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage800);
+            }
+            if (e >= 850 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage850);
             }
 
         }).AddTo(this);
@@ -365,6 +401,24 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 1000)
             {
                 ClearTitleMission(TitleMissionId.Yomul3);
+            }
+        }).AddTo(this);
+
+        //시간베기
+        ServerData.yomulServerTable.TableDatas["yomul4"].level.AsObservable().Subscribe(e =>
+        {
+            if (e >= 100)
+            {
+                ClearTitleMission(TitleMissionId.Yomul4);
+            }
+        }).AddTo(this);
+
+        //천공베기
+        ServerData.yomulServerTable.TableDatas["yomul5"].level.AsObservable().Subscribe(e =>
+        {
+            if (e >= 100)
+            {
+                ClearTitleMission(TitleMissionId.Yomul5);
             }
         }).AddTo(this);
     }
