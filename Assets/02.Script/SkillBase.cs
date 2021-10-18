@@ -7,7 +7,7 @@ public abstract class SkillBase
     protected Transform playerTr;
     public SkillTableData skillInfo { get; private set; }
     protected PlayerSkillCaster playerSkillCaster;
-    protected WaitForSeconds damageApplyInterval;
+    protected WaitForSeconds damageApplyInterval = new WaitForSeconds(0.05f);
     public void Initialize(Transform playerTr, SkillTableData skillInfo, PlayerSkillCaster playerSkillCaster)
     {
         this.playerTr = playerTr;

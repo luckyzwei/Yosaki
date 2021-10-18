@@ -12,7 +12,6 @@ public class HorizontalSlash0 : SkillBase
 
     public HorizontalSlash0()
     {
-        damageApplyInterval = new WaitForSeconds(0.1f);
     }
 
     public override void UseSkill()

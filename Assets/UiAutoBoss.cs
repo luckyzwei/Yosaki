@@ -18,6 +18,41 @@ public class UiAutoBoss : SingletonMono<UiAutoBoss>
 
     public void WhenToggleChanged(bool on)
     {
-        AutoMode.Value = on;
+        if (on)
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "자동으로 진행 합니까?", () =>
+            {
+                AutoMode.Value = on;
+
+                if (autoRoutine != null)
+                {
+                    StopCoroutine(autoRoutine);
+                }
+
+                autoRoutine = StartCoroutine(AutoRoutine());
+
+            }, () =>
+            {
+                StopAutoBoss();
+            });
+        }
+
+    }
+
+    public void StopAutoBoss()
+    {
+        toggle.isOn = false;
+
+        if (autoRoutine != null)
+        {
+            StopCoroutine(autoRoutine);
+        }
+    }
+
+    private Coroutine autoRoutine;
+
+    private IEnumerator AutoRoutine()
+    {
+        yield return null;
     }
 }

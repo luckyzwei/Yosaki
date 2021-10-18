@@ -13,7 +13,6 @@ public class HorizontalSlash1 : HorizontalSlash0
 
     public HorizontalSlash1()
     {
-        damageApplyInterval = new WaitForSeconds(0.1f);
     }
 
     public override void UseSkill()

@@ -158,13 +158,55 @@ public class AgentHpController : MonoBehaviour
             spawnPos = this.transform.position;
         }
 
-        Vector3 damTextspawnPos = spawnPos + Vector3.up * 1f + Vector3.right * UnityEngine.Random.Range(-0.4f, 0.4f) + Vector3.up * UnityEngine.Random.Range(-0.2f, 0.2f);
+        if (damTextRoutine == null)
+        {
+            damTextRoutine = StartCoroutine(DamTextRoutine());
+        }
 
+        damTextspawnPos = this.transform.position + Vector3.up * attackCount * 1f + Vector3.right * rightValue + Vector3.up * upValue;
+
+        attackCount++;
+
+        if (attackCount == attackCountMax)
+        {
+            attackCount = 0;
+            rightValue = UnityEngine.Random.Range(-3f, 3f);
+            upValue = UnityEngine.Random.Range(2f, 4.5f);
+        }
+
+        attackResetCount = 0f;
 
         if (Vector3.Distance(playerPos.position, this.transform.position) < GameBalance.effectActiveDistance)
         {
             BattleObjectManagerAllTime.Instance.SpawnDamageText(value * -1f, damTextspawnPos, (isCritical ? DamTextType.Critical : DamTextType.Normal));
         }
+    }
+    private Vector3 damTextspawnPos;
+    private Coroutine damTextRoutine;
+    private int attackCount = 0;
+    private int attackCountMax = 16;
+    private float attackResetCount = 0f;
+    private float damTextMergeTime = 0.5f;
+    private const float damTextCountAddValue = 0.1f;
+    private readonly WaitForSeconds DamTextDelay = new WaitForSeconds(damTextCountAddValue);
+    private float rightValue = 0f;
+    private float upValue = 2f;
+
+    private IEnumerator DamTextRoutine()
+    {
+        while (attackResetCount < damTextMergeTime)
+        {
+            yield return DamTextDelay;
+            attackResetCount += 0.1f;
+        }
+
+        ResetDamTextValue();
+    }
+    private void ResetDamTextValue()
+    {
+        attackCount = 0;
+        attackResetCount = 0f;
+        damTextRoutine = null;
     }
 
     //안씀, 골드 드랍으로 바꿈

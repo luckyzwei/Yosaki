@@ -12,7 +12,6 @@ public class TraceSlash0 : SkillBase
 
     public TraceSlash0()
     {
-        damageApplyInterval = new WaitForSeconds(0.1f);
     }
 
     public override void UseSkill()

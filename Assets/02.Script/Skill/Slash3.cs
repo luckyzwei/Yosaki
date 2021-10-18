@@ -9,7 +9,6 @@ public class Slash3 : SkillBase
 
     public Slash3()
     {
-        damageApplyInterval = new WaitForSeconds(0.1f);
     }
 
     //매직클로

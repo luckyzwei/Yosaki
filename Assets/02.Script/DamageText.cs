@@ -50,13 +50,6 @@ public class DamageText : PoolItem
     //[SerializeField]
     //private VertexGradient redGradient;
 
-
-    [SerializeField]
-    private RuntimeAnimatorController leftAnim;
-
-    [SerializeField]
-    private RuntimeAnimatorController rightAnim;
-
     [SerializeField]
     private Animator animator;
 
@@ -73,11 +66,6 @@ public class DamageText : PoolItem
         damageText.SetText(Utils.ConvertBigNum(damage));
 
         Invoke(DisableFuncName, disableTime);
-
-        bool isLeft = Random.Range(0, 2) == 0;
-
-        animator.runtimeAnimatorController = isLeft ? leftAnim : rightAnim;
-
     }
 
 
