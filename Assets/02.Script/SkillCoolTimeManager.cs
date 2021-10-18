@@ -11,7 +11,7 @@ public static class SkillCoolTimeManager
 
     private const float updateTick = 0.01f;
 
-    private const float minimumCoolValue = 0.1f;
+    private const float minimumCoolValue = 0.05f;
 
     private static WaitForSeconds delay = new WaitForSeconds(updateTick);
 
