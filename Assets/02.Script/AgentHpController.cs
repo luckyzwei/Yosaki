@@ -178,7 +178,19 @@ public class AgentHpController : MonoBehaviour
 
         if (Vector3.Distance(playerPos.position, this.transform.position) < GameBalance.effectActiveDistance)
         {
-            BattleObjectManagerAllTime.Instance.SpawnDamageText(value * -1f, damTextspawnPos, (isCritical ? DamTextType.Critical : DamTextType.Normal));
+            DamTextType damType = DamTextType.Normal;
+
+            if (isCritical) 
+            {
+                 damType = DamTextType.Critical;
+            }
+
+            if (isSuperCritical) 
+            {
+                 damType = DamTextType.SuperCritical;
+            }
+
+            BattleObjectManagerAllTime.Instance.SpawnDamageText(value * -1f, damTextspawnPos, damType);
         }
     }
     private Vector3 damTextspawnPos;

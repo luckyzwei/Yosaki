@@ -297,6 +297,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         if (hp.Value <= 0)
         {
             whenPlayerDead.Execute();
+            UiAutoBoss.Instance.WhenToggleChanged(false);
         }
     }
 

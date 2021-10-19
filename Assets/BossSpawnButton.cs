@@ -48,6 +48,7 @@ public class BossSpawnButton : SingletonMono<BossSpawnButton>
         if (GameManager.Instance.CurrentStageData.Id == TableManager.Instance.GetLastStageIdx())
         {
             PopupManager.Instance.ShowAlarmMessage("최고 단계 입니다. 다음 업데이트를 기다려주세요!");
+            UiAutoBoss.Instance.WhenToggleChanged(false);
             return;
         }
 
@@ -55,26 +56,32 @@ public class BossSpawnButton : SingletonMono<BossSpawnButton>
 
         if (nextStageId > lastClearStage + 1)
         {
-
             if (GameManager.contentsType != GameManager.ContentsType.NormalField)
             {
                 PopupManager.Instance.ShowAlarmMessage("필드보스를 소환할 수 없는 곳 입니다.");
+                UiAutoBoss.Instance.WhenToggleChanged(false);
                 return;
             }
 
             if (MapInfo.Instance.HasSpawnedBossEnemy())
             {
                 PopupManager.Instance.ShowAlarmMessage("이미 필드에 보스가 있습니다!");
+                UiAutoBoss.Instance.WhenToggleChanged(false);
                 return;
             }
 
-            //확인팝업
-            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "스테이지 보스를 소환합니까?\n\n<color=red>(1층에 소환됩니다.)</color>", () =>
+            if (UiAutoBoss.AutoMode.Value == false) 
             {
-                List<TransactionValue> transactionList = new List<TransactionValue>();
-
+                //확인팝업
+                PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "스테이지 보스를 소환합니까?\n\n<color=red>(1층에 소환됩니다.)</color>", () =>
+                {
+                    MapInfo.Instance.SpawnBossEnemy();
+                }, null);
+            }
+            else 
+            {
                 MapInfo.Instance.SpawnBossEnemy();
-            }, null);
+            }
 
             return;
         }

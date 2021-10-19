@@ -32,6 +32,12 @@ public class UiFieldBossRewardView : SingletonMono<UiFieldBossRewardView>
         this.rewardAmount.SetText(Utils.ConvertBigNum(rewardAmount));
 
         rewardIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)stageMapData.Bossrewardtype);
+
+        if (UiAutoBoss.AutoMode.Value == true)
+        {
+            GameManager.Instance.LoadNextScene();
+        }
+
     }
 
     public void OnClickMoreRewardButton()

@@ -617,7 +617,7 @@ public class UserInfoTable
     public bool IsHotTime()
     {
         int currentHour = currentServerTime.Hour;
-        return currentHour >= GameBalance.HotTime_Start && currentHour <= GameBalance.HotTime_End;
+        return currentHour >= GameBalance.HotTime_Start && currentHour < GameBalance.HotTime_End;
     }
 
     static int totalKillCount = 0;

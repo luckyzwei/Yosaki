@@ -110,6 +110,7 @@ public class MapInfo : SingletonMono<MapInfo>
         UiStageNameIndicater.Instance.StopFieldBossTimer();
         DisableFieldBoss();
         PopupManager.Instance.ShowAlarmMessage("보스가 도망갔습니다!");
+        UiAutoBoss.Instance.WhenToggleChanged(false);
     }
 
     private void SetEnemyData()
@@ -183,7 +184,7 @@ public class MapInfo : SingletonMono<MapInfo>
                 }
             }
 
-         
+
 
             yield return spawnDelay;
         }

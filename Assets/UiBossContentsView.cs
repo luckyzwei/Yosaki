@@ -48,7 +48,7 @@ public class UiBossContentsView : MonoBehaviour
     public void OnClickToggle_3(bool isOn)
     {
         if (isOn)
-            instantOpenAmount = 30;
+            instantOpenAmount = 100;
     }
 
     public void Initialize(BossTableData bossTableData)

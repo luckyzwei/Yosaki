@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public enum DamTextType
 {
-    Normal, Critical, Green, Red, Penetration
+    Normal, Critical, Green, Red, Penetration, SuperCritical
 }
 
 public class DamageText : PoolItem
@@ -24,6 +24,9 @@ public class DamageText : PoolItem
 
     [SerializeField]
     private Color criticalColor;
+
+    [SerializeField]
+    private Color superCriticalColor;
 
     [SerializeField]
     private Color redColor;
@@ -84,6 +87,9 @@ public class DamageText : PoolItem
                 break;
             case DamTextType.Critical:
                 damageText.color = criticalColor;
+                break;
+            case DamTextType.SuperCritical:
+                damageText.color = superCriticalColor;
                 break;
         }
     }

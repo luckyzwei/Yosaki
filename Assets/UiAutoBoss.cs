@@ -16,27 +16,48 @@ public class UiAutoBoss : SingletonMono<UiAutoBoss>
         base.Awake();
     }
 
+    private void Start()
+    {
+        WhenToggleChanged(AutoMode.Value);
+    }
+
     public void WhenToggleChanged(bool on)
     {
         if (on)
         {
-            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "자동으로 진행 합니까?", () =>
+            if (AutoMode.Value == false)
             {
-                AutoMode.Value = on;
-
-                if (autoRoutine != null)
+                PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "자동으로 진행 합니까?", () =>
                 {
-                    StopCoroutine(autoRoutine);
-                }
-
-                autoRoutine = StartCoroutine(AutoRoutine());
-
-            }, () =>
+                    StartBossContents();
+                }, () =>
+                {
+                    StopAutoBoss();
+                });
+            }
+            else
             {
-                StopAutoBoss();
-            });
+                StartBossContents();
+            }
+
+        }
+        else
+        {
+            StopAutoBoss();
         }
 
+    }
+
+    private void StartBossContents()
+    {
+        AutoMode.Value = true;
+
+        if (autoRoutine != null)
+        {
+            StopCoroutine(autoRoutine);
+        }
+
+        autoRoutine = StartCoroutine(AutoRoutine());
     }
 
     public void StopAutoBoss()
@@ -54,5 +75,8 @@ public class UiAutoBoss : SingletonMono<UiAutoBoss>
     private IEnumerator AutoRoutine()
     {
         yield return null;
+        yield return null;
+        AutoManager.Instance.SetAuto(true);
+        BossSpawnButton.Instance.OnClickSpawnButton();
     }
 }

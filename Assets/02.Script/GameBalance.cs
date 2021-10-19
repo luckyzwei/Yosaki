@@ -114,11 +114,11 @@ public static class GameBalance
 
 
     public readonly static ObscuredFloat HotTime_Start = 19;
-    public readonly static ObscuredFloat HotTime_End = 22;
+    public readonly static ObscuredFloat HotTime_End = 21;
 
-    public readonly static ObscuredFloat HotTime_Exp = 5;
-    public readonly static ObscuredFloat HotTime_Gold = 5;
-    public readonly static ObscuredFloat HotTime_GrowthStone = 5;
+    public readonly static ObscuredFloat HotTime_Exp = 10;
+    public readonly static ObscuredFloat HotTime_Gold = 10;
+    public readonly static ObscuredFloat HotTime_GrowthStone = 10;
 
     public readonly static ObscuredInt DailyRelicTicketGetCount = 3;
     public readonly static ObscuredInt StageRelicUnlockLevel = 3000;
