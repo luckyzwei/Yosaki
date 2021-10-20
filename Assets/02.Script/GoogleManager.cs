@@ -27,7 +27,9 @@ public class GoogleManager : MonoBehaviour
     {
         Backend.Initialize(HandleBackendCallBack, true);
 
-        // SRDebug.Init();
+#if UNITY_IOS
+         SRDebug.Init();
+#endif
     }
 
     private void HandleBackendCallBack()
