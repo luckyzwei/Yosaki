@@ -128,6 +128,10 @@ public class UiRealBossRankBoard : MonoBehaviour
                             color1 = Color.yellow;
                         }
 
+#if UNITY_IOS
+                    nickName = nickName.Replace(CommonString.IOS_nick, "");
+#endif
+
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
                         rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
                     }
