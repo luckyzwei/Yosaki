@@ -4,6 +4,9 @@ using Google.Play.Review;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_IOS
+using UnityEngine.iOS;
+#endif
 
 public class GameEscapeManager : SingletonMono<GameEscapeManager>
 {
@@ -54,9 +57,13 @@ public class GameEscapeManager : SingletonMono<GameEscapeManager>
 
         };
 #endif
+
+#if UNITY_IOS
+        Device.RequestStoreReview();
+#endif
     }
 
-    public void OnClickCafeButton() 
+    public void OnClickCafeButton()
     {
         Application.OpenURL(CommonString.CafeURL);
     }
