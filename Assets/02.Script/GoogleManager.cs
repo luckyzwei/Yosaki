@@ -73,7 +73,12 @@ public class GoogleManager : MonoBehaviour
 
                 PopupManager.Instance.ShowVersionUpPopup(CommonString.Notice, "업데이트 버전이 있습니다. 스토어로 이동합니다.", () =>
                 {
+#if UNITY_ANDROID
                     Application.OpenURL("https://play.google.com/store/apps/details?id=com.DragonGames.yoyo");
+#endif
+#if UNITY_IOS
+                    Application.OpenURL("itms-apps://itunes.apple.com/app/id1587651736");
+#endif
                 }, false);
             }
 
