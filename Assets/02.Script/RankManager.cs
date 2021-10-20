@@ -30,7 +30,13 @@ public class RankManager : SingletonMono<RankManager>
     {
         public RankInfo(string NickName, int Rank, float Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int fightPointIdx)
         {
+#if UNITY_ANDROID
             this.NickName = NickName;
+#endif
+
+#if UNITY_IOS
+            this.NickName = NickName.Replace(CommonString.IOS_nick, "");
+#endif
             this.Rank = Rank;
             this.Score = Score;
             this.costumeIdx = costumeIdx;
@@ -56,21 +62,27 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss_Uuid = "4373ef80-228c-11ec-9e8b-89cc0dbedc9b";
     public const string Rank_Real_Boss_Uuid = "4799fde0-2c21-11ec-84b9-659f6192d902";
     public const string Rank_Relic_Uuid = "0453f560-2779-11ec-9b46-299116fee741";
-#endif
-
-#if UNITY_IOS
-    public const string Rank_Level_Uuid = "ac807490-1f7f-11ec-8223-8f79bdaec2e4";
-    public const string Rank_Stage_Uuid = "c7ef2910-1f7f-11ec-a199-efc96572d1a5";
-    public const string Rank_Boss_Uuid = "a715ee30-1f80-11ec-a199-efc96572d1a5";
-    public const string Rank_Real_Boss_Uuid = "c0fddba0-1f80-11ec-8223-8f79bdaec2e4";
-    public const string YoguiSogul_Uuid = "e5484870-1f7f-11ec-8223-8f79bdaec2e4";
-#endif
-
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
     public const string Rank_Boss = "Rank_Boss_Cat";
     public const string Rank_Real_Boss = "Rank_Boss_5";
     public const string Rank_Relic = "Rank_Relic";
+#endif
+
+#if UNITY_IOS
+    public const string Rank_Level_Uuid = "edfa1040-31b6-11ec-9f89-ed8eb4713349";
+    public const string Rank_Stage_Uuid = "f865e900-31b6-11ec-b4ab-713be46ddb60";
+    public const string Rank_Boss_Uuid = "0b700670-31b7-11ec-b6f2-0d73a4821171";
+    public const string Rank_Real_Boss_Uuid = "2b398990-31b7-11ec-b6f2-0d73a4821171";
+    public const string Rank_Relic_Uuid = "1ce07110-31b7-11ec-be95-537d9b90903a";
+    public const string Rank_Level_TableName = "Rank_Level_IOS";
+    public const string Rank_Stage = "Rank_Stage_IOS";
+    public const string Rank_Boss = "Rank_Boss_Cat_IOS";
+    public const string Rank_Real_Boss = "Rank_Boss_5_IOS";
+    public const string Rank_Relic = "Rank_Relic_IOS";
+#endif
+
+
 
     public ReactiveCommand<RankInfo> WhenMyLevelRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyStageRankLoadComplete = new ReactiveCommand<RankInfo>();
@@ -92,7 +104,7 @@ public class RankManager : SingletonMono<RankManager>
         Backend.URank.User.GetRankList(uuid, count, callback);
     }
 
-#region LevelRank
+    #region LevelRank
     public void RequestMyLevelRank()
     {
         Backend.URank.User.GetMyRank(RankManager.Rank_Level_Uuid, MyLevelRankLoadComplete);
@@ -163,9 +175,9 @@ public class RankManager : SingletonMono<RankManager>
 
         });
     }
-#endregion
+    #endregion
 
-#region Stage
+    #region Stage
     private Action<RankInfo> whenLoadSuccess_Stage;
     public void RequestMyStageRank(Action<RankInfo> whenLoadSuccess = null)
     {
@@ -238,10 +250,10 @@ public class RankManager : SingletonMono<RankManager>
 
         });
     }
-#endregion
+    #endregion
 
 
-#region Boss
+    #region Boss
     private Action<RankInfo> whenLoadSuccess_Boss;
     public void RequestMyBossRank(Action<RankInfo> whenLoadSuccess = null)
     {
@@ -326,9 +338,9 @@ public class RankManager : SingletonMono<RankManager>
         });
     }
 
-#endregion
+    #endregion
 
-#region RealBoss
+    #region RealBoss
     private Action<RankInfo> whenLoadSuccess_Real_Boss;
     public void RequestMyRealBossRank(Action<RankInfo> whenLoadSuccess = null)
     {
@@ -410,9 +422,9 @@ public class RankManager : SingletonMono<RankManager>
         });
     }
 
-#endregion
+    #endregion
 
-#region Relic
+    #region Relic
     private Action<RankInfo> whenLoadSuccess_Relic;
     public void RequestMyRelicRank(Action<RankInfo> whenLoadSuccess = null)
     {
@@ -491,7 +503,7 @@ public class RankManager : SingletonMono<RankManager>
         });
     }
 
-#endregion
+    #endregion
 
     private bool UpdateRank()
     {

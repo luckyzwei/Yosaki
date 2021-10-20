@@ -37,6 +37,9 @@ public class UiIapItemCell : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
+    [SerializeField]
+    private Button buyButton;
+
     private void Start()
     {
         if (isInspectorItem == true)
@@ -138,8 +141,6 @@ public class UiIapItemCell : MonoBehaviour
                 weaponView.Initialize(null, null, TableManager.Instance.SkillData[itemIdx]);
             }
         }
-
-
 
         if (itemDetailText != null)
             itemDetailText.SetText(itemDetailDesc);
@@ -277,6 +278,16 @@ public class UiIapItemCell : MonoBehaviour
             if (buyCountText != null)
                 buyCountText.SetText(text);
 
+        }).AddTo(disposable);
+
+        IAPManager.Instance.disableBuyButton.AsObservable().Subscribe(e =>
+        {
+            buyButton.interactable = false;
+        }).AddTo(disposable);
+
+        IAPManager.Instance.activeBuyButton.AsObservable().Subscribe(e =>
+        {
+            buyButton.interactable = true;
         }).AddTo(disposable);
     }
 

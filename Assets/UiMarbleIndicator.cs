@@ -314,7 +314,7 @@ public class UiMarbleIndicator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += 100000;
+            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += 10000000;
         }
     }
 

@@ -717,6 +717,10 @@ public static class PlayerStats
         ret += GetRelicHasEffect(StatusType.IgnoreDefense);
         ret += GetStageRelicHasEffect(StatusType.IgnoreDefense);
 
+        ret += GetSinsuEquipEffect(StatusType.IgnoreDefense);
+
+        
+
         return ret;
     }
 
@@ -739,6 +743,8 @@ public static class PlayerStats
 
         ret += GetYomulUpgradeValue(StatusType.SuperCritical1Prob);
         ret += GetBuffValue(StatusType.SuperCritical1Prob);
+
+        ret += GetSinsuEquipEffect(StatusType.SuperCritical1Prob);
 
         return ret;
     }

@@ -9,7 +9,12 @@ using UniRx;
 
 public class ChatManager : SingletonMono<ChatManager>
 {
+#if UNITY_ANDROID
     private string chatGroupName = "Normal";
+#endif
+#if UNITY_IOS
+    private string chatGroupName = "Normal_IOS";
+#endif
 
     ChannelType channelType = ChannelType.Public;
 

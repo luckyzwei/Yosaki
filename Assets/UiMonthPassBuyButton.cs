@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
+
 public class UiMonthPassBuyButton : MonoBehaviour
 {
     [SerializeField]
@@ -11,6 +13,8 @@ public class UiMonthPassBuyButton : MonoBehaviour
     private CompositeDisposable disposable = new CompositeDisposable();
 
     public static readonly string monthPassKey = "monthpass1";
+
+    private Button buyButton;
 
     void Start()
     {
@@ -24,6 +28,8 @@ public class UiMonthPassBuyButton : MonoBehaviour
 
     private void Subscribe()
     {
+        buyButton = GetComponent<Button>();
+
         disposable.Clear();
 
         ServerData.iapServerTable.TableDatas[monthPassKey].buyCount.AsObservable().Subscribe(e =>
@@ -36,6 +42,16 @@ public class UiMonthPassBuyButton : MonoBehaviour
         {
             SoundManager.Instance.PlaySound("GoldUse");
             GetPackageItem(e.purchasedProduct.definition.id);
+        }).AddTo(disposable);
+
+        IAPManager.Instance.disableBuyButton.AsObservable().Subscribe(e =>
+        {
+            buyButton.interactable = false;
+        }).AddTo(disposable);
+
+        IAPManager.Instance.activeBuyButton.AsObservable().Subscribe(e =>
+        {
+            buyButton.interactable = true;
         }).AddTo(disposable);
     }
 

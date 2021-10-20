@@ -45,7 +45,12 @@ public class PlayerData : SingletonMono<PlayerData>
             {
                 if (row["nickname"] != null)
                 {
+#if UNITY_ANDROID
                     NickName = row["nickname"].ToString();
+#endif
+#if UNITY_IOS
+                    NickName = row["nickname"].ToString().Replace(CommonString.IOS_nick, "");
+#endif
                     WhenUserInfoLoadComplete();
                 }
                 else

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
 
 public class UiLevelPassBuyButton : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class UiLevelPassBuyButton : MonoBehaviour
     private CompositeDisposable disposable = new CompositeDisposable();
 
     public static readonly string stagePassKey = "levelpass";
+
+    private Button buyButton;
 
     void Start()
     {
@@ -25,6 +28,8 @@ public class UiLevelPassBuyButton : MonoBehaviour
 
     private void Subscribe()
     {
+        buyButton = GetComponent<Button>();
+
         disposable.Clear();
 
         ServerData.iapServerTable.TableDatas[stagePassKey].buyCount.AsObservable().Subscribe(e =>
@@ -37,6 +42,16 @@ public class UiLevelPassBuyButton : MonoBehaviour
         {
             SoundManager.Instance.PlaySound("Reward");
             GetPackageItem(e.purchasedProduct.definition.id);
+        }).AddTo(disposable);
+
+        IAPManager.Instance.disableBuyButton.AsObservable().Subscribe(e =>
+        {
+            buyButton.interactable = false;
+        }).AddTo(disposable);
+
+        IAPManager.Instance.activeBuyButton.AsObservable().Subscribe(e =>
+        {
+            buyButton.interactable = true;
         }).AddTo(disposable);
     }
 

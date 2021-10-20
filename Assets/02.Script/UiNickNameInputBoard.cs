@@ -67,6 +67,12 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
             return;
         }
 
+        string nickName = inputField.text;
+
+#if UNITY_IOS
+        nickName += CommonString.IOS_nick;
+#endif
+
         if (HasSuckSsoText())
         {
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말 썩쏘님이 맞습니까?",
@@ -74,7 +80,7 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
                 {
                     nowConnection.Value = true;
 
-                    Backend.BMember.CreateNickname(inputField.text, MakeNickNameCallBack);
+                    Backend.BMember.CreateNickname(nickName, MakeNickNameCallBack);
                 },
                 () =>
                 {
@@ -85,7 +91,7 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
         {
             nowConnection.Value = true;
 
-            Backend.BMember.CreateNickname(inputField.text, MakeNickNameCallBack);
+            Backend.BMember.CreateNickname(nickName, MakeNickNameCallBack);
         }
 
         ServerData.userInfoTable.ClearDailyMission();
@@ -134,10 +140,19 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
 
     private bool CanMakeNickName()
     {
+#if UNITY_ANDROID
+        bool isRightRangeChar = Regex.IsMatch(inputField.text, "^[0-9a-zA-Z가-힣]*$");
+        bool hasBadWorld = Utils.HasBadWord(inputField.text);
+        bool hasIOS = inputField.text.Contains(CommonString.IOS_nick);
+        return isRightRangeChar && hasBadWorld == false && hasIOS == false;
+#endif
+
+#if UNITY_IOS
         bool isRightRangeChar = Regex.IsMatch(inputField.text, "^[0-9a-zA-Z가-힣]*$");
         bool hasBadWorld = Utils.HasBadWord(inputField.text);
 
         return isRightRangeChar && hasBadWorld == false;
+#endif
     }
 
     public void OnClickTermsViewButton()

@@ -49,6 +49,8 @@ public static class CommonString
 
     public static string CafeURL = "https://cafe.naver.com/yokiki";
 
+    public static string IOS_nick = "_IOS";
+
     public static string GetContentsName(ContentsType contentsType)
     {
         switch (contentsType)

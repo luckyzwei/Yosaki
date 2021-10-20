@@ -32,6 +32,10 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
     private ReactiveCommand<PurchaseEventArgs> whenBuyComplete = new ReactiveCommand<PurchaseEventArgs>();
     public IObservable<PurchaseEventArgs> WhenBuyComplete => whenBuyComplete.AsObservable();
 
+
+    public ReactiveCommand disableBuyButton = new ReactiveCommand();
+    public ReactiveCommand activeBuyButton = new ReactiveCommand();
+
     public Product[] PurchasedProducts { get; private set; }
     private Dictionary<string, int> PurchasedProductsDic = new Dictionary<string, int>();
 
@@ -104,6 +108,7 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 
     public void BuyProduct(string shopId)
     {
+        disableBuyButton.Execute();
         BuyProductID(shopId);
     }
 
@@ -231,6 +236,8 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
+        activeBuyButton.Execute();
+
         //BackendReturnObject validation = Backend.Receipt.IsValidateGooglePurchase(args.purchasedProduct.receipt, "receiptDescription", false);
 
         ////영수증 검증 실패
@@ -293,6 +300,7 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {
+        activeBuyButton.Execute();
         MyDebug(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
 

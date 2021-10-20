@@ -80,36 +80,36 @@ public class UiPetEquipmentView : MonoBehaviour
 
             levelUpButtonDesc.SetText(e == petEquipmentData.Maxlevel ? "최고레벨" : Utils.ConvertBigNum(petEquipmentData.Upgradeprice));
 
-            levelUpButtonDesc_marble.SetText(e == petEquipmentData.Maxlevel ? "최고레벨" : Utils.ConvertBigNum(petEquipmentData.Upgradeprice* marbleDiscountRatio));
+            levelUpButtonDesc_marble.SetText(e == petEquipmentData.Maxlevel ? "최고레벨" : Utils.ConvertBigNum(petEquipmentData.Upgradeprice * marbleDiscountRatio));
 
             string abilDesc = string.Empty;
 
             StatusType type1 = (StatusType)petEquipmentData.Abiltype1;
 
-            if (type1.IsPercentStat() == false) 
+            if (type1.IsPercentStat() == false)
             {
                 float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * e;
                 float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
 
                 abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1}(<color=red>MAX:{maxAbil1}</color>)\n";
             }
-            else 
+            else
             {
                 float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * e;
                 float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
 
-                abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1*100f}(<color=red>MAX:{maxAbil1*100f}</color>)\n";
+                abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1 * 100f}(<color=red>MAX:{maxAbil1 * 100f}</color>)\n";
             }
-       
+
             StatusType type2 = (StatusType)petEquipmentData.Abiltype2;
-            if (type2.IsPercentStat()) 
+            if (type2.IsPercentStat())
             {
                 float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * e;
                 float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
 
                 abilDesc += $"{CommonString.GetStatusName(type2)} {abilValue2 * 100f}%(<color=red>MAX:{maxAbil2 * 100f}</color>)";
             }
-            else 
+            else
             {
                 float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * e;
                 float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
@@ -128,8 +128,23 @@ public class UiPetEquipmentView : MonoBehaviour
 
         if (ServerData.petTable.TableDatas[petTableData.Stringid].hasItem.Value == 0)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{petTableData.Name} 보유중일때 획득 가능");
-            return;
+            //주작 이하
+            if (petEquipmentData.Requippetid < 10)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"{petTableData.Name} 보유중일때 획득 가능\n(3단계 환수)");
+                return;
+            }
+            else
+            {
+                var prefPetData = TableManager.Instance.PetEquipment.dataArray[petEquipmentData.Id - 1];
+                var prefPetEquipData = ServerData.petEquipmentServerTable.TableDatas[prefPetData.Stringid];
+
+                if (prefPetEquipData.level.Value < 1000)
+                {
+                    PopupManager.Instance.ShowAlarmMessage($"{petTableData.Name} 보유중이거나(3단계 환수)\n{prefPetData.Name} LV:{1000}이상일때 제작 가능");
+                    return;
+                }
+            }
         }
 
         if (petEquipServerData.hasAbil.Value == 1)
@@ -191,6 +206,21 @@ public class UiPetEquipmentView : MonoBehaviour
         ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value -= petEquipmentData.Upgradeprice;
         petEquipServerData.level.Value++;
 
+        if (upgradeRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(upgradeRoutine);
+        }
+
+        upgradeRoutine = CoroutineExecuter.Instance.StartCoroutine(UpgradeRotuine());
+
+    }
+    private Coroutine upgradeRoutine;
+    private WaitForSeconds upgradeDelay = new WaitForSeconds(0.5f);
+
+    private IEnumerator UpgradeRotuine()
+    {
+        yield return upgradeDelay;
+
         List<TransactionValue> transactions = new List<TransactionValue>();
 
         Param petEquipParam = new Param();
@@ -232,6 +262,20 @@ public class UiPetEquipmentView : MonoBehaviour
         ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= upgradePrice;
         petEquipServerData.level.Value++;
 
+        if (upgradeRoutine_marble != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(upgradeRoutine_marble);
+        }
+
+        upgradeRoutine_marble = CoroutineExecuter.Instance.StartCoroutine(UpgradeRotuine_Marble());
+    }
+
+    private Coroutine upgradeRoutine_marble;
+
+    private IEnumerator UpgradeRotuine_Marble()
+    {
+        yield return upgradeDelay;
+
         List<TransactionValue> transactions = new List<TransactionValue>();
 
         Param petEquipParam = new Param();
@@ -248,6 +292,7 @@ public class UiPetEquipmentView : MonoBehaviour
 
         });
     }
+
 
 #if UNITY_EDITOR
     private void Update()
