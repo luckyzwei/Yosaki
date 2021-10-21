@@ -55,6 +55,9 @@ public enum TitleMissionId
     Yomul5,//★
     Stage900,//★
     Stage950,//★
+    HyeonMu_1,//★
+    BaekHo_1,//★
+    ZuZak_1,//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -430,6 +433,33 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Yomul5);
             }
+        }).AddTo(this);
+
+        ServerData.petEquipmentServerTable.TableDatas["petequip0"].hasAbil.AsObservable().Subscribe(e =>
+        {
+            if (e == 1) 
+            {
+                ClearTitleMission(TitleMissionId.HyeonMu_1);
+            }
+
+        }).AddTo(this);
+
+        ServerData.petEquipmentServerTable.TableDatas["petequip1"].hasAbil.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.BaekHo_1);
+            }
+
+        }).AddTo(this);
+
+        ServerData.petEquipmentServerTable.TableDatas["petequip2"].hasAbil.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.ZuZak_1);
+            }
+
         }).AddTo(this);
     }
 

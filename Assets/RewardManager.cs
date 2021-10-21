@@ -26,6 +26,10 @@ public class RewardManager : SingletonMono<RewardManager>
                 ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value += amount;
                 ServerData.goodsTable.UpData(GoodsTable.DokebiKey, false);
                 break;
+            case Item_Type.Marble:
+                ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += amount;
+                ServerData.goodsTable.UpData(GoodsTable.MarbleKey, false);
+                break;
         }
     }
 }

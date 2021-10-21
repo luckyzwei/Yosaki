@@ -552,6 +552,7 @@ public static class PlayerStats
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
 
         ret += GetBuffValue(StatusType.GoldGainPer);
+        ret += GetTitleAbilValue(StatusType.GoldGainPer);
 
         return ret;
     }

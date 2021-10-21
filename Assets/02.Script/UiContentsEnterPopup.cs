@@ -200,19 +200,22 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 {killCount}로 소탕 합니까?\n보상 : {killCount * GameBalance.bonusDungeonGemPerEnemy}개", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 {killCount}로 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy}개", () =>
         {
             enterButton.interactable = false;
 
-            int rewardNum = killCount * GameBalance.bonusDungeonGemPerEnemy;
+            int rewardNumJade = killCount * GameBalance.bonusDungeonGemPerEnemy;
+            int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy;
             ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value++;
             ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += killCount * GameBalance.bonusDungeonGemPerEnemy;
+            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += killCount * GameBalance.bonusDungeonMarblePerEnemy;
 
             //데이터 싱크
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
             Param goodsParam = new Param();
             goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param userInfoParam = new Param();
@@ -229,7 +232,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
                     enterButton.interactable = true;
                 });
 
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)} {rewardNum}개 획득!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!");
             SoundManager.Instance.PlaySound("GoldUse");
 
 

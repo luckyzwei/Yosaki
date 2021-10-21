@@ -16,6 +16,11 @@ public class ContentsRewardManager : SingletonMono<ContentsRewardManager>
     {
         return enemyNum * GameBalance.bonusDungeonGemPerEnemy;
     }
+
+    public int GetDefenseReward_Marble(int enemyNum)
+    {
+        return enemyNum * GameBalance.bonusDungeonMarblePerEnemy;
+    }
     private IEnumerator RandomizeRoutine()
     {
         WaitForSeconds delay = new WaitForSeconds(2.0f);

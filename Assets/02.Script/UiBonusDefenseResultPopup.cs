@@ -32,11 +32,17 @@ public class UiBonusDefenseResultPopup : MonoBehaviour
         int blueStoneRewardNum = ContentsRewardManager.Instance.GetDefenseReward_BlueStone(defeatEnemiesNum);
         var blueStoneReward = Instantiate<UiRewardView>(prefab, rewardParent);
 
+        int marbleRewardNum = ContentsRewardManager.Instance.GetDefenseReward_Marble(defeatEnemiesNum);
+        var marbleReward = Instantiate<UiRewardView>(prefab, rewardParent);
 
-        RewardData rewardData = new RewardData(Item_Type.Jade, blueStoneRewardNum);
-        blueStoneReward.Initialize(rewardData);
+        RewardData rewardDataJade = new RewardData(Item_Type.Jade, blueStoneRewardNum);
+        blueStoneReward.Initialize(rewardDataJade);
+
+        RewardData rewardDataMarble = new RewardData(Item_Type.Marble, marbleRewardNum);
+        marbleReward.Initialize(rewardDataMarble);
 
         RewardManager.Instance.GetReward(Item_Type.Jade, blueStoneRewardNum);
+        RewardManager.Instance.GetReward(Item_Type.Marble, marbleRewardNum);
 
         int prefMaxKillCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
 
