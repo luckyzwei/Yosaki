@@ -270,7 +270,7 @@ public class GoogleManager : MonoBehaviour
 #if UNITY_EDITOR
         //  return "a_8846847867697156085"; //블랙핑크
         //  return "a_3961873472804492579"; //제니
-        return "a_88468478672269227156085";
+        return "a_8846847867697156085";
 #endif
         Debug.LogError($"GetGoogleLoginKey {loginId}");
         return loginId;

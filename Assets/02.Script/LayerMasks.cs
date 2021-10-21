@@ -12,7 +12,12 @@ public static class LayerMasks
     public static int PlatformLayerMask =  LayerMask.NameToLayer(Platform);
 
     private static string EnemyWall = "EnemyWall";
-    public static int EnemyWallLayerMask = 1 << LayerMask.NameToLayer(EnemyWall);
+    public static int EnemyWallLayerMask_Ray = 1 << LayerMask.NameToLayer(EnemyWall);
+    public static int EnemyWallLayerMask = LayerMask.NameToLayer(EnemyWall);
+
+    private static string Wall = "Wall";
+    public static int WallLayerMask = LayerMask.NameToLayer(Wall);
+
 
     private static string DropItem = "DropItem";
     public static int DropItemLayerMask = LayerMask.NameToLayer(DropItem);

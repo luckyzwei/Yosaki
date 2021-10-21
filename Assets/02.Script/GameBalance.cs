@@ -113,8 +113,8 @@ public static class GameBalance
     public readonly static ObscuredFloat TitleEquipAddPer = 2;
 
 
-    public readonly static ObscuredFloat HotTime_Start = 19;
-    public readonly static ObscuredFloat HotTime_End = 21;
+    public readonly static ObscuredFloat HotTime_Start = 20;
+    public readonly static ObscuredFloat HotTime_End = 22;
 
     public readonly static ObscuredFloat HotTime_Exp = 10;
     public readonly static ObscuredFloat HotTime_Gold = 10;

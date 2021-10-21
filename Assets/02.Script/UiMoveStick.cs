@@ -193,7 +193,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         {
             case InputType.Top:
                 {
-                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.up, quickMoveRange_Common);
+                    var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.up, quickMoveRange_Common, ignoreEnemyWall: true);
 
                     if (wallHitPoint != Vector2.zero)
                     {
@@ -213,7 +213,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
                     }
                     else
                     {
-                        var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.down, quickMoveRange_Down);
+                        var wallHitPoint = PlayerSkillCaster.Instance.GetRayHitPlatformPoint(playerTr.position, Vector3.down, quickMoveRange_Down, ignoreEnemyWall: true);
 
                         if (wallHitPoint != Vector2.zero)
                         {

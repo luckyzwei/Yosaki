@@ -85,7 +85,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     private string wallString = "Wall";
     public Vector2 GetRayHitWallPoint(Vector2 origin, Vector2 rayDirection, float length)
     {
-        int hitLayer = LayerMasks.PlatformLayerMask_Ray + LayerMasks.EnemyWallLayerMask;
+        int hitLayer = LayerMasks.PlatformLayerMask_Ray + LayerMasks.EnemyWallLayerMask_Ray;
 
         var rayHits = Physics2D.RaycastAll(origin, rayDirection, length, hitLayer);
 
@@ -99,9 +99,18 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         return Vector2.zero;
     }
 
-    public Vector2 GetRayHitPlatformPoint(Vector2 origin, Vector2 rayDirection, float length)
+    public Vector2 GetRayHitPlatformPoint(Vector2 origin, Vector2 rayDirection, float length, bool ignoreEnemyWall = false)
     {
-        int hitLayer = LayerMasks.PlatformLayerMask_Ray + LayerMasks.EnemyWallLayerMask;
+        int hitLayer = 0;
+
+        if (ignoreEnemyWall == false)
+        {
+            hitLayer = LayerMasks.PlatformLayerMask_Ray + LayerMasks.EnemyWallLayerMask_Ray;
+        }
+        else
+        {
+            hitLayer = LayerMasks.PlatformLayerMask_Ray;
+        }
 
         var rayHits = Physics2D.RaycastAll(origin, rayDirection, length, hitLayer);
 
@@ -109,6 +118,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         {
             return rayHits[i].point;
         }
+
         return Vector2.zero;
     }
 
@@ -123,7 +133,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         return tableData.Activeoffset * Vector2.right * (playerMoveController.MoveDirection == MoveDirection.Right ? 1 : -1);
     }
 
-    public IEnumerator ApplyDamage(Collider2D hitEnemie, SkillTableData skillInfo, float damage, WaitForSeconds damageApplyInterval,bool playSound)
+    public IEnumerator ApplyDamage(Collider2D hitEnemie, SkillTableData skillInfo, float damage, WaitForSeconds damageApplyInterval, bool playSound)
     {
         AgentHpController agentHpController = hitEnemie.gameObject.GetComponent<AgentHpController>();
 
@@ -152,7 +162,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
             //사운드
             //시전할때 사운드 있어서 따로재생X
-            if (hit != 0 && playSound) 
+            if (hit != 0 && playSound)
             {
                 SoundManager.Instance.PlaySound(skillInfo.Soundname);
             }
