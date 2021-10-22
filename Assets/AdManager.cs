@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
+using UnityEngine.Events;
+using GoogleMobileAds.Api;
+using GoogleMobileAds.Common;
+using UnityEngine.UI;
+using System;
+
 public class AdManager : SingletonMono<AdManager>
 {
     private static string AndroidGameId = "4235399";
@@ -16,6 +22,8 @@ public class AdManager : SingletonMono<AdManager>
     private ShowOptions options;
 
     private System.Action rewardEndCallBack;
+
+    private bool admobLoadSuccess = false;
 
     private new void Awake()
     {
@@ -32,13 +40,16 @@ public class AdManager : SingletonMono<AdManager>
     {
         options = new ShowOptions();
         options.resultCallback = HandleShowResult;
+
+
+        //ADMob
     }
 
     private void ShowNormalVideo()
     {
         Advertisement.Show(videoPlacementId, options);
     }
-    private void ShowRewardedVideo()
+    private void ShowRewardedUnityVideo()
     {
         Advertisement.Show(rewardedPlacementId, options);
     }
@@ -53,7 +64,20 @@ public class AdManager : SingletonMono<AdManager>
         else
         {
             this.rewardEndCallBack = callBack;
-            ShowRewardedVideo();
+
+            if (admobLoadSuccess)
+            {
+                if (this.rewardedAd.IsLoaded())
+                {
+                    this.rewardedAd.Show();
+                }
+            }
+            else
+            {
+                ShowRewardedUnityVideo();
+            }
+
+
         }
     }
 
@@ -68,9 +92,7 @@ public class AdManager : SingletonMono<AdManager>
     {
         if (result == ShowResult.Finished)
         {
-            rewardEndCallBack?.Invoke();
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "광고 보상 획득!", null);
-            SoundManager.Instance.PlaySound("GoldUse");
+            GetReward();
         }
         else if (result == ShowResult.Failed)
         {
@@ -78,16 +100,91 @@ public class AdManager : SingletonMono<AdManager>
         }
     }
 
-    ////배너
-    //IEnumerator ShowBannerWhenReady()
-    //{
-    //    while (!Advertisement.IsReady(bannerPlacement))
-    //    {
-    //        yield return new WaitForSeconds(0.5f);
-    //    }
-    //    Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
-    //    Advertisement.Banner.Show(bannerPlacement);
-    //    // Advertisement.Banner.Hide();
-    //}
+    private void GetReward() 
+    {
+        rewardEndCallBack?.Invoke();
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "광고 보상 획득!", null);
+        SoundManager.Instance.PlaySound("GoldUse");
+    }
+
+
+    //admob
+    private RewardedAd rewardedAd;
+
+    public void Start()
+    {
+        string adUnitId;
+#if UNITY_ANDROID
+            adUnitId = "ca-app-pub-3940256099942544/5224354917";
+#elif UNITY_IPHONE
+            adUnitId = "ca-app-pub-3940256099942544/1712485313";
+#else
+            adUnitId = "unexpected_platform";
+#endif
+
+        this.rewardedAd = new RewardedAd(adUnitId);
+
+        // Called when an ad request has successfully loaded.
+        this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
+
+        // Called when an ad request failed to load.
+        this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+
+        // Called when an ad is shown.
+        this.rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+
+        // Called when an ad request failed to show.
+        this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+
+        // Called when the user should be rewarded for interacting with the ad.
+        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+
+        // Called when the ad is closed.
+        this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the rewarded ad with the request.
+        this.rewardedAd.LoadAd(request);
+    }
+
+    public void HandleRewardedAdLoaded(object sender, EventArgs args)
+    {
+        //초기화 광고 성공
+        admobLoadSuccess = true;
+        Debug.LogError("AdMob_admobLoadSuccess");
+    }
+
+    public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
+        //초기화 광고 실패
+        admobLoadSuccess = false;
+        Debug.LogError("AdMob_admobLoadFailed");
+    }
+
+    public void HandleRewardedAdOpening(object sender, EventArgs args)
+    {
+        //X
+    }
+
+    public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
+    {
+        //실패
+        Debug.LogError("AdMob_AdLoadFailed");
+        ShowRewardedUnityVideo();
+    }
+
+    public void HandleRewardedAdClosed(object sender, EventArgs args)
+    {
+        //X
+    }
+
+    public void HandleUserEarnedReward(object sender, Reward args)
+    {
+        //보상 획득
+        Debug.LogError("AdMob_GetReward");
+        GetReward();
+    }
+
 
 }

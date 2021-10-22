@@ -1,3 +1,19 @@
+# Version 1.2.166 - Jun 30, 2021
+* All - Fixed #440 and fixed #447 by specifying the parameter type while calling
+  `GetApplicationIdentifier()` Unity API using reflection, due to a new
+  overloaded method introduced in Unity 2021.2.
+* Android Resolver - Fixed #442 by patching `Dependency.IsGreater()` when the
+  version strings end '+'.
+
+# Version 1.2.165 - Apr 28, 2021
+## Bug Fixes
+* Version Handler - Fixed #431 by replacing the use of `HttpUtility.UrlEncode()`
+  which causes NullReferenceException in certain version of Unity.
+* Android Resolver - Check that androidSdkRootPath directory exists before using
+  as sdkPath.
+* Android Resolver - Fixed Android Resolver integration tests with Unity
+  2019.3+.
+
 # Version 1.2.164 - Feb 4, 2021
 ## New Features
 * Android Resolver - Added support for Android packages with classifier in their
