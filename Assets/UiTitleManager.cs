@@ -58,6 +58,7 @@ public enum TitleMissionId
     HyeonMu_1,//★
     BaekHo_1,//★
     ZuZak_1,//★
+    Level41000,//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -153,6 +154,11 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 38000)
             {
                 ClearTitleMission(TitleMissionId.Level38000);
+            }
+
+            if (e >= 41000) 
+            {
+                ClearTitleMission(TitleMissionId.Level41000);
             }
 
 

@@ -63,6 +63,7 @@ public class UiAutoBoss : SingletonMono<UiAutoBoss>
     public void StopAutoBoss()
     {
         toggle.isOn = false;
+        AutoMode.Value = false;
 
         if (autoRoutine != null)
         {

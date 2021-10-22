@@ -144,7 +144,7 @@ public class AgentHpController : MonoBehaviour
         if (isSuperCritical)
         {
             //30% 고정
-            value += value * GameBalance.SuperCriticalDamPer;
+            value += value * PlayerStats.GetSuperCriticalDamPer();
         }
 
         Vector3 spawnPos = Vector3.zero;

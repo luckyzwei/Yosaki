@@ -29,7 +29,8 @@ public enum StatusType
     BossDamAddPer,
     SkillAttackCount,
     PenetrateDefense,
-    SuperCritical1Prob
+    SuperCritical1Prob,
+    SuperCritical1DamPer
 }
 
 
@@ -68,7 +69,7 @@ public static class PlayerStats
            * (Mathf.Max(penetration, 0.01f)) * 100f
            );
 
-        totalPower += totalPower * GameBalance.SuperCriticalDamPer * superCriticalProb;
+        totalPower += totalPower * GetSuperCriticalDamPer() * superCriticalProb;
 
 
         //     float totalPower =
@@ -720,7 +721,7 @@ public static class PlayerStats
 
         ret += GetSinsuEquipEffect(StatusType.IgnoreDefense);
 
-        
+
 
         return ret;
     }
@@ -734,6 +735,15 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.PenetrateDefense);
 
         ret += GetStageRelicHasEffect(StatusType.PenetrateDefense);
+
+        return ret;
+    }
+
+    public static float GetSuperCriticalDamPer()
+    {
+        float ret = 0.5f;
+
+        ret += GetSinsuEquipEffect(StatusType.SuperCritical1DamPer);
 
         return ret;
     }

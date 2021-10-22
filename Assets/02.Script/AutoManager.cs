@@ -16,7 +16,7 @@ public class AutoManager : Singleton<AutoManager>
 
     private List<int> skillQueue = new List<int>();
 
-    private WaitForSeconds skillDelay = new WaitForSeconds(0.05f);
+    private WaitForSeconds skillDelay = new WaitForSeconds(0.01f);
 
     public void SetPlayerTr()
     {
@@ -142,7 +142,7 @@ public class AutoManager : Singleton<AutoManager>
 
                         if (skillCast)
                         {
-                            yield return skillDelay;
+                            yield return null;
                         }
                     }
                 }

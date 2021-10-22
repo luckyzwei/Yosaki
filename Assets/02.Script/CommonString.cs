@@ -206,6 +206,9 @@ public static class CommonString
             case StatusType.SuperCritical1Prob:
                 return "천공베기 확률(%)";
                 break;
+            case StatusType.SuperCritical1DamPer:
+                return "천공베기 추가 피해량(%)";
+                break;
         }
 
         return "등록필요";

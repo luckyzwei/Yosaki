@@ -116,9 +116,9 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         desc += $"타겟수 : {skillTableData.Targetcount}\n";
         desc += $"히트수 : {skillTableData.Hitcount}\n";
         desc += $"범위 : {skillTableData.Targetrange}\n";
-      //  desc += $"마나 소모 : {skillTableData.Usecost}\n";
+        //  desc += $"마나 소모 : {skillTableData.Usecost}\n";
         desc += $"각성 최대 : {skillTableData.Awakemaxnum}";
-      //  desc += $"기술 타입 : {skillTableData.Skilltype}";
+        //  desc += $"기술 타입 : {skillTableData.Skilltype}";
         skillAbility.SetText(desc);
     }
 
@@ -240,11 +240,6 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
 
-#if UNITY_EDITOR
-        SkillLevelUp(skillPoint);
-        return;
-#endif
-
         int currentSkillPoint = skillPoint.Value;
         if (currentSkillPoint <= 0)
         {
@@ -255,7 +250,38 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         SkillLevelUp(skillPoint);
     }
 
-    private void SkillLevelUp(ReactiveProperty<int> skillPoint)
+    public void OnClickSkillAllUpgradeButton()
+    {
+        int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
+        int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
+
+        if (skillLevel >= maxLevel)
+        {
+            PopupManager.Instance.ShowAlarmMessage("기술이 최대 레벨 입니다.");
+            return;
+        }
+
+        var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
+
+
+        int currentSkillPoint = skillPoint.Value;
+        if (currentSkillPoint <= 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("기술포인트가 부족합니다.");
+            return;
+        }
+
+        int upgradableNum = maxLevel - skillLevel;
+
+        upgradableNum = Mathf.Min(currentSkillPoint, upgradableNum);
+
+        for (int i = 0; i < upgradableNum; i++)
+        {
+            SkillLevelUp(skillPoint, i == upgradableNum - 1);
+        }
+    }
+
+    private void SkillLevelUp(ReactiveProperty<int> skillPoint, bool updateUi = true)
     {
         //스킬포인트 감소
         skillPoint.Value--;
@@ -267,7 +293,10 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         SyncServerRoutine();
 
         //Ui갱신
-        Initialize(skillTableData);
+        if (updateUi)
+        {
+            Initialize(skillTableData);
+        }
 
         //   UiTutorialManager.Instance.SetClear(TutorialStep._5_SkillLevelUp);
     }
