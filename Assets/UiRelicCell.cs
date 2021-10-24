@@ -78,7 +78,7 @@ public class UiRelicCell : MonoBehaviour
         {
             var requireServerData = ServerData.relicServerTable.TableDatas[TableManager.Instance.RelicTable.dataArray[relicLocalData.Requirerelic].Stringid];
 
-            lockText.color = CommonUiContainer.Instance.itemGradeColor[TableManager.Instance.RelicTable.dataArray[relicLocalData.Requirerelic].Grade+1];
+            lockText.color = CommonUiContainer.Instance.itemGradeColor[TableManager.Instance.RelicTable.dataArray[relicLocalData.Requirerelic].Grade + 1];
 
             requireServerData.level.AsObservable().Subscribe(requireLevel =>
             {
@@ -96,7 +96,7 @@ public class UiRelicCell : MonoBehaviour
         this.relicServerData = ServerData.relicServerTable.TableDatas[this.relicLocalData.Stringid];
 
         relicName.SetText(this.relicLocalData.Name);
-        relicName.color = CommonUiContainer.Instance.itemGradeColor[relicLocalData.Grade+1];
+        relicName.color = CommonUiContainer.Instance.itemGradeColor[relicLocalData.Grade + 1];
 
         relicIcon.sprite = CommonUiContainer.Instance.relicIconList[this.relicLocalData.Id];
 
@@ -106,7 +106,7 @@ public class UiRelicCell : MonoBehaviour
             Subscribe();
         }
     }
-    public void OnClickUpgrade100Button() 
+    public void OnClickUpgrade100Button()
     {
         if (IsMaxLevel())
         {
@@ -116,7 +116,7 @@ public class UiRelicCell : MonoBehaviour
 
         int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
 
-        if (currentRelicNum < 500)
+        if (currentRelicNum < 0)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Relic)}이 부족합니다!");
             return;
@@ -125,6 +125,8 @@ public class UiRelicCell : MonoBehaviour
         int upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
 
         upgradeableNum = Mathf.Min(upgradeableNum, 500);
+
+        upgradeableNum = Mathf.Min(upgradeableNum, currentRelicNum);
 
         ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value -= upgradeableNum;
 
@@ -138,6 +140,42 @@ public class UiRelicCell : MonoBehaviour
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
 
     }
+
+    public void OnClickUpgrade10000Button()
+    {
+        if (IsMaxLevel())
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다!");
+            return;
+        }
+
+        int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
+
+        if (currentRelicNum < 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Relic)}이 부족합니다!");
+            return;
+        }
+
+        int upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
+
+        upgradeableNum = Mathf.Min(upgradeableNum, 10000);
+
+        upgradeableNum = Mathf.Min(upgradeableNum, currentRelicNum);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value -= upgradeableNum;
+
+        relicServerData.level.Value += upgradeableNum;
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
+    }
+
     public void OnClickUpgradeAllButton()
     {
         if (IsMaxLevel())
