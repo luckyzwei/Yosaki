@@ -14,7 +14,13 @@ public class AdManager : SingletonMono<AdManager>
     private static string AndroidGameId = "4235399";
     private static string IOSGameId = "4235398";
 
+#if UNITY_ANDROID
     private string rewardedPlacementId = "Rewarded_Android";
+#endif
+
+#if UNITY_IOS
+    private string rewardedPlacementId = "Rewarded_iOS";
+#endif
     private string videoPlacementId = "video";
 
     public static string bannerPlacement = "Banner_Weapons";
