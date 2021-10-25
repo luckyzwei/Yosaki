@@ -537,7 +537,7 @@ public static class ServerData
 
             SendTransaction(transactionList, successCallBack: () =>
               {
-                  LogManager.Instance.SendLog("랭킹보상 수령완료", $"{type}");
+                  LogManager.Instance.SendLogType("RankReward", type.ToString(), "");
               });
         }
         else if (type.IsRelicRewardItem())
@@ -629,7 +629,10 @@ public static class ServerData
             var tramsaction = GetItemTypeTransactionValue(type);
             transactionList.Add(tramsaction);
 
-            SendTransaction(transactionList);
+            SendTransaction(transactionList,successCallBack:()=> 
+            {
+                LogManager.Instance.SendLogType("Post", type.ToString(), $"{amount}");
+            });
         }
 
     }
