@@ -161,6 +161,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
     {
         string savedData = PlayerPrefs.GetString(CommonString.IOS_loginType, string.Empty);
 
+        Debug.Log($"savedData {savedData}");
         if (savedData.Equals(string.Empty))
         {
             //가입 진행
