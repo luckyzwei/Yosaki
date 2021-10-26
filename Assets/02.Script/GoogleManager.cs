@@ -240,7 +240,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
                 if (SendQueue.UnprocessedFuncCount <= 0 && isSignIn)
                 {
                     nickNameInputBoard.gameObject.SetActive(true);
-                    UiIosLoginBoard.Instance.CloseCustomGuestCreateBoard();
+                
                     break;
                 }
             }
@@ -265,6 +265,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
         if (bro.IsSuccess())
         {
             Debug.Log("Login success");
+            UiIosLoginBoard.Instance.CloseCustomGuestCreateBoard();
             StartCoroutine(SceneChangeRoutine());
         }
         else
