@@ -3,6 +3,7 @@ using CodeStage.AntiCheat.ObscuredTypes;
 #if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+using System;
 #endif
 #if UNITY_IOS
 using UnityEngine.iOS;
@@ -12,23 +13,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoogleManager : MonoBehaviour
+public class GoogleManager : SingletonMono<GoogleManager>
 {
     [SerializeField]
     private UiNickNameInputBoard nickNameInputBoard;
 
     private bool isSignIn = false;
 
-    private ObscuredString loginId;
+    public ObscuredString loginId;
 
     public static string email { get; private set; } = "Editor";
 
-    private void Awake()
+    public enum IOS_LoginType
     {
+        GameCenter, Custom
+    }
+
+    private string iOS_LoginType = string.Empty;
+
+
+    private new void Awake()
+    {
+
+        base.Awake();
         Backend.Initialize(HandleBackendCallBack, true);
 
 #if UNITY_IOS
-         SRDebug.Init();
+         //SRDebug.Init();
 #endif
     }
 
@@ -104,20 +115,20 @@ public class GoogleManager : MonoBehaviour
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.DebugLogEnabled = true;
 
+        iOS_LoginType = PlayerPrefs.GetString(CommonString.IOS_loginType, string.Empty);
 
         //GPGS 시작.
         PlayGamesPlatform.Activate();
 #endif
 
 #if UNITY_EDITOR
-        LoginByCustumId();
+            LoginByCustumId();
 #elif UNITY_ANDROID
             GoogleAuth();
 #elif UNITY_IOS
-            GameCenterLogin();
+            LoginBySavedData();
 #endif
     }
-#if UNITY_IOS
     public void GameCenterLogin()
     {
         if (Social.localUser.authenticated == true)
@@ -132,20 +143,49 @@ public class GoogleManager : MonoBehaviour
                 {
                     loginId = Social.localUser.id;
 
+                    PlayerPrefs.SetString(CommonString.SavedLoginTypeKey, loginId);
+
+                    PlayerPrefs.SetString(CommonString.IOS_loginType, IOS_LoginType.GameCenter.ToString());
+
                     LoginByCustumId();
                 }
                 else
                 {
-                    PopupManager.Instance.ShowYesNoPopup("알림", "로그인 실패 재시도 합니다", GameCenterLogin, () =>
-                    {
-                        Application.Quit();
-                    });
-                    return;
+                    UiIosLoginBoard.Instance.loginProcess = false;
                 }
             });
         }
     }
-#endif
+
+    private void LoginBySavedData()
+    {
+        string savedData = PlayerPrefs.GetString(CommonString.IOS_loginType, string.Empty);
+
+        if (savedData.Equals(string.Empty))
+        {
+            //가입 진행
+            UiIosLoginBoard.Instance.ShowCustomGuestCreateBoard();
+        }
+        //커스텀 계정
+        else if (savedData.Equals(IOS_LoginType.Custom.ToString()))
+        {
+            string id = PlayerPrefs.GetString(CommonString.SavedLoginTypeKey, string.Empty);
+            string passWord = PlayerPrefs.GetString(CommonString.SavedLoginPassWordKey, string.Empty);
+
+            LoginByIdPassWord(id, passWord);
+        }
+        else if (savedData.Equals(IOS_LoginType.GameCenter.ToString()))
+        {
+            GameCenterLogin();
+        }
+    }
+
+
+    public void LoginByIdPassWord(string id = null, string password = null)
+    {
+        loginId = PlayerPrefs.GetString(CommonString.SavedLoginTypeKey, loginId);
+        LoginByCustumId(id, password);
+    }
 
 #if UNITY_ANDROID
     private void GoogleAuth()
@@ -205,9 +245,19 @@ public class GoogleManager : MonoBehaviour
         }
     }
 
-    private void LoginByCustumId()
+    private void LoginByCustumId(string id = null, string password = null)
     {
-        var bro = Backend.BMember.CustomLogin(GetGoogleLoginKey(), GetGoogleLoginKey());
+        BackendReturnObject bro = null;
+
+        if (id == null)
+        {
+            bro = Backend.BMember.CustomLogin(GetSocialLoginKey(), GetSocialLoginKey());
+        }
+        else
+        {
+            bro = Backend.BMember.CustomLogin(id, password);
+            email = password;
+        }
 
         //회원가입 안됨
         if (bro.IsSuccess())
@@ -227,16 +277,30 @@ public class GoogleManager : MonoBehaviour
                   });
             }
 
-            if (bro.GetStatusCode() == "401")
+            //구글인경우 id=null
+            if (bro.GetStatusCode() == "401" && id == null)
             {
                 SignIn();
+            }
+            else if (bro.GetStatusCode() == "401")
+            {
+                SignIn(id, password);
             }
         }
     }
 
-    public void SignIn()
+    public void SignIn(string id = null, string password = null)
     {
-        BackendReturnObject BRO = Backend.BMember.CustomSignUp(GetGoogleLoginKey(), GetGoogleLoginKey());
+        BackendReturnObject BRO = null;
+
+        if (id == null)
+        {
+            BRO = Backend.BMember.CustomSignUp(GetSocialLoginKey(), GetSocialLoginKey());
+        }
+        else
+        {
+            BRO = Backend.BMember.CustomSignUp(id, password);
+        }
 
         if (BRO.IsSuccess())
         {
@@ -249,8 +313,13 @@ public class GoogleManager : MonoBehaviour
             Debug.Log($"SignIn error {BRO.GetStatusCode()}");
             switch (BRO.GetStatusCode())
             {
-                case "200":
+                case "401":
                     Debug.Log("이미 회원가입된 회원");
+                    PopupManager.Instance.ShowAlarmMessage("아이디나 패스워드가 잘못됐습니다.");
+                    break;
+                case "409":
+                    Debug.Log("이미 회원가입된 회원");
+                    PopupManager.Instance.ShowAlarmMessage("이미 등록된 계정 입니다.");
                     break;
 
                 case "403":
@@ -258,22 +327,25 @@ public class GoogleManager : MonoBehaviour
                     break;
             }
 
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "로그인 실패 재시도 합니까?", () =>
-             {
-                 SignIn();
-             });
+#if UNITY_ANDROID
+            if (id == null)
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "로그인 실패 재시도 합니까?", () =>
+                {
+                    SignIn();
+                });
+            }
+#endif
         }
     }
-    
-    private string GetGoogleLoginKey()
+
+    private string GetSocialLoginKey()
     {
 #if UNITY_EDITOR
-        //  return "a_8846847867697156085"; //블랙핑크
-        //  return "a_3961873472804492579"; //제니
         return "a_8846847867697156085";
 #endif
+
         Debug.LogError($"GetGoogleLoginKey {loginId}");
         return loginId;
-        //return Social.localUser.id;
     }
 }

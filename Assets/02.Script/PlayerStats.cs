@@ -744,6 +744,7 @@ public static class PlayerStats
         float ret = 0.5f;
 
         ret += GetSinsuEquipEffect(StatusType.SuperCritical1DamPer);
+        ret += GetRelicHasEffect(StatusType.SuperCritical1DamPer);
 
         return ret;
     }
