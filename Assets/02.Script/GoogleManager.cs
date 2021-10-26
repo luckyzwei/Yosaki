@@ -39,7 +39,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
         Backend.Initialize(HandleBackendCallBack, true);
 
 #if UNITY_IOS
-         //SRDebug.Init();
+         SRDebug.Init();
 #endif
     }
 
