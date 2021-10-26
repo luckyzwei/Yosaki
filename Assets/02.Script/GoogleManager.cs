@@ -342,7 +342,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
     private string GetSocialLoginKey()
     {
 #if UNITY_EDITOR
-        return "a_8846847867697156085";
+        return "a_88468478676933e7156085";
 #endif
 
         Debug.LogError($"GetGoogleLoginKey {loginId}");
