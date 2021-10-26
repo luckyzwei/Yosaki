@@ -122,7 +122,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
 #endif
 
 #if UNITY_EDITOR
-            LoginByCustumId();
+        LoginByCustumId();
 #elif UNITY_ANDROID
             GoogleAuth();
 #elif UNITY_IOS
@@ -306,7 +306,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
         {
             isSignIn = true;
             Debug.Log("Sign in success");
-            LoginByCustumId();
+            LoginByCustumId(id, password);
         }
         else
         {
