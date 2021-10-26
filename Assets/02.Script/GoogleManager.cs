@@ -286,7 +286,15 @@ public class GoogleManager : SingletonMono<GoogleManager>
             }
             else if (bro.GetStatusCode() == "401")
             {
-                SignIn(id, password);
+                //암호 틀림
+                if (bro.GetMessage().Contains("Password"))
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "잘못된 패스워드 입니다.", null);
+                }
+                else
+                {
+                    SignIn(id, password);
+                }
             }
         }
     }
@@ -321,7 +329,14 @@ public class GoogleManager : SingletonMono<GoogleManager>
                     break;
                 case "409":
                     Debug.Log("이미 회원가입된 회원");
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "이미 등록된 계정 입니다.", null);
+                    if (id == null)
+                    {
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "이미 등록된 계정 입니다.", null);
+                    }
+                    else
+                    {
+                        LoginByCustumId(id, password);
+                    }
                     break;
 
                 case "403":
