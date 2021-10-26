@@ -56,7 +56,7 @@ public class UiIosLoginBoard : SingletonMono<UiIosLoginBoard>
 
         if (inputField_password.text.Equals(string.Empty) || inputField_password.text.Length < passWordMinNum)
         {
-            PopupManager.Instance.ShowAlarmMessage($"패스워드는 {passWordMinNum}자 이상이어야 합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"패스워드는 {passWordMinNum} 자 이상이어야 합니다.");
             return;
         }
 
