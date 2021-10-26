@@ -317,11 +317,11 @@ public class GoogleManager : SingletonMono<GoogleManager>
             {
                 case "401":
                     Debug.Log("이미 회원가입된 회원");
-                    PopupManager.Instance.ShowAlarmMessage("아이디나 패스워드가 잘못됐습니다.");
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "아이디나 패스워드가 잘못됐습니다.", null);
                     break;
                 case "409":
                     Debug.Log("이미 회원가입된 회원");
-                    PopupManager.Instance.ShowAlarmMessage("이미 등록된 계정 입니다.");
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "이미 등록된 계정 입니다.", null);
                     break;
 
                 case "403":
