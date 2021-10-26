@@ -38,6 +38,11 @@ public class UiIosLoginBoard : SingletonMono<UiIosLoginBoard>
         rootObject.SetActive(true);
     }
 
+    public void CloseCustomGuestCreateBoard()
+    {
+        rootObject.SetActive(false);
+    }
+
     private bool CanMakeNickName()
     {
         bool isRightRangeChar = Regex.IsMatch(inputField.text, "^[0-9a-zA-Z]*$");

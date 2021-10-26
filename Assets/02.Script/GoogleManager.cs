@@ -240,6 +240,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
                 if (SendQueue.UnprocessedFuncCount <= 0 && isSignIn)
                 {
                     nickNameInputBoard.gameObject.SetActive(true);
+                    UiIosLoginBoard.Instance.CloseCustomGuestCreateBoard();
                     break;
                 }
             }
