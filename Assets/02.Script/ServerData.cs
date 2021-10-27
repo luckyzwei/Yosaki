@@ -54,6 +54,8 @@ public static class ServerData
     public static RelicServerTable relicServerTable { get; private set; } = new RelicServerTable();
     public static StageRelicServerTable stageRelicServerTable { get; private set; } = new StageRelicServerTable();
 
+    public static MonthlyPassServerTable2 monthlyPassServerTable2 { get; private set; } = new MonthlyPassServerTable2();
+
     #region string
     public static string inDate_str = "inDate";
     public static string format_string = "S";
@@ -123,6 +125,8 @@ public static class ServerData
         relicServerTable.Initialize();
 
         stageRelicServerTable.Initialize();
+
+        monthlyPassServerTable2.Initialize();
     }
 
     public static void GetUserInfo()
@@ -217,6 +221,7 @@ public static class ServerData
             case Item_Type.costume8:
             case Item_Type.costume9:
             case Item_Type.costume10:
+            case Item_Type.costume11:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -267,6 +272,7 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.costume1:
             case Item_Type.costume8:
+            case Item_Type.costume11:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -629,10 +635,10 @@ public static class ServerData
             var tramsaction = GetItemTypeTransactionValue(type);
             transactionList.Add(tramsaction);
 
-            SendTransaction(transactionList,successCallBack:()=> 
-            {
-                LogManager.Instance.SendLogType("Post", type.ToString(), $"{amount}");
-            });
+            SendTransaction(transactionList, successCallBack: () =>
+              {
+                  LogManager.Instance.SendLogType("Post", type.ToString(), $"{amount}");
+              });
         }
 
     }

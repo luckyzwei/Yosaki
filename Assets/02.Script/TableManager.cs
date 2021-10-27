@@ -535,5 +535,9 @@ public class TableManager : SingletonMono<TableManager>
 
     public StageRelic StageRelic => stageRelic;
 
+    [SerializeField]
+    private monthpass2 monthlyPass2;
+    public monthpass2 MonthlyPass2 => monthlyPass2;
+
 }
 

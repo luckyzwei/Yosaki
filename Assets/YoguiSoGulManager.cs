@@ -46,6 +46,8 @@ public class YoguiSoGulManager : SingletonMono<YoguiSoGulManager>
 
     private void Start()
     {
+        SetFirstStage();
+
         Subscribe();
 
         SetCameraCollider();
@@ -53,6 +55,12 @@ public class YoguiSoGulManager : SingletonMono<YoguiSoGulManager>
         DisableUi();
 
         SetDefault();
+    }
+    private void SetFirstStage() 
+    {
+        int lastStage = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value - 5;
+        lastStage = Mathf.Max(0, lastStage);
+        currentWave.Value = lastStage;
     }
 
     private void SetDefault()

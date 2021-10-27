@@ -100,6 +100,7 @@ public enum Item_Type
     costume8 = 1209,
     costume9 = 1210,
     costume10 = 1211,
+    costume11 = 1212,
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,

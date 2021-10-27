@@ -32,4 +32,8 @@ public class LevelPassData
   float reward2_value;
   public float Reward2_Value { get {return reward2_value; } set { this.reward2_value = value;} }
   
+  [SerializeField]
+  int passgrade;
+  public int Passgrade { get {return passgrade; } set { this.passgrade = value;} }
+  
 }

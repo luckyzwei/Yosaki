@@ -210,7 +210,7 @@ public class UiMarbleIndicator : MonoBehaviour
 
 
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Marble)} {Utils.ConvertBigNum(GameBalance.marbleAwakePrice)}개를 사용해서 각성 합니까?\n\n각성효과\n향상된 능력치 적용\n구미호 호연 외형 획득\n순보 딜레이 감소",
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Marble)} {Utils.ConvertBigNum(GameBalance.marbleAwakePrice)}개를 사용해서 각성 합니까?\n\n각성효과\n향상된 능력치 적용\n구미호 호연 외형 획득\n순보 딜레이 감소\n드랍 아이템 즉시 획득",
             () =>
             {
                 if (ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value < GameBalance.marbleAwakePrice)

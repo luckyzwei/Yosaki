@@ -45,6 +45,15 @@ public class UiLevelPassCell : MonoBehaviour
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
+    [SerializeField]
+    private Image paidPassBg;
+
+    [SerializeField]
+    private Sprite pass1Frame;
+
+    [SerializeField]
+    private Sprite pass2Frame;
+
     private void OnDestroy()
     {
         disposables.Dispose();
@@ -108,6 +117,8 @@ public class UiLevelPassCell : MonoBehaviour
 
         itemName_free.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_Free));
         itemName_ad.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_IAP));
+
+        paidPassBg.sprite = passInfo.passGrade == 0 ? pass1Frame : pass2Frame;
     }
 
     private void SetDescriptionText()
@@ -154,7 +165,15 @@ public class UiLevelPassCell : MonoBehaviour
 
         if (HasLevelPassProduct() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("여우패스가 필요합니다!");
+            if (passInfo.passGrade == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("여우패스1이 필요합니다!");
+            }
+            else if (passInfo.passGrade == 1)
+            {
+                PopupManager.Instance.ShowAlarmMessage("여우패스2가 필요합니다!");
+            }
+
             return;
         }
 
@@ -169,7 +188,16 @@ public class UiLevelPassCell : MonoBehaviour
 
     private bool HasLevelPassProduct()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas["levelpass"].buyCount.Value > 0;
+        bool hasIapProduct = false;
+
+        if (passInfo.passGrade == 0)
+        {
+            return ServerData.iapServerTable.TableDatas["levelpass"].buyCount.Value > 0;
+        }
+        else if (passInfo.passGrade == 1)
+        {
+            return ServerData.iapServerTable.TableDatas["levelpass2"].buyCount.Value > 0;
+        }
 
         return hasIapProduct;
     }

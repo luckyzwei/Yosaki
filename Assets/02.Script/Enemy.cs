@@ -207,21 +207,32 @@ public class Enemy : PoolItem
 
         //GrowthStone
         float magicStoneSpawnAmount = GameManager.Instance.CurrentStageData.Magicstoneamount;
-        if (magicStoneSpawnAmount != 0)
+        float marbleSpawnAmount = GameManager.Instance.CurrentStageData.Marbleamount;
+
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.marbleAwake].Value != 1)
         {
-            var growthStone = BattleObjectManager.Instance.dropItemProperty.GetItem();
-            growthStone.Initialize(Item_Type.GrowthStone, magicStoneSpawnAmount);
-            growthStone.transform.position = this.transform.position + UnityEngine.Random.Range(-0.3f, 0.3f) * Vector3.right;
+            if (magicStoneSpawnAmount != 0)
+            {
+                var growthStone = BattleObjectManager.Instance.dropItemProperty.GetItem();
+                growthStone.Initialize(Item_Type.GrowthStone, magicStoneSpawnAmount);
+                growthStone.transform.position = this.transform.position + UnityEngine.Random.Range(-0.3f, 0.3f) * Vector3.right;
+            }
+
+            //여우구슬
+            if (marbleSpawnAmount != 0)
+            {
+                var marble = BattleObjectManager.Instance.dropItemProperty.GetItem();
+                marble.Initialize(Item_Type.Marble, marbleSpawnAmount);
+                marble.transform.position = this.transform.position + UnityEngine.Random.Range(-0.3f, 0.3f) * Vector3.right;
+            }
+        }
+        else 
+        {
+            ServerData.goodsTable.GetMagicStone(magicStoneSpawnAmount);
+            ServerData.goodsTable.GetMarble(marbleSpawnAmount);
         }
 
-        //여우구슬
-        float marbleSpawnAmount = GameManager.Instance.CurrentStageData.Marbleamount;
-        if (marbleSpawnAmount != 0)
-        {
-            var marble = BattleObjectManager.Instance.dropItemProperty.GetItem();
-            marble.Initialize(Item_Type.Marble, marbleSpawnAmount);
-            marble.transform.position = this.transform.position + UnityEngine.Random.Range(-0.3f, 0.3f) * Vector3.right;
-        }
+
     }
 
 

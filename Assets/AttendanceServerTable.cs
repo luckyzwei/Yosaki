@@ -11,7 +11,7 @@ public class AttendanceServerTable
 {
     public static string Indate;
     public static string tableName = "Attendance";
-    public const string rewardKey = "rewardKey";
+    public const string rewardKey = "rewardKey2";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {

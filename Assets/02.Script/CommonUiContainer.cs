@@ -105,6 +105,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.costume8:
                 return costumeThumbnail[8];
                 break;
+            case Item_Type.costume11:
+                return costumeThumbnail[11];
+                break;
             case Item_Type.RankFrame1:
                 return rankFrame[8];
                 break;

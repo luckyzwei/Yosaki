@@ -33,8 +33,6 @@ public class UiLevelPass : MonoBehaviour
 
         int interval = tableData.Length - uiPassCellContainer.Count;
 
-
-
         for (int i = 0; i < interval; i++)
         {
             var prefab = Instantiate<UiLevelPassCell>(levelPassCell, cellParent);
@@ -57,11 +55,10 @@ public class UiLevelPass : MonoBehaviour
                 passInfo.rewardType_IAP = tableData[i].Reward2_Pass;
                 passInfo.rewardTypeValue_IAP = tableData[i].Reward2_Value;
                 passInfo.rewardType_IAP_Key = NewLevelPass.premiumReward;
+                passInfo.passGrade = tableData[i].Passgrade;
 
                 uiPassCellContainer[i].gameObject.SetActive(true);
                 uiPassCellContainer[i].Initialize(passInfo);
-
-
             }
             else
             {
@@ -76,7 +73,7 @@ public class UiLevelPass : MonoBehaviour
 
     private void OnEnable()
     {
-        if (initialized) 
+        if (initialized)
         {
             StartCoroutine(scrollRoutine());
         }
@@ -84,6 +81,7 @@ public class UiLevelPass : MonoBehaviour
 
     private IEnumerator scrollRoutine()
     {
+
         yield return null;
         yield return null;
         yield return null;

@@ -7,7 +7,6 @@ using System.Linq;
 using BackEnd;
 using TMPro;
 
-
 public class UiMonthlyPassCell : MonoBehaviour
 {
     [SerializeField]

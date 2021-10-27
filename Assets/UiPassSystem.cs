@@ -22,11 +22,13 @@ public class PassInfo
     public ObscuredString rewardType_IAP_Key;
 
     public ObscuredString shopId;
+
+    public int passGrade;
 }
 
 public enum PassType
 {
-    Level,Daily
+    Level, Daily
 }
 
 public class UiPassSystem : MonoBehaviour

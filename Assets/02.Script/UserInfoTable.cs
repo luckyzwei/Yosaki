@@ -50,7 +50,7 @@ public class UserInfoTable
     public const string tutorialClearFlags = "tutorialClearFlags";
 
     public const string managerDescriptionFlags = "managerDescriptionFlags";
-    public const string attendanceCount = "attendanceCount";
+    public const string attendanceCount = "attendanceCount2";
 
     public const string marbleAwake = "marbleAwake";
     public const string resetStat = "resetStat";
@@ -89,6 +89,7 @@ public class UserInfoTable
     public const string dokebiPackRefund = "dokebiPackRefund";
 
     public const string killCountTotal = "killCountTotal";
+    public const string killCountTotal2 = "killCountTotal2";
 
     public const string relicKillCount = "relicKillCount";
 
@@ -170,7 +171,8 @@ public class UserInfoTable
         {yomul4_buff,0f},
         {relicReset,0f},
         {marbleReset2,0f},
-        {yomul5_buff,0f}
+        {yomul5_buff,0f},
+        {killCountTotal2,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -346,7 +348,15 @@ public class UserInfoTable
     private void UpdatekillCount()
     {
         UpData(dailyEnemyKillCount, false);
-        UpData(killCountTotal, false);
+
+        if (ServerData.userInfoTable.IsMonthlyPass2() == false)
+        {
+            UpData(killCountTotal, false);
+        }
+        else
+        {
+            UpData(killCountTotal2, false);
+        }
     }
     private void UpdatejumpCount()
     {
@@ -633,8 +643,23 @@ public class UserInfoTable
         else
         {
             totalKillCount = 0;
-            tableDatas[killCountTotal].Value += updateRequireNum;
+
+            if (IsMonthlyPass2() == false)
+            {
+                tableDatas[killCountTotal].Value += updateRequireNum;
+            }
+            else
+            {
+                tableDatas[killCountTotal2].Value += updateRequireNum;
+            }
         }
     }
 
+    public bool IsMonthlyPass2()
+    {
+#if UNITY_EDITOR
+       // return true;
+#endif
+        return currentServerTime.Month == 11;
+    }
 }

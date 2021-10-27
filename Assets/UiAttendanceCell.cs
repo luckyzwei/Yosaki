@@ -32,6 +32,17 @@ public class UiAttendanceCell : MonoBehaviour
 
     public void Initialize(AttendanceRewardData attendanceRewardData)
     {
+        //예외처리(외형 보유중인 사람은 다른거 보여줌)
+        if (attendanceRewardData.Reward_Type == 1202)
+        {
+            if (ServerData.costumeServerTable.TableDatas["costume1"].hasCostume.Value == true)
+            {
+                attendanceRewardData.Reward_Type = 14;
+                attendanceRewardData.Reward_Value = 5;
+            }
+        }
+        //
+
         this.attendanceRewardData = attendanceRewardData;
 
         dateText.SetText($"{attendanceRewardData.Id + 1}일차");

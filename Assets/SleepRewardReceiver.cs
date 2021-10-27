@@ -158,7 +158,15 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += sleepRewardInfo.stageRelic;
 
         ServerData.userInfoTable.TableDatas[UserInfoTable.dailyEnemyKillCount].Value += sleepRewardInfo.killCount;
-        ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal].Value += sleepRewardInfo.killCount;
+
+        if (ServerData.userInfoTable.IsMonthlyPass2() == false)
+        {
+            ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal].Value += sleepRewardInfo.killCount;
+        }
+        else
+        {
+            ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal2].Value += sleepRewardInfo.killCount;
+        }
 
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
@@ -172,7 +180,15 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         Param userInfoParam = new Param();
         userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.TableDatas[UserInfoTable.dailyEnemyKillCount].Value);
-        userInfoParam.Add(UserInfoTable.killCountTotal, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal].Value);
+
+        if (ServerData.userInfoTable.IsMonthlyPass2() == false)
+        {
+            userInfoParam.Add(UserInfoTable.killCountTotal, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal].Value);
+        }
+        else 
+        {
+            userInfoParam.Add(UserInfoTable.killCountTotal2, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal2].Value);
+        }
 
         List<TransactionValue> transantions = new List<TransactionValue>();
 

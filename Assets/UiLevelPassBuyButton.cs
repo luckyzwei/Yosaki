@@ -34,7 +34,7 @@ public class UiLevelPassBuyButton : MonoBehaviour
 
         ServerData.iapServerTable.TableDatas[stagePassKey].buyCount.AsObservable().Subscribe(e =>
         {
-            descText.SetText(e >= 1 ? "구매완료" : "패스구매");
+            //descText.SetText(e >= 1 ? "구매완료" : "패스구매");
             this.gameObject.SetActive(e <= 0);
         }).AddTo(disposable);
 
