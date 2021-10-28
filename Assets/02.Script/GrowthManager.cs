@@ -137,11 +137,20 @@ public class GrowthManager : SingletonMono<GrowthManager>
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.BonusSpinKey, ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value);
 
+        Param userinfoParam = new Param();
+        userinfoParam.Add(UserInfoTable.LastLogin, ServerData.userInfoTable.TableDatas[UserInfoTable.LastLogin].Value);
+
         transactionList.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
         transactionList.Add(TransactionValue.SetUpdate(GrowthTable.tableName, GrowthTable.Indate, growthParam));
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userinfoParam));
 
-        ServerData.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList, successCallBack: () =>
+          {
+#if UNITY_EDITOR
+              Debug.Log("levelUp");
+#endif
+          });
     }
 
     public void WhenPlayerDeadInNormalField()

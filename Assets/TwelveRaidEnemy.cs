@@ -31,6 +31,12 @@ public class TwelveRaidEnemy : BossEnemyBase
     [SerializeField]
     private List<AlarmHitObject> HitList_3;
 
+    [SerializeField]
+    private List<AlarmHitObject> RandomHit;
+
+    [SerializeField]
+    private List<AlarmHitObject> RandomHit2;
+
     private void Start()
     {
         Initialize();
@@ -73,7 +79,7 @@ public class TwelveRaidEnemy : BossEnemyBase
             int attackType = Random.Range(0, attackTypeMax);
 
 #if UNITY_EDITOR
-          //  Debug.LogError($"AttackType {attackType}");
+            //  Debug.LogError($"AttackType {attackType}");
 #endif
 
             if (attackType == 0)
@@ -128,8 +134,9 @@ public class TwelveRaidEnemy : BossEnemyBase
     //?
     private IEnumerator AttackRoutine_2(float delay)
     {
-        if (HitList_1.Count == 0)
+        if (HitList_1.Count == 0 && horizontalHit != null)
         {
+
             horizontalHit.AttackStart();
         }
 
@@ -140,13 +147,17 @@ public class TwelveRaidEnemy : BossEnemyBase
 
         StartCoroutine(PlaySoundDelay(1f, "BossSkill2"));
 
+        PlayRandomHits();
+
         yield return new WaitForSeconds(delay);
     }
+
+
 
     //?
     private IEnumerator AttackRoutine_3(float delay)
     {
-        if (HitList_2.Count == 0)
+        if (HitList_2.Count == 0 && verticalHit != null)
         {
             verticalHit.AttackStart();
         }
@@ -157,6 +168,8 @@ public class TwelveRaidEnemy : BossEnemyBase
         }
 
         StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
+
+        PlayRandomHits();
 
         yield return new WaitForSeconds(delay);
     }
@@ -173,6 +186,37 @@ public class TwelveRaidEnemy : BossEnemyBase
 
         StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
 
+        PlayRandomHits();
+
         yield return new WaitForSeconds(delay);
+    }
+
+    private void PlayRandomHits()
+    {
+        if (RandomHit.Count != 0)
+        {
+            int rankIdx = Random.Range(0, RandomHit.Count);
+
+            for (int i = 0; i < RandomHit.Count; i++)
+            {
+                if (i != rankIdx)
+                {
+                    RandomHit[i].AttackStart();
+                }
+            }
+        }
+
+        if (RandomHit2.Count != 0)
+        {
+            int rankIdx = Random.Range(0, RandomHit2.Count);
+
+            for (int i = 0; i < RandomHit2.Count; i++)
+            {
+                if (i != rankIdx)
+                {
+                    RandomHit2[i].AttackStart();
+                }
+            }
+        }
     }
 }

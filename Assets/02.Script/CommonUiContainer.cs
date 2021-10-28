@@ -58,6 +58,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite RabitBossStone;
 
     public Sprite DragonBossStone;
+    public Sprite SnakeStone;
 
     public Sprite Songpyeon;
 
@@ -159,6 +160,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return RabitBossStone;
             case Item_Type.DragonBossStone:
                 return DragonBossStone;
+                break;
+            case Item_Type.SnakeStone:
+                return SnakeStone;
                 break;
             case Item_Type.Relic:
                 return relic;

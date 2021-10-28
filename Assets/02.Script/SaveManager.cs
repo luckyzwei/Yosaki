@@ -99,7 +99,6 @@ public class SaveManager : SingletonMono<SaveManager>
     //SendQueue에서 저장
     public void SyncDatasInQueue()
     {
-       
         ServerData.goodsTable.SyncAllData();
 
         ServerData.userInfoTable.AutoUpdateRoutine();

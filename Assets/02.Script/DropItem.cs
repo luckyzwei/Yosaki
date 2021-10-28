@@ -24,6 +24,7 @@ public enum Item_Type
     DragonBossStone,
     Event_Item_0,
     StageRelic,
+    SnakeStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

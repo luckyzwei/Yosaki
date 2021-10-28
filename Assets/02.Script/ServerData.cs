@@ -358,6 +358,11 @@ public static class ServerData
                 param.Add(GoodsTable.DragonStone, ServerData.goodsTable.GetTableData(GoodsTable.DragonStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
+            case Item_Type.SnakeStone:
+                ServerData.goodsTable.GetTableData(GoodsTable.SnakeStone).Value += amount;
+                param.Add(GoodsTable.SnakeStone, ServerData.goodsTable.GetTableData(GoodsTable.SnakeStone).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.RelicTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += amount;
                 param.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
