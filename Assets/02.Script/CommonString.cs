@@ -127,7 +127,7 @@ public static class CommonString
             case Item_Type.Event_Item_0: return "도깨비 방망이";
             case Item_Type.StageRelic: return "유물 파편";
             case Item_Type.DragonBossStone: return "천공의 증표";
-            case Item_Type.SnakeStone: return "미등록";
+            case Item_Type.SnakeStone: return "치명의 증표";
         }
         return "미등록";
     }

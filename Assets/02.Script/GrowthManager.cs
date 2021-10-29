@@ -150,6 +150,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
 #if UNITY_EDITOR
               Debug.Log("levelUp");
 #endif
+              ServerData.userInfoTable.UpdateLastLoginTime();
           });
     }
 

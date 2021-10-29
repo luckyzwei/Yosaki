@@ -745,6 +745,7 @@ public static class PlayerStats
 
         ret += GetSinsuEquipEffect(StatusType.SuperCritical1DamPer);
         ret += GetRelicHasEffect(StatusType.SuperCritical1DamPer);
+        ret += GetYomulUpgradeValue(StatusType.SuperCritical1DamPer);
 
         return ret;
     }
@@ -755,7 +756,6 @@ public static class PlayerStats
 
         ret += GetYomulUpgradeValue(StatusType.SuperCritical1Prob);
         ret += GetBuffValue(StatusType.SuperCritical1Prob);
-
         ret += GetSinsuEquipEffect(StatusType.SuperCritical1Prob);
 
         return ret;

@@ -387,7 +387,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRealBoss_Score(float score)
     {
-        if (UpdateRank() == false) return;
+        //if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.Real_Boss] != null && score < this.myRankInfo[RankType.Real_Boss].Score)
         {
             Debug.LogError("점수가 더 낮음");

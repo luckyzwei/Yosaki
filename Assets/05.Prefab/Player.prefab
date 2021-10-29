@@ -167,6 +167,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4834500250943576864}
+  - {fileID: 4988468997230300003}
   - {fileID: 6021001959540605472}
   m_Father: {fileID: 1413157575216455527}
   m_RootOrder: 1
@@ -373,6 +374,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipKey: petequip2
   rootObject: {fileID: 739440624972659832}
+--- !u!1 &1381884608886563542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4988468997230300003}
+  m_Layer: 9
+  m_Name: Pet2TargetPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4988468997230300003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381884608886563542}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.471, y: 1.269, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3748789764930103605}
+  m_Father: {fileID: 6598544888420517189}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1413157573863924456
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +478,6 @@ Transform:
   - {fileID: 6410389978833619078}
   - {fileID: 5240153648520106285}
   - {fileID: 2031505045465546292}
-  - {fileID: 5122446594949787942}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1292,7 +1323,7 @@ RectTransform:
   - {fileID: 339513224898458901}
   - {fileID: 6899061621324896466}
   m_Father: {fileID: 6598544888420517189}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1320,6 +1351,53 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 100
   m_TargetDisplay: 0
+--- !u!1 &5436276989880680511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3748789764930103605}
+  - component: {fileID: 10709689572100967}
+  m_Layer: 18
+  m_Name: Pet
+  m_TagString: Pet
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3748789764930103605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436276989880680511}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5122446594949787942}
+  m_Father: {fileID: 4988468997230300003}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &10709689572100967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436276989880680511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf7da2713152bd4895287667f698105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {fileID: 4988468997230300003}
+  playerPos: {fileID: 1413157575216455527}
+  skeletonAnimation: {fileID: 0}
 --- !u!1 &5668903314635448098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,7 +1640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5122446594949787942
 Transform:
   m_ObjectHideFlags: 0
@@ -1571,11 +1649,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6658776599566568666}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.63, y: -0.21, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0.55, y: -0.57, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 1413157575216455527}
-  m_RootOrder: 10
+  m_Father: {fileID: 3748789764930103605}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5856195473759493039
 SpriteRenderer:
@@ -1615,7 +1693,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 200
   m_Sprite: {fileID: 21300000, guid: 8e3cb954b02b6314fb5f38a0172ed4c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2563,6 +2641,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: CartoonFireTorchRed
       objectReference: {fileID: 0}
+    - target: {fileID: 2528959423310441777, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311034443, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311049329, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3135991687522868664, guid: 3f69045d2fefe77458a209e7f7108d73,
         type: 3}
       propertyPath: m_Scale3D.x
@@ -2700,15 +2793,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f69045d2fefe77458a209e7f7108d73, type: 3}
---- !u!1 &3468375070227749406 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2528959423296635223, guid: 3f69045d2fefe77458a209e7f7108d73,
-    type: 3}
-  m_PrefabInstance: {fileID: 1385578106060266313}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5763168683531679023 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6683461214204882534, guid: 3f69045d2fefe77458a209e7f7108d73,
+    type: 3}
+  m_PrefabInstance: {fileID: 1385578106060266313}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3468375070227749406 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2528959423296635223, guid: 3f69045d2fefe77458a209e7f7108d73,
     type: 3}
   m_PrefabInstance: {fileID: 1385578106060266313}
   m_PrefabAsset: {fileID: 0}
@@ -2723,6 +2816,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CartoonFireTorchRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423310441777, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311034443, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311049329, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3135991687522868664, guid: 3f69045d2fefe77458a209e7f7108d73,
         type: 3}
@@ -3710,15 +3818,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69d1ba90ca963cb43b397484aa534786, type: 3}
---- !u!224 &4772892433784551457 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7188127420954680576, guid: 69d1ba90ca963cb43b397484aa534786,
-    type: 3}
-  m_PrefabInstance: {fileID: 2449364114810545441}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6418849011425664022 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8712695639629887799, guid: 69d1ba90ca963cb43b397484aa534786,
+    type: 3}
+  m_PrefabInstance: {fileID: 2449364114810545441}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &4772892433784551457 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7188127420954680576, guid: 69d1ba90ca963cb43b397484aa534786,
     type: 3}
   m_PrefabInstance: {fileID: 2449364114810545441}
   m_PrefabAsset: {fileID: 0}
@@ -3916,6 +4024,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: CartoonFireTorchRed
       objectReference: {fileID: 0}
+    - target: {fileID: 2528959423310441777, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311034443, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311049329, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3135991687522868664, guid: 3f69045d2fefe77458a209e7f7108d73,
         type: 3}
       propertyPath: m_Scale3D.x
@@ -4053,15 +4176,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f69045d2fefe77458a209e7f7108d73, type: 3}
---- !u!224 &8474581488829829961 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6683461214204882534, guid: 3f69045d2fefe77458a209e7f7108d73,
-    type: 3}
-  m_PrefabInstance: {fileID: 2980167335488650543}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &739440624972659832 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2528959423296635223, guid: 3f69045d2fefe77458a209e7f7108d73,
+    type: 3}
+  m_PrefabInstance: {fileID: 2980167335488650543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8474581488829829961 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6683461214204882534, guid: 3f69045d2fefe77458a209e7f7108d73,
     type: 3}
   m_PrefabInstance: {fileID: 2980167335488650543}
   m_PrefabAsset: {fileID: 0}
@@ -4076,6 +4199,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CartoonFireTorchRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423310441777, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311034443, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311049329, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3135991687522868664, guid: 3f69045d2fefe77458a209e7f7108d73,
         type: 3}
@@ -4370,18 +4508,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69d1ba90ca963cb43b397484aa534786, type: 3}
---- !u!1 &6313659310190246856 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8712695639629887799, guid: 69d1ba90ca963cb43b397484aa534786,
-    type: 3}
-  m_PrefabInstance: {fileID: 3420247748488839935}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &5527732013575856127 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7188127420954680576, guid: 69d1ba90ca963cb43b397484aa534786,
-    type: 3}
-  m_PrefabInstance: {fileID: 3420247748488839935}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5428071224880331580 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7215693704655485379, guid: 69d1ba90ca963cb43b397484aa534786,
@@ -4394,6 +4520,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &5527732013575856127 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7188127420954680576, guid: 69d1ba90ca963cb43b397484aa534786,
+    type: 3}
+  m_PrefabInstance: {fileID: 3420247748488839935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6313659310190246856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8712695639629887799, guid: 69d1ba90ca963cb43b397484aa534786,
+    type: 3}
+  m_PrefabInstance: {fileID: 3420247748488839935}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4544862453723552885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4405,6 +4543,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CartoonFireTorchRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423310441777, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311034443, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311049329, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3135991687522868664, guid: 3f69045d2fefe77458a209e7f7108d73,
         type: 3}
@@ -4543,15 +4696,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f69045d2fefe77458a209e7f7108d73, type: 3}
---- !u!1 &2020483870906572066 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2528959423296635223, guid: 3f69045d2fefe77458a209e7f7108d73,
-    type: 3}
-  m_PrefabInstance: {fileID: 4544862453723552885}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7193080669964841491 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6683461214204882534, guid: 3f69045d2fefe77458a209e7f7108d73,
+    type: 3}
+  m_PrefabInstance: {fileID: 4544862453723552885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2020483870906572066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2528959423296635223, guid: 3f69045d2fefe77458a209e7f7108d73,
     type: 3}
   m_PrefabInstance: {fileID: 4544862453723552885}
   m_PrefabAsset: {fileID: 0}
@@ -4711,15 +4864,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &2509056578369832603 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7188127420954680576, guid: 69d1ba90ca963cb43b397484aa534786,
-    type: 3}
-  m_PrefabInstance: {fileID: 4688438956833430427}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4177397486980375212 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8712695639629887799, guid: 69d1ba90ca963cb43b397484aa534786,
+    type: 3}
+  m_PrefabInstance: {fileID: 4688438956833430427}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2509056578369832603 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7188127420954680576, guid: 69d1ba90ca963cb43b397484aa534786,
     type: 3}
   m_PrefabInstance: {fileID: 4688438956833430427}
   m_PrefabAsset: {fileID: 0}
@@ -4825,6 +4978,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CartoonFireTorchRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423310441777, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311034443, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311049329, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3135991687522868664, guid: 3f69045d2fefe77458a209e7f7108d73,
         type: 3}
@@ -5412,18 +5580,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69d1ba90ca963cb43b397484aa534786, type: 3}
---- !u!1 &2741150131364043829 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8712695639629887799, guid: 69d1ba90ca963cb43b397484aa534786,
-    type: 3}
-  m_PrefabInstance: {fileID: 6837364737924392194}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &4405198622815975426 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7188127420954680576, guid: 69d1ba90ca963cb43b397484aa534786,
-    type: 3}
-  m_PrefabInstance: {fileID: 6837364737924392194}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4233515803619679425 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7215693704655485379, guid: 69d1ba90ca963cb43b397484aa534786,
@@ -5436,6 +5592,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2741150131364043829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8712695639629887799, guid: 69d1ba90ca963cb43b397484aa534786,
+    type: 3}
+  m_PrefabInstance: {fileID: 6837364737924392194}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &4405198622815975426 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7188127420954680576, guid: 69d1ba90ca963cb43b397484aa534786,
+    type: 3}
+  m_PrefabInstance: {fileID: 6837364737924392194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7686043672871588556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5633,6 +5801,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: CartoonFireTorchRed
       objectReference: {fileID: 0}
+    - target: {fileID: 2528959423310441777, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311034443, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311049329, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3135991687522868664, guid: 3f69045d2fefe77458a209e7f7108d73,
         type: 3}
       propertyPath: m_Scale3D.x
@@ -5770,15 +5953,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f69045d2fefe77458a209e7f7108d73, type: 3}
---- !u!224 &3212112331870752773 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6683461214204882534, guid: 3f69045d2fefe77458a209e7f7108d73,
-    type: 3}
-  m_PrefabInstance: {fileID: 8094054529525792355}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6002014656443432756 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2528959423296635223, guid: 3f69045d2fefe77458a209e7f7108d73,
+    type: 3}
+  m_PrefabInstance: {fileID: 8094054529525792355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &3212112331870752773 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6683461214204882534, guid: 3f69045d2fefe77458a209e7f7108d73,
     type: 3}
   m_PrefabInstance: {fileID: 8094054529525792355}
   m_PrefabAsset: {fileID: 0}
@@ -5961,6 +6144,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CartoonFireTorchRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423310441777, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311034443, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528959423311049329, guid: 3f69045d2fefe77458a209e7f7108d73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3135991687522868664, guid: 3f69045d2fefe77458a209e7f7108d73,
         type: 3}

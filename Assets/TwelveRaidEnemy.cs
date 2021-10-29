@@ -37,6 +37,9 @@ public class TwelveRaidEnemy : BossEnemyBase
     [SerializeField]
     private List<AlarmHitObject> RandomHit2;
 
+    [SerializeField]
+    private bool playAnim = true;
+
     private void Start()
     {
         Initialize();
@@ -95,7 +98,10 @@ public class TwelveRaidEnemy : BossEnemyBase
                 yield return StartCoroutine(AttackRoutine_4(2));
             }
 
-            StartCoroutine(PlayAttackAnim());
+            if (playAnim)
+            {
+                StartCoroutine(PlayAttackAnim());
+            }
 
             yield return new WaitForSeconds(attackInterval);
         }

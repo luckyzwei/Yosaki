@@ -59,6 +59,12 @@ public enum TitleMissionId
     BaekHo_1,//★
     ZuZak_1,//★
     Level41000,//★
+    Level44000,//★
+    Level47000,//★
+    Level50000,//★
+    Stage1000,//★
+    Stage1050,//★
+    Yomul6,
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -161,6 +167,21 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.Level41000);
             }
 
+            if (e >= 44000)
+            {
+                ClearTitleMission(TitleMissionId.Level44000);
+            }
+
+            if (e >= 47000)
+            {
+                ClearTitleMission(TitleMissionId.Level47000);
+            }
+
+            if (e >= 50000)
+            {
+                ClearTitleMission(TitleMissionId.Level50000);
+            }
+
 
         }).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>
@@ -236,6 +257,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 950 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage950);
+            }
+            if (e >= 1000 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1000);
+            }
+            if (e >= 1050 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1050);
             }
 
         }).AddTo(this);
@@ -438,6 +467,15 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 100)
             {
                 ClearTitleMission(TitleMissionId.Yomul5);
+            }
+        }).AddTo(this);
+
+        //약점베기
+        ServerData.yomulServerTable.TableDatas["yomul6"].level.AsObservable().Subscribe(e =>
+        {
+            if (e >= 100)
+            {
+                ClearTitleMission(TitleMissionId.Yomul6);
             }
         }).AddTo(this);
 

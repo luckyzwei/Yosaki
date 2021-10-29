@@ -19,6 +19,16 @@ public class UiMonthPassSystem2 : MonoBehaviour
 
     private ObscuredString passShopId;
 
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotal2).Value += 1000000;
+        }
+    }
+#endif
+
     private void Start()
     {
         Initialize();

@@ -66,6 +66,7 @@ public class UserInfoTable
     public const string yomul3_buff = "yomul3_buff";
     public const string yomul4_buff = "yomul4_buff";
     public const string yomul5_buff = "yomul5_buff";
+    public const string yomul6_buff = "yomul6_buff";
 
     public const string bonusDungeonMaxKillCount = "bonusDungeonMaxKillCount";
 
@@ -99,6 +100,7 @@ public class UserInfoTable
 
     public const string relicReset = "relicReset";
     public const string marbleReset2 = "marbleReset2";
+    public const string dailyPackReset = "dailyPackReset";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -173,6 +175,8 @@ public class UserInfoTable
         {marbleReset2,0f},
         {yomul5_buff,0f},
         {killCountTotal2,0f},
+        {dailyPackReset,0f},
+        {yomul6_buff,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -470,6 +474,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul3_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul4_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul5_buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.yomul6_buff).Value = 0;
         //
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
@@ -524,6 +529,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.yomul3_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul3_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul4_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul4_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul5_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul5_buff).Value);
+        userInfoParam.Add(UserInfoTable.yomul6_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul6_buff).Value);
 
         //채팅 테두리 초기화
         if (weekChanged)
