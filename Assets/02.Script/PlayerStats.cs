@@ -754,6 +754,7 @@ public static class PlayerStats
         ret += GetRelicHasEffect(StatusType.SuperCritical1DamPer);
         ret += GetYomulUpgradeValue(StatusType.SuperCritical1DamPer);
         ret += GetStageRelicHasEffect(StatusType.SuperCritical1DamPer);
+        ret += GetBuffValue(StatusType.SuperCritical1DamPer);
 
         return ret;
     }
