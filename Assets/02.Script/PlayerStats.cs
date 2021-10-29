@@ -30,7 +30,8 @@ public enum StatusType
     SkillAttackCount,
     PenetrateDefense,
     SuperCritical1Prob,
-    SuperCritical1DamPer
+    SuperCritical1DamPer,
+    MarbleAddPer
 }
 
 
@@ -604,6 +605,12 @@ public static class PlayerStats
         ret += GetHotTimeBuffEffect(StatusType.MagicStoneAddPer);
         return ret;
     }
+    public static float GetMarblePlusValue()
+    {
+        float ret = 0f;
+        ret += GetHotTimeBuffEffect(StatusType.MarbleAddPer);
+        return ret;
+    }
 
     public static float GetBuffValue(StatusType type)
     {
@@ -746,6 +753,7 @@ public static class PlayerStats
         ret += GetSinsuEquipEffect(StatusType.SuperCritical1DamPer);
         ret += GetRelicHasEffect(StatusType.SuperCritical1DamPer);
         ret += GetYomulUpgradeValue(StatusType.SuperCritical1DamPer);
+        ret += GetStageRelicHasEffect(StatusType.SuperCritical1DamPer);
 
         return ret;
     }
@@ -859,6 +867,10 @@ public static class PlayerStats
         else if (statusType == StatusType.MagicStoneAddPer)
         {
             ret = GameBalance.HotTime_GrowthStone;
+        }
+        else if (statusType == StatusType.MarbleAddPer)
+        {
+            ret = GameBalance.HotTime_Marble;
         }
 
         return ret;

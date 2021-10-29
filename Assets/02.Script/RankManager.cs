@@ -59,12 +59,12 @@ public class RankManager : SingletonMono<RankManager>
 #if UNITY_ANDROID
     public const string Rank_Level_Uuid = "c1d70840-de7f-11eb-bc74-95875190be29";
     public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
-    public const string Rank_Boss_Uuid = "4373ef80-228c-11ec-9e8b-89cc0dbedc9b";
+    public const string Rank_Boss_Uuid = "f04cd6f0-3866-11ec-ae07-a5c5ba3b5dfe";
     public const string Rank_Real_Boss_Uuid = "76daacf0-3593-11ec-ae5c-493099866c5d";
     public const string Rank_Relic_Uuid = "0453f560-2779-11ec-9b46-299116fee741";
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
-    public const string Rank_Boss = "Rank_Boss_Cat";
+    public const string Rank_Boss = "RankBossCat2";
     public const string Rank_Real_Boss = "Rank_Boss_6";
     public const string Rank_Relic = "Rank_Relic";
 #endif
@@ -278,7 +278,7 @@ public class RankManager : SingletonMono<RankManager>
                 string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 float score = float.Parse(data["score"][ServerData.format_Number].ToString());
-                score *= 100000000f;
+                score *= 10000000000f;
                 int costumeId = int.Parse(splitData[0]);
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
@@ -302,7 +302,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateBoss_Score(float score)
     {
-        if (UpdateRank() == false) return;
+        //if (UpdateRank() == false) return;
 
         if (this.myRankInfo[RankType.Boss] != null && score < this.myRankInfo[RankType.Boss].Score)
         {
@@ -310,7 +310,7 @@ public class RankManager : SingletonMono<RankManager>
             return;
         }
 
-        score *= 0.00000001f;
+        score *= 0.0000000001f;
 
         Param param = new Param();
         param.Add("Score", score);
@@ -365,7 +365,7 @@ public class RankManager : SingletonMono<RankManager>
                 string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 float score = float.Parse(data["score"][ServerData.format_Number].ToString());
-                score *= 100000000f;
+                score *= 10000000000f;
                 int costumeId = int.Parse(splitData[0]);
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
@@ -394,7 +394,7 @@ public class RankManager : SingletonMono<RankManager>
             return;
         }
 
-        score *= 0.00000001f;
+        score *= 0.0000000001f;
 
         Param param = new Param();
         param.Add("Score", score);

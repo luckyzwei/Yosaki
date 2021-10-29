@@ -214,6 +214,9 @@ public static class CommonString
             case StatusType.SuperCritical1DamPer:
                 return "천공베기 추가 피해량(%)";
                 break;
+            case StatusType.MarbleAddPer:
+                return "여우구슬 추가 획득(%)";
+                break;
         }
 
         return "등록필요";

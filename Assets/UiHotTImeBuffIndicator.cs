@@ -22,7 +22,8 @@ public class UiHotTImeBuffIndicator : MonoBehaviour
 
         desc += $"경험치 +{GameBalance.HotTime_Exp * 100f}%\n";
         desc += $"골드 +{GameBalance.HotTime_Gold * 100f}%\n";
-        desc += $"수련의돌 +{GameBalance.HotTime_GrowthStone * 100f}%";
+        desc += $"수련의돌 +{GameBalance.HotTime_GrowthStone * 100f}%\n";
+        desc += $"여우구슬 +{GameBalance.HotTime_Marble * 100f}%";
 
         description.SetText(desc);
 

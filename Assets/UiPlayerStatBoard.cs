@@ -100,6 +100,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         //타격수
         description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical1DamPer)} : {PlayerStats.GetSuperCriticalDamPer() * 100f}\n";
 
+        description2 += $"{CommonString.GetStatusName(StatusType.MarbleAddPer)} : {PlayerStats.GetMarblePlusValue() * 100f}\n";
         ////기억의파편 추가 획득
         //description1 += $"{CommonString.GetStatusName(StatusType.MagicStoneAddPer)} : {PlayerStats.GetMagicStonePlusValue() * 100f}\n";
 

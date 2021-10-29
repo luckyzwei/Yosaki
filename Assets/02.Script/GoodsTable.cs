@@ -128,9 +128,13 @@ public class GoodsTable
     static float updateRequireNum = 100;
     public void GetMarble(float amount)
     {
-        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Marble)} 획득(+{(int)amount})");
+        float magicMarblePlusValue = PlayerStats.GetMarblePlusValue();
 
-        marbleAddAmount += (int)amount;
+        int amount_int = (int)(amount + amount * magicMarblePlusValue);
+
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Marble)} 획득(+{amount_int})");
+
+        marbleAddAmount += amount_int;
 
         if (marbleAddAmount < updateRequireNum)
         {

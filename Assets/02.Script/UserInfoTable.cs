@@ -632,6 +632,9 @@ public class UserInfoTable
 
     public bool IsHotTime()
     {
+//#if UNITY_EDITOR
+//        return true;
+//#endif
         int currentHour = currentServerTime.Hour;
         return currentHour >= GameBalance.HotTime_Start && currentHour < GameBalance.HotTime_End;
     }
