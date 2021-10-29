@@ -234,6 +234,9 @@ public class UiStageRelicCell : MonoBehaviour
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactions.Add(TransactionValue.SetUpdate(StageRelicServerTable.tableName, StageRelicServerTable.Indate, relicParam));
 
-        ServerData.SendTransaction(transactions);
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+          {
+              LogManager.Instance.SendLogType("StageRelic", relicLocalData.Stringid, ServerData.stageRelicServerTable.TableDatas[relicLocalData.Stringid].level.Value.ToString());
+          });
     }
 }
