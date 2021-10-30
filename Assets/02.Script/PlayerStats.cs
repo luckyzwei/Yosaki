@@ -595,7 +595,6 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
 
         ret += GetTitleAbilValue(StatusType.ExpGainPer);
-        ret += GetHotTimeBuffEffect(StatusType.ExpGainPer);
 
         return ret;
     }
