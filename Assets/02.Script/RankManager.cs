@@ -70,12 +70,12 @@ public class RankManager : SingletonMono<RankManager>
 #endif
 
 #if UNITY_IOS
-    public const string Rank_Level_Uuid = "edfa1040-31b6-11ec-9f89-ed8eb4713349";
+    public const string Rank_Level_Uuid = "ea8c9430-38cf-11ec-955f-fb3c68e97f2a";
     public const string Rank_Stage_Uuid = "f865e900-31b6-11ec-b4ab-713be46ddb60";
     public const string Rank_Boss_Uuid = "0b700670-31b7-11ec-b6f2-0d73a4821171";
     public const string Rank_Real_Boss_Uuid = "8fbf8240-3593-11ec-ae07-a5c5ba3b5dfe";
     public const string Rank_Relic_Uuid = "1ce07110-31b7-11ec-be95-537d9b90903a";
-    public const string Rank_Level_TableName = "Rank_Level_IOS";
+    public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";
     public const string Rank_Boss = "Rank_Boss_Cat_IOS";
     public const string Rank_Real_Boss = "Rank_Boss_6_IOS";
