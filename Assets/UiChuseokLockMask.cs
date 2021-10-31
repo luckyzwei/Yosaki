@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class UiChuseokLockMask : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject rootObject;
     // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         bool canBuy = ServerData.userInfoTable.CanBuyEventPackage();
-        this.gameObject.SetActive(!canBuy);
+        rootObject.gameObject.SetActive(!canBuy);
     }
 }

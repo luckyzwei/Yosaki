@@ -632,9 +632,9 @@ public class UserInfoTable
 
     public bool IsHotTime()
     {
-//#if UNITY_EDITOR
-//        return true;
-//#endif
+        //#if UNITY_EDITOR
+        //        return true;
+        //#endif
         int currentHour = currentServerTime.Hour;
         return currentHour >= GameBalance.HotTime_Start && currentHour < GameBalance.HotTime_End;
     }
@@ -666,9 +666,6 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
-#if UNITY_EDITOR
-        return true;
-#endif
         return currentServerTime.Month == 11;
     }
 }
