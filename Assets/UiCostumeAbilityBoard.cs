@@ -45,6 +45,15 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
     [SerializeField]
     private TextMeshProUGUI currentSelectedSlotDesc;
 
+    [SerializeField]
+    private TMP_Dropdown fixedAbilDropDown;
+
+    [SerializeField]
+    private Toggle fixedAbilToggle;
+
+    [SerializeField]
+    private int currentSelectedFixedDropDownId;
+
     private void SetCurrentSelectedSlotDesc()
     {
         currentSelectedSlotDesc.SetText($"{this.costumeData.Id}번 슬롯");
@@ -116,7 +125,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
         RefreshAllData();
     }
 
-    public void RefreshAllData() 
+    public void RefreshAllData()
     {
         SetCurrentSelectedSlotDesc();
 
@@ -139,6 +148,31 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
     private void Start()
     {
+        SetDropDown();
+    }
+
+    private void SetDropDown()
+    {
+        fixedAbilDropDown.ClearOptions();
+
+        var costumeAbil = TableManager.Instance.CostumeAbility.dataArray;
+
+        List<string> drop = new List<string>();
+
+        for (int i = 0; i < costumeAbil.Length; i++)
+        {
+            if (costumeAbil[i].Grade == 5)
+            {
+                drop.Add(costumeAbil[i].Description);
+            }
+        }
+
+        fixedAbilDropDown.AddOptions(drop);
+    }
+
+    public void WhenFixAbilIdxChanged(int idx)
+    {
+        currentSelectedFixedDropDownId = idx * 5 + 4;
     }
 
     private void Subscribe()
@@ -208,8 +242,19 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
             if (isLock == false && abilityData.Grade == GameBalance.costumeMaxGrade)
             {
-                hasMaxOption = true;
-                break;
+                if (fixedAbilToggle.isOn == true)
+                {
+                    if (abilityData.Id == currentSelectedFixedDropDownId)
+                    {
+                        hasMaxOption = true;
+                        break;
+                    }
+                }
+                else
+                {
+                    hasMaxOption = true;
+                    break;
+                }
             }
 
             if (isLock == false && abilityData.Grade == GameBalance.costumeMaxGrade - 1 && showYellowPop)
@@ -225,6 +270,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
             PopupManager.Instance.ShowAlarmMessage("모든 능력치가 잠겨있습니다.");
             return;
         }
+
 
         if (hasMaxOption)
         {
@@ -279,7 +325,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
             CurrentServerData.abilityIdx[i].Value = costumeAbilities[i];
         }
         //
-        ServerData.costumePreset.TableDatas[ServerData.equipmentTable.GetCurrentCostumePresetKey()] =ServerData.costumeServerTable.ConvertAllCostumeDataToString();
+        ServerData.costumePreset.TableDatas[ServerData.equipmentTable.GetCurrentCostumePresetKey()] = ServerData.costumeServerTable.ConvertAllCostumeDataToString();
         //
 
         //재화 차감
@@ -314,7 +360,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
         Param presetParam = new Param();
 
-        string presetKey =ServerData.equipmentTable.GetCurrentCostumePresetKey();
+        string presetKey = ServerData.equipmentTable.GetCurrentCostumePresetKey();
 
         presetParam.Add(presetKey, ServerData.costumeServerTable.ConvertAllCostumeDataToString());
 

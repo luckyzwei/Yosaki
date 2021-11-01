@@ -81,6 +81,12 @@ public class UIrelicBoard : MonoBehaviour
             instantOpenAmount = 100;
     }
 
+    public void OnClickToggle_4(bool isOn)
+    {
+        if (isOn)
+            instantOpenAmount = 1000;
+    }
+
     public void OnClickInstantClearButton()
     {
         int currentTicketNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value;

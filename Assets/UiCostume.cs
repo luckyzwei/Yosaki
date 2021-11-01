@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static TMPro.TMP_Dropdown;
 
 public class UiCostume : SingletonMono<UiCostume>
 {
@@ -22,7 +23,6 @@ public class UiCostume : SingletonMono<UiCostume>
 
     [SerializeField]
     private UiCostumeAbilityBoard uiCostumeAbilityBoard;
-
 
     void Start()
     {
