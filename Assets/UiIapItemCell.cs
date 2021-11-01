@@ -94,7 +94,12 @@ public class UiIapItemCell : MonoBehaviour
         if (descriptionText != null)
             descriptionText.SetText(productData.Description);
 
+#if UNITY_ANDROID
         string price = IAPManager.m_StoreController.products.WithID(productData.Productid).metadata.localizedPrice.ToString("N0");
+#endif
+#if UNITY_IOS
+        string price = IAPManager.m_StoreController.products.WithID(productData.Productidios).metadata.localizedPrice.ToString("N0");
+#endif
 
         if (priceText != null)
             priceText.SetText($"{price}원");
