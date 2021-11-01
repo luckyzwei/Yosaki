@@ -168,7 +168,13 @@ public class UiIapItemCell : MonoBehaviour
         return;
 #endif
 
+#if UNITY_ANDROID
         IAPManager.Instance.BuyProduct(productData.Productid);
+#endif
+
+#if UNITY_IOS
+        IAPManager.Instance.BuyProduct(productData.Productidios);
+#endif
     }
 
     private bool CanBuyProduct()
