@@ -144,7 +144,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
     {
         if (sleepRewardInfo == null) return;
 
-        LogManager.Instance.SendLog("휴식보상 요청", $"gold {sleepRewardInfo.gold} jade {sleepRewardInfo.jade} marble {sleepRewardInfo.marble} growthStone {sleepRewardInfo.GrowthStone} exp {sleepRewardInfo.exp}");
+        LogManager.Instance.SendLog("휴식보상 요청", $"seconds {sleepRewardInfo.elapsedSeconds} gold {sleepRewardInfo.gold} jade {sleepRewardInfo.jade} marble {sleepRewardInfo.marble} growthStone {sleepRewardInfo.GrowthStone} exp {sleepRewardInfo.exp}");
 
         GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false, false);
 
@@ -185,7 +185,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         {
             userInfoParam.Add(UserInfoTable.killCountTotal, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal].Value);
         }
-        else 
+        else
         {
             userInfoParam.Add(UserInfoTable.killCountTotal2, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal2].Value);
         }

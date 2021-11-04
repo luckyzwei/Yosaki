@@ -278,7 +278,7 @@ public class RankManager : SingletonMono<RankManager>
                 string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 float score = float.Parse(data["score"][ServerData.format_Number].ToString());
-                score *= 10000000000f;
+                score *= GameBalance.BossScoreConvertToOrigin;
                 int costumeId = int.Parse(splitData[0]);
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
@@ -310,7 +310,7 @@ public class RankManager : SingletonMono<RankManager>
             return;
         }
 
-        score *= 0.0000000001f;
+        score *= GameBalance.BossScoreSmallizeValue;
 
         Param param = new Param();
         param.Add("Score", score);
@@ -365,7 +365,7 @@ public class RankManager : SingletonMono<RankManager>
                 string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 float score = float.Parse(data["score"][ServerData.format_Number].ToString());
-                score *= 10000000000f;
+                score *= GameBalance.BossScoreConvertToOrigin;
                 int costumeId = int.Parse(splitData[0]);
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
@@ -394,7 +394,7 @@ public class RankManager : SingletonMono<RankManager>
             return;
         }
 
-        score *= 0.0000000001f;
+        score *= GameBalance.BossScoreSmallizeValue;
 
         Param param = new Param();
         param.Add("Score", score);

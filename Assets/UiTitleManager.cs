@@ -58,6 +58,7 @@ public enum TitleMissionId
     HyeonMu_1,//★
     BaekHo_1,//★
     ZuZak_1,//★
+ 
     Level41000,//★
     Level44000,//★
     Level47000,//★
@@ -65,6 +66,11 @@ public enum TitleMissionId
     Stage1000,//★
     Stage1050,//★
     Yomul6,
+    Stage1100,//★
+    Stage1150,//★
+    ChungRyong_1,//★
+    Level53000,//★
+
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -182,6 +188,10 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.Level50000);
             }
 
+            if (e >= 53000)
+            {
+                ClearTitleMission(TitleMissionId.Level53000);
+            }
 
         }).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>
@@ -265,6 +275,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 1050 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage1050);
+            }
+            if (e >= 1100 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1100);
+            }
+            if (e >= 1150 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1150);
             }
 
         }).AddTo(this);
@@ -502,6 +520,15 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e == 1)
             {
                 ClearTitleMission(TitleMissionId.ZuZak_1);
+            }
+
+        }).AddTo(this);
+
+        ServerData.petEquipmentServerTable.TableDatas["petequip3"].hasAbil.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.ChungRyong_1);
             }
 
         }).AddTo(this);

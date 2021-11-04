@@ -941,4 +941,25 @@ public static class PlayerStats
 
         return ret;
     }
+
+    public static float GetSonAbilHasEffect(StatusType statusType, int addLevel = 0)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.SonAbil.dataArray;
+
+        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value + addLevel;
+
+        for (int i = 0; i < tableDatas.Length; i++)
+        {
+            if (currentLevel < tableDatas[i].Unlocklevel) continue;
+            if (statusType != (StatusType)tableDatas[i].Abiltype) continue;
+
+            int calculatedLevel = currentLevel - tableDatas[i].Unlocklevel;
+
+            ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
+        }
+
+        return ret;
+    }
 }

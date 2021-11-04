@@ -101,6 +101,7 @@ public class UserInfoTable
     public const string relicReset = "relicReset";
     public const string marbleReset2 = "marbleReset2";
     public const string dailyPackReset = "dailyPackReset";
+    public const string sonScore = "sonLastClear";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -177,6 +178,7 @@ public class UserInfoTable
         {killCountTotal2,0f},
         {dailyPackReset,0f},
         {yomul6_buff,0f},
+        {sonScore,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -531,17 +533,23 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.yomul5_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul5_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul6_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul6_buff).Value);
 
+        //요괴소굴
+        Param yoguiSogulParam = new Param();
+
         //채팅 테두리 초기화
         if (weekChanged)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 0f;
             userInfoParam.Add(UserInfoTable.chatFrame, ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
+
+            //손오공
+            ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value = string.Empty;
+            yoguiSogulParam.Add(EtcServerTable.sonReward, ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value);
         }
 
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        //요괴소굴
-        Param yoguiSogulParam = new Param();
+
 
         //로컬
         ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value = string.Empty;

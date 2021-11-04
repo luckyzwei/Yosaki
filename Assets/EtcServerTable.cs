@@ -14,11 +14,13 @@ public class EtcServerTable
     public const string tableName = "Etc";
     public const string email = "email";
     public const string yoguiSogulReward = "yoguiSogulReward";
+    public const string sonReward = "sonReward";
 
     private Dictionary<string, ReactiveProperty<string>> tableSchema = new Dictionary<string, ReactiveProperty<string>>()
     {
         {email,new ReactiveProperty<string>(GoogleManager.email)},
         {yoguiSogulReward,new ReactiveProperty<string>(string.Empty)},
+        {sonReward,new ReactiveProperty<string>(string.Empty)},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -30,6 +32,14 @@ public class EtcServerTable
 
         return rewards.Contains(stageId.ToString());
     }
+
+    public bool SonRewarded(float stageId)
+    {
+        var rewards = tableDatas[sonReward].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(stageId.ToString());
+    }
+
     public void Initialize()
     {
         tableDatas.Clear();

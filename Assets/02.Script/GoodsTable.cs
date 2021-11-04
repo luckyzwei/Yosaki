@@ -38,6 +38,7 @@ public class GoodsTable
     //할로윈 도깨비
     public static string Event_Item_0 = "Event_Item_0";
     public static string StageRelic = "StageRelic";
+    public static string Peach = "Peach";
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -64,7 +65,8 @@ public class GoodsTable
         {Event_Item_0,0f},
         {DragonStone,0f},
         {StageRelic,0f},
-        {SnakeStone,0f}
+        {SnakeStone,0f},
+        {Peach,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

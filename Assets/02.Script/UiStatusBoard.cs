@@ -94,7 +94,7 @@ public class UiStatusBoard : MonoBehaviour
 
     public void OnClickMemoryResetButton()
     {
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "기억 능력치를 초기화 합니까?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "비급 능력치를 초기화 합니까?", () =>
         {
             string log = $"보유 {ServerData.statusTable.GetTableData(StatusTable.Memory).Value}";
 

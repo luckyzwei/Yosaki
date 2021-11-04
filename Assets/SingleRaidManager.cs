@@ -8,8 +8,6 @@ using CodeStage.AntiCheat.ObscuredTypes;
 using static UiRewardView;
 using BackEnd;
 
-
-
 public class SingleRaidManager : ContentsManagerBase
 {
     [Header("BossInfo")]

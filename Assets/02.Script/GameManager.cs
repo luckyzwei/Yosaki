@@ -13,7 +13,7 @@ public class GameManager : SingletonMono<GameManager>
     }
     public enum ContentsType
     {
-        NormalField, FireFly, Boss, InfiniteTower, Dokebi, TwelveDungeon, YoguiSoGul, RelicDungeon
+        NormalField, FireFly, Boss, InfiniteTower, Dokebi, TwelveDungeon, YoguiSoGul, RelicDungeon, Son
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;

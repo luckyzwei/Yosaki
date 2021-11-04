@@ -230,6 +230,9 @@ public static class ServerData
             case Item_Type.StageRelic:
                 ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += rewardValue;
                 break;
+            case Item_Type.Peach:
+                ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += rewardValue;
+                break;
             default:
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"Item_Type {type} is not defined", null);
@@ -295,6 +298,10 @@ public static class ServerData
 
             case Item_Type.StageRelic:
                 passParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Peach:
+                passParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
         }
@@ -376,6 +383,11 @@ public static class ServerData
             case Item_Type.Event_Item_0:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += amount;
                 param.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.Peach:
+                ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
+                param.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.costume1:
@@ -632,6 +644,9 @@ public static class ServerData
                     break;
                 case Item_Type.StageRelic:
                     ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;
+                    break;
+                case Item_Type.Peach:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                     break;
             }
 

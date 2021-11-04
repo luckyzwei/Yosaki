@@ -25,6 +25,7 @@ public enum Item_Type
     Event_Item_0,
     StageRelic,
     SnakeStone,
+    Peach,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

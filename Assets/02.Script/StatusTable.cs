@@ -45,6 +45,7 @@ public class StatusTable
     public const string CriticalDamLevel_memory = "CriticalDamLevel_memory";
     public const string IgnoreDefense_memory = "IgnoreDefense_memory";
     public const string BossDamage_memory = "BossDamage_memory";
+    public const string Son_Level = "Son_Level";
 
 
 
@@ -82,7 +83,8 @@ public class StatusTable
         {IgnoreDefense_memory,0},
         {BossDamage_memory,0},
         {GoldGain_memory,0},
-        {ExpGain_memory,0}
+        {ExpGain_memory,0},
+        {Son_Level,0}
     };
 
     private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();

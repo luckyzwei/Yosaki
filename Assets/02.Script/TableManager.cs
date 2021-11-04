@@ -539,5 +539,15 @@ public class TableManager : SingletonMono<TableManager>
     private monthpass2 monthlyPass2;
     public monthpass2 MonthlyPass2 => monthlyPass2;
 
+    [SerializeField]
+    private SonReward sonReward;
+
+    public SonReward SonReward => sonReward;
+
+    [SerializeField]
+    private SonAbil sonAbil;
+
+    public SonAbil SonAbil => sonAbil;
+
 }
 
