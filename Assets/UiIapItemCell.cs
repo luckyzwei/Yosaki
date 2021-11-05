@@ -101,8 +101,18 @@ public class UiIapItemCell : MonoBehaviour
         string price = IAPManager.m_StoreController.products.WithID(productData.Productidios).metadata.localizedPrice.ToString("N0");
 #endif
 
-        if (priceText != null)
-            priceText.SetText($"{price}원");
+        if (priceText != null) 
+        {
+            if (Application.systemLanguage == SystemLanguage.Korean) 
+            {
+                priceText.SetText($"{price}원");
+            }
+            else 
+            {
+                priceText.SetText($"{price}$");
+            }
+          
+        }
 
         string itemDetailDesc = null;
         string itemAmount = null;
