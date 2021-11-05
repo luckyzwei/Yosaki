@@ -17,6 +17,10 @@ public class SonRewardData
   public float Score { get {return score; } set { this.score = value;} }
   
   [SerializeField]
+  string scoredescription;
+  public string Scoredescription { get {return scoredescription; } set { this.scoredescription = value;} }
+  
+  [SerializeField]
   int rewardtype;
   public int Rewardtype { get {return rewardtype; } set { this.rewardtype = value;} }
   

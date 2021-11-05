@@ -102,6 +102,7 @@ public class UserInfoTable
     public const string marbleReset2 = "marbleReset2";
     public const string dailyPackReset = "dailyPackReset";
     public const string sonScore = "sonLastClear";
+    public const string sleepRewardSavedTime = "sleepRewardSavedTime";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -179,6 +180,7 @@ public class UserInfoTable
         {dailyPackReset,0f},
         {yomul6_buff,0f},
         {sonScore,0f},
+        {sleepRewardSavedTime,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -396,7 +398,34 @@ public class UserInfoTable
                 if (isFirstInit)
                 {
                     isFirstInit = false;
-                    SleepRewardReceiver.Instance.SetElapsedSecond((int)(currentServerTime - savedDate).TotalSeconds);
+                    int elapsedTime = (int)(currentServerTime - savedDate).TotalSeconds;
+
+                    //최소조건 안됨 (시간,첫 접속)
+                    if(elapsedTime < GameBalance.sleepRewardMinValue || ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value == -1) 
+                    {
+                        return;
+                    }
+                    else 
+                    {
+                        //서버에 저장시켜봄
+                        Param userInfoParam = new Param();
+
+                        ServerData.userInfoTable.tableDatas[UserInfoTable.sleepRewardSavedTime].Value += elapsedTime;
+
+                        userInfoParam.Add(sleepRewardSavedTime, ServerData.userInfoTable.tableDatas[UserInfoTable.sleepRewardSavedTime].Value);
+
+                        var returnBro = Backend.GameData.Update(tableName, Indate, userInfoParam);
+
+                        if (returnBro.IsSuccess() == false)
+                        {
+                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크가 불안정 합니다.\n앱을 재실행 합니다.", () =>
+                            {
+                                Utils.RestartApplication();
+                            });
+
+                            return;
+                        }
+                    }
                 }
 
                 //week check
@@ -541,15 +570,12 @@ public class UserInfoTable
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 0f;
             userInfoParam.Add(UserInfoTable.chatFrame, ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
-
-            //손오공
-            ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value = string.Empty;
-            yoguiSogulParam.Add(EtcServerTable.sonReward, ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value);
         }
 
+        //손오공
+        ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value = string.Empty;
+        yoguiSogulParam.Add(EtcServerTable.sonReward, ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-
-
 
         //로컬
         ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value = string.Empty;
@@ -615,11 +641,13 @@ public class UserInfoTable
 
     public bool CanSpawnEventItem()
     {
+        return false;
         if (currentServerTime.Month != 10) return false;
         return true;
     }
     public bool CanMakeEventItem()
     {
+        return false;
         //10월
         if (currentServerTime.Month == 10) return true;
         //11월
@@ -631,6 +659,7 @@ public class UserInfoTable
 
     public bool CanBuyEventPackage()
     {
+        return false;
         if (currentServerTime.Month == 10) return true;
         else
         {

@@ -15,14 +15,7 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
     [SerializeField]
     private TextMeshProUGUI timeDescription;
 
-    private IEnumerator Start()
-    {
-        yield return null;
-
-        CheckReward();
-    }
-
-    private void CheckReward()
+    public void CheckReward()
     {
         if (SleepRewardReceiver.Instance.sleepRewardInfo == null) return;
 

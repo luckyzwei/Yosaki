@@ -205,4 +205,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public List<Sprite> relicIconList;
     public List<Sprite> stageRelicIconList;
 
+    public List<RuntimeAnimatorController> sonAnimators;
+    public List<Sprite> sonThumbNail;
+
 }

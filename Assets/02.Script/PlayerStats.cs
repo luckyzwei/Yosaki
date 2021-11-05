@@ -174,9 +174,7 @@ public static class PlayerStats
         ret += GetRelicHasEffect(StatusType.AttackAdd);
 
         ret += GetStageRelicHasEffect(StatusType.AttackAdd);
-
-
-
+        ret += GetSonAbilHasEffect(StatusType.AttackAdd);
 
         return ret;
     }
@@ -212,7 +210,9 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.AttackAddPer);
         ret += GetMarbleValue(StatusType.AttackAddPer);
         ret += GetStageRelicHasEffect(StatusType.AttackAddPer);
+        ret += GetSonAbilHasEffect(StatusType.AttackAddPer);
 
+        
         return ret;
     }
 
@@ -472,6 +472,7 @@ public static class PlayerStats
 
         ret += GetSinsuEquipEffect(StatusType.SkillDamage);
         ret += GetStageRelicHasEffect(StatusType.SkillDamage);
+        ret += GetSonAbilHasEffect(StatusType.SkillDamage);
 
         return ret;
     }
@@ -535,7 +536,8 @@ public static class PlayerStats
         ret += GetWingAbilValue(StatusType.CriticalDam);
         ret += ServerData.petTable.GetStatusValue(StatusType.CriticalDam);
         ret += GetStageRelicHasEffect(StatusType.CriticalDam);
-
+        ret += GetSonAbilHasEffect(StatusType.CriticalDam);
+        
         return ret;
     }
     #endregion

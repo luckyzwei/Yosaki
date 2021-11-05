@@ -213,9 +213,16 @@ public class SonManager : ContentsManagerBase
 
     private void SendScore()
     {
-        ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value = damageAmount.Value;
+        float reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        ServerData.userInfoTable.UpData(UserInfoTable.sonScore, false);
+        if(reqValue > ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value) 
+        {
+            ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value = reqValue;
+
+            ServerData.userInfoTable.UpData(UserInfoTable.sonScore, false);
+        }
+
+
     }
 
     private void ShowResultPopup()

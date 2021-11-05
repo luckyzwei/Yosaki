@@ -175,7 +175,7 @@ public class StatusTable
                     break;
                 case CriticalDamLevel_StatPoint:
                     {
-                        return level * 0.01f;
+                        return level * 0.015f;
                     }
                     break;
                 case ExpGain_memory:

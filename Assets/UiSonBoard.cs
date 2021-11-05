@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UniRx;
 using BackEnd;
+using UnityEngine.UI;
 
 public class UiSonBoard : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class UiSonBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI upgradePriceText;
 
+    [SerializeField]
+    private Image sonCharacterIcon;
+
+    private List<UiSonRewardCell> rewardCells = new List<UiSonRewardCell>();
+
     private void Start()
     {
         Initialize();
@@ -38,6 +44,8 @@ public class UiSonBoard : MonoBehaviour
             sonLevelText.SetText($"LV : {level}");
             upgradePriceText.SetText($"{Utils.ConvertBigNum(GetUpgradePrice())}");
             UpdateAbilText1(level);
+
+            sonCharacterIcon.sprite = CommonUiContainer.Instance.sonThumbNail[GameBalance.GetSonIdx()];
         }).AddTo(this);
 
     }
@@ -46,7 +54,7 @@ public class UiSonBoard : MonoBehaviour
     {
         var tableData = TableManager.Instance.SonAbil.dataArray;
 
-        string abilDesc = string.Empty;
+        string abilDesc = "보유 효과\n\n";
 
         for (int i = 0; i < tableData.Length; i++)
         {
@@ -71,7 +79,7 @@ public class UiSonBoard : MonoBehaviour
 
     private void Initialize()
     {
-        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value)}");
+        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value * GameBalance.BossScoreConvertToOrigin)}");
 
         var tableData = TableManager.Instance.SonReward.dataArray;
 
@@ -80,6 +88,8 @@ public class UiSonBoard : MonoBehaviour
             var cell = Instantiate<UiSonRewardCell>(cellPrefab, cellParents);
 
             cell.Initialize(tableData[i]);
+
+            rewardCells.Add(cell);
         }
     }
 
@@ -115,7 +125,7 @@ public class UiSonBoard : MonoBehaviour
 
     private int GetUpgradePrice()
     {
-        return ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;
+        return 1;
     }
 
     private Coroutine syncRoutine;
@@ -139,6 +149,14 @@ public class UiSonBoard : MonoBehaviour
           {
               LogManager.Instance.SendLogType("Son", "Level", ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value.ToString());
           });
+    }
+
+    public void OnClickAllReceiveButton()
+    {
+        for (int i = 0; i < rewardCells.Count; i++)
+        {
+            rewardCells[i].OnClickGetButtonByScript();
+        }
     }
 
 

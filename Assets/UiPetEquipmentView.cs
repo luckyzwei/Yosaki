@@ -126,26 +126,43 @@ public class UiPetEquipmentView : MonoBehaviour
     {
         var petTableData = TableManager.Instance.PetTable.dataArray[petEquipmentData.Requippetid];
 
-        if (ServerData.petTable.TableDatas[petTableData.Stringid].hasItem.Value == 0)
+        //청룡
+        if (petEquipmentData.Requippetid == 11)
         {
-            //주작 이하
-            if (petEquipmentData.Requippetid < 10)
+            var prefPetData = TableManager.Instance.PetEquipment.dataArray[petEquipmentData.Id - 1];
+            var prefPetEquipData = ServerData.petEquipmentServerTable.TableDatas[prefPetData.Stringid];
+
+            if (prefPetEquipData.level.Value < 1000)
             {
-                PopupManager.Instance.ShowAlarmMessage($"{petTableData.Name} 보유중일때 획득 가능\n(3단계 환수)");
+                PopupManager.Instance.ShowAlarmMessage($"(3단계 환수)\n{prefPetData.Name} LV:{1000}이상일때 제작 가능");
                 return;
             }
-            else
-            {
-                var prefPetData = TableManager.Instance.PetEquipment.dataArray[petEquipmentData.Id - 1];
-                var prefPetEquipData = ServerData.petEquipmentServerTable.TableDatas[prefPetData.Stringid];
+        }
+        else 
+        {
 
-                if (prefPetEquipData.level.Value < 1000)
+            if (ServerData.petTable.TableDatas[petTableData.Stringid].hasItem.Value == 0)
+            {
+                //주작 이하
+                if (petEquipmentData.Requippetid < 10)
                 {
-                    PopupManager.Instance.ShowAlarmMessage($"{petTableData.Name} 보유중이거나(3단계 환수)\n{prefPetData.Name} LV:{1000}이상일때 제작 가능");
+                    PopupManager.Instance.ShowAlarmMessage($"{petTableData.Name} 보유중일때 획득 가능\n(3단계 환수)");
                     return;
+                }
+                else if (petEquipmentData.Requippetid == 10)
+                {
+                    var prefPetData = TableManager.Instance.PetEquipment.dataArray[petEquipmentData.Id - 1];
+                    var prefPetEquipData = ServerData.petEquipmentServerTable.TableDatas[prefPetData.Stringid];
+
+                    if (prefPetEquipData.level.Value < 1000)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage($"{petTableData.Name} 보유중이거나(3단계 환수)\n{prefPetData.Name} LV:{1000}이상일때 제작 가능");
+                        return;
+                    }
                 }
             }
         }
+
 
         if (petEquipServerData.hasAbil.Value == 1)
         {

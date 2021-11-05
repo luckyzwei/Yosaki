@@ -22,7 +22,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
     private bool useEffect = true;
 
-    public void GetExp(float exp, bool useBuff = true, bool useEffect = true)
+    public void GetExp(float exp, bool useBuff = true, bool useEffect = true, bool syncToServer = true)
     {
         if (useBuff)
         {
@@ -44,12 +44,14 @@ public class GrowthManager : SingletonMono<GrowthManager>
             //추가레벨업 가능?
             if (CanLevelUp())
             {
-                GetExp(0);
+                GetExp(0, syncToServer: syncToServer);
             }
             else
             {
-
-                SyncLevelUpDatas();
+                if (syncToServer)
+                {
+                    SyncLevelUpDatas();
+                }
             }
         }
     }

@@ -128,6 +128,16 @@ public static class GameBalance
 
     public readonly static ObscuredFloat BossScoreSmallizeValue = 0.0000000001f;
     public readonly static ObscuredFloat BossScoreConvertToOrigin = 10000000000f;
+
+    public readonly static ObscuredInt SonEvolutionDivdeNum = 3000;
+
+    public static int GetSonIdx()
+    {
+        int ret = 0;
+        ret = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value / SonEvolutionDivdeNum;
+        ret = Mathf.Min(ret, CommonUiContainer.Instance.sonThumbNail.Count - 1);
+        return ret;
+    }
 }
 
 public static class DamageBalance

@@ -7,29 +7,6 @@ using Spine.Unity;
 
 public class SonBossEnemy : BossEnemyBase
 {
-    private List<AlarmHitObject> enemyHitObjects;
-
-    [SerializeField]
-    private AlarmHitObject alarmHitObject_2;
-
-    [SerializeField]
-    private List<Transform> attack2SpawnPos;
-
-    [SerializeField]
-    private AlarmHitObject alarmHitObject_3;
-
-    [SerializeField]
-    private AlarmHitObject alarmHitObject_4;
-
-    [SerializeField]
-    private Transform atk_minPos;
-
-    [SerializeField]
-    private Transform atk_maxPos;
-
-    [SerializeField]
-    private List<Transform> alarmHitObjectSpawnPos;
-
 
     private void Start()
     {
@@ -45,8 +22,6 @@ public class SonBossEnemy : BossEnemyBase
         float damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax, Mathf.Min(1f, ratio));
 
         hitObject.SetDamage(damage);
-
-        enemyHitObjects.ForEach(e => e.SetDamage(damage));
     }
 
     private IEnumerator BossAttackPowerUpdateRoutine()
@@ -97,21 +72,15 @@ public class SonBossEnemy : BossEnemyBase
 
     private IEnumerator PlayAttackAnim()
     {
-        skeletonAnimation.AnimationName = "attack";
         yield return new WaitForSeconds(1.0f);
-        skeletonAnimation.AnimationName = "idle";
     }
 
     private void Initialize()
     {
-        enemyHitObjects = GetComponentsInChildren<AlarmHitObject>().ToList();
-
         agentHpController.SetHp(float.MaxValue);
 
         var bossTableData = TableManager.Instance.BossTableData[GameManager.Instance.bossId];
         agentHpController.SetDefense(bossTableData.Defense);
-
-        enemyHitObjects.ForEach(e => e.SetDamage(1f));
 
         StartCoroutine(BossAttackPowerUpdateRoutine());
 
@@ -129,10 +98,6 @@ public class SonBossEnemy : BossEnemyBase
     //?
     private IEnumerator AttackRoutine_2(float delay)
     {
-        alarmHitObject_2.transform.position = attack2SpawnPos[Random.Range(0, attack2SpawnPos.Count)].position;
-
-        alarmHitObject_2.AttackStart();
-
         StartCoroutine(PlaySoundDelay(1f, "BossSkill2"));
 
         yield return new WaitForSeconds(delay);
@@ -141,10 +106,6 @@ public class SonBossEnemy : BossEnemyBase
     //?
     private IEnumerator AttackRoutine_3(float delay)
     {
-        //  alarmHitObject_3.transform.position = alarmHitObjectSpawnPos[Random.Range(0, alarmHitObjectSpawnPos.Count)].position;
-
-        alarmHitObject_3.AttackStart();
-
         StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
 
         yield return new WaitForSeconds(delay);
@@ -153,8 +114,6 @@ public class SonBossEnemy : BossEnemyBase
     //
     private IEnumerator AttackRoutine_4(float delay)
     {
-        alarmHitObject_4.AttackStart();
-
         StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
 
         yield return new WaitForSeconds(delay);

@@ -17,7 +17,13 @@ public class PlayerPet2 : MonoBehaviour
     private Transform target;
 
     [SerializeField]
-    private SkeletonAnimation skeletonAnimation;
+    private Animator animator;
+
+    [SerializeField]
+    private GameObject rendererObject;
+
+    [SerializeField]
+    private GameObject effect;
 
     private void Awake()
     {
@@ -25,11 +31,18 @@ public class PlayerPet2 : MonoBehaviour
         Subscribe();
     }
 
-
-
     private void Subscribe()
     {
-     
+        ServerData.statusTable.GetTableData(StatusTable.Son_Level).AsObservable().Subscribe(level =>
+        {
+            rendererObject.SetActive(level > 0);
+
+            int idx = GameBalance.GetSonIdx();
+
+            animator.runtimeAnimatorController = CommonUiContainer.Instance.sonAnimators[GameBalance.GetSonIdx()];
+
+            effect.SetActive(idx > 0);
+        }).AddTo(this);
     }
 
     private void Initialize()

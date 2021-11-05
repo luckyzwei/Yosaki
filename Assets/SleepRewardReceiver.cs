@@ -80,8 +80,6 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         float elapsedMinutes = (float)elapsedSeconds / 60f;
 
-        Debug.LogError($"Elapsed {elapsedSeconds}");
-
         int currentStageIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
 
         if (currentStageIdx == TableManager.Instance.GetLastStageIdx())
@@ -138,15 +136,19 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         exp += exp * expBuffRatio;
 
         this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, yoguiMarble: yoguimarble, eventItem: eventItem, exp: exp, elapsedSeconds: elapsedSeconds, killCount: (int)(elapsedMinutes * killedEnemyPerMin), stageRelic: stageRelic);
+
+        UiSleepRewardView.Instance.CheckReward();
     }
 
     public void GetSleepReward(Action successCallBack)
     {
         if (sleepRewardInfo == null) return;
 
+        int elapsedSeconds = sleepRewardInfo.elapsedSeconds;
+
         LogManager.Instance.SendLog("휴식보상 요청", $"seconds {sleepRewardInfo.elapsedSeconds} gold {sleepRewardInfo.gold} jade {sleepRewardInfo.jade} marble {sleepRewardInfo.marble} growthStone {sleepRewardInfo.GrowthStone} exp {sleepRewardInfo.exp}");
 
-        GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false, false);
+        GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false, false, syncToServer: false);
 
         ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += sleepRewardInfo.gold;
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += sleepRewardInfo.jade;
@@ -158,6 +160,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += sleepRewardInfo.stageRelic;
 
         ServerData.userInfoTable.TableDatas[UserInfoTable.dailyEnemyKillCount].Value += sleepRewardInfo.killCount;
+        ServerData.userInfoTable.TableDatas[UserInfoTable.sleepRewardSavedTime].Value = 0;
 
         if (ServerData.userInfoTable.IsMonthlyPass2() == false)
         {
@@ -180,6 +183,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         Param userInfoParam = new Param();
         userInfoParam.Add(UserInfoTable.dailyEnemyKillCount, ServerData.userInfoTable.TableDatas[UserInfoTable.dailyEnemyKillCount].Value);
+        userInfoParam.Add(UserInfoTable.sleepRewardSavedTime, ServerData.userInfoTable.TableDatas[UserInfoTable.sleepRewardSavedTime].Value);
 
         if (ServerData.userInfoTable.IsMonthlyPass2() == false)
         {
@@ -192,15 +196,33 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         List<TransactionValue> transantions = new List<TransactionValue>();
 
+
+
+        //경험치
+        Param statusParam = new Param();
+        //레벨
+        statusParam.Add(StatusTable.Level, ServerData.statusTable.GetTableData(StatusTable.Level).Value);
+
+        //스킬포인트
+        statusParam.Add(StatusTable.SkillPoint, ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value);
+
+        //스탯포인트
+        statusParam.Add(StatusTable.StatPoint, ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value);
+
+        Param growthParam = new Param();
+        growthParam.Add(GrowthTable.Exp, ServerData.growthTable.GetTableData(GrowthTable.Exp).Value);
+        goodsParam.Add(GoodsTable.BonusSpinKey, ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value);
+
+        transantions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
+        transantions.Add(TransactionValue.SetUpdate(GrowthTable.tableName, GrowthTable.Indate, growthParam));
+        //
         transantions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-
         transantions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-
-        successCallBack?.Invoke();
 
         ServerData.SendTransaction(transantions, successCallBack: () =>
           {
-              LogManager.Instance.SendLog("휴식보상 수령", "수령완료");
+              successCallBack?.Invoke();
+              LogManager.Instance.SendLogType("SleepReward", "Get", elapsedSeconds.ToString());
           });
     }
 
