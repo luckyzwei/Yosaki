@@ -45,7 +45,7 @@ public class StatusTable
     public const string CriticalDamLevel_memory = "CriticalDamLevel_memory";
     public const string IgnoreDefense_memory = "IgnoreDefense_memory";
     public const string BossDamage_memory = "BossDamage_memory";
-    public const string Son_Level = "Son_Level";
+    public const string Son_Level = "Son_Level_Real";
 
 
 

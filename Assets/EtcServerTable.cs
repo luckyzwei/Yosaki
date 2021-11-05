@@ -14,7 +14,7 @@ public class EtcServerTable
     public const string tableName = "Etc";
     public const string email = "email";
     public const string yoguiSogulReward = "yoguiSogulReward";
-    public const string sonReward = "sonReward";
+    public const string sonReward = "sonRewardReal";
 
     private Dictionary<string, ReactiveProperty<string>> tableSchema = new Dictionary<string, ReactiveProperty<string>>()
     {

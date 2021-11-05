@@ -38,7 +38,7 @@ public class GoodsTable
     //할로윈 도깨비
     public static string Event_Item_0 = "Event_Item_0";
     public static string StageRelic = "StageRelic";
-    public static string Peach = "Peach";
+    public static string Peach = "PeachReal";
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
