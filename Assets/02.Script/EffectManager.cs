@@ -4,9 +4,17 @@ using UnityEngine;
 
 public static class EffectManager
 {
-    public static PoolItem SpawnEffectAllTime(string effectName, Vector3 position, Transform parent = null)
+    public static PoolItem SpawnEffectAllTime(string effectName, Vector3 position, Transform parent = null, bool limitSpawnSize = false, int limitNum = 15)
     {
         if (SettingData.ShowEffect.Value == 0) return null;
+
+        if (limitSpawnSize && BattleObjectManagerAllTime.Instance.HasPool(effectName))
+        {
+            if (BattleObjectManagerAllTime.Instance.GetSpawnedItemNum(effectName) > limitNum)
+            {
+                return null;
+            }
+        }
 
         PoolItem effect = null;
 

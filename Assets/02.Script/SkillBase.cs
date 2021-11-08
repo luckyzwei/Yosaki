@@ -64,7 +64,6 @@ public abstract class SkillBase
 
     private void SpawnActiveEffect()
     {
-
         Vector3 activeEffectSpawnPos = PlayerMoveController.Instance.transform.position + Vector3.up * 0.5f;
         MoveDirection moveDirection = PlayerMoveController.Instance.MoveDirection;
 

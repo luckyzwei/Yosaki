@@ -79,4 +79,14 @@ public class BattleObjectManagerAllTime : SingletonMono<BattleObjectManagerAllTi
             return newPool.GetItem();
         }
     }
+
+    public bool HasPool(string name)
+    {
+        return poolContainer.ContainsKey(name);
+    }
+
+    public int GetSpawnedItemNum(string name)
+    {
+        return poolContainer[name].OutPool.Count;
+    }
 }

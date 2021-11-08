@@ -146,7 +146,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         int elapsedSeconds = sleepRewardInfo.elapsedSeconds;
 
-        LogManager.Instance.SendLog("휴식보상 요청", $"seconds {sleepRewardInfo.elapsedSeconds} gold {sleepRewardInfo.gold} jade {sleepRewardInfo.jade} marble {sleepRewardInfo.marble} growthStone {sleepRewardInfo.GrowthStone} exp {sleepRewardInfo.exp}");
+        LogManager.Instance.SendLogType("SleepReward", "Req", $"seconds {sleepRewardInfo.elapsedSeconds} gold {sleepRewardInfo.gold} jade {sleepRewardInfo.jade} marble {sleepRewardInfo.marble} growthStone {sleepRewardInfo.GrowthStone} exp {sleepRewardInfo.exp}");
 
         GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false, false, syncToServer: false);
 

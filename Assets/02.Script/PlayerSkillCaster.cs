@@ -157,7 +157,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                 Vector3 spawnPos = hitEnemie.gameObject.transform.position + Vector3.forward * -1f + Vector3.up * 0.3f;
                 spawnPos += (Vector3)UnityEngine.Random.insideUnitCircle * 0.5f;
                 spawnPos += (Vector3)Vector3.back;
-                EffectManager.SpawnEffectAllTime(skillInfo.Hiteffectname, spawnPos);
+                EffectManager.SpawnEffectAllTime(skillInfo.Hiteffectname, spawnPos, limitSpawnSize: true);
             }
 
             //사운드
