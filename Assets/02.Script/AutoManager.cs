@@ -16,8 +16,6 @@ public class AutoManager : Singleton<AutoManager>
 
     private List<int> skillQueue = new List<int>();
 
-    private WaitForSeconds skillDelay = new WaitForSeconds(0.01f);
-
     public void SetPlayerTr()
     {
         playerTr = PlayerSkillCaster.Instance.PlayerMoveController.transform;
@@ -256,12 +254,12 @@ public class AutoManager : Singleton<AutoManager>
                         int useSkillIdx = skillQueue[0];
 
                         bool skillCast = PlayerSkillCaster.Instance.UseSkill(useSkillIdx);
-
+                        
                         skillQueue.RemoveAt(0);
 
                         if (skillCast)
                         {
-                            yield return skillDelay;
+                            yield return null;
                         }
                     }
                 }

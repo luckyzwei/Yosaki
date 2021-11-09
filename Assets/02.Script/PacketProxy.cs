@@ -39,7 +39,7 @@ public class PacketProxy : SingletonMono<PacketProxy>
     void ExceptionHandler(Exception e)
     {
         Debug.LogError($"Packet proxy error {e}");
-        // 예외 처리
+        // 예외 처리,
     }
 
     private void OnApplicationQuit()
@@ -47,8 +47,4 @@ public class PacketProxy : SingletonMono<PacketProxy>
         Debug.LogError("StopSendQueue");
         SendQueue.StopSendQueue();
     }
-
-
-
-
 }

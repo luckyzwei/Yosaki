@@ -18,6 +18,12 @@ public class UiSkillInputButton : MonoBehaviour
 
     public void PointerDown()
     {
+        if (AutoManager.Instance.IsAutoMode)
+        {
+            PopupManager.Instance.ShowAlarmMessage("자동 모드에서는 사용할수 없습니다.");
+            return;
+        }
+
         if (autoUpRoutine != null)
         {
             CoroutineExecuter.Instance.StopCoroutine(autoUpRoutine);

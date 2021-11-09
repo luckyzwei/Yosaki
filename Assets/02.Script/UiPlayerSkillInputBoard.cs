@@ -61,12 +61,12 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
         coolTimeMaskRoutine = StartCoroutine(CoolTimeRoutine());
 
         currentSelectedSkillGroup = group;
-
+        
         ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
 
         LoadSkillSlotData();
         // RefreshUi();
-
+        
         if (AutoManager.Instance.IsAutoMode)
         {
             AutoManager.Instance.ResetSkillQueue();
