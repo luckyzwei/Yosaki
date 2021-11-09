@@ -27,8 +27,39 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 
     private int currentSelectedSkillGroup = 0;
 
+    [SerializeField]
+    private GameObject changeMaskingButton;
+
+    private const float coolTimeDelay = 3.0f;
+
+    private WaitForSeconds coolTimeDelayWs = new WaitForSeconds(coolTimeDelay);
+
+    private Coroutine coolTimeMaskRoutine;
+
+    public void OnClickChangeMaskButton()
+    {
+        PopupManager.Instance.ShowAlarmMessage($"{(int)coolTimeDelay}초에 한번만 바꿀수 있습니다.");
+    }
+
+    private IEnumerator CoolTimeRoutine()
+    {
+        changeMaskingButton.SetActive(true);
+
+        yield return coolTimeDelayWs;
+
+        changeMaskingButton.SetActive(false);
+    }
+
+
     public void WhenSkillGroupChanged(int group)
     {
+        if (coolTimeMaskRoutine != null)
+        {
+            StopCoroutine(coolTimeMaskRoutine);
+        }
+
+        coolTimeMaskRoutine = StartCoroutine(CoolTimeRoutine());
+
         currentSelectedSkillGroup = group;
 
         ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
@@ -166,21 +197,25 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 #if UNITY_EDITOR
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.Alpha1))
         {
             OnClickSkillSlot(0);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKey(KeyCode.Alpha2))
         {
             OnClickSkillSlot(1);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKey(KeyCode.Alpha3))
         {
             OnClickSkillSlot(2);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKey(KeyCode.Alpha4))
         {
             OnClickSkillSlot(3);
+        }
+        if (Input.GetKey(KeyCode.Alpha5))
+        {
+            OnClickSkillSlot(4);
         }
     }
 

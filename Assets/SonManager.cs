@@ -242,17 +242,16 @@ public class SonManager : ContentsManagerBase
         directionUi.SetActive(false);
         singleRaidEnemy.gameObject.SetActive(true);
 
-        WaitForSeconds ws = new WaitForSeconds(1.0f);
 
         portalObject.gameObject.SetActive(false);
 
-        int remainSec = playTime;
+        float remainSec = playTime;
 
         while (remainSec >= 0)
         {
-            timerText.SetText($"남은시간 : {remainSec}");
-            yield return ws;
-            remainSec--;
+            timerText.SetText($"남은시간 : {(int)remainSec}");
+            yield return null;
+            remainSec-=Time.deltaTime;
             this.remainSec = remainSec;
         }
 

@@ -18,7 +18,7 @@ public abstract class SkillBase
     public bool CanUseSkill()
     {
         //mp계산 뒤에서해야됨.실제 엠피 차감해서
-        return !SkillCoolTimeManager.HasSkillCooltime(skillInfo.Id) && CheckMp() && PlayerStatusController.Instance.IsPlayerDead() == false;
+        return !SkillCoolTimeManager.HasSkillCooltime(skillInfo.Id) && PlayerStatusController.Instance.IsPlayerDead() == false;
     }
     protected float GetSkillDamage(SkillTableData skillInfo)
     {
@@ -35,7 +35,10 @@ public abstract class SkillBase
 
         SkillCoolTimeManager.SetActiveSkillCool(skillInfo.Id, SkillCoolTimeManager.GetSkillCoolTimeMax(skillInfo));
 
-        SpawnActiveEffect();
+        for (int i = 0; i < 50; i++)
+        {
+            SpawnActiveEffect();
+        }
 
         PlaySoundEfx(skillInfo.Soundname);
     }

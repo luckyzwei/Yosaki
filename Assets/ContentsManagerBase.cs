@@ -23,8 +23,8 @@ public class ContentsManagerBase : SingletonMono<ContentsManagerBase>
     [SerializeField]
     protected TextMeshProUGUI timerText;
 
-    protected ObscuredInt remainSec = 0;
-    public ObscuredInt RemainSec => remainSec;
+    protected ObscuredFloat remainSec = 0;
+    public ObscuredFloat RemainSec => remainSec;
     public ObscuredInt PlayTime => playTime;
 
     public virtual Transform GetMainEnemyObjectTransform()
@@ -44,15 +44,13 @@ public class ContentsManagerBase : SingletonMono<ContentsManagerBase>
 
     protected virtual IEnumerator ModeTimer()
     {
-        WaitForSeconds ws = new WaitForSeconds(1.0f);
-
         remainSec = playTime;
 
         while (remainSec >= 0)
         {
-            timerText.SetText($"남은시간 : {remainSec}");
-            yield return ws;
-            remainSec--;
+            timerText.SetText($"남은시간 : {(int)remainSec}");
+            yield return null;
+            remainSec -= Time.deltaTime;
         }
 
         TimerEnd();
@@ -81,8 +79,8 @@ public class ContentsManagerBase : SingletonMono<ContentsManagerBase>
         cameraConfiner.m_BoundingShape2D = cameracollider;
     }
 
-    public virtual void DiscountRelicDungeonHp() 
+    public virtual void DiscountRelicDungeonHp()
     {
-    
+
     }
 }
