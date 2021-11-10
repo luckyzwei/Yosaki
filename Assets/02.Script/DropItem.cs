@@ -26,6 +26,7 @@ public enum Item_Type
     StageRelic,
     SnakeStone,
     Peach,
+    HorseStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

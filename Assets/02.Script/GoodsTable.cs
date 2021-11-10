@@ -26,6 +26,7 @@ public class GoodsTable
     public static string RabitStone = "RabitStone";
     public static string DragonStone = "DragonStone";
     public static string SnakeStone = "SnakeStone";
+    public static string HorseStone = "HorseStone";
 
     //포션
     public static string Potion_0 = "Potion_0";
@@ -66,7 +67,8 @@ public class GoodsTable
         {DragonStone,0f},
         {StageRelic,0f},
         {SnakeStone,0f},
-        {Peach,0f}
+        {Peach,0f},
+        {HorseStone,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

@@ -20,7 +20,7 @@ public abstract class SkillBase
         //mp계산 뒤에서해야됨.실제 엠피 차감해서
         return !SkillCoolTimeManager.HasSkillCooltime(skillInfo.Id) && PlayerStatusController.Instance.IsPlayerDead() == false;
     }
-    protected float GetSkillDamage(SkillTableData skillInfo)
+    protected virtual float GetSkillDamage(SkillTableData skillInfo)
     {
         float apDamage = PlayerStats.GetCalculatedAttackPower();
 
@@ -31,18 +31,22 @@ public abstract class SkillBase
 
     public virtual void UseSkill()
     {
-        playerSkillCaster.PlayAttackAnim();
+        if (skillInfo.Issonskill == false)
+        {
+            playerSkillCaster.PlayAttackAnim();
+        }
+        else
+        {
+            SonSkillCaster.Instance.SonSkillAnim();
+        }
 
         SkillCoolTimeManager.SetActiveSkillCool(skillInfo.Id, SkillCoolTimeManager.GetSkillCoolTimeMax(skillInfo));
 
-        for (int i = 0; i < 50; i++)
-        {
-            SpawnActiveEffect();
-        }
+        SpawnActiveEffect();
 
         PlaySoundEfx(skillInfo.Soundname);
     }
-
+    
     private void PlaySoundEfx(string soundKey)
     {
         SoundManager.Instance.PlaySound(soundKey);
@@ -67,12 +71,14 @@ public abstract class SkillBase
 
     private void SpawnActiveEffect()
     {
-        Vector3 activeEffectSpawnPos = PlayerMoveController.Instance.transform.position + Vector3.up * 0.5f;
+        Transform targetTr = skillInfo.Issonskill == false ? PlayerMoveController.Instance.transform : SonSkillCaster.Instance.transform;
+
+        Vector3 activeEffectSpawnPos = targetTr.position + Vector3.up * 0.5f;
         MoveDirection moveDirection = PlayerMoveController.Instance.MoveDirection;
 
         if (string.IsNullOrEmpty(skillInfo.Activeeffectname1) == false)
         {
-            Transform parent = skillInfo.Iseffectrootplayer ? PlayerMoveController.Instance.transform : null;
+            Transform parent = skillInfo.Iseffectrootplayer ? targetTr : null;
             var effect = EffectManager.SpawnEffectAllTime(skillInfo.Activeeffectname1, activeEffectSpawnPos, parent);
 
             if (effect != null)
@@ -80,7 +86,7 @@ public abstract class SkillBase
 
                 if (skillInfo.Iseffectrootplayer == false)
                 {
-                    effect.transform.position = PlayerMoveController.Instance.transform.position;
+                    effect.transform.position = targetTr.position;
                     effect.transform.localScale = new Vector3(1f, 1f, 1f);
                 }
                 else
@@ -90,11 +96,11 @@ public abstract class SkillBase
                 }
             }
         }
-        Vector3 activeEffectSpawnPos2 = PlayerMoveController.Instance.transform.position + Vector3.up * 0.5f - Vector3.forward * 5f;
+        Vector3 activeEffectSpawnPos2 = targetTr.position + Vector3.up * 0.5f - Vector3.forward * 5f;
 
         if (string.IsNullOrEmpty(skillInfo.Activeeffectname2) == false)
         {
-            Transform parent = skillInfo.Iseffectrootplayer ? PlayerMoveController.Instance.transform : null;
+            Transform parent = skillInfo.Iseffectrootplayer ? targetTr : null;
 
             var effect = EffectManager.SpawnEffectAllTime(skillInfo.Activeeffectname2, activeEffectSpawnPos2, parent);
 
@@ -103,7 +109,7 @@ public abstract class SkillBase
 
                 if (skillInfo.Iseffectrootplayer == false)
                 {
-                    effect.transform.position = PlayerMoveController.Instance.transform.position;
+                    effect.transform.position = targetTr.position;
                     effect.transform.localScale = new Vector3(1f, 1f, 1f);
                 }
                 else

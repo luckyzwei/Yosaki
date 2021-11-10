@@ -184,4 +184,12 @@ public class SkillTableData
   int makerequirevalue;
   public int Makerequirevalue { get {return makerequirevalue; } set { this.makerequirevalue = value;} }
   
+  [SerializeField]
+  bool issonskill;
+  public bool Issonskill { get {return issonskill; } set { this.issonskill = value;} }
+  
+  [SerializeField]
+  int sonunlocklevel;
+  public int Sonunlocklevel { get {return sonunlocklevel; } set { this.sonunlocklevel = value;} }
+  
 }

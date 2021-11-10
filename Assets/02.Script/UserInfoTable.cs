@@ -67,6 +67,7 @@ public class UserInfoTable
     public const string yomul4_buff = "yomul4_buff";
     public const string yomul5_buff = "yomul5_buff";
     public const string yomul6_buff = "yomul6_buff";
+    public const string yomul7_buff = "yomul7_buff";
 
     public const string bonusDungeonMaxKillCount = "bonusDungeonMaxKillCount";
 
@@ -181,6 +182,7 @@ public class UserInfoTable
         {yomul6_buff,0f},
         {sonScore,0f},
         {sleepRewardSavedTime,0f},
+        {yomul7_buff,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -506,6 +508,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul4_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul5_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul6_buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.yomul7_buff).Value = 0;
         //
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
@@ -561,6 +564,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.yomul4_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul4_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul5_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul5_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul6_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul6_buff).Value);
+        userInfoParam.Add(UserInfoTable.yomul7_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul7_buff).Value);
 
         //요괴소굴
         Param yoguiSogulParam = new Param();

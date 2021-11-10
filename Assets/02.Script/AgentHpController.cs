@@ -35,6 +35,7 @@ public class AgentHpController : MonoBehaviour
 
     private bool isFieldBossEnemy = false;
     private bool fieldBossTimerStarted = false;
+    private bool initialized = false;
 
     private void Awake()
     {
@@ -48,8 +49,16 @@ public class AgentHpController : MonoBehaviour
     private void Start()
     {
         Subscribe();
+        SetPlayerTr();
+    }
 
-        playerPos = PlayerMoveController.Instance.transform;
+    private void SetPlayerTr()
+    {
+        if (initialized == false)
+        {
+            playerPos = PlayerMoveController.Instance.transform;
+            initialized = true;
+        }
     }
 
     private void Subscribe()
@@ -176,18 +185,20 @@ public class AgentHpController : MonoBehaviour
 
         attackResetCount = 0f;
 
+        SetPlayerTr();
+
         if (Vector3.Distance(playerPos.position, this.transform.position) < GameBalance.effectActiveDistance)
         {
             DamTextType damType = DamTextType.Normal;
 
-            if (isCritical) 
+            if (isCritical)
             {
-                 damType = DamTextType.Critical;
+                damType = DamTextType.Critical;
             }
 
-            if (isSuperCritical) 
+            if (isSuperCritical)
             {
-                 damType = DamTextType.SuperCritical;
+                damType = DamTextType.SuperCritical;
             }
 
             BattleObjectManagerAllTime.Instance.SpawnDamageText(value * -1f, damTextspawnPos, damType);

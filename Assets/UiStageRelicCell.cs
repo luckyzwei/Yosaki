@@ -118,7 +118,7 @@ public class UiStageRelicCell : MonoBehaviour
 
         int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value;
 
-        if (currentRelicNum < 500 * GameBalance.StageRelicUpgradePrice)
+        if (currentRelicNum < 1000 * GameBalance.StageRelicUpgradePrice)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.StageRelic)}이 부족합니다!");
             return;
@@ -126,10 +126,10 @@ public class UiStageRelicCell : MonoBehaviour
 
         int upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
 
-        upgradeableNum = Mathf.Min(upgradeableNum, 500);
+        upgradeableNum = Mathf.Min(upgradeableNum, 1000);
 
         ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value -= upgradeableNum * GameBalance.StageRelicUpgradePrice;
-
+        
         relicServerData.level.Value += upgradeableNum;
 
         if (syncRoutine != null)
@@ -157,7 +157,7 @@ public class UiStageRelicCell : MonoBehaviour
         }
 
         int upgradeableMaxNum = relicLocalData.Maxlevel - relicServerData.level.Value;
-
+        
         int upgradableMaxPrice = upgradeableMaxNum * GameBalance.StageRelicUpgradePrice;
 
         int diffPrice = currentRelicNum - upgradableMaxPrice;

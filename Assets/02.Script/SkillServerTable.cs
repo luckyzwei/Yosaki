@@ -338,7 +338,17 @@ public class SkillServerTable
     }
     public int GetSkillCurrentLevel(int idx)
     {
-        return tableDatas[SkillLevel][idx].Value;
+        var tableData = TableManager.Instance.SkillData[idx];
+
+        if (tableData.Issonskill == false)
+        {
+            return tableDatas[SkillLevel][idx].Value;
+        }
+        else
+        {
+            return ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value - tableData.Sonunlocklevel;
+        }
+
     }
 
     //UI팝업에서도 쓰는부분이라 함부로 건들면 안됨

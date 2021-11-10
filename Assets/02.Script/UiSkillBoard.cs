@@ -26,11 +26,9 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
     [SerializeField]
     private UiSkillDescriptionPopup uiSkillDescriptionPopup;
 
-    private bool initialized = false;
-
     private void Start()
     {
-        UpdateView();
+        InitView();
     }
 
     private void UpdateSkillDescriptionPopup(SkillTableData data)
@@ -39,9 +37,11 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
         uiSkillDescriptionPopup.Initialize(data);
     }
 
-    private void UpdateView()
+    private void InitView()
     {
         var skillList = TableManager.Instance.SkillTable.dataArray.ToList();
+
+
 
         skillList.Sort((a, b) =>
         {
@@ -53,6 +53,12 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
 
         for (int i = 0; i < skillList.Count; i++)
         {
+            if (skillList[i].Issonskill == true)
+            {
+                Debug.LogError("Has Son Skill");
+                continue;
+            }
+
             var cell = Instantiate<UiSkillCell>(skillCellPrefab, skillCellParent);
 
             cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);

@@ -256,7 +256,7 @@ public class AutoManager : Singleton<AutoManager>
                         bool skillCast = PlayerSkillCaster.Instance.UseSkill(useSkillIdx);
                         
                         skillQueue.RemoveAt(0);
-
+                        
                         if (skillCast)
                         {
                             yield return null;

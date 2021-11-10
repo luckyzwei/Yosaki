@@ -31,6 +31,9 @@ public class UiSonBoard : MonoBehaviour
 
     private List<UiSonRewardCell> rewardCells = new List<UiSonRewardCell>();
 
+    [SerializeField]
+    private GameObject sonSkillBoard;
+
     private void Start()
     {
         Initialize();
@@ -42,12 +45,16 @@ public class UiSonBoard : MonoBehaviour
         ServerData.statusTable.GetTableData(StatusTable.Son_Level).AsObservable().Subscribe(level =>
         {
             sonLevelText.SetText($"LV : {level}");
-            upgradePriceText.SetText($"{Utils.ConvertBigNum(GetUpgradePrice())}");
             UpdateAbilText1(level);
 
             sonCharacterIcon.sprite = CommonUiContainer.Instance.sonThumbNail[GameBalance.GetSonIdx()];
         }).AddTo(this);
 
+        ServerData.goodsTable.GetTableData(GoodsTable.Peach).AsObservable().Subscribe(amount =>
+        {
+            upgradePriceText.SetText($"+{amount}");
+
+        }).AddTo(this);
     }
 
     private void UpdateAbilText1(int currentLevel)
@@ -104,16 +111,15 @@ public class UiSonBoard : MonoBehaviour
     public void OnClickLevelUpButton()
     {
         float goodsNum = ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value;
-        float upgradePrice = GetUpgradePrice();
 
-        if (goodsNum < upgradePrice)
+        if (goodsNum == 0)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Peach)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Peach)}가 없습니다.");
             return;
         }
 
-        ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value -= upgradePrice;
-        ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value++;
+        ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value -= goodsNum;
+        ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value += (int)goodsNum;
 
         if (syncRoutine != null)
         {
@@ -169,4 +175,9 @@ public class UiSonBoard : MonoBehaviour
         }
     }
 #endif
+
+    public void OnClickSkillButton()
+    {
+        sonSkillBoard.SetActive(true);
+    }
 }

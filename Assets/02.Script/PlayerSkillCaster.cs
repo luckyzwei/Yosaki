@@ -139,6 +139,11 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
         int hitCount = skillInfo.Hitcount + PlayerStats.GetSkillHitAddValue();
 
+        if (FrameCalculator.frameRate < 3) 
+        {
+            yield break; 
+        }
+
         for (int hit = 0; hit < hitCount; hit++)
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
