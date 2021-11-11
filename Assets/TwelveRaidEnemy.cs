@@ -116,7 +116,7 @@ public class TwelveRaidEnemy : BossEnemyBase
 
     private void Initialize()
     {
-        enemyHitObjects = GetComponentsInChildren<AlarmHitObject>().ToList();
+        enemyHitObjects = GetComponentsInChildren<AlarmHitObject>(true).ToList();
 
         agentHpController.SetHp(float.MaxValue);
 
@@ -157,7 +157,6 @@ public class TwelveRaidEnemy : BossEnemyBase
 
         yield return new WaitForSeconds(delay);
     }
-
 
 
     //?
