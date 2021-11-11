@@ -115,6 +115,10 @@ public class UiPensionObjectView : MonoBehaviour
         {
             itemType = Item_Type.RelicTicket;
         }
+        else if (pensionKey == "peachpension")
+        {
+            itemType = Item_Type.Peach;
+        }
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 

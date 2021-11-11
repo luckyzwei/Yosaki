@@ -212,7 +212,7 @@ public static class PlayerStats
         ret += GetStageRelicHasEffect(StatusType.AttackAddPer);
         ret += GetSonAbilHasEffect(StatusType.AttackAddPer);
 
-        
+
         return ret;
     }
 
@@ -537,7 +537,7 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.CriticalDam);
         ret += GetStageRelicHasEffect(StatusType.CriticalDam);
         ret += GetSonAbilHasEffect(StatusType.CriticalDam);
-        
+
         return ret;
     }
     #endregion
@@ -756,6 +756,7 @@ public static class PlayerStats
         ret += GetYomulUpgradeValue(StatusType.SuperCritical1DamPer);
         ret += GetStageRelicHasEffect(StatusType.SuperCritical1DamPer);
         ret += GetBuffValue(StatusType.SuperCritical1DamPer);
+        ret += GetRelicHasEffect(StatusType.SuperCritical1DamPer);
 
         return ret;
     }
@@ -771,7 +772,7 @@ public static class PlayerStats
         return ret;
     }
 
-    public static float GetYomulUpgradeValue(StatusType type, bool onlyType1 = false, bool onlyType2 = false)
+    public static float GetYomulUpgradeValue(StatusType type, bool onlyType1 = false, bool onlyType2 = false, int targetId = -1)
     {
         float ret = 0f;
         var tableDatas = TableManager.Instance.YomulAbilTable.dataArray;
@@ -780,6 +781,7 @@ public static class PlayerStats
         {
             var serverData = ServerData.yomulServerTable.TableDatas[tableDatas[i].Stringid];
             if (serverData.hasAbil.Value == 0) continue;
+            if (targetId != -1 && i != targetId) continue;
 
             if (tableDatas[i].Abiltype == (int)type && onlyType2 == false)
             {

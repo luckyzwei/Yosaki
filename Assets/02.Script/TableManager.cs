@@ -549,5 +549,9 @@ public class TableManager : SingletonMono<TableManager>
 
     public SonAbil SonAbil => sonAbil;
 
+    [SerializeField]
+    private Attendance100 attendanceReward_100;
+    public Attendance100 AttendanceReward_100 => attendanceReward_100;
+
 }
 

@@ -16,12 +16,14 @@ public class PensionServerTable
     public static string oakpension = "oakpension";
     public static string marblepension = "marblepension";
     public static string relicpension = "relicpension";
+    public static string peachpension = "peachpension";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
         { oakpension,string.Empty},
         { marblepension,string.Empty},
-        { relicpension,string.Empty}
+        { relicpension,string.Empty},
+        { peachpension,string.Empty}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();

@@ -51,7 +51,7 @@ public class UiHorseAbilUpgrade : MonoBehaviour
         {
             int upgradePrice = GetUpgradePrice();
 
-            abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype2)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1Prob, onlyType2: true) * 100f}\n{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1DamPer) * 100f}");
+            abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1DamPer, targetId: yomulAbilData.Id) * 100f}");
 
             levelText.SetText($"Lv : {e}");
 
@@ -76,7 +76,7 @@ public class UiHorseAbilUpgrade : MonoBehaviour
 
     private int GetUpgradePrice()
     {
-        return 50000;
+        return 60000;
     }
 
     public void OnClickUpgradeButton()
@@ -166,7 +166,7 @@ public class UiHorseAbilUpgrade : MonoBehaviour
 
         //abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SkillCoolTime) * 100f}");
 
-        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype2)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1Prob, onlyType2: true) * 100f}\n{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1DamPer) * 100f}");
+        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)yomulAbilData.Abiltype)} {PlayerStats.GetYomulUpgradeValue(StatusType.SuperCritical1DamPer,targetId: yomulAbilData.Id) * 100f}");
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {

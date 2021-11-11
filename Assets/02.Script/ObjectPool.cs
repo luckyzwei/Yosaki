@@ -12,7 +12,7 @@ public class ObjectPool<T> where T : PoolItem
     public Queue<T> Pool => pool;
     private Dictionary<int, T> outPool = new Dictionary<int, T>();
     public Dictionary<int, T> OutPool => outPool;
-
+    
     public ObjectPool(T prefab, Transform parent, int initCount)
     {
         this.prefab = prefab;

@@ -12,10 +12,12 @@ public class AttendanceServerTable
     public static string Indate;
     public static string tableName = "Attendance";
     public const string rewardKey = "rewardKey2";
+    public const string rewardKey_100 = "rewardKey_100";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
         {rewardKey,""},
+        {rewardKey_100,""},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();

@@ -23,7 +23,7 @@ public class PlayerPet2 : MonoBehaviour
     private GameObject rendererObject;
 
     [SerializeField]
-    private GameObject effect;
+    private List<GameObject> effects;
 
     private void Awake()
     {
@@ -41,7 +41,11 @@ public class PlayerPet2 : MonoBehaviour
 
             animator.runtimeAnimatorController = CommonUiContainer.Instance.sonAnimators[GameBalance.GetSonIdx()];
 
-            effect.SetActive(idx > 0);
+            for (int i = 0; i < effects.Count; i++)
+            {
+                effects[i].SetActive(i == idx);
+            }
+
         }).AddTo(this);
     }
 

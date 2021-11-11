@@ -43,6 +43,7 @@ public class BattleObjectManagerAllTime : SingletonMono<BattleObjectManagerAllTi
     public void SpawnDamageText(float damage, Vector3 position, DamTextType type = DamTextType.Normal)
     {
         if (SettingData.ShowDamageFont.Value == 0) return;
+        if (damageTextProperty.Pool.OutPool.Count > GameBalance.MaxDamTextNum) return;
 
         var damageText = damageTextProperty.GetItem();
         damageText.Initialize(damage, type);

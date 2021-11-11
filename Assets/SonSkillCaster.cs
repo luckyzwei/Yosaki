@@ -5,17 +5,19 @@ using UnityEngine;
 public class SonSkillCaster : SingletonMono<SonSkillCaster>
 {
     private WaitForSeconds ws = new WaitForSeconds(0.1f);
+
+    private Coroutine skillRoutine;
+
     IEnumerator Start()
     {
-        //세팅시간 필요 (1프레임)
         yield return null;
-        
-        StartCoroutine(UserSonSkillRoutine());
+
+        skillRoutine = StartCoroutine(UserSonSkillRoutine());
     }
 
     public void SonSkillAnim()
     {
-        
+
     }
 
     private IEnumerator UserSonSkillRoutine()
@@ -37,5 +39,15 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
             yield return ws;
         }
     }
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            StopCoroutine(skillRoutine);
+        }
+
+    }
+#endif
 
 }

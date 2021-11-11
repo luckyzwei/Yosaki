@@ -222,6 +222,7 @@ public static class ServerData
             case Item_Type.costume9:
             case Item_Type.costume10:
             case Item_Type.costume11:
+            case Item_Type.costume12:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -276,6 +277,7 @@ public static class ServerData
             case Item_Type.costume1:
             case Item_Type.costume8:
             case Item_Type.costume11:
+            case Item_Type.costume12:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -368,6 +370,11 @@ public static class ServerData
             case Item_Type.SnakeStone:
                 ServerData.goodsTable.GetTableData(GoodsTable.SnakeStone).Value += amount;
                 param.Add(GoodsTable.SnakeStone, ServerData.goodsTable.GetTableData(GoodsTable.SnakeStone).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.HorseStone:
+                ServerData.goodsTable.GetTableData(GoodsTable.HorseStone).Value += amount;
+                param.Add(GoodsTable.HorseStone, ServerData.goodsTable.GetTableData(GoodsTable.HorseStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.RelicTicket:

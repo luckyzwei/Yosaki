@@ -60,12 +60,12 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Level_Uuid = "c1d70840-de7f-11eb-bc74-95875190be29";
     public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
     public const string Rank_Boss_Uuid = "f04cd6f0-3866-11ec-ae07-a5c5ba3b5dfe";
-    public const string Rank_Real_Boss_Uuid = "76daacf0-3593-11ec-ae5c-493099866c5d";
+    public const string Rank_Real_Boss_Uuid = "7fe6bf00-42c2-11ec-9209-9d9cd0c9602b";
     public const string Rank_Relic_Uuid = "0453f560-2779-11ec-9b46-299116fee741";
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
     public const string Rank_Boss = "RankBossCat2";
-    public const string Rank_Real_Boss = "Rank_Boss_6";
+    public const string Rank_Real_Boss = "Rank_Boss_7";
     public const string Rank_Relic = "Rank_Relic";
 #endif
 
@@ -73,12 +73,12 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Level_Uuid = "ea8c9430-38cf-11ec-955f-fb3c68e97f2a";
     public const string Rank_Stage_Uuid = "f865e900-31b6-11ec-b4ab-713be46ddb60";
     public const string Rank_Boss_Uuid = "0b700670-31b7-11ec-b6f2-0d73a4821171";
-    public const string Rank_Real_Boss_Uuid = "8fbf8240-3593-11ec-ae07-a5c5ba3b5dfe";
+    public const string Rank_Real_Boss_Uuid = "95a04500-42c2-11ec-b087-6bdad0190697";
     public const string Rank_Relic_Uuid = "1ce07110-31b7-11ec-be95-537d9b90903a";
     public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";
     public const string Rank_Boss = "Rank_Boss_Cat_IOS";
-    public const string Rank_Real_Boss = "Rank_Boss_6_IOS";
+    public const string Rank_Real_Boss = "Rank_Boss_7_IOS";
     public const string Rank_Relic = "Rank_Relic_IOS";
 #endif
 

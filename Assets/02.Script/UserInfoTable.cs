@@ -51,6 +51,7 @@ public class UserInfoTable
 
     public const string managerDescriptionFlags = "managerDescriptionFlags";
     public const string attendanceCount = "attendanceCount2";
+    public const string attendanceCount_100Day = "attendanceCount_100Day";
 
     public const string marbleAwake = "marbleAwake";
     public const string resetStat = "resetStat";
@@ -98,11 +99,12 @@ public class UserInfoTable
     public const string usedRelicTicketNum = "usedRelicTicketNum";
 
     public const string relicpensionAttendance = "relicpension";
+    public const string peachAttendance = "peachpension";
 
     public const string relicReset = "relicReset";
     public const string marbleReset2 = "marbleReset2";
     public const string dailyPackReset = "dailyPackReset";
-    public const string sonScore = "sonLastClear";
+    public const string sonScore = "sonLastClear2";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
 
     public float currentServerDate;
@@ -183,6 +185,8 @@ public class UserInfoTable
         {sonScore,0f},
         {sleepRewardSavedTime,0f},
         {yomul7_buff,0f},
+        {attendanceCount_100Day,1f},
+        {peachAttendance,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -517,6 +521,7 @@ public class UserInfoTable
         if (attendanceUpdatedTime != day)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value++;
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f)
             {
@@ -532,6 +537,11 @@ public class UserInfoTable
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.relicpensionAttendance).Value++;
             }
+
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.peachAttendance].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.peachAttendance).Value++;
+            }
         }
 
         attendanceUpdatedTime = ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value;
@@ -543,10 +553,12 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.dokebiEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiEnterCount).Value);
         userInfoParam.Add(UserInfoTable.LastLogin, ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value);
+        userInfoParam.Add(UserInfoTable.attendanceCount_100Day, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value);
 
         userInfoParam.Add(UserInfoTable.oakpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.relicpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.relicpensionAttendance).Value);
+        userInfoParam.Add(UserInfoTable.peachAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.peachAttendance).Value);
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
