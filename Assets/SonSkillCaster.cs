@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class SonSkillCaster : SingletonMono<SonSkillCaster>
@@ -8,11 +9,32 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
 
     private Coroutine skillRoutine;
 
-    IEnumerator Start()
+    void Start()
     {
-        yield return null;
+        Subscribe();
+    }
 
-        skillRoutine = StartCoroutine(UserSonSkillRoutine());
+    private void Subscribe()
+    {
+        AutoManager.Instance.AutoMode.AsObservable().Subscribe(e =>
+        {
+            if (e)
+            {
+                if (skillRoutine != null)
+                {
+                    StopCoroutine(skillRoutine);
+                }
+
+                skillRoutine = StartCoroutine(UserSonSkillRoutine());
+            }
+            else
+            {
+                if (skillRoutine != null)
+                {
+                    StopCoroutine(skillRoutine);
+                }
+            }
+        }).AddTo(this);
     }
 
     public void SonSkillAnim()
