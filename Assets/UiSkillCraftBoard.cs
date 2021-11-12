@@ -15,12 +15,14 @@ public class UiSkillCraftBoard : MonoBehaviour
         Initialize();
     }
 
-    private void Initialize() 
+    private void Initialize()
     {
         var skillTableDatas = TableManager.Instance.SkillTable.dataArray;
 
-        for(int i = 0; i < skillTableDatas.Length; i++) 
+        for (int i = 0; i < skillTableDatas.Length; i++)
         {
+            if (skillTableDatas[i].Issonskill == true) continue;
+
             var cell = Instantiate<UiMagicbookCraftCell>(craftCell, craftParent);
 
             cell.Initialize(skillTableDatas[i]);
