@@ -165,7 +165,7 @@ public class StatusTable
                 #region Stat
                 case IntLevelAddPer_StatPoint:
                     {
-                        return level * 0.01f;
+                        return level * 0.015f;
                     }
                     break;
                 case CriticalLevel_StatPoint:

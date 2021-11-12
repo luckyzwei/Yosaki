@@ -399,6 +399,7 @@ public static class ServerData
 
             case Item_Type.costume1:
             case Item_Type.costume4:
+            case Item_Type.costume12:
                 {
                     string costumeKey = type.ToString();
                     ServerData.costumeServerTable.TableDatas[costumeKey].hasCostume.Value = true;

@@ -143,7 +143,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
-            if (FrameCalculator.frameRate > 3)
+            if (FrameCalculator.frameRate > 5)
             {
                 if (hit == 0)
                 {
