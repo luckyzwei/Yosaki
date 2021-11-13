@@ -114,7 +114,7 @@ public class UiRoulette : MonoBehaviour
 
         while (e.MoveNext())
         {
-            rewardViewData.Add(new RewardData(e.Current.Key, (int)e.Current.Value));
+            rewardViewData.Add(new RewardData(e.Current.Key, e.Current.Value));
 
             if (e.Current.Key == Item_Type.Gold)
             {

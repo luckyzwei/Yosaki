@@ -27,6 +27,7 @@ public class UiSkillCraftBoard : MonoBehaviour
 
             cell.Initialize(skillTableDatas[i]);
         }
+
     }
 
 }
