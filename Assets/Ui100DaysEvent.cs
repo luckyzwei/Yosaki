@@ -19,13 +19,9 @@ public class Ui100DaysEvent : MonoBehaviour
 
         int currentAttendance = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value;
 
-        int startIdx = ((currentAttendance - 1) / 5) * 5;
-        startIdx -= 5;
-        startIdx = Mathf.Max(0, startIdx);
-
         for (int i = 0; i < attendanceCellList.Count; i++)
         {
-            attendanceCellList[i].Initialize(tableDatas[i + startIdx]);
+            attendanceCellList[i].Initialize(tableDatas[i]);
         }
     }
 
