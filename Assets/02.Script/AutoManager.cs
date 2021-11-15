@@ -101,6 +101,7 @@ public class AutoManager : Singleton<AutoManager>
     private Coroutine autoPlayRoutine;
 
     private Transform currentTarget;
+    public bool canAttack { get; private set; }
 
     WaitForEndOfFrame updateTick = new WaitForEndOfFrame();
 
@@ -150,6 +151,8 @@ public class AutoManager : Singleton<AutoManager>
                 //타겟이랑 거리가 멀때 이동
                 if (Vector3.Distance(playerTr.transform.position, currentTarget.transform.position) > moveDistMax && (SkillCoolTimeManager.moveAutoValue.Value == 1))
                 {
+                    canAttack = false;
+
                     //예전모드
                     if (SkillCoolTimeManager.moveAutoValue.Value == 1 && SkillCoolTimeManager.jumpAutoValue.Value == 1)
                     {
@@ -228,6 +231,8 @@ public class AutoManager : Singleton<AutoManager>
                 }
                 else
                 {
+                    canAttack = true;
+
                     if (skillQueue.Count == 0)
                     {
                         SetSkillQueue();
@@ -254,9 +259,9 @@ public class AutoManager : Singleton<AutoManager>
                         int useSkillIdx = skillQueue[0];
 
                         bool skillCast = PlayerSkillCaster.Instance.UseSkill(useSkillIdx);
-                        
+
                         skillQueue.RemoveAt(0);
-                        
+
                         if (skillCast)
                         {
                             yield return null;

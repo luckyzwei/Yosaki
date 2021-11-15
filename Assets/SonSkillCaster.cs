@@ -54,6 +54,7 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
             {
                 if (skillTableDatas[i].Issonskill == false) continue;
                 if (sonLevel < skillTableDatas[i].Sonunlocklevel) continue;
+                if (AutoManager.Instance.canAttack == false && GameManager.Instance.IsNormalField == true) continue;
 
                 PlayerSkillCaster.Instance.UseSkill(skillTableDatas[i].Id);
             }
@@ -61,6 +62,7 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
             yield return ws;
         }
     }
+
 #if UNITY_EDITOR
     private void Update()
     {
