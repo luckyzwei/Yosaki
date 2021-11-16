@@ -30,13 +30,13 @@ public class UiNickNameChangeBoard : MonoBehaviour
 
     public void OnClickConfirmButton()
     {
-        if (string.IsNullOrEmpty(inputField.text)) 
+        if (string.IsNullOrEmpty(inputField.text))
         {
             PopupManager.Instance.ShowAlarmMessage("닉네임을 입력 해주세요.");
             return;
         }
 
-        if (PlayerData.Instance.NickName.Equals(inputField.text)) 
+        if (PlayerData.Instance.NickName.Equals(inputField.text))
         {
             PopupManager.Instance.ShowAlarmMessage("현재 닉네임 입니다.");
             return;
@@ -57,7 +57,13 @@ public class UiNickNameChangeBoard : MonoBehaviour
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{inputField.text}로 닉네임을 변경 합니까?", () =>
          {
              confirmButton.interactable = false;
+#if UNITY_ANDROID
              Backend.BMember.UpdateNickname(inputField.text, MakeNickNameCallBack);
+#endif
+#if UNITY_IOS
+             Backend.BMember.UpdateNickname(inputField.text+CommonString.IOS_nick, MakeNickNameCallBack);
+#endif
+
          }, null);
 
     }
@@ -75,7 +81,7 @@ public class UiNickNameChangeBoard : MonoBehaviour
             ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.nickNameChangeFee;
             ServerData.goodsTable.UpData(GoodsTable.Jade, false);
 
-            
+
         }
         else
         {

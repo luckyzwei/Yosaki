@@ -559,7 +559,7 @@ public static class ServerData
 
             Param userInfoParam = new Param();
             userInfoParam.Add(UserInfoTable.chatFrame, ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
-
+            
             Param goodsParam = new Param();
             goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
 

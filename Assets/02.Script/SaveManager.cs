@@ -121,16 +121,12 @@ public class SaveManager : SingletonMono<SaveManager>
     //동기로 저장
     public void SyncDatasForce()
     {
-        ServerData.goodsTable.SyncAllDataForce();
-
-        //CollectionManager.Instance.SyncToServerForce();
-
-        ServerData.growthTable.SyncDataForce();
-
         if (BuffManager.Instance != null)
         {
             BuffManager.Instance.UpdateBuffTime();
             ServerData.buffServerTable.SyncAllDataForce();
         }
+
+        ServerData.goodsTable.SyncAllDataForce();
     }
 }

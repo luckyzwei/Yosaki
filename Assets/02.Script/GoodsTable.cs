@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
+using BackEnd.Game.GameInfo;
 using LitJson;
 using System;
 using UniRx;
+
+
 
 public class GoodsTable
 {
@@ -395,14 +398,40 @@ public class GoodsTable
 
     public void SyncAllDataForce()
     {
-        Param param = new Param();
+        List<TransactionValue> transactions = new List<TransactionValue>();
 
-        var e = tableDatas.GetEnumerator();
-        while (e.MoveNext())
-        {
-            param.Add(e.Current.Key, e.Current.Value.Value);
-        }
+        Param goodsParam = new Param();
+        goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+        goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
+        goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
+        goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+        goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
+        goodsParam.Add(GoodsTable.BonusSpinKey, ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value);
 
-        Backend.GameData.Update(tableName, Indate, param);
+        Param userInfoParam = new Param();
+        userInfoParam.Add(UserInfoTable.sleepRewardSavedTime, ServerData.userInfoTable.TableDatas[UserInfoTable.sleepRewardSavedTime].Value);
+
+        //경험치
+        Param statusParam = new Param();
+        //레벨
+        statusParam.Add(StatusTable.Level, ServerData.statusTable.GetTableData(StatusTable.Level).Value);
+
+        //스킬포인트
+        statusParam.Add(StatusTable.SkillPoint, ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value);
+
+        //스탯포인트
+        statusParam.Add(StatusTable.StatPoint, ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value);
+
+        Param growthParam = new Param();
+        growthParam.Add(GrowthTable.Exp, ServerData.growthTable.GetTableData(GrowthTable.Exp).Value);
+
+        transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+        transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
+        transactions.Add(TransactionValue.SetUpdate(GrowthTable.tableName, GrowthTable.Indate, growthParam));
+
+        var bro = Backend.GameData.TransactionWrite(transactions);
     }
 }
