@@ -41,6 +41,8 @@ public class GoogleManager : SingletonMono<GoogleManager>
 #if UNITY_IOS
          //ÍßSRDebug.Init();
 #endif
+
+        GleyNotifications.Initialize();
     }
 
     private void HandleBackendCallBack()
