@@ -73,6 +73,11 @@ public class UiMonthPassBuyButton2 : MonoBehaviour
 
     public void GetPackageItem(string productId)
     {
+        if (productId.Equals("removeadios"))
+        {
+            productId = "removead";
+        }
+
         if (TableManager.Instance.InAppPurchaseData.TryGetValue(productId, out var tableData) == false)
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 상품 id {productId}", null);
