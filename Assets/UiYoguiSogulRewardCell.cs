@@ -68,18 +68,29 @@ public class UiYoguiSogulRewardCell : MonoBehaviour
 
         }).AddTo(this);
     }
+    public bool AlreadyReceiveReward()
+    {
+        return ServerData.etcServerTable.YoguiSoguilRewarded(tableData.Stage);
+    }
+    public bool NotEnoughCondition()
+    {
+        return lastClearStageId < tableData.Stage;
+    }
+
+    public bool CanGetReward()
+    {
+        return AlreadyReceiveReward() == false && NotEnoughCondition() == false;
+    }
 
     public void OnClickGetButton()
     {
-        if (lastClearStageId < tableData.Stage)
+        if (NotEnoughCondition())
         {
             PopupManager.Instance.ShowAlarmMessage("해당 단계를 클리어 해야 합니다.");
             return;
         }
 
-        bool rewarded = ServerData.etcServerTable.YoguiSoguilRewarded(tableData.Stage);
-
-        if (rewarded)
+        if (AlreadyReceiveReward())
         {
             PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다.");
             return;

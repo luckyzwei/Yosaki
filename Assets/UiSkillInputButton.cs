@@ -52,6 +52,12 @@ public class UiSkillInputButton : MonoBehaviour
     {
         while (true)
         {
+            if (AutoManager.Instance.IsAutoMode)
+            {
+                PointerUp();
+                yield break;
+            }
+
             useSkillFunc.Invoke(slotIdx);
             yield return autuUpDelay;
         }

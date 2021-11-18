@@ -53,6 +53,12 @@ public class UiInventoryWeaponView : MonoBehaviour
     [SerializeField]
     private GameObject sinsuCreateButton;
 
+    [SerializeField]
+    private GameObject yachaDescription;
+
+    [SerializeField]
+    private GameObject yachaUpgradeButton;
+
     public void Initialize(WeaponData weaponData, MagicBookData magicBookData, Action<WeaponData, MagicBookData> onClickCallBack)
     {
         this.weaponData = weaponData;
@@ -66,6 +72,11 @@ public class UiInventoryWeaponView : MonoBehaviour
         yomulDescription.SetActive(weaponData != null && weaponData.Id == 19);
 
         yomulUpgradeButton.SetActive(weaponData != null && weaponData.Id == 20);
+
+        //야차 설명
+        yachaDescription.SetActive(weaponData != null && weaponData.Id == 20);
+
+        yachaUpgradeButton.SetActive(weaponData != null && weaponData.Id == 21);
 
 
         //신수

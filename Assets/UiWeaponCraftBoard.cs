@@ -53,7 +53,7 @@ public class UiWeaponCraftBoard : SingletonMono<UiWeaponCraftBoard>
             weaponStoneAmount.SetText($"{e}/{1}");
         }
         ).AddTo(this);
-
+        
     }
 
     public void OnClickCraftButton()

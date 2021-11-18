@@ -11,5 +11,4 @@ public class UiYoumulUpgradeBoard : SingletonMono<UiYoumulUpgradeBoard>
     {
         rootObject.SetActive(show);
     }
-
 }

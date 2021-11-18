@@ -171,7 +171,7 @@ public class UiSonBoard : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += 1000;
+            ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += 1;
         }
     }
 #endif

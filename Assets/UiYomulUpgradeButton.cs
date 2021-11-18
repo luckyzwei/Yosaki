@@ -8,4 +8,9 @@ public class UiYomulUpgradeButton : MonoBehaviour
     {
         UiYoumulUpgradeBoard.Instance.ShowUpgradePopup(true);
     }
+
+    public void OnClickYachaUpgradeButton()
+    {
+        UiYachaUpgradeBoard.Instance.ShowUpgradePopup(true);
+    }
 }

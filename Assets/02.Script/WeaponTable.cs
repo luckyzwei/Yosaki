@@ -64,15 +64,19 @@ public class WeaponTable
         int id = tableDatas[idx].idx;
         level += 1;
 
-        if (id != 20)
+        if (id < 20)
         {
             return Mathf.Pow(level, 3.35f + (float)id * 0.015f);
-
         }
         //요물은 업글이 좀 비싸
-        else
+        else if(id==20)
         {
             return Mathf.Pow(level, 3.45f + (float)id * 0.015f);
+        }
+        //야차
+        else 
+        {
+            return Mathf.Pow(level, 3.65f + (float)id * 0.015f);
         }
     }
 

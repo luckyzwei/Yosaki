@@ -16,4 +16,17 @@ public class UiWeaponCraftButton : MonoBehaviour
 
         UiWeaponCraftBoard.Instance.ShowPopup();
     }
+
+    public void OnClickYachaCraftButton()
+    {
+        WeaponData yomulData = TableManager.Instance.WeaponTable.dataArray[21];
+
+        if (ServerData.weaponTable.TableDatas[yomulData.Stringid].hasItem.Value == 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이미 보유중입니다.");
+            return;
+        }
+
+        UiYachaCraftBoard.Instance.ShowPopup();
+    }
 }

@@ -25,6 +25,7 @@ public static class CommonString
     public static string ItemGrade_3 = "특급";
     public static string ItemGrade_4 = "전설";
     public static string ItemGrade_5 = "요물";
+    public static string ItemGrade_6 = "야차";
     public static string ItemGrade_5_Norigae = "신물";
 
     public static string GoldItemName = "골드";

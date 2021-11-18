@@ -133,10 +133,20 @@ public static class GameBalance
 
     public readonly static ObscuredInt MaxDamTextNum = 120;
 
+    public readonly static ObscuredInt YachaRequireLevel = 5300;
+
     public static int GetSonIdx()
     {
         int ret = 0;
-        ret = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value / SonEvolutionDivdeNum;
+
+        int level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;
+
+        if (level >= 9000) 
+        {
+            level -= 3000;
+        }
+
+        ret = level / SonEvolutionDivdeNum;
         ret = Mathf.Min(ret, CommonUiContainer.Instance.sonThumbNail.Count - 1);
         return ret;
     }
