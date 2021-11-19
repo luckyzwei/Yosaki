@@ -55,7 +55,7 @@ public class UiPetEquipmentView : MonoBehaviour
 
         itemIcon.sprite = CommonUiContainer.Instance.petEquipment[petEquipmentData.Id];
 
-        equipTitle.SetText(petEquipmentData.Name);
+
 
         equipTitle.color = CommonUiContainer.Instance.petEquipColor[petEquipmentData.Id];
 
@@ -74,52 +74,65 @@ public class UiPetEquipmentView : MonoBehaviour
             levelUpButton.SetActive(e == 1);
         }).AddTo(this);
 
-        petEquipServerData.level.AsObservable().Subscribe(e =>
+        petEquipServerData.level.AsObservable().Subscribe(level =>
         {
-            levelText.SetText($"(LV:{e})");
+            WhenLevelChanged(level);
+        }).AddTo(this);
 
-            levelUpButtonDesc.SetText(e == petEquipmentData.Maxlevel ? "최고레벨" : Utils.ConvertBigNum(petEquipmentData.Upgradeprice));
-
-            levelUpButtonDesc_marble.SetText(e == petEquipmentData.Maxlevel ? "최고레벨" : Utils.ConvertBigNum(petEquipmentData.Upgradeprice * marbleDiscountRatio));
-
-            string abilDesc = string.Empty;
-
-            StatusType type1 = (StatusType)petEquipmentData.Abiltype1;
-
-            if (type1.IsPercentStat() == false)
-            {
-                float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * e;
-                float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
-
-                abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1}(<color=red>MAX:{maxAbil1}</color>)\n";
-            }
-            else
-            {
-                float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * e;
-                float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
-
-                abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1 * 100f}(<color=red>MAX:{maxAbil1 * 100f}</color>)\n";
-            }
-
-            StatusType type2 = (StatusType)petEquipmentData.Abiltype2;
-            if (type2.IsPercentStat())
-            {
-                float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * e;
-                float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
-
-                abilDesc += $"{CommonString.GetStatusName(type2)} {abilValue2 * 100f}%(<color=red>MAX:{maxAbil2 * 100f}</color>)";
-            }
-            else
-            {
-                float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * e;
-                float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
-
-                abilDesc += $"{CommonString.GetStatusName(type2)} {abilValue2}(<color=red>MAX:{maxAbil2}</color>)";
-            }
-
-            abilDescription.SetText(abilDesc);
+        ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).AsObservable().Subscribe(e =>
+        {
+            equipTitle.SetText($"{petEquipmentData.Name}({e}강)");
+            WhenLevelChanged(petEquipServerData.level.Value);
 
         }).AddTo(this);
+    }
+
+    private void WhenLevelChanged(int level)
+    {
+        int petEquipLevel = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+
+        levelText.SetText($"(LV:{level})");
+
+        levelUpButtonDesc.SetText(level == petEquipmentData.Maxlevel ? "최고레벨" : Utils.ConvertBigNum(petEquipmentData.Upgradeprice));
+
+        levelUpButtonDesc_marble.SetText(level == petEquipmentData.Maxlevel ? "최고레벨" : Utils.ConvertBigNum(petEquipmentData.Upgradeprice * marbleDiscountRatio));
+
+        string abilDesc = string.Empty;
+
+        StatusType type1 = (StatusType)petEquipmentData.Abiltype1;
+
+        if (type1.IsPercentStat() == false)
+        {
+            float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * level + petEquipmentData.Leveladdvalue1 * petEquipLevel;
+            float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
+
+            abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1}(<color=red>MAX:{maxAbil1}</color>)\n";
+        }
+        else
+        {
+            float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * level + petEquipmentData.Leveladdvalue1 * petEquipLevel;
+            float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
+
+            abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1 * 100f}(<color=red>MAX:{maxAbil1 * 100f}</color>)\n";
+        }
+
+        StatusType type2 = (StatusType)petEquipmentData.Abiltype2;
+        if (type2.IsPercentStat())
+        {
+            float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * level + petEquipmentData.Leveladdvalue2 * petEquipLevel;
+            float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
+
+            abilDesc += $"{CommonString.GetStatusName(type2)} {abilValue2 * 100f}%(<color=red>MAX:{maxAbil2 * 100f}</color>)";
+        }
+        else
+        {
+            float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * level + petEquipmentData.Leveladdvalue2 * petEquipLevel;
+            float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
+
+            abilDesc += $"{CommonString.GetStatusName(type2)} {abilValue2}(<color=red>MAX:{maxAbil2}</color>)";
+        }
+
+        abilDescription.SetText(abilDesc);
     }
 
     public void OnClickUnlockButton()
@@ -138,7 +151,7 @@ public class UiPetEquipmentView : MonoBehaviour
                 return;
             }
         }
-        else 
+        else
         {
 
             if (ServerData.petTable.TableDatas[petTableData.Stringid].hasItem.Value == 0)

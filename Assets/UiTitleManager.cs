@@ -86,6 +86,8 @@ public enum TitleMissionId
     Stage1350,//★
     Stage1400,//★
     Yomul7,
+    Stage1450,//★
+    Stage1500,//★
 
 
 }
@@ -367,6 +369,16 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 1400 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage1400);
+            }
+
+            if (e >= 1450 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1450);
+            }
+
+            if (e >= 1500 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1500);
             }
 
         }).AddTo(this);

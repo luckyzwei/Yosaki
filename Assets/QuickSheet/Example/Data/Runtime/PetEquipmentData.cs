@@ -68,4 +68,12 @@ public class PetEquipmentData
   string name;
   public string Name { get {return name; } set { this.name = value;} }
   
+  [SerializeField]
+  float leveladdvalue1;
+  public float Leveladdvalue1 { get {return leveladdvalue1; } set { this.leveladdvalue1 = value;} }
+  
+  [SerializeField]
+  float leveladdvalue2;
+  public float Leveladdvalue2 { get {return leveladdvalue2; } set { this.leveladdvalue2 = value;} }
+  
 }

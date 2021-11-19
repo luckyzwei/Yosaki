@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Coffee.UIEffects;
 
 public class WeaponEquipView : MonoBehaviour
 {
     [SerializeField]
     private Image weaponImage;
+
+    [SerializeField]
+    private UIShiny shinyEffect;
 
     void Start()
     {
@@ -24,7 +28,10 @@ public class WeaponEquipView : MonoBehaviour
     {
         weaponImage.sprite = CommonResourceContainer.GetWeaponSprite(idx);
 
-
+        if (shinyEffect != null) 
+        {
+            shinyEffect.enabled = idx == 21;
+        }
         //var weaponGrade = TableManager.Instance.WeaponData[idx].Grade;
 
         //var emission = equipEffect.emission;

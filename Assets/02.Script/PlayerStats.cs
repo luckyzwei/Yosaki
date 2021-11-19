@@ -886,6 +886,8 @@ public static class PlayerStats
 
         var tableDatas = TableManager.Instance.PetEquipment.dataArray;
 
+        int petEquipLevel = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+
         for (int i = 0; i < tableDatas.Length; i++)
         {
             var serverData = ServerData.petEquipmentServerTable.TableDatas[tableDatas[i].Stringid];
@@ -894,12 +896,12 @@ public static class PlayerStats
 
             if (tableDatas[i].Abiltype1 == (int)statusType)
             {
-                ret += (tableDatas[i].Abilvalue1 + serverData.level.Value * tableDatas[i].Abiladdvalue1);
+                ret += (tableDatas[i].Abilvalue1 + serverData.level.Value * tableDatas[i].Abiladdvalue1 + tableDatas[i].Leveladdvalue1 * petEquipLevel);
             }
 
             if (tableDatas[i].Abiltype2 == (int)statusType)
             {
-                ret += (tableDatas[i].Abilvalue2 + serverData.level.Value * tableDatas[i].Abiladdvalue2);
+                ret += (tableDatas[i].Abilvalue2 + serverData.level.Value * tableDatas[i].Abiladdvalue2 + tableDatas[i].Leveladdvalue2 * petEquipLevel);
             }
         }
 
