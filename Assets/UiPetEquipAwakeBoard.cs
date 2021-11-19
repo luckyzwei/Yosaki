@@ -129,7 +129,7 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
     {
         int prob = 130 - ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
 
-        return Mathf.Clamp(prob, 1, 100);
+        return Mathf.Clamp(prob, 50, 100);
     }
 
     private bool TryAwake()
