@@ -144,6 +144,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
     {
         if (sleepRewardInfo == null) return;
 
+        UiSleepRewardMask.Instance.ShowMaskObject(true);
+
         int elapsedSeconds = sleepRewardInfo.elapsedSeconds;
 
         LogManager.Instance.SendLogType("SleepReward", "Req", $"seconds {sleepRewardInfo.elapsedSeconds} gold {sleepRewardInfo.gold} jade {sleepRewardInfo.jade} marble {sleepRewardInfo.marble} growthStone {sleepRewardInfo.GrowthStone} exp {sleepRewardInfo.exp}");
@@ -221,6 +223,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         ServerData.SendTransaction(transantions, successCallBack: () =>
           {
               successCallBack?.Invoke();
+              UiSleepRewardMask.Instance.ShowMaskObject(false);
               LogManager.Instance.SendLogType("SleepReward", "Get", elapsedSeconds.ToString());
           });
     }
