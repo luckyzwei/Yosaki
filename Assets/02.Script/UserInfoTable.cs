@@ -102,7 +102,7 @@ public class UserInfoTable
     public const string peachAttendance = "peachpension";
 
     public const string relicReset = "relicReset";
-    public const string marbleReset2 = "marbleReset2";
+    public const string marbleReset2 = "marbleReset3";
     public const string dailyPackReset = "dailyPackReset";
     public const string sonScore = "sonLastClear2";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";

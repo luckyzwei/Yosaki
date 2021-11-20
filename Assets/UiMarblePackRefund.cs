@@ -66,13 +66,13 @@ public class UiMarblePackRefund : MonoBehaviour
         buyCounts[1].SetText(marblePack2Count.ToString() + "회");
         buyCounts[2].SetText(marblePack3Count.ToString() + "회");
 
-        int _1DiffMarble = 800000;
+        int _1DiffMarble = 2500000;
         //int _1DiffTicket = 2;
 
-        int _2DiffMarble = 1500000;
+        int _2DiffMarble = 5000000;
         // int _2DiffTicket = 5;
 
-        int _3DiffMarble = 3500000;
+        int _3DiffMarble = 11000000;
         //int _3DiffTicket = 10;
 
         int marble1_MarbleAdd = marblePack1Count * _1DiffMarble;
@@ -118,7 +118,7 @@ public class UiMarblePackRefund : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              LogManager.Instance.SendLogType("Marble2", "Get", $"m:{addMarbleTotal} t:{0}");
+              LogManager.Instance.SendLogType("Marble3", "Get", $"m:{addMarbleTotal} t:{0}");
               PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "여우구슬 세트 소급 완료!", null);
           });
     }
