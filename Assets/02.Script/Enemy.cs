@@ -146,7 +146,7 @@ public class Enemy : PoolItem
     {
         GrowthManager.Instance.GetExp(tableData.Exp);
 
-        DailyMissionManager.UpdateDailyMission(DailyMissionKey.KillEnemy, 1);
+        DailyMissionManager.UpdateDailyMission(DailyMissionKey.KillEnemy, (int)GameManager.Instance.CurrentStageData.Marbleamount);
 
         EffectManager.SpawnEffectAllTime(DeadEfxName, this.transform.position + Vector3.up * 1f);
 
@@ -168,7 +168,7 @@ public class Enemy : PoolItem
 
     private void GetPetUpgradeGem()
     {
-        ServerData.goodsTable.GetPetUpgradeSoul(1);
+        ServerData.goodsTable.GetPetUpgradeSoul(GameManager.Instance.CurrentStageData.Marbleamount);
     }
 
     private void GetEventItem()
