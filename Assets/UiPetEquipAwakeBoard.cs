@@ -231,12 +231,12 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
               if (awakeSuccess)
               {
                   PopupManager.Instance.ShowAlarmMessage("강화 성공!");
-                  LogManager.Instance.SendLogType("PetEquip", "성공", ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value.ToString());
+                  LogManager.Instance.SendLogType("PetEquip", "성공", ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value.ToString()+$": {ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value} / {ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value}");
               }
               else
               {
                   PopupManager.Instance.ShowAlarmMessage("강화 실패!");
-                  LogManager.Instance.SendLogType("PetEquip", "실패", ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value.ToString());
+                  LogManager.Instance.SendLogType("PetEquip", "실패", ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value.ToString()+$": {ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value} / {ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value}");
               }
 
 
