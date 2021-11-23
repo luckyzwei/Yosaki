@@ -175,7 +175,7 @@ public class Enemy : PoolItem
     {
         if (ServerData.userInfoTable.CanSpawnEventItem() == false) return;
 
-        ServerData.goodsTable.GetEventItem(1);
+        ServerData.goodsTable.GetEventItem(GameManager.Instance.CurrentStageData.Marbleamount);
     }
 
     private void GetStageRelicItem() 

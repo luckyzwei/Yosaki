@@ -105,6 +105,8 @@ public static class CommonString
             case Item_Type.costume10: return TableManager.Instance.Costume.dataArray[10].Name;
             case Item_Type.costume11: return TableManager.Instance.Costume.dataArray[11].Name;
             case Item_Type.costume12: return TableManager.Instance.Costume.dataArray[12].Name;
+            case Item_Type.costume13: return TableManager.Instance.Costume.dataArray[13].Name;
+            case Item_Type.costume14: return TableManager.Instance.Costume.dataArray[14].Name;
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;
@@ -126,11 +128,11 @@ public static class CommonString
             case Item_Type.Relic: return "영혼 조각";
             case Item_Type.RelicTicket: return "영혼 열쇠";
             case Item_Type.RabitBossStone: return "영혼의 증표";
-            case Item_Type.Event_Item_0: return "도깨비 방망이";
+            case Item_Type.Event_Item_0: return "눈송이";
             case Item_Type.StageRelic: return "유물 파편";
             case Item_Type.DragonBossStone: return "천공의 증표";
             case Item_Type.SnakeStone: return "치명의 증표";
-            case Item_Type.Peach: return "천도 복숭아";
+            case Item_Type.PeachReal: return "천도 복숭아";
             case Item_Type.HorseStone: return "하늘의 증표";
         }
         return "미등록";

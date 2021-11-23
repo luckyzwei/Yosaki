@@ -223,6 +223,8 @@ public static class ServerData
             case Item_Type.costume10:
             case Item_Type.costume11:
             case Item_Type.costume12:
+            case Item_Type.costume13:
+            case Item_Type.costume14:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -231,7 +233,7 @@ public static class ServerData
             case Item_Type.StageRelic:
                 ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += rewardValue;
                 break;
-            case Item_Type.Peach:
+            case Item_Type.PeachReal:
                 ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += rewardValue;
                 break;
             default:
@@ -278,6 +280,8 @@ public static class ServerData
             case Item_Type.costume8:
             case Item_Type.costume11:
             case Item_Type.costume12:
+            case Item_Type.costume13:
+            case Item_Type.costume14:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -302,7 +306,7 @@ public static class ServerData
                 passParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
-            case Item_Type.Peach:
+            case Item_Type.PeachReal:
                 passParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
@@ -392,7 +396,7 @@ public static class ServerData
                 param.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
-            case Item_Type.Peach:
+            case Item_Type.PeachReal:
                 ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                 param.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
@@ -653,7 +657,7 @@ public static class ServerData
                 case Item_Type.StageRelic:
                     ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;
                     break;
-                case Item_Type.Peach:
+                case Item_Type.PeachReal:
                     ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                     break;
             }

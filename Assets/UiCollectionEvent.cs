@@ -17,9 +17,9 @@ public class UiCollectionEvent : MonoBehaviour
     {
         string description = string.Empty;
 
-        description += $"<color=red>도깨비방망이 획득 10월 {GameBalance.EventDropEndDay}일까지</color>\n";
-        description += $"<color=red>아이템 제작 11월 {GameBalance.EventMakeEndDay}일까지</color>\n";
-        description += $"<color=red>상품 판매 11월 {GameBalance.EventPackageSaleEndDay}일까지</color>";
+        description += $"<color=red>눈송이 획득 12월 {GameBalance.EventDropEndDay}일까지</color>\n";
+        description += $"<color=red>아이템 제작 1월 {GameBalance.EventMakeEndDay}일까지</color>\n";
+        description += $"<color=red>상품 판매 1월 {GameBalance.EventPackageSaleEndDay}일까지</color>";
 
         eventDescription.SetText(description);
     }
@@ -29,7 +29,7 @@ public class UiCollectionEvent : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += 10000;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += 1000000;
         }
     }
 #endif

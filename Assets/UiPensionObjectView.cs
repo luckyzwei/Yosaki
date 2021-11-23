@@ -122,7 +122,7 @@ public class UiPensionObjectView : MonoBehaviour
         }
         else if (pensionKey == "peachpension")
         {
-            itemType = Item_Type.Peach;
+            itemType = Item_Type.PeachReal;
         }
 
         List<TransactionValue> transactions = new List<TransactionValue>();

@@ -114,7 +114,7 @@ public class UiSonBoard : MonoBehaviour
 
         if (goodsNum == 0)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Peach)}가 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.PeachReal)}가 없습니다.");
             return;
         }
 

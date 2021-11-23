@@ -64,6 +64,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Songpyeon;
 
     public Sprite EventCollection;
+    public Sprite EventCollection2;
 
     public Sprite StageRelic;
 
@@ -114,6 +115,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.costume12:
                 return costumeThumbnail[12];
+                break;
+            case Item_Type.costume13:
+                return costumeThumbnail[13];
+                break;
+            case Item_Type.costume14:
+                return costumeThumbnail[14];
                 break;
             case Item_Type.RankFrame1:
                 return rankFrame[8];
@@ -182,12 +189,11 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Event_Item_0:
                 return EventCollection;
                 break;
-
             case Item_Type.StageRelic:
                 return StageRelic;
                 break;
 
-            case Item_Type.Peach:
+            case Item_Type.PeachReal:
                 return Peach;
                 break;
         }

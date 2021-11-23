@@ -91,7 +91,7 @@ public class UserInfoTable
 
     public const string dokebiPackRefund = "dokebiPackRefund";
 
-    public const string killCountTotal = "killCountTotal";
+    public const string killCountTotal = "killCountTotal3";
     public const string killCountTotal2 = "killCountTotal2";
 
     public const string relicKillCount = "relicKillCount";
@@ -407,11 +407,11 @@ public class UserInfoTable
                     int elapsedTime = (int)(currentServerTime - savedDate).TotalSeconds;
 
                     //최소조건 안됨 (시간,첫 접속)
-                    if(elapsedTime < GameBalance.sleepRewardMinValue || ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value == -1) 
+                    if (elapsedTime < GameBalance.sleepRewardMinValue || ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value == -1)
                     {
                         return;
                     }
-                    else 
+                    else
                     {
                         //서버에 저장시켜봄
                         Param userInfoParam = new Param();
@@ -657,16 +657,17 @@ public class UserInfoTable
 
     public bool CanSpawnEventItem()
     {
+        if (currentServerTime.Month == 11) return true;
+        if (currentServerTime.Month == 12) return true;
         return false;
-        if (currentServerTime.Month != 10) return false;
-        return true;
     }
     public bool CanMakeEventItem()
     {
-        return false;
-        //10월
-        if (currentServerTime.Month == 10) return true;
-        //11월
+        //11월 12월
+        if (currentServerTime.Month == 11) return true;
+        if (currentServerTime.Month == 12) return true;
+
+        //1월
         else
         {
             return currentServerTime.Day < 2;
@@ -675,8 +676,11 @@ public class UserInfoTable
 
     public bool CanBuyEventPackage()
     {
-        return false;
-        if (currentServerTime.Month == 10) return true;
+        //11월 12월
+        if (currentServerTime.Month == 11) return true;
+        if (currentServerTime.Month == 12) return true;
+
+        //1월
         else
         {
             return currentServerTime.Day < 2;
@@ -719,6 +723,9 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
+#if UNITY_EDITOR
+        return false;
+#endif
         return currentServerTime.Month == 11;
     }
 }

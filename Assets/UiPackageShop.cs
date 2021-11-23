@@ -55,7 +55,7 @@ public class UiPackageShop : MonoBehaviour
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, relicParent);
                 cell.Initialize(e.Current.Value);
             }
-            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Event)
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Event2)
             {
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, eventParent);
                 cell.Initialize(e.Current.Value);

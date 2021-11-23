@@ -118,7 +118,7 @@ public class UiPensionItemCell : MonoBehaviour
         }
         else
         {
-            itemType = Item_Type.Peach;
+            itemType = Item_Type.PeachReal;
         }
 
         SoundManager.Instance.PlaySound("Reward");

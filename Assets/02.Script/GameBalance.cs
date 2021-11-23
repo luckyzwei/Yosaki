@@ -71,7 +71,7 @@ public static class GameBalance
     // public readonly static ObscuredInt sleepRewardMinValue = 3600;
     public readonly static ObscuredInt sleepRewardMinValue = 600;
     //10시간
-    public readonly static ObscuredInt sleepRewardMaxValue = 36000;
+    public readonly static ObscuredInt sleepRewardMaxValue = 43200;
     public readonly static ObscuredFloat sleepRewardRatio = 0.9f;
 
     public readonly static ObscuredFloat marbleSpawnProb = 1;
@@ -107,7 +107,7 @@ public static class GameBalance
     public readonly static ObscuredInt rankRewardTicket_21_100_relic = 10;
     public readonly static ObscuredInt rankRewardTicket_101_1000_relic = 5;
 
-    public readonly static ObscuredInt EventDropEndDay = 31;
+    public readonly static ObscuredInt EventDropEndDay = 30;
     public readonly static ObscuredInt EventMakeEndDay = 1;
     public readonly static ObscuredInt EventPackageSaleEndDay = 1;
 

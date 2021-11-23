@@ -40,7 +40,7 @@ public class GoodsTable
     public static string RelicTicket = "RelicTicket";
 
     //할로윈 도깨비
-    public static string Event_Item_0 = "Event_Item_0";
+    public static string Event_Item_0 = "Event_Item_1";
     public static string StageRelic = "StageRelic";
     public static string Peach = "PeachReal";
 
@@ -71,7 +71,7 @@ public class GoodsTable
         {StageRelic,0f},
         {SnakeStone,0f},
         {Peach,0f},
-        {HorseStone,0f}
+        {HorseStone,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

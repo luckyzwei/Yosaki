@@ -68,40 +68,40 @@ public class UiLevelPass : MonoBehaviour
 
         initialized = true;
 
-        StartCoroutine(scrollRoutine());
+        //StartCoroutine(scrollRoutine());
     }
 
-    private void OnEnable()
-    {
-        if (initialized)
-        {
-            StartCoroutine(scrollRoutine());
-        }
-    }
+    //private void OnEnable()
+    //{
+    //    if (initialized)
+    //    {
+    //        StartCoroutine(scrollRoutine());
+    //    }
+    //}
 
-    private IEnumerator scrollRoutine()
-    {
+    //private IEnumerator scrollRoutine()
+    //{
 
-        yield return null;
-        yield return null;
-        yield return null;
+    //    yield return null;
+    //    yield return null;
+    //    yield return null;
 
-        var tableData = TableManager.Instance.LevelPass.dataArray;
+    //    var tableData = TableManager.Instance.LevelPass.dataArray;
 
-        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+    //    int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
-        for (int i = 0; i < tableData.Length; i++)
-        {
-            if (currentLevel >= tableData[i].Unlocklevel)
-            {
-                scrollId = i;
-            }
-        }
+    //    for (int i = 0; i < tableData.Length; i++)
+    //    {
+    //        if (currentLevel >= tableData[i].Unlocklevel)
+    //        {
+    //            scrollId = i;
+    //        }
+    //    }
 
-        float scrollPosY = scrollId * cellSize;
+    //    float scrollPosY = scrollId * cellSize;
 
-        var rc = cellParent.GetComponent<RectTransform>();
+    //    var rc = cellParent.GetComponent<RectTransform>();
 
-        rc.anchoredPosition = new Vector2(rc.anchoredPosition.x, scrollPosY);
-    }
+    //    rc.anchoredPosition = new Vector2(rc.anchoredPosition.x, scrollPosY);
+    //}
 }

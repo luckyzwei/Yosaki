@@ -25,7 +25,7 @@ public enum Item_Type
     Event_Item_0,
     StageRelic,
     SnakeStone,
-    Peach,
+    PeachReal,
     HorseStone,
 
     RankFrame1 = 100,
@@ -105,6 +105,8 @@ public enum Item_Type
     costume10 = 1211,
     costume11 = 1212,
     costume12 = 1213,
+    costume13 = 1214,
+    costume14 = 1215,
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,
