@@ -220,23 +220,29 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
         }
 
+        LogManager.Instance.SendLogType("PetEquip", "요청", awakeSuccess ? "성공":"실패");
+
+
 #if UNITY_EDITOR
         Debug.LogError(awakeSuccess ? "강화성공" : "강화실패");
 #endif
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              upgradeBlockMask.SetActive(false);
+              if (upgradeBlockMask != null)
+              {
+                  upgradeBlockMask.SetActive(false);
+              }
 
               if (awakeSuccess)
               {
                   PopupManager.Instance.ShowAlarmMessage("강화 성공!");
-                  LogManager.Instance.SendLogType("PetEquip", "성공", ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value.ToString()+$": {ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value} / {ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value}");
+                  LogManager.Instance.SendLogType("PetEquip", "성공", ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value.ToString() + $": {ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value} / {ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value}");
               }
               else
               {
                   PopupManager.Instance.ShowAlarmMessage("강화 실패!");
-                  LogManager.Instance.SendLogType("PetEquip", "실패", ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value.ToString()+$": {ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value} / {ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value}");
+                  LogManager.Instance.SendLogType("PetEquip", "실패", ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value.ToString() + $": {ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value} / {ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value}");
               }
 
 
