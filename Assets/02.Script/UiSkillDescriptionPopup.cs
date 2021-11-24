@@ -28,7 +28,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     private Button levelUpButton;
 
     [SerializeField]
-    private Button awakeButton;
+    private Image awakeButton;
 
     [SerializeField]
     private TextMeshProUGUI awakeButtonDescription;
@@ -151,12 +151,11 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         //최초에는 1개로 스킬 배울수있음.
         if (skillAwakeNum == 0)
         {
-            awakeButton.interactable = amount >= GameBalance.firstSkillAwakeNum;
             awakeButtonDescription.SetText($"{amount}/{GameBalance.firstSkillAwakeNum}");
         }
         else
         {
-            awakeButton.interactable = amount >= skillTableData.Awakeweaponreqcount;
+         
             awakeButtonDescription.SetText($"{amount}/{skillTableData.Awakeweaponreqcount}");
         }
     }
@@ -337,8 +336,13 @@ public class UiSkillDescriptionPopup : MonoBehaviour
             return;
         }
 
+        int skillAmount = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value;
         //로컬 데이터 갱신
-
+        if( skillAmount< skillTableData.Awakeweaponreqcount) 
+        {
+            PopupManager.Instance.ShowAlarmMessage("기술이 부족 합니다.");
+            return;
+        }
 
         //스킬북 차감 맨처음에는 1개만 차감
         if (currentAwakeNum == 0)

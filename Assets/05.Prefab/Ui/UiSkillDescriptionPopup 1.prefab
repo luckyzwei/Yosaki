@@ -1415,7 +1415,7 @@ MonoBehaviour:
   skillDesc: {fileID: 7242376738258923297}
   skillAbility: {fileID: 7626743488380185483}
   levelUpButton: {fileID: 5522255088586640305}
-  awakeButton: {fileID: 8593461109955882355}
+  awakeButton: {fileID: 3803227230448917038}
   awakeButtonDescription: {fileID: 8590513467768708657}
   weaponView: {fileID: 6052431798780584854}
   levelDescription: {fileID: 4700349826120479500}
@@ -1485,7 +1485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2442,8 +2442,8 @@ GameObject:
   - component: {fileID: 6939143854565344880}
   - component: {fileID: 8500474142827881229}
   - component: {fileID: 3803227230448917038}
-  - component: {fileID: 8593461109955882355}
   - component: {fileID: 5177494998021814583}
+  - component: {fileID: 8164109948991851228}
   m_Layer: 5
   m_Name: AwakeButton
   m_TagString: Untagged
@@ -2510,64 +2510,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8593461109955882355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7608548340553533868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 2665930108083454080, guid: 6a63ef398306547be8cad5f83b8994a3,
-      type: 3}
-    m_PressedSprite: {fileID: 2665930108083454080, guid: 6a63ef398306547be8cad5f83b8994a3,
-      type: 3}
-    m_SelectedSprite: {fileID: 2665930108083454080, guid: 6a63ef398306547be8cad5f83b8994a3,
-      type: 3}
-    m_DisabledSprite: {fileID: -1220990825568754350, guid: 6f5cc40e4a1cd458c9901849a7f52a07,
-      type: 3}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 3803227230448917038}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5628433628305780004}
-        m_MethodName: OnClickAwakeButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &5177494998021814583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2581,6 +2523,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonKey: 
+--- !u!114 &8164109948991851228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7608548340553533868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ab13a60508f52448fd8995679b984e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickDelay: 0.025
+  OnEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5628433628305780004}
+        m_MethodName: OnClickAwakeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  buttonGraphic: {fileID: 3803227230448917038}
+  pressedColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0.78039217}
+  canExecute: 1
 --- !u!1 &7805121379482002252
 GameObject:
   m_ObjectHideFlags: 0
@@ -3009,7 +2981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3403,10 +3375,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6939143854565344880}
     m_Modifications:
+    - target: {fileID: 1070274384856812168, guid: f5e699cf822ad714a925fe272d049c5a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1943849533946998932, guid: f5e699cf822ad714a925fe272d049c5a,
         type: 3}
       propertyPath: m_fontStyle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943849533946998932, guid: f5e699cf822ad714a925fe272d049c5a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1943849533946998932, guid: f5e699cf822ad714a925fe272d049c5a,
         type: 3}
@@ -3427,6 +3409,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413421461124445815, guid: f5e699cf822ad714a925fe272d049c5a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774618697360539469, guid: f5e699cf822ad714a925fe272d049c5a,
         type: 3}
@@ -3457,6 +3444,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073698612520678545, guid: f5e699cf822ad714a925fe272d049c5a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419867777550867145, guid: f5e699cf822ad714a925fe272d049c5a,
         type: 3}
@@ -3573,10 +3565,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4351291884874082094, guid: f5e699cf822ad714a925fe272d049c5a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799478019686374467, guid: f5e699cf822ad714a925fe272d049c5a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822745764150225309, guid: f5e699cf822ad714a925fe272d049c5a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429171981650739999, guid: f5e699cf822ad714a925fe272d049c5a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7880738417048984323, guid: f5e699cf822ad714a925fe272d049c5a,
         type: 3}
       propertyPath: m_fontStyle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7880738417048984323, guid: f5e699cf822ad714a925fe272d049c5a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7880738417048984323, guid: f5e699cf822ad714a925fe272d049c5a,
         type: 3}
@@ -3602,6 +3619,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontStyle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130568290856645459, guid: f5e699cf822ad714a925fe272d049c5a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9130568290856645459, guid: f5e699cf822ad714a925fe272d049c5a,
         type: 3}
