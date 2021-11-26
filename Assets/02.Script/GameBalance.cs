@@ -125,8 +125,8 @@ public static class GameBalance
     public readonly static ObscuredInt StageRelicUnlockLevel = 3000;
     public readonly static ObscuredInt StageRelicUpgradePrice = 1000;
 
-    public readonly static ObscuredFloat BossScoreSmallizeValue = 0.0000000000001f;
-    public readonly static ObscuredFloat BossScoreConvertToOrigin = 10000000000000f;
+    public readonly static ObscuredFloat BossScoreSmallizeValue = 0.0000000000000001f;
+    public readonly static ObscuredFloat BossScoreConvertToOrigin = 10000000000000000f;
 
     public readonly static ObscuredInt SonEvolutionDivdeNum = 3000;
 
@@ -134,7 +134,7 @@ public static class GameBalance
 
     public readonly static ObscuredInt YachaRequireLevel = 5300;
 
-    public readonly static ObscuredFloat YachaSkillAddValuePerLevel = 0.075f;
+    public readonly static ObscuredFloat YachaSkillAddValuePerLevel = 0.08f;
 
     public static int GetSonIdx()
     {
