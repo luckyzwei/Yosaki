@@ -155,7 +155,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         }
         else
         {
-         
+
             awakeButtonDescription.SetText($"{amount}/{skillTableData.Awakeweaponreqcount}");
         }
     }
@@ -338,10 +338,19 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         int skillAmount = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value;
         //로컬 데이터 갱신
-        if( skillAmount< skillTableData.Awakeweaponreqcount) 
+        if (currentAwakeNum != 0 && skillAmount < skillTableData.Awakeweaponreqcount)
         {
             PopupManager.Instance.ShowAlarmMessage("기술이 부족 합니다.");
+            //
             return;
+        }
+        else if (currentAwakeNum == 0)
+        {
+            if (skillAmount <= 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("기술이 부족 합니다.");
+                return;
+            }
         }
 
         //스킬북 차감 맨처음에는 1개만 차감
