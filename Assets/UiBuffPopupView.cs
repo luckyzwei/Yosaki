@@ -38,25 +38,19 @@ public class UiBuffPopupView : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI remainUseDesc;
 
+    [SerializeField]
+    private GameObject alwaysActiveObject;
+
+    [SerializeField]
+    private GameObject remainSecObject;
+
     private bool initialized = false;
 
     public void Initalize(BuffTableData buffTableData)
     {
         this.buffTableData = buffTableData;
 
-        TimeSpan ts = TimeSpan.FromSeconds(buffTableData.Buffseconds);
-
-
-        StatusType type = (StatusType)buffTableData.Bufftype;
-
-        if (type.IsPercentStat())
-        {
-            buffDescription.SetText($"{CommonString.GetStatusName(type)}+{buffTableData.Buffvalue * 100f}%({ts.TotalMinutes}분)");
-        }
-        else
-        {
-            buffDescription.SetText($"{CommonString.GetStatusName(type)}+{Utils.ConvertBigNum(buffTableData.Buffvalue)}({ts.TotalMinutes}분)");
-        }
+        UpdateAbilUi();
 
         buffIcon.sprite = CommonUiContainer.Instance.buffIconList[buffTableData.Id];
 
@@ -74,8 +68,72 @@ public class UiBuffPopupView : MonoBehaviour
             var yomulTableData = TableManager.Instance.YomulAbilTable.dataArray[buffTableData.Yomulid];
             yomulDesc.SetText($"{yomulTableData.Abilname} LV:{buffTableData.Unlockyomullevel} 필요");
         }
+    }
 
+    private void UpdateAbilUi()
+    {
+        if (alwaysActiveObject != null)
+        {
+            alwaysActiveObject.SetActive(buffTableData.Isyomulabil);
+        }
 
+        if (buffTableData.Isyomulabil == false)
+        {
+            TimeSpan ts = TimeSpan.FromSeconds(buffTableData.Buffseconds);
+
+            StatusType type = (StatusType)buffTableData.Bufftype;
+
+            if (type.IsPercentStat())
+            {
+                buffDescription.SetText($"{CommonString.GetStatusName(type)}+{buffTableData.Buffvalue * 100f}%({ts.TotalMinutes}분)");
+            }
+            else
+            {
+                buffDescription.SetText($"{CommonString.GetStatusName(type)}+{Utils.ConvertBigNum(buffTableData.Buffvalue)}({ts.TotalMinutes}분)");
+            }
+        }
+        //요물버프
+        else
+        {
+            if (alwaysActiveObject != null && remainSecObject != null)
+            {
+                alwaysActiveObject.SetActive(ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 1);
+
+                remainSecObject.SetActive(ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 0);
+            }
+
+            if (ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 0)
+            {
+                TimeSpan ts = TimeSpan.FromSeconds(buffTableData.Buffseconds);
+
+                StatusType type = (StatusType)buffTableData.Bufftype;
+
+                if (type.IsPercentStat())
+                {
+                    buffDescription.SetText($"{CommonString.GetStatusName(type)}+{buffTableData.Buffvalue * 100f}%({ts.TotalMinutes}분)");
+                }
+                else
+                {
+                    buffDescription.SetText($"{CommonString.GetStatusName(type)}+{Utils.ConvertBigNum(buffTableData.Buffvalue)}({ts.TotalMinutes}분)");
+                }
+            }
+            //각성
+            else
+            {
+                TimeSpan ts = TimeSpan.FromSeconds(buffTableData.Buffseconds);
+
+                StatusType type = (StatusType)buffTableData.Bufftype;
+
+                if (type.IsPercentStat())
+                {
+                    buffDescription.SetText($"{CommonString.GetStatusName(type)}+{buffTableData.Buffawakevalue * 100f}%");
+                }
+                else
+                {
+                    buffDescription.SetText($"{CommonString.GetStatusName(type)}+{Utils.ConvertBigNum(buffTableData.Buffawakevalue)}");
+                }
+            }
+        }
     }
 
     private void OnEnable()
@@ -110,6 +168,8 @@ public class UiBuffPopupView : MonoBehaviour
 
     private void Subscribe()
     {
+        if (initialized) return;
+
         ServerData.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.AsObservable().Subscribe(e =>
         {
             WhenRemainSecChanged(e);
@@ -124,10 +184,21 @@ public class UiBuffPopupView : MonoBehaviour
                 remainUseDesc.SetText($"{buffTableData.Usecount - e}/{buffTableData.Usecount}회");
             }
         }).AddTo(this);
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].AsObservable().Subscribe(e =>
+        {
+            UpdateAbilUi();
+        }).AddTo(this);
     }
 
     public void OnClickGetBuffButton()
     {
+        if (buffTableData.Isyomulabil == true && ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("항상 활성화 되어 있습니다.");
+            return;
+        }
+
         if (ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value >= buffTableData.Usecount)
         {
             PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 획득할 수 없습니다.");

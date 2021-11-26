@@ -8,7 +8,7 @@ using UniRx;
 
 public class RelicDungeonManager : ContentsManagerBase
 {
-    private ObscuredFloat spawnDelay1 = 0.25f;
+    private ObscuredFloat spawnDelay1 = 0.15f;
 
     [SerializeField]
     private ObscuredInt relicDungeonHp = 30;

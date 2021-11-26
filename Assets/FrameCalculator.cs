@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FrameCalculator : SingletonMono<FrameCalculator>
 {
-    public static int frameRate { get; private set; }
+    public static int frameRate { get; private set; } = 30;
 
     private WaitForSeconds delay = new WaitForSeconds(0.1f);
 

@@ -8,6 +8,9 @@ public class UiYomulSidongEffect : MonoBehaviour
     [SerializeField]
     private GameObject rootObject;
 
+    [SerializeField]
+    private GameObject buffAwakeObject;
+
     private List<ReactiveProperty<int>> buffRemainTimes = new List<ReactiveProperty<int>>();
 
     void Start()
@@ -47,9 +50,14 @@ public class UiYomulSidongEffect : MonoBehaviour
             {
                 ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.AsObservable().Subscribe(e =>
                 {
-                    rootObject.SetActive(HasActivatedYomulBuff());
+                    rootObject.SetActive(HasActivatedYomulBuff() && ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 0);
                 }).AddTo(this);
             }
         }
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].AsObservable().Subscribe(e =>
+        {
+            buffAwakeObject.SetActive(e == 1);
+        }).AddTo(this);
     }
 }

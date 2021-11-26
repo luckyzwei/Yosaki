@@ -473,8 +473,19 @@ public static class PlayerStats
         ret += GetSinsuEquipEffect(StatusType.SkillDamage);
         ret += GetStageRelicHasEffect(StatusType.SkillDamage);
         ret += GetSonAbilHasEffect(StatusType.SkillDamage);
+        ret += GetYachaSkillPercentValue();
 
         return ret;
+    }
+
+    private const string yachaKey = "weapon21";
+    public static float GetYachaSkillPercentValue()
+    {
+        bool hasYacha = ServerData.weaponTable.TableDatas[yachaKey].hasItem.Value == 1;
+
+        if (hasYacha == false) return 0f;
+
+        return ServerData.statusTable.GetTableData(StatusTable.Level).Value * GameBalance.YachaSkillAddValuePerLevel;
     }
     #endregion
     #region SkillCoolTime
@@ -624,9 +635,29 @@ public static class PlayerStats
             if ((int)type == tableData[i].Bufftype)
             {
                 //-1은 무한
-                if (ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.Value != 0f)
+
+                if (tableData[i].Yomulid == -1)
                 {
-                    ret += tableData[i].Buffvalue;
+                    if (ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.Value != 0f)
+                    {
+                        ret += tableData[i].Buffvalue;
+                    }
+                }
+                //요물
+                else
+                {
+                    if (ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 0)
+                    {
+                        if (ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.Value != 0f)
+                        {
+                            ret += tableData[i].Buffvalue;
+                        }
+                    }
+                    //각성후
+                    else
+                    {
+                        ret += tableData[i].Buffawakevalue;
+                    }
                 }
             }
         }

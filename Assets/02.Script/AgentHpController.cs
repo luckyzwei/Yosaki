@@ -314,7 +314,7 @@ public class AgentHpController : MonoBehaviour
 
     private void AddEnemyDeadCount()
     {
-        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value++;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value+= GameManager.Instance.CurrentStageData.Marbleamount;
         ServerData.userInfoTable.GetKillCountTotal();
     }
 

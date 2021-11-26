@@ -44,4 +44,8 @@ public class BuffTableData
   int usecount;
   public int Usecount { get {return usecount; } set { this.usecount = value;} }
   
+  [SerializeField]
+  float buffawakevalue;
+  public float Buffawakevalue { get {return buffawakevalue; } set { this.buffawakevalue = value;} }
+  
 }

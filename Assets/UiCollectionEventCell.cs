@@ -165,6 +165,10 @@ public class UiCollectionEventCell : MonoBehaviour
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 획득!!", null);
             }
+            else 
+            {
+            
+            }
 
             LogManager.Instance.SendLogType("chuseokExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
         });

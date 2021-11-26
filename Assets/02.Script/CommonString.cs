@@ -134,6 +134,7 @@ public static class CommonString
             case Item_Type.SnakeStone: return "치명의 증표";
             case Item_Type.PeachReal: return "천도 복숭아";
             case Item_Type.HorseStone: return "하늘의 증표";
+            case Item_Type.SheepStone: return "폭주석";
         }
         return "미등록";
     }

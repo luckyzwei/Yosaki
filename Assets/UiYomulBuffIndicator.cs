@@ -13,6 +13,9 @@ public class UiYomulBuffIndicator : MonoBehaviour
 
     private List<Image> buffIconList;
 
+    [SerializeField]
+    private GameObject awakeBuffObject;
+
     void Start()
     {
         Initialize();
@@ -43,8 +46,21 @@ public class UiYomulBuffIndicator : MonoBehaviour
 
             ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.AsObservable().Subscribe(e =>
             {
-                buffImage.gameObject.SetActive((e == -1f || e > 0)&& buffTableData.Isyomulabil);
+                buffImage.gameObject.SetActive(((e == -1f || e > 0) && buffTableData.Isyomulabil) && ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 0);
             }).AddTo(this);
         }
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].AsObservable().Subscribe(e=> 
+        {
+            awakeBuffObject.SetActive(e == 1);
+
+            if (e == 1) 
+            {
+                for (int i = 0; i < tableData.Length; i++)
+                {
+                    buffIconList[i].gameObject.SetActive(false);
+                }
+            }
+        }).AddTo(this);
     }
 }

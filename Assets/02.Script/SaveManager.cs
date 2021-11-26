@@ -121,7 +121,7 @@ public class SaveManager : SingletonMono<SaveManager>
 
     public void SetNotification() 
     {
-        GleyNotifications.SendNotification("휴식보상", "휴식 보상이 가득 찼어요!(10시간)", new System.TimeSpan(10, 0, 0));
+        GleyNotifications.SendNotification("휴식보상", "휴식 보상이 가득 찼어요!(12시간)", new System.TimeSpan(12, 0, 0));
     }
 
     //동기로 저장

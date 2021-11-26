@@ -45,9 +45,9 @@ public static class GameBalance
     public readonly static ObscuredInt ticketPrice = 500;
     public readonly static ObscuredInt contentsEnterprice = 0;
     public readonly static ObscuredInt dailyTickBuyCountMax = 5;
-    public readonly static ObscuredInt bonusDungeonEnterCount = 5;
+    public readonly static ObscuredInt bonusDungeonEnterCount = 10;
 
-    public readonly static ObscuredInt dokebiEnterCount = 5;
+    public readonly static ObscuredInt dokebiEnterCount = 10;
 
     public readonly static List<ObscuredFloat> potion_Option = new List<ObscuredFloat>() { 0.3f, 0.6f, 0.9f };
 
@@ -133,6 +133,8 @@ public static class GameBalance
     public readonly static ObscuredInt MaxDamTextNum = 120;
 
     public readonly static ObscuredInt YachaRequireLevel = 5300;
+
+    public readonly static ObscuredFloat YachaSkillAddValuePerLevel = 0.075f;
 
     public static int GetSonIdx()
     {

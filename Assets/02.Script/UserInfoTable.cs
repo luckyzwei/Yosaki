@@ -106,6 +106,7 @@ public class UserInfoTable
     public const string dailyPackReset = "dailyPackReset";
     public const string sonScore = "sonLastClear2";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
+    public const string buffAwake = "buffAwake";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -187,6 +188,7 @@ public class UserInfoTable
         {yomul7_buff,0f},
         {attendanceCount_100Day,1f},
         {peachAttendance,0f},
+        {buffAwake,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -700,7 +702,7 @@ public class UserInfoTable
     static float updateRequireNum = 100;
     public void GetKillCountTotal()
     {
-        totalKillCount++;
+        totalKillCount += (int)GameManager.Instance.CurrentStageData.Marbleamount;
 
         if (totalKillCount < updateRequireNum)
         {

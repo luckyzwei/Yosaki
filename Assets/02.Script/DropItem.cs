@@ -27,6 +27,7 @@ public enum Item_Type
     SnakeStone,
     PeachReal,
     HorseStone,
+    SheepStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

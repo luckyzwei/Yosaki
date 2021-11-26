@@ -89,6 +89,15 @@ public enum TitleMissionId
     Stage1450,//★
     Stage1500,//★
 
+    Stage1550,//★
+    Stage1600,//★
+
+    Stage1650,//★
+    Stage1700,//★
+
+    Stage1750,//★
+    Stage1800,//★
+    GetYachaWeaopon,
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -380,6 +389,36 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Stage1500);
             }
+            //
+            if (e >= 1550 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1550);
+            }
+
+            if (e >= 1600 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1600);
+            }
+
+            if (e >= 1650 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1650);
+            }
+
+            if (e >= 1700 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1700);
+            }
+
+            if (e >= 1750 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1750);
+            }
+
+            if (e >= 1800 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1800);
+            }
 
         }).AddTo(this);
 
@@ -429,6 +468,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e == 1)
             {
                 ClearTitleMission(TitleMissionId.GetYomulWeapon);
+            }
+        }).AddTo(this);
+
+        ServerData.weaponTable.TableDatas["weapon21"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.GetYachaWeaopon);
             }
         }).AddTo(this);
         //노리개
