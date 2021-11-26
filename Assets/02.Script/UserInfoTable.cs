@@ -725,9 +725,13 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
-#if UNITY_EDITOR
-        return false;
+#if UNITY_IOS
+        if (PlayerData.Instance.HasIOSFlag) 
+        {
+            return false;
+        }
 #endif
+
         return currentServerTime.Month == 11;
     }
 }

@@ -15,6 +15,10 @@ public class PlayerData : SingletonMono<PlayerData>
     [SerializeField]
     private UiNickNameInputBoard uiNickNameInputBoard;
 
+#if UNITY_IOS
+    public bool HasIOSFlag { get; private set; } = false;
+#endif
+
     public void NickNameChanged(string nickName)
     {
         LogManager.Instance.SendLogType("NickChange", "pref", NickName);
@@ -78,6 +82,13 @@ public class PlayerData : SingletonMono<PlayerData>
         SaveManager.Instance.StartAutoSave();
 
         PushManager.Instance.Initialize();
+
+#if UNITY_IOS
+        Backend.Chart.GetChartList((callback) =>
+        {
+            HasIOSFlag = callback.Rows().Count == 2;
+        });
+#endif
     }
 
     private void Subscribe()
