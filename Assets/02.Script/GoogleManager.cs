@@ -38,13 +38,6 @@ public class GoogleManager : SingletonMono<GoogleManager>
         base.Awake();
         Backend.Initialize(HandleBackendCallBack, true);
 
-#if UNITY_IOS
-        if (PlayerData.Instance.HasIOSFlag)
-        {
-            SRDebug.Init();
-        }
-#endif
-
         GleyNotifications.Initialize();
     }
 
