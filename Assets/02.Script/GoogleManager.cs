@@ -39,7 +39,10 @@ public class GoogleManager : SingletonMono<GoogleManager>
         Backend.Initialize(HandleBackendCallBack, true);
 
 #if UNITY_IOS
-         //ÍßSRDebug.Init();
+        if (PlayerData.Instance.HasIOSFlag)
+        {
+            SRDebug.Init();
+        }
 #endif
 
         GleyNotifications.Initialize();
@@ -242,7 +245,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
                 if (SendQueue.UnprocessedFuncCount <= 0 && isSignIn)
                 {
                     nickNameInputBoard.gameObject.SetActive(true);
-                
+
                     break;
                 }
             }
@@ -364,7 +367,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
         //테스트용 a_8846847867697156085
         //로꼬 a_3961873472804492579
 #if UNITY_EDITOR
-        return "a_8846847867697156085";
+        return "a_8846847e2e2867697156085";
 #endif
 
         Debug.LogError($"GetGoogleLoginKey {loginId}");
