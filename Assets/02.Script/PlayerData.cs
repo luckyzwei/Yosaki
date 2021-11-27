@@ -87,6 +87,10 @@ public class PlayerData : SingletonMono<PlayerData>
         Backend.Chart.GetChartList((callback) =>
         {
             HasIOSFlag = callback.Rows().Count == 2;
+            if(HasIOSFlag)
+            {
+                 SRDebug.Init();
+            }
         });
 #endif
     }
