@@ -194,9 +194,19 @@ public class UiIapItemCell : MonoBehaviour
 
     private bool CanBuyProduct()
     {
-        int buyCount = ServerData.iapServerTable.TableDatas[productData.Productid].buyCount.Value;
+        if (productData.BUYTYPE != BuyType.Fixed) 
+        {
+            int buyCount = ServerData.iapServerTable.TableDatas[productData.Productid].buyCount.Value;
 
-        return buyCount < GetBuyCount();
+            return buyCount < GetBuyCount();
+        }
+        else 
+        {
+            int buyCount = ServerData.iAPServerTableTotal.TableDatas[productData.Productid].buyCount.Value;
+
+            return buyCount < GetBuyCount();
+        }
+
     }
 
     private bool IsRewardCollect()
@@ -289,24 +299,50 @@ public class UiIapItemCell : MonoBehaviour
     {
         disposable.Clear();
 
-        ServerData.iapServerTable.TableDatas[productData.Productid].buyCount.AsObservable().Subscribe(e =>
+        if (productData.BUYTYPE != BuyType.Fixed) 
         {
-            string text = null;
-
-            text += GetBuyPrefix();
-
-            int canBuyCount = GetBuyCount();
-
-            if (canBuyCount != int.MaxValue)
+            ServerData.iapServerTable.TableDatas[productData.Productid].buyCount.AsObservable().Subscribe(e =>
             {
-                text += "\n";
-                text += $"({e}/{canBuyCount})";
-            }
+                string text = null;
 
-            if (buyCountText != null)
-                buyCountText.SetText(text);
+                text += GetBuyPrefix();
 
-        }).AddTo(disposable);
+                int canBuyCount = GetBuyCount();
+
+                if (canBuyCount != int.MaxValue)
+                {
+                    text += "\n";
+                    text += $"({e}/{canBuyCount})";
+                }
+
+                if (buyCountText != null)
+                    buyCountText.SetText(text);
+
+            }).AddTo(disposable);
+        }
+        else 
+        {
+            ServerData.iAPServerTableTotal.TableDatas[productData.Productid].buyCount.AsObservable().Subscribe(e =>
+            {
+                string text = null;
+
+                text += GetBuyPrefix();
+
+                int canBuyCount = GetBuyCount();
+
+                if (canBuyCount != int.MaxValue)
+                {
+                    text += "\n";
+                    text += $"({e}/{canBuyCount})";
+                }
+
+                if (buyCountText != null)
+                    buyCountText.SetText(text);
+
+            }).AddTo(disposable);
+        }
+
+
 
         IAPManager.Instance.disableBuyButton.AsObservable().Subscribe(e =>
         {
