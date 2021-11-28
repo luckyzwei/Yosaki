@@ -179,7 +179,7 @@ public class GoodsTable
     {
         SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Item_0)} 획득(+{(int)amount})");
 
-        eventItemAddNum++;
+        eventItemAddNum += (int)amount;
 
         if (eventItemAddNum < updateRequireNum)
         {

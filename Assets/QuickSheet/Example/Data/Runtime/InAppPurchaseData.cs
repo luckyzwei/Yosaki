@@ -72,4 +72,8 @@ public class InAppPurchaseData
   string productidios;
   public string Productidios { get {return productidios; } set { this.productidios = value;} }
   
+  [SerializeField]
+  int fixedbuycount;
+  public int Fixedbuycount { get {return fixedbuycount; } set { this.fixedbuycount = value;} }
+  
 }

@@ -101,17 +101,17 @@ public class UiIapItemCell : MonoBehaviour
         string price = IAPManager.m_StoreController.products.WithID(productData.Productidios).metadata.localizedPrice.ToString("N0");
 #endif
 
-        if (priceText != null) 
+        if (priceText != null)
         {
-            if (Application.systemLanguage == SystemLanguage.Korean) 
+            if (Application.systemLanguage == SystemLanguage.Korean)
             {
                 priceText.SetText($"{price}원");
             }
-            else 
+            else
             {
                 priceText.SetText($"{price}$");
             }
-          
+
         }
 
         string itemDetailDesc = null;
@@ -236,6 +236,8 @@ public class UiIapItemCell : MonoBehaviour
                 return 5;
             case BuyType.MonthOfTen:
                 return 10;
+            case BuyType.Fixed:
+                return productData.Fixedbuycount;
                 break;
         }
 
@@ -262,6 +264,11 @@ public class UiIapItemCell : MonoBehaviour
             case BuyType.AllTimeOne:
                 return "1회만 구매가능";
                 break;
+            case BuyType.Fixed:
+                return $"{productData.Fixedbuycount}회만 구매가능";
+                break;
+
+
             case BuyType.MonthOfFive:
                 return "월 5회 구매가능";
                 break;
