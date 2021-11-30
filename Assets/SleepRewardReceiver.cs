@@ -135,7 +135,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         float exp = killedEnemyPerMin * spawnedEnemyData.Exp * GameBalance.sleepRewardRatio * elapsedMinutes;
         exp += exp * expBuffRatio;
 
-        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, yoguiMarble: yoguimarble, eventItem: eventItem, exp: exp, elapsedSeconds: elapsedSeconds, killCount: (int)(elapsedMinutes * killedEnemyPerMin), stageRelic: stageRelic);
+        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, yoguiMarble: yoguimarble, eventItem: eventItem, exp: exp, elapsedSeconds: elapsedSeconds, killCount: (int)(elapsedMinutes * killedEnemyPerMin* stageTableData.Marbleamount), stageRelic: stageRelic);
 
         UiSleepRewardView.Instance.CheckReward();
     }
