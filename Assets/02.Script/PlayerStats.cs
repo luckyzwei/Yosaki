@@ -599,7 +599,7 @@ public static class PlayerStats
         return ret;
     }
 
-    public static float GetExpPlusValueExclusiveBuff()
+    public static float GetExpPlusValueExclusiveBuff() 
     {
         float ret = 0f;
         ret += ServerData.statusTable.GetStatusValue(StatusTable.ExpGain_memory);
