@@ -32,7 +32,8 @@ public static class Utils
                   type == Item_Type.costume11 ||
                   type == Item_Type.costume12||
                   type == Item_Type.costume13||
-                  type == Item_Type.costume14;
+                  type == Item_Type.costume14||
+                  type == Item_Type.costume15;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -88,12 +89,12 @@ public static class Utils
 
     public static bool IsRankFrameItem(this Item_Type type)
     {
-        return type >= Item_Type.RankFrame1 && type <= Item_Type.RankFrame101_1000;
+        return type >= Item_Type.RankFrame1 && type <= Item_Type.RankFrame1001_10000;
     }
 
     public static bool IsRelicRewardItem(this Item_Type type)
     {
-        return type >= Item_Type.RankFrame1_relic && type <= Item_Type.RankFrame101_1000_relic;
+        return type >= Item_Type.RankFrame1_relic && type <= Item_Type.RankFrame1001_10000_relic;
     }
 
     public static int GetRandomIdx(List<float> inputDatas)

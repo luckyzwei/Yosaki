@@ -68,7 +68,7 @@ public class InfiniteTowerEnterView : MonoBehaviour
 
             List<RewardData> rewardDatas = new List<RewardData>();
 
-            var rewardData = new RewardData((Item_Type)towerTableData.Rewardtype, (int)towerTableData.Rewardvalue);
+            var rewardData = new RewardData((Item_Type)towerTableData.Rewardtype, towerTableData.Rewardvalue);
 
             rewardDatas.Add(rewardData);
 

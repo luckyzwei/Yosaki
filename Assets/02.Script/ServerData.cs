@@ -225,6 +225,7 @@ public static class ServerData
             case Item_Type.costume12:
             case Item_Type.costume13:
             case Item_Type.costume14:
+            case Item_Type.costume15:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -282,6 +283,7 @@ public static class ServerData
             case Item_Type.costume12:
             case Item_Type.costume13:
             case Item_Type.costume14:
+            case Item_Type.costume15:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -563,6 +565,10 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_101_1000;
                     ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 1;
                     break;
+                case Item_Type.RankFrame1001_10000:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += GameBalance.rankRewardTicket_1001_10000;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 9;
+                    break;
             }
 
             List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -608,6 +614,9 @@ public static class ServerData
                     break;
                 case Item_Type.RankFrame101_1000_relic:
                     ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_101_1000_relic;
+                    break;
+                case Item_Type.RankFrame1001_10000_relic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_1001_10000_relic;
                     break;
             }
 

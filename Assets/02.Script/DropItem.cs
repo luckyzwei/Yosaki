@@ -37,6 +37,7 @@ public enum Item_Type
     RankFrame6_20 = 105,
     RankFrame21_100 = 106,
     RankFrame101_1000 = 107,
+    RankFrame1001_10000 = 108,
 
     RankFrame1_relic = 200,
     RankFrame2_relic = 201,
@@ -46,6 +47,7 @@ public enum Item_Type
     RankFrame6_20_relic = 205,
     RankFrame21_100_relic = 206,
     RankFrame101_1000_relic = 207,
+    RankFrame1001_10000_relic = 208,
 
     MagicStoneBuff = 500,
     //1000~1100 무기
@@ -108,6 +110,7 @@ public enum Item_Type
     costume12 = 1213,
     costume13 = 1214,
     costume14 = 1215,
+    costume15 = 1216,
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,

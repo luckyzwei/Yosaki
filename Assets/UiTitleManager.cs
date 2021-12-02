@@ -98,6 +98,20 @@ public enum TitleMissionId
     Stage1750,//★
     Stage1800,//★
     GetYachaWeaopon,
+    Stage1850,//★
+    Stage1900,//★
+    Stage1950,//★
+    Stage2000,//★
+    Stage2050,//★
+    Stage2100,//★
+    Stage2150,//★
+    Stage2200,//★
+    Level86000,//★
+    Level89000,//★
+    Level92000,//★
+    Level95000,//★
+    Level98000,//★
+    Level110000,//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -263,6 +277,32 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.Level83000);
             }
 
+            //
+            if (e >= 86000)
+            {
+                ClearTitleMission(TitleMissionId.Level86000);
+            }
+            if (e >= 89000)
+            {
+                ClearTitleMission(TitleMissionId.Level89000);
+            }
+            if (e >= 92000)
+            {
+                ClearTitleMission(TitleMissionId.Level92000);
+            }
+            if (e >= 95000)
+            {
+                ClearTitleMission(TitleMissionId.Level95000);
+            }
+            if (e >= 98000)
+            {
+                ClearTitleMission(TitleMissionId.Level98000);
+            }
+            if (e >= 110000)
+            {
+                ClearTitleMission(TitleMissionId.Level110000);
+            }
+
         }).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>
         {
@@ -418,6 +458,39 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 1800 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage1800);
+            }
+            //
+            if (e >= 1850 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1850);
+            }
+            if (e >= 1900 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1900);
+            }
+            if (e >= 1950 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage1950);
+            }
+            if (e >= 2000 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage2000);
+            }
+            if (e >= 2050 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage2050);
+            }
+            if (e >= 2100 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage2100);
+            }
+            if (e >= 2150 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage2150);
+            }
+            if (e >= 2200 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage2200);
             }
 
         }).AddTo(this);

@@ -38,7 +38,10 @@ public class UiDailyPackRefund : MonoBehaviour
         int weeklyPackCount = ServerData.iAPServerTableTotal.TableDatas["weeklypackage1"].buyCount.Value;
         int monthlyPackCount = ServerData.iAPServerTableTotal.TableDatas["monthlypackage1"].buyCount.Value;
 
-        if (dailyPackCount == 0 && weeklyPackCount == 0 && monthlyPackCount == 0)
+        int bigOak1 = ServerData.iAPServerTableTotal.TableDatas["bigoak1"].buyCount.Value;
+        int bigOak2 = ServerData.iAPServerTableTotal.TableDatas["bigoak2"].buyCount.Value;
+
+        if (dailyPackCount == 0 && weeklyPackCount == 0 && monthlyPackCount == 0 && bigOak1 == 0 && bigOak2 == 0)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.dailyPackReset).Value = 1;
 
@@ -64,13 +67,19 @@ public class UiDailyPackRefund : MonoBehaviour
         buyCounts[0].SetText(dailyPackCount.ToString() + "회");
         buyCounts[1].SetText(weeklyPackCount.ToString() + "회");
         buyCounts[2].SetText(monthlyPackCount.ToString() + "회");
+        buyCounts[3].SetText(bigOak1.ToString() + "회");
+        buyCounts[4].SetText(bigOak2.ToString() + "회");
 
         //4
-        int _1DiffTicket = 4;
+        int _1DiffTicket = 16;
         //13
-        int _2DiffTicket = 13;
+        int _2DiffTicket = 52;
         //40
-        int _3DiffTicket = 40;
+        int _3DiffTicket = 160;
+
+        int _4DiffTicket = 80;
+
+        int _5DiffTicket = 180;
 
         int marble1_MarbleAdd = dailyPackCount * _1DiffTicket;
         plusCount[0].SetText(Utils.ConvertBigNum(marble1_MarbleAdd));
@@ -87,10 +96,16 @@ public class UiDailyPackRefund : MonoBehaviour
         int marble3_MarbleAdd = monthlyPackCount * _3DiffTicket;
         plusCount[2].SetText(Utils.ConvertBigNum(marble3_MarbleAdd));
 
+        int big_oak_1_Add = bigOak1 * _4DiffTicket;
+        plusCount[3].SetText(Utils.ConvertBigNum(big_oak_1_Add));
+
+        int big_oak_2_Add = bigOak2 * _5DiffTicket;
+        plusCount[4].SetText(Utils.ConvertBigNum(big_oak_2_Add));
+
         //int marble3_TicketAdd = marblePack3Count * _3DiffTicket;
         //ticketPlusCount[2].SetText(marble3_TicketAdd.ToString());
 
-        int addTicketTotal = marble1_MarbleAdd + marble2_MarbleAdd + marble3_MarbleAdd;
+        int addTicketTotal = marble1_MarbleAdd + marble2_MarbleAdd + marble3_MarbleAdd + big_oak_1_Add + big_oak_2_Add;
         //int addTicketTotal = marble1_TicketAdd + marble2_TicketAdd + marble3_TicketAdd;
 
         totalMarble.SetText($"총 {Utils.ConvertBigNum(addTicketTotal)}");

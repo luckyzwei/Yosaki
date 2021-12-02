@@ -5,6 +5,7 @@ using UniRx;
 using System.Linq;
 using UnityEngine.UI;
 using TMPro;
+using BackEnd;
 
 public class UiQuickMoveBoard : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class UiQuickMoveBoard : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI titleText;
+
+    [SerializeField]
+    private Button allReceiveButton;
 
     void Start()
     {
@@ -114,6 +118,39 @@ public class UiQuickMoveBoard : MonoBehaviour
         if (currentPresetId.Value == lastThema) return;
         currentPresetId.Value++;
         RefreshStage(currentPresetId.Value);
+    }
+
+    public void OnClickAllReceiveButton()
+    {
+        allReceiveButton.interactable = false;
+
+        for (int i = 0; i < stageCellList.Count; i++)
+        {
+            stageCellList[i].OnClickRewardButton_Script();
+
+            if (AdManager.Instance.HasRemoveAdProduct())
+            {
+                stageCellList[i].OnClickRewardButton_Ad_Script();
+            }
+        }
+
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        Param passParam = new Param();
+        passParam.Add(PassServerTable.stagePassAdReward, ServerData.passServerTable.TableDatas[PassServerTable.stagePassAdReward].Value);
+        passParam.Add(PassServerTable.stagePassReward, ServerData.passServerTable.TableDatas[PassServerTable.stagePassReward].Value);
+        transactions.Add(TransactionValue.SetUpdate(PassServerTable.tableName, PassServerTable.Indate, passParam));
+
+        Param goodsParam = new Param();
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade));
+        goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone));
+        transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+        {
+            allReceiveButton.interactable = true;
+            PopupManager.Instance.ShowAlarmMessage("처리 성공!(광고 보상은 광고제거가 있어야 수령 됩니다!)");
+        });
     }
 
 }

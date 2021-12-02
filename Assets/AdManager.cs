@@ -91,9 +91,10 @@ public class AdManager : SingletonMono<AdManager>
         }
     }
 
-    private bool HasRemoveAdProduct()
+    private static string removeAdKey = "removead";
+    public bool HasRemoveAdProduct()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas["removead"].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[removeAdKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }

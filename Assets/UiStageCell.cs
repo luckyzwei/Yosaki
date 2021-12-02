@@ -134,6 +134,50 @@ public class UiStageCell : MonoBehaviour
             });
         });
     }
+    //
+    public void OnClickRewardButton_Script()
+    {
+        int lastClearData = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+
+        if (lastClearData < stageMapData.Id)
+        {
+            return;
+        }
+
+        if (HasStagePassItem() == false)
+        {
+            return;
+        }
+
+        if (ServerData.passServerTable.HasReward(PassServerTable.stagePassReward, stageMapData.Id))
+        {
+            return;
+        }
+
+        //로컬
+        ServerData.AddLocalValue((Item_Type)(int)stageMapData.Pre_Bossrewardtype, stageMapData.Pre_Bossrewardvalue);
+        ServerData.passServerTable.TableDatas[PassServerTable.stagePassReward].Value += $",{stageMapData.Id}";
+    }
+
+    public void OnClickRewardButton_Ad_Script()
+    {
+        int lastClearData = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+
+        if (lastClearData < stageMapData.Id)
+        {
+            return;
+        }
+
+        if (ServerData.passServerTable.HasReward(PassServerTable.stagePassAdReward, stageMapData.Id))
+        {
+            return;
+        }
+
+        //로컬
+        ServerData.AddLocalValue((Item_Type)(int)stageMapData.Ad_Bossrewardtype, stageMapData.Ad_Bossrewardvalue);
+        ServerData.passServerTable.TableDatas[PassServerTable.stagePassAdReward].Value += $",{stageMapData.Id}";
+    }
+    //
 
     public void Initialize(StageMapData stageMapData)
     {

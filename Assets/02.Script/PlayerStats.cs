@@ -789,6 +789,8 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.SuperCritical1DamPer);
         ret += GetRelicHasEffect(StatusType.SuperCritical1DamPer);
 
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.ChunSlash_memory);
+
         return ret;
     }
 

@@ -79,6 +79,10 @@ public class UiPostView : MonoBehaviour
                     title.SetText("랭킹보상(101~1000위)");
                     description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_101_1000}개\n채팅 아이콘(8등급)");
                     break;
+                case Item_Type.RankFrame1001_10000:
+                    title.SetText("랭킹보상(1001~10000위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Ticket)} {GameBalance.rankRewardTicket_1001_10000}개\n채팅 아이콘(9등급)");
+                    break;
             }
         }
         else if (type.IsRelicRewardItem()) 
@@ -116,6 +120,10 @@ public class UiPostView : MonoBehaviour
                 case Item_Type.RankFrame101_1000_relic:
                     title.SetText("랭킹보상(101~1000위)(영혼의숲)");
                     description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_101_1000_relic}개");
+                    break;
+                case Item_Type.RankFrame1001_10000_relic:
+                    title.SetText("랭킹보상(1001~10000위)(영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_1001_10000_relic}개");
                     break;
             }
         }

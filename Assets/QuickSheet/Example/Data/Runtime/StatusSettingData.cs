@@ -48,4 +48,12 @@ public class StatusSettingData
   int statustype;
   public int Statustype { get {return statustype; } set { this.statustype = value;} }
   
+  [SerializeField]
+  string needstatuskey;
+  public string Needstatuskey { get {return needstatuskey; } set { this.needstatuskey = value;} }
+  
+  [SerializeField]
+  int unlocklevel;
+  public int Unlocklevel { get {return unlocklevel; } set { this.unlocklevel = value;} }
+  
 }

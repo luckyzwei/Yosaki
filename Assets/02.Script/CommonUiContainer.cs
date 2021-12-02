@@ -123,6 +123,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.costume14:
                 return costumeThumbnail[14];
                 break;
+            case Item_Type.costume15:
+                return costumeThumbnail[15];
+                break;
             case Item_Type.RankFrame1:
                 return rankFrame[8];
                 break;
@@ -147,6 +150,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.RankFrame101_1000:
                 return rankFrame[1];
                 break;
+            case Item_Type.RankFrame1001_10000:
+                return rankFrame[9];
+                break;
+
 
             case Item_Type.RankFrame1_relic:
             case Item_Type.RankFrame2_relic:
@@ -156,6 +163,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.RankFrame6_20_relic:
             case Item_Type.RankFrame21_100_relic:
             case Item_Type.RankFrame101_1000_relic:
+            case Item_Type.RankFrame1001_10000_relic:
                 return relicEnter;
                 break;
 

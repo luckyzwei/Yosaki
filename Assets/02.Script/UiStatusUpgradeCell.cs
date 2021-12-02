@@ -28,6 +28,9 @@ public class UiStatusUpgradeCell : MonoBehaviour
     private Image upgradeButton_100;
 
     [SerializeField]
+    private Image upgradeButton_10000;
+
+    [SerializeField]
     private Image upgradeButton_all;
 
     [SerializeField]
@@ -70,6 +73,15 @@ public class UiStatusUpgradeCell : MonoBehaviour
     [SerializeField]
     private GameObject _100UpgradeButton;
 
+    [SerializeField]
+    private GameObject _10000UpgradeButton;
+
+    [SerializeField]
+    private GameObject lockMask;
+
+    [SerializeField]
+    private TextMeshProUGUI lockDescription;
+
     private void OnDestroy()
     {
         if (CoroutineExecuter.Instance == null) return;
@@ -100,6 +112,8 @@ public class UiStatusUpgradeCell : MonoBehaviour
         allUpgradeButton.SetActive(statusData.STATUSWHERE != StatusWhere.gold);
 
         _100UpgradeButton.SetActive(statusData.STATUSWHERE != StatusWhere.gold);
+
+        _10000UpgradeButton.SetActive(statusData.STATUSWHERE != StatusWhere.gold);
 
         memoryIcon.SetActive(statusData.STATUSWHERE == StatusWhere.memory);
 
@@ -199,6 +213,20 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 SetUpgradeButtonState(CanUpgrade());
             }).AddTo(this);
         }
+
+        if (statusData.Unlocklevel != 0)
+        {
+            lockDescription.SetText($"{ TableManager.Instance.StatusDatas[statusData.Needstatuskey].Description} LV : {statusData.Unlocklevel} 이상 필요");
+
+            ServerData.statusTable.GetTableData(statusData.Needstatuskey).AsObservable().Subscribe(e =>
+            {
+                lockMask.SetActive(statusData.Unlocklevel >= e+2);
+            }).AddTo(this);
+        }
+        else
+        {
+            lockMask.SetActive(false);
+        }
     }
 
     public void PointerDown()
@@ -221,6 +249,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         SyncToServer();
     }
 
+#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKey(KeyCode.Space))
@@ -233,6 +262,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
             PointerUp();
         }
     }
+#endif
 
     private void SyncToServer()
     {
@@ -376,12 +406,14 @@ public class UiStatusUpgradeCell : MonoBehaviour
             upgradeButton.sprite = on ? enableSprite : disableSprite;
             upgradeButton_100.sprite = on ? enableSprite : disableSprite;
             upgradeButton_all.sprite = on ? enableSprite : disableSprite;
+            upgradeButton_10000.sprite = on ? enableSprite : disableSprite;
         }
         else
         {
             upgradeButton.sprite = maxLevelSprite;
             upgradeButton_100.sprite = maxLevelSprite;
             upgradeButton_all.sprite = maxLevelSprite;
+            upgradeButton_10000.sprite = maxLevelSprite;
         }
     }
 
@@ -453,7 +485,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         }
 
         //싱크
-        SyncData();
+        SyncToServer();
 
         SetUpgradeButtonState(CanUpgrade());
     }
@@ -530,7 +562,83 @@ public class UiStatusUpgradeCell : MonoBehaviour
         }
 
         //싱크
-        SyncData();
+        SyncToServer();
+
+        SetUpgradeButtonState(CanUpgrade());
+    }
+    public void OnClick10000_Upgrade()
+    {
+        if (statusData.STATUSWHERE == StatusWhere.statpoint)
+        {
+            int currentStatPoint = ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value;
+
+            if (currentStatPoint <= 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("스텟이 부족합니다.");
+                return;
+            }
+
+            if (IsMaxLevel())
+            {
+                PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
+                return;
+            }
+
+            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            int maxLevel = statusData.Maxlv;
+            int upgradableAmount = maxLevel - currentLevel;
+
+            upgradableAmount = Mathf.Min(upgradableAmount, 10000);
+
+            //맥스렙 가능
+            if (currentStatPoint >= upgradableAmount)
+            {
+                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= upgradableAmount;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+            }
+            else
+            {
+                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= currentStatPoint;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += currentStatPoint;
+            }
+        }
+        else if (statusData.STATUSWHERE == StatusWhere.memory)
+        {
+            int currentMemoryPoint = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
+
+            if (currentMemoryPoint <= 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("기억의 조각이 부족합니다.");
+                return;
+            }
+
+            if (IsMaxLevel())
+            {
+                PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
+                return;
+            }
+
+            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            int maxLevel = statusData.Maxlv;
+            int upgradableAmount = maxLevel - currentLevel;
+
+            upgradableAmount = Mathf.Min(upgradableAmount, 10000);
+
+            //맥스렙 가능
+            if (currentMemoryPoint >= upgradableAmount)
+            {
+                ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= upgradableAmount;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+            }
+            else
+            {
+                ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= currentMemoryPoint;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += currentMemoryPoint;
+            }
+        }
+
+        //싱크
+        SyncToServer();
 
         SetUpgradeButtonState(CanUpgrade());
     }

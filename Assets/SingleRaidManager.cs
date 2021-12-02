@@ -233,7 +233,7 @@ public class SingleRaidManager : ContentsManagerBase
         for (int i = 0; i < bossTableData.Rewardtypes.Length; i++)
         {
             Item_Type rewardType = (Item_Type)bossTableData.Rewardtypes[i];
-            int rewardAmount = (int)(Mathf.Ceil(rewardPer * bossTableData.Rewardmaxvalues[i])) * clearCount;
+            float rewardAmount = (Mathf.Ceil(rewardPer * bossTableData.Rewardmaxvalues[i])) * clearCount;
 
             RewardData viewData = new RewardData(rewardType, rewardAmount);
             rewardDatas.Add(viewData);

@@ -470,7 +470,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRelic_Score(float score)
     {
-         if (UpdateRank() == false) return;
+        if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.Relic] != null && score < this.myRankInfo[RankType.Relic].Score)
         {
             Debug.LogError("점수가 더 낮음");
@@ -508,6 +508,8 @@ public class RankManager : SingletonMono<RankManager>
     private bool UpdateRank()
     {
         return !PlayerData.Instance.NickName.Equals("로꼬")
+         && !PlayerData.Instance.NickName.Equals("테스트용2")
+         && !PlayerData.Instance.NickName.Equals("블랙핑크")
             && !PlayerData.Instance.NickName.Equals("테스트용");
     }
 }

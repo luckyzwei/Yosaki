@@ -89,23 +89,25 @@ public static class GameBalance
     public readonly static ObscuredInt nickNameChangeFee = 500000;
 
 
-    public readonly static ObscuredInt rankRewardTicket_1 = 60;
-    public readonly static ObscuredInt rankRewardTicket_2 = 52;
-    public readonly static ObscuredInt rankRewardTicket_3 = 48;
-    public readonly static ObscuredInt rankRewardTicket_4 = 44;
-    public readonly static ObscuredInt rankRewardTicket_5 = 40;
-    public readonly static ObscuredInt rankRewardTicket_6_20 = 32;
-    public readonly static ObscuredInt rankRewardTicket_21_100 = 28;
-    public readonly static ObscuredInt rankRewardTicket_101_1000 = 14;
+    public readonly static ObscuredInt rankRewardTicket_1 = 120;
+    public readonly static ObscuredInt rankRewardTicket_2 = 104;
+    public readonly static ObscuredInt rankRewardTicket_3 = 96;
+    public readonly static ObscuredInt rankRewardTicket_4 = 88;
+    public readonly static ObscuredInt rankRewardTicket_5 = 80;
+    public readonly static ObscuredInt rankRewardTicket_6_20 = 64;
+    public readonly static ObscuredInt rankRewardTicket_21_100 = 56;
+    public readonly static ObscuredInt rankRewardTicket_101_1000 = 35;
+    public readonly static ObscuredInt rankRewardTicket_1001_10000 = 25;
 
-    public readonly static ObscuredInt rankRewardTicket_1_relic = 45;
-    public readonly static ObscuredInt rankRewardTicket_2_relic = 40;
-    public readonly static ObscuredInt rankRewardTicket_3_relic = 35;
-    public readonly static ObscuredInt rankRewardTicket_4_relic = 30;
-    public readonly static ObscuredInt rankRewardTicket_5_relic = 25;
-    public readonly static ObscuredInt rankRewardTicket_6_20_relic = 20;
-    public readonly static ObscuredInt rankRewardTicket_21_100_relic = 10;
-    public readonly static ObscuredInt rankRewardTicket_101_1000_relic = 5;
+    public readonly static ObscuredInt rankRewardTicket_1_relic = 80;
+    public readonly static ObscuredInt rankRewardTicket_2_relic = 70;
+    public readonly static ObscuredInt rankRewardTicket_3_relic = 65;
+    public readonly static ObscuredInt rankRewardTicket_4_relic = 60;
+    public readonly static ObscuredInt rankRewardTicket_5_relic = 55;
+    public readonly static ObscuredInt rankRewardTicket_6_20_relic = 50;
+    public readonly static ObscuredInt rankRewardTicket_21_100_relic = 40;
+    public readonly static ObscuredInt rankRewardTicket_101_1000_relic = 35;
+    public readonly static ObscuredInt rankRewardTicket_1001_10000_relic = 25;
 
     public readonly static ObscuredInt EventDropEndDay = 30;
     public readonly static ObscuredInt EventMakeEndDay = 1;

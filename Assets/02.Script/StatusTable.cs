@@ -47,6 +47,7 @@ public class StatusTable
     public const string BossDamage_memory = "BossDamage_memory";
     public const string Son_Level = "Son_Level_Real";
     public const string PetEquip_Level = "PetEquip_Level";
+    public const string ChunSlash_memory = "ChunSlash_memory";
 
 
 
@@ -83,7 +84,8 @@ public class StatusTable
         {GoldGain_memory,0},
         {ExpGain_memory,0},
         {Son_Level,0},
-        {PetEquip_Level,0}
+        {PetEquip_Level,0},
+        {ChunSlash_memory,0},
     };
 
     private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();
@@ -232,6 +234,10 @@ public class StatusTable
                 case BossDamage_memory:
                     {
                         return level * 0.05f;
+                    }
+                case ChunSlash_memory:
+                    {
+                        return level * 0.0005f;
                     }
 
                 #endregion
