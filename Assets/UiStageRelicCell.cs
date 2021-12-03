@@ -148,7 +148,7 @@ public class UiStageRelicCell : MonoBehaviour
             return;
         }
 
-        int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value;
+        float currentRelicNum = ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value;
 
         if (currentRelicNum < GameBalance.StageRelicUpgradePrice)
         {
@@ -156,26 +156,26 @@ public class UiStageRelicCell : MonoBehaviour
             return;
         }
 
-        int upgradeableMaxNum = relicLocalData.Maxlevel - relicServerData.level.Value;
+        float upgradeableMaxNum = relicLocalData.Maxlevel - relicServerData.level.Value;
         
-        int upgradableMaxPrice = upgradeableMaxNum * GameBalance.StageRelicUpgradePrice;
+        float upgradableMaxPrice = (float)upgradeableMaxNum * (float)GameBalance.StageRelicUpgradePrice;
 
-        int diffPrice = currentRelicNum - upgradableMaxPrice;
+        float diffPrice = currentRelicNum - upgradableMaxPrice;
 
         //유물 남을때(최대업가능)
         if (diffPrice >= 0)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value -= (upgradeableMaxNum * GameBalance.StageRelicUpgradePrice);
 
-            relicServerData.level.Value += upgradeableMaxNum;
+            relicServerData.level.Value += (int)upgradeableMaxNum;
         }
         else
         {
-            int fullUpgradeNum = currentRelicNum / GameBalance.StageRelicUpgradePrice;
+            float fullUpgradeNum = currentRelicNum / GameBalance.StageRelicUpgradePrice;
 
             ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value -= (fullUpgradeNum * GameBalance.StageRelicUpgradePrice);
 
-            relicServerData.level.Value += fullUpgradeNum;
+            relicServerData.level.Value += (int)fullUpgradeNum;
         }
 
 
