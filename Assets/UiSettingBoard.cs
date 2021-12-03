@@ -33,6 +33,9 @@ public class UiSettingBoard : MonoBehaviour
     private Toggle shakeCameraToggle;
 
     [SerializeField]
+    private Toggle showSleepPushToggle;
+
+    [SerializeField]
     private TextMeshProUGUI bgmDesc;
 
     [SerializeField]
@@ -67,6 +70,8 @@ public class UiSettingBoard : MonoBehaviour
         showEffectToggle.isOn = PlayerPrefs.GetInt(SettingKey.ShowEffect) == 1;
 
         shakeCameraToggle.isOn = PlayerPrefs.GetInt(SettingKey.GlowEffect) == 1;
+
+        showSleepPushToggle.isOn = PlayerPrefs.GetInt(SettingKey.ShowSleepPush) == 1;
 
         initialized = true;
 
@@ -223,6 +228,18 @@ public class UiSettingBoard : MonoBehaviour
         SettingData.GlowEffect.Value = on ? 1 : 0;
     }
 
+    public void ShowSleepPush(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.ShowSleepPush.Value = on ? 1 : 0;
+    }
+
     public void OnClickStory()
     {
         DialogManager.Instance.SetNextDialog();
@@ -276,6 +293,7 @@ public static class SettingKey
     public static string GlowEffect = "GlowEffect";
     public static string PotionUseHpOption = "PotionUseHpOption";
     public static string GachaWhiteEffect = "GachaWhiteEffect";
+    public static string ShowSleepPush = "ShowSleepPush";
 }
 
 public static class SettingData
@@ -292,6 +310,7 @@ public static class SettingData
     public static ReactiveProperty<int> GlowEffect = new ReactiveProperty<int>();
     public static ReactiveProperty<int> PotionUseHpOption = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> GachaWhiteEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> ShowSleepPush = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
@@ -335,6 +354,9 @@ public static class SettingData
 
         if (PlayerPrefs.HasKey(SettingKey.GachaWhiteEffect) == false)
             PlayerPrefs.SetInt(SettingKey.uiView, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.ShowSleepPush) == false)
+            PlayerPrefs.SetInt(SettingKey.ShowSleepPush, 1);
     }
 
     static void Initialize()
@@ -350,6 +372,7 @@ public static class SettingData
         PotionUseHpOption.Value = PlayerPrefs.GetInt(SettingKey.PotionUseHpOption, 1);
         uiView.Value = PlayerPrefs.GetFloat(SettingKey.uiView, 0f);
         GachaWhiteEffect.Value = PlayerPrefs.GetInt(SettingKey.GachaWhiteEffect, 1);
+        ShowSleepPush.Value = PlayerPrefs.GetInt(SettingKey.ShowSleepPush, 1);
 
         Subscribe();
     }
@@ -397,6 +420,11 @@ public static class SettingData
         GachaWhiteEffect.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.GachaWhiteEffect, e);
+        });
+
+        ShowSleepPush.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.ShowSleepPush, e);
         });
     }
 

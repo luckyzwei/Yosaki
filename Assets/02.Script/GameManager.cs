@@ -226,6 +226,8 @@ public class GameManager : SingletonMono<GameManager>
 
     private void ChangeScene()
     {
+        IAPManager.Instance.ResetDisableCallbacks();
+
         if (UiDeadConfirmPopup.Instance != null)
         {
             Destroy(UiDeadConfirmPopup.Instance.gameObject);

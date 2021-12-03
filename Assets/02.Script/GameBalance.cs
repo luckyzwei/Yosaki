@@ -140,11 +140,28 @@ public static class GameBalance
 
     public static int GetSonIdx()
     {
-        int ret = 0;
-
         int level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;
 
-        if (level >= 9000) 
+        if (level >= 12000 && level < 50000)
+        {
+            return 3;
+        }
+
+        if (level >= 50000 && level < 100000)
+        {
+            return 4;
+        }
+
+        if (level >= 100000)
+        {
+            return 5;
+        }
+
+        int ret = 0;
+
+       
+
+        if (level >= 9000)
         {
             level -= 3000;
         }

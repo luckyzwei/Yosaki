@@ -39,6 +39,12 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
     public Product[] PurchasedProducts { get; private set; }
     private Dictionary<string, int> PurchasedProductsDic = new Dictionary<string, int>();
 
+    public void ResetDisableCallbacks() 
+    {
+        disableBuyButton = new ReactiveCommand();
+        activeBuyButton = new ReactiveCommand();
+    }
+
     public bool HasProduct(string id)
     {
         return PurchasedProductsDic.ContainsKey(id);
@@ -108,7 +114,7 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 
     public void BuyProduct(string shopId)
     {
-        disableBuyButton.Execute();
+        disableBuyButton?.Execute();
         BuyProductID(shopId);
     }
 
