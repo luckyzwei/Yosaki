@@ -29,7 +29,7 @@ public class UiBossContentsView : MonoBehaviour
     [SerializeField]
     private Button clearButton;
 
-    private ObscuredInt instantOpenAmount = 1;
+    private ObscuredInt instantOpenAmount = 10;
 
     //private ContentsRewardManager
 

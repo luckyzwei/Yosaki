@@ -111,7 +111,7 @@ public class GoodsTable
     }
 
     static int growThStoneAddAmount = 0;
-    static float updateRequireNum_GrowthStone = 1000;
+    static float updateRequireNum_GrowthStone = 100000;
 
     public void GetMagicStone(float amount)
     {

@@ -142,8 +142,8 @@ public class UiQuickMoveBoard : MonoBehaviour
         transactions.Add(TransactionValue.SetUpdate(PassServerTable.tableName, PassServerTable.Indate, passParam));
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade));
-        goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone));
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
