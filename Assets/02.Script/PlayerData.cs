@@ -29,6 +29,7 @@ public class PlayerData : SingletonMono<PlayerData>
 
     public void LoadUserNickName()
     {
+        Debug.Log("IOS_5");
         Backend.BMember.GetUserInfo(WhenUserInfoLoadComplete);
     }
 
@@ -36,6 +37,7 @@ public class PlayerData : SingletonMono<PlayerData>
     {
         if (bro.IsSuccess())
         {
+            Debug.Log("IOS_6");
             Debug.Log("UserInfo가 존재합니다.");
             var returnData = bro.GetReturnValuetoJSON();
             JsonData row = returnData["row"];
@@ -55,6 +57,7 @@ public class PlayerData : SingletonMono<PlayerData>
 #if UNITY_IOS
                     NickName = row["nickname"].ToString().Replace(CommonString.IOS_nick, "");
 #endif
+                    Debug.Log("IOS_8");
                     WhenUserInfoLoadComplete();
                 }
                 else
@@ -69,12 +72,14 @@ public class PlayerData : SingletonMono<PlayerData>
         }
         else
         {
+            Debug.Log("IOS_7");
             Debug.LogError("User info load Failed");
         }
     }
 
     private void WhenUserInfoLoadComplete()
     {
+        Debug.Log("IOS_9");
         PreSceneStartButton.Instance.SetInteractive();
         ChatManager.Instance.ConnectToChattingServer();
         Subscribe();
@@ -82,7 +87,7 @@ public class PlayerData : SingletonMono<PlayerData>
         SaveManager.Instance.StartAutoSave();
 
         PushManager.Instance.Initialize();
-
+        Debug.Log("IOS_10");
 #if UNITY_IOS
         Backend.Chart.GetChartList((callback) =>
         {

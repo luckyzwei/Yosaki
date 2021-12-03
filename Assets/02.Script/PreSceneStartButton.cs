@@ -22,9 +22,11 @@ public class PreSceneStartButton : SingletonMono<PreSceneStartButton>
     }
     public void SetInteractive()
     {
+        Debug.Log("IOS_11");
         textObject.SetActive(true);
         waitText.SetActive(false);
         startButton.interactable = true;
+        Debug.Log("IOS_12");
     }
     public void OnClickStartButton()
     {
