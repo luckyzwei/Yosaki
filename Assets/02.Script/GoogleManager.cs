@@ -218,22 +218,18 @@ public class GoogleManager : SingletonMono<GoogleManager>
 
     private IEnumerator SceneChangeRoutine()
     {
-        Debug.Log("IOS_1");
         ServerData.LoadTables();
 
         while (SendQueue.UnprocessedFuncCount != 0)
         {
             yield return null;
         }
-        Debug.Log("IOS_2");
         if (isSignIn == false)
         {
-            Debug.Log("IOS_3");
             PlayerData.Instance.LoadUserNickName();
         }
         else
         {
-            Debug.Log("IOS_4");
             while (true)
             {
                 yield return null;
@@ -268,7 +264,6 @@ public class GoogleManager : SingletonMono<GoogleManager>
             Debug.Log("Login success");
       
             UiIosLoginBoard.Instance.CloseCustomGuestCreateBoard();
-            Debug.Log("IOS_0");
             StartCoroutine(SceneChangeRoutine());
         }
         else

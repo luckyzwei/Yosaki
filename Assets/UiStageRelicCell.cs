@@ -129,7 +129,7 @@ public class UiStageRelicCell : MonoBehaviour
         upgradeableNum = Mathf.Min(upgradeableNum, 1000);
 
         ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value -= upgradeableNum * GameBalance.StageRelicUpgradePrice;
-        
+
         relicServerData.level.Value += upgradeableNum;
 
         if (syncRoutine != null)
@@ -157,7 +157,7 @@ public class UiStageRelicCell : MonoBehaviour
         }
 
         float upgradeableMaxNum = relicLocalData.Maxlevel - relicServerData.level.Value;
-        
+
         float upgradableMaxPrice = (float)upgradeableMaxNum * (float)GameBalance.StageRelicUpgradePrice;
 
         float diffPrice = currentRelicNum - upgradableMaxPrice;
@@ -171,7 +171,7 @@ public class UiStageRelicCell : MonoBehaviour
         }
         else
         {
-            float fullUpgradeNum = currentRelicNum / GameBalance.StageRelicUpgradePrice;
+            int fullUpgradeNum = (int)(currentRelicNum / GameBalance.StageRelicUpgradePrice);
 
             ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value -= (fullUpgradeNum * GameBalance.StageRelicUpgradePrice);
 
