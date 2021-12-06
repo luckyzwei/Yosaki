@@ -85,7 +85,7 @@ public class PlayerData : SingletonMono<PlayerData>
         Subscribe();
 
         SaveManager.Instance.StartAutoSave();
-
+        GameManager.Instance.Initialize();
         PushManager.Instance.Initialize();
         Debug.Log("IOS_10");
 #if UNITY_IOS

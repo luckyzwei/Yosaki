@@ -34,6 +34,8 @@ public class GameManager : SingletonMono<GameManager>
 
     public ContentsType lastContentsType { get; private set; } = ContentsType.NormalField;
 
+    private bool firstInit = true;
+
     public void ResetLastContents()
     {
         lastContentsType = ContentsType.NormalField;
@@ -61,7 +63,7 @@ public class GameManager : SingletonMono<GameManager>
         this.bossId.RandomizeCryptoKey();
     }
 
-    private void Start()
+    public void Initialize()
     {
         Subscribe();
         InitGame();
@@ -87,7 +89,14 @@ public class GameManager : SingletonMono<GameManager>
 
         currentMapIdx.AsObservable().Subscribe(e =>
         {
-            ServerData.userInfoTable.UpData(UserInfoTable.LastMap, e, false);
+            if (!firstInit)
+            {
+                ServerData.userInfoTable.UpData(UserInfoTable.LastMap, e, false);
+            }
+            else
+            {
+                firstInit = false;
+            }
         }).AddTo(this);
 
         SettingData.FrameRateOption.AsObservable().Subscribe(SetFrameRate).AddTo(this);
