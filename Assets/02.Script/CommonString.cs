@@ -27,6 +27,7 @@ public static class CommonString
     public static string ItemGrade_5 = "요물";
     public static string ItemGrade_6 = "야차";
     public static string ItemGrade_5_Norigae = "신물";
+    public static string ItemGrade_6_Norigae = "영물";
 
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -43,7 +44,7 @@ public static class CommonString
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "고양이요괴전";
-    public static string RankPrefix_Real_Boss = "십이지신(미)";
+    public static string RankPrefix_Real_Boss = "십이지신(신)";
     public static string RankPrefix_Relic = "영혼의숲";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };

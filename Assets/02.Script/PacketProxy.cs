@@ -27,10 +27,12 @@ public class PacketProxy : SingletonMono<PacketProxy>
         if (pause == true)
         {
             // 게임이 Pause 되었을 때
+            Debug.Log("SendQueuePause");
             SendQueue.PauseSendQueue();
         }
         else if (pause == false)
         {
+            Debug.Log("SendQueueResume");
             // 게임이 다시 진행 되었을 때
             SendQueue.ResumeSendQueue();
         }

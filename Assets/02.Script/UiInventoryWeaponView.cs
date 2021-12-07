@@ -171,11 +171,11 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (weaponData != null)
         {
             //요물일때 X
-            upgradeButton.SetActive(amount >= weaponData.Requireupgrade && weaponData.Id != 19 && weaponData.Id != 20);
+            upgradeButton.SetActive(amount >= weaponData.Requireupgrade && weaponData.Id != 19 && weaponData.Id != 20 && weaponData.Id != 21);
         }
         else if (magicBookData != null)
         {
-            upgradeButton.SetActive(amount >= magicBookData.Requireupgrade);
+            upgradeButton.SetActive(amount >= magicBookData.Requireupgrade && magicBookData.Id < 15);
         }
     }
 

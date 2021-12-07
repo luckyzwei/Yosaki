@@ -38,6 +38,8 @@ public class UiDokebiShopCell : MonoBehaviour
         itemPrice.SetText(Utils.ConvertBigNum(tableData.Price));
     }
 
+    private Coroutine exChangeRoutine;
+
     public void OnClickExChangeButton()
     {
         var currentDokebiHornNum = ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey);
@@ -56,21 +58,36 @@ public class UiDokebiShopCell : MonoBehaviour
 
         ServerData.goodsTable.GetTableData(goodsKey).Value += tableData.Rewardamount;
 
+        if (exChangeRoutine != null) 
+        {
+            CoroutineExecuter.Instance.StopCoroutine(exChangeRoutine);
+        }
+
+        exChangeRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+    }
+
+    private WaitForSeconds delay = new WaitForSeconds(0.5f);
+    private IEnumerator SyncRoutine() 
+    {
+        yield return delay;
+
+        string goodsKey = ((Item_Type)tableData.Itemtype).ToString();
+
         List<TransactionValue> transactions = new List<TransactionValue>();
 
         Param goodsParam = new Param();
 
-        goodsParam.Add(GoodsTable.DokebiKey, currentDokebiHornNum.Value);
+        goodsParam.Add(GoodsTable.DokebiKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value);
 
         goodsParam.Add(goodsKey, ServerData.goodsTable.GetTableData(goodsKey).Value);
 
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
-          {
-              PopupManager.Instance.ShowAlarmMessage("교환 성공");
+        {
+            PopupManager.Instance.ShowAlarmMessage("교환 성공");
 
-              LogManager.Instance.SendLog("도깨비", $"{goodsKey} {tableData.Rewardamount}");
-          });
+            LogManager.Instance.SendLog("도깨비", $"{goodsKey} {tableData.Rewardamount}");
+        });
     }
 }

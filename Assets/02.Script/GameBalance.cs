@@ -138,6 +138,8 @@ public static class GameBalance
 
     public readonly static ObscuredFloat YachaSkillAddValuePerLevel = 0.08f;
 
+    public readonly static ObscuredInt SonCostumeUnlockLevel = 150000;
+
     public static int GetSonIdx()
     {
         int level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;
