@@ -50,7 +50,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         //description1 += $"데미지 범위(%) : {(DamageBalance.baseMinDamage + PlayerStats.GetDamBalanceAddValue()) * 100f}%~{DamageBalance.baseMaxDamage * 100}%\n";
 
         //체력
-        description1 += $"{CommonString.GetStatusName(StatusType.Hp)} : {PlayerStats.GetOriginHp()}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.Hp)} : {Utils.ConvertBigNum(PlayerStats.GetOriginHp())}\n";
         //체력 증가
         description2 += $"{CommonString.GetStatusName(StatusType.HpAddPer)} : {PlayerStats.GetMaxHpPercentAddValue() * 100f}\n";
 

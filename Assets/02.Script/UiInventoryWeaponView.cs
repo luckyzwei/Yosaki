@@ -54,6 +54,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     private GameObject sinsuCreateButton;
 
     [SerializeField]
+    private GameObject youngMulCreateButton;
+
+    [SerializeField]
     private GameObject yachaDescription;
 
     [SerializeField]
@@ -81,6 +84,8 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         //신수
         sinsuCreateButton.gameObject.SetActive(magicBookData != null && magicBookData.Id / 4 == 4);
+
+        youngMulCreateButton.gameObject.SetActive(magicBookData != null && magicBookData.Id == 20);
 
         if (weaponData != null)
         {
@@ -343,13 +348,13 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (effectData.Equipeffecttype1 != -1)
         {
             //%효과
-            if (effectData.Equipeffectvalue1 < 1f)
+            if (effectData.Equipeffectvalue1 <= 1f)
             {
                 float value = equipValue1 * 100f;
                 float value_max = equipValue1_max * 100f;
                 StatusType type = (StatusType)(effectData.Equipeffecttype1);
 
-                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%\n";
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
             else
             {
@@ -357,20 +362,20 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value_max = equipValue1_max;
                 StatusType type = (StatusType)(effectData.Equipeffecttype1);
 
-                description += $"{CommonString.GetStatusName(type)} {value}\n)";
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
         }
 
         if (effectData.Equipeffecttype2 != -1)
         {
             //%효과
-            if (effectData.Equipeffectvalue2 < 1f)
+            if (effectData.Equipeffectvalue2 <= 1f)
             {
                 float value = equipValue2 * 100f;
                 float value_max = equipValue2_max * 100f;
                 StatusType type = (StatusType)effectData.Equipeffecttype2;
 
-                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%\n";
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
             else
             {
@@ -378,7 +383,7 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value_max = equipValue2_max;
                 StatusType type = (StatusType)effectData.Equipeffecttype2;
 
-                description += $"{CommonString.GetStatusName(type)} {value}";
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}";
             }
 
         }
@@ -394,14 +399,14 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value = hasValue1 * 100f;
                 float value_max = hasValue1_max * 100f;
 
-                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%\n";
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
             else
             {
                 float value = hasValue1;
                 float value_max = hasValue1_max;
 
-                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}\n";
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
         }
 
@@ -414,14 +419,14 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value = hasValue2 * 100f;
                 float value_max = hasValue2_max * 100f;
 
-                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%\n";
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
             else
             {
                 float value = hasValue2;
                 float value_max = hasValue2_max;
 
-                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}\n";
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
 
         }
@@ -435,14 +440,14 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value = hasValue3 * 100f;
                 float value_max = hasValue3_max * 100f;
 
-                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}%";
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}";
             }
             else
             {
                 float value = hasValue3;
                 float value_max = hasValue3_max;
 
-                description += $"{CommonString.GetStatusName(type)} {value.ToString("F1")}";
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}";
             }
 
         }
@@ -652,6 +657,13 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (magicBookData == null) return;
 
         UiNorigaeCraftBoard.Instance.Initialize(magicBookData.Id);
+    }
+
+    public void OnClickYoungMulCreateButton()
+    {
+        if (magicBookData == null) return;
+
+        UiYoungMulCraftBoard.Instance.Initialize(magicBookData.Id);
     }
 
 }

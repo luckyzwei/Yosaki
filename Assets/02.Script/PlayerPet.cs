@@ -25,6 +25,9 @@ public class PlayerPet : SingletonMono<PlayerPet>
     [SerializeField]
     private SkeletonAnimation skeletonAnimation;
 
+    [SerializeField]
+    private GameObject awakeEffect;
+
     private new void OnDestroy()
     {
         base.OnDestroy();
@@ -52,6 +55,11 @@ public class PlayerPet : SingletonMono<PlayerPet>
 
             WhenCostumeChanged(e);
             WhenPetEquipIdxChanged(e);
+        }).AddTo(this);
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.petAwake].AsObservable().Subscribe(e =>
+        {
+            awakeEffect.SetActive(e == 1);
         }).AddTo(this);
     }
 

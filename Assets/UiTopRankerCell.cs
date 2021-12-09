@@ -56,6 +56,12 @@ public class UiTopRankerCell : MonoBehaviour
             else
             {
                 int effectIdx = magicBookId % 4;
+
+                if (magicBookId == 20) 
+                {
+                    effectIdx = 4;
+                }
+
                 for (int i = 0; i < norigaeEffects.Count; i++)
                 {
                     norigaeEffects[i].SetActive(i == effectIdx);

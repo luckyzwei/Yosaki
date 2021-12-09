@@ -32,6 +32,7 @@ public class PetServerTable
     {
         float ret = 0f;
         int status = (int)statusType;
+        int petAwakeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
 
         var e = tableDatas.GetEnumerator();
         while (e.MoveNext())
@@ -43,22 +44,42 @@ public class PetServerTable
             var petTableData = TableManager.Instance.PetDatas[e.Current.Value.idx];
             if (petTableData.Hastype1 == status)
             {
-                ret += petTableData.Hasvalue1 + e.Current.Value.level.Value * petTableData.Hasaddvalue1;
+                float value = petTableData.Hasvalue1 + e.Current.Value.level.Value * petTableData.Hasaddvalue1;
+
+                if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                    value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+                ret += value;
             }
 
             if (petTableData.Hastype2 == status)
             {
-                ret += petTableData.Hasvalue2 + e.Current.Value.level.Value * petTableData.Hasaddvalue2;
+                float value = petTableData.Hasvalue2 + e.Current.Value.level.Value * petTableData.Hasaddvalue2;
+
+                if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                    value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+                ret += value;
             }
 
             if (petTableData.Hastype3 == status)
             {
-                ret += petTableData.Hasvalue3 + e.Current.Value.level.Value * petTableData.Hasaddvalue3;
+                float value = petTableData.Hasvalue3 + e.Current.Value.level.Value * petTableData.Hasaddvalue3;
+
+                if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                    value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+                ret += value;
             }
 
             if (petTableData.Hastype4 == status)
             {
-                ret += petTableData.Hasvalue4 + e.Current.Value.level.Value * petTableData.Hasaddvalue4;
+                float value = petTableData.Hasvalue4 + e.Current.Value.level.Value * petTableData.Hasaddvalue4;
+
+                if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                    value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+                ret += value;
             }
         }
 

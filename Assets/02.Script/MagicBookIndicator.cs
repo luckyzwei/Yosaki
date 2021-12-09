@@ -58,6 +58,20 @@ public class MagicBookIndicator : MonoBehaviour
         {
             sinMulEffect.ForEach(e => e.SetActive(false));
         }
+        else if (idx == 20)
+        {
+            int effectIdx = 4;
+
+            if (idx == 20)
+            {
+                effectIdx = 4;
+            }
+
+            for (int i = 0; i < sinMulEffect.Count; i++)
+            {
+                sinMulEffect[i].SetActive(i == effectIdx);
+            }
+        }
         else
         {
             int effectIdx = idx % 4;

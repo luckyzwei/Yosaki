@@ -111,33 +111,58 @@ public class UiPetView : MonoBehaviour
 
         int currentLevel = ServerData.petTable.TableDatas[petData.Stringid].level.Value;
         int maxLevel = petData.Maxlevel;
+        int petAwakeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
 
         if (petData.Hasvalue1 != 0f)
         {
             StatusType statusType = (StatusType)petData.Hastype1;
             bool isPercent = statusType.IsPercentStat();
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue1 + currentLevel * petData.Hasaddvalue1) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue1 + maxLevel * petData.Hasaddvalue1) * (isPercent ? 100 : 1f)}</color>)\n";
+
+            float value = petData.Hasvalue1 + currentLevel * petData.Hasaddvalue1;
+
+            if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue1 + maxLevel * petData.Hasaddvalue1) * (isPercent ? 100 : 1f)}</color>)\n";
         }
 
         if (petData.Hasvalue2 != 0f)
         {
             StatusType statusType = (StatusType)petData.Hastype2;
             bool isPercent = statusType.IsPercentStat();
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue2 + currentLevel * petData.Hasaddvalue2) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue2 + maxLevel * petData.Hasaddvalue2) * (isPercent ? 100 : 1f)}</color>)\n";
+
+            float value = petData.Hasvalue2 + currentLevel * petData.Hasaddvalue2;
+
+            if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue2 + maxLevel * petData.Hasaddvalue2) * (isPercent ? 100 : 1f)}</color>)\n";
         }
 
         if (petData.Hasvalue3 != 0f)
         {
             StatusType statusType = (StatusType)petData.Hastype3;
             bool isPercent = statusType.IsPercentStat();
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue3 + currentLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue3 + maxLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}</color>)\n";
+
+            float value = petData.Hasvalue3 + currentLevel * petData.Hasaddvalue3;
+
+            if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue3 + maxLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}</color>)\n";
         }
 
         if (petData.Hasvalue4 != 0f)
         {
             StatusType statusType = (StatusType)petData.Hastype4;
             bool isPercent = statusType.IsPercentStat();
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(petData.Hasvalue4 + currentLevel * petData.Hasaddvalue4) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue4 + maxLevel * petData.Hasaddvalue4) * (isPercent ? 100 : 1f)}</color>)";
+
+            float value = petData.Hasvalue4 + currentLevel * petData.Hasaddvalue4;
+
+            if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue4 + maxLevel * petData.Hasaddvalue4) * (isPercent ? 100 : 1f)}</color>)";
         }
 
 
@@ -184,6 +209,13 @@ public class UiPetView : MonoBehaviour
 
                 levelUpPrice_Marble.SetText($"{Utils.ConvertBigNum(GetPetLevelUpPrice_Marble(e))}\n레벨업");
             }
+
+            SetAbilityText();
+
+        }).AddTo(this);
+
+        ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).AsObservable().Subscribe(e =>
+        {
 
             SetAbilityText();
 
@@ -535,7 +567,7 @@ public class UiPetView : MonoBehaviour
         var nextPetTableData = TableManager.Instance.PetTable.dataArray[petData.Nextpetid];
         var newPetServerData = ServerData.petTable.TableDatas[nextPetTableData.Stringid];
 
-        if (newPetServerData.hasItem.Value == 1) 
+        if (newPetServerData.hasItem.Value == 1)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 각성 했습니다.");
             return;

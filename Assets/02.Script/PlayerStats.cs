@@ -699,6 +699,8 @@ public static class PlayerStats
         ret += GetTitleAbilValue(StatusType.HpAddPer);
         ret += GetRelicHasEffect(StatusType.HpAddPer);
 
+        ret += GetMagicBookEquipPercentValue(StatusType.HpAddPer);
+
         return ret;
     }
     public static float GetMaxMp()

@@ -215,8 +215,14 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
             UpdateHpMax();
             UpdateMpMax();
         }).AddTo(this);
-    }
 
+        ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).AsObservable().Subscribe(e =>
+        {
+            UpdateHpMax();
+            UpdateMpMax();
+        }).AddTo(this);
+    }
+    
     private IEnumerator LateUpdateHp()
     {
         yield return null;

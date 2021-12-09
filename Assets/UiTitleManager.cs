@@ -111,7 +111,7 @@ public enum TitleMissionId
     Level92000,//★
     Level95000,//★
     Level98000,//★
-    Level110000,//★
+    Level101000,//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -298,9 +298,9 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Level98000);
             }
-            if (e >= 110000)
+            if (e >= 101000)
             {
-                ClearTitleMission(TitleMissionId.Level110000);
+                ClearTitleMission(TitleMissionId.Level101000);
             }
 
         }).AddTo(this);

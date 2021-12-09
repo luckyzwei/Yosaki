@@ -9,7 +9,7 @@ using LitJson;
 
 public enum RankType
 {
-    Level, Stage, Boss, Real_Boss, Relic, None
+    Level, Stage, Boss, Real_Boss, Relic, MiniGame, None
 }
 
 public class RankManager : SingletonMono<RankManager>
@@ -62,11 +62,13 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss_Uuid = "96eaa1f0-4e8c-11ec-9899-5fdf59a8f5ce";
     public const string Rank_Real_Boss_Uuid = "3a0680d0-56ca-11ec-8846-eb56e6e68bb1";
     public const string Rank_Relic_Uuid = "0453f560-2779-11ec-9b46-299116fee741";
+    public const string Rank_MiniGame_Uuid = "b38f2540-587a-11ec-8846-eb56e6e68bb1";
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
     public const string Rank_Boss = "Rank_Cat_4";
     public const string Rank_Real_Boss = "Rank_Boss_9";
     public const string Rank_Relic = "Rank_Relic";
+    public const string Rank_MiniGame = "Rank_MiniGame";
 #endif
 
 #if UNITY_IOS
@@ -75,11 +77,13 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss_Uuid = "9e4b3680-4e8c-11ec-8201-c1594a4e1456";
     public const string Rank_Real_Boss_Uuid = "43a4f770-56ca-11ec-b084-d1a61d5ec8e2";
     public const string Rank_Relic_Uuid = "1ce07110-31b7-11ec-be95-537d9b90903a";
+    public const string Rank_MiniGame_Uuid = "bd2fbec0-587a-11ec-b084-d1a61d5ec8e2";
     public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";
     public const string Rank_Boss = "Rank_Cat_4_IOS";
     public const string Rank_Real_Boss = "Rank_Boss_9_IOS";
     public const string Rank_Relic = "Rank_Relic_IOS";
+    public const string Rank_MiniGame = "Rank_MiniGame_IOS";
 #endif
 
 
@@ -89,6 +93,7 @@ public class RankManager : SingletonMono<RankManager>
     public ReactiveCommand<RankInfo> WhenMyBossRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyRealBossRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyRelicRankLoadComplete = new ReactiveCommand<RankInfo>();
+    public ReactiveCommand<RankInfo> WhenMyMiniGameRankLoadComplete = new ReactiveCommand<RankInfo>();
 
     public void Subscribe()
     {
@@ -490,6 +495,86 @@ public class RankManager : SingletonMono<RankManager>
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Relic_Uuid, Rank_Relic, RankTable_YoguiSogul.Indate, param, bro =>
+        {
+            // 이후처리
+            if (bro.IsSuccess())
+            {
+                Debug.LogError($"랭킹 등록 성공! UpdateBoss0_Score");
+            }
+            else
+            {
+                Debug.LogError($"랭킹 등록 실패 UpdateBoss0_Score {bro.GetStatusCode()}");
+            }
+        });
+    }
+
+    #endregion
+
+    #region MiniGame
+    private Action<RankInfo> whenLoadSuccess_MiniGame;
+    public void RequestMyMiniGameRank(Action<RankInfo> whenLoadSuccess = null)
+    {
+        this.whenLoadSuccess_MiniGame = whenLoadSuccess;
+
+        Backend.URank.User.GetMyRank(RankManager.Rank_MiniGame_Uuid, MyMiniGameLoadComplete);
+    }
+    private void MyMiniGameLoadComplete(BackendReturnObject bro)
+    {
+        RankInfo myRankInfo = null;
+
+        if (bro.IsSuccess())
+        {
+            var rows = bro.Rows();
+
+            if (rows.Count > 0)
+            {
+                JsonData data = rows[0];
+
+                var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
+
+                string nickName = data["nickname"][ServerData.format_string].ToString();
+                int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
+                float score = float.Parse(data["score"][ServerData.format_Number].ToString());
+                int costumeId = int.Parse(splitData[0]);
+                int petId = int.Parse(splitData[1]);
+                int weaponId = int.Parse(splitData[2]);
+                int magicBookId = int.Parse(splitData[3]);
+                int fightPoint = int.Parse(splitData[4]);
+
+                myRankInfo = new RankInfo(nickName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+            }
+        }
+
+        if (myRankInfo != null)
+        {
+            whenLoadSuccess_MiniGame?.Invoke(myRankInfo);
+            WhenMyMiniGameRankLoadComplete.Execute(myRankInfo);
+
+            this.myRankInfo[RankType.MiniGame] = myRankInfo;
+        }
+    }
+
+    public void UpdateMiniGame_Score(float score)
+    {
+        if (this.myRankInfo[RankType.MiniGame] != null && score < this.myRankInfo[RankType.MiniGame].Score)
+        {
+            Debug.LogError("점수가 더 낮음");
+            return;
+        }
+
+        Param param = new Param();
+        param.Add("Score", score);
+
+        int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
+        int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
+        int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int fightPoint = (int)PlayerStats.GetTotalPower();
+        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
+
+        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_MiniGame_Uuid, Rank_MiniGame, RankTable_MiniGame.Indate, param, bro =>
         {
             // 이후처리
             if (bro.IsSuccess())

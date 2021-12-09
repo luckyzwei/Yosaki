@@ -71,10 +71,16 @@ public class MagicBookTable
         {
             return Mathf.Pow(level, 3.54f + (float)id * 0.015f);
         }
+        //영물
+        else if (id == 20)
+        {
+            return Mathf.Pow(level, 3.55f + (float)id * 0.015f);
+        }
         else
         {
             return Mathf.Pow(level, 3.65f + (float)id * 0.015f);
         }
+
 
     }
 

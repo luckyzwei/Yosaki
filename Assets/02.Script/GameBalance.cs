@@ -118,9 +118,9 @@ public static class GameBalance
     public readonly static ObscuredFloat HotTime_Start = 20;
     public readonly static ObscuredFloat HotTime_End = 22;
 
-    public readonly static ObscuredFloat HotTime_Exp = 12;
-    public readonly static ObscuredFloat HotTime_Gold = 12;
-    public readonly static ObscuredFloat HotTime_GrowthStone = 12;
+    public readonly static ObscuredFloat HotTime_Exp = 15;
+    public readonly static ObscuredFloat HotTime_Gold = 15;
+    public readonly static ObscuredFloat HotTime_GrowthStone = 15;
     public readonly static ObscuredFloat HotTime_Marble = 4;
 
     public readonly static ObscuredInt DailyRelicTicketGetCount = 3;
@@ -139,6 +139,9 @@ public static class GameBalance
     public readonly static ObscuredFloat YachaSkillAddValuePerLevel = 0.08f;
 
     public readonly static ObscuredInt SonCostumeUnlockLevel = 150000;
+    public readonly static ObscuredInt YoungMulCreateEquipLevel = 220;
+    public readonly static ObscuredFloat PetAwakeValuePerLevel = 0.1f;
+    public readonly static ObscuredFloat AwakePetUpgradePrice = 100000000;
 
     public static int GetSonIdx()
     {
@@ -161,7 +164,7 @@ public static class GameBalance
 
         int ret = 0;
 
-       
+
 
         if (level >= 9000)
         {

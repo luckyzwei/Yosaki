@@ -55,6 +55,7 @@ public static class ServerData
     public static StageRelicServerTable stageRelicServerTable { get; private set; } = new StageRelicServerTable();
 
     public static MonthlyPassServerTable2 monthlyPassServerTable2 { get; private set; } = new MonthlyPassServerTable2();
+    public static RankTable_MiniGame rankTable_MiniGame { get; private set; } = new RankTable_MiniGame();
 
     #region string
     public static string inDate_str = "inDate";
@@ -127,6 +128,8 @@ public static class ServerData
         stageRelicServerTable.Initialize();
 
         monthlyPassServerTable2.Initialize();
+
+        rankTable_MiniGame.Initialize();
     }
 
     public static void GetUserInfo()
@@ -388,6 +391,10 @@ public static class ServerData
                 param.Add(GoodsTable.SheepStone, ServerData.goodsTable.GetTableData(GoodsTable.SheepStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
+            case Item_Type.MonkeyStone:
+                ServerData.goodsTable.GetTableData(GoodsTable.MonkeyStone).Value += amount;
+                param.Add(GoodsTable.MonkeyStone, ServerData.goodsTable.GetTableData(GoodsTable.MonkeyStone).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.RelicTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += amount;

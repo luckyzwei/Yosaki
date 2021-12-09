@@ -107,6 +107,7 @@ public class UserInfoTable
     public const string sonScore = "sonLastClear3";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
     public const string buffAwake = "buffAwake";
+    public const string petAwake = "petAwake";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -189,6 +190,7 @@ public class UserInfoTable
         {attendanceCount_100Day,1f},
         {peachAttendance,0f},
         {buffAwake,0f},
+        {petAwake,0f},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();

@@ -48,6 +48,7 @@ public class StatusTable
     public const string Son_Level = "Son_Level_Real";
     public const string PetEquip_Level = "PetEquip_Level";
     public const string ChunSlash_memory = "ChunSlash_memory";
+    public const string PetAwakeLevel = "PetAwakeLevel";
 
 
 
@@ -86,6 +87,7 @@ public class StatusTable
         {Son_Level,0},
         {PetEquip_Level,0},
         {ChunSlash_memory,0},
+        {PetAwakeLevel,0},
     };
 
     private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();

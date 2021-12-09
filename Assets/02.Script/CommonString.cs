@@ -46,6 +46,7 @@ public static class CommonString
     public static string RankPrefix_Boss = "고양이요괴전";
     public static string RankPrefix_Real_Boss = "십이지신(신)";
     public static string RankPrefix_Relic = "영혼의숲";
+    public static string RankPrefix_MiniGame = "미니게임";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
 
@@ -137,6 +138,7 @@ public static class CommonString
             case Item_Type.PeachReal: return "천도 복숭아";
             case Item_Type.HorseStone: return "하늘의 증표";
             case Item_Type.SheepStone: return "폭주석";
+            case Item_Type.MonkeyStone: return "지배석";
         }
         return "미등록";
     }
