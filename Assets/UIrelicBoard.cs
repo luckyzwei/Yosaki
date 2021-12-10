@@ -50,7 +50,7 @@ public class UIrelicBoard : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value += 10000;
+            ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value += 100000;
         }
     }
 
