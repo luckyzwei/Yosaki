@@ -189,7 +189,7 @@ public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
 
     private int GetMaxHp()
     {
-        return (int)(ServerData.statusTable.GetTableData(StatusTable.Level).Value / 10000);
+        return 1 + (int)(ServerData.statusTable.GetTableData(StatusTable.Level).Value / 10000);
     }
 
     public void OnClickGameStartButton()
@@ -213,7 +213,7 @@ public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
 
         currentHp.Value--;
 
-        if (currentHp.Value == 0)
+        if (currentHp.Value <= 0)
         {
             PlayerDead();
         }
