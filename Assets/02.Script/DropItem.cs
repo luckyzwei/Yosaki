@@ -29,6 +29,7 @@ public enum Item_Type
     HorseStone,
     SheepStone,
     MonkeyStone,
+    MiniGameReward,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -49,6 +50,16 @@ public enum Item_Type
     RankFrame21_100_relic = 206,
     RankFrame101_1000_relic = 207,
     RankFrame1001_10000_relic = 208,
+
+    RankFrame1_miniGame = 300,
+    RankFrame2_miniGame = 301,
+    RankFrame3_miniGame = 302,
+    RankFrame4_miniGame = 303,
+    RankFrame5_miniGame = 304,
+    RankFrame6_20_miniGame = 305,
+    RankFrame21_100_miniGame = 306,
+    RankFrame101_1000_miniGame = 307,
+    RankFrame1001_10000_miniGame = 308,
 
     MagicStoneBuff = 500,
     //1000~1100 무기

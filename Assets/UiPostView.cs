@@ -127,6 +127,48 @@ public class UiPostView : MonoBehaviour
                     break;
             }
         }
+        else if (type.IsMiniGameRewardItem()) 
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_miniGame:
+                    title.SetText("랭킹보상(1위)(미니게임)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_1_MiniGame}개");
+                    break;
+                case Item_Type.RankFrame2_miniGame:
+                    title.SetText("랭킹보상(2위)(미니게임)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_2_MiniGame}개");
+                    break;
+                case Item_Type.RankFrame3_miniGame:
+                    title.SetText("랭킹보상(3위)(미니게임)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_3_MiniGame}개");
+                    break;
+                case Item_Type.RankFrame4_miniGame:
+                    title.SetText("랭킹보상(4위)(미니게임)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_4_MiniGame}개");
+                    break;
+                case Item_Type.RankFrame5_miniGame:
+                    title.SetText("랭킹보상(5위)(미니게임)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_5_MiniGame}개");
+                    break;
+                case Item_Type.RankFrame6_20_miniGame:
+                    title.SetText("랭킹보상(6~20위)(미니게임)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_6_20_MiniGame}개");
+                    break;
+                case Item_Type.RankFrame21_100_miniGame:
+                    title.SetText("랭킹보상(21~100위)(미니게임)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_21_100_MiniGame}개");
+                    break;
+                case Item_Type.RankFrame101_1000_miniGame:
+                    title.SetText("랭킹보상(101~1000위)(미니게임)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_101_1000_MiniGame}개");
+                    break;
+                case Item_Type.RankFrame1001_10000_miniGame:
+                    title.SetText("랭킹보상(1001~10000위)(미니게임)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_1001_10000_MiniGame}개");
+                    break;
+            }
+        }
         else
         {
             title.SetText(postInfo.titleText);

@@ -396,6 +396,11 @@ public static class ServerData
                 param.Add(GoodsTable.MonkeyStone, ServerData.goodsTable.GetTableData(GoodsTable.MonkeyStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
+            case Item_Type.MiniGameReward:
+                ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += amount;
+                param.Add(GoodsTable.MiniGameReward, ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.RelicTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += amount;
                 param.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
@@ -591,7 +596,7 @@ public static class ServerData
 
             SendTransaction(transactionList, successCallBack: () =>
               {
-                  LogManager.Instance.SendLogType("RankReward", type.ToString(), "");
+                  //LogManager.Instance.SendLogType("RankReward", type.ToString(), "");
               });
         }
         else if (type.IsRelicRewardItem())
@@ -636,7 +641,52 @@ public static class ServerData
 
             SendTransaction(transactionList, successCallBack: () =>
             {
-                LogManager.Instance.SendLogType("RelicReward", type.ToString(), "");
+              //  LogManager.Instance.SendLogType("RelicReward", type.ToString(), "");
+            });
+        }
+        else if (type.IsMiniGameRewardItem())
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_1_MiniGame;
+                    break;
+                case Item_Type.RankFrame2_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_2_MiniGame;
+                    break;
+                case Item_Type.RankFrame3_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_3_MiniGame;
+                    break;
+                case Item_Type.RankFrame4_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_4_MiniGame;
+                    break;
+                case Item_Type.RankFrame5_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_5_MiniGame;
+                    break;
+                case Item_Type.RankFrame6_20_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_6_20_MiniGame;
+                    break;
+                case Item_Type.RankFrame21_100_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_21_100_MiniGame;
+                    break;
+                case Item_Type.RankFrame101_1000_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_101_1000_MiniGame;
+                    break;
+                case Item_Type.RankFrame1001_10000_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_1001_10000_MiniGame;
+                    break;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.MiniGameReward, ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value);
+
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransaction(transactionList, successCallBack: () =>
+            {
+                LogManager.Instance.SendLogType("MiniReward", type.ToString(), "");
             });
         }
         else
@@ -691,7 +741,7 @@ public static class ServerData
 
             SendTransaction(transactionList, successCallBack: () =>
               {
-                  LogManager.Instance.SendLogType("Post", type.ToString(), $"{amount}");
+                  //LogManager.Instance.SendLogType("Post", type.ToString(), $"{amount}");
               });
         }
 

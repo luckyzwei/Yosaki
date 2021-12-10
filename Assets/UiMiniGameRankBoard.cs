@@ -52,7 +52,7 @@ public class UiMiniGameRankBoard : MonoBehaviour
         {
             if (e != null)
             {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}초", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score.ToString("F2")}초", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
             }
             else
             {
@@ -131,7 +131,7 @@ public class UiMiniGameRankBoard : MonoBehaviour
                     nickName = nickName.Replace(CommonString.IOS_nick, "");
 #endif
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}초", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{score.ToString("F2")}초", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
                     }
                     else
                     {

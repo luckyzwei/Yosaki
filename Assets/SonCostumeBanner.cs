@@ -23,7 +23,7 @@ public class SonCostumeBanner : MonoBehaviour
         Initialize();
     }
 
-    private void Initialize() 
+    private void Initialize()
     {
         description.SetText($"손오공 레벨 {GameBalance.SonCostumeUnlockLevel} 달성시 획득 가능!");
     }
@@ -43,6 +43,12 @@ public class SonCostumeBanner : MonoBehaviour
 
     public void OnClickGetButton()
     {
+        if (ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value < GameBalance.SonCostumeUnlockLevel)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"손오공 레벨이 부족합니다.");
+            return;
+        }
+
         getButtonObject.interactable = false;
 
         var costumeServerData = ServerData.costumeServerTable.TableDatas[costumeKey];

@@ -9,6 +9,11 @@ public class InGameCanvas : SingletonMono<InGameCanvas>
     public Canvas canvas;
 
     [SerializeField]
+    private Camera mainCam;
+
+    public Camera MainCam => mainCam;
+
+    [SerializeField]
     private CanvasScaler canvasScaler;
 
     private void Start()

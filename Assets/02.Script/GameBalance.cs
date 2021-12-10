@@ -109,6 +109,16 @@ public static class GameBalance
     public readonly static ObscuredInt rankRewardTicket_101_1000_relic = 35;
     public readonly static ObscuredInt rankRewardTicket_1001_10000_relic = 25;
 
+    public readonly static ObscuredInt rankReward_1_MiniGame = 10;
+    public readonly static ObscuredInt rankReward_2_MiniGame = 9;
+    public readonly static ObscuredInt rankReward_3_MiniGame = 8;
+    public readonly static ObscuredInt rankReward_4_MiniGame = 7;
+    public readonly static ObscuredInt rankReward_5_MiniGame = 6;
+    public readonly static ObscuredInt rankReward_6_20_MiniGame = 5;
+    public readonly static ObscuredInt rankReward_21_100_MiniGame = 4;
+    public readonly static ObscuredInt rankReward_101_1000_MiniGame = 3;
+    public readonly static ObscuredInt rankReward_1001_10000_MiniGame = 2;
+
     public readonly static ObscuredInt EventDropEndDay = 30;
     public readonly static ObscuredInt EventMakeEndDay = 1;
     public readonly static ObscuredInt EventPackageSaleEndDay = 1;
@@ -138,9 +148,9 @@ public static class GameBalance
 
     public readonly static ObscuredFloat YachaSkillAddValuePerLevel = 0.08f;
 
-    public readonly static ObscuredInt SonCostumeUnlockLevel = 150000;
-    public readonly static ObscuredInt YoungMulCreateEquipLevel = 220;
-    public readonly static ObscuredFloat PetAwakeValuePerLevel = 0.1f;
+    public readonly static ObscuredInt SonCostumeUnlockLevel = 80000;
+    public readonly static ObscuredInt YoungMulCreateEquipLevel = 120;
+    public readonly static ObscuredFloat PetAwakeValuePerLevel = 0.01f;
     public readonly static ObscuredFloat AwakePetUpgradePrice = 100000000;
 
     public static int GetSonIdx()

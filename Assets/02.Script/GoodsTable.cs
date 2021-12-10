@@ -45,6 +45,7 @@ public class GoodsTable
     public static string Event_Item_0 = "Event_Item_1";
     public static string StageRelic = "StageRelic";
     public static string Peach = "PeachReal";
+    public static string MiniGameReward = "MiniGameReward";
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -76,6 +77,7 @@ public class GoodsTable
         {HorseStone,0f},
         {SheepStone,0f},
         {MonkeyStone,0f},
+        {MiniGameReward,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

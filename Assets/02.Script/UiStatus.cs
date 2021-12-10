@@ -34,6 +34,7 @@ public class UiStatus : SingletonMono<UiStatus>
             RankManager.Instance.RequestMyBossRank();
             RankManager.Instance.RequestMyRealBossRank();
             RankManager.Instance.RequestMyRelicRank();
+            RankManager.Instance.RequestMyMiniGameRank();
         }
     }
     private void Subscribe()

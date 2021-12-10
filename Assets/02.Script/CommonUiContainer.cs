@@ -12,7 +12,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
-    private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae , CommonString.ItemGrade_6_Norigae };
+    private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae };
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
     public List<Color> itemGradeColor;
@@ -62,6 +62,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite HorseStone;
     public Sprite SheepStone;
     public Sprite MonkeyStone;
+    public Sprite MiniGameTicket;
 
     public Sprite Songpyeon;
 
@@ -168,6 +169,18 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return relicEnter;
                 break;
 
+            case Item_Type.RankFrame1_miniGame:
+            case Item_Type.RankFrame2_miniGame:
+            case Item_Type.RankFrame3_miniGame:
+            case Item_Type.RankFrame4_miniGame:
+            case Item_Type.RankFrame5_miniGame:
+            case Item_Type.RankFrame6_20_miniGame:
+            case Item_Type.RankFrame21_100_miniGame:
+            case Item_Type.RankFrame101_1000_miniGame:
+            case Item_Type.RankFrame1001_10000_miniGame:
+                return MiniGameTicket;
+                break;
+
             case Item_Type.WeaponUpgradeStone:
                 return WeaponUpgradeStone;
                 break;
@@ -195,6 +208,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.MonkeyStone:
                 return MonkeyStone;
+                break;
+            case Item_Type.MiniGameReward:
+                return MiniGameTicket;
                 break;
             case Item_Type.Relic:
                 return relic;

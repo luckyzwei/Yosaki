@@ -139,6 +139,7 @@ public static class CommonString
             case Item_Type.HorseStone: return "하늘의 증표";
             case Item_Type.SheepStone: return "폭주석";
             case Item_Type.MonkeyStone: return "지배석";
+            case Item_Type.MiniGameReward: return "뽑기권";
         }
         return "미등록";
     }
