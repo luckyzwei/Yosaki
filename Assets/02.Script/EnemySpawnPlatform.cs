@@ -33,11 +33,7 @@ public class EnemySpawnPlatform : MonoBehaviour
     {
         return new Vector3(Random.Range(minXPos+ xOffset, maxXPos- xOffset), yPos + yOffset);
     }
-  
 
-  
-
- 
 }
 
 

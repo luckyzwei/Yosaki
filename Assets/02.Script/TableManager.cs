@@ -553,5 +553,10 @@ public class TableManager : SingletonMono<TableManager>
     private Attendance100 attendanceReward_100;
     public Attendance100 AttendanceReward_100 => attendanceReward_100;
 
+    [SerializeField]
+    private IosCoupon iosCoupon;
+
+    public IosCoupon IosCoupon => iosCoupon;
+
 }
 

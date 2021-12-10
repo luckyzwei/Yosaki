@@ -23,9 +23,13 @@ public class UiMiniGamePlayer : MonoBehaviour
     }
 
 
+    private string bulletTag = "Bullet";
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        UiMinigameBoard.Instance.PlayerDamaged();
-        collision.gameObject.SetActive(false);
+        if (collision.gameObject.tag.Equals(bulletTag))
+        {
+            UiMinigameBoard.Instance.PlayerDamaged();
+            collision.gameObject.SetActive(false);
+        }
     }
 }

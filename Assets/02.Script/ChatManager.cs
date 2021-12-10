@@ -287,6 +287,9 @@ public class ChatManager : SingletonMono<ChatManager>
             case RankType.Relic:
                 return CommonString.RankPrefix_Relic;
                 break;
+            case RankType.MiniGame:
+                return CommonString.RankPrefix_MiniGame;
+                break;
         }
 
         return "미등록";
