@@ -58,6 +58,8 @@ public class UiDokebiShopCell : MonoBehaviour
 
         ServerData.goodsTable.GetTableData(goodsKey).Value += tableData.Rewardamount;
 
+        PopupManager.Instance.ShowAlarmMessage("교환 성공");
+
         if (exChangeRoutine != null) 
         {
             CoroutineExecuter.Instance.StopCoroutine(exChangeRoutine);
@@ -85,7 +87,7 @@ public class UiDokebiShopCell : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            PopupManager.Instance.ShowAlarmMessage("교환 성공");
+     
 
             LogManager.Instance.SendLog("도깨비", $"{goodsKey} {tableData.Rewardamount}");
         });

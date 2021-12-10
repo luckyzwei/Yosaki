@@ -150,7 +150,7 @@ public static class GameBalance
 
     public readonly static ObscuredInt SonCostumeUnlockLevel = 80000;
     public readonly static ObscuredInt YoungMulCreateEquipLevel = 120;
-    public readonly static ObscuredFloat PetAwakeValuePerLevel = 0.01f;
+    public readonly static ObscuredFloat PetAwakeValuePerLevel = 0.003f;
     public readonly static ObscuredFloat AwakePetUpgradePrice = 100000000;
 
     public static int GetSonIdx()

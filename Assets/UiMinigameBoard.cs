@@ -39,6 +39,9 @@ public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
     [SerializeField]
     private TextMeshProUGUI remainHp;
 
+    [SerializeField]
+    private Animator hpAnim;
+
     private void Start()
     {
         bulletPool = new ObjectPool<UiMiniGameBullet>(bulletPrefab, this.transform, 10);
@@ -46,11 +49,13 @@ public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
         Subscribe();
     }
 
+    private string playTriggerName = "play";
     private void Subscribe()
     {
         currentHp.AsObservable().Subscribe(e =>
         {
             remainHp.SetText($"남은 체력 : {e}");
+            hpAnim.SetTrigger(playTriggerName);
         }).AddTo(this);
 
         elapsedTime.AsObservable().Subscribe(e =>
@@ -286,6 +291,12 @@ public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                     goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+                }
+                break;
+            case Item_Type.GrowthStone:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value += amount;
+                    goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
                 }
                 break;
         }
