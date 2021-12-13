@@ -220,6 +220,10 @@ public class GoogleManager : SingletonMono<GoogleManager>
     {
         ServerData.LoadTables();
 
+#if UNITY_IOS
+        SendQueue.ResumeSendQueue();
+#endif
+
         while (SendQueue.UnprocessedFuncCount != 0)
         {
             yield return null;
@@ -360,7 +364,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
         //테스트용 a_8846847867697156085
         //로꼬 a_3961873472804492579
 #if UNITY_EDITOR
-        return "a_8846847867697156085";
+        return "a_88eewd46847867697156085";
 #endif
 
         Debug.LogError($"GetGoogleLoginKey {loginId}");
