@@ -75,8 +75,8 @@ public class RankManager : SingletonMono<RankManager>
 #if UNITY_IOS
     public const string Rank_Level_Uuid = "ea8c9430-38cf-11ec-955f-fb3c68e97f2a";
     public const string Rank_Stage_Uuid = "f865e900-31b6-11ec-b4ab-713be46ddb60";
-    public const string Rank_Boss_Uuid = "9e4b3680-4e8c-11ec-8201-c1594a4e1456";
-    public const string Rank_Real_Boss_Uuid = "43a4f770-56ca-11ec-b084-d1a61d5ec8e2";
+    public const string Rank_Boss_Uuid = "1b18e700-5d26-11ec-9838-558e1ab66c0c";
+    public const string Rank_Real_Boss_Uuid = "ffa55080-5d25-11ec-80a4-d75a5ea006c8";
     public const string Rank_Relic_Uuid = "1ce07110-31b7-11ec-be95-537d9b90903a";
     public const string Rank_MiniGame_Uuid = "edec1600-5954-11ec-8846-eb56e6e68bb1";
     public const string Rank_Level_TableName = "Level_Rank_IOS";
