@@ -7,7 +7,6 @@ using UnityEngine;
 public class GrowthManager : SingletonMono<GrowthManager>
 {
     public ReactiveProperty<float> maxExp = new ReactiveProperty<float>();
-    public ReactiveCommand WhenPlayerLevelUp = new ReactiveCommand();
 
     private new void Awake()
     {
@@ -24,6 +23,11 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
     public void GetExp(float exp, bool useBuff = true, bool useEffect = true, bool syncToServer = true)
     {
+        if (accumLevel > 50000) 
+        {
+            return;
+        }
+
         if (useBuff)
         {
             exp += exp * PlayerStats.GetExpPlusValue();
@@ -31,7 +35,10 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
         this.useEffect = useEffect;
 
-        SystemMessage.Instance.SetMessage($"경험치 획득 ({(int)exp})");
+        if (syncToServer)
+        {
+            SystemMessage.Instance.SetMessage($"경험치 획득 ({(int)exp})");
+        }
 
         ServerData.growthTable.GetTableData(GrowthTable.Exp).Value += exp;
 
@@ -44,7 +51,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
             //추가레벨업 가능?
             if (CanLevelUp())
             {
-                GetExp(0, syncToServer: syncToServer);
+                GetExp(0, useBuff: useBuff, useEffect: useEffect, syncToServer: syncToServer);
             }
             else
             {
@@ -54,6 +61,12 @@ public class GrowthManager : SingletonMono<GrowthManager>
                 }
             }
         }
+
+        if (syncToServer)
+        {
+            UiExpGauge.Instance.WhenGrowthValueChanged();
+        }
+
     }
 
     private bool CanLevelUp()
@@ -61,49 +74,66 @@ public class GrowthManager : SingletonMono<GrowthManager>
         return ServerData.growthTable.GetTableData(GrowthTable.Exp).Value >= maxExp.Value;
     }
 
+    int accumLevel = 0;
+    private WaitForSeconds delay = new WaitForSeconds(0.1f);
+    private Coroutine syncRoutine;
+    private IEnumerator SyncRoutine()
+    {
+        accumLevel++;
+
+        ShowContentsUnlockAlarm(accumLevel);
+
+        yield return delay;
+
+        //레벨 증가
+        ServerData.statusTable.GetTableData(StatusTable.Level).Value += accumLevel;
+
+        //스킬포인트 증가
+        ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value += accumLevel * GameBalance.SkillPointGet;
+
+        //스탯포인트 증가
+        ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value += accumLevel * GameBalance.StatPoint;
+
+        //스핀포인트 증가
+        ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value += accumLevel * GameBalance.levelUpSpinGet;
+
+        //일일미션
+        DailyMissionManager.UpdateDailyMission(DailyMissionKey.LevelUp, accumLevel);
+
+        accumLevel = 0;
+    }
     public void levelUp()
     {
         UpdateLocalData();
 
         //최대경험치 갱신
-        maxExp.Value = GameDataCalculator.GetMaxExp(ServerData.statusTable.GetTableData(StatusTable.Level).Value);
+        maxExp.Value = GameDataCalculator.GetMaxExp(ServerData.statusTable.GetTableData(StatusTable.Level).Value + accumLevel);
 
         //레벨업 이벤트
-        WhenPlayerLevelUp.Execute();
 
         if (useEffect)
         {
             EffectManager.SpawnEffectAllTime("LevelUp", PlayerMoveController.Instance.transform.position, PlayerMoveController.Instance.transform);
             SoundManager.Instance.PlaySound("Reward");
         }
-
-        //일일미션
-        DailyMissionManager.UpdateDailyMission(DailyMissionKey.LevelUp, 1);
-
-
     }
 
     private void UpdateLocalData()
     {
-        //레벨 증가
-        ServerData.statusTable.GetTableData(StatusTable.Level).Value++;
+        if (syncRoutine != null)
+        {
+            StopCoroutine(syncRoutine);
+        }
 
-        //스킬포인트 증가
-        ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value += GameBalance.SkillPointGet;
+        syncRoutine = StartCoroutine(SyncRoutine());
 
-        //스탯포인트 증가
-        ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value += GameBalance.StatPoint;
 
-        //스핀포인트 증가
-        ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value += GameBalance.levelUpSpinGet;
-
-        ShowContentsUnlockAlarm();
     }
 
-    private void ShowContentsUnlockAlarm()
+    private void ShowContentsUnlockAlarm(int accumLevel)
     {
-        return;
-        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+
+        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value + accumLevel;
 
         if (currentLevel == GameBalance.bonusDungeonUnlockLevel)
         {

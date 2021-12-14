@@ -6,31 +6,19 @@ using TMPro;
 using System;
 using UniRx;
 
-public class UiExpGauge : MonoBehaviour
+public class UiExpGauge : SingletonMono<UiExpGauge>
 {
     [SerializeField]
     private Image gauge;
     [SerializeField]
     private TextMeshProUGUI gaugeText;
+
     private void Start()
     {
-        Subscribe();
+        WhenGrowthValueChanged();
     }
 
-    private void Subscribe()
-    {
-        //GrowthManager.Instance.WhenPlayerLevelUp.AsObservable().Subscribe(e=> 
-        //{
-        //    WhenGrowthValueChanged();
-        //}).AddTo(this);
-
-        ServerData.growthTable.GetTableData(GrowthTable.Exp).AsObservable().Subscribe(e =>
-        {
-            WhenGrowthValueChanged();
-        }).AddTo(this);
-    }
-
-    private void WhenGrowthValueChanged()
+    public void WhenGrowthValueChanged()
     {
         Initialize(ServerData.growthTable.GetTableData(GrowthTable.Exp).Value, GrowthManager.Instance.maxExp.Value);
     }

@@ -225,6 +225,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
               successCallBack?.Invoke();
               UiSleepRewardMask.Instance.ShowMaskObject(false);
               LogManager.Instance.SendLogType("SleepReward", "Get", elapsedSeconds.ToString());
+              UiExpGauge.Instance.WhenGrowthValueChanged();
           });
     }
 
