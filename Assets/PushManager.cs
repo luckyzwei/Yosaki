@@ -16,6 +16,7 @@ public class PushManager : SingletonMono<PushManager>
     // Start is called before the first frame update
     public void Initialize()
     {
+#if UNITY_ANDROID
         // Firebase 클라우드 메시징 초기화
         // https://firebase.google.com/docs/cloud-messaging/unity/client?hl=ko#initialize
         Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenReceived;
@@ -48,8 +49,9 @@ public class PushManager : SingletonMono<PushManager>
                 // Firebase Unity SDK is not safe to use here.
             }
         });
+#endif
     }
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && UNITY_ANDROID
     private void Update()
     {
         if (canInit == true) 
