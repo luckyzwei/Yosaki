@@ -73,6 +73,28 @@ public class PushManager : SingletonMono<PushManager>
     }
 #endif
 
+#if UNITY_IOS
+    private void Update()
+    {
+        if (canInit == true) 
+        {
+            Backend.iOS.PutDeviceToken(isDevelopment.iosProd, (callback) =>
+            {
+                // 이후 처리
+                if (callback.IsSuccess())
+                {
+                    Debug.LogError("뒤끝 등록 성공");
+                }
+                else
+                {
+                    Debug.LogError($"뒤끝 등록 실패 {callback.GetStatusCode()}");
+                }
+            });
+            canInit = false;
+        }
+    }
+#endif
+
     // 토큰을 수신하며 차후 토큰을 사용하도록 캐시한다.
     public void OnTokenReceived(object sender, Firebase.Messaging.TokenReceivedEventArgs token)
     {
