@@ -130,7 +130,7 @@ public static class GameBalance
 
     public readonly static ObscuredFloat HotTime_Exp = 15;
     public readonly static ObscuredFloat HotTime_Gold = 15;
-    public readonly static ObscuredFloat HotTime_GrowthStone = 15;
+    public readonly static ObscuredFloat HotTime_GrowthStone = 30;
     public readonly static ObscuredFloat HotTime_Marble = 4;
 
     public readonly static ObscuredInt DailyRelicTicketGetCount = 3;

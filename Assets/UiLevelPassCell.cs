@@ -99,6 +99,8 @@ public class UiLevelPassCell : MonoBehaviour
         SetDescriptionText();
 
         Subscribe();
+
+        RefreshParent();
     }
 
     private void SetAmount()
@@ -269,5 +271,31 @@ public class UiLevelPassCell : MonoBehaviour
     {
         int currentLevel = (int)ServerData.statusTable.GetTableData(StatusTable.Level).Value;
         return currentLevel >= passInfo.require;
+    }
+
+    private void OnEnable()
+    {
+        RefreshParent();
+    }
+
+    private void RefreshParent()
+    {
+        if (passInfo == null) return;
+
+        if (HasLevelPassProduct() == false)
+        {
+            if (CanGetReward() == true && HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false)
+            {
+                this.transform.SetAsFirstSibling();
+            }
+        }
+        else
+        {
+            if (CanGetReward() == true &&
+                (HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false || HasReward(passInfo.rewardType_IAP_Key, passInfo.id)==false))
+            {
+                this.transform.SetAsFirstSibling();
+            }
+        }
     }
 }

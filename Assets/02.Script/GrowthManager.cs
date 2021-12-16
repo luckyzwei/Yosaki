@@ -194,4 +194,13 @@ public class GrowthManager : SingletonMono<GrowthManager>
         ServerData.growthTable.GetTableData(GrowthTable.Exp).Value = ServerData.growthTable.GetTableData(GrowthTable.Exp).Value * 0.5f;
         ServerData.growthTable.UpData(GrowthTable.Exp, false);
     }
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L)) 
+        {
+            ServerData.statusTable.GetTableData(StatusTable.Level).Value += 1000;
+        }
+    }
+#endif
 }

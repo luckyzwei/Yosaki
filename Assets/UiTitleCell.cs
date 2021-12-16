@@ -66,6 +66,8 @@ public class UiTitleCell : MonoBehaviour
         rewardAmount.SetText(Utils.ConvertBigNum(tableData.Rewardvalue));
 
         Subscribe();
+
+        SetTopParent();
     }
 
     private string GetAbilDescription()
@@ -165,5 +167,23 @@ public class UiTitleCell : MonoBehaviour
         }
 
         ServerData.equipmentTable.ChangeEquip(EquipmentTable.TitleSelectId, tableData.Id);
+    }
+
+    private void OnEnable()
+    {
+        SetTopParent();
+    }
+
+    private void SetTopParent()
+    {
+        if (tableData == null) return;
+
+        if (tableData.Displaygroup != 0 && tableData.Displaygroup != 1) return;
+
+        if (serverTable.clearFlag.Value == 1)
+        {
+            this.transform.SetAsFirstSibling();
+        }
+
     }
 }
