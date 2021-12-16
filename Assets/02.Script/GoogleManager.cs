@@ -364,7 +364,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
         //테스트용 a_8846847867697156085
         //로꼬 a_3961873472804492579
 #if UNITY_EDITOR
-        return "dwfww22ff22";
+        return "a_884684786769ee22e7156085";
 #endif
 
         Debug.LogError($"GetGoogleLoginKey {loginId}");
