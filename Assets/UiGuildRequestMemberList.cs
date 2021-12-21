@@ -13,6 +13,9 @@ public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
 
     private List<UiGuildMemberRequestCell> cells;
 
+    [SerializeField]
+    private GameObject emptyText;
+
     void Start()
     {
         Refresh();
@@ -26,6 +29,30 @@ public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
                 cells[i].gameObject.SetActive(false);
             }
         }
+
+        CheckDisableText();
+    }
+
+    private void CheckDisableText() 
+    {
+        if (cells == null) 
+        {
+            emptyText.SetActive(false);
+            return;
+        }
+
+        int activeCount = 0;
+
+        for (int i = 0; i < cells.Count; i++) 
+        {
+            if (cells[i].gameObject.activeInHierarchy) 
+            {
+                activeCount++;
+                break;
+            }
+        }
+
+        emptyText.SetActive(activeCount == 0);
     }
 
     public void Refresh()
@@ -33,6 +60,7 @@ public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
         if (UiGuildMemberList.Instance.GetMyGuildGrade() == UiGuildMemberCell.GuildGrade.Member)
         {
             PopupManager.Instance.ShowAlarmMessage("권한이 없습니다.");
+            CheckDisableText();
             return;
         }
 
@@ -40,6 +68,11 @@ public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
 
         if (bro.IsSuccess())
         {
+            if (cells != null)
+            {
+                cells.ForEach(e => e.gameObject.SetActive(false));
+            }
+
             cells = new List<UiGuildMemberRequestCell>();
 
             var returnValue = bro.GetReturnValuetoJSON();
@@ -66,6 +99,8 @@ public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
                     cells[i].gameObject.SetActive(false);
                 }
             }
+
+            PopupManager.Instance.ShowAlarmMessage("갱신 완료");
         }
         else
         {
@@ -75,6 +110,9 @@ public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
             }
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"조회 실패\n잠시후 다시 시도해 주세요\n{bro.GetStatusCode()} {bro.GetMessage()}", null);
         }
+
+
+        CheckDisableText();
     }
 }
 

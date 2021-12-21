@@ -85,6 +85,8 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     memberCells[i].gameObject.SetActive(false);
                 }
             }
+
+            PopupManager.Instance.ShowAlarmMessage("갱신 완료");
         }
         else
         {
