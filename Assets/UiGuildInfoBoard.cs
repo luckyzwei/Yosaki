@@ -24,12 +24,12 @@ public class UiGuildInfoBoard : MonoBehaviour
 
                 switch (errorCode) 
                 {
-                    case "memberExist": 
+                    case "memberExist 사전 조건을 만족하지 않습니다.": 
                         {
-                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "문파 마스터는 문파원이 한명도 없어야 탈퇴 가능 합니다!", null);
+                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "문주는 문파원이 한명도 없어야 탈퇴 가능 합니다!", null);
                         }
                         break;
-                    case "subscribed guild": 
+                    case "subscribed guild 사전 조건을 만족하지 않습니다.": 
                         {
                             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "문파에 가입되지 않은 유저 입니다!", null);
                         }
