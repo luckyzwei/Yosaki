@@ -1,6 +1,7 @@
 ﻿using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static UiGuildMemberCell;
 
@@ -16,11 +17,26 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
     public int guildMemberCount = GameBalance.GuildMemberMax;
 
+    [SerializeField]
+    private TextMeshProUGUI guildNameInputBoard;
+
+    public void RemovePlayer(string nickName)
+    {
+        for (int i = 0; i < memberCells.Count; i++)
+        {
+            if (memberCells[i].guildMemberInfo != null && memberCells[i].guildMemberInfo.nickName == nickName)
+            {
+                memberCells[i].gameObject.SetActive(false);
+                return;
+            }
+        }
+    }
+
     public GuildGrade GetMyGuildGrade()
     {
         for (int i = 0; i < memberCells.Count; i++)
         {
-            if (memberCells[i].guildMemberInfo != null && memberCells[i].guildMemberInfo.nickName.Equals(PlayerData.Instance.NickName)) 
+            if (memberCells[i].guildMemberInfo != null && memberCells[i].guildMemberInfo.nickName.Equals(PlayerData.Instance.NickName))
             {
                 return memberCells[i].guildMemberInfo.guildGrade;
             }
@@ -84,6 +100,15 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                 {
                     memberCells[i].gameObject.SetActive(false);
                 }
+            }
+
+            for (int i = 0; i < memberCells.Count; i++)
+            {
+                if (i < rows.Count)
+                {
+                    memberCells[i].RefreshKickButton();
+                }
+
             }
 
             PopupManager.Instance.ShowAlarmMessage("갱신 완료");

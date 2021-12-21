@@ -56,12 +56,6 @@ public class UiGuildListCell : MonoBehaviour
 
     public void OnClickEnterButton()
     {
-        if (ServerData.userInfoTable.TableDatas[UserInfoTable.CanEnterGuild].Value == 0)
-        {
-            PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 가입하실수 없습니다.(0시 초기화)");
-            return;
-        }
-
         if (memberCount >= GameBalance.GuildMemberMax)
         {
             PopupManager.Instance.ShowAlarmMessage("문파원이 가득차서 가입하실수 없습니다.");

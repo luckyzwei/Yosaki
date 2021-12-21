@@ -50,17 +50,22 @@ public class UiYomulBuffIndicator : MonoBehaviour
             }).AddTo(this);
         }
 
-        ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].AsObservable().Subscribe(e=> 
+        ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].AsObservable().Subscribe(e =>
         {
-            awakeBuffObject.SetActive(e == 1);
+            awakeBuffObject.SetActive(e == 1 && SettingData.YachaEffect.Value == 1);
 
-            if (e == 1) 
+            if (e == 1)
             {
                 for (int i = 0; i < tableData.Length; i++)
                 {
                     buffIconList[i].gameObject.SetActive(false);
                 }
             }
+        }).AddTo(this);
+
+        SettingData.YachaEffect.AsObservable().Subscribe(e =>
+        {
+            awakeBuffObject.SetActive(ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 1 && e == 1);
         }).AddTo(this);
     }
 }

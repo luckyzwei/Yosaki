@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UiGuildRecommendView : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class UiGuildRecommendView : MonoBehaviour
 
     [SerializeField]
     private Button refreshButton;
+
+    [SerializeField]
+    private TMP_InputField guildNameInputField;
 
     void Start()
     {
@@ -81,5 +85,70 @@ public class UiGuildRecommendView : MonoBehaviour
             refreshDelay = CoroutineExecuter.Instance.StartCoroutine(RefreshRoutine());
             RefreshGuildList();
         }
+    }
+
+    public void OnClickNameSearchButton()
+    {
+        BackendReturnObject bro = Backend.Social.Guild.GetGuildIndateByGuildNameV3(guildNameInputField.text);
+
+        if (bro.IsSuccess())
+        {
+            string guildIndate = bro.GetReturnValuetoJSON()["guildInDate"]["S"].ToString();
+
+            var bro2 = Backend.Social.Guild.GetGuildInfoV3(guildIndate);
+
+            if (bro2.IsSuccess())
+            {
+                int guildNum = int.Parse(bro2.GetReturnValuetoJSON()["guild"]["memberCount"]["N"].ToString());
+
+                if (guildNum >= GameBalance.GuildMemberMax) 
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "인원이 가득찬 문파 입니다.", null);
+                }
+                else 
+                {
+                    var bro3 = Backend.Social.Guild.ApplyGuildV3(guildIndate);
+
+                    if (bro3.IsSuccess())
+                    {
+                        PopupManager.Instance.ShowConfirmPopup("알림", "가입 신청 완료!", null);
+                    }
+                    else
+                    {
+                        switch (bro3.GetStatusCode())
+                        {
+
+                            //이미 가입한 길드
+                            case "409":
+                                {
+                                    PopupManager.Instance.ShowConfirmPopup("알림", "이미 가입 요청된 문파 입니다.", null);
+                                }
+                                break;
+                            //이미 길드가 있음
+                            case "412":
+                                {
+                                    PopupManager.Instance.ShowConfirmPopup("알림", "이미 가입된 문파가 있습니다.", null);
+                                }
+                                break;
+                            default:
+                                {
+                                    PopupManager.Instance.ShowConfirmPopup("알림", $"가입 요청 실패\n{bro.GetStatusCode()}", null);
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "존재하지 않는 문파 입니다.", null);
+            }
+
+        }
+        else
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "존재하지 않는 문파 입니다.", null);
+        }
+
     }
 }

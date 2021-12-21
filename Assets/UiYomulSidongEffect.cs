@@ -57,7 +57,12 @@ public class UiYomulSidongEffect : MonoBehaviour
 
         ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].AsObservable().Subscribe(e =>
         {
-            buffAwakeObject.SetActive(e == 1);
+            buffAwakeObject.SetActive(e == 1&& SettingData.YachaEffect.Value == 1);
+        }).AddTo(this);
+
+        SettingData.YachaEffect.AsObservable().Subscribe(e =>
+        {
+            buffAwakeObject.SetActive(ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 1 && e == 1);
         }).AddTo(this);
     }
 }

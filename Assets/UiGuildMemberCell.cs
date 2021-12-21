@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackEnd;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,6 +14,8 @@ public class UiGuildMemberCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI donateAmount;
     public GuildMemberInfo guildMemberInfo { get; private set; }
+
+    public GameObject kickButton;
 
     public enum GuildGrade
     {
@@ -57,6 +60,44 @@ public class UiGuildMemberCell : MonoBehaviour
         donateAmount.SetText(Utils.ConvertBigNum(guildMemberInfo.donateGoods));
 
         lastLogin.SetText(guildMemberInfo.lastLogin);
+
+        RefreshKickButton();
+    }
+
+    public void RefreshKickButton()
+    {
+        if (UiGuildMemberList.Instance.GetMyGuildGrade() == GuildGrade.Member)
+        {
+            kickButton.SetActive(false);
+        }
+        else if (UiGuildMemberList.Instance.GetMyGuildGrade() == GuildGrade.ViceMaster)
+        {
+            kickButton.SetActive(PlayerData.Instance.NickName != guildMemberInfo.nickName && guildMemberInfo.guildGrade == GuildGrade.Member);
+        }
+        else if (UiGuildMemberList.Instance.GetMyGuildGrade() == GuildGrade.Master)
+        {
+            kickButton.SetActive(PlayerData.Instance.NickName != guildMemberInfo.nickName);
+        }
+    }
+
+    public void OnClickKickButton()
+    {
+        PopupManager.Instance.ShowYesNoPopup("알림", $"({guildMemberInfo.nickName})유저를 추방 하시겠습니다?", () =>
+        {
+            var bro = Backend.Social.Guild.ExpelMemberV3(guildMemberInfo.gamerIndate);
+
+            if (bro.IsSuccess())
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "추방에 성공했습니다!", null);
+                UiGuildMemberList.Instance.RemovePlayer(guildMemberInfo.nickName);
+
+            }
+            else
+            {
+                PopupManager.Instance.ShowConfirmPopup("오류", $"권한이 없거나 이미 탈퇴한 유저 입니다.\n{bro.GetStatusCode()}", null);
+            }
+        }, null);
+
     }
 
 }
