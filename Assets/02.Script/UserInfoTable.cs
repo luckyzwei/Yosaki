@@ -108,6 +108,8 @@ public class UserInfoTable
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
     public const string buffAwake = "buffAwake";
     public const string petAwake = "petAwake";
+    public const string IgnoreDamDec = "IgnoreDamDec";
+    public const string CanEnterGuild = "CanEnterGuild";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -191,6 +193,8 @@ public class UserInfoTable
         {peachAttendance,0f},
         {buffAwake,0f},
         {petAwake,0f},
+        {IgnoreDamDec,0f},
+        {CanEnterGuild,1},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -502,6 +506,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.CanEnterGuild).Value = 1;
 
         //버프
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
@@ -567,6 +572,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
         userInfoParam.Add(UserInfoTable.freeSkill, ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value);
+        userInfoParam.Add(UserInfoTable.CanEnterGuild, ServerData.userInfoTable.GetTableData(UserInfoTable.CanEnterGuild).Value);
 
         userInfoParam.Add(UserInfoTable.buff_gold1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);
         userInfoParam.Add(UserInfoTable.buff_gold2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);

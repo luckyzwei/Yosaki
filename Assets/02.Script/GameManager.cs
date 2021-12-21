@@ -164,8 +164,16 @@ public class GameManager : SingletonMono<GameManager>
 
     private Coroutine internetConnectCheckRoutine;
 
+    private bool guildInfoLoadComplete = false;
+
     public void LoadNormalField()
     {
+        if (guildInfoLoadComplete == false)
+        {
+            GuildManager.Instance.LoadGuildInfo();
+            guildInfoLoadComplete = true;
+        }
+
         if (internetConnectCheckRoutine != null)
         {
             StopCoroutine(internetConnectCheckRoutine);
@@ -199,10 +207,8 @@ public class GameManager : SingletonMono<GameManager>
 
     IEnumerator checkInternetConnection(Action<bool> action)
     {
-#if UNITY_IOS
-      action(true);
-      yield break;
-#endif
+        action(true);
+        yield break;
 
         WWW www = new WWW("http://google.com");
         yield return www;

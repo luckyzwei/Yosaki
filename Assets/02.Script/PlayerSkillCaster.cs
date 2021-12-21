@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UniRx;
+using CodeStage.AntiCheat.ObscuredTypes;
 
 public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 {
@@ -14,6 +15,8 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     public Dictionary<int, SkillBase> UserSkills { get; private set; } = new Dictionary<int, SkillBase>();
 
     public bool isSkillMoveRestriction = false;
+
+    private ObscuredBool ignoreDamDecrease = false;
 
     public bool UseSkill(int skillIdx)
     {
@@ -30,6 +33,8 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     private void Start()
     {
         InitSkill();
+
+        ignoreDamDecrease = ServerData.userInfoTable.TableDatas[UserInfoTable.IgnoreDamDec].Value == 1;
     }
 
     public void SetMoveRestriction(float time)
@@ -143,7 +148,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
-            if (FrameCalculator.frameRate > 3)
+            if (ignoreDamDecrease == true || FrameCalculator.frameRate > 3)
             {
                 if (hit == 0)
                 {

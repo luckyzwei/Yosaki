@@ -153,6 +153,12 @@ public static class GameBalance
     public readonly static ObscuredFloat PetAwakeValuePerLevel = 0.003f;
     public readonly static ObscuredFloat AwakePetUpgradePrice = 100000000;
 
+    public readonly static ObscuredFloat GuildMakePrice = 500000000;
+    public readonly static ObscuredInt GuildMemberMax = 10;
+
+    public readonly static ObscuredInt GuildCreateMinLevel = 50000;
+    public readonly static ObscuredInt GuildEnterMinLevel = 10000;
+
     public static int GetSonIdx()
     {
         int level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;

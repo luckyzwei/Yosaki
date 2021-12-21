@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
+using static UiGuildMemberCell;
 
 public static class CommonString
 {
@@ -236,6 +237,24 @@ public static class CommonString
 
     public static string GetDialogTextName(DialogCharcterType type)
     {
+        return "미등록";
+    }
+
+    public static string GetGuildGradeName(GuildGrade grade) 
+    {
+        switch (grade)
+        {
+            case GuildGrade.Member:
+                return "문파원";
+                break;
+            case GuildGrade.ViceMaster:
+                return "부문주";
+                break;
+            case GuildGrade.Master:
+                return "문주";
+                break;
+        }
+
         return "미등록";
     }
 }

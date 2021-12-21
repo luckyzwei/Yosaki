@@ -61,31 +61,6 @@ public class UIrelicBoard : MonoBehaviour
     [SerializeField]
     private Button clearButton;
 
-    private ObscuredInt instantOpenAmount = 1;
-
-    public void OnClickToggle_1(bool isOn)
-    {
-        if (isOn)
-            instantOpenAmount = 1;
-    }
-
-    public void OnClickToggle_2(bool isOn)
-    {
-        if (isOn)
-            instantOpenAmount = 10;
-    }
-
-    public void OnClickToggle_3(bool isOn)
-    {
-        if (isOn)
-            instantOpenAmount = 100;
-    }
-
-    public void OnClickToggle_4(bool isOn)
-    {
-        if (isOn)
-            instantOpenAmount = 1000;
-    }
 
     public void OnClickInstantClearButton()
     {
@@ -98,7 +73,7 @@ public class UIrelicBoard : MonoBehaviour
         }
 
 
-        int clearAmount = Mathf.Min(instantOpenAmount, currentTicketNum);
+        int clearAmount = currentTicketNum;
 
         int currentKillCount = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.relicKillCount].Value;
 
