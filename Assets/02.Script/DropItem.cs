@@ -30,6 +30,7 @@ public enum Item_Type
     SheepStone,
     MonkeyStone,
     MiniGameReward,
+    GuildGoods,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

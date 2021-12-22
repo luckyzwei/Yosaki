@@ -53,6 +53,8 @@ public class UiTwelveBossContentsView : MonoBehaviour
     public void OnClickRewardButton()
     {
         UiTwelveRewardPopup.Instance.Initialize(bossTableData.Id);
+
+        UiContentsEnterPopup.Instance.transform.SetAsLastSibling();
     }
 
     public void OnClickEnterButton()

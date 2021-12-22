@@ -9,17 +9,17 @@ public class UiBossContentsBoard : MonoBehaviour
 
     [SerializeField]
     private Transform cellParent;
-    
+
     void Start()
     {
         Initialize();
     }
 
-    private void Initialize() 
+    private void Initialize()
     {
         var tableDatas = TableManager.Instance.TwelveBossTable.dataArray;
-
-        for (int i = 0; i < tableDatas.Length; i++)
+                                       //길드보스 -1
+        for (int i = 0; i < tableDatas.Length - 1; i++)
         {
             var cell = Instantiate<UiTwelveBossContentsView>(uiBossContentsViewPrefab, cellParent);
 
