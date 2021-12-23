@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
 {
@@ -16,10 +17,86 @@ public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
     [SerializeField]
     private GameObject emptyText;
 
+    [SerializeField]
+    private Button allAcceptButton;
+
+    [SerializeField]
+    private Button requireAgreeButton;
+
+    [SerializeField]
+    private GameObject acceptRequireObjects;
+
+    private void OnEnable()
+    {
+        acceptRequireObjects.SetActive(UiGuildMemberList.Instance.GetMyGuildGrade() == UiGuildMemberCell.GuildGrade.Master);
+
+        RefreshRequreButtons();
+    }
     void Start()
     {
         Refresh();
     }
+
+    private void RefreshRequreButtons()
+    {
+        if (UiGuildMemberList.Instance.GetMyGuildGrade() != UiGuildMemberCell.GuildGrade.Master) return;
+
+        if (GuildManager.Instance.guildInfoData != null)
+        {
+            if (GuildManager.Instance.guildInfoData.ContainsKey("_immediateRegistration")
+                && GuildManager.Instance.guildInfoData["_immediateRegistration"]["BOOL"].ToString().Equals("True"))
+            {
+                allAcceptButton.interactable = false;
+                requireAgreeButton.interactable = true;
+            }
+            else
+            {
+                allAcceptButton.interactable = true;
+                requireAgreeButton.interactable = false;
+            }
+        }
+
+    }
+
+
+
+    public void OnClickRequireAcceptButton()
+    {
+        var bro = Backend.Social.Guild.SetRegistrationValueV3(false);
+
+        if (bro.IsSuccess())
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "변경 완료! 문파에 가입 하려면 승인이 필요합니다.", null);
+
+            GuildManager.Instance.LoadGuildInfo();
+
+            RefreshRequreButtons();
+        }
+        else
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "문주가 아니거나,문파에 가입하지 않은 유저 입니다.", null);
+        }
+    }
+
+    public void OnClickAllAcceptButton()
+    {
+        var bro = Backend.Social.Guild.SetRegistrationValueV3(true);
+
+        if (bro.IsSuccess())
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "변경 완료! 승인 없이 유저가 가입 됩니다.", null);
+
+            GuildManager.Instance.LoadGuildInfo();
+
+            RefreshRequreButtons();
+        }
+        else
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "문주가 아니거나,문파에 가입하지 않은 유저 입니다.", null);
+        }
+
+    }
+
     public void DisableInCell(string nickName)
     {
         for (int i = 0; i < cells.Count; i++)
@@ -33,9 +110,9 @@ public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
         CheckDisableText();
     }
 
-    private void CheckDisableText() 
+    private void CheckDisableText()
     {
-        if (cells == null) 
+        if (cells == null)
         {
             emptyText.SetActive(false);
             return;
@@ -43,9 +120,9 @@ public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
 
         int activeCount = 0;
 
-        for (int i = 0; i < cells.Count; i++) 
+        for (int i = 0; i < cells.Count; i++)
         {
-            if (cells[i].gameObject.activeInHierarchy) 
+            if (cells[i].gameObject.activeInHierarchy)
             {
                 activeCount++;
                 break;

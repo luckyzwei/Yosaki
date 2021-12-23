@@ -16,6 +16,12 @@ using UnityEngine;
 public class GoogleManager : SingletonMono<GoogleManager>
 {
     [SerializeField]
+    private string editorLoginId;
+
+    [SerializeField]
+    private string testId = "a_8846847867697156085";
+    
+    [SerializeField]
     private UiNickNameInputBoard nickNameInputBoard;
 
     private bool isSignIn = false;
@@ -364,7 +370,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
         //테스트용 a_8846847867697156085
         //로꼬 a_3961873472804492579
 #if UNITY_EDITOR
-        return "a_8846847867697156085";
+        return editorLoginId;
 #endif
 
         Debug.LogError($"GetGoogleLoginKey {loginId}");

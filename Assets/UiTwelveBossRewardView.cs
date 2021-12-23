@@ -59,7 +59,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
 
         rewardAmount.SetText($"{Utils.ConvertBigNum(rewardInfo.rewardAmount)}개");
 
-        lockDescription.SetText($"최고 피해량 {rewardInfo.rewardCutString}에 해금");
+        lockDescription.SetText($"{rewardInfo.rewardCutString}에 해금");
 
         Subscribe();
     }

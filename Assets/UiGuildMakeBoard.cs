@@ -73,8 +73,8 @@ public class UiGuildMakeBoard : MonoBehaviour
 
             // 메타정보가 있는 경우 
             Param param = new Param();
-            param.Add("param1", 0); //길드아이콘
-            param.Add("param2", 0); //길드소개글
+            param.Add("guildIcon", 0); //길드아이콘
+            param.Add("guildDesc", "아직 소개가 없습니다."); //길드소개글
             param.Add("param3", 0);
             param.Add("param4", 0);
             param.Add("param5", 0);

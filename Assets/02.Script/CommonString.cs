@@ -141,6 +141,8 @@ public static class CommonString
             case Item_Type.SheepStone: return "폭주석";
             case Item_Type.MonkeyStone: return "지배석";
             case Item_Type.MiniGameReward: return "뽑기권";
+            case Item_Type.GuildPoint: return "검은구슬";
+            case Item_Type.GuildReward: return "정화된구슬";
         }
         return "미등록";
     }

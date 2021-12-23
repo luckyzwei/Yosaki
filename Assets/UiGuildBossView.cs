@@ -11,6 +11,11 @@ public class UiGuildBossView : MonoBehaviour
     {
         Initialize();
     }
+    private void OnEnable()
+    {
+        this.transform.SetAsLastSibling();
+    }
+
     private void Initialize()
     {
         bossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[TableManager.Instance.TwelveBossTable.dataArray.Length - 1]);

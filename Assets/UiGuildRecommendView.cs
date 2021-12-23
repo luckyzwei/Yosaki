@@ -100,18 +100,28 @@ public class UiGuildRecommendView : MonoBehaviour
             if (bro2.IsSuccess())
             {
                 int guildNum = int.Parse(bro2.GetReturnValuetoJSON()["guild"]["memberCount"]["N"].ToString());
+                bool isInstantAcceptGuild = bro2.GetReturnValuetoJSON()["guild"].ContainsKey("_immediateRegistration") &&
+                     bro2.GetReturnValuetoJSON()["guild"]["_immediateRegistration"]["BOOL"].ToString().Equals("True");
 
-                if (guildNum >= GameBalance.GuildMemberMax) 
+                if (guildNum >= GameBalance.GuildMemberMax)
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "인원이 가득찬 문파 입니다.", null);
                 }
-                else 
+                else
                 {
                     var bro3 = Backend.Social.Guild.ApplyGuildV3(guildIndate);
 
                     if (bro3.IsSuccess())
                     {
-                        PopupManager.Instance.ShowConfirmPopup("알림", "가입 신청 완료!", null);
+                        if (isInstantAcceptGuild == false)
+                        {
+                            PopupManager.Instance.ShowConfirmPopup("알림", "가입 신청 완료!", null);
+                        }
+                        else
+                        {
+                            PopupManager.Instance.ShowConfirmPopup("알림", "문파 가입 완료!!", null);
+                            GuildManager.Instance.LoadGuildInfo();
+                        }
                     }
                     else
                     {

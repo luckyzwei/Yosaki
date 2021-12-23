@@ -79,6 +79,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
+    public Sprite GuildPoint;
+    public Sprite GuildReward;
+
     public Sprite GetItemIcon(Item_Type type)
     {
         switch (type)
@@ -228,6 +231,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.PeachReal:
                 return Peach;
                 break;
+
+            case Item_Type.GuildPoint:
+                return GuildPoint;
+                break;
+
+            case Item_Type.GuildReward:
+                return GuildReward;
+                break;
         }
 
         return null;
@@ -253,4 +264,5 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public List<RuntimeAnimatorController> sonAnimators;
     public List<Sprite> sonThumbNail;
 
+    public List<Sprite> guildIcon;
 }

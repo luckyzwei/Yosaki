@@ -12,6 +12,10 @@ public class GuildManager : SingletonMono<GuildManager>
 
     public string myGuildIndate { get; private set; }
 
+    public LitJson.JsonData guildInfoData;
+
+    public ReactiveProperty<int> guildIconIdx = new ReactiveProperty<int>();
+
 
 
     //public struct GuildMemberInfo
@@ -42,9 +46,14 @@ public class GuildManager : SingletonMono<GuildManager>
 
             var returnValue = bro.GetReturnValuetoJSON();
 
+            guildInfoData = returnValue["guild"];
+
             this.myGuildIndate = returnValue["guild"]["inDate"]["S"].ToString();
 
             ChangeHasGuildState(true);
+
+            guildIconIdx.Value = int.Parse(returnValue["guild"]["guildIcon"]["N"].ToString());
+
             //string masterNick = returnValue["guild"]["masterNickname"]["S"].ToString();
 
 

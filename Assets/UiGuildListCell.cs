@@ -23,9 +23,14 @@ public class UiGuildListCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI guildMemNumCount;
 
+    [SerializeField]
+    private TextMeshProUGUI acceptDescription;
+
     private JsonData jsonData;
 
     private int memberCount;
+
+    private bool isInstantAcceptGuild = false;
 
     public void Initialize(JsonData jsonData)
     {
@@ -36,9 +41,9 @@ public class UiGuildListCell : MonoBehaviour
         string guildName = jsonData["guildName"].ToString();
         this.guildName.SetText(guildName);
 
-        int guildIconIdx = int.Parse(jsonData["param1"].ToString());
+        int guildIconIdx = int.Parse(jsonData["guildIcon"].ToString());
 
-        string description = jsonData["param2"].ToString();
+        string description = jsonData["guildDesc"].ToString();
         this.guildDescription.SetText(description);
 
         memberCount = int.Parse(jsonData["memberCount"].ToString());
@@ -46,6 +51,10 @@ public class UiGuildListCell : MonoBehaviour
 
         string masterName = jsonData["masterNickname"].ToString();
         this.masterName.SetText(masterName);
+
+        isInstantAcceptGuild = jsonData.ContainsKey("_immediateRegistration") && jsonData["_immediateRegistration"].ToString().Equals("True");
+
+        acceptDescription.SetText(isInstantAcceptGuild ? "즉시가입" : "가입신청");
     }
 
     public void OnClickInfoButton()
@@ -68,7 +77,15 @@ public class UiGuildListCell : MonoBehaviour
 
         if (bro.IsSuccess())
         {
-            PopupManager.Instance.ShowConfirmPopup("알림", "가입 신청 완료!", null);
+            if (isInstantAcceptGuild == false)
+            {
+                PopupManager.Instance.ShowConfirmPopup("알림", "문파 가입 신청 완료!", null);
+            }
+            else
+            {
+                PopupManager.Instance.ShowConfirmPopup("알림", "문파 가입 완료!!", null);
+                GuildManager.Instance.LoadGuildInfo();
+            }
 
             //GuildManager.Instance.ChangeHasGuildState(true);
 
