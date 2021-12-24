@@ -31,6 +31,6 @@ public class UiGuildRankCell : MonoBehaviour
 
         rankText.SetText(rankInfo.rank.ToString());
 
-        score.SetText(rankInfo.rank.ToString());
+        score.SetText($"{rankInfo.score}점");
     }
 }

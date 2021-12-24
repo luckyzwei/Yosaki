@@ -33,7 +33,7 @@ public class UiGuildTopRankerCell : MonoBehaviour
         Backend.Social.Guild.GetGuildInfoV3(rankInfo.indate, bro =>
         {
             // 이후 처리
-            if (bro.IsSuccess()) 
+            if (bro.IsSuccess())
             {
                 guildIcon.gameObject.SetActive(true);
                 masterName.gameObject.SetActive(true);
@@ -42,10 +42,18 @@ public class UiGuildTopRankerCell : MonoBehaviour
 
                 var returnValue = bro.GetReturnValuetoJSON();
                 var data = returnValue["guild"];
+
+                guildIcon.sprite = CommonUiContainer.Instance.guildIcon[int.Parse(returnValue["guild"]["guildIcon"]["N"].ToString())];
+
+                masterName.SetText(returnValue["guild"]["masterNickname"]["S"].ToString());
+
+                score.SetText($"{rankInfo.score}점");
+
+                rankText.SetText($"{rankInfo.rank}등");
             }
-            else 
+            else
             {
-            
+
             }
         });
     }

@@ -54,10 +54,10 @@ public class UiGuildRankBoard : MonoBehaviour
 
                         var rankInfo = new GuildRankInfo
                             (
-                            rows["guildName"]["S"].ToString(),
-                            rows["guildInDate"]["S"].ToString(),
-                           int.Parse(rows["rank"]["N"].ToString()),
-                            int.Parse(rows["score"]["N"].ToString())
+                            rows[i]["guildName"]["S"].ToString(),
+                            rows[i]["guildInDate"]["S"].ToString(),
+                           int.Parse(rows[i]["rank"]["N"].ToString()),
+                            int.Parse(rows[i]["score"]["N"].ToString())
                             );
 
                         uiGuildRankCells[i].Initialize(rankInfo);
