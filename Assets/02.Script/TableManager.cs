@@ -558,5 +558,10 @@ public class TableManager : SingletonMono<TableManager>
 
     public IosCoupon IosCoupon => iosCoupon;
 
+    [SerializeField]
+    private GuildRewardTable guildRewardTable;
+
+    public GuildRewardTable GuildRewardTable => guildRewardTable;
+
 }
 

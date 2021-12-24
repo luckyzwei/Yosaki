@@ -165,7 +165,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &58684575
 GameObject:
@@ -841,7 +841,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &674726471
 GameObject:
@@ -1764,6 +1764,7 @@ MonoBehaviour:
   attendanceReward_100: {fileID: 11400000, guid: cf28fd6cc1feb3e4fb4f561c43b9230c,
     type: 2}
   iosCoupon: {fileID: 11400000, guid: 36302576d79cefd4fb76adcc78da5db9, type: 2}
+  guildRewardTable: {fileID: 11400000, guid: fc3a39187f43a4b4ca1c9d5638911738, type: 2}
 --- !u!224 &1672999882 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3778453797765526293, guid: 341961fb75a51fb4c844909972cb6b1a,
@@ -1898,6 +1899,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: db441505ed48eba468a9bcd4a532b647, type: 3}
   - {fileID: 21300000, guid: 2118fdbf243da1545b922b29afa346a2, type: 3}
   - {fileID: 21300000, guid: 3fbe63d487923c64787bc785925db0f9, type: 3}
+  - {fileID: 21300000, guid: 0375c361df9370c4b81731daf52be8d7, type: 3}
   rankFrame:
   - {fileID: 21300000, guid: 180b014bbd854ff4c8d26a3bc3108a29, type: 3}
   - {fileID: 21300000, guid: 045aff0737bd68d449d44a4a9bb5b849, type: 3}
@@ -1968,8 +1970,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d43e1532e76e82d498f78f121b929a76, type: 2}
   - {fileID: 11400000, guid: d43e1532e76e82d498f78f121b929a76, type: 2}
   - {fileID: 11400000, guid: d43e1532e76e82d498f78f121b929a76, type: 2}
-  GuildPoint: {fileID: 0}
-  GuildReward: {fileID: 0}
+  GuildReward: {fileID: 21300000, guid: e03b837e432c12a45882817d48ca04a5, type: 3}
   statusIcon:
   - {fileID: 21300000, guid: 7854f2316f4dcd943a9a4b823ddd53c4, type: 3}
   - {fileID: 21300000, guid: f71053e9446063c4ba8f0d66f0bacd74, type: 3}
@@ -2035,6 +2036,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b471b9878e3224d4eb87be7516944980, type: 2}
   - {fileID: 11400000, guid: defe851e0d158a1429a16b69c2aeeb92, type: 2}
   - {fileID: 11400000, guid: bc2a84c0810556f42a5ad01d1cbbd921, type: 2}
+  - {fileID: 11400000, guid: 8140a763d8fdc6d4085687179883b7a5, type: 2}
   petCostumeList:
   - {fileID: 11400000, guid: 3d9145f3f8361c944acb6cd70679d6e2, type: 2}
   - {fileID: 11400000, guid: 206e7bbe5e49e2f4bb8859c83698d1d7, type: 2}
@@ -2097,18 +2099,23 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7ce44f1302817584aba5e7058030cbd7, type: 3}
   - {fileID: 21300000, guid: af1c4bac84dee6b47abcc8f0689f3ca2, type: 3}
   - {fileID: 21300000, guid: bb25bd2141c3942409e1b4638dc0c77f, type: 3}
-  guidIcons:
-  - {fileID: 21300000, guid: da89522d0f4b26644b8f55c4fc696277, type: 3}
-  - {fileID: 21300000, guid: 8f2877c0087c4934abddc4bfa7ae14b6, type: 3}
-  - {fileID: 21300000, guid: 2368468429a814d4dbe340f02d755c09, type: 3}
-  - {fileID: 21300000, guid: d1fee367d0fac95488a3fbfe86ccda9e, type: 3}
-  - {fileID: 21300000, guid: 493a6e0ceb1cf3946b73f07d143cfa3d, type: 3}
-  - {fileID: 21300000, guid: d47f016ffb99c67458980934d8773a65, type: 3}
-  - {fileID: 21300000, guid: e0edd679339c8c44eb9865b335144579, type: 3}
-  - {fileID: 21300000, guid: c79cdb4437d25af4b8bab2a9dc0883af, type: 3}
-  - {fileID: 21300000, guid: 2d36c67115e3da44eb79a13cfa72681f, type: 3}
-  - {fileID: 21300000, guid: 78ba33d23ab1efa4eb49f7ac089012bb, type: 3}
-  - {fileID: 21300000, guid: 65979598125c07644a62c618a33f5118, type: 3}
+  guildIcon:
+  - {fileID: 21300000, guid: 0ffce559378232e428570d5838de9d3f, type: 3}
+  - {fileID: 21300000, guid: 05080f6f5edaa054b8bc7f36c7272c49, type: 3}
+  - {fileID: 21300000, guid: 1703709157d13964da0789bc855eba02, type: 3}
+  - {fileID: 21300000, guid: 9ac4f3e16c6380c4ba63830f8c40af6d, type: 3}
+  - {fileID: 21300000, guid: 9f571373b9647884ebd4c4fc034d12d9, type: 3}
+  - {fileID: 21300000, guid: f98c79a526a70b941a5870218ecbddf4, type: 3}
+  - {fileID: 21300000, guid: 09a155bc3ce7c4f4d9c697e9b8f4ad6b, type: 3}
+  - {fileID: 21300000, guid: 10f81a9188052c84798cb88ce385819a, type: 3}
+  - {fileID: 21300000, guid: f08dbb3379b4e0145b88922521df5348, type: 3}
+  - {fileID: 21300000, guid: aa8d56e7f9f6bce40aeaa72e785ab4e3, type: 3}
+  - {fileID: 21300000, guid: 9a8a97f3edda3cd48bbdea7fb46665af, type: 3}
+  - {fileID: 21300000, guid: 7b04fa9f38ee2c54c84fe1c3be525883, type: 3}
+  - {fileID: 21300000, guid: cdf71664cbf97ac4789413a68c3cdac0, type: 3}
+  - {fileID: 21300000, guid: 692e00e959cf270438cc2ec4a86a21b7, type: 3}
+  - {fileID: 21300000, guid: 3fb9fef49ea4e554183bb9d4e3b1c2c4, type: 3}
+  - {fileID: 21300000, guid: 715b283a288a3fd4aa92e01f5f1cc8f0, type: 3}
 --- !u!4 &1918971821
 Transform:
   m_ObjectHideFlags: 0

@@ -109,7 +109,7 @@ public class UserInfoTable
     public const string buffAwake = "buffAwake";
     public const string petAwake = "petAwake";
     public const string IgnoreDamDec = "IgnoreDamDec";
-    public const string CanEnterGuild = "CanEnterGuild";
+    public const string SendGuildPoint = "SendGuildPoint";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -194,7 +194,7 @@ public class UserInfoTable
         {buffAwake,0f},
         {petAwake,0f},
         {IgnoreDamDec,0f},
-        {CanEnterGuild,1},
+        {SendGuildPoint,0},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -506,7 +506,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.CanEnterGuild).Value = 1;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value = 0;
 
         //버프
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
@@ -572,7 +572,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
         userInfoParam.Add(UserInfoTable.freeSkill, ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value);
-        userInfoParam.Add(UserInfoTable.CanEnterGuild, ServerData.userInfoTable.GetTableData(UserInfoTable.CanEnterGuild).Value);
+        userInfoParam.Add(UserInfoTable.SendGuildPoint, ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value);
 
         userInfoParam.Add(UserInfoTable.buff_gold1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);
         userInfoParam.Add(UserInfoTable.buff_gold2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);
@@ -643,6 +643,15 @@ public class UserInfoTable
         goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
 
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+        //길드보상 초기화
+        ServerData.bossServerTable.TableDatas["boss12"].rewardedId.Value = string.Empty;
+
+        Param bossParam = new Param();
+
+        bossParam.Add("boss12", ServerData.bossServerTable.TableDatas["boss12"].ConvertToString());
+
+        transactionList.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
         ServerData.SendTransaction(transactionList, false);
     }

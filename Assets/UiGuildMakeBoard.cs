@@ -82,44 +82,42 @@ public class UiGuildMakeBoard : MonoBehaviour
 
             createButton.interactable = false;
 
-            Backend.Social.Guild.CreateGuildV3(guildName, 10, param, (bro) =>
+            var bro = Backend.Social.Guild.CreateGuildV3(guildName, 10, param);
+
+            // 이후 처리
+            if (bro.IsSuccess())
             {
-                createButton.interactable = true;
-                // 이후 처리
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "문파 생성 성공!", null);
 
-                if (bro.IsSuccess())
-                {
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "문파 생성 성공!", null);
-
-                    GuildManager.Instance.LoadGuildInfo();
+                GuildManager.Instance.LoadGuildInfo();
 
 #if !UNITY_EDITOR
                     ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.GuildMakePrice;
                     ServerData.goodsTable.UpData(GoodsTable.Jade, false);
 #endif
-                }
-                else
+            }
+            else
+            {
+                switch (bro.GetStatusCode())
                 {
-                    switch (bro.GetStatusCode())
-                    {
-                        case "409":
-                            {
-                                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "이미 존재하는 문파명 입니다.", null);
-                            }
-                            break;
-                        case "412":
-                            {
-                                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "이미 문파에 가입되어 있습니다.", null);
-                            }
-                            break;
-                        default:
-                            {
-                                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"생성 오류\n{bro.GetStatusCode()}", null);
-                            }
-                            break;
-                    }
+                    case "409":
+                        {
+                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "이미 존재하는 문파명 입니다.", null);
+                        }
+                        break;
+                    case "412":
+                        {
+                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "이미 문파에 가입되어 있습니다.", null);
+                        }
+                        break;
+                    default:
+                        {
+                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"생성 오류\n{bro.GetStatusCode()}", null);
+                        }
+                        break;
                 }
-            });
+            }
+
         }, null);
 
 

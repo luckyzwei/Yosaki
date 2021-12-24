@@ -90,7 +90,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     string position = data["position"]["S"].ToString();
                     string lastLogin = data["lastLogin"]["S"].ToString();
                     string gamerIndate = data["gamerInDate"]["S"].ToString();
-                    int donateGoods = int.Parse(data["totalGoods5Amount"]["N"].ToString());
+                    int donateGoods = int.Parse(data["totalGoods1Amount"]["N"].ToString());
 
                     var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods);
 

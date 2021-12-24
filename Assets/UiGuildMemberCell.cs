@@ -13,6 +13,8 @@ public class UiGuildMemberCell : MonoBehaviour
     private TextMeshProUGUI lastLogin;
     [SerializeField]
     private TextMeshProUGUI donateAmount;
+    [SerializeField]
+    private TextMeshProUGUI grade;
     public GuildMemberInfo guildMemberInfo { get; private set; }
 
     public GameObject kickButton;
@@ -55,13 +57,30 @@ public class UiGuildMemberCell : MonoBehaviour
     {
         this.guildMemberInfo = guildMemberInfo;
 
-        nickName.SetText($"{guildMemberInfo.nickName}({CommonString.GetGuildGradeName(this.guildMemberInfo.guildGrade)})");
+        nickName.SetText($"{guildMemberInfo.nickName}");
 
-        donateAmount.SetText(Utils.ConvertBigNum(guildMemberInfo.donateGoods));
+        donateAmount.SetText($"{Utils.ConvertBigNum(guildMemberInfo.donateGoods)}점 추가");
 
         lastLogin.SetText(guildMemberInfo.lastLogin);
 
         RefreshKickButton();
+
+        grade.SetText($"({CommonString.GetGuildGradeName(this.guildMemberInfo.guildGrade)})");
+
+        switch (this.guildMemberInfo.guildGrade)
+        {
+            case GuildGrade.Member:
+                grade.color = Color.white;
+                break;
+            case GuildGrade.ViceMaster:
+                grade.color = Color.yellow;
+                break;
+            case GuildGrade.Master:
+                grade.color = Color.magenta;
+                break;
+        }
+
+        //)
     }
 
     public void RefreshKickButton()

@@ -46,7 +46,6 @@ public class GoodsTable
     public static string StageRelic = "StageRelic";
     public static string Peach = "PeachReal";
     public static string MiniGameReward = "MiniGameReward";
-    public static string GuildPoint = "GuildPoint";
     public static string GuildReward = "GuildReward";
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -80,7 +79,6 @@ public class GoodsTable
         {SheepStone,0f},
         {MonkeyStone,0f},
         {MiniGameReward,0f},
-        {GuildPoint,0f},
         {GuildReward,0f},
     };
 

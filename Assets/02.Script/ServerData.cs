@@ -229,6 +229,8 @@ public static class ServerData
             case Item_Type.costume13:
             case Item_Type.costume14:
             case Item_Type.costume15:
+            case Item_Type.costume16:
+            case Item_Type.costume17:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -241,9 +243,7 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += rewardValue;
                 break;
 
-            case Item_Type.GuildPoint:
-                ServerData.goodsTable.GetTableData(GoodsTable.GuildPoint).Value += rewardValue;
-                break;
+          
 
             case Item_Type.GuildReward:
                 ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += rewardValue;
@@ -295,6 +295,8 @@ public static class ServerData
             case Item_Type.costume13:
             case Item_Type.costume14:
             case Item_Type.costume15:
+            case Item_Type.costume16:
+            case Item_Type.costume17:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -323,9 +325,7 @@ public static class ServerData
                 passParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
-            case Item_Type.GuildPoint:
-                passParam.Add(GoodsTable.GuildPoint, ServerData.goodsTable.GetTableData(GoodsTable.GuildPoint).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+    
 
             case Item_Type.GuildReward:
                 passParam.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
@@ -438,10 +438,7 @@ public static class ServerData
                 param.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
-            case Item_Type.GuildPoint:
-                ServerData.goodsTable.GetTableData(GoodsTable.GuildPoint).Value += amount;
-                param.Add(GoodsTable.GuildPoint, ServerData.goodsTable.GetTableData(GoodsTable.GuildPoint).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
 
             case Item_Type.GuildReward:
                 ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += amount;
@@ -760,9 +757,7 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                     break;
 
-                case Item_Type.GuildPoint:
-                    ServerData.goodsTable.GetTableData(GoodsTable.GuildPoint).Value += amount;
-                    break;
+      
 
                 case Item_Type.GuildReward:
                     ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += amount;

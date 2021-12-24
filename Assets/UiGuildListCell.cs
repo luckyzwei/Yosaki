@@ -18,6 +18,9 @@ public class UiGuildListCell : MonoBehaviour
     private TextMeshProUGUI guildDescription;
 
     [SerializeField]
+    private TextMeshProUGUI guildScore;
+
+    [SerializeField]
     private TextMeshProUGUI masterName;
 
     [SerializeField]
@@ -54,13 +57,31 @@ public class UiGuildListCell : MonoBehaviour
 
         isInstantAcceptGuild = jsonData.ContainsKey("_immediateRegistration") && jsonData["_immediateRegistration"].ToString().Equals("True");
 
+        guildIcon.sprite = CommonUiContainer.Instance.guildIcon[int.Parse(jsonData["guildIcon"].ToString())];
+
         acceptDescription.SetText(isInstantAcceptGuild ? "즉시가입" : "가입신청");
-    }
 
-    public void OnClickInfoButton()
-    {
+        //점수 조회
+        string indate = jsonData["inDate"].ToString();
 
+        guildScore.SetText("(점수 조회중)");
 
+        Backend.Social.Guild.GetGuildGoodsByIndateV3(indate, bro =>
+        {
+            // 이후 처리
+            if (bro.IsSuccess())
+            {
+                var data = bro.GetReturnValuetoJSON();
+
+                if (guildScore != null)
+                    guildScore.SetText($"(점수:{int.Parse(data["goods"]["totalGoods1Amount"]["N"].ToString())}점)");
+            }
+            else
+            {
+                if (guildScore != null)
+                    guildScore.SetText("(점수 조회 실패)");
+            }
+        });
     }
 
     public void OnClickEnterButton()

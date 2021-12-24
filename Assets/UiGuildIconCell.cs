@@ -1,6 +1,7 @@
 ﻿using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,13 +10,31 @@ public class UiGuildIconCell : MonoBehaviour
     [SerializeField]
     private Image icon;
 
+    [SerializeField]
+    private GameObject selectedFrame;
+
     private int idx;
 
     public void Initialize(int idx)
     {
         this.idx = idx;
         icon.sprite = CommonUiContainer.Instance.guildIcon[idx];
+
+        Subscribe();
     }
+
+    private void Subscribe()
+    {
+
+        GuildManager.Instance.guildIconIdx.AsObservable().Subscribe(e =>
+        {
+
+            selectedFrame.SetActive(idx == e);
+
+        }).AddTo(this);
+
+    }
+
     public void OnCliCkIconButton()
     {
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "문파 아이콘을 변경 합니까?", () =>

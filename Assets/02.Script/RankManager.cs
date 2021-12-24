@@ -64,6 +64,8 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Real_Boss_Uuid = "1962f430-5b66-11ec-8846-eb56e6e68bb1";
     public const string Rank_Relic_Uuid = "0453f560-2779-11ec-9b46-299116fee741";
     public const string Rank_MiniGame_Uuid = "e1dced80-5954-11ec-b084-d1a61d5ec8e2";
+    public const string Rank_Guild_Uuid = "e83a9380-6435-11ec-9737-e53b5eab75db";
+
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
     public const string Rank_Boss = "Rank_Cat_4";
@@ -79,6 +81,8 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Real_Boss_Uuid = "ffa55080-5d25-11ec-80a4-d75a5ea006c8";
     public const string Rank_Relic_Uuid = "1ce07110-31b7-11ec-be95-537d9b90903a";
     public const string Rank_MiniGame_Uuid = "edec1600-5954-11ec-8846-eb56e6e68bb1";
+    public const string Rank_Guild_Uuid = "0ac9c650-6436-11ec-a4b2-3f5c11e7b3ef";
+
     public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";
     public const string Rank_Boss = "Rank_Cat_4_IOS";

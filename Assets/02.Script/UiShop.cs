@@ -243,12 +243,7 @@ public class UiShop : SingletonMono<UiShop>
                 }
                 break;
 
-            case Item_Type.GuildPoint:
-                {
-                    ServerData.goodsTable.GetTableData(GoodsTable.GuildPoint).Value += amount;
-                    param.Add(GoodsTable.GuildPoint, ServerData.goodsTable.GetTableData(GoodsTable.GuildPoint).Value);
-                }
-                break;
+       
 
             case Item_Type.GuildReward:
                 {

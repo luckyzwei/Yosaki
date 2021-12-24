@@ -106,6 +106,8 @@ public class UiCollectionEventCell : MonoBehaviour
             return;
         }
 
+        PopupManager.Instance.ShowAlarmMessage("교환 완료");
+
         //로컬
         ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value -= tableData.Price;
 

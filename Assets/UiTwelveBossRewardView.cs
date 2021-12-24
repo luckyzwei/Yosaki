@@ -33,6 +33,9 @@ public class UiTwelveBossRewardView : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI lockDescription;
 
+    [SerializeField]
+    private TextMeshProUGUI gradeText;
+
     private BossServerData bossServerData;
 
     [SerializeField]
@@ -60,6 +63,23 @@ public class UiTwelveBossRewardView : MonoBehaviour
         rewardAmount.SetText($"{Utils.ConvertBigNum(rewardInfo.rewardAmount)}개");
 
         lockDescription.SetText($"{rewardInfo.rewardCutString}에 해금");
+
+        if (gradeText != null)
+        {
+            gradeText.SetText($"{rewardInfo.idx + 1}단계\n({rewardInfo.idx + 1}점)");
+
+            //문파만
+            if (bossServerData.idx == 12)
+            {
+                if (rewardInfo.currentDamage >= rewardInfo.damageCut)
+                {
+                    if (UiGuildBossView.Instance.rewardGrade < rewardInfo.idx + 1)
+                    {
+                        UiGuildBossView.Instance.rewardGrade = rewardInfo.idx + 1;
+                    }
+                }
+            }
+        }
 
         Subscribe();
     }
@@ -124,5 +144,48 @@ public class UiTwelveBossRewardView : MonoBehaviour
               SoundManager.Instance.PlaySound("Reward");
               rewardButton.interactable = true;
           });
+    }
+
+    public bool GetRewardByScript()
+    {
+        if (rewardInfo.currentDamage < rewardInfo.damageCut)
+        {
+            return false;
+        }
+
+        var rewards = bossServerData.rewardedId.Value.Split(BossServerTable.rewardSplit).ToList();
+
+        if (rewards.Contains(rewardInfo.idx.ToString()))
+        {
+            return false;
+        }
+
+        rewardButton.interactable = false;
+
+        Item_Type type = (Item_Type)rewardInfo.rewardType;
+
+        float amount = rewardInfo.rewardAmount;
+
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        Param bossParam = new Param();
+
+        bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+        var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+        bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+        transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+
+        transactions.Add(ServerData.GetItemTypeTransactionValueForAttendance(type, (int)amount));
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+        {
+            //PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
+            rewardButton.interactable = true;
+        });
+
+        return true;
     }
 }

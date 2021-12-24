@@ -29,8 +29,7 @@ public enum Item_Type
     HorseStone,
     SheepStone,
     MonkeyStone,
-    MiniGameReward,
-    GuildPoint,
+    MiniGameReward,   
     GuildReward,
 
     RankFrame1 = 100,
@@ -62,6 +61,15 @@ public enum Item_Type
     RankFrame21_100_miniGame = 306,
     RankFrame101_1000_miniGame = 307,
     RankFrame1001_10000_miniGame = 308,
+
+    RankFrame1_guild = 400,
+    RankFrame2_guild = 401,
+    RankFrame3_guild = 402,
+    RankFrame4_guild = 403,
+    RankFrame5_guild = 404,
+    RankFrame6_20_guild = 405,
+    RankFrame21_100_guild = 406,
+    RankFrame101_1000_guild = 407,
 
     MagicStoneBuff = 500,
     //1000~1100 무기
@@ -125,6 +133,8 @@ public enum Item_Type
     costume13 = 1214,
     costume14 = 1215,
     costume15 = 1216,
+    costume16 = 1217,
+    costume17 = 1218,
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,

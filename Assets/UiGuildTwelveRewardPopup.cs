@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using static UiTwelveRewardPopup;
 
-public class UiGuildTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
+public class UiGuildTwelveRewardPopup : SingletonMono<UiGuildTwelveRewardPopup>
 {
     [SerializeField]
     private GameObject rootObject;
@@ -22,7 +22,7 @@ public class UiGuildTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
     [SerializeField]
     private TextMeshProUGUI damText;
 
-    private void Start()
+    private void OnEnable()
     {
         Initialize(12);
     }
@@ -73,4 +73,39 @@ public class UiGuildTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
 
         }
     }
+
+    public void OnClickAllReceiveButton()
+    {
+        int rewardCount = 0;
+
+        for (int i = 0; i < uiTwelveBossRewardViews.Count; i++)
+        {
+            bool hasReward = uiTwelveBossRewardViews[i].GetRewardByScript();
+
+            if (hasReward)
+            {
+                rewardCount++;
+            }
+        }
+
+        if (rewardCount != 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
+            SoundManager.Instance.PlaySound("Reward");
+        }
+        else
+        {
+            PopupManager.Instance.ShowAlarmMessage("받을수 있는 보상이 없습니다.");
+        }
+    }
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            ServerData.userInfoTable.TableDatas[UserInfoTable.LastLogin].Value = 0;
+        }
+    }
+#endif
 }
