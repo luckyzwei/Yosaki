@@ -53,11 +53,11 @@ public class UiStageRankBoard : MonoBehaviour
             if (e != null)
             {   
                                                                 //스테이지 -1부터 시작함
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score+2}단계", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score+2}단계", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName);
             }
             else
             {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1,string.Empty);
             }
 
 
@@ -132,7 +132,12 @@ public class UiStageRankBoard : MonoBehaviour
 #endif
 
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{level+2}단계", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
+                        string guildName = string.Empty;
+                        if (splitData.Length >= 8)
+                        {
+                            guildName = splitData[7];
+                        }
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{level+2}단계", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName);
                     }
                     else
                     {

@@ -52,11 +52,11 @@ public class UiRealBossRankBoard : MonoBehaviour
         {
             if (e != null)
             {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName);
             }
             else
             {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1,string.Empty);
             }
 
 
@@ -132,8 +132,13 @@ public class UiRealBossRankBoard : MonoBehaviour
                     nickName = nickName.Replace(CommonString.IOS_nick, "");
 #endif
 
+                        string guildName = string.Empty;
+                        if (splitData.Length >= 8)
+                        {
+                            guildName = splitData[7];
+                        }
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName);
                     }
                     else
                     {

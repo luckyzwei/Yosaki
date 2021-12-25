@@ -129,8 +129,12 @@ public class UiInfinityRankBoard : MonoBehaviour
                         {
                             color1 = Color.yellow;
                         }
-
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"지하 {level + 1}층", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
+                        string guildName = string.Empty;
+                        if (splitData.Length >= 8)
+                        {
+                            guildName = splitData[7];
+                        }
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"지하 {level + 1}층", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName);
                     }
                     else
                     {

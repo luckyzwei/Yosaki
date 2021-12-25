@@ -52,11 +52,11 @@ public class UiMiniGameRankBoard : MonoBehaviour
         {
             if (e != null)
             {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score.ToString("F2")}초", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score.ToString("F2")}초", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName);
             }
             else
             {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1);
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1,string.Empty);
             }
 
 
@@ -130,8 +130,13 @@ public class UiMiniGameRankBoard : MonoBehaviour
 #if UNITY_IOS
                     nickName = nickName.Replace(CommonString.IOS_nick, "");
 #endif
+                        string guildName = string.Empty;
+                        if (splitData.Length >= 8)
+                        {
+                            guildName = splitData[7];
+                        }
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{score.ToString("F2")}초", rank, costumeId, petId, weaponId, magicBookId, fightPoint);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{score.ToString("F2")}초", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName);
                     }
                     else
                     {

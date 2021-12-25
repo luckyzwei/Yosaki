@@ -17,15 +17,21 @@ public class UiRankView : MonoBehaviour
     private TextMeshProUGUI text3;
 
     [SerializeField]
+    private TextMeshProUGUI guildName;
+
+    [SerializeField]
     private List<GameObject> rankList;
 
     public static int rank1Count = 0;
 
-    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int fightpoint)
+    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int fightpoint, string guildName)
     {
         this.text1.SetText(text1);
         this.text2.SetText(text2);
         this.text3.SetText(text3);
+
+        this.guildName.gameObject.SetActive(string.IsNullOrEmpty(guildName) == false);
+        this.guildName.SetText($"({guildName})");
 
         this.text1.gameObject.SetActive(rank != 1 && rank != 2 && rank != 3);
 
@@ -41,11 +47,11 @@ public class UiRankView : MonoBehaviour
             {
                 rankerCell = UiTopRankerView.Instance.RankerCellList[0];
             }
-            else if (rank1Count == 1) 
+            else if (rank1Count == 1)
             {
                 rankerCell = UiTopRankerView.Instance.RankerCellList[1];
             }
-            else if (rank1Count == 2) 
+            else if (rank1Count == 2)
             {
                 rankerCell = UiTopRankerView.Instance.RankerCellList[2];
             }
@@ -64,7 +70,7 @@ public class UiRankView : MonoBehaviour
         if (rankerCell != null)
         {
             rankerCell.gameObject.SetActive(true);
-            rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint);
+            rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName);
         }
     }
 }

@@ -487,6 +487,16 @@ public static class PlayerStats
 
         return ServerData.statusTable.GetTableData(StatusTable.Level).Value * GameBalance.YachaSkillAddValuePerLevel;
     }
+    public static float GetYachaIgnoreDefenseValue()
+    {
+        bool hasYacha = ServerData.weaponTable.TableDatas[yachaKey].hasItem.Value == 1;
+
+        bool cockAwake = ServerData.userInfoTable.TableDatas[UserInfoTable.cockAwake].Value == 1;
+
+        if (hasYacha == false || cockAwake == false) return 0f;
+
+        return ServerData.statusTable.GetTableData(StatusTable.Level).Value * GameBalance.YachaIgnoreDefenseAddValuePerLevel;
+    }
     #endregion
     #region SkillCoolTime
     public static float GetSkillCoolTimeDecreaseValue()
@@ -599,7 +609,7 @@ public static class PlayerStats
         return ret;
     }
 
-    public static float GetExpPlusValueExclusiveBuff() 
+    public static float GetExpPlusValueExclusiveBuff()
     {
         float ret = 0f;
         ret += ServerData.statusTable.GetStatusValue(StatusTable.ExpGain_memory);
@@ -762,7 +772,7 @@ public static class PlayerStats
 
         ret += GetSinsuEquipEffect(StatusType.IgnoreDefense);
 
-
+        ret += GetYachaIgnoreDefenseValue();
 
         return ret;
     }

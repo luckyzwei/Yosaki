@@ -29,7 +29,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public class RankInfo
     {
-        public RankInfo(string NickName, int Rank, float Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int fightPointIdx)
+        public RankInfo(string NickName, string GuildName, int Rank, float Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int fightPointIdx)
         {
 #if UNITY_ANDROID
             this.NickName = NickName;
@@ -45,9 +45,11 @@ public class RankManager : SingletonMono<RankManager>
             this.weaponIdx = weaponIdx;
             this.magicbookIdx = magicbookIdx;
             this.fightPointIdx = fightPointIdx;
+            this.GuildName = GuildName;
         }
 
         public string NickName;
+        public string GuildName;
         public int Rank;
         public float Score;
         public int costumeIdx;
@@ -143,7 +145,13 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
 
-                myRankInfo = new RankInfo(nickName, rank, level, costumeId, petId, weaponId, magicBookId, fightPoint);
+                string guildName = string.Empty;
+                if (splitData.Length >= 8)
+                {
+                    guildName = splitData[7];
+                }
+
+                myRankInfo = new RankInfo(nickName, guildName, rank, level, costumeId, petId, weaponId, magicBookId, fightPoint);
             }
         }
 
@@ -169,7 +177,7 @@ public class RankManager : SingletonMono<RankManager>
         int fightPoint = (int)PlayerStats.GetTotalPower();
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Level_Uuid, Rank_Level_TableName, RankTable_Level.Indate, param, bro =>
         {
@@ -218,7 +226,13 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
 
-                myRankInfo = new RankInfo(nickName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                string guildName = string.Empty;
+                if (splitData.Length >= 8)
+                {
+                    guildName = splitData[7];
+                }
+
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
             }
         }
 
@@ -244,7 +258,7 @@ public class RankManager : SingletonMono<RankManager>
         int fightPoint = (int)PlayerStats.GetTotalPower();
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Stage_Uuid, Rank_Stage, RankTable_Stage.Indate, param, bro =>
         {
@@ -295,7 +309,13 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
 
-                myRankInfo = new RankInfo(nickName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                string guildName = string.Empty;
+                if (splitData.Length >= 8)
+                {
+                    guildName = splitData[7];
+                }
+
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
             }
         }
 
@@ -332,7 +352,7 @@ public class RankManager : SingletonMono<RankManager>
         int fightPoint = (int)PlayerStats.GetTotalPower();
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Boss_Uuid, Rank_Boss, RankTable_Boss.Indate, param, bro =>
         {
@@ -382,7 +402,14 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
 
-                myRankInfo = new RankInfo(nickName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                string guildName = string.Empty;
+                if (splitData.Length >= 8)
+                {
+                    guildName = splitData[7];
+                }
+
+
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
             }
         }
 
@@ -416,7 +443,7 @@ public class RankManager : SingletonMono<RankManager>
         int fightPoint = (int)PlayerStats.GetTotalPower();
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Real_Boss_Uuid, Rank_Real_Boss, RankTable_Real_Boss.Indate, param, bro =>
         {
@@ -465,7 +492,13 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
 
-                myRankInfo = new RankInfo(nickName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                string guildName = string.Empty;
+                if (splitData.Length >= 8)
+                {
+                    guildName = splitData[7];
+                }
+
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
             }
         }
 
@@ -497,7 +530,7 @@ public class RankManager : SingletonMono<RankManager>
         int fightPoint = (int)PlayerStats.GetTotalPower();
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Relic_Uuid, Rank_Relic, RankTable_YoguiSogul.Indate, param, bro =>
         {
@@ -524,7 +557,7 @@ public class RankManager : SingletonMono<RankManager>
         Backend.URank.User.GetMyRank(RankManager.Rank_MiniGame_Uuid, MyMiniGameLoadComplete);
     }
 
-    public void ResetMiniGameScore() 
+    public void ResetMiniGameScore()
     {
         SendQueue.Enqueue(Backend.URank.User.GetMyRank, RankManager.Rank_MiniGame_Uuid, MyMiniGameLoadComplete);
     }
@@ -552,7 +585,13 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
 
-                myRankInfo = new RankInfo(nickName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                string guildName = string.Empty;
+                if (splitData.Length >= 8)
+                {
+                    guildName = splitData[7];
+                }
+
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
             }
 
             if (myRankInfo != null)
@@ -566,7 +605,7 @@ public class RankManager : SingletonMono<RankManager>
         }
         else
         {
-            if (bro.GetStatusCode().Equals("404")) 
+            if (bro.GetStatusCode().Equals("404"))
             {
                 if (this.myRankInfo[RankType.MiniGame] != null)
                 {
@@ -596,7 +635,7 @@ public class RankManager : SingletonMono<RankManager>
         int fightPoint = (int)PlayerStats.GetTotalPower();
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_MiniGame_Uuid, Rank_MiniGame, RankTable_MiniGame.Indate, param, bro =>
         {

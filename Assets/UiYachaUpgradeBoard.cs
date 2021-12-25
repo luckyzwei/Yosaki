@@ -25,8 +25,32 @@ public class UiYachaUpgradeBoard : SingletonMono<UiYachaUpgradeBoard>
     {
         ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(e=> 
         {
-            basicAbilDescription.SetText($"{CommonString.GetStatusName(StatusType.SkillDamage)} {PlayerStats.GetYachaSkillPercentValue()*100f} 증가");
+
+            UpdateDescriptionText();
+
         }).AddTo(this);
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.cockAwake].AsObservable().Subscribe(e => 
+        {
+
+            if (e == 1) 
+            {
+                UpdateDescriptionText();
+            }
+
+        }).AddTo(this);
+    }
+
+    private void UpdateDescriptionText() 
+    {
+        string desc = $"{CommonString.GetStatusName(StatusType.SkillDamage)} {PlayerStats.GetYachaSkillPercentValue() * 100f} 증가";
+
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.cockAwake].Value == 1)
+        {
+            desc += $"\n<color=red>{PlayerStats.GetYachaIgnoreDefenseValue()}증가</color>";
+        }
+
+        basicAbilDescription.SetText(desc);
     }
 
     private void Initialize()

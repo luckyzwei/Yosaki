@@ -27,12 +27,18 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private List<GameObject> norigaeEffects;
 
-    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int fightPoint)
+    [SerializeField]
+    private TextMeshProUGUI guildName;
+
+    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int fightPoint, string guildName)
     {
         this.nickName.SetText(nickName);
         this.rankText.SetText(rankText);
         SetCostumeSpine(costumeId);
         SetPetSpine(petId);
+
+        this.guildName.gameObject.SetActive(string.IsNullOrEmpty(guildName) == false);
+        this.guildName.SetText($"({guildName})");
 
         weapon.gameObject.SetActive(weaponId != -1);
 
@@ -57,7 +63,7 @@ public class UiTopRankerCell : MonoBehaviour
             {
                 int effectIdx = magicBookId % 4;
 
-                if (magicBookId == 20) 
+                if (magicBookId == 20)
                 {
                     effectIdx = 4;
                 }
@@ -69,7 +75,7 @@ public class UiTopRankerCell : MonoBehaviour
             }
         }
 
-       
+
     }
 
     private void SetPetSpine(int idx)

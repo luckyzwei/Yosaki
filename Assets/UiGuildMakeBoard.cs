@@ -63,7 +63,7 @@ public class UiGuildMakeBoard : MonoBehaviour
 
         if (CanMakeNickName() == false)
         {
-            PopupManager.Instance.ShowConfirmPopup("알림", "한글만 입력 가능 합니다! (10자 이내,금지 단어 포함X)", null);
+            PopupManager.Instance.ShowConfirmPopup("알림", "한글만 입력 가능 합니다! (8자 이내,금지 단어 포함X)", null);
             return;
         }
 

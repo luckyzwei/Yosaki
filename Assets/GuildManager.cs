@@ -12,6 +12,8 @@ public class GuildManager : SingletonMono<GuildManager>
 
     public string myGuildIndate { get; private set; }
 
+    public string myGuildName => guildInfoData == null ? string.Empty : guildInfoData["guildName"]["S"].ToString();
+
     public LitJson.JsonData guildInfoData;
 
     public ReactiveProperty<int> guildIconIdx = new ReactiveProperty<int>();

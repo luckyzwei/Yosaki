@@ -156,6 +156,7 @@ public static class GameBalance
     public readonly static ObscuredInt YachaRequireLevel = 5300;
 
     public readonly static ObscuredFloat YachaSkillAddValuePerLevel = 0.08f;
+    public readonly static ObscuredFloat YachaIgnoreDefenseAddValuePerLevel = 0.1f;
 
     public readonly static ObscuredInt SonCostumeUnlockLevel = 80000;
     public readonly static ObscuredInt YoungMulCreateEquipLevel = 120;

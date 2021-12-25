@@ -72,7 +72,7 @@ public class UiStatusBoard : MonoBehaviour
         int petId = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponId = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
         int magicBookId = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
-        topRankerCell.Initialize(string.Empty, string.Empty, costumeId, petId, weaponId, magicBookId, 0);
+        topRankerCell.Initialize(string.Empty, string.Empty, costumeId, petId, weaponId, magicBookId, 0, string.Empty);
     }
 
     public void OnClickStatResetButton()
