@@ -169,6 +169,44 @@ public class UiPostView : MonoBehaviour
                     break;
             }
         }
+        else if (type.IsGuildRewardItem())
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_guild:
+                    title.SetText("랭킹보상(1위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankReward_1_guild}개");
+                    break;
+                case Item_Type.RankFrame2_guild:
+                    title.SetText("랭킹보상(2위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankReward_2_guild}개");
+                    break;
+                case Item_Type.RankFrame3_guild:
+                    title.SetText("랭킹보상(3위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankReward_3_guild}개");
+                    break;
+                case Item_Type.RankFrame4_guild:
+                    title.SetText("랭킹보상(4위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankReward_4_guild}개");
+                    break;
+                case Item_Type.RankFrame5_guild:
+                    title.SetText("랭킹보상(5위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankReward_5_guild}개");
+                    break;
+                case Item_Type.RankFrame6_20_guild:
+                    title.SetText("랭킹보상(6~20위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankReward_6_20_guild}개");
+                    break;
+                case Item_Type.RankFrame21_100_guild:
+                    title.SetText("랭킹보상(21~100위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankReward_21_100_guild}개");
+                    break;
+                case Item_Type.RankFrame101_1000_guild:
+                    title.SetText("랭킹보상(101~1000위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankReward_101_1000_guild}개");
+                    break;
+            }
+        }
         else
         {
             title.SetText(postInfo.titleText);

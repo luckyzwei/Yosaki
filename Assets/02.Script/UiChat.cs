@@ -25,6 +25,8 @@ public class UiChat : MonoBehaviour
     private void Subscribe()
     {
         ChatManager.Instance.whenChatReceived.Subscribe(e => { SetMessage(e, false); }).AddTo(this);
+
+        ChatManager.Instance.LoadNormalChatHistory();
     }
 
     private void Initialize()

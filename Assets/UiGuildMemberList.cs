@@ -20,6 +20,8 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     [SerializeField]
     private TextMeshProUGUI guildNameInputBoard;
 
+    private bool initialized = false;
+
     public void RemovePlayer(string nickName)
     {
         for (int i = 0; i < memberCells.Count; i++)
@@ -50,6 +52,14 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
         Initialize();
     }
 
+    private void OnEnable()
+    {
+        if (initialized)
+        {
+            RefreshMemberList();
+        }
+    }
+
     private void Initialize()
     {
         memberCells = new List<UiGuildMemberCell>();
@@ -64,6 +74,8 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
         }
 
         RefreshMemberList();
+
+        initialized = true;
     }
 
     public void RefreshMemberList()

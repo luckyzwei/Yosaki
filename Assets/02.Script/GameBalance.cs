@@ -119,6 +119,15 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_101_1000_MiniGame = 3;
     public readonly static ObscuredInt rankReward_1001_10000_MiniGame = 2;
 
+    public readonly static ObscuredInt rankReward_1_guild = 10;
+    public readonly static ObscuredInt rankReward_2_guild = 9;
+    public readonly static ObscuredInt rankReward_3_guild = 8;
+    public readonly static ObscuredInt rankReward_4_guild = 7;
+    public readonly static ObscuredInt rankReward_5_guild = 6;
+    public readonly static ObscuredInt rankReward_6_20_guild = 5;
+    public readonly static ObscuredInt rankReward_21_100_guild = 4;
+    public readonly static ObscuredInt rankReward_101_1000_guild = 3;
+
     public readonly static ObscuredInt EventDropEndDay = 30;
     public readonly static ObscuredInt EventMakeEndDay = 1;
     public readonly static ObscuredInt EventPackageSaleEndDay = 1;

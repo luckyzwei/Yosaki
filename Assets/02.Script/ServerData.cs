@@ -243,7 +243,7 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += rewardValue;
                 break;
 
-          
+
 
             case Item_Type.GuildReward:
                 ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += rewardValue;
@@ -325,7 +325,7 @@ public static class ServerData
                 passParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
-    
+
 
             case Item_Type.GuildReward:
                 passParam.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
@@ -611,7 +611,7 @@ public static class ServerData
 
             Param userInfoParam = new Param();
             userInfoParam.Add(UserInfoTable.chatFrame, ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
-            
+
             Param goodsParam = new Param();
             goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
 
@@ -665,7 +665,7 @@ public static class ServerData
 
             SendTransaction(transactionList, successCallBack: () =>
             {
-              //  LogManager.Instance.SendLogType("RelicReward", type.ToString(), "");
+                //  LogManager.Instance.SendLogType("RelicReward", type.ToString(), "");
             });
         }
         else if (type.IsMiniGameRewardItem())
@@ -701,6 +701,7 @@ public static class ServerData
                     break;
             }
 
+
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
             Param goodsParam = new Param();
@@ -710,7 +711,50 @@ public static class ServerData
 
             SendTransaction(transactionList, successCallBack: () =>
             {
-                LogManager.Instance.SendLogType("MiniReward", type.ToString(), "");
+                // LogManager.Instance.SendLogType("MiniReward", type.ToString(), "");
+            });
+        }
+        else if (type.IsGuildRewardItem())
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_1_guild;
+                    break;
+                case Item_Type.RankFrame2_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_2_guild;
+                    break;
+                case Item_Type.RankFrame3_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_3_guild;
+                    break;
+                case Item_Type.RankFrame4_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_4_guild;
+                    break;
+                case Item_Type.RankFrame5_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_5_guild;
+                    break;
+                case Item_Type.RankFrame6_20_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_6_20_guild;
+                    break;
+                case Item_Type.RankFrame21_100_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_21_100_guild;
+                    break;
+                case Item_Type.RankFrame101_1000_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_101_1000_guild;
+                    break;
+            }
+
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
+
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransaction(transactionList, successCallBack: () =>
+            {
+                //LogManager.Instance.SendLogType("GuildReward", type.ToString(), "");
             });
         }
         else
@@ -757,7 +801,7 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                     break;
 
-      
+
 
                 case Item_Type.GuildReward:
                     ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += amount;

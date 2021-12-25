@@ -189,6 +189,17 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return MiniGameTicket;
                 break;
 
+            case Item_Type.RankFrame1_guild:
+            case Item_Type.RankFrame2_guild:
+            case Item_Type.RankFrame3_guild:
+            case Item_Type.RankFrame4_guild:
+            case Item_Type.RankFrame5_guild:
+            case Item_Type.RankFrame6_20_guild:
+            case Item_Type.RankFrame21_100_guild:
+            case Item_Type.RankFrame101_1000_guild:
+                return GuildReward;
+                break;
+
             case Item_Type.WeaponUpgradeStone:
                 return WeaponUpgradeStone;
                 break;

@@ -231,7 +231,7 @@ public class TwelveDungeonManager : ContentsManagerBase
     private void SendScore()
     {
         //인만 업데이트
-        if (GameManager.Instance.bossId == 8)
+        if (GameManager.Instance.bossId == 9)
         {
             RankManager.Instance.UpdateRealBoss_Score(damageAmount.Value);
         }

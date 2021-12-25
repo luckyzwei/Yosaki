@@ -59,10 +59,13 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                     if (bro.IsSuccess())
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "점수 추가 완료!", null);
+
+                        UiGuildChatBoard.Instance.SendRankScore($"<color=yellow>{PlayerData.Instance.NickName}님이 {rewardGrade}점을 추가했습니다.</color>");
+
                     }
                     else
                     {
-                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 수차에 실패했습니다\n오전 4시~오전 5시에는 갱신할수 없습니다\n({bro.GetStatusCode()})", null);
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n월요일 오전 4시~오전 5시에는 갱신할수 없습니다\n({bro.GetStatusCode()})", null);
 
                         ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value = 0;
 

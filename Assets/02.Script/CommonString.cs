@@ -45,7 +45,7 @@ public static class CommonString
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "고양이요괴전";
-    public static string RankPrefix_Real_Boss = "십이지신(신)";
+    public static string RankPrefix_Real_Boss = "십이지신(유)";
     public static string RankPrefix_Relic = "영혼의숲";
     public static string RankPrefix_MiniGame = "미니게임";
 

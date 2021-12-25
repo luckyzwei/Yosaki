@@ -1,14 +1,27 @@
 ﻿using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UiGuildInfoBoard : MonoBehaviour
 {
 
+    [SerializeField]
+    private TextMeshProUGUI title;
+
+    private void OnEnable()
+    {
+        SetGuildTitle();
+    }
+
+    private void SetGuildTitle() 
+    {
+        title.SetText(GuildManager.Instance.guildInfoData["guildName"]["S"].ToString());
+    }
     public void OnClickExitButton()
     {
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "문파를 탈퇴 합니까? \n<color=red>탈퇴시 1일간 다른 문파 가입 불가능\n문주는 문파원이 0명일때 탈퇴 가능</color>", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "문파를 탈퇴 합니까?\n문주는 문파원이 0명일때 탈퇴 가능</color>", () =>
         {
             var bro = Backend.Social.Guild.WithdrawGuildV3();
 
