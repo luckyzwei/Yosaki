@@ -45,7 +45,7 @@ public class DokebiEnterView : MonoBehaviour
 
         if (currentEnterCount >= GameBalance.dokebiEnterCount)
         {
-            PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 입장할수 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 입장할 수 없습니다.");
             return;
         }
 

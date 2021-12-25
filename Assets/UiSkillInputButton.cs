@@ -20,7 +20,7 @@ public class UiSkillInputButton : MonoBehaviour
     {
         if (AutoManager.Instance.IsAutoMode)
         {
-            PopupManager.Instance.ShowAlarmMessage("자동 모드에서는 사용할수 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage("자동 모드에서는 사용할 수 없습니다.");
             return;
         }
 

@@ -11,13 +11,9 @@ public class UiGuildBoard : MonoBehaviour
 
         if (currentLevel < GameBalance.GuildEnterMinLevel)
         {
-            PopupManager.Instance.ShowAlarmMessage($"문파 컨텐츠는 레벨 {GameBalance.GuildEnterMinLevel}부터 가능 합니다.");
-#if !UNITY_EDITOR
+            PopupManager.Instance.ShowAlarmMessage($"문파는 레벨 {GameBalance.GuildEnterMinLevel}부터 가입할 수 있습니다.");
             this.gameObject.SetActive(false);
             return;
-#else
-            GuildManager.Instance.LoadGuildInfo();
-#endif
         }
         else
         {

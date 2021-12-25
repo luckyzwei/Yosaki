@@ -119,14 +119,14 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_101_1000_MiniGame = 3;
     public readonly static ObscuredInt rankReward_1001_10000_MiniGame = 2;
 
-    public readonly static ObscuredInt rankReward_1_guild = 10;
-    public readonly static ObscuredInt rankReward_2_guild = 9;
-    public readonly static ObscuredInt rankReward_3_guild = 8;
-    public readonly static ObscuredInt rankReward_4_guild = 7;
-    public readonly static ObscuredInt rankReward_5_guild = 6;
-    public readonly static ObscuredInt rankReward_6_20_guild = 5;
-    public readonly static ObscuredInt rankReward_21_100_guild = 4;
-    public readonly static ObscuredInt rankReward_101_1000_guild = 3;
+    public readonly static ObscuredInt rankReward_1_guild = 800;
+    public readonly static ObscuredInt rankReward_2_guild = 700;
+    public readonly static ObscuredInt rankReward_3_guild = 600;
+    public readonly static ObscuredInt rankReward_4_guild = 500;
+    public readonly static ObscuredInt rankReward_5_guild = 400;
+    public readonly static ObscuredInt rankReward_6_20_guild = 300;
+    public readonly static ObscuredInt rankReward_21_100_guild = 200;
+    public readonly static ObscuredInt rankReward_101_1000_guild = 150;
 
     public readonly static ObscuredInt EventDropEndDay = 30;
     public readonly static ObscuredInt EventMakeEndDay = 1;
@@ -156,7 +156,7 @@ public static class GameBalance
     public readonly static ObscuredInt YachaRequireLevel = 5300;
 
     public readonly static ObscuredFloat YachaSkillAddValuePerLevel = 0.08f;
-    public readonly static ObscuredFloat YachaIgnoreDefenseAddValuePerLevel = 0.1f;
+    public readonly static ObscuredFloat YachaIgnoreDefenseAddValuePerLevel = 0.04f;
 
     public readonly static ObscuredInt SonCostumeUnlockLevel = 80000;
     public readonly static ObscuredInt YoungMulCreateEquipLevel = 120;
@@ -164,10 +164,10 @@ public static class GameBalance
     public readonly static ObscuredFloat AwakePetUpgradePrice = 100000000;
 
     public readonly static ObscuredFloat GuildMakePrice = 500000000;
-    public readonly static ObscuredInt GuildMemberMax = 10;
+    public readonly static ObscuredInt GuildMemberMax = 15;
 
-    public readonly static ObscuredInt GuildCreateMinLevel = 50000;
-    public readonly static ObscuredInt GuildEnterMinLevel = 10000;
+    public readonly static ObscuredInt GuildCreateMinLevel = 5000;
+    public readonly static ObscuredInt GuildEnterMinLevel = 5000;
 
     public static int GetSonIdx()
     {

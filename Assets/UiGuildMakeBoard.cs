@@ -75,7 +75,12 @@ public class UiGuildMakeBoard : MonoBehaviour
             Param param = new Param();
             param.Add("guildIcon", 0); //길드아이콘
             param.Add("guildDesc", "아직 소개가 없습니다."); //길드소개글
-            param.Add("param3", 0);
+#if UNITY_ANDROID
+            param.Add("isAnd", 1);
+#endif
+#if UNITY_IOS
+            param.Add("isAnd", 0);
+#endif
             param.Add("param4", 0);
             param.Add("param5", 0);
             param.Add("param6", 0);
@@ -84,6 +89,7 @@ public class UiGuildMakeBoard : MonoBehaviour
 
             var bro = Backend.Social.Guild.CreateGuildV3(guildName, 10, param);
 
+            createButton.interactable = true;
             // 이후 처리
             if (bro.IsSuccess())
             {

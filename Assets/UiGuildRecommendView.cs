@@ -21,12 +21,17 @@ public class UiGuildRecommendView : MonoBehaviour
 
     void Start()
     {
-        RefreshGuildList();
+        RefreshGuildList(false);
     }
 
-    private void RefreshGuildList()
+    private void RefreshGuildList(bool showAlarmMessage = true)
     {
-        var bro = Backend.Social.Guild.GetRandomGuildInfoV3(5);
+#if UNITY_ANDROID
+        var bro = Backend.Social.Guild.GetRandomGuildInfoV3("isAnd", 1, 0, 5);
+#endif
+#if UNITY_IOS
+        var bro = Backend.Social.Guild.GetRandomGuildInfoV3("isAnd",0,0,5);
+#endif
 
         loadFailObject.SetActive(!bro.IsSuccess());
 
@@ -47,6 +52,10 @@ public class UiGuildRecommendView : MonoBehaviour
                 }
             }
 
+            if (showAlarmMessage)
+            {
+                PopupManager.Instance.ShowAlarmMessage("갱신 완료");
+            }
             ////example
             //for (int i = 0; i < bro.Rows().Count; i++)
             //{
@@ -55,7 +64,7 @@ public class UiGuildRecommendView : MonoBehaviour
         }
         else
         {
-
+            PopupManager.Instance.ShowAlarmMessage("갱신 실패");
         }
 
 
@@ -102,6 +111,24 @@ public class UiGuildRecommendView : MonoBehaviour
                 int guildNum = int.Parse(bro2.GetReturnValuetoJSON()["guild"]["memberCount"]["N"].ToString());
                 bool isInstantAcceptGuild = bro2.GetReturnValuetoJSON()["guild"].ContainsKey("_immediateRegistration") &&
                      bro2.GetReturnValuetoJSON()["guild"]["_immediateRegistration"]["BOOL"].ToString().Equals("True");
+
+                bool isAndroidGuild = int.Parse(bro2.GetReturnValuetoJSON()["guild"]["isAnd"]["N"].ToString()) == 1;
+
+#if UNITY_ANDROID
+                if (isAndroidGuild == false) 
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "가입할 수 없는 문파 입니다.", null);
+                    return;
+                }
+#endif
+
+#if UNITY_IOS
+                if (isAndroidGuild == true)
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "가입할 수 없는 문파 입니다.", null);
+                    return;
+                }
+#endif
 
                 if (guildNum >= GameBalance.GuildMemberMax)
                 {

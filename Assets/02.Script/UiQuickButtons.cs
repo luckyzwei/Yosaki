@@ -171,7 +171,7 @@ public class UiQuickButtons : MonoBehaviour
         {
             if (showAlarmText)
             {
-                PopupManager.Instance.ShowAlarmMessage("이곳에서는 뿌리식물을 사용할수 없습니다.");
+                PopupManager.Instance.ShowAlarmMessage("이곳에서는 뿌리식물을 사용할 수 없습니다.");
             }
             return;
         }
