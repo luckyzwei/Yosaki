@@ -523,6 +523,12 @@ public class RankManager : SingletonMono<RankManager>
 
         Backend.URank.User.GetMyRank(RankManager.Rank_MiniGame_Uuid, MyMiniGameLoadComplete);
     }
+
+    public void ResetMiniGameScore() 
+    {
+        SendQueue.Enqueue(Backend.URank.User.GetMyRank, RankManager.Rank_MiniGame_Uuid, MyMiniGameLoadComplete);
+    }
+
     private void MyMiniGameLoadComplete(BackendReturnObject bro)
     {
         RankInfo myRankInfo = null;
@@ -548,15 +554,28 @@ public class RankManager : SingletonMono<RankManager>
 
                 myRankInfo = new RankInfo(nickName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
             }
-        }
 
-        if (myRankInfo != null)
+            if (myRankInfo != null)
+            {
+                whenLoadSuccess_MiniGame?.Invoke(myRankInfo);
+                WhenMyMiniGameRankLoadComplete.Execute(myRankInfo);
+
+                this.myRankInfo[RankType.MiniGame] = myRankInfo;
+            }
+
+        }
+        else
         {
-            whenLoadSuccess_MiniGame?.Invoke(myRankInfo);
-            WhenMyMiniGameRankLoadComplete.Execute(myRankInfo);
-
-            this.myRankInfo[RankType.MiniGame] = myRankInfo;
+            if (bro.GetStatusCode().Equals("404")) 
+            {
+                if (this.myRankInfo[RankType.MiniGame] != null)
+                {
+                    this.myRankInfo[RankType.MiniGame].Score = 0f;
+                }
+            }
         }
+
+
     }
 
     public void UpdateMiniGame_Score(float score)

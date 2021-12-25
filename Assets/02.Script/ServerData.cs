@@ -408,6 +408,11 @@ public static class ServerData
                 param.Add(GoodsTable.SheepStone, ServerData.goodsTable.GetTableData(GoodsTable.SheepStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
+            case Item_Type.CockStone:
+                ServerData.goodsTable.GetTableData(GoodsTable.CockStone).Value += amount;
+                param.Add(GoodsTable.CockStone, ServerData.goodsTable.GetTableData(GoodsTable.CockStone).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.MonkeyStone:
                 ServerData.goodsTable.GetTableData(GoodsTable.MonkeyStone).Value += amount;
                 param.Add(GoodsTable.MonkeyStone, ServerData.goodsTable.GetTableData(GoodsTable.MonkeyStone).Value);

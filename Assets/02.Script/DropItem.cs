@@ -31,6 +31,7 @@ public enum Item_Type
     MonkeyStone,
     MiniGameReward,   
     GuildReward,
+    CockStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

@@ -229,6 +229,8 @@ public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
     private void OnEnable()
     {
         gameState.Value = MiniGameState.Wait;
+
+        RankManager.Instance.ResetMiniGameScore();
     }
 
     public void OnClickCloseButton()

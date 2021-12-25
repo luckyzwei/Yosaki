@@ -110,6 +110,7 @@ public class UserInfoTable
     public const string petAwake = "petAwake";
     public const string IgnoreDamDec = "IgnoreDamDec";
     public const string SendGuildPoint = "SendGuildPoint";
+    public const string cockAwake = "cockAwake";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -195,6 +196,7 @@ public class UserInfoTable
         {petAwake,0f},
         {IgnoreDamDec,0f},
         {SendGuildPoint,0},
+        {cockAwake,0},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();

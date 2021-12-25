@@ -32,6 +32,7 @@ public class GoodsTable
     public static string HorseStone = "HorseStone";
     public static string SheepStone = "SheepStone";
     public static string MonkeyStone = "MonkeyStone";
+    public static string CockStone = "CockStone";
 
     //포션
     public static string Potion_0 = "Potion_0";
@@ -80,6 +81,7 @@ public class GoodsTable
         {MonkeyStone,0f},
         {MiniGameReward,0f},
         {GuildReward,0f},
+        {CockStone,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

@@ -29,6 +29,12 @@ public class UiGuildListCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI acceptDescription;
 
+    [SerializeField]
+    private Button enterButton;
+
+    [SerializeField]
+    private TextMeshProUGUI enterDescription;
+
     private JsonData jsonData;
 
     private int memberCount;
@@ -86,57 +92,82 @@ public class UiGuildListCell : MonoBehaviour
 
     public void OnClickEnterButton()
     {
-        if (memberCount >= GameBalance.GuildMemberMax)
-        {
-            PopupManager.Instance.ShowAlarmMessage("문파원이 가득차서 가입하실수 없습니다.");
-            return;
-        }
-
         string indate = jsonData["inDate"].ToString();
 
-        var bro = Backend.Social.Guild.ApplyGuildV3(indate);
+        enterButton.interactable = false;
+        enterDescription.SetText("신청됨");
 
-        if (bro.IsSuccess())
+        SendQueue.Enqueue(Backend.Social.Guild.GetGuildInfoV3, indate, callback =>
         {
-            if (isInstantAcceptGuild == false)
+            // 이후 처리
+            if (callback.IsSuccess())
             {
-                PopupManager.Instance.ShowConfirmPopup("알림", "문파 가입 신청 완료!", null);
+                int guildNum = int.Parse(callback.GetReturnValuetoJSON()["guild"]["memberCount"]["N"].ToString());
+                if (guildNum >= GameBalance.GuildMemberMax)
+                {
+                    PopupManager.Instance.ShowConfirmPopup("알림", "문파원이 가득차서 가입하실수 없습니다.", null);
+
+                    enterButton.interactable = true;
+                    enterDescription.SetText("가입 신청");
+
+                    return;
+                }
+                else
+                {
+                    SendQueue.Enqueue(Backend.Social.Guild.ApplyGuildV3, indate, bro =>
+                     {
+                         enterButton.interactable = true;
+                         enterDescription.SetText("가입 신청");
+
+                         if (bro.IsSuccess())
+                         {
+                             if (isInstantAcceptGuild == false)
+                             {
+                                 PopupManager.Instance.ShowConfirmPopup("알림", "문파 가입 신청 완료!", null);
+                             }
+                             else
+                             {
+                                 PopupManager.Instance.ShowConfirmPopup("알림", "문파 가입 완료!!", null);
+                                 GuildManager.Instance.LoadGuildInfo();
+                             }
+                         }
+                         else
+                         {
+                             switch (bro.GetStatusCode())
+                             {
+
+                                 //이미 가입한 길드
+                                 case "409":
+                                     {
+                                         PopupManager.Instance.ShowConfirmPopup("알림", "이미 가입 요청된 문파 입니다.", null);
+                                     }
+                                     break;
+                                 //이미 길드가 있음
+                                 case "412":
+                                     {
+                                         PopupManager.Instance.ShowConfirmPopup("알림", "이미 가입된 문파가 있습니다.", null);
+                                     }
+                                     break;
+                                 default:
+                                     {
+                                         PopupManager.Instance.ShowConfirmPopup("알림", $"가입 요청 실패\n{bro.GetStatusCode()}", null);
+                                     }
+                                     break;
+                             }
+                         }
+
+
+                     });
+                }
             }
             else
             {
-                PopupManager.Instance.ShowConfirmPopup("알림", "문파 가입 완료!!", null);
-                GuildManager.Instance.LoadGuildInfo();
+                PopupManager.Instance.ShowConfirmPopup("알림", $"가입 요청 실패\n{callback.GetStatusCode()}", null);
+
+                enterButton.interactable = true;
+                enterDescription.SetText("가입 신청");
             }
-
-            //GuildManager.Instance.ChangeHasGuildState(true);
-
-            //ServerData.userInfoTable.TableDatas[UserInfoTable.CanEnterGuild].Value = 0;
-            //ServerData.userInfoTable.UpData(UserInfoTable.CanEnterGuild, false);
-        }
-        else
-        {
-            switch (bro.GetStatusCode())
-            {
-
-                //이미 가입한 길드
-                case "409":
-                    {
-                        PopupManager.Instance.ShowConfirmPopup("알림", "이미 가입 요청된 문파 입니다.", null);
-                    }
-                    break;
-                //이미 길드가 있음
-                case "412":
-                    {
-                        PopupManager.Instance.ShowConfirmPopup("알림", "이미 가입된 문파가 있습니다.", null);
-                    }
-                    break;
-                default:
-                    {
-                        PopupManager.Instance.ShowConfirmPopup("알림", $"가입 요청 실패\n{bro.GetStatusCode()}", null);
-                    }
-                    break;
-            }
-        }
+        });
     }
 
     //Success cases
