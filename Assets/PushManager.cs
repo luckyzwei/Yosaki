@@ -16,6 +16,15 @@ public class PushManager : SingletonMono<PushManager>
     // Start is called before the first frame update
     public void Initialize()
     {
+#if UNITY_IOS
+        var bro = Backend.iOS.PutDeviceToken(isDevelopment.iosProd);
+
+        if (bro.IsSuccess())
+        {
+            Debug.LogError("IOS 푸시 토큰 설정 완료");
+        }
+#endif
+
 #if UNITY_ANDROID
         // Firebase 클라우드 메시징 초기화
         // https://firebase.google.com/docs/cloud-messaging/unity/client?hl=ko#initialize
