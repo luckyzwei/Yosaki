@@ -29,11 +29,11 @@ public class UiGuildMakeBoard : MonoBehaviour
 
     private bool CanMakeNickName()
     {
-#if UNITY_ANDROID
+
         bool isRightRangeChar = Regex.IsMatch(inputField.text, "^[가-힣]*$");
         bool hasBadWorld = Utils.HasBadWord(inputField.text);
         return isRightRangeChar && hasBadWorld == false;
-#endif
+
     }
 
 
