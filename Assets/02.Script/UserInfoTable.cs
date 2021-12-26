@@ -111,6 +111,7 @@ public class UserInfoTable
     public const string IgnoreDamDec = "IgnoreDamDec";
     public const string SendGuildPoint = "SendGuildPoint";
     public const string cockAwake = "cockAwake";
+    public const string peachRefund = "peachRefund";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -197,6 +198,7 @@ public class UserInfoTable
         {IgnoreDamDec,0f},
         {SendGuildPoint,0},
         {cockAwake,0},
+        {peachRefund,0},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();

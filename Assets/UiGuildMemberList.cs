@@ -22,6 +22,9 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
     private bool initialized = false;
 
+    [SerializeField]
+    private GameObject guildInfoButton;
+
     public void RemovePlayer(string nickName)
     {
         for (int i = 0; i < memberCells.Count; i++)
@@ -130,5 +133,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
             memberCells.ForEach(e => e.gameObject.SetActive(false));
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "조회 실패\n잠시후 다시 시도해 주세요", null);
         }
+
+        guildInfoButton.SetActive(GetMyGuildGrade() == GuildGrade.Master);
     }
 }

@@ -107,7 +107,7 @@ public class UiGuildMemberCell : MonoBehaviour
 
             if (bro.IsSuccess())
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "추방에 성공했습니다!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "추방 했습니다", null);
                 UiGuildMemberList.Instance.RemovePlayer(guildMemberInfo.nickName);
 
             }

@@ -47,7 +47,7 @@ public class UiYachaUpgradeBoard : SingletonMono<UiYachaUpgradeBoard>
 
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.cockAwake].Value == 1)
         {
-            desc += $"\n<color=red>{PlayerStats.GetYachaIgnoreDefenseValue()}증가</color>";
+            desc += $"\n<color=red>{CommonString.GetStatusName(StatusType.IgnoreDefense)} {PlayerStats.GetYachaIgnoreDefenseValue()}증가</color>";
         }
 
         basicAbilDescription.SetText(desc);

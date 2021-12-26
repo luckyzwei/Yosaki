@@ -97,10 +97,8 @@ public class UiGuildMakeBoard : MonoBehaviour
 
                 GuildManager.Instance.LoadGuildInfo();
 
-#if !UNITY_EDITOR
-                    ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.GuildMakePrice;
-                    ServerData.goodsTable.UpData(GoodsTable.Jade, false);
-#endif
+                ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.GuildMakePrice;
+                ServerData.goodsTable.UpData(GoodsTable.Jade, false);
             }
             else
             {

@@ -156,15 +156,15 @@ public static class GameBalance
     public readonly static ObscuredInt YachaRequireLevel = 5300;
 
     public readonly static ObscuredFloat YachaSkillAddValuePerLevel = 0.08f;
-    public readonly static ObscuredFloat YachaIgnoreDefenseAddValuePerLevel = 0.04f;
+    public readonly static ObscuredFloat YachaIgnoreDefenseAddValuePerLevel = 0.08f;
 
     public readonly static ObscuredInt SonCostumeUnlockLevel = 80000;
     public readonly static ObscuredInt YoungMulCreateEquipLevel = 120;
     public readonly static ObscuredFloat PetAwakeValuePerLevel = 0.003f;
     public readonly static ObscuredFloat AwakePetUpgradePrice = 100000000;
 
-    public readonly static ObscuredFloat GuildMakePrice = 500000000;
-    public readonly static ObscuredInt GuildMemberMax = 15;
+    public readonly static ObscuredFloat GuildMakePrice = 100000000;
+    public readonly static ObscuredInt GuildMemberMax = 20;
 
     public readonly static ObscuredInt GuildCreateMinLevel = 5000;
     public readonly static ObscuredInt GuildEnterMinLevel = 5000;

@@ -15,7 +15,8 @@ public class UiGuildInfoBoard : MonoBehaviour
         SetGuildTitle();
     }
 
-    private void SetGuildTitle() 
+
+    private void SetGuildTitle()
     {
         title.SetText(GuildManager.Instance.guildInfoData["guildName"]["S"].ToString());
     }
@@ -35,14 +36,14 @@ public class UiGuildInfoBoard : MonoBehaviour
             {
                 var errorCode = bro.GetMessage();
 
-                switch (errorCode) 
+                switch (errorCode)
                 {
-                    case "memberExist 사전 조건을 만족하지 않습니다.": 
+                    case "memberExist 사전 조건을 만족하지 않습니다.":
                         {
                             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "문주는 문파원이 한명도 없어야 탈퇴 가능 합니다!", null);
                         }
                         break;
-                    case "subscribed guild 사전 조건을 만족하지 않습니다.": 
+                    case "subscribed guild 사전 조건을 만족하지 않습니다.":
                         {
                             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "문파에 가입되지 않은 유저 입니다!", null);
                         }
