@@ -21,7 +21,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
     private bool useEffect = true;
 
-    public void GetExp(float exp, bool useBuff = true, bool useEffect = true, bool syncToServer = true)
+    public void GetExp(float exp, bool useBuff = true, bool useEffect = true, bool syncToServer = true, bool isSleep =false)
     {
         if (accumLevel > 50000) 
         {
@@ -55,7 +55,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
             }
             else
             {
-                if (syncToServer)
+                if (syncToServer || isSleep)
                 {
                     SyncLevelUpDatas();
                 }

@@ -135,7 +135,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         float exp = killedEnemyPerMin * spawnedEnemyData.Exp * GameBalance.sleepRewardRatio * elapsedMinutes;
         exp += exp * expBuffRatio;
 
-        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, yoguiMarble: yoguimarble, eventItem: eventItem, exp: exp, elapsedSeconds: elapsedSeconds, killCount: (int)(elapsedMinutes * killedEnemyPerMin* stageTableData.Marbleamount), stageRelic: stageRelic);
+        this.sleepRewardInfo = new SleepRewardInfo(gold: gold, jade: jade, GrowthStone: GrowthStone, marble: marble, yoguiMarble: yoguimarble, eventItem: eventItem, exp: exp, elapsedSeconds: elapsedSeconds, killCount: (int)(elapsedMinutes * killedEnemyPerMin * stageTableData.Marbleamount), stageRelic: stageRelic);
 
         UiSleepRewardView.Instance.CheckReward();
     }
@@ -150,7 +150,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         LogManager.Instance.SendLogType("SleepReward", "Req", $"seconds {sleepRewardInfo.elapsedSeconds} gold {sleepRewardInfo.gold} jade {sleepRewardInfo.jade} marble {sleepRewardInfo.marble} growthStone {sleepRewardInfo.GrowthStone} exp {sleepRewardInfo.exp}");
 
-        GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false, false, syncToServer: false);
+        GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false, false, syncToServer: false, isSleep: true);
 
         ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += sleepRewardInfo.gold;
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += sleepRewardInfo.jade;
@@ -229,6 +229,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
           });
     }
 
+    private IEnumerator SyncLevelUpDataLate()
+    {
+        yield return new WaitForSeconds(5.0f);
+    }
     public void GetRewardSuccess()
     {
         sleepRewardInfo = null;

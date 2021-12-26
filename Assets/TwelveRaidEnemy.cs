@@ -23,6 +23,9 @@ public class TwelveRaidEnemy : BossEnemyBase
     private float attackInterval = 1f;
 
     [SerializeField]
+    private float attackInterval_Real = 2f;
+
+    [SerializeField]
     private List<AlarmHitObject> HitList_1;
 
     [SerializeField]
@@ -36,6 +39,12 @@ public class TwelveRaidEnemy : BossEnemyBase
 
     [SerializeField]
     private List<AlarmHitObject> RandomHit2;
+
+    [SerializeField]
+    private List<AlarmHitObject> RandomHit3_Guild;
+
+    [SerializeField]
+    private bool isGuildBoss = false;
 
     [SerializeField]
     private bool playAnim = true;
@@ -87,15 +96,37 @@ public class TwelveRaidEnemy : BossEnemyBase
 
             if (attackType == 0)
             {
-                yield return StartCoroutine(AttackRoutine_2(2));
+                if (isGuildBoss == false)
+                {
+                    yield return StartCoroutine(AttackRoutine_2(attackInterval_Real));
+                }
+                else
+                {
+                    yield return StartCoroutine(GuildBossHit(attackInterval_Real));
+
+                }
             }
             else if (attackType == 1)
             {
-                yield return StartCoroutine(AttackRoutine_3(2));
+                if (isGuildBoss == false)
+                {
+                    yield return StartCoroutine(AttackRoutine_3(attackInterval_Real));
+                }
+                else
+                {
+                    yield return StartCoroutine(GuildBossHit(attackInterval_Real));
+                }
             }
             else if (attackType == 2)
             {
-                yield return StartCoroutine(AttackRoutine_4(2));
+                if (isGuildBoss == false)
+                {
+                    yield return StartCoroutine(AttackRoutine_4(attackInterval_Real));
+                }
+                else
+                {
+                    yield return StartCoroutine(GuildBossHit(attackInterval_Real));
+                }
             }
 
             if (playAnim)
@@ -222,6 +253,70 @@ public class TwelveRaidEnemy : BossEnemyBase
                     RandomHit2[i].AttackStart();
                 }
             }
+        }
+    }
+
+    private IEnumerator GuildBossHit(float delay)
+    {
+
+        StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
+
+        PlayRandomHits_Guild();
+
+        yield return new WaitForSeconds(delay);
+    }
+
+    private int idx1 = 0;
+
+    private int idx2 = 0;
+    private int idx3 = 0;
+    private void PlayRandomHits_Guild()
+    {
+        int rankIdx = Random.Range(0, RandomHit.Count);
+
+        if (RandomHit.Count != 0)
+        {
+            if (idx1 >= RandomHit.Count) idx1 = 0;
+
+            for (int i = 0; i < RandomHit.Count; i++)
+            {
+                if (i == rankIdx)
+                {
+                    RandomHit[i].AttackStart();
+                }
+            }
+
+            idx1++;
+        }
+
+        if (RandomHit2.Count != 0)
+        {
+            if (idx2 >= RandomHit.Count) idx2 = 0;
+
+            for (int i = 0; i < RandomHit2.Count; i++)
+            {
+                if (i == rankIdx)
+                {
+                    RandomHit2[i].AttackStart();
+                }
+            }
+
+            idx2++;
+        }
+
+        if (RandomHit3_Guild.Count != 0) 
+        {
+            if (idx3 >= RandomHit3_Guild.Count) idx3 = 0;
+
+            for (int i = 0; i < RandomHit3_Guild.Count; i++)
+            {
+                if (i == idx3)
+                {
+                    RandomHit3_Guild[i].AttackStart();
+                }
+            }
+
+            idx3++;
         }
     }
 }

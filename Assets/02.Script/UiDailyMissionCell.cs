@@ -25,7 +25,7 @@ public class UiDailyMissionCell : MonoBehaviour
     private int getAmountFactor;
     public void Initialize(DailyMissionData tableData)
     {
-        if (tableData.Enable == false) 
+        if (tableData.Enable == false)
         {
             this.gameObject.SetActive(false);
             return;
@@ -80,7 +80,7 @@ public class UiDailyMissionCell : MonoBehaviour
         DailyMissionManager.UpdateDailyMission((DailyMissionKey)(tableData.Id), -tableData.Rewardrequire * amountFactor);
         ServerData.goodsTable.AddLocalData(GoodsTable.Jade, rewardGemNum);
 
-        PopupManager.Instance.ShowAlarmMessage($"보석 {rewardGemNum}개 획득!!");
+        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)} {rewardGemNum}개 획득!!");
         SoundManager.Instance.PlaySound("GoldUse");
 
         if (SyncRoutine != null)
@@ -92,7 +92,7 @@ public class UiDailyMissionCell : MonoBehaviour
 
         this.transform.SetAsLastSibling();
 
-       // UiTutorialManager.Instance.SetClear(TutorialStep._7_MissionReward);
+        // UiTutorialManager.Instance.SetClear(TutorialStep._7_MissionReward);
     }
 
     private IEnumerator SyncDataRoutine()
