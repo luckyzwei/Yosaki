@@ -83,7 +83,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
     public void RefreshMemberList()
     {
-        var bro = Backend.Social.Guild.GetGuildMemberListV3(GuildManager.Instance.myGuildIndate, 5);
+        var bro = Backend.Social.Guild.GetGuildMemberListV3(GuildManager.Instance.myGuildIndate, 25);
 
         if (bro.IsSuccess())
         {

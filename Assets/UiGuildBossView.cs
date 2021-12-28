@@ -39,7 +39,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{rewardGrade}점 점수를 추가합니까?\n<color=red>점수는 하루에 한번만 추가할 수 있습니다.</color>",
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{rewardGrade}점 점수를 추가합니까?\n<color=red>점수는 하루에 한번만 추가할 수 있습니다.",
             () =>
             {
                 ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value = 1;
@@ -60,7 +60,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "점수 추가 완료!", null);
 
-                        UiGuildChatBoard.Instance.SendRankScore($"<color=yellow>{PlayerData.Instance.NickName}님이 {rewardGrade}점을 추가했습니다.</color>");
+                        UiGuildChatBoard.Instance.SendRankScore($"<color=yellow>{PlayerData.Instance.NickName}님이 {rewardGrade}점을 추가했습니다.");
 
                     }
                     else
