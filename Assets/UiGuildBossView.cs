@@ -27,6 +27,13 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
     public void RecordGuildScoreButton()
     {
+        bool canRecord = ServerData.userInfoTable.CanRecordGuildScore();
+
+        if (canRecord == false)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "평일 오전3시~오전5시에는 점수를 추가할 수 없습니다!\n일요일은 오후11시~ 월요일 오전5시까지\n점수를 등록할수 없습니다!(랭킹 집계)", null);
+            return;
+        }
 
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value == 1)
         {
@@ -84,7 +91,9 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                         {
                             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "점수 추가 완료!", null);
 
-                            UiGuildChatBoard.Instance.SendRankScore($"<color=yellow>{PlayerData.Instance.NickName}님이 {rewardGrade}점을 추가했습니다.");
+                            var time = ServerData.userInfoTable.currentServerTime;
+
+                            UiGuildChatBoard.Instance.SendRankScore_System($"<color=yellow>{PlayerData.Instance.NickName}님이 {rewardGrade}점을 추가했습니다.({time.Month}월 {time.Day}일 {time.Hour}시)");
 
                         }
                         else

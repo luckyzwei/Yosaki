@@ -248,6 +248,7 @@ public class UserInfoTable
 
                          string time = servertime.GetReturnValuetoJSON()["utcTime"].ToString();
                          DateTime currentServerTime = DateTime.Parse(time).ToUniversalTime().AddHours(9);
+
                          currentServerDate = (float)Utils.ConvertToUnixTimestamp(currentServerTime);
 
                          defultValues.Add(e.Current.Key, (float)currentServerDate);
@@ -407,6 +408,10 @@ public class UserInfoTable
                 string time = bro.GetReturnValuetoJSON()["utcTime"].ToString();
 
                 currentServerTime = DateTime.Parse(time).ToUniversalTime().AddHours(9);
+
+#if UNITY_EDITOR
+                currentServerTime = currentServerTime.AddDays(15);
+#endif
 
                 whenServerTimeUpdated.Execute();
 
@@ -717,6 +722,16 @@ public class UserInfoTable
         }
     }
 
+    public bool CanRecordGuildScore()
+    {
+        if (currentServerTime.DayOfWeek == DayOfWeek.Sunday && currentServerTime.Hour >= 23) return false;
+        if (currentServerTime.DayOfWeek == DayOfWeek.Monday && currentServerTime.Hour < 5) return false;
+
+        if (currentServerTime.Hour == 3 || currentServerTime.Hour == 4) return false;
+
+        return true;
+    }
+
     public bool IsHotTime()
     {
         //#if UNITY_EDITOR
@@ -753,16 +768,6 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
-#if UNITY_IOS
-        if (PlayerData.Instance.HasIOSFlag) 
-        {
-            return false;
-        }
-#endif
-
-#if UNITY_EDITOR
-        return true;
-#endif
         return currentServerTime.Month == 1;
     }
 }

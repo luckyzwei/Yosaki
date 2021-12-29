@@ -110,6 +110,12 @@ public class UiGuildChatBoard : SingletonMono<UiGuildChatBoard>
         inputfield.text = string.Empty;
     }
 
+    public void SendRankScore_System(string chat)
+    {
+        ChatManager.Instance.SendChat_Guild(chat, false);
+        inputfield.text = string.Empty;
+    }
+
 #if UNITY_EDITOR
     int count = 0;
     private void Update()
