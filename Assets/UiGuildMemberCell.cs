@@ -44,7 +44,6 @@ public class UiGuildMemberCell : MonoBehaviour
                 case "member": { guildGrade = GuildGrade.Member; } break;
                 default: { guildGrade = GuildGrade.ViceMaster; } break;
             }
-
             this.lastLogin = lastLogin;
 
             this.gamerIndate = gamerIndate;
@@ -57,11 +56,31 @@ public class UiGuildMemberCell : MonoBehaviour
     {
         this.guildMemberInfo = guildMemberInfo;
 
-        nickName.SetText($"{guildMemberInfo.nickName}");
+        nickName.SetText($"{guildMemberInfo.nickName.Replace(CommonString.IOS_nick, "")}");
 
         donateAmount.SetText($"{Utils.ConvertBigNum(guildMemberInfo.donateGoods)}점 추가");
 
-        lastLogin.SetText(guildMemberInfo.lastLogin);
+        if (guildMemberInfo.lastLogin.Length >= 16)
+        {
+            int lastYear = int.Parse($"{guildMemberInfo.lastLogin[0]}{guildMemberInfo.lastLogin[1]}{guildMemberInfo.lastLogin[2]}{guildMemberInfo.lastLogin[3]}");
+            int lastMonth = int.Parse($"{guildMemberInfo.lastLogin[5]}{guildMemberInfo.lastLogin[6]}");
+            int lastDay = int.Parse($"{guildMemberInfo.lastLogin[8]}{guildMemberInfo.lastLogin[9]}");
+            int lastHour = int.Parse($"{guildMemberInfo.lastLogin[11]}{guildMemberInfo.lastLogin[12]}");
+            int lastMinute = int.Parse($"{guildMemberInfo.lastLogin[14]}{guildMemberInfo.lastLogin[15]}");
+
+            DateTime loginTime = new DateTime(lastYear, lastMonth, lastDay, lastHour, lastMinute, 0);
+            loginTime = loginTime.AddHours(9);
+
+            lastLogin.gameObject.SetActive(true);
+            lastLogin.SetText($"{loginTime.Year}년{loginTime.Month}월{loginTime.Day}일{loginTime.Hour}시{loginTime.Minute}분 마지막 로그인");
+        }
+        else
+        {
+            lastLogin.gameObject.SetActive(false);
+        }
+
+
+
 
         RefreshKickButton();
 

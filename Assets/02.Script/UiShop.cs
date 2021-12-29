@@ -28,10 +28,6 @@ public class UiShop : SingletonMono<UiShop>
 
     public void BuyProduct(string id)
     {
-#if TEST
-        GetPackageItem(id);
-        return;
-#endif
         IAPManager.Instance.BuyProduct(id);
     }
 

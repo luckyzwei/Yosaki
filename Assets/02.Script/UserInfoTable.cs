@@ -92,7 +92,7 @@ public class UserInfoTable
     public const string dokebiPackRefund = "dokebiPackRefund";
 
     public const string killCountTotal = "killCountTotal3";
-    public const string killCountTotal2 = "killCountTotal2";
+    public const string killCountTotal2 = "killCountTotal4";
 
     public const string relicKillCount = "relicKillCount";
 
@@ -109,9 +109,10 @@ public class UserInfoTable
     public const string buffAwake = "buffAwake";
     public const string petAwake = "petAwake";
     public const string IgnoreDamDec = "IgnoreDamDec";
-    public const string SendGuildPoint = "SendGuildPoint";
+    public const string SendGuildPoint = "SendGuildPoint2";
     public const string cockAwake = "cockAwake";
     public const string peachRefund = "peachRefund";
+    public const string petCostumePackRefund = "pcr";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -199,6 +200,7 @@ public class UserInfoTable
         {SendGuildPoint,0},
         {cockAwake,0},
         {peachRefund,0},
+        {petCostumePackRefund,0},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -682,7 +684,12 @@ public class UserInfoTable
     {
         if (currentServerTime.Month == 11) return true;
         if (currentServerTime.Month == 12) return true;
-        return false;
+
+        //1월
+        else
+        {
+            return currentServerTime.Day < 8;
+        }
     }
     public bool CanMakeEventItem()
     {
@@ -693,7 +700,7 @@ public class UserInfoTable
         //1월
         else
         {
-            return currentServerTime.Day < 2;
+            return currentServerTime.Day < 8;
         }
     }
 
@@ -706,7 +713,7 @@ public class UserInfoTable
         //1월
         else
         {
-            return currentServerTime.Day < 2;
+            return currentServerTime.Day < 8;
         }
     }
 
@@ -753,6 +760,9 @@ public class UserInfoTable
         }
 #endif
 
-        return currentServerTime.Month == 11;
+#if UNITY_EDITOR
+        return true;
+#endif
+        return currentServerTime.Month == 1;
     }
 }

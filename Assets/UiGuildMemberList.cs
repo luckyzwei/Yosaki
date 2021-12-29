@@ -20,6 +20,9 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     [SerializeField]
     private TextMeshProUGUI guildNameInputBoard;
 
+    [SerializeField]
+    private TextMeshProUGUI memberNumText;
+
     private bool initialized = false;
 
     [SerializeField]
@@ -41,7 +44,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     {
         for (int i = 0; i < memberCells.Count; i++)
         {
-            if (memberCells[i].guildMemberInfo != null && memberCells[i].guildMemberInfo.nickName.Replace(CommonString.IOS_nick,"").Equals(PlayerData.Instance.NickName))
+            if (memberCells[i].guildMemberInfo != null && memberCells[i].guildMemberInfo.nickName.Replace(CommonString.IOS_nick, "").Equals(PlayerData.Instance.NickName))
             {
                 return memberCells[i].guildMemberInfo.guildGrade;
             }
@@ -83,6 +86,8 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
     public void RefreshMemberList()
     {
+        memberNumText.SetText(string.Empty);
+
         var bro = Backend.Social.Guild.GetGuildMemberListV3(GuildManager.Instance.myGuildIndate, 25);
 
         if (bro.IsSuccess())
@@ -92,6 +97,8 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
             var rows = returnValue["rows"];
 
             guildMemberCount = rows.Count;
+
+            memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GameBalance.GuildMemberMax}");
 
             for (int i = 0; i < memberCells.Count; i++)
             {
@@ -105,11 +112,13 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     string position = data["position"]["S"].ToString();
                     string lastLogin = data["lastLogin"]["S"].ToString();
                     string gamerIndate = data["gamerInDate"]["S"].ToString();
-                    int donateGoods = int.Parse(data["totalGoods1Amount"]["N"].ToString());
+                    int donateGoods = int.Parse(data["totalGoods2Amount"]["N"].ToString());
 
                     var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods);
 
                     memberCells[i].Initialize(memberData);
+                    memberCells[i].transform.SetAsFirstSibling();
+
                 }
                 else
                 {

@@ -96,6 +96,8 @@ public class DokebiEnterView : MonoBehaviour
 
         int defeatCount = 0;
 
+        int clearCount = GameBalance.dokebiEnterCount - currentEnterCount;
+
         if (idx == 0)
         {
             defeatCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiKillCount0).Value;
@@ -119,12 +121,13 @@ public class DokebiEnterView : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Dokebi)} {defeatCount}개로 소탕 합니까?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Dokebi)} <color=yellow>{defeatCount}</color>개로 <color=yellow>{clearCount}회</color> 소탕 합니까?", () =>
          {
              int rewardNum = defeatCount * TableManager.Instance.DokebiTable.dataArray[idx].Rewardamount;
-             ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value += rewardNum;
 
-             ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiEnterCount).Value++;
+             ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value += rewardNum * clearCount;
+
+             ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiEnterCount).Value += clearCount;
 
              List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -141,11 +144,11 @@ public class DokebiEnterView : MonoBehaviour
 
              ServerData.SendTransaction(transactions, successCallBack: () =>
              {
-                 PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Dokebi)} {rewardNum}개 획득!");
+                 PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Dokebi)} {rewardNum * clearCount}개 획득!");
 
-                //사운드
-                SoundManager.Instance.PlaySound("Reward");
-                 LogManager.Instance.SendLog("도꺠비 소탕", $"{rewardNum}개 획득 {ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value}");
+                 //사운드
+                 SoundManager.Instance.PlaySound("Reward");
+                 //LogManager.Instance.SendLog("DokClear", $"{rewardNum}개 획득 {ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value}");
              });
          }, null);
     }

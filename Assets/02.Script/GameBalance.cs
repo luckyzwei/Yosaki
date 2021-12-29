@@ -128,9 +128,9 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_21_100_guild = 200;
     public readonly static ObscuredInt rankReward_101_1000_guild = 150;
 
-    public readonly static ObscuredInt EventDropEndDay = 30;
-    public readonly static ObscuredInt EventMakeEndDay = 1;
-    public readonly static ObscuredInt EventPackageSaleEndDay = 1;
+    public readonly static ObscuredInt EventDropEndDay = 7;
+    public readonly static ObscuredInt EventMakeEndDay = 7;
+    public readonly static ObscuredInt EventPackageSaleEndDay = 7;
 
     public readonly static ObscuredFloat TitleEquipAddPer = 2;
 

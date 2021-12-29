@@ -111,7 +111,7 @@ public class UiSonRewardCell : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            LogManager.Instance.SendLogType("Son", "reward", tableData.Id.ToString());
+            //LogManager.Instance.SendLogType("Son", "reward", tableData.Id.ToString());
             PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
             SoundManager.Instance.PlaySound("Reward");
             rewardButton.interactable = true;
@@ -152,7 +152,7 @@ public class UiSonRewardCell : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            LogManager.Instance.SendLogType("Son", "reward", tableData.Id.ToString());
+            //LogManager.Instance.SendLogType("Son", "reward", tableData.Id.ToString());
             PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
             SoundManager.Instance.PlaySound("Reward");
             rewardButton.interactable = true;

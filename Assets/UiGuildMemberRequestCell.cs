@@ -18,7 +18,7 @@ public class UiGuildMemberRequestCell : MonoBehaviour
         this.nickName = nickName;
         this.indate = indate;
 
-        nickNameText.SetText(this.nickName);
+        nickNameText.SetText(this.nickName.Replace(CommonString.IOS_nick, ""));
     }
 
     public void OnClickAcceptButton()

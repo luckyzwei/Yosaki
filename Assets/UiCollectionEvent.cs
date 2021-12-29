@@ -17,7 +17,7 @@ public class UiCollectionEvent : MonoBehaviour
     {
         string description = string.Empty;
 
-        description += $"<color=red>눈송이 획득 12월 {GameBalance.EventDropEndDay}일까지</color>\n";
+        description += $"<color=red>눈송이 획득 1월 {GameBalance.EventDropEndDay}일까지</color>\n";
         description += $"<color=red>아이템 제작 1월 {GameBalance.EventMakeEndDay}일까지</color>\n";
         description += $"<color=red>상품 판매 1월 {GameBalance.EventPackageSaleEndDay}일까지</color>";
 

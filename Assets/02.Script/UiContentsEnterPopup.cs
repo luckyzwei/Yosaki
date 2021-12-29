@@ -200,15 +200,17 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 {killCount}로 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy}개", () =>
+        int clearCount = GameBalance.bonusDungeonEnterCount - (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 <color=yellow>{killCount}</color>로 <color=yellow>{clearCount}회</color> 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy * clearCount}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy * clearCount}개", () =>
         {
             enterButton.interactable = false;
 
-            int rewardNumJade = killCount * GameBalance.bonusDungeonGemPerEnemy;
-            int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy;
-            ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value++;
-            ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += killCount * GameBalance.bonusDungeonGemPerEnemy;
-            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += killCount * GameBalance.bonusDungeonMarblePerEnemy;
+            int rewardNumJade = killCount * GameBalance.bonusDungeonGemPerEnemy * clearCount;
+            int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy * clearCount;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value += clearCount;
+            ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardNumJade;
+            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += rewardNumMarble;
 
             //데이터 싱크
             List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -232,7 +234,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
                     enterButton.interactable = true;
                 });
 
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!");
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{clearCount}회 소탕 완료!\n{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!", null);
             SoundManager.Instance.PlaySound("GoldUse");
 
 

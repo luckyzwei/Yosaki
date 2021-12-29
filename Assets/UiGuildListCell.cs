@@ -35,6 +35,15 @@ public class UiGuildListCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI enterDescription;
 
+    [SerializeField]
+    private Image buttonImage;
+
+    [SerializeField]
+    private Color instantAcceptColor;
+
+    [SerializeField]
+    private Color needAcceptColor;
+
     private JsonData jsonData;
 
     private int memberCount;
@@ -66,6 +75,8 @@ public class UiGuildListCell : MonoBehaviour
         guildIcon.sprite = CommonUiContainer.Instance.guildIcon[int.Parse(jsonData["guildIcon"].ToString())];
 
         acceptDescription.SetText(isInstantAcceptGuild ? "즉시가입" : "가입신청");
+        
+        buttonImage.color = isInstantAcceptGuild ? instantAcceptColor : needAcceptColor;
 
         //점수 조회
         string indate = jsonData["inDate"].ToString();
@@ -80,7 +91,7 @@ public class UiGuildListCell : MonoBehaviour
                 var data = bro.GetReturnValuetoJSON();
 
                 if (guildScore != null)
-                    guildScore.SetText($"(점수:{int.Parse(data["goods"]["totalGoods1Amount"]["N"].ToString())}점)");
+                    guildScore.SetText($"(점수:{int.Parse(data["goods"]["totalGoods2Amount"]["N"].ToString())}점)");
             }
             else
             {
