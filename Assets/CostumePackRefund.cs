@@ -81,9 +81,20 @@ public class CostumePackRefund : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
+            int peachNum = 0;
+            int keyNum = 0;
+
+            if (buyPet0) keyNum += pet0RelicTicketNum;
+
+            if (buyPet1) keyNum += pet1RelicTicketNum;
+
+            if (buyCostume0) peachNum += costume0PeachNum;
+
+            if (buyCostume1) peachNum += costume1PeachNum;
+
             if (buyPet0 || buyPet1 || buyCostume0 || buyCostume1)
             {
-                PopupManager.Instance.ShowConfirmPopup("환수,외형 세트상품 소급", $"영혼열쇠 {pet0RelicTicketNum + pet1RelicTicketNum}개\n천도복숭아 {costume0PeachNum + costume1PeachNum}개 소급됨", null);
+                PopupManager.Instance.ShowConfirmPopup("환수,외형 세트상품 소급", $"영혼열쇠 {keyNum}개\n천도복숭아 {peachNum}개 소급됨", null);
             }
         });
     }
