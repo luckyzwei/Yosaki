@@ -31,7 +31,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
         if (canRecord == false)
         {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "평일 오전3시~오전5시에는 점수를 추가할 수 없습니다!\n일요일은 오후11시~ 월요일 오전5시까지\n점수를 등록할수 없습니다!(랭킹 집계)", null);
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "오후11시~ 다음날 오전5시 까지는\n점수를 등록할 수 없습니다!", null);
             return;
         }
 
@@ -98,7 +98,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                         }
                         else
                         {
-                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n월요일 오전 4시~오전 5시에는 갱신할 수 없습니다\n({bro.GetStatusCode()})", null);
+                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n점수 갱신 시간이 아닙니다.\n({bro.GetStatusCode()})", null);
 
                             ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value = 0;
 
@@ -118,7 +118,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                     }
                     else
                     {
-                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n오전 4시~오전 5시에는 갱신할 수 없습니다\n({bro2.GetStatusCode()})", null);
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n점수 갱신 시간이 아닙니다.\n({bro2.GetStatusCode()})", null);
 
                         ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value = 0;
 

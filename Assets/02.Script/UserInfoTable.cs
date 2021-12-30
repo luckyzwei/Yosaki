@@ -724,10 +724,12 @@ public class UserInfoTable
 
     public bool CanRecordGuildScore()
     {
-        if (currentServerTime.DayOfWeek == DayOfWeek.Sunday && currentServerTime.Hour >= 23) return false;
-        if (currentServerTime.DayOfWeek == DayOfWeek.Monday && currentServerTime.Hour < 5) return false;
-
-        if (currentServerTime.Hour == 3 || currentServerTime.Hour == 4) return false;
+        if (currentServerTime.Hour == 23
+            || currentServerTime.Hour == 0
+            || currentServerTime.Hour == 1
+            || currentServerTime.Hour == 2
+            || currentServerTime.Hour == 3
+            || currentServerTime.Hour == 4) return false;
 
         return true;
     }
