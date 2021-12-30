@@ -66,8 +66,8 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Real_Boss_Uuid = "4e8a26e0-6518-11ec-bbbf-47820da7deba";
     public const string Rank_Relic_Uuid = "0453f560-2779-11ec-9b46-299116fee741";
     public const string Rank_MiniGame_Uuid = "e1dced80-5954-11ec-b084-d1a61d5ec8e2";
-    public const string Rank_Guild_Uuid = "2a0ac8f0-67ee-11ec-b243-8d1fccc57e3d";
-    public const string Rank_Guild_Reset_Uuid = "9caa0160-67ed-11ec-8cd0-b197cc5e7fb4";
+    public const string Rank_Guild_Uuid = "ff017920-698b-11ec-b243-8d1fccc57e3d";
+    public const string Rank_Guild_Reset_Uuid = "be50a6d0-698b-11ec-b243-8d1fccc57e3d";
 
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
@@ -84,8 +84,8 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Real_Boss_Uuid = "57e79ce0-6518-11ec-9737-e53b5eab75db";
     public const string Rank_Relic_Uuid = "1ce07110-31b7-11ec-be95-537d9b90903a";
     public const string Rank_MiniGame_Uuid = "edec1600-5954-11ec-8846-eb56e6e68bb1";
-    public const string Rank_Guild_Uuid = "35a8e020-67ee-11ec-b243-8d1fccc57e3d";
-    public const string Rank_Guild_Reset_Uuid = "adecf360-67ed-11ec-8cd0-b197cc5e7fb4";
+    public const string Rank_Guild_Uuid = "10619010-698c-11ec-b243-8d1fccc57e3d";
+    public const string Rank_Guild_Reset_Uuid = "d248cdc0-698b-11ec-b243-8d1fccc57e3d";
 
     public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";

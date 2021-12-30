@@ -91,7 +91,7 @@ public class UiGuildListCell : MonoBehaviour
                 var data = bro.GetReturnValuetoJSON();
 
                 if (guildScore != null)
-                    guildScore.SetText($"(점수:{int.Parse(data["goods"]["totalGoods2Amount"]["N"].ToString())}점)");
+                    guildScore.SetText($"(점수:{int.Parse(data["goods"]["totalGoods3Amount"]["N"].ToString())}점)");
             }
             else
             {

@@ -55,7 +55,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                 {
                     var returnValue = guildInfoBro.GetReturnValuetoJSON();
 
-                    int addAmount = int.Parse(returnValue["goods"]["totalGoods10Amount"]["N"].ToString());
+                    int addAmount = int.Parse(returnValue["goods"]["totalGoods9Amount"]["N"].ToString());
 
                     if (addAmount >= GameBalance.GuildMemberMax)
                     {
@@ -80,12 +80,12 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                 ServerData.SendTransaction(transactions, successCallBack: () =>
                 {
-                    var bro2 = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_Guild_Reset_Uuid, goodsType.goods10, 1);
+                    var bro2 = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_Guild_Reset_Uuid, goodsType.goods9, 1);
 
                     if (bro2.IsSuccess())
                     {
 
-                        var bro = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_Guild_Uuid, goodsType.goods2, rewardGrade);
+                        var bro = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_Guild_Uuid, goodsType.goods3, rewardGrade);
 
                         if (bro.IsSuccess())
                         {

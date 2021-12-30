@@ -109,7 +109,7 @@ public class UserInfoTable
     public const string buffAwake = "buffAwake";
     public const string petAwake = "petAwake";
     public const string IgnoreDamDec = "IgnoreDamDec";
-    public const string SendGuildPoint = "SendGuildPoint2";
+    public const string SendGuildPoint = "SendGuildPoint3";
     public const string cockAwake = "cockAwake";
     public const string peachRefund = "peachRefund";
     public const string petCostumePackRefund = "pcr";
@@ -410,7 +410,7 @@ public class UserInfoTable
                 currentServerTime = DateTime.Parse(time).ToUniversalTime().AddHours(9);
 
 #if UNITY_EDITOR
-                currentServerTime = currentServerTime.AddDays(15);
+                //currentServerTime = currentServerTime.AddDays(15);
 #endif
 
                 whenServerTimeUpdated.Execute();
