@@ -30,7 +30,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
     [SerializeField]
     private GameObject twelveDungeonObject;
 
-    private ContentsType contentsType;
+    public static ContentsType contentsType;
 
     public ObscuredInt bossId { get; private set; }
 
@@ -62,7 +62,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
     {
         bossId.RandomizeCryptoKey();
     }
-    public void Initialize(ContentsType contentsType, int bossId)
+    public void Initialize(ContentsType type, int bossId)
     {
         this.transform.SetAsLastSibling();
 
@@ -70,19 +70,30 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
         rootObject.SetActive(true);
 
-        this.contentsType = contentsType;
+        contentsType = type;
 
         UpdateUi();
 
         ticketPrice.SetText($"X{GameBalance.contentsEnterprice}");
 
-        bonusDungeonObject.SetActive(contentsType == ContentsType.FireFly);
+        bonusDungeonObject.SetActive(type == ContentsType.FireFly);
 
-        infinityTowerObject.SetActive(contentsType == ContentsType.InfiniteTower);
+        infinityTowerObject.SetActive(type == ContentsType.InfiniteTower);
 
-        dokebiObject.SetActive(contentsType == ContentsType.Dokebi);
+        dokebiObject.SetActive(type == ContentsType.Dokebi);
 
-        twelveDungeonObject.SetActive(contentsType == ContentsType.TwelveDungeon);
+        twelveDungeonObject.SetActive(type == ContentsType.TwelveDungeon);
+
+        if (type == ContentsType.InfiniteTower && UiLastContentsFunc.AutoInfiniteTower)
+        {
+            if (ServerData.userInfoTable.TableDatas[UserInfoTable.currentFloorIdx].Value == 301)
+            {
+                UiLastContentsFunc.AutoInfiniteTower = false;
+                return;
+            }
+
+            OnClickEnterButton();
+        }
     }
 
     private void UpdateUi()

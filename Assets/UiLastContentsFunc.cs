@@ -11,8 +11,11 @@ public class UiLastContentsFunc : MonoBehaviour
 
     public UnityEvent myUnityEvent;
 
+
     [SerializeField]
     private bool resetState = false;
+
+    public static bool AutoInfiniteTower = false;
 
     void Start()
     {

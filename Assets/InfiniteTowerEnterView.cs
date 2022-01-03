@@ -21,6 +21,11 @@ public class InfiniteTowerEnterView : MonoBehaviour
     [SerializeField]
     private GameObject startButtonRoot;
 
+    public void OnAutoToggleChanged(bool onOff)
+    {
+        UiLastContentsFunc.AutoInfiniteTower = onOff;
+    }
+
     void OnEnable()
     {
         SetStageText();

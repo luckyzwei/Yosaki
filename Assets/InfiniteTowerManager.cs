@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Events;
 using static UiRewardView;
 
 public class InfiniteTowerManager : ContentsManagerBase
@@ -20,6 +21,8 @@ public class InfiniteTowerManager : ContentsManagerBase
 
     [SerializeField]
     private UiInfinityTowerResult uiInfinityTowerResult;
+
+    public UnityEvent retryFunc;
 
     public static string poolName;
 
@@ -78,11 +81,14 @@ public class InfiniteTowerManager : ContentsManagerBase
         //클리어 됐을때 죽지 않게
         if (contentsState.Value != (int)ContentsState.Fight) return;
 
+        UiLastContentsFunc.AutoInfiniteTower = false;
+
         contentsState.Value = (int)ContentsState.Dead;
     }
 
     protected override void TimerEnd()
     {
+        UiLastContentsFunc.AutoInfiniteTower = false;
         base.TimerEnd();
         contentsState.Value = (int)ContentsState.TimerEnd;
     }
@@ -257,9 +263,21 @@ public class InfiniteTowerManager : ContentsManagerBase
 
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, floorParam));
 
-        ServerData.SendTransaction(transactionList);
+        ServerData.SendTransaction(transactionList, successCallBack: () =>
+          {
+              StartCoroutine(AutoPlayRoutine());
+          });
     }
 
+    private IEnumerator AutoPlayRoutine() 
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (UiLastContentsFunc.AutoInfiniteTower)
+        {
+            retryFunc?.Invoke();
+        }
+    }
 
 
 }
