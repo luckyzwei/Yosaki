@@ -108,12 +108,20 @@ public class RelicDungeonManager : ContentsManagerBase
 
     private IEnumerator EnemySpawnRoutine()
     {
-        WaitForSeconds delay1 = new WaitForSeconds(spawnDelay1);
-
         while (true)
         {
-            yield return delay1;
-            SpawnEnemy();
+            float t = 0f;
+
+            while (t < spawnDelay1)
+            {
+                t += Time.deltaTime;
+                yield return null;
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                SpawnEnemy();
+            }
         }
     }
 

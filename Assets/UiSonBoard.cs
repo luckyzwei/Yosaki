@@ -71,11 +71,11 @@ public class UiSonBoard : MonoBehaviour
 
             if (type.IsPercentStat() == false)
             {
-                abilDesc += $"{CommonString.GetStatusName(type)} {PlayerStats.GetSonAbilHasEffect(type)}\n";
+                abilDesc += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(PlayerStats.GetSonAbilHasEffect(type))}\n";
             }
             else
             {
-                abilDesc += $"{CommonString.GetStatusName(type)} {PlayerStats.GetSonAbilHasEffect(type) * 100f}\n";
+                abilDesc += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(PlayerStats.GetSonAbilHasEffect(type) * 100f)}\n";
             }
         }
 

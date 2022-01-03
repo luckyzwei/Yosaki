@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class FrameCalculator : SingletonMono<FrameCalculator>
 {
-    public static int frameRate { get; private set; } = 30;
+    private List<float> averageFrame = new List<float>();
+    public static float frameRate { get; private set; } = 60;
+
+    private float frameDivedeNum = 150f;
 
     private WaitForSeconds delay = new WaitForSeconds(0.1f);
 
@@ -12,7 +15,25 @@ public class FrameCalculator : SingletonMono<FrameCalculator>
     {
         while (true)
         {
-            frameRate = (int)(1 / Time.unscaledDeltaTime);
+            averageFrame.Add((1f / Time.unscaledDeltaTime));
+
+            if (averageFrame.Count >= frameDivedeNum)
+            {
+                float sum = 0f;
+
+                for (int i = 0; i < averageFrame.Count; i++)
+                {
+                    sum += averageFrame[i];
+                }
+
+                frameRate = sum / frameDivedeNum;
+
+                averageFrame.Clear();
+
+#if UNITY_EDITOR
+                Debug.LogError($"Frame {frameRate}");
+#endif
+            }
             yield return null;
         }
     }

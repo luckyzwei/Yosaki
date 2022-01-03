@@ -161,6 +161,33 @@ public enum TitleMissionId
     Stage3100,//★
     Stage3150,//★
     Stage3200,//★
+              //
+    Level176000,//★
+    Level179000,//★
+    Level182000,//★
+    Level185000,//★
+    Level188000,//★
+    Level191000,//★
+    Level194000,//★
+    Level197000,//★
+    Level200000,//★
+    Level203000,//★
+    Level206000,//★
+    Level209000,//★
+    Level212000,//★
+    Level215000,//★
+    Level218000,//★
+    Level221000,//★
+    Level224000,//★
+    Level227000,//★
+    Level230000,//★
+    Level233000,//★
+    Level236000,//★
+    Level239000,//★
+    Level242000,//★
+    Level245000,//★
+    Level248000,//★
+    Level251000,//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -451,6 +478,112 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 173000)
             {
                 ClearTitleMission(TitleMissionId.Level173000);
+            }
+            //
+
+            if (e >= 176000)
+            {
+                ClearTitleMission(TitleMissionId.Level176000);
+            }
+            if (e >= 179000)
+            {
+                ClearTitleMission(TitleMissionId.Level179000);
+            }
+            if (e >= 182000)
+            {
+                ClearTitleMission(TitleMissionId.Level182000);
+            }
+            if (e >= 185000)
+            {
+                ClearTitleMission(TitleMissionId.Level185000);
+            }
+            if (e >= 188000)
+            {
+                ClearTitleMission(TitleMissionId.Level188000);
+            }
+            if (e >= 191000)
+            {
+                ClearTitleMission(TitleMissionId.Level191000);
+            }
+            if (e >= 194000)
+            {
+                ClearTitleMission(TitleMissionId.Level194000);
+            }
+            if (e >= 197000)
+            {
+                ClearTitleMission(TitleMissionId.Level197000);
+            }
+            if (e >= 200000)
+            {
+                ClearTitleMission(TitleMissionId.Level200000);
+            }
+            if (e >= 203000)
+            {
+                ClearTitleMission(TitleMissionId.Level203000);
+            }
+            if (e >= 206000)
+            {
+                ClearTitleMission(TitleMissionId.Level206000);
+            }
+            if (e >= 209000)
+            {
+                ClearTitleMission(TitleMissionId.Level209000);
+            }
+            if (e >= 212000)
+            {
+                ClearTitleMission(TitleMissionId.Level212000);
+            }
+            if (e >= 215000)
+            {
+                ClearTitleMission(TitleMissionId.Level215000);
+            }
+            if (e >= 218000)
+            {
+                ClearTitleMission(TitleMissionId.Level218000);
+            }
+            if (e >= 221000)
+            {
+                ClearTitleMission(TitleMissionId.Level221000);
+            }
+            if (e >= 224000)
+            {
+                ClearTitleMission(TitleMissionId.Level224000);
+            }
+            if (e >= 227000)
+            {
+                ClearTitleMission(TitleMissionId.Level227000);
+            }
+            if (e >= 230000)
+            {
+                ClearTitleMission(TitleMissionId.Level230000);
+            }
+            if (e >= 233000)
+            {
+                ClearTitleMission(TitleMissionId.Level233000);
+            }
+            if (e >= 236000)
+            {
+                ClearTitleMission(TitleMissionId.Level236000);
+            }
+            if (e >= 239000)
+            {
+                ClearTitleMission(TitleMissionId.Level239000);
+            }
+            if (e >= 242000)
+            {
+                ClearTitleMission(TitleMissionId.Level242000);
+            }
+            if (e >= 245000)
+            {
+                ClearTitleMission(TitleMissionId.Level245000);
+            }
+            if (e >= 248000)
+            {
+                ClearTitleMission(TitleMissionId.Level248000);
+            }
+            if (e >= 251000)
+            {
+                ClearTitleMission(TitleMissionId.Level251000);
             }
 
 
