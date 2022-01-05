@@ -224,14 +224,20 @@ public class GameManager : SingletonMono<GameManager>
 
     public void LoadContents(ContentsType type)
     {
+        if (type == ContentsType.FireFly)
+        {
+            if (ServerData.userInfoTable.TableDatas[UserInfoTable.bonusDungeonEnterCount].Value >= GameBalance.bonusDungeonEnterCount)
+            {
+                PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 입장하실수 없습니다!");
+                return;
+            }
+
+            DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
+        }
+
         if (type != ContentsType.NormalField)
         {
             lastContentsType = type;
-        }
-
-        if (type == ContentsType.FireFly)
-        {
-            DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
         }
 
         contentsType = type;

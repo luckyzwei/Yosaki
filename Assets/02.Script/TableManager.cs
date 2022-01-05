@@ -563,5 +563,10 @@ public class TableManager : SingletonMono<TableManager>
 
     public GuildRewardTable GuildRewardTable => guildRewardTable;
 
+    [SerializeField]
+    private GuildLevel guildLevel;
+
+    public GuildLevel GuildLevel => guildLevel;
+
 }
 

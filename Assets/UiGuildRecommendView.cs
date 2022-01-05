@@ -115,7 +115,7 @@ public class UiGuildRecommendView : MonoBehaviour
                 bool isAndroidGuild = int.Parse(bro2.GetReturnValuetoJSON()["guild"]["isAnd"]["N"].ToString()) == 1;
 
 #if UNITY_ANDROID
-                if (isAndroidGuild == false) 
+                if (isAndroidGuild == false)
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "가입할 수 없는 문파 입니다.", null);
                     return;
@@ -129,8 +129,24 @@ public class UiGuildRecommendView : MonoBehaviour
                     return;
                 }
 #endif
+                int memberMax = GameBalance.GuildMemberMax;
 
-                if (guildNum >= GameBalance.GuildMemberMax)
+                //길드 인원 조회
+                var goodsBro = Backend.Social.Guild.GetGuildGoodsByIndateV3(guildIndate);
+                //
+                if (goodsBro.IsSuccess())
+                {
+                    var data = goodsBro.GetReturnValuetoJSON();
+
+                    memberMax = GuildManager.Instance.GetGuildMemberMaxNum(int.Parse(data["goods"]["totalGoods4Amount"]["N"].ToString()));
+                }
+                else
+                {
+                    PopupManager.Instance.ShowConfirmPopup("알림", $"가입 요청 실패\n{goodsBro.GetStatusCode()}", null);
+                    return;
+                }
+
+                if (guildNum >= memberMax)
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "인원이 가득찬 문파 입니다.", null);
                 }

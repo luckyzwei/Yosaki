@@ -135,9 +135,9 @@ public class UiGuildChatBoard : SingletonMono<UiGuildChatBoard>
 
     private void OnEnable()
     {
-        if (GuildManager.Instance.guildInfoData != null)
+        if (GuildManager.Instance.guildInfoData.Value != null)
         {
-            string desc = GuildManager.Instance.guildInfoData["guildDesc"]["S"].ToString();
+            string desc = GuildManager.Instance.guildInfoData.Value["guildDesc"]["S"].ToString();
             guildDescription.SetText(desc);
         }
 

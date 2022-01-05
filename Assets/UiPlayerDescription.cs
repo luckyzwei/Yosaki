@@ -35,7 +35,7 @@ public class UiPlayerDescription : MonoBehaviour
 
             if (e == true)
             {
-                if (GuildManager.Instance.guildInfoData != null)
+                if (GuildManager.Instance.guildInfoData.Value != null)
                 {
                     guilIcon.sprite = CommonUiContainer.Instance.guildIcon[GuildManager.Instance.guildIconIdx.Value];
                     guildName.SetText(GuildManager.Instance.myGuildName);

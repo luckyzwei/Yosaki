@@ -41,10 +41,10 @@ public class UiGuildRequestMemberList : SingletonMono<UiGuildRequestMemberList>
     {
         if (UiGuildMemberList.Instance.GetMyGuildGrade() != UiGuildMemberCell.GuildGrade.Master) return;
 
-        if (GuildManager.Instance.guildInfoData != null)
+        if (GuildManager.Instance.guildInfoData.Value != null)
         {
-            if (GuildManager.Instance.guildInfoData.ContainsKey("_immediateRegistration")
-                && GuildManager.Instance.guildInfoData["_immediateRegistration"]["BOOL"].ToString().Equals("True"))
+            if (GuildManager.Instance.guildInfoData.Value.ContainsKey("_immediateRegistration")
+                && GuildManager.Instance.guildInfoData.Value["_immediateRegistration"]["BOOL"].ToString().Equals("True"))
             {
                 allAcceptButton.interactable = false;
                 requireAgreeButton.interactable = true;

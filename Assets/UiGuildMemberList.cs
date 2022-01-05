@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using static UiGuildMemberCell;
 
@@ -15,7 +16,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
     private List<UiGuildMemberCell> memberCells;
 
-    public int guildMemberCount = GameBalance.GuildMemberMax;
+    public int guildMemberCount = 0;
 
     [SerializeField]
     private TextMeshProUGUI guildNameInputBoard;
@@ -56,6 +57,16 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     void Start()
     {
         Initialize();
+
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        GuildManager.Instance.guildLevelGoods.AsObservable().Subscribe(e =>
+        {
+            RefreshGuildMemberCountText();
+        }).AddTo(this);
     }
 
     private void OnEnable()
@@ -70,7 +81,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     {
         memberCells = new List<UiGuildMemberCell>();
 
-        for (int i = 0; i < GameBalance.GuildMemberMax + 5; i++)
+        for (int i = 0; i < 100; i++)
         {
             var cell = Instantiate<UiGuildMemberCell>(memberCellPrefab, cellParent);
 
@@ -82,6 +93,11 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
         RefreshMemberList();
 
         initialized = true;
+    }
+
+    private void RefreshGuildMemberCountText()
+    {
+        memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelGoods.Value)}");
     }
 
     public void RefreshMemberList()
@@ -98,7 +114,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
             guildMemberCount = rows.Count;
 
-            memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GameBalance.GuildMemberMax}");
+            memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelGoods.Value)}");
 
             for (int i = 0; i < memberCells.Count; i++)
             {

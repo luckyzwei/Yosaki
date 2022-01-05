@@ -65,7 +65,8 @@ public class UiGuildListCell : MonoBehaviour
         this.guildDescription.SetText(description);
 
         memberCount = int.Parse(jsonData["memberCount"].ToString());
-        guildMemNumCount.SetText($"{memberCount}/{GameBalance.GuildMemberMax}");
+
+
 
         string masterName = jsonData["masterNickname"].ToString();
         this.masterName.SetText(masterName);
@@ -83,6 +84,8 @@ public class UiGuildListCell : MonoBehaviour
 
         guildScore.SetText("(점수 조회중)");
 
+        guildMemNumCount.SetText("조회중");
+
         Backend.Social.Guild.GetGuildGoodsByIndateV3(indate, bro =>
         {
             // 이후 처리
@@ -92,6 +95,10 @@ public class UiGuildListCell : MonoBehaviour
 
                 if (guildScore != null)
                     guildScore.SetText($"(점수:{int.Parse(data["goods"]["totalGoods3Amount"]["N"].ToString())}점)");
+
+
+                int memberMax = GuildManager.Instance.GetGuildMemberMaxNum(int.Parse(data["goods"]["totalGoods4Amount"]["N"].ToString()));
+                guildMemNumCount.SetText($"{memberCount}/{memberMax}");
             }
             else
             {
@@ -114,6 +121,10 @@ public class UiGuildListCell : MonoBehaviour
             if (callback.IsSuccess())
             {
                 int guildNum = int.Parse(callback.GetReturnValuetoJSON()["guild"]["memberCount"]["N"].ToString());
+
+                int memberMax = GuildManager.Instance.GetGuildMemberMaxNum(int.Parse(callback.GetReturnValuetoJSON()["guild"]["totalGoods4Amount"]["N"].ToString()));
+
+
                 if (guildNum >= GameBalance.GuildMemberMax)
                 {
                     PopupManager.Instance.ShowConfirmPopup("알림", "문파원이 가득차서 가입하실수 없습니다.", null);

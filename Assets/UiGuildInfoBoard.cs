@@ -18,7 +18,7 @@ public class UiGuildInfoBoard : MonoBehaviour
 
     private void SetGuildTitle()
     {
-        title.SetText(GuildManager.Instance.guildInfoData["guildName"]["S"].ToString());
+        title.SetText(GuildManager.Instance.guildInfoData.Value["guildName"]["S"].ToString());
     }
     public void OnClickExitButton()
     {

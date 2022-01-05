@@ -29,13 +29,23 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
     {
         bool canRecord = ServerData.userInfoTable.CanRecordGuildScore();
 
+#if UNITY_EDITOR
+        canRecord = true;
+#endif
+
         if (canRecord == false)
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "오후11시~ 다음날 오전5시 까지는\n점수를 등록할 수 없습니다!", null);
             return;
         }
 
-        if (ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value == 1)
+        bool alreadyRecord = ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value == 1;
+
+#if UNITY_EDITOR
+        alreadyRecord = false;
+#endif
+
+        if (alreadyRecord)
         {
             PopupManager.Instance.ShowAlarmMessage("오늘은 이미 점수를 추가했습니다.");
             return;
@@ -57,9 +67,15 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                     int addAmount = int.Parse(returnValue["goods"]["totalGoods9Amount"]["N"].ToString());
 
-                    if (addAmount >= GameBalance.GuildMemberMax)
+                    bool maxContributed = addAmount >= GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelGoods.Value);
+
+#if UNITY_EDITOR
+                    maxContributed = false;
+#endif
+
+                    if (maxContributed)
                     {
-                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{GuildManager.Instance.myGuildName} 문파는 \n오늘 더이상 점수를 추가할 수 없습니다!\n<color=red>문파별로 최대 {GameBalance.GuildMemberMax}번만 추가 가능</color>\n<color=red>(매일 오전 5시 초기화)</color>", null);
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{GuildManager.Instance.myGuildName} 문파는 \n오늘 더이상 점수를 추가할 수 없습니다!\n<color=red>최대 {GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelGoods.Value)}번 추가 가능</color>\n<color=red>(매일 오전 5시 초기화)</color>", null);
                         return;
                     }
                 }
@@ -95,6 +111,13 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                             UiGuildChatBoard.Instance.SendRankScore_System($"<color=yellow>{PlayerData.Instance.NickName}님이 {rewardGrade}점을 추가했습니다.({time.Month}월 {time.Day}일 {time.Hour}시)");
 
+                            //길드 레벨용
+                            var broForGuildLevel = Backend.Social.Guild.ContributeGoodsV3(goodsType.goods4, 1);
+
+                            if (broForGuildLevel.IsSuccess())
+                            {
+                                GuildManager.Instance.guildLevelGoods.Value++;
+                            }
                         }
                         else
                         {

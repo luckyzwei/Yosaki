@@ -10,11 +10,13 @@ public class GuildManager : SingletonMono<GuildManager>
 
     // public List<GuildMemberInfo> guildMemberInfos;
 
-    public string myGuildIndate { get; private set; }
+    public string myGuildIndate { get; private set; } = string.Empty;
 
-    public string myGuildName => guildInfoData == null ? string.Empty : guildInfoData["guildName"]["S"].ToString();
+    public string myGuildName => guildInfoData == null ? string.Empty : guildInfoData.Value["guildName"]["S"].ToString();
 
-    public LitJson.JsonData guildInfoData;
+    public ReactiveProperty<LitJson.JsonData> guildInfoData = new ReactiveProperty<LitJson.JsonData>();
+
+    public ReactiveProperty<int> guildLevelGoods = new ReactiveProperty<int>(0);
 
     public ReactiveProperty<int> guildIconIdx = new ReactiveProperty<int>();
 
@@ -48,7 +50,7 @@ public class GuildManager : SingletonMono<GuildManager>
 
             var returnValue = bro.GetReturnValuetoJSON();
 
-            guildInfoData = returnValue["guild"];
+            guildInfoData.Value = returnValue["guild"];
 
             this.myGuildIndate = returnValue["guild"]["inDate"]["S"].ToString();
 
@@ -56,17 +58,7 @@ public class GuildManager : SingletonMono<GuildManager>
 
             guildIconIdx.Value = int.Parse(returnValue["guild"]["guildIcon"]["N"].ToString());
 
-            //string masterNick = returnValue["guild"]["masterNickname"]["S"].ToString();
-
-
-            // guildMemberInfos.Add(new GuildMemberInfo(masterNick, GuildGrade.Master));
-
-            //for (int i = 0; i < returnValue["guild"]["viceMasterList"]["L"].Count; i++)
-            //{
-            //    string nickName = returnValue["guild"]["viceMasterList"]["L"][i]["S"].ToString();
-            //    guildMemberInfos.Add(new GuildMemberInfo(nickName, GuildGrade.ViceMaster));
-            //}
-
+            LoadGuildLevelGoods();
         }
         else
         {
@@ -91,5 +83,61 @@ public class GuildManager : SingletonMono<GuildManager>
             }
         }
 
+    }
+
+    public void LoadGuildLevelGoods()
+    {
+        if (string.IsNullOrEmpty(myGuildIndate))
+        {
+            return;
+        }
+
+        //굿즈정보 요청
+        var guildGoodsBro = Backend.Social.Guild.GetGuildGoodsByIndateV3(myGuildIndate);
+
+        if (guildGoodsBro.IsSuccess())
+        {
+            guildLevelGoods.Value = int.Parse(guildGoodsBro.GetReturnValuetoJSON()["goods"]["totalGoods4Amount"]["N"].ToString());
+        }
+        else
+        {
+
+        }
+    }
+
+    public int GetGuildLevel(int goodsAmount)
+    {
+        var tableData = TableManager.Instance.GuildLevel.dataArray;
+
+        int level = 0;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (goodsAmount >= tableData[i].Needamount)
+            {
+                level = tableData[i].Id;
+            }
+        }
+
+        return level;
+    }
+
+    public int GetGuildMemberMaxNum(int exp = 0)
+    {
+        var tableData = TableManager.Instance.GuildLevel.dataArray;
+
+        int maxAddNum = 0;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].GUILDLEVELTYPE != guildLevelType.guildMemberPlus) continue;
+
+            if (exp >= tableData[i].Needamount)
+            {
+                maxAddNum += (int)tableData[i].Value;
+            }
+        }
+
+        return GameBalance.GuildMemberMax + maxAddNum;
     }
 }

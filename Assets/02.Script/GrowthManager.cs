@@ -21,9 +21,9 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
     private bool useEffect = true;
 
-    public void GetExp(float exp, bool useBuff = true, bool useEffect = true, bool syncToServer = true, bool isSleep =false)
+    public void GetExp(float exp, bool useBuff = true, bool useEffect = true, bool syncToServer = true, bool isSleep = false)
     {
-        if (accumLevel > 50000) 
+        if (accumLevel > 50000)
         {
             return;
         }
@@ -51,7 +51,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
             //추가레벨업 가능?
             if (CanLevelUp())
             {
-                GetExp(0, useBuff: useBuff, useEffect: useEffect, syncToServer: syncToServer);
+                GetExp(0, useBuff: useBuff, useEffect: useEffect, syncToServer: syncToServer, isSleep: isSleep);
             }
             else
             {
@@ -197,7 +197,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
 #if UNITY_EDITOR
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L)) 
+        if (Input.GetKeyDown(KeyCode.L))
         {
             ServerData.statusTable.GetTableData(StatusTable.Level).Value += 1000;
         }
