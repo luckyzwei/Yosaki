@@ -6,18 +6,8 @@ using UnityEngine;
 public enum guildLevelType
 {
     guildMemberPlus,
-
-    guildBuff0 = 100,
-    guildBuff1,
-    guildBuff2,
-    guildBuff3,
-    guildBuff4,
-
-    guildIcon0 = 200,
-    guildIcon1,
-    guildIcon2,
-    guildIcon3,
-    guildIcon4,
+    guildBuff,
+    guildIcon
 }
 public class UiGuildLevelBoard : MonoBehaviour
 {
@@ -28,15 +18,16 @@ public class UiGuildLevelBoard : MonoBehaviour
     private TextMeshProUGUI guildLevelText;
 
     [SerializeField]
+    private TextMeshProUGUI descriptionText;
+
+    [SerializeField]
     private GameObject rootObject;
 
-    [SerializeField]
-    private UiGuildLevelAbilCell levelAbilCellPrefab;
+    private void Start()
+    {
 
-    [SerializeField]
-    private Transform levelAbillCellParent;
-
-
+        StartCoroutine(Initialize());
+    }
 
     private void Awake()
     {
@@ -47,26 +38,32 @@ public class UiGuildLevelBoard : MonoBehaviour
         GuildManager.Instance.LoadGuildLevelGoods();
     }
 
-    private void Start()
-    {
-        Initialize();
-    }
-
-    private void Initialize()
+    private IEnumerator Initialize()
     {
         var tableData = TableManager.Instance.GuildLevel.dataArray;
 
+        string description = string.Empty;
+
         for (int i = 0; i < tableData.Length; i++)
         {
-            var cell = Instantiate<UiGuildLevelAbilCell>(levelAbilCellPrefab, levelAbillCellParent);
-
-            cell.Initialize(tableData[i]);
+            description += $"LV:{tableData[i].Id} 필요경험치 : {tableData[i].Needamount}\n<color=yellow>{tableData[i].Description}</color>\n\n";
         }
+
+        descriptionText.SetText(description);
+
+        rootObject.SetActive(false);
+        yield return null;
+        rootObject.SetActive(true);
+        yield return null;
+        rootObject.SetActive(false);
+        yield return null;
+        rootObject.SetActive(true);
+
     }
 
     private void Subscribe()
     {
-        GuildManager.Instance.guildLevelGoods.AsObservable().Subscribe(e =>
+        GuildManager.Instance.guildLevelExp.AsObservable().Subscribe(e =>
         {
             RefreshUi();
         }).AddTo(this);
@@ -74,8 +71,8 @@ public class UiGuildLevelBoard : MonoBehaviour
 
     private void RefreshUi()
     {
-        guildExpText.SetText($"경험치 : {GuildManager.Instance.guildLevelGoods.Value}");
-        guildLevelText.SetText($"레벨 : {GuildManager.Instance.GetGuildLevel(GuildManager.Instance.guildLevelGoods.Value)}");
+        guildExpText.SetText($"경험치 : {GuildManager.Instance.guildLevelExp.Value}");
+        guildLevelText.SetText($"레벨 : {GuildManager.Instance.GetGuildLevel(GuildManager.Instance.guildLevelExp.Value)}");
     }
 
 }

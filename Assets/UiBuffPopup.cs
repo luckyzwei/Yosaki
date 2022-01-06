@@ -22,7 +22,7 @@ public class UiBuffPopup : MonoBehaviour
         for (int i = 0; i < tableDatas.Length; i++)
         {
             if (tableDatas[i].Buffseconds < 0) continue;
-            if (tableDatas[i].Isyomulabil == true) continue;
+            if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Yomul) continue;
 
             var cell = Instantiate<UiBuffPopupView>(uiBuffPopupView, buffViewParent);
 

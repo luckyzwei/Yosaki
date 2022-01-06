@@ -35,7 +35,7 @@ public class UiYomulBuffIndicator : MonoBehaviour
 
             buffIconList.Add(buffImage);
 
-            buffImage.gameObject.SetActive(tableData[i].Isyomulabil);
+            buffImage.gameObject.SetActive(tableData[i].BUFFTYPEENUM==BuffTypeEnum.Yomul);
         }
 
         for (int i = 0; i < tableData.Length; i++)
@@ -46,7 +46,7 @@ public class UiYomulBuffIndicator : MonoBehaviour
 
             ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.AsObservable().Subscribe(e =>
             {
-                buffImage.gameObject.SetActive(((e == -1f || e > 0) && buffTableData.Isyomulabil) && ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 0);
+                buffImage.gameObject.SetActive(((e == -1f || e > 0) && buffTableData.BUFFTYPEENUM==BuffTypeEnum.Yomul) && ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 0);
             }).AddTo(this);
         }
 

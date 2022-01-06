@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 
+public enum BuffTypeEnum
+{
+    Normal, Yomul, Guild
+}
+
 public class UiBuffIndicator : MonoBehaviour
 {
     [SerializeField]
@@ -33,7 +38,7 @@ public class UiBuffIndicator : MonoBehaviour
 
             buffIconList.Add(buffImage);
 
-            buffImage.gameObject.SetActive(!tableData[i].Isyomulabil);
+            buffImage.gameObject.SetActive(tableData[i].BUFFTYPEENUM!=BuffTypeEnum.Yomul);
         }
 
         for (int i = 0; i < tableData.Length; i++)
@@ -44,7 +49,7 @@ public class UiBuffIndicator : MonoBehaviour
 
             ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.AsObservable().Subscribe(e =>
             {
-                buffImage.gameObject.SetActive((e == -1f || e > 0) && buffTableData.Isyomulabil == false);
+                buffImage.gameObject.SetActive((e == -1f || e > 0) && buffTableData.BUFFTYPEENUM!=BuffTypeEnum.Yomul);
             }).AddTo(this);
         }
     }

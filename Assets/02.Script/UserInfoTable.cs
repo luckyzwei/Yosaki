@@ -61,6 +61,10 @@ public class UserInfoTable
     public const string buff_exp1 = "exp1_new_new_new";
     public const string buff_exp2 = "exp2_new_new_new";
 
+    public const string guild_buff0 = "guild_buff0";
+    public const string guild_buff1 = "guild_buff1";
+    public const string guild_buff2 = "guild_buff2";
+
     public const string yomul0_buff = "yomul0_buff";
     public const string yomul1_buff = "yomul1_buff";
     public const string yomul2_buff = "yomul2_buff";
@@ -149,6 +153,10 @@ public class UserInfoTable
         {buff_gold2,0f},
         {buff_exp1,0f},
         {buff_exp2,0f},
+
+        {guild_buff0,0f},
+        {guild_buff1,0f},
+        {guild_buff2,0f},
 
         {bonusDungeonMaxKillCount,0f},
         {wingPackageRewardReceive,0f},
@@ -525,6 +533,10 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp1).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp2).Value = 0;
 
+        ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff0).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff1).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff2).Value = 0;
+
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul2_buff).Value = 0;
@@ -589,6 +601,10 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.buff_gold2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);
         userInfoParam.Add(UserInfoTable.buff_exp1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp1).Value);
         userInfoParam.Add(UserInfoTable.buff_exp2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_exp2).Value);
+
+        userInfoParam.Add(UserInfoTable.guild_buff0, ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff0).Value);
+        userInfoParam.Add(UserInfoTable.guild_buff1, ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff1).Value);
+        userInfoParam.Add(UserInfoTable.guild_buff2, ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff2).Value);
 
         userInfoParam.Add(UserInfoTable.yomul0_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul1_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value);

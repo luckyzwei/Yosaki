@@ -44,7 +44,15 @@ public class UiBuffPopupView : MonoBehaviour
     [SerializeField]
     private GameObject remainSecObject;
 
+    [SerializeField]
+    private GameObject adImage;
+
+    [SerializeField]
+    private GameObject guildImage;
+
     private bool initialized = false;
+
+
 
     public void Initalize(BuffTableData buffTableData)
     {
@@ -58,12 +66,23 @@ public class UiBuffPopupView : MonoBehaviour
 
         initialized = true;
 
-        if (yomulDesc != null)
+        if (adImage != null)
         {
-            yomulDesc.gameObject.SetActive(buffTableData.Isyomulabil);
+            adImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Normal);
         }
 
-        if (buffTableData.Isyomulabil == true)
+        if (guildImage != null)
+        {
+            guildImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Guild);
+        }
+
+
+        if (yomulDesc != null)
+        {
+            yomulDesc.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul);
+        }
+
+        if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul)
         {
             var yomulTableData = TableManager.Instance.YomulAbilTable.dataArray[buffTableData.Yomulid];
             yomulDesc.SetText($"{yomulTableData.Abilname} LV:{buffTableData.Unlockyomullevel} 필요");
@@ -74,10 +93,10 @@ public class UiBuffPopupView : MonoBehaviour
     {
         if (alwaysActiveObject != null)
         {
-            alwaysActiveObject.SetActive(buffTableData.Isyomulabil);
+            alwaysActiveObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul);
         }
 
-        if (buffTableData.Isyomulabil == false)
+        if (buffTableData.BUFFTYPEENUM != BuffTypeEnum.Yomul)
         {
             TimeSpan ts = TimeSpan.FromSeconds(buffTableData.Buffseconds);
 
@@ -193,7 +212,7 @@ public class UiBuffPopupView : MonoBehaviour
 
     public void OnClickGetBuffButton()
     {
-        if (buffTableData.Isyomulabil == true && ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 1)
+        if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul && ServerData.userInfoTable.TableDatas[UserInfoTable.buffAwake].Value == 1)
         {
             PopupManager.Instance.ShowAlarmMessage("항상 활성화 되어 있습니다.");
             return;
@@ -205,14 +224,14 @@ public class UiBuffPopupView : MonoBehaviour
             return;
         }
 
-        if (buffTableData.Isyomulabil == false)
+        if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Normal)
         {
             AdManager.Instance.ShowRewardedReward(() =>
             {
                 BuffGetRoutine();
             });
         }
-        else
+        else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul) 
         {
             var yomulTableData = TableManager.Instance.YomulAbilTable.dataArray[buffTableData.Yomulid];
             var yomulServerData = ServerData.yomulServerTable.TableDatas[yomulTableData.Stringid];
@@ -226,7 +245,26 @@ public class UiBuffPopupView : MonoBehaviour
             {
                 BuffGetRoutine();
             }
+        }
+        else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Guild)
+        {
+            int getLevel = GuildManager.Instance.GetBuffGetExp(buffTableData.Id);
 
+            //길드 체크
+            if (GuildManager.Instance.guildInfoData.Value == null) 
+            {
+                PopupManager.Instance.ShowAlarmMessage($"문파에 가입되어 있어야 합니다.(문파경험치 {getLevel}이상)");
+                return;
+            }
+
+            if (GuildManager.Instance.HasGuildBuff(buffTableData.Id)) 
+            {
+                BuffGetRoutine();
+            }
+            else 
+            {
+                PopupManager.Instance.ShowAlarmMessage($"문파의 경험치가 부족합니다.(문파경험치 {getLevel}이상)");
+            }
         }
     }
 
@@ -257,7 +295,7 @@ public class UiBuffPopupView : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              LogManager.Instance.SendLog("버프 획득", $"{buffTableData.Stringid}");
+              //LogManager.Instance.SendLog("버프 획득", $"{buffTableData.Stringid}");
           });
     }
 }

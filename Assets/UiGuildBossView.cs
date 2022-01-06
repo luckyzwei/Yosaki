@@ -67,7 +67,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                     int addAmount = int.Parse(returnValue["goods"]["totalGoods9Amount"]["N"].ToString());
 
-                    bool maxContributed = addAmount >= GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelGoods.Value);
+                    bool maxContributed = addAmount >= GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value);
 
 #if UNITY_EDITOR
                     maxContributed = false;
@@ -75,7 +75,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                     if (maxContributed)
                     {
-                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{GuildManager.Instance.myGuildName} 문파는 \n오늘 더이상 점수를 추가할 수 없습니다!\n<color=red>최대 {GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelGoods.Value)}번 추가 가능</color>\n<color=red>(매일 오전 5시 초기화)</color>", null);
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{GuildManager.Instance.myGuildName} 문파는 \n오늘 더이상 점수를 추가할 수 없습니다!\n<color=red>최대 {GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value)}번 추가 가능</color>\n<color=red>(매일 오전 5시 초기화)</color>", null);
                         return;
                     }
                 }
@@ -116,7 +116,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                             if (broForGuildLevel.IsSuccess())
                             {
-                                GuildManager.Instance.guildLevelGoods.Value++;
+                                GuildManager.Instance.guildLevelExp.Value++;
                             }
                         }
                         else

@@ -29,8 +29,8 @@ public class BuffTableData
   public int Buffseconds { get {return buffseconds; } set { this.buffseconds = value;} }
   
   [SerializeField]
-  bool isyomulabil;
-  public bool Isyomulabil { get {return isyomulabil; } set { this.isyomulabil = value;} }
+  BuffTypeEnum bufftypeenum;
+  public BuffTypeEnum BUFFTYPEENUM { get {return bufftypeenum; } set { this.bufftypeenum = value;} }
   
   [SerializeField]
   int yomulid;
@@ -41,11 +41,15 @@ public class BuffTableData
   public int Unlockyomullevel { get {return unlockyomullevel; } set { this.unlockyomullevel = value;} }
   
   [SerializeField]
-  int usecount;
-  public int Usecount { get {return usecount; } set { this.usecount = value;} }
+  float usecount;
+  public float Usecount { get {return usecount; } set { this.usecount = value;} }
   
   [SerializeField]
   float buffawakevalue;
   public float Buffawakevalue { get {return buffawakevalue; } set { this.buffawakevalue = value;} }
+  
+  [SerializeField]
+  int guildlevel;
+  public int Guildlevel { get {return guildlevel; } set { this.guildlevel = value;} }
   
 }

@@ -37,6 +37,12 @@ public class UiGuildIconCell : MonoBehaviour
 
     public void OnCliCkIconButton()
     {
+        if (GuildManager.Instance.HasGuildIcon(CommonUiContainer.Instance.guildIconGrade[idx]) == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("문파 경험치가 부족합니다.");
+            return;
+        }
+
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "문파 아이콘을 변경 합니까?", () =>
         {
             Param param = new Param();

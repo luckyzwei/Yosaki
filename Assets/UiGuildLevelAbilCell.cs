@@ -36,7 +36,7 @@ public class UiGuildLevelAbilCell : MonoBehaviour
 
     private void Subscribe()
     {
-        GuildManager.Instance.guildLevelGoods.AsObservable().Subscribe(e =>
+        GuildManager.Instance.guildLevelExp.AsObservable().Subscribe(e =>
         {
             lockMask.gameObject.SetActive(e < guildLevelData.Needamount);
         }).AddTo(this);

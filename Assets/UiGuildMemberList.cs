@@ -63,7 +63,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
     private void Subscribe()
     {
-        GuildManager.Instance.guildLevelGoods.AsObservable().Subscribe(e =>
+        GuildManager.Instance.guildLevelExp.AsObservable().Subscribe(e =>
         {
             RefreshGuildMemberCountText();
         }).AddTo(this);
@@ -97,7 +97,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
     private void RefreshGuildMemberCountText()
     {
-        memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelGoods.Value)}");
+        memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value)}");
     }
 
     public void RefreshMemberList()
@@ -114,7 +114,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
             guildMemberCount = rows.Count;
 
-            memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelGoods.Value)}");
+            memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value)}");
 
             for (int i = 0; i < memberCells.Count; i++)
             {

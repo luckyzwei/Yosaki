@@ -38,7 +38,7 @@ public class UiYomulSidongEffect : MonoBehaviour
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            if (tableData[i].Isyomulabil)
+            if (tableData[i].BUFFTYPEENUM==BuffTypeEnum.Yomul)
             {
                 buffRemainTimes.Add(ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec);
             }
@@ -46,7 +46,7 @@ public class UiYomulSidongEffect : MonoBehaviour
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            if (tableData[i].Isyomulabil)
+            if (tableData[i].BUFFTYPEENUM==BuffTypeEnum.Yomul)
             {
                 ServerData.buffServerTable.TableDatas[tableData[i].Stringid].remainSec.AsObservable().Subscribe(e =>
                 {

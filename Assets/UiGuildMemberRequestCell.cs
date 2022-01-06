@@ -23,9 +23,9 @@ public class UiGuildMemberRequestCell : MonoBehaviour
 
     public void OnClickAcceptButton()
     {
-        if (UiGuildMemberList.Instance.guildMemberCount >= GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelGoods.Value))
+        if (UiGuildMemberList.Instance.guildMemberCount >= GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value))
         {
-            PopupManager.Instance.ShowAlarmMessage($"문파원이 가득 찼습니다.(최대 {GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelGoods.Value)}명)");
+            PopupManager.Instance.ShowAlarmMessage($"문파원이 가득 찼습니다.(최대 {GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value)}명)");
             return;
         }
 

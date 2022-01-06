@@ -283,4 +283,5 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public List<Sprite> sonThumbNail;
 
     public List<Sprite> guildIcon;
+    public List<int> guildIconGrade;
 }

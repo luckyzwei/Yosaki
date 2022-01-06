@@ -12,11 +12,11 @@ public class GuildManager : SingletonMono<GuildManager>
 
     public string myGuildIndate { get; private set; } = string.Empty;
 
-    public string myGuildName => guildInfoData == null ? string.Empty : guildInfoData.Value["guildName"]["S"].ToString();
+    public string myGuildName => guildInfoData.Value == null ? string.Empty : guildInfoData.Value["guildName"]["S"].ToString();
 
     public ReactiveProperty<LitJson.JsonData> guildInfoData = new ReactiveProperty<LitJson.JsonData>();
 
-    public ReactiveProperty<int> guildLevelGoods = new ReactiveProperty<int>(0);
+    public ReactiveProperty<int> guildLevelExp = new ReactiveProperty<int>(0);
 
     public ReactiveProperty<int> guildIconIdx = new ReactiveProperty<int>();
 
@@ -97,7 +97,7 @@ public class GuildManager : SingletonMono<GuildManager>
 
         if (guildGoodsBro.IsSuccess())
         {
-            guildLevelGoods.Value = int.Parse(guildGoodsBro.GetReturnValuetoJSON()["goods"]["totalGoods4Amount"]["N"].ToString());
+            guildLevelExp.Value = int.Parse(guildGoodsBro.GetReturnValuetoJSON()["goods"]["totalGoods4Amount"]["N"].ToString());
         }
         else
         {
@@ -139,5 +139,55 @@ public class GuildManager : SingletonMono<GuildManager>
         }
 
         return GameBalance.GuildMemberMax + maxAddNum;
+    }
+
+    public bool HasGuildBuff(int buffIdx)
+    {
+        int myGuildExp = guildLevelExp.Value;
+
+        var tableData = TableManager.Instance.GuildLevel.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].GUILDLEVELTYPE != guildLevelType.guildBuff) continue;
+
+            if (myGuildExp < tableData[i].Needamount) continue;
+
+            if (buffIdx != (int)tableData[i].Value) continue;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public int GetBuffGetExp(int buffIdx)
+    {
+        var tableData = TableManager.Instance.GuildLevel.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].GUILDLEVELTYPE != guildLevelType.guildBuff) continue;
+
+            if (buffIdx == (int)tableData[i].Value) return tableData[i].Needamount;
+        }
+
+        return 999;
+    }
+
+    public bool HasGuildIcon(int grade)
+    {
+        var tableData = TableManager.Instance.GuildLevel.dataArray;
+
+        int myExp = GuildManager.Instance.guildLevelExp.Value;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].GUILDLEVELTYPE != guildLevelType.guildIcon) continue;
+            if (myExp < tableData[i].Needamount) continue;
+            if ((int)tableData[i].Value >= grade) return true;
+        }
+
+        return false;
     }
 }
