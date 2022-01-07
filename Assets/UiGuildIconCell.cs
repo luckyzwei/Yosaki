@@ -1,6 +1,7 @@
 ﻿using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,12 +14,21 @@ public class UiGuildIconCell : MonoBehaviour
     [SerializeField]
     private GameObject selectedFrame;
 
+    [SerializeField]
+    private TextMeshProUGUI gradeDescription;
+
     private int idx;
 
     public void Initialize(int idx)
     {
         this.idx = idx;
         icon.sprite = CommonUiContainer.Instance.guildIcon[idx];
+
+        int exp = GuildManager.Instance.GetGuildIconExp(CommonUiContainer.Instance.guildIconGrade[idx]);
+
+        gradeDescription.SetText($"명성{exp}이상");
+
+        gradeDescription.color = CommonUiContainer.Instance.itemGradeColor[CommonUiContainer.Instance.guildIconGrade[idx]];
 
         Subscribe();
     }
@@ -39,7 +49,7 @@ public class UiGuildIconCell : MonoBehaviour
     {
         if (GuildManager.Instance.HasGuildIcon(CommonUiContainer.Instance.guildIconGrade[idx]) == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("문파 경험치가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("문파 명성이 부족합니다.");
             return;
         }
 

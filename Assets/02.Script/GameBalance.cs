@@ -89,15 +89,15 @@ public static class GameBalance
     public readonly static ObscuredInt nickNameChangeFee = 500000;
 
 
-    public readonly static ObscuredInt rankRewardTicket_1 = 120;
-    public readonly static ObscuredInt rankRewardTicket_2 = 104;
-    public readonly static ObscuredInt rankRewardTicket_3 = 96;
-    public readonly static ObscuredInt rankRewardTicket_4 = 88;
-    public readonly static ObscuredInt rankRewardTicket_5 = 80;
-    public readonly static ObscuredInt rankRewardTicket_6_20 = 64;
-    public readonly static ObscuredInt rankRewardTicket_21_100 = 56;
-    public readonly static ObscuredInt rankRewardTicket_101_1000 = 35;
-    public readonly static ObscuredInt rankRewardTicket_1001_10000 = 25;
+    public readonly static ObscuredInt rankRewardTicket_1 = 500;
+    public readonly static ObscuredInt rankRewardTicket_2 = 450;
+    public readonly static ObscuredInt rankRewardTicket_3 = 400;
+    public readonly static ObscuredInt rankRewardTicket_4 = 350;
+    public readonly static ObscuredInt rankRewardTicket_5 = 300;
+    public readonly static ObscuredInt rankRewardTicket_6_20 = 200;
+    public readonly static ObscuredInt rankRewardTicket_21_100 = 150;
+    public readonly static ObscuredInt rankRewardTicket_101_1000 = 100;
+    public readonly static ObscuredInt rankRewardTicket_1001_10000 = 50;
 
     public readonly static ObscuredInt rankRewardTicket_1_relic = 80;
     public readonly static ObscuredInt rankRewardTicket_2_relic = 70;
@@ -128,9 +128,9 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_21_100_guild = 200;
     public readonly static ObscuredInt rankReward_101_1000_guild = 150;
 
-    public readonly static ObscuredInt EventDropEndDay = 7;
-    public readonly static ObscuredInt EventMakeEndDay = 7;
-    public readonly static ObscuredInt EventPackageSaleEndDay = 7;
+    public readonly static ObscuredInt EventDropEndDay = 14;
+    public readonly static ObscuredInt EventMakeEndDay = 14;
+    public readonly static ObscuredInt EventPackageSaleEndDay = 14;
 
     public readonly static ObscuredFloat TitleEquipAddPer = 2;
 

@@ -198,7 +198,6 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         List<TransactionValue> transantions = new List<TransactionValue>();
 
 
-
         //경험치
         Param statusParam = new Param();
         //레벨

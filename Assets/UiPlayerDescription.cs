@@ -48,5 +48,10 @@ public class UiPlayerDescription : MonoBehaviour
             }
 
         }).AddTo(this);
+
+        GuildManager.Instance.guildIconIdx.AsObservable().Subscribe(e =>
+        {
+            guilIcon.sprite = CommonUiContainer.Instance.guildIcon[e];
+        }).AddTo(this);
     }
 }

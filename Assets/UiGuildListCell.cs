@@ -125,7 +125,7 @@ public class UiGuildListCell : MonoBehaviour
                 int memberMax = GuildManager.Instance.GetGuildMemberMaxNum(int.Parse(callback.GetReturnValuetoJSON()["guild"]["totalGoods4Amount"]["N"].ToString()));
 
 
-                if (guildNum >= GameBalance.GuildMemberMax)
+                if (guildNum >= memberMax)
                 {
                     PopupManager.Instance.ShowConfirmPopup("알림", "문파원이 가득차서 가입하실수 없습니다.", null);
 

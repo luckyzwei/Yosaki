@@ -568,5 +568,9 @@ public class TableManager : SingletonMono<TableManager>
 
     public GuildLevel GuildLevel => guildLevel;
 
+    [SerializeField]
+    private SeolPass seolPass;
+    public SeolPass SeolPass => seolPass;
+
 }
 

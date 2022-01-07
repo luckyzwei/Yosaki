@@ -52,6 +52,7 @@ public class UserInfoTable
     public const string managerDescriptionFlags = "managerDescriptionFlags";
     public const string attendanceCount = "attendanceCount2";
     public const string attendanceCount_100Day = "attendanceCount_100Day";
+    public const string attendanceCount_Seol = "atten_Seol";
 
     public const string marbleAwake = "marbleAwake";
     public const string resetStat = "resetStat";
@@ -209,6 +210,7 @@ public class UserInfoTable
         {cockAwake,0},
         {peachRefund,0},
         {petCostumePackRefund,0},
+        {attendanceCount_Seol,1},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -554,6 +556,7 @@ public class UserInfoTable
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value++;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value++;
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f)
             {
@@ -586,6 +589,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.LastLogin, ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount_100Day, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value);
+        userInfoParam.Add(UserInfoTable.attendanceCount_Seol, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value);
 
         userInfoParam.Add(UserInfoTable.oakpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);
@@ -709,7 +713,7 @@ public class UserInfoTable
         //1월
         else
         {
-            return currentServerTime.Day < 8;
+            return currentServerTime.Day < 15;
         }
     }
     public bool CanMakeEventItem()
@@ -721,7 +725,7 @@ public class UserInfoTable
         //1월
         else
         {
-            return currentServerTime.Day < 8;
+            return currentServerTime.Day < 15;
         }
     }
 
@@ -734,7 +738,7 @@ public class UserInfoTable
         //1월
         else
         {
-            return currentServerTime.Day < 8;
+            return currentServerTime.Day < 15;
         }
     }
 
@@ -752,9 +756,9 @@ public class UserInfoTable
 
     public bool IsHotTime()
     {
-        //#if UNITY_EDITOR
-        //        return true;
-        //#endif
+#if UNITY_EDITOR
+        return true;
+#endif
         int currentHour = currentServerTime.Hour;
         return currentHour >= GameBalance.HotTime_Start && currentHour < GameBalance.HotTime_End;
     }

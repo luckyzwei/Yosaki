@@ -43,7 +43,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description1 += $"{CommonString.GetStatusName(StatusType.SkillCoolTime)} : {PlayerStats.GetSkillCoolTimeDecreaseValue() * 100f}\n";
 
         //스킬 데미지 증가
-        description2 += $"{CommonString.GetStatusName(StatusType.SkillDamage)} : {PlayerStats.GetSkillDamagePercentValue() * 100f}\n";
+        description2 += $"{CommonString.GetStatusName(StatusType.SkillDamage)} : {Utils.ConvertBigNum(PlayerStats.GetSkillDamagePercentValue() * 100f)}\n";
 
         ////최소데미지 보정
         //description1 += $"{CommonString.GetStatusName(StatusType.DamBalance)} : +{PlayerStats.GetDamBalanceAddValue() * 100f}%\n";

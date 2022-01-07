@@ -190,4 +190,22 @@ public class GuildManager : SingletonMono<GuildManager>
 
         return false;
     }
+
+    public int GetGuildIconExp(int grade)
+    {
+        var tableData = TableManager.Instance.GuildLevel.dataArray;
+
+        int myExp = GuildManager.Instance.guildLevelExp.Value;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].GUILDLEVELTYPE != guildLevelType.guildIcon) continue;
+            if ((int)tableData[i].Value == grade)
+            {
+                return tableData[i].Needamount;
+            }
+        }
+
+        return 0;
+    }
 }

@@ -624,13 +624,19 @@ public static class PlayerStats
     public static float GetMagicStonePlusValue()
     {
         float ret = 0f;
+
         ret += GetHotTimeBuffEffect(StatusType.MagicStoneAddPer);
+        ret += GetBuffValue(StatusType.MagicStoneAddPer);
+
         return ret;
     }
     public static float GetMarblePlusValue()
     {
         float ret = 0f;
+
         ret += GetHotTimeBuffEffect(StatusType.MarbleAddPer);
+        ret += GetBuffValue(StatusType.MarbleAddPer);
+
         return ret;
     }
 

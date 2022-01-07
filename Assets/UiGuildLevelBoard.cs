@@ -46,7 +46,7 @@ public class UiGuildLevelBoard : MonoBehaviour
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            description += $"LV:{tableData[i].Id} 필요경험치 : {tableData[i].Needamount}\n<color=yellow>{tableData[i].Description}</color>\n\n";
+            description += $"명성 : {tableData[i].Needamount}\n<color=yellow>{tableData[i].Description}</color>\n\n";
         }
 
         descriptionText.SetText(description);
@@ -71,7 +71,7 @@ public class UiGuildLevelBoard : MonoBehaviour
 
     private void RefreshUi()
     {
-        guildExpText.SetText($"경험치 : {GuildManager.Instance.guildLevelExp.Value}");
+        guildExpText.SetText($"명성 : {GuildManager.Instance.guildLevelExp.Value}");
         guildLevelText.SetText($"레벨 : {GuildManager.Instance.GetGuildLevel(GuildManager.Instance.guildLevelExp.Value)}");
     }
 

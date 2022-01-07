@@ -253,7 +253,7 @@ public class UiBuffPopupView : MonoBehaviour
             //길드 체크
             if (GuildManager.Instance.guildInfoData.Value == null) 
             {
-                PopupManager.Instance.ShowAlarmMessage($"문파에 가입되어 있어야 합니다.(문파경험치 {getLevel}이상)");
+                PopupManager.Instance.ShowAlarmMessage($"문파에 가입되어 있어야 합니다.(명성 {getLevel}이상)");
                 return;
             }
 
@@ -263,7 +263,7 @@ public class UiBuffPopupView : MonoBehaviour
             }
             else 
             {
-                PopupManager.Instance.ShowAlarmMessage($"문파의 경험치가 부족합니다.(문파경험치 {getLevel}이상)");
+                PopupManager.Instance.ShowAlarmMessage($"문파의 명성이 부족합니다.(명성 {getLevel}이상)");
             }
         }
     }
