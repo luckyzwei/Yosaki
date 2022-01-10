@@ -19,6 +19,9 @@ public class UiGuildMemberCell : MonoBehaviour
 
     public GameObject kickButton;
 
+    [SerializeField]
+    private GameObject donatedObject;
+
     public enum GuildGrade
     {
         Member, ViceMaster, Master
@@ -33,8 +36,10 @@ public class UiGuildMemberCell : MonoBehaviour
 
         public int donateGoods { get; private set; }
 
+        public bool todayDonated { get; private set; } = false;
 
-        public GuildMemberInfo(string nickName, string position, string lastLogin, string gamerIndate, int donateGoods)
+
+        public GuildMemberInfo(string nickName, string position, string lastLogin, string gamerIndate, int donateGoods, bool todayDonated)
         {
             this.nickName = nickName;
 
@@ -49,6 +54,8 @@ public class UiGuildMemberCell : MonoBehaviour
             this.gamerIndate = gamerIndate;
 
             this.donateGoods = donateGoods;
+
+            this.todayDonated = todayDonated;
         }
     }
 
@@ -62,7 +69,7 @@ public class UiGuildMemberCell : MonoBehaviour
 
         if (guildMemberInfo.lastLogin.Length >= 16)
         {
-            DateTime loginTime =DateTime.Parse(guildMemberInfo.lastLogin);
+            DateTime loginTime = DateTime.Parse(guildMemberInfo.lastLogin);
             //loginTime = loginTime.AddHours(9);
 
             lastLogin.gameObject.SetActive(true);
@@ -73,7 +80,7 @@ public class UiGuildMemberCell : MonoBehaviour
             lastLogin.gameObject.SetActive(false);
         }
 
-
+        donatedObject.gameObject.SetActive(guildMemberInfo.todayDonated);
 
 
         RefreshKickButton();

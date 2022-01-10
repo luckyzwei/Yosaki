@@ -104,7 +104,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     {
         memberNumText.SetText(string.Empty);
 
-        var bro = Backend.Social.Guild.GetGuildMemberListV3(GuildManager.Instance.myGuildIndate, 25);
+        var bro = Backend.Social.Guild.GetGuildMemberListV3(GuildManager.Instance.myGuildIndate, GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value));
 
         if (bro.IsSuccess())
         {
@@ -129,8 +129,9 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     string lastLogin = data["lastLogin"]["S"].ToString();
                     string gamerIndate = data["gamerInDate"]["S"].ToString();
                     int donateGoods = int.Parse(data["totalGoods3Amount"]["N"].ToString());
+                    bool todayDonated = int.Parse(data["totalGoods9Amount"]["N"].ToString()) >= 1;
 
-                    var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods);
+                    var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated);
 
                     memberCells[i].Initialize(memberData);
                     memberCells[i].transform.SetAsFirstSibling();
