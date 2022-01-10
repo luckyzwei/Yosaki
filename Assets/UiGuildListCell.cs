@@ -76,7 +76,7 @@ public class UiGuildListCell : MonoBehaviour
         guildIcon.sprite = CommonUiContainer.Instance.guildIcon[int.Parse(jsonData["guildIcon"].ToString())];
 
         acceptDescription.SetText(isInstantAcceptGuild ? "즉시가입" : "가입신청");
-        
+
         buttonImage.color = isInstantAcceptGuild ? instantAcceptColor : needAcceptColor;
 
         //점수 조회
@@ -122,7 +122,28 @@ public class UiGuildListCell : MonoBehaviour
             {
                 int guildNum = int.Parse(callback.GetReturnValuetoJSON()["guild"]["memberCount"]["N"].ToString());
 
-                int memberMax = GuildManager.Instance.GetGuildMemberMaxNum(int.Parse(callback.GetReturnValuetoJSON()["guild"]["totalGoods4Amount"]["N"].ToString()));
+                var returnValue = callback.GetReturnValuetoJSON()["guild"];
+
+                int memberMax = 0;
+
+                //
+                var goodsBro = Backend.Social.Guild.GetGuildGoodsByIndateV3(indate);
+
+                // 이후 처리
+                if (goodsBro.IsSuccess())
+                {
+                    var data = goodsBro.GetReturnValuetoJSON();
+
+                    memberMax = GuildManager.Instance.GetGuildMemberMaxNum(int.Parse(data["goods"]["totalGoods4Amount"]["N"].ToString()));
+                    guildMemNumCount.SetText($"{memberCount}/{memberMax}");
+                }
+                else
+                {
+                    PopupManager.Instance.ShowConfirmPopup("알림", $"가입 요청 실패\n{goodsBro.GetStatusCode()}", null);
+                    return;
+                }
+
+                //
 
 
                 if (guildNum >= memberMax)
