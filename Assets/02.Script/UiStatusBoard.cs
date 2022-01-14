@@ -109,6 +109,12 @@ public class UiStatusBoard : MonoBehaviour
                 ServerData.statusTable.GetTableData(e.Current.Value.Key).Value = 0;
             }
 
+            if (usedPoint == 0)
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "초기화에 실패했습니다", null);
+                return;
+            }
+
             log += $"획득수량 {usedPoint}";
 
             ServerData.statusTable.GetTableData(StatusTable.Memory).Value += usedPoint;

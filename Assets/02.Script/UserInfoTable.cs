@@ -118,6 +118,7 @@ public class UserInfoTable
     public const string cockAwake = "cockAwake";
     public const string peachRefund = "peachRefund";
     public const string petCostumePackRefund = "pcr";
+    public const string dogAwake = "dogAwake";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -211,6 +212,7 @@ public class UserInfoTable
         {peachRefund,0},
         {petCostumePackRefund,0},
         {attendanceCount_Seol,1},
+        {dogAwake,0},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
@@ -709,37 +711,29 @@ public class UserInfoTable
     {
         if (currentServerTime.Month == 11) return true;
         if (currentServerTime.Month == 12) return true;
+        if (currentServerTime.Month == 1) return true;
+        if (currentServerTime.Month == 2) return true;
 
-        //1월
-        else
-        {
-            return currentServerTime.Day < 15;
-        }
+        return false;
     }
     public bool CanMakeEventItem()
     {
-        //11월 12월
         if (currentServerTime.Month == 11) return true;
         if (currentServerTime.Month == 12) return true;
+        if (currentServerTime.Month == 1) return true;
+        if (currentServerTime.Month == 2) return true;
 
-        //1월
-        else
-        {
-            return currentServerTime.Day < 15;
-        }
+        return false;
     }
 
     public bool CanBuyEventPackage()
     {
-        //11월 12월
         if (currentServerTime.Month == 11) return true;
         if (currentServerTime.Month == 12) return true;
+        if (currentServerTime.Month == 1) return true;
+        if (currentServerTime.Month == 2) return true;
 
-        //1월
-        else
-        {
-            return currentServerTime.Day < 15;
-        }
+        return false;
     }
 
     public bool CanRecordGuildScore()
@@ -757,7 +751,7 @@ public class UserInfoTable
     public bool IsHotTime()
     {
 #if UNITY_EDITOR
-        return true;
+        //return true;
 #endif
         int currentHour = currentServerTime.Hour;
         return currentHour >= GameBalance.HotTime_Start && currentHour < GameBalance.HotTime_End;

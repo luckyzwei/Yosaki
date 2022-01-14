@@ -497,6 +497,18 @@ public static class PlayerStats
 
         return ServerData.statusTable.GetTableData(StatusTable.Level).Value * GameBalance.YachaIgnoreDefenseAddValuePerLevel;
     }
+
+    public static float GetYachaChunSlashValue()
+    {
+        bool hasYacha = ServerData.weaponTable.TableDatas[yachaKey].hasItem.Value == 1;
+
+        bool dogAwake = ServerData.userInfoTable.TableDatas[UserInfoTable.dogAwake].Value == 1;
+
+        if (hasYacha == false || dogAwake == false) return 0f;
+
+        return ServerData.statusTable.GetTableData(StatusTable.Level).Value * GameBalance.YachaChunSlashAddValuePerLevel;
+    }
+
     #endregion
     #region SkillCoolTime
     public static float GetSkillCoolTimeDecreaseValue()
@@ -558,6 +570,7 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.CriticalDam);
         ret += GetStageRelicHasEffect(StatusType.CriticalDam);
         ret += GetSonAbilHasEffect(StatusType.CriticalDam);
+    
 
         return ret;
     }
@@ -806,7 +819,11 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.SuperCritical1DamPer);
         ret += GetRelicHasEffect(StatusType.SuperCritical1DamPer);
 
+        ret += ServerData.petTable.GetStatusValue(StatusType.SuperCritical1DamPer);
+
         ret += ServerData.statusTable.GetStatusValue(StatusTable.ChunSlash_memory);
+
+        ret += GetYachaChunSlashValue();
 
         return ret;
     }

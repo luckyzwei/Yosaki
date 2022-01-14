@@ -68,6 +68,15 @@ public class UiPetView : MonoBehaviour
     [SerializeField]
     private GameObject awakeButton;
 
+    [SerializeField]
+    private GameObject normalPetObject;
+
+    [SerializeField]
+    private GameObject leemugiPetObject;
+
+    [SerializeField]
+    private TextMeshProUGUI leemugiGetDescription;
+
     private void SetPetSpine(int idx)
     {
         skeletonGraphic.Clear();
@@ -103,6 +112,15 @@ public class UiPetView : MonoBehaviour
         SetAbilityText();
 
         tutorialObject.SetActive(petData.PETGETTYPE == PetGetType.Gem && petData.Price == 0f);
+
+        normalPetObject.SetActive(petData.Id < 12 || ServerData.petTable.TableDatas["pet12"].hasItem.Value == 1);
+
+        leemugiPetObject.SetActive(petData.Id >= 12);
+
+        if (petData.Id == 12)
+        {
+            leemugiGetDescription.SetText($"야차 지배 LV :{GameBalance.LeeMuGiGetLevel}에 획득 가능");
+        }
     }
 
     private void SetAbilityText()
@@ -123,7 +141,14 @@ public class UiPetView : MonoBehaviour
             if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
                 value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
 
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue1 + maxLevel * petData.Hasaddvalue1) * (isPercent ? 100 : 1f)}</color>)\n";
+            if (petData.Id != 12)
+            {
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue1 + maxLevel * petData.Hasaddvalue1) * (isPercent ? 100 : 1f)}</color>)\n";
+            }
+            else
+            {
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}\n";
+            }
         }
 
         if (petData.Hasvalue2 != 0f)
@@ -136,7 +161,14 @@ public class UiPetView : MonoBehaviour
             if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
                 value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
 
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue2 + maxLevel * petData.Hasaddvalue2) * (isPercent ? 100 : 1f)}</color>)\n";
+            if (petData.Id != 12)
+            {
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue2 + maxLevel * petData.Hasaddvalue2) * (isPercent ? 100 : 1f)}</color>)\n";
+            }
+            else 
+            {
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}\n";
+            }
         }
 
         if (petData.Hasvalue3 != 0f)
@@ -149,7 +181,14 @@ public class UiPetView : MonoBehaviour
             if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
                 value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
 
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue3 + maxLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}</color>)\n";
+            if (petData.Id != 12)
+            {
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue3 + maxLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}</color>)\n";
+            }
+            else 
+            {
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}\n";
+            }
         }
 
         if (petData.Hasvalue4 != 0f)
@@ -162,7 +201,14 @@ public class UiPetView : MonoBehaviour
             if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
                 value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
 
-            abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue4 + maxLevel * petData.Hasaddvalue4) * (isPercent ? 100 : 1f)}</color>)";
+            if (petData.Id != 12)
+            {
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue4 + maxLevel * petData.Hasaddvalue4) * (isPercent ? 100 : 1f)}</color>)";
+            }
+            else 
+            {
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}";
+            }
         }
 
 
@@ -232,6 +278,15 @@ public class UiPetView : MonoBehaviour
                 awakeButton.SetActive(e == 0);
             }).AddTo(this);
 
+        }
+
+        if (petData.Id == 12)
+        {
+            ServerData.petTable.TableDatas["pet12"].hasItem.AsObservable().Subscribe(e =>
+            {
+                leemugiGetDescription.gameObject.SetActive(e == 0);
+                normalPetObject.SetActive(petData.Id < 12 || ServerData.petTable.TableDatas["pet12"].hasItem.Value == 1);
+            }).AddTo(this);
         }
 
     }
@@ -625,5 +680,32 @@ public class UiPetView : MonoBehaviour
     public int GetPetLevelUpPrice_Marble(int level)
     {
         return (int)Mathf.Pow(level + 1, petData.Upgradepowvalue);
+    }
+
+    public void GetLeeMuGiButton()
+    {
+        int yachaZiBaeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
+
+        if (yachaZiBaeLevel < GameBalance.LeeMuGiGetLevel)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"야차 지배 LV:{GameBalance.LeeMuGiGetLevel}에 획득할 수 있습니다.");
+            return;
+        }
+
+        ServerData.petTable.TableDatas["pet12"].hasItem.Value = 1;
+
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        Param petParam = new Param();
+
+        petParam.Add("pet12", ServerData.petTable.TableDatas["pet12"].ConvertToString());
+
+        transactions.Add(TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, petParam));
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+          {
+              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "이무기 획득!", null);
+          });
+
     }
 }

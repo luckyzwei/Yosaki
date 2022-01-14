@@ -32,6 +32,7 @@ public enum Item_Type
     MiniGameReward,   
     GuildReward,
     CockStone,
+    DogStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

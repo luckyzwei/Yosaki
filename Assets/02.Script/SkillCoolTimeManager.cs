@@ -79,10 +79,6 @@ public static class SkillCoolTimeManager
         float calculatedCoolTime = coolTime - (coolTime * skillCoolTimeDecValue);
         calculatedCoolTime = Mathf.Max(minimumCoolValue, calculatedCoolTime);
 
-#if UNITY_EDITOR
-        Debug.Log($"idx {idx} cooltime {coolTime} decValue {skillCoolTimeDecValue} result {calculatedCoolTime} ");
-#endif
-
         if (remainCool.ContainsKey(idx) == false)
         {
             remainCool.Add(idx, new ReactiveProperty<float>());

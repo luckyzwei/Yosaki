@@ -89,6 +89,9 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
         while (e.MoveNext())
         {
+            //이무기는 생성X
+            if (e.Current.Value.Id >= 12) break;
+
             var petView = Instantiate<UiPetView>(uiPetViewPrefeab, petViewParent);
 
             petView.Initialize(e.Current.Value);

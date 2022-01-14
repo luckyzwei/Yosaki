@@ -128,9 +128,9 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_21_100_guild = 200;
     public readonly static ObscuredInt rankReward_101_1000_guild = 150;
 
-    public readonly static ObscuredInt EventDropEndDay = 14;
-    public readonly static ObscuredInt EventMakeEndDay = 14;
-    public readonly static ObscuredInt EventPackageSaleEndDay = 14;
+    public readonly static ObscuredInt EventDropEndDay = 28;
+    public readonly static ObscuredInt EventMakeEndDay = 28;
+    public readonly static ObscuredInt EventPackageSaleEndDay = 28;
 
     public readonly static ObscuredFloat TitleEquipAddPer = 2;
 
@@ -157,6 +157,7 @@ public static class GameBalance
 
     public readonly static ObscuredFloat YachaSkillAddValuePerLevel = 0.08f;
     public readonly static ObscuredFloat YachaIgnoreDefenseAddValuePerLevel = 0.08f;
+    public readonly static ObscuredFloat YachaChunSlashAddValuePerLevel = 0.0005f;
 
     public readonly static ObscuredInt SonCostumeUnlockLevel = 80000;
     public readonly static ObscuredInt YoungMulCreateEquipLevel = 120;
@@ -168,6 +169,8 @@ public static class GameBalance
 
     public readonly static ObscuredInt GuildCreateMinLevel = 5000;
     public readonly static ObscuredInt GuildEnterMinLevel = 5000;
+
+    public readonly static ObscuredInt LeeMuGiGetLevel = 2000;
 
     public static int GetSonIdx()
     {

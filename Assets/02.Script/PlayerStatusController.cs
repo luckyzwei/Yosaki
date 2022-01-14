@@ -285,7 +285,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
 
 #if UNITY_EDITOR
-        Debug.Log($"Player damaged {value}");
+       // Debug.Log($"Player damaged {value}");
 #endif
 
         SpawnDamText(value);

@@ -29,6 +29,22 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     [SerializeField]
     private GameObject guildInfoButton;
 
+    public UiGuildMemberCell GetMemberCell(string nickName)
+    {
+        nickName = nickName.Replace(CommonString.IOS_nick, "");
+
+        for (int i = 0; i < memberCells.Count; i++)
+        {
+            if (memberCells[i].guildMemberInfo != null &&
+                memberCells[i].guildMemberInfo.nickName.Replace(CommonString.IOS_nick, "").Equals(nickName))
+            {
+                return memberCells[i];
+            }
+        }
+
+        return null;
+    }
+
     public void RemovePlayer(string nickName)
     {
         for (int i = 0; i < memberCells.Count; i++)
@@ -46,6 +62,21 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
         for (int i = 0; i < memberCells.Count; i++)
         {
             if (memberCells[i].guildMemberInfo != null && memberCells[i].guildMemberInfo.nickName.Replace(CommonString.IOS_nick, "").Equals(PlayerData.Instance.NickName))
+            {
+                return memberCells[i].guildMemberInfo.guildGrade;
+            }
+
+        }
+        return GuildGrade.Member;
+    }
+
+    public GuildGrade GetGuildGrade(string nickName)
+    {
+        nickName = nickName.Replace(CommonString.IOS_nick, "");
+
+        for (int i = 0; i < memberCells.Count; i++)
+        {
+            if (memberCells[i].guildMemberInfo != null && memberCells[i].guildMemberInfo.nickName.Replace(CommonString.IOS_nick, "").Equals(nickName))
             {
                 return memberCells[i].guildMemberInfo.guildGrade;
             }

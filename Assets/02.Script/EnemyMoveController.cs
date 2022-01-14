@@ -29,6 +29,7 @@ public class EnemyMoveController : EnemyMoveBase
     private Coroutine returnState;
     private WaitForSeconds returnStateDelay = new WaitForSeconds(8f);
     private ObscuredFloat followMoveSpeedAddValue = 1.5f;
+    private bool isBossEnemy = false;
 
     private new void Awake()
     {
@@ -39,6 +40,16 @@ public class EnemyMoveController : EnemyMoveBase
     {
         base.Start();
         SetRandomZPos();
+    }
+
+    public void SetBossEnemy(bool isBossEnemy)
+    {
+        this.isBossEnemy = isBossEnemy;
+
+        if (isBossEnemy)
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 
     public void SetMoveState(MoveState moveState)
@@ -117,7 +128,15 @@ public class EnemyMoveController : EnemyMoveBase
 
         if (canMove)
         {
-            rb.velocity = moveDirection;
+            if (isBossEnemy)
+            {
+                rb.velocity = Vector3.zero;
+            }
+            else
+            {
+                rb.velocity = moveDirection;
+            }
+
         }
     }
 
@@ -149,6 +168,11 @@ public class EnemyMoveController : EnemyMoveBase
         moveDirection = moveDirectionType == MoveDirection.Left ? Vector3.left : Vector3.right;
 
         moveDirection *= moveSpeed;
+
+        if (isBossEnemy)
+        {
+            moveDirection = Vector3.zero;
+        }
 
         FlipCharacter();
 
@@ -218,20 +242,22 @@ public class EnemyMoveController : EnemyMoveBase
 
     public void SetKnockBack()
     {
+        return;
+
         if (nowKnockBack == true) return;
         //슈퍼아머
-        if (enemyInfo.Value==null || enemyInfo.Value.Knockbackpower == 0f) return;
+        if (enemyInfo.Value == null || enemyInfo.Value.Knockbackpower == 0f) return;
 
         nowKnockBack = true;
 
         Vector2 knockBackDir = this.transform.position.x < PlayerMoveController.Instance.transform.position.x ? Vector2.left : Vector2.right;
 
-        knockBackDir += Vector2.up * 0.5f;
+        // knockBackDir += Vector2.up * 0.5f;
 
-        rb.velocity = Vector2.zero;
-        rb.AddForce(knockBackDir * enemyInfo.Value.Knockbackpower, ForceMode2D.Impulse);
+        // rb.velocity = Vector2.zero;
+        //rb.AddForce(knockBackDir * enemyInfo.Value.Knockbackpower, ForceMode2D.Impulse);
 
-        StartCoroutine(KnockBackRoutine());
+        // StartCoroutine(KnockBackRoutine());
     }
 
     private IEnumerator KnockBackRoutine()

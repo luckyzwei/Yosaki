@@ -422,6 +422,11 @@ public static class ServerData
                 param.Add(GoodsTable.CockStone, ServerData.goodsTable.GetTableData(GoodsTable.CockStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
+            case Item_Type.DogStone:
+                ServerData.goodsTable.GetTableData(GoodsTable.DogStone).Value += amount;
+                param.Add(GoodsTable.DogStone, ServerData.goodsTable.GetTableData(GoodsTable.DogStone).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.MonkeyStone:
                 ServerData.goodsTable.GetTableData(GoodsTable.MonkeyStone).Value += amount;
                 param.Add(GoodsTable.MonkeyStone, ServerData.goodsTable.GetTableData(GoodsTable.MonkeyStone).Value);

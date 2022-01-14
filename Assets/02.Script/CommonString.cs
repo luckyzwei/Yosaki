@@ -45,7 +45,7 @@ public static class CommonString
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "고양이요괴전";
-    public static string RankPrefix_Real_Boss = "십이지신(유)";
+    public static string RankPrefix_Real_Boss = "십이지신(술)";
     public static string RankPrefix_Relic = "영혼의숲";
     public static string RankPrefix_MiniGame = "미니게임";
 
@@ -148,6 +148,7 @@ public static class CommonString
             case Item_Type.MiniGameReward: return "뽑기권";
             case Item_Type.GuildReward: return "요괴석";
             case Item_Type.CockStone: return "태양석";
+            case Item_Type.DogStone: return "미등록";
         }
         return "미등록";
     }

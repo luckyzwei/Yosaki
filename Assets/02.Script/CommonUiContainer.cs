@@ -63,6 +63,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite SheepStone;
     public Sprite CockStone;
     public Sprite MonkeyStone;
+    public Sprite DogStone;
     public Sprite MiniGameTicket;
 
     public Sprite Songpyeon;
@@ -237,6 +238,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.CockStone:
                 return CockStone;
+                break;
+            case Item_Type.DogStone:
+                return DogStone;
                 break;
             case Item_Type.MonkeyStone:
                 return MonkeyStone;

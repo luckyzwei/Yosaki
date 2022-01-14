@@ -118,6 +118,13 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                             {
                                 GuildManager.Instance.guildLevelExp.Value++;
                             }
+
+                            var memberCell = UiGuildMemberList.Instance.GetMemberCell(PlayerData.Instance.NickName);
+
+                            if (memberCell != null)
+                            {
+                                memberCell.UpdateDonatedObject(true);
+                            }
                         }
                         else
                         {

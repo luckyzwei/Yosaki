@@ -89,6 +89,11 @@ public class Enemy : PoolItem
     {
         SetRequireComponents();
 
+        if (enemyMoveController != null)
+        {
+            enemyMoveController.SetBossEnemy(isFieldBossEnemy);
+        }
+
         this.spawnedPlatformIdx = spawnedPlatformIdx;
 
         this.isFieldBossEnemy = isFieldBossEnemy;
@@ -111,9 +116,14 @@ public class Enemy : PoolItem
             }
         }
 
-        if (isFlyingEnemy) 
+        if (isFlyingEnemy)
         {
             flyMove_normal.Initialize(Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f)) * Vector3.right, tableData.Movespeed);
+        }
+
+        if (enemyMoveController != null)
+        {
+            enemyMoveController.SetBossEnemy(isFieldBossEnemy);
         }
     }
 
@@ -134,7 +144,10 @@ public class Enemy : PoolItem
     {
         if (isFlyingEnemy == false)
         {
-            enemyMoveController.SetMoveState(EnemyMoveController.MoveState.FollowPlayer);
+            if (enemyMoveController != null)
+            {
+                enemyMoveController.SetMoveState(EnemyMoveController.MoveState.FollowPlayer);
+            }
         }
         else
         {
@@ -178,7 +191,7 @@ public class Enemy : PoolItem
         ServerData.goodsTable.GetEventItem(GameManager.Instance.CurrentStageData.Marbleamount);
     }
 
-    private void GetStageRelicItem() 
+    private void GetStageRelicItem()
     {
         if (GameManager.Instance.IsNormalField == false) return;
 
@@ -226,7 +239,7 @@ public class Enemy : PoolItem
                 marble.transform.position = this.transform.position + UnityEngine.Random.Range(-0.3f, 0.3f) * Vector3.right;
             }
         }
-        else 
+        else
         {
             ServerData.goodsTable.GetMagicStone(magicStoneSpawnAmount);
             ServerData.goodsTable.GetMarble(marbleSpawnAmount);

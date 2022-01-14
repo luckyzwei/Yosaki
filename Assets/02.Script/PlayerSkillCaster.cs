@@ -148,7 +148,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
-            if (ignoreDamDecrease == true || FrameCalculator.frameRate > 3)
+            if (ignoreDamDecrease == true || FrameCalculator.frameRate > 5)
             {
                 if (hit == 0)
                 {

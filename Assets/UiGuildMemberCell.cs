@@ -15,9 +15,12 @@ public class UiGuildMemberCell : MonoBehaviour
     private TextMeshProUGUI donateAmount;
     [SerializeField]
     private TextMeshProUGUI grade;
+    [SerializeField]
     public GuildMemberInfo guildMemberInfo { get; private set; }
 
     public GameObject kickButton;
+
+    public GameObject changeGradeButton;
 
     [SerializeField]
     private GameObject donatedObject;
@@ -30,7 +33,7 @@ public class UiGuildMemberCell : MonoBehaviour
     public class GuildMemberInfo
     {
         public string nickName { get; private set; }
-        public GuildGrade guildGrade { get; private set; }
+        public GuildGrade guildGrade;
         public string lastLogin { get; private set; }
         public string gamerIndate { get; private set; }
 
@@ -59,6 +62,11 @@ public class UiGuildMemberCell : MonoBehaviour
         }
     }
 
+    public void UpdateDonatedObject(bool donated)
+    {
+        donatedObject.gameObject.SetActive(donated);
+    }
+
     public void Initialize(GuildMemberInfo guildMemberInfo)
     {
         this.guildMemberInfo = guildMemberInfo;
@@ -80,10 +88,17 @@ public class UiGuildMemberCell : MonoBehaviour
             lastLogin.gameObject.SetActive(false);
         }
 
-        donatedObject.gameObject.SetActive(guildMemberInfo.todayDonated);
-
+        UpdateDonatedObject(guildMemberInfo.todayDonated);
 
         RefreshKickButton();
+
+        UpdateGradeText(this.guildMemberInfo.guildGrade);
+        //)
+    }
+
+    public void UpdateGradeText(GuildGrade guildGrade) 
+    {
+        this.guildMemberInfo.guildGrade = guildGrade;
 
         grade.SetText($"({CommonString.GetGuildGradeName(this.guildMemberInfo.guildGrade)})");
 
@@ -99,8 +114,6 @@ public class UiGuildMemberCell : MonoBehaviour
                 grade.color = Color.magenta;
                 break;
         }
-
-        //)
     }
 
     public void RefreshKickButton()
@@ -108,14 +121,20 @@ public class UiGuildMemberCell : MonoBehaviour
         if (UiGuildMemberList.Instance.GetMyGuildGrade() == GuildGrade.Member)
         {
             kickButton.SetActive(false);
+            changeGradeButton.SetActive(false);
         }
         else if (UiGuildMemberList.Instance.GetMyGuildGrade() == GuildGrade.ViceMaster)
         {
             kickButton.SetActive(PlayerData.Instance.NickName != guildMemberInfo.nickName && guildMemberInfo.guildGrade == GuildGrade.Member);
+            changeGradeButton.SetActive(false);
         }
         else if (UiGuildMemberList.Instance.GetMyGuildGrade() == GuildGrade.Master)
         {
+            //내가 아닐떄
             kickButton.SetActive(PlayerData.Instance.NickName != guildMemberInfo.nickName);
+
+            //내가 아닐때
+            changeGradeButton.SetActive(PlayerData.Instance.NickName != guildMemberInfo.nickName);
         }
     }
 
@@ -129,7 +148,7 @@ public class UiGuildMemberCell : MonoBehaviour
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "추방 했습니다", null);
                 UiGuildMemberList.Instance.RemovePlayer(guildMemberInfo.nickName);
-
+                UiGuildMemberList.Instance.guildMemberCount--;
             }
             else
             {
@@ -137,6 +156,11 @@ public class UiGuildMemberCell : MonoBehaviour
             }
         }, null);
 
+    }
+
+    public void OnClickChangeGradeButton()
+    {
+        UiGuildGradeChangeBoard.Instance.Initialize(guildMemberInfo.nickName, guildMemberInfo.gamerIndate);
     }
 
 }

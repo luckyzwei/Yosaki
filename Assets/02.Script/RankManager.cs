@@ -63,7 +63,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Level_Uuid = "c1d70840-de7f-11eb-bc74-95875190be29";
     public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
     public const string Rank_Boss_Uuid = "c8c57ba0-5b66-11ec-b084-d1a61d5ec8e2";
-    public const string Rank_Real_Boss_Uuid = "4e8a26e0-6518-11ec-bbbf-47820da7deba";
+    public const string Rank_Real_Boss_Uuid = "c97e3920-7424-11ec-bded-11d91e4367f2";
     public const string Rank_Relic_Uuid = "0453f560-2779-11ec-9b46-299116fee741";
     public const string Rank_MiniGame_Uuid = "e1dced80-5954-11ec-b084-d1a61d5ec8e2";
     public const string Rank_Guild_Uuid = "ff017920-698b-11ec-b243-8d1fccc57e3d";
@@ -72,7 +72,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
     public const string Rank_Boss = "Rank_Cat_4";
-    public const string Rank_Real_Boss = "Rank_Boss_10";
+    public const string Rank_Real_Boss = "Rank_Boss_11";
     public const string Rank_Relic = "Rank_Relic";
     public const string Rank_MiniGame = "Rank_MiniGame";
 #endif
@@ -81,7 +81,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Level_Uuid = "ea8c9430-38cf-11ec-955f-fb3c68e97f2a";
     public const string Rank_Stage_Uuid = "f865e900-31b6-11ec-b4ab-713be46ddb60";
     public const string Rank_Boss_Uuid = "1b18e700-5d26-11ec-9838-558e1ab66c0c";
-    public const string Rank_Real_Boss_Uuid = "57e79ce0-6518-11ec-9737-e53b5eab75db";
+    public const string Rank_Real_Boss_Uuid = "dd6a2b10-7424-11ec-877a-eb75b42d8bd1";
     public const string Rank_Relic_Uuid = "1ce07110-31b7-11ec-be95-537d9b90903a";
     public const string Rank_MiniGame_Uuid = "edec1600-5954-11ec-8846-eb56e6e68bb1";
     public const string Rank_Guild_Uuid = "10619010-698c-11ec-b243-8d1fccc57e3d";
@@ -90,7 +90,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";
     public const string Rank_Boss = "Rank_Cat_4_IOS";
-    public const string Rank_Real_Boss = "Rank_Boss_10_IOS";
+    public const string Rank_Real_Boss = "Rank_Boss_11_IOS";
     public const string Rank_Relic = "Rank_Relic_IOS";
     public const string Rank_MiniGame = "Rank_MiniGame_IOS";
 #endif
