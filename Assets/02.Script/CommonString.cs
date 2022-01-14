@@ -148,7 +148,7 @@ public static class CommonString
             case Item_Type.MiniGameReward: return "뽑기권";
             case Item_Type.GuildReward: return "요괴석";
             case Item_Type.CockStone: return "태양석";
-            case Item_Type.DogStone: return "미등록";
+            case Item_Type.DogStone: return "천공석";
         }
         return "미등록";
     }
