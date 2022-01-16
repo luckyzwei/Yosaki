@@ -8,14 +8,14 @@ public class FrameCalculator : SingletonMono<FrameCalculator>
 
     private WaitForSeconds delay = new WaitForSeconds(0.1f);
 
-    private IEnumerator Start()
-    {
-        while (true)
-        {
-            frameRate = (1f / Time.unscaledDeltaTime);
+    //private IEnumerator Start()
+    //{
+    //    //while (true)
+    //    //{
+    //    //    frameRate = (1f / Time.unscaledDeltaTime);
 
-            yield return null;
+    //    //    yield return null;
 
-        }
-    }
+    //    //}
+    //}
 }

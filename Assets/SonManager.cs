@@ -245,14 +245,19 @@ public class SonManager : ContentsManagerBase
 
         portalObject.gameObject.SetActive(false);
 
-        float remainSec = playTime;
+        float maxTime = playTime;
 
-        while (remainSec >= 0)
+        float startTime = Time.realtimeSinceStartup;
+
+        float elapsedTime = Time.realtimeSinceStartup - startTime;
+
+        while (elapsedTime <= maxTime)
         {
-            timerText.SetText($"남은시간 : {(int)remainSec}");
+            elapsedTime = Time.realtimeSinceStartup - startTime;
+
+            timerText.SetText($"남은시간 : {(int)(maxTime - elapsedTime)}");
+
             yield return null;
-            remainSec-=Time.deltaTime;
-            this.remainSec = remainSec;
         }
 
         TimerEnd();

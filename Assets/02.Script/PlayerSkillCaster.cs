@@ -148,8 +148,6 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
-            if (ignoreDamDecrease == true || FrameCalculator.frameRate > 15)
-            {
                 if (hit == 0)
                 {
                     agentHpController.SetKnockBack();
@@ -173,7 +171,6 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                 {
                     SoundManager.Instance.PlaySound(skillInfo.Soundname);
                 }
-            }
 
             yield return damageApplyInterval;
         }
