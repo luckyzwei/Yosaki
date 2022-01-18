@@ -137,7 +137,7 @@ public class UiPensionItemCell : MonoBehaviour
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
               PopupManager.Instance.ShowAlarmMessage("연금 수령!");
-              LogManager.Instance.SendLogType("Pension", pensionKey, idx.ToString());
+          //    LogManager.Instance.SendLogType("Pension", pensionKey, idx.ToString());
 
               //모든 보상 다받음. 보상리셋,상품초기화,출석 초기화
               if (ServerData.pensionServerTable.RewarededCount(pensionKey) - 1 == rewardMaxCount)
@@ -166,7 +166,7 @@ public class UiPensionItemCell : MonoBehaviour
 
                   ServerData.SendTransaction(completeTransactions, successCallBack: () =>
                   {
-                      LogManager.Instance.SendLogType("Pension", pensionKey, "Reset");
+                    //  LogManager.Instance.SendLogType("Pension", pensionKey, "Reset");
                       PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상 전부 수령 완료!\n연금 초기화", null);
                   });
 

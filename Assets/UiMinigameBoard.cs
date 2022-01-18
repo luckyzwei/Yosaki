@@ -309,7 +309,7 @@ public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              LogManager.Instance.SendLogType("Mini", "R", rewardTicketNum.ToString());
+            //  LogManager.Instance.SendLogType("Mini", "R", rewardTicketNum.ToString());
           });
 
     }

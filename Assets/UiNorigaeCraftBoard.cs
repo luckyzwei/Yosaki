@@ -197,7 +197,7 @@ public class UiNorigaeCraftBoard : SingletonMono<UiNorigaeCraftBoard>
         {
             SoundManager.Instance.PlaySound("Reward");
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "신수 제작 완료!", null);
-            LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+           // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
         });
     }
 }

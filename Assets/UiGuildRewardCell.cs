@@ -176,7 +176,7 @@ public class UiGuildRewardCell : MonoBehaviour
 
             }
 
-            LogManager.Instance.SendLogType("guildExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
+        //    LogManager.Instance.SendLogType("guildExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
         });
     }
 }

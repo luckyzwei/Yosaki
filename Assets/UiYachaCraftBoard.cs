@@ -106,7 +106,7 @@ public class UiYachaCraftBoard : SingletonMono<UiYachaCraftBoard>
         {
             SoundManager.Instance.PlaySound("Reward");
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "너에게 힘을 주마", null);
-            LogManager.Instance.SendLogType("야차제작", "make", "");
+          //  LogManager.Instance.SendLogType("야차제작", "make", "");
         });
     }
 

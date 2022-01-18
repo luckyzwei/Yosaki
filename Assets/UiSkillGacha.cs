@@ -125,7 +125,7 @@ public class UiSkillGacha : MonoBehaviour
 
                 OnClickOpenButton(2);
 
-                LogManager.Instance.SendLogType("FreeGacha", "Skill", "");
+             //   LogManager.Instance.SendLogType("FreeGacha", "Skill", "");
             });
         });
     }

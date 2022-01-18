@@ -89,7 +89,7 @@ public class UiDokebiPackRefund : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            LogManager.Instance.SendLogType("TicketRefund", "Get", $"t:{addTicketTotal}");
+          //  LogManager.Instance.SendLogType("TicketRefund", "Get", $"t:{addTicketTotal}");
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "도깨비 세트 소급 완료!", null);
         });
     }

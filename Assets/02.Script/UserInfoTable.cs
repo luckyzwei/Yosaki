@@ -484,7 +484,7 @@ public class UserInfoTable
             }
             else
             {
-                LogManager.Instance.SendLog("출석", $"{isSuccess}/{statusCode}/{returnValue}");
+               // LogManager.Instance.SendLog("출석", $"{isSuccess}/{statusCode}/{returnValue}");
             }
         });
     }

@@ -155,7 +155,7 @@ public class UiRoulette : MonoBehaviour
             log += $"{rewardViewData[i].itemType}/{rewardViewData[i].amount} ";
         }
 
-        LogManager.Instance.SendLog("복주머니사용", log);
+     //   LogManager.Instance.SendLog("복주머니사용", log);
     }
 
 #if UNITY_EDITOR

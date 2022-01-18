@@ -170,7 +170,7 @@ public class UiYomulAttackUpgradeBoard : MonoBehaviour
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
             SoundManager.Instance.PlaySound("Reward");
-            LogManager.Instance.SendLogType("Yomul", "해제", yomulAbilData.Id.ToString());
+         //   LogManager.Instance.SendLogType("Yomul", "해제", yomulAbilData.Id.ToString());
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "계약 완료!", null);
         });
     }

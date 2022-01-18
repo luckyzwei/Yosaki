@@ -206,7 +206,7 @@ public class UiPetEquipmentView : MonoBehaviour
         transactions.Add(TransactionValue.SetUpdate(PetEquipmentServerTable.tableName, PetEquipmentServerTable.Indate, petEquipParam));
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-        LogManager.Instance.SendLogType("환수장비", petEquipmentData.Stringid, "g");
+      //  LogManager.Instance.SendLogType("환수장비", petEquipmentData.Stringid, "g");
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {

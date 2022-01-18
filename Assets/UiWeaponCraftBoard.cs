@@ -88,7 +88,7 @@ public class UiWeaponCraftBoard : SingletonMono<UiWeaponCraftBoard>
           {
               SoundManager.Instance.PlaySound("Reward");
               PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "누가 나를 깨웠지?", null);
-              LogManager.Instance.SendLog("요물제작", "요물제작 성공");
+          //    LogManager.Instance.SendLog("요물제작", "요물제작 성공");
           });
     }
 }

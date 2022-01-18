@@ -120,7 +120,7 @@ public class YachaPetAwakeView : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              LogManager.Instance.SendLogType("PetAwake", "S", ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value.ToString());
+           //   LogManager.Instance.SendLogType("PetAwake", "S", ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value.ToString());
           });
     }
 

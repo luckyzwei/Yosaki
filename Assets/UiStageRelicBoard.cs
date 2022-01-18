@@ -95,7 +95,7 @@ public class UiStageRelicBoard : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
-                LogManager.Instance.SendLogType("StageRelic", "초기화", $"{refundCount}개");
+              //  LogManager.Instance.SendLogType("StageRelic", "초기화", $"{refundCount}개");
             });
 
         }, () => { });

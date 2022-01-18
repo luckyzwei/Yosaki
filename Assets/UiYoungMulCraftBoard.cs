@@ -91,7 +91,7 @@ public class UiYoungMulCraftBoard : SingletonMono<UiYoungMulCraftBoard>
         {
             SoundManager.Instance.PlaySound("Reward");
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "영물 제작 완료!", null);
-            LogManager.Instance.SendLogType("YoungMul", "C", "C");
+         //   LogManager.Instance.SendLogType("YoungMul", "C", "C");
         });
     }
 }

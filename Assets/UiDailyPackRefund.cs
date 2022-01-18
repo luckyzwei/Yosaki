@@ -130,7 +130,7 @@ public class UiDailyPackRefund : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            LogManager.Instance.SendLogType("TicketRefund", "Get", $"t:{addTicketTotal} t:{0}");
+          //  LogManager.Instance.SendLogType("TicketRefund", "Get", $"t:{addTicketTotal} t:{0}");
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "세트 소급 완료!", null);
         });
     }

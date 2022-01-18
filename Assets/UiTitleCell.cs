@@ -154,7 +154,7 @@ public class UiTitleCell : MonoBehaviour
           {
               PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상 수령 완료!", null);
 
-              LogManager.Instance.SendLogType("TitleReward", tableData.Id.ToString(), "");
+         //     LogManager.Instance.SendLogType("TitleReward", tableData.Id.ToString(), "");
           });
     }
 

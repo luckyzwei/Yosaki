@@ -255,7 +255,7 @@ public class UiLevelPassCell : MonoBehaviour
         ServerData.SendTransaction(transactionList, successCallBack: () =>
           {
               SoundManager.Instance.PlaySound("Reward");
-              LogManager.Instance.SendLogType("Fox", "Normal", $"보상 {passInfo.id}");
+          //    LogManager.Instance.SendLogType("Fox", "Normal", $"보상 {passInfo.id}");
               PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
           });
     }
@@ -278,7 +278,7 @@ public class UiLevelPassCell : MonoBehaviour
         ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
             SoundManager.Instance.PlaySound("Reward");
-            LogManager.Instance.SendLogType("Fox", "Premium", $"보상 {passInfo.id}");
+          //  LogManager.Instance.SendLogType("Fox", "Premium", $"보상 {passInfo.id}");
             PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
         });
     }

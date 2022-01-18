@@ -145,7 +145,7 @@ public class UiAttendanceCell_100Days : MonoBehaviour
         {
             PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
             SoundManager.Instance.PlaySound("RoulletSpin");
-            LogManager.Instance.SendLogType("Event_100","보상획득", attendanceRewardData.Id.ToString());
+          //  LogManager.Instance.SendLogType("Event_100","보상획득", attendanceRewardData.Id.ToString());
         });
     }
 }

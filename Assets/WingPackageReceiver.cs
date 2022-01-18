@@ -47,7 +47,7 @@ public class WingPackageReceiver : MonoBehaviour
               {
                   PopupManager.Instance.ShowConfirmPopup("보석 패키지 소급 보상", $"티켓 {getTicketCount}개\n깃털 {getFeatherCount}개", null);
 
-                  LogManager.Instance.SendLog("날개패키지 소급", $"티켓{getTicketCount} 깃털{getFeatherCount} ");
+             //     LogManager.Instance.SendLog("날개패키지 소급", $"티켓{getTicketCount} 깃털{getFeatherCount} ");
               });
         }
     }

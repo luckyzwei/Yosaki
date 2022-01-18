@@ -156,7 +156,7 @@ public class UiAttendanceCell : MonoBehaviour
           {
               PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
               SoundManager.Instance.PlaySound("RoulletSpin");
-              LogManager.Instance.SendLog("출석", "보상획득");
+             // LogManager.Instance.SendLog("출석", "보상획득");
           });
     }
 }

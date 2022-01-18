@@ -118,7 +118,7 @@ public class UiMagicBookGacha : MonoBehaviour
 
                 OnClickOpenButton(2);
 
-                LogManager.Instance.SendLogType("FreeGacha", "Norigae", "");
+               // LogManager.Instance.SendLogType("FreeGacha", "Norigae", "");
             });
         });
 

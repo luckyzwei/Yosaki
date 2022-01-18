@@ -201,7 +201,7 @@ public class UiMonthlyPassCell : MonoBehaviour
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
-            LogManager.Instance.SendLogType("월간", "무료", $"{passInfo.id}");
+          //  LogManager.Instance.SendLogType("월간", "무료", $"{passInfo.id}");
         });
     }
     private void GetAdReward()
@@ -227,7 +227,7 @@ public class UiMonthlyPassCell : MonoBehaviour
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
-            LogManager.Instance.SendLogType("월간", "유료", $"{passInfo.id}");
+         //   LogManager.Instance.SendLogType("월간", "유료", $"{passInfo.id}");
         });
 
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");

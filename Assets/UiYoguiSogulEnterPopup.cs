@@ -57,6 +57,6 @@ public class UiYoguiSogulEnterPopup : MonoBehaviour
             }
         }
 
-        LogManager.Instance.SendLogType("Sogul", "Receive", rewardReceiveCount.ToString());
+      //  LogManager.Instance.SendLogType("Sogul", "Receive", rewardReceiveCount.ToString());
     }
 }

@@ -233,7 +233,7 @@ public class UiDailyPassCell : MonoBehaviour
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
           {
-              LogManager.Instance.SendLog("패스 광고보상", "보상획득");
+           //   LogManager.Instance.SendLog("패스 광고보상", "보상획득");
           });
 
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");

@@ -666,7 +666,7 @@ public class UiPetView : MonoBehaviour
           {
               PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{nextPetTableData.Name} 획득!", null);
 
-              LogManager.Instance.SendLogType("Pet", "각성", $"{nextPetTableData.Name }");
+           //   LogManager.Instance.SendLogType("Pet", "각성", $"{nextPetTableData.Name }");
           });
     }
 

@@ -153,7 +153,7 @@ public class UiSonBoard : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              LogManager.Instance.SendLogType("Son", "Level", ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value.ToString());
+          //    LogManager.Instance.SendLogType("Son", "Level", ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value.ToString());
           });
     }
 

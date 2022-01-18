@@ -124,7 +124,7 @@ public class UiWeaponGacha : MonoBehaviour
 
                 OnClickOpenButton(2);
 
-                LogManager.Instance.SendLogType("FreeGacha", "Weapon", "");
+               // LogManager.Instance.SendLogType("FreeGacha", "Weapon", "");
             });
 
         });

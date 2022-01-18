@@ -89,7 +89,7 @@ public class UiDokebiShopCell : MonoBehaviour
         {
      
 
-            LogManager.Instance.SendLog("도깨비", $"{goodsKey} {tableData.Rewardamount}");
+        //    LogManager.Instance.SendLog("도깨비", $"{goodsKey} {tableData.Rewardamount}");
         });
     }
 }

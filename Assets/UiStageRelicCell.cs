@@ -236,7 +236,7 @@ public class UiStageRelicCell : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              LogManager.Instance.SendLogType("StageRelic", relicLocalData.Stringid, ServerData.stageRelicServerTable.TableDatas[relicLocalData.Stringid].level.Value.ToString());
+            //  LogManager.Instance.SendLogType("StageRelic", relicLocalData.Stringid, ServerData.stageRelicServerTable.TableDatas[relicLocalData.Stringid].level.Value.ToString());
           });
     }
 }

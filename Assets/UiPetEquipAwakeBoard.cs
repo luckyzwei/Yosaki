@@ -220,7 +220,7 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
         }
 
-        LogManager.Instance.SendLogType("PetEquip", "요청", awakeSuccess ? "성공":"실패");
+    //    LogManager.Instance.SendLogType("PetEquip", "요청", awakeSuccess ? "성공":"실패");
 
 
 #if UNITY_EDITOR

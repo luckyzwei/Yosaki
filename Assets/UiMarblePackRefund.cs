@@ -118,7 +118,7 @@ public class UiMarblePackRefund : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              LogManager.Instance.SendLogType("Marble3", "Get", $"m:{addMarbleTotal} t:{0}");
+       //       LogManager.Instance.SendLogType("Marble3", "Get", $"m:{addMarbleTotal} t:{0}");
               PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "여우구슬 세트 소급 완료!", null);
           });
     }

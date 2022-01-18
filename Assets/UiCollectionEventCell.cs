@@ -176,7 +176,7 @@ public class UiCollectionEventCell : MonoBehaviour
             
             }
 
-            LogManager.Instance.SendLogType("chuseokExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
+         //   LogManager.Instance.SendLogType("chuseokExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
         });
     }
 }

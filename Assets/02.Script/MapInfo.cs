@@ -403,7 +403,7 @@ public class MapInfo : SingletonMono<MapInfo>
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              LogManager.Instance.SendLog("스테이지클리어", GameManager.Instance.CurrentStageData.Id.ToString());
+             // LogManager.Instance.SendLog("스테이지클리어", GameManager.Instance.CurrentStageData.Id.ToString());
               //결과표시
               UiFieldBossRewardView.Instance.Initialize(rewardValue);
           });
