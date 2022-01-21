@@ -51,6 +51,12 @@ public class StatusTable
     public const string PetAwakeLevel = "PetAwakeLevel";
 
 
+    public const string Skill0_AddValue = "Sk0_Add";
+    public const string Skill1_AddValue = "Sk1_Add";
+    public const string Skill2_AddValue = "Sk2_Add";
+    public const string SkillAdPoint = "Sk_AdPoint";
+
+
 
     private Dictionary<string, int> tableSchema = new Dictionary<string, int>()
     {
@@ -93,6 +99,11 @@ public class StatusTable
         {PetEquip_Level,0},
         {ChunSlash_memory,0},
         {PetAwakeLevel,0},
+
+        {Skill0_AddValue,0},
+        {Skill1_AddValue,0},
+        {Skill2_AddValue,0},
+        {SkillAdPoint,0},
     };
 
     private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();

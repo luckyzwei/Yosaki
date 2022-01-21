@@ -12,90 +12,92 @@ public class CostumePackRefund : MonoBehaviour
 
     private void Check()
     {
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.petCostumePackRefund).Value == 1) return;
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.basicPackRefund).Value == 1) return;
 
+        bool buyBeginner = ServerData.iapServerTable.TableDatas["newbiepack"].buyCount.Value == 1;
+        bool buyMiddle = ServerData.iapServerTable.TableDatas["middlepack"].buyCount.Value == 1;
+        bool buyHigh = ServerData.iapServerTable.TableDatas["highpack"].buyCount.Value == 1;
 
-        bool buyPet0 = ServerData.iapServerTable.TableDatas["petpackage1"].buyCount.Value == 1;
-        bool buyPet1 = ServerData.iapServerTable.TableDatas["petpackage2"].buyCount.Value == 1;
+        if (buyBeginner == false && buyMiddle == false && buyHigh == false) 
+        {
+            List<TransactionValue> tr = new List<TransactionValue>();
 
-        bool buyCostume0 = ServerData.iapServerTable.TableDatas["costumepackage1"].buyCount.Value == 1;
-        bool buyCostume1 = ServerData.iapServerTable.TableDatas["costumepackage2"].buyCount.Value == 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.basicPackRefund).Value = 1;
 
+            Param ur = new Param();
+
+            ur.Add(UserInfoTable.basicPackRefund, ServerData.userInfoTable.GetTableData(UserInfoTable.basicPackRefund).Value);
+
+            tr.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, ur));
+
+            ServerData.SendTransaction(tr);
+            return;
+        }
 
         List<TransactionValue> transactions = new List<TransactionValue>();
-        //
 
-        ServerData.userInfoTable.GetTableData(UserInfoTable.petCostumePackRefund).Value = 1;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.basicPackRefund).Value = 1;
 
         Param userInfoParam = new Param();
 
-        userInfoParam.Add(UserInfoTable.petCostumePackRefund, ServerData.userInfoTable.GetTableData(UserInfoTable.petCostumePackRefund).Value);
+        userInfoParam.Add(UserInfoTable.basicPackRefund, ServerData.userInfoTable.GetTableData(UserInfoTable.basicPackRefund).Value);
 
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         //
 
-        int pet0RelicTicketNum = 15;
-        int pet1RelicTicketNum = 25;
+        int beginnerPeachNum = 1000;
+        int middlePeachNum = 3000;
+        int highPeachNum = 7000;
 
-        int costume0PeachNum = 1500;
-        int costume1PeachNum = 3000;
+        int peachNum = 0;
 
 
         Param goodsParam = new Param();
 
-        if (buyPet0)
+        if (buyBeginner)
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += pet0RelicTicketNum;
+            ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += beginnerPeachNum;
+
+            peachNum += beginnerPeachNum;
         }
 
-        if (buyPet1)
+        if (buyMiddle)
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += pet1RelicTicketNum;
+            ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += middlePeachNum;
+
+            peachNum += middlePeachNum;
         }
 
-        if (buyCostume0)
+        if (buyHigh)
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += costume0PeachNum;
+            ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += highPeachNum;
+
+            peachNum += highPeachNum;
         }
 
-        if (buyCostume1)
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += costume1PeachNum;
-        }
+        goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
 
-        if (buyPet0 || buyPet1)
-        {
-            goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
-        }
-
-        if (buyCostume0 || buyCostume1)
-        {
-            goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
-        }
-
-        if (buyPet0 || buyPet1 || buyCostume0 || buyCostume1)
-        {
-            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-        }
+        transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            int peachNum = 0;
-            int keyNum = 0;
+            string desc = string.Empty;
 
-            if (buyPet0) keyNum += pet0RelicTicketNum;
-
-            if (buyPet1) keyNum += pet1RelicTicketNum;
-
-            if (buyCostume0) peachNum += costume0PeachNum;
-
-            if (buyCostume1) peachNum += costume1PeachNum;
-
-            if (buyPet0 || buyPet1 || buyCostume0 || buyCostume1)
+            if (buyBeginner) 
             {
-                PopupManager.Instance.ShowConfirmPopup("환수,외형 세트상품 소급", $"영혼열쇠 {keyNum}개\n천도복숭아 {peachNum}개 소급됨", null);
+                desc += "초보자세트\n";
             }
+            if (buyMiddle) 
+            {
+                desc += "중급자세트\n";
+            }
+            if (buyHigh) 
+            {
+                desc += "상급자세트\n";
+            }
+
+            PopupManager.Instance.ShowConfirmPopup($"알림", $"{desc}{CommonString.GetItemName(Item_Type.PeachReal)} 총 {peachNum}개 소급됨", null);
         });
     }
 }

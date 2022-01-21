@@ -12,7 +12,7 @@ public class UiPeachRefund : MonoBehaviour
 
     private void Check()
     {
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.peachRefund).Value == 1) return;
+      //  if (ServerData.userInfoTable.GetTableData(UserInfoTable.peachRefund).Value == 1) return;
 
         float score = ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value * GameBalance.BossScoreConvertToOrigin;
 
@@ -31,7 +31,7 @@ public class UiPeachRefund : MonoBehaviour
         }
 
         ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += accumPeach;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.peachRefund).Value = 1;
+       // ServerData.userInfoTable.GetTableData(UserInfoTable.peachRefund).Value = 1;
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -43,7 +43,7 @@ public class UiPeachRefund : MonoBehaviour
         }
 
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.peachRefund, ServerData.userInfoTable.GetTableData(UserInfoTable.peachRefund).Value);
+     //   userInfoParam.Add(UserInfoTable.peachRefund, ServerData.userInfoTable.GetTableData(UserInfoTable.peachRefund).Value);
 
         if (accumPeach != 0)
         {

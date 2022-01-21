@@ -52,26 +52,14 @@ public class HorizontalSlash0 : SkillBase
         //데미지적용
         for (int i = 0; i < hitEnemies.Length && i < skillInfo.Targetcount; i++)
         {
-            PlayerSkillCaster.Instance.StartCoroutine(playerSkillCaster.ApplyDamage(hitEnemies[i].collider, skillInfo, damage, damageApplyInterval, i == 0));
-
-            //끌어모음
-            if (attractEnemy && hitEnemies[i].transform.tag.Equals(Tags.Boss) == false)
-            {
-                if (playerSkillCaster.PlayerMoveController.MoveDirection == MoveDirection.Right)
-                {
-                    hitEnemies[i].transform.position = playerTr.position - Vector3.right * 4f;
-                }
-                else
-                {
-                    hitEnemies[i].transform.position = playerTr.position + Vector3.right * 4f;
-                }
-            }
+            PlayerSkillCaster.Instance.StartCoroutine(playerSkillCaster.ApplyDamage(hitEnemies[i].collider, skillInfo, damage, i == 0));
         }
     }
 
+    private static string effectName = "LightningFloorYellowTrail";
     private IEnumerator SpawnLineEffect()
     {
-        var effect = EffectManager.SpawnEffectAllTime("LightningFloorYellowTrail", PlayerMoveController.Instance.transform.position);
+        var effect = EffectManager.SpawnEffectAllTime(effectName, PlayerMoveController.Instance.transform.position);
 
         yield return null;
 

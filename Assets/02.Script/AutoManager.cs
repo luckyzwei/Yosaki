@@ -272,7 +272,7 @@ public class AutoManager : Singleton<AutoManager>
         }
     }
 
-    private const string skillType2 = "2";
+    private const int skillType2 = 2;
     List<int> fronSkillContainer = new List<int>();
 
     //이동광역기 우선으로 앞으로 빼주도록
@@ -286,7 +286,7 @@ public class AutoManager : Singleton<AutoManager>
         {
             var skillTableData = TableManager.Instance.SkillData[skillQueue[i]];
 
-            if (skillTableData.Skilltype.Equals(skillType2))
+            if (skillTableData.Skilltype== skillType2)
             {
                 fronSkillContainer.Add(skillQueue[i]);
             }

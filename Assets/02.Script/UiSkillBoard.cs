@@ -89,4 +89,22 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
         uiSkillSlotSettingBoard.gameObject.SetActive(true);
         uiSkillSlotSettingBoard.SetSkillIdx(idx);
     }
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value += 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value += 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value += 1;
+        }
+    }
+#endif
 }

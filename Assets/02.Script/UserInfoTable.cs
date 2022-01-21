@@ -94,7 +94,6 @@ public class UserInfoTable
 
     public const string yoguiSogulLastClear = "yoguiSogulLastClear";
 
-    public const string dokebiPackRefund = "dokebiPackRefund";
 
     public const string killCountTotal = "killCountTotal3";
     public const string killCountTotal2 = "killCountTotal4";
@@ -116,9 +115,9 @@ public class UserInfoTable
     public const string IgnoreDamDec = "IgnoreDamDec";
     public const string SendGuildPoint = "SendGuildPoint3";
     public const string cockAwake = "cockAwake";
-    public const string peachRefund = "peachRefund";
-    public const string petCostumePackRefund = "pcr";
     public const string dogAwake = "dogAwake";
+    public const string basicPackRefund = "basicPackRefund";
+    public const string skillInitialized = "ski";
 
     public float currentServerDate;
     public double attendanceUpdatedTime;
@@ -182,7 +181,6 @@ public class UserInfoTable
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
 
-        {dokebiPackRefund,0f},
 
         {yomul0_buff,0f},
         {yomul1_buff,0f},
@@ -209,10 +207,10 @@ public class UserInfoTable
         {IgnoreDamDec,0f},
         {SendGuildPoint,0},
         {cockAwake,0},
-        {peachRefund,0},
-        {petCostumePackRefund,0},
         {attendanceCount_Seol,1},
         {dogAwake,0},
+        {basicPackRefund,0},
+        {skillInitialized,0},
     };
 
     private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();

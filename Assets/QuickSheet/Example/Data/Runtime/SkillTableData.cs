@@ -93,8 +93,8 @@ public class SkillTableData
   public string Hiteffectname { get {return hiteffectname; } set { this.hiteffectname = value;} }
   
   [SerializeField]
-  string skilltype;
-  public string Skilltype { get {return skilltype; } set { this.skilltype = value;} }
+  int skilltype;
+  public int Skilltype { get {return skilltype; } set { this.skilltype = value;} }
   
   [SerializeField]
   int displayorder;

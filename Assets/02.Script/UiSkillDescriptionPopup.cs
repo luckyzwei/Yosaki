@@ -48,7 +48,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI awakeText;
 
-    private string lvTextFormat = "LV : {0}/{1}";
+    private string lvTextFormat = "LV : {0}/{1}<color=yellow>(+{2} 강화됨)</color>";
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
@@ -132,6 +132,28 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         //스킬 레벨업시
         ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].AsObservable().Subscribe(WhenSkillUpgraded).AddTo(disposables);
 
+        if (skillTableData.Skilltype == 0)
+        {
+            ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).AsObservable().Subscribe(e =>
+            {
+                WhenSkillUpgraded(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].Value);
+            }).AddTo(disposables);
+        }
+        else if (skillTableData.Skilltype == 1)
+        {
+            ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).AsObservable().Subscribe(e =>
+            {
+                WhenSkillUpgraded(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].Value);
+            }).AddTo(disposables);
+        }
+        else if (skillTableData.Skilltype == 2)
+        {
+            ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).AsObservable().Subscribe(e =>
+            {
+                WhenSkillUpgraded(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].Value);
+            }).AddTo(disposables);
+        }
+
 
         var weaponData = TableManager.Instance.WeaponData[skillTableData.Awakeweaponidx];
 
@@ -184,8 +206,22 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     {
         int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
+        int addValue = 0;
 
-        levelDescription.SetText(string.Format(lvTextFormat, skillLevel, maxLevel));
+        if (skillTableData.Skilltype == 0)
+        {
+            addValue = ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value;
+        }
+        if (skillTableData.Skilltype == 1)
+        {
+            addValue = ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
+        }
+        if (skillTableData.Skilltype == 2)
+        {
+            addValue = ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value;
+        }
+
+        levelDescription.SetText(string.Format(lvTextFormat, skillLevel, maxLevel, addValue));
     }
 
     private void RefreshUpgradeButton()
@@ -402,4 +438,5 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     {
         disposables.Dispose();
     }
+
 }

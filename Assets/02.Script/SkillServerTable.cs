@@ -342,7 +342,9 @@ public class SkillServerTable
 
         if (tableData.Issonskill == false)
         {
-            return tableDatas[SkillLevel][idx].Value;
+            int originLevel = tableDatas[SkillLevel][idx].Value;
+
+            return originLevel;
         }
         else
         {
@@ -356,7 +358,28 @@ public class SkillServerTable
     {
         int currentLevel = GetSkillCurrentLevel(idx);
 
+        //
+        var tableData = TableManager.Instance.SkillData[idx];
+
+        int plusAddValue = 0;
+
+        if (tableData.Skilltype == 0)
+        {
+            plusAddValue = ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value;
+        }
+        if (tableData.Skilltype == 1)
+        {
+            plusAddValue = ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
+        }
+        if (tableData.Skilltype == 2)
+        {
+            plusAddValue = ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value;
+        }
+        //
+
         currentLevel += addLevel;
+
+        currentLevel += plusAddValue;
 
         float originDamage = (TableManager.Instance.SkillData[idx].Damageper + TableManager.Instance.SkillData[idx].Damageaddvalue * (currentLevel));
 

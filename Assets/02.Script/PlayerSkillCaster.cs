@@ -138,7 +138,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         return tableData.Activeoffset * Vector2.right * (playerMoveController.MoveDirection == MoveDirection.Right ? 1 : -1);
     }
 
-    public IEnumerator ApplyDamage(Collider2D hitEnemie, SkillTableData skillInfo, float damage, WaitForSeconds damageApplyInterval, bool playSound)
+    public IEnumerator ApplyDamage(Collider2D hitEnemie, SkillTableData skillInfo, float damage, bool playSound)
     {
         AgentHpController agentHpController = hitEnemie.gameObject.GetComponent<AgentHpController>();
 
@@ -172,7 +172,13 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                     SoundManager.Instance.PlaySound(skillInfo.Soundname);
                 }
 
-            yield return damageApplyInterval;
+            float tick = 0f;
+
+            while (tick < 0.05f) 
+            {
+                tick += Time.deltaTime;
+                yield return null;
+            }
         }
     }
 

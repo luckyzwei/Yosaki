@@ -93,6 +93,8 @@ public class UiMonthlyPassCell : MonoBehaviour
         SetDescriptionText();
 
         Subscribe();
+
+        RefreshParent();
     }
 
     private void SetAmount()
@@ -237,5 +239,31 @@ public class UiMonthlyPassCell : MonoBehaviour
     {
         int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotal).Value;
         return killCountTotal >= passInfo.require;
+    }
+
+    private void OnEnable()
+    {
+        RefreshParent();
+    }
+
+    private void RefreshParent()
+    {
+        if (passInfo == null) return;
+
+        if (HasPassItem() == false)
+        {
+            if (CanGetReward() == true && HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false)
+            {
+                this.transform.SetAsFirstSibling();
+            }
+        }
+        else
+        {
+            if (CanGetReward() == true &&
+                (HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false || HasReward(passInfo.rewardType_IAP_Key, passInfo.id) == false))
+            {
+                this.transform.SetAsFirstSibling();
+            }
+        }
     }
 }

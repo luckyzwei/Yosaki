@@ -27,20 +27,20 @@ public class UiDokebiPackRefund : MonoBehaviour
     {
         rootObject.SetActive(false);
 
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiPackRefund).Value == 1) return;
+       // if (ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiPackRefund).Value == 1) return;
 
         int dokevi_1_BuyCount = ServerData.iAPServerTableTotal.TableDatas["bigoak1"].buyCount.Value;
         int dokevi_2_BuyCount = ServerData.iAPServerTableTotal.TableDatas["bigoak2"].buyCount.Value;
 
         if (dokevi_1_BuyCount == 0 && dokevi_2_BuyCount == 0)
         {
-            ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiPackRefund).Value = 1;
+         //   ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiPackRefund).Value = 1;
 
             List<TransactionValue> tr = new List<TransactionValue>();
 
             Param dokebiParam = new Param();
 
-            dokebiParam.Add(UserInfoTable.dokebiPackRefund, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiPackRefund).Value);
+          //  dokebiParam.Add(UserInfoTable.dokebiPackRefund, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiPackRefund).Value);
             tr.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, dokebiParam));
 
             ServerData.SendTransaction(tr, successCallBack: () =>
@@ -76,20 +76,20 @@ public class UiDokebiPackRefund : MonoBehaviour
 
         ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += addTicketTotal;
 
-        ServerData.userInfoTable.TableDatas[UserInfoTable.dokebiPackRefund].Value = 1;
+     //   ServerData.userInfoTable.TableDatas[UserInfoTable.dokebiPackRefund].Value = 1;
 
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
 
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.dokebiPackRefund, ServerData.userInfoTable.TableDatas[UserInfoTable.dokebiPackRefund].Value);
+     //   userInfoParam.Add(UserInfoTable.dokebiPackRefund, ServerData.userInfoTable.TableDatas[UserInfoTable.dokebiPackRefund].Value);
 
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-          //  LogManager.Instance.SendLogType("TicketRefund", "Get", $"t:{addTicketTotal}");
+            LogManager.Instance.SendLogType("TicketRefund", "Get", $"t:{addTicketTotal}");
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "도깨비 세트 소급 완료!", null);
         });
     }

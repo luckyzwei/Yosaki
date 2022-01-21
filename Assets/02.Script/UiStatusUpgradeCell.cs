@@ -381,7 +381,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
             if (showPopup && ret == false)
             {
-                PopupManager.Instance.ShowAlarmMessage("기억의 조각이 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage("무공비급이 부족합니다.");
             }
 
             return ret;
@@ -457,7 +457,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
             if (currentMemoryPoint <= 0)
             {
-                PopupManager.Instance.ShowAlarmMessage("기억의 조각이 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage("무공비급이 부족합니다.");
                 return;
             }
 
@@ -532,7 +532,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
             if (currentMemoryPoint <= 0)
             {
-                PopupManager.Instance.ShowAlarmMessage("기억의 조각이 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage("무공비급이 부족합니다.");
                 return;
             }
 
@@ -608,7 +608,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
             if (currentMemoryPoint <= 0)
             {
-                PopupManager.Instance.ShowAlarmMessage("기억의 조각이 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage("무공비급이 부족합니다.");
                 return;
             }
 
