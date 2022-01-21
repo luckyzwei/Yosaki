@@ -15,7 +15,7 @@ public class UiBossResultPopup : MonoBehaviour
     [SerializeField]
     private Transform rewardParent;
 
-    public void Initialize(float damagedAmount, float bossRemainHpPer, List<RewardData> rewardDatas)
+    public void Initialize(double damagedAmount, double bossRemainHpPer, List<RewardData> rewardDatas)
     {
         scoreText.SetText(Utils.ConvertBigNum(damagedAmount));
         remainHpText.SetText(((bossRemainHpPer * 100f).ToString("F7")).ToString());

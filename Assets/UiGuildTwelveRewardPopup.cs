@@ -34,11 +34,11 @@ public class UiGuildTwelveRewardPopup : SingletonMono<UiGuildTwelveRewardPopup>
 
         var bossServerData = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
 
-        float currentDamage = 0f;
+        double currentDamage = 0f;
 
         if (string.IsNullOrEmpty(bossServerData.score.Value) == false)
         {
-            currentDamage = float.Parse(bossServerData.score.Value);
+            currentDamage = double.Parse(bossServerData.score.Value);
         }
 
         damText.SetText($"최고 피해량 : {Utils.ConvertBigNum(currentDamage)}");

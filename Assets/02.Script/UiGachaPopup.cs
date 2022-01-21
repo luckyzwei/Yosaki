@@ -34,7 +34,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).AsObservable().Subscribe(WhenGachaNumChanged_SKill).AddTo(this);
     }
 
-    private void WhenGachaNumChanged_Weapon(float num)
+    private void WhenGachaNumChanged_Weapon(double num)
     {
         int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Weapon);
 
@@ -63,7 +63,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         }
     }
 
-    private void WhenGachaNumChanged_Norigae(float num)
+    private void WhenGachaNumChanged_Norigae(double num)
     {
         int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Norigae);
 
@@ -92,7 +92,7 @@ public class UiGachaPopup : SingletonMono<UiGachaPopup>
         }
     }
 
-    private void WhenGachaNumChanged_SKill(float num)
+    private void WhenGachaNumChanged_SKill(double num)
     {
         int gachaLevel = GachaLevel(UserInfoTable.gachaNum_Skill);
 

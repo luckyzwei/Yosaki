@@ -58,13 +58,13 @@ public class TwelveRaidEnemy : BossEnemyBase
     {
         var bossTableData = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];
 
-        float ratio = TwelveDungeonManager.Instance.GetComponent<TwelveDungeonManager>().GetDamagedAmount() / bossTableData.Hp;
+        double ratio = TwelveDungeonManager.Instance.GetComponent<TwelveDungeonManager>().GetDamagedAmount() / bossTableData.Hp;
 
-        float damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax, Mathf.Min(1f, ratio));
+        double damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax, Mathf.Min(1f, (float)ratio));
 
         hitObject.SetDamage(damage);
 
-        enemyHitObjects.ForEach(e => e.SetDamage(damage));
+        enemyHitObjects.ForEach(e => e.SetDamage((float)damage));
     }
 
     private IEnumerator BossAttackPowerUpdateRoutine()

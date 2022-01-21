@@ -29,8 +29,8 @@ public class TwelveBossTableData
   public string Description { get {return description; } set { this.description = value;} }
   
   [SerializeField]
-  float hp;
-  public float Hp { get {return hp; } set { this.hp = value;} }
+  double hp;
+  public double Hp { get {return hp; } set { this.hp = value;} }
   
   [SerializeField]
   float rewardminhp;
@@ -57,8 +57,8 @@ public class TwelveBossTableData
   public float Defense { get {return defense; } set { this.defense = value;} }
   
   [SerializeField]
-  float[] rewardcut = new float[0];
-  public float[] Rewardcut { get {return rewardcut; } set { this.rewardcut = value;} }
+  double[] rewardcut = new double[0];
+  public double[] Rewardcut { get {return rewardcut; } set { this.rewardcut = value;} }
   
   [SerializeField]
   int[] rewardtype = new int[0];

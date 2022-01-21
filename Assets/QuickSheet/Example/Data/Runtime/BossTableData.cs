@@ -29,16 +29,16 @@ public class BossTableData
   public string Description { get {return description; } set { this.description = value;} }
   
   [SerializeField]
-  float hp;
-  public float Hp { get {return hp; } set { this.hp = value;} }
+  double hp;
+  public double Hp { get {return hp; } set { this.hp = value;} }
   
   [SerializeField]
-  float rewardminhp;
-  public float Rewardminhp { get {return rewardminhp; } set { this.rewardminhp = value;} }
+  double rewardminhp;
+  public double Rewardminhp { get {return rewardminhp; } set { this.rewardminhp = value;} }
   
   [SerializeField]
-  float rewardmaxhp;
-  public float Rewardmaxhp { get {return rewardmaxhp; } set { this.rewardmaxhp = value;} }
+  double rewardmaxhp;
+  public double Rewardmaxhp { get {return rewardmaxhp; } set { this.rewardmaxhp = value;} }
   
   [SerializeField]
   float attackpowermin;

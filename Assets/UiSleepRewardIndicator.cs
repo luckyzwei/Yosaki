@@ -28,7 +28,7 @@ public class UiSleepRewardIndicator : MonoBehaviour
         {
             rootObject.gameObject.SetActive(e > GameBalance.sleepRewardMinValue);
 
-            TimeSpan ts = TimeSpan.FromSeconds(Mathf.Min(e, GameBalance.sleepRewardMaxValue));
+            TimeSpan ts = TimeSpan.FromSeconds(Mathf.Min((float)e, GameBalance.sleepRewardMaxValue));
 
             description.SetText($"{ts.Hours}시간 {ts.Minutes}분");
         }).AddTo(this);

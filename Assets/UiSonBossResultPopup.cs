@@ -9,7 +9,7 @@ public class UiSonBossResultPopup : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
 
-    public void Initialize(float damagedAmount)
+    public void Initialize(double damagedAmount)
     {
         scoreText.SetText(Utils.ConvertBigNum(damagedAmount));
     }

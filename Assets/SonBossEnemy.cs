@@ -17,7 +17,7 @@ public class SonBossEnemy : BossEnemyBase
     {
         var bossTableData = TableManager.Instance.BossTableData[GameManager.Instance.bossId];
 
-        float ratio = SonManager.Instance.GetComponent<SonManager>().GetDamagedAmount() / bossTableData.Hp;
+        float ratio = (float)(SonManager.Instance.GetComponent<SonManager>().GetDamagedAmount() / bossTableData.Hp);
 
         float damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax, Mathf.Min(1f, ratio));
 

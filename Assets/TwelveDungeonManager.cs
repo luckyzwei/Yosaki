@@ -16,20 +16,20 @@ public class TwelveDungeonManager : ContentsManagerBase
     private AgentHpController bossHpController;
 
     private TwelveBossTableData twelveBossTable;
-    private ReactiveProperty<ObscuredFloat> damageAmount = new ReactiveProperty<ObscuredFloat>();
-    private ReactiveProperty<ObscuredFloat> bossRemainHp = new ReactiveProperty<ObscuredFloat>();
+    private ReactiveProperty<ObscuredDouble> damageAmount = new ReactiveProperty<ObscuredDouble>();
+    private ReactiveProperty<ObscuredDouble> bossRemainHp = new ReactiveProperty<ObscuredDouble>();
 
     public override Transform GetMainEnemyObjectTransform()
     {
         return singleRaidEnemy.transform;
     }
-    public override float GetBossRemainHpRatio()
+    public override double GetBossRemainHpRatio()
     {
         return damageAmount.Value / bossRemainHp.Value;
     }
-    public float BossRemainHp => bossRemainHp.Value;
+    public double BossRemainHp => bossRemainHp.Value;
 
-    public override float GetDamagedAmount()
+    public override double GetDamagedAmount()
     {
         return damageAmount.Value;
     }
@@ -139,7 +139,7 @@ public class TwelveDungeonManager : ContentsManagerBase
     private void SetBossHp()
     {
         twelveBossTable = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];
-        bossRemainHp.Value = float.MaxValue;
+        bossRemainHp.Value = double.MaxValue;
 
         var prefab = Resources.Load<BossEnemyBase>($"TwelveBoss/{GameManager.Instance.bossId}");
 
@@ -147,25 +147,26 @@ public class TwelveDungeonManager : ContentsManagerBase
         singleRaidEnemy.transform.localPosition = Vector3.zero;
         singleRaidEnemy.gameObject.SetActive(false);
         bossHpController = singleRaidEnemy.GetComponent<AgentHpController>();
+        bossHpController.SetRaidEnemy();
     }
 
-    private void whenDamageAmountChanged(ObscuredFloat hp)
+    private void whenDamageAmountChanged(ObscuredDouble hp)
     {
         damageIndicator.SetText(Utils.ConvertBigNum(hp));
         damagedAnim.SetTrigger(DamageAnimName);
     }
 
-    private void WhenBossDamaged(ObscuredFloat hp)
+    private void WhenBossDamaged(ObscuredDouble hp)
     {
         //  bossHpBar.UpdateHpBar(hp, bossTableData.Hp);
 
         if (hp <= 0f && contentsState.Value == (int)ContentsState.Fight)
         {
-            WhenBossDead();
+           // WhenBossDead();
         }
     }
 
-    private void WhenBossDamaged(float damage)
+    private void WhenBossDamaged(double damage)
     {
         damageAmount.Value -= damage;
         bossRemainHp.Value += damage;
@@ -240,7 +241,7 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         if (string.IsNullOrEmpty(serverData.score.Value) == false)
         {
-            if (damageAmount.Value < float.Parse(serverData.score.Value))
+            if (damageAmount.Value < double.Parse(serverData.score.Value))
             {
                 return;
             }
@@ -265,7 +266,7 @@ public class TwelveDungeonManager : ContentsManagerBase
     {
         // DailyMissionManager.UpdateDailyMission(DailyMissionKey.RewardedBossContents, 1);
 
-        //float damagedHp = damageAmount.Value;
+        //double damagedHp = damageAmount.Value;
 
         //List<RewardData> rewardDatas = GetRewawrdData(twelveBossTable, damagedHp);
 
@@ -290,11 +291,11 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         portalObject.gameObject.SetActive(false);
 
-        float maxTime = playTime;
+        double maxTime = playTime;
 
-        float startTime = Time.realtimeSinceStartup;
+        double startTime = Time.realtimeSinceStartup;
 
-        float elapsedTime = Time.realtimeSinceStartup - startTime;
+        double elapsedTime = Time.realtimeSinceStartup - startTime;
 
         while (elapsedTime <= maxTime)
         {

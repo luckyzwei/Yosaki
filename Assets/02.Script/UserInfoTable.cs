@@ -119,12 +119,12 @@ public class UserInfoTable
     public const string basicPackRefund = "basicPackRefund";
     public const string skillInitialized = "ski";
 
-    public float currentServerDate;
+    public double currentServerDate;
     public double attendanceUpdatedTime;
     public DateTime currentServerTime { get; private set; }
     public ReactiveCommand whenServerTimeUpdated = new ReactiveCommand();
 
-    private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
+    private Dictionary<string, double> tableSchema = new Dictionary<string, double>()
     {
         {Hp,100f},
         {Mp,100f},
@@ -213,9 +213,9 @@ public class UserInfoTable
         {skillInitialized,0},
     };
 
-    private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
-    public Dictionary<string, ReactiveProperty<float>> TableDatas => tableDatas;
-    public ReactiveProperty<float> GetTableData(string key)
+    private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
+    public Dictionary<string, ReactiveProperty<double>> TableDatas => tableDatas;
+    public ReactiveProperty<double> GetTableData(string key)
     {
         return tableDatas[key];
     }
@@ -250,7 +250,7 @@ public class UserInfoTable
                      if (e.Current.Key != LastLogin)
                      {
                          defultValues.Add(e.Current.Key, e.Current.Value);
-                         tableDatas.Add(e.Current.Key, new ReactiveProperty<float>(e.Current.Value));
+                         tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(e.Current.Value));
                      }
                      else
                      {
@@ -259,10 +259,10 @@ public class UserInfoTable
                          string time = servertime.GetReturnValuetoJSON()["utcTime"].ToString();
                          DateTime currentServerTime = DateTime.Parse(time).ToUniversalTime().AddHours(9);
 
-                         currentServerDate = (float)Utils.ConvertToUnixTimestamp(currentServerTime);
+                         currentServerDate = (double)Utils.ConvertToUnixTimestamp(currentServerTime);
 
-                         defultValues.Add(e.Current.Key, (float)currentServerDate);
-                         tableDatas.Add(e.Current.Key, new ReactiveProperty<float>((float)currentServerDate));
+                         defultValues.Add(e.Current.Key, (double)currentServerDate);
+                         tableDatas.Add(e.Current.Key, new ReactiveProperty<double>((double)currentServerDate));
                      }
 
                  }
@@ -315,12 +315,12 @@ public class UserInfoTable
                          {
                              //값로드
                              var value = data[e.Current.Key][ServerData.format_Number].ToString();
-                             tableDatas.Add(e.Current.Key, new ReactiveProperty<float>(float.Parse(value)));
+                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(double.Parse(value)));
                          }
                          else
                          {
                              defultValues.Add(e.Current.Key, e.Current.Value);
-                             tableDatas.Add(e.Current.Key, new ReactiveProperty<float>(e.Current.Value));
+                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(e.Current.Value));
                              paramCount++;
                          }
                      }
@@ -352,7 +352,7 @@ public class UserInfoTable
         UpData(key, tableDatas[key].Value, LocalOnly);
     }
 
-    public void UpData(string key, float data, bool LocalOnly, Action failCallBack = null)
+    public void UpData(string key, double data, bool LocalOnly, Action failCallBack = null)
     {
         if (tableDatas.ContainsKey(key) == false)
         {
@@ -425,7 +425,7 @@ public class UserInfoTable
 
                 whenServerTimeUpdated.Execute();
 
-                currentServerDate = (float)Utils.ConvertToUnixTimestamp(currentServerTime);
+                currentServerDate = (double)Utils.ConvertToUnixTimestamp(currentServerTime);
 
                 //day check
                 DateTime savedDate = Utils.ConvertFromUnixTimestamp(tableDatas[LastLogin].Value - 2f);
@@ -491,7 +491,7 @@ public class UserInfoTable
     {
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
-        ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (double)currentServerDate;
 
         Param userInfoParam = new Param();
         userInfoParam.Add(UserInfoTable.LastLogin, ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value);
@@ -549,7 +549,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul7_buff).Value = 0;
         //
 
-        ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (float)currentServerDate;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (double)currentServerDate;
 
         //두번타는거 방지
         if (attendanceUpdatedTime != day)
@@ -756,7 +756,7 @@ public class UserInfoTable
     }
 
     static int totalKillCount = 0;
-    static float updateRequireNum = 100;
+    static double updateRequireNum = 100;
     public void GetKillCountTotal()
     {
         totalKillCount += (int)GameManager.Instance.CurrentStageData.Marbleamount;

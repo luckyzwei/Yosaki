@@ -29,17 +29,17 @@ public class UiPlayerMpBar : MonoBehaviour
         PlayerStatusController.Instance.mp.AsObservable().Subscribe(WhenMpChanged).AddTo(this);
     }
 
-    private void WhenMaxMpChanged(float value)
+    private void WhenMaxMpChanged(double value)
     {
         WhenMpChanged(value);
     }
 
-    private void WhenMpChanged(float value)
+    private void WhenMpChanged(double value)
     {
         animator.SetTrigger(PlayTrigger);
 
-        float maxMp = PlayerStatusController.Instance.maxMp.Value;
-        float currentMp = PlayerStatusController.Instance.mp.Value;
+        float maxMp = (float)PlayerStatusController.Instance.maxMp.Value;
+        float currentMp = (float)PlayerStatusController.Instance.mp.Value;
 
         mpText.SetText($"{(int)currentMp}/{(int)maxMp}");
         barObject.transform.localScale = new Vector3(currentMp / maxMp, barObject.transform.localScale.y, barObject.transform.localScale.z);

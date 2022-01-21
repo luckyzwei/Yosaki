@@ -9,7 +9,7 @@ public class EnemyHitObject : MonoBehaviour
 
     private WaitForSeconds enableDelay = new WaitForSeconds(1.5f);
 
-    private float damage = 10;
+    private double damage = 10;
 
     private Coroutine enableRoutine;
 
@@ -21,7 +21,7 @@ public class EnemyHitObject : MonoBehaviour
         enableRoutine = null;
     }
 
-    public void SetDamage(float damage)
+    public void SetDamage(double damage)
     {
         this.damage = damage;
     }

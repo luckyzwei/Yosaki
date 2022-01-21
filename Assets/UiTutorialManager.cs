@@ -50,8 +50,8 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
 
     [SerializeField]
     private Animator animator;
-    private ReactiveProperty<float> tutorialStep => ServerData.userInfoTable.GetTableData(UserInfoTable.tutorialCurrentStep);
-    private ReactiveProperty<float> tutorialClearFlags => ServerData.userInfoTable.GetTableData(UserInfoTable.tutorialClearFlags);
+    private ReactiveProperty<double> tutorialStep => ServerData.userInfoTable.GetTableData(UserInfoTable.tutorialCurrentStep);
+    private ReactiveProperty<double> tutorialClearFlags => ServerData.userInfoTable.GetTableData(UserInfoTable.tutorialClearFlags);
 
     public bool HasClearFlag(TutorialStep step)
     {
@@ -94,7 +94,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
         }
     }
 
-    private void WhenTutorialStepChanged(float step)
+    private void WhenTutorialStepChanged(double step)
     {
         var currentStep = (TutorialStep)step;
 
@@ -114,7 +114,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
 
         description.SetText(GetDescription((TutorialStep)step));
     }
-    private void WhenTutorialClearFlag(float clearState)
+    private void WhenTutorialClearFlag(double clearState)
     {
         WhenTutorialStepChanged(tutorialStep.Value);
     }

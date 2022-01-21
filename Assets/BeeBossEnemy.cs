@@ -88,13 +88,13 @@ public class BeeBossEnemy : BossEnemyBase
     {
         var bossTableData = TableManager.Instance.BossTableData[GameManager.Instance.bossId];
 
-        float ratio = SingleRaidManager.Instance.GetComponent<SingleRaidManager>().BossRemainHp / bossTableData.Hp;
+       // float ratio = SingleRaidManager.Instance.GetComponent<SingleRaidManager>().BossRemainHp / bossTableData.Hp;
 
-        float damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax, 1f - ratio);
+        //float damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax, 1f - ratio);
 
-        this.currentDamage = damage;
+       // this.currentDamage = damage;
 
-        hitObject.SetDamage(damage);
+      //  hitObject.SetDamage(damage);
     }
 
     public void SpawnEnemy()

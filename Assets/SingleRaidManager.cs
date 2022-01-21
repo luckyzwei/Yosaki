@@ -15,20 +15,20 @@ public class SingleRaidManager : ContentsManagerBase
     private AgentHpController bossHpController;
 
     private BossTableData bossTableData;
-    private ReactiveProperty<ObscuredFloat> damageAmount = new ReactiveProperty<ObscuredFloat>();
-    private ReactiveProperty<ObscuredFloat> bossRemainHp = new ReactiveProperty<ObscuredFloat>();
+    private ReactiveProperty<ObscuredDouble> damageAmount = new ReactiveProperty<ObscuredDouble>();
+    private ReactiveProperty<ObscuredDouble> bossRemainHp = new ReactiveProperty<ObscuredDouble>();
 
     public override Transform GetMainEnemyObjectTransform()
     {
         return singleRaidEnemy.transform;
     }
-    public override float GetBossRemainHpRatio()
+    public override double GetBossRemainHpRatio()
     {
         return damageAmount.Value / bossRemainHp.Value;
     }
-    public float BossRemainHp => bossRemainHp.Value;
+    public double BossRemainHp => bossRemainHp.Value;
 
-    public override float GetDamagedAmount()
+    public override double GetDamagedAmount()
     {
         return damageAmount.Value;
     }
@@ -133,15 +133,16 @@ public class SingleRaidManager : ContentsManagerBase
         singleRaidEnemy.transform.localPosition = Vector3.zero;
         singleRaidEnemy.gameObject.SetActive(false);
         bossHpController = singleRaidEnemy.GetComponent<AgentHpController>();
+        bossHpController.SetRaidEnemy();
     }
 
-    private void whenDamageAmountChanged(ObscuredFloat hp)
+    private void whenDamageAmountChanged(ObscuredDouble hp)
     {
         damageIndicator.SetText(Utils.ConvertBigNum(hp));
         damagedAnim.SetTrigger(DamageAnimName);
     }
 
-    private void WhenBossDamaged(ObscuredFloat hp)
+    private void WhenBossDamaged(ObscuredDouble hp)
     {
         //  bossHpBar.UpdateHpBar(hp, bossTableData.Hp);
 
@@ -151,7 +152,7 @@ public class SingleRaidManager : ContentsManagerBase
         }
     }
 
-    private void WhenBossDamaged(float damage)
+    private void WhenBossDamaged(double damage)
     {
         damageAmount.Value -= damage;
         bossRemainHp.Value += damage;
@@ -225,15 +226,20 @@ public class SingleRaidManager : ContentsManagerBase
         //ServerData.bossServerTable.UpdateData(bossTableData.Stringid);
     }
 
-    public static List<RewardData> GetRewawrdData(BossTableData bossTableData, float damagedHp, int clearCount = 1)
+    public static List<RewardData> GetRewawrdData(BossTableData bossTableData, double damagedHp, int clearCount = 1)
     {
+        if (damagedHp > float.MaxValue) 
+        {
+            damagedHp = float.MaxValue;
+        }
+
         List<RewardData> rewardDatas = new List<RewardData>();
-        float rewardPer = Mathf.Clamp(damagedHp, bossTableData.Rewardminhp, bossTableData.Rewardmaxhp) / bossTableData.Rewardmaxhp;
+        double rewardPer = Mathf.Clamp((float)damagedHp, (float)bossTableData.Rewardminhp, (float)bossTableData.Rewardmaxhp) / bossTableData.Rewardmaxhp;
         //보상 산정
         for (int i = 0; i < bossTableData.Rewardtypes.Length; i++)
         {
             Item_Type rewardType = (Item_Type)bossTableData.Rewardtypes[i];
-            float rewardAmount = (Mathf.Ceil(rewardPer * bossTableData.Rewardmaxvalues[i])) * clearCount;
+            float rewardAmount = (Mathf.Ceil((float)rewardPer * bossTableData.Rewardmaxvalues[i])) * clearCount;
 
             RewardData viewData = new RewardData(rewardType, rewardAmount);
             rewardDatas.Add(viewData);
@@ -252,7 +258,7 @@ public class SingleRaidManager : ContentsManagerBase
     {
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.RewardedBossContents, 1);
 
-        float damagedHp = damageAmount.Value;
+        double damagedHp = damageAmount.Value;
 
         List<RewardData> rewardDatas = GetRewawrdData(bossTableData, damagedHp);
 

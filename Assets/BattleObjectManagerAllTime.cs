@@ -40,7 +40,7 @@ public class BattleObjectManagerAllTime : SingletonMono<BattleObjectManagerAllTi
 
     private float zOffset = 0f;
 
-    public void SpawnDamageText(float damage, Vector3 position, DamTextType type = DamTextType.Normal)
+    public void SpawnDamageText(double damage, Vector3 position, DamTextType type = DamTextType.Normal)
     {
         if (SettingData.ShowDamageFont.Value == 0) return;
         if (damageTextProperty.Pool.OutPool.Count > GameBalance.MaxDamTextNum) return;

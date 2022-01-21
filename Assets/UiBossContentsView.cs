@@ -130,7 +130,7 @@ public class UiBossContentsView : MonoBehaviour
         });
     }
 
-    private void InstantClearReceive(float score, int clearAmount)
+    private void InstantClearReceive(double score, int clearAmount)
     {
         if (ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value < clearAmount)
         {

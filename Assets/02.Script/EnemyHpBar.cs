@@ -79,11 +79,11 @@ public class EnemyHpBar : MonoBehaviour
         greyRoutine = null;
     }
 
-    public void UpdateGauge(float currentHp, float maxHp)
+    public void UpdateGauge(double currentHp, double maxHp)
     {
         if (maxHp == 0f) return;
 
-        greenRenderer.transform.localScale = new Vector2(Mathf.Max(0f, currentHp / maxHp), originYScale);
+        greenRenderer.transform.localScale = new Vector2(Mathf.Max(0f, (float)(currentHp / maxHp)), originYScale);
 
         if (greyRoutine != null)
         {

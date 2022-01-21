@@ -7,11 +7,11 @@ using UnityEngine;
 
 public class AgentHpController : MonoBehaviour
 {
-    private ReactiveProperty<float> currentHp = new ReactiveProperty<float>();
-    public float CurrentHp => currentHp.Value;
+    private ReactiveProperty<double> currentHp = new ReactiveProperty<double>();
+    public double CurrentHp => currentHp.Value;
     public ReactiveCommand whenEnemyDead { get; private set; } = new ReactiveCommand();
-    public ReactiveCommand<float> whenEnemyDamaged { get; private set; } = new ReactiveCommand<float>();
-    public float maxHp { get; private set; }
+    public ReactiveCommand<double> whenEnemyDamaged { get; private set; } = new ReactiveCommand<double>();
+    public double maxHp { get; private set; }
 
     private EnemyTableData enemyTableData;
 
@@ -22,7 +22,7 @@ public class AgentHpController : MonoBehaviour
 
     private bool isEnemyDead = false;
 
-    public ReactiveCommand<float> WhenAgentDamaged = new ReactiveCommand<float>();
+    public ReactiveCommand<double> WhenAgentDamaged = new ReactiveCommand<double>();
 
     private Transform playerPos;
 
@@ -36,6 +36,12 @@ public class AgentHpController : MonoBehaviour
     private bool isFieldBossEnemy = false;
     private bool fieldBossTimerStarted = false;
     private bool initialized = false;
+    private bool isRaidEnemy = false;
+
+    public void SetRaidEnemy()
+    {
+        isRaidEnemy = true;
+    }
 
     private void Awake()
     {
@@ -100,7 +106,7 @@ public class AgentHpController : MonoBehaviour
         SetHp(isFieldBossEnemy == false ? enemyTableData.Hp : enemyTableData.Hp * enemyTableData.Bosshpratio);
     }
 
-    public void SetHp(float hp)
+    public void SetHp(double hp)
     {
         this.maxHp = hp;
         currentHp.Value = maxHp;
@@ -113,7 +119,7 @@ public class AgentHpController : MonoBehaviour
     }
     private static string hitSfxName = "EnemyHitted";
     private static string deadSfxName = "EnemyDead";
-    private void ApplyPlusDamage(ref float value)
+    private void ApplyPlusDamage(ref double value)
     {
         bool isCritical = PlayerStats.ActiveCritical();
 
@@ -139,10 +145,10 @@ public class AgentHpController : MonoBehaviour
 
         //방어력 초과데미지
         //방어력 차이
-        float gapDefense = defense - ignoreDefenseValue;
+        float gapDefense = (float)(defense - ignoreDefenseValue);
         if (gapDefense < 0)
         {
-            float penetrateValue = PlayerStats.GetPenetrateDefense();
+            double penetrateValue = PlayerStats.GetPenetrateDefense();
             value += Mathf.Abs(gapDefense) * value * penetrateValue;
         }
 
@@ -208,8 +214,8 @@ public class AgentHpController : MonoBehaviour
     private Coroutine damTextRoutine;
     private int attackCount = 0;
     private int attackCountMax = 16;
-    private float attackResetCount = 0f;
-    private float damTextMergeTime = 0.5f;
+    private double attackResetCount = 0f;
+    private double damTextMergeTime = 0.5f;
     private const float damTextCountAddValue = 0.1f;
     private readonly WaitForSeconds DamTextDelay = new WaitForSeconds(damTextCountAddValue);
     private float rightValue = 0f;
@@ -235,22 +241,22 @@ public class AgentHpController : MonoBehaviour
     //안씀, 골드 드랍으로 바꿈
     private void GetHitGold(float value)
     {
-        //데미지는 -값임
-        if (value < 0)
-        {
-            if (currentHp.Value + value > 0)
-            {
-                GetGoldByEnemy(-value);
-            }
-            else
-            {
-                GetGoldByEnemy(-(value - currentHp.Value));
-            }
-        }
+        ////데미지는 -값임
+        //if (value < 0)
+        //{
+        //    if (currentHp.Value + value > 0)
+        //    {
+        //        GetGoldByEnemy(-value);
+        //    }
+        //    else
+        //    {
+        //        GetGoldByEnemy(-(value - currentHp.Value));
+        //    }
+        //}
 
     }
 
-    public void UpdateHp(float value)
+    public void UpdateHp(double value)
     {
         if (value < 0 && isFieldBossEnemy && fieldBossTimerStarted == false)
         {
@@ -279,7 +285,7 @@ public class AgentHpController : MonoBehaviour
 
         whenEnemyDamaged.Execute(value);
 
-        if (currentHp.Value <= 0)
+        if (currentHp.Value <= 0 && isRaidEnemy == false)
         {
             EnemyDead();
 
@@ -288,7 +294,7 @@ public class AgentHpController : MonoBehaviour
     }
     private float ignoreDefenseValue;
 
-    private void ApplyDefense(ref float value)
+    private void ApplyDefense(ref double value)
     {
         ignoreDefenseValue = PlayerStats.GetIgnoreDefenseValue();
 
@@ -314,7 +320,7 @@ public class AgentHpController : MonoBehaviour
 
     private void AddEnemyDeadCount()
     {
-        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value+= GameManager.Instance.CurrentStageData.Marbleamount;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value += GameManager.Instance.CurrentStageData.Marbleamount;
         ServerData.userInfoTable.GetKillCountTotal();
     }
 

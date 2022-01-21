@@ -32,12 +32,12 @@ public class ContentsManagerBase : SingletonMono<ContentsManagerBase>
         return null;
     }
 
-    public virtual float GetDamagedAmount()
+    public virtual double GetDamagedAmount()
     {
         return 0f;
     }
 
-    public virtual float GetBossRemainHpRatio()
+    public virtual double GetBossRemainHpRatio()
     {
         return 0f;
     }

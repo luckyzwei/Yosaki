@@ -73,7 +73,7 @@ public class UiAttendanceCell_100Days : MonoBehaviour
         ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).AsObservable().Subscribe(WhenDayChanged).AddTo(compositeDisposable);
     }
 
-    private void WhenDayChanged(float attendanceCount)
+    private void WhenDayChanged(double attendanceCount)
     {
         bool canReceiveReward = attendanceRewardData.Id < attendanceCount;
         lockedIcon.SetActive(!canReceiveReward);

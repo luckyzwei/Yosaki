@@ -19,7 +19,7 @@ public class UiBonusDungeonEnterCount : MonoBehaviour
         ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).AsObservable().Subscribe(WhenEnterCountChanged).AddTo(this);
     }
 
-    private void WhenEnterCountChanged(float enterCount)
+    private void WhenEnterCountChanged(double enterCount)
     {
         description.SetText($"오늘 입장({(int)enterCount}/{GameBalance.bonusDungeonEnterCount})");
     }

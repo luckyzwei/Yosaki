@@ -140,7 +140,7 @@ public class Enemy : PoolItem
         agentHpController.WhenAgentDamaged.AsObservable().Subscribe(WhenAgentDamaged).AddTo(this);
     }
 
-    private void WhenAgentDamaged(float damage)
+    private void WhenAgentDamaged(double damage)
     {
         if (isFlyingEnemy == false)
         {

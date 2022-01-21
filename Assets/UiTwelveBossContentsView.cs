@@ -37,7 +37,7 @@ public class UiTwelveBossContentsView : MonoBehaviour
         var score = ServerData.bossServerTable.TableDatas[bossTableData.Stringid].score.Value;
         if (string.IsNullOrEmpty(score) == false)
         {
-            description.SetText($"최고 피해량 : {Utils.ConvertBigNum(float.Parse(score))}");
+            description.SetText($"최고 피해량 : {Utils.ConvertBigNum(double.Parse(score))}");
         }
         else
         {

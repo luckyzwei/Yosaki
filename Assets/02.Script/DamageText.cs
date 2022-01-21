@@ -58,7 +58,7 @@ public class DamageText : PoolItem
 
     //   private readonly string Format = "N1";
 
-    public void Initialize(float damage, DamTextType type = DamTextType.Normal)
+    public void Initialize(double damage, DamTextType type = DamTextType.Normal)
     {
         SetColor(type);
 

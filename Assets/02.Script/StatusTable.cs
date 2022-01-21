@@ -60,12 +60,7 @@ public class StatusTable
 
     private Dictionary<string, int> tableSchema = new Dictionary<string, int>()
     {
-#if UNITY_EDITOR
-        {Level,5000},
-#endif
-#if !UNITY_EDITOR
         {Level,1},
-#endif
         {SkillPoint,GameBalance.SkillPointGet},
         {StatPoint,0},
         {Memory,0},

@@ -7,7 +7,7 @@ public class UiTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
 {
     public class TwelveBossRewardInfo
     {
-        public TwelveBossRewardInfo(int idx, float damageCut, int rewardType, float rewardAmount, string rewardCutString, float currentDamage)
+        public TwelveBossRewardInfo(int idx, double damageCut, int rewardType, float rewardAmount, string rewardCutString, double currentDamage)
         {
             this.idx = idx;
 
@@ -23,10 +23,10 @@ public class UiTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
         }
 
         public int idx;
-        public float damageCut;
+        public double damageCut;
         public int rewardType;
         public float rewardAmount;
-        public float currentDamage;
+        public double currentDamage;
         public string rewardCutString;
     }
 

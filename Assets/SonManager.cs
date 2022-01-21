@@ -15,20 +15,20 @@ public class SonManager : ContentsManagerBase
     private AgentHpController bossHpController;
 
     private BossTableData bossTableData;
-    private ReactiveProperty<ObscuredFloat> damageAmount = new ReactiveProperty<ObscuredFloat>();
-    private ReactiveProperty<ObscuredFloat> bossRemainHp = new ReactiveProperty<ObscuredFloat>();
+    private ReactiveProperty<ObscuredDouble> damageAmount = new ReactiveProperty<ObscuredDouble>();
+    private ReactiveProperty<ObscuredDouble> bossRemainHp = new ReactiveProperty<ObscuredDouble>();
 
     public override Transform GetMainEnemyObjectTransform()
     {
         return singleRaidEnemy.transform;
     }
-    public override float GetBossRemainHpRatio()
+    public override double GetBossRemainHpRatio()
     {
         return damageAmount.Value / bossRemainHp.Value;
     }
-    public float BossRemainHp => bossRemainHp.Value;
+    public double BossRemainHp => bossRemainHp.Value;
 
-    public override float GetDamagedAmount()
+    public override double GetDamagedAmount()
     {
         return damageAmount.Value;
     }
@@ -132,25 +132,26 @@ public class SonManager : ContentsManagerBase
         singleRaidEnemy.transform.localPosition = Vector3.zero;
         singleRaidEnemy.gameObject.SetActive(false);
         bossHpController = singleRaidEnemy.GetComponent<AgentHpController>();
+        bossHpController.SetRaidEnemy();
     }
 
-    private void whenDamageAmountChanged(ObscuredFloat hp)
+    private void whenDamageAmountChanged(ObscuredDouble hp)
     {
         damageIndicator.SetText(Utils.ConvertBigNum(hp));
         damagedAnim.SetTrigger(DamageAnimName);
     }
 
-    private void WhenBossDamaged(ObscuredFloat hp)
+    private void WhenBossDamaged(ObscuredDouble hp)
     {
         //  bossHpBar.UpdateHpBar(hp, bossTableData.Hp);
 
         if (hp <= 0f && contentsState.Value == (int)ContentsState.Fight)
         {
-            WhenBossDead();
+           // WhenBossDead();
         }
     }
 
-    private void WhenBossDamaged(float damage)
+    private void WhenBossDamaged(double damage)
     {
         damageAmount.Value -= damage;
         bossRemainHp.Value += damage;
@@ -213,7 +214,7 @@ public class SonManager : ContentsManagerBase
 
     private void SendScore()
     {
-        float reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
+        double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
         if(reqValue > ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value) 
         {

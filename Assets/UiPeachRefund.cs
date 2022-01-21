@@ -12,9 +12,9 @@ public class UiPeachRefund : MonoBehaviour
 
     private void Check()
     {
-      //  if (ServerData.userInfoTable.GetTableData(UserInfoTable.peachRefund).Value == 1) return;
+        //  if (ServerData.userInfoTable.GetTableData(UserInfoTable.peachRefund).Value == 1) return;
 
-        float score = ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value * GameBalance.BossScoreConvertToOrigin;
+        double score = ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value * GameBalance.BossScoreConvertToOrigin;
 
         var tableDatas = TableManager.Instance.SonReward.dataArray;
 

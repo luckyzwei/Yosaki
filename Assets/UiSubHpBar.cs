@@ -47,11 +47,11 @@ public class UiSubHpBar : SingletonMono<UiSubHpBar>
         greyRoutine = null;
     }
 
-    public void UpdateGauge(float currentHp, float maxHp)
+    public void UpdateGauge(double currentHp, double maxHp)
     {
         if (maxHp == 0f) return;
 
-        greenRenderer.fillAmount = currentHp / maxHp;
+        greenRenderer.fillAmount = (float)(currentHp / maxHp);
 
         if (greyRoutine != null)
         {

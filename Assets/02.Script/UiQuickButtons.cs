@@ -100,8 +100,8 @@ public class UiQuickButtons : MonoBehaviour
     {
         if (GameManager.contentsType != GameManager.ContentsType.NormalField) return;
 
-        float currentHp = PlayerStatusController.Instance.hp.Value;
-        float maxhp = PlayerStatusController.Instance.maxHp.Value;
+        float currentHp = (float)PlayerStatusController.Instance.hp.Value;
+        float maxhp = (float)PlayerStatusController.Instance.maxHp.Value;
         float optionValue = GameBalance.potion_Option[SettingData.PotionUseHpOption.Value];
         float currentHpRatio = currentHp / maxhp;
         if (currentHpRatio < optionValue)
@@ -253,8 +253,8 @@ public class UiQuickButtons : MonoBehaviour
 
         float recoverAmount = PotionBalance.recover_Potion[idx];
 
-        float hpRecoverAmount = PlayerStatusController.Instance.maxHp.Value * recoverAmount;
-        float mpRecoverAmount = PlayerStatusController.Instance.maxMp.Value * recoverAmount;
+        float hpRecoverAmount = (float)PlayerStatusController.Instance.maxHp.Value * recoverAmount;
+        float mpRecoverAmount = (float)PlayerStatusController.Instance.maxMp.Value * recoverAmount;
 
         PlayerStatusController.Instance.UpdateHp(hpRecoverAmount);
         PlayerStatusController.Instance.UpdateMp(mpRecoverAmount);

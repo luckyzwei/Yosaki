@@ -38,7 +38,7 @@ public class UiWingIndicator : MonoBehaviour
         ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(WhenWingGradeChanged).AddTo(this);
     }
 
-    private void WhenWingGradeChanged(float grade)
+    private void WhenWingGradeChanged(double grade)
     {
         int idx = (int)grade;
         currentGrade = idx;

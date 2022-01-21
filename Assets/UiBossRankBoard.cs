@@ -104,7 +104,7 @@ public class UiBossRankBoard : MonoBehaviour
 
                         var test = data["score"][ServerData.format_Number].ToString();
 
-                        float score = float.Parse(data["score"][ServerData.format_Number].ToString());
+                        double score = double.Parse(data["score"][ServerData.format_Number].ToString());
                         score *= GameBalance.BossScoreConvertToOrigin;
                         int costumeId = int.Parse(splitData[0]);
                         int petId = int.Parse(splitData[1]);

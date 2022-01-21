@@ -36,7 +36,7 @@ public class UiSonRewardCell : MonoBehaviour
 
     private SonRewardData tableData;
 
-    private float score = 0;
+    private double score = 0;
 
     public void Initialize(SonRewardData tableData)
     {

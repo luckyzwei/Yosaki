@@ -28,20 +28,20 @@ public class UiPlayerHpBar : MonoBehaviour
         PlayerStatusController.Instance.hp.AsObservable().Subscribe(WhenHpChanged).AddTo(this);
     }
 
-    private void WhenMaxHpChanged(float value)
+    private void WhenMaxHpChanged(double value)
     {
         WhenHpChanged(value);
     }
 
-    private void WhenHpChanged(float value)
+    private void WhenHpChanged(double value)
     {
         animator.SetTrigger(PlayTrigger);
 
-        float maxHp = PlayerStatusController.Instance.maxHp.Value;
-        float currentHp = PlayerStatusController.Instance.hp.Value;
+        double maxHp = PlayerStatusController.Instance.maxHp.Value;
+        double currentHp = PlayerStatusController.Instance.hp.Value;
 
         hpText.SetText($"{Utils.ConvertBigNum(currentHp)}/{Utils.ConvertBigNum(maxHp)}");
-        barObject.transform.localScale = new Vector3(currentHp / maxHp, barObject.transform.localScale.y, barObject.transform.localScale.z);
+        barObject.transform.localScale = new Vector3((float)currentHp / (float)maxHp, barObject.transform.localScale.y, barObject.transform.localScale.z);
     }
 
 }

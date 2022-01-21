@@ -200,12 +200,12 @@ public static class Utils
     }
 
     #region BigFloat
-    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간","정","재","극" };
-    private static int p = (int)Mathf.Pow(10, 4);
-    private static List<int> numList = new List<int>();
+    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간","정","재","극" ,"??","??","??"};
+    private static double p = (double)Mathf.Pow(10, 4);
+    private static List<double> numList = new List<double>();
     private static List<string> numStringList = new List<string>();
     private static string zeroString = "0";
-    public static string ConvertBigNum(float data)
+    public static string ConvertBigNum(double data)
     {
 #if UNITY_EDITOR
         bool isUnderZero = data < 0;
@@ -220,14 +220,14 @@ public static class Utils
             return zeroString;
         }
 
-        System.Numerics.BigInteger value = (System.Numerics.BigInteger)data;
+        double value = data;
 
         numList.Clear();
         numStringList.Clear();
 
         do
         {
-            numList.Add((int)(value % p));
+            numList.Add((value % p));
             value /= p;
         }
         while (value >= 1);
@@ -240,7 +240,7 @@ public static class Utils
             {
                 if (numList[i] == 0) continue;
 
-                numStringList.Add(numList[i] + goldUnitArr[i]);
+                numStringList.Add(Math.Truncate(numList[i]) + goldUnitArr[i]);
             }
 
             for (int i = 0; i < numStringList.Count; i++)
@@ -260,7 +260,7 @@ public static class Utils
             for (int i = 0; i < numList.Count; i++)
             {
                 if (numList[i] == 0) continue;
-                retStr = numList[i] + goldUnitArr[i] + retStr;
+                retStr = Math.Truncate(numList[i]) + goldUnitArr[i] + retStr;
             }
 #if UNITY_EDITOR
             if (isUnderZero)

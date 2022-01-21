@@ -37,7 +37,7 @@ public class UiTicketBuyShop : MonoBehaviour
         ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).AsObservable().Subscribe(WhenAdRewardReceived).AddTo(this);
     }
 
-    private void WhenAdRewardReceived(float received)
+    private void WhenAdRewardReceived(double received)
     {
         bool canReceive = received == 0f;
 
@@ -52,7 +52,7 @@ public class UiTicketBuyShop : MonoBehaviour
 
     }
 
-    private void WhenTicketBuyCountChanged(float buyCount)
+    private void WhenTicketBuyCountChanged(double buyCount)
     {
         remainBuyCount.SetText($"오늘 구매({(int)buyCount}/{GameBalance.dailyTickBuyCountMax})");
     }

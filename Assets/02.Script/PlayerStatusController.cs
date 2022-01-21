@@ -9,11 +9,11 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
     private bool canHit = true;
 
     private WaitForSeconds hitDelay = new WaitForSeconds(1f);
-    public ReactiveProperty<float> maxHp { get; private set; } = new ReactiveProperty<float>(GameBalance.initHp);
-    public ReactiveProperty<float> hp { get; private set; } = new ReactiveProperty<float>();
+    public ReactiveProperty<double> maxHp { get; private set; } = new ReactiveProperty<double>(GameBalance.initHp);
+    public ReactiveProperty<double> hp { get; private set; } = new ReactiveProperty<double>();
 
-    public ReactiveProperty<float> maxMp { get; private set; } = new ReactiveProperty<float>(GameBalance.initMp);
-    public ReactiveProperty<float> mp { get; private set; } = new ReactiveProperty<float>();
+    public ReactiveProperty<double> maxMp { get; private set; } = new ReactiveProperty<double>(GameBalance.initMp);
+    public ReactiveProperty<double> mp { get; private set; } = new ReactiveProperty<double>();
 
     public ReactiveCommand whenPlayerDead = new ReactiveCommand();
 
@@ -53,7 +53,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
             if (IsMpFull() == false && mpRecoverPer != 0f)
             {
-                UpdateMp(maxMp.Value * mpRecoverPer);
+              //  UpdateMp(maxMp.Value * mpRecoverPer);
             }
         }
     }
@@ -243,8 +243,8 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         }
         else
         {
-            hp.Value = ServerData.userInfoTable.GetTableData(UserInfoTable.Hp).Value;
-            mp.Value = ServerData.userInfoTable.GetTableData(UserInfoTable.Mp).Value;
+            hp.Value = (float)ServerData.userInfoTable.GetTableData(UserInfoTable.Hp).Value;
+            mp.Value = (float)ServerData.userInfoTable.GetTableData(UserInfoTable.Mp).Value;
         }
     }
 
@@ -264,7 +264,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         return mp.Value == maxMp.Value;
     }
 
-    public void UpdateHp(float value)
+    public void UpdateHp(double value)
     {
         //데미지입음
         if (value < 0)
@@ -292,7 +292,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
         hp.Value += value;
 
-        hp.Value = Mathf.Clamp(hp.Value, 0f, maxHp.Value);
+        hp.Value = Mathf.Clamp((float)hp.Value, 0f, (float)maxHp.Value);
 
         CheckDead();
     }
@@ -301,7 +301,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
     {
         mp.Value += value;
 
-        mp.Value = Mathf.Clamp(mp.Value, 0f, maxMp.Value);
+        mp.Value = Mathf.Clamp((float)mp.Value, 0f, (float)maxMp.Value);
     }
 
     private void CheckDead()
@@ -313,7 +313,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         }
     }
 
-    private void SpawnDamText(float value)
+    private void SpawnDamText(double value)
     {
         Vector2 position = Vector2.up * damTextYOffect + UnityEngine.Random.insideUnitCircle;
 
