@@ -25,7 +25,7 @@ public class UiSkillAwakeBoard : MonoBehaviour
 
     private void Initialize()
     {
-
+        
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.skillInitialized).Value == 0)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
