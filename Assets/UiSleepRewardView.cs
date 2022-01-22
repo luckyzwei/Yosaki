@@ -61,6 +61,9 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
         //스테이지relic
         rewards[7].SetText(Utils.ConvertBigNum(reward.stageRelic));
 
+        //설날
+        rewards[8].SetText(Utils.ConvertBigNum(reward.sulItem));
+
         SleepRewardReceiver.Instance.GetRewardSuccess();
     }
 }

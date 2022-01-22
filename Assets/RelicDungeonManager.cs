@@ -150,7 +150,7 @@ public class RelicDungeonManager : ContentsManagerBase
         return 3f + (((float)spawnCount / 10f) * 0.1f);
     }
 
-    public float GetEnemyHp()
+    public double GetEnemyHp()
     {
         int enemyTableIdx = spawnCount * 2;
 

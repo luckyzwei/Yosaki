@@ -198,6 +198,17 @@ public enum TitleMissionId
     Stage3550,//★
     Stage3600,//★
 
+    Level255000,//★
+    Level260000,//★
+    Level265000,//★
+    Level270000,//★
+    Level275000,//★
+    Level280000,//★
+    Level285000,//★
+    Level290000,//★
+    Level295000,//★
+    Level300000,//★
+
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -595,6 +606,46 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.Level251000);
             }
 
+            if (e >= 255000)
+            {
+                ClearTitleMission(TitleMissionId.Level255000);
+            }
+            if (e >= 260000)
+            {
+                ClearTitleMission(TitleMissionId.Level260000);
+            }
+            if (e >= 265000)
+            {
+                ClearTitleMission(TitleMissionId.Level265000);
+            }
+            if (e >= 270000)
+            {
+                ClearTitleMission(TitleMissionId.Level270000);
+            }
+            if (e >= 275000)
+            {
+                ClearTitleMission(TitleMissionId.Level275000);
+            }
+            if (e >= 280000)
+            {
+                ClearTitleMission(TitleMissionId.Level280000);
+            }
+            if (e >= 285000)
+            {
+                ClearTitleMission(TitleMissionId.Level285000);
+            }
+            if (e >= 290000)
+            {
+                ClearTitleMission(TitleMissionId.Level290000);
+            }
+            if (e >= 295000)
+            {
+                ClearTitleMission(TitleMissionId.Level295000);
+            }
+            if (e >= 300000)
+            {
+                ClearTitleMission(TitleMissionId.Level300000);
+            }
 
         }).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>

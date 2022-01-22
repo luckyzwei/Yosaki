@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Linq;
 using LitJson;
 
-public class AttendanceServerTable 
+public class AttendanceServerTable
 {
     public static string Indate;
     public static string tableName = "Attendance";
@@ -22,6 +22,38 @@ public class AttendanceServerTable
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
     public Dictionary<string, ReactiveProperty<string>> TableDatas => tableDatas;
+
+    public bool Attendance100AllReceived()
+    {
+        var receivedRewardList = ServerData.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey_100].Value;
+
+        var rewards = receivedRewardList.Split(',');
+
+        var tableData = TableManager.Instance.AttendanceReward_100.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            string key = tableData[i].Id.ToString();
+
+            bool hasKey = false;
+
+            for (int j = 0; j < rewards.Length; j++)
+            {
+                if (rewards[j].Equals(key))
+                {
+                    hasKey = true;
+                    break;
+                }
+            }
+
+            if (hasKey == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public void Initialize()
     {

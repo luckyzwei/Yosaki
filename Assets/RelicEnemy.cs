@@ -13,7 +13,7 @@ public class RelicEnemy : PoolItem
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public void Initialize(float hp, float moveSpeed, int defense, Action enemyDeadCallBack)
+    public void Initialize(double hp, float moveSpeed, int defense, Action enemyDeadCallBack)
     {
         EnemyTableData data = new EnemyTableData();
         data.Hp = hp;

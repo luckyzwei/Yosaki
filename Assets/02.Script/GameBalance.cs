@@ -146,8 +146,8 @@ public static class GameBalance
     public readonly static ObscuredInt StageRelicUnlockLevel = 3000;
     public readonly static ObscuredFloat StageRelicUpgradePrice = 1000;
 
-    public readonly static ObscuredFloat BossScoreSmallizeValue = 0.00000000000000000001f;
-    public readonly static ObscuredFloat BossScoreConvertToOrigin = 100000000000000000000f;
+    public readonly static ObscuredFloat BossScoreSmallizeValue = 0.0000000000000000000001f;
+    public readonly static ObscuredFloat BossScoreConvertToOrigin = 10000000000000000000000f;
 
     public readonly static ObscuredInt SonEvolutionDivdeNum = 3000;
 
@@ -208,10 +208,13 @@ public static class GameBalance
 
 public static class DamageBalance
 {
-    public readonly static ObscuredFloat baseMinDamage = 0.8f;
-    public readonly static ObscuredFloat baseMaxDamage = 1.2f;
+    public readonly static ObscuredFloat baseMinDamage = 0.98f;
+    public readonly static ObscuredFloat baseMaxDamage = 1.02f;
     public static float GetRandomDamageRange()
     {
+#if UNITY_EDITOR
+        return 1f;
+#endif
         return Random.Range(baseMinDamage + PlayerStats.GetDamBalanceAddValue(), baseMaxDamage);
     }
 }

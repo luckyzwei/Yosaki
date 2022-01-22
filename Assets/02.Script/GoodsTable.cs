@@ -49,6 +49,7 @@ public class GoodsTable
     public static string Peach = "PeachReal";
     public static string MiniGameReward = "MiniGameReward";
     public static string GuildReward = "GuildReward";
+    public static string SulItem = "SulItem";
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -84,6 +85,7 @@ public class GoodsTable
         {GuildReward,0f},
         {CockStone,0f},
         {DogStone,0f},
+        {SulItem,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -161,8 +163,8 @@ public class GoodsTable
         }
         else
         {
+            tableDatas[MarbleKey].Value += marbleAddAmount;
             marbleAddAmount = 0;
-            tableDatas[MarbleKey].Value += updateRequireNum;
         }
     }
     static int soulAddAmount = 0;
@@ -179,8 +181,8 @@ public class GoodsTable
         }
         else
         {
+            tableDatas[PetUpgradeSoul].Value += soulAddAmount;
             soulAddAmount = 0;
-            tableDatas[PetUpgradeSoul].Value += updateRequireNum;
         }
     }
 
@@ -197,8 +199,26 @@ public class GoodsTable
         }
         else
         {
+            tableDatas[Event_Item_0].Value += eventItemAddNum;
             eventItemAddNum = 0;
-            tableDatas[Event_Item_0].Value += updateRequireNum;
+        }
+    }
+
+    static int sulAddNum = 0;
+    public void GetsulItem(float amount)
+    {
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.SulItem)} 획득(+{(int)amount})");
+
+        sulAddNum += (int)amount;
+
+        if (sulAddNum < updateRequireNum)
+        {
+
+        }
+        else
+        {
+            tableDatas[SulItem].Value += sulAddNum;
+            sulAddNum = 0;
         }
     }
 
@@ -419,6 +439,7 @@ public class GoodsTable
         goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
         goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+        goodsParam.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);
         goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
         goodsParam.Add(GoodsTable.BonusSpinKey, ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value);
 

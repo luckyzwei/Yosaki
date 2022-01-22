@@ -1,4 +1,5 @@
 ﻿using BackEnd;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
@@ -170,7 +171,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
         goodsParam.Add(GoodsTable.BonusSpinKey, ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value);
 
         Param userinfoParam = new Param();
-        userinfoParam.Add(UserInfoTable.LastLogin, ServerData.userInfoTable.TableDatas[UserInfoTable.LastLogin].Value);
+        userinfoParam.Add(UserInfoTable.LastLogin, Math.Truncate(ServerData.userInfoTable.TableDatas[UserInfoTable.LastLogin].Value));
 
         transactionList.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
         transactionList.Add(TransactionValue.SetUpdate(GrowthTable.tableName, GrowthTable.Indate, growthParam));

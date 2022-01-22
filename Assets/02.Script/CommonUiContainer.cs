@@ -82,6 +82,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public List<SkeletonDataAsset> enemySpineAssets;
 
     public Sprite GuildReward;
+    public Sprite SulItem;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -146,6 +147,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.costume20:
                 return costumeThumbnail[20];
+                break;
+            case Item_Type.costume21:
+                return costumeThumbnail[21];
                 break;
             case Item_Type.RankFrame1:
                 return rankFrame[8];
@@ -266,6 +270,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.GuildReward:
                 return GuildReward;
+                break;
+            case Item_Type.SulItem:
+                return SulItem;
                 break;
         }
 

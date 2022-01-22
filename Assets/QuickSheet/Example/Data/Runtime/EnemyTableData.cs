@@ -33,8 +33,8 @@ public class EnemyTableData
   public float Movespeed { get {return movespeed; } set { this.movespeed = value;} }
   
   [SerializeField]
-  float hp;
-  public float Hp { get {return hp; } set { this.hp = value;} }
+  double hp;
+  public double Hp { get {return hp; } set { this.hp = value;} }
   
   [SerializeField]
   float exp;

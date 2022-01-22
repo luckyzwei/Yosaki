@@ -148,7 +148,7 @@ public class SingleRaidManager : ContentsManagerBase
 
         if (hp <= 0f && contentsState.Value == (int)ContentsState.Fight)
         {
-            WhenBossDead();
+       //     WhenBossDead();
         }
     }
 
@@ -283,19 +283,14 @@ public class SingleRaidManager : ContentsManagerBase
 
         portalObject.gameObject.SetActive(false);
 
-        float maxTime = playTime;
+        float remainSec = playTime;
 
-        float startTime = Time.realtimeSinceStartup;
-
-        float elapsedTime = Time.realtimeSinceStartup - startTime;
-
-        while (elapsedTime <= maxTime)
+        while (remainSec >= 0)
         {
-            elapsedTime = Time.realtimeSinceStartup - startTime;
-
-            timerText.SetText($"남은시간 : {(int)(maxTime - elapsedTime)}");
-
+            timerText.SetText($"남은시간 : {(int)remainSec}");
             yield return null;
+            remainSec -= Time.deltaTime;
+            this.remainSec = remainSec;
         }
 
         TimerEnd();

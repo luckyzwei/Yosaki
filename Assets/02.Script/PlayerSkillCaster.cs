@@ -148,33 +148,28 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
-                if (hit == 0)
-                {
-                    agentHpController.SetKnockBack();
-                }
+            agentHpController.UpdateHp(-damage);
 
-                agentHpController.UpdateHp(-damage);
+            //이펙트
+            if (string.IsNullOrEmpty(skillInfo.Hiteffectname) == false &&
+                Vector3.Distance(this.transform.position, hitEnemie.gameObject.transform.position) < GameBalance.effectActiveDistance)
+            {
+                Vector3 spawnPos = hitEnemie.gameObject.transform.position + Vector3.forward * -1f + Vector3.up * 0.3f;
+                spawnPos += (Vector3)UnityEngine.Random.insideUnitCircle * 0.5f;
+                spawnPos += (Vector3)Vector3.back;
+                EffectManager.SpawnEffectAllTime(skillInfo.Hiteffectname, spawnPos, limitSpawnSize: true);
+            }
 
-                //이펙트
-                if (string.IsNullOrEmpty(skillInfo.Hiteffectname) == false &&
-                    Vector3.Distance(this.transform.position, hitEnemie.gameObject.transform.position) < GameBalance.effectActiveDistance)
-                {
-                    Vector3 spawnPos = hitEnemie.gameObject.transform.position + Vector3.forward * -1f + Vector3.up * 0.3f;
-                    spawnPos += (Vector3)UnityEngine.Random.insideUnitCircle * 0.5f;
-                    spawnPos += (Vector3)Vector3.back;
-                    EffectManager.SpawnEffectAllTime(skillInfo.Hiteffectname, spawnPos, limitSpawnSize: true);
-                }
-
-                //사운드
-                //시전할때 사운드 있어서 따로재생X
-                if (hit != 0 && playSound)
-                {
-                    SoundManager.Instance.PlaySound(skillInfo.Soundname);
-                }
+            //사운드
+            //시전할때 사운드 있어서 따로재생X
+            if (hit != 0 && playSound)
+            {
+                SoundManager.Instance.PlaySound(skillInfo.Soundname);
+            }
 
             float tick = 0f;
 
-            while (tick < 0.05f) 
+            while (tick < 0.05f)
             {
                 tick += Time.deltaTime;
                 yield return null;

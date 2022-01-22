@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SonSkillCaster : SingletonMono<SonSkillCaster>
 {
-    private WaitForSeconds ws = new WaitForSeconds(0.1f);
 
     private Coroutine skillRoutine;
 
@@ -59,7 +58,15 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
                 PlayerSkillCaster.Instance.UseSkill(skillTableDatas[i].Id);
             }
 
-            yield return ws;
+            yield return null;
+
+            //float tick = 0.1f;
+
+            //while (tick >= 0.1f)
+            //{
+            //    yield return null;
+            //    tick -= Time.deltaTime;
+            //}
         }
     }
 

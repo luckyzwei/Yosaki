@@ -25,7 +25,7 @@ public class UiSkillAwakeBoard : MonoBehaviour
 
     private void Initialize()
     {
-        
+
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.skillInitialized).Value == 0)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
@@ -41,10 +41,9 @@ public class UiSkillAwakeBoard : MonoBehaviour
             statusParam.Add(StatusTable.SkillAdPoint, ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value);
             transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
 
-
             ServerData.SendTransaction(transactions);
         }
-        
+
         lockDescription.SetText($"요물무기가 필요합니다.");
 
     }
@@ -64,10 +63,34 @@ public class UiSkillAwakeBoard : MonoBehaviour
 
     public int GetMaxSkillAwakePoint()
     {
-        return ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value + 2) * 3;
+        return ((int)ServerData.statusTable.GetTableData(StatusTable.Level).Value) / 20;
     }
 
     public void OnClickResetButton()
+    {
+        int currentMaxPoint = GetMaxSkillAwakePoint();
+
+        currentMaxPoint -= ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value;
+        currentMaxPoint -= ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
+        currentMaxPoint -= ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value;
+
+        ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value = currentMaxPoint;
+
+        Param statusParam = new Param();
+
+        statusParam.Add(StatusTable.SkillAdPoint, ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value);
+
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+        {
+            PopupManager.Instance.ShowAlarmMessage($"갱신 성공!");
+        });
+    }
+
+    public void OnClickAllResetButton()
     {
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말 초기화 합니까?", () =>
         {
@@ -92,6 +115,5 @@ public class UiSkillAwakeBoard : MonoBehaviour
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"초기화 성공!", null);
             });
         }, () => { });
-
     }
 }

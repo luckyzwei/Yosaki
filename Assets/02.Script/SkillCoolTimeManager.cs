@@ -101,10 +101,10 @@ public static class SkillCoolTimeManager
 
     private static IEnumerator CooltimeRoutine(ReactiveProperty<float> data)
     {
-        while (data.Value > 0f)
+        while (data.Value >= 0f)
         {
-            data.Value -= Time.deltaTime;
             yield return null;
+            data.Value -= Time.deltaTime;
         }
 
         data.Value = 0f;

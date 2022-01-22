@@ -72,23 +72,16 @@ public class UiStageNameIndicater : SingletonMono<UiStageNameIndicater>
 
     private IEnumerator FieldBossRoutine(int timer)
     {
-        float maxTime = timer;
+        float remainSec = timer;
 
         fieldBossTimer.fillAmount = 1f;
 
-        float startTime = Time.realtimeSinceStartup;
-
-        float elapsedTime = Time.realtimeSinceStartup - startTime;
-
-        while (elapsedTime <= maxTime)
+        while (remainSec > 0)
         {
-            elapsedTime = Time.realtimeSinceStartup - startTime;
-
-            fieldBossTimer.fillAmount = ((maxTime-elapsedTime) / maxTime);
-
-            fieldBossRemainSec.SetText($"남은시간 {(int)(maxTime - elapsedTime)}");
-
             yield return null;
+            remainSec -= Time.deltaTime;
+            fieldBossTimer.fillAmount = (remainSec / (float)timer);
+            fieldBossRemainSec.SetText($"남은시간 {(int)remainSec}");
         }
 
         fieldBossTimer.fillAmount = 0f;

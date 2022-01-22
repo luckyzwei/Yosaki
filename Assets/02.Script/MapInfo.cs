@@ -401,12 +401,6 @@ public class MapInfo : SingletonMono<MapInfo>
 
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, stageParam));
 
-        Param statusParam = new Param();
-        ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value += 1;
-        statusParam.Add(StatusTable.SkillAdPoint, ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value);
-
-        transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
-
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
               // LogManager.Instance.SendLog("스테이지클리어", GameManager.Instance.CurrentStageData.Id.ToString());

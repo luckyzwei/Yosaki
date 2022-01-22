@@ -56,7 +56,7 @@ public class UiRealBossRankBoard : MonoBehaviour
             }
             else
             {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1,string.Empty);
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1, string.Empty);
             }
 
 
@@ -77,6 +77,8 @@ public class UiRealBossRankBoard : MonoBehaviour
         {
             var rows = bro.Rows();
 
+            var te = JsonUtility.ToJson(bro.GetReturnValue());
+            
 
             if (rows.Count > 0)
             {
@@ -138,7 +140,7 @@ public class UiRealBossRankBoard : MonoBehaviour
                             guildName = splitData[7];
                         }
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint, guildName);
                     }
                     else
                     {

@@ -44,19 +44,13 @@ public class ContentsManagerBase : SingletonMono<ContentsManagerBase>
 
     protected virtual IEnumerator ModeTimer()
     {
-        float maxTime = playTime;
+        remainSec = playTime;
 
-        float startTime = Time.realtimeSinceStartup;
-
-        float elapsedTime = Time.realtimeSinceStartup - startTime;
-
-        while (elapsedTime <= maxTime)
+        while (remainSec >= 0)
         {
-            elapsedTime = Time.realtimeSinceStartup - startTime;
-
-            timerText.SetText($"남은시간 : {(int)(maxTime - elapsedTime)}");
-
+            timerText.SetText($"남은시간 : {(int)remainSec}");
             yield return null;
+            remainSec -= Time.deltaTime;
         }
 
         TimerEnd();

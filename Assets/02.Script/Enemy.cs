@@ -169,6 +169,8 @@ public class Enemy : PoolItem
 
         GetEventItem();
 
+        GetSulItem();
+
         GetStageRelicItem();
 
         enemyDeadCallBack?.Invoke(this);
@@ -189,6 +191,11 @@ public class Enemy : PoolItem
         if (ServerData.userInfoTable.CanSpawnEventItem() == false) return;
 
         ServerData.goodsTable.GetEventItem(GameManager.Instance.CurrentStageData.Marbleamount);
+    }
+
+    private void GetSulItem() 
+    {
+        ServerData.goodsTable.GetsulItem(GameManager.Instance.CurrentStageData.Marbleamount);
     }
 
     private void GetStageRelicItem()

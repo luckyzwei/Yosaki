@@ -57,6 +57,7 @@ public static class ServerData
     public static MonthlyPassServerTable2 monthlyPassServerTable2 { get; private set; } = new MonthlyPassServerTable2();
     public static RankTable_MiniGame rankTable_MiniGame { get; private set; } = new RankTable_MiniGame();
     public static SeolPassServerTable seolPassServerTable { get; private set; } = new SeolPassServerTable();
+    public static SulPassServerTable sulPassServerTable { get; private set; } = new SulPassServerTable();
 
     #region string
     public static string inDate_str = "inDate";
@@ -133,6 +134,7 @@ public static class ServerData
         rankTable_MiniGame.Initialize();
 
         seolPassServerTable.Initialize();
+        sulPassServerTable.Initialize();
     }
 
     public static void GetUserInfo()
@@ -221,6 +223,9 @@ public static class ServerData
             case Item_Type.Event_Item_0:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += rewardValue;
                 break;
+            case Item_Type.SulItem:
+                ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += rewardValue;
+                break;
             case Item_Type.costume1:
             case Item_Type.costume6:
             case Item_Type.costume7:
@@ -237,6 +242,7 @@ public static class ServerData
             case Item_Type.costume18:
             case Item_Type.costume19:
             case Item_Type.costume20:
+            case Item_Type.costume21:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -306,6 +312,7 @@ public static class ServerData
             case Item_Type.costume18:
             case Item_Type.costume19:
             case Item_Type.costume20:
+            case Item_Type.costume21:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -324,6 +331,10 @@ public static class ServerData
 
             case Item_Type.Event_Item_0:
                 passParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.SulItem:
+                passParam.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.StageRelic:
@@ -450,6 +461,11 @@ public static class ServerData
             case Item_Type.Event_Item_0:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += amount;
                 param.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.SulItem:
+                ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += amount;
+                param.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.PeachReal:
@@ -812,6 +828,9 @@ public static class ServerData
                     break;
                 case Item_Type.Event_Item_0:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += amount;
+                    break;
+                case Item_Type.SulItem:
+                    ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += amount;
                     break;
                 case Item_Type.StageRelic:
                     ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;

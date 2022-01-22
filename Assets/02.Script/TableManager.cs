@@ -572,5 +572,9 @@ public class TableManager : SingletonMono<TableManager>
     private SeolPass seolPass;
     public SeolPass SeolPass => seolPass;
 
+    [SerializeField]
+    private SulPass sulPass;
+    public SulPass SulPass => sulPass;
+
 }
 
