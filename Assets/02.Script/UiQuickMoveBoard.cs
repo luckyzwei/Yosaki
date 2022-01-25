@@ -126,12 +126,23 @@ public class UiQuickMoveBoard : MonoBehaviour
 
         for (int i = 0; i < stageCellList.Count; i++)
         {
+            stageCellList[i].DisposeTemp();
+        }
+
+
+        for (int i = 0; i < stageCellList.Count; i++)
+        {
             stageCellList[i].OnClickRewardButton_Script();
 
             if (AdManager.Instance.HasRemoveAdProduct())
             {
                 stageCellList[i].OnClickRewardButton_Ad_Script();
             }
+        }
+
+        for (int i = 0; i < stageCellList.Count; i++)
+        {
+            stageCellList[i].Subscribe();
         }
 
         List<TransactionValue> transactions = new List<TransactionValue>();

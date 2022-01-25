@@ -102,6 +102,8 @@ public class UiInventoryWeaponView : MonoBehaviour
 
 
         SubscribeWeapon();
+
+        SetParent();
     }
 
 
@@ -664,6 +666,26 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (magicBookData == null) return;
 
         UiYoungMulCraftBoard.Instance.Initialize(magicBookData.Id);
+    }
+
+    private void OnEnable()
+    {
+        SetParent();
+    }
+
+    private void SetParent()
+    {
+        if (weaponData != null)
+        {
+            //요물 야차만
+            if (weaponData.Id >= 20)
+            {
+                if (ServerData.weaponTable.TableDatas[weaponData.Stringid].hasItem.Value == 1)
+                {
+                    this.transform.SetAsFirstSibling();
+                }
+            }
+        }
     }
 
 }

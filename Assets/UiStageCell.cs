@@ -203,7 +203,7 @@ public class UiStageCell : MonoBehaviour
         compositDisposable.Dispose();
     }
 
-    private void Subscribe()
+    public void Subscribe()
     {
         compositDisposable.Clear();
 
@@ -230,6 +230,11 @@ public class UiStageCell : MonoBehaviour
             rewardCompleteObject_Ad.SetActive(ServerData.passServerTable.HasReward(PassServerTable.stagePassAdReward, stageMapData.Id));
 
         }).AddTo(compositDisposable);
+    }
+
+    public void DisposeTemp() 
+    {
+        compositDisposable.Clear();
     }
 
     public void OnClickButton()

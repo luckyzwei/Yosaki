@@ -36,4 +36,8 @@ public class LevelPassData
   int passgrade;
   public int Passgrade { get {return passgrade; } set { this.passgrade = value;} }
   
+  [SerializeField]
+  string shopid;
+  public string Shopid { get {return shopid; } set { this.shopid = value;} }
+  
 }
