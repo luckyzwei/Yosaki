@@ -13,6 +13,9 @@ public class WeaponEquipView : MonoBehaviour
     [SerializeField]
     private UIShiny shinyEffect;
 
+    [SerializeField]
+    private GameObject newEffect;
+
     void Start()
     {
         Subscribe();
@@ -28,10 +31,12 @@ public class WeaponEquipView : MonoBehaviour
     {
         weaponImage.sprite = CommonResourceContainer.GetWeaponSprite(idx);
 
-        if (shinyEffect != null) 
+        if (shinyEffect != null)
         {
             shinyEffect.enabled = idx == 21;
         }
+
+        newEffect.gameObject.SetActive(idx == 22);
         //var weaponGrade = TableManager.Instance.WeaponData[idx].Grade;
 
         //var emission = equipEffect.emission;

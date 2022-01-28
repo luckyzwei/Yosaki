@@ -8,7 +8,7 @@ using UniRx;
 
 public class BonusDefenseManager : ContentsManagerBase
 {
-    private ObscuredFloat spawnDelay1 = 0.3f;
+    private ObscuredFloat spawnDelay1 = 0.25f;
     //20초남았을때
     private ObscuredFloat spawnDelay2 = 0.15f;
 

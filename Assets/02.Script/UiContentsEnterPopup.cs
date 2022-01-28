@@ -122,7 +122,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
     }
     private void BonusDefenseEnterRoutine()
     {
-        int currentBlueStone = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
+        float currentBlueStone = ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         if (currentBlueStone < GameBalance.contentsEnterprice)
         {

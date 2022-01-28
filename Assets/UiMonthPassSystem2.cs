@@ -1,4 +1,5 @@
-﻿using CodeStage.AntiCheat.ObscuredTypes;
+﻿using BackEnd;
+using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,7 +7,6 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
-
 public class UiMonthPassSystem2 : MonoBehaviour
 {
     [SerializeField]
@@ -72,5 +72,132 @@ public class UiMonthPassSystem2 : MonoBehaviour
         }
 
         // cellParent.transform.localPosition = new Vector3(0f, cellParent.transform.localPosition.y, cellParent.transform.localPosition.z);
+    }
+
+    public void OnClickAllReceiveButton()
+    {
+        string freeKey = MonthlyPassServerTable2.MonthlypassFreeReward;
+        string adKey = MonthlyPassServerTable2.MonthlypassAdReward;
+
+        List<int> splitData_Free = GetSplitData(MonthlyPassServerTable2.MonthlypassFreeReward);
+        List<int> splitData_Ad = GetSplitData(MonthlyPassServerTable2.MonthlypassAdReward);
+
+        var tableData = TableManager.Instance.MonthlyPass2.dataArray;
+
+        int rewardedNum = 0;
+
+        string free = ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassFreeReward].Value;
+        string ad = ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value;
+
+        bool hasCostumeItem = false;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            bool canGetReward = CanGetReward(tableData[i].Unlockamount);
+
+            if (canGetReward == false) break;
+
+            //무료보상
+            if (HasReward(splitData_Free, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+
+                free += $",{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
+                rewardedNum++;
+            }
+
+            //유료보상
+            if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+
+                ad += $",{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+                rewardedNum++;
+            }
+        }
+
+        if (hasCostumeItem)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 아이템은 직접 수령해야 합니다.", null);
+            return;
+        }
+
+        if (rewardedNum > 0)
+        {
+            ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassFreeReward].Value = free;
+            ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value = ad;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+            goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+            goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            Param passParam = new Param();
+
+            passParam.Add(MonthlyPassServerTable2.MonthlypassFreeReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassFreeReward].Value);
+            passParam.Add(MonthlyPassServerTable2.MonthlypassAdReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value);
+
+            transactions.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
+                LogManager.Instance.SendLogType("MonthPass", "A", "A");
+            });
+        }
+        else
+        {
+            PopupManager.Instance.ShowAlarmMessage("수령할 보상이 없습니다.");
+        }
+    }
+
+
+    private bool CanGetReward(int require)
+    {
+        int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotal2).Value;
+        return killCountTotal >= require;
+    }
+    public bool HasReward(List<int> splitData, int id)
+    {
+        return splitData.Contains(id);
+    }
+
+    private bool HasPassItem()
+    {
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey].buyCount.Value > 0;
+
+        return hasIapProduct;
+    }
+
+    public List<int> GetSplitData(string key)
+    {
+        List<int> returnValues = new List<int>();
+
+        var splits = ServerData.monthlyPassServerTable2.TableDatas[key].Value.Split(',');
+
+        for (int i = 0; i < splits.Length; i++)
+        {
+            if (int.TryParse(splits[i], out var result))
+            {
+                returnValues.Add(result);
+            }
+        }
+
+        return returnValues;
     }
 }

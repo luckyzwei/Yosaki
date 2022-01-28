@@ -27,6 +27,7 @@ public static class CommonString
     public static string ItemGrade_4 = "전설";
     public static string ItemGrade_5 = "요물";
     public static string ItemGrade_6 = "야차";
+    public static string ItemGrade_7 = "필멸";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
 
@@ -45,7 +46,7 @@ public static class CommonString
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "고양이요괴전";
-    public static string RankPrefix_Real_Boss = "십이지신(술)";
+    public static string RankPrefix_Real_Boss = "십이지신(해)";
     public static string RankPrefix_Relic = "영혼의숲";
     public static string RankPrefix_MiniGame = "미니게임";
 
@@ -117,6 +118,7 @@ public static class CommonString
             case Item_Type.costume19: return TableManager.Instance.Costume.dataArray[19].Name;
             case Item_Type.costume20: return TableManager.Instance.Costume.dataArray[20].Name;
             case Item_Type.costume21: return TableManager.Instance.Costume.dataArray[21].Name;
+            case Item_Type.costume22: return TableManager.Instance.Costume.dataArray[22].Name;
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;
@@ -151,6 +153,7 @@ public static class CommonString
             case Item_Type.CockStone: return "태양석";
             case Item_Type.DogStone: return "천공석";
             case Item_Type.SulItem: return "설날 복주머니";
+            case Item_Type.PigStone: return "십이지석";
         }
         return "미등록";
     }
@@ -239,6 +242,9 @@ public static class CommonString
                 break;
             case StatusType.MarbleAddPer:
                 return "여우구슬 추가 획득(%)";
+                break;
+            case StatusType.SuperCritical2DamPer:
+                return "필멸 피해량(추가피해)(%)";
                 break;
         }
 

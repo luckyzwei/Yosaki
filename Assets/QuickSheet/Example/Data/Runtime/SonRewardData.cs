@@ -13,8 +13,8 @@ public class SonRewardData
   public int Id { get {return id; } set { this.id = value;} }
   
   [SerializeField]
-  float score;
-  public float Score { get {return score; } set { this.score = value;} }
+  double score;
+  public double Score { get {return score; } set { this.score = value;} }
   
   [SerializeField]
   string scoredescription;

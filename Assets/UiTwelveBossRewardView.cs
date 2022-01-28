@@ -160,32 +160,13 @@ public class UiTwelveBossRewardView : MonoBehaviour
             return false;
         }
 
-        rewardButton.interactable = false;
-
         Item_Type type = (Item_Type)rewardInfo.rewardType;
 
         float amount = rewardInfo.rewardAmount;
 
-        List<TransactionValue> transactions = new List<TransactionValue>();
-
-        Param bossParam = new Param();
-
         bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
-
-        var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
-
-        bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
-
-        transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
-
-        transactions.Add(ServerData.GetItemTypeTransactionValueForAttendance(type, (int)amount));
-
-        ServerData.SendTransaction(transactions, successCallBack: () =>
-        {
-            //PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
-            rewardButton.interactable = true;
-        });
-
+        ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += amount;
+        
         return true;
     }
 }

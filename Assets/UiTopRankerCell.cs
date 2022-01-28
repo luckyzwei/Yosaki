@@ -25,6 +25,9 @@ public class UiTopRankerCell : MonoBehaviour
     private GameObject yomulObject;
 
     [SerializeField]
+    private GameObject newWeaponEffect;
+
+    [SerializeField]
     private List<GameObject> norigaeEffects;
 
     [SerializeField]
@@ -43,6 +46,8 @@ public class UiTopRankerCell : MonoBehaviour
         weapon.gameObject.SetActive(weaponId != -1);
 
         yomulObject.SetActive(weaponId == 20);
+
+        newWeaponEffect.SetActive(weaponId == 22);
 
         if (weaponId != -1)
         {

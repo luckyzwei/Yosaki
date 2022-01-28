@@ -34,6 +34,7 @@ public enum Item_Type
     CockStone,
     DogStone,
     SulItem,
+    PigStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -142,6 +143,7 @@ public enum Item_Type
     costume19 = 1220,
     costume20 = 1221,
     costume21 = 1222,
+    costume22 = 1223,
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,

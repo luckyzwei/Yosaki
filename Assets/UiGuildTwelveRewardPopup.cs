@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using BackEnd;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -90,8 +91,21 @@ public class UiGuildTwelveRewardPopup : SingletonMono<UiGuildTwelveRewardPopup>
 
         if (rewardCount != 0)
         {
-            PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
-            SoundManager.Instance.PlaySound("Reward");
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param bossParam = new Param();
+            bossParam.Add("boss12", ServerData.bossServerTable.TableDatas["boss12"].ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
+                SoundManager.Instance.PlaySound("Reward");
+            });
         }
         else
         {
@@ -102,7 +116,7 @@ public class UiGuildTwelveRewardPopup : SingletonMono<UiGuildTwelveRewardPopup>
 #if UNITY_EDITOR
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             ServerData.userInfoTable.TableDatas[UserInfoTable.LastLogin].Value = 0;
         }

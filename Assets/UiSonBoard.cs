@@ -153,16 +153,44 @@ public class UiSonBoard : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-          //    LogManager.Instance.SendLogType("Son", "Level", ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value.ToString());
+              //    LogManager.Instance.SendLogType("Son", "Level", ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value.ToString());
           });
     }
 
     public void OnClickAllReceiveButton()
     {
+        bool hasreward = false;
         for (int i = 0; i < rewardCells.Count; i++)
         {
-            rewardCells[i].OnClickGetButtonByScript();
+            hasreward |= rewardCells[i].OnClickGetButtonByScript();
         }
+
+        if (hasreward)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param rewardParam = new Param();
+
+            rewardParam.Add(EtcServerTable.sonReward, ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value);
+
+            transactions.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, rewardParam));
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                LogManager.Instance.SendLogType("Son", "all", "");
+                PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
+                SoundManager.Instance.PlaySound("Reward");
+            });
+        }
+        else
+        {
+            PopupManager.Instance.ShowAlarmMessage("받을 수 있는 보상이 없습니다.");
+        }
+
     }
 
 

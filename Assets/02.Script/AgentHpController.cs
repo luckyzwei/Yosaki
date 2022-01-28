@@ -162,6 +162,9 @@ public class AgentHpController : MonoBehaviour
             value += value * PlayerStats.GetSuperCriticalDamPer();
         }
 
+        //필멸 데미지
+        value += value * PlayerStats.GetSuperCritical2DamPer();
+
         Vector3 spawnPos = Vector3.zero;
 
         if (damTextSpawnPos != null)

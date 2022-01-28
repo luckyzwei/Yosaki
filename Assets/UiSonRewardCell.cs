@@ -118,44 +118,28 @@ public class UiSonRewardCell : MonoBehaviour
         });
     }
 
-    public void OnClickGetButtonByScript()
+    public bool OnClickGetButtonByScript()
     {
         if (score < tableData.Score)
         {
-            return;
+            return false;
         }
 
         bool rewarded = ServerData.etcServerTable.SonRewarded(tableData.Id);
 
         if (rewarded)
         {
-            return;
+            return false;
         }
-
-        rewardButton.interactable = false;
 
         Item_Type type = (Item_Type)tableData.Rewardtype;
 
         float amount = tableData.Rewardvalue;
 
-        List<TransactionValue> transactions = new List<TransactionValue>();
-
-        Param rewardParam = new Param();
-
         ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value += $"{BossServerTable.rewardSplit}{tableData.Id}";
 
-        rewardParam.Add(EtcServerTable.sonReward, ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value);
+        ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += (int)amount;
 
-        transactions.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, rewardParam));
-
-        transactions.Add(ServerData.GetItemTypeTransactionValueForAttendance(type, (int)amount));
-
-        ServerData.SendTransaction(transactions, successCallBack: () =>
-        {
-            //LogManager.Instance.SendLogType("Son", "reward", tableData.Id.ToString());
-            PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
-            SoundManager.Instance.PlaySound("Reward");
-            rewardButton.interactable = true;
-        });
+        return true;
     }
 }

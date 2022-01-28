@@ -62,6 +62,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     [SerializeField]
     private GameObject yachaUpgradeButton;
 
+    [SerializeField]
+    private GameObject feelMulCraftButton;
+
     public void Initialize(WeaponData weaponData, MagicBookData magicBookData, Action<WeaponData, MagicBookData> onClickCallBack)
     {
         this.weaponData = weaponData;
@@ -80,6 +83,8 @@ public class UiInventoryWeaponView : MonoBehaviour
         yachaDescription.SetActive(weaponData != null && weaponData.Id == 20);
 
         yachaUpgradeButton.SetActive(weaponData != null && weaponData.Id == 21);
+
+        feelMulCraftButton.SetActive(weaponData != null && weaponData.Id == 21);
 
 
         //신수
@@ -462,7 +467,18 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
+            if (weaponData.Id < 20)
+            {
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
+
+            }
+            else
+            {
+                PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?", () =>
+                {
+                    ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
+                }, () => { });
+            }
             //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
         }
         else

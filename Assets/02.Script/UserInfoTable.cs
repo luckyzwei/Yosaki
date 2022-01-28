@@ -95,7 +95,7 @@ public class UserInfoTable
     public const string yoguiSogulLastClear = "yoguiSogulLastClear";
 
 
-    public const string killCountTotal = "killCountTotal3";
+    public const string killCountTotal = "killCountTotal5";
     public const string killCountTotal2 = "killCountTotal4";
 
     public const string relicKillCount = "relicKillCount";
@@ -482,7 +482,7 @@ public class UserInfoTable
             }
             else
             {
-               // LogManager.Instance.SendLog("출석", $"{isSuccess}/{statusCode}/{returnValue}");
+                // LogManager.Instance.SendLog("출석", $"{isSuccess}/{statusCode}/{returnValue}");
             }
         });
     }
@@ -782,6 +782,10 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
+#if UNITY_EDITOR
+        return false;
+#endif
+
         return currentServerTime.Month == 1;
     }
 }

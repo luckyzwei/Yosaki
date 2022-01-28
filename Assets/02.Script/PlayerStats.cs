@@ -31,7 +31,8 @@ public enum StatusType
     PenetrateDefense,
     SuperCritical1Prob,
     SuperCritical1DamPer,
-    MarbleAddPer
+    MarbleAddPer,
+    SuperCritical2DamPer,
 }
 
 
@@ -56,6 +57,8 @@ public static class PlayerStats
         float penetration = GetPenetrateDefense();
         float superCriticalProb = GetSuperCriticalProb();
 
+        float feelMulDam = GetSuperCritical2DamPer();
+
         float totalPower =
           ((baseAttack + baseAttack * baseAttackPer)
            * (Mathf.Max(criProb, 0.01f) * 100f * Mathf.Max(criDam, 0.01f))
@@ -72,6 +75,7 @@ public static class PlayerStats
 
         totalPower += totalPower * GetSuperCriticalDamPer() * superCriticalProb;
 
+        totalPower += totalPower * feelMulDam;
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -570,7 +574,7 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.CriticalDam);
         ret += GetStageRelicHasEffect(StatusType.CriticalDam);
         ret += GetSonAbilHasEffect(StatusType.CriticalDam);
-    
+
 
         return ret;
     }
@@ -828,6 +832,7 @@ public static class PlayerStats
         return ret;
     }
 
+
     public static float GetSuperCriticalProb()
     {
         float ret = 0f;
@@ -835,6 +840,15 @@ public static class PlayerStats
         ret += GetYomulUpgradeValue(StatusType.SuperCritical1Prob);
         ret += GetBuffValue(StatusType.SuperCritical1Prob);
         ret += GetSinsuEquipEffect(StatusType.SuperCritical1Prob);
+
+        return ret;
+    }
+
+    public static float GetSuperCritical2DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetWeaponHasPercentValue(StatusType.SuperCritical2DamPer);
 
         return ret;
     }
