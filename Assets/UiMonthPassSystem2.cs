@@ -179,7 +179,7 @@ public class UiMonthPassSystem2 : MonoBehaviour
 
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }
