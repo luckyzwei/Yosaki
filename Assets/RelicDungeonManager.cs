@@ -45,6 +45,8 @@ public class RelicDungeonManager : ContentsManagerBase
 
     protected new void Start()
     {
+        SetPrefData();
+
         base.Start();
 
         spawnRoutine = StartCoroutine(EnemySpawnRoutine());
@@ -52,6 +54,12 @@ public class RelicDungeonManager : ContentsManagerBase
         Subscribe();
 
         UpdateRemainHp();
+    }
+
+    private void SetPrefData()
+    {
+        enemyDeadCount.Value = Mathf.Max(0, (int)ServerData.userInfoTable.TableDatas[UserInfoTable.relicKillCount].Value - 300);
+        spawnCount = enemyDeadCount.Value;
     }
 
     private void UpdateRemainHp()

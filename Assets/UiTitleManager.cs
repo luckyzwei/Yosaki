@@ -218,6 +218,17 @@ public enum TitleMissionId
     Stage3950,//★
     Stage4000,//★
 
+    Level305000,//★
+    Level310000,//★
+    Level315000,//★
+    Level320000,//★
+    Level325000,//★
+    Level330000,//★
+    Level335000,//★
+    Level340000,//★
+    Level345000,//★
+    Level350000,//★
+
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -654,6 +665,49 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 300000)
             {
                 ClearTitleMission(TitleMissionId.Level300000);
+            }
+
+            //
+
+            if (e >= 305000)
+            {
+                ClearTitleMission(TitleMissionId.Level305000);
+            }
+            if (e >= 310000)
+            {
+                ClearTitleMission(TitleMissionId.Level310000);
+            }
+            if (e >= 315000)
+            {
+                ClearTitleMission(TitleMissionId.Level315000);
+            }
+            if (e >= 320000)
+            {
+                ClearTitleMission(TitleMissionId.Level320000);
+            }
+            if (e >= 325000)
+            {
+                ClearTitleMission(TitleMissionId.Level325000);
+            }
+            if (e >= 330000)
+            {
+                ClearTitleMission(TitleMissionId.Level330000);
+            }
+            if (e >= 335000)
+            {
+                ClearTitleMission(TitleMissionId.Level335000);
+            }
+            if (e >= 340000)
+            {
+                ClearTitleMission(TitleMissionId.Level340000);
+            }
+            if (e >= 345000)
+            {
+                ClearTitleMission(TitleMissionId.Level345000);
+            }
+            if (e >= 350000)
+            {
+                ClearTitleMission(TitleMissionId.Level350000);
             }
 
         }).AddTo(this);
