@@ -228,6 +228,7 @@ public enum TitleMissionId
     Level340000,//★
     Level345000,//★
     Level350000,//★
+    GetFeelMulGetEffect,//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -1133,6 +1134,15 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.GetYachaWeaopon);
             }
         }).AddTo(this);
+
+        ServerData.weaponTable.TableDatas["weapon22"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.GetFeelMulGetEffect);
+            }
+        }).AddTo(this);
+        
         //노리개
 
         ServerData.magicBookTable.TableDatas["magicBook12"].hasItem.AsObservable().Subscribe(e =>
