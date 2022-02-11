@@ -154,6 +154,8 @@ public static class CommonString
             case Item_Type.DogStone: return "천공석";
             case Item_Type.SulItem: return "설날 복주머니";
             case Item_Type.PigStone: return "십이지석";
+            case Item_Type.SmithFire: return "요괴 불꽃";
+            case Item_Type.FeelMulStone: return "필멸석";
         }
         return "미등록";
     }
@@ -245,6 +247,21 @@ public static class CommonString
                 break;
             case StatusType.SuperCritical2DamPer:
                 return "필멸 피해량(추가피해)(%)";
+                break;
+            case StatusType.growthStoneUp:
+                return "수련의돌 추가 획득";
+                break;
+            case StatusType.WeaponHasUp:
+                return "무기 보유효과 강화";
+                break;
+            case StatusType.NorigaeHasUp:
+                return "노리개 보유효과 강화";
+                break;
+            case StatusType.PetEquipHasUp:
+                return "환수장비 보유효과 강화";
+                break;
+            case StatusType.PetEquipProbUp:
+                return "환수장비 강화확률 증가";
                 break;
         }
 

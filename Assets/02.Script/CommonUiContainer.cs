@@ -84,6 +84,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public Sprite GuildReward;
     public Sprite SulItem;
+    public Sprite FeelMulStone;
+    public Sprite SmithFire;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -280,6 +282,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.SulItem:
                 return SulItem;
+                break;
+            case Item_Type.SmithFire:
+                return SmithFire;
+                break;
+            case Item_Type.FeelMulStone:
+                return FeelMulStone;
                 break;
         }
 

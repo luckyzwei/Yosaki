@@ -35,6 +35,8 @@ public enum Item_Type
     DogStone,
     SulItem,
     PigStone,
+    SmithFire,
+    FeelMulStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

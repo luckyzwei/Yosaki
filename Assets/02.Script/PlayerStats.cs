@@ -33,6 +33,8 @@ public enum StatusType
     SuperCritical1DamPer,
     MarbleAddPer,
     SuperCritical2DamPer,
+    //Smith
+    growthStoneUp, WeaponHasUp, NorigaeHasUp, PetEquipHasUp, PetEquipProbUp
 }
 
 
@@ -299,6 +301,8 @@ public static class PlayerStats
             }
         }
 
+        ret = ret * GetSmithValue(StatusType.WeaponHasUp);
+
         return ret;
     }
 
@@ -363,6 +367,8 @@ public static class PlayerStats
                 ret += currentLevel * effectData.Haseffectvalue3;
             }
         }
+
+        ret = ret * GetSmithValue(StatusType.NorigaeHasUp);
 
         return ret;
     }
@@ -849,6 +855,7 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetWeaponHasPercentValue(StatusType.SuperCritical2DamPer);
+        ret += GetFeelMulAddDam();
 
         return ret;
     }
@@ -986,6 +993,8 @@ public static class PlayerStats
             }
         }
 
+        ret = ret * GetSmithValue(StatusType.PetEquipHasUp);
+
         return ret;
     }
 
@@ -1048,5 +1057,29 @@ public static class PlayerStats
         }
 
         return ret;
+    }
+
+    public static float GetSmithValue(StatusType statusType)
+    {
+        int currentExp = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.smithExp].Value;
+
+        var tableData = TableManager.Instance.smithTable.dataArray;
+
+        float ret = 0f;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (currentExp < tableData[i].Require) continue;
+            if (statusType != tableData[i].STATUSTYPE) continue;
+
+            ret = tableData[i].Value;
+        }
+
+        return ret;
+    }
+
+    public static float GetFeelMulAddDam()
+    {
+        return ServerData.statusTable.GetTableData(StatusTable.FeelMul).Value * 0.1f;
     }
 }

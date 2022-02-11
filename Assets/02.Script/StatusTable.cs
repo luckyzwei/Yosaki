@@ -55,6 +55,7 @@ public class StatusTable
     public const string Skill1_AddValue = "Sk1_Add";
     public const string Skill2_AddValue = "Sk2_Add";
     public const string SkillAdPoint = "Sk_AdPoint";
+    public const string FeelMul = "FeelMul";
 
 
 
@@ -99,6 +100,7 @@ public class StatusTable
         {Skill1_AddValue,0},
         {Skill2_AddValue,0},
         {SkillAdPoint,0},
+        {FeelMul,0},
     };
 
     private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();

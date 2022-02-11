@@ -94,6 +94,7 @@ public class UserInfoTable
     public const string marblePackChange = "marblePackChange";
 
     public const string yoguiSogulLastClear = "yoguiSogulLastClear";
+    public const string smithClear = "smithClear";
 
 
     public const string killCountTotal = "killCountTotal5";
@@ -105,9 +106,11 @@ public class UserInfoTable
 
     public const string relicpensionAttendance = "relicpension";
     public const string peachAttendance = "peachpension";
+    public const string smithpensionAttendance = "smithpension";
 
     public const string relicReset = "relicReset";
     public const string marbleReset2 = "marbleReset3";
+    public const string marbleReset3 = "marbleReset4";
     public const string dailyPackReset = "dailyPackReset2";
     public const string sonScore = "sonLastClear5";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
@@ -119,6 +122,8 @@ public class UserInfoTable
     public const string dogAwake = "dogAwake";
     public const string basicPackRefund = "basicPackRefund";
     public const string skillInitialized = "ski";
+    public const string smithExp = "smith";
+    public const string getSmith = "getSmith";
 
     public double currentServerDate;
     public double attendanceUpdatedTime;
@@ -182,6 +187,7 @@ public class UserInfoTable
 
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
+        {smithClear,0f},
 
 
         {yomul0_buff,0f},
@@ -204,6 +210,7 @@ public class UserInfoTable
         {yomul7_buff,0f},
         {attendanceCount_100Day,1f},
         {peachAttendance,0f},
+        {smithpensionAttendance,0f},
         {buffAwake,0f},
         {petAwake,0f},
         {IgnoreDamDec,0f},
@@ -213,6 +220,9 @@ public class UserInfoTable
         {dogAwake,0},
         {basicPackRefund,0},
         {skillInitialized,0},
+        {smithExp,0},
+        {getSmith,0},
+        {marbleReset3,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -530,6 +540,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value = 0;
 
         //버프
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
@@ -580,6 +591,12 @@ public class UserInfoTable
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.peachAttendance).Value++;
             }
+
+
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.smithpensionAttendance].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.smithpensionAttendance).Value++;
+            }
         }
 
         attendanceUpdatedTime = ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value;
@@ -598,11 +615,13 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.relicpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.relicpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.peachAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.peachAttendance).Value);
+        userInfoParam.Add(UserInfoTable.smithpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.smithpensionAttendance).Value);
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
         userInfoParam.Add(UserInfoTable.freeSkill, ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value);
         userInfoParam.Add(UserInfoTable.SendGuildPoint, ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value);
+        userInfoParam.Add(UserInfoTable.getSmith, ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value);
 
         userInfoParam.Add(UserInfoTable.buff_gold1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);
         userInfoParam.Add(UserInfoTable.buff_gold2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);

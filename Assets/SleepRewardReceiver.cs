@@ -115,7 +115,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         float jade = killedEnemyPerMin / enemyKilldailyMissionRequire * enemyKilldailyMissionReward * GameBalance.sleepRewardRatio * elapsedMinutes * 1.8f;
 
-        float GrowthStone = killedEnemyPerMin * stageTableData.Magicstoneamount * GameBalance.sleepRewardRatio * elapsedMinutes;
+        float GrowthStone = killedEnemyPerMin * (stageTableData.Magicstoneamount + PlayerStats.GetSmithValue(StatusType.growthStoneUp)) * GameBalance.sleepRewardRatio * elapsedMinutes;
 
         float marble = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
 

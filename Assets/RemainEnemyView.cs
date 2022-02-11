@@ -71,6 +71,6 @@ public class RemainEnemyView : MonoBehaviour
     {
         if (MapInfo.Instance == null) return;
       //  animator.SetTrigger(animName);
-        remainEnemyText.SetText($"몹 {MapInfo.Instance.SpawnedEnemyList.Count.ToString()}");
+        remainEnemyText.SetText($"요괴 {MapInfo.Instance.SpawnedEnemyList.Count.ToString()}");
     }
 }

@@ -106,14 +106,14 @@ public class UiPetEquipmentView : MonoBehaviour
             float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * level + petEquipmentData.Leveladdvalue1 * petEquipLevel;
             float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
 
-            abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1}(<color=red>MAX:{maxAbil1}</color>)\n";
+            abilDesc += $"{CommonString.GetStatusName(type1)} {Utils.ConvertBigNum(abilValue1)}(<color=red>MAX:{Utils.ConvertBigNum(maxAbil1)}</color>)\n";
         }
         else
         {
             float abilValue1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * level + petEquipmentData.Leveladdvalue1 * petEquipLevel;
             float maxAbil1 = petEquipmentData.Abilvalue1 + petEquipmentData.Abiladdvalue1 * petEquipmentData.Maxlevel;
 
-            abilDesc += $"{CommonString.GetStatusName(type1)} {abilValue1 * 100f}(<color=red>MAX:{maxAbil1 * 100f}</color>)\n";
+            abilDesc += $"{CommonString.GetStatusName(type1)} {Utils.ConvertBigNum(abilValue1 * 100f)}(<color=red>MAX:{Utils.ConvertBigNum(maxAbil1 * 100f)}</color>)\n";
         }
 
         StatusType type2 = (StatusType)petEquipmentData.Abiltype2;
@@ -122,14 +122,14 @@ public class UiPetEquipmentView : MonoBehaviour
             float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * level + petEquipmentData.Leveladdvalue2 * petEquipLevel;
             float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
 
-            abilDesc += $"{CommonString.GetStatusName(type2)} {abilValue2 * 100f}%(<color=red>MAX:{maxAbil2 * 100f}</color>)";
+            abilDesc += $"{CommonString.GetStatusName(type2)} {Utils.ConvertBigNum(abilValue2 * 100f)}%(<color=red>MAX:{Utils.ConvertBigNum(maxAbil2 * 100f)}</color>)";
         }
         else
         {
             float abilValue2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * level + petEquipmentData.Leveladdvalue2 * petEquipLevel;
             float maxAbil2 = petEquipmentData.Abilvalue2 + petEquipmentData.Abiladdvalue2 * petEquipmentData.Maxlevel;
 
-            abilDesc += $"{CommonString.GetStatusName(type2)} {abilValue2}(<color=red>MAX:{maxAbil2}</color>)";
+            abilDesc += $"{CommonString.GetStatusName(type2)} {Utils.ConvertBigNum(abilValue2)}(<color=red>MAX:{Utils.ConvertBigNum(maxAbil2)}</color>)";
         }
 
         abilDescription.SetText(abilDesc);
@@ -147,7 +147,7 @@ public class UiPetEquipmentView : MonoBehaviour
 
             if (prefPetEquipData.level.Value < 1000)
             {
-                PopupManager.Instance.ShowAlarmMessage($"(3단계 환수)\n{prefPetData.Name} LV:{1000}이상일때 제작 가능");
+                PopupManager.Instance.ShowAlarmMessage($"청룡 보유중이거나(3단계 환수)\n{prefPetData.Name} LV:{1000}이상일때 제작 가능");
                 return;
             }
         }
@@ -206,7 +206,7 @@ public class UiPetEquipmentView : MonoBehaviour
         transactions.Add(TransactionValue.SetUpdate(PetEquipmentServerTable.tableName, PetEquipmentServerTable.Indate, petEquipParam));
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-      //  LogManager.Instance.SendLogType("환수장비", petEquipmentData.Stringid, "g");
+        //  LogManager.Instance.SendLogType("환수장비", petEquipmentData.Stringid, "g");
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {

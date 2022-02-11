@@ -226,6 +226,12 @@ public static class ServerData
             case Item_Type.SulItem:
                 ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += rewardValue;
                 break;
+            case Item_Type.FeelMulStone:
+                ServerData.goodsTable.GetTableData(GoodsTable.FeelMulStone).Value += rewardValue;
+                break;
+            case Item_Type.SmithFire:
+                ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += rewardValue;
+                break;
             case Item_Type.costume1:
             case Item_Type.costume6:
             case Item_Type.costume7:
@@ -351,6 +357,14 @@ public static class ServerData
 
             case Item_Type.GuildReward:
                 passParam.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.FeelMulStone:
+                passParam.Add(GoodsTable.FeelMulStone, ServerData.goodsTable.GetTableData(GoodsTable.FeelMulStone).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.SmithFire:
+                passParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
 
@@ -485,6 +499,16 @@ public static class ServerData
             case Item_Type.GuildReward:
                 ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += amount;
                 param.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.FeelMulStone:
+                ServerData.goodsTable.GetTableData(GoodsTable.FeelMulStone).Value += amount;
+                param.Add(GoodsTable.FeelMulStone, ServerData.goodsTable.GetTableData(GoodsTable.FeelMulStone).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.SmithFire:
+                ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += amount;
+                param.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.costume1:
@@ -844,6 +868,14 @@ public static class ServerData
                     break;
                 case Item_Type.PeachReal:
                     ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
+                    break;
+
+                case Item_Type.FeelMulStone:
+                    ServerData.goodsTable.GetTableData(GoodsTable.FeelMulStone).Value += amount;
+                    break;
+
+                case Item_Type.SmithFire:
+                    ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += amount;
                     break;
 
 

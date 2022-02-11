@@ -576,5 +576,9 @@ public class TableManager : SingletonMono<TableManager>
     private SulPass sulPass;
     public SulPass SulPass => sulPass;
 
+    public SmithTable smithTable;
+
+    public SmithEnemy smithEnemy;
+
 }
 

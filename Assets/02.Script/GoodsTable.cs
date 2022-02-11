@@ -51,6 +51,8 @@ public class GoodsTable
     public static string MiniGameReward = "MiniGameReward";
     public static string GuildReward = "GuildReward";
     public static string SulItem = "SulItem";
+    public static string SmithFire = "SmithFire";
+    public static string FeelMulStone = "FeelMulStone";
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -88,6 +90,8 @@ public class GoodsTable
         {DogStone,0f},
         {SulItem,0f},
         {PigStone,0f},
+        {SmithFire,0f},
+        {FeelMulStone,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -129,6 +133,8 @@ public class GoodsTable
 
     public void GetMagicStone(float amount)
     {
+        amount += PlayerStats.GetSmithValue(StatusType.growthStoneUp);
+
         float magicStonePlusValue = PlayerStats.GetMagicStonePlusValue();
 
         int amount_int = (int)(amount + amount * magicStonePlusValue);

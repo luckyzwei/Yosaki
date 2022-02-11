@@ -46,6 +46,7 @@ public static class GameBalance
     public readonly static ObscuredInt contentsEnterprice = 0;
     public readonly static ObscuredInt dailyTickBuyCountMax = 5;
     public readonly static ObscuredInt bonusDungeonEnterCount = 10;
+    public readonly static ObscuredInt smithEnterCount = 5;
 
     public readonly static ObscuredInt dokebiEnterCount = 10;
 

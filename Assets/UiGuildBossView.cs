@@ -3,6 +3,7 @@ using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiGuildBossView : SingletonMono<UiGuildBossView>
 {
@@ -10,6 +11,9 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
     private UiTwelveBossContentsView bossContentsView;
 
     public ObscuredInt rewardGrade = 0;
+
+    [SerializeField]
+    private Button recordButton;
 
     void Start()
     {
@@ -29,9 +33,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
     {
         bool canRecord = ServerData.userInfoTable.CanRecordGuildScore();
 
-#if UNITY_EDITOR
-        canRecord = true;
-#endif
+
 
         if (canRecord == false)
         {
@@ -41,9 +43,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
         bool alreadyRecord = ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value == 1;
 
-#if UNITY_EDITOR
-        alreadyRecord = false;
-#endif
+
 
         if (alreadyRecord)
         {
@@ -59,6 +59,8 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{rewardGrade}점 점수를 추가합니까?\n<color=red>점수는 하루에 한번만 추가할 수 있습니다.</color>\n문파별로 최대 인원만큼만 추가 가능합니다.\n(매일 오전 5시 초기화)",
             () =>
             {
+                recordButton.interactable = false;
+
                 var guildInfoBro = Backend.Social.Guild.GetMyGuildGoodsV3();
 
                 if (guildInfoBro.IsSuccess())
@@ -69,19 +71,18 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                     bool maxContributed = addAmount >= GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value);
 
-#if UNITY_EDITOR
-                    maxContributed = false;
-#endif
-
                     if (maxContributed)
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{GuildManager.Instance.myGuildName} 문파는 \n오늘 더이상 점수를 추가할 수 없습니다!\n<color=red>최대 {GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value)}번 추가 가능</color>\n<color=red>(매일 오전 5시 초기화)</color>", null);
+                        recordButton.interactable = true;
                         return;
                     }
                 }
                 else
                 {
+                    recordButton.interactable = true;
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "오류가 발생했습니다. 잠시후 다시 시도해 주세요.", null);
+                    return;
                 }
 
                 ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value = 1;
@@ -105,6 +106,8 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                         if (bro.IsSuccess())
                         {
+                            recordButton.interactable = true;
+
                             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "점수 추가 완료!", null);
 
                             var time = ServerData.userInfoTable.currentServerTime;
@@ -128,6 +131,8 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                         }
                         else
                         {
+                            recordButton.interactable = true;
+
                             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n점수 갱신 시간이 아닙니다.\n({bro.GetStatusCode()})", null);
 
                             ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value = 0;
@@ -148,6 +153,8 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                     }
                     else
                     {
+                        recordButton.interactable = true;
+
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n점수 갱신 시간이 아닙니다.\n({bro2.GetStatusCode()})", null);
 
                         ServerData.userInfoTable.TableDatas[UserInfoTable.SendGuildPoint].Value = 0;
@@ -165,8 +172,6 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                         });
                     }
-
-
 
                 });
             }, null);

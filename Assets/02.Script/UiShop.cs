@@ -231,6 +231,21 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);
                 }
                 break;
+
+            case Item_Type.FeelMulStone:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.FeelMulStone).Value += amount;
+                    param.Add(GoodsTable.FeelMulStone, ServerData.goodsTable.GetTableData(GoodsTable.FeelMulStone).Value);
+                }
+                break;
+
+            case Item_Type.SmithFire:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += amount;
+                    param.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
+                }
+                break;
+
             case Item_Type.StageRelic:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;

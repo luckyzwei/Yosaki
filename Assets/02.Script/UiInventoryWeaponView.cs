@@ -65,6 +65,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     [SerializeField]
     private GameObject feelMulCraftButton;
 
+    [SerializeField]
+    private GameObject feelMulUpgradeButton;
+
     public void Initialize(WeaponData weaponData, MagicBookData magicBookData, Action<WeaponData, MagicBookData> onClickCallBack)
     {
         this.weaponData = weaponData;
@@ -85,6 +88,8 @@ public class UiInventoryWeaponView : MonoBehaviour
         yachaUpgradeButton.SetActive(weaponData != null && weaponData.Id == 21);
 
         feelMulCraftButton.SetActive(weaponData != null && weaponData.Id == 21);
+
+        feelMulUpgradeButton.SetActive(weaponData != null && weaponData.Id == 22);
 
 
         //신수
@@ -318,6 +323,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         string stringid;
         int weaponLevel = 0;
 
+
         if (weaponData != null)
         {
             effectData = TableManager.Instance.WeaponEffectDatas[this.weaponData.Weaponeffectid];
@@ -406,12 +412,14 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value = hasValue1 * 100f;
                 float value_max = hasValue1_max * 100f;
 
+
                 description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
             else
             {
                 float value = hasValue1;
                 float value_max = hasValue1_max;
+
 
                 description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
@@ -426,12 +434,14 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value = hasValue2 * 100f;
                 float value_max = hasValue2_max * 100f;
 
+
                 description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
             else
             {
                 float value = hasValue2;
                 float value_max = hasValue2_max;
+
 
                 description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
@@ -447,12 +457,14 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value = hasValue3 * 100f;
                 float value_max = hasValue3_max * 100f;
 
+
                 description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}";
             }
             else
             {
                 float value = hasValue3;
                 float value_max = hasValue3_max;
+
 
                 description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}";
             }

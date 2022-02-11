@@ -109,10 +109,25 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
     {
         ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).AsObservable().Subscribe(currentAwake =>
         {
+
             awakeDescription.SetText($"현재강화도 + {currentAwake}강");
 
-            awakeProb.SetText($"강화 성공 확률 : {GetAwakeProb()}%");
+            UpdateAwakeProb();
+
         }).AddTo(this);
+
+        ServerData.userInfoTable.GetTableData(UserInfoTable.smithExp).AsObservable().Subscribe(e=> 
+        {
+
+            UpdateAwakeProb();
+
+        }).AddTo(this);
+
+    }
+
+    private void UpdateAwakeProb() 
+    {
+        awakeProb.SetText($"강화 성공 확률 : {GetAwakeProb()}%");
     }
 
     private float GetYoguiMarbleUpgradePrice()
@@ -129,7 +144,7 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
     {
         int prob = 130 - ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
 
-        return Mathf.Clamp(prob, 50, 100);
+        return Mathf.Clamp(prob, 50, 100) + PlayerStats.GetSmithValue(StatusType.PetEquipProbUp);
     }
 
     private bool TryAwake()

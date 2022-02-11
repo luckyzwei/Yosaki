@@ -124,6 +124,10 @@ public class UiPensionObjectView : MonoBehaviour
         {
             itemType = Item_Type.PeachReal;
         }
+        else if (pensionKey == "smithpension")
+        {
+            itemType = Item_Type.SmithFire;
+        }
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
