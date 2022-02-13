@@ -42,11 +42,7 @@ public class UiMarblePackRefund : MonoBehaviour
         int marblePack2Count = ServerData.iAPServerTableTotal.TableDatas["marblepackage2"].buyCount.Value;
         int marblePack3Count = ServerData.iAPServerTableTotal.TableDatas["marblepackage3"].buyCount.Value;
 
-#if UNITY_ANDROID
         int removeAdCount = ServerData.iAPServerTableTotal.TableDatas["removead"].buyCount.Value;
-#else 
-        int removeAdCount = ServerData.iAPServerTableTotal.TableDatas["removeadios"].buyCount.Value;
-#endif
 
         if (removeAdCount >= 1)
         {
