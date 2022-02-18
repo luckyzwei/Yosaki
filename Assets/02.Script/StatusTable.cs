@@ -196,12 +196,12 @@ public class StatusTable
                     break;
                 case ExpGain_memory:
                     {
-                        return level * 0.01f;
+                        return level * 6f;
                     }
                     break;
                 case GoldGain_memory:
                     {
-                        return level * 0.01f;
+                        return level * 6f;
                     }
                     break;
                 case HpPer_StatPoint:

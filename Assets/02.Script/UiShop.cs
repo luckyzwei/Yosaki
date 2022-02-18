@@ -239,6 +239,36 @@ public class UiShop : SingletonMono<UiShop>
                 }
                 break;
 
+            case Item_Type.Asura0:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Asura0).Value += amount;
+                    param.Add(GoodsTable.Asura0, ServerData.goodsTable.GetTableData(GoodsTable.Asura0).Value);
+                }
+                break;
+
+            case Item_Type.Asura1:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Asura1).Value += amount;
+                    param.Add(GoodsTable.Asura1, ServerData.goodsTable.GetTableData(GoodsTable.Asura1).Value);
+                }
+                break;
+
+            case Item_Type.Asura2:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Asura2).Value += amount;
+                    param.Add(GoodsTable.Asura2, ServerData.goodsTable.GetTableData(GoodsTable.Asura2).Value);
+                }
+                break;
+
+            case Item_Type.Asura3:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Asura3).Value += amount;
+                    param.Add(GoodsTable.Asura3, ServerData.goodsTable.GetTableData(GoodsTable.Asura3).Value);
+                }
+                break;
+
+
+
             case Item_Type.SmithFire:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += amount;

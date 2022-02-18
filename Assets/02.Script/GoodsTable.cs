@@ -54,6 +54,12 @@ public class GoodsTable
     public static string SmithFire = "SmithFire";
     public static string FeelMulStone = "FeelMulStone";
 
+    public static string Asura0 = "a0";
+    public static string Asura1 = "a1";
+    public static string Asura2 = "a2";
+    public static string Asura3 = "a3";
+
+
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
         {Gold,GameBalance.StartingMoney},
@@ -92,6 +98,11 @@ public class GoodsTable
         {PigStone,0f},
         {SmithFire,0f},
         {FeelMulStone,0f},
+
+        {Asura0,0f},
+        {Asura1,0f},
+        {Asura2,0f},
+        {Asura3,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

@@ -19,7 +19,7 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
     {
         if (SleepRewardReceiver.Instance.sleepRewardInfo == null) return;
 
-        SleepRewardReceiver.Instance.GetSleepReward(ShowReward);
+        StartCoroutine(SleepRewardReceiver.Instance.GetSleepReward(ShowReward));
     }
 
     private void ShowReward()

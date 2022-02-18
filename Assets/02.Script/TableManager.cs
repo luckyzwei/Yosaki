@@ -160,6 +160,7 @@ public class TableManager : SingletonMono<TableManager>
 
     [SerializeField]
     private StatusSetting statusTable;
+    public StatusSetting StatusTable => statusTable;
 
     private Dictionary<string, StatusSettingData> statusDatas;
     public Dictionary<string, StatusSettingData> StatusDatas

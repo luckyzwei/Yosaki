@@ -232,6 +232,20 @@ public static class ServerData
             case Item_Type.SmithFire:
                 ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += rewardValue;
                 break;
+
+            case Item_Type.Asura0:
+                ServerData.goodsTable.GetTableData(GoodsTable.Asura0).Value += rewardValue;
+                break;
+            case Item_Type.Asura1:
+                ServerData.goodsTable.GetTableData(GoodsTable.Asura1).Value += rewardValue;
+                break;
+            case Item_Type.Asura2:
+                ServerData.goodsTable.GetTableData(GoodsTable.Asura2).Value += rewardValue;
+                break;
+            case Item_Type.Asura3:
+                ServerData.goodsTable.GetTableData(GoodsTable.Asura3).Value += rewardValue;
+                break;
+
             case Item_Type.costume1:
             case Item_Type.costume6:
             case Item_Type.costume7:
@@ -365,6 +379,22 @@ public static class ServerData
 
             case Item_Type.SmithFire:
                 passParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Asura0:
+                passParam.Add(GoodsTable.Asura0, ServerData.goodsTable.GetTableData(GoodsTable.Asura0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Asura1:
+                passParam.Add(GoodsTable.Asura1, ServerData.goodsTable.GetTableData(GoodsTable.Asura1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Asura2:
+                passParam.Add(GoodsTable.Asura2, ServerData.goodsTable.GetTableData(GoodsTable.Asura2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Asura3:
+                passParam.Add(GoodsTable.Asura3, ServerData.goodsTable.GetTableData(GoodsTable.Asura3).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
 
@@ -509,6 +539,26 @@ public static class ServerData
             case Item_Type.SmithFire:
                 ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += amount;
                 param.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.Asura0:
+                ServerData.goodsTable.GetTableData(GoodsTable.Asura0).Value += amount;
+                param.Add(GoodsTable.Asura0, ServerData.goodsTable.GetTableData(GoodsTable.Asura0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.Asura1:
+                ServerData.goodsTable.GetTableData(GoodsTable.Asura1).Value += amount;
+                param.Add(GoodsTable.Asura1, ServerData.goodsTable.GetTableData(GoodsTable.Asura1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.Asura2:
+                ServerData.goodsTable.GetTableData(GoodsTable.Asura2).Value += amount;
+                param.Add(GoodsTable.Asura2, ServerData.goodsTable.GetTableData(GoodsTable.Asura2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.Asura3:
+                ServerData.goodsTable.GetTableData(GoodsTable.Asura3).Value += amount;
+                param.Add(GoodsTable.Asura3, ServerData.goodsTable.GetTableData(GoodsTable.Asura3).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.costume1:

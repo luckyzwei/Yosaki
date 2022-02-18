@@ -156,6 +156,12 @@ public static class CommonString
             case Item_Type.PigStone: return "십이지석";
             case Item_Type.SmithFire: return "요괴 불꽃";
             case Item_Type.FeelMulStone: return "필멸석";
+
+
+            case Item_Type.Asura0: return "첫번째팔";
+            case Item_Type.Asura1: return "두번째팔";
+            case Item_Type.Asura2: return "세번째팔";
+            case Item_Type.Asura3: return "네번째팔";
         }
         return "미등록";
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using CodeStage.AntiCheat.ObscuredTypes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -217,6 +218,8 @@ public static class PlayerStats
         ret += GetMarbleValue(StatusType.AttackAddPer);
         ret += GetStageRelicHasEffect(StatusType.AttackAddPer);
         ret += GetSonAbilHasEffect(StatusType.AttackAddPer);
+        ret += GetAsuraAbilValue(StatusType.AttackAddPer);
+        ret += GetGuildPetEffect(StatusType.AttackAddPer);
 
 
         return ret;
@@ -301,7 +304,15 @@ public static class PlayerStats
             }
         }
 
-        ret = ret * GetSmithValue(StatusType.WeaponHasUp);
+        if (ActiveSmithValue(type))
+        {
+            ret = ret * GetSmithValue(StatusType.WeaponHasUp);
+        }
+        else
+        {
+
+        }
+
 
         return ret;
     }
@@ -368,7 +379,15 @@ public static class PlayerStats
             }
         }
 
-        ret = ret * GetSmithValue(StatusType.NorigaeHasUp);
+
+        if (ActiveSmithValue(type))
+        {
+            ret = ret * GetSmithValue(StatusType.NorigaeHasUp);
+        }
+        else
+        {
+
+        }
 
         return ret;
     }
@@ -601,6 +620,7 @@ public static class PlayerStats
 
         ret += GetBuffValue(StatusType.GoldGainPer);
         ret += GetTitleAbilValue(StatusType.GoldGainPer);
+        ret += GetGuildPetEffect(StatusType.GoldGainPer);
 
         return ret;
     }
@@ -615,6 +635,7 @@ public static class PlayerStats
 
         ret += GetTitleAbilValue(StatusType.GoldGainPer);
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
+        ret += GetGuildPetEffect(StatusType.GoldGainPer);
         return ret;
     }
     public static float GetExpPlusValue()
@@ -628,6 +649,7 @@ public static class PlayerStats
 
         ret += GetTitleAbilValue(StatusType.ExpGainPer);
         ret += GetHotTimeBuffEffect(StatusType.ExpGainPer);
+        ret += GetGuildPetEffect(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -641,6 +663,7 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
 
         ret += GetTitleAbilValue(StatusType.ExpGainPer);
+        ret += GetGuildPetEffect(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -803,6 +826,8 @@ public static class PlayerStats
 
         ret += GetYachaIgnoreDefenseValue();
 
+        ret += GetAsuraAbilValue(StatusType.IgnoreDefense);
+
         return ret;
     }
 
@@ -835,6 +860,8 @@ public static class PlayerStats
 
         ret += GetYachaChunSlashValue();
 
+        ret += GetAsuraAbilValue(StatusType.SuperCritical1DamPer);
+
         return ret;
     }
 
@@ -855,7 +882,10 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetWeaponHasPercentValue(StatusType.SuperCritical2DamPer);
+
         ret += GetFeelMulAddDam();
+
+        ret += GetAsuraAbilValue(StatusType.SuperCritical2DamPer);
 
         return ret;
     }
@@ -993,9 +1023,21 @@ public static class PlayerStats
             }
         }
 
-        ret = ret * GetSmithValue(StatusType.PetEquipHasUp);
+        if (ActiveSmithValue(statusType))
+        {
+            ret = ret * GetSmithValue(StatusType.PetEquipHasUp);
+        }
+        else
+        {
+
+        }
 
         return ret;
+    }
+
+    private static bool ActiveSmithValue(StatusType statustype)
+    {
+        return statustype != StatusType.Damdecrease && statustype != StatusType.SuperCritical1Prob;
     }
 
     public static float GetRelicHasEffect(StatusType statusType)
@@ -1081,5 +1123,90 @@ public static class PlayerStats
     public static float GetFeelMulAddDam()
     {
         return ServerData.statusTable.GetTableData(StatusTable.FeelMul).Value * 0.1f;
+    }
+
+    public static string asuraKey0 = "a0";
+    public static string asuraKey1 = "a1";
+    public static string asuraKey2 = "a2";
+    public static string asuraKey3 = "a3";
+
+    public static ObscuredFloat asura0Value = 15000f;
+    public static ObscuredFloat asura1Value = 25000f;
+    public static ObscuredFloat asura2Value = 300f;
+    public static ObscuredFloat asura3Value = 0.5f;
+
+    public static float GetAsuraAbilValue(StatusType type)
+    {
+        switch (type)
+        {
+            case StatusType.AttackAddPer:
+                {
+                    if (ServerData.goodsTable.GetTableData(asuraKey0).Value == 0)
+                    {
+                        return 0f;
+                    }
+
+                    return asura0Value;
+                }
+                break;
+            case StatusType.IgnoreDefense:
+                {
+                    if (ServerData.goodsTable.GetTableData(asuraKey1).Value == 0)
+                    {
+                        return 0f;
+                    }
+
+                    return asura1Value;
+                }
+                break;
+            case StatusType.SuperCritical1DamPer:
+                {
+                    if (ServerData.goodsTable.GetTableData(asuraKey2).Value == 0)
+                    {
+                        return 0f;
+                    }
+
+                    return asura2Value;
+                }
+                break;
+            case StatusType.SuperCritical2DamPer:
+                {
+                    if (ServerData.goodsTable.GetTableData(asuraKey3).Value == 0)
+                    {
+                        return 0f;
+                    }
+
+                    return asura3Value;
+                }
+                break;
+        }
+
+        return 0f;
+    }
+
+    public static float GetGuildPetEffect(StatusType type)
+    {
+        int petLevel = GuildManager.Instance.guildPetExp.Value;
+
+        switch (type)
+        {
+            case StatusType.AttackAddPer:
+                {
+                    return petLevel *0.1f;
+                }
+                break;
+            case StatusType.ExpGainPer:
+                {
+                    return petLevel * 0.01f;
+                }
+                break;
+            case StatusType.GoldGainPer:
+                {
+                    return petLevel * 0.01f;
+                }
+                break;
+        }
+
+        return 0f;
     }
 }

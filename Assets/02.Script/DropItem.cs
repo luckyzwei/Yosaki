@@ -38,6 +38,11 @@ public enum Item_Type
     SmithFire,
     FeelMulStone,
 
+    Asura0,
+    Asura1,
+    Asura2,
+    Asura3,
+
     RankFrame1 = 100,
     RankFrame2 = 101,
     RankFrame3 = 102,

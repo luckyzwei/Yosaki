@@ -77,7 +77,7 @@ public class UiStatusBoard : MonoBehaviour
 
     public void OnClickStatResetButton()
     {
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "스텟 능력치를 초기화 합니까?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "특수무공 능력치를 초기화 합니까?", () =>
         {
             ServerData.statusTable.GetTableData(StatusTable.IntLevelAddPer_StatPoint).Value = 1;
             ServerData.statusTable.GetTableData(StatusTable.CriticalLevel_StatPoint).Value = 1;
@@ -96,22 +96,27 @@ public class UiStatusBoard : MonoBehaviour
     {
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "비급 능력치를 초기화 합니까?", () =>
         {
-            string log = $"보유 {ServerData.statusTable.GetTableData(StatusTable.Memory).Value}";
+            int pref = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
 
-            var e = TableManager.Instance.StatusDatas.GetEnumerator();
+            string log = $"보유 {pref}";
+
+            var tableData = TableManager.Instance.StatusTable.dataArray;
 
             int usedPoint = 0;
 
-            while (e.MoveNext())
+            for (int i = 0; i < tableData.Length; i++)
             {
-                if (e.Current.Value.STATUSWHERE != StatusWhere.memory) continue;
-                usedPoint += (ServerData.statusTable.GetTableData(e.Current.Value.Key).Value);
-                ServerData.statusTable.GetTableData(e.Current.Value.Key).Value = 0;
+                if (tableData[i].STATUSWHERE != StatusWhere.memory) continue;
+
+                usedPoint += (ServerData.statusTable.GetTableData(tableData[i].Key).Value);
+
+                ServerData.statusTable.GetTableData(tableData[i].Key).Value = 0;
             }
 
             log += $"획득수량 {usedPoint}";
 
-            ServerData.statusTable.GetTableData(StatusTable.Memory).Value += usedPoint;
+            ServerData.statusTable.GetTableData(StatusTable.Memory).Value = pref + usedPoint;
+
             log += $"최종 {ServerData.statusTable.GetTableData(StatusTable.Memory).Value}";
 
             ServerData.statusTable.SyncAllData();

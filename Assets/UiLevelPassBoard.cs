@@ -109,7 +109,7 @@ public class UiLevelPassBoard : MonoBehaviour
 
     private bool HasLevelPassProduct(string passItem)
     {
-        return ServerData.iapServerTable.TableDatas[passItem].buyCount.Value == 1;
+        return ServerData.iapServerTable.TableDatas[passItem].buyCount.Value >= 1;
     }
 
 #if UNITY_EDITOR

@@ -145,9 +145,11 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         UiSleepRewardView.Instance.CheckReward();
     }
 
-    public void GetSleepReward(Action successCallBack)
+    public IEnumerator GetSleepReward(Action successCallBack)
     {
-        if (sleepRewardInfo == null) return;
+        if (sleepRewardInfo == null) yield break;
+
+        Debug.LogError($"before {ServerData.statusTable.GetTableData(StatusTable.Level).Value}");
 
         UiSleepRewardMask.Instance.ShowMaskObject(true);
 
@@ -202,8 +204,11 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             userInfoParam.Add(UserInfoTable.killCountTotal2, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal2].Value);
         }
 
+        yield return new WaitForSeconds(0.5f);
+
         List<TransactionValue> transantions = new List<TransactionValue>();
 
+        Debug.LogError($"after {ServerData.statusTable.GetTableData(StatusTable.Level).Value}");
 
         //경험치
         Param statusParam = new Param();

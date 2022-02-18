@@ -18,8 +18,8 @@ public class UiBossContentsBoard : MonoBehaviour
     private void Initialize()
     {
         var tableDatas = TableManager.Instance.TwelveBossTable.dataArray;
-                                       //길드보스 -1
-        for (int i = 0; i < tableDatas.Length - 1; i++)
+        //길드보스 -1
+        for (int i = 0; i < 12; i++)
         {
             var cell = Instantiate<UiTwelveBossContentsView>(uiBossContentsViewPrefab, cellParent);
 

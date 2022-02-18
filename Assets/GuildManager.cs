@@ -17,9 +17,14 @@ public class GuildManager : SingletonMono<GuildManager>
     public ReactiveProperty<LitJson.JsonData> guildInfoData = new ReactiveProperty<LitJson.JsonData>();
 
     public ReactiveProperty<int> guildLevelExp = new ReactiveProperty<int>(0);
+    public ReactiveProperty<int> guildPetExp = new ReactiveProperty<int>(0);
 
     public ReactiveProperty<int> guildIconIdx = new ReactiveProperty<int>();
 
+    private void Start()
+    {
+        StartCoroutine(LoadGuildPetExp());
+    }
 
 
     //public struct GuildMemberInfo
@@ -98,9 +103,42 @@ public class GuildManager : SingletonMono<GuildManager>
         if (guildGoodsBro.IsSuccess())
         {
             guildLevelExp.Value = int.Parse(guildGoodsBro.GetReturnValuetoJSON()["goods"]["totalGoods4Amount"]["N"].ToString());
+            guildPetExp.Value = int.Parse(guildGoodsBro.GetReturnValuetoJSON()["goods"]["totalGoods5Amount"]["N"].ToString());
         }
         else
         {
+
+        }
+    }
+
+    public IEnumerator LoadGuildPetExp()
+    {
+        while (true)
+        {
+#if !UNITY_EDITOR
+            yield return new WaitForSeconds(3600);
+#endif
+
+#if UNITY_EDITOR
+            yield return new WaitForSeconds(10);
+#endif
+
+            if (string.IsNullOrEmpty(myGuildIndate) == false)
+            {
+                SendQueue.Enqueue(Backend.Social.Guild.GetGuildGoodsByIndateV3, myGuildIndate, (guildGoodsBro) =>
+                {
+                    if (guildGoodsBro.IsSuccess())
+                    {
+                        guildLevelExp.Value = int.Parse(guildGoodsBro.GetReturnValuetoJSON()["goods"]["totalGoods4Amount"]["N"].ToString());
+                        guildPetExp.Value = int.Parse(guildGoodsBro.GetReturnValuetoJSON()["goods"]["totalGoods5Amount"]["N"].ToString());
+                    }
+                    else
+                    {
+
+                    }
+                });
+            }
+
 
         }
     }

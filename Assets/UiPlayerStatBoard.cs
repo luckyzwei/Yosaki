@@ -30,17 +30,17 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         fightPoint.SetText($"무력 : {Utils.ConvertBigNum(PlayerStats.GetTotalPower())}");
 
         //공격력
-        description1 += $"{CommonString.GetStatusName(StatusType.AttackAdd)} : {(int)PlayerStats.GetBaseAttackPower()}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.AttackAdd)} : {Utils.ConvertBigNum((int)PlayerStats.GetBaseAttackPower())}\n";
         //공격력증가(%)
-        description2 += $"{CommonString.GetStatusName(StatusType.AttackAddPer)} : {PlayerStats.GetBaseAttackAddPercentValue() * 100f}\n";
+        description2 += $"{CommonString.GetStatusName(StatusType.AttackAddPer)} : {Utils.ConvertBigNum(PlayerStats.GetBaseAttackAddPercentValue() * 100f)}\n";
 
         //크리티컬 확률(%)
-        description1 += $"{CommonString.GetStatusName(StatusType.CriticalProb)} : {PlayerStats.GetCriticalProb() * 100f}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.CriticalProb)} : {Utils.ConvertBigNum(PlayerStats.GetCriticalProb() * 100f)}\n";
         //크리티컬 데미지(%)
-        description2 += $"{CommonString.GetStatusName(StatusType.CriticalDam)} : {PlayerStats.CriticalDam() * 100f}\n";
+        description2 += $"{CommonString.GetStatusName(StatusType.CriticalDam)} : {Utils.ConvertBigNum(PlayerStats.CriticalDam() * 100f)}\n";
         //--
         //스킬 쿨타임 감소
-        description1 += $"{CommonString.GetStatusName(StatusType.SkillCoolTime)} : {PlayerStats.GetSkillCoolTimeDecreaseValue() * 100f}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.SkillCoolTime)} : {Utils.ConvertBigNum(PlayerStats.GetSkillCoolTimeDecreaseValue() * 100f)}\n";
 
         //스킬 데미지 증가
         description2 += $"{CommonString.GetStatusName(StatusType.SkillDamage)} : {Utils.ConvertBigNum(PlayerStats.GetSkillDamagePercentValue() * 100f)}\n";
@@ -52,7 +52,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         //체력
         description1 += $"{CommonString.GetStatusName(StatusType.Hp)} : {Utils.ConvertBigNum(PlayerStats.GetOriginHp())}\n";
         //체력 증가
-        description2 += $"{CommonString.GetStatusName(StatusType.HpAddPer)} : {PlayerStats.GetMaxHpPercentAddValue() * 100f}\n";
+        description2 += $"{CommonString.GetStatusName(StatusType.HpAddPer)} : {Utils.ConvertBigNum(PlayerStats.GetMaxHpPercentAddValue() * 100f)}\n";
 
         //초당체력회복
         description1 += $"{CommonString.GetStatusName(StatusType.HpRecover)} : {PlayerStats.GetHpRecover() * 100f}\n";
@@ -95,14 +95,14 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description1 += $"{CommonString.GetStatusName(StatusType.SkillAttackCount)} : {PlayerStats.GetSkillHitAddValue()}\n";
         //방무 GetIgnoreDefenseValue
         //천공베기
-        description2 += $"{CommonString.GetStatusName(StatusType.SuperCritical1Prob)} : {PlayerStats.GetSuperCriticalProb() * 100f}\n";
+        description2 += $"{CommonString.GetStatusName(StatusType.SuperCritical1Prob)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCriticalProb() * 100f)}\n";
 
         //타격수
         description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical1DamPer)} : {PlayerStats.GetSuperCriticalDamPer() * 100f}\n";
 
         description2 += $"{CommonString.GetStatusName(StatusType.MarbleAddPer)} : {PlayerStats.GetMarblePlusValue() * 100f}\n";
 
-        description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical2DamPer)} : {PlayerStats.GetSuperCritical2DamPer() * 100f}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical2DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical2DamPer() * 100f)}\n";
         ////기억의파편 추가 획득
         //description1 += $"{CommonString.GetStatusName(StatusType.MagicStoneAddPer)} : {PlayerStats.GetMagicStonePlusValue() * 100f}\n";
 

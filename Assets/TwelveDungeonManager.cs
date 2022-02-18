@@ -60,6 +60,9 @@ public class TwelveDungeonManager : ContentsManagerBase
     private Transform bossSpawnParent;
 
     [SerializeField]
+    private Transform bossSpawnParent_Sin;
+
+    [SerializeField]
     private List<GameObject> mapObjects;
 
     #region Security
@@ -143,7 +146,15 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         var prefab = Resources.Load<BossEnemyBase>($"TwelveBoss/{GameManager.Instance.bossId}");
 
-        singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent);
+        if (GameManager.Instance.bossId != 13)
+        {
+            singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent);
+        }
+        else
+        {
+            singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent_Sin);
+        }
+
         singleRaidEnemy.transform.localPosition = Vector3.zero;
         singleRaidEnemy.gameObject.SetActive(false);
         bossHpController = singleRaidEnemy.GetComponent<AgentHpController>();
@@ -162,7 +173,7 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         if (hp <= 0f && contentsState.Value == (int)ContentsState.Fight)
         {
-           // WhenBossDead();
+            // WhenBossDead();
         }
     }
 
