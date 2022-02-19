@@ -21,8 +21,8 @@ public class UiGuildPetBoard : MonoBehaviour
     private ObscuredFloat exchangeGoodsNum;
 
     private ObscuredInt maxSendNum = 10;
-    private ObscuredFloat eachMarbleNum = 300000f;
-    private ObscuredFloat eachGrowthStoneNum = 300000000f;
+    private ObscuredFloat eachMarbleNum = 200000f;
+    private ObscuredFloat eachGrowthStoneNum = 400000000f;
 
     [SerializeField]
     private Button recordButton;
