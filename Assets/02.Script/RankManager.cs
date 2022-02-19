@@ -68,6 +68,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_MiniGame_Uuid = "e1dced80-5954-11ec-b084-d1a61d5ec8e2";
     public const string Rank_Guild_Uuid = "ff017920-698b-11ec-b243-8d1fccc57e3d";
     public const string Rank_Guild_Reset_Uuid = "be50a6d0-698b-11ec-b243-8d1fccc57e3d";
+    public const string Rank_Guild_Reset_Uuid_Feed = "0fdf35b0-9115-11ec-a581-736e2455e958";
 
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
@@ -86,6 +87,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_MiniGame_Uuid = "edec1600-5954-11ec-8846-eb56e6e68bb1";
     public const string Rank_Guild_Uuid = "10619010-698c-11ec-b243-8d1fccc57e3d";
     public const string Rank_Guild_Reset_Uuid = "d248cdc0-698b-11ec-b243-8d1fccc57e3d";
+    public const string Rank_Guild_Reset_Uuid_Feed = "41c34620-9115-11ec-a581-736e2455e958";
 
     public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";
