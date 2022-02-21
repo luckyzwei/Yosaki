@@ -18,8 +18,6 @@ public class UiGuildPetBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI petDescription;
 
-    private ObscuredFloat exchangeGoodsNum;
-
     private ObscuredInt maxSendNum = 10;
     private ObscuredFloat eachMarbleNum = 200000f;
     private ObscuredFloat eachGrowthStoneNum = 400000000f;
@@ -30,7 +28,7 @@ public class UiGuildPetBoard : MonoBehaviour
     private void Start()
     {
         Subscribe();
-        WhenValueChanged("1");
+        SetDescriptionText("1");
     }
 
     private void OnEnable()
@@ -38,18 +36,9 @@ public class UiGuildPetBoard : MonoBehaviour
         GuildManager.Instance.LoadGuildLevelGoods();
     }
 
-    public void WhenValueChanged(string goodsNum)
+    public void SetDescriptionText(string goodsNum)
     {
-        int goods = int.Parse(goodsNum);
-
-        if (goods == 0)
-        {
-            PopupManager.Instance.ShowAlarmMessage($"최소 {Utils.ConvertBigNum(eachMarbleNum)}개부터 먹이로 주실 수 있습니다.");
-        }
-
-        this.exchangeGoodsNum = Mathf.Clamp(goods, 1, maxSendNum);
-
-        sendAmountText.SetText($"먹이 : {CommonString.GetItemName(Item_Type.Marble)} {Utils.ConvertBigNum(exchangeGoodsNum * eachMarbleNum)}개 \n레벨 {exchangeGoodsNum}상승\n{CommonString.GetItemName(Item_Type.GrowthStone)} {Utils.ConvertBigNum(eachGrowthStoneNum * exchangeGoodsNum)}개 획득");
+        sendAmountText.SetText($"먹이 1회당 \n레벨 1상승\n<color=#ff00ffff>{CommonString.GetItemName(Item_Type.GrowthStone)} {Utils.ConvertBigNum(eachGrowthStoneNum)}개</color> 획득");
     }
 
     private void Subscribe()
@@ -62,7 +51,7 @@ public class UiGuildPetBoard : MonoBehaviour
         }).AddTo(this);
     }
 
-    public void SendPetExp()
+    public void SendPetExp(int exchangeGoodsNum)
     {
         bool canRecord = ServerData.userInfoTable.CanRecordGuildScore();
 
@@ -149,6 +138,15 @@ public class UiGuildPetBoard : MonoBehaviour
                           GuildManager.Instance.guildPetExp.Value += (int)exchangeGoodsNum;
                           PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"레벨 {exchangeGoodsNum}증가,\n{CommonString.GetItemName(Item_Type.GrowthStone)} {Utils.ConvertBigNum(exchangeGoodsNum * eachGrowthStoneNum)}개 획득!", null);
                           GuildManager.Instance.LoadGuildLevelGoods();
+
+
+                          var memberCell = UiGuildMemberList.Instance.GetMemberCell(PlayerData.Instance.NickName);
+
+                          if (memberCell != null)
+                          {
+                              memberCell.UpdateDonatedObject_PetExp(true);
+                          }
+
                       }
                       else
                       {

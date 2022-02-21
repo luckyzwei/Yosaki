@@ -113,7 +113,7 @@ public class UserInfoTable
     public const string marbleReset3 = "marbleReset4";
     public const string relicReset2 = "relicReset2";
     public const string dailyPackReset = "dailyPackReset2";
-    public const string sonScore = "sonLastClear5";
+    public const string sonScore = "son6";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
     public const string buffAwake = "buffAwake";
     public const string petAwake = "petAwake";

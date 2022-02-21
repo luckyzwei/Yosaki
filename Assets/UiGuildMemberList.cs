@@ -161,8 +161,9 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     string gamerIndate = data["gamerInDate"]["S"].ToString();
                     int donateGoods = int.Parse(data["totalGoods3Amount"]["N"].ToString());
                     bool todayDonated = int.Parse(data["totalGoods9Amount"]["N"].ToString()) >= 1;
+                    bool todayDonatedPetExp = int.Parse(data["totalGoods8Amount"]["N"].ToString()) >= 1;
 
-                    var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated);
+                    var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp);
 
                     memberCells[i].Initialize(memberData);
                     memberCells[i].transform.SetAsFirstSibling();
