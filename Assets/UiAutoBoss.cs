@@ -9,6 +9,9 @@ public class UiAutoBoss : SingletonMono<UiAutoBoss>
     [SerializeField]
     private Toggle toggle;
 
+    [SerializeField]
+    private GameObject stopButton;
+
     public static ReactiveProperty<bool> AutoMode = new ReactiveProperty<bool>(false);
 
     private new void Awake()
@@ -19,6 +22,18 @@ public class UiAutoBoss : SingletonMono<UiAutoBoss>
     private void Start()
     {
         WhenToggleChanged(AutoMode.Value);
+
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        AutoMode.AsObservable().Subscribe(e =>
+        {
+
+            stopButton.SetActive(e);
+
+        }).AddTo(this);
     }
 
     public void WhenToggleChanged(bool on)
@@ -79,5 +94,10 @@ public class UiAutoBoss : SingletonMono<UiAutoBoss>
         yield return null;
         AutoManager.Instance.SetAuto(true);
         BossSpawnButton.Instance.OnClickSpawnButton();
+    }
+
+    public void OnClickAutoStopButton()
+    {
+        StopAutoBoss();
     }
 }

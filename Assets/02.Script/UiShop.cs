@@ -225,6 +225,14 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
                 }
                 break;
+
+            case Item_Type.Event_Item_1:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += amount;
+                    param.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
+                }
+                break;
+
             case Item_Type.SulItem:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += amount;
@@ -264,6 +272,12 @@ public class UiShop : SingletonMono<UiShop>
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Asura3).Value += amount;
                     param.Add(GoodsTable.Asura3, ServerData.goodsTable.GetTableData(GoodsTable.Asura3).Value);
+                }
+                break;
+            case Item_Type.Asura4:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Asura4).Value += amount;
+                    param.Add(GoodsTable.Asura4, ServerData.goodsTable.GetTableData(GoodsTable.Asura4).Value);
                 }
                 break;
 

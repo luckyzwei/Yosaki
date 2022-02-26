@@ -46,6 +46,7 @@ public class GoodsTable
 
     //할로윈 도깨비
     public static string Event_Item_0 = "Event_Item_1";
+    public static string Event_Item_1 = "Event2";
     public static string StageRelic = "StageRelic";
     public static string Peach = "PeachReal";
     public static string MiniGameReward = "MiniGameReward";
@@ -58,6 +59,7 @@ public class GoodsTable
     public static string Asura1 = "a1";
     public static string Asura2 = "a2";
     public static string Asura3 = "a3";
+    public static string Asura4 = "a4";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -76,13 +78,14 @@ public class GoodsTable
         {WeaponUpgradeStone,0f},
         {PetUpgradeSoul,0f},
         {YomulExchangeStone,0f},
-        {Songpyeon,0f},
+       // {Songpyeon,0f},
         {TigerStone,0f},
         {Relic,0f},
 
         {RelicTicket,GameBalance.DailyRelicTicketGetCount},
         {RabitStone,0f},
         {Event_Item_0,0f},
+        {Event_Item_1,0f},
         {DragonStone,0f},
         {StageRelic,0f},
         {SnakeStone,0f},
@@ -103,6 +106,7 @@ public class GoodsTable
         {Asura1,0f},
         {Asura2,0f},
         {Asura3,0f},
+        {Asura4,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -222,6 +226,25 @@ public class GoodsTable
             eventItemAddNum = 0;
         }
     }
+    //
+    static int eventItemAddNum_Spring = 0;
+    public void GetSpringEventItem(float amount)
+    {
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Item_1)} 획득(+{(int)amount})");
+
+        eventItemAddNum_Spring += (int)amount;
+
+        if (eventItemAddNum_Spring < updateRequireNum)
+        {
+
+        }
+        else
+        {
+            tableDatas[Event_Item_1].Value += eventItemAddNum_Spring;
+            eventItemAddNum_Spring = 0;
+        }
+    }
+    //
 
     static int sulAddNum = 0;
     public void GetsulItem(float amount)
@@ -457,7 +480,14 @@ public class GoodsTable
         goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
         goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
-        goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+
+        if (ServerData.userInfoTable.CanSpawnEventItem())
+        {
+            goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+        }
+
+        goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
+
         goodsParam.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);
         goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
         goodsParam.Add(GoodsTable.BonusSpinKey, ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value);

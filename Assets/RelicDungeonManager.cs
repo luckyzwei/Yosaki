@@ -155,7 +155,9 @@ public class RelicDungeonManager : ContentsManagerBase
 
     public float GetMoveSpeed()
     {
-        return 3f + (((float)spawnCount / 10f) * 0.1f);
+        int SpeedClamp = Mathf.Clamp(spawnCount, 0, 2500);
+
+        return 3f + (((float)SpeedClamp / 10f) * 0.1f);
     }
 
     public double GetEnemyHp()
@@ -164,7 +166,16 @@ public class RelicDungeonManager : ContentsManagerBase
 
         enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
 
-        return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * 1000;
+        //최대층
+        if (enemyTableIdx == TableManager.Instance.EnemyTable.dataArray.Length - 1)
+        {
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (spawnCount*0.6f);
+        }
+        else
+        {
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * 1000;
+        }
+
     }
 
     public int GetEnemyDefense()

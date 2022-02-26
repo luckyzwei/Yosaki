@@ -169,6 +169,8 @@ public class Enemy : PoolItem
 
         GetEventItem();
 
+        GetSpringEventItem();
+
         GetSulItem();
 
         GetStageRelicItem();
@@ -191,6 +193,11 @@ public class Enemy : PoolItem
         if (ServerData.userInfoTable.CanSpawnEventItem() == false) return;
 
         ServerData.goodsTable.GetEventItem(GameManager.Instance.CurrentStageData.Marbleamount);
+    }
+
+    private void GetSpringEventItem() 
+    {
+        ServerData.goodsTable.GetSpringEventItem(GameManager.Instance.CurrentStageData.Marbleamount);
     }
 
     private void GetSulItem() 

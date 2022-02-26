@@ -98,7 +98,7 @@ public class UserInfoTable
 
 
     public const string killCountTotal = "killCountTotal5";
-    public const string killCountTotal2 = "killCountTotal4";
+    public const string killCountTotal2 = "kt6";
 
     public const string relicKillCount = "relicKillCount";
 
@@ -126,6 +126,8 @@ public class UserInfoTable
     public const string smithExp = "smith";
     public const string getSmith = "getSmith";
     public const string sendPetExp = "sendPetExp";
+
+    public const string exchangeCount = "ex_0";
 
     public double currentServerDate;
     public double attendanceUpdatedTime;
@@ -227,6 +229,7 @@ public class UserInfoTable
         {getSmith,0},
         {marbleReset3,0},
         {sendPetExp,0},
+        {exchangeCount,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -814,6 +817,6 @@ public class UserInfoTable
 #if UNITY_EDITOR
         return true;
 #endif
-        return currentServerTime.Month == 1;
+        return currentServerTime.Month == 3;
     }
 }

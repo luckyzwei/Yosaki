@@ -8,6 +8,9 @@ public class UiPackageShop : MonoBehaviour
     private UiIapItemCell iapCellPrefab;
 
     [SerializeField]
+    private Transform gemCategoryParent;
+
+    [SerializeField]
     private Transform package1Parent;
 
     [SerializeField]
@@ -22,6 +25,9 @@ public class UiPackageShop : MonoBehaviour
     [SerializeField]
     private Transform eventParent;
 
+    [SerializeField]
+    private Transform springEventParent;
+
     private void Start()
     {
         Initialize();
@@ -35,11 +41,18 @@ public class UiPackageShop : MonoBehaviour
         {
             if (e.Current.Value.Active == false) continue;
 
-            if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit1)
+            if (e.Current.Value.SHOPCATEGORY == ShopCategory.Gem) 
+            {
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, gemCategoryParent);
+                cell.Initialize(e.Current.Value);
+                
+            }
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit1)
             {
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, package1Parent);
                 cell.Initialize(e.Current.Value);
             }
+
             else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit2)
             {
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, package2Parent);
@@ -58,6 +71,11 @@ public class UiPackageShop : MonoBehaviour
             else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Event2)
             {
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, eventParent);
+                cell.Initialize(e.Current.Value);
+            }
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Event3)
+            {
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, springEventParent);
                 cell.Initialize(e.Current.Value);
             }
         }

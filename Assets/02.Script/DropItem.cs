@@ -42,6 +42,9 @@ public enum Item_Type
     Asura1,
     Asura2,
     Asura3,
+    Asura4,
+
+    Event_Item_1,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -151,6 +154,10 @@ public enum Item_Type
     costume20 = 1221,
     costume21 = 1222,
     costume22 = 1223,
+
+    costume23 = 1224,
+    costume24 = 1225,
+    costume25 = 1226,
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,

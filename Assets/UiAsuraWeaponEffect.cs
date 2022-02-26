@@ -30,6 +30,11 @@ public class UiAsuraWeaponEffect : MonoBehaviour
             effectObject[3].SetActive(e == 1);
         }).AddTo(this);
 
+        ServerData.goodsTable.GetTableData("a4").AsObservable().Subscribe(e =>
+        {
+            effectObject[4].SetActive(e == 1);
+        }).AddTo(this);
+
     }
  
 }

@@ -90,25 +90,25 @@ public static class GameBalance
     public readonly static ObscuredInt nickNameChangeFee = 500000;
 
 
-    public readonly static ObscuredInt rankRewardTicket_1 = 500;
-    public readonly static ObscuredInt rankRewardTicket_2 = 450;
-    public readonly static ObscuredInt rankRewardTicket_3 = 400;
-    public readonly static ObscuredInt rankRewardTicket_4 = 350;
-    public readonly static ObscuredInt rankRewardTicket_5 = 300;
-    public readonly static ObscuredInt rankRewardTicket_6_20 = 200;
-    public readonly static ObscuredInt rankRewardTicket_21_100 = 150;
-    public readonly static ObscuredInt rankRewardTicket_101_1000 = 100;
-    public readonly static ObscuredInt rankRewardTicket_1001_10000 = 50;
+    public readonly static ObscuredInt rankRewardTicket_1 = 3000;
+    public readonly static ObscuredInt rankRewardTicket_2 = 2800;
+    public readonly static ObscuredInt rankRewardTicket_3 = 2600;
+    public readonly static ObscuredInt rankRewardTicket_4 = 2400;
+    public readonly static ObscuredInt rankRewardTicket_5 = 2200;
+    public readonly static ObscuredInt rankRewardTicket_6_20 = 2000;
+    public readonly static ObscuredInt rankRewardTicket_21_100 = 1800;
+    public readonly static ObscuredInt rankRewardTicket_101_1000 = 1600;
+    public readonly static ObscuredInt rankRewardTicket_1001_10000 = 1400;
 
-    public readonly static ObscuredInt rankRewardTicket_1_relic = 80;
-    public readonly static ObscuredInt rankRewardTicket_2_relic = 70;
-    public readonly static ObscuredInt rankRewardTicket_3_relic = 65;
-    public readonly static ObscuredInt rankRewardTicket_4_relic = 60;
-    public readonly static ObscuredInt rankRewardTicket_5_relic = 55;
-    public readonly static ObscuredInt rankRewardTicket_6_20_relic = 50;
-    public readonly static ObscuredInt rankRewardTicket_21_100_relic = 40;
-    public readonly static ObscuredInt rankRewardTicket_101_1000_relic = 35;
-    public readonly static ObscuredInt rankRewardTicket_1001_10000_relic = 25;
+    public readonly static ObscuredInt rankRewardTicket_1_relic = 120;
+    public readonly static ObscuredInt rankRewardTicket_2_relic = 110;
+    public readonly static ObscuredInt rankRewardTicket_3_relic = 100;
+    public readonly static ObscuredInt rankRewardTicket_4_relic = 90;
+    public readonly static ObscuredInt rankRewardTicket_5_relic = 80;
+    public readonly static ObscuredInt rankRewardTicket_6_20_relic = 70;
+    public readonly static ObscuredInt rankRewardTicket_21_100_relic = 60;
+    public readonly static ObscuredInt rankRewardTicket_101_1000_relic = 50;
+    public readonly static ObscuredInt rankRewardTicket_1001_10000_relic = 40;
 
     public readonly static ObscuredInt rankReward_1_MiniGame = 10;
     public readonly static ObscuredInt rankReward_2_MiniGame = 9;
@@ -172,6 +172,8 @@ public static class GameBalance
     public readonly static ObscuredInt GuildEnterMinLevel = 5000;
 
     public readonly static ObscuredInt LeeMuGiGetLevel = 2000;
+
+    public readonly static ObscuredInt fireExchangeMaxCount = 10;
 
     public static int GetSonIdx()
     {

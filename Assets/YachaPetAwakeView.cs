@@ -120,9 +120,36 @@ public class YachaPetAwakeView : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-           //   LogManager.Instance.SendLogType("PetAwake", "S", ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value.ToString());
+              //   LogManager.Instance.SendLogType("PetAwake", "S", ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value.ToString());
           });
     }
+
+    public void OnClickLevelUpButton_All()
+    {
+        float currentGrowthStoneAmount = ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value;
+
+        if (currentGrowthStoneAmount < GameBalance.AwakePetUpgradePrice)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)}이 부족합니다.");
+            return;
+        }
+
+        float amount = currentGrowthStoneAmount / GameBalance.AwakePetUpgradePrice;
+
+        amount = (float)System.Math.Truncate(amount);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= (GameBalance.AwakePetUpgradePrice * (int)amount);
+        ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value += 1 * (int)amount;
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
+    }
+
 
 #if UNITY_EDITOR
     private void Update()

@@ -11,7 +11,7 @@ public class SaveManager : SingletonMono<SaveManager>
     private WaitForSeconds updateDelay = new WaitForSeconds(120.0f);
 #endif
 
-    private WaitForSeconds versionCheckDelay = new WaitForSeconds(300.0f);
+    private WaitForSeconds versionCheckDelay = new WaitForSeconds(500.0f);
 
     //12시간
     private WaitForSeconds tockenRefreshDelay = new WaitForSeconds(43200f);

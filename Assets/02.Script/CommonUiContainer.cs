@@ -90,6 +90,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite AsuraHand1;
     public Sprite AsuraHand2;
     public Sprite AsuraHand3;
+    public Sprite AsuraHand4;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -161,6 +162,20 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.costume22:
                 return costumeThumbnail[22];
                 break;
+
+            case Item_Type.costume23:
+                return costumeThumbnail[23];
+                break;
+
+            case Item_Type.costume24:
+                return costumeThumbnail[24];
+                break;
+
+            case Item_Type.costume25:
+                return costumeThumbnail[25];
+                break;
+
+
             case Item_Type.RankFrame1:
                 return rankFrame[8];
                 break;
@@ -305,6 +320,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.Asura3:
                 return AsuraHand3;
+                break;
+            case Item_Type.Asura4:
+                return AsuraHand4;
                 break;
         }
 

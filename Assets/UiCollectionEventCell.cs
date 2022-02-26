@@ -13,6 +13,9 @@ public class UiCollectionEventCell : MonoBehaviour
     private TextMeshProUGUI itemName;
 
     [SerializeField]
+    private TextMeshProUGUI buyCountDesc;
+
+    [SerializeField]
     private TextMeshProUGUI itemAmount;
 
     [SerializeField]
@@ -29,6 +32,9 @@ public class UiCollectionEventCell : MonoBehaviour
 
     private ChuseokEventData tableData;
 
+    [SerializeField]
+    private bool isSnowEvent = true;
+
     private void Start()
     {
         Initialize();
@@ -37,17 +43,27 @@ public class UiCollectionEventCell : MonoBehaviour
 
     private void Subscribe()
     {
+        if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
+        {
+            ServerData.userInfoTable.TableDatas[tableData.Exchangekey].AsObservable().Subscribe(e =>
+            {
+
+                buyCountDesc.SetText($"교환 가능 : {e}/{tableData.Exchangemaxcount}");
+
+            }).AddTo(this);
+        }
+
         if (IsCostumeItem() == false) return;
 
         string itemKey = ((Item_Type)tableData.Itemtype).ToString();
 
-        ServerData.costumeServerTable.TableDatas[itemKey].hasCostume.AsObservable().Subscribe(e=> 
+        ServerData.costumeServerTable.TableDatas[itemKey].hasCostume.AsObservable().Subscribe(e =>
         {
-            if (e == false) 
+            if (e == false)
             {
                 price.SetText(Utils.ConvertBigNum(tableData.Price));
             }
-            else 
+            else
             {
                 price.SetText("보유중!");
             }
@@ -87,6 +103,16 @@ public class UiCollectionEventCell : MonoBehaviour
 
     public void OnClickExchangeButton()
     {
+
+        if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
+        {
+            if (ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value >= tableData.Exchangemaxcount)
+            {
+                PopupManager.Instance.ShowAlarmMessage("더이상 교환하실 수 없습니다.");
+                return;
+            }
+        }
+
         if (IsCostumeItem())
         {
             string itemKey = ((Item_Type)tableData.Itemtype).ToString();
@@ -98,27 +124,65 @@ public class UiCollectionEventCell : MonoBehaviour
             }
         }
 
-        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value;
-
-        if (currentEventItemNum < tableData.Price)
+        if (isSnowEvent)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Item_0)}가 부족합니다.");
-            return;
+            int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value;
+
+            if (currentEventItemNum < tableData.Price)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Item_0)}가 부족합니다.");
+                return;
+            }
+
+            PopupManager.Instance.ShowAlarmMessage("교환 완료");
+
+            //로컬
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value -= tableData.Price;
+
+            if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
+            {
+                ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value++;
+            }
+
+            ServerData.AddLocalValue((Item_Type)tableData.Itemtype, tableData.Itemvalue);
+
+            if (syncRoutine != null)
+            {
+                CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+            }
+
+            syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+        }
+        else
+        {
+            int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value;
+
+            if (currentEventItemNum < tableData.Price)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Item_1)}가 부족합니다.");
+                return;
+            }
+
+            PopupManager.Instance.ShowAlarmMessage("교환 완료");
+
+            //로컬
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value -= tableData.Price;
+
+            if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
+            {
+                ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value++;
+            }
+
+            ServerData.AddLocalValue((Item_Type)tableData.Itemtype, tableData.Itemvalue);
+
+            if (syncRoutine != null)
+            {
+                CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+            }
+
+            syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
         }
 
-        PopupManager.Instance.ShowAlarmMessage("교환 완료");
-
-        //로컬
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value -= tableData.Price;
-
-        ServerData.AddLocalValue((Item_Type)tableData.Itemtype, tableData.Itemvalue);
-
-        if (syncRoutine != null)
-        {
-            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
-        }
-
-        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
     }
 
     private bool IsCostumeItem()
@@ -146,7 +210,14 @@ public class UiCollectionEventCell : MonoBehaviour
 
             Param goodsParam = new Param();
 
-            goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+            if (isSnowEvent)
+            {
+                goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+            }
+            else
+            {
+                goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
+            }
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
@@ -158,25 +229,41 @@ public class UiCollectionEventCell : MonoBehaviour
 
             Param goodsParam = new Param();
 
-            goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+
+
+            if (isSnowEvent)
+            {
+                goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+            }
+            else
+            {
+                goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
+            }
 
             goodsParam.Add(itemKey, ServerData.goodsTable.GetTableData(itemKey).Value);
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         }
 
-        ServerData.SendTransaction(transactions, successCallBack: () =>
+        if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
         {
-            if (IsCostumeItem())
-            {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 획득!!", null);
-            }
-            else 
-            {
-            
-            }
+            Param userInfoParam = new Param();
+            userInfoParam.Add(tableData.Exchangekey, ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+        }
 
-         //   LogManager.Instance.SendLogType("chuseokExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
-        });
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+    {
+        if (IsCostumeItem())
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 획득!!", null);
+        }
+        else
+        {
+
+        }
+
+        //   LogManager.Instance.SendLogType("chuseokExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
+    });
     }
 }
