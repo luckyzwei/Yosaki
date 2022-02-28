@@ -281,6 +281,8 @@ public class CostumeServerTable
 
                 var table = TableManager.Instance.Costume.dataArray;
 
+                bool needSync = false;
+
                 for (int i = 0; i < table.Length; i++)
                 {
                     if (data.Keys.Contains(table[i].Stringid))
@@ -288,6 +290,25 @@ public class CostumeServerTable
                         //값로드
                         var value = data[table[i].Stringid][ServerData.format_string].ToString();
                         var costumeData = CostumeServerData.GetCostumeClass(value);
+
+                        if (table[i].Stringid.Equals("costume25"))
+                        {
+                            if (costumeData.abilityIdx.Count == 6)
+                            {
+                                if (costumeData.hasCostume.Value == true)
+                                {
+                                    costumeData = CostumeServerData.GetDefaultCostumeClass(table[i]);
+                                    costumeData.hasCostume.Value = true;
+                                }
+                                else
+                                {
+                                    costumeData = CostumeServerData.GetDefaultCostumeClass(table[i]);
+                                }
+
+                                needSync = true;
+                            }
+                        }
+
                         tableDatas.Add(table[i].Stringid, costumeData);
                     }
                     //새로운 아이템 추가시
@@ -299,6 +320,15 @@ public class CostumeServerTable
 
                         paramCount++;
                     }
+                }
+
+                if (needSync) 
+                {
+                    Param newParam = new Param();
+
+                    newParam.Add("costume25", tableDatas["costume25"].ConvertToString());
+
+                    Backend.GameData.Update(tableName, Indate, newParam);
                 }
 
                 if (paramCount != 0)

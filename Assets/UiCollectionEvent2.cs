@@ -37,11 +37,11 @@ public class UiCollectionEvent2 : MonoBehaviour
 
     private void OnEnable()
     {
-        if (ServerData.userInfoTable.CanMakeEventItem() == false)
-        {
-            this.gameObject.SetActive(false);
-            PopupManager.Instance.ShowAlarmMessage("이벤트가 종료됐습니다!");
-        }
+        //if (ServerData.userInfoTable.CanMakeEventItem() == false)
+        //{
+        //    this.gameObject.SetActive(false);
+        //    PopupManager.Instance.ShowAlarmMessage("이벤트가 종료됐습니다!");
+        //}
     }
 
 }

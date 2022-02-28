@@ -92,6 +92,8 @@ public class UiCostumeAbilityCell : MonoBehaviour
 
     public void OnClickLockButton()
     {
+        if (costumeData == null) return;
+
         var serverData = ServerData.costumeServerTable.TableDatas[costumeData.Stringid];
 
         if (serverData.hasCostume.Value == false)

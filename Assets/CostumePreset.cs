@@ -98,6 +98,8 @@ public class CostumePreset
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
+                bool reUpdate = false;
+
                 var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
@@ -108,6 +110,55 @@ public class CostumePreset
                         {
                             //값로드
                             var value = data[e.Current.Key][ServerData.format_string].ToString();
+
+                            //
+                            var splits = value.Split('|');
+
+                            if (splits.Length >= 26)
+                            {
+
+                                for (int j = 0; j < splits.Length; j++)
+                                {
+                                    if (string.IsNullOrEmpty(splits[j]) == false)
+                                    {
+                                        var splits2 = splits[j].Split('#');
+
+
+                                        if (splits2[0] == "25") 
+                                        {
+                                            int length = splits2[1].Split(',').Length;
+
+                                            if (length == 6)
+                                            {
+                                                reUpdate = true;
+
+                                                splits2[1] += ",-1";
+                                                splits2[2] += ",0";
+
+                                                string newValue = string.Empty;
+
+                                                for (int k = 0; k < 25; k++)
+                                                {
+                                                    if (string.IsNullOrEmpty(splits[k]) == false)
+                                                    {
+                                                        newValue += splits[k] + "|";
+                                                    }
+                                                }
+
+                                                newValue += splits2[0] + "#" + splits2[1] + "#" + splits2[2] + "|";
+
+                                                value = newValue;
+                                            }
+                                        } 
+                                       
+                                    }
+                                }
+
+                       
+                            }
+
+                            //
+
                             tableDatas.Add(e.Current.Key, value);
                         }
                         else
@@ -121,6 +172,17 @@ public class CostumePreset
                             paramCount++;
                         }
                     }
+                }
+
+                if (reUpdate)
+                {
+                    Param newParam = new Param();
+
+                    newParam.Add("preset_0", TableDatas["preset_0"]);
+                    newParam.Add("preset_1", TableDatas["preset_1"]);
+                    newParam.Add("preset_2", TableDatas["preset_2"]);
+
+                    Backend.GameData.Update(tableName, Indate, newParam);
                 }
 
                 if (paramCount != 0)

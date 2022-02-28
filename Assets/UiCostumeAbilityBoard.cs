@@ -371,7 +371,7 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
     private bool CanGacha()
     {
-        int currentBlueStoneNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
+        var currentBlueStoneNum = ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         return currentBlueStoneNum >= price;
     }
