@@ -60,6 +60,7 @@ public class GoodsTable
     public static string Asura2 = "a2";
     public static string Asura3 = "a3";
     public static string Asura4 = "a4";
+    public static string Asura5 = "a5";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -107,6 +108,7 @@ public class GoodsTable
         {Asura2,0f},
         {Asura3,0f},
         {Asura4,0f},
+        {Asura5,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

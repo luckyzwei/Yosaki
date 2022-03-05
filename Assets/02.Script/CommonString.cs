@@ -168,6 +168,7 @@ public static class CommonString
             case Item_Type.Asura2: return "세번째팔";
             case Item_Type.Asura3: return "네번째팔";
             case Item_Type.Asura4: return "다섯번째팔";
+            case Item_Type.Asura5: return "여섯번째팔";
         }
         return "미등록";
     }

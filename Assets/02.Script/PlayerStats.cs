@@ -1130,12 +1130,14 @@ public static class PlayerStats
     public static string asuraKey2 = "a2";
     public static string asuraKey3 = "a3";
     public static string asuraKey4 = "a4";
+    public static string asuraKey5 = "a5";
 
     public static ObscuredFloat asura0Value = 15000f;
     public static ObscuredFloat asura1Value = 25000f;
     public static ObscuredFloat asura2Value = 300f;
     public static ObscuredFloat asura3Value = 0.5f;
     public static ObscuredFloat asura4Value = 0.8f;
+    public static ObscuredFloat asura5Value = 1.0f;
 
     public static float GetAsuraAbilValue(StatusType type)
     {
@@ -1191,6 +1193,15 @@ public static class PlayerStats
                     else
                     {
                         ret += asura4Value;
+                    }
+
+                    if (ServerData.goodsTable.GetTableData(asuraKey5).Value == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        ret += asura5Value;
                     }
 
                     return ret;

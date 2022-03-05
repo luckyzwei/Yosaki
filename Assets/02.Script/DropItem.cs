@@ -45,6 +45,7 @@ public enum Item_Type
     Asura4,
 
     Event_Item_1,
+    Asura5,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

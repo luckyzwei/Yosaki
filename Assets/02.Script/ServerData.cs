@@ -255,6 +255,10 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.Asura4).Value += rewardValue;
                 break;
 
+            case Item_Type.Asura5:
+                ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value += rewardValue;
+                break;
+
             case Item_Type.costume1:
             case Item_Type.costume6:
             case Item_Type.costume7:
@@ -420,7 +424,9 @@ public static class ServerData
                 passParam.Add(GoodsTable.Asura4, ServerData.goodsTable.GetTableData(GoodsTable.Asura4).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
-
+            case Item_Type.Asura5:
+                passParam.Add(GoodsTable.Asura5, ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);
@@ -592,6 +598,11 @@ public static class ServerData
             case Item_Type.Asura4:
                 ServerData.goodsTable.GetTableData(GoodsTable.Asura4).Value += amount;
                 param.Add(GoodsTable.Asura4, ServerData.goodsTable.GetTableData(GoodsTable.Asura4).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.Asura5:
+                ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value += amount;
+                param.Add(GoodsTable.Asura5, ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.costume1:

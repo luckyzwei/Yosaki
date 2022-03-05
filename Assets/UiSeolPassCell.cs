@@ -229,4 +229,29 @@ public class UiSeolPassCell : MonoBehaviour
         int seolKillCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value;
         return seolKillCount >= passInfo.require;
     }
+
+    private void OnEnable()
+    {
+        RefreshParent();
+    }
+    private void RefreshParent()
+    {
+        if (passInfo == null) return;
+
+        if (HasPassItem() == false)
+        {
+            if (CanGetReward() == true && HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false)
+            {
+                this.transform.SetAsFirstSibling();
+            }
+        }
+        else
+        {
+            if (CanGetReward() == true &&
+                (HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false || HasReward(passInfo.rewardType_IAP_Key, passInfo.id) == false))
+            {
+                this.transform.SetAsFirstSibling();
+            }
+        }
+    }
 }

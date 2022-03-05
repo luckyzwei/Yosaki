@@ -47,6 +47,10 @@ public class UiAsuraAbilCell : MonoBehaviour
         {
             description.SetText($"<color=red>{CommonString.GetItemName(Item_Type.Asura4)}</color>\n{CommonString.GetStatusName(StatusType.SuperCritical2DamPer)}\n{Utils.ConvertBigNum(PlayerStats.asura4Value * 100f)}");
         }
+        else if (key == PlayerStats.asuraKey5)
+        {
+            description.SetText($"<color=red>{CommonString.GetItemName(Item_Type.Asura5)}</color>\n{CommonString.GetStatusName(StatusType.SuperCritical2DamPer)}\n{Utils.ConvertBigNum(PlayerStats.asura5Value * 100f)}");
+        }
 
     }
 

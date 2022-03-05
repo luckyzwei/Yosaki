@@ -281,6 +281,13 @@ public class UiShop : SingletonMono<UiShop>
                 }
                 break;
 
+            case Item_Type.Asura5:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value += amount;
+                    param.Add(GoodsTable.Asura5, ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value);
+                }
+                break;
+
 
 
             case Item_Type.SmithFire:

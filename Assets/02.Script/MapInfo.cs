@@ -160,7 +160,10 @@ public class MapInfo : SingletonMono<MapInfo>
 
             bool isEnemyEmpty = IsEnemyEmpty();
 
-            int spawnNum = maxEnemy - spawnedEnemyList.Count;
+            //문파 추가소환
+            int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
+
+            int spawnNum = maxEnemy - spawnedEnemyList.Count + plusSpawnNum;
 
             while (canSpawnEnemy == false)
             {
@@ -183,8 +186,7 @@ public class MapInfo : SingletonMono<MapInfo>
                     yield return spawnInterval;
                 }
             }
-
-
+               
 
             yield return spawnDelay;
         }

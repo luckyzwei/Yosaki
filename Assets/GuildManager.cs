@@ -179,6 +179,25 @@ public class GuildManager : SingletonMono<GuildManager>
         return GameBalance.GuildMemberMax + maxAddNum;
     }
 
+    public int GetGuildSpawnEnemyNum(int exp = 0)
+    {
+        var tableData = TableManager.Instance.GuildLevel.dataArray;
+
+        int addNum = 0;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].GUILDLEVELTYPE != guildLevelType.spawnPlus) continue;
+
+            if (exp >= tableData[i].Needamount)
+            {
+                addNum += (int)tableData[i].Value;
+            }
+        }
+
+        return addNum;
+    }
+
     public bool HasGuildBuff(int buffIdx)
     {
         int myGuildExp = guildLevelExp.Value;

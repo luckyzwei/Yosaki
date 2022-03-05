@@ -37,6 +37,9 @@ public class UiAbilityPreset : MonoBehaviour
 
         ServerData.costumeServerTable.ApplyAbilityByCurrentSelectedPreset();
 
-        UiCostumeAbilityBoard.Instance.RefreshAllData();
+        if (UiCostumeAbilityBoard.Instance != null)
+        {
+            UiCostumeAbilityBoard.Instance.RefreshAllData();
+        }
     }
 }

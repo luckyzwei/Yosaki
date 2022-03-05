@@ -103,7 +103,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         //
         int platformNum = mapInfo.spawnPlatforms.Count;
 
-        float spawnEnemyNumPerSec = (float)(platformNum * stageTableData.Spawnamountperplatform) / spawnInterval;
+
+        int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
+
+        float spawnEnemyNumPerSec = (float)((platformNum * stageTableData.Spawnamountperplatform) + plusSpawnNum) / spawnInterval;
 
         float killedEnemyPerMin = spawnEnemyNumPerSec * 60f;
 

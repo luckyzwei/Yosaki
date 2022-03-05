@@ -106,6 +106,10 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         ////기억의파편 추가 획득
         //description1 += $"{CommonString.GetStatusName(StatusType.MagicStoneAddPer)} : {PlayerStats.GetMagicStonePlusValue() * 100f}\n";
 
+        int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
+        description2 += $"요괴 추가소환 : {plusSpawnNum}";
+
+
         descriptionBoard1.SetText(description1);
         descriptionBoard2.SetText(description2);
     }

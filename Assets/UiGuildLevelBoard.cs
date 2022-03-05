@@ -7,7 +7,8 @@ public enum guildLevelType
 {
     guildMemberPlus,
     guildBuff,
-    guildIcon
+    guildIcon,
+    spawnPlus
 }
 public class UiGuildLevelBoard : MonoBehaviour
 {
