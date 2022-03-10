@@ -144,7 +144,7 @@ public class UiSmithBoard : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              LogManager.Instance.SendLogType("Smith", "OK", goodsAmount.ToString());
+             // LogManager.Instance.SendLogType("Smith", "OK", goodsAmount.ToString());
           });
     }
 

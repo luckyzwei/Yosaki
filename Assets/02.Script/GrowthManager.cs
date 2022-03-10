@@ -9,6 +9,9 @@ public class GrowthManager : SingletonMono<GrowthManager>
 {
     public ReactiveProperty<float> maxExp = new ReactiveProperty<float>();
 
+    private int levelUpSyncCount = 100;
+    private static int currentSyncCount = 0;
+
     private new void Awake()
     {
         base.Awake();
@@ -56,9 +59,22 @@ public class GrowthManager : SingletonMono<GrowthManager>
             }
             else
             {
-                if (syncToServer || isSleep)
+                if (isSleep)
                 {
                     SyncLevelUpDatas();
+                }
+                else
+                {
+                    if (syncToServer)
+                    {
+                        currentSyncCount++;
+
+                        if (currentSyncCount >= levelUpSyncCount)
+                        {
+                            SyncLevelUpDatas();
+                            currentSyncCount = 0;
+                        }
+                    }
                 }
             }
         }

@@ -34,8 +34,6 @@ public class BuffManager : SingletonMono<BuffManager>
     {
         var tableDatas = TableManager.Instance.BuffTable.dataArray;
 
-        DateTime currentTime = DateTime.Now.ToUniversalTime();
-
         int elapsedSeconds = updateDelay;
 
         for (int i = 0; i < tableDatas.Length; i++)

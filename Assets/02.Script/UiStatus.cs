@@ -18,25 +18,20 @@ public class UiStatus : SingletonMono<UiStatus>
 
     private int loadedMyRank = -1;
 
+    private static bool LevelInit = false;
+
     void Start()
     {
-        Subscribe();
-        RequestMyRank();
-    }
-
-    private void RequestMyRank()
-    {
-        RankManager.Instance.RequestMyLevelRank();
-        RankManager.Instance.RequestMyStageRank();
-
-        if (GameManager.contentsType == GameManager.ContentsType.NormalField)
+        if (LevelInit == false) 
         {
-            RankManager.Instance.RequestMyBossRank();
-            RankManager.Instance.RequestMyRealBossRank();
-            RankManager.Instance.RequestMyRelicRank();
-            RankManager.Instance.RequestMyMiniGameRank();
+            LevelInit = true;
+            RankManager.Instance.RequestMyLevelRank();
         }
+
+        Subscribe();
     }
+
+
     private void Subscribe()
     {
         ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(WhenLevelChanged).AddTo(this);
