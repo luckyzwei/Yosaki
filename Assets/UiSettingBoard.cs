@@ -39,6 +39,9 @@ public class UiSettingBoard : MonoBehaviour
     private Toggle yachaEffectToggle;
 
     [SerializeField]
+    private Toggle hpBarToggle;
+
+    [SerializeField]
     private TextMeshProUGUI bgmDesc;
 
     [SerializeField]
@@ -77,6 +80,8 @@ public class UiSettingBoard : MonoBehaviour
         showSleepPushToggle.isOn = PlayerPrefs.GetInt(SettingKey.ShowSleepPush) == 1;
 
         yachaEffectToggle.isOn = PlayerPrefs.GetInt(SettingKey.YachaEffect) == 1;
+
+        hpBarToggle.isOn = PlayerPrefs.GetInt(SettingKey.HpBar) == 1;
 
         initialized = true;
 
@@ -257,6 +262,18 @@ public class UiSettingBoard : MonoBehaviour
         SettingData.YachaEffect.Value = on ? 1 : 0;
     }
 
+    public void HpBar(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.HpBar.Value = on ? 1 : 0;
+    }
+
     public void OnClickStory()
     {
         DialogManager.Instance.SetNextDialog();
@@ -312,6 +329,7 @@ public static class SettingKey
     public static string GachaWhiteEffect = "GachaWhiteEffect";
     public static string ShowSleepPush = "ShowSleepPush";
     public static string YachaEffect = "YachaEffect";
+    public static string HpBar = "HpBar";
 }
 
 public static class SettingData
@@ -330,6 +348,7 @@ public static class SettingData
     public static ReactiveProperty<int> GachaWhiteEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> ShowSleepPush = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> YachaEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> HpBar = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
@@ -378,7 +397,10 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.ShowSleepPush, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.YachaEffect) == false)
-            PlayerPrefs.SetInt(SettingKey.YachaEffect, 1);
+            PlayerPrefs.SetInt(SettingKey.YachaEffect, 1); 
+        
+        if (PlayerPrefs.HasKey(SettingKey.HpBar) == false)
+            PlayerPrefs.SetInt(SettingKey.HpBar, 1);
     }
 
     static void Initialize()
@@ -396,6 +418,7 @@ public static class SettingData
         GachaWhiteEffect.Value = PlayerPrefs.GetInt(SettingKey.GachaWhiteEffect, 1);
         ShowSleepPush.Value = PlayerPrefs.GetInt(SettingKey.ShowSleepPush, 1);
         YachaEffect.Value = PlayerPrefs.GetInt(SettingKey.YachaEffect, 1);
+        HpBar.Value = PlayerPrefs.GetInt(SettingKey.HpBar, 1);
 
         Subscribe();
     }
@@ -453,6 +476,11 @@ public static class SettingData
         YachaEffect.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.YachaEffect, e);
+        });
+
+        HpBar.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.HpBar, e);
         });
     }
 

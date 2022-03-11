@@ -137,5 +137,7 @@ public class SaveManager : SingletonMono<SaveManager>
         }
 
         ServerData.goodsTable.SyncAllDataForce();
+
+        GrowthManager.Instance.SyncLevelUpDatas();
     }
 }

@@ -10,12 +10,12 @@ using UniRx;
 public class ChatManager : SingletonMono<ChatManager>
 {
     private string chatGroupName_Guild = "Guild";
-#if UNITY_ANDROID
+    //#if UNITY_ANDROID
     private string chatGroupName = "Normal";
-#endif
-#if UNITY_IOS
-    private string chatGroupName = "Normal_IOS";
-#endif
+    //#endif
+    //#if UNITY_IOS
+    //    private string chatGroupName = "Normal_IOS";
+    //#endif
 
     ChannelType channelType = ChannelType.Public;
 
@@ -139,7 +139,7 @@ public class ChatManager : SingletonMono<ChatManager>
                 retryCount_Guild = 0;
 
                 //비속어 필터링
-               // whenChatReceived_Guild.Execute(new ChatInfo(CommonString.ChatConnectString));
+                // whenChatReceived_Guild.Execute(new ChatInfo(CommonString.ChatConnectString));
                 Debug.LogError("채팅  JoinChannel success");
                 chatConnected_Guild = true;
                 Backend.Chat.SetFilterUse(true);
@@ -193,7 +193,7 @@ public class ChatManager : SingletonMono<ChatManager>
                     {
                         whenChatReceived_Guild.Execute(new ChatInfo($"{split[0]} 나:{split[1]}"));
                     }
-                    else if (split.Length == 1) 
+                    else if (split.Length == 1)
                     {
                         whenChatReceived_Guild.Execute(new ChatInfo($"{split[0]}"));
                     }
@@ -598,7 +598,7 @@ public class ChatManager : SingletonMono<ChatManager>
                 {
                     whenChatReceived_Guild.Execute(new ChatInfo($"{split[0]} 나:{split[1]}"));
                 }
-                else if (split.Length == 1) 
+                else if (split.Length == 1)
                 {
                     whenChatReceived_Guild.Execute(new ChatInfo($"{split[0]}"));
                 }

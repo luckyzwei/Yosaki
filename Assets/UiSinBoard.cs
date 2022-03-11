@@ -10,10 +10,8 @@ public class UiSinBoard : MonoBehaviour
     [SerializeField]
     private UiTwelveBossContentsView bossContentsView;
 
-    public ObscuredInt rewardGrade = 0;
-
     [SerializeField]
-    private Button recordButton;
+    private UiTwelveBossContentsView bossContentsView2;
 
     void Start()
     {
@@ -27,5 +25,6 @@ public class UiSinBoard : MonoBehaviour
     private void Initialize()
     {
         bossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[13]);
+        bossContentsView2.Initialize(TableManager.Instance.TwelveBossTable.dataArray[14]);
     }
 }

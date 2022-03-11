@@ -63,6 +63,10 @@ public class TwelveDungeonManager : ContentsManagerBase
     private Transform bossSpawnParent_Sin;
 
     [SerializeField]
+    private Transform bossSpawnParent_Sin2;
+
+
+    [SerializeField]
     private List<GameObject> mapObjects;
 
     #region Security
@@ -146,13 +150,18 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         var prefab = Resources.Load<BossEnemyBase>($"TwelveBoss/{GameManager.Instance.bossId}");
 
-        if (GameManager.Instance.bossId != 13)
+        if (GameManager.Instance.bossId < 13)
         {
             singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent);
         }
-        else
+        else if (GameManager.Instance.bossId == 13)
         {
             singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent_Sin);
+        }
+        else if (GameManager.Instance.bossId == 14)
+        {
+            singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent_Sin2);
+
         }
 
         singleRaidEnemy.transform.localPosition = Vector3.zero;

@@ -363,17 +363,11 @@ public class SkillServerTable
 
         int plusAddValue = 0;
 
-        if (tableData.Skilltype == 0)
+        if (tableData.Skilltype == 0 || tableData.Skilltype == 1 || tableData.Skilltype == 2)
         {
             plusAddValue = ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value;
-        }
-        if (tableData.Skilltype == 1)
-        {
-            plusAddValue = ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
-        }
-        if (tableData.Skilltype == 2)
-        {
-            plusAddValue = ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value;
+            plusAddValue += ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
+            plusAddValue += ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value;
         }
         //
 

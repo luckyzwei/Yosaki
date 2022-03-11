@@ -132,28 +132,23 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         //스킬 레벨업시
         ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].AsObservable().Subscribe(WhenSkillUpgraded).AddTo(disposables);
 
-        if (skillTableData.Skilltype == 0)
+        if (skillTableData.Skilltype == 0 || skillTableData.Skilltype == 1 || skillTableData.Skilltype == 2)
         {
             ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).AsObservable().Subscribe(e =>
             {
                 WhenSkillUpgraded(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].Value);
             }).AddTo(disposables);
-        }
-        else if (skillTableData.Skilltype == 1)
-        {
+
             ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).AsObservable().Subscribe(e =>
             {
                 WhenSkillUpgraded(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].Value);
             }).AddTo(disposables);
-        }
-        else if (skillTableData.Skilltype == 2)
-        {
+
             ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).AsObservable().Subscribe(e =>
             {
                 WhenSkillUpgraded(ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].Value);
             }).AddTo(disposables);
         }
-
 
         var weaponData = TableManager.Instance.WeaponData[skillTableData.Awakeweaponidx];
 
@@ -208,17 +203,11 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
         int addValue = 0;
 
-        if (skillTableData.Skilltype == 0)
+        if (skillTableData.Skilltype == 0|| skillTableData.Skilltype == 1 || skillTableData.Skilltype == 2)
         {
             addValue = ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value;
-        }
-        if (skillTableData.Skilltype == 1)
-        {
-            addValue = ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
-        }
-        if (skillTableData.Skilltype == 2)
-        {
-            addValue = ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value;
+            addValue += ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
+            addValue += ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value;
         }
 
         levelDescription.SetText(string.Format(lvTextFormat, skillLevel, maxLevel, addValue));

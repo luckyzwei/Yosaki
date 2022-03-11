@@ -23,9 +23,11 @@ public class UiSinRewardPopup_0 : SingletonMono<UiSinRewardPopup_0>
     [SerializeField]
     private TextMeshProUGUI damText;
 
+    public int bossId = 13;
+
     private void OnEnable()
     {
-        Initialize(13);
+        Initialize(bossId);
     }
 
 
@@ -77,40 +79,40 @@ public class UiSinRewardPopup_0 : SingletonMono<UiSinRewardPopup_0>
 
     public void OnClickAllReceiveButton()
     {
-        int rewardCount = 0;
+        //int rewardCount = 0;
 
-        for (int i = 0; i < uiTwelveBossRewardViews.Count; i++)
-        {
-            bool hasReward = uiTwelveBossRewardViews[i].GetRewardByScript();
+        //for (int i = 0; i < uiTwelveBossRewardViews.Count; i++)
+        //{
+        //    bool hasReward = uiTwelveBossRewardViews[i].GetRewardByScript();
 
-            if (hasReward)
-            {
-                rewardCount++;
-            }
-        }
+        //    if (hasReward)
+        //    {
+        //        rewardCount++;
+        //    }
+        //}
 
-        if (rewardCount != 0)
-        {
-            List<TransactionValue> transactions = new List<TransactionValue>();
+        //if (rewardCount != 0)
+        //{
+        //    List<TransactionValue> transactions = new List<TransactionValue>();
 
-            Param bossParam = new Param();
-            bossParam.Add("boss12", ServerData.bossServerTable.TableDatas["boss12"].ConvertToString());
-            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+        //    Param bossParam = new Param();
+        //    bossParam.Add("boss12", ServerData.bossServerTable.TableDatas["boss12"].ConvertToString());
+        //    transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
-            Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
-            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        //    Param goodsParam = new Param();
+        //    goodsParam.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
+        //    transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-            ServerData.SendTransaction(transactions, successCallBack: () =>
-            {
-                PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
-                SoundManager.Instance.PlaySound("Reward");
-            });
-        }
-        else
-        {
-            PopupManager.Instance.ShowAlarmMessage("받을수 있는 보상이 없습니다.");
-        }
+        //    ServerData.SendTransaction(transactions, successCallBack: () =>
+        //    {
+        //        PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
+        //        SoundManager.Instance.PlaySound("Reward");
+        //    });
+        //}
+        //else
+        //{
+        //    PopupManager.Instance.ShowAlarmMessage("받을수 있는 보상이 없습니다.");
+        //}
     }
 
 #if UNITY_EDITOR

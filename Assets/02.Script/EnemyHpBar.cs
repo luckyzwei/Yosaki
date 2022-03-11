@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class EnemyHpBar : MonoBehaviour
@@ -22,6 +23,8 @@ public class EnemyHpBar : MonoBehaviour
     [SerializeField]
     private int minOrderInLayer = 99;
 
+    private bool notUpdate = false;
+
     private void OnEnable()
     {
         ResetGauge();
@@ -29,8 +32,22 @@ public class EnemyHpBar : MonoBehaviour
         SetOderInlayer();
     }
 
+    private void Subscribe()
+    {
+        SettingData.HpBar.AsObservable().Subscribe(e =>
+        {
+
+            notUpdate = e == 0;
+
+            this.gameObject.SetActive(notUpdate == false);
+
+        }).AddTo(this);
+    }
+
     private void SetOderInlayer()
     {
+        if (notUpdate == true) return;
+
         int rand = Random.Range(0, 20);
 
         frameRenderer.sortingOrder = minOrderInLayer + rand;
@@ -45,6 +62,8 @@ public class EnemyHpBar : MonoBehaviour
     private void Awake()
     {
         SetOriginYScale();
+
+        Subscribe();
     }
 
     private void SetOriginYScale()
@@ -54,12 +73,16 @@ public class EnemyHpBar : MonoBehaviour
 
     private void ResetGauge()
     {
+        if (notUpdate == true) return;
+
         greenRenderer.transform.localScale = new Vector2(1f, originYScale);
         greyRenderer.transform.localScale = new Vector2(1f, originYScale);
     }
 
     private IEnumerator GreyRoutine()
     {
+        if (notUpdate == true) yield break;
+
         float tick = 0f;
 
         float startXScale = greyRenderer.transform.localScale.x;
@@ -81,6 +104,8 @@ public class EnemyHpBar : MonoBehaviour
 
     public void UpdateGauge(double currentHp, double maxHp)
     {
+        if (notUpdate == true) return;
+
         if (maxHp == 0f) return;
 
         greenRenderer.transform.localScale = new Vector2(Mathf.Max(0f, (float)(currentHp / maxHp)), originYScale);
