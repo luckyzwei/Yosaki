@@ -93,6 +93,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite AsuraHand4;
     public Sprite AsuraHand5;
     public Sprite springIcon;
+    public Sprite Aduk;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -175,6 +176,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.costume25:
                 return costumeThumbnail[25];
+                break;
+
+            case Item_Type.costume26:
+                return costumeThumbnail[26];
                 break;
 
 
@@ -328,6 +333,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.Asura5:
                 return AsuraHand5;
+                break;     
+            case Item_Type.Aduk:
+                return Aduk;
                 break;
             case Item_Type.Event_Item_1:
                 return springIcon;

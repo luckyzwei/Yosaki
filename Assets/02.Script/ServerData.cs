@@ -257,6 +257,9 @@ public static class ServerData
 
             case Item_Type.Asura5:
                 ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value += rewardValue;
+                break;   
+            case Item_Type.Aduk:
+                ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value += rewardValue;
                 break;
 
             case Item_Type.costume1:
@@ -280,6 +283,7 @@ public static class ServerData
             case Item_Type.costume23:
             case Item_Type.costume24:
             case Item_Type.costume25:
+            case Item_Type.costume26:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -354,6 +358,7 @@ public static class ServerData
             case Item_Type.costume23:
             case Item_Type.costume24:
             case Item_Type.costume25:
+            case Item_Type.costume26:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -426,6 +431,10 @@ public static class ServerData
 
             case Item_Type.Asura5:
                 passParam.Add(GoodsTable.Asura5, ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
+            
+            case Item_Type.Aduk:
+                passParam.Add(GoodsTable.Aduk, ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
         }
 
@@ -603,6 +612,10 @@ public static class ServerData
             case Item_Type.Asura5:
                 ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value += amount;
                 param.Add(GoodsTable.Asura5, ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);  
+            case Item_Type.Aduk:
+                ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value += amount;
+                param.Add(GoodsTable.Aduk, ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.costume1:

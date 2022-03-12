@@ -27,6 +27,7 @@ public class UserInfoTable
 
     public const string passSelectedIdx = "passSelectedIdx";
     public const string currentFloorIdx = "currentFloorIdx";
+    public const string currentFloorIdx2 = "cf2";
 
     public const string receiveReviewReward = "receiveReviewReward";
 
@@ -36,7 +37,7 @@ public class UserInfoTable
     public const string dailyTicketBuyCount = "dailyTicketBuyCount";
     public const string receivedTicketReward = "receivedTicketReward";
 
-    public const string bonusDungeonEnterCount = "bonusDungeonEnterCount3";
+    public const string bonusDungeonEnterCount = "bonusDungeonEnterCount4";
 
     public const string dokebiKillCount0 = "dokebiKillCount0";
     public const string dokebiKillCount1 = "dokebiKillCount1";
@@ -147,6 +148,7 @@ public class UserInfoTable
         {hackingCount,0f},
         {passSelectedIdx,0f},
         {currentFloorIdx,0f},
+        {currentFloorIdx2,0f},
         {receiveReviewReward,0f},
         {dailyEnemyKillCount,0f},
         {dailyTicketBuyCount,0f},
@@ -203,7 +205,7 @@ public class UserInfoTable
         {usedRelicTicketNum,0f},
         {relicpensionAttendance,0f},
         {yomul4_buff,0f},
-       
+
         {marbleReset2,0f},
         {relicReset2,0f},
         {yomul5_buff,0f},
@@ -810,6 +812,11 @@ public class UserInfoTable
                 tableDatas[killCountTotal2].Value += updateRequireNum;
             }
         }
+    }
+
+    public bool IsLastFloor()
+    {
+        return tableDatas[currentFloorIdx].Value == 301;
     }
 
     public bool IsMonthlyPass2()

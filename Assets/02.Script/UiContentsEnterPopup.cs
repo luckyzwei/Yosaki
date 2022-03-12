@@ -25,6 +25,9 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
     private GameObject infinityTowerObject;
 
     [SerializeField]
+    private GameObject infinityTowerObject2;
+
+    [SerializeField]
     private GameObject dokebiObject;
 
     [SerializeField]
@@ -80,6 +83,8 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
         infinityTowerObject.SetActive(type == ContentsType.InfiniteTower);
 
+        infinityTowerObject2.SetActive(type == ContentsType.InfiniteTower2);
+
         dokebiObject.SetActive(type == ContentsType.Dokebi);
 
         twelveDungeonObject.SetActive(type == ContentsType.TwelveDungeon);
@@ -116,6 +121,11 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
             case ContentsType.InfiniteTower:
                 {
                     InfiniteTowerEnterRoutine();
+                }
+                break;
+            case ContentsType.InfiniteTower2:
+                {
+                    InfiniteTowerEnterRoutine2();
                 }
                 break;
         }
@@ -193,6 +203,13 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
            enterButton.interactable = true;
            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "서버가 불안정 합니다. 잠시후 다시 시도해 주세요.", null);
        });
+    }
+
+    private void InfiniteTowerEnterRoutine2()
+    {
+        enterButton.interactable = false;
+
+        GameManager.Instance.LoadContents(contentsType);
     }
 
     public void BonusDungeonInstantClear()

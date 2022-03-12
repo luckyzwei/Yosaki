@@ -233,40 +233,30 @@ public class AutoManager : Singleton<AutoManager>
                 {
                     canAttack = true;
 
-                    if (skillQueue.Count == 0)
+                    //스킬 발동 방향 
+                    bool isEnemyOnRight = currentTarget.transform.position.x > this.playerTr.position.x;
+
+                    if (UiMoveStick.Instance.nowTouching == false)
                     {
-                        SetSkillQueue();
+                        UiMoveStick.Instance.SetHorizontalAxsis(0);
                     }
 
-                    SetFrontType2Skill();
+                    PlayerMoveController.Instance.SetMoveDirection(isEnemyOnRight ? MoveDirection.Right : MoveDirection.Left);
 
-                    if (skillQueue.Count > 0)
+
+                    int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
+
+                    var selectedSkill = ServerData.skillServerTable.TableDatas[SkillServerTable.GetSkillGroupKey(currentSelectedGroupId)];
+
+                    for (int i = 0; i < selectedSkill.Count; i++)
                     {
-                        //스킬 발동 방향 
-                        bool isEnemyOnRight = currentTarget.transform.position.x > this.playerTr.position.x;
+                        int skillIdx = selectedSkill[i].Value;
 
-                        if (UiMoveStick.Instance.nowTouching == false)
-                        {
-                            UiMoveStick.Instance.SetHorizontalAxsis(0);
-                        }
-
-                        PlayerMoveController.Instance.SetMoveDirection(isEnemyOnRight ? MoveDirection.Right : MoveDirection.Left);
-
-                        //스킬 큐 세팅
-
-                        //스킬 사용
-
-                        int useSkillIdx = skillQueue[0];
-
-                        bool skillCast = PlayerSkillCaster.Instance.UseSkill(useSkillIdx);
-
-                        skillQueue.RemoveAt(0);
-
-                        if (skillCast)
-                        {
-                            yield return null;
-                        }
+                        PlayerSkillCaster.Instance.UseSkill(skillIdx);
                     }
+
+                    yield return null;
+
                 }
             }
         }
@@ -286,7 +276,7 @@ public class AutoManager : Singleton<AutoManager>
         {
             var skillTableData = TableManager.Instance.SkillData[skillQueue[i]];
 
-            if (skillTableData.Skilltype== skillType2)
+            if (skillTableData.Skilltype == skillType2)
             {
                 fronSkillContainer.Add(skillQueue[i]);
             }

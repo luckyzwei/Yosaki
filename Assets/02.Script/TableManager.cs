@@ -393,6 +393,31 @@ public class TableManager : SingletonMono<TableManager>
             return towerTableData;
         }
     }
+    //
+
+    [SerializeField]
+    private TowerTable2 towerTable2;
+    public TowerTable2 TowerTable2 => towerTable2;
+
+    private Dictionary<int, TowerTable2Data> towerTableData2;
+    public Dictionary<int, TowerTable2Data> TowerTableData2
+    {
+        get
+        {
+            if (towerTableData2 == null)
+            {
+                towerTableData2 = new Dictionary<int, TowerTable2Data>();
+
+                for (int i = 0; i < towerTable2.dataArray.Length; i++)
+                {
+                    towerTableData2.Add(towerTable2.dataArray[i].Id, towerTable2.dataArray[i]);
+                }
+            }
+
+            return towerTableData2;
+        }
+    }
+    //
 
 
 

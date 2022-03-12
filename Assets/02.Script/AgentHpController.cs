@@ -103,7 +103,21 @@ public class AgentHpController : MonoBehaviour
 
         SetDefense(enemyTableData.Defense);
 
-        SetHp(isFieldBossEnemy == false ? enemyTableData.Hp : enemyTableData.Hp * enemyTableData.Bosshpratio);
+        if (isFieldBossEnemy == false)
+        {
+            SetHp(enemyTableData.Hp);
+        }
+        else
+        {
+            double bossHp = enemyTableData.Hp * enemyTableData.Bosshpratio;
+
+            double decreaseValue = PlayerStats.DecreaseBossHp();
+
+            bossHp -= bossHp * decreaseValue;
+
+            SetHp(bossHp);
+        }
+
     }
 
     public void SetHp(double hp)

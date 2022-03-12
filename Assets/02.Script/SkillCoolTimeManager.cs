@@ -107,7 +107,7 @@ public static class SkillCoolTimeManager
             data.Value -= Time.deltaTime;
         }
 
-        data.Value = 0f;
+        //data.Value = 0f;
     }
 
     public static float GetSkillCoolTimeMax(SkillTableData skillInfo)

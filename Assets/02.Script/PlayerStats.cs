@@ -35,7 +35,8 @@ public enum StatusType
     MarbleAddPer,
     SuperCritical2DamPer,
     //Smith
-    growthStoneUp, WeaponHasUp, NorigaeHasUp, PetEquipHasUp, PetEquipProbUp
+    growthStoneUp, WeaponHasUp, NorigaeHasUp, PetEquipHasUp, PetEquipProbUp,
+    DecreaseBossHp
 }
 
 
@@ -1179,16 +1180,16 @@ public static class PlayerStats
 
                     if (ServerData.goodsTable.GetTableData(asuraKey3).Value == 0)
                     {
-                     
+
                     }
-                    else 
+                    else
                     {
                         ret += asura3Value;
                     }
 
                     if (ServerData.goodsTable.GetTableData(asuraKey4).Value == 0)
                     {
-                  
+
                     }
                     else
                     {
@@ -1220,7 +1221,7 @@ public static class PlayerStats
         {
             case StatusType.AttackAddPer:
                 {
-                    return petLevel *0.1f;
+                    return petLevel * 0.1f;
                 }
                 break;
             case StatusType.ExpGainPer:
@@ -1236,5 +1237,13 @@ public static class PlayerStats
         }
 
         return 0f;
+    }
+
+    private static string adukCostumeKey = "costume26";
+    public static float DecreaseBossHp()
+    {
+        if (ServerData.costumeServerTable.TableDatas[adukCostumeKey].hasCostume.Value == false) return 0f;
+
+        return 0.05f;
     }
 }

@@ -108,6 +108,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
         int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
         description2 += $"요괴 추가소환 : {plusSpawnNum}";
+        description1 += $"{CommonString.GetStatusName(StatusType.DecreaseBossHp)} : {PlayerStats.DecreaseBossHp() * 100f}";
 
 
         descriptionBoard1.SetText(description1);

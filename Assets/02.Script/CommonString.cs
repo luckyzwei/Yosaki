@@ -123,6 +123,7 @@ public static class CommonString
             case Item_Type.costume23: return TableManager.Instance.Costume.dataArray[23].Name;
             case Item_Type.costume24: return TableManager.Instance.Costume.dataArray[24].Name;
             case Item_Type.costume25: return TableManager.Instance.Costume.dataArray[25].Name;
+            case Item_Type.costume26: return TableManager.Instance.Costume.dataArray[26].Name;
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;
@@ -169,6 +170,7 @@ public static class CommonString
             case Item_Type.Asura3: return "네번째팔";
             case Item_Type.Asura4: return "다섯번째팔";
             case Item_Type.Asura5: return "여섯번째팔";
+            case Item_Type.Aduk: return "어둑시니의 뿔";
         }
         return "미등록";
     }
@@ -275,6 +277,9 @@ public static class CommonString
                 break;
             case StatusType.PetEquipProbUp:
                 return "환수장비 강화확률 증가";
+                break;
+            case StatusType.DecreaseBossHp:
+                return "스테이지 보스 체력 감소(%)";
                 break;
         }
 
