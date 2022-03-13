@@ -66,11 +66,11 @@ public class UiDailyPackRefund : MonoBehaviour
         buyCounts[2].SetText(monthlyPackCount.ToString() + "회");
 
         //4
-        int _1DiffTicket = 700;
+        int _1DiffTicket = 1000;
         //13
-        int _2DiffTicket = 2500;
+        int _2DiffTicket = 3000;
         //40
-        int _3DiffTicket = 9000;
+        int _3DiffTicket = 10000;
 
         int marble1_MarbleAdd = dailyPackCount * _1DiffTicket;
         plusCount[0].SetText(Utils.ConvertBigNum(marble1_MarbleAdd));
