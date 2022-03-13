@@ -252,6 +252,8 @@ public class AutoManager : Singleton<AutoManager>
                     {
                         int skillIdx = selectedSkill[i].Value;
 
+                        if (skillIdx == -1) continue;
+
                         PlayerSkillCaster.Instance.UseSkill(skillIdx);
                     }
 

@@ -113,7 +113,7 @@ public class UserInfoTable
     public const string marbleReset2 = "marbleReset3";
     public const string marbleReset3 = "marbleReset4";
     public const string relicReset2 = "relicReset2";
-    public const string dailyPackReset = "dailyPackReset2";
+    public const string dailyPackReset = "dpr";
     public const string sonScore = "son6";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
     public const string buffAwake = "buffAwake";
@@ -403,7 +403,6 @@ public class UserInfoTable
     {
         UpdateLastLoginTime();
         UpdatekillCount();
-        UpdatejumpCount();
     }
     private void UpdatekillCount()
     {

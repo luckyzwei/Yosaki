@@ -99,11 +99,14 @@ public class SaveManager : SingletonMono<SaveManager>
     //SendQueue에서 저장
     public void SyncDatasInQueue()
     {
+        if (GrowthManager.Instance != null)
+        {
+            GrowthManager.Instance.SyncLevelUpDatas();
+        }
+
         ServerData.goodsTable.SyncAllData();
 
         ServerData.userInfoTable.AutoUpdateRoutine();
-
-        ServerData.growthTable.UpData(GrowthTable.Exp, false);
 
         //CollectionManager.Instance.SyncToServer();
 

@@ -102,6 +102,6 @@ public class PlayerData : SingletonMono<PlayerData>
 
     private void Subscribe()
     {
-        RankManager.Instance.Subscribe();
+      //  RankManager.Instance.Subscribe();
     }
 }

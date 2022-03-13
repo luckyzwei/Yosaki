@@ -99,6 +99,17 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
             OnClickEnterButton();
         }
+
+        //if (type == ContentsType.InfiniteTower2 && UiLastContentsFunc.AutoInfiniteTower2)
+        //{
+        //    if (ServerData.userInfoTable.TableDatas[UserInfoTable.currentFloorIdx2].Value >= TableManager.Instance.TowerTableData2.Count+1)
+        //    {
+        //        UiLastContentsFunc.AutoInfiniteTower2 = false;
+        //        return;
+        //    }
+
+        //    OnClickEnterButton();
+        //}
     }
 
     private void UpdateUi()
@@ -176,7 +187,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
     private void InfiniteTowerEnterRoutine()
     {
-        int currentBlueStone = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
+        float currentBlueStone = ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         if (currentBlueStone < GameBalance.contentsEnterprice)
         {

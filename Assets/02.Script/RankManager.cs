@@ -106,13 +106,13 @@ public class RankManager : SingletonMono<RankManager>
     public ReactiveCommand<RankInfo> WhenMyRelicRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyMiniGameRankLoadComplete = new ReactiveCommand<RankInfo>();
 
-    public void Subscribe()
-    {
-        ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e =>
-             {
-                 UpdateUserRank_Level();
-             }).AddTo(this);
-    }
+    //public void Subscribe()
+    //{
+    //    ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e =>
+    //         {
+    //             UpdateUserRank_Level();
+    //         }).AddTo(this);
+    //}
 
     public void GetRankerList(string uuid, int count, Backend.BackendCallback callback)
     {

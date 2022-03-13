@@ -73,13 +73,9 @@ public class MapInfo : SingletonMono<MapInfo>
 
         Subscribe();
 
-        UpdateStageRank();
+       // UpdateStageRank();
     }
 
-    private void UpdateStageRank()
-    {
-        RankManager.Instance.UpdateStage_Score(ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
-    }
 
     private void Subscribe()
     {
@@ -419,6 +415,7 @@ public class MapInfo : SingletonMono<MapInfo>
             UiTutorialManager.Instance.SetClear(TutorialStep.ClearBoss2);
         }
 
-        UpdateStageRank();
+     
+        GameManager.Instance.ResetLastContents();
     }
 }

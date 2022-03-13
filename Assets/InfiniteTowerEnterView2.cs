@@ -23,7 +23,7 @@ public class InfiniteTowerEnterView2 : MonoBehaviour
 
     public void OnAutoToggleChanged(bool onOff)
     {
-        UiLastContentsFunc.AutoInfiniteTower = onOff;
+       // UiLastContentsFunc.AutoInfiniteTower2 = onOff;
     }
 
     void OnEnable()
