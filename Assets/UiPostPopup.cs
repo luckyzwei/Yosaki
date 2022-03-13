@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System;
+using TMPro;
 
 public class UiPostPopup : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class UiPostPopup : MonoBehaviour
     [SerializeField]
     private GameObject emptyText;
 
+    [SerializeField]
+    private TextMeshProUGUI loadText;
+
+    private Coroutine textingRoutine;
+
     void Start()
     {
         Subscribe();
@@ -24,13 +30,45 @@ public class UiPostPopup : MonoBehaviour
 
     private void OnEnable()
     {
+        emptyText.SetActive(false);
+        loadText.gameObject.SetActive(true);
         PostManager.Instance.RefreshPost(true);
+
+        if (textingRoutine != null)
+        {
+            StopCoroutine(textingRoutine);
+        }
+
+        textingRoutine = StartCoroutine(LoadTextingRoutine());
+    }
+
+    WaitForSeconds textingDelay = new WaitForSeconds(0.2f);
+    private IEnumerator LoadTextingRoutine()
+    {
+        while (true) 
+        {
+            loadText.SetText("우편 확인중...");
+            yield return textingDelay;
+            loadText.SetText("우편 확인중..");
+            yield return textingDelay;
+            loadText.SetText("우편 확인중.");
+            yield return textingDelay;
+            loadText.SetText("우편 확인중..");
+            yield return textingDelay;
+        }
     }
 
     private void Subscribe()
     {
         PostManager.Instance.WhenPostRefreshed.Subscribe(e =>
         {
+            if (textingRoutine != null)
+            {
+                StopCoroutine(textingRoutine);
+            }
+
+            loadText.gameObject.SetActive(false);
+
             WhenPostRefreshed();
         }).AddTo(this);
     }

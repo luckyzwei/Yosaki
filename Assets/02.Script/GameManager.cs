@@ -244,7 +244,7 @@ public class GameManager : SingletonMono<GameManager>
 
         ChangeScene();
     }
-
+    private static bool firstLoad = true;
     private void ChangeScene()
     {
         IAPManager.Instance.ResetDisableCallbacks();
@@ -256,7 +256,11 @@ public class GameManager : SingletonMono<GameManager>
 
         PopupManager.Instance.SetChatBoardPopupManager();
 
-        PostManager.Instance.RefreshPost();
+        if (firstLoad)
+        {
+            firstLoad = false;
+            PostManager.Instance.RefreshPost();
+        }
 
         if (contentsType == ContentsType.NormalField)
         {
@@ -266,7 +270,7 @@ public class GameManager : SingletonMono<GameManager>
             }
         }
 
-        SaveManager.Instance.SyncDatasInQueue();
+        // SaveManager.Instance.SyncDatasInQueue();
 
         whenSceneChanged.Execute();
 

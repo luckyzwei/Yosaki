@@ -50,7 +50,7 @@ public class PostManager : SingletonMono<PostManager>
                         var postInfo = fromadmin[i];
 
                         //랭킹보상
-                        if (postInfo.ContainsKey("rankType")) 
+                        if (postInfo.ContainsKey("rankType"))
                         {
                             PostInfo post = new PostInfo();
                             post.Indate = postInfo["inDate"][ServerData.format_string].ToString();
@@ -62,7 +62,7 @@ public class PostManager : SingletonMono<PostManager>
                             postList.Add(post);
                         }
                         //일반보상
-                        else 
+                        else
                         {
                             PostInfo post = new PostInfo();
                             post.Indate = postInfo["inDate"][ServerData.format_string].ToString();
@@ -99,12 +99,29 @@ public class PostManager : SingletonMono<PostManager>
             // 이후 처리
             if (bro.IsSuccess())
             {
-               // LogManager.Instance.SendLog("랭킹보상 수령 요청", $"{(Item_Type)((int)post.itemType)}");
+                // LogManager.Instance.SendLog("랭킹보상 수령 요청", $"{(Item_Type)((int)post.itemType)}");
 
                 SoundManager.Instance.PlaySound("GoldUse");
                 ServerData.GetPostItem((Item_Type)((int)post.itemType), post.itemCount);
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "우편을 수령했습니다.", null);
-                RefreshPost(true);
+
+                int findIdx = -1;
+                for (int i = 0; i < postList.Count; i++)
+                {
+                    if (postList[i].Indate.Equals(post.Indate))
+                    {
+                        findIdx = i;
+                        break;
+                    }
+                }
+
+                if (findIdx != -1)
+                {
+                    postList.RemoveAt(findIdx);
+                    WhenPostRefreshed.Execute();
+                }
+
+                //RefreshPost(true);
             }
             else
             {
