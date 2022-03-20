@@ -196,6 +196,10 @@ public class UiLevelPassCell : MonoBehaviour
             {
                 PopupManager.Instance.ShowAlarmMessage("여우패스8이 필요합니다!");
             }
+            else if (passInfo.passGrade == 8)
+            {
+                PopupManager.Instance.ShowAlarmMessage("여우패스9이 필요합니다!");
+            }
 
             return;
         }
