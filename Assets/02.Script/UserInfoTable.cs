@@ -111,7 +111,7 @@ public class UserInfoTable
 
     public const string relicReset = "relicReset";
     public const string marbleReset2 = "marbleReset3";
-    public const string marbleReset3 = "marbleReset4";
+    public const string marbleReset3 = "marbleReset5";
     public const string relicReset2 = "relicReset2";
     public const string dailyPackReset = "dpr";
     public const string sonScore = "son6";

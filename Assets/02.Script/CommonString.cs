@@ -31,6 +31,10 @@ public static class CommonString
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
 
+    public static string ItemGrade_4_Skill = "주작";
+    public static string ItemGrade_5_Skill = "청룡";
+    public static string ItemGrade_6_Skill = "청룡";
+
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
 
@@ -171,6 +175,10 @@ public static class CommonString
             case Item_Type.Asura4: return "다섯번째팔";
             case Item_Type.Asura5: return "여섯번째팔";
             case Item_Type.Aduk: return "어둑시니의 뿔";
+            case Item_Type.SinSkill0: return "등껍질 부수기";
+            case Item_Type.SinSkill1: return "백호 발톱";
+            case Item_Type.SinSkill2: return "주작 베기";
+            case Item_Type.SinSkill3: return "청룡 베기";
         }
         return "미등록";
     }

@@ -78,7 +78,7 @@ public class WeaponView : MonoBehaviour
             grade = skillData.Skillgrade;
             id = skillData.Id;
             skillIcon.sprite = CommonResourceContainer.GetSkillIconSprite(id);
-            this.gradeText.SetText(CommonUiContainer.Instance.ItemGradeName_Weapon[grade]);
+            this.gradeText.SetText(CommonUiContainer.Instance.ItemGradeName_Skill[grade]);
         }
 
         lvText.gameObject.SetActive(skillData == null);

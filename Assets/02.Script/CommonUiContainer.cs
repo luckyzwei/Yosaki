@@ -15,6 +15,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae };
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
+    private List<string> itemGradeName_Skill = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill, CommonString.ItemGrade_6_Skill };
+    public List<string> ItemGradeName_Skill => itemGradeName_Skill;
+
     public List<Color> itemGradeColor;
 
     [SerializeField]
@@ -94,6 +97,11 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite AsuraHand5;
     public Sprite springIcon;
     public Sprite Aduk;
+
+    public Sprite SinSkill0;
+    public Sprite SinSkill1;
+    public Sprite SinSkill2;
+    public Sprite SinSkill3;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -340,6 +348,21 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Event_Item_1:
                 return springIcon;
                 break;
+                //
+            case Item_Type.SinSkill0:
+                return SinSkill0;
+                break;
+            case Item_Type.SinSkill1:
+                return SinSkill1;
+                break;
+            case Item_Type.SinSkill2:
+                return SinSkill2;
+                break;
+            case Item_Type.SinSkill3:
+                return SinSkill3;
+                break;
+
+
         }
 
         return null;

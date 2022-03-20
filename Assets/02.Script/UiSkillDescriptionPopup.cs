@@ -80,6 +80,26 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     public void Initialize(SkillTableData skillTableData)
     {
+        //신수스킬용
+        if (skillTableData.Id == 15 || skillTableData.Id == 16)
+        {
+            if (skillTableData.Id == 15)
+            {
+                if (ServerData.goodsTable.GetTableData(GoodsTable.SinSkill2).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 16)
+            {
+                if (ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+        }
+        //
+
         this.gameObject.SetActive(true);
 
         this.skillTableData = skillTableData;
@@ -132,7 +152,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         //스킬 레벨업시
         ServerData.skillServerTable.TableDatas[SkillServerTable.SkillLevel][skillTableData.Id].AsObservable().Subscribe(WhenSkillUpgraded).AddTo(disposables);
 
-        if (skillTableData.Skilltype == 0 || skillTableData.Skilltype == 1 || skillTableData.Skilltype == 2)
+        if (skillTableData.Skilltype == 0 || skillTableData.Skilltype == 1 || skillTableData.Skilltype == 2 || skillTableData.Skilltype == 4)
         {
             ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).AsObservable().Subscribe(e =>
             {
@@ -203,7 +223,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
         int addValue = 0;
 
-        if (skillTableData.Skilltype == 0|| skillTableData.Skilltype == 1 || skillTableData.Skilltype == 2)
+        if (skillTableData.Skilltype == 0 || skillTableData.Skilltype == 1 || skillTableData.Skilltype == 2 || skillTableData.Skilltype == 4)
         {
             addValue = ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value;
             addValue += ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
@@ -350,6 +370,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     public void OnClickAwakeButton()
     {
+ 
         // UiTutorialManager.Instance.SetClear(TutorialStep._10_GetSkill);
 
         int currentAwakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillTableData.Id].Value;

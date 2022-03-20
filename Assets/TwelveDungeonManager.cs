@@ -150,11 +150,7 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         var prefab = Resources.Load<BossEnemyBase>($"TwelveBoss/{GameManager.Instance.bossId}");
 
-        if (GameManager.Instance.bossId < 13)
-        {
-            singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent);
-        }
-        else if (GameManager.Instance.bossId == 13)
+        if (GameManager.Instance.bossId == 13)
         {
             singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent_Sin);
         }
@@ -162,6 +158,10 @@ public class TwelveDungeonManager : ContentsManagerBase
         {
             singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent_Sin2);
 
+        }
+        else
+        {
+            singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent);
         }
 
         singleRaidEnemy.transform.localPosition = Vector3.zero;
@@ -312,6 +312,14 @@ public class TwelveDungeonManager : ContentsManagerBase
         portalObject.gameObject.SetActive(false);
 
         float remainSec = playTime;
+
+        if (twelveBossTable != null)
+        {
+            if (twelveBossTable.Id == 15 || twelveBossTable.Id == 16 || twelveBossTable.Id == 17 || twelveBossTable.Id == 18)
+            {
+                remainSec *= 0.5f;
+            }
+        }
 
         while (remainSec >= 0)
         {

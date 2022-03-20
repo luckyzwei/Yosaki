@@ -261,6 +261,22 @@ public static class ServerData
             case Item_Type.Aduk:
                 ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value += rewardValue;
                 break;
+                //
+            case Item_Type.SinSkill0:
+                ServerData.goodsTable.GetTableData(GoodsTable.SinSkill0).Value += rewardValue;
+                break;
+
+            case Item_Type.SinSkill1:
+                ServerData.goodsTable.GetTableData(GoodsTable.SinSkill1).Value += rewardValue;
+                break;
+
+            case Item_Type.SinSkill2:
+                ServerData.goodsTable.GetTableData(GoodsTable.SinSkill2).Value += rewardValue;
+                break;
+
+            case Item_Type.SinSkill3:
+                ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value += rewardValue;
+                break;
 
             case Item_Type.costume1:
             case Item_Type.costume6:
@@ -435,6 +451,20 @@ public static class ServerData
             
             case Item_Type.Aduk:
                 passParam.Add(GoodsTable.Aduk, ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            //
+            case Item_Type.SinSkill0:
+                passParam.Add(GoodsTable.SinSkill0, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.SinSkill1:
+                passParam.Add(GoodsTable.SinSkill1, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.SinSkill2:
+                passParam.Add(GoodsTable.SinSkill2, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.SinSkill3:
+                passParam.Add(GoodsTable.SinSkill3, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
         }
 
@@ -616,6 +646,27 @@ public static class ServerData
             case Item_Type.Aduk:
                 ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value += amount;
                 param.Add(GoodsTable.Aduk, ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            //
+
+            case Item_Type.SinSkill0:
+                ServerData.goodsTable.GetTableData(GoodsTable.SinSkill0).Value += amount;
+                param.Add(GoodsTable.SinSkill0, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.SinSkill1:
+                ServerData.goodsTable.GetTableData(GoodsTable.SinSkill1).Value += amount;
+                param.Add(GoodsTable.SinSkill1, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.SinSkill2:
+                ServerData.goodsTable.GetTableData(GoodsTable.SinSkill2).Value += amount;
+                param.Add(GoodsTable.SinSkill2, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.SinSkill3:
+                ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value += amount;
+                param.Add(GoodsTable.SinSkill3, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.costume1:

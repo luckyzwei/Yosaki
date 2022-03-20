@@ -294,6 +294,33 @@ public class UiShop : SingletonMono<UiShop>
                 }
                 break;
 
+            //
+            case Item_Type.SinSkill0:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SinSkill0).Value += amount;
+                    param.Add(GoodsTable.SinSkill0, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill0).Value);
+                }
+                break;
+            case Item_Type.SinSkill1:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SinSkill1).Value += amount;
+                    param.Add(GoodsTable.SinSkill1, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill1).Value);
+                }
+                break;
+            case Item_Type.SinSkill2:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SinSkill2).Value += amount;
+                    param.Add(GoodsTable.SinSkill2, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill2).Value);
+                }
+                break;
+            case Item_Type.SinSkill3:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value += amount;
+                    param.Add(GoodsTable.SinSkill3, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value);
+                }
+                break;
+            //
+
             case Item_Type.SmithFire:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += amount;

@@ -44,6 +44,12 @@ public class UiPetEquipmentView : MonoBehaviour
 
     private ObscuredFloat marbleDiscountRatio = 0.8f;
 
+    [SerializeField]
+    private GameObject lockMask;
+
+    [SerializeField]
+    private TextMeshProUGUI lockDescription;
+
 
     public void Initialize(PetEquipmentData petEquipmentData)
     {
@@ -83,6 +89,19 @@ public class UiPetEquipmentView : MonoBehaviour
         {
             equipTitle.SetText($"{petEquipmentData.Name}({e}강)");
             WhenLevelChanged(petEquipServerData.level.Value);
+
+
+            if(petEquipmentData.Needpetawakelevel != 0) 
+            {
+                lockMask.SetActive(e < petEquipmentData.Needpetawakelevel);
+                lockDescription.SetText($"환수장비\n{petEquipmentData.Needpetawakelevel}강화 이상 개방");
+            }
+            else 
+            {
+                lockMask.SetActive(false);
+            }
+
+     
 
         }).AddTo(this);
     }

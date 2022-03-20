@@ -36,4 +36,12 @@ public class PassiveSkillData
   string skillname;
   public string Skillname { get {return skillname; } set { this.skillname = value;} }
   
+  [SerializeField]
+  bool issinpassive;
+  public bool Issinpassive { get {return issinpassive; } set { this.issinpassive = value;} }
+  
+  [SerializeField]
+  string needgoods;
+  public string Needgoods { get {return needgoods; } set { this.needgoods = value;} }
+  
 }

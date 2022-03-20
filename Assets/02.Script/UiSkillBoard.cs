@@ -9,16 +9,28 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
     [SerializeField]
     private UiSkillCell skillCellPrefab;
 
+    [SerializeField]
+    private UiSkillCell skillCellPrefab_Sin;
+
     private List<UiSkillCell> skillCells = new List<UiSkillCell>();
 
     [SerializeField]
     private Transform skillCellParent;
 
     [SerializeField]
+    private Transform skillCellParent_Sin;
+
+    [SerializeField]
     private UiPassiveSkillCell passiveSkillCellPrefab;
 
     [SerializeField]
+    private UiPassiveSkillCell passiveSkillCellPrefab_Sin;
+
+    [SerializeField]
     private Transform passiveSkillCellParent;
+
+    [SerializeField]
+    private Transform passiveSkillCellParent_Sin;
 
     [SerializeField]
     private UiSkillSlotSettingBoard uiSkillSlotSettingBoard;
@@ -43,13 +55,13 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
 
 
 
-        skillList.Sort((a, b) =>
-        {
-            if (a.Displayorder < b.Displayorder)
-                return -1;
+        //skillList.Sort((a, b) =>
+        //{
+        //    if (a.Displayorder < b.Displayorder)
+        //        return -1;
 
-            return 1;
-        });
+        //    return 1;
+        //});
 
         for (int i = 0; i < skillList.Count; i++)
         {
@@ -59,20 +71,42 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
                 continue;
             }
 
-            var cell = Instantiate<UiSkillCell>(skillCellPrefab, skillCellParent);
+            if (skillList[i].Skilltype == 4)
+            {
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Sin);
 
-            cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
+                cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
-            skillCells.Add(cell);
+                skillCells.Add(cell);
+            }
+            else 
+            {
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab, skillCellParent);
+
+                cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
+
+                skillCells.Add(cell);
+            }
+
+ 
         }
 
         var passiveSkillList = TableManager.Instance.PassiveSkill.dataArray.ToList();
 
         for (int i = 0; i < passiveSkillList.Count; i++)
         {
-            var cell = Instantiate<UiPassiveSkillCell>(passiveSkillCellPrefab, passiveSkillCellParent);
+            if (passiveSkillList[i].Issinpassive == false) 
+            {
+                var cell = Instantiate<UiPassiveSkillCell>(passiveSkillCellPrefab, passiveSkillCellParent);
 
-            cell.Refresh(passiveSkillList[i]);
+                cell.Refresh(passiveSkillList[i]);
+            }
+            else
+            {
+                var cell = Instantiate<UiPassiveSkillCell>(passiveSkillCellPrefab_Sin, passiveSkillCellParent_Sin);
+
+                cell.Refresh(passiveSkillList[i]);
+            }
         }
     }
 

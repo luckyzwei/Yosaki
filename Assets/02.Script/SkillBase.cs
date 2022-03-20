@@ -37,7 +37,7 @@ public abstract class SkillBase
         }
         else
         {
-            SonSkillCaster.Instance.SonSkillAnim();
+            //SonSkillCaster.Instance.SonSkillAnim();
         }
 
         SkillCoolTimeManager.SetActiveSkillCool(skillInfo.Id, SkillCoolTimeManager.GetSkillCoolTimeMax(skillInfo));

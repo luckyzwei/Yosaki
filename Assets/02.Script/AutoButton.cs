@@ -19,7 +19,7 @@ public class AutoButton : MonoBehaviour
 
     private IEnumerator AutoSetRoutine()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.5f);
 
         if (prefAuto == true)
         {

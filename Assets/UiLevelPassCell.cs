@@ -245,6 +245,10 @@ public class UiLevelPassCell : MonoBehaviour
         {
             return ServerData.iapServerTable.TableDatas["levelpass8"].buyCount.Value > 0;
         }
+        else if (passInfo.passGrade == 8)
+        {
+            return ServerData.iapServerTable.TableDatas["levelpass9"].buyCount.Value > 0;
+        }
 
         return hasIapProduct;
     }

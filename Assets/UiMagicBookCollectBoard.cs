@@ -21,6 +21,7 @@ public class UiMagicBookCollectBoard : MonoBehaviour
         for (int i = 0; i < tableData.Length; i++)
         {
             if (tableData[i].Issonskill == true) continue;
+            if (tableData[i].Skilltype == 4) continue;
             var cell = Instantiate<UiMagicBookCollectCell>(cellPrefab, cellParent);
             cell.Initialize(tableData[i]);
         }

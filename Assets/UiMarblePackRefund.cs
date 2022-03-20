@@ -21,12 +21,6 @@ public class UiMarblePackRefund : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI totalMarble;
 
-    [SerializeField]
-    private TextMeshProUGUI removeAd;
-
-    //[SerializeField]
-    //private TextMeshProUGUI totalTicket;
-
     private void Start()
     {
         Check();
@@ -42,14 +36,8 @@ public class UiMarblePackRefund : MonoBehaviour
         int marblePack2Count = ServerData.iAPServerTableTotal.TableDatas["marblepackage2"].buyCount.Value;
         int marblePack3Count = ServerData.iAPServerTableTotal.TableDatas["marblepackage3"].buyCount.Value;
 
-        int removeAdCount = ServerData.iAPServerTableTotal.TableDatas["removead"].buyCount.Value;
 
-        if (removeAdCount >= 1)
-        {
-            removeAdCount = 1;
-        }
-
-        if (marblePack1Count == 0 && marblePack2Count == 0 && marblePack3Count == 0 && removeAdCount == 0)
+        if (marblePack1Count == 0 && marblePack2Count == 0 && marblePack3Count == 0)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.marbleReset3).Value = 1;
 
@@ -75,8 +63,6 @@ public class UiMarblePackRefund : MonoBehaviour
         buyCounts[0].SetText(marblePack1Count.ToString() + "회");
         buyCounts[1].SetText(marblePack2Count.ToString() + "회");
         buyCounts[2].SetText(marblePack3Count.ToString() + "회");
-
-        removeAd.SetText(removeAdCount.ToString() + "회(1000만개)");
 
         int _1DiffMarble = 4000000;
         //int _1DiffTicket = 2;
@@ -105,9 +91,7 @@ public class UiMarblePackRefund : MonoBehaviour
         //int marble3_TicketAdd = marblePack3Count * _3DiffTicket;
         //ticketPlusCount[2].SetText(marble3_TicketAdd.ToString());
 
-        int removeAdMarble = removeAdCount * 10000000;
-
-        int addMarbleTotal = marble1_MarbleAdd + marble2_MarbleAdd + marble3_MarbleAdd + removeAdMarble;
+        int addMarbleTotal = marble1_MarbleAdd + marble2_MarbleAdd + marble3_MarbleAdd;
         //int addTicketTotal = marble1_TicketAdd + marble2_TicketAdd + marble3_TicketAdd;
 
         totalMarble.SetText($"총 {Utils.ConvertBigNum(addMarbleTotal)}");
@@ -133,7 +117,7 @@ public class UiMarblePackRefund : MonoBehaviour
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
               //       LogManager.Instance.SendLogType("Marble3", "Get", $"m:{addMarbleTotal} t:{0}");
-              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "여우구슬 세트,광고제거 소급 완료!", null);
+              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "여우구슬 세트 소급 완료!", null);
           });
     }
 }

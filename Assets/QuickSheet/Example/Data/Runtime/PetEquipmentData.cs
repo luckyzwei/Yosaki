@@ -76,4 +76,8 @@ public class PetEquipmentData
   float leveladdvalue2;
   public float Leveladdvalue2 { get {return leveladdvalue2; } set { this.leveladdvalue2 = value;} }
   
+  [SerializeField]
+  int needpetawakelevel;
+  public int Needpetawakelevel { get {return needpetawakelevel; } set { this.needpetawakelevel = value;} }
+  
 }

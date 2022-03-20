@@ -48,6 +48,11 @@ public enum Item_Type
     Asura5,
     Aduk,
 
+    SinSkill0,
+    SinSkill1,
+    SinSkill2,
+    SinSkill3,
+
     RankFrame1 = 100,
     RankFrame2 = 101,
     RankFrame3 = 102,

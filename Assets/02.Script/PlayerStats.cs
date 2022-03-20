@@ -600,6 +600,7 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.CriticalDam);
         ret += GetStageRelicHasEffect(StatusType.CriticalDam);
         ret += GetSonAbilHasEffect(StatusType.CriticalDam);
+        ret += GetSinsuEquipEffect(StatusType.CriticalDam);
 
 
         return ret;
@@ -829,6 +830,8 @@ public static class PlayerStats
 
         ret += GetAsuraAbilValue(StatusType.IgnoreDefense);
 
+        ret += GetPassiveSkillValue(StatusType.IgnoreDefense);
+
         return ret;
     }
 
@@ -841,6 +844,8 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.PenetrateDefense);
 
         ret += GetStageRelicHasEffect(StatusType.PenetrateDefense);
+
+        ret += GetPassiveSkillValue(StatusType.PenetrateDefense);
 
         return ret;
     }

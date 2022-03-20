@@ -50,6 +50,12 @@ public class UiPassiveSkillCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI buttonDesc;
 
+    [SerializeField]
+    private GameObject lockMask_Sin;
+
+    [SerializeField]
+    private TextMeshProUGUI lockMask_Sin_Text;
+
 
     public void Refresh(PassiveSkillData passiveSkillData)
     {
@@ -89,15 +95,32 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         magicBookServerData = ServerData.magicBookTable.TableDatas[magicBookData.Stringid];
 
-        if (magicBookServerData.hasItem.Value == 0)
+        //
+        if (string.IsNullOrEmpty(passiveSkillData.Needgoods)==true)
         {
-            weaponView.Initialize(null, magicBookData);
-            lockMask.SetActive(true);
+            lockMask_Sin.SetActive(false);
+
+            if (magicBookServerData.hasItem.Value == 0)
+            {
+                weaponView.Initialize(null, magicBookData);
+                lockMask.SetActive(true);
+            }
+            else
+            {
+                lockMask.SetActive(false);
+            }
         }
         else
         {
             lockMask.SetActive(false);
+
+            lockMask_Sin.SetActive(ServerData.goodsTable.GetTableData(passiveSkillData.Needgoods).Value == 0);
+
+            lockMask_Sin_Text.SetText("환수의 시련에서 획득 가능");
         }
+
+
+        //
 
         if (isSubscribed == false)
         {
@@ -119,6 +142,14 @@ public class UiPassiveSkillCell : MonoBehaviour
         {
             Refresh(this.passiveSkillData);
         }).AddTo(this);
+
+        if (string.IsNullOrEmpty(passiveSkillData.Needgoods) == false)
+        {
+            ServerData.goodsTable.GetTableData(passiveSkillData.Needgoods).AsObservable().Subscribe(e =>
+            {
+                Refresh(this.passiveSkillData);
+            }).AddTo(this);
+        }
     }
 
     public void OnClickUpgradeButton()
@@ -156,7 +187,7 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
     }
-    public void OnClickOneHundredUpgradeButton() 
+    public void OnClickOneHundredUpgradeButton()
     {
         int currentLevel = ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value;
 

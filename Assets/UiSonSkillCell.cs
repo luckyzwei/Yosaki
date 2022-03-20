@@ -48,7 +48,7 @@ public class UiSonSkillCell : MonoBehaviour
             {
                 int currentLevel = sonLevel - skillTableData.Sonunlocklevel;
                 levelDescription.SetText($"LV : {currentLevel}");
-                description.SetText(skillTableData.Skilldesc + $"\n피해량 : {ServerData.skillServerTable.GetSkillDamagePer(skillTableData.Id, applySkillDamAbility: false) * 100f}%");
+                description.SetText(skillTableData.Skilldesc + $"\n피해량 :  {Utils.ConvertBigNum(ServerData.skillServerTable.GetSkillDamagePer(skillTableData.Id, applySkillDamAbility: false) * 100f)}%");
             }
             else
             {

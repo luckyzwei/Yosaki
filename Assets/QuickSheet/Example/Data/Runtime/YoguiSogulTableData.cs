@@ -13,8 +13,8 @@ public class YoguiSogulTableData
   public int Stage { get {return stage; } set { this.stage = value;} }
   
   [SerializeField]
-  float hp;
-  public float Hp { get {return hp; } set { this.hp = value;} }
+  double hp;
+  public double Hp { get {return hp; } set { this.hp = value;} }
   
   [SerializeField]
   float tankerhpratio;
