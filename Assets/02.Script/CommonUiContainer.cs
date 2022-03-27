@@ -102,6 +102,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite SinSkill1;
     public Sprite SinSkill2;
     public Sprite SinSkill3;
+    public Sprite LeeMuGiStone;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -188,6 +189,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.costume26:
                 return costumeThumbnail[26];
+                break;
+
+            case Item_Type.costume27:
+                return costumeThumbnail[27];
+                break;
+
+            case Item_Type.costume28:
+                return costumeThumbnail[28];
                 break;
 
 
@@ -361,7 +370,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.SinSkill3:
                 return SinSkill3;
                 break;
-
+            case Item_Type.LeeMuGiStone:
+                return LeeMuGiStone;
+                break;
 
         }
 

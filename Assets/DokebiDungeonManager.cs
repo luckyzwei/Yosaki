@@ -21,19 +21,17 @@ public class DokebiDungeonManager : ContentsManagerBase
 
     private Coroutine spawnRoutine;
 
-    private DokebiData dokebiData;
-
-    public static string poolName;
-
     private ObscuredInt currentSpawnedNum = 0;
+
+    public static string poolName = "Enemy/Dokebi0";
+
+    private ObscuredInt maxEnemySpawnNum = 5;
+
+    private ObscuredInt spawnNum = 1;
 
     protected new void Start()
     {
         base.Start();
-
-        dokebiData = TableManager.Instance.DokebiTable.dataArray[GameManager.Instance.dokebiIdx];
-
-        poolName = $"Enemy/{dokebiData.Prefabname}";
 
         spawnRoutine = StartCoroutine(EnemySpawnRoutine());
 
@@ -61,30 +59,32 @@ public class DokebiDungeonManager : ContentsManagerBase
         resultPopup.gameObject.SetActive(true);
 
         BattleObjectManager.Instance.PoolContainer[poolName].DisableAllObject();
+
     }
 
     private IEnumerator EnemySpawnRoutine()
     {
-        WaitForSeconds delay1 = new WaitForSeconds(dokebiData.Spawndelay1);
+        WaitForSeconds interval = new WaitForSeconds(0.5f);
 
         yield return new WaitForSeconds(1.5f);
 
         while (true)
         {
-            int enemySpawnNum = dokebiData.Maxenemynum - currentSpawnedNum;
+            int enemySpawnNum = maxEnemySpawnNum - currentSpawnedNum;
 
             for (int i = 0; i < enemySpawnNum; i++)
             {
                 SpawnEnemy();
             }
 
-            yield return delay1;
+            yield return interval;
         }
     }
 
     private void SpawnEnemy()
     {
         currentSpawnedNum++;
+        spawnNum++;
 
         int directionRand = Random.Range(0, 2);
         Vector3 moveDir = Vector3.zero;
@@ -97,12 +97,49 @@ public class DokebiDungeonManager : ContentsManagerBase
 
         var enemy = enemyPrefab.GetComponent<DokebiEnemy>();
 
-        enemy.Initialize(dokebiData.Hp, dokebiData.Movespeed, WhenEnemyDead);
+        enemy.Initialize(GetEnemyHp(), GetMoveSpeed(), GetEnemyDefense(), WhenEnemyDead);
 
         enemy.transform.position = spawnPos;
     }
 
+    public double GetEnemyHp()
+    {
+        int enemyTableIdx = spawnNum * 22;
 
+        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
+
+        //최대층
+        if (enemyTableIdx == TableManager.Instance.EnemyTable.dataArray.Length - 1)
+        {
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Bosshpratio * Mathf.Abs(spawnNum - 300);
+        }
+        else
+        {
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Bosshpratio;
+        }
+
+    }
+    public int GetEnemyDefense()
+    {
+        int enemyTableIdx = spawnNum * 22;
+
+        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
+
+        //최대층
+        if (enemyTableIdx == TableManager.Instance.EnemyTable.dataArray.Length - 1)
+        {
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Defense + enemyDeadCount.Value;
+        }
+        else
+        {
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Defense;
+        }
+    }
+
+    public float GetMoveSpeed()
+    {
+        return Random.Range(5, 15);
+    }
 
     private void WhenEnemyDead()
     {

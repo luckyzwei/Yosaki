@@ -52,6 +52,7 @@ public enum Item_Type
     SinSkill1,
     SinSkill2,
     SinSkill3,
+    LeeMuGiStone,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -166,6 +167,9 @@ public enum Item_Type
     costume24 = 1225,
     costume25 = 1226,
     costume26 = 1227,
+
+    costume27 = 1228,
+    costume28 = 1229,
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,

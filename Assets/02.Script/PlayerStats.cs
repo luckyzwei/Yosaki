@@ -893,6 +893,8 @@ public static class PlayerStats
 
         ret += GetAsuraAbilValue(StatusType.SuperCritical2DamPer);
 
+        ret += GetLeeMuGiAddDam();
+
         return ret;
     }
 
@@ -1130,6 +1132,10 @@ public static class PlayerStats
     {
         return ServerData.statusTable.GetTableData(StatusTable.FeelMul).Value * 0.1f;
     }
+    public static float GetLeeMuGiAddDam()
+    {
+        return ServerData.statusTable.GetTableData(StatusTable.LeeMuGi).Value * 0.2f;
+    }
 
     public static string asuraKey0 = "a0";
     public static string asuraKey1 = "a1";
@@ -1245,10 +1251,21 @@ public static class PlayerStats
     }
 
     private static string adukCostumeKey = "costume26";
+    private static string leeMuGiCostumeKey = "costume27";
     public static float DecreaseBossHp()
     {
-        if (ServerData.costumeServerTable.TableDatas[adukCostumeKey].hasCostume.Value == false) return 0f;
+        float ret = 0f;
 
-        return 0.05f;
+        if (ServerData.costumeServerTable.TableDatas[adukCostumeKey].hasCostume.Value == true)
+        {
+            ret += 0.05f;
+        }
+
+        if (ServerData.costumeServerTable.TableDatas[leeMuGiCostumeKey].hasCostume.Value == true)
+        {
+            ret += 0.05f;
+        }
+
+        return ret;
     }
 }

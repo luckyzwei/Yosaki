@@ -225,4 +225,37 @@ public class UIrelicBoard : MonoBehaviour
 
         }, () => { });
     }
+
+
+    public void RenewalAbil()
+    {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"현재 점수에 맞게 영혼 조각을 갱신 하시겠습니까?", () =>
+        {
+            int currentKillCount = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.relicKillCount].Value;
+
+            var tableDatas = TableManager.Instance.RelicTable.dataArray;
+
+            float prefTotal = ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
+
+            for (int i = 0; i < tableDatas.Length; i++)
+            {
+                prefTotal += ServerData.relicServerTable.TableDatas[tableDatas[i].Stringid].level.Value;
+            }
+
+            float newTotal = currentKillCount * (int)ServerData.userInfoTable.GetTableData(UserInfoTable.usedRelicTicketNum).Value;
+
+            float interval = newTotal - prefTotal;
+
+            if (interval == 0f)
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "갱신할 데이터가 없습니다.", null);
+            }
+            else
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value = interval;
+                ServerData.goodsTable.UpData(GoodsTable.Relic, false);
+            }
+           
+        }, () => { });
+    }
 }

@@ -30,11 +30,9 @@ public class UiDokebiResultPopup : MonoBehaviour
     {
         int dokebiIdx = GameManager.Instance.dokebiIdx;
 
-        var tableData = TableManager.Instance.DokebiTable.dataArray[dokebiIdx];
-
         var prefab = CommonPrefabContainer.Instance.uiRewardViewPrefab;
 
-        int rewardNum = defeatEnemiesNum * tableData.Rewardamount;
+        int rewardNum = defeatEnemiesNum;
 
         var rewardPrefab = Instantiate<UiRewardView>(prefab, rewardParent);
 

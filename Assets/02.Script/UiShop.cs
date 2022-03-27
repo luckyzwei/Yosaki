@@ -292,6 +292,13 @@ public class UiShop : SingletonMono<UiShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value += amount;
                     param.Add(GoodsTable.Aduk, ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value);
                 }
+                break;    
+            
+            case Item_Type.LeeMuGiStone:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value += amount;
+                    param.Add(GoodsTable.Aduk, ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
+                }
                 break;
 
             //

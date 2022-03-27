@@ -28,24 +28,25 @@ public class UiMarblePackRefund : MonoBehaviour
 
     private void Check()
     {
+
         rootObject.SetActive(false);
 
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.marbleReset3).Value == 1) return;
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.springReset).Value == 1) return;
 
-        int marblePack1Count = ServerData.iAPServerTableTotal.TableDatas["marblepackage1"].buyCount.Value;
-        int marblePack2Count = ServerData.iAPServerTableTotal.TableDatas["marblepackage2"].buyCount.Value;
-        int marblePack3Count = ServerData.iAPServerTableTotal.TableDatas["marblepackage3"].buyCount.Value;
+        int marblePack1Count = ServerData.iAPServerTableTotal.TableDatas["spring1"].buyCount.Value;
+        int marblePack2Count = ServerData.iAPServerTableTotal.TableDatas["spring2"].buyCount.Value;
+        int marblePack3Count = ServerData.iAPServerTableTotal.TableDatas["spring3"].buyCount.Value;
 
 
         if (marblePack1Count == 0 && marblePack2Count == 0 && marblePack3Count == 0)
         {
-            ServerData.userInfoTable.GetTableData(UserInfoTable.marbleReset3).Value = 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.springReset).Value = 1;
 
             List<TransactionValue> tr = new List<TransactionValue>();
 
             Param marbleParam = new Param();
 
-            marbleParam.Add(UserInfoTable.marbleReset3, ServerData.userInfoTable.GetTableData(UserInfoTable.marbleReset3).Value);
+            marbleParam.Add(UserInfoTable.springReset, ServerData.userInfoTable.GetTableData(UserInfoTable.springReset).Value);
             tr.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, marbleParam));
 
             ServerData.SendTransaction(tr, successCallBack: () =>
@@ -64,13 +65,13 @@ public class UiMarblePackRefund : MonoBehaviour
         buyCounts[1].SetText(marblePack2Count.ToString() + "회");
         buyCounts[2].SetText(marblePack3Count.ToString() + "회");
 
-        int _1DiffMarble = 4000000;
+        int _1DiffMarble = 1000;
         //int _1DiffTicket = 2;
 
-        int _2DiffMarble = 8000000;
+        int _2DiffMarble = 3500;
         // int _2DiffTicket = 5;
 
-        int _3DiffMarble = 18000000;
+        int _3DiffMarble = 6000;
         //int _3DiffTicket = 10;
 
         int marble1_MarbleAdd = marblePack1Count * _1DiffMarble;
@@ -99,17 +100,17 @@ public class UiMarblePackRefund : MonoBehaviour
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
-        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += addMarbleTotal;
+        ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += addMarbleTotal;
         //ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += addTicketTotal;
 
-        ServerData.userInfoTable.TableDatas[UserInfoTable.marbleReset3].Value = 1;
+        ServerData.userInfoTable.TableDatas[UserInfoTable.springReset].Value = 1;
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+        goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
         //goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
 
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.marbleReset3, ServerData.userInfoTable.TableDatas[UserInfoTable.marbleReset3].Value);
+        userInfoParam.Add(UserInfoTable.springReset, ServerData.userInfoTable.TableDatas[UserInfoTable.springReset].Value);
 
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
@@ -117,7 +118,7 @@ public class UiMarblePackRefund : MonoBehaviour
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
               //       LogManager.Instance.SendLogType("Marble3", "Get", $"m:{addMarbleTotal} t:{0}");
-              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "여우구슬 세트 소급 완료!", null);
+              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "벚꽃 세트 소급 완료!", null);
           });
     }
 }

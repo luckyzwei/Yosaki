@@ -200,4 +200,12 @@ public class UiMonthPassSystem2 : MonoBehaviour
 
         return returnValues;
     }
+
+    public void RefreshCells()
+    {
+        for (int i = 0; i < uiPassCellContainer.Count; i++)
+        {
+            uiPassCellContainer[i].RefreshParent();
+        }
+    }
 }

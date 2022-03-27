@@ -19,7 +19,7 @@ public class GoodsTable
     public static string Ticket = "Ticket";
     public static string BonusSpinKey = "BonusSpin";
     public static string MarbleKey = "Marble";
-    public static string DokebiKey = "Dokebi";
+    public static string DokebiKey = "Dokebi2";
     public static string SkillPartion = "SkillPartion";
     public static string WeaponUpgradeStone = "WeaponUpgradeStone";
     public static string PetUpgradeSoul = "PetUpgradeSoul";
@@ -67,6 +67,7 @@ public class GoodsTable
     public static string SinSkill1 = "s1";
     public static string SinSkill2 = "s2";
     public static string SinSkill3 = "s3";
+    public static string LeeMuGiStone = "LeeMuGiStone";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -121,6 +122,7 @@ public class GoodsTable
         {SinSkill1,0f},
         {SinSkill2,0f},
         {SinSkill3,0f},
+        {LeeMuGiStone,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

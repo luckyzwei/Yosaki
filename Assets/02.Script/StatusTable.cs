@@ -56,6 +56,7 @@ public class StatusTable
     public const string Skill2_AddValue = "Sk2_Add";
     public const string SkillAdPoint = "Sk_AdPoint";
     public const string FeelMul = "FeelMul";
+    public const string LeeMuGi = "LeeMuGi";
 
 
 
@@ -101,6 +102,7 @@ public class StatusTable
         {Skill2_AddValue,0},
         {SkillAdPoint,0},
         {FeelMul,0},
+        {LeeMuGi,0},
     };
 
     private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();
@@ -181,12 +183,12 @@ public class StatusTable
                 #region Stat
                 case IntLevelAddPer_StatPoint:
                     {
-                        return level * 0.015f;
+                        return level * 0.03f;
                     }
                     break;
                 case CriticalLevel_StatPoint:
                     {
-                        return level * 0.0005f;
+                        return level * 0.001f;
                     }
                     break;
                 case CriticalDamLevel_StatPoint:

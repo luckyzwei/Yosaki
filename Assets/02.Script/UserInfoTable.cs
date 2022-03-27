@@ -39,10 +39,10 @@ public class UserInfoTable
 
     public const string bonusDungeonEnterCount = "bonusDungeonEnterCount4";
 
-    public const string dokebiKillCount0 = "dokebiKillCount0";
-    public const string dokebiKillCount1 = "dokebiKillCount1";
-    public const string dokebiKillCount2 = "dokebiKillCount2";
-    public const string dokebiKillCount3 = "dokebiKillCount3";
+    public const string dokebiKillCount0 = "dokebiKillCount4";
+    public const string dokebiKillCount1 = "dokebiKillCount5";
+    public const string dokebiKillCount2 = "dokebiKillCount6";
+    public const string dokebiKillCount3 = "dokebiKillCount7";
 
 
     public const string chatBan = "chatBan";
@@ -82,7 +82,7 @@ public class UserInfoTable
     public const string wingPackageRewardReceive = "wingPackageRewardReceive";
     public const string topClearStageId = "topClearStageId";
     public const string selectedSkillGroupId = "selectedSkillGroupId";
-    public const string dokebiEnterCount = "dokebiEnterCount2";
+    public const string dokebiEnterCount = "dec3";
     public const string chatFrame = "chatFrame";
 
     public const string freeWeapon = "freeWeapon";
@@ -98,7 +98,7 @@ public class UserInfoTable
     public const string smithClear = "smithClear";
 
 
-    public const string killCountTotal = "killCountTotal5";
+    public const string killCountTotal = "kt7";
     public const string killCountTotal2 = "kt6";
 
     public const string relicKillCount = "relicKillCount";
@@ -112,6 +112,7 @@ public class UserInfoTable
     public const string relicReset = "relicReset";
     public const string marbleReset2 = "marbleReset3";
     public const string marbleReset3 = "marbleReset5";
+    public const string springReset = "springReset2";
     public const string relicReset2 = "relicReset2";
     public const string dailyPackReset = "dpr";
     public const string sonScore = "son6";
@@ -232,6 +233,7 @@ public class UserInfoTable
         {marbleReset3,0},
         {sendPetExp,0},
         {exchangeCount,0},
+        {springReset,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -784,8 +786,19 @@ public class UserInfoTable
 #if UNITY_EDITOR
         //return true;
 #endif
-        int currentHour = currentServerTime.Hour;
-        return currentHour >= GameBalance.HotTime_Start && currentHour < GameBalance.HotTime_End;
+
+        if (currentServerTime.DayOfWeek != DayOfWeek.Sunday && currentServerTime.DayOfWeek != DayOfWeek.Saturday)
+        {
+            int currentHour = currentServerTime.Hour;
+            return currentHour >= GameBalance.HotTime_Start && currentHour < GameBalance.HotTime_End;
+        }
+        else
+        {
+            int currentHour = currentServerTime.Hour;
+            return currentHour >= GameBalance.HotTime_Start_Weekend && currentHour < GameBalance.HotTime_End;
+        }
+
+
     }
 
     static int totalKillCount = 0;
@@ -821,7 +834,7 @@ public class UserInfoTable
     public bool IsMonthlyPass2()
     {
 #if UNITY_EDITOR
-        return true;
+        //return false;
 #endif
         return currentServerTime.Month == 3;
     }

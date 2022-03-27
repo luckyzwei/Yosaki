@@ -51,8 +51,8 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
     [SerializeField]
     private Toggle fixedAbilToggle;
 
-    [SerializeField]
-    private int currentSelectedFixedDropDownId;
+
+    private int currentSelectedFixedDropDownId = 4;
 
     private void SetCurrentSelectedSlotDesc()
     {
@@ -60,8 +60,25 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
     }
 
     private ObscuredInt price;
+    private ObscuredInt fixedGachaPrice = 1000000;
+
+    private float FixedGachaPrice()
+    {
+        int slotCount = CurrentServerData.abilityIdx.Count;
+
+        for (int i = 0; i < CurrentServerData.abilityIdx.Count; i++)
+        {
+            if (CurrentServerData.abilityIdx[i].Value == currentSelectedFixedDropDownId)
+            {
+                slotCount--;
+            }
+        }
+
+        return fixedGachaPrice * slotCount;
+    }
 
     private bool showYellowPop = false;
+
     public void WhenYellowAbilPopupChanged(bool ison)
     {
         showYellowPop = ison;
@@ -124,6 +141,8 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
 
         RefreshAllData();
     }
+
+
 
     public void RefreshAllData()
     {
@@ -376,6 +395,14 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
         return currentBlueStoneNum >= price;
     }
 
+    private bool CanGacha_Fixed()
+    {
+        var currentBlueStoneNum = ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
+
+        return currentBlueStoneNum >= FixedGachaPrice();
+    }
+
+
     private void SetExist()
     {
         notExistText.SetActive(!CurrentServerData.hasCostume.Value);
@@ -413,5 +440,47 @@ public class UiCostumeAbilityBoard : SingletonMono<UiCostumeAbilityBoard>
         {
             abilityCells[i].Initialize(costumeData, costumeServerData.abilityIdx[i].Value, i, OnCostumeLocked);
         }
+    }
+
+
+
+    public void OnClickGachaButton_Fixed()
+    {
+        if (CanGacha_Fixed() == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
+            return;
+        }
+
+        if (CurrentServerData.hasCostume.Value == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("외형이 없습니다.");
+            return;
+        }
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"옥 {Utils.ConvertBigNum(FixedGachaPrice())}개를 사용해서\n선택된 슬롯의 능력치들을 변경 할까요?", () =>
+        {
+
+            ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= FixedGachaPrice();
+
+            for (int i = 0; i < CurrentServerData.abilityIdx.Count; i++)
+            {
+                CurrentServerData.abilityIdx[i].Value = currentSelectedFixedDropDownId;
+            }
+
+            ServerData.costumePreset.TableDatas[ServerData.equipmentTable.GetCurrentCostumePresetKey()] = ServerData.costumeServerTable.ConvertAllCostumeDataToString();
+
+            //동기화
+            if (syncRoutine != null)
+            {
+                CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+            }
+
+            syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncServerData());
+
+            RefreshUi();
+
+        }, () => { });
+
     }
 }

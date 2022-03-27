@@ -14,13 +14,14 @@ public class DokebiEnemy : PoolItem
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public void Initialize(float hp, float moveSpeed, Action enemyDeadCallBack)
+    public void Initialize(double hp, float moveSpeed, int defense, Action enemyDeadCallBack)
     {
         EnemyTableData data = new EnemyTableData();
         data.Hp = hp;
         data.Useonedamage = false;
         data.Movespeed = moveSpeed;
         data.Attackpower = 0f;
+        data.Defense = defense;
 
         agentHpController.Initialize(data);
         dokebiMoveController.Initialize(data.Movespeed);

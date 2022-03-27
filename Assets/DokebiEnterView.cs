@@ -123,7 +123,7 @@ public class DokebiEnterView : MonoBehaviour
 
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Dokebi)} <color=yellow>{defeatCount}</color>개로 <color=yellow>{clearCount}회</color> 소탕 합니까?", () =>
          {
-             int rewardNum = defeatCount * TableManager.Instance.DokebiTable.dataArray[idx].Rewardamount;
+             int rewardNum = defeatCount;
 
              ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value += rewardNum * clearCount;
 
