@@ -109,9 +109,10 @@ public class RelicDungeonManager : ContentsManagerBase
             ServerData.userInfoTable.TableDatas[UserInfoTable.relicKillCount].Value = enemyDeadCount.Value;
 
             ServerData.userInfoTable.UpData(UserInfoTable.relicKillCount, false);
+
+            RankManager.Instance.UpdateRelic_Score(enemyDeadCount.Value);
         }
 
-        RankManager.Instance.UpdateRelic_Score(enemyDeadCount.Value);
     }
 
     private IEnumerator EnemySpawnRoutine()
@@ -169,7 +170,7 @@ public class RelicDungeonManager : ContentsManagerBase
         //최대층
         if (enemyTableIdx == TableManager.Instance.EnemyTable.dataArray.Length - 1)
         {
-            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (spawnCount*0.6f);
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (spawnCount * 0.6f);
         }
         else
         {
