@@ -137,18 +137,41 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     {
         return tableData.Activeoffset * Vector2.right * (playerMoveController.MoveDirection == MoveDirection.Right ? 1 : -1);
     }
+    private Dictionary<int, AgentHpController> agentHpControllers = new Dictionary<int, AgentHpController>();
 
-    public IEnumerator ApplyDamage(Collider2D hitEnemie, SkillTableData skillInfo, float damage, bool playSound)
+    public IEnumerator ApplyDamage(Collider2D hitEnemie, SkillTableData skillInfo, double damage, bool playSound)
     {
-        AgentHpController agentHpController = hitEnemie.gameObject.GetComponent<AgentHpController>();
+        AgentHpController agentHpController;
+
+        int instanceId = hitEnemie.GetInstanceID();
+
+        if (agentHpControllers.ContainsKey(instanceId) == false)
+        {
+            agentHpControllers.Add(instanceId, hitEnemie.gameObject.GetComponent<AgentHpController>());
+
+            agentHpController = agentHpControllers[instanceId];
+
+        }
+        else
+        {
+            agentHpController = agentHpControllers[instanceId];
+        }
 
         int hitCount = skillInfo.Hitcount + PlayerStats.GetSkillHitAddValue();
+
+        agentHpController.ApplyDefense(ref damage);
+
+        bool isCritical = false;
+        bool isSuperCritical = false;
+
+        agentHpController.ApplyPlusDamage(ref damage, ref isCritical, ref isSuperCritical);
 
         for (int hit = 0; hit < hitCount; hit++)
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
             agentHpController.UpdateHp(-damage);
+            agentHpController.SpawnDamText(isCritical, isSuperCritical, damage);
 
             //이펙트
             if (string.IsNullOrEmpty(skillInfo.Hiteffectname) == false &&

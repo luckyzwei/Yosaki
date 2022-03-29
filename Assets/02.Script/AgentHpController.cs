@@ -133,9 +133,9 @@ public class AgentHpController : MonoBehaviour
     }
     private static string hitSfxName = "EnemyHitted";
     private static string deadSfxName = "EnemyDead";
-    private void ApplyPlusDamage(ref double value)
+    public void ApplyPlusDamage(ref double value, ref bool isCritical, ref bool isSuperCritical)
     {
-        bool isCritical = PlayerStats.ActiveCritical();
+        isCritical = PlayerStats.ActiveCritical();
 
         SoundManager.Instance.PlaySound(hitSfxName);
 
@@ -168,7 +168,7 @@ public class AgentHpController : MonoBehaviour
 
         //슈퍼크리티컬
 
-        bool isSuperCritical = PlayerStats.ActiveSuperCritical();
+        isSuperCritical = PlayerStats.ActiveSuperCritical();
 
         if (isSuperCritical)
         {
@@ -179,6 +179,21 @@ public class AgentHpController : MonoBehaviour
         //필멸 데미지
         value += value * PlayerStats.GetSuperCritical2DamPer();
 
+        ///
+    }
+    private Vector3 damTextspawnPos;
+    private Coroutine damTextRoutine;
+    private int attackCount = 0;
+    private int attackCountMax = 16;
+    private double attackResetCount = 0f;
+    private double damTextMergeTime = 0.5f;
+    private const float damTextCountAddValue = 0.1f;
+    private readonly WaitForSeconds DamTextDelay = new WaitForSeconds(damTextCountAddValue);
+    private float rightValue = 0f;
+    private float upValue = 2f;
+
+    public void SpawnDamText(bool isCritical, bool isSuperCritical, double value)
+    {
         Vector3 spawnPos = Vector3.zero;
 
         if (damTextSpawnPos != null)
@@ -224,19 +239,9 @@ public class AgentHpController : MonoBehaviour
                 damType = DamTextType.SuperCritical;
             }
 
-            BattleObjectManagerAllTime.Instance.SpawnDamageText(value * -1f, damTextspawnPos, damType);
+            BattleObjectManagerAllTime.Instance.SpawnDamageText(value, damTextspawnPos, damType);
         }
     }
-    private Vector3 damTextspawnPos;
-    private Coroutine damTextRoutine;
-    private int attackCount = 0;
-    private int attackCountMax = 16;
-    private double attackResetCount = 0f;
-    private double damTextMergeTime = 0.5f;
-    private const float damTextCountAddValue = 0.1f;
-    private readonly WaitForSeconds DamTextDelay = new WaitForSeconds(damTextCountAddValue);
-    private float rightValue = 0f;
-    private float upValue = 2f;
 
     private IEnumerator DamTextRoutine()
     {
@@ -282,12 +287,9 @@ public class AgentHpController : MonoBehaviour
         }
 
         //방어력 적용
-        ApplyDefense(ref value);
-        //1
+        //ApplyDefense(ref value);
 
-        value *= DamageBalance.GetRandomDamageRange();
-
-        ApplyPlusDamage(ref value);
+        //ApplyPlusDamage(ref value);
 
         if (isEnemyDead == true) return;
 
@@ -311,7 +313,7 @@ public class AgentHpController : MonoBehaviour
     }
     private float ignoreDefenseValue;
 
-    private void ApplyDefense(ref double value)
+    public void ApplyDefense(ref double value)
     {
         ignoreDefenseValue = PlayerStats.GetIgnoreDefenseValue();
 

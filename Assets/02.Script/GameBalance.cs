@@ -216,9 +216,6 @@ public static class DamageBalance
     public readonly static ObscuredFloat baseMaxDamage = 1.02f;
     public static float GetRandomDamageRange()
     {
-#if UNITY_EDITOR
-        return 1f;
-#endif
         return Random.Range(baseMinDamage + PlayerStats.GetDamBalanceAddValue(), baseMaxDamage);
     }
 }

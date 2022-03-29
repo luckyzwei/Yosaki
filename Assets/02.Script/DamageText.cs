@@ -62,6 +62,8 @@ public class DamageText : PoolItem
     {
         SetColor(type);
 
+
+        damage *= DamageBalance.GetRandomDamageRange();
         //SetColor(type);
 
         //criticalIcon.SetActive(isCritical);
