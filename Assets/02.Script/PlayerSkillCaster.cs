@@ -170,8 +170,8 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
-            agentHpController.UpdateHp(-damage);
             agentHpController.SpawnDamText(isCritical, isSuperCritical, damage);
+            agentHpController.UpdateHp(-damage);
 
             //이펙트
             if (string.IsNullOrEmpty(skillInfo.Hiteffectname) == false &&

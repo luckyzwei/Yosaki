@@ -149,7 +149,7 @@ public class AgentHpController : MonoBehaviour
         if (enemyTableData != null && enemyTableData.Useonedamage)
         {
             isCritical = false;
-            value = -1f;
+            value = 1f;
         }
 
         if (GameManager.contentsType != GameManager.ContentsType.NormalField || isFieldBossEnemy)
