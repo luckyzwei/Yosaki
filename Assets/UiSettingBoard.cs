@@ -42,6 +42,9 @@ public class UiSettingBoard : MonoBehaviour
     private Toggle hpBarToggle;
 
     [SerializeField]
+    private Toggle enemyViewToggle;
+
+    [SerializeField]
     private TextMeshProUGUI bgmDesc;
 
     [SerializeField]
@@ -82,6 +85,8 @@ public class UiSettingBoard : MonoBehaviour
         yachaEffectToggle.isOn = PlayerPrefs.GetInt(SettingKey.YachaEffect) == 1;
 
         hpBarToggle.isOn = PlayerPrefs.GetInt(SettingKey.HpBar) == 1;
+
+        enemyViewToggle.isOn = PlayerPrefs.GetInt(SettingKey.ViewEnemy) == 1;
 
         initialized = true;
 
@@ -272,6 +277,18 @@ public class UiSettingBoard : MonoBehaviour
         }
 
         SettingData.HpBar.Value = on ? 1 : 0;
+    } 
+    
+    public void EnemyView(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.ViewEnemy.Value = on ? 1 : 0;
     }
 
     public void OnClickStory()
@@ -330,6 +347,7 @@ public static class SettingKey
     public static string ShowSleepPush = "ShowSleepPush";
     public static string YachaEffect = "YachaEffect";
     public static string HpBar = "HpBar";
+    public static string ViewEnemy = "ViewEnemy";
 }
 
 public static class SettingData
@@ -349,6 +367,7 @@ public static class SettingData
     public static ReactiveProperty<int> ShowSleepPush = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> YachaEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> HpBar = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> ViewEnemy = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
@@ -400,7 +419,10 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.YachaEffect, 1); 
         
         if (PlayerPrefs.HasKey(SettingKey.HpBar) == false)
-            PlayerPrefs.SetInt(SettingKey.HpBar, 1);
+            PlayerPrefs.SetInt(SettingKey.HpBar, 1); 
+        
+        if (PlayerPrefs.HasKey(SettingKey.ViewEnemy) == false)
+            PlayerPrefs.SetInt(SettingKey.ViewEnemy, 1);
     }
 
     static void Initialize()
@@ -419,6 +441,7 @@ public static class SettingData
         ShowSleepPush.Value = PlayerPrefs.GetInt(SettingKey.ShowSleepPush, 1);
         YachaEffect.Value = PlayerPrefs.GetInt(SettingKey.YachaEffect, 1);
         HpBar.Value = PlayerPrefs.GetInt(SettingKey.HpBar, 1);
+        ViewEnemy.Value = PlayerPrefs.GetInt(SettingKey.ViewEnemy, 1);
 
         Subscribe();
     }
@@ -481,6 +504,11 @@ public static class SettingData
         HpBar.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.HpBar, e);
+        });
+
+        ViewEnemy.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.ViewEnemy, e);
         });
     }
 

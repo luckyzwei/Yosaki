@@ -42,6 +42,8 @@ public class EnemyMoveController : EnemyMoveBase
         SetRandomZPos();
     }
 
+
+
     public void SetBossEnemy(bool isBossEnemy)
     {
         this.isBossEnemy = isBossEnemy;
@@ -151,6 +153,14 @@ public class EnemyMoveController : EnemyMoveBase
                 MoveCharcterByDirection();
             }
         }).AddTo(this);
+
+        if (characterView != null && GameManager.contentsType == GameManager.ContentsType.NormalField)
+        {
+            SettingData.ViewEnemy.AsObservable().Subscribe(e =>
+            {
+                characterView.gameObject.SetActive(e == 1);
+            }).AddTo(this);
+        }
 
     }
 
