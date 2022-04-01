@@ -49,6 +49,19 @@ public class UiMonthlyPassCell : MonoBehaviour
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
+    private void ReGetItem()
+    {
+        if (passInfo.id == 5)
+        {
+            bool rewarded = HasReward(passInfo.rewardType_IAP_Key, passInfo.id);
+
+            if (HasPassItem() && rewarded && ServerData.costumeServerTable.TableDatas["costume28"].hasCostume.Value == false)
+            {
+                GetAdReward();
+            }
+        }
+    }
+
     private void OnDestroy()
     {
         disposables.Dispose();
@@ -95,6 +108,8 @@ public class UiMonthlyPassCell : MonoBehaviour
         Subscribe();
 
         RefreshParent();
+
+        ReGetItem();
     }
 
     private void SetAmount()

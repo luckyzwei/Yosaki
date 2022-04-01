@@ -40,6 +40,10 @@ public class UiIapItemCell : MonoBehaviour
     [SerializeField]
     private Button buyButton;
 
+
+    [SerializeField]
+    private GameObject levelPackageComplete;
+
     private void Start()
     {
         if (isInspectorItem == true)
@@ -94,24 +98,27 @@ public class UiIapItemCell : MonoBehaviour
         if (descriptionText != null)
             descriptionText.SetText(productData.Description);
 
+        if (productData.Needlevel == 0)
+        {
 #if UNITY_ANDROID
-        string price = IAPManager.m_StoreController.products.WithID(productData.Productid).metadata.localizedPrice.ToString("N0");
+            string price = IAPManager.m_StoreController.products.WithID(productData.Productid).metadata.localizedPrice.ToString("N0");
 #endif
 #if UNITY_IOS
         string price = IAPManager.m_StoreController.products.WithID(productData.Productidios).metadata.localizedPrice.ToString("N0");
 #endif
 
-        if (priceText != null)
-        {
-            if (Application.systemLanguage == SystemLanguage.Korean)
+            if (priceText != null)
             {
-                priceText.SetText($"{price}원");
-            }
-            else
-            {
-                priceText.SetText($"{price}$");
-            }
+                if (Application.systemLanguage == SystemLanguage.Korean)
+                {
+                    priceText.SetText($"{price}원");
+                }
+                else
+                {
+                    priceText.SetText($"{price}$");
+                }
 
+            }
         }
 
         string itemDetailDesc = null;
@@ -166,9 +173,28 @@ public class UiIapItemCell : MonoBehaviour
 
     public void OnClickBuyButton()
     {
+        if (productData.Needlevel != 0)
+        {
+            int currentLevel = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.topClearStageId].Value + 1;
+
+            if (currentLevel < productData.Needlevel)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"스테이지 {productData.Needlevel}이상일때 보상을 받으실 수 있습니다!");
+                return;
+            }
+        }
+
         if (CanBuyProduct() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("더이상 구매 불가");
+            if (productData.Needlevel == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("더이상 구매 불가");
+            }
+            else
+            {
+                PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
+            }
+
             return;
         }
 
@@ -178,29 +204,36 @@ public class UiIapItemCell : MonoBehaviour
             return;
         }
 
+        if (productData.Needlevel == 0)
+        {
 #if TEST
         UiShop.Instance.BuyProduct(productData.Productid);
         return;
 #endif
 
 #if UNITY_ANDROID
-        IAPManager.Instance.BuyProduct(productData.Productid);
+            IAPManager.Instance.BuyProduct(productData.Productid);
 #endif
 
 #if UNITY_IOS
         IAPManager.Instance.BuyProduct(productData.Productidios);
 #endif
+        }
+        else
+        {
+            UiLevelUpEventShop.Instance.GetPackageItem(productData.Productid);
+        }
     }
 
     private bool CanBuyProduct()
     {
-        if (productData.BUYTYPE != BuyType.Fixed) 
+        if (productData.BUYTYPE != BuyType.Fixed)
         {
             int buyCount = ServerData.iapServerTable.TableDatas[productData.Productid].buyCount.Value;
 
             return buyCount < GetBuyCount();
         }
-        else 
+        else
         {
             int buyCount = ServerData.iAPServerTableTotal.TableDatas[productData.Productid].buyCount.Value;
 
@@ -299,7 +332,7 @@ public class UiIapItemCell : MonoBehaviour
     {
         disposable.Clear();
 
-        if (productData.BUYTYPE != BuyType.Fixed) 
+        if (productData.BUYTYPE != BuyType.Fixed)
         {
             ServerData.iapServerTable.TableDatas[productData.Productid].buyCount.AsObservable().Subscribe(e =>
             {
@@ -320,7 +353,7 @@ public class UiIapItemCell : MonoBehaviour
 
             }).AddTo(disposable);
         }
-        else 
+        else
         {
             ServerData.iAPServerTableTotal.TableDatas[productData.Productid].buyCount.AsObservable().Subscribe(e =>
             {
@@ -353,6 +386,22 @@ public class UiIapItemCell : MonoBehaviour
         {
             buyButton.interactable = true;
         }).AddTo(disposable);
+
+        if (productData.Needlevel != 0)
+        {
+            ServerData.iapServerTable.TableDatas[productData.Productid].buyCount.AsObservable().Subscribe(e =>
+            {
+                if (levelPackageComplete != null)
+                {
+                    levelPackageComplete.SetActive(e >= 1);
+                }
+
+                if (buyButton != null)
+                {
+                    buyButton.gameObject.SetActive(e == 0);
+                }
+            }).AddTo(disposable);
+        }
     }
 
     private void OnDestroy()

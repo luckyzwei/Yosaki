@@ -58,7 +58,7 @@ public enum TitleMissionId
     HyeonMu_1,//★
     BaekHo_1,//★
     ZuZak_1,//★
- 
+
     Level41000,//★
     Level44000,//★
     Level47000,//★
@@ -269,7 +269,7 @@ public enum TitleMissionId
     Stage5100,//★
     Stage5150,//★
     Stage5200,//★
-   
+
 
     //
     Level405000,//★
@@ -340,7 +340,11 @@ public enum TitleMissionId
     Stage6250,//★
     Stage6300,//★
     Stage6350,//★
-    Stage6400//★
+    Stage6400,//★
+    Stage6450,//★
+    Stage6500,//★
+    Stage6550,//★
+    Stage6600//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -438,7 +442,7 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.Level38000);
             }
 
-            if (e >= 41000) 
+            if (e >= 41000)
             {
                 ClearTitleMission(TitleMissionId.Level41000);
             }
@@ -1621,6 +1625,23 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Stage6400);
             }
+            //
+            if (e >= 6450 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage6450);
+            }
+            if (e >= 6500 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage6500);
+            }
+            if (e >= 6550 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage6550);
+            }
+            if (e >= 6600 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage6600);
+            }
 
 
         }).AddTo(this);
@@ -1689,7 +1710,7 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.GetFeelMulGetEffect);
             }
         }).AddTo(this);
-        
+
         //노리개
 
         ServerData.magicBookTable.TableDatas["magicBook12"].hasItem.AsObservable().Subscribe(e =>
@@ -1871,7 +1892,7 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
 
         ServerData.petEquipmentServerTable.TableDatas["petequip0"].hasAbil.AsObservable().Subscribe(e =>
         {
-            if (e == 1) 
+            if (e == 1)
             {
                 ClearTitleMission(TitleMissionId.HyeonMu_1);
             }

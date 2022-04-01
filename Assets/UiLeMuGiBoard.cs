@@ -8,7 +8,11 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
     private GameObject rootObject;
 
     [SerializeField]
-    private UiPetView uiPetViewPrefeab;
+    private UiPetView uiPetViewPrefeab_LeeMuGi;
+
+    [SerializeField]
+    private UiPetView uiPetViewPrefeab_GoldDragon;
+
     [SerializeField]
     private Transform petViewParent;
     void Start()
@@ -23,15 +27,27 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
         while (e.MoveNext())
         {
             //이무기는 생성X
-            if (e.Current.Value.Id != 12) continue;
+            if (e.Current.Value.Id == 12) 
+            {
+                var petView = Instantiate<UiPetView>(uiPetViewPrefeab_LeeMuGi, petViewParent);
 
-            var petView = Instantiate<UiPetView>(uiPetViewPrefeab, petViewParent);
+                petView.gameObject.SetActive(true);
 
-            petView.gameObject.SetActive(true);
+                petView.transform.localPosition = Vector3.zero;
 
-            petView.transform.localPosition = Vector3.zero;
+                petView.Initialize(e.Current.Value);
+            }
+            else if(e.Current.Value.Id == 13) 
+            {
+                var petView = Instantiate<UiPetView>(uiPetViewPrefeab_GoldDragon, petViewParent);
 
-            petView.Initialize(e.Current.Value);
+                petView.gameObject.SetActive(true);
+
+                petView.transform.localPosition = Vector3.zero;
+
+                petView.Initialize(e.Current.Value);
+
+            }
         }
     }
 }

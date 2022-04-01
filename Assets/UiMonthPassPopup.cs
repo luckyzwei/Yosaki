@@ -16,4 +16,14 @@ public class UiMonthPassPopup : MonoBehaviour
         monthPass2.SetActive(ServerData.userInfoTable.IsMonthlyPass2() == true);
     }
 
+    private void Start()
+    {
+        
+    }
+
+    private void CostumeReGetRoutine() 
+    {
+        
+    }
+
 }

@@ -76,4 +76,8 @@ public class InAppPurchaseData
   int fixedbuycount;
   public int Fixedbuycount { get {return fixedbuycount; } set { this.fixedbuycount = value;} }
   
+  [SerializeField]
+  int needlevel;
+  public int Needlevel { get {return needlevel; } set { this.needlevel = value;} }
+  
 }

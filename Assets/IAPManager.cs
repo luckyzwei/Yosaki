@@ -18,11 +18,11 @@ using BackEnd;
 
 public enum BuyType
 {
-    NoLimit, DayOfOne, WeekOfTwo, MonthOfOne, AllTimeOne, MonthOfFive, WeekOfFive, DayOfFive, MonthOfTen, Pension,Fixed
+    NoLimit, DayOfOne, WeekOfTwo, MonthOfOne, AllTimeOne, MonthOfFive, WeekOfFive, DayOfFive, MonthOfTen, Pension, Fixed
 }
 public enum ShopCategory
 {
-    Gem, Limit1, Limit2, Pet, Costume, Pension, Chuseok, Limit3, Event, Event2, Event3,None
+    Gem, Limit1, Limit2, Pet, Costume, Pension, Chuseok, Limit3, Event, Event2, Event3, None, LevelUp
 }
 public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 {
@@ -39,7 +39,7 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
     public Product[] PurchasedProducts { get; private set; }
     private Dictionary<string, int> PurchasedProductsDic = new Dictionary<string, int>();
 
-    public void ResetDisableCallbacks() 
+    public void ResetDisableCallbacks()
     {
         disableBuyButton = new ReactiveCommand();
         activeBuyButton = new ReactiveCommand();
@@ -85,6 +85,8 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 
         for (int i = 0; i < tableData.Length; i++)
         {
+            if (tableData[i].Needlevel != 0) continue;
+
             string productId = string.Empty;
 
 #if UNITY_ANDROID
