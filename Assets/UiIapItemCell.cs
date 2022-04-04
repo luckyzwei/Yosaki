@@ -112,7 +112,12 @@ public class UiIapItemCell : MonoBehaviour
             {
                 if (Application.systemLanguage == SystemLanguage.Korean)
                 {
+#if UNITY_ANDROID
                     priceText.SetText($"{price}{IAPManager.Instance.GetProduct(productData.Productid).metadata.isoCurrencyCode}");
+#endif
+#if UNITY_IOS
+                    priceText.SetText($"{price}{IAPManager.Instance.GetProduct(productData.Productidios).metadata.isoCurrencyCode}");
+#endif
                 }
                 else
                 {
