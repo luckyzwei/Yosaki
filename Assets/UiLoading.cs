@@ -43,8 +43,6 @@ public class UiLoading : MonoBehaviour
         var tableData = TableManager.Instance.LoadingTip.dataArray[randIdx];
 
         description.SetText(tableData.Description);
-
-        tipIcon.sprite = CommonUiContainer.Instance.loadingTipIcon[randIdx];
     }
 
 }

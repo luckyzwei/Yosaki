@@ -44,6 +44,9 @@ public class UiIapItemCell : MonoBehaviour
     [SerializeField]
     private GameObject levelPackageComplete;
 
+    [SerializeField]
+    private GameObject levelPackageComplete_Add;
+
     private void Start()
     {
         if (isInspectorItem == true)
@@ -232,6 +235,76 @@ public class UiIapItemCell : MonoBehaviour
         }
     }
 
+    private bool HasGrowthAddProduct()
+    {
+        return ServerData.iapServerTable.TableDatas["growthadd"].buyCount.Value >= 1;
+    }
+    public void OnClickBuyButton_AddReward()
+    {
+        if (productData.Needlevel != 0)
+        {
+            int currentLevel = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.topClearStageId].Value + 1;
+
+            if (currentLevel < productData.Needlevel)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"스테이지 {productData.Needlevel}이상일때 보상을 받으실 수 있습니다!");
+                return;
+            }
+        }
+
+        if (HasGrowthAddProduct() == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("추가 보상권이 필요합니다.");
+            return;
+        }
+
+        if (ServerData.iapServerTable.TableDatas[productData.Productid].buyCount.Value < 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("기본 보상을 먼저 받아 주세요!");
+            return;
+        }
+
+        if (CanBuyProduct() == false)
+        {
+            if (productData.Needlevel == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("더이상 구매 불가");
+            }
+            else
+            {
+                PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
+            }
+
+            return;
+        }
+
+        if (IsRewardCollect() == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("보상 데이터 오류");
+            return;
+        }
+
+        if (productData.Needlevel == 0)
+        {
+#if TEST
+        UiShop.Instance.BuyProduct(productData.Productid);
+        return;
+#endif
+
+#if UNITY_ANDROID
+            IAPManager.Instance.BuyProduct(productData.Productid);
+#endif
+
+#if UNITY_IOS
+        IAPManager.Instance.BuyProduct(productData.Productidios);
+#endif
+        }
+        else
+        {
+            UiLevelUpEventShop.Instance.GetPackageItem(productData.Productid);
+        }
+    }
+
     private bool CanBuyProduct()
     {
         if (productData.BUYTYPE != BuyType.Fixed)
@@ -287,7 +360,26 @@ public class UiIapItemCell : MonoBehaviour
             case BuyType.MonthOfTen:
                 return 10;
             case BuyType.Fixed:
-                return productData.Fixedbuycount;
+                {
+                    //일반상품
+                    if (productData.Needlevel == 0)
+                    {
+
+                        return productData.Fixedbuycount;
+                    }
+                    else
+                    {
+                        //추가 보상권 없을때
+                        if (HasGrowthAddProduct() == true)
+                        {
+                            return productData.Fixedbuycount + 1;
+                        }
+                        else
+                        {
+                            return productData.Fixedbuycount;
+                        }
+                    }
+                }
                 break;
         }
 
@@ -401,6 +493,11 @@ public class UiIapItemCell : MonoBehaviour
                 if (levelPackageComplete != null)
                 {
                     levelPackageComplete.SetActive(e >= 1);
+                }
+
+                if (levelPackageComplete_Add != null)
+                {
+                    levelPackageComplete_Add.SetActive(e >= 2);
                 }
 
                 if (buyButton != null)
