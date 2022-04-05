@@ -129,7 +129,8 @@ public class UserInfoTable
     public const string getSmith = "getSmith";
     public const string sendPetExp = "sendPetExp";
 
-    public const string exchangeCount = "ex_0";
+    public const string refundFox = "rf";
+
 
     public double currentServerDate;
     public double attendanceUpdatedTime;
@@ -232,8 +233,8 @@ public class UserInfoTable
         {getSmith,0},
         {marbleReset3,0},
         {sendPetExp,0},
-        {exchangeCount,0},
         {springReset,0},
+        {refundFox,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -672,6 +673,10 @@ public class UserInfoTable
         //로컬
         ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value = string.Empty;
         yoguiSogulParam.Add(EtcServerTable.yoguiSogulReward, ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value);
+
+        ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value = string.Empty;
+        yoguiSogulParam.Add(EtcServerTable.guildAttenReward, ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value);
+
         transactionList.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, yoguiSogulParam));
 
         Param iapParam = null;
@@ -799,6 +804,11 @@ public class UserInfoTable
         }
 
 
+    }
+
+    public bool IsWeekend()
+    {
+        return currentServerTime.DayOfWeek == DayOfWeek.Sunday || currentServerTime.DayOfWeek == DayOfWeek.Saturday;
     }
 
     static int totalKillCount = 0;

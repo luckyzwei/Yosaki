@@ -135,14 +135,20 @@ public static class GameBalance
 
     public readonly static ObscuredFloat TitleEquipAddPer = 2;
 
-    public readonly static ObscuredFloat HotTime_Start = 19;
-    public readonly static ObscuredFloat HotTime_Start_Weekend = 18;
+    public readonly static ObscuredFloat HotTime_Start = 20;
+    public readonly static ObscuredFloat HotTime_Start_Weekend = 20;
     public readonly static ObscuredFloat HotTime_End = 22;
 
-    public readonly static ObscuredFloat HotTime_Exp = 15;
-    public readonly static ObscuredFloat HotTime_Gold = 15;
-    public readonly static ObscuredFloat HotTime_GrowthStone = 30;
-    public readonly static ObscuredFloat HotTime_Marble = 4;
+    public readonly static ObscuredFloat HotTime_Exp = 25;
+    public readonly static ObscuredFloat HotTime_Gold = 25;
+    public readonly static ObscuredFloat HotTime_GrowthStone = 45;
+    public readonly static ObscuredFloat HotTime_Marble = 6;
+
+    public readonly static ObscuredFloat HotTime_Exp_Weekend = 30;
+    public readonly static ObscuredFloat HotTime_Gold_Weekend = 30;
+    public readonly static ObscuredFloat HotTime_GrowthStone_Weekend = 55;
+    public readonly static ObscuredFloat HotTime_Marble_Weekend = 8;
+
 
     public readonly static ObscuredInt DailyRelicTicketGetCount = 3;
     public readonly static ObscuredInt StageRelicUnlockLevel = 3000;

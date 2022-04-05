@@ -11,6 +11,75 @@ public class UiLevelPassBoard : MonoBehaviour
     private List<int> splitData_Free;
     private List<int> splitData_Ad;
 
+    private void Start()
+    {
+        RefundFox();
+    }
+
+    private string refundProduct = "levelpass9";
+    private void RefundFox()
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.refundFox].Value == 1 || HasLevelPassProduct(refundProduct) == false)
+        {
+            ServerData.userInfoTable.TableDatas[UserInfoTable.refundFox].Value = 1;
+            ServerData.userInfoTable.UpData(UserInfoTable.refundFox, false);
+            return;
+        }
+
+        float refundJade = 0f;
+        float refundMarble = 0f;
+
+        var tableData = TableManager.Instance.LevelPass.dataArray;
+        splitData_Ad = GetSplitData(NewLevelPass.premiumReward);
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            //비교대상이아님
+            if (tableData[i].Shopid.Equals(refundProduct) == false) continue;
+
+            //처리안해도되는거
+            if (tableData[i].Wrongbefore == 0) continue;
+
+            //보상 안받은애들은 처리X
+            if (HasReward(splitData_Ad, tableData[i].Id) == false) continue;
+
+            //옥
+            if (tableData[i].Reward2_Pass == 1)
+            {
+                refundJade += (tableData[i].Reward2_Value - tableData[i].Wrongbefore);
+            }
+            //여우구슬
+            else if (tableData[i].Reward2_Pass == 5)
+            {
+                refundMarble += (tableData[i].Reward2_Value - tableData[i].Wrongbefore);
+            }
+        }
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.refundFox].Value = 1;
+
+        ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += refundJade;
+        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += refundMarble;
+
+        Param goodsParam = new Param();
+        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+
+
+        Param userInfoParam = new Param();
+        userInfoParam.Add(UserInfoTable.refundFox, ServerData.userInfoTable.TableDatas[UserInfoTable.refundFox].Value);
+
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+          {
+              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"옥 : {Utils.ConvertBigNum(refundJade)}개\n여우구슬 : {Utils.ConvertBigNum(refundMarble)}개\n소급 완료!", null);
+          });
+    }
+
     public void OnClickAllReceiveButton()
     {
         splitData_Free = GetSplitData(NewLevelPass.freeReward);

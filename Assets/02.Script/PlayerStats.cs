@@ -982,28 +982,58 @@ public static class PlayerStats
 
     public static float GetHotTimeBuffEffect(StatusType statusType)
     {
-        float ret = 0f;
+        if (ServerData.userInfoTable.IsWeekend() == false) 
+        {
+            float ret = 0f;
 
-        if (ServerData.userInfoTable.IsHotTime() == false) return 0f;
+            if (ServerData.userInfoTable.IsHotTime() == false) return 0f;
 
-        if (statusType == StatusType.GoldGainPer)
-        {
-            ret = GameBalance.HotTime_Gold;
+            if (statusType == StatusType.GoldGainPer)
+            {
+                ret = GameBalance.HotTime_Gold;
+            }
+            else if (statusType == StatusType.ExpGainPer)
+            {
+                ret = GameBalance.HotTime_Exp;
+            }
+            else if (statusType == StatusType.MagicStoneAddPer)
+            {
+                ret = GameBalance.HotTime_GrowthStone;
+            }
+            else if (statusType == StatusType.MarbleAddPer)
+            {
+                ret = GameBalance.HotTime_Marble;
+            }
+
+            return ret;
         }
-        else if (statusType == StatusType.ExpGainPer)
+        else 
         {
-            ret = GameBalance.HotTime_Exp;
-        }
-        else if (statusType == StatusType.MagicStoneAddPer)
-        {
-            ret = GameBalance.HotTime_GrowthStone;
-        }
-        else if (statusType == StatusType.MarbleAddPer)
-        {
-            ret = GameBalance.HotTime_Marble;
+            float ret = 0f;
+
+            if (ServerData.userInfoTable.IsHotTime() == false) return 0f;
+
+            if (statusType == StatusType.GoldGainPer)
+            {
+                ret = GameBalance.HotTime_Gold_Weekend;
+            }
+            else if (statusType == StatusType.ExpGainPer)
+            {
+                ret = GameBalance.HotTime_Exp_Weekend;
+            }
+            else if (statusType == StatusType.MagicStoneAddPer)
+            {
+                ret = GameBalance.HotTime_GrowthStone_Weekend;
+            }
+            else if (statusType == StatusType.MarbleAddPer)
+            {
+                ret = GameBalance.HotTime_Marble_Weekend;
+            }
+
+            return ret;
         }
 
-        return ret;
+     
     }
 
     public static float GetSinsuEquipEffect(StatusType statusType)

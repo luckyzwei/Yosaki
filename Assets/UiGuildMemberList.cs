@@ -29,6 +29,8 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     [SerializeField]
     private GameObject guildInfoButton;
 
+    public ReactiveProperty<int> attenUserNum = new ReactiveProperty<int>();
+
     public UiGuildMemberCell GetMemberCell(string nickName)
     {
         nickName = nickName.Replace(CommonString.IOS_nick, "");
@@ -135,7 +137,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     {
         memberNumText.SetText(string.Empty);
 
-        var bro = Backend.Social.Guild.GetGuildMemberListV3(GuildManager.Instance.myGuildIndate, GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value));
+        var bro = Backend.Social.Guild.GetGuildMemberListV3(GuildManager.Instance.myGuildIndate, GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value) + 5);
 
         if (bro.IsSuccess())
         {
@@ -144,12 +146,20 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
             var rows = returnValue["rows"];
 
             guildMemberCount = rows.Count;
+            guildMemberCount = Mathf.Min(guildMemberCount, GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value));
 
             memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value)}");
 
+            bool findMyData = false;
+            string myNickName = PlayerData.Instance.NickName.Replace(CommonString.IOS_nick, "");
+
+            attenUserNum.Value = 0;
+
+            int attenNum = 0;
+
             for (int i = 0; i < memberCells.Count; i++)
             {
-                if (i < rows.Count)
+                if (i < guildMemberCount)
                 {
                     memberCells[i].gameObject.SetActive(true);
 
@@ -163,10 +173,21 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     bool todayDonated = int.Parse(data["totalGoods9Amount"]["N"].ToString()) >= 1;
                     bool todayDonatedPetExp = int.Parse(data["totalGoods8Amount"]["N"].ToString()) >= 1;
 
+                    if (todayDonated)
+                    {
+                        attenNum++;
+
+                    }
+
                     var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp);
 
                     memberCells[i].Initialize(memberData);
                     memberCells[i].transform.SetAsFirstSibling();
+
+                    if (findMyData == false)
+                    {
+                        findMyData = nickName.Replace(CommonString.IOS_nick, "").Equals(myNickName);
+                    }
 
                 }
                 else
@@ -175,9 +196,37 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                 }
             }
 
+            attenUserNum.Value = attenNum;
+
+            if (findMyData == false)
+            {
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    var data = rows[i];
+
+                    string nickName = data["nickname"]["S"].ToString();
+
+                    string position = data["position"]["S"].ToString();
+                    string lastLogin = data["lastLogin"]["S"].ToString();
+                    string gamerIndate = data["gamerInDate"]["S"].ToString();
+                    int donateGoods = int.Parse(data["totalGoods3Amount"]["N"].ToString());
+                    bool todayDonated = int.Parse(data["totalGoods9Amount"]["N"].ToString()) >= 1;
+                    bool todayDonatedPetExp = int.Parse(data["totalGoods8Amount"]["N"].ToString()) >= 1;
+
+                    //내꺼찾음
+                    if (nickName.Replace(CommonString.IOS_nick, "").Equals(myNickName))
+                    {
+                        var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp);
+                        memberCells[0].Initialize(memberData);
+                        memberCells[0].transform.SetAsFirstSibling();
+                        break;
+                    }
+                }
+            }
+
             for (int i = 0; i < memberCells.Count; i++)
             {
-                if (i < rows.Count)
+                if (i < guildMemberCount)
                 {
                     memberCells[i].RefreshKickButton();
                 }

@@ -40,4 +40,8 @@ public class LevelPassData
   string shopid;
   public string Shopid { get {return shopid; } set { this.shopid = value;} }
   
+  [SerializeField]
+  float wrongbefore;
+  public float Wrongbefore { get {return wrongbefore; } set { this.wrongbefore = value;} }
+  
 }
