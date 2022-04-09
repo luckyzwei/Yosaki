@@ -106,6 +106,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
 
     private void Subscribe()
     {
+
         disposable.Clear();
 
         bossServerData.rewardedId.AsObservable().Subscribe(e =>
