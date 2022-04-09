@@ -172,6 +172,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     int donateGoods = int.Parse(data["totalGoods3Amount"]["N"].ToString());
                     bool todayDonated = int.Parse(data["totalGoods9Amount"]["N"].ToString()) >= 1;
                     bool todayDonatedPetExp = int.Parse(data["totalGoods8Amount"]["N"].ToString()) >= 1;
+                    bool todayGuildBoss = int.Parse(data["totalGoods6Amount"]["N"].ToString()) >= 1;
 
                     if (todayDonated)
                     {
@@ -179,7 +180,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
                     }
 
-                    var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp);
+                    var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp, todayGuildBoss);
 
                     memberCells[i].Initialize(memberData);
                     memberCells[i].transform.SetAsFirstSibling();
@@ -212,11 +213,12 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     int donateGoods = int.Parse(data["totalGoods3Amount"]["N"].ToString());
                     bool todayDonated = int.Parse(data["totalGoods9Amount"]["N"].ToString()) >= 1;
                     bool todayDonatedPetExp = int.Parse(data["totalGoods8Amount"]["N"].ToString()) >= 1;
+                    bool todayGuildBoss = int.Parse(data["totalGoods6Amount"]["N"].ToString()) >= 1;
 
                     //내꺼찾음
                     if (nickName.Replace(CommonString.IOS_nick, "").Equals(myNickName))
                     {
-                        var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp);
+                        var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp, todayGuildBoss);
                         memberCells[0].Initialize(memberData);
                         memberCells[0].transform.SetAsFirstSibling();
                         break;

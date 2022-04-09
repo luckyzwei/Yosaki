@@ -54,22 +54,39 @@ public class TwelveRaidEnemy : BossEnemyBase
         Initialize();
     }
 
+    private double gangChulDam = 2.5;
+
     private void UpdateBossDamage()
     {
-        var bossTableData = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];
+        if (GameManager.Instance.bossId != 20)
+        {
+            var bossTableData = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];
 
-        double ratio = TwelveDungeonManager.Instance.GetComponent<TwelveDungeonManager>().GetDamagedAmount() / bossTableData.Hp;
+            double ratio = TwelveDungeonManager.Instance.GetComponent<TwelveDungeonManager>().GetDamagedAmount() / bossTableData.Hp;
 
-        double damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax, Mathf.Min(1f, (float)ratio));
+            double damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax, Mathf.Min(1f, (float)ratio));
 
-        hitObject.SetDamage(damage);
+            hitObject.SetDamage(damage);
 
-        enemyHitObjects.ForEach(e => e.SetDamage((float)damage));
+            enemyHitObjects.ForEach(e => e.SetDamage((float)damage));
+        }
+        else
+        {
+            if (gangChulDam < double.MaxValue * 0.25)
+            {
+                gangChulDam *= 2.5;
+            }
+
+            hitObject.SetDamage(gangChulDam);
+
+            enemyHitObjects.ForEach(e => e.SetDamage(gangChulDam));
+        }
+
     }
 
     private IEnumerator BossAttackPowerUpdateRoutine()
     {
-        var updateDelay = new WaitForSeconds(5.0f);
+        var updateDelay = new WaitForSeconds(1.0f);
 
         while (true)
         {
@@ -304,7 +321,7 @@ public class TwelveRaidEnemy : BossEnemyBase
             idx2++;
         }
 
-        if (RandomHit3_Guild.Count != 0) 
+        if (RandomHit3_Guild.Count != 0)
         {
             if (idx3 >= RandomHit3_Guild.Count) idx3 = 0;
 

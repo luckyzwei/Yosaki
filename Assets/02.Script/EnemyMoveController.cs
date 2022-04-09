@@ -42,6 +42,17 @@ public class EnemyMoveController : EnemyMoveBase
         SetRandomZPos();
     }
 
+    private void OnDisable()
+    {
+        if (isBossEnemy) 
+        {
+            if (characterView != null && GameManager.contentsType == GameManager.ContentsType.NormalField)
+            {
+                characterView.gameObject.SetActive(SettingData.ViewEnemy.Value == 1);
+            }
+        }
+    }
+
 
 
     public void SetBossEnemy(bool isBossEnemy)
@@ -51,6 +62,8 @@ public class EnemyMoveController : EnemyMoveBase
         if (isBossEnemy)
         {
             rb.velocity = Vector3.zero;
+
+            characterView.gameObject.SetActive(true);
         }
     }
 

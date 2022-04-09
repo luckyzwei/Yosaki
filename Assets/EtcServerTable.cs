@@ -13,7 +13,7 @@ public class EtcServerTable
     public static string Indate;
     public const string tableName = "Etc";
     public const string email = "email";
-    public const string yoguiSogulReward = "yoguiSogulReward";
+    public const string yoguiSogulReward = "ys";
     public const string sonReward = "sonRewardReal";
     public const string iosCoupon = "iosCoupon";
     public const string guildAttenReward = "gar";

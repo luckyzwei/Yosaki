@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AlarmHitObject : MonoBehaviour
 {
-    private float damage = 10;
+    private double damage = 10;
 
     [SerializeField]
     private Animator animator;
@@ -15,7 +15,7 @@ public class AlarmHitObject : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
-    public void SetDamage(float damage)
+    public void SetDamage(double damage)
     {
         this.damage = damage;
     }

@@ -982,7 +982,7 @@ public static class PlayerStats
 
     public static float GetHotTimeBuffEffect(StatusType statusType)
     {
-        if (ServerData.userInfoTable.IsWeekend() == false) 
+        if (ServerData.userInfoTable.IsWeekend() == false)
         {
             float ret = 0f;
 
@@ -1007,7 +1007,7 @@ public static class PlayerStats
 
             return ret;
         }
-        else 
+        else
         {
             float ret = 0f;
 
@@ -1033,7 +1033,7 @@ public static class PlayerStats
             return ret;
         }
 
-     
+
     }
 
     public static float GetSinsuEquipEffect(StatusType statusType)
@@ -1143,19 +1143,38 @@ public static class PlayerStats
     {
         int currentExp = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.smithExp].Value;
 
-        var tableData = TableManager.Instance.smithTable.dataArray;
-
-        float ret = 0f;
-
-        for (int i = 0; i < tableData.Length; i++)
+        if (statusType == StatusType.growthStoneUp)
         {
-            if (currentExp < tableData[i].Require) continue;
-            if (statusType != tableData[i].STATUSTYPE) continue;
+            if (currentExp < 1000)
+            {
+                return 0;
+            }
+            else
+            {
+                currentExp = Mathf.Min(currentExp, 60000);
 
-            ret = tableData[i].Value;
+                int divide = currentExp / 1000;
+
+                return (1 + (divide)) * 10;
+            }
+
+        }
+        else if (statusType == StatusType.WeaponHasUp ||
+            statusType == StatusType.NorigaeHasUp ||
+            statusType == StatusType.PetEquipHasUp)
+        {
+            return 1f + (currentExp / 2500) * 0.05f;
+        }
+        else if (statusType == StatusType.PetEquipProbUp)
+        {
+            currentExp = Mathf.Min(currentExp, 50000);
+
+            int divide = currentExp / 10000;
+
+            return divide * 10;
         }
 
-        return ret;
+        return 0f;
     }
 
     public static float GetFeelMulAddDam()

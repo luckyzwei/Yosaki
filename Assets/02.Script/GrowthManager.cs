@@ -143,8 +143,6 @@ public class GrowthManager : SingletonMono<GrowthManager>
         }
 
         syncRoutine = StartCoroutine(SyncRoutine());
-
-
     }
 
     private void ShowContentsUnlockAlarm(int accumLevel)

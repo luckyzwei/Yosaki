@@ -9,7 +9,7 @@ using LitJson;
 
 public enum RankType
 {
-    Level, Stage, Boss, Real_Boss, Relic, MiniGame, None
+    Level, Stage, Boss, Real_Boss, Relic, MiniGame, GangChul, None
 }
 
 public class RankManager : SingletonMono<RankManager>
@@ -22,7 +22,8 @@ public class RankManager : SingletonMono<RankManager>
         { RankType.Level,null },
         { RankType.Boss,null },
         { RankType.Relic,null },
-        { RankType.MiniGame,null }
+        { RankType.MiniGame,null },
+        { RankType.GangChul,null },
     };
 
     public Dictionary<RankType, RankInfo> MyRankInfo => myRankInfo;
@@ -70,12 +71,21 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Guild_Reset_Uuid = "be50a6d0-698b-11ec-b243-8d1fccc57e3d";
     public const string Rank_Guild_Reset_Uuid_Feed = "0fdf35b0-9115-11ec-a581-736e2455e958";
 
+    public const string Rank_GangChul_Boss_Uuid = "9d88e4d0-b76f-11ec-8ef8-7f0c591b422a";
+    public const string Rank_GangChul_Guild_Boss_Uuid = "be9d79d0-b754-11ec-8ef8-7f0c591b422a";
+    public const string Rank_Guild_Reset_GangChul_Uuid = "a1a406a0-b754-11ec-8ac4-7dc9d81a6e2f";
+
+    //
+
+
+
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
     public const string Rank_Boss = "Last_Cat2_And";
     public const string Rank_Real_Boss = "boss12_And";
     public const string Rank_Relic = "Rank_Relic";
     public const string Rank_MiniGame = "Rank_MiniGame";
+    public const string Rank_GangChul = "Guild_Boss_And";
 #endif
 
 #if UNITY_IOS
@@ -89,12 +99,18 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Guild_Reset_Uuid = "d248cdc0-698b-11ec-b243-8d1fccc57e3d";
     public const string Rank_Guild_Reset_Uuid_Feed = "41c34620-9115-11ec-a581-736e2455e958";
 
+    public const string Rank_GangChul_Boss_Uuid = "c09780d0-b76f-11ec-8ac4-7dc9d81a6e2f";
+    public const string Rank_GangChul_Guild_Boss_Uuid = "c7a57cd0-b754-11ec-8ef8-7f0c591b422a";
+    public const string Rank_Guild_Reset_GangChul_Uuid = "ac06b7a0-b754-11ec-8ac4-7dc9d81a6e2f";
+
     public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";
     public const string Rank_Boss = "Last_Cat2_IOS";
     public const string Rank_Real_Boss = "boss12_IOS";
     public const string Rank_Relic = "Rank_Relic_IOS";
     public const string Rank_MiniGame = "Rank_MiniGame_IOS";
+    public const string Rank_GangChul = "Guild_Boss_IOS";
+
 #endif
 
 
@@ -105,6 +121,7 @@ public class RankManager : SingletonMono<RankManager>
     public ReactiveCommand<RankInfo> WhenMyRealBossRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyRelicRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyMiniGameRankLoadComplete = new ReactiveCommand<RankInfo>();
+    public ReactiveCommand<RankInfo> WhenMyRealGangChulBossRankLoadComplete = new ReactiveCommand<RankInfo>();
 
     //public void Subscribe()
     //{
@@ -450,6 +467,96 @@ public class RankManager : SingletonMono<RankManager>
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Real_Boss_Uuid, Rank_Real_Boss, RankTable_Real_Boss.Indate, param, bro =>
+        {
+            // 이후처리
+            if (bro.IsSuccess())
+            {
+                Debug.LogError($"랭킹 등록 성공! UpdateBoss0_Score");
+            }
+            else
+            {
+                Debug.LogError($"랭킹 등록 실패 UpdateBoss0_Score {bro.GetStatusCode()}");
+            }
+        });
+    }
+
+    #endregion
+    #region GangChul
+    private Action<RankInfo> whenLoadSuccess_Real_Boss_GangChul;
+    public void RequestMyRealBossGangChulRank(Action<RankInfo> whenLoadSuccess = null)
+    {
+        this.whenLoadSuccess_Real_Boss_GangChul = whenLoadSuccess;
+
+        Backend.URank.User.GetMyRank(RankManager.Rank_GangChul_Boss_Uuid, MyRealBossRankLoadComplete_GangChul);
+    }
+    private void MyRealBossRankLoadComplete_GangChul(BackendReturnObject bro)
+    {
+        RankInfo myRankInfo = null;
+
+        if (bro.IsSuccess())
+        {
+            var rows = bro.Rows();
+
+            if (rows.Count > 0)
+            {
+                JsonData data = rows[0];
+
+                var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
+
+                string nickName = data["nickname"][ServerData.format_string].ToString();
+                int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
+                double score = double.Parse(data["score"][ServerData.format_Number].ToString());
+                score *= GameBalance.BossScoreConvertToOrigin;
+                int costumeId = int.Parse(splitData[0]);
+                int petId = int.Parse(splitData[1]);
+                int weaponId = int.Parse(splitData[2]);
+                int magicBookId = int.Parse(splitData[3]);
+                int fightPoint = int.Parse(splitData[4]);
+
+                string guildName = string.Empty;
+                if (splitData.Length >= 8)
+                {
+                    guildName = splitData[7];
+                }
+
+
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+            }
+        }
+
+        if (myRankInfo != null)
+        {
+            whenLoadSuccess_Real_Boss_GangChul?.Invoke(myRankInfo);
+            WhenMyRealGangChulBossRankLoadComplete.Execute(myRankInfo);
+
+            this.myRankInfo[RankType.GangChul] = myRankInfo;
+        }
+    }
+
+    public void UpdateRealBoss_Score_GangChul(double score)
+    {
+        //if (UpdateRank() == false) return;
+        if (this.myRankInfo[RankType.GangChul] != null && score < this.myRankInfo[RankType.GangChul].Score)
+        {
+            Debug.LogError("점수가 더 낮음");
+            return;
+        }
+
+        score *= GameBalance.BossScoreSmallizeValue;
+
+        Param param = new Param();
+        param.Add("Score", score);
+
+        int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
+        int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
+        int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int fightPoint = (int)PlayerStats.GetTotalPower();
+        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
+
+        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_GangChul_Boss_Uuid, Rank_GangChul, RankTable_Real_Boss_GangChul.Indate, param, bro =>
         {
             // 이후처리
             if (bro.IsSuccess())

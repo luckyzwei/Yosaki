@@ -23,6 +23,7 @@ public static class ServerData
     public static RankTable_Stage rankTables_Stage { get; private set; } = new RankTable_Stage();
     public static RankTable_Boss rankTables_Boss { get; private set; } = new RankTable_Boss();
     public static RankTable_Real_Boss rankTables_Real_Boss { get; private set; } = new RankTable_Real_Boss();
+    public static RankTable_Real_Boss_GangChul rankTables_Real_Boss_gangChul { get; private set; } = new RankTable_Real_Boss_GangChul();
     public static PassServerTable passServerTable { get; private set; } = new PassServerTable();
 
     public static CostumeServerTable costumeServerTable { get; private set; } = new CostumeServerTable();
@@ -93,6 +94,7 @@ public static class ServerData
         rankTables_Stage.Initialize();
         rankTables_Boss.Initialize();
         rankTables_Real_Boss.Initialize();
+        rankTables_Real_Boss_gangChul.Initialize();
         passServerTable.Initialize();
         costumeServerTable.Initialize();
         dailyPassServerTable.Initialize();
@@ -941,6 +943,7 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_1001_10000_MiniGame;
                     break;
             }
+         
 
 
             List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -978,10 +981,37 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_6_20_guild;
                     break;
                 case Item_Type.RankFrame21_100_guild:
-                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_21_100_guild;
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_21_50_guild;
                     break;
                 case Item_Type.RankFrame101_1000_guild:
-                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_101_1000_guild;
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_51_100_guild;
+                    break;
+
+                //
+
+                case Item_Type.RankFrame1guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_1_guild_new;
+                    break;
+                case Item_Type.RankFrame2guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_2_guild_new;
+                    break;
+                case Item_Type.RankFrame3guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_3_guild_new;
+                    break;
+                case Item_Type.RankFrame4guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_4_guild_new;
+                    break;
+                case Item_Type.RankFrame5guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_5_guild_new;
+                    break;
+                case Item_Type.RankFrame6_20_guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_6_20_guild_new;
+                    break;
+                case Item_Type.RankFrame21_50_guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_21_50_guild_new;
+                    break;
+                case Item_Type.RankFrame51_100_guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_51_100_guild_new;
                     break;
             }
 
@@ -997,6 +1027,69 @@ public static class ServerData
             {
                 //LogManager.Instance.SendLogType("GuildReward", type.ToString(), "");
             });
+        }
+        else if (type.IsGangChulItem())
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_1_new_boss;
+                    break;
+                case Item_Type.RankFrame2_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_2_new_boss;
+                    break;
+                case Item_Type.RankFrame3_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_3_new_boss;
+                    break;
+                case Item_Type.RankFrame4_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_4_new_boss;
+                    break;
+                case Item_Type.RankFrame5_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_5_new_boss;
+                    break;
+                case Item_Type.RankFrame6_10_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_6_10_new_boss;
+                    break;
+                case Item_Type.RankFrame10_30_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_10_30_new_boss;
+                    break;
+                case Item_Type.RankFrame30_50boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_30_50_new_boss;
+                    break;
+                case Item_Type.RankFrame50_70_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_50_70_new_boss;
+                    break;
+                case Item_Type.RankFrame70_100_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_70_100_new_boss;
+                    break;
+                case Item_Type.RankFrame100_200_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_100_200_new_boss;
+                    break;
+                case Item_Type.RankFrame200_500_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_200_500_new_boss;
+                    break;
+                case Item_Type.RankFrame500_1000_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_500_1000_new_boss;
+                    break;
+                case Item_Type.RankFrame1000_3000_boss_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.rankReward_1000_3000_new_boss;
+                    break;
+
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransaction(transactionList, successCallBack: () =>
+            {
+                //  LogManager.Instance.SendLogType("RelicReward", type.ToString(), "");
+            });
+
+
         }
         else
         {

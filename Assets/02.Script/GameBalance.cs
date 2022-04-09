@@ -120,14 +120,38 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_101_1000_MiniGame = 3;
     public readonly static ObscuredInt rankReward_1001_10000_MiniGame = 2;
 
-    public readonly static ObscuredInt rankReward_1_guild = 800;
-    public readonly static ObscuredInt rankReward_2_guild = 700;
-    public readonly static ObscuredInt rankReward_3_guild = 600;
-    public readonly static ObscuredInt rankReward_4_guild = 500;
-    public readonly static ObscuredInt rankReward_5_guild = 400;
-    public readonly static ObscuredInt rankReward_6_20_guild = 300;
-    public readonly static ObscuredInt rankReward_21_100_guild = 200;
-    public readonly static ObscuredInt rankReward_101_1000_guild = 150;
+    public readonly static ObscuredInt rankReward_1_guild = 1200;
+    public readonly static ObscuredInt rankReward_2_guild = 1100;
+    public readonly static ObscuredInt rankReward_3_guild = 1000;
+    public readonly static ObscuredInt rankReward_4_guild = 900;
+    public readonly static ObscuredInt rankReward_5_guild = 800;
+    public readonly static ObscuredInt rankReward_6_20_guild = 700;
+    public readonly static ObscuredInt rankReward_21_50_guild = 600;
+    public readonly static ObscuredInt rankReward_51_100_guild = 500;
+
+    public readonly static ObscuredInt rankReward_1_guild_new = 400;
+    public readonly static ObscuredInt rankReward_2_guild_new = 350;
+    public readonly static ObscuredInt rankReward_3_guild_new = 300;
+    public readonly static ObscuredInt rankReward_4_guild_new = 250;
+    public readonly static ObscuredInt rankReward_5_guild_new = 200;
+    public readonly static ObscuredInt rankReward_6_20_guild_new = 150;
+    public readonly static ObscuredInt rankReward_21_50_guild_new = 100;
+    public readonly static ObscuredInt rankReward_51_100_guild_new = 50;
+
+    public readonly static ObscuredInt rankReward_1_new_boss = 3000;
+    public readonly static ObscuredInt rankReward_2_new_boss = 2800;
+    public readonly static ObscuredInt rankReward_3_new_boss = 2600;
+    public readonly static ObscuredInt rankReward_4_new_boss = 2400;
+    public readonly static ObscuredInt rankReward_5_new_boss = 2200;
+    public readonly static ObscuredInt rankReward_6_10_new_boss = 2000;
+    public readonly static ObscuredInt rankReward_10_30_new_boss = 1800;
+    public readonly static ObscuredInt rankReward_30_50_new_boss = 1600;
+    public readonly static ObscuredInt rankReward_50_70_new_boss = 1400;
+    public readonly static ObscuredInt rankReward_70_100_new_boss = 1200;
+    public readonly static ObscuredInt rankReward_100_200_new_boss = 1000;
+    public readonly static ObscuredInt rankReward_200_500_new_boss = 800;
+    public readonly static ObscuredInt rankReward_500_1000_new_boss = 600;
+    public readonly static ObscuredInt rankReward_1000_3000_new_boss = 400;
 
     public readonly static ObscuredInt EventDropEndDay = 28;
     public readonly static ObscuredInt EventMakeEndDay = 28;
@@ -146,7 +170,7 @@ public static class GameBalance
 
     public readonly static ObscuredFloat HotTime_Exp_Weekend = 30;
     public readonly static ObscuredFloat HotTime_Gold_Weekend = 30;
-    public readonly static ObscuredFloat HotTime_GrowthStone_Weekend = 55;
+    public readonly static ObscuredFloat HotTime_GrowthStone_Weekend = 60;
     public readonly static ObscuredFloat HotTime_Marble_Weekend = 8;
 
 

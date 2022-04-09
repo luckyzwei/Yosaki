@@ -530,6 +530,9 @@ public class ChatManager : SingletonMono<ChatManager>
                 break;
             case RankType.Real_Boss:
                 return CommonString.RankPrefix_Real_Boss;
+                break;       
+            case RankType.GangChul:
+                return CommonString.RankPrefix_GangChul;
                 break;
             case RankType.Relic:
                 return CommonString.RankPrefix_Relic;

@@ -28,6 +28,9 @@ public class UiGuildMemberCell : MonoBehaviour
     [SerializeField]
     private GameObject donatedPetExp;
 
+    [SerializeField]
+    private GameObject guildBossObejct;
+
     public enum GuildGrade
     {
         Member, ViceMaster, Master
@@ -44,9 +47,10 @@ public class UiGuildMemberCell : MonoBehaviour
 
         public bool todayDonated { get; private set; } = false;
         public bool todayDonatedPetExp { get; private set; }
+        public bool todayGuildBoss { get; private set; }
 
 
-        public GuildMemberInfo(string nickName, string position, string lastLogin, string gamerIndate, int donateGoods, bool todayDonated, bool todayDonatedPetExp)
+        public GuildMemberInfo(string nickName, string position, string lastLogin, string gamerIndate, int donateGoods, bool todayDonated, bool todayDonatedPetExp, bool todayGuildBoss)
         {
             this.nickName = nickName;
 
@@ -65,12 +69,19 @@ public class UiGuildMemberCell : MonoBehaviour
             this.todayDonated = todayDonated;
 
             this.todayDonatedPetExp = todayDonatedPetExp;
+
+            this.todayGuildBoss = todayGuildBoss;
         }
     }
 
     public void UpdateDonatedObject(bool donated)
     {
         donatedObject.gameObject.SetActive(donated);
+    }
+
+    public void UpdateGuildBossObject(bool donated)
+    {
+        guildBossObejct.gameObject.SetActive(donated);
     }
 
     public void UpdateDonatedObject_PetExp(bool donated)
@@ -98,6 +109,7 @@ public class UiGuildMemberCell : MonoBehaviour
         {
             lastLogin.gameObject.SetActive(false);
         }
+        UpdateGuildBossObject(guildMemberInfo.todayGuildBoss);
 
         UpdateDonatedObject(guildMemberInfo.todayDonated);
 

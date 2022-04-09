@@ -129,7 +129,9 @@ public class UserInfoTable
     public const string getSmith = "getSmith";
     public const string sendPetExp = "sendPetExp";
 
+    public const string exchangeCount = "ex_0";
     public const string refundFox = "rf";
+    public const string sendGangChul = "sg";
 
 
     public double currentServerDate;
@@ -233,8 +235,10 @@ public class UserInfoTable
         {getSmith,0},
         {marbleReset3,0},
         {sendPetExp,0},
+        {exchangeCount,0},
         {springReset,0},
         {refundFox,0},
+        {sendGangChul,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -551,6 +555,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.sendGangChul).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value = 0;
 
@@ -633,6 +638,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
         userInfoParam.Add(UserInfoTable.freeSkill, ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value);
         userInfoParam.Add(UserInfoTable.SendGuildPoint, ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value);
+        userInfoParam.Add(UserInfoTable.sendGangChul, ServerData.userInfoTable.GetTableData(UserInfoTable.sendGangChul).Value);
         userInfoParam.Add(UserInfoTable.getSmith, ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value);
         userInfoParam.Add(UserInfoTable.sendPetExp, ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value);
 
@@ -717,10 +723,12 @@ public class UserInfoTable
 
         //길드보상 초기화
         ServerData.bossServerTable.TableDatas["boss12"].rewardedId.Value = string.Empty;
+        ServerData.bossServerTable.TableDatas["boss20"].rewardedId.Value = string.Empty;
 
         Param bossParam = new Param();
 
         bossParam.Add("boss12", ServerData.bossServerTable.TableDatas["boss12"].ConvertToString());
+        bossParam.Add("boss20", ServerData.bossServerTable.TableDatas["boss20"].ConvertToString());
 
         transactionList.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
@@ -839,6 +847,15 @@ public class UserInfoTable
     public bool IsLastFloor()
     {
         return tableDatas[currentFloorIdx].Value == 301;
+    }
+
+    public bool CanPlayGangChul()
+    {
+        return currentServerTime.DayOfWeek == DayOfWeek.Monday ||
+         currentServerTime.DayOfWeek == DayOfWeek.Tuesday ||
+         currentServerTime.DayOfWeek == DayOfWeek.Wednesday ||
+         currentServerTime.DayOfWeek == DayOfWeek.Thursday ||
+         currentServerTime.DayOfWeek == DayOfWeek.Friday;
     }
 
     public bool IsMonthlyPass2()

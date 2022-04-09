@@ -264,6 +264,35 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return GuildReward;
                 break;
 
+            case Item_Type.RankFrame1guild_new:
+            case Item_Type.RankFrame2guild_new:
+            case Item_Type.RankFrame3guild_new:
+            case Item_Type.RankFrame4guild_new:
+            case Item_Type.RankFrame5guild_new:
+            case Item_Type.RankFrame6_20_guild_new:
+            case Item_Type.RankFrame21_50_guild_new:
+            case Item_Type.RankFrame51_100_guild_new:
+                return GuildReward;
+                break;
+
+            case Item_Type.RankFrame1_boss_new:
+            case Item_Type.RankFrame2_boss_new:
+            case Item_Type.RankFrame3_boss_new:
+            case Item_Type.RankFrame4_boss_new:
+            case Item_Type.RankFrame5_boss_new:
+            case Item_Type.RankFrame6_10_boss_new:
+            case Item_Type.RankFrame10_30_boss_new:
+            case Item_Type.RankFrame30_50boss_new:
+            case Item_Type.RankFrame50_70_boss_new:
+            case Item_Type.RankFrame70_100_boss_new:
+            case Item_Type.RankFrame100_200_boss_new:
+            case Item_Type.RankFrame200_500_boss_new:
+            case Item_Type.RankFrame500_1000_boss_new:
+            case Item_Type.RankFrame1000_3000_boss_new:
+
+                return Peach;
+                break;
+
             case Item_Type.WeaponUpgradeStone:
                 return WeaponUpgradeStone;
                 break;

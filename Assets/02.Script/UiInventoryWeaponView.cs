@@ -479,18 +479,10 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            if (weaponData.Id < 20)
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?", () =>
             {
                 ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
-
-            }
-            else
-            {
-                PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?", () =>
-                {
-                    ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
-                }, () => { });
-            }
+            }, () => { });
             //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
         }
         else

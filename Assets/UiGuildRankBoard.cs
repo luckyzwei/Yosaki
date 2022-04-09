@@ -2,6 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public class GuildRankInfo
+{
+    public string guildName;
+    public string indate;
+    public int rank;
+    public int score;
+
+    public GuildRankInfo(string name, string indate, int rank, int score)
+    {
+        this.guildName = name;
+        this.indate = indate;
+        this.rank = rank;
+        this.score = score;
+    }
+}
 
 public class UiGuildRankBoard : MonoBehaviour
 {
@@ -11,21 +26,7 @@ public class UiGuildRankBoard : MonoBehaviour
     [SerializeField]
     private GameObject RefreshObject;
 
-    public class GuildRankInfo
-    {
-        public string guildName;
-        public string indate;
-        public int rank;
-        public int score;
 
-        public GuildRankInfo(string name, string indate, int rank, int score)
-        {
-            this.guildName = name;
-            this.indate = indate;
-            this.rank = rank;
-            this.score = score;
-        }
-    }
 
     private void OnEnable()
     {

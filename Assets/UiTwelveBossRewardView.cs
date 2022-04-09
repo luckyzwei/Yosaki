@@ -73,9 +73,29 @@ public class UiTwelveBossRewardView : MonoBehaviour
             {
                 if (rewardInfo.currentDamage >= rewardInfo.damageCut)
                 {
-                    if (UiGuildBossView.Instance.rewardGrade < rewardInfo.idx + 1)
+                    if (UiGuildBossView.Instance != null && UiGuildBossView.Instance.rewardGrade < rewardInfo.idx + 1)
                     {
                         UiGuildBossView.Instance.rewardGrade = rewardInfo.idx + 1;
+                    }
+                }
+
+                var bossTableData = TableManager.Instance.TwelveBossTable.dataArray[20];
+
+                var bsd = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
+
+                double currentDamage = 0f;
+
+                if (string.IsNullOrEmpty(bsd.score.Value) == false)
+                {
+                    currentDamage = double.Parse(bsd.score.Value);
+                }
+
+                if (currentDamage >= rewardInfo.damageCut)
+                {
+                    //강철은 구미호와 같은 점수 계산 사용
+                    if (UiGangChulView.Instance != null && UiGangChulView.Instance.rewardGrade < rewardInfo.idx + 1)
+                    {
+                        UiGangChulView.Instance.rewardGrade = rewardInfo.idx + 1;
                     }
                 }
             }
@@ -166,7 +186,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
 
         bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
         ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += amount;
-        
+
         return true;
     }
 }

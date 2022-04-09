@@ -344,7 +344,32 @@ public enum TitleMissionId
     Stage6450,//★
     Stage6500,//★
     Stage6550,//★
-    Stage6600//★
+    Stage6600,//★
+    Stage6650,//★
+    Stage6700,//★
+    Stage6750,//★
+    Stage6800,//★
+
+    Level605000,//★
+    Level610000,//★
+    Level615000,//★
+    Level620000,//★
+    Level625000,//★
+    Level630000,//★
+    Level635000,//★
+    Level640000,//★
+    Level645000,//★
+    Level650000,//★
+    Level655000,//★
+    Level660000,//★
+    Level665000,//★
+    Level670000,//★
+    Level675000,//★
+    Level680000,//★
+    Level685000,//★
+    Level690000,//★
+    Level695000,//★
+    Level700000,//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -1033,6 +1058,90 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Level600000);
             }
+            /////
+            ///
+
+            if (e >= 605000)
+            {
+                ClearTitleMission(TitleMissionId.Level605000);
+            }
+            if (e >= 610000)
+            {
+                ClearTitleMission(TitleMissionId.Level610000);
+            }
+            if (e >= 615000)
+            {
+                ClearTitleMission(TitleMissionId.Level615000);
+            }
+            if (e >= 620000)
+            {
+                ClearTitleMission(TitleMissionId.Level620000);
+            }
+            if (e >= 625000)
+            {
+                ClearTitleMission(TitleMissionId.Level625000);
+            }
+            if (e >= 630000)
+            {
+                ClearTitleMission(TitleMissionId.Level630000);
+            }
+            if (e >= 635000)
+            {
+                ClearTitleMission(TitleMissionId.Level635000);
+            }
+            if (e >= 640000)
+            {
+                ClearTitleMission(TitleMissionId.Level640000);
+            }
+            if (e >= 645000)
+            {
+                ClearTitleMission(TitleMissionId.Level645000);
+            }
+            if (e >= 650000)
+            {
+                ClearTitleMission(TitleMissionId.Level650000);
+            }
+            //
+            if (e >= 655000)
+            {
+                ClearTitleMission(TitleMissionId.Level655000);
+            }
+            if (e >= 660000)
+            {
+                ClearTitleMission(TitleMissionId.Level660000);
+            }
+            if (e >= 665000)
+            {
+                ClearTitleMission(TitleMissionId.Level665000);
+            }
+            if (e >= 670000)
+            {
+                ClearTitleMission(TitleMissionId.Level670000);
+            }
+            if (e >= 675000)
+            {
+                ClearTitleMission(TitleMissionId.Level675000);
+            }
+            if (e >= 680000)
+            {
+                ClearTitleMission(TitleMissionId.Level680000);
+            }
+            if (e >= 685000)
+            {
+                ClearTitleMission(TitleMissionId.Level685000);
+            }
+            if (e >= 690000)
+            {
+                ClearTitleMission(TitleMissionId.Level690000);
+            }
+            if (e >= 695000)
+            {
+                ClearTitleMission(TitleMissionId.Level695000);
+            }
+            if (e >= 700000)
+            {
+                ClearTitleMission(TitleMissionId.Level700000);
+            }
 
         }).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>
@@ -1641,6 +1750,24 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 6600 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage6600);
+            }
+
+            //
+            if (e >= 6650 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage6650);
+            }
+            if (e >= 6700 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage6700);
+            }
+            if (e >= 6750 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage6750);
+            }
+            if (e >= 6800 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage6800);
             }
 
 

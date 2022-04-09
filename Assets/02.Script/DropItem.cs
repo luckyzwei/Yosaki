@@ -93,6 +93,31 @@ public enum Item_Type
     RankFrame21_100_guild = 406,
     RankFrame101_1000_guild = 407,
 
+    //신규
+    RankFrame1guild_new = 600,
+    RankFrame2guild_new = 601,
+    RankFrame3guild_new = 602,
+    RankFrame4guild_new = 603,
+    RankFrame5guild_new = 604,
+    RankFrame6_20_guild_new = 605,
+    RankFrame21_50_guild_new = 606,
+    RankFrame51_100_guild_new = 607,
+
+    RankFrame1_boss_new = 700,
+    RankFrame2_boss_new = 701,
+    RankFrame3_boss_new = 702,
+    RankFrame4_boss_new = 703,
+    RankFrame5_boss_new = 704,
+    RankFrame6_10_boss_new = 705,
+    RankFrame10_30_boss_new = 706,
+    RankFrame30_50boss_new = 707,
+    RankFrame50_70_boss_new = 708,
+    RankFrame70_100_boss_new = 709,
+    RankFrame100_200_boss_new = 710,
+    RankFrame200_500_boss_new = 711,
+    RankFrame500_1000_boss_new = 712,
+    RankFrame1000_3000_boss_new = 713,
+
     MagicStoneBuff = 500,
     //1000~1100 무기
     weapon0 = 1000,

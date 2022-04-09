@@ -24,7 +24,7 @@ public class UiRankView : MonoBehaviour
 
     public static int rank1Count = 0;
 
-    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int fightpoint, string guildName)
+    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int fightpoint, string guildName,bool isGangChul=false)
     {
         this.text1.SetText(text1);
         this.text2.SetText(text2);
@@ -39,38 +39,80 @@ public class UiRankView : MonoBehaviour
         rankList[1].SetActive(rank == 2);
         rankList[2].SetActive(rank == 3);
 
-        UiTopRankerCell rankerCell = null;
 
-        if (rank == 1)
+        if (isGangChul==false) 
         {
-            if (rank1Count == 0)
+            UiTopRankerCell rankerCell = null;
+
+            if (rank == 1)
             {
-                rankerCell = UiTopRankerView.Instance.RankerCellList[0];
+                if (rank1Count == 0)
+                {
+                    rankerCell = UiTopRankerView.Instance.RankerCellList[0];
+                }
+                else if (rank1Count == 1)
+                {
+                    rankerCell = UiTopRankerView.Instance.RankerCellList[1];
+                }
+                else if (rank1Count == 2)
+                {
+                    rankerCell = UiTopRankerView.Instance.RankerCellList[2];
+                }
+
+                rank1Count++;
             }
-            else if (rank1Count == 1)
+            else if (rank == 2)
             {
                 rankerCell = UiTopRankerView.Instance.RankerCellList[1];
             }
-            else if (rank1Count == 2)
+            else if (rank == 3)
             {
                 rankerCell = UiTopRankerView.Instance.RankerCellList[2];
             }
 
-            rank1Count++;
+            if (rankerCell != null)
+            {
+                rankerCell.gameObject.SetActive(true);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName);
+            }
         }
-        else if (rank == 2)
+        else 
         {
-            rankerCell = UiTopRankerView.Instance.RankerCellList[1];
-        }
-        else if (rank == 3)
-        {
-            rankerCell = UiTopRankerView.Instance.RankerCellList[2];
+            UiTopRankerCell rankerCell = null;
+
+            if (rank == 1)
+            {
+                if (rank1Count == 0)
+                {
+                    rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[0];
+                }
+                else if (rank1Count == 1)
+                {
+                    rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[1];
+                }
+                else if (rank1Count == 2)
+                {
+                    rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[2];
+                }
+
+                rank1Count++;
+            }
+            else if (rank == 2)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[1];
+            }
+            else if (rank == 3)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[2];
+            }
+
+            if (rankerCell != null)
+            {
+                rankerCell.gameObject.SetActive(true);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName);
+            }
         }
 
-        if (rankerCell != null)
-        {
-            rankerCell.gameObject.SetActive(true);
-            rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName);
-        }
+       
     }
 }

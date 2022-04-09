@@ -256,6 +256,11 @@ public class TwelveDungeonManager : ContentsManagerBase
         {
             RankManager.Instance.UpdateRealBoss_Score(damageAmount.Value);
         }
+        //강철이
+        else if (GameManager.Instance.bossId == 20) 
+        {
+            RankManager.Instance.UpdateRealBoss_Score_GangChul(damageAmount.Value);
+        }
 
         var serverData = ServerData.bossServerTable.TableDatas[twelveBossTable.Stringid];
 
@@ -315,7 +320,7 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         if (twelveBossTable != null)
         {
-            if (twelveBossTable.Id == 15 || twelveBossTable.Id == 16 || twelveBossTable.Id == 17 || twelveBossTable.Id == 18)
+            if (twelveBossTable.Id == 15 || twelveBossTable.Id == 16 || twelveBossTable.Id == 17 || twelveBossTable.Id == 18 || twelveBossTable.Id == 20)
             {
                 remainSec *= 0.5f;
             }

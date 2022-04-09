@@ -20,7 +20,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
 
     [SerializeField]
     private string testId = "a_8846847867697156085";
-    
+
     [SerializeField]
     private UiNickNameInputBoard nickNameInputBoard;
 
@@ -66,43 +66,65 @@ public class GoogleManager : SingletonMono<GoogleManager>
 
     private void CheckCurrentVersion()
     {
+        var servercheckBro = Backend.Utils.GetServerStatus();
 
-        int clientVersion = int.Parse(Application.version);
-
-        var bro = Backend.Utils.GetLatestVersion();
-
-        if (bro.IsSuccess())
+        if (servercheckBro.IsSuccess())
         {
-            var jsonData = bro.GetReturnValuetoJSON();
-            string serverVersion = jsonData["version"].ToString();
+            var json = servercheckBro.GetReturnValuetoJSON();
+            var state = json["serverStatus"].ToString();
 
-            //버전이 높거나 같음
-            if (clientVersion >= int.Parse(serverVersion))
+            //온라인
+            if (state == "0")
             {
-                Debug.LogError($"클라이언트 버전 {clientVersion} 서버 버전 {serverVersion} 같음");
-                WhenVersionCheckSuccess();
-            }
-            else
-            {
-                Debug.LogError($"클라이언트 버전 {clientVersion} 서버 버전 {serverVersion} 다름");
+                int clientVersion = int.Parse(Application.version);
 
-                PopupManager.Instance.ShowVersionUpPopup(CommonString.Notice, "업데이트 버전이 있습니다. 스토어로 이동합니다.", () =>
+                var bro = Backend.Utils.GetLatestVersion();
+
+                if (bro.IsSuccess())
                 {
+                    var jsonData = bro.GetReturnValuetoJSON();
+                    string serverVersion = jsonData["version"].ToString();
+
+                    //버전이 높거나 같음
+                    if (clientVersion >= int.Parse(serverVersion))
+                    {
+                        Debug.LogError($"클라이언트 버전 {clientVersion} 서버 버전 {serverVersion} 같음");
+                        WhenVersionCheckSuccess();
+                    }
+                    else
+                    {
+                        Debug.LogError($"클라이언트 버전 {clientVersion} 서버 버전 {serverVersion} 다름");
+
+                        PopupManager.Instance.ShowVersionUpPopup(CommonString.Notice, "업데이트 버전이 있습니다. 스토어로 이동합니다.", () =>
+                        {
 #if UNITY_ANDROID
-                    Application.OpenURL("https://play.google.com/store/apps/details?id=com.DragonGames.yoyo");
+                            Application.OpenURL("https://play.google.com/store/apps/details?id=com.DragonGames.yoyo");
 #endif
 #if UNITY_IOS
                     Application.OpenURL("itms-apps://itunes.apple.com/app/id1587651736");
 #endif
-                }, false);
+                        }, false);
+                    }
+
+                    Debug.LogError($"clientVersion = {clientVersion} serverVersion {serverVersion}");
+                }
+                else
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "클라이언트 버전 정보 로드에 실패했습니다.\n버전 정보를 다시 요청합니다.", CheckCurrentVersion);
+                }
+            }
+            else
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "서버 점검중입니다. 자세한 사항은\n네이버 카페에서 확인 부탁드립니다!", ()=> 
+                {
+                    Application.OpenURL("https://cafe.naver.com/yokiki");
+                });
             }
 
-            Debug.LogError($"clientVersion = {clientVersion} serverVersion {serverVersion}");
         }
-        else
-        {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "클라이언트 버전 정보 로드에 실패했습니다.\n버전 정보를 다시 요청합니다.", CheckCurrentVersion);
-        }
+
+
+
     }
 
     private void WhenVersionCheckSuccess()
@@ -272,7 +294,7 @@ public class GoogleManager : SingletonMono<GoogleManager>
         if (bro.IsSuccess())
         {
             Debug.Log("Login success");
-      
+
             UiIosLoginBoard.Instance.CloseCustomGuestCreateBoard();
             StartCoroutine(SceneChangeRoutine());
         }
