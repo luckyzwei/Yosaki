@@ -195,7 +195,7 @@ public class RankManager : SingletonMono<RankManager>
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
-        int fightPoint = (int)PlayerStats.GetTotalPower();
+        int fightPoint = 0;
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");

@@ -165,7 +165,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         LogManager.Instance.SendLogType("SleepReward", "Req", $"seconds {sleepRewardInfo.elapsedSeconds} gold {sleepRewardInfo.gold} jade {sleepRewardInfo.jade} marble {sleepRewardInfo.marble} growthStone {sleepRewardInfo.GrowthStone} exp {sleepRewardInfo.exp}");
 
-        GrowthManager.Instance.GetExp(sleepRewardInfo.exp, false, false, syncToServer: false, isSleep: true);
+        GrowthManager.Instance.GetExpBySleep(sleepRewardInfo.exp);
 
         ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += sleepRewardInfo.gold;
         ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += sleepRewardInfo.jade;

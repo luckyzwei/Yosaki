@@ -11,6 +11,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
     private int levelUpSyncCount = 100;
     private static int currentSyncCount = 0;
+    float expValue = 0f;
 
     private new void Awake()
     {
@@ -18,30 +19,75 @@ public class GrowthManager : SingletonMono<GrowthManager>
         Initialize();
     }
 
+    private WaitForSeconds buffUpdateDelay = new WaitForSeconds(30.0f);
+
+    private IEnumerator Start()
+    {
+        while (true)
+        {
+            SetBuffExpValue();
+            yield return buffUpdateDelay;
+        }
+    }
+
     private void Initialize()
     {
         maxExp.Value = GameDataCalculator.GetMaxExp(ServerData.statusTable.GetTableData(StatusTable.Level).Value);
     }
 
+    private void SetBuffExpValue()
+    {
+        expValue = PlayerStats.GetExpPlusValue();
+    }
+
+
     private bool useEffect = true;
 
-    public void GetExp(float exp, bool useBuff = true, bool useEffect = true, bool syncToServer = true, bool isSleep = false)
+    public void GetExpBySleep(float exp)
+    {
+        ServerData.growthTable.GetTableData(GrowthTable.Exp).Value += exp;
+
+        int maxLevelUpCount = 100000;
+
+        this.useEffect = false;
+
+        for (int i = 0; i < maxLevelUpCount; i++)
+        {
+            if (CanLevelUp())
+            {
+                accumLevel++;
+                ServerData.growthTable.GetTableData(GrowthTable.Exp).Value -= maxExp.Value;
+                maxExp.Value = GameDataCalculator.GetMaxExp(ServerData.statusTable.GetTableData(StatusTable.Level).Value + accumLevel);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        UpdateLocalByAccum();
+
+        SyncLevelUpDatas();
+
+        UiExpGauge.Instance.WhenGrowthValueChanged();
+    }
+
+    public void GetExp(float exp, bool useEffect = true, bool syncToServer = true, bool isSleep = false)
     {
         if (accumLevel > 50000)
         {
             return;
         }
 
-        if (useBuff)
-        {
-            exp += exp * PlayerStats.GetExpPlusValue();
-        }
+
+        exp += exp * expValue;
+
 
         this.useEffect = useEffect;
 
         if (syncToServer)
         {
-            SystemMessage.Instance.SetMessage($"경험치 획득 ({(int)exp})");
+            //SystemMessage.Instance.SetMessage($"경험치 획득 ({(int)exp})");
         }
 
         ServerData.growthTable.GetTableData(GrowthTable.Exp).Value += exp;
@@ -55,7 +101,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
             //추가레벨업 가능?
             if (CanLevelUp())
             {
-                GetExp(0, useBuff: useBuff, useEffect: useEffect, syncToServer: syncToServer, isSleep: isSleep);
+                GetExp(0, useEffect: useEffect, syncToServer: syncToServer, isSleep: isSleep);
             }
             else
             {
@@ -102,6 +148,11 @@ public class GrowthManager : SingletonMono<GrowthManager>
 
         yield return delay;
 
+        UpdateLocalByAccum();
+    }
+
+    public void UpdateLocalByAccum()
+    {
         //레벨 증가
         ServerData.statusTable.GetTableData(StatusTable.Level).Value += accumLevel;
 

@@ -45,7 +45,7 @@ public class UiPostPopup : MonoBehaviour
     WaitForSeconds textingDelay = new WaitForSeconds(0.2f);
     private IEnumerator LoadTextingRoutine()
     {
-        while (true) 
+        while (true)
         {
             loadText.SetText("우편 확인중...");
             yield return textingDelay;
@@ -96,6 +96,25 @@ public class UiPostPopup : MonoBehaviour
             {
                 postViewContainer[i].gameObject.SetActive(false);
             }
+        }
+    }
+
+    public void OnClickAllReceiveButton()
+    {
+        int receiveCount = 0;
+
+        for (int i = 0; i < postViewContainer.Count; i++)
+        {
+            if (postViewContainer[i].gameObject.activeInHierarchy)
+            {
+                postViewContainer[i].OnClickReceiveButton();
+                receiveCount++;
+            }
+        }
+
+        if (receiveCount == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("우편이 없습니다.");
         }
     }
 }

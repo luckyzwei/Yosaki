@@ -42,39 +42,39 @@ public enum StatusType
 
 public static class PlayerStats
 {
-    public static float GetTotalPower()
+    public static double GetTotalPower()
     {
-        float baseAttack = GetBaseAttackPower();
-        float baseAttackPer = GetBaseAttackAddPercentValue();
-        float criProb = GetCriticalProb();
-        float criDam = CriticalDam();
-        float coolTIme = GetSkillCoolTimeDecreaseValue();
-        float skillDam = GetSkillDamagePercentValue();
-        float hpBase = GetMaxHp();
-        float hpAddPer = GetMaxHpPercentAddValue();
-        float mpBase = GetMaxMp();
-        float mpAddPer = GetMaxMpPercentAddValue();
+        double baseAttack = GetBaseAttackPower();
+        double baseAttackPer = GetBaseAttackAddPercentValue();
+        double criProb = GetCriticalProb();
+        double criDam = CriticalDam();
+        double coolTIme = GetSkillCoolTimeDecreaseValue();
+        double skillDam = GetSkillDamagePercentValue();
+        double hpBase = GetMaxHp();
+        double hpAddPer = GetMaxHpPercentAddValue();
+        double mpBase = GetMaxMp();
+        double mpAddPer = GetMaxMpPercentAddValue();
 
-        float ignoreDefense = GetIgnoreDefenseValue();
-        float decreaseDam = GetDamDecreaseValue();
-        float skillAttackCount = GetSkillHitAddValue();
-        float penetration = GetPenetrateDefense();
-        float superCriticalProb = GetSuperCriticalProb();
+        double ignoreDefense = GetIgnoreDefenseValue();
+        double decreaseDam = GetDamDecreaseValue();
+        double skillAttackCount = GetSkillHitAddValue();
+        double penetration = GetPenetrateDefense();
+        double superCriticalProb = GetSuperCriticalProb();
 
-        float feelMulDam = GetSuperCritical2DamPer();
+        double feelMulDam = GetSuperCritical2DamPer();
 
-        float totalPower =
+        double totalPower =
           ((baseAttack + baseAttack * baseAttackPer)
-           * (Mathf.Max(criProb, 0.01f) * 100f * Mathf.Max(criDam, 0.01f))
-           * (Mathf.Max(skillDam, 0.01f) * 100f)
-           * (Mathf.Max(coolTIme, 0.01f)) * 100f)
+           * (Mathf.Max((float)criProb, 0.01f) * 100f * Mathf.Max((float)criDam, 0.01f))
+           * (Mathf.Max((float)skillDam, 0.01f) * 100f)
+           * (Mathf.Max((float)coolTIme, 0.01f)) * 100f)
 
            + ((hpBase + hpBase * hpAddPer) + (mpBase + mpBase * mpAddPer))
            + ((baseAttack + baseAttack * baseAttackPer)
-           * (Mathf.Max(ignoreDefense, 0.01f)) * 100f
-           * (Mathf.Max(decreaseDam, 0.01f)) * 100f
-           * (Mathf.Max(skillAttackCount, 0.01f)) * 100f
-           * (Mathf.Max(penetration, 0.01f)) * 100f
+           * (Mathf.Max((float)ignoreDefense, 0.01f)) * 100f
+           * (Mathf.Max((float)decreaseDam, 0.01f)) * 100f
+           * (Mathf.Max((float)skillAttackCount, 0.01f)) * 100f
+           * (Mathf.Max((float)penetration, 0.01f)) * 100f
            );
 
         totalPower += totalPower * GetSuperCriticalDamPer() * superCriticalProb;
@@ -942,6 +942,7 @@ public static class PlayerStats
 
     public static float GetTitleAbilValue(StatusType type)
     {
+      
         var e = ServerData.titleServerTable.TableDatas.GetEnumerator();
 
         float ret = 0f;

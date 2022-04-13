@@ -315,6 +315,8 @@ public class UiPostView : MonoBehaviour
 
     public void OnClickReceiveButton()
     {
+        if (receiveButton.interactable == false) return;
+
         receiveButton.interactable = false;
         PostManager.Instance.ReceivePost(postInfo);
     }

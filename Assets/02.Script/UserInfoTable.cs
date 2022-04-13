@@ -434,11 +434,6 @@ public class UserInfoTable
 
     public void UpdateLastLoginTime()
     {
-
-        DateChanged(1, false, false);
-        Debug.LogError("Day Change");
-        return;
-
         SendQueue.Enqueue(Backend.Utils.GetServerTime, (bro) =>
         {
             var isSuccess = bro.IsSuccess();
