@@ -964,18 +964,6 @@ public static class PlayerStats
                     ret += tableData.Abilvalue1;
                 }
             }
-
-            if (type == (StatusType)tableData.Abiltype2)
-            {
-                if (tableData.Id == ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].Value)
-                {
-                    ret += tableData.Abilvalue2 * GameBalance.TitleEquipAddPer;
-                }
-                else
-                {
-                    ret += tableData.Abilvalue2;
-                }
-            }
         }
 
         return ret;
