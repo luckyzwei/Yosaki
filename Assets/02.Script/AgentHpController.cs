@@ -134,10 +134,8 @@ public class AgentHpController : MonoBehaviour
     }
     private static string hitSfxName = "EnemyHitted";
     private static string deadSfxName = "EnemyDead";
-    public void ApplyPlusDamage(ref double value, ref bool isCritical, ref bool isSuperCritical)
+    public void ApplyPlusDamage(ref double value, bool isCritical, bool isSuperCritical)
     {
-        isCritical = PlayerStats.ActiveCritical();
-
         SoundManager.Instance.PlaySound(hitSfxName);
 
         //크리티컬
@@ -168,8 +166,6 @@ public class AgentHpController : MonoBehaviour
         }
 
         //슈퍼크리티컬
-
-        isSuperCritical = PlayerStats.ActiveSuperCritical();
 
         if (isSuperCritical)
         {

@@ -55,15 +55,15 @@ public class DokebiMoveController : MonoBehaviour
 
         if (moveState == MoveState.FollowPlayer)
         {
-            if (returnState != null)
-            {
-                StopCoroutine(returnState);
-            }
+            //if (returnState != null)
+            //{
+            //    StopCoroutine(returnState);
+            //}
 
-            returnState = StartCoroutine(ReturnNormalState());
+            //returnState = StartCoroutine(ReturnNormalState());
 
             //이동속도 증가
-            WhenDirectionChanged(moveDirectionType.Value);
+            //WhenDirectionChanged(moveDirectionType.Value);
         }
     }
 

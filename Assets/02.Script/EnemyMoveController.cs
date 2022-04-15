@@ -81,7 +81,7 @@ public class EnemyMoveController : EnemyMoveBase
             //returnState = StartCoroutine(ReturnNormalState());
 
             //이동속도 증가
-            WhenDirectionChanged(moveDirectionType.Value);
+            //WhenDirectionChanged(moveDirectionType.Value);
         }
     }
 

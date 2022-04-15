@@ -139,8 +139,8 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     }
     private Dictionary<int, AgentHpController> agentHpControllers = new Dictionary<int, AgentHpController>();
     private Dictionary<double, double> calculatedDamage = new Dictionary<double, double>();
-    private Dictionary<double, bool> calculatedDamage_critical = new Dictionary<double, bool>();
-    private Dictionary<double, bool> calculatedDamage_superCritical = new Dictionary<double, bool>();
+    private Dictionary<double, double> calculatedDamage_critical = new Dictionary<double, double>();
+    private Dictionary<double, double> calculatedDamage_superCritical = new Dictionary<double, double>();
 
     public IEnumerator ApplyDamage(Collider2D hitEnemie, SkillTableData skillInfo, double damage, bool playSound)
     {
@@ -164,29 +164,69 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
         double originDam = damage;
         double defense = agentHpController.Defense;
-        double key = originDam + defense;
 
-        if (calculatedDamage.ContainsKey(key) == false)
+        bool isCritical = PlayerStats.ActiveCritical();
+        bool isSuperCritical = PlayerStats.ActiveSuperCritical();
+
+        double key = originDam * defense * 0.0001;
+
+        double calculatedDam = 0;
+
+        if (isCritical)
         {
-            agentHpController.ApplyDefense(ref damage);
+            //슈퍼크리
+            if (isSuperCritical)
+            {
+                if (calculatedDamage_superCritical.ContainsKey(key) == false)
+                {
+                    agentHpController.ApplyDefense(ref damage);
 
-            bool isCritical = false;
-            bool isSuperCritical = false;
+                    agentHpController.ApplyPlusDamage(ref damage, isCritical, isSuperCritical);
 
-            agentHpController.ApplyPlusDamage(ref damage, ref isCritical, ref isSuperCritical);
+                    calculatedDamage_superCritical.Add(key, damage);
+                }
 
-            calculatedDamage.Add(key, damage);
-            calculatedDamage_critical.Add(key, isCritical);
-            calculatedDamage_superCritical.Add(key, isSuperCritical);
+                calculatedDam = calculatedDamage_superCritical[key];
+            }
+            //그냥크리
+            else
+            {
+                if (calculatedDamage_critical.ContainsKey(key) == false)
+                {
+                    agentHpController.ApplyDefense(ref damage);
+
+                    agentHpController.ApplyPlusDamage(ref damage, isCritical, isSuperCritical);
+
+                    calculatedDamage_critical.Add(key, damage);
+                }
+
+                calculatedDam = calculatedDamage_critical[key];
+            }
         }
-        
+        //노크리
+        else
+        {
+            if (calculatedDamage.ContainsKey(key) == false)
+            {
+                agentHpController.ApplyDefense(ref damage);
+
+                agentHpController.ApplyPlusDamage(ref damage, isCritical, isSuperCritical);
+
+                calculatedDamage.Add(key, damage);
+            }
+
+            calculatedDam = calculatedDamage[key];
+        }
+
+
+
 
         for (int hit = 0; hit < hitCount; hit++)
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
-            agentHpController.SpawnDamText(calculatedDamage_critical[key], calculatedDamage_superCritical[key], damage);
-            agentHpController.UpdateHp(-calculatedDamage[key]);
+            agentHpController.SpawnDamText(isCritical, isSuperCritical, calculatedDam);
+            agentHpController.UpdateHp(-calculatedDam);
 
             //이펙트
             if (string.IsNullOrEmpty(skillInfo.Hiteffectname) == false &&
@@ -212,6 +252,19 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                 tick += Time.deltaTime;
                 yield return null;
             }
+        }
+
+        if (calculatedDamage.Count > 100) 
+        {
+            calculatedDamage.Clear();
+        }
+        if (calculatedDamage_critical.Count > 100)
+        {
+            calculatedDamage_critical.Clear();
+        }
+        if (calculatedDamage_superCritical.Count > 100)
+        {
+            calculatedDamage_superCritical.Clear();
         }
     }
 
