@@ -74,7 +74,7 @@ public class EnemyHpBar : MonoBehaviour
     private void ResetGauge()
     {
         if (notUpdate == true) return;
-
+        greyRoutine = null;
         greenRenderer.transform.localScale = new Vector2(1f, originYScale);
         greyRenderer.transform.localScale = new Vector2(1f, originYScale);
     }
@@ -110,14 +110,12 @@ public class EnemyHpBar : MonoBehaviour
 
         greenRenderer.transform.localScale = new Vector2(Mathf.Max(0f, (float)(currentHp / maxHp)), originYScale);
 
-        if (greyRoutine != null)
+        if (greyRoutine == null)
         {
-            StopCoroutine(greyRoutine);
-        }
-
-        if (this.gameObject.activeInHierarchy)
-        {
-            greyRoutine = StartCoroutine(GreyRoutine());
+            if (this.gameObject.activeInHierarchy)
+            {
+                greyRoutine = StartCoroutine(GreyRoutine());
+            }
         }
     }
 }

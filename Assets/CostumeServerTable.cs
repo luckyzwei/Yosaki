@@ -157,6 +157,8 @@ public class CostumeServerTable
 
     public const char SplitText = '|';
 
+    public Dictionary<int, float> abilValues = new Dictionary<int, float>();
+
     public string ConvertAllCostumeDataToString()
     {
         string ret = string.Empty;
@@ -171,29 +173,7 @@ public class CostumeServerTable
         return ret;
     }
 
-    public float GetCostumeAbility(StatusType type)
-    {
-        float ret = 0f;
 
-        for (int j = 0; j < TableManager.Instance.Costume.dataArray.Length; j++)
-        {
-            var costumeTableData = TableManager.Instance.CostumeData[j];
-
-            var currentCostumeData = tableDatas[costumeTableData.Stringid];
-
-            for (int i = 0; i < currentCostumeData.abilityIdx.Count; i++)
-            {
-                var abilityInfo = TableManager.Instance.CostumeAbilityData[currentCostumeData.abilityIdx[i].Value];
-
-                if (abilityInfo.Abilitytype == (int)type)
-                {
-                    ret += abilityInfo.Abilityvalue;
-                }
-            }
-        }
-
-        return ret;
-    }
 
 
     public void SyncCostumeData(string key)
@@ -322,7 +302,7 @@ public class CostumeServerTable
                     }
                 }
 
-                if (needSync) 
+                if (needSync)
                 {
                     Param newParam = new Param();
 
@@ -360,6 +340,39 @@ public class CostumeServerTable
 
             tableDatas[costumeTableData.Stringid].abilityIdx = CostumeServerData.GetCostumeAbilOnly(costumeAbilities[i]);
             tableDatas[costumeTableData.Stringid].lockIdx = CostumeServerData.GetCostumeLockOnly(costumeAbilities[i]);
+        }
+
+        abilValues = new Dictionary<int, float>();
+
+        var e = tableDatas.GetEnumerator();
+
+        while (e.MoveNext())
+        {
+            for (int i = 0; i < e.Current.Value.abilityIdx.Count; i++)
+            {
+                var abilityInfo = TableManager.Instance.CostumeAbilityData[e.Current.Value.abilityIdx[i].Value];
+
+                if (abilValues.ContainsKey(abilityInfo.Abilitytype) == false)
+                {
+                    abilValues.Add(abilityInfo.Abilitytype, 0f);
+                }
+
+                abilValues[abilityInfo.Abilitytype] += abilityInfo.Abilityvalue;
+            }
+        }
+    }
+
+    public float GetCostumeAbility(StatusType type)
+    {
+        int key = (int)type;
+
+        if (abilValues.ContainsKey(key))
+        {
+            return abilValues[(int)type];
+        }
+        else
+        {
+            return 0f;
         }
     }
 }

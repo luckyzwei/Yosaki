@@ -138,6 +138,9 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         return tableData.Activeoffset * Vector2.right * (playerMoveController.MoveDirection == MoveDirection.Right ? 1 : -1);
     }
     private Dictionary<int, AgentHpController> agentHpControllers = new Dictionary<int, AgentHpController>();
+    private Dictionary<double, double> calculatedDamage = new Dictionary<double, double>();
+    private Dictionary<double, bool> calculatedDamage_critical = new Dictionary<double, bool>();
+    private Dictionary<double, bool> calculatedDamage_superCritical = new Dictionary<double, bool>();
 
     public IEnumerator ApplyDamage(Collider2D hitEnemie, SkillTableData skillInfo, double damage, bool playSound)
     {
@@ -159,19 +162,31 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
         int hitCount = skillInfo.Hitcount + PlayerStats.GetSkillHitAddValue();
 
-        agentHpController.ApplyDefense(ref damage);
+        double originDam = damage;
+        double defense = agentHpController.Defense;
+        double key = originDam + defense;
 
-        bool isCritical = false;
-        bool isSuperCritical = false;
+        if (calculatedDamage.ContainsKey(key) == false)
+        {
+            agentHpController.ApplyDefense(ref damage);
 
-        agentHpController.ApplyPlusDamage(ref damage, ref isCritical, ref isSuperCritical);
+            bool isCritical = false;
+            bool isSuperCritical = false;
+
+            agentHpController.ApplyPlusDamage(ref damage, ref isCritical, ref isSuperCritical);
+
+            calculatedDamage.Add(key, damage);
+            calculatedDamage_critical.Add(key, isCritical);
+            calculatedDamage_superCritical.Add(key, isSuperCritical);
+        }
+        
 
         for (int hit = 0; hit < hitCount; hit++)
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
-            agentHpController.SpawnDamText(isCritical, isSuperCritical, damage);
-            agentHpController.UpdateHp(-damage);
+            agentHpController.SpawnDamText(calculatedDamage_critical[key], calculatedDamage_superCritical[key], damage);
+            agentHpController.UpdateHp(-calculatedDamage[key]);
 
             //이펙트
             if (string.IsNullOrEmpty(skillInfo.Hiteffectname) == false &&

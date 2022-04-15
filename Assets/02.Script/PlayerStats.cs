@@ -942,27 +942,21 @@ public static class PlayerStats
 
     public static float GetTitleAbilValue(StatusType type)
     {
-      
-        var e = ServerData.titleServerTable.TableDatas.GetEnumerator();
-
         float ret = 0f;
 
-        while (e.MoveNext())
+        var dicData = TableManager.Instance.TitleAbils[(int)type];
+
+        for(int i = 0; i < dicData.Count; i++) 
         {
-            if (e.Current.Value.clearFlag.Value == 0) continue;
+            if (ServerData.titleServerTable.TableDatas[dicData[i].Stringid].clearFlag.Value == 0) continue;
 
-            var tableData = TableManager.Instance.TitleTable.dataArray[e.Current.Value.idx];
-
-            if (type == (StatusType)tableData.Abiltype1)
+            if (dicData[i].Id == ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].Value)
             {
-                if (tableData.Id == ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].Value)
-                {
-                    ret += tableData.Abilvalue1 * GameBalance.TitleEquipAddPer;
-                }
-                else
-                {
-                    ret += tableData.Abilvalue1;
-                }
+                ret += dicData[i].Abilvalue1 * GameBalance.TitleEquipAddPer;
+            }
+            else
+            {
+                ret += dicData[i].Abilvalue1;
             }
         }
 

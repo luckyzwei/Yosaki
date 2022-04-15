@@ -27,6 +27,7 @@ public class AgentHpController : MonoBehaviour
     private Transform playerPos;
 
     private ObscuredFloat defense;
+    public ObscuredFloat Defense=> defense;
 
     [SerializeField]
     private Transform damTextSpawnPos;

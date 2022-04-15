@@ -527,6 +527,30 @@ public class TableManager : SingletonMono<TableManager>
 
     public TitleTable TitleTable => titleTable;
 
+    private Dictionary<int, List<TitleTableData>> titleAbils;
+    public Dictionary<int, List<TitleTableData>> TitleAbils
+    {
+        get
+        {
+            if (titleAbils == null)
+            {
+                titleAbils = new Dictionary<int, List<TitleTableData>>();
+
+                for (int i = 0; i < titleTable.dataArray.Length; i++)
+                {
+                    if (titleAbils.ContainsKey(titleTable.dataArray[i].Abiltype1) == false)
+                    {
+                        titleAbils.Add(titleTable.dataArray[i].Abiltype1, new List<TitleTableData>());
+                    }
+
+                    titleAbils[titleTable.dataArray[i].Abiltype1].Add(titleTable.dataArray[i]);
+                }
+            }
+
+            return titleAbils;
+        }
+    }
+
     [SerializeField]
     private YomulAbil yomulAbilTable;
     public YomulAbil YomulAbilTable => yomulAbilTable;

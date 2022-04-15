@@ -6,11 +6,6 @@ using UnityEngine;
 
 public class EnemyMoveController : EnemyMoveBase
 {
-    public enum MoveState
-    {
-        Normal, FollowPlayer
-    }
-
     private ReactiveProperty<MoveDirection> moveDirectionType = new ReactiveProperty<MoveDirection>();
 
     private Vector3 moveDirection;
@@ -25,7 +20,6 @@ public class EnemyMoveController : EnemyMoveBase
     //이 시간값을 테이블에 넣으면 좋을듯 (슈퍼아머도 만들고)
     private WaitForSeconds knockBackTime = new WaitForSeconds(0.2f);
 
-    private ReactiveProperty<MoveState> moveState = new ReactiveProperty<MoveState>();
     private Coroutine returnState;
     private WaitForSeconds returnStateDelay = new WaitForSeconds(8f);
     private ObscuredFloat followMoveSpeedAddValue = 1.5f;
@@ -67,29 +61,8 @@ public class EnemyMoveController : EnemyMoveBase
         }
     }
 
-    public void SetMoveState(MoveState moveState)
-    {
-        this.moveState.Value = moveState;
 
-        if (moveState == MoveState.FollowPlayer)
-        {
-            if (returnState != null)
-            {
-                StopCoroutine(returnState);
-            }
-
-            returnState = StartCoroutine(ReturnNormalState());
-
-            //이동속도 증가
-            WhenDirectionChanged(moveDirectionType.Value);
-        }
-    }
-
-    private IEnumerator ReturnNormalState()
-    {
-        yield return returnStateDelay;
-        SetMoveState(MoveState.Normal);
-    }
+  
 
     private void SetRandomZPos()
     {
@@ -99,7 +72,6 @@ public class EnemyMoveController : EnemyMoveBase
     private void ResetState()
     {
         nowKnockBack = false;
-        moveState.Value = MoveState.Normal;
     }
 
     private IEnumerator MoveRoutine()
@@ -110,19 +82,8 @@ public class EnemyMoveController : EnemyMoveBase
 
         while (true)
         {
-            switch (moveState.Value)
-            {
-                case MoveState.Normal:
-                    {
-
-                    }
-                    break;
-                case MoveState.FollowPlayer:
-                    {
                         FollowPlayer();
-                    }
-                    break;
-            }
+  
 
             MoveCharcterByDirection();
 
@@ -183,11 +144,6 @@ public class EnemyMoveController : EnemyMoveBase
     {
         float moveSpeed = enemyInfo.Value.Movespeed;
 
-        if (moveState.Value == MoveState.FollowPlayer)
-        {
-            moveSpeed += followMoveSpeedAddValue;
-        }
-
         moveDirection = moveDirectionType == MoveDirection.Left ? Vector3.left : Vector3.right;
 
         moveDirection *= moveSpeed;
@@ -243,23 +199,10 @@ public class EnemyMoveController : EnemyMoveBase
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        switch (moveState.Value)
+        if (collision.gameObject.layer == LayerMask.NameToLayer(EnemyWall_str))
         {
-            case MoveState.Normal:
-                {
-                    if (collision.gameObject.layer == LayerMask.NameToLayer(EnemyWall_str))
-                    {
-                        SetReverseDirection();
-                        MoveCharcterByDirection();
-                    }
-                }
-                break;
-            case MoveState.FollowPlayer:
-                {
-
-
-                }
-                break;
+            SetReverseDirection();
+            MoveCharcterByDirection();
         }
     }
 
