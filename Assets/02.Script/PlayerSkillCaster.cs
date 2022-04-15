@@ -162,13 +162,12 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
         int hitCount = skillInfo.Hitcount + PlayerStats.GetSkillHitAddValue();
 
-        double originDam = damage;
         double defense = agentHpController.Defense;
 
         bool isCritical = PlayerStats.ActiveCritical();
         bool isSuperCritical = PlayerStats.ActiveSuperCritical();
 
-        double key = originDam * defense * 0.0001;
+        double key = damage * defense * 0.0001;
 
         double calculatedDam = 0;
 
