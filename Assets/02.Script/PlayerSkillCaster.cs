@@ -217,14 +217,16 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
             calculatedDam = calculatedDamage[key];
         }
 
-
-
+        bool spawnDamText = SettingData.ShowDamageFont.Value == 1;
 
         for (int hit = 0; hit < hitCount; hit++)
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
-            agentHpController.SpawnDamText(isCritical, isSuperCritical, calculatedDam);
+            if (spawnDamText)
+            {
+                agentHpController.SpawnDamText(isCritical, isSuperCritical, calculatedDam);
+            }
             agentHpController.UpdateHp(-calculatedDam);
 
             //이펙트
