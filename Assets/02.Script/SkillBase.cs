@@ -20,11 +20,11 @@ public abstract class SkillBase
         //mp계산 뒤에서해야됨.실제 엠피 차감해서
         return !SkillCoolTimeManager.HasSkillCooltime(skillInfo.Id) && PlayerStatusController.Instance.IsPlayerDead() == false;
     }
-    protected virtual float GetSkillDamage(SkillTableData skillInfo)
+    protected virtual double GetSkillDamage(SkillTableData skillInfo)
     {
-        float apDamage = PlayerStats.GetCalculatedAttackPower();
+        double apDamage = PlayerStats.GetCalculatedAttackPower();
 
-        float skillDamagePer = ServerData.skillServerTable.GetSkillDamagePer(skillInfo.Id);
+        double skillDamagePer = ServerData.skillServerTable.GetSkillDamagePer(skillInfo.Id);
 
         return apDamage * skillDamagePer;
     }

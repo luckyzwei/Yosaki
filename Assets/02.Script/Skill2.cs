@@ -39,7 +39,7 @@ public class Skill2 : SkillBase
         playerTr.position = neariestEnemy.position;
 
         //데미지
-        float damage = GetSkillDamage(skillInfo);
+        double damage = GetSkillDamage(skillInfo);
 
         var hitEnemies = playerSkillCaster.GetEnemiesInCircle(playerTr.position, skillInfo.Targetrange);
 

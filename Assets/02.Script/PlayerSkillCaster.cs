@@ -162,7 +162,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
         int hitCount = skillInfo.Hitcount + PlayerStats.GetSkillHitAddValue();
 
-        double defense = agentHpController.Defense;
+        double defense = agentHpController.Defense + 1;
 
         bool isCritical = PlayerStats.ActiveCritical();
         bool isSuperCritical = PlayerStats.ActiveSuperCritical();
@@ -253,7 +253,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
             }
         }
 
-        if (calculatedDamage.Count > 100) 
+        if (calculatedDamage.Count > 100)
         {
             calculatedDamage.Clear();
         }

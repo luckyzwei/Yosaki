@@ -33,7 +33,7 @@ public class Slash0 : SkillBase
         playerSkillCaster.SetMoveRestriction(skillInfo.Movedelay);
 
         //데미지
-        float damage = GetSkillDamage(skillInfo);
+        double damage = GetSkillDamage(skillInfo);
 
         //데미지적용
         for (int i = 0; i < hitEnemies.Length && i < skillInfo.Targetcount; i++)

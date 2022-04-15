@@ -26,7 +26,7 @@ public class HorizontalSlash0 : SkillBase
         playerSkillCaster.SetMoveRestriction(skillInfo.Movedelay);
 
         //데미지
-        float damage = GetSkillDamage(skillInfo);
+        double damage = GetSkillDamage(skillInfo);
 
         Vector3 rayDirection = playerSkillCaster.PlayerMoveController.MoveDirection == MoveDirection.Right ? Vector3.right : Vector3.left;
 

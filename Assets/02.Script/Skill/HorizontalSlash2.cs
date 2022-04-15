@@ -27,7 +27,7 @@ public class HorizontalSlash2 : SkillBase
         playerSkillCaster.SetMoveRestriction(skillInfo.Movedelay);
 
         //데미지
-        float damage = GetSkillDamage(skillInfo);
+        double damage = GetSkillDamage(skillInfo);
 
 
         var hitEnemies_1 = playerSkillCaster.GetEnemiesInBoxcast(playerTr.position, Vector3.right, skillInfo.Targetrange, boxSize);
