@@ -144,10 +144,10 @@ public class Enemy : PoolItem
     {
         if (isFlyingEnemy == false)
         {
-            //if (enemyMoveController != null)
-            //{
-            //    enemyMoveController.SetMoveState(EnemyMoveController.MoveState.FollowPlayer);
-            //}
+            if (enemyMoveController != null)
+            {
+                enemyMoveController.SetMoveState(EnemyMoveController.MoveState.FollowPlayer);
+            }
         }
         else
         {
