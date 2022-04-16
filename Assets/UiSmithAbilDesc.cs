@@ -15,6 +15,9 @@ public class UiSmithAbilDesc : MonoBehaviour
 
     private void Initialize()
     {
+
+        return;
+
         var tableData = TableManager.Instance.smithTable.dataArray;
 
         string desc = string.Empty;

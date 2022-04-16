@@ -167,7 +167,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         bool isCritical = PlayerStats.ActiveCritical();
         bool isSuperCritical = PlayerStats.ActiveSuperCritical();
 
-        double key = damage * defense * 0.0001;
+        double key = damage * defense;
 
         double calculatedDam = 0;
 
@@ -194,7 +194,8 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                 {
                     agentHpController.ApplyDefense(ref damage);
 
-                    agentHpController.ApplyPlusDamage(ref damage, isCritical, isSuperCritical);
+                    agentHpController.ApplyPlusDamage(ref damage, isCritical, 
+                        isSuperCritical);
 
                     calculatedDamage_critical.Add(key, damage);
                 }
@@ -255,15 +256,15 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
             }
         }
 
-        if (calculatedDamage.Count > 100)
+        if (calculatedDamage.Count > 1000)
         {
             calculatedDamage.Clear();
         }
-        if (calculatedDamage_critical.Count > 100)
+        if (calculatedDamage_critical.Count > 1000)
         {
             calculatedDamage_critical.Clear();
         }
-        if (calculatedDamage_superCritical.Count > 100)
+        if (calculatedDamage_superCritical.Count > 1000)
         {
             calculatedDamage_superCritical.Clear();
         }

@@ -11,6 +11,9 @@ public class WeaponEquipView : MonoBehaviour
     private Image weaponImage;
 
     [SerializeField]
+    private Image weaponImage_long;
+
+    [SerializeField]
     private UIShiny shinyEffect;
 
     [SerializeField]
@@ -30,6 +33,11 @@ public class WeaponEquipView : MonoBehaviour
     private void WhenEquipIdxChanged(int idx)
     {
         weaponImage.sprite = CommonResourceContainer.GetWeaponSprite(idx);
+        weaponImage_long.sprite = CommonResourceContainer.GetWeaponSprite(idx);
+
+        weaponImage.gameObject.SetActive(idx < 21);
+        weaponImage_long.gameObject.SetActive(idx >= 21);
+
 
         if (shinyEffect != null)
         {

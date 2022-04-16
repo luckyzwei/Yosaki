@@ -33,6 +33,10 @@ public class UiRelicCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI lockText;
 
+
+    [SerializeField]
+    private GameObject lockMask_San;
+
     private bool subscribed = false;
     private bool IsMaxLevel()
     {
@@ -82,9 +86,24 @@ public class UiRelicCell : MonoBehaviour
 
             requireServerData.level.AsObservable().Subscribe(requireLevel =>
             {
-                lockMask.SetActive(requireLevel < relicLocalData.Requirelevel);
+                //장산범 아닐때
+                if (relicLocalData.Id != 7)
+                {
+                    lockMask.SetActive(requireLevel < relicLocalData.Requirelevel);
+                    lockText.SetText($"{TableManager.Instance.RelicTable.dataArray[relicLocalData.Requirerelic].Name} {relicLocalData.Requirelevel}레벨 필요");
+                }
 
-                lockText.SetText($"{TableManager.Instance.RelicTable.dataArray[relicLocalData.Requirerelic].Name} {relicLocalData.Requirelevel}레벨 필요");
+            }).AddTo(this);
+        }
+
+        //장산범
+        if (relicLocalData.Id == 7)
+        {
+            lockMask.SetActive(false);
+
+            ServerData.goodsTable.GetTableData(GoodsTable.ZangStone).AsObservable().Subscribe(e =>
+            {
+                lockMask_San.SetActive(e < 1);
             }).AddTo(this);
         }
     }

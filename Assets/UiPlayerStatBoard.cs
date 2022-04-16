@@ -98,7 +98,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description2 += $"{CommonString.GetStatusName(StatusType.SuperCritical1Prob)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCriticalProb() * 100f)}\n";
 
         //타격수
-        description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical1DamPer)} : {PlayerStats.GetSuperCriticalDamPer() * 100f}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical1DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCriticalDamPer() * 100f)}\n";
 
         description2 += $"{CommonString.GetStatusName(StatusType.MarbleAddPer)} : {PlayerStats.GetMarblePlusValue() * 100f}\n";
 

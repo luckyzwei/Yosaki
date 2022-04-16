@@ -198,6 +198,8 @@ public class TwelveDungeonManager : ContentsManagerBase
         if (contentsState.Value != (int)ContentsState.Fight) return;
 
         contentsState.Value = (int)ContentsState.Dead;
+
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "플레이어가 사망했습니다.", null);
     }
 
     //클리어조건1 보스 처치 성공
@@ -257,7 +259,7 @@ public class TwelveDungeonManager : ContentsManagerBase
             RankManager.Instance.UpdateRealBoss_Score(damageAmount.Value);
         }
         //강철이
-        else if (GameManager.Instance.bossId == 20) 
+        else if (GameManager.Instance.bossId == 20)
         {
             RankManager.Instance.UpdateRealBoss_Score_GangChul(damageAmount.Value);
         }

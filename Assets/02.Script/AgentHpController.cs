@@ -27,7 +27,7 @@ public class AgentHpController : MonoBehaviour
     private Transform playerPos;
 
     private ObscuredFloat defense;
-    public ObscuredFloat Defense=> defense;
+    public ObscuredFloat Defense => defense;
 
     [SerializeField]
     private Transform damTextSpawnPos;
@@ -151,10 +151,7 @@ public class AgentHpController : MonoBehaviour
             value = 1f;
         }
 
-        if (GameManager.contentsType != GameManager.ContentsType.NormalField || isFieldBossEnemy)
-        {
-            value += value * PlayerStats.GetBossDamAddValue();
-        }
+        value += value * PlayerStats.GetBossDamAddValue();
 
         //방어력 초과데미지
         //방어력 차이

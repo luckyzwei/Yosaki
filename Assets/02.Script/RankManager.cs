@@ -770,6 +770,7 @@ public class RankManager : SingletonMono<RankManager>
          && !PlayerData.Instance.NickName.Equals("테스트용2")
          && !PlayerData.Instance.NickName.Equals("블랙핑크")
          && !PlayerData.Instance.NickName.Equals("BiBi")
+         && !PlayerData.Instance.NickName.Equals("테스트용3")
             && !PlayerData.Instance.NickName.Equals("테스트용");
     }
 }
