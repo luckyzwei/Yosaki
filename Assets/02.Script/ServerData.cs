@@ -283,6 +283,9 @@ public static class ServerData
             case Item_Type.LeeMuGiStone:
                 ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value += rewardValue;
                 break;
+            case Item_Type.SwordPartial:
+                ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += rewardValue;
+                break;
 
             case Item_Type.costume1:
             case Item_Type.costume6:
@@ -318,7 +321,8 @@ public static class ServerData
                 break;
             case Item_Type.PeachReal:
                 ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += rewardValue;
-                break;
+                break;  
+       
 
 
 
@@ -419,6 +423,10 @@ public static class ServerData
 
             case Item_Type.PeachReal:
                 passParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);   
+            
+            case Item_Type.SwordPartial:
+                passParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
 
@@ -479,7 +487,9 @@ public static class ServerData
             
             case Item_Type.LeeMuGiStone:
                 passParam.Add(GoodsTable.LeeMuGiStone, ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam); 
+            
+     
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);
@@ -609,6 +619,11 @@ public static class ServerData
             case Item_Type.PeachReal:
                 ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                 param.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);  
+            
+            case Item_Type.SwordPartial:
+                ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
+                param.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
 
@@ -687,6 +702,7 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value += amount;
                 param.Add(GoodsTable.LeeMuGiStone, ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            
 
             case Item_Type.costume1:
             case Item_Type.costume4:
@@ -1135,6 +1151,9 @@ public static class ServerData
 
                 case Item_Type.SulItem:
                     ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += amount;
+                    break; 
+                case Item_Type.SwordPartial:
+                    ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
                     break;
                 case Item_Type.StageRelic:
                     ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;

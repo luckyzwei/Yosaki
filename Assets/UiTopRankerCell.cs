@@ -52,6 +52,15 @@ public class UiTopRankerCell : MonoBehaviour
         if (weaponId != -1)
         {
             weapon.sprite = CommonResourceContainer.GetWeaponSprite(weaponId);
+
+            if (fightPoint < CommonUiContainer.Instance.weaponEnhnaceMats.Count)
+            {
+                weapon.material = CommonUiContainer.Instance.weaponEnhnaceMats[fightPoint];
+            }
+            else 
+            {
+                weapon.material = CommonUiContainer.Instance.weaponEnhnaceMats[0];
+            }
         }
 
         magicBook.gameObject.SetActive(magicBookId != -1);

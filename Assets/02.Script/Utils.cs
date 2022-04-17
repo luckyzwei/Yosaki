@@ -66,6 +66,7 @@ public static class Utils
                 type == Item_Type.Event_Item_0 ||
                 type == Item_Type.Event_Item_1 ||
                 type == Item_Type.PeachReal ||
+                type == Item_Type.SwordPartial ||
                 type == Item_Type.RelicTicket;
     }
 

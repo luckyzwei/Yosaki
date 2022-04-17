@@ -298,6 +298,12 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += amount;
                     param.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
                 }
+                break;    
+            case Item_Type.SwordPartial:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
+                    param.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
+                }
                 break;
 
         }

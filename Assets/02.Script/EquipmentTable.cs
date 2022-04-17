@@ -17,6 +17,9 @@ public class EquipmentTable
     public static string CostumeLook = "CostumeLook";
     public static string CostumePresetId = "CostumePresetId";
     public static string TitleSelectId = "TitleSelectId";
+    public static string WeaponEnhance = "WeaponEnhance";
+    public static string WeaponE_View = "WeaponE_View";
+    public static string Weapon_View = "Weapon_View";
 
     private Dictionary<string, int> tableSchema = new Dictionary<string, int>()
     {
@@ -27,7 +30,10 @@ public class EquipmentTable
         {CostumeSlot,0},
         {CostumeLook,0},
         {CostumePresetId,0},
-        {TitleSelectId,-1}
+        {TitleSelectId,-1},
+        {WeaponEnhance,0},
+        {WeaponE_View,0},
+        {Weapon_View,0},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<int>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<int>>();
@@ -147,9 +153,19 @@ public class EquipmentTable
                         }
                         else
                         {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(e.Current.Value));
-                            paramCount++;
+                            if (e.Current.Key != Weapon_View)
+                            {
+                                defultValues.Add(e.Current.Key, e.Current.Value);
+                                tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(e.Current.Value));
+                                paramCount++;
+                            }
+                            else
+                            {
+                                int curWeaponEquip = TableDatas[Weapon].Value;
+                                defultValues.Add(e.Current.Key, curWeaponEquip);
+                                tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(curWeaponEquip));
+                                paramCount++;
+                            }
                         }
                     }
                 }

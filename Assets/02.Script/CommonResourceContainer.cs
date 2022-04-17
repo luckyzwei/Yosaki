@@ -8,6 +8,26 @@ public static class CommonResourceContainer
     private static List<Sprite> weaponSprites;
     private static List<Sprite> magicBookSprites;
 
+    public static Sprite GetRandomWeaponSprite()
+    {
+        if (weaponSprites == null)
+        {
+            var weaponIcons = Resources.LoadAll<Sprite>("Weapon/");
+            weaponSprites = weaponIcons.ToList();
+
+
+            weaponSprites.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
+        }
+
+        return weaponSprites[Random.Range(0, 21)];
+    }
+
     public static Sprite GetWeaponSprite(int idx)
     {
         if (weaponSprites == null)

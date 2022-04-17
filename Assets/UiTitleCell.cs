@@ -82,13 +82,13 @@ public class UiTitleCell : MonoBehaviour
         {
             float abil = isEquiped ? (tableData.Abilvalue1 * 100) * GameBalance.TitleEquipAddPer : (tableData.Abilvalue1 * 100);
 
-            abilValue = abil.ToString() + "%";
+            abilValue = Utils.ConvertBigNum(abil) + "%";
         }
         else
         {
             float abil = isEquiped ? (tableData.Abilvalue1) * GameBalance.TitleEquipAddPer : (tableData.Abilvalue1);
 
-            abilValue = abil.ToString();
+            abilValue = Utils.ConvertBigNum(abil);
         }
 
         return $"{CommonString.GetStatusName(type)} {abilValue}";

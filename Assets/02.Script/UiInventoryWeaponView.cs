@@ -68,6 +68,35 @@ public class UiInventoryWeaponView : MonoBehaviour
     [SerializeField]
     private GameObject feelMulUpgradeButton;
 
+    [SerializeField]
+    private Image weaponViewEquipButton;
+
+    [SerializeField]
+    private TextMeshProUGUI weaponViewEquipDesc;
+
+    [SerializeField]
+    private Sprite weaponViewEquipDisable;
+
+    [SerializeField]
+    private Sprite weaponViewEquipEnable;
+
+    [SerializeField]
+    private GameObject feelMul2Lock;
+
+    [SerializeField]
+    private GameObject feelMul3Lock;
+    public void OnClickWeaponViewButton()
+    {
+        if (weaponData != null)
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기 외형을 변경 할까요?", () =>
+            {
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon_View, weaponData.Id);
+            }, () => { });
+            //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
+        }
+    }
+
     public void Initialize(WeaponData weaponData, MagicBookData magicBookData, Action<WeaponData, MagicBookData> onClickCallBack)
     {
         this.weaponData = weaponData;
@@ -91,6 +120,7 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         feelMulUpgradeButton.SetActive(weaponData != null && weaponData.Id == 22);
 
+        //weaponViewEquipButton.SetActive(weaponData != null);
 
         //신수
         sinsuCreateButton.gameObject.SetActive(magicBookData != null && magicBookData.Id / 4 == 4);
@@ -124,6 +154,8 @@ public class UiInventoryWeaponView : MonoBehaviour
             ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].AsObservable().Subscribe(WhenEquipWeaponChanged).AddTo(this);
             ServerData.weaponTable.TableDatas[weaponData.Stringid].hasItem.AsObservable().Subscribe(WhenHasStageChanged).AddTo(this);
             ServerData.weaponTable.TableDatas[weaponData.Stringid].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
+
+            ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].AsObservable().Subscribe(WhenEquipWeapon_ViewChanged).AddTo(this);
         }
         else if (magicBookData != null)
         {
@@ -203,12 +235,53 @@ public class UiInventoryWeaponView : MonoBehaviour
         equipButton.gameObject.SetActive(state == 1);
 
         levelUpButton.gameObject.SetActive(state == 1);
+
+        if (weaponData != null)
+        {
+            weaponViewEquipButton.gameObject.SetActive(state == 1);
+
+            feelMul2Lock.SetActive(false);
+            feelMul3Lock.SetActive(false);
+
+            //필멸2 필멸3  (23,24)
+            if (weaponData.Id == 23 || weaponData.Id == 24)
+            {
+                hasMask.SetActive(false);
+
+                if (weaponData.Id == 23)
+                {
+                    feelMul2Lock.gameObject.SetActive(state == 0);
+                }
+
+                if (weaponData.Id == 24)
+                {
+                    feelMul3Lock.gameObject.SetActive(state == 0);
+                }
+            }
+
+        }
+        else
+        {
+            feelMul2Lock.SetActive(false);
+            feelMul3Lock.SetActive(false);
+            weaponViewEquipButton.gameObject.SetActive(false);
+        }
+
+
     }
     private void WhenEquipWeaponChanged(int idx)
     {
         equipText.SetActive(idx == this.weaponData.Id);
 
         UpdateEquipButton();
+    }
+    private void WhenEquipWeapon_ViewChanged(int idx)
+    {
+        if (weaponViewEquipDesc != null)
+        {
+            weaponViewEquipDesc.SetText(idx == this.weaponData.Id ? "적용" : "외형적용");
+            weaponViewEquipButton.sprite = (idx == this.weaponData.Id ? weaponViewEquipDisable : weaponViewEquipEnable);
+        }
     }
     private void WhenEquipMagicBookChanged(int idx)
     {
@@ -479,9 +552,11 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?", () =>
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
             {
                 ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
+
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon_View, weaponData.Id);
             }, () => { });
             //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
         }
@@ -706,6 +781,27 @@ public class UiInventoryWeaponView : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnClickGetFeelMul2Button()
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.smithExp].Value < 400000)
+        {
+            PopupManager.Instance.ShowAlarmMessage("도깨비 대장간 레벨 40만 이상일때 각성 하실 수 있습니다.");
+            return;
+        }
+
+        ServerData.weaponTable.TableDatas["weapon23"].amount.Value += 1;
+        ServerData.weaponTable.TableDatas["weapon23"].hasItem.Value = 1;
+        ServerData.weaponTable.SyncToServerEach("weapon23");
+    }
+
+    public void OnClickGetFeelMul3Button()
+    {
+        return;
+        ServerData.weaponTable.TableDatas["weapon24"].amount.Value += 1;
+        ServerData.weaponTable.TableDatas["weapon24"].hasItem.Value = 1;
+        ServerData.weaponTable.SyncToServerEach("weapon24");
     }
 
 }

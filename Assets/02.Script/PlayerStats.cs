@@ -184,7 +184,15 @@ public static class PlayerStats
         ret += GetStageRelicHasEffect(StatusType.AttackAdd);
         ret += GetSonAbilHasEffect(StatusType.AttackAdd);
 
+        ret += GetGumGiAttackValue();
+
         return ret;
+    }
+
+    public static float GetGumGiAttackValue()
+    {
+        int idx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponEnhance].Value;
+        return (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue;
     }
 
     public static float GetCollectionAbilValue(StatusType type)
@@ -946,7 +954,7 @@ public static class PlayerStats
 
         var dicData = TableManager.Instance.TitleAbils[(int)type];
 
-        for(int i = 0; i < dicData.Count; i++) 
+        for (int i = 0; i < dicData.Count; i++)
         {
             if (ServerData.titleServerTable.TableDatas[dicData[i].Stringid].clearFlag.Value == 0) continue;
 

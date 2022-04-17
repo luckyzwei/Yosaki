@@ -12,7 +12,7 @@ public class UiPlayerWeaponEffect : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].AsObservable().Subscribe(e =>
+        ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].AsObservable().Subscribe(e =>
         {
             this.gameObject.SetActive(e == 20);
         }).AddTo(this);

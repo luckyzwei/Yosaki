@@ -35,6 +35,12 @@ public class UiGangChulView : SingletonMono<UiGangChulView>
     }
     private void OnEnable()
     {
+        var serverData = ServerData.bossServerTable.TableDatas["boss20"];
+
+        if (serverData.score.Value != "0")
+        {
+            RankManager.Instance.UpdateRealBoss_Score_GangChul(double.Parse(serverData.score.Value));
+        }
         //this.transform.SetAsLastSibling();
     }
 

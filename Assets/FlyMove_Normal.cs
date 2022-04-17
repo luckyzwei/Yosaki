@@ -27,6 +27,9 @@ public class FlyMove_Normal : EnemyMoveBase
     [SerializeField]
     private Collider2D collider;
 
+    [SerializeField]
+    private bool isDownOnly = false;
+
     public void Initialize(Vector3 moveDir, float moveSpeed)
     {
         isDamaged = false;
@@ -48,8 +51,13 @@ public class FlyMove_Normal : EnemyMoveBase
 
         agentHpController.whenEnemyDamaged.AsObservable().Subscribe(e =>
         {
-            isDamaged = true;
-            collider.isTrigger = true;
+            if (isDownOnly == false)
+            {
+                isDamaged = true;
+                collider.isTrigger = true;
+            }
+
+
         }).AddTo(this);
     }
 
@@ -62,23 +70,34 @@ public class FlyMove_Normal : EnemyMoveBase
         }
         else
         {
-            float playerDist = Vector3.Distance(playerTr.position, this.transform.position);
-
-            if (playerDist >= 0.1f)
+            if (isDownOnly == false)
             {
-                Vector3 moveDir = playerTr.position - this.transform.position;
-                rb.velocity = moveDir.normalized * moveSpeed * 1.5f;
-            }
+                float playerDist = Vector3.Distance(playerTr.position, this.transform.position);
 
+                if (playerDist >= 0.1f)
+                {
+                    Vector3 moveDir = playerTr.position - this.transform.position;
+                    rb.velocity = moveDir.normalized * moveSpeed * 1.5f;
+                }
+            }
         }
 
-        viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
+
+        if (isDownOnly == false)
+        {
+            viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
+        }
     }
 
     private void SetMoveDir(Vector3 moveDir, float moveSpeed)
     {
         this.moveSpeed = moveSpeed;
         this.moveDir = moveDir;
+
+        if (isDownOnly)
+        {
+            this.moveDir = Vector3.down;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -87,7 +106,10 @@ public class FlyMove_Normal : EnemyMoveBase
 
         //Vector3 refrectDir = this.transform.position - (Vector3)collision.GetContact(0).point;
 
-        SetMoveDir(Quaternion.Euler(0f, 0f, Random.Range(200, 340)) * moveDir, this.moveSpeed);
+        if (isDownOnly == false)
+        {
+            SetMoveDir(Quaternion.Euler(0f, 0f, Random.Range(200, 340)) * moveDir, this.moveSpeed);
+        }
         //SetMoveDir(refrectDir, this.moveSpeed);
     }
 }

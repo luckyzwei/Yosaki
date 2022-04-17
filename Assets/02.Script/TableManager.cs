@@ -630,5 +630,7 @@ public class TableManager : SingletonMono<TableManager>
 
     public SmithEnemy smithEnemy;
 
+    public GumGiTable gumGiTable;
+
 }
 

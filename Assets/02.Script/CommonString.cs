@@ -28,6 +28,8 @@ public static class CommonString
     public static string ItemGrade_5 = "요물";
     public static string ItemGrade_6 = "야차";
     public static string ItemGrade_7 = "필멸";
+    public static string ItemGrade_8 = "필멸(암)";
+    public static string ItemGrade_9 = "필멸(천)";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
 
@@ -183,6 +185,7 @@ public static class CommonString
             case Item_Type.SinSkill2: return "주작 베기";
             case Item_Type.SinSkill3: return "청룡 베기";
             case Item_Type.LeeMuGiStone: return "여의주";
+            case Item_Type.SwordPartial: return "검조각";
         }
         return "미등록";
     }

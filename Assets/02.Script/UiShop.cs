@@ -297,7 +297,13 @@ public class UiShop : SingletonMono<UiShop>
             case Item_Type.LeeMuGiStone:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value += amount;
-                    param.Add(GoodsTable.Aduk, ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
+                    param.Add(GoodsTable.LeeMuGiStone, ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
+                }
+                break;   
+            case Item_Type.SwordPartial:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
+                    param.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 }
                 break;
 
@@ -347,9 +353,8 @@ public class UiShop : SingletonMono<UiShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                     param.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 }
-                break;
-
-       
+                break; 
+              
 
             case Item_Type.GuildReward:
                 {

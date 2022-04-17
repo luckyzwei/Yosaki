@@ -54,6 +54,7 @@ public enum Item_Type
     SinSkill3,
     LeeMuGiStone,
     ZangStone,
+    SwordPartial,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

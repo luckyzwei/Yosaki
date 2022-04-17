@@ -40,7 +40,7 @@ public class UiZangAbilGetBoard : MonoBehaviour
             return;
         }
 
-        if (ServerData.goodsTable.GetTableData(GoodsTable.ZangStone).Value >= 0)
+        if (ServerData.goodsTable.GetTableData(GoodsTable.ZangStone).Value > 0)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 영혼이 있습니다.");
             return;

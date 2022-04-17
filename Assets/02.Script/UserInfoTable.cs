@@ -96,6 +96,7 @@ public class UserInfoTable
 
     public const string yoguiSogulLastClear = "yoguiSogulLastClear";
     public const string smithClear = "smithClear";
+    public const string gumGiClear = "gumGiClear";
 
 
     public const string killCountTotal = "kt7";
@@ -127,6 +128,7 @@ public class UserInfoTable
     public const string skillInitialized = "ski";
     public const string smithExp = "smith";
     public const string getSmith = "getSmith";
+    public const string getGumGi = "getGumGi";
     public const string sendPetExp = "sendPetExp";
 
     public const string exchangeCount = "ex_0";
@@ -198,6 +200,7 @@ public class UserInfoTable
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
         {smithClear,0f},
+        {gumGiClear,0f},
 
 
         {yomul0_buff,0f},
@@ -233,6 +236,7 @@ public class UserInfoTable
         {skillInitialized,0},
         {smithExp,0},
         {getSmith,0},
+        {getGumGi,0},
         {marbleReset3,0},
         {sendPetExp,0},
         {exchangeCount,0},
@@ -558,6 +562,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.sendGangChul).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value = 0;
 
         //버프
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
@@ -640,6 +645,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.SendGuildPoint, ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value);
         userInfoParam.Add(UserInfoTable.sendGangChul, ServerData.userInfoTable.GetTableData(UserInfoTable.sendGangChul).Value);
         userInfoParam.Add(UserInfoTable.getSmith, ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value);
+        userInfoParam.Add(UserInfoTable.getGumGi, ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value);
         userInfoParam.Add(UserInfoTable.sendPetExp, ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value);
 
         userInfoParam.Add(UserInfoTable.buff_gold1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);

@@ -14,9 +14,6 @@ public class WeaponEquipView : MonoBehaviour
     private Image weaponImage_long;
 
     [SerializeField]
-    private UIShiny shinyEffect;
-
-    [SerializeField]
     private GameObject newEffect;
 
     void Start()
@@ -26,7 +23,7 @@ public class WeaponEquipView : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].AsObservable().Subscribe(WhenEquipIdxChanged).AddTo(this);
+        ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].AsObservable().Subscribe(WhenEquipIdxChanged).AddTo(this);
 
     }
 
@@ -37,12 +34,7 @@ public class WeaponEquipView : MonoBehaviour
 
         weaponImage.gameObject.SetActive(idx < 21);
         weaponImage_long.gameObject.SetActive(idx >= 21);
-
-
-        if (shinyEffect != null)
-        {
-            shinyEffect.enabled = idx == 21;
-        }
+      
 
         newEffect.gameObject.SetActive(idx == 22);
         //var weaponGrade = TableManager.Instance.WeaponData[idx].Grade;
