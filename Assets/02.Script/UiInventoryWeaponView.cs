@@ -785,9 +785,9 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     public void OnClickGetFeelMul2Button()
     {
-        if (ServerData.userInfoTable.TableDatas[UserInfoTable.smithExp].Value < 350000)
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.smithExp].Value < 400000)
         {
-            PopupManager.Instance.ShowAlarmMessage("도깨비 대장간 레벨 35만 이상일때 획득 하실 수 있습니다.");
+            PopupManager.Instance.ShowAlarmMessage("도깨비 대장간 레벨 40만 이상일때 획득 하실 수 있습니다.");
             return;
         }
 

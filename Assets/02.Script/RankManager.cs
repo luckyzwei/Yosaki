@@ -535,7 +535,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRealBoss_Score_GangChul(double score)
     {
-        //if (UpdateRank() == false) return;
+        if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.GangChul] != null && score < this.myRankInfo[RankType.GangChul].Score)
         {
             Debug.LogError("점수가 더 낮음");
@@ -766,10 +766,8 @@ public class RankManager : SingletonMono<RankManager>
 
     private bool UpdateRank()
     {
-        return !PlayerData.Instance.NickName.Equals("로꼬")
-         && !PlayerData.Instance.NickName.Equals("테스트용2")
-         && !PlayerData.Instance.NickName.Equals("블랙핑크")
-         && !PlayerData.Instance.NickName.Equals("BiBi")
+        return 
+            !PlayerData.Instance.NickName.Equals("테스트용2")
          && !PlayerData.Instance.NickName.Equals("테스트용3")
             && !PlayerData.Instance.NickName.Equals("테스트용");
     }

@@ -82,10 +82,24 @@ public class UiGumGiCell : MonoBehaviour
 
     public void OnClickEquipButton()
     {
+        float goods = ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value;
+        if (goods < tableData.Require)
+        {
+
+            return;
+        }
+
         ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeaponEnhance, tableData.Id);
     }
     public void OnClickEquipViewButton()
     {
+        float goods = ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value;
+        if (goods < tableData.Require)
+        {
+
+            return;
+        }
+
         ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeaponE_View, tableData.Id);
     }
 }
