@@ -127,6 +127,10 @@ public class UiPensionObjectView : MonoBehaviour
         else if (pensionKey == "smithpension")
         {
             itemType = Item_Type.SmithFire;
+        }   
+        else if (pensionKey == "weaponpension")
+        {
+            itemType = Item_Type.SwordPartial;
         }
 
         List<TransactionValue> transactions = new List<TransactionValue>();

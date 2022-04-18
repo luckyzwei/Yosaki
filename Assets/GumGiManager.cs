@@ -210,7 +210,7 @@ public class GumGiManager : SingletonMono<GumGiManager>
 
         var tableData = TableManager.Instance.EnemyTable.dataArray[index];
 
-        enemyData.Hp = tableData.Hp * enemyDeadCount.Value * 60000;
+        enemyData.Hp = tableData.Hp * enemyDeadCount.Value * 1800000;
 
         enemyData.Attackpower = tableData.Attackpower * 0.0001f * enemyDeadCount.Value;
 

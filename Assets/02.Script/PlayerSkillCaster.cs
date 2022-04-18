@@ -18,6 +18,11 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
     private ObscuredBool ignoreDamDecrease = false;
 
+    private float addRange = 0f;
+
+    private string newWeaponKey1 = "weapon23";
+    private string newWeaponKey2 = "weapon24";
+
     public bool UseSkill(int skillIdx)
     {
         bool canUserSkill = UserSkills[skillIdx].CanUseSkill();
@@ -35,6 +40,28 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         InitSkill();
 
         ignoreDamDecrease = ServerData.userInfoTable.TableDatas[UserInfoTable.IgnoreDamDec].Value == 1;
+
+        Subscribe();
+
+    }
+
+    private void Subscribe()
+    {
+        ServerData.weaponTable.TableDatas[newWeaponKey1].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                addRange = 10;
+            }
+        }).AddTo(this);
+
+        ServerData.weaponTable.TableDatas[newWeaponKey2].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                addRange = 10;
+            }
+        }).AddTo(this);
     }
 
     public void SetMoveRestriction(float time)
@@ -74,7 +101,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
     public Collider2D[] GetEnemiesInCircle(Vector2 origin, float radius)
     {
-        return Physics2D.OverlapCircleAll(origin, radius, LayerMasks.EnemyLayerMask);
+        return Physics2D.OverlapCircleAll(origin, radius + addRange, LayerMasks.EnemyLayerMask);
     }
 
     public RaycastHit2D[] GetEnemiesInRaycast(Vector2 origin, Vector2 rayDirection, float length)
@@ -84,7 +111,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
     public RaycastHit2D[] GetEnemiesInBoxcast(Vector2 origin, Vector2 rayDirection, float length, float size)
     {
-        return Physics2D.BoxCastAll(origin, Vector2.one * size, 0f, rayDirection, length, LayerMasks.EnemyLayerMask);
+        return Physics2D.BoxCastAll(origin, Vector2.one * (size + addRange), 0f, rayDirection, length, LayerMasks.EnemyLayerMask);
     }
 
     private string wallString = "Wall";
@@ -194,7 +221,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                 {
                     agentHpController.ApplyDefense(ref damage);
 
-                    agentHpController.ApplyPlusDamage(ref damage, isCritical, 
+                    agentHpController.ApplyPlusDamage(ref damage, isCritical,
                         isSuperCritical);
 
                     calculatedDamage_critical.Add(key, damage);

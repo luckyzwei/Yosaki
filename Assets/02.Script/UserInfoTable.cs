@@ -109,6 +109,7 @@ public class UserInfoTable
     public const string relicpensionAttendance = "relicpension";
     public const string peachAttendance = "peachpension";
     public const string smithpensionAttendance = "smithpension";
+    public const string weaponpensionAttendance = "weaponpension";
 
     public const string relicReset = "relicReset";
     public const string marbleReset2 = "marbleReset3";
@@ -225,6 +226,7 @@ public class UserInfoTable
         {attendanceCount_100Day,1f},
         {peachAttendance,0f},
         {smithpensionAttendance,0f},
+        {weaponpensionAttendance,0f},
         {buffAwake,0f},
         {petAwake,0f},
         {IgnoreDamDec,0f},
@@ -618,6 +620,11 @@ public class UserInfoTable
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.smithpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.smithpensionAttendance).Value++;
+            } 
+            
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.weaponpensionAttendance].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.weaponpensionAttendance).Value++;
             }
         }
 
@@ -638,6 +645,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.relicpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.relicpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.peachAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.peachAttendance).Value);
         userInfoParam.Add(UserInfoTable.smithpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.smithpensionAttendance).Value);
+        userInfoParam.Add(UserInfoTable.weaponpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.weaponpensionAttendance).Value);
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);

@@ -903,6 +903,9 @@ public static class PlayerStats
 
         ret += GetLeeMuGiAddDam();
 
+        ret += GetRelicHasEffect(StatusType.SuperCritical2DamPer);
+
+
         return ret;
     }
 

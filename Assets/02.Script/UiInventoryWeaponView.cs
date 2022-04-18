@@ -785,9 +785,9 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     public void OnClickGetFeelMul2Button()
     {
-        if (ServerData.userInfoTable.TableDatas[UserInfoTable.smithExp].Value < 400000)
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.smithExp].Value < 350000)
         {
-            PopupManager.Instance.ShowAlarmMessage("도깨비 대장간 레벨 40만 이상일때 각성 하실 수 있습니다.");
+            PopupManager.Instance.ShowAlarmMessage("도깨비 대장간 레벨 35만 이상일때 획득 하실 수 있습니다.");
             return;
         }
 
@@ -798,7 +798,12 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     public void OnClickGetFeelMul3Button()
     {
-        return;
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiClear].Value < 5000)
+        {
+            PopupManager.Instance.ShowAlarmMessage("검의 산 처치 5000 이상일때 획득 하실 수 있습니다.");
+            return;
+        }
+
         ServerData.weaponTable.TableDatas["weapon24"].amount.Value += 1;
         ServerData.weaponTable.TableDatas["weapon24"].hasItem.Value = 1;
         ServerData.weaponTable.SyncToServerEach("weapon24");

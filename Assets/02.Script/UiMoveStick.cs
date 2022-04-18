@@ -27,6 +27,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     private readonly WaitForSeconds doubleInputDelay_Awake = new WaitForSeconds(0.25f);
     private const float quickMoveDelaySec = 0.5f;
     private const float quickMoveDelaySec_Awake = 0.25f;
+    private const float quickMoveDelaySec_New_Weapon = 0.175f;
 
     [SerializeField]
     private Image quickMoveDelayGauge;
@@ -136,7 +137,8 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
 
         downInputContainter[type] = false;
     }
-
+    private string newWeaponKey1 = "weapon23";
+    private string newWeaponKey2 = "weapon24";
     private IEnumerator QuickMoveDelay(InputType type)
     {
         float tick = 0f;
@@ -146,8 +148,13 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         float delay = 0f;
 
         bool marbleAwake = ServerData.userInfoTable.TableDatas[UserInfoTable.marbleAwake].Value == 1f;
+        bool hasNewWaepon = ServerData.weaponTable.TableDatas[newWeaponKey1].hasItem.Value == 1 || ServerData.weaponTable.TableDatas[newWeaponKey2].hasItem.Value == 1;
 
-        if (marbleAwake)
+        if (hasNewWaepon)
+        {
+            delay = quickMoveDelaySec_New_Weapon;
+        }
+        else if (marbleAwake)
         {
             delay = quickMoveDelaySec_Awake;
         }
