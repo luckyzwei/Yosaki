@@ -27,4 +27,15 @@ public class UiGumGiBoard : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += 10000;
+        }
+    }
+#endif
+
 }

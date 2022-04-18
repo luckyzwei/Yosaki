@@ -220,7 +220,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (weaponData != null)
         {
             //요물일때 X
-            upgradeButton.SetActive(amount >= weaponData.Requireupgrade && weaponData.Id != 19 && weaponData.Id != 20 && weaponData.Id != 21);
+            upgradeButton.SetActive(amount >= weaponData.Requireupgrade && weaponData.Id < 19);
         }
         else if (magicBookData != null)
         {
@@ -794,6 +794,8 @@ public class UiInventoryWeaponView : MonoBehaviour
         ServerData.weaponTable.TableDatas["weapon23"].amount.Value += 1;
         ServerData.weaponTable.TableDatas["weapon23"].hasItem.Value = 1;
         ServerData.weaponTable.SyncToServerEach("weapon23");
+
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,"무기 획득!",null);
     }
 
     public void OnClickGetFeelMul3Button()
@@ -807,6 +809,8 @@ public class UiInventoryWeaponView : MonoBehaviour
         ServerData.weaponTable.TableDatas["weapon24"].amount.Value += 1;
         ServerData.weaponTable.TableDatas["weapon24"].hasItem.Value = 1;
         ServerData.weaponTable.SyncToServerEach("weapon24");
+
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "무기 획득!", null);
     }
 
 }

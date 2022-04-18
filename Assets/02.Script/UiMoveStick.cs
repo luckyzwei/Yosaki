@@ -27,7 +27,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     private readonly WaitForSeconds doubleInputDelay_Awake = new WaitForSeconds(0.25f);
     private const float quickMoveDelaySec = 0.5f;
     private const float quickMoveDelaySec_Awake = 0.25f;
-    private const float quickMoveDelaySec_New_Weapon = 0.175f;
+    private const float quickMoveDelaySec_New_Weapon = 0.16f;
 
     [SerializeField]
     private Image quickMoveDelayGauge;

@@ -120,6 +120,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             itemType = Item_Type.PeachReal;
         }
+        else if (pensionKey == "weaponpension")
+        {
+            itemType = Item_Type.SwordPartial;
+        }
         else
         {
             itemType = Item_Type.SmithFire;

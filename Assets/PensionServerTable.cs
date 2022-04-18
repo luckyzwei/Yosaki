@@ -26,6 +26,7 @@ public class PensionServerTable
         { marblepension,string.Empty},
         { relicpension,string.Empty},
         { peachpension,string.Empty},
+        { smithpension,string.Empty},
         { weaponpension,string.Empty}
     };
 

@@ -73,7 +73,7 @@ public class GumGiManager : SingletonMono<GumGiManager>
     }
     private void SetFirstStage()
     {
-        int lastStage = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiClear].Value - (enemyMaxCount * 10);
+        int lastStage = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiClear].Value - (enemyMaxCount * 2);
 
         lastStage = Mathf.Max(0, lastStage);
 

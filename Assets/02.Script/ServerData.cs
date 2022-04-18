@@ -626,8 +626,6 @@ public static class ServerData
                 param.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
-
-
             case Item_Type.GuildReward:
                 ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += amount;
                 param.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);

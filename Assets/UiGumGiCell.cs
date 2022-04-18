@@ -89,7 +89,12 @@ public class UiGumGiCell : MonoBehaviour
             return;
         }
 
-        ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeaponEnhance, tableData.Id);
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "검기를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
+         {
+             ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeaponEnhance, tableData.Id);
+             ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeaponE_View, tableData.Id);
+         }, null);
+
     }
     public void OnClickEquipViewButton()
     {
@@ -100,6 +105,9 @@ public class UiGumGiCell : MonoBehaviour
             return;
         }
 
-        ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeaponE_View, tableData.Id);
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "검기 외형을 변경 할까요?", () =>
+        {
+            ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeaponE_View, tableData.Id);
+        }, null);
     }
 }
