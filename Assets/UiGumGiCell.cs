@@ -76,7 +76,7 @@ public class UiGumGiCell : MonoBehaviour
 
         ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).AsObservable().Subscribe(e =>
         {
-            lockMask.SetActive(tableData.Require >= e);
+            lockMask.SetActive(tableData.Require > e);
         }).AddTo(this);
     }
 
