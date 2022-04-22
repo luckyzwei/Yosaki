@@ -57,6 +57,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     private GameObject youngMulCreateButton;
 
     [SerializeField]
+    private GameObject youngMulCreateButton2;
+
+    [SerializeField]
     private GameObject yachaDescription;
 
     [SerializeField]
@@ -75,6 +78,12 @@ public class UiInventoryWeaponView : MonoBehaviour
     private TextMeshProUGUI weaponViewEquipDesc;
 
     [SerializeField]
+    private Image magicBookViewEquipButton;
+
+    [SerializeField]
+    private TextMeshProUGUI magicBookViewEquipDesc;
+
+    [SerializeField]
     private Sprite weaponViewEquipDisable;
 
     [SerializeField]
@@ -85,6 +94,13 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     [SerializeField]
     private GameObject feelMul3Lock;
+
+    [SerializeField]
+    private GameObject armDescription;
+
+    [SerializeField]
+    private GameObject chunDescription;
+        
     public void OnClickWeaponViewButton()
     {
         if (weaponData != null)
@@ -92,6 +108,18 @@ public class UiInventoryWeaponView : MonoBehaviour
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기 외형을 변경 할까요?", () =>
             {
                 ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon_View, weaponData.Id);
+            }, () => { });
+            //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
+        }
+    }
+
+    public void OnClickMagicBookViewButton()
+    {
+        if (magicBookData != null)
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 노리개 외형을 변경 할까요?", () =>
+            {
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeapMagicBook_View, magicBookData.Id);
             }, () => { });
             //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
         }
@@ -122,10 +150,14 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         //weaponViewEquipButton.SetActive(weaponData != null);
 
+        armDescription.gameObject.SetActive(weaponData != null && weaponData.Id == 23);
+        chunDescription.gameObject.SetActive(weaponData != null && weaponData.Id == 24);
+
         //신수
         sinsuCreateButton.gameObject.SetActive(magicBookData != null && magicBookData.Id / 4 == 4);
 
         youngMulCreateButton.gameObject.SetActive(magicBookData != null && magicBookData.Id == 20);
+        youngMulCreateButton2.gameObject.SetActive(magicBookData != null && magicBookData.Id == 21);
 
         if (weaponData != null)
         {
@@ -163,6 +195,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             ServerData.magicBookTable.TableDatas[magicBookData.Stringid].hasItem.AsObservable().Subscribe(WhenHasStageChanged).AddTo(this);
             ServerData.magicBookTable.TableDatas[magicBookData.Stringid].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
 
+            ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].AsObservable().Subscribe(WhenEquipMagicBook_ViewChanged).AddTo(this);
         }
 
         if (weaponData != null)
@@ -239,6 +272,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (weaponData != null)
         {
             weaponViewEquipButton.gameObject.SetActive(state == 1);
+            magicBookViewEquipButton.gameObject.SetActive(false);
 
             feelMul2Lock.SetActive(false);
             feelMul3Lock.SetActive(false);
@@ -264,6 +298,8 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             feelMul2Lock.SetActive(false);
             feelMul3Lock.SetActive(false);
+
+            magicBookViewEquipButton.gameObject.SetActive(state == 1);
             weaponViewEquipButton.gameObject.SetActive(false);
         }
 
@@ -281,6 +317,15 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             weaponViewEquipDesc.SetText(idx == this.weaponData.Id ? "적용" : "외형적용");
             weaponViewEquipButton.sprite = (idx == this.weaponData.Id ? weaponViewEquipDisable : weaponViewEquipEnable);
+        }
+    }
+
+    private void WhenEquipMagicBook_ViewChanged(int idx)
+    {
+        if (magicBookViewEquipDesc != null)
+        {
+            magicBookViewEquipDesc.SetText(idx == this.magicBookData.Id ? "적용" : "외형적용");
+            magicBookViewEquipButton.sprite = (idx == this.magicBookData.Id ? weaponViewEquipDisable : weaponViewEquipEnable);
         }
     }
     private void WhenEquipMagicBookChanged(int idx)
@@ -433,12 +478,13 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         if (effectData.Equipeffecttype1 != -1)
         {
-            //%효과
-            if (effectData.Equipeffectvalue1 <= 1f)
+            StatusType type = (StatusType)effectData.Equipeffecttype1;
+
+            if (type.IsPercentStat())
             {
                 float value = equipValue1 * 100f;
                 float value_max = equipValue1_max * 100f;
-                StatusType type = (StatusType)(effectData.Equipeffecttype1);
+
 
                 description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
@@ -446,20 +492,22 @@ public class UiInventoryWeaponView : MonoBehaviour
             {
                 float value = equipValue1;
                 float value_max = equipValue1_max;
-                StatusType type = (StatusType)(effectData.Equipeffecttype1);
+
 
                 description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
+        
         }
 
         if (effectData.Equipeffecttype2 != -1)
         {
-            //%효과
-            if (effectData.Equipeffectvalue2 <= 1f)
+            StatusType type = (StatusType)effectData.Equipeffecttype2;
+
+            if (type.IsPercentStat())
             {
                 float value = equipValue2 * 100f;
                 float value_max = equipValue2_max * 100f;
-                StatusType type = (StatusType)effectData.Equipeffecttype2;
+
 
                 description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
@@ -467,9 +515,9 @@ public class UiInventoryWeaponView : MonoBehaviour
             {
                 float value = equipValue2;
                 float value_max = equipValue2_max;
-                StatusType type = (StatusType)effectData.Equipeffecttype2;
 
-                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}";
+
+                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
 
         }
@@ -555,14 +603,18 @@ public class UiInventoryWeaponView : MonoBehaviour
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
             {
                 ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
-
                 ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon_View, weaponData.Id);
             }, () => { });
             //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
         }
         else
         {
-            ServerData.equipmentTable.ChangeEquip(EquipmentTable.MagicBook, magicBookData.Id);
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 노리개를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
+            {
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.MagicBook, magicBookData.Id);
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeapMagicBook_View, magicBookData.Id);
+            }, () => { });
+
         }
 
         UpdateEquipButton();
@@ -763,6 +815,13 @@ public class UiInventoryWeaponView : MonoBehaviour
         UiYoungMulCraftBoard.Instance.Initialize(magicBookData.Id);
     }
 
+    public void OnClickYoungMulCreateButton2()
+    {
+        if (magicBookData == null) return;
+
+        UiYoungMulCraftBoard2.Instance.Initialize(magicBookData.Id);
+    }
+
     private void OnEnable()
     {
         SetParent();
@@ -795,7 +854,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         ServerData.weaponTable.TableDatas["weapon23"].hasItem.Value = 1;
         ServerData.weaponTable.SyncToServerEach("weapon23");
 
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,"무기 획득!",null);
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "무기 획득!", null);
     }
 
     public void OnClickGetFeelMul3Button()

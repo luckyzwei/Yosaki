@@ -100,7 +100,7 @@ public class UserInfoTable
 
 
     public const string killCountTotal = "kt7";
-    public const string killCountTotal2 = "kt6";
+    public const string killCountTotal2 = "kt8";
 
     public const string relicKillCount = "relicKillCount";
 
@@ -653,7 +653,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.SendGuildPoint, ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value);
         userInfoParam.Add(UserInfoTable.sendGangChul, ServerData.userInfoTable.GetTableData(UserInfoTable.sendGangChul).Value);
         userInfoParam.Add(UserInfoTable.getSmith, ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value);
-        userInfoParam.Add(UserInfoTable.getGumGi, ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value);
+        userInfoParam.Add(UserInfoTable.getGumGi, ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value);
         userInfoParam.Add(UserInfoTable.sendPetExp, ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value);
 
         userInfoParam.Add(UserInfoTable.buff_gold1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);
@@ -875,8 +875,8 @@ public class UserInfoTable
     public bool IsMonthlyPass2()
     {
 #if UNITY_EDITOR
-        return false;
+        return true;
 #endif
-        return currentServerTime.Month == 3;
+        return currentServerTime.Month == 5;
     }
 }

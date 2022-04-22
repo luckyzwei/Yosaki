@@ -194,7 +194,7 @@ public class RankManager : SingletonMono<RankManager>
         int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
-        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int weaponEnhance = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
@@ -275,7 +275,7 @@ public class RankManager : SingletonMono<RankManager>
         int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
-        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
@@ -369,7 +369,7 @@ public class RankManager : SingletonMono<RankManager>
         int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
-        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
@@ -460,7 +460,7 @@ public class RankManager : SingletonMono<RankManager>
         int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
-        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
@@ -550,7 +550,7 @@ public class RankManager : SingletonMono<RankManager>
         int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
-        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
@@ -637,7 +637,7 @@ public class RankManager : SingletonMono<RankManager>
         int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
-        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 
@@ -742,7 +742,7 @@ public class RankManager : SingletonMono<RankManager>
         int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
-        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
 

@@ -43,4 +43,9 @@ public class WeaponEquipView : MonoBehaviour
         //emission.rateOverTime = weaponGrade * 5;
     }
 
+    private void OnDisable()
+    {
+        
+    }
+
 }
