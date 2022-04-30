@@ -10,8 +10,11 @@ public class EventReceiver : MonoBehaviour
     [SerializeField]
     private string funcName;
 
-    public void WhenAnimEnd_1() 
+    public void WhenAnimEnd_1()
     {
-        target.SendMessage(funcName);
+        if (string.IsNullOrEmpty(funcName) == false)
+        {
+            target.SendMessage(funcName);
+        }
     }
 }

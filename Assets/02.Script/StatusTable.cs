@@ -144,7 +144,9 @@ public class StatusTable
                 #region Gold
                 case AttackLevel_Gold:
                     {
-                        return Mathf.Pow(level, 1.07f) * 2f + 10;
+                        float goldAbilRatio = PlayerStats.GetGoldAbilRatio();
+
+                        return (Mathf.Pow(level, 1.07f) * 2f + 10) * goldAbilRatio;
                     }
                     break;
                 case CriticalLevel_Gold:
@@ -154,7 +156,9 @@ public class StatusTable
                     break;
                 case CriticalDamLevel_Gold:
                     {
-                        return level * 0.01f;
+                        float goldAbilRatio = PlayerStats.GetGoldAbilRatio();
+
+                        return level * 0.01f * goldAbilRatio;
                     }
                     break;
 
@@ -198,11 +202,11 @@ public class StatusTable
                     break;
                 case ExpGain_memory:
                     {
-                        if (level == 0) 
+                        if (level == 0)
                         {
                             return 0f;
                         }
-                        else 
+                        else
                         {
                             return 6f;
                         }

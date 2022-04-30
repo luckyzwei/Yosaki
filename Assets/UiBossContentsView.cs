@@ -29,27 +29,7 @@ public class UiBossContentsView : MonoBehaviour
     [SerializeField]
     private Button clearButton;
 
-    private ObscuredInt instantOpenAmount = 10;
-
-    //private ContentsRewardManager
-
-    public void OnClickToggle_1(bool isOn)
-    {
-        if (isOn)
-            instantOpenAmount = 10;
-    }
-
-    public void OnClickToggle_2(bool isOn)
-    {
-        if (isOn)
-            instantOpenAmount = 100;
-    }
-
-    public void OnClickToggle_3(bool isOn)
-    {
-        if (isOn)
-            instantOpenAmount = 1000;
-    }
+    private ObscuredInt instantOpenAmount = 10000000;
 
     public void Initialize(BossTableData bossTableData)
     {
@@ -69,7 +49,7 @@ public class UiBossContentsView : MonoBehaviour
 
         if (currentTicketNum < price)
         {
-            PopupManager.Instance.ShowAlarmMessage("티켓이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("소환서가 부족합니다.");
             return;
         }
 
@@ -101,7 +81,7 @@ public class UiBossContentsView : MonoBehaviour
 
         if (currentTicketNum < price)
         {
-            PopupManager.Instance.ShowAlarmMessage("티켓이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("소환서가 부족합니다.");
             return;
         }
 
@@ -134,7 +114,7 @@ public class UiBossContentsView : MonoBehaviour
     {
         if (ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value < clearAmount)
         {
-            PopupManager.Instance.ShowAlarmMessage("티켓이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("소환서가 부족합니다.");
             clearButton.interactable = true;
             return;
         }

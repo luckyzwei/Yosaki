@@ -45,7 +45,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI priceText;
 
-    private ObscuredInt currentLevel;
+    private ObscuredInt currentLevel = -1;
 
     private ObscuredFloat upgradePrice_gold;
 
@@ -134,63 +134,76 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
         statusIcon.sprite = CommonUiContainer.Instance.statusIcon[statusData.Statustype];
     }
+    private void RefreshStatusText()
+    {
+        float currentStatusValue = ServerData.statusTable.GetStatusValue(statusData.Key, currentLevel);
+        float nextStatusValue = ServerData.statusTable.GetStatusValue(statusData.Key, currentLevel + 1);
 
+        float price = 0f;
+        if (statusData.STATUSWHERE == StatusWhere.gold)
+        {
+            price = ServerData.statusTable.GetStatusUpgradePrice(statusData.Key, currentLevel);
+
+            priceText.SetText(Utils.ConvertBigNum(price));
+
+            upgradePrice_gold = price;
+        }
+        else if (statusData.STATUSWHERE == StatusWhere.statpoint)
+        {
+            price = 1;
+            priceText.SetText($"{price}개");
+        }
+        else if (statusData.STATUSWHERE == StatusWhere.memory)
+        {
+            price = 1;
+            priceText.SetText($"{price}개");
+        }
+
+        statusNameText.SetText(CommonString.GetStatusName((StatusType)statusData.Statustype));
+
+        if (statusData.Ispercent == false)
+        {
+            if (IsMaxLevel() == false)
+            {
+                descriptionText.SetText($"{(int)(currentStatusValue)}->{(int)(nextStatusValue)}");
+            }
+            else
+            {
+                descriptionText.SetText($"{(int)(currentStatusValue)}(MAX)");
+            }
+        }
+        //%로 표시
+        else
+        {
+            if (IsMaxLevel() == false)
+            {
+                descriptionText.SetText($"{(currentStatusValue * 100f).ToString("F2")}%->{(nextStatusValue * 100f).ToString("F2")}%");
+            }
+            else
+            {
+                descriptionText.SetText($"{(currentStatusValue * 100f).ToString("F2")}%(MAX)");
+            }
+        }
+
+        levelText.SetText($"Lv : {currentLevel}");
+    }
     private void Subscribe()
     {
         ServerData.statusTable.GetTableData(statusData.Key).AsObservable().Subscribe(currentLevel =>
         {
-            float currentStatusValue = ServerData.statusTable.GetStatusValue(statusData.Key, currentLevel);
-            float nextStatusValue = ServerData.statusTable.GetStatusValue(statusData.Key, currentLevel + 1);
-
-            float price = 0f;
-            if (statusData.STATUSWHERE == StatusWhere.gold)
-            {
-                price = ServerData.statusTable.GetStatusUpgradePrice(statusData.Key, currentLevel);
-
-                priceText.SetText(Utils.ConvertBigNum(price));
-
-                upgradePrice_gold = price;
-            }
-            else if (statusData.STATUSWHERE == StatusWhere.statpoint)
-            {
-                price = 1;
-                priceText.SetText($"{price}개");
-            }
-            else if (statusData.STATUSWHERE == StatusWhere.memory)
-            {
-                price = 1;
-                priceText.SetText($"{price}개");
-            }
-
-            statusNameText.SetText(CommonString.GetStatusName((StatusType)statusData.Statustype));
-
-            if (statusData.Ispercent == false)
-            {
-                if (IsMaxLevel() == false)
-                {
-                    descriptionText.SetText($"{(int)(currentStatusValue)}->{(int)(nextStatusValue)}");
-                }
-                else
-                {
-                    descriptionText.SetText($"{(int)(currentStatusValue)}(MAX)");
-                }
-            }
-            //%로 표시
-            else
-            {
-                if (IsMaxLevel() == false)
-                {
-                    descriptionText.SetText($"{(currentStatusValue * 100f).ToString("F2")}%->{(nextStatusValue * 100f).ToString("F2")}%");
-                }
-                else
-                {
-                    descriptionText.SetText($"{(currentStatusValue * 100f).ToString("F2")}%(MAX)");
-                }
-            }
-
-            levelText.SetText($"Lv : {currentLevel}");
-
+            this.currentLevel = currentLevel;
+            RefreshStatusText();
         }).AddTo(this);
+
+        ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].AsObservable().Subscribe(e =>
+        {
+            //초기화 됐을때만
+            if (currentLevel != -1 && statusData.STATUSWHERE == StatusWhere.gold)
+            {
+                RefreshStatusText();
+            }
+        }).AddTo(this);
+
 
         if (this.statusData.STATUSWHERE == StatusWhere.gold)
         {
@@ -220,7 +233,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
 
             ServerData.statusTable.GetTableData(statusData.Needstatuskey).AsObservable().Subscribe(e =>
             {
-                lockMask.SetActive(statusData.Unlocklevel >= e+2);
+                lockMask.SetActive(statusData.Unlocklevel >= e + 2);
             }).AddTo(this);
         }
         else

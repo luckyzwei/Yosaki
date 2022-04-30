@@ -55,10 +55,34 @@ public class TwelveRaidEnemy : BossEnemyBase
     }
 
     private double gangChulDam = 2.5;
+    private double haeTaeDam = 2.8;
 
     private void UpdateBossDamage()
     {
-        if (GameManager.Instance.bossId != 20)
+        //해태
+        if (GameManager.Instance.bossId == 22) 
+        {
+            if (haeTaeDam < double.MaxValue * 0.25)
+            {
+                haeTaeDam *= 2.8;
+            }
+
+            hitObject.SetDamage(haeTaeDam);
+
+            enemyHitObjects.ForEach(e => e.SetDamage(haeTaeDam));
+        }
+        else if(GameManager.Instance.bossId == 20) 
+        {
+            if (gangChulDam < double.MaxValue * 0.25)
+            {
+                gangChulDam *= 2.5;
+            }
+
+            hitObject.SetDamage(gangChulDam);
+
+            enemyHitObjects.ForEach(e => e.SetDamage(gangChulDam));
+        }
+        else
         {
             var bossTableData = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];
 
@@ -70,18 +94,6 @@ public class TwelveRaidEnemy : BossEnemyBase
 
             enemyHitObjects.ForEach(e => e.SetDamage((float)damage));
         }
-        else
-        {
-            if (gangChulDam < double.MaxValue * 0.25)
-            {
-                gangChulDam *= 2.5;
-            }
-
-            hitObject.SetDamage(gangChulDam);
-
-            enemyHitObjects.ForEach(e => e.SetDamage(gangChulDam));
-        }
-
     }
 
     private IEnumerator BossAttackPowerUpdateRoutine()

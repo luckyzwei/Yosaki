@@ -81,14 +81,14 @@ public class InfiniteTowerManager2 : ContentsManagerBase
         //클리어 됐을때 죽지 않게
         if (contentsState.Value != (int)ContentsState.Fight) return;
 
-       //  UiLastContentsFunc.AutoInfiniteTower2 = false;
+        //  UiLastContentsFunc.AutoInfiniteTower2 = false;
 
         contentsState.Value = (int)ContentsState.Dead;
     }
 
     protected override void TimerEnd()
     {
-      //  UiLastContentsFunc.AutoInfiniteTower2 = false;
+        //  UiLastContentsFunc.AutoInfiniteTower2 = false;
         base.TimerEnd();
         contentsState.Value = (int)ContentsState.TimerEnd;
     }
@@ -151,7 +151,7 @@ public class InfiniteTowerManager2 : ContentsManagerBase
 
     private IEnumerator ContentsRoutine()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return null;
 
         SpawnEnemy();
     }
@@ -258,7 +258,7 @@ public class InfiniteTowerManager2 : ContentsManagerBase
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
-          //  StartCoroutine(AutoPlayRoutine());
+            //  StartCoroutine(AutoPlayRoutine());
         });
     }
 

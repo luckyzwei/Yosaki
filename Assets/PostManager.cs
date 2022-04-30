@@ -29,7 +29,6 @@ public class PostManager : SingletonMono<PostManager>
 
     public void RefreshPost(bool retry = false)
     {
-
         // example
         Backend.Social.Post.GetPostListV2((bro) =>
         {

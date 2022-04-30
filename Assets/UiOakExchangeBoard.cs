@@ -86,7 +86,7 @@ public class UiOakExchangeBoard : MonoBehaviour
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
             SoundManager.Instance.PlaySound("Reward");
-          //  LogManager.Instance.SendLogType("Yomul", "해제", yomulAbilData.Id.ToString());
+            //  LogManager.Instance.SendLogType("Yomul", "해제", yomulAbilData.Id.ToString());
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "계약 완료!", null);
         });
 
@@ -117,6 +117,41 @@ public class UiOakExchangeBoard : MonoBehaviour
 
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
     }
+
+    public void OnClickExchangeButtonAll()
+    {
+        if (yomulServerData.hasAbil.Value == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("먼저 계약을 해야 합니다.");
+            return;
+        }
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "모든 옥을 소환서로 교환 할까요?", () =>
+        {
+            float oakAmount = ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
+
+            if (oakAmount < requireOakAmount)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
+                return;
+            }
+
+            int exchangeNum = (int)(oakAmount / (float)requireOakAmount);
+
+            ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= requireOakAmount * (float)exchangeNum;
+            ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += ticketGetAmount * (float)exchangeNum;
+
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Ticket)} 획득!");
+
+            if (syncRoutine != null)
+            {
+                CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+            }
+
+            syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+        }, null);
+    }
+
     private Coroutine syncRoutine;
     private WaitForSeconds syncDelay = new WaitForSeconds(1.0f);
     private IEnumerator SyncRoutine()

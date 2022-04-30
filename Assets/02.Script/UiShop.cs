@@ -308,6 +308,22 @@ public class UiShop : SingletonMono<UiShop>
                 break;
 
             //
+
+            case Item_Type.Hae_Norigae:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hae_Norigae).Value += amount;
+                    param.Add(GoodsTable.Hae_Norigae, ServerData.goodsTable.GetTableData(GoodsTable.Hae_Norigae).Value);
+                }
+                break;
+
+            case Item_Type.Hae_Pet:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hae_Pet).Value += amount;
+                    param.Add(GoodsTable.Hae_Pet, ServerData.goodsTable.GetTableData(GoodsTable.Hae_Pet).Value);
+                }
+                break;
+
+            //
             case Item_Type.SinSkill0:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.SinSkill0).Value += amount;

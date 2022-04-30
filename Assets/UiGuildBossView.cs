@@ -33,7 +33,9 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
     {
         bool canRecord = ServerData.userInfoTable.CanRecordGuildScore();
 
-
+#if UNITY_EDITOR
+        canRecord = true;
+#endif
 
         if (canRecord == false)
         {

@@ -12,7 +12,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
-    private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae };
+    private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae };
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
     private List<string> itemGradeName_Skill = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill, CommonString.ItemGrade_6_Skill };
@@ -83,6 +83,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public Sprite relicEnter;
     public Sprite SwordPartial;
+    public Sprite HaeNorigae;
+    public Sprite HaePet;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -354,10 +356,19 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.PeachReal:
                 return Peach;
-                break;    
+                break;
             case Item_Type.SwordPartial:
                 return SwordPartial;
                 break;
+
+            case Item_Type.Hae_Norigae:
+                return HaeNorigae;
+                break;
+
+            case Item_Type.Hae_Pet:
+                return HaePet;
+                break;
+
             case Item_Type.GuildReward:
                 return GuildReward;
                 break;

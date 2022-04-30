@@ -33,6 +33,7 @@ public static class CommonString
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
+    public static string ItemGrade_8_Norigae = "영물";
 
     public static string ItemGrade_4_Skill = "주작";
     public static string ItemGrade_5_Skill = "청룡";
@@ -188,6 +189,8 @@ public static class CommonString
             case Item_Type.SinSkill3: return "청룡 베기";
             case Item_Type.LeeMuGiStone: return "여의주";
             case Item_Type.SwordPartial: return "검조각";
+            case Item_Type.Hae_Norigae: return "해태 노리개 조각";
+            case Item_Type.Hae_Pet: return "아기 해태 구슬";
         }
         return "미등록";
     }

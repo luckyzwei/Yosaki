@@ -199,6 +199,10 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
             attenUserNum.Value = attenNum;
 
+#if UNITY_EDITOR
+            attenUserNum.Value = 29;
+#endif
+
             if (findMyData == false)
             {
                 for (int i = 0; i < rows.Count; i++)

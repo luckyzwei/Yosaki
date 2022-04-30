@@ -71,6 +71,9 @@ public class GoodsTable
     public static string ZangStone = "ZS";
     public static string SwordPartial = "SP";
 
+    public static string Hae_Norigae = "hn";
+    public static string Hae_Pet = "hp";
+
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
         {Gold,GameBalance.StartingMoney},
@@ -126,6 +129,9 @@ public class GoodsTable
         {LeeMuGiStone,0f},
         {ZangStone,0f},
         {SwordPartial,0f},
+
+        {Hae_Norigae,0f},
+        {Hae_Pet,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

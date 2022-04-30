@@ -55,6 +55,8 @@ public enum Item_Type
     LeeMuGiStone,
     ZangStone,
     SwordPartial,
+    Hae_Norigae,
+    Hae_Pet,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

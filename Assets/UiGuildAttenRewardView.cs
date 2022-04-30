@@ -24,10 +24,16 @@ public class UiGuildAttenRewardView : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI rewardCut;
 
-    private ObscuredInt idx;
+    private ObscuredInt idx = -1;
     private ObscuredInt rewardType;
     private ObscuredFloat rewardValue;
     private ObscuredInt requireAtten;
+
+    [SerializeField]
+    private GameObject addRewardLockObject;
+
+    [SerializeField]
+    private TextMeshProUGUI addRewardDescription;
 
     public void Initialize(int requireAtten, int idx, int rewardType, float rewardValue)
     {
@@ -42,9 +48,35 @@ public class UiGuildAttenRewardView : MonoBehaviour
 
         rewardCut.SetText($"{requireAtten}명");
 
+        CheckAddReward();
+
         Subscribe();
 
         RefreshReward();
+    }
+
+    private void OnEnable()
+    {
+        //초기화 됐을때만 체크
+        if (idx != -1)
+        {
+            CheckAddReward();
+        }
+    }
+
+    private void CheckAddReward()
+    {
+        if (idx < 5)
+        {
+            addRewardLockObject.SetActive(false);
+        }
+        else
+        {
+            int plusRewardNum = GuildManager.Instance.GetGuildAddRewardNum(GuildManager.Instance.guildLevelExp.Value);
+            int idx = this.idx - 4;
+
+            addRewardLockObject.SetActive((plusRewardNum < idx));
+        }
     }
 
     private void RefreshReward()

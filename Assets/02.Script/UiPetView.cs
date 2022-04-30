@@ -119,7 +119,7 @@ public class UiPetView : MonoBehaviour
 
         tutorialObject.SetActive(petData.PETGETTYPE == PetGetType.Gem && petData.Price == 0f);
 
-        normalPetObject.SetActive(petData.Id < 12);
+        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14);
 
         if (leemugiPetObject != null)
             leemugiPetObject.SetActive(petData.Id == 12);
@@ -427,7 +427,14 @@ public class UiPetView : MonoBehaviour
 
                 var prefPetData = TableManager.Instance.PetTable.dataArray[prefPetId];
 
-                buttonDescription.SetText($"{prefPetData.Name}\n각성시 획득");
+                if (petData.Id == 14)
+                {
+                    buttonDescription.SetText($"수호신 컨텐츠\n에서 획득!");
+                }
+                else
+                {
+                    buttonDescription.SetText($"{prefPetData.Name}\n각성시 획득");
+                }
             }
         }
 
@@ -493,7 +500,17 @@ public class UiPetView : MonoBehaviour
             //미보유
             else
             {
-                PopupManager.Instance.ShowAlarmMessage("환수를 각성시켜 획득 가능합니다.");
+                if (petServerData.idx == 14)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("수호신 컨텐츠에서 획득 가능");
+
+                }
+                else
+                {
+
+                    PopupManager.Instance.ShowAlarmMessage("환수를 각성시켜 획득 가능합니다.");
+                }
+
             }
         }
 

@@ -1311,4 +1311,9 @@ public static class PlayerStats
 
         return ret;
     }
+
+    public static float GetGoldAbilRatio()
+    {
+        return (float)TableManager.Instance.MagicBookTable.dataArray[ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value].Goldabilratio;
+    }
 }

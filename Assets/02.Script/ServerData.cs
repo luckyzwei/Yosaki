@@ -287,6 +287,14 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += rewardValue;
                 break;
 
+            case Item_Type.Hae_Norigae:
+                ServerData.goodsTable.GetTableData(GoodsTable.Hae_Norigae).Value += rewardValue;
+                break;
+
+            case Item_Type.Hae_Pet:
+                ServerData.goodsTable.GetTableData(GoodsTable.Hae_Pet).Value += rewardValue;
+                break;
+
             case Item_Type.costume1:
             case Item_Type.costume6:
             case Item_Type.costume7:
@@ -431,7 +439,13 @@ public static class ServerData
                 passParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
+            case Item_Type.Hae_Norigae:
+                passParam.Add(GoodsTable.Hae_Norigae, ServerData.goodsTable.GetTableData(GoodsTable.Hae_Norigae).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
+            case Item_Type.Hae_Pet:
+                passParam.Add(GoodsTable.Hae_Pet, ServerData.goodsTable.GetTableData(GoodsTable.Hae_Pet).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.GuildReward:
                 passParam.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
@@ -627,6 +641,17 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
                 param.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            //
+            case Item_Type.Hae_Norigae:
+                ServerData.goodsTable.GetTableData(GoodsTable.Hae_Norigae).Value += amount;
+                param.Add(GoodsTable.Hae_Norigae, ServerData.goodsTable.GetTableData(GoodsTable.Hae_Norigae).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.Hae_Pet:
+                ServerData.goodsTable.GetTableData(GoodsTable.Hae_Pet).Value += amount;
+                param.Add(GoodsTable.Hae_Pet, ServerData.goodsTable.GetTableData(GoodsTable.Hae_Pet).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            //
 
             case Item_Type.GuildReward:
                 ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += amount;
@@ -1155,6 +1180,16 @@ public static class ServerData
                 case Item_Type.SwordPartial:
                     ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
                     break;
+
+                //
+                case Item_Type.Hae_Norigae:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hae_Norigae).Value += amount;
+                    break;
+
+                case Item_Type.Hae_Pet:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hae_Pet).Value += amount;
+                    break;
+                //
                 case Item_Type.StageRelic:
                     ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;
                     break;

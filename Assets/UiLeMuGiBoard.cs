@@ -14,6 +14,9 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
     private UiPetView uiPetViewPrefeab_GoldDragon;
 
     [SerializeField]
+    private UiPetView uiPetViewPrefeab_Haetae;
+
+    [SerializeField]
     private Transform petViewParent;
     void Start()
     {
@@ -47,6 +50,16 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
 
                 petView.Initialize(e.Current.Value);
 
+            }
+            else if (e.Current.Value.Id == 14) 
+            {
+                var petView = Instantiate<UiPetView>(uiPetViewPrefeab_Haetae, petViewParent);
+
+                petView.gameObject.SetActive(true);
+
+                petView.transform.localPosition = Vector3.zero;
+
+                petView.Initialize(e.Current.Value);
             }
         }
     }

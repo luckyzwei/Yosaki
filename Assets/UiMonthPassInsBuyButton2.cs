@@ -64,7 +64,11 @@ public class UiMonthPassInsBuyButton2 : MonoBehaviour
 
     public void OnClickBuyButton()
     {
-
+        if (CanBuyProduct() == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("23일 부터 구매 가능합니다!");
+            return;
+        }
 
 #if UNITY_EDITOR || TEST
         GetPackageItem(monthInsPassKey);
@@ -96,5 +100,12 @@ public class UiMonthPassInsBuyButton2 : MonoBehaviour
         ServerData.userInfoTable.UpData(UserInfoTable.killCountTotal2, false);
 
         OnEvent?.Invoke();
+    }
+
+    private bool CanBuyProduct()
+    {
+        var severTime = ServerData.userInfoTable.currentServerTime;
+
+        return severTime.Day >= 23;
     }
 }

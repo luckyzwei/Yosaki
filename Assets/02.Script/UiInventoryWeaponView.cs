@@ -100,7 +100,10 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     [SerializeField]
     private GameObject chunDescription;
-        
+
+    [SerializeField]
+    private TextMeshProUGUI norigaeDescription;
+
     public void OnClickWeaponViewButton()
     {
         if (weaponData != null)
@@ -158,6 +161,13 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         youngMulCreateButton.gameObject.SetActive(magicBookData != null && magicBookData.Id == 20);
         youngMulCreateButton2.gameObject.SetActive(magicBookData != null && magicBookData.Id == 21);
+
+        norigaeDescription.gameObject.SetActive(magicBookData != null);
+
+        if (magicBookData != null)
+        {
+            norigaeDescription.SetText($"기본무공 강화\n{Utils.ConvertBigNum(magicBookData.Goldabilratio)}배");
+        }
 
         if (weaponData != null)
         {
@@ -496,7 +506,7 @@ public class UiInventoryWeaponView : MonoBehaviour
 
                 description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
             }
-        
+
         }
 
         if (effectData.Equipeffecttype2 != -1)

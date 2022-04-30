@@ -159,7 +159,7 @@ public class InfiniteTowerManager : ContentsManagerBase
 
     private IEnumerator ContentsRoutine()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return null;
 
         SpawnEnemy();
     }
@@ -269,7 +269,7 @@ public class InfiniteTowerManager : ContentsManagerBase
           });
     }
 
-    private IEnumerator AutoPlayRoutine() 
+    private IEnumerator AutoPlayRoutine()
     {
         yield return new WaitForSeconds(0.5f);
 

@@ -28,6 +28,9 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
     [SerializeField]
     private GameObject upgradeBlockMask;
 
+    [SerializeField]
+    private GameObject allLevelUpButton;
+
     void Start()
     {
         Subscribe();
@@ -116,7 +119,7 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
 
         }).AddTo(this);
 
-        ServerData.userInfoTable.GetTableData(UserInfoTable.smithExp).AsObservable().Subscribe(e=> 
+        ServerData.userInfoTable.GetTableData(UserInfoTable.smithExp).AsObservable().Subscribe(e =>
         {
 
             UpdateAwakeProb();
@@ -125,9 +128,13 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
 
     }
 
-    private void UpdateAwakeProb() 
+    private void UpdateAwakeProb()
     {
         awakeProb.SetText($"강화 성공 확률 : {GetAwakeProb()}%");
+
+        float prob = GetAwakeProb();
+
+        allLevelUpButton.SetActive(prob >= 100);
     }
 
     private float GetYoguiMarbleUpgradePrice()
@@ -203,6 +210,50 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
         });
     }
 
+    //
+    public void OnClickMarbleAwakeButton_All()
+    {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "모든 여우구슬로 강화 할까요?", () =>
+        {
+            float currentMarble = ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value;
+
+            if (currentMarble < GetMarbleUpgradePrice())
+            {
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Marble)}이 부족합니다.");
+                return;
+            }
+
+            upgradeBlockMask.SetActive(true);
+
+            int upgradableNum = (int)(ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value / GetMarbleUpgradePrice());
+
+            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value -= (GetMarbleUpgradePrice() * upgradableNum);
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+            goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+
+            ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value += upgradableNum;
+
+            Param statusParam = new Param();
+            statusParam.Add(StatusTable.PetEquip_Level, ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value);
+            transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
+
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                upgradeBlockMask.SetActive(false);
+
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"+{upgradableNum} 강화 성공!", null);
+            });
+        }, null);
+    }
+    //
+
     public void OnClickYoguiMarbleAwakeButton()
     {
         float currentSoul = ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value;
@@ -235,7 +286,7 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
         }
 
-    //    LogManager.Instance.SendLogType("PetEquip", "요청", awakeSuccess ? "성공":"실패");
+        //    LogManager.Instance.SendLogType("PetEquip", "요청", awakeSuccess ? "성공":"실패");
 
 
 #if UNITY_EDITOR

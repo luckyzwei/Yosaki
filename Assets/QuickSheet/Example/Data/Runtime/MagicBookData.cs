@@ -100,4 +100,8 @@ public class MagicBookData
   int needpetid;
   public int Needpetid { get {return needpetid; } set { this.needpetid = value;} }
   
+  [SerializeField]
+  double goldabilratio;
+  public double Goldabilratio { get {return goldabilratio; } set { this.goldabilratio = value;} }
+  
 }
