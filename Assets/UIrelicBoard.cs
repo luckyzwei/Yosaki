@@ -242,11 +242,11 @@ public class UIrelicBoard : MonoBehaviour
                 prefTotal += ServerData.relicServerTable.TableDatas[tableDatas[i].Stringid].level.Value;
             }
 
-            float newTotal = currentKillCount * (int)ServerData.userInfoTable.GetTableData(UserInfoTable.usedRelicTicketNum).Value;
+            float newTotal = currentKillCount * (float)ServerData.userInfoTable.GetTableData(UserInfoTable.usedRelicTicketNum).Value;
 
             float interval = newTotal - prefTotal;
 
-            if (interval == 0f)
+            if (interval <= 0f)
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "갱신할 데이터가 없습니다.", null);
             }
@@ -255,7 +255,7 @@ public class UIrelicBoard : MonoBehaviour
                 ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value = interval;
                 ServerData.goodsTable.UpData(GoodsTable.Relic, false);
             }
-           
+
         }, () => { });
     }
 }

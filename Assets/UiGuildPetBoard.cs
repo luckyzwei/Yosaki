@@ -55,6 +55,10 @@ public class UiGuildPetBoard : MonoBehaviour
     {
         bool canRecord = ServerData.userInfoTable.CanRecordGuildScore();
 
+#if UNITY_EDITOR
+        canRecord = true;
+#endif
+
         if (canRecord == false)
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "오후11시~ 다음날 오전5시 까지는\n먹이를 줄 수 없습니다!", null);

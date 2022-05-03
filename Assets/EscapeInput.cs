@@ -8,7 +8,7 @@ public class EscapeInput : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GameEscapeManager.Instance.WhenEscapeInputReceived();
+           
         }
     }
 }
