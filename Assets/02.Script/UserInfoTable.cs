@@ -859,9 +859,10 @@ public class UserInfoTable
             {
                 tableDatas[killCountTotal2].Value += updateRequireNum;
             }
+
+            tableDatas[killCountTotalChild].Value += updateRequireNum;
         }
 
-        tableDatas[killCountTotalChild].Value += updateRequireNum;
     }
 
     public bool IsLastFloor()
