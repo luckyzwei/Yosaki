@@ -176,7 +176,51 @@ public class UiGuildRewardCell : MonoBehaviour
 
             }
 
-        //    LogManager.Instance.SendLogType("guildExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
+            //    LogManager.Instance.SendLogType("guildExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
         });
+    }
+
+    public void OnClickExchangeButton_All()
+    {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "전부 교환 합니까?", () =>
+        {
+            if (IsCostumeItem())
+            {
+                string itemKey = ((Item_Type)tableData.Itemtype).ToString();
+
+                if (ServerData.costumeServerTable.TableDatas[itemKey].hasCostume.Value)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("이미 보유하고 있습니다!");
+                    return;
+                }
+            }
+
+            int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value;
+
+            if (currentEventItemNum < tableData.Price)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GuildReward)}이 부족합니다.");
+                return;
+            }
+
+            PopupManager.Instance.ShowAlarmMessage("교환 완료");
+
+            float exchangeNum = (int)(ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value / tableData.Price);
+
+            //로컬
+            ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value -= tableData.Price * exchangeNum;
+
+            ServerData.AddLocalValue((Item_Type)tableData.Itemtype, tableData.Itemvalue * exchangeNum);
+
+            if (syncRoutine != null)
+            {
+                CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+            }
+
+            syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
+        }, () => { });
+
+
     }
 }
