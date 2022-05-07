@@ -56,7 +56,9 @@ public enum Item_Type
     ZangStone,
     SwordPartial,
     Hae_Norigae,
-    Hae_Pet,
+    Hae_Pet, 
+    Sam_Norigae,
+    Sam_Pet,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -200,6 +202,9 @@ public enum Item_Type
     costume27 = 1228,
     costume28 = 1229,
     costume29 = 1230,
+
+    costume30 = 1231,
+    costume31 = 1232,
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,

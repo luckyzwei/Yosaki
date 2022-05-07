@@ -87,7 +87,14 @@ public class UiPetView : MonoBehaviour
     {
         skeletonGraphic.Clear();
         skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[idx];
-        skeletonGraphic.startingAnimation = "walk";
+        if (idx != 15)
+        {
+            skeletonGraphic.startingAnimation = "walk";
+        }
+        else
+        {
+            skeletonGraphic.startingAnimation = "idel";
+        }
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
     }
@@ -102,8 +109,10 @@ public class UiPetView : MonoBehaviour
 
         SetPetSpine(petData.Id);
 
-
-        petName.color = CommonUiContainer.Instance.itemGradeColor[(petData.Id / 4) + 1];
+        if (petName != null)
+        {
+            petName.color = CommonUiContainer.Instance.itemGradeColor[(petData.Id / 4) + 1];
+        }
 
         awakePrice.SetText(Utils.ConvertBigNum(petData.Awakeprice));
 
@@ -119,7 +128,7 @@ public class UiPetView : MonoBehaviour
 
         tutorialObject.SetActive(petData.PETGETTYPE == PetGetType.Gem && petData.Price == 0f);
 
-        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14);
+        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15);
 
         if (leemugiPetObject != null)
             leemugiPetObject.SetActive(petData.Id == 12);
@@ -251,7 +260,11 @@ public class UiPetView : MonoBehaviour
                 UpdateUi();
             }
             string defix = e == 1 ? "" : "(미보유)";
-            petName.SetText($"{petData.Name}{defix}");
+
+            if (petName != null)
+            {
+                petName.SetText($"{petData.Name}{defix}");
+            }
         }).AddTo(this);
 
         petServerData.level.AsObservable().Subscribe(e =>
@@ -427,7 +440,7 @@ public class UiPetView : MonoBehaviour
 
                 var prefPetData = TableManager.Instance.PetTable.dataArray[prefPetId];
 
-                if (petData.Id == 14)
+                if (petData.Id == 14|| petData.Id == 15)
                 {
                     buttonDescription.SetText($"수호신 컨텐츠\n에서 획득!");
                 }
@@ -500,7 +513,7 @@ public class UiPetView : MonoBehaviour
             //미보유
             else
             {
-                if (petServerData.idx == 14)
+                if (petServerData.idx == 14|| petServerData.idx == 15)
                 {
                     PopupManager.Instance.ShowAlarmMessage("수호신 컨텐츠에서 획득 가능");
 

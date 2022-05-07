@@ -34,6 +34,7 @@ public static class CommonString
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
     public static string ItemGrade_8_Norigae = "영물";
+    public static string ItemGrade_9_Norigae = "병아리";
 
     public static string ItemGrade_4_Skill = "주작";
     public static string ItemGrade_5_Skill = "청룡";
@@ -136,6 +137,8 @@ public static class CommonString
             case Item_Type.costume27: return TableManager.Instance.Costume.dataArray[27].Name;
             case Item_Type.costume28: return TableManager.Instance.Costume.dataArray[28].Name;
             case Item_Type.costume29: return TableManager.Instance.Costume.dataArray[29].Name;
+            case Item_Type.costume30: return TableManager.Instance.Costume.dataArray[30].Name;
+            case Item_Type.costume31: return TableManager.Instance.Costume.dataArray[31].Name;
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;

@@ -104,6 +104,19 @@ public class UiInventoryWeaponView : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI norigaeDescription;
 
+    [SerializeField]
+    private TextMeshProUGUI suhoSinDescription;
+
+    private void SetEquipButton(bool onOff)
+    {
+        equipButton.gameObject.SetActive(onOff);
+
+        if (magicBookData != null && magicBookData.Id == 23)
+        {
+            equipButton.gameObject.SetActive(false);
+        }
+    }
+
     public void OnClickWeaponViewButton()
     {
         if (weaponData != null)
@@ -163,6 +176,21 @@ public class UiInventoryWeaponView : MonoBehaviour
         youngMulCreateButton2.gameObject.SetActive(magicBookData != null && magicBookData.Id == 21);
 
         norigaeDescription.gameObject.SetActive(magicBookData != null);
+
+        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24));
+
+        if (magicBookData != null)
+        {
+            if ((magicBookData.Id == 22 || magicBookData.Id == 24))
+            {
+                suhoSinDescription.SetText($"요괴사냥\n수호신 에서 획득!");
+            }
+            else if (magicBookData.Id == 23)
+            {
+                suhoSinDescription.SetText($"여름훈련에서\n획득!");
+            }
+
+        }
 
         if (magicBookData != null)
         {
@@ -275,7 +303,7 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         hasMask.SetActive(state == 0);
 
-        equipButton.gameObject.SetActive(state == 1);
+        SetEquipButton(state == 1);
 
         levelUpButton.gameObject.SetActive(state == 1);
 
@@ -645,7 +673,8 @@ public class UiInventoryWeaponView : MonoBehaviour
             has = ServerData.magicBookTable.GetMagicBookData(magicBookData.Stringid).hasItem.Value;
         }
 
-        equipButton.gameObject.SetActive(has == 1);
+        SetEquipButton(has == 1);
+
         levelUpButton.gameObject.SetActive(has == 1);
 
         if (equipButton.gameObject.activeSelf)

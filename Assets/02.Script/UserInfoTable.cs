@@ -101,6 +101,7 @@ public class UserInfoTable
 
     public const string killCountTotal = "kt7";
     public const string killCountTotal2 = "kt8";
+    public const string killCountTotalChild = "kt9";
 
     public const string relicKillCount = "relicKillCount";
 
@@ -218,6 +219,7 @@ public class UserInfoTable
         {relicReset2,0f},
         {yomul5_buff,0f},
         {killCountTotal2,0f},
+        {killCountTotalChild,0f},
         {dailyPackReset,0f},
         {yomul6_buff,0f},
         {sonScore,0f},
@@ -429,6 +431,8 @@ public class UserInfoTable
         {
             UpData(killCountTotal2, false);
         }
+
+        UpData(killCountTotalChild, false);
     }
     private void UpdatejumpCount()
     {
@@ -620,8 +624,8 @@ public class UserInfoTable
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.smithpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.smithpensionAttendance).Value++;
-            } 
-            
+            }
+
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.weaponpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.weaponpensionAttendance).Value++;
@@ -778,10 +782,10 @@ public class UserInfoTable
     }
     public bool CanMakeEventItem()
     {
-        if (currentServerTime.Month == 11) return true;
-        if (currentServerTime.Month == 12) return true;
-        if (currentServerTime.Month == 1) return true;
-        if (currentServerTime.Month == 2) return true;
+        //if (currentServerTime.Month == 11) return true;
+        //if (currentServerTime.Month == 12) return true;
+        //if (currentServerTime.Month == 1) return true;
+        //if (currentServerTime.Month == 2) return true;
 
         return false;
     }
@@ -856,6 +860,8 @@ public class UserInfoTable
                 tableDatas[killCountTotal2].Value += updateRequireNum;
             }
         }
+
+        tableDatas[killCountTotalChild].Value += updateRequireNum;
     }
 
     public bool IsLastFloor()

@@ -12,7 +12,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
-    private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae };
+    private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae };
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
     private List<string> itemGradeName_Skill = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill, CommonString.ItemGrade_6_Skill };
@@ -85,6 +85,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite SwordPartial;
     public Sprite HaeNorigae;
     public Sprite HaePet;
+    public Sprite SamNorigae;
+    public Sprite SamPet;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -205,6 +207,13 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.costume29:
                 return costumeThumbnail[29];
+                break;
+
+            case Item_Type.costume30:
+                return costumeThumbnail[30];
+                break;
+            case Item_Type.costume31:
+                return costumeThumbnail[31];
                 break;
 
 
@@ -357,6 +366,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.PeachReal:
                 return Peach;
                 break;
+
             case Item_Type.SwordPartial:
                 return SwordPartial;
                 break;
@@ -367,6 +377,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.Hae_Pet:
                 return HaePet;
+                break;
+
+            case Item_Type.Sam_Norigae:
+                return SamNorigae;
+                break;
+
+            case Item_Type.Sam_Pet:
+                return SamPet;
                 break;
 
             case Item_Type.GuildReward:

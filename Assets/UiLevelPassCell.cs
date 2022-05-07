@@ -78,9 +78,11 @@ public class UiLevelPassCell : MonoBehaviour
         //레벨 변경될때
         ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(e =>
         {
-            lockIcon_Free.SetActive(!CanGetReward());
-            lockIcon_Ad.SetActive(!CanGetReward());
-
+            if (this.gameObject.activeInHierarchy == true) 
+            {
+                lockIcon_Free.SetActive(!CanGetReward());
+                lockIcon_Ad.SetActive(!CanGetReward());
+            }
             //itemAmount_free.color = lockIcon_Free.activeInHierarchy == true ? Color.grey : Color.white;
             //itemName_free.color = lockIcon_Free.activeInHierarchy == true ? Color.grey : Color.white;
             //itemAmount_ad.color = lockIcon_Ad.activeInHierarchy == true ? Color.grey : Color.white;

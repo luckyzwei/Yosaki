@@ -56,11 +56,23 @@ public class TwelveRaidEnemy : BossEnemyBase
 
     private double gangChulDam = 2.5;
     private double haeTaeDam = 2.8;
+    private double samDam = 2.9;
 
     private void UpdateBossDamage()
     {
-        //해태
-        if (GameManager.Instance.bossId == 22) 
+        //삼족오
+        if (GameManager.Instance.bossId == 23)
+        {
+            if (samDam < double.MaxValue * 0.25)
+            {
+                samDam *= 2.8;
+            }
+
+            hitObject.SetDamage(samDam);
+
+            enemyHitObjects.ForEach(e => e.SetDamage(samDam));
+        }
+        else if (GameManager.Instance.bossId == 22) 
         {
             if (haeTaeDam < double.MaxValue * 0.25)
             {

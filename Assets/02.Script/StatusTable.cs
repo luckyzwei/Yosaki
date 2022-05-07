@@ -272,7 +272,7 @@ public class StatusTable
                     }
                 case ChunSlash_memory:
                     {
-                        return level * 0.004f;
+                        return level * 0.006f;
                     }
 
                 #endregion

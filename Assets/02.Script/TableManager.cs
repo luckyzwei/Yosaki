@@ -632,5 +632,7 @@ public class TableManager : SingletonMono<TableManager>
 
     public GumGiTable gumGiTable;
 
+    public ChildPass childPass;
+
 }
 

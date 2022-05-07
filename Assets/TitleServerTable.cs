@@ -86,6 +86,8 @@ public class TitleServerTable
             else
             {
                 Param defultValues = new Param();
+                Param defultValues2 = new Param();
+
                 int paramCount = 0;
 
                 JsonData data = rows[0];
@@ -116,14 +118,29 @@ public class TitleServerTable
                     }
                     else
                     {
-                        var titleData = new TitleServerData();
-                        titleData.idx = table[i].Id;
-                        titleData.clearFlag = new ReactiveProperty<int>(0);
-                        titleData.rewarded = new ReactiveProperty<int>(0);
+                        if (paramCount < 280) 
+                        {
+                            var titleData = new TitleServerData();
+                            titleData.idx = table[i].Id;
+                            titleData.clearFlag = new ReactiveProperty<int>(0);
+                            titleData.rewarded = new ReactiveProperty<int>(0);
 
-                        tableDatas.Add(table[i].Stringid, titleData);
-                        defultValues.Add(table[i].Stringid, titleData.ConvertToString());
-                        paramCount++;
+                            tableDatas.Add(table[i].Stringid, titleData);
+                            defultValues.Add(table[i].Stringid, titleData.ConvertToString());
+                            paramCount++;
+                        }
+                        else 
+                        {
+                            var titleData = new TitleServerData();
+                            titleData.idx = table[i].Id;
+                            titleData.clearFlag = new ReactiveProperty<int>(0);
+                            titleData.rewarded = new ReactiveProperty<int>(0);
+
+                            tableDatas.Add(table[i].Stringid, titleData);
+                            defultValues2.Add(table[i].Stringid, titleData.ConvertToString());
+                            paramCount++;
+                        }
+                
                     }
                 }
 
@@ -135,6 +152,17 @@ public class TitleServerTable
                     {
                         ServerData.ShowCommonErrorPopup(bro, Initialize);
                         return;
+                    }
+
+                    if (paramCount >= 280) 
+                    {
+                        var bro2 = Backend.GameData.Update(tableName, Indate, defultValues2);
+
+                        if (bro2.IsSuccess() == false)
+                        {
+                            ServerData.ShowCommonErrorPopup(bro, Initialize);
+                            return;
+                        }
                     }
                 }
 

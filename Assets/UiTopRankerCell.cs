@@ -57,7 +57,7 @@ public class UiTopRankerCell : MonoBehaviour
             {
                 weapon.material = CommonUiContainer.Instance.weaponEnhnaceMats[fightPoint];
             }
-            else 
+            else
             {
                 weapon.material = CommonUiContainer.Instance.weaponEnhnaceMats[0];
             }
@@ -99,12 +99,27 @@ public class UiTopRankerCell : MonoBehaviour
             petGraphic.gameObject.SetActive(false);
             return;
         }
+
+
+        if (idx <= 14)
+        {
+            petGraphic.startingAnimation = "walk";
+            petGraphic.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            petGraphic.GetComponent<RectTransform>().anchoredPosition = new Vector3(44.9f, 74.7f, 0.7f);
+        }
+        else
+        {
+            petGraphic.startingAnimation = "idel";
+            petGraphic.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            petGraphic.GetComponent<RectTransform>().anchoredPosition = new Vector3(44.9f, 138.2f, 0.7f);
+        }
+
         petGraphic.gameObject.SetActive(true);
         petGraphic.Clear();
         petGraphic.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[idx];
-        petGraphic.startingAnimation = "walk";
         petGraphic.Initialize(true);
         petGraphic.SetMaterialDirty();
+
     }
 
     private void SetCostumeSpine(int idx)

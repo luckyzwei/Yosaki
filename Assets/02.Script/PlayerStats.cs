@@ -816,7 +816,7 @@ public static class PlayerStats
 
     public static float GetIgnoreDefenseValue()
     {
-        float ret = 0f;
+        float ret = 300f;
 
         ret += ServerData.statusTable.GetStatusValue(StatusTable.IgnoreDefense_memory);
         ret += GetWeaponEquipPercentValue(StatusType.IgnoreDefense);

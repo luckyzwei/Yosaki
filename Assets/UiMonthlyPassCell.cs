@@ -89,9 +89,12 @@ public class UiMonthlyPassCell : MonoBehaviour
         //킬카운트 변경될때
         ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotal).AsObservable().Subscribe(e =>
         {
-            lockIcon_Free.SetActive(!CanGetReward());
-            lockIcon_Ad.SetActive(!CanGetReward());
-            gaugeImage.SetActive(CanGetReward());
+            if (this.gameObject.activeInHierarchy)
+            {
+                lockIcon_Free.SetActive(!CanGetReward());
+                lockIcon_Ad.SetActive(!CanGetReward());
+                gaugeImage.SetActive(CanGetReward());
+            }
         }).AddTo(disposables);
     }
 

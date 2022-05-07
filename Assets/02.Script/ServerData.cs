@@ -51,6 +51,7 @@ public static class ServerData
 
     public static PetEquipmentServerTable petEquipmentServerTable { get; private set; } = new PetEquipmentServerTable();
     public static MonthlyPassServerTable monthlyPassServerTable { get; private set; } = new MonthlyPassServerTable();
+    public static ChildPassServerTable childPassServerTable { get; private set; } = new ChildPassServerTable();
 
     public static RelicServerTable relicServerTable { get; private set; } = new RelicServerTable();
     public static StageRelicServerTable stageRelicServerTable { get; private set; } = new StageRelicServerTable();
@@ -126,6 +127,8 @@ public static class ServerData
         petEquipmentServerTable.Initialize();
 
         monthlyPassServerTable.Initialize();
+
+        childPassServerTable.Initialize();
 
         relicServerTable.Initialize();
 
@@ -320,6 +323,8 @@ public static class ServerData
             case Item_Type.costume27:
             case Item_Type.costume28:
             case Item_Type.costume29:
+            case Item_Type.costume30:
+            case Item_Type.costume31:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -399,6 +404,8 @@ public static class ServerData
             case Item_Type.costume27:
             case Item_Type.costume28:
             case Item_Type.costume29:
+            case Item_Type.costume30:
+            case Item_Type.costume31:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);

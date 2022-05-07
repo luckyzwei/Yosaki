@@ -10,6 +10,9 @@ public class UiHaeTeaBoard : MonoBehaviour
     [SerializeField]
     private UiTwelveBossContentsView bossContentsView;
 
+    [SerializeField]
+    private UiTwelveBossContentsView bossContentsView_Three;
+
     void Start()
     {
         Initialize();
@@ -18,5 +21,6 @@ public class UiHaeTeaBoard : MonoBehaviour
     private void Initialize()
     {
         bossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[22]);
+        bossContentsView_Three.Initialize(TableManager.Instance.TwelveBossTable.dataArray[23]);
     }
 }
