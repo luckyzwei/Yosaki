@@ -53,11 +53,11 @@ public class UiStageRankBoard : MonoBehaviour
             if (e != null)
             {   
                                                                 //스테이지 -1부터 시작함
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score+2}단계", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score+2}단계", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName,e.maskIdx);
             }
             else
             {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1,string.Empty);
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1,string.Empty,-1);
             }
 
 
@@ -107,6 +107,7 @@ public class UiStageRankBoard : MonoBehaviour
                         int weaponId = int.Parse(splitData[2]);
                         int magicBookId = int.Parse(splitData[3]);
                         int fightPoint = int.Parse(splitData[4]);
+                        int maskIdx = int.Parse(splitData[6]);
 
                         Color color1 = Color.white;
                         Color color2 = Color.white;
@@ -137,7 +138,7 @@ public class UiStageRankBoard : MonoBehaviour
                         {
                             guildName = splitData[7];
                         }
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{level+2}단계", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{level+2}단계", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName, maskIdx);
                     }
                     else
                     {

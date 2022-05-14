@@ -51,25 +51,12 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
         while (e.MoveNext())
         {
-            if (e.Current.Value.Id == 25) 
-            {
-                //UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent);
 
-                //view.Initialize(e.Current.Value, null, OnClickWeaponView);
+            UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, viewParentWeapon);
 
-                //weaponViewContainer.Add(view);
+            view.Initialize(e.Current.Value, null, OnClickWeaponView);
 
-      
-            }
-            else
-            {
-                UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, viewParentWeapon);
-
-                view.Initialize(e.Current.Value, null, OnClickWeaponView);
-
-                weaponViewContainer.Add(view);
-
-            }
+            weaponViewContainer.Add(view);
         }
     }
 
@@ -79,7 +66,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
         while (e.MoveNext())
         {
-            if (e.Current.Value.Id == 23) 
+            if (e.Current.Value.Id == 23)
             {
                 UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent);
 
@@ -87,7 +74,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
                 magicBookViewContainer.Add(view);
             }
-            else 
+            else
             {
 
                 UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, viewParentMagicBook);
@@ -96,7 +83,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
                 magicBookViewContainer.Add(view);
             }
-     
+
         }
     }
 

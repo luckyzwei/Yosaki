@@ -96,6 +96,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     private GameObject feelMul3Lock;
 
     [SerializeField]
+    private GameObject feelMul4Lock;
+
+    [SerializeField]
     private GameObject armDescription;
 
     [SerializeField]
@@ -314,9 +317,10 @@ public class UiInventoryWeaponView : MonoBehaviour
 
             feelMul2Lock.SetActive(false);
             feelMul3Lock.SetActive(false);
+            feelMul4Lock.SetActive(false);
 
             //필멸2 필멸3  (23,24)
-            if (weaponData.Id == 23 || weaponData.Id == 24)
+            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25)
             {
                 hasMask.SetActive(false);
 
@@ -329,6 +333,11 @@ public class UiInventoryWeaponView : MonoBehaviour
                 {
                     feelMul3Lock.gameObject.SetActive(state == 0);
                 }
+
+                if (weaponData.Id == 25)
+                {
+                    feelMul4Lock.gameObject.SetActive(state == 0);
+                }
             }
 
         }
@@ -336,6 +345,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             feelMul2Lock.SetActive(false);
             feelMul3Lock.SetActive(false);
+            feelMul4Lock.SetActive(false);
 
             magicBookViewEquipButton.gameObject.SetActive(state == 1);
             weaponViewEquipButton.gameObject.SetActive(false);
@@ -907,6 +917,21 @@ public class UiInventoryWeaponView : MonoBehaviour
         ServerData.weaponTable.TableDatas["weapon24"].amount.Value += 1;
         ServerData.weaponTable.TableDatas["weapon24"].hasItem.Value = 1;
         ServerData.weaponTable.SyncToServerEach("weapon24");
+
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "무기 획득!", null);
+    }
+
+    public void OnClickGetFeelMulLastButton()
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiClear].Value < 6000)
+        {
+            PopupManager.Instance.ShowAlarmMessage("검의 산 처치 6000 이상일때 획득 하실 수 있습니다.");
+            return;
+        }
+
+        ServerData.weaponTable.TableDatas["weapon25"].amount.Value += 1;
+        ServerData.weaponTable.TableDatas["weapon25"].hasItem.Value = 1;
+        ServerData.weaponTable.SyncToServerEach("weapon25");
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "무기 획득!", null);
     }

@@ -17,9 +17,16 @@ public class UiTopRankerCell : MonoBehaviour
     private TextMeshProUGUI rankText;
 
     [SerializeField]
+    private BoneFollowerGraphic boneFollowerGraphic_Mask;
+
+    [SerializeField]
     private Image weapon;
     [SerializeField]
     private Image magicBook;
+
+    [SerializeField]
+    private Image mask;
+
 
     [SerializeField]
     private GameObject yomulObject;
@@ -33,7 +40,7 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI guildName;
 
-    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int fightPoint, string guildName)
+    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int fightPoint, string guildName, int maskIdx)
     {
         this.nickName.SetText(nickName);
         this.rankText.SetText(rankText);
@@ -48,6 +55,16 @@ public class UiTopRankerCell : MonoBehaviour
         yomulObject.SetActive(weaponId == 20);
 
         newWeaponEffect.SetActive(weaponId == 22);
+
+        if (maskIdx != -1)
+        {
+            mask.gameObject.SetActive(true);
+            mask.sprite = CommonResourceContainer.GetMaskSprite(maskIdx);
+        }
+        else
+        {
+            mask.gameObject.SetActive(false);
+        }
 
         if (weaponId != -1)
         {
@@ -129,6 +146,7 @@ public class UiTopRankerCell : MonoBehaviour
         costumeGraphic.Initialize(true);
         costumeGraphic.SetMaterialDirty();
 
+        boneFollowerGraphic_Mask.SetBone("bone21");
         //boneFollowerGraphic.SetBone("Weapon1");
     }
 }

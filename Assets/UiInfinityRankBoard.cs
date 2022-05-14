@@ -109,6 +109,7 @@ public class UiInfinityRankBoard : MonoBehaviour
                         int weaponId = int.Parse(splitData[2]);
                         int magicBookId = int.Parse(splitData[3]);
                         int fightPoint = int.Parse(splitData[4]);
+                        int maskIdx = int.Parse(splitData[6]);
 
 
                         Color color1 = Color.white;
@@ -134,7 +135,7 @@ public class UiInfinityRankBoard : MonoBehaviour
                         {
                             guildName = splitData[7];
                         }
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"지하 {level + 1}층", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"지하 {level + 1}층", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName, maskIdx);
                     }
                     else
                     {

@@ -634,5 +634,7 @@ public class TableManager : SingletonMono<TableManager>
 
     public ChildPass childPass;
 
+    public FoxMask FoxMask;
+
 }
 

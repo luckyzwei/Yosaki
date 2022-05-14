@@ -229,7 +229,7 @@ public static class PlayerStats
         ret += GetSonAbilHasEffect(StatusType.AttackAddPer);
         ret += GetAsuraAbilValue(StatusType.AttackAddPer);
         ret += GetGuildPetEffect(StatusType.AttackAddPer);
-
+        ret += GetMaskAttackAddPerDam();
 
         return ret;
     }
@@ -1323,5 +1323,13 @@ public static class PlayerStats
             return 1f;
         }
 
+    }
+
+    public static float GetMaskAttackAddPerDam()
+    {
+        int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMask].Value;
+        if (equipId == -1) return 0f;
+
+        return (float)TableManager.Instance.FoxMask.dataArray[equipId].Abilvalue;
     }
 }

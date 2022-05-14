@@ -53,11 +53,11 @@ public class UiBossRankBoard : MonoBehaviour
         {
             if (e != null)
             {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName,e.maskIdx);
             }
             else
             {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1,string.Empty);
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1,string.Empty,-1);
             }
 
 
@@ -111,6 +111,7 @@ public class UiBossRankBoard : MonoBehaviour
                         int weaponId = int.Parse(splitData[2]);
                         int magicBookId = int.Parse(splitData[3]);
                         int fightPoint = int.Parse(splitData[4]);
+                        int maskIdx = int.Parse(splitData[6]);
 
                         Color color1 = Color.white;
                         Color color2 = Color.white;
@@ -142,7 +143,7 @@ public class UiBossRankBoard : MonoBehaviour
                         }
 
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint,guildName, maskIdx);
                     }
                     else
                     {

@@ -7,6 +7,7 @@ public static class CommonResourceContainer
 {
     private static List<Sprite> weaponSprites;
     private static List<Sprite> magicBookSprites;
+    private static List<Sprite> maskSprites;
 
     public static Sprite GetRandomWeaponSprite()
     {
@@ -48,6 +49,34 @@ public static class CommonResourceContainer
         if (idx < weaponSprites.Count)
         {
             return weaponSprites[idx];
+        }
+        else
+        {
+            Debug.LogError($"Weapon icon {idx} is not exist");
+            return null;
+        }
+    }
+
+    public static Sprite GetMaskSprite(int idx)
+    {
+        if (maskSprites == null)
+        {
+            var maksIcons = Resources.LoadAll<Sprite>("FoxMask/");
+            maskSprites = maksIcons.ToList();
+
+
+            maskSprites.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
+        }
+
+        if (idx < maskSprites.Count)
+        {
+            return maskSprites[idx];
         }
         else
         {

@@ -24,7 +24,7 @@ public class UiRankView : MonoBehaviour
 
     public static int rank1Count = 0;
 
-    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int fightpoint, string guildName,bool isGangChul=false)
+    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int fightpoint, string guildName, int maskIdx, bool isGangChul = false)
     {
         this.text1.SetText(text1);
         this.text2.SetText(text2);
@@ -40,7 +40,7 @@ public class UiRankView : MonoBehaviour
         rankList[2].SetActive(rank == 3);
 
 
-        if (isGangChul==false) 
+        if (isGangChul == false)
         {
             UiTopRankerCell rankerCell = null;
 
@@ -73,10 +73,10 @@ public class UiRankView : MonoBehaviour
             if (rankerCell != null)
             {
                 rankerCell.gameObject.SetActive(true);
-                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName, maskIdx);
             }
         }
-        else 
+        else
         {
             UiTopRankerCell rankerCell = null;
 
@@ -109,10 +109,10 @@ public class UiRankView : MonoBehaviour
             if (rankerCell != null)
             {
                 rankerCell.gameObject.SetActive(true);
-                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName, maskIdx);
             }
         }
 
-       
+
     }
 }

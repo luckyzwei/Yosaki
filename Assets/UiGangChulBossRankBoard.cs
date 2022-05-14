@@ -52,11 +52,11 @@ public class UiGangChulBossRankBoard : MonoBehaviour
         {
             if (e != null)
             {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName,isGangChul:true);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName,e.maskIdx,isGangChul:true);
             }
             else
             {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1, string.Empty, isGangChul: true);
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1, string.Empty, -1,isGangChul: true);
             }
 
 
@@ -110,6 +110,7 @@ public class UiGangChulBossRankBoard : MonoBehaviour
                         int weaponId = int.Parse(splitData[2]);
                         int magicBookId = int.Parse(splitData[3]);
                         int fightPoint = int.Parse(splitData[4]);
+                        int maskIdx = int.Parse(splitData[6]);
 
                         Color color1 = Color.white;
                         Color color2 = Color.white;
@@ -140,7 +141,7 @@ public class UiGangChulBossRankBoard : MonoBehaviour
                             guildName = splitData[7];
                         }
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint, guildName, isGangChul: true);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint, guildName, maskIdx, isGangChul: true);
                     }
                     else
                     {

@@ -30,7 +30,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public class RankInfo
     {
-        public RankInfo(string NickName, string GuildName, int Rank, double Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int fightPointIdx)
+        public RankInfo(string NickName, string GuildName, int Rank, double Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int fightPointIdx,int maskIdx)
         {
 #if UNITY_ANDROID
             this.NickName = NickName;
@@ -58,6 +58,7 @@ public class RankManager : SingletonMono<RankManager>
         public int weaponIdx;
         public int magicbookIdx;
         public int fightPointIdx;
+        public int maskIdx;
     }
 
 #if UNITY_ANDROID
@@ -165,6 +166,7 @@ public class RankManager : SingletonMono<RankManager>
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
+                int maskIdx = int.Parse(splitData[6]);
 
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
@@ -172,7 +174,7 @@ public class RankManager : SingletonMono<RankManager>
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, level, costumeId, petId, weaponId, magicBookId, fightPoint);
+                myRankInfo = new RankInfo(nickName, guildName, rank, level, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
             }
         }
 
@@ -196,7 +198,7 @@ public class RankManager : SingletonMono<RankManager>
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int weaponEnhance = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
-        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+        int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{weaponEnhance}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
@@ -246,14 +248,14 @@ public class RankManager : SingletonMono<RankManager>
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
-
+                int maskIdx = int.Parse(splitData[6]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
             }
         }
 
@@ -277,7 +279,7 @@ public class RankManager : SingletonMono<RankManager>
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
-        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+        int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
@@ -329,14 +331,14 @@ public class RankManager : SingletonMono<RankManager>
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
-
+                int maskIdx = int.Parse(splitData[6]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
             }
         }
 
@@ -371,7 +373,7 @@ public class RankManager : SingletonMono<RankManager>
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
-        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+        int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
@@ -422,7 +424,7 @@ public class RankManager : SingletonMono<RankManager>
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
-
+                int maskIdx = int.Parse(splitData[6]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
@@ -430,7 +432,7 @@ public class RankManager : SingletonMono<RankManager>
                 }
 
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
             }
         }
 
@@ -462,7 +464,7 @@ public class RankManager : SingletonMono<RankManager>
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
-        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+        int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
@@ -512,7 +514,7 @@ public class RankManager : SingletonMono<RankManager>
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
-
+                int maskIdx = int.Parse(splitData[6]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
@@ -520,7 +522,7 @@ public class RankManager : SingletonMono<RankManager>
                 }
 
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
             }
         }
 
@@ -552,7 +554,7 @@ public class RankManager : SingletonMono<RankManager>
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
-        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+        int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
@@ -602,14 +604,14 @@ public class RankManager : SingletonMono<RankManager>
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
-
+                int maskIdx = int.Parse(splitData[6]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
             }
         }
 
@@ -639,7 +641,7 @@ public class RankManager : SingletonMono<RankManager>
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
-        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+        int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
@@ -695,14 +697,14 @@ public class RankManager : SingletonMono<RankManager>
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
                 int fightPoint = int.Parse(splitData[4]);
-
+                int maskIdx = int.Parse(splitData[6]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
             }
 
             if (myRankInfo != null)
@@ -744,7 +746,7 @@ public class RankManager : SingletonMono<RankManager>
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
         int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
-        int wingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
+        int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 

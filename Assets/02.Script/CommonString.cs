@@ -30,6 +30,7 @@ public static class CommonString
     public static string ItemGrade_7 = "필멸";
     public static string ItemGrade_8 = "필멸(암)";
     public static string ItemGrade_9 = "필멸(천)";
+    public static string ItemGrade_10 = "필멸(극)";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
