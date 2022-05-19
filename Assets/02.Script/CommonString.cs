@@ -186,6 +186,14 @@ public static class CommonString
             case Item_Type.Asura3: return "네번째팔";
             case Item_Type.Asura4: return "다섯번째팔";
             case Item_Type.Asura5: return "여섯번째팔";
+
+            case Item_Type.Indra0: return "인드라0";
+            case Item_Type.Indra1: return "인드라1";
+            case Item_Type.Indra2: return "인드라2";
+            case Item_Type.Indra3: return "인드라3";
+            case Item_Type.Indra4: return "인드라4";
+            case Item_Type.Indra5: return "인드라5";
+
             case Item_Type.Aduk: return "어둑시니의 뿔";
             case Item_Type.SinSkill0: return "등껍질 부수기";
             case Item_Type.SinSkill1: return "백호 발톱";

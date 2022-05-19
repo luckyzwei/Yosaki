@@ -30,7 +30,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         fightPoint.SetText($"무력 : {Utils.ConvertBigNum(PlayerStats.GetTotalPower())}");
 
         //공격력
-        description1 += $"{CommonString.GetStatusName(StatusType.AttackAdd)} : {Utils.ConvertBigNum((int)PlayerStats.GetBaseAttackPower())}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.AttackAdd)} : {Utils.ConvertBigNum(PlayerStats.GetBaseAttackPower())}\n";
         //공격력증가(%)
         description2 += $"{CommonString.GetStatusName(StatusType.AttackAddPer)} : {Utils.ConvertBigNum(PlayerStats.GetBaseAttackAddPercentValue() * 100f)}\n";
 

@@ -61,6 +61,14 @@ public class GoodsTable
     public static string Asura3 = "a3";
     public static string Asura4 = "a4";
     public static string Asura5 = "a5";
+
+    public static string Indra0 = "i0";
+    public static string Indra1 = "i1";
+    public static string Indra2 = "i2";
+    public static string Indra3 = "i3";
+    public static string Indra4 = "i4";
+    public static string Indra5 = "i5";
+
     public static string Aduk = "ad";
 
     public static string SinSkill0 = "s0";
@@ -132,6 +140,13 @@ public class GoodsTable
 
         {Hae_Norigae,0f},
         {Hae_Pet,0f},
+
+        {Indra0,0f},
+        {Indra1,0f},
+        {Indra2,0f},
+        {Indra3,0f},
+        {Indra4,0f},
+        {Indra5,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

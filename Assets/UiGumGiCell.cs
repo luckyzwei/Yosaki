@@ -8,7 +8,13 @@ using UniRx;
 public class UiGumGiCell : MonoBehaviour
 {
     [SerializeField]
+    private TextMeshProUGUI gradeText;
+
+    [SerializeField]
     private TextMeshProUGUI abilDescription;
+
+    [SerializeField]
+    private TextMeshProUGUI abilDescription2;
 
     [SerializeField]
     private TextMeshProUGUI requireDescription;
@@ -48,7 +54,16 @@ public class UiGumGiCell : MonoBehaviour
 
         weaponIcon.material = CommonUiContainer.Instance.weaponEnhnaceMats[tableData.Id];
 
-        abilDescription.SetText($"{tableData.Id}단계\n{CommonString.GetStatusName((StatusType)tableData.Abiltype)} {Utils.ConvertBigNum(tableData.Abilvalue)}");
+        gradeText.SetText($"{tableData.Id}단계");
+
+        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)tableData.Abiltype)} {Utils.ConvertBigNum(tableData.Abilvalue)}");
+
+        abilDescription2.gameObject.SetActive(tableData.Abilvalue2 != 0);
+
+        if (tableData.Abilvalue2 != 0) 
+        {
+            abilDescription2.SetText($"{CommonString.GetStatusName((StatusType)tableData.Abiltype2)} {Utils.ConvertBigNum(tableData.Abilvalue2)}");
+        }
 
         requireDescription.SetText($"{Utils.ConvertBigNum(tableData.Require)}이상");
 

@@ -1187,6 +1187,13 @@ public static class PlayerStats
     public static string asuraKey4 = "a4";
     public static string asuraKey5 = "a5";
 
+    public static string indraKey0 = "i0";
+    public static string indraKey1 = "i1";
+    public static string indraKey2 = "i2";
+    public static string indraKey3 = "i3";
+    public static string indraKey4 = "i4";
+    public static string indraKey5 = "i5";
+
     public static ObscuredFloat asura0Value = 15000f;
     public static ObscuredFloat asura1Value = 25000f;
     public static ObscuredFloat asura2Value = 300f;

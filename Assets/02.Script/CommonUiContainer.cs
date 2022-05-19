@@ -100,6 +100,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite AsuraHand3;
     public Sprite AsuraHand4;
     public Sprite AsuraHand5;
+
+    public Sprite Indra0;
+    public Sprite Indra1;
+    public Sprite Indra2;
+    public Sprite Indra3;
+    public Sprite Indra4;
+    public Sprite Indra5;
+
     public Sprite springIcon;
     public Sprite Aduk;
 
@@ -418,6 +426,27 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Asura5:
                 return AsuraHand5;
                 break;
+            //
+            case Item_Type.Indra0:
+                return Indra0;
+                break;
+            case Item_Type.Indra1:
+                return Indra1;
+                break;
+            case Item_Type.Indra2:
+                return Indra2;
+                break;
+            case Item_Type.Indra3:
+                return Indra3;
+                break;
+            case Item_Type.Indra4:
+                return Indra4;
+                break;
+            case Item_Type.Indra5:
+                return Indra5;
+                break;
+
+            //
             case Item_Type.Aduk:
                 return Aduk;
                 break;

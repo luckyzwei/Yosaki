@@ -43,7 +43,7 @@ public class UiSkillPointResetButton : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertBigNum(GameBalance.SkillPointResetPrice)}개를 사용해서\n패시브 기술을 초기화 하시겠습니까?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertBigNum(GameBalance.SkillPointResetPrice)}개를 사용해서\n패시브 기술을 초기화 하시겠습니까?\n<color=red>주의 : 환수 패시브도 초기화 됩니다.</color>", () =>
         {
             ResetPassiveOnly();
         }, null);

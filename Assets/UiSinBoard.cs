@@ -17,6 +17,9 @@ public class UiSinBoard : MonoBehaviour
     [SerializeField]
     private UiTwelveBossContentsView bossContentsView4;
 
+    [SerializeField]
+    private UiTwelveBossContentsView bossContentsView5;
+
     void Start()
     {
         Initialize();
@@ -32,5 +35,6 @@ public class UiSinBoard : MonoBehaviour
         bossContentsView2.Initialize(TableManager.Instance.TwelveBossTable.dataArray[14]);
         bossContentsView3.Initialize(TableManager.Instance.TwelveBossTable.dataArray[19]);
         bossContentsView4.Initialize(TableManager.Instance.TwelveBossTable.dataArray[21]);
+        bossContentsView5.Initialize(TableManager.Instance.TwelveBossTable.dataArray[24]);
     }
 }
