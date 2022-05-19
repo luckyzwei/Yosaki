@@ -445,6 +445,12 @@ public enum TitleMissionId
     Stage8400,//★
     Stage8500,//★
     Stage8600,//★
+              //
+    GetFeelArm,//★
+    GetFeelChun,//★
+    GetFeelGuk,//★
+    GetIndraWeapon,//★
+
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -2190,6 +2196,7 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             }
         }).AddTo(this);
 
+        //필멸
         ServerData.weaponTable.TableDatas["weapon22"].hasItem.AsObservable().Subscribe(e =>
         {
             if (e == 1)
@@ -2198,6 +2205,38 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             }
         }).AddTo(this);
 
+        //암
+        ServerData.weaponTable.TableDatas["weapon23"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.GetFeelArm);
+            }
+        }).AddTo(this);
+        //천
+        ServerData.weaponTable.TableDatas["weapon24"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.GetFeelChun);
+            }
+        }).AddTo(this);
+        //극
+        ServerData.weaponTable.TableDatas["weapon25"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.GetFeelGuk);
+            }
+        }).AddTo(this);
+        //인드라
+        ServerData.weaponTable.TableDatas["weapon26"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.GetIndraWeapon);
+            }
+        }).AddTo(this);
         //노리개
 
         ServerData.magicBookTable.TableDatas["magicBook12"].hasItem.AsObservable().Subscribe(e =>

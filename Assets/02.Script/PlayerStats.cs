@@ -905,6 +905,7 @@ public static class PlayerStats
 
         ret += GetRelicHasEffect(StatusType.SuperCritical2DamPer);
 
+        ret += GetTitleAbilValue(StatusType.SuperCritical2DamPer);
 
         return ret;
     }

@@ -154,7 +154,7 @@ public class UiTitleCell : MonoBehaviour
           {
               PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상 수령 완료!", null);
 
-         //     LogManager.Instance.SendLogType("TitleReward", tableData.Id.ToString(), "");
+              //     LogManager.Instance.SendLogType("TitleReward", tableData.Id.ToString(), "");
           });
     }
 
@@ -178,7 +178,7 @@ public class UiTitleCell : MonoBehaviour
     {
         if (tableData == null) return;
 
-        if (tableData.Displaygroup != 0 && tableData.Displaygroup != 1) return;
+        if (tableData.Displaygroup != 0 && tableData.Displaygroup != 1 && tableData.Displaygroup != 2) return;
 
         if (serverTable.clearFlag.Value == 1)
         {
