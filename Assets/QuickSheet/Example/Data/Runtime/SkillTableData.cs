@@ -192,4 +192,8 @@ public class SkillTableData
   int sonunlocklevel;
   public int Sonunlocklevel { get {return sonunlocklevel; } set { this.sonunlocklevel = value;} }
   
+  [SerializeField]
+  string indragoodsname;
+  public string Indragoodsname { get {return indragoodsname; } set { this.indragoodsname = value;} }
+  
 }

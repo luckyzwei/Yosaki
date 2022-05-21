@@ -150,7 +150,7 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         var prefab = Resources.Load<BossEnemyBase>($"TwelveBoss/{GameManager.Instance.bossId}");
 
-        if (GameManager.Instance.bossId == 13)
+        if (GameManager.Instance.bossId == 13 || GameManager.Instance.bossId == 24)
         {
             singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent_Sin);
         }

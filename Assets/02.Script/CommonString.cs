@@ -31,6 +31,7 @@ public static class CommonString
     public static string ItemGrade_8 = "필멸(암)";
     public static string ItemGrade_9 = "필멸(천)";
     public static string ItemGrade_10 = "필멸(극)";
+    public static string ItemGrade_11 = "인드라";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
@@ -187,12 +188,10 @@ public static class CommonString
             case Item_Type.Asura4: return "다섯번째팔";
             case Item_Type.Asura5: return "여섯번째팔";
 
-            case Item_Type.Indra0: return "인드라0";
-            case Item_Type.Indra1: return "인드라1";
-            case Item_Type.Indra2: return "인드라2";
-            case Item_Type.Indra3: return "인드라3";
-            case Item_Type.Indra4: return "인드라4";
-            case Item_Type.Indra5: return "인드라5";
+            case Item_Type.Indra0: return "인드라의 힘1";
+            case Item_Type.Indra1: return "인드라의 힘2";
+            case Item_Type.Indra2: return "인드라의 힘3";
+  
 
             case Item_Type.Aduk: return "어둑시니의 뿔";
             case Item_Type.SinSkill0: return "등껍질 부수기";

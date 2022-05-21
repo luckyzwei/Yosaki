@@ -63,7 +63,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     {
         for (int i = 0; i < memberCells.Count; i++)
         {
-            if (memberCells[i].guildMemberInfo != null && memberCells[i].guildMemberInfo.nickName.Replace(CommonString.IOS_nick, "").Equals(PlayerData.Instance.NickName))
+            if (memberCells[i].guildMemberInfo != null && memberCells[i].guildMemberInfo.nickName.Replace(CommonString.IOS_nick, "").Equals(PlayerData.Instance.NickName.Replace(CommonString.IOS_nick, "")))
             {
                 return memberCells[i].guildMemberInfo.guildGrade;
             }

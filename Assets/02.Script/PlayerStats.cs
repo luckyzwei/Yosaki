@@ -195,6 +195,12 @@ public static class PlayerStats
         return (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue;
     }
 
+    public static float GetGumIgDefenseValue()
+    {
+        int idx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponEnhance].Value;
+        return (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue2;
+    }
+
     public static float GetCollectionAbilValue(StatusType type)
     {
         var enemyTable = TableManager.Instance.EnemyTable.dataArray;
@@ -837,8 +843,13 @@ public static class PlayerStats
         ret += GetYachaIgnoreDefenseValue();
 
         ret += GetAsuraAbilValue(StatusType.IgnoreDefense);
+        ret += GetIndraAbilValue(StatusType.IgnoreDefense);
 
         ret += GetPassiveSkillValue(StatusType.IgnoreDefense);
+
+        //
+        ret += GetGumIgDefenseValue();
+        //
 
         return ret;
     }
@@ -854,6 +865,8 @@ public static class PlayerStats
         ret += GetStageRelicHasEffect(StatusType.PenetrateDefense);
 
         ret += GetPassiveSkillValue(StatusType.PenetrateDefense);
+
+        ret += GetIndraAbilValue(StatusType.PenetrateDefense);
 
         return ret;
     }
@@ -1191,9 +1204,7 @@ public static class PlayerStats
     public static string indraKey0 = "i0";
     public static string indraKey1 = "i1";
     public static string indraKey2 = "i2";
-    public static string indraKey3 = "i3";
-    public static string indraKey4 = "i4";
-    public static string indraKey5 = "i5";
+
 
     public static ObscuredFloat asura0Value = 15000f;
     public static ObscuredFloat asura1Value = 25000f;
@@ -1201,6 +1212,10 @@ public static class PlayerStats
     public static ObscuredFloat asura3Value = 0.5f;
     public static ObscuredFloat asura4Value = 0.8f;
     public static ObscuredFloat asura5Value = 1.0f;
+
+    public static ObscuredFloat indra0Value = 50000;
+    public static ObscuredFloat indra1Value = 70000;
+    public static ObscuredFloat indra2Value = 0.001f;
 
     public static float GetAsuraAbilValue(StatusType type)
     {
@@ -1268,6 +1283,43 @@ public static class PlayerStats
                     }
 
                     return ret;
+                }
+                break;
+        }
+
+        return 0f;
+    }
+
+    public static float GetIndraAbilValue(StatusType type)
+    {
+        switch (type)
+        {
+            case StatusType.IgnoreDefense:
+                {
+                    float ret = 0f;
+
+                    if (ServerData.goodsTable.GetTableData(indraKey0).Value != 0)
+                    {
+                        ret+= indra0Value;
+                    }
+
+                    if (ServerData.goodsTable.GetTableData(indraKey1).Value != 0)
+                    {
+                        ret+= indra1Value;
+                    }
+
+                    return ret;
+                }
+                break;
+     
+            case StatusType.PenetrateDefense:
+                {
+                    if (ServerData.goodsTable.GetTableData(indraKey2).Value == 0)
+                    {
+                        return 0f;
+                    }
+
+                    return indra2Value;
                 }
                 break;
         }

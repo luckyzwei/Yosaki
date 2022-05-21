@@ -99,6 +99,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     private GameObject feelMul4Lock;
 
     [SerializeField]
+    private GameObject indraLock;
+
+    [SerializeField]
     private GameObject armDescription;
 
     [SerializeField]
@@ -318,9 +321,10 @@ public class UiInventoryWeaponView : MonoBehaviour
             feelMul2Lock.SetActive(false);
             feelMul3Lock.SetActive(false);
             feelMul4Lock.SetActive(false);
+            indraLock.SetActive(false);
 
             //필멸2 필멸3  (23,24)
-            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25)
+            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26)
             {
                 hasMask.SetActive(false);
 
@@ -338,6 +342,11 @@ public class UiInventoryWeaponView : MonoBehaviour
                 {
                     feelMul4Lock.gameObject.SetActive(state == 0);
                 }
+
+                if (weaponData.Id == 26) 
+                {
+                    indraLock.gameObject.SetActive(state == 0);
+                }
             }
 
         }
@@ -346,6 +355,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             feelMul2Lock.SetActive(false);
             feelMul3Lock.SetActive(false);
             feelMul4Lock.SetActive(false);
+            indraLock.SetActive(false);
 
             magicBookViewEquipButton.gameObject.SetActive(state == 1);
             weaponViewEquipButton.gameObject.SetActive(false);

@@ -71,7 +71,12 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
                 continue;
             }
 
-            if (skillList[i].Skilltype == 4)
+            //인드라
+            if (skillList[i].Skilltype == 5)
+            {
+             
+            }
+            else if (skillList[i].Skilltype == 4)
             {
                 var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Sin);
 

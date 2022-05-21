@@ -9,7 +9,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public List<Sprite> itemGradeFrame;
 
-    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10 };
+    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae };
@@ -104,9 +104,6 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Indra0;
     public Sprite Indra1;
     public Sprite Indra2;
-    public Sprite Indra3;
-    public Sprite Indra4;
-    public Sprite Indra5;
 
     public Sprite springIcon;
     public Sprite Aduk;
@@ -116,6 +113,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite SinSkill2;
     public Sprite SinSkill3;
     public Sprite LeeMuGiStone;
+    public Sprite IndraWeapon;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -436,15 +434,6 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Indra2:
                 return Indra2;
                 break;
-            case Item_Type.Indra3:
-                return Indra3;
-                break;
-            case Item_Type.Indra4:
-                return Indra4;
-                break;
-            case Item_Type.Indra5:
-                return Indra5;
-                break;
 
             //
             case Item_Type.Aduk:
@@ -468,6 +457,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.LeeMuGiStone:
                 return LeeMuGiStone;
+                break;    
+            case Item_Type.IndraWeapon:
+                return IndraWeapon;
                 break;
 
         }

@@ -369,6 +369,11 @@ public class SkillServerTable
             plusAddValue += ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
             plusAddValue += ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value;
         }
+        //인드라 제외
+        if (tableData.Skilltype == 5)
+        {
+            plusAddValue = 0;
+        }
         //
 
         currentLevel += addLevel;

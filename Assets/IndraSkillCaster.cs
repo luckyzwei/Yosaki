@@ -1,18 +1,72 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
-public class IndraSkillCaster : MonoBehaviour
+
+
+public class IndraSkillCaster : SingletonMono<IndraSkillCaster>
 {
-    // Start is called before the first frame update
+    private Coroutine skillRoutine;
+
     void Start()
     {
-        
+        Subscribe();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Subscribe()
     {
-        
+        AutoManager.Instance.AutoMode.AsObservable().Subscribe(e =>
+        {
+            if (e)
+            {
+                if (skillRoutine != null)
+                {
+                    StopCoroutine(skillRoutine);
+                }
+
+                skillRoutine = StartCoroutine(UserSonSkillRoutine());
+            }
+            else
+            {
+                if (skillRoutine != null)
+                {
+                    StopCoroutine(skillRoutine);
+                }
+            }
+        }).AddTo(this);
     }
+
+    public void SonSkillAnim()
+    {
+
+    }
+    private static string weaponName = "weapon26";
+    private IEnumerator UserSonSkillRoutine()
+    {
+        yield break;
+
+        var skillTableDatas = TableManager.Instance.SkillTable.dataArray;
+
+        while (true)
+        {
+            if (ServerData.weaponTable.TableDatas[weaponName].hasItem.Value != 0)
+            {
+                PlayerSkillCaster.Instance.UseSkill(skillTableDatas[18].Id);
+            }
+
+            yield return null;
+        }
+    }
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            StopCoroutine(skillRoutine);
+        }
+
+    }
+#endif
 }

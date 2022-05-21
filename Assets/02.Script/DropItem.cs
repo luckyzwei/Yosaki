@@ -48,13 +48,6 @@ public enum Item_Type
     Asura5,
     Aduk,
 
-    Indra0,
-    Indra1,
-    Indra2,
-    Indra3,
-    Indra4,
-    Indra5,
-
     SinSkill0,
     SinSkill1,
     SinSkill2,
@@ -66,6 +59,12 @@ public enum Item_Type
     Hae_Pet, 
     Sam_Norigae,
     Sam_Pet,
+
+    Indra0,
+    Indra1,
+    Indra2,
+    IndraWeapon,
+
 
     RankFrame1 = 100,
     RankFrame2 = 101,

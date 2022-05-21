@@ -60,8 +60,8 @@ public class TwelveRaidEnemy : BossEnemyBase
 
     private void UpdateBossDamage()
     {
-        //삼족오
-        if (GameManager.Instance.bossId == 23)
+        //삼족오 
+        if (GameManager.Instance.bossId == 23 || GameManager.Instance.bossId == 24)
         {
             if (samDam < double.MaxValue * 0.25)
             {
