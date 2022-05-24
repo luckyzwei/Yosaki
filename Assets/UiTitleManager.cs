@@ -450,7 +450,11 @@ public enum TitleMissionId
     GetFeelChun,//★
     GetFeelGuk,//★
     GetIndraWeapon,//★
-
+                   //
+    Stage8700,//★
+    Stage8800,//★
+    Stage8900,//★
+    Stage9000,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -2134,6 +2138,23 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 8600 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage8600);
+            }
+            //
+            if (e >= 8700 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage8700);
+            }
+            if (e >= 8800 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage8800);
+            }
+            if (e >= 8900 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage8900);
+            }
+            if (e >= 9000 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage9000);
             }
 
 

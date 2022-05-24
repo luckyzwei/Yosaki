@@ -99,7 +99,7 @@ public class UserInfoTable
     public const string gumGiClear = "gumGiClear";
 
 
-    public const string killCountTotal = "kt7";
+    public const string killCountTotal = "kt10";
     public const string killCountTotal2 = "kt8";
     public const string killCountTotalChild = "kt9";
 
@@ -371,7 +371,7 @@ public class UserInfoTable
                      if (bro.IsSuccess() == false)
                      {
                          ServerData.ShowCommonErrorPopup(bro, Initialize);
-                         return;
+                         return;//
                      }
                  }
 
@@ -884,7 +884,7 @@ public class UserInfoTable
     public bool IsMonthlyPass2()
     {
 #if UNITY_EDITOR
-        return true;
+        return false;
 #endif
         return currentServerTime.Month == 5;
     }
