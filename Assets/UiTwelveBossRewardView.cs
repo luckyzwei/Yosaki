@@ -143,7 +143,70 @@ public class UiTwelveBossRewardView : MonoBehaviour
 
         Item_Type type = (Item_Type)rewardInfo.rewardType;
 
-        if (type == Item_Type.IndraWeapon) 
+        if (type == Item_Type.Kirin_Pet)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.petTable.TableDatas["pet16"].hasItem.Value = 1;
+
+            Param petParam = new Param();
+
+            petParam.Add("pet16", ServerData.petTable.TableDatas["pet16"].ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, petParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "아기 기린 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+
+        }
+        else if (type == Item_Type.KirinNorigae)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.magicBookTable.TableDatas["magicBook25"].amount.Value += 1;
+            ServerData.magicBookTable.TableDatas["magicBook25"].hasItem.Value = 1;
+
+            Param magicBookParam = new Param();
+
+            magicBookParam.Add("magicBook25", ServerData.magicBookTable.TableDatas["magicBook25"].ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "기린 노리개 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+        }
+        else if (type == Item_Type.IndraWeapon) 
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 

@@ -74,6 +74,8 @@ public static class Utils
                 type == Item_Type.Hae_Pet ||
                 type == Item_Type.Sam_Pet ||
                 type == Item_Type.Sam_Norigae ||
+                type == Item_Type.KirinNorigae ||
+                type == Item_Type.Kirin_Pet ||
                 type == Item_Type.RelicTicket;
     }
 

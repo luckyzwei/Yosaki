@@ -82,7 +82,7 @@ public class UiPetView : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI goldDragonGetDescription;
-
+    //
     private void SetPetSpine(int idx)
     {
         skeletonGraphic.Clear();
@@ -128,7 +128,7 @@ public class UiPetView : MonoBehaviour
 
         tutorialObject.SetActive(petData.PETGETTYPE == PetGetType.Gem && petData.Price == 0f);
 
-        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15);
+        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15 || petData.Id == 16);
 
         if (leemugiPetObject != null)
             leemugiPetObject.SetActive(petData.Id == 12);
@@ -440,7 +440,7 @@ public class UiPetView : MonoBehaviour
 
                 var prefPetData = TableManager.Instance.PetTable.dataArray[prefPetId];
 
-                if (petData.Id == 14|| petData.Id == 15)
+                if (petData.Id == 14|| petData.Id == 15 || petData.Id == 16)
                 {
                     buttonDescription.SetText($"수호신 컨텐츠\n에서 획득!");
                 }
@@ -513,7 +513,7 @@ public class UiPetView : MonoBehaviour
             //미보유
             else
             {
-                if (petServerData.idx == 14|| petServerData.idx == 15)
+                if (petServerData.idx == 14|| petServerData.idx == 15 || petServerData.idx == 16)
                 {
                     PopupManager.Instance.ShowAlarmMessage("수호신 컨텐츠에서 획득 가능");
 

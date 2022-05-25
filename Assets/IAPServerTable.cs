@@ -14,7 +14,7 @@ public class IAPServerData
     public string ConvertToString()
     {
         return $"{id},{buyCount.Value}";
-    }
+    } 
 }
 
 public class IAPServerTable

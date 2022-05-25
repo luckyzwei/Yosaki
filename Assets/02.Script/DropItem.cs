@@ -64,6 +64,8 @@ public enum Item_Type
     Indra1,
     Indra2,
     IndraWeapon,
+    KirinNorigae,
+    Kirin_Pet,
 
 
     RankFrame1 = 100,
@@ -211,6 +213,10 @@ public enum Item_Type
 
     costume30 = 1231,
     costume31 = 1232,
+
+    costume32 = 1233,
+    costume33 = 1234,
+
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,

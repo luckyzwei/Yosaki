@@ -183,11 +183,11 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         norigaeDescription.gameObject.SetActive(magicBookData != null);
 
-        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24));
+        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25));
 
         if (magicBookData != null)
         {
-            if ((magicBookData.Id == 22 || magicBookData.Id == 24))
+            if ((magicBookData.Id == 22 || magicBookData.Id == 24 || magicBookData.Id == 25))
             {
                 suhoSinDescription.SetText($"요괴사냥\n수호신 에서 획득!");
             }
@@ -343,7 +343,7 @@ public class UiInventoryWeaponView : MonoBehaviour
                     feelMul4Lock.gameObject.SetActive(state == 0);
                 }
 
-                if (weaponData.Id == 26) 
+                if (weaponData.Id == 26)
                 {
                     indraLock.gameObject.SetActive(state == 0);
                 }

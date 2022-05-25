@@ -218,6 +218,10 @@ public class UiLevelPassCell : MonoBehaviour
             {
                 PopupManager.Instance.ShowAlarmMessage("여우패스13가 필요합니다!");
             }
+            else if (passInfo.passGrade == 13)
+            {
+                PopupManager.Instance.ShowAlarmMessage("여우패스14가 필요합니다!");
+            }
 
             return;
         }
@@ -286,6 +290,10 @@ public class UiLevelPassCell : MonoBehaviour
         else if (passInfo.passGrade == 12)
         {
             return ServerData.iapServerTable.TableDatas["levelpass13"].buyCount.Value > 0;
+        }
+        else if (passInfo.passGrade == 13)
+        {
+            return ServerData.iapServerTable.TableDatas["levelpass14"].buyCount.Value > 0;
         }
 
         return hasIapProduct;
