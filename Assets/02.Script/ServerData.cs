@@ -325,6 +325,8 @@ public static class ServerData
             case Item_Type.costume29:
             case Item_Type.costume30:
             case Item_Type.costume31:
+            case Item_Type.costume32:
+            case Item_Type.costume33:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -406,6 +408,8 @@ public static class ServerData
             case Item_Type.costume29:
             case Item_Type.costume30:
             case Item_Type.costume31:
+            case Item_Type.costume32:
+            case Item_Type.costume33:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -498,6 +502,9 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.Indra2:
                 passParam.Add(GoodsTable.Indra2, ServerData.goodsTable.GetTableData(GoodsTable.Indra2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.IndraPower:
+                passParam.Add(GoodsTable.IndraPower, ServerData.goodsTable.GetTableData(GoodsTable.IndraPower).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             //
@@ -682,6 +689,11 @@ public static class ServerData
             case Item_Type.Indra2:
                 ServerData.goodsTable.GetTableData(GoodsTable.Indra2).Value += amount;
                 param.Add(GoodsTable.Indra2, ServerData.goodsTable.GetTableData(GoodsTable.Indra2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.IndraPower:
+                ServerData.goodsTable.GetTableData(GoodsTable.IndraPower).Value += amount;
+                param.Add(GoodsTable.IndraPower, ServerData.goodsTable.GetTableData(GoodsTable.IndraPower).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             //

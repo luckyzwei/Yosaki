@@ -181,14 +181,14 @@ RectTransform:
   m_GameObject: {fileID: 906185358534028996}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 0.14, y: 0.14, z: 0.14}
   m_Children: []
   m_Father: {fileID: 2493491761798558001}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44.9, y: 58.4}
+  m_AnchoredPosition: {x: 42.1, y: 144.6}
   m_SizeDelta: {x: 727.63916, y: 475.44507}
   m_Pivot: {x: 0.5137269, y: -0.44952843}
 --- !u!222 &5695263447547741513
@@ -218,11 +218,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  skeletonDataAsset: {fileID: 11400000, guid: 551169b459f994b4bb45f3db29727d0f, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: ef433b962bd51ce42a48dc13899e3a0e, type: 2}
   initialSkinName: default
   initialFlipX: 0
   initialFlipY: 0
-  startingAnimation: walk
+  startingAnimation: idle
   startingLoop: 1
   timeScale: 1
   freeze: 0
@@ -2383,6 +2383,21 @@ PrefabInstance:
     - target: {fileID: 1707000239251520, guid: 350b0d86cd71d294da79fbcd45cf21dc, type: 3}
       propertyPath: m_Name
       value: NewWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 199469188689176762, guid: 350b0d86cd71d294da79fbcd45cf21dc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199574726639431696, guid: 350b0d86cd71d294da79fbcd45cf21dc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199618448326904094, guid: 350b0d86cd71d294da79fbcd45cf21dc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 866237408817806102, guid: 350b0d86cd71d294da79fbcd45cf21dc,
         type: 3}

@@ -209,6 +209,8 @@ public static class GameBalance
 
     public readonly static ObscuredInt fireExchangeMaxCount = 10;
 
+    public static ObscuredFloat forestValue = 1f;
+
     public static int GetSonIdx()
     {
         int level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;

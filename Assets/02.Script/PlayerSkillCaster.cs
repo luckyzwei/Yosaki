@@ -187,7 +187,19 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
             agentHpController = agentHpControllers[instanceId];
         }
 
-        int hitCount = skillInfo.Hitcount + PlayerStats.GetSkillHitAddValue();
+        int hitCount = 0;
+
+
+        if (skillInfo.Id != 18)
+        {
+            hitCount = skillInfo.Hitcount + PlayerStats.GetSkillHitAddValue();
+        }
+        //인드라는 추가타X
+        else
+        {
+            hitCount = skillInfo.Hitcount;
+
+        }
 
         double defense = agentHpController.Defense + 1;
 

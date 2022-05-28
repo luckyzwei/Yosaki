@@ -66,6 +66,7 @@ public enum Item_Type
     IndraWeapon,
     KirinNorigae,
     Kirin_Pet,
+    IndraPower,
 
 
     RankFrame1 = 100,

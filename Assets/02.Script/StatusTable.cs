@@ -187,7 +187,7 @@ public class StatusTable
                 #region Stat
                 case IntLevelAddPer_StatPoint:
                     {
-                        return level * 0.03f;
+                        return level * 0.03f * GameBalance.forestValue;
                     }
                     break;
                 case CriticalLevel_StatPoint:
@@ -197,7 +197,7 @@ public class StatusTable
                     break;
                 case CriticalDamLevel_StatPoint:
                     {
-                        return level * 0.03f;
+                        return level * 0.03f * GameBalance.forestValue;
                     }
                     break;
                 case ExpGain_memory:

@@ -73,7 +73,7 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
 #if UNITY_EDITOR
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F2))
         {
             StopCoroutine(skillRoutine);
         }

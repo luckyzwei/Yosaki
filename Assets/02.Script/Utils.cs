@@ -30,26 +30,28 @@ public static class Utils
                   type == Item_Type.costume9 ||
                   type == Item_Type.costume10 ||
                   type == Item_Type.costume11 ||
-                  type == Item_Type.costume12||
-                  type == Item_Type.costume13||
-                  type == Item_Type.costume14||
-                  type == Item_Type.costume15||
-                  type == Item_Type.costume16||
-                  type == Item_Type.costume17||
-                  type == Item_Type.costume18||
-                  type == Item_Type.costume19||
-                  type == Item_Type.costume20||
-                  type == Item_Type.costume21||
-                  type == Item_Type.costume22||
-                  type == Item_Type.costume23||
-                  type == Item_Type.costume24||
-                  type == Item_Type.costume25||
-                  type == Item_Type.costume26||
-                  type == Item_Type.costume27||
-                  type == Item_Type.costume28||
-                  type == Item_Type.costume29||
-                  type == Item_Type.costume30||
-                  type == Item_Type.costume31;
+                  type == Item_Type.costume12 ||
+                  type == Item_Type.costume13 ||
+                  type == Item_Type.costume14 ||
+                  type == Item_Type.costume15 ||
+                  type == Item_Type.costume16 ||
+                  type == Item_Type.costume17 ||
+                  type == Item_Type.costume18 ||
+                  type == Item_Type.costume19 ||
+                  type == Item_Type.costume20 ||
+                  type == Item_Type.costume21 ||
+                  type == Item_Type.costume22 ||
+                  type == Item_Type.costume23 ||
+                  type == Item_Type.costume24 ||
+                  type == Item_Type.costume25 ||
+                  type == Item_Type.costume26 ||
+                  type == Item_Type.costume27 ||
+                  type == Item_Type.costume28 ||
+                  type == Item_Type.costume29 ||
+                  type == Item_Type.costume30 ||
+                  type == Item_Type.costume31 ||
+                  type == Item_Type.costume32 ||
+                  type == Item_Type.costume33;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -225,7 +227,7 @@ public static class Utils
     }
 
     #region BigFloat
-    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간","정","재","극" ,"항","아","나"};
+    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나" };
     private static double p = (double)Mathf.Pow(10, 4);
     private static List<double> numList = new List<double>();
     private static List<string> numStringList = new List<string>();

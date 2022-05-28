@@ -72,7 +72,7 @@ public class TwelveRaidEnemy : BossEnemyBase
 
             enemyHitObjects.ForEach(e => e.SetDamage(samDam));
         }
-        else if (GameManager.Instance.bossId == 22) 
+        else if (GameManager.Instance.bossId == 22 || GameManager.Instance.bossId == 25) 
         {
             if (haeTaeDam < double.MaxValue * 0.25)
             {

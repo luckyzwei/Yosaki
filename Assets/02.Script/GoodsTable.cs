@@ -65,6 +65,7 @@ public class GoodsTable
     public static string Indra0 = "i0";
     public static string Indra1 = "i1";
     public static string Indra2 = "i2";
+    public static string IndraPower = "ipw";
 
     public static string Aduk = "ad";
 
@@ -141,6 +142,7 @@ public class GoodsTable
         {Indra0,0f},
         {Indra1,0f},
         {Indra2,0f},
+        {IndraPower,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

@@ -106,6 +106,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Indra0;
     public Sprite Indra1;
     public Sprite Indra2;
+    public Sprite IndraPower;
 
     public Sprite springIcon;
     public Sprite Aduk;
@@ -222,6 +223,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.costume31:
                 return costumeThumbnail[31];
+                break;
+
+            case Item_Type.costume32:
+                return costumeThumbnail[32];
+                break;
+
+            case Item_Type.costume33:
+                return costumeThumbnail[33];
                 break;
 
 
@@ -442,6 +451,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.Indra2:
                 return Indra2;
+                break;
+            case Item_Type.IndraPower:
+                return IndraPower;
                 break;
 
             //

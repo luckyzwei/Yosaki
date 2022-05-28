@@ -141,6 +141,8 @@ public static class CommonString
             case Item_Type.costume29: return TableManager.Instance.Costume.dataArray[29].Name;
             case Item_Type.costume30: return TableManager.Instance.Costume.dataArray[30].Name;
             case Item_Type.costume31: return TableManager.Instance.Costume.dataArray[31].Name;
+            case Item_Type.costume32: return TableManager.Instance.Costume.dataArray[32].Name;
+            case Item_Type.costume33: return TableManager.Instance.Costume.dataArray[33].Name;
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;
@@ -191,6 +193,7 @@ public static class CommonString
             case Item_Type.Indra0: return "인드라의 힘1";
             case Item_Type.Indra1: return "인드라의 힘2";
             case Item_Type.Indra2: return "인드라의 힘3";
+            case Item_Type.IndraPower: return "인드라의 번개";
   
 
             case Item_Type.Aduk: return "어둑시니의 뿔";

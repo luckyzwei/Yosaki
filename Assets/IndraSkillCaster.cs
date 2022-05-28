@@ -37,20 +37,15 @@ public class IndraSkillCaster : SingletonMono<IndraSkillCaster>
         }).AddTo(this);
     }
 
-    public void SonSkillAnim()
-    {
-
-    }
-    private static string weaponName = "weapon26";
     private IEnumerator UserSonSkillRoutine()
     {
-        yield break;
+        yield return null;
 
         var skillTableDatas = TableManager.Instance.SkillTable.dataArray;
 
         while (true)
         {
-            if (ServerData.weaponTable.TableDatas[weaponName].hasItem.Value != 0)
+            if (ServerData.goodsTable.GetTableData(GoodsTable.IndraPower).Value != 0)
             {
                 PlayerSkillCaster.Instance.UseSkill(skillTableDatas[18].Id);
             }
@@ -62,6 +57,10 @@ public class IndraSkillCaster : SingletonMono<IndraSkillCaster>
 #if UNITY_EDITOR
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            StartCoroutine(UserSonSkillRoutine());
+        }
         if (Input.GetKeyDown(KeyCode.F2))
         {
             StopCoroutine(skillRoutine);

@@ -169,7 +169,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "아기 기린 획득!!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "기린 획득!!", null);
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
 

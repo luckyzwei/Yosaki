@@ -31,7 +31,8 @@ public abstract class SkillBase
 
     public virtual void UseSkill()
     {
-        if (skillInfo.Issonskill == false)
+                                            //인드라 X
+        if (skillInfo.Issonskill == false && skillInfo.Id != 18)
         {
             playerSkillCaster.PlayAttackAnim();
         }
@@ -46,7 +47,7 @@ public abstract class SkillBase
 
         PlaySoundEfx(skillInfo.Soundname);
     }
-    
+
     private void PlaySoundEfx(string soundKey)
     {
         SoundManager.Instance.PlaySound(soundKey);
