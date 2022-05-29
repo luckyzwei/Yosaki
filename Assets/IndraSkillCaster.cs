@@ -47,7 +47,7 @@ public class IndraSkillCaster : SingletonMono<IndraSkillCaster>
         {
             if (ServerData.goodsTable.GetTableData(GoodsTable.IndraPower).Value != 0)
             {
-                PlayerSkillCaster.Instance.UseSkill(skillTableDatas[18].Id);
+                PlayerSkillCaster.Instance.UseSkill(skillTableDatas[19].Id);
             }
 
             yield return null;

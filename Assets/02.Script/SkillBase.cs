@@ -32,7 +32,7 @@ public abstract class SkillBase
     public virtual void UseSkill()
     {
                                             //인드라 X
-        if (skillInfo.Issonskill == false && skillInfo.Id != 18)
+        if (skillInfo.Issonskill == false && skillInfo.Id != 18 && skillInfo.Id != 19)
         {
             playerSkillCaster.PlayAttackAnim();
         }

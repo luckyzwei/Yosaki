@@ -74,9 +74,9 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             //인드라
             if (skillList[i].Skilltype == 5)
             {
-             
+
             }
-            else if (skillList[i].Skilltype == 4)
+            else if (skillList[i].Skilltype == 4 && skillList[i].Id != 18 && skillList[i].Id != 19)
             {
                 var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Sin);
 
@@ -84,7 +84,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
 
                 skillCells.Add(cell);
             }
-            else 
+            else
             {
                 var cell = Instantiate<UiSkillCell>(skillCellPrefab, skillCellParent);
 
@@ -93,14 +93,14 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
                 skillCells.Add(cell);
             }
 
- 
+
         }
 
         var passiveSkillList = TableManager.Instance.PassiveSkill.dataArray.ToList();
 
         for (int i = 0; i < passiveSkillList.Count; i++)
         {
-            if (passiveSkillList[i].Issinpassive == false) 
+            if (passiveSkillList[i].Issinpassive == false)
             {
                 var cell = Instantiate<UiPassiveSkillCell>(passiveSkillCellPrefab, passiveSkillCellParent);
 
