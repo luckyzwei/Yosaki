@@ -71,6 +71,11 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
                 continue;
             }
 
+            if (skillList[i].Id == 18 || skillList[i].Id == 19)
+            {
+                continue;
+            }
+
             //인드라
             if (skillList[i].Skilltype == 5)
             {
