@@ -59,22 +59,73 @@ public class UiSinRewardPopup_0 : SingletonMono<UiSinRewardPopup_0>
             uiTwelveBossRewardViews.Add(cell);
         }
 
-        for (int i = 0; i < uiTwelveBossRewardViews.Count; i++)
+        if (bossId != 24)
         {
-            if (i < bossTableData.Rewardcut.Length)
+            for (int i = 0; i < uiTwelveBossRewardViews.Count; i++)
             {
-                uiTwelveBossRewardViews[i].gameObject.SetActive(true);
+                if (i < bossTableData.Rewardcut.Length)
+                {
+                    uiTwelveBossRewardViews[i].gameObject.SetActive(true);
 
-                TwelveBossRewardInfo info = new TwelveBossRewardInfo(i, bossTableData.Rewardcut[i], bossTableData.Rewardtype[i], bossTableData.Rewardvalue[i], bossTableData.Cutstring[i], currentDamage);
+                    TwelveBossRewardInfo info = new TwelveBossRewardInfo(i, bossTableData.Rewardcut[i], bossTableData.Rewardtype[i], bossTableData.Rewardvalue[i], bossTableData.Cutstring[i], currentDamage);
 
-                uiTwelveBossRewardViews[i].Initialize(info, bossServerData);
+                    uiTwelveBossRewardViews[i].Initialize(info, bossServerData);
+                }
+                else
+                {
+                    uiTwelveBossRewardViews[i].gameObject.SetActive(false);
+                }
+
             }
-            else
-            {
-                uiTwelveBossRewardViews[i].gameObject.SetActive(false);
-            }
-
         }
+        else
+        {
+            for (int i = 0; i < uiTwelveBossRewardViews.Count; i++)
+            {
+                if (i < bossTableData.Rewardcut.Length)
+                {
+                    if (i == 12)
+                    {
+                        uiTwelveBossRewardViews[i].gameObject.SetActive(true);
+
+                        TwelveBossRewardInfo info = new TwelveBossRewardInfo(14, bossTableData.Rewardcut[14], bossTableData.Rewardtype[14], bossTableData.Rewardvalue[14], bossTableData.Cutstring[14], currentDamage);
+
+                        uiTwelveBossRewardViews[i].Initialize(info, bossServerData);
+                    }
+                    else if (i == 13)
+                    {
+                        uiTwelveBossRewardViews[i].gameObject.SetActive(true);
+
+                        TwelveBossRewardInfo info = new TwelveBossRewardInfo(12, bossTableData.Rewardcut[12], bossTableData.Rewardtype[12], bossTableData.Rewardvalue[12], bossTableData.Cutstring[12], currentDamage);
+
+                        uiTwelveBossRewardViews[i].Initialize(info, bossServerData);
+                    }
+                    else if (i == 14)
+                    {
+                        uiTwelveBossRewardViews[i].gameObject.SetActive(true);
+
+                        TwelveBossRewardInfo info = new TwelveBossRewardInfo(13, bossTableData.Rewardcut[13], bossTableData.Rewardtype[13], bossTableData.Rewardvalue[13], bossTableData.Cutstring[13], currentDamage);
+
+                        uiTwelveBossRewardViews[i].Initialize(info, bossServerData);
+                    }
+                    else
+                    {
+                        uiTwelveBossRewardViews[i].gameObject.SetActive(true);
+
+                        TwelveBossRewardInfo info = new TwelveBossRewardInfo(i, bossTableData.Rewardcut[i], bossTableData.Rewardtype[i], bossTableData.Rewardvalue[i], bossTableData.Cutstring[i], currentDamage);
+
+                        uiTwelveBossRewardViews[i].Initialize(info, bossServerData);
+                    }
+
+                }
+                else
+                {
+                    uiTwelveBossRewardViews[i].gameObject.SetActive(false);
+                }
+
+            }
+        }
+
     }
 
     public void OnClickAllReceiveButton()
