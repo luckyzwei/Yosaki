@@ -45,9 +45,16 @@ public class IndraSkillCaster : SingletonMono<IndraSkillCaster>
 
         while (true)
         {
-            if (ServerData.goodsTable.GetTableData(GoodsTable.IndraPower).Value != 0)
+            if (AutoManager.Instance.canAttack == false && GameManager.Instance.IsNormalField == true) 
             {
-                PlayerSkillCaster.Instance.UseSkill(skillTableDatas[19].Id);
+
+            }
+            else 
+            {
+                if (ServerData.goodsTable.GetTableData(GoodsTable.IndraPower).Value != 0)
+                {
+                    PlayerSkillCaster.Instance.UseSkill(skillTableDatas[19].Id);
+                }
             }
 
             yield return null;
