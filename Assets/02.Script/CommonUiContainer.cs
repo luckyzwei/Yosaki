@@ -117,6 +117,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite SinSkill3;
     public Sprite LeeMuGiStone;
     public Sprite IndraWeapon;
+    public Sprite Event_Item_Summer;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -231,6 +232,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.costume33:
                 return costumeThumbnail[33];
+                break;
+
+            case Item_Type.costume34:
+                return costumeThumbnail[34];
+                break;
+
+            case Item_Type.costume35:
+                return costumeThumbnail[35];
                 break;
 
 
@@ -384,7 +393,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return Peach;
                 break;
 
-            case Item_Type.SwordPartial:
+            case Item_Type.SP:
                 return SwordPartial;
                 break;
 
@@ -462,6 +471,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.Event_Item_1:
                 return springIcon;
+                break;     
+            case Item_Type.Event_Item_Summer:
+                return Event_Item_Summer;
                 break;
             //
             case Item_Type.SinSkill0:

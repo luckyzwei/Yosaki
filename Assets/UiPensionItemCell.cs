@@ -122,7 +122,7 @@ public class UiPensionItemCell : MonoBehaviour
         }
         else if (pensionKey == "weaponpension")
         {
-            itemType = Item_Type.SwordPartial;
+            itemType = Item_Type.SP;
         }
         else
         {

@@ -56,7 +56,7 @@ public class UiGumGiContentsBoard : MonoBehaviour
     {
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.getGumGi].Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SwordPartial)}는 하루에 한번만 획득 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SP)}는 하루에 한번만 획득 가능합니다!");
             return;
         }
 
@@ -87,7 +87,7 @@ public class UiGumGiContentsBoard : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 LogManager.Instance.SendLogType("GumGi", "_", score.ToString());
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SwordPartial)} {score}개 획득!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SP)} {score}개 획득!", null);
             });
         }, null);
     }

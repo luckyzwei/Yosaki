@@ -1,0 +1,40 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UniRx;
+using UnityEngine;
+
+public class PlayerNataRotater : MonoBehaviour
+{
+    [SerializeField]
+    private GameObject rotateObject;
+
+    [SerializeField]
+    private float rotateSpeed = 0f;
+
+    private float currentAngle;
+
+    private void Start()
+    {
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
+        {
+            rotateObject.SetActive(e == 35);
+        }).AddTo(this);
+    }
+
+    void Update()
+    {
+        currentAngle += Time.deltaTime * rotateSpeed;
+
+        rotateObject.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+
+        if (currentAngle >= 360f)
+        {
+            currentAngle = currentAngle - 360f;
+        }
+    }
+}

@@ -1355,6 +1355,7 @@ public static class PlayerStats
 
     private static string adukCostumeKey = "costume26";
     private static string leeMuGiCostumeKey = "costume27";
+    private static string nataCostumeKey = "costume35";
     public static float DecreaseBossHp()
     {
         float ret = 0f;
@@ -1369,6 +1370,11 @@ public static class PlayerStats
             ret += 0.05f;
         }
 
+        if (ServerData.costumeServerTable.TableDatas[nataCostumeKey].hasCostume.Value == true)
+        {
+            ret += 0.1f;
+        }
+
         return ret;
     }
 
@@ -1377,6 +1383,19 @@ public static class PlayerStats
         if (ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value >= 0)
         {
             return (float)TableManager.Instance.MagicBookTable.dataArray[ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value].Goldabilratio;
+        }
+        else
+        {
+            return 1f;
+        }
+
+    }
+
+    public static float GetSpecialAbilRatio()
+    {
+        if (ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value >= 0)
+        {
+            return (float)TableManager.Instance.WeaponTable.dataArray[ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value].Specialadd;
         }
         else
         {

@@ -61,7 +61,7 @@ public class TwelveRaidEnemy : BossEnemyBase
     private void UpdateBossDamage()
     {
         //삼족오 
-        if (GameManager.Instance.bossId == 23 || GameManager.Instance.bossId == 24)
+        if (GameManager.Instance.bossId == 23 || GameManager.Instance.bossId == 24 || GameManager.Instance.bossId == 26)
         {
             if (samDam < double.MaxValue * 0.25)
             {
@@ -172,7 +172,15 @@ public class TwelveRaidEnemy : BossEnemyBase
 
             if (playAnim)
             {
-                StartCoroutine(PlayAttackAnim());
+                //나타
+                if (GameManager.Instance.bossId == 26) 
+                {
+                    StartCoroutine(PlayAttackAnim_Nata());
+                }
+                else 
+                {
+                    StartCoroutine(PlayAttackAnim());
+                }
             }
 
             yield return new WaitForSeconds(attackInterval);
@@ -181,9 +189,18 @@ public class TwelveRaidEnemy : BossEnemyBase
 
     private IEnumerator PlayAttackAnim()
     {
+
         skeletonAnimation.AnimationName = "attack";
         yield return new WaitForSeconds(1.5f);
         skeletonAnimation.AnimationName = "walk";
+    }
+
+    private IEnumerator PlayAttackAnim_Nata()
+    {
+
+        skeletonAnimation.AnimationName = "attack2";
+        yield return new WaitForSeconds(1.5f);
+        skeletonAnimation.AnimationName = "idle";
     }
 
     private void Initialize()

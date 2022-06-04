@@ -636,5 +636,10 @@ public class TableManager : SingletonMono<TableManager>
 
     public FoxMask FoxMask;
 
+    [SerializeField]
+    private SummerCollection summerCollection;
+
+    public SummerCollection SummerCollection => summerCollection;
+
 }
 

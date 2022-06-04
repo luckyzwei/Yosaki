@@ -134,6 +134,8 @@ public class UserInfoTable
     public const string sendPetExp = "sendPetExp";
 
     public const string exchangeCount = "ex_0";
+    public const string exchangeCount_1 = "ex_1";
+    public const string exchangeCount_2 = "ex_2";
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
@@ -245,6 +247,8 @@ public class UserInfoTable
         {marbleReset3,0},
         {sendPetExp,0},
         {exchangeCount,0},
+        {exchangeCount_1,0},
+        {exchangeCount_2,0},
         {springReset,0},
         {refundFox,0},
         {sendGangChul,0},

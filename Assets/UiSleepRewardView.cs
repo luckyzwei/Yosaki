@@ -15,8 +15,8 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
     [SerializeField]
     private TextMeshProUGUI timeDescription;
 
-    [SerializeField]
-    private GameObject winterObject;
+    //[SerializeField]
+    //private GameObject winterObject;
 
     public void CheckReward()
     {
@@ -43,7 +43,7 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
             timeDescription.SetText($"{ts.Minutes}분 {ts.Seconds}초\n(최대 :{maxTimeString}시간)");
         }
 
-        winterObject.SetActive(ServerData.userInfoTable.CanSpawnEventItem());
+      //  winterObject.SetActive(ServerData.userInfoTable.CanSpawnEventItem());
 
         //골드
         rewards[0].SetText(Utils.ConvertBigNum(reward.gold));

@@ -135,15 +135,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         float springItem = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
 
-        if (ServerData.userInfoTable.CanSpawnEventItem())
-        {
-            eventItem = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
-        }
-        else
-        {
-            eventItem = 0;
-        }
-
+        eventItem = springItem;
 
         float exp = killedEnemyPerMin * spawnedEnemyData.Exp * GameBalance.sleepRewardRatio * elapsedMinutes;
         exp += exp * expBuffRatio;
@@ -180,6 +172,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
 
         ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += sleepRewardInfo.springItem;
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += sleepRewardInfo.springItem;
 
 
         ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += sleepRewardInfo.sulItem;
@@ -212,6 +205,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
 
         goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
+        goodsParam.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
 
         goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
         goodsParam.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);

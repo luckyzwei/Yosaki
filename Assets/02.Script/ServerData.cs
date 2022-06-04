@@ -231,6 +231,9 @@ public static class ServerData
 
             case Item_Type.Event_Item_1:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += rewardValue;
+                break; 
+            case Item_Type.Event_Item_Summer:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += rewardValue;
                 break;
 
             case Item_Type.SulItem:
@@ -286,7 +289,7 @@ public static class ServerData
             case Item_Type.LeeMuGiStone:
                 ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value += rewardValue;
                 break;
-            case Item_Type.SwordPartial:
+            case Item_Type.SP:
                 ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += rewardValue;
                 break;
 
@@ -327,6 +330,8 @@ public static class ServerData
             case Item_Type.costume31:
             case Item_Type.costume32:
             case Item_Type.costume33:
+            case Item_Type.costume34:
+            case Item_Type.costume35:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -410,6 +415,8 @@ public static class ServerData
             case Item_Type.costume31:
             case Item_Type.costume32:
             case Item_Type.costume33:
+            case Item_Type.costume34:
+            case Item_Type.costume35:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -432,6 +439,9 @@ public static class ServerData
 
             case Item_Type.Event_Item_1:
                 passParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);   
+            case Item_Type.Event_Item_Summer:
+                passParam.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.SulItem:
@@ -446,7 +456,7 @@ public static class ServerData
                 passParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);   
             
-            case Item_Type.SwordPartial:
+            case Item_Type.SP:
                 passParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
@@ -651,6 +661,10 @@ public static class ServerData
             case Item_Type.Event_Item_1:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += amount;
                 param.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);   
+            case Item_Type.Event_Item_Summer:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
+                param.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.SulItem:
@@ -663,7 +677,7 @@ public static class ServerData
                 param.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);  
             
-            case Item_Type.SwordPartial:
+            case Item_Type.SP:
                 ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
                 param.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
@@ -1217,12 +1231,15 @@ public static class ServerData
 
                 case Item_Type.Event_Item_1:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += amount;
+                    break;  
+                case Item_Type.Event_Item_Summer:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
                     break;
 
                 case Item_Type.SulItem:
                     ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += amount;
                     break; 
-                case Item_Type.SwordPartial:
+                case Item_Type.SP:
                     ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
                     break;
 

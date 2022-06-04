@@ -181,7 +181,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         youngMulCreateButton.gameObject.SetActive(magicBookData != null && magicBookData.Id == 20);
         youngMulCreateButton2.gameObject.SetActive(magicBookData != null && magicBookData.Id == 21);
 
-        norigaeDescription.gameObject.SetActive(magicBookData != null);
+        norigaeDescription.gameObject.SetActive(true);
 
         suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25));
 
@@ -201,6 +201,11 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (magicBookData != null)
         {
             norigaeDescription.SetText($"기본무공 강화\n{Utils.ConvertBigNum(magicBookData.Goldabilratio)}배");
+        }
+
+        if (weaponData != null)
+        {
+            norigaeDescription.SetText($"무공비급 강화\n{weaponData.Specialadd}배");
         }
 
         if (weaponData != null)

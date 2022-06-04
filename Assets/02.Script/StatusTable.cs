@@ -243,7 +243,9 @@ public class StatusTable
                     break;
                 case SkillDamage_memory:
                     {
-                        return level * 0.2f;
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
+
+                        return level * 0.2f * spcialAbilRatio;
                     }
                     break;
                 case SkillCoolTime_memory:
@@ -263,7 +265,9 @@ public class StatusTable
                     break;
                 case IgnoreDefense_memory:
                     {
-                        return level;
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
+
+                        return level * spcialAbilRatio;
                     }
                     break;
                 case BossDamage_memory:
@@ -272,7 +276,9 @@ public class StatusTable
                     }
                 case ChunSlash_memory:
                     {
-                        return level * 0.006f;
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
+
+                        return level * 0.006f * spcialAbilRatio;
                     }
 
                 #endregion

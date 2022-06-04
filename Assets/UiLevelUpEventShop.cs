@@ -176,6 +176,12 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += amount;
                     param.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
                 }
+                break;   
+            case Item_Type.Event_Item_Summer:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
+                    param.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
+                }
                 break;
 
             case Item_Type.SulItem:
@@ -299,13 +305,12 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     param.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
                 }
                 break;    
-            case Item_Type.SwordPartial:
+            case Item_Type.SP:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
                     param.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 }
                 break;
-
         }
     }
 

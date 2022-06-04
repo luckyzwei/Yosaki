@@ -84,4 +84,8 @@ public class WeaponData
   float gachalv10;
   public float Gachalv10 { get {return gachalv10; } set { this.gachalv10 = value;} }
   
+  [SerializeField]
+  float specialadd;
+  public float Specialadd { get {return specialadd; } set { this.specialadd = value;} }
+  
 }

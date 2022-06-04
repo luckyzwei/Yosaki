@@ -51,7 +51,9 @@ public static class Utils
                   type == Item_Type.costume30 ||
                   type == Item_Type.costume31 ||
                   type == Item_Type.costume32 ||
-                  type == Item_Type.costume33;
+                  type == Item_Type.costume33 ||
+                  type == Item_Type.costume34 ||
+                  type == Item_Type.costume35;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -71,13 +73,15 @@ public static class Utils
                 type == Item_Type.Event_Item_0 ||
                 type == Item_Type.Event_Item_1 ||
                 type == Item_Type.PeachReal ||
-                type == Item_Type.SwordPartial ||
+                type == Item_Type.SP ||
                 type == Item_Type.Hae_Norigae ||
                 type == Item_Type.Hae_Pet ||
                 type == Item_Type.Sam_Pet ||
                 type == Item_Type.Sam_Norigae ||
                 type == Item_Type.KirinNorigae ||
                 type == Item_Type.Kirin_Pet ||
+                type == Item_Type.SmithFire ||
+                type == Item_Type.Event_Item_Summer ||
                 type == Item_Type.RelicTicket;
     }
 

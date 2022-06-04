@@ -54,7 +54,7 @@ public enum Item_Type
     SinSkill3,
     LeeMuGiStone,
     ZangStone,
-    SwordPartial,
+    SP,
     Hae_Norigae,
     Hae_Pet, 
     Sam_Norigae,
@@ -67,6 +67,7 @@ public enum Item_Type
     KirinNorigae,
     Kirin_Pet,
     IndraPower,
+    Event_Item_Summer,
 
 
     RankFrame1 = 100,
@@ -217,6 +218,8 @@ public enum Item_Type
 
     costume32 = 1233,
     costume33 = 1234,
+    costume34 = 1235,
+    costume35 = 1236,
 
     pet0 = 1301,
     pet1 = 1302,
