@@ -69,6 +69,54 @@ public class UiRankView : MonoBehaviour
             {
                 rankerCell = UiTopRankerView.Instance.RankerCellList[2];
             }
+            else if (rank == 4)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[3];
+            }
+            else if (rank == 5)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[4];
+            }
+            else if (rank == 6)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[5];
+            }
+            else if (rank == 7)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[6];
+            }
+            else if (rank == 8)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[7];
+            }
+            else if (rank == 9)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[8];
+            }
+            else if (rank == 10)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[9];
+            }
+            else if (rank == 11)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[10];
+            }
+            else if (rank == 12)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[11];
+            }
+            else if (rank == 13)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[12];
+            }
+            else if (rank == 14)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[13];
+            }
+            else if (rank == 15)
+            {
+                rankerCell = UiTopRankerView.Instance.RankerCellList[14];
+            }
 
             if (rankerCell != null)
             {
@@ -104,6 +152,54 @@ public class UiRankView : MonoBehaviour
             else if (rank == 3)
             {
                 rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[2];
+            }
+            else if (rank == 4)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[3];
+            }
+            else if (rank == 5)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[4];
+            }
+            else if (rank == 6)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[5];
+            }
+            else if (rank == 7)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[6];
+            }
+            else if (rank == 8)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[7];
+            }
+            else if (rank == 9)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[8];
+            }
+            else if (rank == 10)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[9];
+            }
+            else if (rank == 11)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[10];
+            }
+            else if (rank == 12)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[11];
+            }
+            else if (rank == 13)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[12];
+            }
+            else if (rank == 14)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[13];
+            }
+            else if (rank == 15)
+            {
+                rankerCell = UiTopRankerView_GangChul.Instance.RankerCellList[14];
             }
 
             if (rankerCell != null)

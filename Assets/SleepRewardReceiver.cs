@@ -223,7 +223,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             userInfoParam.Add(UserInfoTable.killCountTotal2, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotal2].Value);
         }
 
-            userInfoParam.Add(UserInfoTable.killCountTotalChild, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value);
+        userInfoParam.Add(UserInfoTable.killCountTotalChild, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value);
 
 
         yield return new WaitForSeconds(0.5f);
@@ -259,6 +259,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
               UiSleepRewardMask.Instance.ShowMaskObject(false);
               LogManager.Instance.SendLogType("SleepReward", "Get", elapsedSeconds.ToString());
               UiExpGauge.Instance.WhenGrowthValueChanged();
+              DailyMissionManager.SyncAllMissions();
           });
     }
 
