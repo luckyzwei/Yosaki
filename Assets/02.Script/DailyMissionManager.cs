@@ -28,8 +28,12 @@ public static class DailyMissionManager
 
     private static WaitForSeconds syncDelay = new WaitForSeconds(3.0f);
 
+    private static WaitForSeconds syncDelay_slow = new WaitForSeconds(300.0f);
+
     public static void UpdateDailyMission(DailyMissionKey missionKey, int count)
     {
+
+
         string key = TableManager.Instance.DailyMissionDatas[(int)missionKey].Stringid;
 
         //로컬 데이터 갱신
@@ -51,12 +55,36 @@ public static class DailyMissionManager
         SyncRoutines[missionKey] = CoroutineExecuter.Instance.StartCoroutine(SyncToServerRoutine(key, missionKey));
     }
 
+    private static string Mission0 = "Mission0";
+
+    private static string Mission1 = "Mission1";
+
+
+
     private static IEnumerator SyncToServerRoutine(string key, DailyMissionKey missionKey)
     {
-        yield return syncDelay;
+        if (key.Equals(Mission0) || key.Equals(Mission1))
+        {
+            yield return syncDelay_slow;
+        }
+        else
+        {
+            yield return syncDelay;
+        }
+
 
         ServerData.dailyMissionTable.SyncToServerEach(key);
 
         SyncRoutines[missionKey] = null;
+    }
+
+    public static void SyncAllMissions()
+    {
+        var tableData = TableManager.Instance.DailyMission.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            ServerData.dailyMissionTable.SyncToServerEach(tableData[i].Stringid);
+        }
     }
 }

@@ -120,6 +120,12 @@ public class SaveManager : SingletonMono<SaveManager>
     {
         SetNotification();
         SyncDatasForce();
+        SyncDailyMissions();
+    }
+
+    private void SyncDailyMissions()
+    {
+        DailyMissionManager.SyncAllMissions();
     }
 
     public void SetNotification()
