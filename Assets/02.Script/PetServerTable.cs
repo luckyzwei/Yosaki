@@ -28,60 +28,81 @@ public class PetServerTable
 
     public ReactiveDictionary<string, PetServerData> TableDatas => tableDatas;
 
+    private static Dictionary<StatusType, float> PetHasValue = new Dictionary<StatusType, float>();
+
+    public static void ResetPetHas()
+    {
+        PetHasValue.Clear();
+    }
+
     public float GetStatusValue(StatusType statusType)
     {
         float ret = 0f;
-        int status = (int)statusType;
-        int petAwakeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
 
-        var e = tableDatas.GetEnumerator();
-        while (e.MoveNext())
+        if (PetHasValue.ContainsKey(statusType))
         {
-            //무료펫 능력치XX
-            //미보유 X
-            if (e.Current.Value.hasItem.Value == 0) continue;
-
-            var petTableData = TableManager.Instance.PetDatas[e.Current.Value.idx];
-            if (petTableData.Hastype1 == status)
-            {
-                float value = petTableData.Hasvalue1 + e.Current.Value.level.Value * petTableData.Hasaddvalue1;
-
-                if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
-                    value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
-
-                ret += value;
-            }
-
-            if (petTableData.Hastype2 == status)
-            {
-                float value = petTableData.Hasvalue2 + e.Current.Value.level.Value * petTableData.Hasaddvalue2;
-
-                if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
-                    value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
-
-                ret += value;
-            }
-
-            if (petTableData.Hastype3 == status)
-            {
-                float value = petTableData.Hasvalue3 + e.Current.Value.level.Value * petTableData.Hasaddvalue3;
-
-                if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
-                    value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
-
-                ret += value;
-            }
-
-            if (petTableData.Hastype4 == status)
-            {
-                float value = petTableData.Hasvalue4 + e.Current.Value.level.Value * petTableData.Hasaddvalue4;
-
-                if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
-                    value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
-
-                ret += value;
-            }
+            ret = PetHasValue[statusType];
         }
+        else
+        {
+            int status = (int)statusType;
+            int petAwakeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
+
+            var e = tableDatas.GetEnumerator();
+            while (e.MoveNext())
+            {
+                //무료펫 능력치XX
+                //미보유 X
+                if (e.Current.Value.hasItem.Value == 0) continue;
+
+                var petTableData = TableManager.Instance.PetDatas[e.Current.Value.idx];
+                if (petTableData.Hastype1 == status)
+                {
+                    float value = petTableData.Hasvalue1 + e.Current.Value.level.Value * petTableData.Hasaddvalue1;
+
+                    if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                        value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+                    ret += value;
+                }
+
+                if (petTableData.Hastype2 == status)
+                {
+                    float value = petTableData.Hasvalue2 + e.Current.Value.level.Value * petTableData.Hasaddvalue2;
+
+                    if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                        value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+                    ret += value;
+                }
+
+                if (petTableData.Hastype3 == status)
+                {
+                    float value = petTableData.Hasvalue3 + e.Current.Value.level.Value * petTableData.Hasaddvalue3;
+
+                    if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                        value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+                    ret += value;
+                }
+
+                if (petTableData.Hastype4 == status)
+                {
+                    float value = petTableData.Hasvalue4 + e.Current.Value.level.Value * petTableData.Hasaddvalue4;
+
+                    if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                        value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
+
+                    ret += value;
+                }
+
+            }
+
+            PetHasValue.Add(statusType, ret);
+
+        }
+
+
 
         return ret;
     }

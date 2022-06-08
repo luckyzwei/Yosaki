@@ -117,6 +117,11 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
         }
     }
 
+    private void OnDisable()
+    {
+        PlayerStats.ResetAbilDic();
+    }
+
 #if UNITY_EDITOR
     private void Update()
     {

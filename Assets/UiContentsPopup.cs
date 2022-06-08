@@ -20,4 +20,9 @@ public class UiContentsPopup : MonoBehaviour
         tower1.SetActive(ServerData.userInfoTable.IsLastFloor() == false);
         tower2.SetActive(ServerData.userInfoTable.IsLastFloor());
     }
+
+    private void OnDisable()
+    {
+        PlayerStats.ResetAbilDic();
+    }
 }

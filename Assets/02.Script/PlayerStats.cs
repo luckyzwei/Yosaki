@@ -362,36 +362,54 @@ public static class PlayerStats
         return ret;
     }
 
+    private static Dictionary<StatusType, float> magicBookHasValue = new Dictionary<StatusType, float>();
+
+    public static void ResetMagicBookHas()
+    {
+        magicBookHasValue.Clear();
+    }
+
     public static float GetMagicBookHasPercentValue(StatusType type)
     {
-        var e = TableManager.Instance.MagicBoocDatas.GetEnumerator();
-
         float ret = 0f;
-        while (e.MoveNext())
+
+        if (magicBookHasValue.ContainsKey(type))
         {
-            if (TableManager.Instance.WeaponEffectDatas.TryGetValue(e.Current.Value.Magicbookeffectid, out var effectData) == false) continue;
+            ret = magicBookHasValue[type];
+        }
+        else
+        {
+            var e = TableManager.Instance.MagicBoocDatas.GetEnumerator();
 
-            var magieBookServerData = ServerData.magicBookTable.TableDatas[e.Current.Value.Stringid];
 
-            if (magieBookServerData.hasItem.Value == 0) continue;
-
-            int currentLevel = ServerData.magicBookTable.GetMagicBookData(e.Current.Value.Stringid).level.Value;
-
-            if (effectData.Haseffecttype1 == (int)type)
+            while (e.MoveNext())
             {
-                ret += effectData.Haseffectbase1;
-                ret += currentLevel * effectData.Haseffectvalue1;
+                if (TableManager.Instance.WeaponEffectDatas.TryGetValue(e.Current.Value.Magicbookeffectid, out var effectData) == false) continue;
+
+                var magieBookServerData = ServerData.magicBookTable.TableDatas[e.Current.Value.Stringid];
+
+                if (magieBookServerData.hasItem.Value == 0) continue;
+
+                int currentLevel = ServerData.magicBookTable.GetMagicBookData(e.Current.Value.Stringid).level.Value;
+
+                if (effectData.Haseffecttype1 == (int)type)
+                {
+                    ret += effectData.Haseffectbase1;
+                    ret += currentLevel * effectData.Haseffectvalue1;
+                }
+                if (effectData.Haseffecttype2 == (int)type)
+                {
+                    ret += effectData.Haseffectbase2;
+                    ret += currentLevel * effectData.Haseffectvalue2;
+                }
+                if (effectData.Haseffecttype3 == (int)type)
+                {
+                    ret += effectData.Haseffectbase3;
+                    ret += currentLevel * effectData.Haseffectvalue3;
+                }
             }
-            if (effectData.Haseffecttype2 == (int)type)
-            {
-                ret += effectData.Haseffectbase2;
-                ret += currentLevel * effectData.Haseffectvalue2;
-            }
-            if (effectData.Haseffecttype3 == (int)type)
-            {
-                ret += effectData.Haseffectbase3;
-                ret += currentLevel * effectData.Haseffectvalue3;
-            }
+
+            magicBookHasValue.Add(type, ret);
         }
 
 
@@ -964,26 +982,43 @@ public static class PlayerStats
 
         return ret;
     }
+    private static Dictionary<StatusType, float> titleHasValue = new Dictionary<StatusType, float>();
+
+    public static void ResetTitleHas()
+    {
+        titleHasValue.Clear();
+    }
 
     public static float GetTitleAbilValue(StatusType type)
     {
         float ret = 0f;
 
-        var dicData = TableManager.Instance.TitleAbils[(int)type];
-
-        for (int i = 0; i < dicData.Count; i++)
+        if (titleHasValue.ContainsKey(type))
         {
-            if (ServerData.titleServerTable.TableDatas[dicData[i].Stringid].clearFlag.Value == 0) continue;
-
-            if (dicData[i].Id == ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].Value)
-            {
-                ret += dicData[i].Abilvalue1 * GameBalance.TitleEquipAddPer;
-            }
-            else
-            {
-                ret += dicData[i].Abilvalue1;
-            }
+            ret = titleHasValue[type];
         }
+        else
+        {
+            var dicData = TableManager.Instance.TitleAbils[(int)type];
+
+            for (int i = 0; i < dicData.Count; i++)
+            {
+                if (ServerData.titleServerTable.TableDatas[dicData[i].Stringid].clearFlag.Value == 0) continue;
+
+                if (dicData[i].Id == ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].Value)
+                {
+                    ret += dicData[i].Abilvalue1 * GameBalance.TitleEquipAddPer;
+                }
+                else
+                {
+                    ret += dicData[i].Abilvalue1;
+                }
+            }
+
+            titleHasValue.Add(type, ret);
+        }
+
+
 
         return ret;
     }
@@ -1043,31 +1078,48 @@ public static class PlayerStats
 
 
     }
+    private static Dictionary<StatusType, float> sinsuHasValue = new Dictionary<StatusType, float>();
+
+    public static void ResetSinsuBookHas()
+    {
+        sinsuHasValue.Clear();
+    }
 
     public static float GetSinsuEquipEffect(StatusType statusType)
     {
         float ret = 0f;
 
-        var tableDatas = TableManager.Instance.PetEquipment.dataArray;
-
-        int petEquipLevel = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
-
-        for (int i = 0; i < tableDatas.Length; i++)
+        if (sinsuHasValue.ContainsKey(statusType))
         {
-            var serverData = ServerData.petEquipmentServerTable.TableDatas[tableDatas[i].Stringid];
-
-            if (serverData.hasAbil.Value == 0) continue;
-
-            if (tableDatas[i].Abiltype1 == (int)statusType)
-            {
-                ret += (tableDatas[i].Abilvalue1 + serverData.level.Value * tableDatas[i].Abiladdvalue1 + tableDatas[i].Leveladdvalue1 * petEquipLevel);
-            }
-
-            if (tableDatas[i].Abiltype2 == (int)statusType)
-            {
-                ret += (tableDatas[i].Abilvalue2 + serverData.level.Value * tableDatas[i].Abiladdvalue2 + tableDatas[i].Leveladdvalue2 * petEquipLevel);
-            }
+            ret = sinsuHasValue[statusType];
         }
+        else
+        {
+            var tableDatas = TableManager.Instance.PetEquipment.dataArray;
+
+            int petEquipLevel = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+
+            for (int i = 0; i < tableDatas.Length; i++)
+            {
+                var serverData = ServerData.petEquipmentServerTable.TableDatas[tableDatas[i].Stringid];
+
+                if (serverData.hasAbil.Value == 0) continue;
+
+                if (tableDatas[i].Abiltype1 == (int)statusType)
+                {
+                    ret += (tableDatas[i].Abilvalue1 + serverData.level.Value * tableDatas[i].Abiladdvalue1 + tableDatas[i].Leveladdvalue1 * petEquipLevel);
+                }
+
+                if (tableDatas[i].Abiltype2 == (int)statusType)
+                {
+                    ret += (tableDatas[i].Abilvalue2 + serverData.level.Value * tableDatas[i].Abiladdvalue2 + tableDatas[i].Leveladdvalue2 * petEquipLevel);
+                }
+            }
+
+            sinsuHasValue.Add(statusType, ret);
+        }
+
+
 
         if (ActiveSmithValue(statusType))
         {
@@ -1300,18 +1352,18 @@ public static class PlayerStats
 
                     if (ServerData.goodsTable.GetTableData(indraKey0).Value != 0)
                     {
-                        ret+= indra0Value;
+                        ret += indra0Value;
                     }
 
                     if (ServerData.goodsTable.GetTableData(indraKey1).Value != 0)
                     {
-                        ret+= indra1Value;
+                        ret += indra1Value;
                     }
 
                     return ret;
                 }
                 break;
-     
+
             case StatusType.PenetrateDefense:
                 {
                     if (ServerData.goodsTable.GetTableData(indraKey2).Value == 0)
@@ -1410,5 +1462,13 @@ public static class PlayerStats
         if (equipId == -1) return 0f;
 
         return (float)TableManager.Instance.FoxMask.dataArray[equipId].Abilvalue;
+    }
+
+    public static void ResetAbilDic()
+    {
+        PlayerStats.ResetMagicBookHas();
+        PlayerStats.ResetSinsuBookHas();
+        PetServerTable.ResetPetHas();
+        PlayerStats.ResetTitleHas();
     }
 }

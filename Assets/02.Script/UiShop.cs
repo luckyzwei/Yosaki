@@ -231,7 +231,7 @@ public class UiShop : SingletonMono<UiShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += amount;
                     param.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
                 }
-                break; 
+                break;
             case Item_Type.Event_Item_Summer:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
@@ -292,20 +292,20 @@ public class UiShop : SingletonMono<UiShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value += amount;
                     param.Add(GoodsTable.Asura5, ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value);
                 }
-                break;  
+                break;
             case Item_Type.Aduk:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value += amount;
                     param.Add(GoodsTable.Aduk, ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value);
                 }
-                break;    
-            
+                break;
+
             case Item_Type.LeeMuGiStone:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value += amount;
                     param.Add(GoodsTable.LeeMuGiStone, ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
                 }
-                break;   
+                break;
             case Item_Type.SP:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
@@ -375,8 +375,8 @@ public class UiShop : SingletonMono<UiShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                     param.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 }
-                break; 
-              
+                break;
+
 
             case Item_Type.GuildReward:
                 {
@@ -502,6 +502,11 @@ public class UiShop : SingletonMono<UiShop>
 
         param.Add(SkillServerTable.SkillHasAmount, skillAmountSyncData);
         param.Add(SkillServerTable.SkillAlreadyHas, skillAlreadyHasSyncData);
+    }
+
+    private void OnDisable()
+    {
+        PlayerStats.ResetAbilDic();
     }
 
 }

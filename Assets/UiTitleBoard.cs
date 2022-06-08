@@ -25,4 +25,9 @@ public class UiTitleBoard : MonoBehaviour
             cell.Initialize(tableDatas[i]);
         }
     }
+
+    private void OnDisable()
+    {
+        PlayerStats.ResetAbilDic();
+    }
 }
