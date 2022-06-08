@@ -56,7 +56,7 @@ public enum Item_Type
     ZangStone,
     SP,
     Hae_Norigae,
-    Hae_Pet, 
+    Hae_Pet,
     Sam_Norigae,
     Sam_Pet,
 
@@ -68,6 +68,9 @@ public enum Item_Type
     Kirin_Pet,
     IndraPower,
     Event_Item_Summer,
+    NataWeapon,
+    RabitNorigae,
+    RabitPet,
 
 
     RankFrame1 = 100,

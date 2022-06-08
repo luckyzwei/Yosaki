@@ -80,6 +80,8 @@ public static class Utils
                 type == Item_Type.Sam_Norigae ||
                 type == Item_Type.KirinNorigae ||
                 type == Item_Type.Kirin_Pet ||
+                type == Item_Type.RabitPet ||
+                type == Item_Type.RabitNorigae ||
                 type == Item_Type.SmithFire ||
                 type == Item_Type.Event_Item_Summer ||
                 type == Item_Type.RelicTicket;

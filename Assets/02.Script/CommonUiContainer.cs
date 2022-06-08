@@ -9,7 +9,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public List<Sprite> itemGradeFrame;
 
-    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11 };
+    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11, CommonString.ItemGrade_12 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae };
@@ -89,6 +89,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite SamPet;
     public Sprite KirinNorigae;
     public Sprite Kirin_Pet;
+    public Sprite RabitNorigae;
+    public Sprite RabitPet;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -118,6 +120,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite LeeMuGiStone;
     public Sprite IndraWeapon;
     public Sprite Event_Item_Summer;
+    public Sprite NataWeapon;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -411,13 +414,19 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.KirinNorigae:
                 return KirinNorigae;
+                break;  
+            case Item_Type.RabitNorigae:
+                return RabitNorigae;
                 break;
 
             case Item_Type.Sam_Pet:
                 return SamPet;
-                break;  
+                break;
             case Item_Type.Kirin_Pet:
                 return Kirin_Pet;
+                break;
+            case Item_Type.RabitPet:
+                return RabitPet;
                 break;
 
             case Item_Type.GuildReward:
@@ -471,7 +480,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.Event_Item_1:
                 return springIcon;
-                break;     
+                break;
             case Item_Type.Event_Item_Summer:
                 return Event_Item_Summer;
                 break;
@@ -490,9 +499,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.LeeMuGiStone:
                 return LeeMuGiStone;
-                break;    
+                break;
             case Item_Type.IndraWeapon:
                 return IndraWeapon;
+                break;    
+            case Item_Type.NataWeapon:
+                return NataWeapon;
                 break;
 
         }

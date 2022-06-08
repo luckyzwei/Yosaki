@@ -115,6 +115,8 @@ public class SaveManager : SingletonMono<SaveManager>
             BuffManager.Instance.UpdateBuffTime();
             ServerData.buffServerTable.SyncAllData();
         }
+
+        SyncDailyMissions();
     }
     private void OnApplicationQuit()
     {
