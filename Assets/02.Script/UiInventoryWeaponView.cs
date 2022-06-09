@@ -102,6 +102,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     private GameObject indraLock;
 
     [SerializeField]
+    private GameObject nataLock;
+
+    [SerializeField]
     private GameObject armDescription;
 
     [SerializeField]
@@ -183,11 +186,11 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         norigaeDescription.gameObject.SetActive(true);
 
-        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25));
+        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26));
 
         if (magicBookData != null)
         {
-            if ((magicBookData.Id == 22 || magicBookData.Id == 24 || magicBookData.Id == 25))
+            if ((magicBookData.Id == 22 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26))
             {
                 suhoSinDescription.SetText($"요괴사냥\n수호신 에서 획득!");
             }
@@ -327,9 +330,10 @@ public class UiInventoryWeaponView : MonoBehaviour
             feelMul3Lock.SetActive(false);
             feelMul4Lock.SetActive(false);
             indraLock.SetActive(false);
+            nataLock.SetActive(false);
 
             //필멸2 필멸3  (23,24)
-            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26)
+            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26|| weaponData.Id == 27)
             {
                 hasMask.SetActive(false);
 
@@ -352,6 +356,11 @@ public class UiInventoryWeaponView : MonoBehaviour
                 {
                     indraLock.gameObject.SetActive(state == 0);
                 }
+
+                if (weaponData.Id == 27)
+                {
+                    nataLock.gameObject.SetActive(state == 0);
+                }
             }
 
         }
@@ -361,6 +370,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             feelMul3Lock.SetActive(false);
             feelMul4Lock.SetActive(false);
             indraLock.SetActive(false);
+            nataLock.SetActive(false);
 
             magicBookViewEquipButton.gameObject.SetActive(state == 1);
             weaponViewEquipButton.gameObject.SetActive(false);
