@@ -69,20 +69,25 @@ public class PlayerPet : SingletonMono<PlayerPet>
         skeletonAnimation.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[idx];
         skeletonAnimation.Initialize(true);
 
-        if (idx <= 14) 
+        if (idx <= 14)
         {
             skeletonAnimation.transform.localScale = new Vector3(2.6f, 2.6f, 2.6f);
             skeletonAnimation.transform.localPosition = new Vector3(0.05f, -1.24f, 0f);
         }
-        else if(idx==15)
+        else if (idx == 15)
         {
             skeletonAnimation.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             skeletonAnimation.transform.localPosition = new Vector3(0.05f, 0.6f, 0f);
         }
-        else if (idx == 16) 
+        else if (idx == 16)
         {
             skeletonAnimation.transform.localScale = new Vector3(0.42f, 0.42f, 0.42f);
             skeletonAnimation.transform.localPosition = new Vector3(0.26f, 0.58f, 0.0f);
+        }
+        else if (idx == 17)
+        {
+            skeletonAnimation.transform.localScale = new Vector3(0.65f, 0.65f, 0.45f);
+            skeletonAnimation.transform.localPosition = new Vector3(0.3f, 0.58f, 0.0f);
         }
     }
 

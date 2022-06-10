@@ -143,7 +143,42 @@ public class UiTwelveBossRewardView : MonoBehaviour
 
         Item_Type type = (Item_Type)rewardInfo.rewardType;
 
-        if (type == Item_Type.RabitPet)
+        if (type == Item_Type.costume36)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            //
+            var costumeServerData = ServerData.costumeServerTable.TableDatas["costume36"];
+
+            costumeServerData.hasCostume.Value = true;
+
+            Param costumeParam = new Param();
+
+            costumeParam.Add("costume36", costumeServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+     
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "달토끼 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+
+        }
+        else if (type == Item_Type.RabitPet)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 

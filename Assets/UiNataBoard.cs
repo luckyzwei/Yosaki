@@ -37,9 +37,9 @@ public class UiNataBoard : MonoBehaviour
     {
         var rewards = bossServerData.rewardedId.Value.Split(BossServerTable.rewardSplit);
 
-        if (bossTableData.Rewardcut.Length != rewards.Length - 1)
+        if (rewards.Length - 1 < 12)
         {
-            PopupManager.Instance.ShowAlarmMessage("보상을 전부 수령해야 획득 가능합니다.");
+            PopupManager.Instance.ShowAlarmMessage("보상을 12개 받아야 획득 가능합니다.");
             return;
         }
         var costumeServerData = ServerData.costumeServerTable.TableDatas["costume35"];

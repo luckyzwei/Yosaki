@@ -15,7 +15,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae };
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
-    private List<string> itemGradeName_Skill = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill, CommonString.ItemGrade_6_Skill };
+    private List<string> itemGradeName_Skill = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill, CommonString.ItemGrade_6_Skill, CommonString.ItemGrade_7_Skill };
     public List<string> ItemGradeName_Skill => itemGradeName_Skill;
 
     public List<Color> itemGradeColor;
@@ -121,6 +121,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite IndraWeapon;
     public Sprite Event_Item_Summer;
     public Sprite NataWeapon;
+    public Sprite NataSkill;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -243,6 +244,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.costume35:
                 return costumeThumbnail[35];
+                break;    
+            case Item_Type.costume36:
+                return costumeThumbnail[36];
                 break;
 
 
@@ -493,6 +497,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.SinSkill2:
                 return SinSkill2;
+                break;      
+            case Item_Type.NataSkill:
+                return NataSkill;
                 break;
             case Item_Type.SinSkill3:
                 return SinSkill3;

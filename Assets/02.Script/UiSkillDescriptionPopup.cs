@@ -81,7 +81,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     public void Initialize(SkillTableData skillTableData)
     {
         //신수스킬용
-        if (skillTableData.Id == 15 || skillTableData.Id == 16|| skillTableData.Id == 17)
+        if (skillTableData.Id == 15 || skillTableData.Id == 16|| skillTableData.Id == 17 || skillTableData.Id == 20)
         {
             if (skillTableData.Id == 15)
             {
@@ -101,6 +101,14 @@ public class UiSkillDescriptionPopup : MonoBehaviour
             {
                 //흑룡 있을때
                 if (ServerData.costumeServerTable.TableDatas["costume27"].hasCostume.Value==true)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 20)
+            {
+                //흑룡 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value != 0)
                 {
                     ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
                 }

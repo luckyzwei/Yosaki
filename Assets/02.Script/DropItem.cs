@@ -71,6 +71,7 @@ public enum Item_Type
     NataWeapon,
     RabitNorigae,
     RabitPet,
+    NataSkill,
 
 
     RankFrame1 = 100,
@@ -223,6 +224,7 @@ public enum Item_Type
     costume33 = 1234,
     costume34 = 1235,
     costume35 = 1236,
+    costume36 = 1237,
 
     pet0 = 1301,
     pet1 = 1302,

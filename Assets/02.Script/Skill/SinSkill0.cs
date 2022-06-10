@@ -24,3 +24,8 @@ public class SinSkill3 : TraceSlash0
 {
   
 }
+
+public class Nata0 : TraceSlash0
+{
+
+}

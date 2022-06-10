@@ -167,6 +167,8 @@ public class UiTitleCell : MonoBehaviour
         }
 
         ServerData.equipmentTable.ChangeEquip(EquipmentTable.TitleSelectId, tableData.Id);
+
+        PlayerStats.ResetAbilDic();
     }
 
     private void OnEnable()

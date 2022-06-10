@@ -171,7 +171,6 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.AttackAdd);
         ret += GetWeaponEquipPercentValue(StatusType.AttackAdd);
         ret += GetSkillCollectionValue(StatusType.AttackAdd);
-        ret += GetWingAbilValue(StatusType.AttackAdd);
         ret += GetPassiveSkillValue(StatusType.AttackAdd);
         ret += GetMarbleValue(StatusType.AttackAdd);
         ret += GetSkillHasValue(StatusType.AttackAdd);
@@ -227,7 +226,6 @@ public static class PlayerStats
         ret += GetMagicBookHasPercentValue(StatusType.AttackAddPer);
         ret += GetCostumeAttackPowerValue();
         ret += GetSkillCollectionValue(StatusType.AttackAddPer);
-        ret += GetWingAbilValue(StatusType.AttackAddPer);
         ret += GetPassiveSkillValue(StatusType.AttackAddPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.AttackAddPer);
         ret += GetMarbleValue(StatusType.AttackAddPer);
@@ -364,7 +362,7 @@ public static class PlayerStats
 
     private static Dictionary<StatusType, float> magicBookHasValue = new Dictionary<StatusType, float>();
 
-    public static void ResetMagicBookHas()
+    private static void ResetMagicBookHas()
     {
         magicBookHasValue.Clear();
     }
@@ -445,29 +443,7 @@ public static class PlayerStats
         return ret;
     }
 
-    public static float GetWingAbilValue(StatusType type)
-    {
-        //사용안함
-        return 0f;
-
-        int currentWingIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).Value;
-
-        if (currentWingIdx < 0f || currentWingIdx >= TableManager.Instance.WingTable.dataArray.Length) return 0f;
-
-        var tableData = TableManager.Instance.WingTable.dataArray[currentWingIdx];
-
-        float ret = 0f;
-
-        for (int i = 0; i < tableData.Abilitytype.Length; i++)
-        {
-            if (tableData.Abilitytype[i] == (int)type)
-            {
-                ret += tableData.Abilityvalue[i];
-            }
-        }
-
-        return ret;
-    }
+    
     public static float GetSkillHasValue(StatusType type)
     {
         float ret = 0f;
@@ -525,7 +501,6 @@ public static class PlayerStats
         ret += ServerData.statusTable.GetStatusValue(StatusTable.SkillDamage_memory);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.SkillDamage);
         ret += GetSkillCollectionValue(StatusType.SkillDamage);
-        ret += GetWingAbilValue(StatusType.SkillDamage);
         ret += GetPassiveSkillValue(StatusType.SkillDamage);
         ret += ServerData.petTable.GetStatusValue(StatusType.SkillDamage);
 
@@ -628,7 +603,6 @@ public static class PlayerStats
         ret += GetWeaponHasPercentValue(StatusType.CriticalDam);
         ret += GetMagicBookHasPercentValue(StatusType.CriticalDam);
         ret += GetSkillCollectionValue(StatusType.CriticalDam);
-        ret += GetWingAbilValue(StatusType.CriticalDam);
         ret += ServerData.petTable.GetStatusValue(StatusType.CriticalDam);
         ret += GetStageRelicHasEffect(StatusType.CriticalDam);
         ret += GetSonAbilHasEffect(StatusType.CriticalDam);
@@ -789,7 +763,6 @@ public static class PlayerStats
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.HpAddPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.HpAddPer);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.HpPer_StatPoint);
-        ret += GetWingAbilValue(StatusType.HpAddPer);
         ret += GetPassiveSkillValue(StatusType.HpAddPer);
 
         ret += GetTitleAbilValue(StatusType.HpAddPer);
@@ -984,7 +957,7 @@ public static class PlayerStats
     }
     private static Dictionary<StatusType, float> titleHasValue = new Dictionary<StatusType, float>();
 
-    public static void ResetTitleHas()
+    private static void ResetTitleHas()
     {
         titleHasValue.Clear();
     }
@@ -1080,7 +1053,7 @@ public static class PlayerStats
     }
     private static Dictionary<StatusType, float> sinsuHasValue = new Dictionary<StatusType, float>();
 
-    public static void ResetSinsuBookHas()
+    private static void ResetSinsuBookHas()
     {
         sinsuHasValue.Clear();
     }
@@ -1158,24 +1131,53 @@ public static class PlayerStats
         return ret;
     }
 
+    private static Dictionary<StatusType, float> stageRelicValue = new Dictionary<StatusType, float>();
+
+    private static void ResetStageRelicHas()
+    {
+        stageRelicValue.Clear();
+    }
+
+    public const float divideNum = 500f;
+    public const float divideAbilValue = 0.2f;
     public static float GetStageRelicHasEffect(StatusType statusType)
     {
         float ret = 0f;
 
-        var tableDatas = TableManager.Instance.StageRelic.dataArray;
-
-        for (int i = 0; i < tableDatas.Length; i++)
+        if (stageRelicValue.ContainsKey(statusType))
         {
-            var serverData = ServerData.stageRelicServerTable.TableDatas[tableDatas[i].Stringid];
+            ret = stageRelicValue[statusType];
+        }
+        else
+        {
+            var tableDatas = TableManager.Instance.StageRelic.dataArray;
 
-            if (serverData.level.Value == 0) continue;
+            for (int i = 0; i < tableDatas.Length; i++)
+            {
+                var serverData = ServerData.stageRelicServerTable.TableDatas[tableDatas[i].Stringid];
 
-            if (tableDatas[i].Abiltype != (int)statusType) continue;
+                if (serverData.level.Value == 0) continue;
 
-            ret += serverData.level.Value * tableDatas[i].Abilvalue;
+                if (tableDatas[i].Abiltype != (int)statusType) continue;
+
+                ret += serverData.level.Value * tableDatas[i].Abilvalue;
+            }
+
+            stageRelicValue.Add(statusType, ret);
         }
 
+        ret *= GetStageAddValue();
+
         return ret;
+    }
+
+    public static float GetStageAddValue() 
+    {
+        int currentStage = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.topClearStageId].Value;
+
+        float divide = (int)(currentStage / divideNum);
+
+        return (1 + divide * divideAbilValue); 
     }
 
     public static float GetSonAbilHasEffect(StatusType statusType, int addLevel = 0)
@@ -1470,5 +1472,6 @@ public static class PlayerStats
         PlayerStats.ResetSinsuBookHas();
         PetServerTable.ResetPetHas();
         PlayerStats.ResetTitleHas();
+        PlayerStats.ResetStageRelicHas();
     }
 }

@@ -280,6 +280,9 @@ public static class ServerData
 
             case Item_Type.SinSkill2:
                 ServerData.goodsTable.GetTableData(GoodsTable.SinSkill2).Value += rewardValue;
+                break;      
+            case Item_Type.NataSkill:
+                ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value += rewardValue;
                 break;
 
             case Item_Type.SinSkill3:
@@ -332,6 +335,7 @@ public static class ServerData
             case Item_Type.costume33:
             case Item_Type.costume34:
             case Item_Type.costume35:
+            case Item_Type.costume36:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -417,6 +421,7 @@ public static class ServerData
             case Item_Type.costume33:
             case Item_Type.costume34:
             case Item_Type.costume35:
+            case Item_Type.costume36:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -535,6 +540,9 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.SinSkill3:
                 passParam.Add(GoodsTable.SinSkill3, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);   
+            case Item_Type.NataSkill:
+                passParam.Add(GoodsTable.NataSkill, ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             
             case Item_Type.LeeMuGiStone:
@@ -780,6 +788,10 @@ public static class ServerData
             case Item_Type.SinSkill3:
                 ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value += amount;
                 param.Add(GoodsTable.SinSkill3, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);    
+            case Item_Type.NataSkill:
+                ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value += amount;
+                param.Add(GoodsTable.NataSkill, ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);  
             
             case Item_Type.LeeMuGiStone:

@@ -73,7 +73,7 @@ public class MapInfo : SingletonMono<MapInfo>
 
         Subscribe();
 
-       // UpdateStageRank();
+        // UpdateStageRank();
     }
 
 
@@ -182,7 +182,7 @@ public class MapInfo : SingletonMono<MapInfo>
                     yield return spawnInterval;
                 }
             }
-               
+
 
             yield return spawnDelay;
         }
@@ -415,7 +415,8 @@ public class MapInfo : SingletonMono<MapInfo>
             UiTutorialManager.Instance.SetClear(TutorialStep.ClearBoss2);
         }
 
-     
+
         GameManager.Instance.ResetLastContents();
+        PlayerStats.ResetAbilDic();
     }
 }

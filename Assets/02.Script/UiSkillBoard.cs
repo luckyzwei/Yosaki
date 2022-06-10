@@ -21,6 +21,9 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
     private Transform skillCellParent_Sin;
 
     [SerializeField]
+    private Transform skillCellParent_Nata;
+
+    [SerializeField]
     private UiPassiveSkillCell passiveSkillCellPrefab;
 
     [SerializeField]
@@ -79,7 +82,15 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             //인드라
             if (skillList[i].Skilltype == 5)
             {
+                //나타
+                if (skillList[i].Id == 20) 
+                {
+                    var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Nata);
 
+                    cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
+
+                    skillCells.Add(cell);
+                }
             }
             else if (skillList[i].Skilltype == 4 && skillList[i].Id != 18 && skillList[i].Id != 19)
             {

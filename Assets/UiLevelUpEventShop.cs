@@ -276,6 +276,12 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value += amount;
                     param.Add(GoodsTable.SinSkill3, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value);
                 }
+                break;     
+            case Item_Type.NataSkill:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value += amount;
+                    param.Add(GoodsTable.NataSkill, ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value);
+                }
                 break;
             //
 

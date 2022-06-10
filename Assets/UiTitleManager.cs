@@ -469,6 +469,20 @@ public enum TitleMissionId
 
     Stage9100,//★
     Stage9200,//★
+    Stage9300,//★
+    Stage9400,//★
+              //
+    Level1110000,//★
+    Level1120000,//★
+    Level1130000,//★
+    Level1140000,//★
+    Level1150000,//★
+    Level1160000,//★
+    Level1170000,//★
+    Level1180000,//★
+    Level1190000,//★
+    Level1200000,//★
+    GetNaTaWeapon,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -1447,6 +1461,47 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Level1100000);
             }
+            //
+            if (e >= 1110000)
+            {
+                ClearTitleMission(TitleMissionId.Level1110000);
+            }
+            if (e >= 1120000)
+            {
+                ClearTitleMission(TitleMissionId.Level1120000);
+            }
+            if (e >= 1130000)
+            {
+                ClearTitleMission(TitleMissionId.Level1130000);
+            }
+            if (e >= 1140000)
+            {
+                ClearTitleMission(TitleMissionId.Level1140000);
+            }
+            if (e >= 1150000)
+            {
+                ClearTitleMission(TitleMissionId.Level1150000);
+            }
+            if (e >= 1160000)
+            {
+                ClearTitleMission(TitleMissionId.Level1160000);
+            }
+            if (e >= 1170000)
+            {
+                ClearTitleMission(TitleMissionId.Level1170000);
+            }
+            if (e >= 1180000)
+            {
+                ClearTitleMission(TitleMissionId.Level1180000);
+            }
+            if (e >= 1190000)
+            {
+                ClearTitleMission(TitleMissionId.Level1190000);
+            }
+            if (e >= 1200000)
+            {
+                ClearTitleMission(TitleMissionId.Level1200000);
+            }
 
 
 
@@ -2221,6 +2276,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Stage9200);
             }
+            if (e >= 9300 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage9300);
+            }
+            if (e >= 9400 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage9400);
+            }
 
 
         }).AddTo(this);
@@ -2323,6 +2386,17 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.GetIndraWeapon);
             }
         }).AddTo(this);
+
+        //나타
+        ServerData.weaponTable.TableDatas["weapon27"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.GetNaTaWeapon);
+            }
+        }).AddTo(this);
+
+        //
         //노리개
 
         ServerData.magicBookTable.TableDatas["magicBook12"].hasItem.AsObservable().Subscribe(e =>
