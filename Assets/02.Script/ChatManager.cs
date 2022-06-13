@@ -29,6 +29,8 @@ public class ChatManager : SingletonMono<ChatManager>
 
     WaitForSeconds retryDelay = new WaitForSeconds(3.0f);
 
+    public ReactiveCommand<string> WhenBanned = new ReactiveCommand<string>();
+
     public class ChatInfo
     {
         public string message;
@@ -530,7 +532,7 @@ public class ChatManager : SingletonMono<ChatManager>
                 break;
             case RankType.Real_Boss:
                 return CommonString.RankPrefix_Real_Boss;
-                break;       
+                break;
             case RankType.GangChul:
                 return CommonString.RankPrefix_GangChul;
                 break;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class UiMessageText : MonoBehaviour
 
     private static string fadeAnimName = "Fade";
 
+    private string nickName = string.Empty;
+
 
     [SerializeField]
     private Image costumeIcon;
@@ -24,12 +27,19 @@ public class UiMessageText : MonoBehaviour
     [SerializeField]
     private List<GameObject> frame;
 
+    [SerializeField]
+    private GameObject banButtonRoot;
+
+    private bool subscribed = false;
+
     public void Initialize(string description, bool isSystem, int frameId = 0)
     {
-        for(int i = 0; i < frame.Count; i++) 
+        for (int i = 0; i < frame.Count; i++)
         {
             frame[i].SetActive(!isSystem && i == frameId);
         }
+
+        nickName = string.Empty;
 
         costumeIcon.gameObject.SetActive(isSystem == false);
 
@@ -45,6 +55,18 @@ public class UiMessageText : MonoBehaviour
         {
             if (description.Contains($"{CommonString.ChatSplitChar}"))
             {
+                var nickSplit = description.Split('>');
+
+                if (nickSplit.Length >= 2)
+                {
+                    var nickFind = nickSplit[2].Split(':');
+
+                    if (nickFind.Length > 0)
+                    {
+                        nickName = nickFind[0];
+                    }
+                }
+
                 var split = description.Split(CommonString.ChatSplitChar);
 
                 if (split.Length > 0)
@@ -73,5 +95,41 @@ public class UiMessageText : MonoBehaviour
             }
 
         }
+
+        banButtonRoot.SetActive(nickName != string.Empty);
+
+        if (subscribed == false)
+        {
+
+            subscribed = true;
+
+            Subscribe();
+
+        }
     }
+
+    private void Subscribe()
+    {
+        ChatManager.Instance.WhenBanned.AsObservable().Subscribe(e =>
+        {
+            if (e.Equals(this.nickName))
+            {
+                description.SetText("차단됨");
+            }
+
+        }).AddTo(this);
+    }
+
+    public void OnClickBanButton()
+    {
+        description.SetText("차단됨");
+
+        ChatManager.Instance.WhenBanned.Execute(nickName);
+    }
+
+    public void OnClickReportButton()
+    {
+        PopupManager.Instance.ShowYesNoPopup("알림", "채팅을 신고 할까요?", () => { }, () => { });
+    }
+
 }

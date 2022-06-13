@@ -38,36 +38,44 @@ public class UiStageRelicCell : MonoBehaviour
         return relicServerData.level.Value >= relicLocalData.Maxlevel;
     }
 
+    private void UpdateDescription(int level)
+    {
+        if (levelText == null || priceText == null || relicDescription == null || relicLocalData == null) return;
+
+        levelText.SetText($"LV:{level.ToString()}");
+
+        if (IsMaxLevel() == false)
+        {
+            priceText.SetText(Utils.ConvertBigNum(relicLocalData.Upgradeprice));
+        }
+        else
+        {
+            priceText.SetText("MAX");
+        }
+
+        StatusType abilType = (StatusType)relicLocalData.Abiltype;
+
+        if (abilType.IsPercentStat())
+        {
+            var abilValue = PlayerStats.GetStageRelicHasEffect(abilType);
+
+            relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {abilValue * 100f}%");
+
+        }
+        else
+        {
+            var abilValue = PlayerStats.GetStageRelicHasEffect(abilType);
+
+            relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {abilValue}");
+        }
+    }
+
     private void Subscribe()
     {
         relicServerData.level.AsObservable().Subscribe(level =>
         {
-            levelText.SetText($"LV:{level.ToString()}");
 
-            if (IsMaxLevel() == false)
-            {
-                priceText.SetText(Utils.ConvertBigNum(relicLocalData.Upgradeprice));
-            }
-            else
-            {
-                priceText.SetText("MAX");
-            }
-
-            StatusType abilType = (StatusType)relicLocalData.Abiltype;
-
-            if (abilType.IsPercentStat())
-            {
-                var abilValue = PlayerStats.GetStageRelicHasEffect(abilType);
-
-                relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {abilValue * 100f}%");
-
-            }
-            else
-            {
-                var abilValue = PlayerStats.GetStageRelicHasEffect(abilType);
-
-                relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {abilValue}");
-            }
+            UpdateDescription(level);
 
         }).AddTo(this);
 
@@ -186,6 +194,8 @@ public class UiStageRelicCell : MonoBehaviour
 
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
 
+
+
     }
     public void OnClickLevelupButton()
     {
@@ -221,6 +231,10 @@ public class UiStageRelicCell : MonoBehaviour
 
     private IEnumerator SyncRoutine()
     {
+        PlayerStats.ResetAbilDic();
+
+        UpdateDescription(relicServerData.level.Value);
+
         yield return syncDelay;
 
         List<TransactionValue> transactions = new List<TransactionValue>();
@@ -236,7 +250,10 @@ public class UiStageRelicCell : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-            //  LogManager.Instance.SendLogType("StageRelic", relicLocalData.Stringid, ServerData.stageRelicServerTable.TableDatas[relicLocalData.Stringid].level.Value.ToString());
+              //  LogManager.Instance.SendLogType("StageRelic", relicLocalData.Stringid, ServerData.stageRelicServerTable.TableDatas[relicLocalData.Stringid].level.Value.ToString());
           });
+
+
+
     }
 }
