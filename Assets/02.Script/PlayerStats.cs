@@ -443,7 +443,7 @@ public static class PlayerStats
         return ret;
     }
 
-    
+
     public static float GetSkillHasValue(StatusType type)
     {
         float ret = 0f;
@@ -607,7 +607,7 @@ public static class PlayerStats
         ret += GetStageRelicHasEffect(StatusType.CriticalDam);
         ret += GetSonAbilHasEffect(StatusType.CriticalDam);
         ret += GetSinsuEquipEffect(StatusType.CriticalDam);
-
+        ret += GetSusanoAbil(StatusType.CriticalDam);
 
         return ret;
     }
@@ -858,6 +858,8 @@ public static class PlayerStats
         ret += GetPassiveSkillValue(StatusType.PenetrateDefense);
 
         ret += GetIndraAbilValue(StatusType.PenetrateDefense);
+
+        ret += GetSusanoAbil(StatusType.PenetrateDefense);
 
         return ret;
     }
@@ -1171,13 +1173,13 @@ public static class PlayerStats
         return ret;
     }
 
-    public static float GetStageAddValue() 
+    public static float GetStageAddValue()
     {
         int currentStage = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.topClearStageId].Value;
 
         float divide = (int)(currentStage / divideNum);
 
-        return (1 + divide * divideAbilValue); 
+        return (1 + divide * divideAbilValue);
     }
 
     public static float GetSonAbilHasEffect(StatusType statusType, int addLevel = 0)
@@ -1473,5 +1475,49 @@ public static class PlayerStats
         PetServerTable.ResetPetHas();
         PlayerStats.ResetTitleHas();
         PlayerStats.ResetStageRelicHas();
+    }
+
+    public static int GetSusanoGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.susanoTable.dataArray;
+
+        var score = ServerData.userInfoTable.TableDatas[UserInfoTable.susanoScore].Value * GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
+
+    public static float GetSusanoAbil(StatusType type)
+    {
+
+        int grade = GetSusanoGrade();
+
+        if (grade == -1) return 0f;
+
+        var tableData = TableManager.Instance.susanoTable.dataArray[grade];
+
+        if (type == StatusType.CriticalDam)
+        {
+
+            return tableData.Abilvalue0;
+
+        }
+        else if (type == StatusType.PenetrateDefense)
+        {
+
+            return tableData.Abilvalue1;
+
+        }
+
+        return 0f;
     }
 }

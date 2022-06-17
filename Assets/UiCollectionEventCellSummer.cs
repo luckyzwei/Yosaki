@@ -18,6 +18,9 @@ public class UiCollectionEventCellSummer : MonoBehaviour
     private TextMeshProUGUI itemAmount;
 
     [SerializeField]
+    private TextMeshProUGUI itemAmount_Costume;
+
+    [SerializeField]
     private TextMeshProUGUI price;
 
     [SerializeField]
@@ -88,6 +91,13 @@ public class UiCollectionEventCellSummer : MonoBehaviour
             skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
             skeletonGraphic.Initialize(true);
             skeletonGraphic.SetMaterialDirty();
+
+            var costumeTable = TableManager.Instance.Costume.dataArray[idx];
+
+            if (itemAmount_Costume != null)
+            {
+                itemAmount_Costume.SetText($"(능력치 슬롯{costumeTable.Slotnum}개)");
+            }
         }
 
         itemIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableData.Itemtype);

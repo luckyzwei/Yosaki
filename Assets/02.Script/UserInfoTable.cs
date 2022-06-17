@@ -119,6 +119,7 @@ public class UserInfoTable
     public const string relicReset2 = "relicReset2";
     public const string dailyPackReset = "dpr";
     public const string sonScore = "son6";
+    public const string susanoScore = "susa";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
     public const string buffAwake = "buffAwake";
     public const string petAwake = "petAwake";
@@ -226,6 +227,7 @@ public class UserInfoTable
         {dailyPackReset,0f},
         {yomul6_buff,0f},
         {sonScore,0f},
+        {susanoScore,0f},
         {sleepRewardSavedTime,0f},
         {yomul7_buff,0f},
         {attendanceCount_100Day,1f},

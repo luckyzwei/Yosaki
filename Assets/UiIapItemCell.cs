@@ -113,18 +113,25 @@ public class UiIapItemCell : MonoBehaviour
 
             if (priceText != null)
             {
-                if (Application.systemLanguage == SystemLanguage.Korean)
+                if (productData.Id == 101)
                 {
+                    priceText.SetText($"무료!");
+                }
+                else 
+                {
+                    if (Application.systemLanguage == SystemLanguage.Korean)
+                    {
 #if UNITY_ANDROID
-                    priceText.SetText($"{price}{IAPManager.Instance.GetProduct(productData.Productid).metadata.isoCurrencyCode}");
+                        priceText.SetText($"{price}{IAPManager.Instance.GetProduct(productData.Productid).metadata.isoCurrencyCode}");
 #endif
 #if UNITY_IOS
                     priceText.SetText($"{price}{IAPManager.Instance.GetProduct(productData.Productidios).metadata.isoCurrencyCode}");
 #endif
-                }
-                else
-                {
-                    priceText.SetText($"{price}$");
+                    }
+                    else
+                    {
+                        priceText.SetText($"{price}$");
+                    }
                 }
 
             }
@@ -216,18 +223,22 @@ public class UiIapItemCell : MonoBehaviour
 
         if (productData.Needlevel == 0)
         {
-#if TEST
-        UiShop.Instance.BuyProduct(productData.Productid);
-        return;
-#endif
 
+            if (productData.Id == 101)
+            {
+                UiShop.Instance.GetPackageItem(productData.Productid);
+            }
+            else
+            {
 #if UNITY_ANDROID
-            IAPManager.Instance.BuyProduct(productData.Productid);
+                IAPManager.Instance.BuyProduct(productData.Productid);
 #endif
 
 #if UNITY_IOS
         IAPManager.Instance.BuyProduct(productData.Productidios);
 #endif
+            }
+
         }
         else
         {

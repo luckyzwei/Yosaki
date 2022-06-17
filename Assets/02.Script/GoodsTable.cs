@@ -270,7 +270,7 @@ public class GoodsTable
     static int eventItemAddNum_Spring = 0;
     public void GetSpringEventItem(float amount)
     {
-        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Item_1)} 획득(+{(int)amount})");
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Item_Summer)} 획득(+{(int)amount})");
 
         eventItemAddNum_Spring += (int)amount;
 
@@ -280,7 +280,7 @@ public class GoodsTable
         }
         else
         {
-            tableDatas[Event_Item_1].Value += eventItemAddNum_Spring;
+            //tableDatas[Event_Item_1].Value += eventItemAddNum_Spring;
             tableDatas[Event_Item_Summer].Value += eventItemAddNum_Spring;
             eventItemAddNum_Spring = 0;
         }
@@ -527,7 +527,7 @@ public class GoodsTable
             goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
         }
 
-        goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
+        //goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
         goodsParam.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
 
         goodsParam.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);

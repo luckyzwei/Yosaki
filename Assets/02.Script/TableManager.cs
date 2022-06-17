@@ -641,5 +641,6 @@ public class TableManager : SingletonMono<TableManager>
 
     public SummerCollection SummerCollection => summerCollection;
 
+    public SusanoTable susanoTable;
 }
 

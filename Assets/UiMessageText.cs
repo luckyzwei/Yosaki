@@ -129,7 +129,10 @@ public class UiMessageText : MonoBehaviour
 
     public void OnClickReportButton()
     {
-        PopupManager.Instance.ShowYesNoPopup("알림", "채팅을 신고 할까요?", () => { }, () => { });
+        PopupManager.Instance.ShowYesNoPopup("알림", "채팅을 신고 할까요?", () => 
+        {
+            PopupManager.Instance.ShowAlarmMessage("신고 완료");
+        }, () => { });
     }
 
 }

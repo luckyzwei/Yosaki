@@ -15,13 +15,9 @@ public class SonBossEnemy : BossEnemyBase
 
     private void UpdateBossDamage()
     {
-        var bossTableData = TableManager.Instance.BossTableData[GameManager.Instance.bossId];
 
-        float ratio = (float)(SonManager.Instance.GetComponent<SonManager>().GetDamagedAmount() / bossTableData.Hp);
 
-        float damage = Mathf.Lerp(bossTableData.Attackpowermin, bossTableData.Attackpowermax, Mathf.Min(1f, ratio));
-
-        hitObject.SetDamage(damage);
+        hitObject.SetDamage(0f);
     }
 
     private IEnumerator BossAttackPowerUpdateRoutine()
@@ -79,8 +75,7 @@ public class SonBossEnemy : BossEnemyBase
     {
         agentHpController.SetHp(float.MaxValue);
 
-        var bossTableData = TableManager.Instance.BossTableData[GameManager.Instance.bossId];
-        agentHpController.SetDefense(bossTableData.Defense);
+        agentHpController.SetDefense(10);
 
         StartCoroutine(BossAttackPowerUpdateRoutine());
 

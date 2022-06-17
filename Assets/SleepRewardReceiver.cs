@@ -171,7 +171,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += sleepRewardInfo.eventItem;
         }
 
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += sleepRewardInfo.springItem;
+      //  ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += sleepRewardInfo.springItem;
         ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += sleepRewardInfo.springItem;
 
 
@@ -204,7 +204,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
         }
 
-        goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
+     //   goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
         goodsParam.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
 
         goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
