@@ -25,6 +25,7 @@ public class GameEscapeManager : SingletonMono<GameEscapeManager>
 
     public void OnClickApplicationQuitButton()
     {
+        Backend.BMember.Logout();
         Application.Quit();
     }
 
