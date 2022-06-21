@@ -120,6 +120,7 @@ public class SaveManager : SingletonMono<SaveManager>
     }
     private void OnApplicationQuit()
     {
+        Backend.BMember.Logout();
         SetNotification();
         SyncDatasForce();
         SyncDailyMissions();
