@@ -98,6 +98,10 @@ public class UiAutoBoss : SingletonMono<UiAutoBoss>
 
     public void OnClickAutoStopButton()
     {
-        StopAutoBoss();
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "자동 진행을 멈출까요?", () =>
+         {
+             StopAutoBoss();
+         }, () => { });
+
     }
 }
