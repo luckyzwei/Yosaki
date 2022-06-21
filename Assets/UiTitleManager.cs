@@ -485,6 +485,18 @@ public enum TitleMissionId
     GetNaTaWeapon,//★
     Stage9500,//★
     Stage9600,//★
+    Stage9700,//★
+    Stage9800,//★
+    Level1210000,//★
+    Level1220000,//★
+    Level1230000,//★
+    Level1240000,//★
+    Level1250000,//★
+    Level1260000,//★
+    Level1270000,//★
+    Level1280000,//★
+    Level1290000,//★
+    Level1300000,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -502,964 +514,964 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.Level1000);
             }
 
-              if (e >= 2000)
+            if (e >= 2000)
             {
                 ClearTitleMission(TitleMissionId.Level2000);
             }
 
-              if (e >= 3000)
+            if (e >= 3000)
             {
                 ClearTitleMission(TitleMissionId.Level3000);
             }
 
-              if (e >= 5000)
+            if (e >= 5000)
             {
                 ClearTitleMission(TitleMissionId.Level5000);
             }
 
-              if (e >= 7000)
+            if (e >= 7000)
             {
                 ClearTitleMission(TitleMissionId.Level7000);
             }
 
-              if (e >= 9000)
+            if (e >= 9000)
             {
                 ClearTitleMission(TitleMissionId.Level9000);
             }
 
-              if (e >= 11000)
+            if (e >= 11000)
             {
                 ClearTitleMission(TitleMissionId.Level11000);
             }
 
-              if (e >= 13000)
+            if (e >= 13000)
             {
                 ClearTitleMission(TitleMissionId.Level13000);
             }
 
-              if (e >= 15000)
+            if (e >= 15000)
             {
                 ClearTitleMission(TitleMissionId.Level15000);
             }
 
-              if (e >= 17000)
+            if (e >= 17000)
             {
                 ClearTitleMission(TitleMissionId.Level17000);
             }
 
-              if (e >= 20000)
+            if (e >= 20000)
             {
                 ClearTitleMission(TitleMissionId.Level20000);
             }
 
-              if (e >= 23000)
+            if (e >= 23000)
             {
                 ClearTitleMission(TitleMissionId.Level23000);
             }
 
-              if (e >= 26000)
+            if (e >= 26000)
             {
                 ClearTitleMission(TitleMissionId.Level26000);
             }
 
-              if (e >= 29000)
+            if (e >= 29000)
             {
                 ClearTitleMission(TitleMissionId.Level29000);
             }
 
-              if (e >= 32000)
+            if (e >= 32000)
             {
                 ClearTitleMission(TitleMissionId.Level32000);
             }
 
-              if (e >= 35000)
+            if (e >= 35000)
             {
                 ClearTitleMission(TitleMissionId.Level35000);
             }
 
-              if (e >= 38000)
+            if (e >= 38000)
             {
                 ClearTitleMission(TitleMissionId.Level38000);
             }
 
-              if (e >= 41000)
+            if (e >= 41000)
             {
                 ClearTitleMission(TitleMissionId.Level41000);
             }
 
-              if (e >= 44000)
+            if (e >= 44000)
             {
                 ClearTitleMission(TitleMissionId.Level44000);
             }
 
-              if (e >= 47000)
+            if (e >= 47000)
             {
                 ClearTitleMission(TitleMissionId.Level47000);
             }
 
-              if (e >= 50000)
+            if (e >= 50000)
             {
                 ClearTitleMission(TitleMissionId.Level50000);
             }
 
-              if (e >= 53000)
+            if (e >= 53000)
             {
                 ClearTitleMission(TitleMissionId.Level53000);
             }
 
             /////////
             ///
-              if (e >= 56000)
+            if (e >= 56000)
             {
                 ClearTitleMission(TitleMissionId.Level56000);
             }
-              if (e >= 59000)
+            if (e >= 59000)
             {
                 ClearTitleMission(TitleMissionId.Level59000);
             }
-              if (e >= 62000)
+            if (e >= 62000)
             {
                 ClearTitleMission(TitleMissionId.Level62000);
             }
-              if (e >= 65000)
+            if (e >= 65000)
             {
                 ClearTitleMission(TitleMissionId.Level65000);
             }
-              if (e >= 68000)
+            if (e >= 68000)
             {
                 ClearTitleMission(TitleMissionId.Level68000);
             }
-              if (e >= 71000)
+            if (e >= 71000)
             {
                 ClearTitleMission(TitleMissionId.Level71000);
             }
-              if (e >= 74000)
+            if (e >= 74000)
             {
                 ClearTitleMission(TitleMissionId.Level74000);
             }
-              if (e >= 77000)
+            if (e >= 77000)
             {
                 ClearTitleMission(TitleMissionId.Level77000);
             }
-              if (e >= 80000)
+            if (e >= 80000)
             {
                 ClearTitleMission(TitleMissionId.Level80000);
             }
-              if (e >= 83000)
+            if (e >= 83000)
             {
                 ClearTitleMission(TitleMissionId.Level83000);
             }
 
             //
-              if (e >= 86000)
+            if (e >= 86000)
             {
                 ClearTitleMission(TitleMissionId.Level86000);
             }
-              if (e >= 89000)
+            if (e >= 89000)
             {
                 ClearTitleMission(TitleMissionId.Level89000);
             }
-              if (e >= 92000)
+            if (e >= 92000)
             {
                 ClearTitleMission(TitleMissionId.Level92000);
             }
-              if (e >= 95000)
+            if (e >= 95000)
             {
                 ClearTitleMission(TitleMissionId.Level95000);
             }
-              if (e >= 98000)
+            if (e >= 98000)
             {
                 ClearTitleMission(TitleMissionId.Level98000);
             }
-              if (e >= 101000)
+            if (e >= 101000)
             {
                 ClearTitleMission(TitleMissionId.Level101000);
             }
 
             //
-              if (e >= 104000)
+            if (e >= 104000)
             {
                 ClearTitleMission(TitleMissionId.Level104000);
             }
-              if (e >= 107000)
+            if (e >= 107000)
             {
                 ClearTitleMission(TitleMissionId.Level107000);
             }
-              if (e >= 110000)
+            if (e >= 110000)
             {
                 ClearTitleMission(TitleMissionId.Level110000);
             }
-              if (e >= 113000)
+            if (e >= 113000)
             {
                 ClearTitleMission(TitleMissionId.Level113000);
             }
-              if (e >= 116000)
+            if (e >= 116000)
             {
                 ClearTitleMission(TitleMissionId.Level116000);
             }
-              if (e >= 119000)
+            if (e >= 119000)
             {
                 ClearTitleMission(TitleMissionId.Level119000);
             }
-              if (e >= 122000)
+            if (e >= 122000)
             {
                 ClearTitleMission(TitleMissionId.Level122000);
             }
-              if (e >= 125000)
+            if (e >= 125000)
             {
                 ClearTitleMission(TitleMissionId.Level125000);
             }
 
             //
-              if (e >= 128000)
+            if (e >= 128000)
             {
                 ClearTitleMission(TitleMissionId.Level128000);
             }
-              if (e >= 131000)
+            if (e >= 131000)
             {
                 ClearTitleMission(TitleMissionId.Level131000);
             }
-              if (e >= 134000)
+            if (e >= 134000)
             {
                 ClearTitleMission(TitleMissionId.Level134000);
             }
-              if (e >= 137000)
+            if (e >= 137000)
             {
                 ClearTitleMission(TitleMissionId.Level137000);
             }
-              if (e >= 140000)
+            if (e >= 140000)
             {
                 ClearTitleMission(TitleMissionId.Level140000);
             }
-              if (e >= 143000)
+            if (e >= 143000)
             {
                 ClearTitleMission(TitleMissionId.Level143000);
             }
-              if (e >= 146000)
+            if (e >= 146000)
             {
                 ClearTitleMission(TitleMissionId.Level146000);
             }
-              if (e >= 149000)
+            if (e >= 149000)
             {
                 ClearTitleMission(TitleMissionId.Level149000);
             }
-              if (e >= 152000)
+            if (e >= 152000)
             {
                 ClearTitleMission(TitleMissionId.Level152000);
             }
-              if (e >= 155000)
+            if (e >= 155000)
             {
                 ClearTitleMission(TitleMissionId.Level155000);
             }
-              if (e >= 158000)
+            if (e >= 158000)
             {
                 ClearTitleMission(TitleMissionId.Level158000);
             }
-              if (e >= 161000)
+            if (e >= 161000)
             {
                 ClearTitleMission(TitleMissionId.Level161000);
             }
             //
-              if (e >= 164000)
+            if (e >= 164000)
             {
                 ClearTitleMission(TitleMissionId.Level164000);
             }
-              if (e >= 167000)
+            if (e >= 167000)
             {
                 ClearTitleMission(TitleMissionId.Level167000);
             }
-              if (e >= 170000)
+            if (e >= 170000)
             {
                 ClearTitleMission(TitleMissionId.Level170000);
             }
-              if (e >= 173000)
+            if (e >= 173000)
             {
                 ClearTitleMission(TitleMissionId.Level173000);
             }
             //
 
-              if (e >= 176000)
+            if (e >= 176000)
             {
                 ClearTitleMission(TitleMissionId.Level176000);
             }
-              if (e >= 179000)
+            if (e >= 179000)
             {
                 ClearTitleMission(TitleMissionId.Level179000);
             }
-              if (e >= 182000)
+            if (e >= 182000)
             {
                 ClearTitleMission(TitleMissionId.Level182000);
             }
-              if (e >= 185000)
+            if (e >= 185000)
             {
                 ClearTitleMission(TitleMissionId.Level185000);
             }
-              if (e >= 188000)
+            if (e >= 188000)
             {
                 ClearTitleMission(TitleMissionId.Level188000);
             }
-              if (e >= 191000)
+            if (e >= 191000)
             {
                 ClearTitleMission(TitleMissionId.Level191000);
             }
-              if (e >= 194000)
+            if (e >= 194000)
             {
                 ClearTitleMission(TitleMissionId.Level194000);
             }
-              if (e >= 197000)
+            if (e >= 197000)
             {
                 ClearTitleMission(TitleMissionId.Level197000);
             }
-              if (e >= 200000)
+            if (e >= 200000)
             {
                 ClearTitleMission(TitleMissionId.Level200000);
             }
-              if (e >= 203000)
+            if (e >= 203000)
             {
                 ClearTitleMission(TitleMissionId.Level203000);
             }
-              if (e >= 206000)
+            if (e >= 206000)
             {
                 ClearTitleMission(TitleMissionId.Level206000);
             }
-              if (e >= 209000)
+            if (e >= 209000)
             {
                 ClearTitleMission(TitleMissionId.Level209000);
             }
-              if (e >= 212000)
+            if (e >= 212000)
             {
                 ClearTitleMission(TitleMissionId.Level212000);
             }
-              if (e >= 215000)
+            if (e >= 215000)
             {
                 ClearTitleMission(TitleMissionId.Level215000);
             }
-              if (e >= 218000)
+            if (e >= 218000)
             {
                 ClearTitleMission(TitleMissionId.Level218000);
             }
-              if (e >= 221000)
+            if (e >= 221000)
             {
                 ClearTitleMission(TitleMissionId.Level221000);
             }
-              if (e >= 224000)
+            if (e >= 224000)
             {
                 ClearTitleMission(TitleMissionId.Level224000);
             }
-              if (e >= 227000)
+            if (e >= 227000)
             {
                 ClearTitleMission(TitleMissionId.Level227000);
             }
-              if (e >= 230000)
+            if (e >= 230000)
             {
                 ClearTitleMission(TitleMissionId.Level230000);
             }
-              if (e >= 233000)
+            if (e >= 233000)
             {
                 ClearTitleMission(TitleMissionId.Level233000);
             }
-              if (e >= 236000)
+            if (e >= 236000)
             {
                 ClearTitleMission(TitleMissionId.Level236000);
             }
-              if (e >= 239000)
+            if (e >= 239000)
             {
                 ClearTitleMission(TitleMissionId.Level239000);
             }
-              if (e >= 242000)
+            if (e >= 242000)
             {
                 ClearTitleMission(TitleMissionId.Level242000);
             }
-              if (e >= 245000)
+            if (e >= 245000)
             {
                 ClearTitleMission(TitleMissionId.Level245000);
             }
-              if (e >= 248000)
+            if (e >= 248000)
             {
                 ClearTitleMission(TitleMissionId.Level248000);
             }
-              if (e >= 251000)
+            if (e >= 251000)
             {
                 ClearTitleMission(TitleMissionId.Level251000);
             }
 
-              if (e >= 255000)
+            if (e >= 255000)
             {
                 ClearTitleMission(TitleMissionId.Level255000);
             }
-              if (e >= 260000)
+            if (e >= 260000)
             {
                 ClearTitleMission(TitleMissionId.Level260000);
             }
-              if (e >= 265000)
+            if (e >= 265000)
             {
                 ClearTitleMission(TitleMissionId.Level265000);
             }
-              if (e >= 270000)
+            if (e >= 270000)
             {
                 ClearTitleMission(TitleMissionId.Level270000);
             }
-              if (e >= 275000)
+            if (e >= 275000)
             {
                 ClearTitleMission(TitleMissionId.Level275000);
             }
-              if (e >= 280000)
+            if (e >= 280000)
             {
                 ClearTitleMission(TitleMissionId.Level280000);
             }
-              if (e >= 285000)
+            if (e >= 285000)
             {
                 ClearTitleMission(TitleMissionId.Level285000);
             }
-              if (e >= 290000)
+            if (e >= 290000)
             {
                 ClearTitleMission(TitleMissionId.Level290000);
             }
-              if (e >= 295000)
+            if (e >= 295000)
             {
                 ClearTitleMission(TitleMissionId.Level295000);
             }
-              if (e >= 300000)
+            if (e >= 300000)
             {
                 ClearTitleMission(TitleMissionId.Level300000);
             }
 
             //
 
-              if (e >= 305000)
+            if (e >= 305000)
             {
                 ClearTitleMission(TitleMissionId.Level305000);
             }
-              if (e >= 310000)
+            if (e >= 310000)
             {
                 ClearTitleMission(TitleMissionId.Level310000);
             }
-              if (e >= 315000)
+            if (e >= 315000)
             {
                 ClearTitleMission(TitleMissionId.Level315000);
             }
-              if (e >= 320000)
+            if (e >= 320000)
             {
                 ClearTitleMission(TitleMissionId.Level320000);
             }
-              if (e >= 325000)
+            if (e >= 325000)
             {
                 ClearTitleMission(TitleMissionId.Level325000);
             }
-              if (e >= 330000)
+            if (e >= 330000)
             {
                 ClearTitleMission(TitleMissionId.Level330000);
             }
-              if (e >= 335000)
+            if (e >= 335000)
             {
                 ClearTitleMission(TitleMissionId.Level335000);
             }
-              if (e >= 340000)
+            if (e >= 340000)
             {
                 ClearTitleMission(TitleMissionId.Level340000);
             }
-              if (e >= 345000)
+            if (e >= 345000)
             {
                 ClearTitleMission(TitleMissionId.Level345000);
             }
-              if (e >= 350000)
+            if (e >= 350000)
             {
                 ClearTitleMission(TitleMissionId.Level350000);
             }
 
             //
 
-              if (e >= 355000)
+            if (e >= 355000)
             {
                 ClearTitleMission(TitleMissionId.Level355000);
             }
-              if (e >= 360000)
+            if (e >= 360000)
             {
                 ClearTitleMission(TitleMissionId.Level360000);
             }
-              if (e >= 365000)
+            if (e >= 365000)
             {
                 ClearTitleMission(TitleMissionId.Level365000);
             }
-              if (e >= 370000)
+            if (e >= 370000)
             {
                 ClearTitleMission(TitleMissionId.Level370000);
             }
-              if (e >= 375000)
+            if (e >= 375000)
             {
                 ClearTitleMission(TitleMissionId.Level375000);
             }
-              if (e >= 380000)
+            if (e >= 380000)
             {
                 ClearTitleMission(TitleMissionId.Level380000);
             }
-              if (e >= 385000)
+            if (e >= 385000)
             {
                 ClearTitleMission(TitleMissionId.Level385000);
             }
-              if (e >= 390000)
+            if (e >= 390000)
             {
                 ClearTitleMission(TitleMissionId.Level390000);
             }
-              if (e >= 395000)
+            if (e >= 395000)
             {
                 ClearTitleMission(TitleMissionId.Level395000);
             }
-              if (e >= 400000)
+            if (e >= 400000)
             {
                 ClearTitleMission(TitleMissionId.Level400000);
             }
             //
-              if (e >= 405000)
+            if (e >= 405000)
             {
                 ClearTitleMission(TitleMissionId.Level405000);
             }
-              if (e >= 410000)
+            if (e >= 410000)
             {
                 ClearTitleMission(TitleMissionId.Level410000);
             }
-              if (e >= 415000)
+            if (e >= 415000)
             {
                 ClearTitleMission(TitleMissionId.Level415000);
             }
-              if (e >= 420000)
+            if (e >= 420000)
             {
                 ClearTitleMission(TitleMissionId.Level420000);
             }
-              if (e >= 425000)
+            if (e >= 425000)
             {
                 ClearTitleMission(TitleMissionId.Level425000);
             }
-              if (e >= 430000)
+            if (e >= 430000)
             {
                 ClearTitleMission(TitleMissionId.Level430000);
             }
-              if (e >= 435000)
+            if (e >= 435000)
             {
                 ClearTitleMission(TitleMissionId.Level435000);
             }
-              if (e >= 440000)
+            if (e >= 440000)
             {
                 ClearTitleMission(TitleMissionId.Level440000);
             }
-              if (e >= 445000)
+            if (e >= 445000)
             {
                 ClearTitleMission(TitleMissionId.Level445000);
             }
-              if (e >= 450000)
+            if (e >= 450000)
             {
                 ClearTitleMission(TitleMissionId.Level450000);
             }
             //
-              if (e >= 455000)
+            if (e >= 455000)
             {
                 ClearTitleMission(TitleMissionId.Level455000);
             }
-              if (e >= 460000)
+            if (e >= 460000)
             {
                 ClearTitleMission(TitleMissionId.Level460000);
             }
-              if (e >= 465000)
+            if (e >= 465000)
             {
                 ClearTitleMission(TitleMissionId.Level465000);
             }
-              if (e >= 470000)
+            if (e >= 470000)
             {
                 ClearTitleMission(TitleMissionId.Level470000);
             }
-              if (e >= 475000)
+            if (e >= 475000)
             {
                 ClearTitleMission(TitleMissionId.Level475000);
             }
-              if (e >= 480000)
+            if (e >= 480000)
             {
                 ClearTitleMission(TitleMissionId.Level480000);
             }
-              if (e >= 485000)
+            if (e >= 485000)
             {
                 ClearTitleMission(TitleMissionId.Level485000);
             }
-              if (e >= 490000)
+            if (e >= 490000)
             {
                 ClearTitleMission(TitleMissionId.Level490000);
             }
-              if (e >= 495000)
+            if (e >= 495000)
             {
                 ClearTitleMission(TitleMissionId.Level495000);
             }
-              if (e >= 500000)
+            if (e >= 500000)
             {
                 ClearTitleMission(TitleMissionId.Level500000);
             }
             //
-              if (e >= 505000)
+            if (e >= 505000)
             {
                 ClearTitleMission(TitleMissionId.Level505000);
             }
-              if (e >= 510000)
+            if (e >= 510000)
             {
                 ClearTitleMission(TitleMissionId.Level510000);
             }
-              if (e >= 515000)
+            if (e >= 515000)
             {
                 ClearTitleMission(TitleMissionId.Level515000);
             }
-              if (e >= 520000)
+            if (e >= 520000)
             {
                 ClearTitleMission(TitleMissionId.Level520000);
             }
-              if (e >= 525000)
+            if (e >= 525000)
             {
                 ClearTitleMission(TitleMissionId.Level525000);
             }
-              if (e >= 530000)
+            if (e >= 530000)
             {
                 ClearTitleMission(TitleMissionId.Level530000);
             }
-              if (e >= 535000)
+            if (e >= 535000)
             {
                 ClearTitleMission(TitleMissionId.Level535000);
             }
-              if (e >= 540000)
+            if (e >= 540000)
             {
                 ClearTitleMission(TitleMissionId.Level540000);
             }
-              if (e >= 545000)
+            if (e >= 545000)
             {
                 ClearTitleMission(TitleMissionId.Level545000);
             }
-              if (e >= 550000)
+            if (e >= 550000)
             {
                 ClearTitleMission(TitleMissionId.Level550000);
             }
             //
-              if (e >= 555000)
+            if (e >= 555000)
             {
                 ClearTitleMission(TitleMissionId.Level555000);
             }
-              if (e >= 560000)
+            if (e >= 560000)
             {
                 ClearTitleMission(TitleMissionId.Level560000);
             }
-              if (e >= 565000)
+            if (e >= 565000)
             {
                 ClearTitleMission(TitleMissionId.Level565000);
             }
-              if (e >= 570000)
+            if (e >= 570000)
             {
                 ClearTitleMission(TitleMissionId.Level570000);
             }
-              if (e >= 575000)
+            if (e >= 575000)
             {
                 ClearTitleMission(TitleMissionId.Level575000);
             }
-              if (e >= 580000)
+            if (e >= 580000)
             {
                 ClearTitleMission(TitleMissionId.Level580000);
             }
-              if (e >= 585000)
+            if (e >= 585000)
             {
                 ClearTitleMission(TitleMissionId.Level585000);
             }
-              if (e >= 590000)
+            if (e >= 590000)
             {
                 ClearTitleMission(TitleMissionId.Level590000);
             }
-              if (e >= 595000)
+            if (e >= 595000)
             {
                 ClearTitleMission(TitleMissionId.Level595000);
             }
-              if (e >= 600000)
+            if (e >= 600000)
             {
                 ClearTitleMission(TitleMissionId.Level600000);
             }
             /////
             ///
 
-              if (e >= 605000)
+            if (e >= 605000)
             {
                 ClearTitleMission(TitleMissionId.Level605000);
             }
-              if (e >= 610000)
+            if (e >= 610000)
             {
                 ClearTitleMission(TitleMissionId.Level610000);
             }
-              if (e >= 615000)
+            if (e >= 615000)
             {
                 ClearTitleMission(TitleMissionId.Level615000);
             }
-              if (e >= 620000)
+            if (e >= 620000)
             {
                 ClearTitleMission(TitleMissionId.Level620000);
             }
-              if (e >= 625000)
+            if (e >= 625000)
             {
                 ClearTitleMission(TitleMissionId.Level625000);
             }
-              if (e >= 630000)
+            if (e >= 630000)
             {
                 ClearTitleMission(TitleMissionId.Level630000);
             }
-              if (e >= 635000)
+            if (e >= 635000)
             {
                 ClearTitleMission(TitleMissionId.Level635000);
             }
-              if (e >= 640000)
+            if (e >= 640000)
             {
                 ClearTitleMission(TitleMissionId.Level640000);
             }
-              if (e >= 645000)
+            if (e >= 645000)
             {
                 ClearTitleMission(TitleMissionId.Level645000);
             }
-              if (e >= 650000)
+            if (e >= 650000)
             {
                 ClearTitleMission(TitleMissionId.Level650000);
             }
             //
-              if (e >= 655000)
+            if (e >= 655000)
             {
                 ClearTitleMission(TitleMissionId.Level655000);
             }
-              if (e >= 660000)
+            if (e >= 660000)
             {
                 ClearTitleMission(TitleMissionId.Level660000);
             }
-              if (e >= 665000)
+            if (e >= 665000)
             {
                 ClearTitleMission(TitleMissionId.Level665000);
             }
-              if (e >= 670000)
+            if (e >= 670000)
             {
                 ClearTitleMission(TitleMissionId.Level670000);
             }
-              if (e >= 675000)
+            if (e >= 675000)
             {
                 ClearTitleMission(TitleMissionId.Level675000);
             }
-              if (e >= 680000)
+            if (e >= 680000)
             {
                 ClearTitleMission(TitleMissionId.Level680000);
             }
-              if (e >= 685000)
+            if (e >= 685000)
             {
                 ClearTitleMission(TitleMissionId.Level685000);
             }
-              if (e >= 690000)
+            if (e >= 690000)
             {
                 ClearTitleMission(TitleMissionId.Level690000);
             }
-              if (e >= 695000)
+            if (e >= 695000)
             {
                 ClearTitleMission(TitleMissionId.Level695000);
             }
-              if (e >= 700000)
+            if (e >= 700000)
             {
                 ClearTitleMission(TitleMissionId.Level700000);
             }
 
             /////////////////////
             ///
-              if (e >= 705000)
+            if (e >= 705000)
             {
                 ClearTitleMission(TitleMissionId.Level705000);
             }
-              if (e >= 710000)
+            if (e >= 710000)
             {
                 ClearTitleMission(TitleMissionId.Level710000);
             }
-              if (e >= 715000)
+            if (e >= 715000)
             {
                 ClearTitleMission(TitleMissionId.Level715000);
             }
-              if (e >= 720000)
+            if (e >= 720000)
             {
                 ClearTitleMission(TitleMissionId.Level720000);
             }
-              if (e >= 725000)
+            if (e >= 725000)
             {
                 ClearTitleMission(TitleMissionId.Level725000);
             }
-              if (e >= 730000)
+            if (e >= 730000)
             {
                 ClearTitleMission(TitleMissionId.Level730000);
             }
-              if (e >= 735000)
+            if (e >= 735000)
             {
                 ClearTitleMission(TitleMissionId.Level735000);
             }
-              if (e >= 740000)
+            if (e >= 740000)
             {
                 ClearTitleMission(TitleMissionId.Level740000);
             }
-              if (e >= 745000)
+            if (e >= 745000)
             {
                 ClearTitleMission(TitleMissionId.Level745000);
             }
-              if (e >= 750000)
+            if (e >= 750000)
             {
                 ClearTitleMission(TitleMissionId.Level750000);
             }
             //
-              if (e >= 755000)
-            { 
+            if (e >= 755000)
+            {
                 ClearTitleMission(TitleMissionId.Level755000);
             }
-              if (e >= 760000)
+            if (e >= 760000)
             {
                 ClearTitleMission(TitleMissionId.Level760000);
             }
-              if (e >= 765000)
+            if (e >= 765000)
             {
                 ClearTitleMission(TitleMissionId.Level765000);
             }
-              if (e >= 770000)
+            if (e >= 770000)
             {
                 ClearTitleMission(TitleMissionId.Level770000);
             }
-              if (e >= 775000)
+            if (e >= 775000)
             {
                 ClearTitleMission(TitleMissionId.Level775000);
             }
-              if (e >= 780000)
+            if (e >= 780000)
             {
                 ClearTitleMission(TitleMissionId.Level780000);
             }
-              if (e >= 785000)
+            if (e >= 785000)
             {
                 ClearTitleMission(TitleMissionId.Level785000);
             }
-              if (e >= 790000)
+            if (e >= 790000)
             {
                 ClearTitleMission(TitleMissionId.Level790000);
             }
-              if (e >= 795000)
+            if (e >= 795000)
             {
                 ClearTitleMission(TitleMissionId.Level795000);
             }
-              if (e >= 800000)
+            if (e >= 800000)
             {
                 ClearTitleMission(TitleMissionId.Level800000);
             }
             //
-              if (e >= 810000)
+            if (e >= 810000)
             {
                 ClearTitleMission(TitleMissionId.Level810000);
             }
-              if (e >= 820000)
+            if (e >= 820000)
             {
                 ClearTitleMission(TitleMissionId.Level820000);
             }
-              if (e >= 830000)
+            if (e >= 830000)
             {
                 ClearTitleMission(TitleMissionId.Level830000);
             }
-              if (e >= 840000)
+            if (e >= 840000)
             {
                 ClearTitleMission(TitleMissionId.Level840000);
             }
-              if (e >= 850000)
+            if (e >= 850000)
             {
                 ClearTitleMission(TitleMissionId.Level850000);
             }
-              if (e >= 860000)
+            if (e >= 860000)
             {
                 ClearTitleMission(TitleMissionId.Level860000);
             }
-              if (e >= 870000)
+            if (e >= 870000)
             {
                 ClearTitleMission(TitleMissionId.Level870000);
             }
-              if (e >= 880000)
+            if (e >= 880000)
             {
                 ClearTitleMission(TitleMissionId.Level880000);
             }
-              if (e >= 890000)
+            if (e >= 890000)
             {
                 ClearTitleMission(TitleMissionId.Level890000);
             }
-              if (e >= 900000)
+            if (e >= 900000)
             {
                 ClearTitleMission(TitleMissionId.Level900000);
             }
-              if (e >= 910000)
+            if (e >= 910000)
             {
                 ClearTitleMission(TitleMissionId.Level910000);
             }
-              if (e >= 920000)
+            if (e >= 920000)
             {
                 ClearTitleMission(TitleMissionId.Level920000);
             }
-              if (e >= 930000)
+            if (e >= 930000)
             {
                 ClearTitleMission(TitleMissionId.Level930000);
             }
-              if (e >= 940000)
+            if (e >= 940000)
             {
                 ClearTitleMission(TitleMissionId.Level940000);
             }
-              if (e >= 950000)
+            if (e >= 950000)
             {
                 ClearTitleMission(TitleMissionId.Level950000);
             }
-              if (e >= 960000)
+            if (e >= 960000)
             {
                 ClearTitleMission(TitleMissionId.Level960000);
             }
-              if (e >= 970000)
+            if (e >= 970000)
             {
                 ClearTitleMission(TitleMissionId.Level970000);
             }
-              if (e >= 980000)
+            if (e >= 980000)
             {
                 ClearTitleMission(TitleMissionId.Level980000);
             }
-              if (e >= 990000)
+            if (e >= 990000)
             {
                 ClearTitleMission(TitleMissionId.Level990000);
             }
-              if (e >= 1000000)
+            if (e >= 1000000)
             {
                 ClearTitleMission(TitleMissionId.Level1000000);
             }
             //
-              if (e >= 1010000)
+            if (e >= 1010000)
             {
                 ClearTitleMission(TitleMissionId.Level1010000);
             }
-              if (e >= 1020000)
+            if (e >= 1020000)
             {
                 ClearTitleMission(TitleMissionId.Level1020000);
             }
-              if (e >= 1030000)
+            if (e >= 1030000)
             {
                 ClearTitleMission(TitleMissionId.Level1030000);
             }
-              if (e >= 1040000)
+            if (e >= 1040000)
             {
                 ClearTitleMission(TitleMissionId.Level1040000);
             }
-              if (e >= 1050000)
+            if (e >= 1050000)
             {
                 ClearTitleMission(TitleMissionId.Level1050000);
             }
-              if (e >= 1060000)
+            if (e >= 1060000)
             {
                 ClearTitleMission(TitleMissionId.Level1060000);
             }
-              if (e >= 1070000)
+            if (e >= 1070000)
             {
                 ClearTitleMission(TitleMissionId.Level1070000);
             }
-              if (e >= 1080000)
+            if (e >= 1080000)
             {
                 ClearTitleMission(TitleMissionId.Level1080000);
             }
-              if (e >= 1090000)
+            if (e >= 1090000)
             {
                 ClearTitleMission(TitleMissionId.Level1090000);
             }
-              if (e >= 1100000)
+            if (e >= 1100000)
             {
                 ClearTitleMission(TitleMissionId.Level1100000);
             }
@@ -1504,7 +1516,47 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Level1200000);
             }
-
+            //
+            if (e >= 1210000)
+            {
+                ClearTitleMission(TitleMissionId.Level1210000);
+            }
+            if (e >= 1220000)
+            {
+                ClearTitleMission(TitleMissionId.Level1220000);
+            }
+            if (e >= 1230000)
+            {
+                ClearTitleMission(TitleMissionId.Level1230000);
+            }
+            if (e >= 1240000)
+            {
+                ClearTitleMission(TitleMissionId.Level1240000);
+            }
+            if (e >= 1250000)
+            {
+                ClearTitleMission(TitleMissionId.Level1250000);
+            }
+            if (e >= 1260000)
+            {
+                ClearTitleMission(TitleMissionId.Level1260000);
+            }
+            if (e >= 1270000)
+            {
+                ClearTitleMission(TitleMissionId.Level1270000);
+            }
+            if (e >= 1280000)
+            {
+                ClearTitleMission(TitleMissionId.Level1280000);
+            }
+            if (e >= 1290000)
+            {
+                ClearTitleMission(TitleMissionId.Level1290000);
+            }
+            if (e >= 1300000)
+            {
+                ClearTitleMission(TitleMissionId.Level1300000);
+            }
 
 
         }).AddTo(this);
@@ -2293,6 +2345,15 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 9600 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage9600);
+            }
+            //
+            if (e >= 9700 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage9700);
+            }
+            if (e >= 9800 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage9800);
             }
 
 
