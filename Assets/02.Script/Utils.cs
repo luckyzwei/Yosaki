@@ -54,7 +54,9 @@ public static class Utils
                   type == Item_Type.costume33 ||
                   type == Item_Type.costume34 ||
                   type == Item_Type.costume35 ||
-                  type == Item_Type.costume36;
+                  type == Item_Type.costume36 ||
+                  type == Item_Type.costume37 ||
+                  type == Item_Type.costume38;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -234,7 +236,7 @@ public static class Utils
     }
 
     #region BigFloat
-    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나" ,"불","무"};
+    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무" };
     private static double p = (double)Mathf.Pow(10, 4);
     private static List<double> numList = new List<double>();
     private static List<string> numStringList = new List<string>();

@@ -100,7 +100,7 @@ public class UserInfoTable
 
 
     public const string killCountTotal = "kt10";
-    public const string killCountTotal2 = "kt8";
+    public const string killCountTotal2 = "kt11";
     public const string killCountTotalChild = "kt9";
 
     public const string relicKillCount = "relicKillCount";
@@ -890,7 +890,7 @@ public class UserInfoTable
     public bool IsMonthlyPass2()
     {
 #if UNITY_EDITOR
-        return false;
+        return true;
 #endif
         return currentServerTime.Month == 5;
     }
