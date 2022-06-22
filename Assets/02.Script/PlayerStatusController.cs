@@ -53,7 +53,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
             if (IsMpFull() == false && mpRecoverPer != 0f)
             {
-              //  UpdateMp(maxMp.Value * mpRecoverPer);
+                //  UpdateMp(maxMp.Value * mpRecoverPer);
             }
         }
     }
@@ -222,7 +222,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
             UpdateMpMax();
         }).AddTo(this);
     }
-    
+
     private IEnumerator LateUpdateHp()
     {
         yield return null;
@@ -269,7 +269,9 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         //데미지입음
         if (value < 0)
         {
-            if (canHit == false || IsPlayerDead()) return;
+
+
+            if (canHit == false || IsPlayerDead() || UiSusanoBuff.isImmune) return;
 
             float damDecreaseValue = PlayerStats.GetDamDecreaseValue();
 
@@ -285,7 +287,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
 
 #if UNITY_EDITOR
-       // Debug.Log($"Player damaged {value}");
+        // Debug.Log($"Player damaged {value}");
 #endif
 
         SpawnDamText(value);

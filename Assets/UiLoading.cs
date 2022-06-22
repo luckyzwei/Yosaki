@@ -32,7 +32,7 @@ public class UiLoading : MonoBehaviour
         }
 
 
-
+        UiSusanoBuff.isImmune = false;
         PopupManager.Instance.PlayFade();
     }
 
