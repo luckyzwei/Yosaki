@@ -1,54 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiSusanoBuff : MonoBehaviour
+public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
 {
-    public static bool isImmune = false;
-
-    [SerializeField]
-    private Transform buttonObject;
-
-    [SerializeField]
-    private Image buffRemainObject;
-
-    [SerializeField]
-    private Image buffIcon;
-
-    [SerializeField]
-    private TextMeshProUGUI buffRemainSecDesc;
-
-    // Start is called before the first frame update
-    void Start()
+    public static ReactiveProperty<bool> isImmune = new ReactiveProperty<bool>(false);
+    public int immuneCount = 0;
+    public void ActiveSusanoImmune()
     {
-        bool isNormalField = GameManager.Instance.IsNormalField;
-        int susanoIdx = PlayerStats.GetSusanoGrade();
+        if (immuneCount > 0) return;
 
-
-        buffRemainObject.gameObject.SetActive(false);
-
-        if (susanoIdx == -1)
-        {
-            buttonObject.gameObject.SetActive(false);
-        }
-        else
-        {
-            buffIcon.sprite = CommonResourceContainer.GetSusanoIcon();
-            buttonObject.gameObject.SetActive(isNormalField == false);
-        }
-    }
-
-    public void OnClickBuffButton()
-    {
         int susanoGrade = PlayerStats.GetSusanoGrade();
-        if (susanoGrade == -1) PopupManager.Instance.ShowAlarmMessage("사용하실 수 없습니다.");
+        if (susanoGrade == -1) return;
 
-        buttonObject.gameObject.SetActive(false);
+        var tableData = TableManager.Instance.susanoTable.dataArray[susanoGrade];
+        if (tableData.Buffsec == 0) return;
+
+        immuneCount = 1;
+
+        PlayerStatusController.Instance.SetHpToMax();
+
+        isImmune.Value = true;
 
         StartCoroutine(ImmuneRoutine());
-
     }
 
     private IEnumerator ImmuneRoutine()
@@ -59,31 +36,14 @@ public class UiSusanoBuff : MonoBehaviour
 
         float tick = 0f;
 
-        isImmune = true;
-
-        buffRemainObject.gameObject.SetActive(true);
-
-        int prefSec = -1;
-
         while (tick < tableData.Buffsec)
         {
             tick += Time.deltaTime;
 
-            int currentSec = (int)(tableData.Buffsec - tick);
-
-            if (prefSec != currentSec)
-            {
-                buffRemainSecDesc.SetText($"무적 {currentSec}초");
-            }
-
-            prefSec = (int)(tableData.Buffsec - tick);
-
             yield return null;
         }
 
-        buffRemainObject.gameObject.SetActive(false);
-
-        isImmune = false;
+        isImmune.Value = false;
     }
 
 }

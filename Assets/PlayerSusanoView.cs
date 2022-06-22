@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,17 @@ public class PlayerSusanoView : MonoBehaviour
     private void Start()
     {
         Initialize();
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        UiSusanoBuff.isImmune.AsObservable().Subscribe(e =>
+        {
+
+            this.transform.localScale = e ? Vector3.one * 3 : Vector3.one;
+
+        }).AddTo(this);
     }
 
     private void Initialize()

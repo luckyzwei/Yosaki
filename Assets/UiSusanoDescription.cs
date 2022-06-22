@@ -10,6 +10,9 @@ public class UiSusanoDescription : MonoBehaviour
     private TextMeshProUGUI abilDescription;
 
     [SerializeField]
+    private TextMeshProUGUI immuneDescription;
+
+    [SerializeField]
     private TextMeshProUGUI gradeText;
 
     [SerializeField]
@@ -51,8 +54,14 @@ public class UiSusanoDescription : MonoBehaviour
             abilDescription.SetText($"{CommonString.GetStatusName(StatusType.CriticalDam)}{Utils.ConvertBigNum(tableData.Abilvalue0 * 100f)}");
         }
 
-        image.sprite = Resources.Load<Sprite>($"Susano/{idx / 3}");
+        immuneDescription.gameObject.SetActive(tableData.Buffsec != 0);
 
+        if (tableData.Buffsec != 0)
+        {
+            immuneDescription.SetText($"피해면역 {tableData.Buffsec}초");
+        }
+
+        image.sprite = Resources.Load<Sprite>($"Susano/{idx / 3}");
     }
 
     public void OnClickLeftButton()

@@ -264,14 +264,17 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         return mp.Value == maxMp.Value;
     }
 
+    public void SetHpToMax()
+    {
+        hp.Value = maxHp.Value;
+    }
+
     public void UpdateHp(double value)
     {
         //데미지입음
         if (value < 0)
         {
-
-
-            if (canHit == false || IsPlayerDead() || UiSusanoBuff.isImmune) return;
+            if (canHit == false || IsPlayerDead() || UiSusanoBuff.isImmune.Value) return;
 
             float damDecreaseValue = PlayerStats.GetDamDecreaseValue();
 
@@ -310,8 +313,16 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
     {
         if (hp.Value <= 0)
         {
-            whenPlayerDead.Execute();
-            UiAutoBoss.Instance.WhenToggleChanged(false);
+            if (GameManager.Instance.IsNormalField == false && UiSusanoBuff.isImmune.Value == false)
+            {
+                UiSusanoBuff.Instance.ActiveSusanoImmune();
+            }
+
+            if (UiSusanoBuff.isImmune.Value == false)
+            {
+                whenPlayerDead.Execute();
+                UiAutoBoss.Instance.WhenToggleChanged(false);
+            }
         }
     }
 
