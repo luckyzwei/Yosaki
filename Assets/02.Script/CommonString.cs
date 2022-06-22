@@ -33,6 +33,7 @@ public static class CommonString
     public static string ItemGrade_10 = "필멸(극)";
     public static string ItemGrade_11 = "인드라";
     public static string ItemGrade_12 = "나타";
+    public static string ItemGrade_13 = "오로치";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
