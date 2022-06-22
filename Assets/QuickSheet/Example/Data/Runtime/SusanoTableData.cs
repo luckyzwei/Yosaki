@@ -44,4 +44,8 @@ public class SusanoTableData
   float abilvalue2;
   public float Abilvalue2 { get {return abilvalue2; } set { this.abilvalue2 = value;} }
   
+  [SerializeField]
+  float buffsec;
+  public float Buffsec { get {return buffsec; } set { this.buffsec = value;} }
+  
 }
