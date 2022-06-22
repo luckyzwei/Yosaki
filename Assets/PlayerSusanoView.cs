@@ -21,7 +21,7 @@ public class PlayerSusanoView : MonoBehaviour
 
         if (idx != -1)
         {
-            icon.sprite = Resources.Load<Sprite>($"Susano/{idx / 3}");
+            icon.sprite = CommonResourceContainer.GetSusanoIcon();
 
             icon.material = CommonUiContainer.Instance.weaponEnhnaceMats[idx / 3];
         }

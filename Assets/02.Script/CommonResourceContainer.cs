@@ -151,4 +151,16 @@ public static class CommonResourceContainer
         return Resources.Load<Sprite>($"PassiveSkillIcon/{skillData.Id}");
     }
 
+    public static Sprite GetSusanoIcon()
+    {
+        int susanoIdx = PlayerStats.GetSusanoGrade();
+
+        if (susanoIdx != -1)
+        {
+            return Resources.Load<Sprite>($"Susano/{susanoIdx / 3}");
+        }
+
+        return null;
+    }
+
 }

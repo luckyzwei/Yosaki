@@ -15,23 +15,27 @@ public class UiSusanoBuff : MonoBehaviour
     private Image buffRemainObject;
 
     [SerializeField]
+    private Image buffIcon;
+
+    [SerializeField]
     private TextMeshProUGUI buffRemainSecDesc;
 
     // Start is called before the first frame update
     void Start()
     {
         bool isNormalField = GameManager.Instance.IsNormalField;
-        int susanoGrade = PlayerStats.GetSusanoGrade();
+        int susanoIdx = PlayerStats.GetSusanoGrade();
 
 
         buffRemainObject.gameObject.SetActive(false);
 
-        if (susanoGrade == -1)
+        if (susanoIdx == -1)
         {
             buttonObject.gameObject.SetActive(false);
         }
         else
         {
+            buffIcon.sprite = CommonResourceContainer.GetSusanoIcon();
             buttonObject.gameObject.SetActive(isNormalField == false);
         }
     }
