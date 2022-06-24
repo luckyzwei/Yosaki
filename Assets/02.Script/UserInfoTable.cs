@@ -889,9 +889,6 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
-#if UNITY_EDITOR
-        return true;
-#endif
         return currentServerTime.Month == 5;
     }
 }

@@ -32,18 +32,32 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
         var reward = SleepRewardReceiver.Instance.sleepRewardInfo;
 
         TimeSpan ts = TimeSpan.FromSeconds(reward.elapsedSeconds);
-        string maxTimeString = TimeSpan.FromSeconds(GameBalance.sleepRewardMaxValue).Hours.ToString();
+        string maxTimeString = TimeSpan.FromSeconds(GameBalance.sleepRewardMaxValue).TotalHours.ToString();
 
         if (ts.Hours != 0)
         {
-            timeDescription.SetText($"{ts.Hours}시간 {ts.Minutes}분\n(최대 :{maxTimeString}시간)");
+            if (ts.Days == 0)
+            {
+                timeDescription.SetText($"{ts.Hours}시간 {ts.Minutes}분\n(최대 :{maxTimeString}시간)");
+            }
+            else
+            {
+                timeDescription.SetText($"{ts.TotalHours}시간\n(최대 :{maxTimeString}시간)");
+            }
         }
         else
         {
-            timeDescription.SetText($"{ts.Minutes}분 {ts.Seconds}초\n(최대 :{maxTimeString}시간)");
+            if (ts.Days == 0)
+            {
+                timeDescription.SetText($"{ts.Minutes}분 {ts.Seconds}초\n(최대 :{maxTimeString}시간)");
+            }
+            else
+            {
+                timeDescription.SetText($"{ts.TotalHours}시간\n(최대 :{maxTimeString}시간)");
+            }
         }
 
-      //  winterObject.SetActive(ServerData.userInfoTable.CanSpawnEventItem());
+        //  winterObject.SetActive(ServerData.userInfoTable.CanSpawnEventItem());
 
         //골드
         rewards[0].SetText(Utils.ConvertBigNum(reward.gold));
