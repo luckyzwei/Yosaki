@@ -231,7 +231,7 @@ public static class ServerData
 
             case Item_Type.Event_Item_1:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += rewardValue;
-                break; 
+                break;
             case Item_Type.Event_Item_Summer:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += rewardValue;
                 break;
@@ -265,11 +265,11 @@ public static class ServerData
 
             case Item_Type.Asura5:
                 ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value += rewardValue;
-                break;   
+                break;
             case Item_Type.Aduk:
                 ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value += rewardValue;
                 break;
-                //
+            //
             case Item_Type.SinSkill0:
                 ServerData.goodsTable.GetTableData(GoodsTable.SinSkill0).Value += rewardValue;
                 break;
@@ -280,9 +280,12 @@ public static class ServerData
 
             case Item_Type.SinSkill2:
                 ServerData.goodsTable.GetTableData(GoodsTable.SinSkill2).Value += rewardValue;
-                break;      
+                break;
             case Item_Type.NataSkill:
                 ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value += rewardValue;
+                break;
+            case Item_Type.OrochiSkill:
+                ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value += rewardValue;
                 break;
 
             case Item_Type.SinSkill3:
@@ -348,8 +351,8 @@ public static class ServerData
                 break;
             case Item_Type.PeachReal:
                 ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += rewardValue;
-                break;  
-       
+                break;
+
 
 
 
@@ -448,7 +451,7 @@ public static class ServerData
 
             case Item_Type.Event_Item_1:
                 passParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);   
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.Event_Item_Summer:
                 passParam.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
@@ -463,8 +466,8 @@ public static class ServerData
 
             case Item_Type.PeachReal:
                 passParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);   
-            
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
             case Item_Type.SP:
                 passParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
@@ -526,6 +529,14 @@ public static class ServerData
                 passParam.Add(GoodsTable.IndraPower, ServerData.goodsTable.GetTableData(GoodsTable.IndraPower).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
+            case Item_Type.OrochiTooth0:
+                passParam.Add(GoodsTable.OrochiTooth0, ServerData.goodsTable.GetTableData(GoodsTable.OrochiTooth0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.OrochiTooth1:
+                passParam.Add(GoodsTable.OrochiTooth1, ServerData.goodsTable.GetTableData(GoodsTable.OrochiTooth1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
             //
 
             case Item_Type.Aduk:
@@ -544,16 +555,19 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.SinSkill3:
                 passParam.Add(GoodsTable.SinSkill3, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);   
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.NataSkill:
                 passParam.Add(GoodsTable.NataSkill, ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
-            
+            case Item_Type.OrochiSkill:
+                passParam.Add(GoodsTable.OrochiSkill, ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
             case Item_Type.LeeMuGiStone:
                 passParam.Add(GoodsTable.LeeMuGiStone, ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam); 
-            
-     
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);
@@ -673,7 +687,7 @@ public static class ServerData
             case Item_Type.Event_Item_1:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += amount;
                 param.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);   
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             case Item_Type.Event_Item_Summer:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
                 param.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
@@ -687,8 +701,8 @@ public static class ServerData
             case Item_Type.PeachReal:
                 ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                 param.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);  
-            
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.SP:
                 ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
                 param.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
@@ -715,6 +729,16 @@ public static class ServerData
             case Item_Type.Indra2:
                 ServerData.goodsTable.GetTableData(GoodsTable.Indra2).Value += amount;
                 param.Add(GoodsTable.Indra2, ServerData.goodsTable.GetTableData(GoodsTable.Indra2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.OrochiTooth0:
+                ServerData.goodsTable.GetTableData(GoodsTable.OrochiTooth0).Value += amount;
+                param.Add(GoodsTable.OrochiTooth0, ServerData.goodsTable.GetTableData(GoodsTable.OrochiTooth0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.OrochiTooth1:
+                ServerData.goodsTable.GetTableData(GoodsTable.OrochiTooth1).Value += amount;
+                param.Add(GoodsTable.OrochiTooth1, ServerData.goodsTable.GetTableData(GoodsTable.OrochiTooth1).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.IndraPower:
@@ -767,7 +791,7 @@ public static class ServerData
             case Item_Type.Asura5:
                 ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value += amount;
                 param.Add(GoodsTable.Asura5, ServerData.goodsTable.GetTableData(GoodsTable.Asura5).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);  
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             case Item_Type.Aduk:
                 ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value += amount;
                 param.Add(GoodsTable.Aduk, ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value);
@@ -792,17 +816,21 @@ public static class ServerData
             case Item_Type.SinSkill3:
                 ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value += amount;
                 param.Add(GoodsTable.SinSkill3, ServerData.goodsTable.GetTableData(GoodsTable.SinSkill3).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);    
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             case Item_Type.NataSkill:
                 ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value += amount;
                 param.Add(GoodsTable.NataSkill, ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value);
-                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);  
-            
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
+            case Item_Type.OrochiSkill:
+                ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value += amount;
+                param.Add(GoodsTable.OrochiSkill, ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.LeeMuGiStone:
                 ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value += amount;
                 param.Add(GoodsTable.LeeMuGiStone, ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
-            
+
 
             case Item_Type.costume1:
             case Item_Type.costume4:
@@ -1059,7 +1087,7 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_1001_10000_MiniGame;
                     break;
             }
-         
+
 
 
             List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -1247,14 +1275,14 @@ public static class ServerData
 
                 case Item_Type.Event_Item_1:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += amount;
-                    break;  
+                    break;
                 case Item_Type.Event_Item_Summer:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
                     break;
 
                 case Item_Type.SulItem:
                     ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += amount;
-                    break; 
+                    break;
                 case Item_Type.SP:
                     ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
                     break;

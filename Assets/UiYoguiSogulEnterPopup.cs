@@ -16,6 +16,9 @@ public class UiYoguiSogulEnterPopup : MonoBehaviour
 
     private List<UiYoguiSogulRewardCell> cellLists = new List<UiYoguiSogulRewardCell>();
 
+    [SerializeField]
+    private TextMeshProUGUI passiveDescription;
+
     private void Start()
     {
         Initialize();
@@ -37,6 +40,8 @@ public class UiYoguiSogulEnterPopup : MonoBehaviour
         }
 
         lastClearStageDesc.SetText($"최고 단계 : {(int)(ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value)}");
+
+        passiveDescription.SetText($"{PlayerStats.sogulGab}단계당 {PlayerStats.sogulValuePerGab * 100f}% 상승!");
     }
 
     public void OnClickEnterButton()
@@ -57,6 +62,6 @@ public class UiYoguiSogulEnterPopup : MonoBehaviour
             }
         }
 
-      //  LogManager.Instance.SendLogType("Sogul", "Receive", rewardReceiveCount.ToString());
+        //  LogManager.Instance.SendLogType("Sogul", "Receive", rewardReceiveCount.ToString());
     }
 }

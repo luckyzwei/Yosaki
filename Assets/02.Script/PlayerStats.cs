@@ -135,9 +135,13 @@ public static class PlayerStats
         ret += (int)GetMarbleValue(StatusType.SkillAttackCount);
         ret += (int)GetMagicBookHasPercentValue(StatusType.SkillAttackCount);
         ret += (int)GetSinsuEquipEffect(StatusType.SkillAttackCount);
-
+        
         return ret;
     }
+
+    public static float sogulGab = 20f;
+    public static float sogulValuePerGab = 0.5f;
+    public static float baekPassiveLock = 200;
 
     public static float GetPassiveSkillValue(StatusType statusType)
     {
@@ -159,7 +163,22 @@ public static class PlayerStats
             }
         }
 
+        if (statusType != StatusType.IgnoreDefense && statusType != StatusType.PenetrateDefense)
+        {
+
+            ret = ret + ret * GetPassiveAdvanceValue();
+        }
+
         return ret;
+    }
+
+    public static float GetPassiveAdvanceValue()
+    {
+        int floor = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value;
+
+        float gap = floor / sogulGab;
+
+        return gap * sogulValuePerGab;
     }
 
     #region AttackPower
@@ -861,6 +880,8 @@ public static class PlayerStats
 
         ret += GetSusanoAbil(StatusType.PenetrateDefense);
 
+        ret += GetOrochiAbilValue(StatusType.PenetrateDefense);
+
         return ret;
     }
 
@@ -881,6 +902,8 @@ public static class PlayerStats
         ret += GetYachaChunSlashValue();
 
         ret += GetAsuraAbilValue(StatusType.SuperCritical1DamPer);
+
+        ret += GetPassiveSkillValue(StatusType.SuperCritical1DamPer);
 
         return ret;
     }
@@ -912,6 +935,8 @@ public static class PlayerStats
         ret += GetRelicHasEffect(StatusType.SuperCritical2DamPer);
 
         ret += GetTitleAbilValue(StatusType.SuperCritical2DamPer);
+
+
 
         return ret;
     }
@@ -1261,6 +1286,9 @@ public static class PlayerStats
     public static string indraKey1 = "i1";
     public static string indraKey2 = "i2";
 
+    public static string orochi0 = "or0";
+    public static string orochi1 = "or1";
+
 
     public static ObscuredFloat asura0Value = 15000f;
     public static ObscuredFloat asura1Value = 25000f;
@@ -1272,6 +1300,9 @@ public static class PlayerStats
     public static ObscuredFloat indra0Value = 50000;
     public static ObscuredFloat indra1Value = 70000;
     public static ObscuredFloat indra2Value = 0.001f;
+
+    public static ObscuredFloat orochi0Value = 0.001f;
+    public static ObscuredFloat orochi1Value = 0.002f;
 
     public static float GetAsuraAbilValue(StatusType type)
     {
@@ -1376,6 +1407,32 @@ public static class PlayerStats
                     }
 
                     return indra2Value;
+                }
+                break;
+        }
+
+        return 0f;
+    }
+
+    public static float GetOrochiAbilValue(StatusType type)
+    {
+        switch (type)
+        {
+            case StatusType.PenetrateDefense:
+                {
+                    float ret = 0f;
+
+                    if (ServerData.goodsTable.GetTableData(orochi0).Value != 0)
+                    {
+                        ret += orochi0Value;
+                    }
+
+                    if (ServerData.goodsTable.GetTableData(orochi1).Value != 0)
+                    {
+                        ret += orochi1Value;
+                    }
+
+                    return ret;
                 }
                 break;
         }

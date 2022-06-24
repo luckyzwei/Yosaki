@@ -34,6 +34,12 @@ public class UiPassiveSkillCell : MonoBehaviour
     private GameObject lockMask;
 
     [SerializeField]
+    private GameObject lockMask_Baek;
+
+    [SerializeField]
+    private TextMeshProUGUI baekLockDescription;
+
+    [SerializeField]
     private WeaponView weaponView;
 
     private Coroutine syncRoutine;
@@ -71,11 +77,11 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         if (statusType.IsPercentStat())
         {
-            skillDesc.SetText($"{CommonString.GetStatusName(statusType)} : {currentSkillLevel * passiveSkillData.Abilityvalue * 100f}");
+            skillDesc.SetText($"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum(PlayerStats.GetPassiveSkillValue(statusType) * 100f)}");
         }
         else
         {
-            skillDesc.SetText($"{CommonString.GetStatusName(statusType)} : {currentSkillLevel * passiveSkillData.Abilityvalue}");
+            skillDesc.SetText($"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum(PlayerStats.GetPassiveSkillValue(statusType))}");
         }
 
         levelDescription.SetText($"LV:{currentSkillLevel}/{passiveSkillData.Maxlevel}");
@@ -96,23 +102,42 @@ public class UiPassiveSkillCell : MonoBehaviour
         magicBookServerData = ServerData.magicBookTable.TableDatas[magicBookData.Stringid];
 
         //
-        if (string.IsNullOrEmpty(passiveSkillData.Needgoods)==true)
+        if (string.IsNullOrEmpty(passiveSkillData.Needgoods) == true)
         {
             lockMask_Sin.SetActive(false);
+            lockMask_Baek.SetActive(false);
 
-            if (magicBookServerData.hasItem.Value == 0)
+            if (passiveSkillData.Requiremagicbookidx != 12)
             {
-                weaponView.Initialize(null, magicBookData);
-                lockMask.SetActive(true);
+
+                if (magicBookServerData.hasItem.Value == 0)
+                {
+                    weaponView.Initialize(null, magicBookData);
+                    lockMask.SetActive(true);
+                }
+                else
+                {
+                    lockMask.SetActive(false);
+                }
             }
+            //백귀패시브
             else
             {
-                lockMask.SetActive(false);
+                baekLockDescription.SetText($"백귀야행 {PlayerStats.baekPassiveLock}단계 이상 개방");
+
+                int floor = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value;
+
+                lockMask_Baek.SetActive(floor < PlayerStats.baekPassiveLock);
             }
         }
         else
         {
             lockMask.SetActive(false);
+
+            if (lockMask_Baek != null)
+            {
+                lockMask_Baek.SetActive(false);
+            }
 
             lockMask_Sin.SetActive(ServerData.goodsTable.GetTableData(passiveSkillData.Needgoods).Value == 0);
 

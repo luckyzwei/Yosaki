@@ -83,7 +83,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             if (skillList[i].Skilltype == 5)
             {
                 //나타
-                if (skillList[i].Id == 20) 
+                if (skillList[i].Id == 20 || skillList[i].Id == 21)
                 {
                     var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Nata);
 

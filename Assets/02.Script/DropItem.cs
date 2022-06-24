@@ -72,6 +72,10 @@ public enum Item_Type
     RabitNorigae,
     RabitPet,
     NataSkill,
+    OrochiWeapon,
+    OrochiSkill,
+    OrochiTooth0,
+    OrochiTooth1,
 
 
     RankFrame1 = 100,

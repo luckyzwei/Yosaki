@@ -79,6 +79,17 @@ public class UiGangChulView : SingletonMono<UiGangChulView>
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{rewardGrade}점 점수를 추가합니까?\n<color=red>점수는 하루에 한번만 추가할 수 있습니다.</color>\n문파별로 최대 인원만큼만 추가 가능합니다.\n(매일 오전 5시 초기화)",
             () =>
             {
+                if (alreadyRecord)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("오늘은 이미 점수를 추가했습니다.");
+                    return;
+                }
+                if (rewardGrade == 0)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("추가할 점수가 없습니다.");
+                    return;
+                }
+
                 recordButton.interactable = false;
 
                 var guildInfoBro = Backend.Social.Guild.GetMyGuildGoodsV3();

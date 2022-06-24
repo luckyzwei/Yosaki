@@ -81,6 +81,10 @@ public class GoodsTable
     public static string Hae_Norigae = "hn";
     public static string Hae_Pet = "hp";
     public static string NataSkill = "NataSkill";
+    public static string OrochiSkill = "OrochiSkill";
+
+    public static string OrochiTooth0 = "or0";
+    public static string OrochiTooth1 = "or1";
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -147,6 +151,9 @@ public class GoodsTable
         {Indra2,0f},
         {IndraPower,0f},
         {NataSkill,0f},
+        {OrochiSkill,0f},
+        {OrochiTooth0,0f},
+        {OrochiTooth1,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

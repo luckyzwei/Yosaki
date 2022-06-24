@@ -29,3 +29,9 @@ public class Nata0 : TraceSlash0
 {
 
 }
+
+public class Orochi0 : TraceSlash0
+{
+
+}
+

@@ -102,7 +102,9 @@ public class UiInventoryWeaponView : MonoBehaviour
     private GameObject indraLock;
 
     [SerializeField]
-    private GameObject nataLock;
+    private GameObject nataLock;  
+    [SerializeField]
+    private GameObject orochiLock;
 
     [SerializeField]
     private GameObject armDescription;
@@ -331,9 +333,10 @@ public class UiInventoryWeaponView : MonoBehaviour
             feelMul4Lock.SetActive(false);
             indraLock.SetActive(false);
             nataLock.SetActive(false);
+            orochiLock.SetActive(false);
 
             //필멸2 필멸3  (23,24)
-            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26|| weaponData.Id == 27)
+            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26|| weaponData.Id == 27 || weaponData.Id == 28)
             {
                 hasMask.SetActive(false);
 
@@ -361,6 +364,11 @@ public class UiInventoryWeaponView : MonoBehaviour
                 {
                     nataLock.gameObject.SetActive(state == 0);
                 }
+
+                if (weaponData.Id == 28)
+                {
+                    orochiLock.gameObject.SetActive(state == 0);
+                }
             }
 
         }
@@ -371,6 +379,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             feelMul4Lock.SetActive(false);
             indraLock.SetActive(false);
             nataLock.SetActive(false);
+            orochiLock.SetActive(false);
 
             magicBookViewEquipButton.gameObject.SetActive(state == 1);
             weaponViewEquipButton.gameObject.SetActive(false);

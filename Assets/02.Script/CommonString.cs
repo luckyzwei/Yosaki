@@ -44,6 +44,7 @@ public static class CommonString
     public static string ItemGrade_5_Skill = "청룡";
     public static string ItemGrade_6_Skill = "흑룡";
     public static string ItemGrade_7_Skill = "나타";
+    public static string ItemGrade_8_Skill = "오로치";
 
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -73,7 +74,7 @@ public static class CommonString
     public static string IOS_loginType = "IOS_LoginType";
     public static string SavedLoginTypeKey = "SavedLoginTypeKey";
     public static string SavedLoginPassWordKey = "SavedLoginPassWordKey";
-     
+
     public static string GetContentsName(ContentsType contentsType)
     {
         switch (contentsType)
@@ -202,7 +203,7 @@ public static class CommonString
             case Item_Type.Indra1: return "인드라의 힘2";
             case Item_Type.Indra2: return "인드라의 힘3";
             case Item_Type.IndraPower: return "인드라의 번개";
-  
+
 
             case Item_Type.Aduk: return "어둑시니의 뿔";
             case Item_Type.SinSkill0: return "등껍질 부수기";
@@ -215,6 +216,10 @@ public static class CommonString
             case Item_Type.Hae_Pet: return "아기 해태 구슬";
             case Item_Type.Event_Item_Summer: return "수박";
             case Item_Type.NataSkill: return "나타 베기";
+            case Item_Type.OrochiSkill: return "오로치 베기";
+
+            case Item_Type.OrochiTooth0: return "오로치 이빨1";
+            case Item_Type.OrochiTooth1: return "오로치 이빨2";
         }
         return "미등록";
     }
@@ -335,7 +340,7 @@ public static class CommonString
         return "미등록";
     }
 
-    public static string GetGuildGradeName(GuildGrade grade) 
+    public static string GetGuildGradeName(GuildGrade grade)
     {
         switch (grade)
         {
