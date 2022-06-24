@@ -157,7 +157,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             costumeParam.Add("costume36", costumeServerData.ConvertToString());
 
             transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
-     
+
             //
             Param bossParam = new Param();
 
@@ -368,7 +368,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.IndraWeapon) 
+        else if (type == Item_Type.IndraWeapon)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -463,7 +463,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-       else if (type == Item_Type.Hae_Pet) 
+        else if (type == Item_Type.Hae_Pet)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -494,7 +494,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             });
 
         }
-        else if(type == Item_Type.Hae_Norigae) 
+        else if (type == Item_Type.Hae_Norigae)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -526,7 +526,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else 
+        else
         {
             float amount = rewardInfo.rewardAmount;
 
@@ -548,7 +548,10 @@ public class UiTwelveBossRewardView : MonoBehaviour
             {
                 PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
                 SoundManager.Instance.PlaySound("Reward");
-                rewardButton.interactable = true;
+                if (rewardButton != null)
+                {
+                    rewardButton.interactable = true;
+                }
             });
         }
     }
