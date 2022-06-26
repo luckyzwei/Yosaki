@@ -77,7 +77,15 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         if (statusType.IsPercentStat())
         {
+            if (statusType != StatusType.PenetrateDefense)
+            {
+
             skillDesc.SetText($"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum(PlayerStats.GetPassiveSkillValue(statusType) * 100f)}");
+            }
+            else
+            {
+                skillDesc.SetText($"{CommonString.GetStatusName(statusType)} : {(PlayerStats.GetPassiveSkillValue(statusType) * 100f)}");
+            }
         }
         else
         {
