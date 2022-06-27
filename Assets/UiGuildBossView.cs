@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UiTwelveRewardPopup;
 
 public class UiGuildBossView : SingletonMono<UiGuildBossView>
 {
@@ -11,6 +12,11 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
     private UiTwelveBossContentsView bossContentsView;
 
     public ObscuredInt rewardGrade = 0;
+    public ObscuredInt rewardGrade_GangChul = 0;
+
+    [SerializeField]
+    private UiTwelveBossRewardView uiTwelveBossRewardView;
+    private List<UiTwelveBossRewardView> uiTwelveBossRewardViews = new List<UiTwelveBossRewardView>();
 
     [SerializeField]
     private Button recordButton;
@@ -18,6 +24,49 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
     void Start()
     {
         Initialize();
+        Initialize_gangChul(20);
+    }
+    public void Initialize_gangChul(int bossId)
+    {
+        var bossTableData = TableManager.Instance.TwelveBossTable.dataArray[bossId];
+
+        var bossServerData = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
+
+        double currentDamage = 0f;
+
+        if (string.IsNullOrEmpty(bossServerData.score.Value) == false)
+        {
+            currentDamage = double.Parse(bossServerData.score.Value);
+        }
+
+
+        bossTableData = TableManager.Instance.TwelveBossTable.dataArray[bossId];
+
+        int makeCellAmount = bossTableData.Rewardcut.Length - uiTwelveBossRewardViews.Count;
+
+        for (int i = 0; i < makeCellAmount; i++)
+        {
+            var cell = Instantiate<UiTwelveBossRewardView>(uiTwelveBossRewardView, this.transform);
+
+            uiTwelveBossRewardViews.Add(cell);
+        }
+
+        for (int i = 0; i < uiTwelveBossRewardViews.Count; i++)
+        {
+            if (i < bossTableData.Rewardcut.Length)
+            {
+                uiTwelveBossRewardViews[i].gameObject.SetActive(false);
+
+                TwelveBossRewardInfo info = new TwelveBossRewardInfo(i, bossTableData.Rewardcut[i], bossTableData.Rewardtype[i], bossTableData.Rewardvalue[i], bossTableData.Cutstring[i], currentDamage);
+
+                uiTwelveBossRewardViews[i].Initialize(info, bossServerData);
+            }
+            else
+            {
+                uiTwelveBossRewardViews[i].gameObject.SetActive(false);
+            }
+
+        }
     }
     private void OnEnable()
     {
@@ -211,13 +260,13 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
             PopupManager.Instance.ShowAlarmMessage("오늘은 이미 점수를 추가했습니다.");
             return;
         }
-        if (rewardGrade == 0)
+        if (rewardGrade_GangChul == 0)
         {
             PopupManager.Instance.ShowAlarmMessage("추가할 점수가 없습니다.");
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{rewardGrade}점 점수를 추가합니까?\n<color=red>점수는 하루에 한번만 추가할 수 있습니다.</color>\n문파별로 최대 인원만큼만 추가 가능합니다.\n(매일 오전 5시 초기화)",
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{rewardGrade_GangChul}점 점수를 추가합니까?\n<color=red>점수는 하루에 한번만 추가할 수 있습니다.</color>\n문파별로 최대 인원만큼만 추가 가능합니다.\n(매일 오전 5시 초기화)",
             () =>
             {
                 if (alreadyRecord)
@@ -225,7 +274,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                     PopupManager.Instance.ShowAlarmMessage("오늘은 이미 점수를 추가했습니다.");
                     return;
                 }
-                if (rewardGrade == 0)
+                if (rewardGrade_GangChul == 0)
                 {
                     PopupManager.Instance.ShowAlarmMessage("추가할 점수가 없습니다.");
                     return;
@@ -274,7 +323,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                     if (bro2.IsSuccess())
                     {
 
-                        var bro = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_GangChul_Guild_Boss_Uuid, goodsType.goods6, rewardGrade);
+                        var bro = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_GangChul_Guild_Boss_Uuid, goodsType.goods6, rewardGrade_GangChul);
 
                         if (bro.IsSuccess())
                         {

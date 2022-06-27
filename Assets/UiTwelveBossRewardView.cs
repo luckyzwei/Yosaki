@@ -96,6 +96,11 @@ public class UiTwelveBossRewardView : MonoBehaviour
                     if (UiGangChulView.Instance != null && UiGangChulView.Instance.rewardGrade < rewardInfo.idx + 1)
                     {
                         UiGangChulView.Instance.rewardGrade = rewardInfo.idx + 1;
+
+                    }
+                    if (UiGuildBossView.Instance != null && UiGuildBossView.Instance.rewardGrade_GangChul < rewardInfo.idx + 1)
+                    {
+                        UiGuildBossView.Instance.rewardGrade_GangChul = rewardInfo.idx + 1;
                     }
                 }
             }
