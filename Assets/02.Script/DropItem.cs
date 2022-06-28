@@ -76,6 +76,8 @@ public enum Item_Type
     OrochiSkill,
     OrochiTooth0,
     OrochiTooth1,
+    DogNorigae,
+    DogPet,
 
 
     RankFrame1 = 100,
@@ -231,6 +233,7 @@ public enum Item_Type
     costume36 = 1237,
     costume37 = 1238,
     costume38 = 1239,
+    costume39 = 1240,
 
     pet0 = 1301,
     pet1 = 1302,

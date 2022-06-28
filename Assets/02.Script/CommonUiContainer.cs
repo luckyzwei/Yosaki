@@ -88,6 +88,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite SamNorigae;
     public Sprite SamPet;
     public Sprite KirinNorigae;
+    public Sprite DogNorigae;
     public Sprite Kirin_Pet;
     public Sprite RabitNorigae;
     public Sprite RabitPet;
@@ -260,6 +261,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.costume38:
                 return costumeThumbnail[38];
+                break;  
+            case Item_Type.costume39:
+                return costumeThumbnail[39];
                 break;
 
 
@@ -431,6 +435,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.KirinNorigae:
                 return KirinNorigae;
+                break;   
+            case Item_Type.DogNorigae:
+                return DogNorigae;
                 break;
             case Item_Type.RabitNorigae:
                 return RabitNorigae;

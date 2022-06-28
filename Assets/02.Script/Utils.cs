@@ -56,7 +56,8 @@ public static class Utils
                   type == Item_Type.costume35 ||
                   type == Item_Type.costume36 ||
                   type == Item_Type.costume37 ||
-                  type == Item_Type.costume38;
+                  type == Item_Type.costume38 ||
+                  type == Item_Type.costume39;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -83,6 +84,8 @@ public static class Utils
                 type == Item_Type.Sam_Norigae ||
                 type == Item_Type.KirinNorigae ||
                 type == Item_Type.Kirin_Pet ||
+                type == Item_Type.DogNorigae ||
+                type == Item_Type.DogPet ||
                 type == Item_Type.RabitPet ||
                 type == Item_Type.RabitNorigae ||
                 type == Item_Type.SmithFire ||

@@ -17,7 +17,10 @@ public class UiHaeTeaBoard : MonoBehaviour
     private UiTwelveBossContentsView bossContentsView_Kirin;
 
     [SerializeField]
-    private UiTwelveBossContentsView bossContentsView_Rabit;
+    private UiTwelveBossContentsView bossContentsView_Rabit;  
+    
+    [SerializeField]
+    private UiTwelveBossContentsView bossContentsView_Dog;
 
     void Start()
     {
@@ -30,5 +33,6 @@ public class UiHaeTeaBoard : MonoBehaviour
         bossContentsView_Three.Initialize(TableManager.Instance.TwelveBossTable.dataArray[23]);
         bossContentsView_Kirin.Initialize(TableManager.Instance.TwelveBossTable.dataArray[25]);
         bossContentsView_Rabit.Initialize(TableManager.Instance.TwelveBossTable.dataArray[27]);
+        bossContentsView_Dog.Initialize(TableManager.Instance.TwelveBossTable.dataArray[29]);
     }
 }
