@@ -970,4 +970,19 @@ public class UiInventoryWeaponView : MonoBehaviour
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "무기 획득!", null);
     }
 
+    public void OnClickGetFeelMulLastLastButton()
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiClear].Value < 6000)
+        {
+            PopupManager.Instance.ShowAlarmMessage("검의 산 처치 6000 이상일때 획득 하실 수 있습니다.");
+            return;
+        }
+
+        ServerData.weaponTable.TableDatas["weapon29"].amount.Value += 1;
+        ServerData.weaponTable.TableDatas["weapon29"].hasItem.Value = 1;
+        ServerData.weaponTable.SyncToServerEach("weapon29");
+
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "필멸(패) 획득!", null);
+    }
+
 }

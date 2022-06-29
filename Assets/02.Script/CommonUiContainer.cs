@@ -9,7 +9,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public List<Sprite> itemGradeFrame;
 
-    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13 };
+    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae };
@@ -261,7 +261,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.costume38:
                 return costumeThumbnail[38];
-                break;  
+                break;
             case Item_Type.costume39:
                 return costumeThumbnail[39];
                 break;
@@ -435,7 +435,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.KirinNorigae:
                 return KirinNorigae;
-                break;   
+                break;
             case Item_Type.DogNorigae:
                 return DogNorigae;
                 break;

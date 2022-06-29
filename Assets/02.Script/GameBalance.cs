@@ -202,7 +202,7 @@ public static class GameBalance
     public readonly static ObscuredInt GuildMemberMax = 20;
 
     public readonly static ObscuredInt GuildCreateMinLevel = 5000;
-    public readonly static ObscuredInt GuildEnterMinLevel = 5000;
+    public readonly static ObscuredInt GuildEnterMinLevel = 1000;
 
     public readonly static ObscuredInt LeeMuGiGetLevel = 2000;
     public readonly static ObscuredInt GoldGetLevel = 30;
