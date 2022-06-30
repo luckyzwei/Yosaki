@@ -102,9 +102,11 @@ public class UiInventoryWeaponView : MonoBehaviour
     private GameObject indraLock;
 
     [SerializeField]
-    private GameObject nataLock;  
+    private GameObject nataLock;
     [SerializeField]
     private GameObject orochiLock;
+    [SerializeField]
+    private GameObject feelPaeLock;
 
     [SerializeField]
     private GameObject armDescription;
@@ -334,9 +336,10 @@ public class UiInventoryWeaponView : MonoBehaviour
             indraLock.SetActive(false);
             nataLock.SetActive(false);
             orochiLock.SetActive(false);
+            feelPaeLock.SetActive(false);
 
             //필멸2 필멸3  (23,24)
-            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26|| weaponData.Id == 27 || weaponData.Id == 28)
+            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29)
             {
                 hasMask.SetActive(false);
 
@@ -369,6 +372,11 @@ public class UiInventoryWeaponView : MonoBehaviour
                 {
                     orochiLock.gameObject.SetActive(state == 0);
                 }
+
+                if (weaponData.Id == 29)
+                {
+                    feelPaeLock.gameObject.SetActive(state == 0);
+                }
             }
 
         }
@@ -380,6 +388,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             indraLock.SetActive(false);
             nataLock.SetActive(false);
             orochiLock.SetActive(false);
+            feelPaeLock.SetActive(false);
 
             magicBookViewEquipButton.gameObject.SetActive(state == 1);
             weaponViewEquipButton.gameObject.SetActive(false);
@@ -972,9 +981,9 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     public void OnClickGetFeelMulLastLastButton()
     {
-        if (ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiClear].Value < 6000)
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiClear].Value < 8000)
         {
-            PopupManager.Instance.ShowAlarmMessage("검의 산 처치 6000 이상일때 획득 하실 수 있습니다.");
+            PopupManager.Instance.ShowAlarmMessage("검의 산 처치 8000 이상일때 획득 하실 수 있습니다.");
             return;
         }
 

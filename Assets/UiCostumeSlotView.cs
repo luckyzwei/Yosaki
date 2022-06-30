@@ -10,6 +10,9 @@ public class UiCostumeSlotView : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI slotNum;
 
+    [SerializeField]
+    private TextMeshProUGUI costumeName;
+
     private CostumeData costumeData;
 
     [SerializeField]
@@ -33,7 +36,11 @@ public class UiCostumeSlotView : MonoBehaviour
         this.selectCallBack = selectCallBack;
 
         this.costumeData = costumeData;
-        slotNum.SetText((costumeData.Id+1).ToString());
+
+        slotNum.SetText((costumeData.Id + 1).ToString());
+
+        costumeName.SetText((costumeData.Name));
+
         Subscribe();
     }
 
