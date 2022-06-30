@@ -100,8 +100,9 @@ public class UserInfoTable
 
 
     public const string killCountTotal = "kt10";
-    public const string killCountTotal2 = "kt11";
+    public const string killCountTotal2 = "kt12";
     public const string killCountTotalChild = "kt9";
+    public const string attenCountBok = "kb";
 
     public const string relicKillCount = "relicKillCount";
 
@@ -222,8 +223,9 @@ public class UserInfoTable
         {marbleReset2,0f},
         {relicReset2,0f},
         {yomul5_buff,0f},
-        {killCountTotal2,0f},
+        {killCountTotal2,5000000f},
         {killCountTotalChild,0f},
+        {attenCountBok,1f},
         {dailyPackReset,0f},
         {yomul6_buff,0f},
         {sonScore,0f},
@@ -607,6 +609,7 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value++;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value++;
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f)
             {
@@ -651,6 +654,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.attendanceCount, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount_100Day, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount_Seol, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value);
+        userInfoParam.Add(UserInfoTable.attenCountBok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value);
 
         userInfoParam.Add(UserInfoTable.oakpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);
@@ -889,9 +893,6 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
-#if UNITY_EDITOR
-        return true;
-#endif
-        return currentServerTime.Month == 5;
+        return currentServerTime.Month == 7;
     }
 }

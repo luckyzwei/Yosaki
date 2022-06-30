@@ -234,6 +234,7 @@ public enum Item_Type
     costume37 = 1238,
     costume38 = 1239,
     costume39 = 1240,
+    costume40 = 1241,
 
     pet0 = 1301,
     pet1 = 1302,

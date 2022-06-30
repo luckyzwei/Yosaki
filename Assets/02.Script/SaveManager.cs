@@ -135,7 +135,7 @@ public class SaveManager : SingletonMono<SaveManager>
     {
         if (SettingData.ShowSleepPush.Value == 1)
         {
-            GleyNotifications.SendNotification("휴식보상", "휴식 보상이 가득 찼어요!(12시간)", new System.TimeSpan(12, 0, 0));
+            GleyNotifications.SendNotification("휴식보상", "휴식 보상이 가득 찼어요!(24시간)", new System.TimeSpan(24, 0, 0));
         }
     }
 

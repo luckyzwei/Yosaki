@@ -60,6 +60,7 @@ public static class ServerData
     public static RankTable_MiniGame rankTable_MiniGame { get; private set; } = new RankTable_MiniGame();
     public static SeolPassServerTable seolPassServerTable { get; private set; } = new SeolPassServerTable();
     public static SulPassServerTable sulPassServerTable { get; private set; } = new SulPassServerTable();
+    public static BokPassServerTable bokPassServerTable { get; private set; } = new BokPassServerTable();
 
     #region string
     public static string inDate_str = "inDate";
@@ -139,7 +140,10 @@ public static class ServerData
         rankTable_MiniGame.Initialize();
 
         seolPassServerTable.Initialize();
+
         sulPassServerTable.Initialize();
+
+        bokPassServerTable.Initialize();
     }
 
     public static void GetUserInfo()
@@ -342,6 +346,7 @@ public static class ServerData
             case Item_Type.costume37:
             case Item_Type.costume38:
             case Item_Type.costume39:
+            case Item_Type.costume40:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -431,6 +436,7 @@ public static class ServerData
             case Item_Type.costume37:
             case Item_Type.costume38:
             case Item_Type.costume39:
+            case Item_Type.costume40:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
