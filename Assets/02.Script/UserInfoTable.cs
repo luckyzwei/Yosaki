@@ -362,8 +362,8 @@ public class UserInfoTable
                              {
                                  if (tableDatas.ContainsKey(killCountTotal) && tableDatas[killCountTotal].Value >= 0)
                                  {
-                                     defultValues.Add(e.Current.Key, 8000000);
-                                     tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(8000000));
+                                     defultValues.Add(e.Current.Key, 10000000);
+                                     tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(10000000));
                                  }
                                  else
                                  {
