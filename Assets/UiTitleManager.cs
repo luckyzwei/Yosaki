@@ -500,6 +500,7 @@ public enum TitleMissionId
     GetOrochiWeapon,//★
     Stage9900,//★
     Stage10000,//★
+    FeelMulPaeWeapon,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -2483,6 +2484,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e == 1)
             {
                 ClearTitleMission(TitleMissionId.GetOrochiWeapon);
+            }
+        }).AddTo(this);   
+
+        ServerData.weaponTable.TableDatas["weapon29"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.FeelMulPaeWeapon);
             }
         }).AddTo(this);
 
