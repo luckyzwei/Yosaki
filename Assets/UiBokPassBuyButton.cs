@@ -12,7 +12,7 @@ public class UiBokPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string childPassKey = "bokpass";
+    public static readonly string bokPassKey = "bokpass";
 
     private Button buyButton;
 
@@ -32,7 +32,7 @@ public class UiBokPassBuyButton : MonoBehaviour
 
         disposable.Clear();
 
-        ServerData.iapServerTable.TableDatas[childPassKey].buyCount.AsObservable().Subscribe(e =>
+        ServerData.iapServerTable.TableDatas[bokPassKey].buyCount.AsObservable().Subscribe(e =>
         {
             descText.SetText(e >= 1 ? "구매완료" : "훈련권 구매");
             this.gameObject.SetActive(e <= 0);
@@ -57,18 +57,18 @@ public class UiBokPassBuyButton : MonoBehaviour
 
     public void OnClickBuyButton()
     {
-        if (ServerData.iapServerTable.TableDatas[childPassKey].buyCount.Value >= 1)
+        if (ServerData.iapServerTable.TableDatas[bokPassKey].buyCount.Value >= 1)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 구매 했습니다.");
             return;
         }
 
 #if UNITY_EDITOR|| TEST
-        GetPackageItem(childPassKey);
+        GetPackageItem(bokPassKey);
         return;
 #endif
 
-        IAPManager.Instance.BuyProduct(childPassKey);
+        IAPManager.Instance.BuyProduct(bokPassKey);
     }
 
     public void GetPackageItem(string productId)
@@ -88,7 +88,7 @@ public class UiBokPassBuyButton : MonoBehaviour
             // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} 구매 성공!", null);
         }
 
-        if (tableData.Productid != childPassKey) return;
+        if (tableData.Productid != bokPassKey) return;
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
 

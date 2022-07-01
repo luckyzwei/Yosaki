@@ -182,7 +182,7 @@ public class UiBokPassSystem : MonoBehaviour
 
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiBokPassBuyButton.childPassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiBokPassBuyButton.bokPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }

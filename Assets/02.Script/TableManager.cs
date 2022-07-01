@@ -644,5 +644,6 @@ public class TableManager : SingletonMono<TableManager>
     public SusanoTable susanoTable;
 
     public BokPass bokPass;
+    public GuildBook guildBook;
 }
 

@@ -620,7 +620,7 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value++;
-            // ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value++;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value++;
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f)
             {
@@ -665,7 +665,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.attendanceCount, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount_100Day, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount_Seol, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value);
-        //userInfoParam.Add(UserInfoTable.attenCountBok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value);
+        userInfoParam.Add(UserInfoTable.attenCountBok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value);
 
         userInfoParam.Add(UserInfoTable.oakpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);

@@ -135,7 +135,7 @@ public class UiBokPassCell : MonoBehaviour
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("몹 처치가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("출석이 부족합니다.");
             return;
         }
 
@@ -156,7 +156,7 @@ public class UiBokPassCell : MonoBehaviour
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("몹 처치가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("출석이 부족합니다.");
             return;
         }
 
@@ -172,13 +172,13 @@ public class UiBokPassCell : MonoBehaviour
         }
         else
         {
-            PopupManager.Instance.ShowAlarmMessage($"보상권이 필요합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"복날 출석권 필요합니다.");
         }
     }
 
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiChildPassBuyButton.childPassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiBokPassBuyButton.bokPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }

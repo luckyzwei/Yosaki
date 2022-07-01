@@ -135,7 +135,7 @@ public static class PlayerStats
         ret += (int)GetMarbleValue(StatusType.SkillAttackCount);
         ret += (int)GetMagicBookHasPercentValue(StatusType.SkillAttackCount);
         ret += (int)GetSinsuEquipEffect(StatusType.SkillAttackCount);
-        
+
         return ret;
     }
 
@@ -530,6 +530,7 @@ public static class PlayerStats
         ret += GetStageRelicHasEffect(StatusType.SkillDamage);
         ret += GetSonAbilHasEffect(StatusType.SkillDamage);
         ret += GetYachaSkillPercentValue();
+        ret += GuildManager.abilValue;
 
         return ret;
     }

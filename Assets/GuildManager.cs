@@ -24,6 +24,16 @@ public class GuildManager : SingletonMono<GuildManager>
     private void Start()
     {
         StartCoroutine(LoadGuildPetExp());
+
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        guildLevelExp.AsObservable().Subscribe((e) =>
+        {
+            UpdateGuildBookAbilValue();
+        }).AddTo(this);
     }
 
 
@@ -116,7 +126,7 @@ public class GuildManager : SingletonMono<GuildManager>
         while (true)
         {
 #if !UNITY_EDITOR
-            yield return new WaitForSeconds(3600);
+            yield return new WaitForSeconds(7200);
 #endif
 
 #if UNITY_EDITOR
@@ -215,6 +225,32 @@ public class GuildManager : SingletonMono<GuildManager>
         }
 
         return addNum;
+    }
+
+    public static float abilValue = 0;
+
+    public void UpdateGuildBookAbilValue()
+    {
+        var tableData = TableManager.Instance.guildBook.dataArray;
+
+        abilValue = tableData[GetGuildBookAbilGrade()].Abilvalue;
+    }
+
+    public int GetGuildBookAbilGrade()
+    {
+        int ret = 0;
+
+        var tableData = TableManager.Instance.guildBook.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (this.guildLevelExp.Value >= tableData[i].Require)
+            {
+                ret = i;
+            }
+        }
+
+        return ret;
     }
 
     public bool HasGuildBuff(int buffIdx)

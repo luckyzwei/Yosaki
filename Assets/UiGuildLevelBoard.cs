@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
+
 public enum guildLevelType
 {
     guildMemberPlus,
@@ -25,9 +27,14 @@ public class UiGuildLevelBoard : MonoBehaviour
     [SerializeField]
     private GameObject rootObject;
 
+    [SerializeField]
+    private Image guildBookIcon;
+
+    [SerializeField]
+    private TextMeshProUGUI guildBookAbilDescription;
+
     private void Start()
     {
-
         StartCoroutine(Initialize());
     }
 
@@ -75,6 +82,9 @@ public class UiGuildLevelBoard : MonoBehaviour
     {
         guildExpText.SetText($"명성 : {GuildManager.Instance.guildLevelExp.Value}");
         guildLevelText.SetText($"레벨 : {GuildManager.Instance.GetGuildLevel(GuildManager.Instance.guildLevelExp.Value)}");
+
+        guildBookIcon.sprite = Resources.Load<Sprite>($"GuildBook/{GuildManager.Instance.GetGuildBookAbilGrade()}");
+        guildBookAbilDescription.SetText($"{GuildManager.Instance.GetGuildBookAbilGrade()}단계\n{CommonString.GetStatusName(StatusType.SkillDamage)} {Utils.ConvertBigNum(GuildManager.abilValue * 100f)}%증가");
     }
 
 }
