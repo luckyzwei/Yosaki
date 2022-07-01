@@ -104,6 +104,10 @@ public class UiMonthPassInsBuyButton2 : MonoBehaviour
 
     private bool CanBuyProduct()
     {
+#if UNITY_EDITOR
+        return true;
+#endif
+
         var severTime = ServerData.userInfoTable.currentServerTime;
 
         return severTime.Day >= 23;

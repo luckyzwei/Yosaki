@@ -498,6 +498,8 @@ public enum TitleMissionId
     Level1290000,//★
     Level1300000,//★
     GetOrochiWeapon,//★
+    Stage9900,//★
+    Stage10000,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -2355,6 +2357,15 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 9800 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage9800);
+            }
+            //
+            if (e >= 9900 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage9900);
+            }
+            if (e >= 10000 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage10000);
             }
 
 

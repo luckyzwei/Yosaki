@@ -92,6 +92,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Kirin_Pet;
     public Sprite RabitNorigae;
     public Sprite RabitPet;
+    public Sprite DogPet;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -454,6 +455,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.RabitPet:
                 return RabitPet;
+                break;     
+            case Item_Type.DogPet:
+                return DogPet;
                 break;
 
             case Item_Type.GuildReward:

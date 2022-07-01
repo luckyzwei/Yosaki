@@ -7,19 +7,7 @@ using UnityEngine;
 public class UiMarblePackRefund : MonoBehaviour
 {
     [SerializeField]
-    private List<TextMeshProUGUI> buyCounts;
-
-    [SerializeField]
-    private List<TextMeshProUGUI> marblePlusCount;
-
-    //[SerializeField]
-    //private List<TextMeshProUGUI> ticketPlusCount;
-
-    [SerializeField]
     private GameObject rootObject;
-
-    [SerializeField]
-    private TextMeshProUGUI totalMarble;
 
     private void Start()
     {
@@ -28,25 +16,21 @@ public class UiMarblePackRefund : MonoBehaviour
 
     private void Check()
     {
-
         rootObject.SetActive(false);
 
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.springReset).Value == 1) return;
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.monthreset).Value == 1) return;
 
-        int marblePack1Count = ServerData.iAPServerTableTotal.TableDatas["spring1"].buyCount.Value;
-        int marblePack2Count = ServerData.iAPServerTableTotal.TableDatas["spring2"].buyCount.Value;
-        int marblePack3Count = ServerData.iAPServerTableTotal.TableDatas["spring3"].buyCount.Value;
+        int buyCount = ServerData.iAPServerTableTotal.TableDatas["monthpass9ins"].buyCount.Value;
 
-
-        if (marblePack1Count == 0 && marblePack2Count == 0 && marblePack3Count == 0)
+        if (buyCount == 0 )
         {
-            ServerData.userInfoTable.GetTableData(UserInfoTable.springReset).Value = 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.monthreset).Value = 1;
 
             List<TransactionValue> tr = new List<TransactionValue>();
 
             Param marbleParam = new Param();
 
-            marbleParam.Add(UserInfoTable.springReset, ServerData.userInfoTable.GetTableData(UserInfoTable.springReset).Value);
+            marbleParam.Add(UserInfoTable.monthreset, ServerData.userInfoTable.GetTableData(UserInfoTable.monthreset).Value);
             tr.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, marbleParam));
 
             ServerData.SendTransaction(tr, successCallBack: () =>
@@ -61,64 +45,33 @@ public class UiMarblePackRefund : MonoBehaviour
 
         rootObject.SetActive(true);
 
-        buyCounts[0].SetText(marblePack1Count.ToString() + "회");
-        buyCounts[1].SetText(marblePack2Count.ToString() + "회");
-        buyCounts[2].SetText(marblePack3Count.ToString() + "회");
-
-        int _1DiffMarble = 1000;
-        //int _1DiffTicket = 2;
-
-        int _2DiffMarble = 3500;
-        // int _2DiffTicket = 5;
-
-        int _3DiffMarble = 6000;
-        //int _3DiffTicket = 10;
-
-        int marble1_MarbleAdd = marblePack1Count * _1DiffMarble;
-        marblePlusCount[0].SetText(Utils.ConvertBigNum(marble1_MarbleAdd));
-
-        //int marble1_TicketAdd = marblePack1Count * _1DiffTicket;
-        //ticketPlusCount[0].SetText(marble1_TicketAdd.ToString());
-
-        int marble2_MarbleAdd = marblePack2Count * _2DiffMarble;
-        marblePlusCount[1].SetText(Utils.ConvertBigNum(marble2_MarbleAdd));
-
-        //int marble2_TicketAdd = marblePack2Count * _2DiffTicket;
-        // ticketPlusCount[1].SetText(marble2_TicketAdd.ToString());
-
-        int marble3_MarbleAdd = marblePack3Count * _3DiffMarble;
-        marblePlusCount[2].SetText(Utils.ConvertBigNum(marble3_MarbleAdd));
-
-        //int marble3_TicketAdd = marblePack3Count * _3DiffTicket;
-        //ticketPlusCount[2].SetText(marble3_TicketAdd.ToString());
-
-        int addMarbleTotal = marble1_MarbleAdd + marble2_MarbleAdd + marble3_MarbleAdd;
-        //int addTicketTotal = marble1_TicketAdd + marble2_TicketAdd + marble3_TicketAdd;
-
-        totalMarble.SetText($"총 {Utils.ConvertBigNum(addMarbleTotal)}");
-        //totalTicket.SetText($"총 {Utils.ConvertBigNum(addTicketTotal)}");
-
         List<TransactionValue> transactions = new List<TransactionValue>();
 
-        ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += addMarbleTotal;
-        //ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += addTicketTotal;
+        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += 15000000;
+        ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += 2000;
+        ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += 3000;
+        ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += 50;
+        ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += 2000;
 
-        ServerData.userInfoTable.TableDatas[UserInfoTable.springReset].Value = 1;
+        ServerData.userInfoTable.TableDatas[UserInfoTable.monthreset].Value = 1;
 
         Param goodsParam = new Param();
+        goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+        goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
+        goodsParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
+        goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
         goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
         //goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
 
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.springReset, ServerData.userInfoTable.TableDatas[UserInfoTable.springReset].Value);
+        userInfoParam.Add(UserInfoTable.monthreset, ServerData.userInfoTable.TableDatas[UserInfoTable.monthreset].Value);
 
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
-              //       LogManager.Instance.SendLogType("Marble3", "Get", $"m:{addMarbleTotal} t:{0}");
-              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "벚꽃 세트 소급 완료!", null);
+              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "소급 완료!", null);
           });
     }
 }

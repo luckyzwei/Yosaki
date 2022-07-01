@@ -99,8 +99,10 @@ public class UserInfoTable
     public const string gumGiClear = "gumGiClear";
 
 
+    //6월월간
     public const string killCountTotal = "kt10";
-    public const string killCountTotal2 = "kt12";
+    //7월월간
+    public const string killCountTotal2 = "k7w";
     public const string killCountTotalChild = "kt9";
     public const string attenCountBok = "kb";
 
@@ -113,12 +115,7 @@ public class UserInfoTable
     public const string smithpensionAttendance = "smithpension";
     public const string weaponpensionAttendance = "weaponpension";
 
-    public const string relicReset = "relicReset";
-    public const string marbleReset2 = "marbleReset3";
-    public const string marbleReset3 = "marbleReset5";
-    public const string springReset = "springReset2";
-    public const string relicReset2 = "relicReset2";
-    public const string dailyPackReset = "dpr";
+    public const string monthreset = "monthreset";
     public const string sonScore = "son6";
     public const string susanoScore = "susa";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
@@ -220,13 +217,10 @@ public class UserInfoTable
         {relicpensionAttendance,0f},
         {yomul4_buff,0f},
 
-        {marbleReset2,0f},
-        {relicReset2,0f},
         {yomul5_buff,0f},
-        {killCountTotal2,5000000f},
+        {killCountTotal2,0f},
         {killCountTotalChild,0f},
         {attenCountBok,1f},
-        {dailyPackReset,0f},
         {yomul6_buff,0f},
         {sonScore,0f},
         {susanoScore,0f},
@@ -248,12 +242,11 @@ public class UserInfoTable
         {smithExp,0},
         {getSmith,0},
         {getGumGi,0},
-        {marbleReset3,0},
         {sendPetExp,0},
         {exchangeCount,0},
         {exchangeCount_1,0},
         {exchangeCount_2,0},
-        {springReset,0},
+        {monthreset,0},
         {refundFox,0},
         {sendGangChul,0},
         {foxMask,0},
@@ -365,8 +358,26 @@ public class UserInfoTable
                          }
                          else
                          {
-                             defultValues.Add(e.Current.Key, e.Current.Value);
-                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(e.Current.Value));
+                             if (e.Current.Key == killCountTotal2)
+                             {
+                                 if (tableDatas.ContainsKey(killCountTotal) && tableDatas[killCountTotal].Value >= 0)
+                                 {
+                                     defultValues.Add(e.Current.Key, 8000000);
+                                     tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(8000000));
+                                 }
+                                 else
+                                 {
+                                     defultValues.Add(e.Current.Key, e.Current.Value);
+                                     tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(e.Current.Value));
+                                 }
+                             }
+                             else
+                             {
+                                 defultValues.Add(e.Current.Key, e.Current.Value);
+                                 tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(e.Current.Value));
+
+                             }
+
                              paramCount++;
                          }
                      }
@@ -609,7 +620,7 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value++;
-            ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value++;
+            // ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value++;
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f)
             {
@@ -654,7 +665,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.attendanceCount, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount_100Day, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount_Seol, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value);
-        userInfoParam.Add(UserInfoTable.attenCountBok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value);
+        //userInfoParam.Add(UserInfoTable.attenCountBok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value);
 
         userInfoParam.Add(UserInfoTable.oakpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);

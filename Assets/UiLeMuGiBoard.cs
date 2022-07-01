@@ -26,6 +26,9 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
     private UiPetView uiPetViewPrefeab_Rabit;
 
     [SerializeField]
+    private UiPetView uiPetViewPrefeab_Dog;
+
+    [SerializeField]
     private Transform petViewParent;
     void Start()
     {
@@ -39,7 +42,7 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
         while (e.MoveNext())
         {
             //이무기는 생성X
-            if (e.Current.Value.Id == 12) 
+            if (e.Current.Value.Id == 12)
             {
                 var petView = Instantiate<UiPetView>(uiPetViewPrefeab_LeeMuGi, petViewParent);
 
@@ -49,7 +52,7 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
 
                 petView.Initialize(e.Current.Value);
             }
-            else if(e.Current.Value.Id == 13) 
+            else if (e.Current.Value.Id == 13)
             {
                 var petView = Instantiate<UiPetView>(uiPetViewPrefeab_GoldDragon, petViewParent);
 
@@ -60,7 +63,7 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
                 petView.Initialize(e.Current.Value);
 
             }
-            else if (e.Current.Value.Id == 14) 
+            else if (e.Current.Value.Id == 14)
             {
                 var petView = Instantiate<UiPetView>(uiPetViewPrefeab_Haetae, petViewParent);
 
@@ -93,6 +96,17 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
             else if (e.Current.Value.Id == 17)
             {
                 var petView = Instantiate<UiPetView>(uiPetViewPrefeab_Rabit, petViewParent);
+
+                petView.gameObject.SetActive(true);
+
+                petView.transform.localPosition = Vector3.zero;
+
+                petView.Initialize(e.Current.Value);
+            }
+            else if (e.Current.Value.Id == 18)
+            {
+                continue;
+                var petView = Instantiate<UiPetView>(uiPetViewPrefeab_Dog, petViewParent);
 
                 petView.gameObject.SetActive(true);
 
