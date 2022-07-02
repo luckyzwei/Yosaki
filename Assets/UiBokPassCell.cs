@@ -117,7 +117,7 @@ public class UiBokPassCell : MonoBehaviour
 
     private void SetDescriptionText()
     {
-        descriptionText.SetText($"{Utils.ConvertBigNum(passInfo.require)}");
+        descriptionText.SetText($"{Utils.ConvertBigNum(passInfo.require)}일");
     }
 
     public List<string> GetSplitData(string key)

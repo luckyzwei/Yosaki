@@ -111,9 +111,6 @@ public class UiTopRankerCell : MonoBehaviour
 
     private void SetPetSpine(int idx)
     {
-#if UNITY_EDITOR
-        idx = 17;
-#endif
 
         if (idx == -1)
         {
@@ -141,6 +138,12 @@ public class UiTopRankerCell : MonoBehaviour
             petGraphic.GetComponent<RectTransform>().anchoredPosition = new Vector3(42.1f, 144.6f, 0.7f);
         }
         else if (idx == 17)
+        {
+            petGraphic.startingAnimation = "idle";
+            petGraphic.transform.localScale = new Vector3(0.3f, 0.3f, 0.14f);
+            petGraphic.GetComponent<RectTransform>().anchoredPosition = new Vector3(49.4f, 141f, 0.0f);
+        }
+        else if (idx == 18)
         {
             petGraphic.startingAnimation = "idle";
             petGraphic.transform.localScale = new Vector3(0.3f, 0.3f, 0.14f);
