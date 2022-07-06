@@ -125,13 +125,13 @@ public class DailyMissionTable
         {
             if (e.IsSuccess() == false)
             {
-                Debug.Log($"Growth {key} up failed");
+                Debug.Log($"일일미션 {key} up failed");
                 return;
             }
 #if UNITY_EDITOR
             else
             {
-                Debug.Log($"DailyMission Key {key} sync complete");
+                Debug.LogError($"일일미션 Key {key} sync complete");
             }
 #endif
         });

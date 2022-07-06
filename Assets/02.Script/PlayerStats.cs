@@ -985,7 +985,7 @@ public static class PlayerStats
     }
     private static Dictionary<StatusType, float> titleHasValue = new Dictionary<StatusType, float>();
 
-    private static void ResetTitleHas()
+    public static void ResetTitleHas()
     {
         titleHasValue.Clear();
     }

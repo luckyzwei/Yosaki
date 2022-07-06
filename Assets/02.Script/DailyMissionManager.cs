@@ -80,6 +80,7 @@ public static class DailyMissionManager
 
     public static void SyncAllMissions()
     {
+ 
         var tableData = TableManager.Instance.DailyMission.dataArray;
 
         for (int i = 0; i < tableData.Length; i++)

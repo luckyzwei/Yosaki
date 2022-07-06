@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class SaveManager : SingletonMono<SaveManager>
 {
-#if UNITY_EDITOR
-    private WaitForSeconds updateDelay = new WaitForSeconds(10f);
-#else
+
     private WaitForSeconds updateDelay = new WaitForSeconds(300.0f);
-#endif
+
+    private WaitForSeconds updateDelay_DailyMission = new WaitForSeconds(3600.0f);
 
     private WaitForSeconds versionCheckDelay = new WaitForSeconds(600.0f);
 
@@ -19,6 +18,7 @@ public class SaveManager : SingletonMono<SaveManager>
     public void StartAutoSave()
     {
         StartCoroutine(AutoSaveRoutine());
+        StartCoroutine(AutoSaveRoutine_Mission());
         StartCoroutine(TockenRefreshRoutine());
         StartCoroutine(VersionCheckRoutine());
     }
@@ -96,6 +96,15 @@ public class SaveManager : SingletonMono<SaveManager>
         }
     }
 
+    private IEnumerator AutoSaveRoutine_Mission()
+    {
+        while (true)
+        {
+            SyncDailyMissions();
+            yield return updateDelay_DailyMission;
+        }
+    }
+
     //SendQueue에서 저장
     public void SyncDatasInQueue()
     {
@@ -115,18 +124,16 @@ public class SaveManager : SingletonMono<SaveManager>
             BuffManager.Instance.UpdateBuffTime();
             ServerData.buffServerTable.SyncAllData();
         }
-
-        SyncDailyMissions();
     }
     private void OnApplicationQuit()
     {
-   
+
         SetNotification();
         SyncDatasForce();
         SyncDailyMissions();
     }
 
-    private void SyncDailyMissions()
+    public void SyncDailyMissions()
     {
         DailyMissionManager.SyncAllMissions();
     }

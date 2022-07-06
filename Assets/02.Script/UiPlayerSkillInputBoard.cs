@@ -49,7 +49,27 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 
         changeMaskingButton.SetActive(false);
     }
+    public void WhenSkillGroupChangedByScript(int group)
+    {
+        if (coolTimeMaskRoutine != null)
+        {
+            StopCoroutine(coolTimeMaskRoutine);
+        }
 
+        coolTimeMaskRoutine = StartCoroutine(CoolTimeRoutine());
+
+        currentSelectedSkillGroup = group;
+
+        //ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
+
+        LoadSkillSlotData();
+        // RefreshUi();
+
+        if (AutoManager.Instance.IsAutoMode)
+        {
+            AutoManager.Instance.ResetSkillQueue();
+        }
+    }
 
     public void WhenSkillGroupChanged(int group)
     {
@@ -88,7 +108,7 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 
         skillGroupToggles[currentSelectedGroupId].isOn = true;
 
-        WhenSkillGroupChanged(currentSelectedGroupId);
+        WhenSkillGroupChangedByScript(currentSelectedGroupId);
     }
 
 

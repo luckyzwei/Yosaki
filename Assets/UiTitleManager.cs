@@ -2723,6 +2723,8 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             return;
         }
 
+        PlayerStats.ResetTitleHas();
+
         serverData.clearFlag.Value = 1;
 
         List<TransactionValue> transactions = new List<TransactionValue>();

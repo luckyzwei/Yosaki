@@ -318,6 +318,7 @@ public class UiSettingBoard : MonoBehaviour
         }
 
         SaveManager.Instance.SyncDatasInQueue();
+        SaveManager.Instance.SyncDailyMissions();
 
         autoSaveRoutine = CoroutineExecuter.Instance.StartCoroutine(AutoSaveRoutine());
     }
