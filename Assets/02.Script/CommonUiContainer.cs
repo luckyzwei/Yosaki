@@ -129,6 +129,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite OrochiWeapon;
     public Sprite NataSkill;
     public Sprite OrochiSkill;
+    public Sprite MihoWeapon;
+    public Sprite MihoNorigae;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -265,9 +267,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.costume39:
                 return costumeThumbnail[39];
-                break;   
+                break;
             case Item_Type.costume40:
                 return costumeThumbnail[40];
+                break;
+            case Item_Type.costume41:
+                return costumeThumbnail[41];
                 break;
 
 
@@ -455,7 +460,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.RabitPet:
                 return RabitPet;
-                break;     
+                break;
             case Item_Type.DogPet:
                 return DogPet;
                 break;
@@ -552,6 +557,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.OrochiWeapon:
                 return OrochiWeapon;
+                break;
+
+            case Item_Type.MihoWeapon:
+                return MihoWeapon;
+                break;
+
+            case Item_Type.MihoNorigae:
+                return MihoNorigae;
                 break;
 
         }

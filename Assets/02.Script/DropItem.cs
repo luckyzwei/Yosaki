@@ -79,6 +79,9 @@ public enum Item_Type
     DogNorigae,
     DogPet,
 
+    MihoWeapon,
+    MihoNorigae,
+
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -235,6 +238,7 @@ public enum Item_Type
     costume38 = 1239,
     costume39 = 1240,
     costume40 = 1241,
+    costume41 = 1242,
 
     pet0 = 1301,
     pet1 = 1302,
