@@ -107,6 +107,8 @@ public class UiInventoryWeaponView : MonoBehaviour
     private GameObject orochiLock;
     [SerializeField]
     private GameObject feelPaeLock;
+    [SerializeField]
+    private GameObject gumihoWeaponLock;
 
     [SerializeField]
     private GameObject armDescription;
@@ -119,6 +121,9 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI suhoSinDescription;
+
+    [SerializeField]
+    private GameObject foxNorigaeGetButton;
 
     private void SetEquipButton(bool onOff)
     {
@@ -190,7 +195,8 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         norigaeDescription.gameObject.SetActive(true);
 
-        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26 || magicBookData.Id == 27));
+        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26 || magicBookData.Id == 27 || magicBookData.Id == 28));
+        foxNorigaeGetButton.SetActive(false);
 
         if (magicBookData != null)
         {
@@ -202,7 +208,12 @@ public class UiInventoryWeaponView : MonoBehaviour
             {
                 suhoSinDescription.SetText($"여름훈련에서\n획득!");
             }
+            else if (magicBookData.Id == 28)
+            {
+                suhoSinDescription.SetText($"요괴사냥\n구미호꼬리 8획득시\n획득 가능");
+            }
 
+            foxNorigaeGetButton.SetActive(magicBookData.Id == 28);
         }
 
         if (magicBookData != null)
@@ -337,9 +348,10 @@ public class UiInventoryWeaponView : MonoBehaviour
             nataLock.SetActive(false);
             orochiLock.SetActive(false);
             feelPaeLock.SetActive(false);
+            gumihoWeaponLock.SetActive(false);
 
             //필멸2 필멸3  (23,24)
-            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29)
+            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29 || weaponData.Id == 30)
             {
                 hasMask.SetActive(false);
 
@@ -377,6 +389,11 @@ public class UiInventoryWeaponView : MonoBehaviour
                 {
                     feelPaeLock.gameObject.SetActive(state == 0);
                 }
+
+                if (weaponData.Id == 30)
+                {
+                    gumihoWeaponLock.gameObject.SetActive(state == 0);
+                }
             }
 
         }
@@ -389,6 +406,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             nataLock.SetActive(false);
             orochiLock.SetActive(false);
             feelPaeLock.SetActive(false);
+            gumihoWeaponLock.SetActive(false);
 
             magicBookViewEquipButton.gameObject.SetActive(state == 1);
             weaponViewEquipButton.gameObject.SetActive(false);
@@ -992,6 +1010,45 @@ public class UiInventoryWeaponView : MonoBehaviour
         ServerData.weaponTable.SyncToServerEach("weapon29");
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "필멸(패) 획득!", null);
+    }
+
+    public void OnClickGetGumihoWeaponButton()
+    {
+        if (ServerData.goodsTable.GetTableData(GoodsTable.gumiho0).Value == 0 ||
+            ServerData.goodsTable.GetTableData(GoodsTable.gumiho1).Value == 0 ||
+            ServerData.goodsTable.GetTableData(GoodsTable.gumiho2).Value == 0 ||
+            ServerData.goodsTable.GetTableData(GoodsTable.gumiho3).Value == 0 ||
+            ServerData.goodsTable.GetTableData(GoodsTable.gumiho4).Value == 0 ||
+            ServerData.goodsTable.GetTableData(GoodsTable.gumiho5).Value == 0 ||
+            ServerData.goodsTable.GetTableData(GoodsTable.gumiho6).Value == 0 ||
+            ServerData.goodsTable.GetTableData(GoodsTable.gumiho7).Value == 0 ||
+            ServerData.goodsTable.GetTableData(GoodsTable.gumiho8).Value == 0
+            )
+        {
+            PopupManager.Instance.ShowAlarmMessage("구미호전 구미호 꼬리 모두 획득시 획득 하실 수 있습니다.");
+            return;
+        }
+
+        ServerData.weaponTable.TableDatas["weapon30"].amount.Value += 1;
+        ServerData.weaponTable.TableDatas["weapon30"].hasItem.Value = 1;
+        ServerData.weaponTable.SyncToServerEach("weapon30");
+
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "여우검 획득!", null);
+    }
+
+    public void OnClickGetGumihoNorigaeButton()
+    {
+        if (ServerData.goodsTable.GetTableData(GoodsTable.gumiho7).Value == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("구미호전 구미호 꼬리8 획득시 획득 하실 수 있습니다.");
+            return;
+        }
+
+        ServerData.magicBookTable.TableDatas["magicBook28"].amount.Value += 1;
+        ServerData.magicBookTable.TableDatas["magicBook28"].hasItem.Value = 1;
+        ServerData.magicBookTable.SyncToServerEach("magicBook28");
+
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "여우 노리개 획득!", null);
     }
 
 }

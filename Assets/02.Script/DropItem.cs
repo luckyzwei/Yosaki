@@ -54,7 +54,7 @@ public enum Item_Type
     SinSkill3,
     LeeMuGiStone,
     ZangStone,
-    SP,
+    SP,//검조각
     Hae_Norigae,
     Hae_Pet,
     Sam_Norigae,
@@ -243,7 +243,19 @@ public enum Item_Type
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,
-    pet3 = 1304
+    pet3 = 1304,
+
+
+
+    gumiho0 =5000,
+    gumiho1 =5001,
+    gumiho2 =5002,
+    gumiho3 =5003,
+    gumiho4 =5004,
+    gumiho5 =5005,
+    gumiho6 =5006,
+    gumiho7 =5007,
+    gumiho8 =5008,
 }
 
 public class DropItem : PoolItem

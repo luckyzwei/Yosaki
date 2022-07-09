@@ -86,6 +86,16 @@ public class GoodsTable
     public static string OrochiTooth0 = "or0";
     public static string OrochiTooth1 = "or1";
 
+    public static string gumiho0 = "g0";
+    public static string gumiho1 = "g1";
+    public static string gumiho2 = "g2";
+    public static string gumiho3 = "g3";
+    public static string gumiho4 = "g4";
+    public static string gumiho5 = "g5";
+    public static string gumiho6 = "g6";
+    public static string gumiho7 = "g7";
+    public static string gumiho8 = "g8";
+
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
         {Gold,GameBalance.StartingMoney},
@@ -154,6 +164,16 @@ public class GoodsTable
         {OrochiSkill,0f},
         {OrochiTooth0,0f},
         {OrochiTooth1,0f},
+        //
+        {gumiho0,0f},
+        {gumiho1,0f},
+        {gumiho2,0f},
+        {gumiho3,0f},
+        {gumiho4,0f},
+        {gumiho5,0f},
+        {gumiho6,0f},
+        {gumiho7,0f},
+        {gumiho8,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

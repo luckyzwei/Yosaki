@@ -506,6 +506,20 @@ public enum TitleMissionId
     Stage10200,//★
     Stage10300,//★
     Stage10400,//★
+
+    //
+    Level1310000,//★
+    Level1320000,//★
+    Level1330000,//★
+    Level1340000,//★
+    Level1350000,//★
+    Level1360000,//★
+    Level1370000,//★
+    Level1380000,//★
+    Level1390000,//★
+    Level1400000,//★
+
+    FoxWeapon,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -1567,6 +1581,48 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.Level1300000);
             }
 
+            //
+            if (e >= 1310000)
+            {
+                ClearTitleMission(TitleMissionId.Level1310000);
+            }
+            if (e >= 1320000)
+            {
+                ClearTitleMission(TitleMissionId.Level1320000);
+            }
+            if (e >= 1330000)
+            {
+                ClearTitleMission(TitleMissionId.Level1330000);
+            }
+            if (e >= 1340000)
+            {
+                ClearTitleMission(TitleMissionId.Level1340000);
+            }
+            if (e >= 1350000)
+            {
+                ClearTitleMission(TitleMissionId.Level1350000);
+            }
+            if (e >= 1360000)
+            {
+                ClearTitleMission(TitleMissionId.Level1360000);
+            }
+            if (e >= 1370000)
+            {
+                ClearTitleMission(TitleMissionId.Level1370000);
+            }
+            if (e >= 1380000)
+            {
+                ClearTitleMission(TitleMissionId.Level1380000);
+            }
+            if (e >= 1390000)
+            {
+                ClearTitleMission(TitleMissionId.Level1390000);
+            }
+            if (e >= 1400000)
+            {
+                ClearTitleMission(TitleMissionId.Level1400000);
+            }
+
 
         }).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>
@@ -2517,6 +2573,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.FeelMulPaeWeapon);
             }
+        }).AddTo(this);  
+        
+        ServerData.weaponTable.TableDatas["weapon30"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.FoxWeapon);
+            }
         }).AddTo(this);
 
         //
@@ -2747,8 +2811,6 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             return;
         }
 
-        PlayerStats.ResetTitleHas();
-
         serverData.clearFlag.Value = 1;
 
         List<TransactionValue> transactions = new List<TransactionValue>();
@@ -2760,5 +2822,7 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
         transactions.Add(TransactionValue.SetUpdate(TitleServerTable.tableName, TitleServerTable.Indate, param));
 
         ServerData.SendTransaction(transactions);
+
+        PlayerStats.ResetTitleHas();
     }
 }

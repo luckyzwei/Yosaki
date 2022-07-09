@@ -35,11 +35,13 @@ public static class CommonString
     public static string ItemGrade_12 = "나타";
     public static string ItemGrade_13 = "오로치";
     public static string ItemGrade_14 = "필멸(패)";
+    public static string ItemGrade_15 = "여우검";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
     public static string ItemGrade_8_Norigae = "영물";
     public static string ItemGrade_9_Norigae = "병아리";
+    public static string ItemGrade_10_Norigae = "영물";
 
     public static string ItemGrade_4_Skill = "주작";
     public static string ItemGrade_5_Skill = "청룡";
@@ -224,6 +226,16 @@ public static class CommonString
 
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
+
+            case Item_Type.gumiho0: return "구미호 꼬리1";
+            case Item_Type.gumiho1: return "구미호 꼬리2";
+            case Item_Type.gumiho2: return "구미호 꼬리3";
+            case Item_Type.gumiho3: return "구미호 꼬리4";
+            case Item_Type.gumiho4: return "구미호 꼬리5";
+            case Item_Type.gumiho5: return "구미호 꼬리6";
+            case Item_Type.gumiho6: return "구미호 꼬리7";
+            case Item_Type.gumiho7: return "구미호 꼬리8";
+            case Item_Type.gumiho8: return "구미호 꼬리9";
         }
         return "미등록";
     }

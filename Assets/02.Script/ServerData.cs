@@ -901,6 +901,82 @@ public static class ServerData
                     return TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, param);
                 }
                 break;
+
+
+            case Item_Type.gumiho0:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.gumiho0).Value += amount;
+                    param.Add(GoodsTable.gumiho0, ServerData.goodsTable.GetTableData(GoodsTable.gumiho0).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+
+            //
+            case Item_Type.gumiho1:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.gumiho1).Value += amount;
+                    param.Add(GoodsTable.gumiho1, ServerData.goodsTable.GetTableData(GoodsTable.gumiho1).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.gumiho2:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.gumiho2).Value += amount;
+                    param.Add(GoodsTable.gumiho2, ServerData.goodsTable.GetTableData(GoodsTable.gumiho2).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.gumiho3:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.gumiho3).Value += amount;
+                    param.Add(GoodsTable.gumiho3, ServerData.goodsTable.GetTableData(GoodsTable.gumiho3).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.gumiho4:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.gumiho4).Value += amount;
+                    param.Add(GoodsTable.gumiho4, ServerData.goodsTable.GetTableData(GoodsTable.gumiho4).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.gumiho5:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.gumiho5).Value += amount;
+                    param.Add(GoodsTable.gumiho5, ServerData.goodsTable.GetTableData(GoodsTable.gumiho5).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.gumiho6:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.gumiho6).Value += amount;
+                    param.Add(GoodsTable.gumiho6, ServerData.goodsTable.GetTableData(GoodsTable.gumiho6).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.gumiho7:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.gumiho7).Value += amount;
+                    param.Add(GoodsTable.gumiho7, ServerData.goodsTable.GetTableData(GoodsTable.gumiho7).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.gumiho8:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.gumiho8).Value += amount;
+                    param.Add(GoodsTable.gumiho8, ServerData.goodsTable.GetTableData(GoodsTable.gumiho8).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);

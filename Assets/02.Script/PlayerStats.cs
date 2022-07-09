@@ -861,6 +861,7 @@ public static class PlayerStats
         //
         ret += GetGumIgDefenseValue();
         //
+        ret += GetGumihoAbil();
 
         return ret;
     }
@@ -1305,6 +1306,33 @@ public static class PlayerStats
     public static ObscuredFloat orochi0Value = 0.001f;
     public static ObscuredFloat orochi1Value = 0.002f;
 
+    public static ObscuredFloat gumihoValue0 = 5000;
+    public static ObscuredFloat gumihoValue1 = 10000;
+    public static ObscuredFloat gumihoValue2 = 15000;
+    public static ObscuredFloat gumihoValue3 = 30000;
+    public static ObscuredFloat gumihoValue4 = 40000;
+    public static ObscuredFloat gumihoValue5 = 50000;
+    public static ObscuredFloat gumihoValue6 = 70000;
+    public static ObscuredFloat gumihoValue7 = 90000;
+    public static ObscuredFloat gumihoValue8 = 120000;
+
+    public static float GetGumihoAbil()
+    {
+        float ret = 0f;
+
+        ret += ServerData.goodsTable.GetTableData(GoodsTable.gumiho0).Value == 1 ? gumihoValue0 : 0;
+        ret += ServerData.goodsTable.GetTableData(GoodsTable.gumiho1).Value == 1 ? gumihoValue1 : 0;
+        ret += ServerData.goodsTable.GetTableData(GoodsTable.gumiho2).Value == 1 ? gumihoValue2 : 0;
+        ret += ServerData.goodsTable.GetTableData(GoodsTable.gumiho3).Value == 1 ? gumihoValue3 : 0;
+        ret += ServerData.goodsTable.GetTableData(GoodsTable.gumiho4).Value == 1 ? gumihoValue4 : 0;
+        ret += ServerData.goodsTable.GetTableData(GoodsTable.gumiho5).Value == 1 ? gumihoValue5 : 0;
+        ret += ServerData.goodsTable.GetTableData(GoodsTable.gumiho6).Value == 1 ? gumihoValue6 : 0;
+        ret += ServerData.goodsTable.GetTableData(GoodsTable.gumiho7).Value == 1 ? gumihoValue7 : 0;
+        ret += ServerData.goodsTable.GetTableData(GoodsTable.gumiho8).Value == 1 ? gumihoValue8 : 0;
+
+        return ret;
+    }
+
     public static float GetAsuraAbilValue(StatusType type)
     {
         switch (type)
@@ -1470,6 +1498,7 @@ public static class PlayerStats
     private static string adukCostumeKey = "costume26";
     private static string leeMuGiCostumeKey = "costume27";
     private static string nataCostumeKey = "costume35";
+    private static string foxCostumeKey = "costume40";
     public static float DecreaseBossHp()
     {
         float ret = 0f;
@@ -1485,6 +1514,11 @@ public static class PlayerStats
         }
 
         if (ServerData.costumeServerTable.TableDatas[nataCostumeKey].hasCostume.Value == true)
+        {
+            ret += 0.1f;
+        }
+
+        if (ServerData.costumeServerTable.TableDatas[foxCostumeKey].hasCostume.Value == true)
         {
             ret += 0.1f;
         }
@@ -1578,4 +1612,9 @@ public static class PlayerStats
 
         return 0f;
     }
+
+
+
+
+
 }

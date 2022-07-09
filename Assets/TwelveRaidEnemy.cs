@@ -61,7 +61,16 @@ public class TwelveRaidEnemy : BossEnemyBase
     private void UpdateBossDamage()
     {
         //삼족오 
-        if (GameManager.Instance.bossId == 23 || GameManager.Instance.bossId == 24 || GameManager.Instance.bossId == 26 || GameManager.Instance.bossId == 27 || GameManager.Instance.bossId == 28 || GameManager.Instance.bossId == 29)
+        if (GameManager.Instance.bossId == 23 || GameManager.Instance.bossId == 24 || GameManager.Instance.bossId == 26
+            || GameManager.Instance.bossId == 27 || GameManager.Instance.bossId == 28
+            || GameManager.Instance.bossId == 29 ||
+            GameManager.Instance.bossId == 33 ||
+            GameManager.Instance.bossId == 34 ||
+            GameManager.Instance.bossId == 35 ||
+            GameManager.Instance.bossId == 36 ||
+            GameManager.Instance.bossId == 37 ||
+            GameManager.Instance.bossId == 38
+            )
         {
             if (samDam < double.MaxValue * 0.25)
             {
@@ -72,7 +81,7 @@ public class TwelveRaidEnemy : BossEnemyBase
 
             enemyHitObjects.ForEach(e => e.SetDamage(samDam));
         }
-        else if (GameManager.Instance.bossId == 22 || GameManager.Instance.bossId == 25) 
+        else if (GameManager.Instance.bossId == 22 || GameManager.Instance.bossId == 25)
         {
             if (haeTaeDam < double.MaxValue * 0.25)
             {
@@ -83,7 +92,7 @@ public class TwelveRaidEnemy : BossEnemyBase
 
             enemyHitObjects.ForEach(e => e.SetDamage(haeTaeDam));
         }
-        else if(GameManager.Instance.bossId == 20) 
+        else if (GameManager.Instance.bossId == 20)
         {
             if (gangChulDam < double.MaxValue * 0.25)
             {
@@ -173,11 +182,11 @@ public class TwelveRaidEnemy : BossEnemyBase
             if (playAnim)
             {
                 //나타
-                if (GameManager.Instance.bossId == 26) 
+                if (GameManager.Instance.bossId == 26)
                 {
                     StartCoroutine(PlayAttackAnim_Nata());
                 }
-                else 
+                else
                 {
                     StartCoroutine(PlayAttackAnim());
                 }

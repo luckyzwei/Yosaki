@@ -14,13 +14,20 @@ public class UiTwelveBossIcon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GameManager.Instance.bossId >= sprites.Count)
+        int id = GameManager.Instance.bossId;
+
+        if (id >= 30 && id <= 38)
+        {
+            id = 30;
+        }
+
+        if (id >= sprites.Count)
         {
             icon.gameObject.SetActive(false);
         }
         else
         {
-            icon.sprite = sprites[GameManager.Instance.bossId];
+            icon.sprite = sprites[id];
         }
 
     }

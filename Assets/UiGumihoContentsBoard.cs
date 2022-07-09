@@ -19,7 +19,7 @@ public class UiGumihoContentsBoard : MonoBehaviour
     {
         var tableDatas = TableManager.Instance.TwelveBossTable.dataArray;
         //길드보스 -1
-        for (int i = 29; i < 39; i++)
+        for (int i = 30; i < 39; i++)
         {
             var cell = Instantiate<UiTwelveBossContentsView>(uiBossContentsViewPrefab, cellParent);
 
