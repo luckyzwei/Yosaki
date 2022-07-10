@@ -138,6 +138,7 @@ public class UserInfoTable
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
+    public const string relicPackReset = "rr";
 
 
     public double currentServerDate;
@@ -250,6 +251,7 @@ public class UserInfoTable
         {refundFox,0},
         {sendGangChul,0},
         {foxMask,0},
+        {relicPackReset,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

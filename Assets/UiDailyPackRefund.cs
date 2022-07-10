@@ -5,118 +5,134 @@ using TMPro;
 using UnityEngine;
 public class UiDailyPackRefund : MonoBehaviour
 {
-//    [SerializeField]
-//    private List<TextMeshProUGUI> buyCounts;
+    [SerializeField]
+    private List<TextMeshProUGUI> buyCounts;
 
-//    [SerializeField]
-//    private List<TextMeshProUGUI> plusCount;
+    [SerializeField]
+    private List<TextMeshProUGUI> plusCount;
 
-//    //[SerializeField]
-//    //private List<TextMeshProUGUI> ticketPlusCount;
+    //[SerializeField]
+    //private List<TextMeshProUGUI> ticketPlusCount;
 
-//    [SerializeField]
-//    private GameObject rootObject;
+    [SerializeField]
+    private GameObject rootObject;
 
-//    [SerializeField]
-//    private TextMeshProUGUI totalMarble;
+    [SerializeField]
+    private TextMeshProUGUI totalMarble;
 
-//    //[SerializeField]
-//    //private TextMeshProUGUI totalTicket;
+    [SerializeField]
+    private TextMeshProUGUI yoguiFireAmount;
 
-//    private void Start()
-//    {
-//        Check();
-//    }
+    //[SerializeField]
+    //private TextMeshProUGUI totalTicket;
 
-//    private void Check()
-//    {
-//        rootObject.SetActive(false);
+    private void Start()
+    {
+        Check();
+    }
 
-//        if (ServerData.userInfoTable.GetTableData(UserInfoTable.dailyPackReset).Value == 1) return;
+    private void Check()
+    {
+        rootObject.SetActive(false);
 
-//        int dailyPackCount = ServerData.iAPServerTableTotal.TableDatas["dailypackage1"].buyCount.Value;
-//        int weeklyPackCount = ServerData.iAPServerTableTotal.TableDatas["weeklypackage1"].buyCount.Value;
-//        int monthlyPackCount = ServerData.iAPServerTableTotal.TableDatas["monthlypackage1"].buyCount.Value;
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.relicPackReset).Value == 1) return;
 
-//        if (dailyPackCount == 0 && weeklyPackCount == 0 && monthlyPackCount == 0)
-//        {
-//            ServerData.userInfoTable.GetTableData(UserInfoTable.dailyPackReset).Value = 1;
+        int relic1 = ServerData.iAPServerTableTotal.TableDatas["relic1"].buyCount.Value;
+        int relic2 = ServerData.iAPServerTableTotal.TableDatas["relic2"].buyCount.Value;
+        int relic3 = ServerData.iAPServerTableTotal.TableDatas["relic3"].buyCount.Value;
+        int relic4 = ServerData.iAPServerTableTotal.TableDatas["relic4"].buyCount.Value;
 
-//            List<TransactionValue> tr = new List<TransactionValue>();
+        if (relic1 == 0 && relic2 == 0 && relic3 == 0 && relic4 == 0)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.relicPackReset).Value = 1;
 
-//            Param marbleParam = new Param();
+            List<TransactionValue> tr = new List<TransactionValue>();
 
-//            marbleParam.Add(UserInfoTable.dailyPackReset, ServerData.userInfoTable.GetTableData(UserInfoTable.dailyPackReset).Value);
-//            tr.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, marbleParam));
+            Param marbleParam = new Param();
 
-//            ServerData.SendTransaction(tr, successCallBack: () =>
-//            {
-//#if UNITY_EDITOR
-//                Debug.LogError("소급 없음");
-//#endif
-//            });
+            marbleParam.Add(UserInfoTable.relicPackReset, ServerData.userInfoTable.GetTableData(UserInfoTable.relicPackReset).Value);
+            tr.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, marbleParam));
 
-//            return;
-//        }
+            ServerData.SendTransaction(tr, successCallBack: () =>
+            {
+#if UNITY_EDITOR
+                Debug.LogError("소급 없음");
+#endif
+            });
 
-//        rootObject.SetActive(true);
+            return;
+        }
 
-//        buyCounts[0].SetText(dailyPackCount.ToString() + "회");
-//        buyCounts[1].SetText(weeklyPackCount.ToString() + "회");
-//        buyCounts[2].SetText(monthlyPackCount.ToString() + "회");
+        rootObject.SetActive(true);
 
-//        //4
-//        int _1DiffTicket = 1000;
-//        //13
-//        int _2DiffTicket = 3000;
-//        //40
-//        int _3DiffTicket = 10000;
+        buyCounts[0].SetText(relic1.ToString() + "회");
+        buyCounts[1].SetText(relic2.ToString() + "회");
+        buyCounts[2].SetText(relic3.ToString() + "회");
+        buyCounts[3].SetText(relic4.ToString() + "회");
 
-//        int marble1_MarbleAdd = dailyPackCount * _1DiffTicket;
-//        plusCount[0].SetText(Utils.ConvertBigNum(marble1_MarbleAdd));
+        //4
+        int _1DiffTicket = 18;
+        //13
+        int _2DiffTicket = 64;
+        //40
+        int _3DiffTicket = 128;
+        int _4DiffTicket = 340;
 
-//        //int marble1_TicketAdd = marblePack1Count * _1DiffTicket;
-//        //ticketPlusCount[0].SetText(marble1_TicketAdd.ToString());
+        int marble1_MarbleAdd = relic1 * _1DiffTicket;
+        plusCount[0].SetText(Utils.ConvertBigNum(marble1_MarbleAdd));
 
-//        int marble2_MarbleAdd = weeklyPackCount * _2DiffTicket;
-//        plusCount[1].SetText(Utils.ConvertBigNum(marble2_MarbleAdd));
 
-//        //int marble2_TicketAdd = marblePack2Count * _2DiffTicket;
-//        // ticketPlusCount[1].SetText(marble2_TicketAdd.ToString());
+        int marble2_MarbleAdd = relic2 * _2DiffTicket;
+        plusCount[1].SetText(Utils.ConvertBigNum(marble2_MarbleAdd));
 
-//        int marble3_MarbleAdd = monthlyPackCount * _3DiffTicket;
-//        plusCount[2].SetText(Utils.ConvertBigNum(marble3_MarbleAdd));
 
-//        //int marble3_TicketAdd = marblePack3Count * _3DiffTicket;
-//        //ticketPlusCount[2].SetText(marble3_TicketAdd.ToString());
+        int marble3_MarbleAdd = relic3 * _3DiffTicket;
+        plusCount[2].SetText(Utils.ConvertBigNum(marble3_MarbleAdd));
 
-//        int addTicketTotal = marble1_MarbleAdd + marble2_MarbleAdd + marble3_MarbleAdd;
-//        //int addTicketTotal = marble1_TicketAdd + marble2_TicketAdd + marble3_TicketAdd;
 
-//        totalMarble.SetText($"총 {Utils.ConvertBigNum(addTicketTotal)}");
-//        //totalTicket.SetText($"총 {Utils.ConvertBigNum(addTicketTotal)}");
+        int marble4_MarbleAdd = relic4 * _4DiffTicket;
+        plusCount[3].SetText(Utils.ConvertBigNum(marble4_MarbleAdd));
 
-//        List<TransactionValue> transactions = new List<TransactionValue>();
+        yoguiFireAmount.gameObject.SetActive(relic4 != 0);
 
-//        ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += addTicketTotal;
-//        //ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value += addTicketTotal;
+        if (relic4 != 0)
+        {
+            yoguiFireAmount.SetText($"40000");
+        }
 
-//        ServerData.userInfoTable.TableDatas[UserInfoTable.dailyPackReset].Value = 1;
+        int addTicketTotal = marble1_MarbleAdd + marble2_MarbleAdd + marble3_MarbleAdd + marble4_MarbleAdd;
 
-//        Param goodsParam = new Param();
-//        goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
-//        //goodsParam.Add(GoodsTable.Ticket, ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value);
+        totalMarble.SetText($"총 {Utils.ConvertBigNum(addTicketTotal)}");
 
-//        Param userInfoParam = new Param();
-//        userInfoParam.Add(UserInfoTable.dailyPackReset, ServerData.userInfoTable.TableDatas[UserInfoTable.dailyPackReset].Value);
+        List<TransactionValue> transactions = new List<TransactionValue>();
 
-//        transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-//        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+        ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += addTicketTotal;
 
-//        ServerData.SendTransaction(transactions, successCallBack: () =>
-//        {
-//          //  LogManager.Instance.SendLogType("TicketRefund", "Get", $"t:{addTicketTotal} t:{0}");
-//            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "세트 소급 완료!", null);
-//        });
-//    }
+        if (relic4 != 0)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += 40000;
+        }
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.relicPackReset].Value = 1;
+
+        Param goodsParam = new Param();
+        goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+
+        if (relic4 != 0)
+        {
+            goodsParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
+        }
+
+        Param userInfoParam = new Param();
+        userInfoParam.Add(UserInfoTable.relicPackReset, ServerData.userInfoTable.TableDatas[UserInfoTable.relicPackReset].Value);
+
+        transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+        {
+            //  LogManager.Instance.SendLogType("TicketRefund", "Get", $"t:{addTicketTotal} t:{0}");
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "세트 소급 완료!", null);
+        });
+    }
 }
