@@ -191,6 +191,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
 
         ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value += sleepRewardInfo.killCount;
+        ServerData.userInfoTable.TableDatas[UserInfoTable.attenCountOne].Value += sleepRewardInfo.killCount;
 
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
@@ -224,6 +225,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
 
         userInfoParam.Add(UserInfoTable.killCountTotalChild, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value);
+        userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.TableDatas[UserInfoTable.attenCountOne].Value);
 
 
         yield return new WaitForSeconds(0.5f);

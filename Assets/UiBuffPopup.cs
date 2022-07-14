@@ -7,6 +7,8 @@ public class UiBuffPopup : MonoBehaviour
     [SerializeField]
     private UiBuffPopupView uiBuffPopupView;
 
+
+
     [SerializeField]
     private Transform buffViewParent;
 
@@ -25,7 +27,6 @@ public class UiBuffPopup : MonoBehaviour
             if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Yomul) continue;
 
             var cell = Instantiate<UiBuffPopupView>(uiBuffPopupView, buffViewParent);
-
             cell.Initalize(tableDatas[i]);
         }
     }

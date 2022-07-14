@@ -93,6 +93,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite RabitNorigae;
     public Sprite RabitPet;
     public Sprite DogPet;
+    public Sprite ChunMaPet;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -132,6 +133,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite MihoWeapon;
     public Sprite MihoNorigae;
     public Sprite MihoTail;
+    public Sprite ChunMaNorigae;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -274,6 +276,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.costume41:
                 return costumeThumbnail[41];
+                break; 
+            case Item_Type.costume42:
+                return costumeThumbnail[42];
+                break;  
+            case Item_Type.costume43:
+                return costumeThumbnail[43];
                 break;
 
 
@@ -464,6 +472,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.DogPet:
                 return DogPet;
+                break;  
+            
+            case Item_Type.ChunMaPet:
+                return ChunMaPet;
                 break;
 
             case Item_Type.GuildReward:
@@ -566,6 +578,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.MihoNorigae:
                 return MihoNorigae;
+                break;    
+            
+            case Item_Type.ChunMaNorigae:
+                return ChunMaNorigae;
                 break;  
             
             case Item_Type.gumiho0:

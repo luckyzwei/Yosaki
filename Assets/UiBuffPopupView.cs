@@ -50,6 +50,9 @@ public class UiBuffPopupView : MonoBehaviour
     [SerializeField]
     private GameObject guildImage;
 
+    [SerializeField]
+    private GameObject oneYearImage;
+
     private bool initialized = false;
 
 
@@ -74,6 +77,11 @@ public class UiBuffPopupView : MonoBehaviour
         if (guildImage != null)
         {
             guildImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Guild);
+        }
+
+        if (oneYearImage != null)
+        {
+            oneYearImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.OneYear);
         }
 
 
@@ -231,7 +239,7 @@ public class UiBuffPopupView : MonoBehaviour
                 BuffGetRoutine();
             });
         }
-        else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul) 
+        else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul)
         {
             var yomulTableData = TableManager.Instance.YomulAbilTable.dataArray[buffTableData.Yomulid];
             var yomulServerData = ServerData.yomulServerTable.TableDatas[yomulTableData.Stringid];
@@ -251,20 +259,24 @@ public class UiBuffPopupView : MonoBehaviour
             int getLevel = GuildManager.Instance.GetBuffGetExp(buffTableData.Id);
 
             //길드 체크
-            if (GuildManager.Instance.guildInfoData.Value == null) 
+            if (GuildManager.Instance.guildInfoData.Value == null)
             {
                 PopupManager.Instance.ShowAlarmMessage($"문파에 가입되어 있어야 합니다.(명성 {getLevel}이상)");
                 return;
             }
 
-            if (GuildManager.Instance.HasGuildBuff(buffTableData.Id)) 
+            if (GuildManager.Instance.HasGuildBuff(buffTableData.Id))
             {
                 BuffGetRoutine();
             }
-            else 
+            else
             {
                 PopupManager.Instance.ShowAlarmMessage($"문파의 명성이 부족합니다.(명성 {getLevel}이상)");
             }
+        }
+        else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.OneYear)
+        {
+            BuffGetRoutine();
         }
     }
 

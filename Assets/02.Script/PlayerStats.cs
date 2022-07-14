@@ -36,7 +36,8 @@ public enum StatusType
     SuperCritical2DamPer,
     //Smith
     growthStoneUp, WeaponHasUp, NorigaeHasUp, PetEquipHasUp, PetEquipProbUp,
-    DecreaseBossHp
+    DecreaseBossHp,
+    OneYearBuff,
 }
 
 
@@ -253,8 +254,16 @@ public static class PlayerStats
         ret += GetAsuraAbilValue(StatusType.AttackAddPer);
         ret += GetGuildPetEffect(StatusType.AttackAddPer);
         ret += GetMaskAttackAddPerDam();
+        ret += GetRelicReleaseValue();
 
         return ret;
+    }
+
+    public static float GetRelicReleaseValue()
+    {
+        return 0f;
+        int divideNum = (int)(ServerData.userInfoTable.TableDatas[UserInfoTable.usedRelicTicketNum].Value / 1000f);
+        return relicReleaseValue * divideNum;
     }
 
     public static float GetCostumeAttackPowerValue()
@@ -679,7 +688,37 @@ public static class PlayerStats
         ret += GetHotTimeBuffEffect(StatusType.ExpGainPer);
         ret += GetGuildPetEffect(StatusType.ExpGainPer);
 
+        ret += GetOneYearBuffValue(StatusType.ExpGainPer);
+
         return ret;
+    }
+
+    //1주년 버프 키값
+    private static string ob = "ob";
+
+    private static float GetOneYearBuffValue(StatusType status)
+    {
+        if (ServerData.buffServerTable.TableDatas[ob].remainSec.Value <= 0f) return 0f;
+
+        switch (status)
+        {
+            case StatusType.ExpGainPer:
+                {
+                    return 100f;
+                }
+                break;
+            case StatusType.MagicStoneAddPer:
+                {
+                    return 200f;
+                }
+                break;
+            case StatusType.MarbleAddPer:
+                {
+                    return 40f;
+                }
+                break;
+        }
+        return 0f;
     }
 
     public static float GetExpPlusValueExclusiveBuff()
@@ -701,6 +740,7 @@ public static class PlayerStats
 
         ret += GetHotTimeBuffEffect(StatusType.MagicStoneAddPer);
         ret += GetBuffValue(StatusType.MagicStoneAddPer);
+        ret += GetOneYearBuffValue(StatusType.MagicStoneAddPer);
 
         return ret;
     }
@@ -710,6 +750,8 @@ public static class PlayerStats
 
         ret += GetHotTimeBuffEffect(StatusType.MarbleAddPer);
         ret += GetBuffValue(StatusType.MarbleAddPer);
+
+        ret += GetOneYearBuffValue(StatusType.MarbleAddPer);
 
         return ret;
     }
@@ -1315,6 +1357,9 @@ public static class PlayerStats
     public static ObscuredFloat gumihoValue6 = 70000;
     public static ObscuredFloat gumihoValue7 = 90000;
     public static ObscuredFloat gumihoValue8 = 120000;
+
+
+    public static ObscuredFloat relicReleaseValue = 1f;
 
     public static float GetGumihoAbil()
     {

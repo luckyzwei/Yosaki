@@ -81,6 +81,8 @@ public enum Item_Type
 
     MihoWeapon,
     MihoNorigae,
+    ChunMaNorigae,
+    ChunMaPet,
 
 
     RankFrame1 = 100,
@@ -239,6 +241,9 @@ public enum Item_Type
     costume39 = 1240,
     costume40 = 1241,
     costume41 = 1242,
+
+    costume42 = 1243,
+    costume43 = 1244,
 
     pet0 = 1301,
     pet1 = 1302,
