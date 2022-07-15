@@ -69,7 +69,8 @@ public class TwelveRaidEnemy : BossEnemyBase
             GameManager.Instance.bossId == 35 ||
             GameManager.Instance.bossId == 36 ||
             GameManager.Instance.bossId == 37 ||
-            GameManager.Instance.bossId == 38
+            GameManager.Instance.bossId == 38||
+            GameManager.Instance.bossId == 39
             )
         {
             if (samDam < double.MaxValue * 0.25)

@@ -131,7 +131,7 @@ public class UiTopRankerCell : MonoBehaviour
             petGraphic.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             petGraphic.GetComponent<RectTransform>().anchoredPosition = new Vector3(44.9f, 138.2f, 0.7f);
         }
-        else if (idx == 16) 
+        else if (idx == 16|| idx == 19) 
         {
             petGraphic.startingAnimation = "idle";
             petGraphic.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);

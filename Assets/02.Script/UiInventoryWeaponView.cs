@@ -195,12 +195,12 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         norigaeDescription.gameObject.SetActive(true);
 
-        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26 || magicBookData.Id == 27 || magicBookData.Id == 28));
+        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26 || magicBookData.Id == 27 || magicBookData.Id == 28 || magicBookData.Id == 29));
         foxNorigaeGetButton.SetActive(false);
 
         if (magicBookData != null)
         {
-            if ((magicBookData.Id == 22 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26 || magicBookData.Id == 27))
+            if ((magicBookData.Id == 22 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26 || magicBookData.Id == 27 || magicBookData.Id == 29))
             {
                 suhoSinDescription.SetText($"요괴사냥\n수호신 에서 획득!");
             }

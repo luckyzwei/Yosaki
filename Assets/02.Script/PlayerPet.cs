@@ -79,7 +79,7 @@ public class PlayerPet : SingletonMono<PlayerPet>
             skeletonAnimation.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             skeletonAnimation.transform.localPosition = new Vector3(0.05f, 0.6f, 0f);
         }
-        else if (idx == 16)
+        else if (idx == 16|| idx == 19)
         {
             skeletonAnimation.transform.localScale = new Vector3(0.42f, 0.42f, 0.42f);
             skeletonAnimation.transform.localPosition = new Vector3(0.26f, 0.58f, 0.0f);

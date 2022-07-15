@@ -13,8 +13,8 @@ public class UiRelicReleaseBoard : MonoBehaviour
     {
         int usedKeyNum = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.usedRelicTicketNum].Value;
 
-        description.SetText($"영혼열쇠 {usedKeyNum}개 사용\n" +
-            $"사용한 열쇠 1000개당 공격력(%) {PlayerStats.relicReleaseValue} 증가 \n" +
-            $"<color=yellow>총 {CommonString.GetStatusName(StatusType.AttackAddPer)} {Utils.ConvertBigNum(PlayerStats.GetRelicReleaseValue())}증가");
+        description.SetText($"영혼열쇠 총{usedKeyNum}개 사용\n" +
+            $"사용한 열쇠 1000개당 공격력(%) {Utils.ConvertBigNum(PlayerStats.relicReleaseValue*100f)} 증가 \n" +
+            $"<color=yellow>총 {CommonString.GetStatusName(StatusType.AttackAddPer)} {Utils.ConvertBigNum(PlayerStats.GetRelicReleaseValue() * 100f)}증가");
     }
 }

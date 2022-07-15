@@ -259,9 +259,10 @@ public static class PlayerStats
         return ret;
     }
 
+    public static ObscuredFloat relicReleaseValue = 6000f;
+
     public static float GetRelicReleaseValue()
     {
-        return 0f;
         int divideNum = (int)(ServerData.userInfoTable.TableDatas[UserInfoTable.usedRelicTicketNum].Value / 1000f);
         return relicReleaseValue * divideNum;
     }
@@ -714,7 +715,7 @@ public static class PlayerStats
                 break;
             case StatusType.MarbleAddPer:
                 {
-                    return 40f;
+                    return 50f;
                 }
                 break;
         }
@@ -1359,7 +1360,7 @@ public static class PlayerStats
     public static ObscuredFloat gumihoValue8 = 120000;
 
 
-    public static ObscuredFloat relicReleaseValue = 1f;
+    
 
     public static float GetGumihoAbil()
     {

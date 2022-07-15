@@ -128,7 +128,7 @@ public class UiPetView : MonoBehaviour
 
         tutorialObject.SetActive(petData.PETGETTYPE == PetGetType.Gem && petData.Price == 0f);
 
-        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18);
+        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19);
 
         if (leemugiPetObject != null)
             leemugiPetObject.SetActive(petData.Id == 12);
@@ -440,7 +440,7 @@ public class UiPetView : MonoBehaviour
 
                 var prefPetData = TableManager.Instance.PetTable.dataArray[prefPetId];
 
-                if (petData.Id == 14|| petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18)
+                if (petData.Id == 14|| petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19)
                 {
                     buttonDescription.SetText($"수호신 컨텐츠\n에서 획득!");
                 }
@@ -513,7 +513,7 @@ public class UiPetView : MonoBehaviour
             //미보유
             else
             {
-                if (petServerData.idx == 14|| petServerData.idx == 15 || petServerData.idx == 16 || petServerData.idx == 17 || petServerData.idx == 18)
+                if (petServerData.idx == 14|| petServerData.idx == 15 || petServerData.idx == 16 || petServerData.idx == 17 || petServerData.idx == 18 || petServerData.idx == 19)
                 {
                     PopupManager.Instance.ShowAlarmMessage("수호신 컨텐츠에서 획득 가능");
 

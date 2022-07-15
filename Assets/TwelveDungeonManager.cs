@@ -124,6 +124,10 @@ public class TwelveDungeonManager : ContentsManagerBase
         {
             id = 30;
         }
+        else if (id > 38)
+        {
+            id -= 9;
+        }
 
         for (int i = 0; i < mapObjects.Count; i++)
         {
