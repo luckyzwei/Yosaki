@@ -56,9 +56,42 @@ public class UiSettingBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI uiViewDesc;
 
+    //
+    [SerializeField]
+    private Toggle sonView;
+    [SerializeField]
+    private Toggle dogView;
+    [SerializeField]
+    private Toggle marbleCircleView;
+    [SerializeField]
+    private Toggle asuarView;
+    [SerializeField]
+    private Toggle akGuiView;
+    [SerializeField]
+    private Toggle tailView;
+    //
+    [SerializeField]
+    private Toggle hyonMu;
+    [SerializeField]
+    private Toggle baekHo;
+    [SerializeField]
+    private Toggle pet;
+    [SerializeField]
+    private Toggle orb;
+    [SerializeField]
+    private Toggle indra;
+
+    [SerializeField]
+    private Transform playerViewController;
+
     private void Awake()
     {
         Initialize();
+    }
+
+    private void Start()
+    {
+        playerViewController.parent = InGameCanvas.Instance.transform;
     }
 
     private bool initialized = false;
@@ -87,6 +120,19 @@ public class UiSettingBoard : MonoBehaviour
         hpBarToggle.isOn = PlayerPrefs.GetInt(SettingKey.HpBar) == 1;
 
         enemyViewToggle.isOn = PlayerPrefs.GetInt(SettingKey.ViewEnemy) == 1;
+        //
+        sonView.isOn = PlayerPrefs.GetInt(SettingKey.sonView) == 1;
+        dogView.isOn = PlayerPrefs.GetInt(SettingKey.dogView) == 1;
+        marbleCircleView.isOn = PlayerPrefs.GetInt(SettingKey.marbleCircleView) == 1;
+        asuarView.isOn = PlayerPrefs.GetInt(SettingKey.asuarView) == 1;
+        akGuiView.isOn = PlayerPrefs.GetInt(SettingKey.akGuiView) == 1;
+        tailView.isOn = PlayerPrefs.GetInt(SettingKey.tailView) == 1;
+        //
+        hyonMu.isOn = PlayerPrefs.GetInt(SettingKey.hyonMu) == 1;
+        baekHo.isOn = PlayerPrefs.GetInt(SettingKey.baekHo) == 1;
+        pet.isOn = PlayerPrefs.GetInt(SettingKey.pet) == 1;
+        orb.isOn = PlayerPrefs.GetInt(SettingKey.orb) == 1;
+        indra.isOn = PlayerPrefs.GetInt(SettingKey.indra) == 1;
 
         initialized = true;
 
@@ -277,8 +323,8 @@ public class UiSettingBoard : MonoBehaviour
         }
 
         SettingData.HpBar.Value = on ? 1 : 0;
-    } 
-    
+    }
+
     public void EnemyView(bool on)
     {
         if (initialized == false) return;
@@ -289,6 +335,130 @@ public class UiSettingBoard : MonoBehaviour
         }
 
         SettingData.ViewEnemy.Value = on ? 1 : 0;
+    }
+
+    //
+    public void SonView(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.sonView.Value = on ? 1 : 0;
+    }
+    public void DogView(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.dogView.Value = on ? 1 : 0;
+    }
+    public void MarbleCircleView(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.marbleCircleView.Value = on ? 1 : 0;
+    }
+    public void AsuarView(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.asuarView.Value = on ? 1 : 0;
+    }
+    public void AkGuiView(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.akGuiView.Value = on ? 1 : 0;
+    }
+    public void TailView(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.tailView.Value = on ? 1 : 0;
+    }
+    //
+    public void HyonMu(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.hyonMu.Value = on ? 1 : 0;
+    }
+    public void BaekHo(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.baekHo.Value = on ? 1 : 0;
+    }
+    public void Pet(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.pet.Value = on ? 1 : 0;
+    }
+    public void Orb(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.orb.Value = on ? 1 : 0;
+    }
+    public void Indra(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.indra.Value = on ? 1 : 0;
     }
 
     public void OnClickStory()
@@ -349,6 +519,20 @@ public static class SettingKey
     public static string YachaEffect = "YachaEffect";
     public static string HpBar = "HpBar";
     public static string ViewEnemy = "ViewEnemy";
+    //
+    public static string sonView = "sonView";
+    public static string dogView = "dogView";
+    public static string marbleCircleView = "marbleCircleView";
+    public static string asuarView = "asuarView";
+    public static string akGuiView = "akGuiView";
+    public static string tailView = "tailView";
+    //
+    public static string hyonMu = "hyonMu";
+    public static string baekHo = "baekHo";
+    public static string pet = "pet";
+    public static string orb = "orb";
+    public static string indra = "indra";
+
 }
 
 public static class SettingData
@@ -369,6 +553,20 @@ public static class SettingData
     public static ReactiveProperty<int> YachaEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> HpBar = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> ViewEnemy = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    //
+    public static ReactiveProperty<int> sonView = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> dogView = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> marbleCircleView = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> asuarView = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> akGuiView = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> tailView = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+
+
+    public static ReactiveProperty<int> hyonMu = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> baekHo = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> pet = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> orb = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> indra = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
@@ -417,13 +615,48 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.ShowSleepPush, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.YachaEffect) == false)
-            PlayerPrefs.SetInt(SettingKey.YachaEffect, 1); 
-        
+            PlayerPrefs.SetInt(SettingKey.YachaEffect, 1);
+
         if (PlayerPrefs.HasKey(SettingKey.HpBar) == false)
-            PlayerPrefs.SetInt(SettingKey.HpBar, 1); 
-        
+            PlayerPrefs.SetInt(SettingKey.HpBar, 1);
+
         if (PlayerPrefs.HasKey(SettingKey.ViewEnemy) == false)
             PlayerPrefs.SetInt(SettingKey.ViewEnemy, 1);
+        //
+        if (PlayerPrefs.HasKey(SettingKey.sonView) == false)
+            PlayerPrefs.SetInt(SettingKey.sonView, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.dogView) == false)
+            PlayerPrefs.SetInt(SettingKey.dogView, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.marbleCircleView) == false)
+            PlayerPrefs.SetInt(SettingKey.marbleCircleView, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.asuarView) == false)
+            PlayerPrefs.SetInt(SettingKey.asuarView, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.akGuiView) == false)
+            PlayerPrefs.SetInt(SettingKey.akGuiView, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.tailView) == false)
+            PlayerPrefs.SetInt(SettingKey.tailView, 1);
+
+        //
+        if (PlayerPrefs.HasKey(SettingKey.hyonMu) == false)
+            PlayerPrefs.SetInt(SettingKey.hyonMu, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.baekHo) == false)
+            PlayerPrefs.SetInt(SettingKey.baekHo, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.pet) == false)
+            PlayerPrefs.SetInt(SettingKey.pet, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.orb) == false)
+            PlayerPrefs.SetInt(SettingKey.orb, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.indra) == false)
+            PlayerPrefs.SetInt(SettingKey.indra, 1);
+
     }
 
     static void Initialize()
@@ -443,6 +676,19 @@ public static class SettingData
         YachaEffect.Value = PlayerPrefs.GetInt(SettingKey.YachaEffect, 1);
         HpBar.Value = PlayerPrefs.GetInt(SettingKey.HpBar, 1);
         ViewEnemy.Value = PlayerPrefs.GetInt(SettingKey.ViewEnemy, 1);
+        //
+        sonView.Value = PlayerPrefs.GetInt(SettingKey.sonView, 1);
+        dogView.Value = PlayerPrefs.GetInt(SettingKey.dogView, 1);
+        marbleCircleView.Value = PlayerPrefs.GetInt(SettingKey.marbleCircleView, 1);
+        asuarView.Value = PlayerPrefs.GetInt(SettingKey.asuarView, 1);
+        akGuiView.Value = PlayerPrefs.GetInt(SettingKey.akGuiView, 1);
+        tailView.Value = PlayerPrefs.GetInt(SettingKey.tailView, 1);
+
+        hyonMu.Value = PlayerPrefs.GetInt(SettingKey.hyonMu, 1);
+        baekHo.Value = PlayerPrefs.GetInt(SettingKey.baekHo, 1);
+        pet.Value = PlayerPrefs.GetInt(SettingKey.pet, 1);
+        orb.Value = PlayerPrefs.GetInt(SettingKey.orb, 1);
+        indra.Value = PlayerPrefs.GetInt(SettingKey.indra, 1);
 
         Subscribe();
     }
@@ -510,6 +756,52 @@ public static class SettingData
         ViewEnemy.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.ViewEnemy, e);
+        });
+        //
+        sonView.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.sonView, e);
+        });
+        dogView.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.dogView, e);
+        });
+        marbleCircleView.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.marbleCircleView, e);
+        });
+        asuarView.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.asuarView, e);
+        });
+        akGuiView.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.akGuiView, e);
+        });
+        tailView.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.tailView, e);
+        });
+        //
+        hyonMu.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.hyonMu, e);
+        });
+        baekHo.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.baekHo, e);
+        });
+        pet.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.pet, e);
+        });
+        orb.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.orb, e);
+        });
+        indra.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.indra, e);
         });
     }
 
