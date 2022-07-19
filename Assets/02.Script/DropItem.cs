@@ -252,15 +252,27 @@ public enum Item_Type
 
 
 
-    gumiho0 =5000,
-    gumiho1 =5001,
-    gumiho2 =5002,
-    gumiho3 =5003,
-    gumiho4 =5004,
-    gumiho5 =5005,
-    gumiho6 =5006,
-    gumiho7 =5007,
-    gumiho8 =5008,
+    gumiho0 = 5000,
+    gumiho1 = 5001,
+    gumiho2 = 5002,
+    gumiho3 = 5003,
+    gumiho4 = 5004,
+    gumiho5 = 5005,
+    gumiho6 = 5006,
+    gumiho7 = 5007,
+    gumiho8 = 5008,
+
+    //지옥 전용템
+    hell0 = 6000,
+    hell1 = 6001,
+    hell2 = 6002,
+    hell3 = 6003,
+    hell4 = 6004,
+    hell5 = 6005,
+    hell6 = 6006,
+    hell7 = 6007,
+    hell8 = 6008,
+    hell9 = 6009,
 }
 
 public class DropItem : PoolItem
