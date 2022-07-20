@@ -25,6 +25,7 @@ public class UiBuffPopup : MonoBehaviour
         {
             if (tableDatas[i].Buffseconds < 0) continue;
             if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Yomul) continue;
+            if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.OneYear) continue;
 
             var cell = Instantiate<UiBuffPopupView>(uiBuffPopupView, buffViewParent);
             cell.Initalize(tableDatas[i]);
