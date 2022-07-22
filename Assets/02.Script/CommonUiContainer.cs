@@ -94,6 +94,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite RabitPet;
     public Sprite DogPet;
     public Sprite ChunMaPet;
+    public Sprite Hel;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -283,6 +284,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.costume43:
                 return costumeThumbnail[43];
                 break;
+            case Item_Type.costume44:
+                return costumeThumbnail[44];
+                break; 
+            case Item_Type.costume45:
+                return costumeThumbnail[45];
+                break;
 
 
             case Item_Type.RankFrame1:
@@ -437,6 +444,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.SP:
                 return SwordPartial;
+                break; 
+            
+            case Item_Type.Hel:
+                return Hel;
                 break;
 
             case Item_Type.Hae_Norigae:
@@ -594,6 +605,18 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.gumiho7:
             case Item_Type.gumiho8:
                 return MihoTail;
+                break;
+
+            case Item_Type.h0: return CommonResourceContainer.GetHellIconSprite(0);
+            case Item_Type.h1: return CommonResourceContainer.GetHellIconSprite(1);
+            case Item_Type.h2: return CommonResourceContainer.GetHellIconSprite(2);
+            case Item_Type.h3: return CommonResourceContainer.GetHellIconSprite(3);
+            case Item_Type.h4: return CommonResourceContainer.GetHellIconSprite(4);
+            case Item_Type.h5: return CommonResourceContainer.GetHellIconSprite(5);
+            case Item_Type.h6: return CommonResourceContainer.GetHellIconSprite(6);
+            case Item_Type.h7: return CommonResourceContainer.GetHellIconSprite(7);
+            case Item_Type.h8: return CommonResourceContainer.GetHellIconSprite(8);
+            case Item_Type.h9: return CommonResourceContainer.GetHellIconSprite(9);
                 break;
 
         }

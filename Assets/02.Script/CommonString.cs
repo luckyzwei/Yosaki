@@ -160,6 +160,8 @@ public static class CommonString
             case Item_Type.costume41: return TableManager.Instance.Costume.dataArray[41].Name;
             case Item_Type.costume42: return TableManager.Instance.Costume.dataArray[42].Name;
             case Item_Type.costume43: return TableManager.Instance.Costume.dataArray[43].Name;
+            case Item_Type.costume44: return TableManager.Instance.Costume.dataArray[44].Name;
+            case Item_Type.costume45: return TableManager.Instance.Costume.dataArray[45].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -239,6 +241,18 @@ public static class CommonString
             case Item_Type.gumiho6: return "구미호 꼬리7";
             case Item_Type.gumiho7: return "구미호 꼬리8";
             case Item_Type.gumiho8: return "구미호 꼬리9";
+
+            case Item_Type.h0: return TableManager.Instance.hellAbil.dataArray[0].Name;
+            case Item_Type.h1: return TableManager.Instance.hellAbil.dataArray[1].Name;
+            case Item_Type.h2: return TableManager.Instance.hellAbil.dataArray[2].Name;
+            case Item_Type.h3: return TableManager.Instance.hellAbil.dataArray[3].Name;
+            case Item_Type.h4: return TableManager.Instance.hellAbil.dataArray[4].Name;
+            case Item_Type.h5: return TableManager.Instance.hellAbil.dataArray[5].Name;
+            case Item_Type.h6: return TableManager.Instance.hellAbil.dataArray[6].Name;
+            case Item_Type.h7: return TableManager.Instance.hellAbil.dataArray[7].Name;
+            case Item_Type.h8: return TableManager.Instance.hellAbil.dataArray[8].Name;
+            case Item_Type.h9: return TableManager.Instance.hellAbil.dataArray[9].Name;
+            case Item_Type.Hel: return "불멸석";
         }
         return "미등록";
     }

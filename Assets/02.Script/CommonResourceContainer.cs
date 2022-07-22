@@ -8,6 +8,7 @@ public static class CommonResourceContainer
     private static List<Sprite> weaponSprites;
     private static List<Sprite> magicBookSprites;
     private static List<Sprite> maskSprites;
+    private static List<Sprite> hellIcons;
 
     public static Sprite GetRandomWeaponSprite()
     {
@@ -77,6 +78,34 @@ public static class CommonResourceContainer
         if (idx < maskSprites.Count)
         {
             return maskSprites[idx];
+        }
+        else
+        {
+            Debug.LogError($"Weapon icon {idx} is not exist");
+            return null;
+        }
+    }
+
+    public static Sprite GetHellIconSprite(int idx)
+    {
+        if (hellIcons == null)
+        {
+            var maksIcons = Resources.LoadAll<Sprite>("HellIcons/");
+            hellIcons = maksIcons.ToList();
+
+
+            hellIcons.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
+        }
+
+        if (idx < hellIcons.Count)
+        {
+            return hellIcons[idx];
         }
         else
         {

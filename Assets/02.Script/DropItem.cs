@@ -83,6 +83,7 @@ public enum Item_Type
     MihoNorigae,
     ChunMaNorigae,
     ChunMaPet,
+    Hel,
 
 
     RankFrame1 = 100,
@@ -245,6 +246,9 @@ public enum Item_Type
     costume42 = 1243,
     costume43 = 1244,
 
+    costume44 = 1245,
+    costume45 = 1246,
+
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,
@@ -263,16 +267,16 @@ public enum Item_Type
     gumiho8 = 5008,
 
     //지옥 전용템
-    hell0 = 6000,
-    hell1 = 6001,
-    hell2 = 6002,
-    hell3 = 6003,
-    hell4 = 6004,
-    hell5 = 6005,
-    hell6 = 6006,
-    hell7 = 6007,
-    hell8 = 6008,
-    hell9 = 6009,
+    h0 = 6000,
+    h1 = 6001,
+    h2 = 6002,
+    h3 = 6003,
+    h4 = 6004,
+    h5 = 6005,
+    h6 = 6006,
+    h7 = 6007,
+    h8 = 6008,
+    h9 = 6009,
 }
 
 public class DropItem : PoolItem

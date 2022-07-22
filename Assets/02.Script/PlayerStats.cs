@@ -38,6 +38,7 @@ public enum StatusType
     growthStoneUp, WeaponHasUp, NorigaeHasUp, PetEquipHasUp, PetEquipProbUp,
     DecreaseBossHp,
     OneYearBuff,
+    HellPower,//지옥항마력
 }
 
 
@@ -1273,6 +1274,27 @@ public static class PlayerStats
         return ret;
     }
 
+    public static float GetHellAbilHasEffect(StatusType statusType, int addLevel = 0)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.hellAbilBase.dataArray;
+
+        int currentLevel = (int)ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value + addLevel;
+
+        for (int i = 0; i < tableDatas.Length; i++)
+        {
+            if (currentLevel < tableDatas[i].Unlocklevel) continue;
+            if (statusType != (StatusType)tableDatas[i].Abiltype) continue;
+
+            int calculatedLevel = currentLevel - tableDatas[i].Unlocklevel;
+
+            ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
+        }
+
+        return ret;
+    }
+
     public static float GetSmithValue(StatusType statusType)
     {
         int currentExp = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.smithExp].Value;
@@ -1360,7 +1382,7 @@ public static class PlayerStats
     public static ObscuredFloat gumihoValue8 = 120000;
 
 
-    
+
 
     public static float GetGumihoAbil()
     {

@@ -646,5 +646,8 @@ public class TableManager : SingletonMono<TableManager>
     public BokPass bokPass;
     public GuildBook guildBook;
     public OneYearAtten oneYearAtten;
+    public HellAbil hellAbil;
+    public HellAbilBase hellAbilBase;
+    public HellReward hellReward;
 }
 

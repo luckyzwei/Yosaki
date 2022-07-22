@@ -59,8 +59,11 @@ public class UiTwelveBossContentsView : MonoBehaviour
 
     public void OnClickEnterButton()
     {
-        enterButton.interactable = false;
-        GameManager.Instance.SetBossId(bossTableData.Id);
-        GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
+        PopupManager.Instance.ShowYesNoPopup("알림", "도전 할까요?", () =>
+        {
+            enterButton.interactable = false;
+            GameManager.Instance.SetBossId(bossTableData.Id);
+            GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
+        }, () => { });
     }
 }

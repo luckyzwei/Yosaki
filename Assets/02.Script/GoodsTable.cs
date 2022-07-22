@@ -96,6 +96,18 @@ public class GoodsTable
     public static string gumiho7 = "g7";
     public static string gumiho8 = "g8";
 
+    public static string Hel = "Hel";
+    public static string h0 = "h0";
+    public static string h1 = "h1";
+    public static string h2 = "h2";
+    public static string h3 = "h3";
+    public static string h4 = "h4";
+    public static string h5 = "h5";
+    public static string h6 = "h6";
+    public static string h7 = "h7";
+    public static string h8 = "h8";
+    public static string h9 = "h9";
+
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
         {Gold,GameBalance.StartingMoney},
@@ -174,6 +186,18 @@ public class GoodsTable
         {gumiho6,0f},
         {gumiho7,0f},
         {gumiho8,0f},
+        //
+        {Hel,0f},
+        {h0,0f},
+        {h1,0f},
+        {h2,0f},
+        {h3,0f},
+        {h4,0f},
+        {h5,0f},
+        {h6,0f},
+        {h7,0f},
+        {h8,0f},
+        {h9,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

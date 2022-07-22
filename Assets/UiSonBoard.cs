@@ -181,7 +181,7 @@ public class UiSonBoard : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                LogManager.Instance.SendLogType("Son", "all", "");
+               // LogManager.Instance.SendLogType("Son", "all", "");
                 PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
                 SoundManager.Instance.PlaySound("Reward");
             });

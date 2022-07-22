@@ -119,6 +119,7 @@ public class UserInfoTable
 
     public const string monthreset = "monthreset";
     public const string sonScore = "son6";
+    public const string hellScore = "hels";
     public const string susanoScore = "susa";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
     public const string buffAwake = "buffAwake";
@@ -256,6 +257,7 @@ public class UserInfoTable
         {sendGangChul,0},
         {foxMask,0},
         {relicPackReset,0},
+        {hellScore,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -723,7 +725,9 @@ public class UserInfoTable
 
         //손오공
         ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value = string.Empty;
+        ServerData.etcServerTable.TableDatas[EtcServerTable.hellReward].Value = string.Empty;
         yoguiSogulParam.Add(EtcServerTable.sonReward, ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value);
+        yoguiSogulParam.Add(EtcServerTable.hellReward, ServerData.etcServerTable.TableDatas[EtcServerTable.hellReward].Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         //로컬

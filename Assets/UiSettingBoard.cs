@@ -89,6 +89,7 @@ public class UiSettingBoard : MonoBehaviour
         Initialize();
     }
 
+
     private void Start()
     {
         playerViewController.parent = InGameCanvas.Instance.transform;
