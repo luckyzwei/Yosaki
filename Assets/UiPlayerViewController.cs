@@ -7,7 +7,11 @@ public class UiPlayerViewController : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject sonObject;
+    private SpriteRenderer sonObject;
+
+
+    [SerializeField]
+    private GameObject sonObject_EFX;
 
     [SerializeField]
     private GameObject dogObject;
@@ -45,36 +49,37 @@ public class UiPlayerViewController : MonoBehaviour
     {
         SettingData.sonView.AsObservable().Subscribe(e =>
         {
-            sonObject.SetActive(e==1);
+            sonObject.enabled = e == 1;
+            sonObject_EFX.SetActive(e == 1);
         }).AddTo(this);
 
         SettingData.dogView.AsObservable().Subscribe(e =>
         {
-            dogObject.SetActive(e==1);
+            dogObject.SetActive(e == 1);
 
         }).AddTo(this);
 
         SettingData.marbleCircleView.AsObservable().Subscribe(e =>
         {
-            marbleCircleObject.SetActive(e==1);
+            marbleCircleObject.SetActive(e == 1);
 
         }).AddTo(this);
 
         SettingData.asuarView.AsObservable().Subscribe(e =>
         {
-            asuraObject.SetActive(e==1);
+            asuraObject.SetActive(e == 1);
 
         }).AddTo(this);
 
         SettingData.akGuiView.AsObservable().Subscribe(e =>
         {
-            akGuiObject.SetActive(e==1);
+            akGuiObject.SetActive(e == 1);
 
         }).AddTo(this);
 
         SettingData.tailView.AsObservable().Subscribe(e =>
         {
-            tailObject.SetActive(e==1);
+            tailObject.SetActive(e == 1);
 
         }).AddTo(this);
         //
