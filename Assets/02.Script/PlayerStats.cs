@@ -38,7 +38,7 @@ public enum StatusType
     growthStoneUp, WeaponHasUp, NorigaeHasUp, PetEquipHasUp, PetEquipProbUp,
     DecreaseBossHp,
     OneYearBuff,
-    HellPower,//지옥항마력
+    SuperCritical3DamPer,
 }
 
 
@@ -64,6 +64,7 @@ public static class PlayerStats
         double superCriticalProb = GetSuperCriticalProb();
 
         double feelMulDam = GetSuperCritical2DamPer();
+        double hellDam = GetSuperCritical3DamPer();
 
         double totalPower =
           ((baseAttack + baseAttack * baseAttackPer)
@@ -81,7 +82,7 @@ public static class PlayerStats
 
         totalPower += totalPower * GetSuperCriticalDamPer() * superCriticalProb;
 
-        totalPower += totalPower * feelMulDam;
+        totalPower += totalPower * feelMulDam * hellDam;
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -256,6 +257,7 @@ public static class PlayerStats
         ret += GetGuildPetEffect(StatusType.AttackAddPer);
         ret += GetMaskAttackAddPerDam();
         ret += GetRelicReleaseValue();
+        ret += GetHellAbilHasEffect(StatusType.AttackAddPer);
 
         return ret;
     }
@@ -987,6 +989,65 @@ public static class PlayerStats
         return ret;
     }
 
+    public static float GetSuperCritical3DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetWeaponEquipPercentValue(StatusType.SuperCritical3DamPer);
+        ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical3DamPer);
+        ret += GetHellMarkValue();
+        ret += GetHellAbilHasEffect(StatusType.SuperCritical3DamPer);
+
+        return ret;
+    }
+
+    public static float GetHellMarkValue()
+    {
+        float ret = 0f;
+        if (ServerData.goodsTable.GetTableData(GoodsTable.h0).Value == 1)
+        {
+            ret += TableManager.Instance.hellAbil.dataArray[0].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.h1).Value == 1)
+        {
+            ret += TableManager.Instance.hellAbil.dataArray[1].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.h2).Value == 1)
+        {
+            ret += TableManager.Instance.hellAbil.dataArray[2].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.h3).Value == 1)
+        {
+            ret += TableManager.Instance.hellAbil.dataArray[3].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.h4).Value == 1)
+        {
+            ret += TableManager.Instance.hellAbil.dataArray[4].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.h5).Value == 1)
+        {
+            ret += TableManager.Instance.hellAbil.dataArray[5].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.h6).Value == 1)
+        {
+            ret += TableManager.Instance.hellAbil.dataArray[6].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.h7).Value == 1)
+        {
+            ret += TableManager.Instance.hellAbil.dataArray[7].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.h8).Value == 1)
+        {
+            ret += TableManager.Instance.hellAbil.dataArray[8].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.h9).Value == 1)
+        {
+            ret += TableManager.Instance.hellAbil.dataArray[9].Abilbasevalue;
+        }
+
+        return ret;
+    }
+
     public static float GetYomulUpgradeValue(StatusType type, bool onlyType1 = false, bool onlyType2 = false, int targetId = -1)
     {
         float ret = 0f;
@@ -1567,6 +1628,9 @@ public static class PlayerStats
     private static string leeMuGiCostumeKey = "costume27";
     private static string nataCostumeKey = "costume35";
     private static string foxCostumeKey = "costume40";
+
+    private static string hellCostumeKey0 = "costume43";
+    private static string hellCostumeKey1 = "costume44";
     public static float DecreaseBossHp()
     {
         float ret = 0f;
@@ -1587,6 +1651,17 @@ public static class PlayerStats
         }
 
         if (ServerData.costumeServerTable.TableDatas[foxCostumeKey].hasCostume.Value == true)
+        {
+            ret += 0.1f;
+        }
+
+        //
+        if (ServerData.costumeServerTable.TableDatas[hellCostumeKey0].hasCostume.Value == true)
+        {
+            ret += 0.05f;
+        }
+
+        if (ServerData.costumeServerTable.TableDatas[hellCostumeKey1].hasCostume.Value == true)
         {
             ret += 0.1f;
         }

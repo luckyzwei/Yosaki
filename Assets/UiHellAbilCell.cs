@@ -17,6 +17,9 @@ public class UiHellAbilCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI description;
 
+    [SerializeField]
+    private GameObject lockIcon;
+
 
     private HellAbilData tableData;
 
@@ -32,11 +35,13 @@ public class UiHellAbilCell : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.goodsTable.GetTableData(GoodsTable.Hel).AsObservable().Subscribe(e =>
+        ServerData.goodsTable.GetTableData(tableData.Goods).AsObservable().Subscribe(e =>
         {
             StatusType type = (StatusType)(tableData.Abiltype);
 
-            description.SetText($"{CommonString.GetStatusName(type)}");
+            description.SetText($"{CommonString.GetStatusName(type)}\n{tableData.Abilbasevalue * 100f}%");
+
+            lockIcon.SetActive(e == 0);
 
         }).AddTo(this);
     }

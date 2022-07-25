@@ -57,6 +57,7 @@ public class TwelveRaidEnemy : BossEnemyBase
     private double gangChulDam = 2.5;
     private double haeTaeDam = 2.8;
     private double samDam = 2.9;
+    private double hellDam = 3.2;
 
     private void UpdateBossDamage()
     {
@@ -69,7 +70,7 @@ public class TwelveRaidEnemy : BossEnemyBase
             GameManager.Instance.bossId == 35 ||
             GameManager.Instance.bossId == 36 ||
             GameManager.Instance.bossId == 37 ||
-            GameManager.Instance.bossId == 38||
+            GameManager.Instance.bossId == 38 ||
             GameManager.Instance.bossId == 39
             )
         {
@@ -81,6 +82,28 @@ public class TwelveRaidEnemy : BossEnemyBase
             hitObject.SetDamage(samDam);
 
             enemyHitObjects.ForEach(e => e.SetDamage(samDam));
+        }
+        else if (GameManager.Instance.bossId == 40 ||
+            GameManager.Instance.bossId == 41 ||
+            GameManager.Instance.bossId == 42 ||
+            GameManager.Instance.bossId == 43 ||
+            GameManager.Instance.bossId == 44 ||
+            GameManager.Instance.bossId == 45 ||
+            GameManager.Instance.bossId == 46 ||
+            GameManager.Instance.bossId == 47 ||
+            GameManager.Instance.bossId == 48 ||
+            GameManager.Instance.bossId == 49
+
+            )
+        {
+            if (hellDam < double.MaxValue * 0.25)
+            {
+                hellDam *= 3.3f;
+            }
+
+            hitObject.SetDamage(hellDam);
+
+            enemyHitObjects.ForEach(e => e.SetDamage(hellDam));
         }
         else if (GameManager.Instance.bossId == 22 || GameManager.Instance.bossId == 25)
         {

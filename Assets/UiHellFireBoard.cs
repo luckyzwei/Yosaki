@@ -51,13 +51,13 @@ public class UiHellFireBoard : MonoBehaviour
         {
             StatusType type = (StatusType)tableData[i].Abiltype;
 
-            if (type.IsPercentStat() == false)
+            if (type == StatusType.AttackAddPer)
             {
                 abilDesc += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(PlayerStats.GetHellAbilHasEffect(type))}\n";
             }
             else
             {
-                abilDesc += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(PlayerStats.GetHellAbilHasEffect(type) * 100f)}\n";
+                abilDesc += $"{CommonString.GetStatusName(type)} {PlayerStats.GetHellAbilHasEffect(type) * 100f}\n";
             }
         }
 

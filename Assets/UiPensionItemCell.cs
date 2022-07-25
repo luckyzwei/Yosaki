@@ -124,6 +124,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             itemType = Item_Type.SP;
         }
+        else if (pensionKey == "hellpension")
+        {
+            itemType = Item_Type.Hel;
+        }
         else
         {
             itemType = Item_Type.SmithFire;

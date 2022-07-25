@@ -36,12 +36,14 @@ public static class CommonString
     public static string ItemGrade_13 = "오로치";
     public static string ItemGrade_14 = "필멸(패)";
     public static string ItemGrade_15 = "여우검";
+    public static string ItemGrade_16 = "지옥";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
     public static string ItemGrade_8_Norigae = "영물";
     public static string ItemGrade_9_Norigae = "병아리";
     public static string ItemGrade_10_Norigae = "영물";
+    public static string ItemGrade_11_Norigae = "지옥";
 
     public static string ItemGrade_4_Skill = "주작";
     public static string ItemGrade_5_Skill = "청룡";
@@ -337,13 +339,13 @@ public static class CommonString
                 return "천공베기 확률(%)";
                 break;
             case StatusType.SuperCritical1DamPer:
-                return "천공베기 추가 피해량(%)";
+                return "천공베기 피해(%)";
                 break;
             case StatusType.MarbleAddPer:
                 return "여우구슬 추가 획득(%)";
                 break;
             case StatusType.SuperCritical2DamPer:
-                return "필멸 피해량(추가피해)(%)";
+                return "필멸 피해(%)";
                 break;
             case StatusType.growthStoneUp:
                 return "수련의돌 추가 획득";
@@ -362,6 +364,9 @@ public static class CommonString
                 break;
             case StatusType.DecreaseBossHp:
                 return "스테이지 보스 체력 감소(%)";
+                break;   
+            case StatusType.SuperCritical3DamPer:
+                return "지옥베기 피해(%)";
                 break;
         }
 

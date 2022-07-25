@@ -535,6 +535,10 @@ public enum TitleMissionId
     Level1480000,//★
     Level1490000,//★
     Level1500000,//★
+
+    Stage10700,//★
+    Stage10800,//★
+    HellWeapon,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -2516,6 +2520,15 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Stage10600);
             }
+            //
+            if (e >= 10700 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage10700);
+            }
+            if (e >= 10800 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage10800);
+            }
 
 
         }).AddTo(this);
@@ -2648,6 +2661,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e == 1)
             {
                 ClearTitleMission(TitleMissionId.FoxWeapon);
+            }
+        }).AddTo(this);   
+        
+        ServerData.weaponTable.TableDatas["weapon31"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.HellWeapon);
             }
         }).AddTo(this);
 

@@ -28,4 +28,8 @@ public class HellAbilData
   float abiladdvalue;
   public float Abiladdvalue { get {return abiladdvalue; } set { this.abiladdvalue = value;} }
   
+  [SerializeField]
+  string goods;
+  public string Goods { get {return goods; } set { this.goods = value;} }
+  
 }

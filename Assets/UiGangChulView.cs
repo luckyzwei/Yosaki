@@ -76,6 +76,8 @@ public class UiGangChulView : SingletonMono<UiGangChulView>
             return;
         }
 
+        recordButton.interactable = false;
+
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{rewardGrade}점 점수를 추가합니까?\n<color=red>점수는 하루에 한번만 추가할 수 있습니다.</color>\n문파별로 최대 인원만큼만 추가 가능합니다.\n(매일 오전 5시 초기화)",
             () =>
             {
@@ -90,7 +92,7 @@ public class UiGangChulView : SingletonMono<UiGangChulView>
                     return;
                 }
 
-                recordButton.interactable = false;
+       
 
                 var guildInfoBro = Backend.Social.Guild.GetMyGuildGoodsV3();
 
@@ -197,6 +199,9 @@ public class UiGangChulView : SingletonMono<UiGangChulView>
                     }
 
                 });
-            }, null);
+            }, ()=> 
+            {
+                recordButton.interactable = true;
+            });
     }
 }

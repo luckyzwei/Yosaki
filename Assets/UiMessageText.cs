@@ -57,7 +57,7 @@ public class UiMessageText : MonoBehaviour
             {
                 var nickSplit = description.Split('>');
 
-                if (nickSplit.Length >= 2)
+                if (nickSplit.Length >= 3)
                 {
                     var nickFind = nickSplit[2].Split(':');
 

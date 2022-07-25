@@ -92,6 +92,7 @@ public class UserInfoTable
 
     public const string oakpensionAttendance = "oakpension";
     public const string marblepensionAttendance = "marblepension";
+    public const string hellpensionAttendance = "hellpension";
 
     public const string marblePackChange = "marblePackChange";
 
@@ -142,6 +143,7 @@ public class UserInfoTable
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
     public const string relicPackReset = "rr";
+    public const string oneAttenEvent = "oe";
 
 
     public double currentServerDate;
@@ -205,6 +207,7 @@ public class UserInfoTable
 
         {oakpensionAttendance,0f},
         {marblepensionAttendance,0f},
+        {hellpensionAttendance,0f},
 
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
@@ -258,6 +261,7 @@ public class UserInfoTable
         {foxMask,0},
         {relicPackReset,0},
         {hellScore,0},
+        {oneAttenEvent,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -599,6 +603,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.oneAttenEvent).Value = 0;
 
         //버프
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
@@ -640,6 +645,11 @@ public class UserInfoTable
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.marblepensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value++;
+            }  
+
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.hellpensionAttendance].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.hellpensionAttendance).Value++;
             }
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
@@ -683,6 +693,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.peachAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.peachAttendance).Value);
         userInfoParam.Add(UserInfoTable.smithpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.smithpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.weaponpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.weaponpensionAttendance).Value);
+        userInfoParam.Add(UserInfoTable.hellpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.hellpensionAttendance).Value);
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
@@ -692,6 +703,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.getSmith, ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value);
         userInfoParam.Add(UserInfoTable.getGumGi, ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value);
         userInfoParam.Add(UserInfoTable.sendPetExp, ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value);
+        userInfoParam.Add(UserInfoTable.oneAttenEvent, ServerData.userInfoTable.GetTableData(UserInfoTable.oneAttenEvent).Value);
 
         userInfoParam.Add(UserInfoTable.buff_gold1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);
         userInfoParam.Add(UserInfoTable.buff_gold2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);

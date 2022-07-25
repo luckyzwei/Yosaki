@@ -126,7 +126,7 @@ public class TwelveDungeonManager : ContentsManagerBase
         }
         else if (id > 38)
         {
-            id -= 9;
+            id -= 8;
         }
 
         for (int i = 0; i < mapObjects.Count; i++)
@@ -339,6 +339,10 @@ public class TwelveDungeonManager : ContentsManagerBase
                 remainSec *= 0.5f;
             }
             else if (twelveBossTable.Id >= 30 && twelveBossTable.Id <= 38)
+            {
+                remainSec *= 0.5f;
+            }
+            else if (twelveBossTable.Id >= 40 && twelveBossTable.Id <= 49)
             {
                 remainSec *= 0.5f;
             }

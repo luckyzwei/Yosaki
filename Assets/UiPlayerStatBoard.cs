@@ -103,12 +103,13 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description2 += $"{CommonString.GetStatusName(StatusType.MarbleAddPer)} : {PlayerStats.GetMarblePlusValue() * 100f}\n";
 
         description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical2DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical2DamPer() * 100f)}\n";
+        description2 += $"{CommonString.GetStatusName(StatusType.DecreaseBossHp)} : {PlayerStats.DecreaseBossHp() * 100f}\n";
         ////기억의파편 추가 획득
         //description1 += $"{CommonString.GetStatusName(StatusType.MagicStoneAddPer)} : {PlayerStats.GetMagicStonePlusValue() * 100f}\n";
 
         int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
-        description2 += $"요괴 추가소환 : {plusSpawnNum}\n\n";
-        description1 += $"{CommonString.GetStatusName(StatusType.DecreaseBossHp)} : {PlayerStats.DecreaseBossHp() * 100f}\n\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical3DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical3DamPer() * 100f)}\n";
+        description2 += $"요괴 추가소환 : {plusSpawnNum}\n";
 
 
         descriptionBoard1.SetText(description1);

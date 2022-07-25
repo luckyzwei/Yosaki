@@ -173,6 +173,9 @@ public class AgentHpController : MonoBehaviour
         //필멸 데미지
         value += value * PlayerStats.GetSuperCritical2DamPer();
 
+        //지옥 데미지
+        value += value * PlayerStats.GetSuperCritical3DamPer();
+
         ///
     }
     private Vector3 damTextspawnPos;

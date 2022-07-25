@@ -21,6 +21,9 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
     [SerializeField]
     private Button recordButton;
 
+    [SerializeField]
+    private Button recordButton_GC;
+
     void Start()
     {
         Initialize();
@@ -107,21 +110,25 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
             return;
         }
 
+        recordButton.interactable = false;
+
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{rewardGrade}점 점수를 추가합니까?\n<color=red>점수는 하루에 한번만 추가할 수 있습니다.</color>\n문파별로 최대 인원만큼만 추가 가능합니다.\n(매일 오전 5시 초기화)",
             () =>
             {
                 if (alreadyRecord)
                 {
                     PopupManager.Instance.ShowAlarmMessage("오늘은 이미 점수를 추가했습니다.");
+                    recordButton.interactable = true;
                     return;
                 }
                 if (rewardGrade == 0)
                 {
                     PopupManager.Instance.ShowAlarmMessage("추가할 점수가 없습니다.");
+                    recordButton.interactable = true;
                     return;
                 }
 
-                recordButton.interactable = false;
+
 
                 var guildInfoBro = Backend.Social.Guild.GetMyGuildGoodsV3();
 
@@ -236,7 +243,10 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                     }
 
                 });
-            }, null);
+            }, () =>
+            {
+                recordButton.interactable = true;
+            });
     }
 
     public void RecordGuildScoreButton_GangChul()
@@ -266,21 +276,25 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
             return;
         }
 
+        recordButton_GC.interactable = false;
+
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{rewardGrade_GangChul}점 점수를 추가합니까?\n<color=red>점수는 하루에 한번만 추가할 수 있습니다.</color>\n문파별로 최대 인원만큼만 추가 가능합니다.\n(매일 오전 5시 초기화)",
             () =>
             {
                 if (alreadyRecord)
                 {
                     PopupManager.Instance.ShowAlarmMessage("오늘은 이미 점수를 추가했습니다.");
+                    recordButton_GC.interactable = true;
                     return;
                 }
                 if (rewardGrade_GangChul == 0)
                 {
                     PopupManager.Instance.ShowAlarmMessage("추가할 점수가 없습니다.");
+                    recordButton_GC.interactable = true;
                     return;
                 }
 
-                recordButton.interactable = false;
+                recordButton_GC.interactable = false;
 
                 var guildInfoBro = Backend.Social.Guild.GetMyGuildGoodsV3();
 
@@ -295,13 +309,13 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                     if (maxContributed)
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{GuildManager.Instance.myGuildName} 문파는 \n오늘 더이상 점수를 추가할 수 없습니다!\n<color=red>최대 {GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value)}번 추가 가능</color>\n<color=red>(매일 오전 5시 초기화)</color>", null);
-                        recordButton.interactable = true;
+                        recordButton_GC.interactable = true;
                         return;
                     }
                 }
                 else
                 {
-                    recordButton.interactable = true;
+                    recordButton_GC.interactable = true;
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "오류가 발생했습니다. 잠시후 다시 시도해 주세요.", null);
                     return;
                 }
@@ -327,7 +341,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                         if (bro.IsSuccess())
                         {
-                            recordButton.interactable = true;
+                            recordButton_GC.interactable = true;
 
                             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "점수 추가 완료!", null);
 
@@ -344,7 +358,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                         }
                         else
                         {
-                            recordButton.interactable = true;
+                            recordButton_GC.interactable = true;
 
                             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n점수 갱신 시간이 아닙니다.\n({bro.GetStatusCode()})", null);
 
@@ -366,7 +380,7 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                     }
                     else
                     {
-                        recordButton.interactable = true;
+                        recordButton_GC.interactable = true;
 
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n점수 갱신 시간이 아닙니다.\n({bro2.GetStatusCode()})", null);
 
@@ -387,7 +401,10 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
                     }
 
                 });
-            }, null);
+            }, () =>
+            {
+                recordButton_GC.interactable = true;
+            });
     }
 
 }
