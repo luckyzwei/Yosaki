@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using BackEnd;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UniRx;
@@ -470,6 +471,14 @@ public class UiSettingBoard : MonoBehaviour
     public void OnClickCafeButton()
     {
         Application.OpenURL(CommonString.CafeURL);
+    }
+    public void LogOut()
+    {
+        PopupManager.Instance.ShowYesNoPopup("알림", "계정을 탈퇴 할까요?\n탈퇴는 7일간의 유예기간 뒤에 처리 됩니다\n그 전에 다시 로그인 하면 계정이 복구 됩니다.", () =>
+        {
+            PopupManager.Instance.ShowConfirmPopup("알림", "탈퇴 성공! 게임을 종료 해주세요. 데이터 통신이 실패 합니다.", null);
+            Backend.BMember.SignOut("e");
+        }, () => { });
     }
 
     private float AutoSaveDelay = 3600f;
