@@ -144,37 +144,35 @@ public class UiHellEquipGetBoard : MonoBehaviour
         {
             if (currentScore >= reqCostume1)
             {
-                if (currentScore >= reqCostume0)
-                {
-                    var costumeServerData = ServerData.costumeServerTable.TableDatas["costume44"];
 
-                    if (costumeServerData.hasCostume.Value == true)
+                var costumeServerData = ServerData.costumeServerTable.TableDatas["costume44"];
+
+                if (costumeServerData.hasCostume.Value == true)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("이미 외형이 있습니다.");
+                    return;
+                }
+
+                costumeServerData.hasCostume.Value = true;
+
+                Param param = new Param();
+
+                param.Add("costume44", costumeServerData.ConvertToString());
+
+                SendQueue.Enqueue(Backend.GameData.Update, CostumeServerTable.tableName, CostumeServerTable.Indate, param, e =>
+                {
+                    if (e.IsSuccess())
                     {
-                        PopupManager.Instance.ShowAlarmMessage("이미 외형이 있습니다.");
-                        return;
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 획득!", null);
                     }
+                });
 
-                    costumeServerData.hasCostume.Value = true;
+                ServerData.costumeServerTable.SyncCostumeData("costume44");
 
-                    Param param = new Param();
-
-                    param.Add("costume44", costumeServerData.ConvertToString());
-
-                    SendQueue.Enqueue(Backend.GameData.Update, CostumeServerTable.tableName, CostumeServerTable.Indate, param, e =>
-                    {
-                        if (e.IsSuccess())
-                        {
-                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 획득!", null);
-                        }
-                    });
-
-                    ServerData.costumeServerTable.SyncCostumeData("costume43");
-                }
-                else
-                {
-                    PopupManager.Instance.ShowAlarmMessage("점수가 부족 합니다!");
-                }
-
+            }
+            else
+            {
+                PopupManager.Instance.ShowAlarmMessage("점수가 부족 합니다!");
             }
         }
 
