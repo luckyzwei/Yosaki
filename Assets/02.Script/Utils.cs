@@ -63,7 +63,8 @@ public static class Utils
                   type == Item_Type.costume42 ||
                   type == Item_Type.costume43 ||
                   type == Item_Type.costume44 ||
-                  type == Item_Type.costume45;
+                  type == Item_Type.costume45 ||
+                  type == Item_Type.costume46;
     }
     public static bool IsPetItem(this Item_Type type)
     {

@@ -102,7 +102,7 @@ public class UserInfoTable
 
 
     //6월월간
-    public const string killCountTotal = "kt10";
+    public const string killCountTotal = "k8w";
     //7월월간
     public const string killCountTotal2 = "k7w";
     public const string killCountTotalChild = "kt9";
@@ -370,25 +370,8 @@ public class UserInfoTable
                          }
                          else
                          {
-                             if (e.Current.Key == killCountTotal2)
-                             {
-                                 if (tableDatas.ContainsKey(killCountTotal) && tableDatas[killCountTotal].Value >= 0)
-                                 {
-                                     defultValues.Add(e.Current.Key, 12000000);
-                                     tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(12000000));
-                                 }
-                                 else
-                                 {
-                                     defultValues.Add(e.Current.Key, e.Current.Value);
-                                     tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(e.Current.Value));
-                                 }
-                             }
-                             else
-                             {
-                                 defultValues.Add(e.Current.Key, e.Current.Value);
-                                 tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(e.Current.Value));
-
-                             }
+                             defultValues.Add(e.Current.Key, e.Current.Value);
+                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(e.Current.Value));
 
                              paramCount++;
                          }
@@ -930,6 +913,7 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
+        
         return currentServerTime.Month == 7;
     }
 }
