@@ -82,7 +82,8 @@ public static class PlayerStats
 
         totalPower += totalPower * GetSuperCriticalDamPer() * superCriticalProb;
 
-        totalPower += totalPower * feelMulDam * hellDam;
+        totalPower += totalPower * feelMulDam;
+        totalPower += totalPower * hellDam; ;
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)

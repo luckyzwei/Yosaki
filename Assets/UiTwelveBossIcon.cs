@@ -20,6 +20,10 @@ public class UiTwelveBossIcon : MonoBehaviour
         {
             id = 30;
         }
+        else if (id > 38)
+        {
+            id -= 8;
+        }
 
         if (id >= sprites.Count)
         {

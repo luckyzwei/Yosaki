@@ -628,7 +628,7 @@ public class UserInfoTable
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.marblepensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value++;
-            }  
+            }
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.hellpensionAttendance].buyCount.Value > 0f)
             {
@@ -913,7 +913,10 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
-        
+#if UNITY_EDITOR
+        return false;
+#endif
+
         return currentServerTime.Month == 7;
     }
 }
