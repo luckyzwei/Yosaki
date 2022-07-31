@@ -604,7 +604,7 @@ public static class ServerData
         return null;
     }
 
-    public static TransactionValue GetItemTypeTransactionValueForAttendance(Item_Type type, int amount)
+    public static TransactionValue GetItemTypeTransactionValueForAttendance(Item_Type type, float amount)
     {
         Param param = new Param();
         //패스 보상
@@ -622,7 +622,7 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
                 break;
             case Item_Type.Memory:
-                ServerData.statusTable.GetTableData(StatusTable.Memory).Value += amount;
+                ServerData.statusTable.GetTableData(StatusTable.Memory).Value += (int)amount;
                 param.Add(StatusTable.Memory, ServerData.statusTable.GetTableData(StatusTable.Memory).Value);
                 return TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, param);
                 break;
@@ -896,7 +896,7 @@ public static class ServerData
                 {
                     string key = type.ToString();
                     ServerData.weaponTable.TableDatas[key].hasItem.Value = 1;
-                    ServerData.weaponTable.TableDatas[key].amount.Value += amount;
+                    ServerData.weaponTable.TableDatas[key].amount.Value += (int)amount;
 
                     param.Add(key, ServerData.weaponTable.TableDatas[key].ConvertToString());
 
@@ -918,7 +918,7 @@ public static class ServerData
                 {
                     string key = type.ToString();
                     ServerData.magicBookTable.TableDatas[key].hasItem.Value = 1;
-                    ServerData.magicBookTable.TableDatas[key].amount.Value += amount;
+                    ServerData.magicBookTable.TableDatas[key].amount.Value += (int)amount;
 
                     param.Add(key, ServerData.magicBookTable.TableDatas[key].ConvertToString());
 

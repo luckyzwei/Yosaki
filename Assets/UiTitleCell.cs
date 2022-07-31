@@ -148,7 +148,7 @@ public class UiTitleCell : MonoBehaviour
 
         transactions.Add(TransactionValue.SetUpdate(TitleServerTable.tableName, TitleServerTable.Indate, titleParam));
 
-        transactions.Add(ServerData.GetItemTypeTransactionValueForAttendance((Item_Type)tableData.Rewardtype, (int)tableData.Rewardvalue));
+        transactions.Add(ServerData.GetItemTypeTransactionValueForAttendance((Item_Type)tableData.Rewardtype, tableData.Rewardvalue));
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
           {
