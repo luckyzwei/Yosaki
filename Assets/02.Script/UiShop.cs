@@ -317,6 +317,12 @@ public class UiShop : SingletonMono<UiShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += amount;
                     param.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
                 }
+                break; 
+            case Item_Type.Ym:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value += amount;
+                    param.Add(GoodsTable.Ym, ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value);
+                }
                 break;
 
             //

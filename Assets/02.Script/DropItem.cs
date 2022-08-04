@@ -84,6 +84,7 @@ public enum Item_Type
     ChunMaNorigae,
     ChunMaPet,
     Hel,
+    Ym,
 
 
     RankFrame1 = 100,
@@ -278,6 +279,7 @@ public enum Item_Type
     h7 = 6007,
     h8 = 6008,
     h9 = 6009,
+
 }
 
 public class DropItem : PoolItem

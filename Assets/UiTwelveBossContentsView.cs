@@ -32,7 +32,11 @@ public class UiTwelveBossContentsView : MonoBehaviour
     public void Initialize(TwelveBossTableData bossTableData)
     {
         this.bossTableData = bossTableData;
-        title.SetText(bossTableData.Name);
+
+        if (title != null)
+        {
+            title.SetText(bossTableData.Name);
+        }
 
         var score = ServerData.bossServerTable.TableDatas[bossTableData.Stringid].score.Value;
         if (string.IsNullOrEmpty(score) == false)

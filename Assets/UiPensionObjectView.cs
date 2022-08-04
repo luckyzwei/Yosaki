@@ -137,7 +137,6 @@ public class UiPensionObjectView : MonoBehaviour
             itemType = Item_Type.Hel;
         }
 
-
         List<TransactionValue> transactions = new List<TransactionValue>();
 
         Param iapParam = new Param();

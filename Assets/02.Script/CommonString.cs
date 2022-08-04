@@ -37,6 +37,7 @@ public static class CommonString
     public static string ItemGrade_14 = "필멸(패)";
     public static string ItemGrade_15 = "여우검";
     public static string ItemGrade_16 = "지옥";
+    public static string ItemGrade_17 = "여래";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
@@ -44,6 +45,7 @@ public static class CommonString
     public static string ItemGrade_9_Norigae = "병아리";
     public static string ItemGrade_10_Norigae = "영물";
     public static string ItemGrade_11_Norigae = "지옥";
+    public static string ItemGrade_12_Norigae = "여래";
 
     public static string ItemGrade_4_Skill = "주작";
     public static string ItemGrade_5_Skill = "청룡";
@@ -256,6 +258,7 @@ public static class CommonString
             case Item_Type.h8: return TableManager.Instance.hellAbil.dataArray[8].Name;
             case Item_Type.h9: return TableManager.Instance.hellAbil.dataArray[9].Name;
             case Item_Type.Hel: return "불멸석";
+            case Item_Type.Ym: return "염주";
         }
         return "미등록";
     }

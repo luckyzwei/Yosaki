@@ -102,6 +102,7 @@ public static class Utils
                 type == Item_Type.MihoWeapon ||
                 type == Item_Type.ChunMaNorigae ||
                 type == Item_Type.Hel ||
+                type == Item_Type.Ym ||
                 type == Item_Type.RelicTicket;
     }
 

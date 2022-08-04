@@ -307,6 +307,9 @@ public static class ServerData
                 break;   
             case Item_Type.Hel:
                 ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += rewardValue;
+                break;   
+            case Item_Type.Ym:
+                ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value += rewardValue;
                 break;
 
             case Item_Type.Hae_Norigae:
@@ -499,6 +502,9 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);    
             case Item_Type.Hel:
                 passParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam); 
+            case Item_Type.Ym:
+                passParam.Add(GoodsTable.Ym, ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.Hae_Norigae:
@@ -740,6 +746,11 @@ public static class ServerData
             case Item_Type.Hel:
                 ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += amount;
                 param.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);   
+            
+            case Item_Type.Ym:
+                ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value += amount;
+                param.Add(GoodsTable.Ym, ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             //
             case Item_Type.Hae_Norigae:
@@ -1479,6 +1490,9 @@ public static class ServerData
                     break;     
                 case Item_Type.Hel:
                     ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += amount;
+                    break;  
+                case Item_Type.Ym:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value += amount;
                     break;
 
                 //

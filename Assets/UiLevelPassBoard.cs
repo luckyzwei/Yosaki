@@ -13,7 +13,7 @@ public class UiLevelPassBoard : MonoBehaviour
 
     private void Start()
     {
-        RefundFox();
+       // RefundFox();
     }
 
     private string refundProduct = "levelpass9";

@@ -111,6 +111,8 @@ public class UiInventoryWeaponView : MonoBehaviour
     private GameObject gumihoWeaponLock;
     [SerializeField]
     private GameObject hellWeaponLock;
+    [SerializeField]
+    private GameObject yeoRaeWeaponLock;
 
     [SerializeField]
     private GameObject armDescription;
@@ -197,7 +199,7 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         norigaeDescription.gameObject.SetActive(true);
 
-        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26 || magicBookData.Id == 27 || magicBookData.Id == 28 || magicBookData.Id == 29 || magicBookData.Id == 30));
+        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26 || magicBookData.Id == 27 || magicBookData.Id == 28 || magicBookData.Id == 29 || magicBookData.Id == 30 || magicBookData.Id == 31 || magicBookData.Id == 32));
         foxNorigaeGetButton.SetActive(false);
 
         if (magicBookData != null)
@@ -214,9 +216,13 @@ public class UiInventoryWeaponView : MonoBehaviour
             {
                 suhoSinDescription.SetText($"요괴사냥\n구미호꼬리 8획득시\n획득 가능");
             }
-            else if (magicBookData.Id == 30)
+            else if (magicBookData.Id == 30 || magicBookData.Id == 31)
             {
                 suhoSinDescription.SetText($"요괴지옥\n지옥불꽃에서\n획득!");
+            }
+            else if (magicBookData.Id == 32)
+            {
+                suhoSinDescription.SetText($"여래전에서\n획득!");
             }
 
             foxNorigaeGetButton.SetActive(magicBookData.Id == 28);
@@ -356,9 +362,10 @@ public class UiInventoryWeaponView : MonoBehaviour
             feelPaeLock.SetActive(false);
             gumihoWeaponLock.SetActive(false);
             hellWeaponLock.SetActive(false);
+            yeoRaeWeaponLock.SetActive(false);
 
             //필멸2 필멸3  (23,24)
-            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29 || weaponData.Id == 30 || weaponData.Id == 31)
+            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29 || weaponData.Id == 30 || weaponData.Id == 31 || weaponData.Id == 32 || weaponData.Id == 33)
             {
                 hasMask.SetActive(false);
 
@@ -400,10 +407,15 @@ public class UiInventoryWeaponView : MonoBehaviour
                 if (weaponData.Id == 30)
                 {
                     gumihoWeaponLock.gameObject.SetActive(state == 0);
-                }  
-                if (weaponData.Id == 31)
+                }
+                if (weaponData.Id == 31 || weaponData.Id == 32)
                 {
                     hellWeaponLock.gameObject.SetActive(state == 0);
+                }
+
+                if (weaponData.Id == 33)
+                {
+                    yeoRaeWeaponLock.gameObject.SetActive(state == 0);
                 }
             }
 
@@ -419,6 +431,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             feelPaeLock.SetActive(false);
             gumihoWeaponLock.SetActive(false);
             hellWeaponLock.SetActive(false);
+            yeoRaeWeaponLock.SetActive(false);
 
             magicBookViewEquipButton.gameObject.SetActive(state == 1);
             weaponViewEquipButton.gameObject.SetActive(false);
