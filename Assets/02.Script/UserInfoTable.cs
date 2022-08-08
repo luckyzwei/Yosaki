@@ -145,6 +145,7 @@ public class UserInfoTable
     public const string relicPackReset = "rr";
     public const string oneAttenEvent = "oe";
     public const string titleRefund = "tii";
+    public const string oneAttenEvent_one = "oo";
 
 
     public double currentServerDate;
@@ -264,6 +265,7 @@ public class UserInfoTable
         {hellScore,0},
         {oneAttenEvent,0},
         {titleRefund,0},
+        {oneAttenEvent_one,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

@@ -162,7 +162,7 @@ public class TwelveDungeonManager : ContentsManagerBase
         var prefab = Resources.Load<BossEnemyBase>($"TwelveBoss/{GameManager.Instance.bossId}");
 
         //아수라,인드라,구미호
-        if (GameManager.Instance.bossId == 13 || GameManager.Instance.bossId == 24 || GameManager.Instance.bossId == 38)
+        if (GameManager.Instance.bossId == 13 || GameManager.Instance.bossId == 24 || GameManager.Instance.bossId == 38 || GameManager.Instance.bossId == 50)
         {
             singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent_Sin);
         }
@@ -298,6 +298,34 @@ public class TwelveDungeonManager : ContentsManagerBase
             ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
         }
 
+        //여래 예외처리
+        if (twelveBossTable.Stringid == "b50") 
+        {
+
+            var yeoraeData = ServerData.bossServerTable.TableDatas["b51"];
+
+            if (string.IsNullOrEmpty(yeoraeData.score.Value) == false)
+            {
+                if (damageAmount.Value < double.Parse(yeoraeData.score.Value))
+                {
+                    return;
+                }
+                else
+                {
+                    yeoraeData.score.Value = damageAmount.Value.ToString();
+
+                    ServerData.bossServerTable.UpdateData("b51");
+                }
+            }
+            else
+            {
+                yeoraeData.score.Value = damageAmount.Value.ToString();
+
+                ServerData.bossServerTable.UpdateData("b51");
+            }
+
+        }
+
 
     }
 
@@ -342,7 +370,7 @@ public class TwelveDungeonManager : ContentsManagerBase
             {
                 remainSec *= 0.5f;
             }
-            else if (twelveBossTable.Id >= 40 && twelveBossTable.Id <= 49)
+            else if (twelveBossTable.Id >= 40 && twelveBossTable.Id <= 50)
             {
                 remainSec *= 0.5f;
             }

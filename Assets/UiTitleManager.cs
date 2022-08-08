@@ -543,6 +543,22 @@ public enum TitleMissionId
 
     Stage10900,//★
     Stage11000,//★
+    Stage11100,//★
+    Stage11200,//★
+               //
+    Level1510000,//★
+    Level1520000,//★
+    Level1530000,//★
+    Level1540000,//★
+    Level1550000,//★
+    Level1560000,//★
+    Level1570000,//★
+    Level1580000,//★
+    Level1590000,//★
+    Level1600000,//★
+
+    HellWeapon2,//★
+    YeoRaeWeapon,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -1689,6 +1705,47 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Level1500000);
             }
+            //
+            if (e >= 1510000)
+            {
+                ClearTitleMission(TitleMissionId.Level1510000);
+            }
+            if (e >= 1520000)
+            {
+                ClearTitleMission(TitleMissionId.Level1520000);
+            }
+            if (e >= 1530000)
+            {
+                ClearTitleMission(TitleMissionId.Level1530000);
+            }
+            if (e >= 1540000)
+            {
+                ClearTitleMission(TitleMissionId.Level1540000);
+            }
+            if (e >= 1550000)
+            {
+                ClearTitleMission(TitleMissionId.Level1550000);
+            }
+            if (e >= 1560000)
+            {
+                ClearTitleMission(TitleMissionId.Level1560000);
+            }
+            if (e >= 1570000)
+            {
+                ClearTitleMission(TitleMissionId.Level1570000);
+            }
+            if (e >= 1580000)
+            {
+                ClearTitleMission(TitleMissionId.Level1580000);
+            }
+            if (e >= 1590000)
+            {
+                ClearTitleMission(TitleMissionId.Level1590000);
+            }
+            if (e >= 1600000)
+            {
+                ClearTitleMission(TitleMissionId.Level1600000);
+            }
 
 
         }).AddTo(this);
@@ -2542,6 +2599,15 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Stage11000);
             }
+            //
+            if (e >= 11100 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage11100);
+            }
+            if (e >= 11200 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage11200);
+            }
 
 
         }).AddTo(this);
@@ -2684,7 +2750,23 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.HellWeapon);
             }
         }).AddTo(this);
+        //
+        ServerData.weaponTable.TableDatas["weapon32"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.HellWeapon2);
+            }
+        }).AddTo(this);
 
+        ServerData.weaponTable.TableDatas["weapon33"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.YeoRaeWeapon);
+            }
+        }).AddTo(this);
+   
         //
         //노리개
 

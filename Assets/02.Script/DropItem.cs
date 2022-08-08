@@ -85,6 +85,8 @@ public enum Item_Type
     ChunMaPet,
     Hel,
     Ym,
+    YeaRaeWeapon,
+    YeaRaeNorigae,
 
 
     RankFrame1 = 100,
@@ -250,6 +252,7 @@ public enum Item_Type
     costume44 = 1245,
     costume45 = 1246,
     costume46 = 1247,
+    costume47 = 1248,
 
     pet0 = 1301,
     pet1 = 1302,

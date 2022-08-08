@@ -1333,6 +1333,8 @@ public static class PlayerStats
             ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
         }
 
+        ret = ret + (ret * GetSonAbilPlusValue());
+
         return ret;
     }
 
@@ -1755,6 +1757,13 @@ public static class PlayerStats
         }
 
         return 0f;
+    }
+
+    public static float yeoRaeMarbleValue = 0.05f;
+
+    public static float GetSonAbilPlusValue()
+    {
+        return yeoRaeMarbleValue * ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value;
     }
 
 

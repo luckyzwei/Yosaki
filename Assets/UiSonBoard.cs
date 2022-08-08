@@ -55,6 +55,11 @@ public class UiSonBoard : MonoBehaviour
             upgradePriceText.SetText($"+{amount}");
 
         }).AddTo(this);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.Ym).AsObservable().Subscribe(amount =>
+        {
+            UpdateAbilText1(ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value);
+        }).AddTo(this);
     }
 
     private void UpdateAbilText1(int currentLevel)
@@ -181,7 +186,7 @@ public class UiSonBoard : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-               // LogManager.Instance.SendLogType("Son", "all", "");
+                // LogManager.Instance.SendLogType("Son", "all", "");
                 PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
                 SoundManager.Instance.PlaySound("Reward");
             });
