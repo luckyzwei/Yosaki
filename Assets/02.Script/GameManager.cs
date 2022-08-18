@@ -91,10 +91,11 @@ public class GameManager : SingletonMono<GameManager>
         {
             if (!firstInit)
             {
-                ServerData.userInfoTable.UpData(UserInfoTable.LastMap, e, false);
+                ServerData.userInfoTable.UpData(UserInfoTable.LastMap, e, true);
             }
             else
             {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.LastMap).Value = ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value + 1;
                 firstInit = false;
             }
         }).AddTo(this);
