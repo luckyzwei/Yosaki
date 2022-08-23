@@ -35,3 +35,8 @@ public class Orochi0 : TraceSlash0
 
 }
 
+public class Gangrim0 : TraceSlash0
+{
+
+}
+

@@ -120,6 +120,14 @@ public class UiSkillDescriptionPopup : MonoBehaviour
                 {
                     ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
                 }
+            }  
+            else if (skillTableData.Id == 22)
+            {
+                //흑룡 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
             }
         }
         //

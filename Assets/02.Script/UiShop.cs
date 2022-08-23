@@ -377,6 +377,12 @@ public class UiShop : SingletonMono<UiShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value += amount;
                     param.Add(GoodsTable.OrochiSkill, ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value);
                 }
+                break;  
+            case Item_Type.GangrimSkill:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value += amount;
+                    param.Add(GoodsTable.GangrimSkill, ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value);
+                }
                 break;
             //
 

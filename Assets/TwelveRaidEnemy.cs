@@ -58,6 +58,7 @@ public class TwelveRaidEnemy : BossEnemyBase
     private double haeTaeDam = 2.8;
     private double samDam = 2.9;
     private double hellDam = 3.2;
+    private double gangrimDam = 3.7;
 
     private void UpdateBossDamage()
     {
@@ -99,6 +100,17 @@ public class TwelveRaidEnemy : BossEnemyBase
             if (hellDam < double.MaxValue * 0.25)
             {
                 hellDam *= 3.3f;
+            }
+
+            hitObject.SetDamage(hellDam);
+
+            enemyHitObjects.ForEach(e => e.SetDamage(hellDam));
+        }
+        else if (GameManager.Instance.bossId == 52)
+        {
+            if (gangrimDam < double.MaxValue * 0.25)
+            {
+                gangrimDam *= 3.6f;
             }
 
             hitObject.SetDamage(hellDam);

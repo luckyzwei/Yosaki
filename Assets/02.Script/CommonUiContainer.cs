@@ -15,7 +15,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae, CommonString.ItemGrade_10_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae };
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
-    private List<string> itemGradeName_Skill = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill, CommonString.ItemGrade_6_Skill, CommonString.ItemGrade_7_Skill, CommonString.ItemGrade_8_Skill };
+    private List<string> itemGradeName_Skill = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill, CommonString.ItemGrade_6_Skill, CommonString.ItemGrade_7_Skill, CommonString.ItemGrade_8_Skill, CommonString.ItemGrade_9_Skill };
     public List<string> ItemGradeName_Skill => itemGradeName_Skill;
 
     public List<Color> itemGradeColor;
@@ -93,7 +93,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Kirin_Pet;
     public Sprite RabitNorigae;
     public Sprite YeaRaeNorigae;
+    public Sprite GangrimNorigae;
     public Sprite YeaRaeWeapon;
+    public Sprite GangrimWeapon;
     public Sprite RabitPet;
     public Sprite DogPet;
     public Sprite ChunMaPet;
@@ -135,6 +137,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite OrochiWeapon;
     public Sprite NataSkill;
     public Sprite OrochiSkill;
+    public Sprite GangrimSkill;
     public Sprite MihoWeapon;
     public Sprite MihoNorigae;
     public Sprite MihoTail;
@@ -299,6 +302,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;   
             case Item_Type.costume47:
                 return costumeThumbnail[47];
+                break;
+            case Item_Type.costume48:
+                return costumeThumbnail[48];
                 break;
 
 
@@ -488,8 +494,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.YeaRaeNorigae:
                 return YeaRaeNorigae;
                 break; 
+            case Item_Type.GangrimNorigae:
+                return GangrimNorigae;
+                break; 
             case Item_Type.YeaRaeWeapon:
                 return YeaRaeWeapon;
+                break;
+            case Item_Type.GangrimWeapon:
+                return GangrimWeapon;
                 break;
 
             case Item_Type.Sam_Pet:
@@ -586,6 +598,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.OrochiSkill:
                 return OrochiSkill;
+                break;
+            case Item_Type.GangrimSkill:
+                return GangrimSkill;
                 break;
             case Item_Type.SinSkill3:
                 return SinSkill3;

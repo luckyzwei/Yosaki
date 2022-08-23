@@ -52,6 +52,7 @@ public static class CommonString
     public static string ItemGrade_6_Skill = "흑룡";
     public static string ItemGrade_7_Skill = "나타";
     public static string ItemGrade_8_Skill = "오로치";
+    public static string ItemGrade_9_Skill = "강림";
 
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -168,6 +169,7 @@ public static class CommonString
             case Item_Type.costume45: return TableManager.Instance.Costume.dataArray[45].Name;
             case Item_Type.costume46: return TableManager.Instance.Costume.dataArray[46].Name;
             case Item_Type.costume47: return TableManager.Instance.Costume.dataArray[47].Name;
+            case Item_Type.costume48: return TableManager.Instance.Costume.dataArray[48].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -234,6 +236,7 @@ public static class CommonString
             case Item_Type.Event_Item_Summer: return "수박";
             case Item_Type.NataSkill: return "나타 베기";
             case Item_Type.OrochiSkill: return "오로치 베기";
+            case Item_Type.GangrimSkill: return "강림 베기";
 
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";

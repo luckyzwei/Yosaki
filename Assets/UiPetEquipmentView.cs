@@ -87,21 +87,29 @@ public class UiPetEquipmentView : MonoBehaviour
 
         ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).AsObservable().Subscribe(e =>
         {
-            equipTitle.SetText($"{petEquipmentData.Name}({e}강)");
+            if (petEquipmentData.Id != 20)
+            {
+                equipTitle.SetText($"{petEquipmentData.Name}({e}강)");
+            }
+            else
+            {
+                equipTitle.SetText($"{petEquipmentData.Name}");
+            }
+
             WhenLevelChanged(petEquipServerData.level.Value);
 
 
-            if(petEquipmentData.Needpetawakelevel != 0) 
+            if (petEquipmentData.Needpetawakelevel != 0)
             {
                 lockMask.SetActive(e < petEquipmentData.Needpetawakelevel);
                 lockDescription.SetText($"환수장비\n{petEquipmentData.Needpetawakelevel}강화 이상 개방");
             }
-            else 
+            else
             {
                 lockMask.SetActive(false);
             }
 
-     
+
 
         }).AddTo(this);
     }
@@ -151,14 +159,21 @@ public class UiPetEquipmentView : MonoBehaviour
             abilDesc += $"{CommonString.GetStatusName(type2)} {Utils.ConvertBigNum(abilValue2)}(<color=red>MAX:{Utils.ConvertBigNum(maxAbil2)}</color>)";
         }
 
-        abilDescription.SetText(abilDesc);
+        if (petEquipmentData.Id != 20)
+        {
+            abilDescription.SetText(abilDesc);
+        }
+        else
+        {
+            abilDescription.SetText(string.Empty);
+        }
     }
 
     public void OnClickUnlockButton()
     {
         var petTableData = TableManager.Instance.PetTable.dataArray[petEquipmentData.Requippetid];
 
-        if (petEquipmentData.Id < 4) 
+        if (petEquipmentData.Id < 4)
         {
             //청룡
             if (petEquipmentData.Requippetid == 11)
@@ -201,7 +216,7 @@ public class UiPetEquipmentView : MonoBehaviour
                 }
             }
         }
-    
+
 
 
         if (petEquipServerData.hasAbil.Value == 1)

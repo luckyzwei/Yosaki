@@ -83,7 +83,7 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
 
         string desc = string.Empty;
 
-        for (int i = 0; i < tableDatas.Length; i++)
+        for (int i = 0; i < tableDatas.Length-1; i++)
         {
             desc += tableDatas[i].Name;
 

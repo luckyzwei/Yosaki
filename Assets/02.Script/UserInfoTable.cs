@@ -110,6 +110,7 @@ public class UserInfoTable
     public const string attenCountOne = "oy";
 
     public const string relicKillCount = "relicKillCount";
+    public const string hellRelicKillCount = "hrk";
 
     public const string usedRelicTicketNum = "usedRelicTicketNum";
 
@@ -223,6 +224,7 @@ public class UserInfoTable
         {yomul3_buff,0f},
         {killCountTotal,0f},
         {relicKillCount,0f},
+        {hellRelicKillCount,0f},
         {usedRelicTicketNum,0f},
         {relicpensionAttendance,0f},
         {yomul4_buff,0f},
@@ -778,10 +780,18 @@ public class UserInfoTable
         ServerData.bossServerTable.TableDatas["boss12"].rewardedId.Value = string.Empty;
         ServerData.bossServerTable.TableDatas["boss20"].rewardedId.Value = string.Empty;
 
+
+
         Param bossParam = new Param();
 
         bossParam.Add("boss12", ServerData.bossServerTable.TableDatas["boss12"].ConvertToString());
         bossParam.Add("boss20", ServerData.bossServerTable.TableDatas["boss20"].ConvertToString());
+
+        if (weekChanged)
+        {
+            ServerData.bossServerTable.TableDatas["b53"].rewardedId.Value = string.Empty;
+            bossParam.Add("b53", ServerData.bossServerTable.TableDatas["b53"].ConvertToString());
+        }
 
         transactionList.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 

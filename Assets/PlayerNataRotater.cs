@@ -9,6 +9,9 @@ public class PlayerNataRotater : MonoBehaviour
     private GameObject rotateObject;
 
     [SerializeField]
+    private GameObject rotateObject_Gang;
+
+    [SerializeField]
     private float rotateSpeed = 0f;
 
     private float currentAngle;
@@ -22,7 +25,10 @@ public class PlayerNataRotater : MonoBehaviour
     {
         ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
         {
+
             rotateObject.SetActive(e == 35);
+            rotateObject_Gang.SetActive(e == 48);
+
         }).AddTo(this);
     }
 
@@ -30,7 +36,15 @@ public class PlayerNataRotater : MonoBehaviour
     {
         currentAngle += Time.deltaTime * rotateSpeed;
 
-        rotateObject.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+        if (rotateObject.activeInHierarchy)
+        {
+            rotateObject.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+        }
+
+        if (rotateObject_Gang.activeInHierarchy)
+        {
+            rotateObject_Gang.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+        }
 
         if (currentAngle >= 360f)
         {

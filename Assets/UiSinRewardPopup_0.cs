@@ -46,7 +46,10 @@ public class UiSinRewardPopup_0 : SingletonMono<UiSinRewardPopup_0>
 
         damText.SetText($"최고 피해량 : {Utils.ConvertBigNum(currentDamage)}");
 
-        rootObject.SetActive(true);
+        if (rootObject != null)
+        {
+            rootObject.SetActive(true);
+        }
 
         bossTableData = TableManager.Instance.TwelveBossTable.dataArray[bossId];
 

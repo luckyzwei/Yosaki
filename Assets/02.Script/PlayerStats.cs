@@ -263,7 +263,7 @@ public static class PlayerStats
         return ret;
     }
 
-    public static ObscuredFloat relicReleaseValue = 6000f;
+    public static ObscuredFloat relicReleaseValue = 7000f;
 
     public static float GetRelicReleaseValue()
     {
@@ -995,9 +995,16 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetWeaponEquipPercentValue(StatusType.SuperCritical3DamPer);
+
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical3DamPer);
+
         ret += GetHellMarkValue();
+
         ret += GetHellAbilHasEffect(StatusType.SuperCritical3DamPer);
+
+        ret += GetDragonBallAbilValue();
+
+        ret += GetHellRelicAbilValue();
 
         return ret;
     }
@@ -1766,8 +1773,39 @@ public static class PlayerStats
         return yeoRaeMarbleValue * ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value;
     }
 
+    public static int GetCurrentDragonIdx()
+    {
+        var tableData = TableManager.Instance.dragonBall.dataArray;
+        int currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+        int idx = -1;
 
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (currentPetEquipGrade >= tableData[i].Require)
+            {
+                idx = i;
+            }
+        }
 
+        return idx;
+    }
+
+    public static float GetDragonBallAbilValue()
+    {
+        int idx = GetCurrentDragonIdx();
+
+        if (idx == -1) return 0f;
+
+        return TableManager.Instance.dragonBall.dataArray[idx].Abilvalue0;
+    }
+
+    public const float HellRelicAbilValue = 0.1f;
+    public const int HellRelicAbilDivide = 100;
+    public static float GetHellRelicAbilValue()
+    {
+        int kt = (int)(ServerData.userInfoTable.TableDatas[UserInfoTable.hellRelicKillCount].Value / HellRelicAbilDivide);
+        return kt * HellRelicAbilValue;
+    }
 
 
 }

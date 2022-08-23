@@ -293,6 +293,9 @@ public static class ServerData
                 break;
             case Item_Type.OrochiSkill:
                 ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value += rewardValue;
+                break; 
+            case Item_Type.GangrimSkill:
+                ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value += rewardValue;
                 break;
 
             case Item_Type.SinSkill3:
@@ -363,6 +366,7 @@ public static class ServerData
             case Item_Type.costume45:
             case Item_Type.costume46:
             case Item_Type.costume47:
+            case Item_Type.costume48:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -460,6 +464,7 @@ public static class ServerData
             case Item_Type.costume45:
             case Item_Type.costume46:
             case Item_Type.costume47:
+            case Item_Type.costume48:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -595,6 +600,9 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.NataSkill:
                 passParam.Add(GoodsTable.NataSkill, ServerData.goodsTable.GetTableData(GoodsTable.NataSkill).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);   
+            case Item_Type.GangrimSkill:
+                passParam.Add(GoodsTable.GangrimSkill, ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.OrochiSkill:
                 passParam.Add(GoodsTable.OrochiSkill, ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value);
@@ -871,6 +879,11 @@ public static class ServerData
             case Item_Type.OrochiSkill:
                 ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value += amount;
                 param.Add(GoodsTable.OrochiSkill, ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);     
+            
+            case Item_Type.GangrimSkill:
+                ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value += amount;
+                param.Add(GoodsTable.GangrimSkill, ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.LeeMuGiStone:

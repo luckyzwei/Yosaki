@@ -82,6 +82,7 @@ public class GoodsTable
     public static string Hae_Pet = "hp";
     public static string NataSkill = "NataSkill";
     public static string OrochiSkill = "OrochiSkill";
+    public static string GangrimSkill = "GangrimSkill";
 
     public static string OrochiTooth0 = "or0";
     public static string OrochiTooth1 = "or1";
@@ -175,6 +176,7 @@ public class GoodsTable
         {IndraPower,0f},
         {NataSkill,0f},
         {OrochiSkill,0f},
+        {GangrimSkill,0f},
         {OrochiTooth0,0f},
         {OrochiTooth1,0f},
         //

@@ -88,6 +88,10 @@ public enum Item_Type
     YeaRaeWeapon,
     YeaRaeNorigae,
 
+    GangrimWeapon,
+    GangrimNorigae,
+    GangrimSkill,
+
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -253,6 +257,7 @@ public enum Item_Type
     costume45 = 1246,
     costume46 = 1247,
     costume47 = 1248,
+    costume48 = 1249,
 
     pet0 = 1301,
     pet1 = 1302,
