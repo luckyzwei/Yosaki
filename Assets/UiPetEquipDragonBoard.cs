@@ -13,6 +13,9 @@ public class UiPetEquipDragonBoard : MonoBehaviour
     private TextMeshProUGUI abilDescription;
 
     [SerializeField]
+    private TextMeshProUGUI currentAwakeLevel;
+
+    [SerializeField]
     private Image dragonIcon;
 
 
@@ -25,6 +28,8 @@ public class UiPetEquipDragonBoard : MonoBehaviour
         int currentIdx = PlayerStats.GetCurrentDragonIdx();
 
         if (currentIdx == -1) return;
+
+        currentAwakeLevel.SetText($"현재 강화도 : + {ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value}강");
 
         var tableData = TableManager.Instance.dragonBall.dataArray[currentIdx];
 
