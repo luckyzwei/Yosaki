@@ -81,6 +81,8 @@ public class UiSettingBoard : MonoBehaviour
     private Toggle orb;
     [SerializeField]
     private Toggle indra;
+    [SerializeField]
+    private Toggle dragon;
 
     [SerializeField]
     private Transform playerViewController;
@@ -135,6 +137,7 @@ public class UiSettingBoard : MonoBehaviour
         pet.isOn = PlayerPrefs.GetInt(SettingKey.pet) == 1;
         orb.isOn = PlayerPrefs.GetInt(SettingKey.orb) == 1;
         indra.isOn = PlayerPrefs.GetInt(SettingKey.indra) == 1;
+        dragon.isOn = PlayerPrefs.GetInt(SettingKey.dragon) == 1;
 
         initialized = true;
 
@@ -463,6 +466,18 @@ public class UiSettingBoard : MonoBehaviour
         SettingData.indra.Value = on ? 1 : 0;
     }
 
+    public void Dragon(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.dragon.Value = on ? 1 : 0;
+    }
+
     public void OnClickStory()
     {
         DialogManager.Instance.SetNextDialog();
@@ -542,6 +557,7 @@ public static class SettingKey
     public static string pet = "pet";
     public static string orb = "orb";
     public static string indra = "indra";
+    public static string dragon = "dragon";
 
 }
 
@@ -577,6 +593,7 @@ public static class SettingData
     public static ReactiveProperty<int> pet = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> orb = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> indra = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> dragon = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
@@ -665,7 +682,10 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.orb, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.indra) == false)
-            PlayerPrefs.SetInt(SettingKey.indra, 1);
+            PlayerPrefs.SetInt(SettingKey.indra, 1);  
+        
+        if (PlayerPrefs.HasKey(SettingKey.dragon) == false)
+            PlayerPrefs.SetInt(SettingKey.dragon, 1);
 
     }
 
@@ -699,6 +719,7 @@ public static class SettingData
         pet.Value = PlayerPrefs.GetInt(SettingKey.pet, 1);
         orb.Value = PlayerPrefs.GetInt(SettingKey.orb, 1);
         indra.Value = PlayerPrefs.GetInt(SettingKey.indra, 1);
+        dragon.Value = PlayerPrefs.GetInt(SettingKey.dragon, 1);
 
         Subscribe();
     }
@@ -812,6 +833,10 @@ public static class SettingData
         indra.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.indra, e);
+        });
+        dragon.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.dragon, e);
         });
     }
 

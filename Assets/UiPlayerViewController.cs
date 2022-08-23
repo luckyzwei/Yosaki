@@ -38,6 +38,8 @@ public class UiPlayerViewController : MonoBehaviour
     private GameObject orb;
     [SerializeField]
     private GameObject indra;
+    [SerializeField]
+    private GameObject dragon;
 
 
     void Start()
@@ -110,6 +112,12 @@ public class UiPlayerViewController : MonoBehaviour
         SettingData.indra.AsObservable().Subscribe(e =>
         {
             indra.SetActive(e == 1);
+
+        }).AddTo(this);
+
+        SettingData.dragon.AsObservable().Subscribe(e =>
+        {
+            dragon.SetActive(e == 1);
 
         }).AddTo(this);
     }
