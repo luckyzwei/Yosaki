@@ -23,11 +23,11 @@ public class PlayerPetEquipDraonView : MonoBehaviour
 
             if (idx == -1)
             {
-                this.gameObject.SetActive(false);
+                this.icon.gameObject.SetActive(false);
             }
             else
             {
-                this.gameObject.SetActive(true);
+                this.icon.gameObject.SetActive(true);
                 icon.sprite = CommonResourceContainer.GetDragonBallSprite(idx);
             }
         }).AddTo(this);
