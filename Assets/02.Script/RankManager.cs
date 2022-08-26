@@ -66,7 +66,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
     public const string Rank_Boss_Uuid = "5522b420-9305-11ec-b896-5d8902af2d1b";
     public const string Rank_Real_Boss_Uuid = "7e03f910-9302-11ec-865e-e713a4acb6da";
-    public const string Rank_Relic_Uuid = "0453f560-2779-11ec-9b46-299116fee741";
+    public const string Rank_Relic_Uuid = "e24e0610-257c-11ed-9935-efa0a6ef95f0";
     public const string Rank_MiniGame_Uuid = "e1dced80-5954-11ec-b084-d1a61d5ec8e2";
     public const string Rank_Guild_Uuid = "ff017920-698b-11ec-b243-8d1fccc57e3d";
     public const string Rank_Guild_Reset_Uuid = "be50a6d0-698b-11ec-b243-8d1fccc57e3d";
@@ -84,7 +84,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Stage = "Rank_Stage";
     public const string Rank_Boss = "Last_Cat2_And";
     public const string Rank_Real_Boss = "boss12_And";
-    public const string Rank_Relic = "Rank_Relic";
+    public const string Rank_Relic = "HelRelicRank";
     public const string Rank_MiniGame = "Rank_MiniGame";
     public const string Rank_GangChul = "Guild_Boss_And";
 #endif
@@ -94,7 +94,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Stage_Uuid = "f865e900-31b6-11ec-b4ab-713be46ddb60";
     public const string Rank_Boss_Uuid = "5e9279a0-9305-11ec-87d0-e7fba5f2b556";
     public const string Rank_Real_Boss_Uuid = "8c763ee0-9302-11ec-80bd-6747f1381435";
-    public const string Rank_Relic_Uuid = "1ce07110-31b7-11ec-be95-537d9b90903a";
+    public const string Rank_Relic_Uuid = "ee37f350-257c-11ed-9935-efa0a6ef95f0";
     public const string Rank_MiniGame_Uuid = "edec1600-5954-11ec-8846-eb56e6e68bb1";
     public const string Rank_Guild_Uuid = "10619010-698c-11ec-b243-8d1fccc57e3d";
     public const string Rank_Guild_Reset_Uuid = "d248cdc0-698b-11ec-b243-8d1fccc57e3d";
@@ -108,7 +108,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Stage = "Rank_Stage_IOS";
     public const string Rank_Boss = "Last_Cat2_IOS";
     public const string Rank_Real_Boss = "boss12_IOS";
-    public const string Rank_Relic = "Rank_Relic_IOS";
+    public const string Rank_Relic = "HelRelicRank_IOS";
     public const string Rank_MiniGame = "Rank_MiniGame_IOS";
     public const string Rank_GangChul = "Guild_Boss_IOS";
 
@@ -626,7 +626,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRelic_Score(double score)
     {
-        if (UpdateRank() == false) return;
+        //if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.Relic] != null && score < this.myRankInfo[RankType.Relic].Score)
         {
             Debug.LogError("점수가 더 낮음");

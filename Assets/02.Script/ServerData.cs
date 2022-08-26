@@ -367,6 +367,8 @@ public static class ServerData
             case Item_Type.costume46:
             case Item_Type.costume47:
             case Item_Type.costume48:
+            case Item_Type.costume49:
+            case Item_Type.costume50:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -465,6 +467,8 @@ public static class ServerData
             case Item_Type.costume46:
             case Item_Type.costume47:
             case Item_Type.costume48:
+            case Item_Type.costume49:
+            case Item_Type.costume50:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1232,38 +1236,38 @@ public static class ServerData
             switch (type)
             {
                 case Item_Type.RankFrame1_relic:
-                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_1_relic;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_1_relic;
                     break;
                 case Item_Type.RankFrame2_relic:
-                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_2_relic;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_2_relic;
                     break;
                 case Item_Type.RankFrame3_relic:
-                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_3_relic;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_3_relic;
                     break;
                 case Item_Type.RankFrame4_relic:
-                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_4_relic;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_4_relic;
                     break;
                 case Item_Type.RankFrame5_relic:
-                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_5_relic;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_5_relic;
                     break;
                 case Item_Type.RankFrame6_20_relic:
-                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_6_20_relic;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_6_20_relic;
                     break;
                 case Item_Type.RankFrame21_100_relic:
-                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_21_100_relic;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_21_100_relic;
                     break;
                 case Item_Type.RankFrame101_1000_relic:
-                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_101_1000_relic;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_101_1000_relic;
                     break;
                 case Item_Type.RankFrame1001_10000_relic:
-                    ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.rankRewardTicket_1001_10000_relic;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_1001_10000_relic;
                     break;
             }
 
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+            goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
 
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 

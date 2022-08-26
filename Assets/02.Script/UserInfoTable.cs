@@ -104,7 +104,7 @@ public class UserInfoTable
     //6월월간
     public const string killCountTotal = "k8w";
     //7월월간
-    public const string killCountTotal2 = "k7w";
+    public const string killCountTotal2 = "k9w";
     public const string killCountTotalChild = "kt9";
     public const string attenCountBok = "kb";
     public const string attenCountOne = "oy";
@@ -928,9 +928,9 @@ public class UserInfoTable
     public bool IsMonthlyPass2()
     {
 #if UNITY_EDITOR
-        return false;
+        return true;
 #endif
 
-        return currentServerTime.Month == 7;
+        return currentServerTime.Month == 9;
     }
 }

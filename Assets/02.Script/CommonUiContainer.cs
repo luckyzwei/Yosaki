@@ -306,6 +306,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.costume48:
                 return costumeThumbnail[48];
                 break;
+            case Item_Type.costume49:
+                return costumeThumbnail[49];
+                break;
+            case Item_Type.costume50:
+                return costumeThumbnail[50];
+                break;
 
 
             case Item_Type.RankFrame1:
@@ -346,7 +352,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.RankFrame21_100_relic:
             case Item_Type.RankFrame101_1000_relic:
             case Item_Type.RankFrame1001_10000_relic:
-                return relicEnter;
+                return Hel;
                 break;
 
             case Item_Type.RankFrame1_miniGame:

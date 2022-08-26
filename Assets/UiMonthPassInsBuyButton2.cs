@@ -16,7 +16,7 @@ public class UiMonthPassInsBuyButton2 : MonoBehaviour
     [SerializeField]
     private ObscuredFloat killAddAmount = 30000000;
 
-    public static readonly string monthInsPassKey = "monthpass10ins";
+    public static readonly string monthInsPassKey = "monthpass12ins";
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -66,7 +66,7 @@ public class UiMonthPassInsBuyButton2 : MonoBehaviour
     {
         if (CanBuyProduct() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("23일 부터 구매 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage("22일 부터 구매 가능합니다!");
             return;
         }
 
@@ -110,6 +110,6 @@ public class UiMonthPassInsBuyButton2 : MonoBehaviour
 
         var severTime = ServerData.userInfoTable.currentServerTime;
 
-        return severTime.Day >= 23;
+        return severTime.Day >= 22;
     }
 }

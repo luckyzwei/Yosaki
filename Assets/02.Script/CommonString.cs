@@ -70,7 +70,7 @@ public static class CommonString
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "고양이요괴전";
     public static string RankPrefix_Real_Boss = "십이지신(해)";
-    public static string RankPrefix_Relic = "영혼의숲";
+    public static string RankPrefix_Relic = "영혼의숲(지옥)";
     public static string RankPrefix_MiniGame = "미니게임";
     public static string RankPrefix_GangChul = "강철이";
 
@@ -170,6 +170,8 @@ public static class CommonString
             case Item_Type.costume46: return TableManager.Instance.Costume.dataArray[46].Name;
             case Item_Type.costume47: return TableManager.Instance.Costume.dataArray[47].Name;
             case Item_Type.costume48: return TableManager.Instance.Costume.dataArray[48].Name;
+            case Item_Type.costume49: return TableManager.Instance.Costume.dataArray[49].Name;
+            case Item_Type.costume50: return TableManager.Instance.Costume.dataArray[50].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
