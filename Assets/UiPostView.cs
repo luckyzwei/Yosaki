@@ -90,40 +90,82 @@ public class UiPostView : MonoBehaviour
             switch (type)
             {
                 case Item_Type.RankFrame1_relic:
-                    title.SetText("랭킹보상(1위)(지옥 영혼의숲)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_1_relic}개");
+                    title.SetText("랭킹보상(1위)(영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_1_relic}개");
                     break;
                 case Item_Type.RankFrame2_relic:
-                    title.SetText("랭킹보상(2위)(지옥 영혼의숲)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_2_relic}개");
+                    title.SetText("랭킹보상(2위)(영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_2_relic}개");
                     break;
                 case Item_Type.RankFrame3_relic:
-                    title.SetText("랭킹보상(3위)(지옥 영혼의숲)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_3_relic}개");
+                    title.SetText("랭킹보상(3위)(영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_3_relic}개");
                     break;
                 case Item_Type.RankFrame4_relic:
-                    title.SetText("랭킹보상(4위)(지옥 영혼의숲)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_4_relic}개");
+                    title.SetText("랭킹보상(4위)(영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_4_relic}개");
                     break;
                 case Item_Type.RankFrame5_relic:
-                    title.SetText("랭킹보상(5위)(지옥 영혼의숲)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_5_relic}개");
+                    title.SetText("랭킹보상(5위)(영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_5_relic}개");
                     break;
                 case Item_Type.RankFrame6_20_relic:
-                    title.SetText("랭킹보상(6~20위)(지옥 영혼의숲)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_6_20_relic}개");
+                    title.SetText("랭킹보상(6~20위)(영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_6_20_relic}개");
                     break;
                 case Item_Type.RankFrame21_100_relic:
-                    title.SetText("랭킹보상(21~100위)(지옥 영혼의숲)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_21_100_relic}개");
+                    title.SetText("랭킹보상(21~100위)(영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_21_100_relic}개");
                     break;
                 case Item_Type.RankFrame101_1000_relic:
-                    title.SetText("랭킹보상(101~1000위)(지옥 영혼의숲)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_101_1000_relic}개");
+                    title.SetText("랭킹보상(101~1000위)(영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_101_1000_relic}개");
                     break;
                 case Item_Type.RankFrame1001_10000_relic:
+                    title.SetText("랭킹보상(1001~10000위)(영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.RelicTicket)} {GameBalance.rankRewardTicket_1001_10000_relic}개");
+                    break;
+            }
+        }
+        else if (type.IsRelicRewardItem_hell())
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_relic_hell:
+                    title.SetText("랭킹보상(1위)(지옥 영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_1_relic_hell}개");
+                    break;
+                case Item_Type.RankFrame2_relic_hell:
+                    title.SetText("랭킹보상(2위)(지옥 영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_2_relic_hell}개");
+                    break;
+                case Item_Type.RankFrame3_relic_hell:
+                    title.SetText("랭킹보상(3위)(지옥 영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_3_relic_hell}개");
+                    break;
+                case Item_Type.RankFrame4_relic_hell:
+                    title.SetText("랭킹보상(4위)(지옥 영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_4_relic_hell}개");
+                    break;
+                case Item_Type.RankFrame5_relic_hell:
+                    title.SetText("랭킹보상(5위)(지옥 영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_5_relic_hell}개");
+                    break;
+                case Item_Type.RankFrame6_20_relic_hell:
+                    title.SetText("랭킹보상(6~20위)(지옥 영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_6_20_relic_hell}개");
+                    break;
+                case Item_Type.RankFrame21_100_relic_hell:
+                    title.SetText("랭킹보상(21~100위)(지옥 영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_21_100_relic_hell}개");
+                    break;
+                case Item_Type.RankFrame101_1000_relic_hell:
+                    title.SetText("랭킹보상(101~1000위)(지옥 영혼의숲)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_101_1000_relic_hell}개");
+                    break;
+                case Item_Type.RankFrame1001_10000_relic_hell:
                     title.SetText("랭킹보상(1001~10000위)(지옥 영혼의숲)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_1001_10000_relic}개");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_1001_10000_relic_hell}개");
                     break;
             }
         }

@@ -158,6 +158,17 @@ public enum Item_Type
     RankFrame1000_3000_boss_new = 713,
 
     MagicStoneBuff = 500,
+
+    RankFrame1_relic_hell = 800,
+    RankFrame2_relic_hell = 801,
+    RankFrame3_relic_hell = 802,
+    RankFrame4_relic_hell = 803,
+    RankFrame5_relic_hell = 804,
+    RankFrame6_20_relic_hell = 805,
+    RankFrame21_100_relic_hell = 806,
+    RankFrame101_1000_relic_hell = 807,
+    RankFrame1001_10000_relic_hell = 808,
+
     //1000~1100 무기
     weapon0 = 1000,
     weapon1 = 1001,

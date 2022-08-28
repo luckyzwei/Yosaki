@@ -14,7 +14,7 @@ public class UiChildPassInsBuyButton : MonoBehaviour
 
     private ObscuredFloat killAddAmount = 100000000;
 
-    public static readonly string monthInsPassKey = "summerpassIns";
+    public static readonly string monthInsPassKey = "summerpassins";
 
     private CompositeDisposable disposable = new CompositeDisposable();
 

@@ -352,6 +352,18 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.RankFrame21_100_relic:
             case Item_Type.RankFrame101_1000_relic:
             case Item_Type.RankFrame1001_10000_relic:
+                return relicEnter;
+                break;
+
+            case Item_Type.RankFrame1_relic_hell:
+            case Item_Type.RankFrame2_relic_hell:
+            case Item_Type.RankFrame3_relic_hell:
+            case Item_Type.RankFrame4_relic_hell:
+            case Item_Type.RankFrame5_relic_hell:
+            case Item_Type.RankFrame6_20_relic_hell:
+            case Item_Type.RankFrame21_100_relic_hell:
+            case Item_Type.RankFrame101_1000_relic_hell:
+            case Item_Type.RankFrame1001_10000_relic_hell:
                 return Hel;
                 break;
 

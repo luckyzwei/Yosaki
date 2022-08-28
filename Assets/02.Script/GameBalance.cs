@@ -100,15 +100,25 @@ public static class GameBalance
     public readonly static ObscuredInt rankRewardTicket_101_1000 = 1600;
     public readonly static ObscuredInt rankRewardTicket_1001_10000 = 1400;
 
-    public readonly static ObscuredInt rankRewardTicket_1_relic = 1200;
-    public readonly static ObscuredInt rankRewardTicket_2_relic = 1150;
-    public readonly static ObscuredInt rankRewardTicket_3_relic = 1100;
-    public readonly static ObscuredInt rankRewardTicket_4_relic = 1050;
-    public readonly static ObscuredInt rankRewardTicket_5_relic = 1000;
-    public readonly static ObscuredInt rankRewardTicket_6_20_relic = 900;
-    public readonly static ObscuredInt rankRewardTicket_21_100_relic = 800;
-    public readonly static ObscuredInt rankRewardTicket_101_1000_relic = 700;
-    public readonly static ObscuredInt rankRewardTicket_1001_10000_relic = 600;
+    public readonly static ObscuredInt rankRewardTicket_1_relic = 120;
+    public readonly static ObscuredInt rankRewardTicket_2_relic = 110;
+    public readonly static ObscuredInt rankRewardTicket_3_relic = 100;
+    public readonly static ObscuredInt rankRewardTicket_4_relic = 90;
+    public readonly static ObscuredInt rankRewardTicket_5_relic = 80;
+    public readonly static ObscuredInt rankRewardTicket_6_20_relic = 70;
+    public readonly static ObscuredInt rankRewardTicket_21_100_relic = 60;
+    public readonly static ObscuredInt rankRewardTicket_101_1000_relic = 50;
+    public readonly static ObscuredInt rankRewardTicket_1001_10000_relic = 40;
+
+    public readonly static ObscuredInt rankRewardTicket_1_relic_hell = 1200;
+    public readonly static ObscuredInt rankRewardTicket_2_relic_hell = 1150;
+    public readonly static ObscuredInt rankRewardTicket_3_relic_hell = 1100;
+    public readonly static ObscuredInt rankRewardTicket_4_relic_hell = 1050;
+    public readonly static ObscuredInt rankRewardTicket_5_relic_hell = 1000;
+    public readonly static ObscuredInt rankRewardTicket_6_20_relic_hell = 900;
+    public readonly static ObscuredInt rankRewardTicket_21_100_relic_hell = 800;
+    public readonly static ObscuredInt rankRewardTicket_101_1000_relic_hell = 700;
+    public readonly static ObscuredInt rankRewardTicket_1001_10000_relic_hell = 600;
 
     public readonly static ObscuredInt rankReward_1_MiniGame = 10;
     public readonly static ObscuredInt rankReward_2_MiniGame = 9;

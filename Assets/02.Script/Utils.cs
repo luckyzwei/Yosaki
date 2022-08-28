@@ -157,6 +157,11 @@ public static class Utils
         return type >= Item_Type.RankFrame1_relic && type <= Item_Type.RankFrame1001_10000_relic;
     }
 
+    public static bool IsRelicRewardItem_hell(this Item_Type type)
+    {
+        return type >= Item_Type.RankFrame1_relic_hell && type <= Item_Type.RankFrame1001_10000_relic_hell;
+    }
+
     public static bool IsMiniGameRewardItem(this Item_Type type)
     {
         return type >= Item_Type.RankFrame1_miniGame && type <= Item_Type.RankFrame1001_10000_miniGame;
