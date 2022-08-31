@@ -29,7 +29,7 @@ public class UiOneYearEventBoard : MonoBehaviour
     {
         var serverTime = ServerData.userInfoTable.currentServerTime;
 
-        if (serverTime.Month == 9)
+        if (serverTime.Month == 9 && serverTime.Day > 8)
         {
             PopupManager.Instance.ShowAlarmMessage("이벤트가 종료됐습니다.");
             this.gameObject.SetActive(false);
