@@ -13,7 +13,7 @@ public class UiLevelPassBoard : MonoBehaviour
 
     private void Start()
     {
-       // RefundFox();
+        // RefundFox();
     }
 
     private string refundProduct = "levelpass9";
@@ -127,6 +127,7 @@ public class UiLevelPassBoard : MonoBehaviour
             goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
             goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
             goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+            goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param passParam = new Param();
