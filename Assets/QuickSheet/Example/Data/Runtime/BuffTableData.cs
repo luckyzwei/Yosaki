@@ -52,4 +52,12 @@ public class BuffTableData
   int guildlevel;
   public int Guildlevel { get {return guildlevel; } set { this.guildlevel = value;} }
   
+  [SerializeField]
+  int buffusecount;
+  public int Buffusecount { get {return buffusecount; } set { this.buffusecount = value;} }
+  
+  [SerializeField]
+  float buffaddvalue;
+  public float Buffaddvalue { get {return buffaddvalue; } set { this.buffaddvalue = value;} }
+  
 }
