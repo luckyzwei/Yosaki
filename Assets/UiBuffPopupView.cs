@@ -274,7 +274,7 @@ public class UiBuffPopupView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage($"문파의 명성이 부족합니다.(명성 {getLevel}이상)");
             }
         }
-        else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.OneYear)
+        else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.OneYear || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Chuseok)
         {
             BuffGetRoutine();
         }

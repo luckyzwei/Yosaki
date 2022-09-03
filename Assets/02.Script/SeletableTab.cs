@@ -23,6 +23,9 @@ public class SeletableTab : MonoBehaviour
     [SerializeField]
     private Color disableColor_text = Color.grey;
 
+    [SerializeField]
+    private bool useButtonColor = true;
+
     private void Awake()
     {
         SetDefault();
@@ -44,10 +47,16 @@ public class SeletableTab : MonoBehaviour
         {
             if (tabTexts.Count == tabs.Count)
             {
-                tabTexts[i].color = i == select ? enableColor_text : disableColor_text;
+                if (useButtonColor)
+                {
+                    tabTexts[i].color = i == select ? enableColor_text : disableColor_text;
+                }
+            }
+            if (useButtonColor)
+            {
+                tabs[i].color = i == select ? enableColor : disableColor;
             }
 
-            tabs[i].color = i == select ? enableColor : disableColor;
             objects[i].gameObject.SetActive(i == select);
         }
     }

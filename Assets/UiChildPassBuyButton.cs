@@ -12,7 +12,7 @@ public class UiChildPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string childPassKey = "summerpass";
+    public static readonly string childPassKey = "chuseokpass";
 
     private Button buyButton;
 
@@ -34,7 +34,7 @@ public class UiChildPassBuyButton : MonoBehaviour
 
         ServerData.iapServerTable.TableDatas[childPassKey].buyCount.AsObservable().Subscribe(e =>
         {
-            descText.SetText(e >= 1 ? "구매완료" : "훈련권 구매");
+            descText.SetText(e >= 1 ? "구매완료" : "패스권 구매");
             this.gameObject.SetActive(e <= 0);
         }).AddTo(disposable);
 

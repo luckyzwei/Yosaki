@@ -9,7 +9,7 @@ public class AutoButton : MonoBehaviour
     [SerializeField]
     private GameObject autoEffect;
 
-    private static bool prefAuto = false;
+    private static bool prefAuto = true;
 
     private void Start()
     {

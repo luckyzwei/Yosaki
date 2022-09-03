@@ -5,7 +5,9 @@ using UnityEngine;
 public class UiHellBossBoard : MonoBehaviour
 {
     [SerializeField]
-    private UiTwelveBossContentsView bossContentsView;
+    private UiTwelveBossContentsView bossContentsView;  
+    [SerializeField]
+    private UiTwelveBossContentsView bossContentsView_dukChoon;
 
     void Start()
     {
@@ -15,5 +17,6 @@ public class UiHellBossBoard : MonoBehaviour
     private void Initialize()
     {
         bossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[52]);
+        bossContentsView_dukChoon.Initialize(TableManager.Instance.TwelveBossTable.dataArray[54]);
     }
 }

@@ -99,8 +99,8 @@ public class SaveManager : SingletonMono<SaveManager>
     {
         while (true)
         {
-            SyncDailyMissions();
             yield return updateDelay_DailyMission;
+            SyncDailyMissions();
         }
     }
 

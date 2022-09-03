@@ -612,13 +612,18 @@ public class ChildPassServerTable
     public const string tableName = "ChildPass";
 
 
-    public static string childFree = "f3";
-    public static string childAd = "a3";
+    public static string childFree = "f4";
+    public static string childAd = "a4";
+
+    public static string childFree_Atten = "atf";
+    public static string childAd_Atten = "ata";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
         { childFree,string.Empty},
-        { childAd,string.Empty}
+        { childAd,string.Empty},
+        { childFree_Atten,string.Empty},
+        { childAd_Atten,string.Empty}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -723,6 +728,7 @@ public class ChildPassServerTable
     }
 
 }
+//
 
 //
 

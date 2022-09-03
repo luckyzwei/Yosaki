@@ -68,6 +68,8 @@ public class UserInfoTable
     public const string guild_buff2 = "guild_buff2";
     public const string guild_buff3 = "guild_buff3";
     public const string one_Buff = "ob";
+    public const string chu_Buff = "ch";
+    public const string chu_Buff2 = "ch2";
 
     public const string yomul0_buff = "yomul0_buff";
     public const string yomul1_buff = "yomul1_buff";
@@ -105,8 +107,9 @@ public class UserInfoTable
     public const string killCountTotal = "k8w";
     //7월월간
     public const string killCountTotal2 = "k9w";
-    public const string killCountTotalChild = "kt9";
+    public const string killCountTotalChild = "cuk";
     public const string attenCountBok = "kb";
+    public const string attenCountChuSeok = "kchu";
     public const string attenCountOne = "oy";
 
     public const string relicKillCount = "relicKillCount";
@@ -191,6 +194,8 @@ public class UserInfoTable
         {guild_buff2,0f},
         {guild_buff3,0f},
         {one_Buff,0f},
+        {chu_Buff,0f},
+        {chu_Buff2,0f},
 
         {bonusDungeonMaxKillCount,0f},
         {wingPackageRewardReceive,0f},
@@ -234,6 +239,7 @@ public class UserInfoTable
         {killCountTotalChild,0f},
         {attenCountBok,1f},
         {attenCountOne,0f},
+        {attenCountChuSeok,1f},
         {yomul6_buff,0f},
         {sonScore,0f},
         {susanoScore,0f},
@@ -605,6 +611,8 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff2).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff3).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.one_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.chu_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.chu_Buff2).Value = 0;
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value = 0;
@@ -625,6 +633,7 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value++;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountChuSeok).Value++;
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f)
             {
@@ -675,6 +684,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.attendanceCount_100Day, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value);
         userInfoParam.Add(UserInfoTable.attendanceCount_Seol, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value);
         userInfoParam.Add(UserInfoTable.attenCountBok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value);
+        userInfoParam.Add(UserInfoTable.attenCountChuSeok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountChuSeok).Value);
 
         userInfoParam.Add(UserInfoTable.oakpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);
@@ -704,6 +714,8 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.guild_buff2, ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff2).Value);
         userInfoParam.Add(UserInfoTable.guild_buff3, ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff3).Value);
         userInfoParam.Add(UserInfoTable.one_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.one_Buff).Value);
+        userInfoParam.Add(UserInfoTable.chu_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.chu_Buff).Value);
+        userInfoParam.Add(UserInfoTable.chu_Buff2, ServerData.userInfoTable.GetTableData(UserInfoTable.chu_Buff2).Value);
 
         userInfoParam.Add(UserInfoTable.yomul0_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul1_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value);

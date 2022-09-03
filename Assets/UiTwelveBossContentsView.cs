@@ -51,7 +51,10 @@ public class UiTwelveBossContentsView : MonoBehaviour
         lockObject.SetActive(bossTableData.Islock);
         buttons.SetActive(bossTableData.Islock == false);
 
-        bossIcon.sprite = CommonUiContainer.Instance.bossIcon[bossTableData.Id];
+        if (bossTableData.Id < CommonUiContainer.Instance.bossIcon.Count)
+        {
+            bossIcon.sprite = CommonUiContainer.Instance.bossIcon[bossTableData.Id];
+        }
     }
 
     public void OnClickRewardButton()
