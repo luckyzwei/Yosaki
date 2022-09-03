@@ -101,6 +101,7 @@ public class UserInfoTable
     public const string yoguiSogulLastClear = "yoguiSogulLastClear";
     public const string smithClear = "smithClear";
     public const string gumGiClear = "gumGiClear";
+    public const string gumGiSoulClear = "gsc";
 
 
     //6월월간
@@ -220,6 +221,7 @@ public class UserInfoTable
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
         {smithClear,0f},
+        {gumGiSoulClear,0f},
         {gumGiClear,0f},
 
 

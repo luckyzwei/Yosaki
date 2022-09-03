@@ -43,13 +43,27 @@ public class UiGumGiContentsBoard : MonoBehaviour
         {
             expDescription.SetText($"{e}");
         }).AddTo(this);
-  
+
     }
 
     public void OnClickEnterButton()
     {
-        GameManager.Instance.LoadContents(ContentsType.GumGi);
-        enterButton.interactable = false;
+        PopupManager.Instance.ShowYesNoPopup("알림", "입장 할까요?", () =>
+        {
+            GameManager.Instance.LoadContents(ContentsType.GumGi);
+            enterButton.interactable = false;
+        }, () => { });
+
+
+    }
+
+    public void OnClickEnterSoulButton()
+    {
+        PopupManager.Instance.ShowYesNoPopup("알림", "입장 할까요?", () =>
+        {
+            GameManager.Instance.LoadContents(ContentsType.GumGiSoul);
+            enterButton.interactable = false;
+        }, () => { });
     }
 
     public void OnClickGetFireButton()

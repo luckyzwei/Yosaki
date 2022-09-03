@@ -71,8 +71,11 @@ public class UiSmithBoard : MonoBehaviour
 
     public void OnClickEnterButton()
     {
-        GameManager.Instance.LoadContents(ContentsType.Smith);
-        enterButton.interactable = false;
+        PopupManager.Instance.ShowYesNoPopup("알림", "입장 할까요?", () =>
+        {
+            GameManager.Instance.LoadContents(ContentsType.Smith);
+            enterButton.interactable = false;
+        }, () => { });
     }
 
     public void OnClickGetFireButton()
