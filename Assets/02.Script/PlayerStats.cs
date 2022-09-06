@@ -1817,6 +1817,10 @@ public static class PlayerStats
     public const int gumgiSoulDivideNum = 100;
     public static float GetGumgiAbilAddValue()
     {
+#if UNITY_EDITOR
+        return 0f;
+#endif
+
         int kt = (int)(ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value / gumgiSoulDivideNum);
         return kt * gumgiSoulAbilValue;
     }

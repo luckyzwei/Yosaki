@@ -101,6 +101,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite ChunMaPet;
     public Sprite Hel;
     public Sprite YeoMarble;
+    public Sprite du;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -494,6 +495,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             
             case Item_Type.Ym:
                 return YeoMarble;
+                break;  
+            
+            case Item_Type.du:
+                return du;
                 break;
 
             case Item_Type.Hae_Norigae:

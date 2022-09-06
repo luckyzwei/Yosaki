@@ -159,7 +159,10 @@ public class MapInfo : SingletonMono<MapInfo>
             //문파 추가소환
             int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
 
-            int spawnNum = maxEnemy - spawnedEnemyList.Count + plusSpawnNum;
+            //명부 추가소환
+            int hellPlusSpawnNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
+
+            int spawnNum = maxEnemy - spawnedEnemyList.Count + plusSpawnNum + hellPlusSpawnNum;
 
             while (canSpawnEnemy == false)
             {

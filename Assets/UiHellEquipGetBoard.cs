@@ -21,6 +21,11 @@ public class UiHellEquipGetBoard : MonoBehaviour
     private double weaponReq2;
 
     [SerializeField]
+    private double norigaeReq3;
+    [SerializeField]
+    private double weaponReq3;
+
+    [SerializeField]
     private WeaponView norigaeView;
     [SerializeField]
     private WeaponView weaponView;
@@ -28,6 +33,10 @@ public class UiHellEquipGetBoard : MonoBehaviour
     private WeaponView norigaeView2;
     [SerializeField]
     private WeaponView weaponView2;
+    [SerializeField]
+    private WeaponView norigaeView3;
+    [SerializeField]
+    private WeaponView weaponView3;
 
     [SerializeField]
     private TextMeshProUGUI scoreDescription;
@@ -51,6 +60,12 @@ public class UiHellEquipGetBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI buttonDesc5;
 
+    [SerializeField]
+    private TextMeshProUGUI buttonDesc6;
+
+    [SerializeField]
+    private TextMeshProUGUI buttonDesc7;
+
     //
     [SerializeField]
     private TextMeshProUGUI scoreDesc0;
@@ -70,6 +85,12 @@ public class UiHellEquipGetBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreDesc5;
 
+    [SerializeField]
+    private TextMeshProUGUI scoreDesc6;
+
+    [SerializeField]
+    private TextMeshProUGUI scoreDesc7;
+
     private void Start()
     {
         Initialize();
@@ -82,9 +103,12 @@ public class UiHellEquipGetBoard : MonoBehaviour
 
         norigaeView.Initialize(null, TableManager.Instance.MagicBoocDatas[30]);
         norigaeView2.Initialize(null, TableManager.Instance.MagicBoocDatas[31]);
+        norigaeView3.Initialize(null, TableManager.Instance.MagicBoocDatas[34]);
 
         weaponView.Initialize(TableManager.Instance.WeaponData[31], null);
         weaponView2.Initialize(TableManager.Instance.WeaponData[32], null);
+        weaponView3.Initialize(TableManager.Instance.WeaponData[35], null);
+
 
         scoreDesc0.SetText($"{Utils.ConvertBigNum(reqCostume0)} 이상");
         scoreDesc1.SetText($"{Utils.ConvertBigNum(reqCostume1)} 이상");
@@ -93,6 +117,9 @@ public class UiHellEquipGetBoard : MonoBehaviour
 
         scoreDesc4.SetText($"{Utils.ConvertBigNum(norigaeReq2)} 이상");
         scoreDesc5.SetText($"{Utils.ConvertBigNum(weaponReq2)} 이상");
+
+        scoreDesc6.SetText($"{Utils.ConvertBigNum(norigaeReq3)} 이상");
+        scoreDesc7.SetText($"{Utils.ConvertBigNum(weaponReq3)} 이상");
 
         Subscribe();
     }
@@ -135,6 +162,20 @@ public class UiHellEquipGetBoard : MonoBehaviour
         ServerData.weaponTable.TableDatas["weapon32"].hasItem.AsObservable().Subscribe(e =>
         {
             buttonDesc5.SetText(e == 0 ? "획득" : "보유중");
+        }).AddTo(this);
+
+        //
+
+        //magicBook30
+        ServerData.magicBookTable.TableDatas["magicBook34"].hasItem.AsObservable().Subscribe(e =>
+        {
+            buttonDesc6.SetText(e == 0 ? "획득" : "보유중");
+        }).AddTo(this);
+
+        //weapon31
+        ServerData.weaponTable.TableDatas["weapon35"].hasItem.AsObservable().Subscribe(e =>
+        {
+            buttonDesc7.SetText(e == 0 ? "획득" : "보유중");
         }).AddTo(this);
     }
 
@@ -341,6 +382,77 @@ public class UiHellEquipGetBoard : MonoBehaviour
                 Param weaponParam = new Param();
 
                 weaponParam.Add("weapon32", ServerData.weaponTable.TableDatas["weapon32"].ConvertToString());
+
+                transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
+
+                ServerData.SendTransaction(transactions, successCallBack: () =>
+                {
+                    SoundManager.Instance.PlaySound("Reward");
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "무기 획득!!", null);
+                    // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+                });
+            }
+            else
+            {
+                PopupManager.Instance.ShowAlarmMessage("점수가 부족 합니다!");
+            }
+        }
+        //
+
+        //노리개
+        if (idx == 6)
+        {
+            if (currentScore >= norigaeReq2)
+            {
+                if (ServerData.magicBookTable.TableDatas["magicBook34"].hasItem.Value == 1)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("이미 노리개가 있습니다.");
+                    return;
+                }
+
+                List<TransactionValue> transactions = new List<TransactionValue>();
+
+                ServerData.magicBookTable.TableDatas["magicBook34"].amount.Value += 1;
+                ServerData.magicBookTable.TableDatas["magicBook34"].hasItem.Value = 1;
+
+                Param magicBookParam = new Param();
+
+                magicBookParam.Add("magicBook34", ServerData.magicBookTable.TableDatas["magicBook34"].ConvertToString());
+
+                transactions.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
+
+                ServerData.SendTransaction(transactions, successCallBack: () =>
+                {
+                    SoundManager.Instance.PlaySound("Reward");
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "노리개 획득!!", null);
+                    // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+                });
+            }
+            else
+            {
+                PopupManager.Instance.ShowAlarmMessage("점수가 부족 합니다!");
+            }
+        }
+
+        //무기
+        if (idx == 7)
+        {
+            if (currentScore >= weaponReq2)
+            {
+                if (ServerData.weaponTable.TableDatas["weapon35"].hasItem.Value == 1)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("이미 무기가 있습니다.");
+                    return;
+                }
+
+                List<TransactionValue> transactions = new List<TransactionValue>();
+
+                ServerData.weaponTable.TableDatas["weapon35"].amount.Value += 1;
+                ServerData.weaponTable.TableDatas["weapon35"].hasItem.Value = 1;
+
+                Param weaponParam = new Param();
+
+                weaponParam.Add("weapon35", ServerData.weaponTable.TableDatas["weapon35"].ConvertToString());
 
                 transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
 

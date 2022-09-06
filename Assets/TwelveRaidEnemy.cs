@@ -44,6 +44,9 @@ public class TwelveRaidEnemy : BossEnemyBase
     private List<AlarmHitObject> RandomHit3_Guild;
 
     [SerializeField]
+    private List<AlarmHitObject> RandomHit3_Guild2;
+
+    [SerializeField]
     private bool isGuildBoss = false;
 
     [SerializeField]
@@ -420,6 +423,11 @@ public class TwelveRaidEnemy : BossEnemyBase
             }
 
             idx3++;
+        }
+
+        if (RandomHit3_Guild2 != null && RandomHit3_Guild2.Count != 0)
+        {
+            RandomHit3_Guild2[Random.Range(0, RandomHit3_Guild2.Count)].AttackStart();
         }
     }
 }

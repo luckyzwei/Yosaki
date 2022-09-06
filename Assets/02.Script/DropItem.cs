@@ -91,6 +91,8 @@ public enum Item_Type
     GangrimWeapon,
     GangrimNorigae,
     GangrimSkill,
+    //이덕춘 두루마리
+    du,
 
 
     RankFrame1 = 100,

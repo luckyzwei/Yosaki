@@ -362,7 +362,7 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         if (twelveBossTable != null)
         {
-            if (twelveBossTable.Id == 15 || twelveBossTable.Id == 16 || twelveBossTable.Id == 17 || twelveBossTable.Id == 18 || twelveBossTable.Id == 20 || twelveBossTable.Id == 52)
+            if (twelveBossTable.Id == 15 || twelveBossTable.Id == 16 || twelveBossTable.Id == 17 || twelveBossTable.Id == 18 || twelveBossTable.Id == 20 || twelveBossTable.Id == 52 || twelveBossTable.Id == 54)
             {
                 remainSec *= 0.5f;
             }

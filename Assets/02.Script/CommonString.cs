@@ -267,6 +267,7 @@ public static class CommonString
             case Item_Type.h9: return TableManager.Instance.hellAbil.dataArray[9].Name;
             case Item_Type.Hel: return "불멸석";
             case Item_Type.Ym: return "염주";
+            case Item_Type.du: return "저승 명부";
         }
         return "미등록";
     }
