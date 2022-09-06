@@ -171,6 +171,14 @@ public enum Item_Type
     RankFrame101_1000_relic_hell = 807,
     RankFrame1001_10000_relic_hell = 808,
 
+    RankFrame1_2_war_hell = 809,
+    RankFrame3_5_war_hell = 810,
+    RankFrame6_20_war_hell = 811,
+    RankFrame21_50_war_hell = 812,
+    RankFrame51_100_war_hell = 813,
+    RankFrame101_1000_war_hell = 814,
+    RankFrame1001_10000_war_hell = 815,
+
     //1000~1100 무기
     weapon0 = 1000,
     weapon1 = 1001,

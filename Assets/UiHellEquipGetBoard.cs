@@ -402,7 +402,7 @@ public class UiHellEquipGetBoard : MonoBehaviour
         //노리개
         if (idx == 6)
         {
-            if (currentScore >= norigaeReq2)
+            if (currentScore >= norigaeReq3)
             {
                 if (ServerData.magicBookTable.TableDatas["magicBook34"].hasItem.Value == 1)
                 {
@@ -437,7 +437,7 @@ public class UiHellEquipGetBoard : MonoBehaviour
         //무기
         if (idx == 7)
         {
-            if (currentScore >= weaponReq2)
+            if (currentScore >= weaponReq3)
             {
                 if (ServerData.weaponTable.TableDatas["weapon35"].hasItem.Value == 1)
                 {

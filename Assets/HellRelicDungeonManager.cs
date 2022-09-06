@@ -188,7 +188,7 @@ public class HellRelicDungeonManager : ContentsManagerBase
 
     public double GetEnemyHp(int randIdx)
     {
-        int enemyTableIdx = spawnCount * 2 + 4500 + (randIdx * 200);
+        int enemyTableIdx = spawnCount * 2 + 4500 /*+ (randIdx * 200)*/;
 
         enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
 

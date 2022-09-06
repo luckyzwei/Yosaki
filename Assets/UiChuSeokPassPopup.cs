@@ -28,7 +28,7 @@ public class UiChuSeokPassPopup : MonoBehaviour
     {
         var severTime = ServerData.userInfoTable.currentServerTime;
 
-        if (severTime.Month >= 10 && severTime.Day > 1)
+        if (severTime.Month >= 10 && severTime.Day > 3)
         {
             this.gameObject.SetActive(false);
             PopupManager.Instance.ShowAlarmMessage("이벤트가 종료됐습니다.");

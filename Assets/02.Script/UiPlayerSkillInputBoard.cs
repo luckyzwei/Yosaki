@@ -70,7 +70,7 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
             AutoManager.Instance.ResetSkillQueue();
         }
     }
-
+    private bool isFirstEnter = true;
     public void WhenSkillGroupChanged(int group)
     {
         if (coolTimeMaskRoutine != null)
@@ -81,12 +81,17 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
         coolTimeMaskRoutine = StartCoroutine(CoolTimeRoutine());
 
         currentSelectedSkillGroup = group;
-        
-        ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
+
+        if (isFirstEnter == false)
+        {
+            ServerData.userInfoTable.UpData(UserInfoTable.selectedSkillGroupId, currentSelectedSkillGroup, false);
+        }
+
+        isFirstEnter = false;
 
         LoadSkillSlotData();
         // RefreshUi();
-        
+
         if (AutoManager.Instance.IsAutoMode)
         {
             AutoManager.Instance.ResetSkillQueue();

@@ -43,7 +43,7 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
         if (IsAllMaxLevel() == false)
         {
             rootObject.SetActive(false);
-            PopupManager.Instance.ShowAlarmMessage($"모든 환수장비가 최대 레벨 이어야 합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"모든 환수장비가 최대 레벨 이어야 합니다.(각성 장비 제외)");
 
         }
         else
@@ -83,7 +83,7 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
 
         string desc = string.Empty;
 
-        for (int i = 0; i < tableDatas.Length-1; i++)
+        for (int i = 0; i < tableDatas.Length - 1; i++)
         {
             desc += tableDatas[i].Name;
 
@@ -250,7 +250,7 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
 
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"+{upgradableNum} 강화 성공!", null);
 
-                LogManager.Instance.SendLogType("PetEquip", "all",$"pref {ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value- upgradableNum} +{upgradableNum}");
+                LogManager.Instance.SendLogType("PetEquip", "all", $"pref {ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value - upgradableNum} +{upgradableNum}");
 
             });
         }, null);

@@ -125,6 +125,7 @@ public class UserInfoTable
 
     public const string monthreset = "monthreset";
     public const string sonScore = "son6";
+    public const string hellWarScore = "hws";
     public const string hellScore = "hels";
     public const string susanoScore = "susa";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
@@ -244,6 +245,7 @@ public class UserInfoTable
         {attenCountChuSeok,1f},
         {yomul6_buff,0f},
         {sonScore,0f},
+        {hellWarScore,0f},
         {susanoScore,0f},
         {sleepRewardSavedTime,0f},
         {yomul7_buff,0f},

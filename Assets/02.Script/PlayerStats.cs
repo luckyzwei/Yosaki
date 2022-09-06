@@ -269,7 +269,7 @@ public static class PlayerStats
         return ret;
     }
 
-    public static ObscuredFloat relicReleaseValue = 7000f;
+    public static ObscuredFloat relicReleaseValue = 10000f;
 
     public static float GetRelicReleaseValue()
     {
@@ -700,6 +700,8 @@ public static class PlayerStats
         ret += GetGuildPetEffect(StatusType.ExpGainPer);
 
         ret += GetOneYearBuffValue(StatusType.ExpGainPer);
+        ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
+        ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -732,6 +734,60 @@ public static class PlayerStats
         return 0f;
     }
 
+
+    //추석이벤트 키값
+    private static string ch = "ch";
+    private static float GetChuSeokBuffValue(StatusType status)
+    {
+        if (ServerData.buffServerTable.TableDatas[ch].remainSec.Value <= 0f) return 0f;
+
+        switch (status)
+        {
+            case StatusType.ExpGainPer:
+                {
+                    return 150f;
+                }
+                break;
+            case StatusType.MagicStoneAddPer:
+                {
+                    return 400f;
+                }
+                break;
+            case StatusType.MarbleAddPer:
+                {
+                    return 100f;
+                }
+                break;
+        }
+        return 0f;
+    }
+
+    private static string ch2 = "ch2";
+    private static float GetChuSeokBuffValue2(StatusType status)
+    {
+        if (ServerData.buffServerTable.TableDatas[ch2].remainSec.Value <= 0f) return 0f;
+
+        switch (status)
+        {
+            case StatusType.ExpGainPer:
+                {
+                    return 200f;
+                }
+                break;
+            case StatusType.MagicStoneAddPer:
+                {
+                    return 500f;
+                }
+                break;
+            case StatusType.MarbleAddPer:
+                {
+                    return 200f;
+                }
+                break;
+        }
+        return 0f;
+    }
+
     public static float GetExpPlusValueExclusiveBuff()
     {
         float ret = 0f;
@@ -752,6 +808,8 @@ public static class PlayerStats
         ret += GetHotTimeBuffEffect(StatusType.MagicStoneAddPer);
         ret += GetBuffValue(StatusType.MagicStoneAddPer);
         ret += GetOneYearBuffValue(StatusType.MagicStoneAddPer);
+        ret += GetChuSeokBuffValue(StatusType.MagicStoneAddPer);
+        ret += GetChuSeokBuffValue2(StatusType.MagicStoneAddPer);
 
         return ret;
     }
@@ -763,6 +821,8 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.MarbleAddPer);
 
         ret += GetOneYearBuffValue(StatusType.MarbleAddPer);
+        ret += GetChuSeokBuffValue(StatusType.MarbleAddPer);
+        ret += GetChuSeokBuffValue2(StatusType.MarbleAddPer);
 
         return ret;
     }
@@ -1813,13 +1873,10 @@ public static class PlayerStats
         return kt * HellRelicAbilValue;
     }
 
-    public const float gumgiSoulAbilValue = 0.1f;
+    public const float gumgiSoulAbilValue = 0.005f;
     public const int gumgiSoulDivideNum = 100;
     public static float GetGumgiAbilAddValue()
     {
-#if UNITY_EDITOR
-        return 0f;
-#endif
 
         int kt = (int)(ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value / gumgiSoulDivideNum);
         return kt * gumgiSoulAbilValue;

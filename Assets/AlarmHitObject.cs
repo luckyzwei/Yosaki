@@ -15,16 +15,19 @@ public class AlarmHitObject : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
-    public void SetDamage(double damage)
+    float percentDamage = 0f;
+
+    public void SetDamage(double damage, float percentDamage = 0f)
     {
         this.damage = damage;
+        this.percentDamage = percentDamage;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name.Equals(Tags.Player) == false) return;
 
-        PlayerStatusController.Instance.UpdateHp(-damage);
+        PlayerStatusController.Instance.UpdateHp(-damage, percentDamage);
     }
 
 }

@@ -6,9 +6,9 @@ using UnityEngine;
 public class SaveManager : SingletonMono<SaveManager>
 {
 
-    private WaitForSeconds updateDelay = new WaitForSeconds(360.0f);
+    private WaitForSeconds updateDelay = new WaitForSeconds(500.0f);
 
-    private WaitForSeconds updateDelay_DailyMission = new WaitForSeconds(5000.0f);
+    private WaitForSeconds updateDelay_DailyMission = new WaitForSeconds(7000.0f);
 
     private WaitForSeconds versionCheckDelay = new WaitForSeconds(1200.0f);
 

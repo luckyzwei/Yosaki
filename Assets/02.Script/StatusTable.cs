@@ -287,7 +287,7 @@ public class StatusTable
                     {
                         float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
 
-                        return level * 0.006f * spcialAbilRatio;
+                        return level * 0.0025f * spcialAbilRatio;
                     }
 
                 #endregion

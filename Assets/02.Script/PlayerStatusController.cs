@@ -269,7 +269,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         hp.Value = maxHp.Value;
     }
 
-    public void UpdateHp(double value)
+    public void UpdateHp(double value, float percentDamage = 0)
     {
         //데미지입음
         if (value < 0)
@@ -292,10 +292,19 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 #if UNITY_EDITOR
         // Debug.Log($"Player damaged {value}");
 #endif
+        if (percentDamage == 0)
+        {
+            SpawnDamText(value);
+            hp.Value += value;
+        }
+        else
+        {
+            value = maxHp.Value * -percentDamage;
 
-        SpawnDamText(value);
+            SpawnDamText(value);
+            hp.Value += value;
+        }
 
-        hp.Value += value;
 
         hp.Value = Mathf.Clamp((float)hp.Value, 0f, (float)maxHp.Value);
 
