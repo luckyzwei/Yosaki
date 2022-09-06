@@ -14,11 +14,11 @@ public class UiSogulResultPopup : MonoBehaviour
     [SerializeField]
     private GameObject clearObject;
 
-    public void Initialize(int lastClearStage, bool clearLastStage, bool isPlayerDead)
+    public void Initialize(int lastClearStage, bool clearLastStage, bool isPlayerDead, string defix = "단계 돌파!!")
     {
         this.gameObject.SetActive(true);
 
-        lastClearStageDesc.SetText($"{lastClearStage}단계 돌파!!");
+        lastClearStageDesc.SetText($"{lastClearStage}{defix}");
 
         deadGameObject.SetActive(isPlayerDead);
 

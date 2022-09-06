@@ -13,7 +13,10 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
     private PolygonCollider2D cameracollider;
 
     [SerializeField]
-    private List<GameObject> spawnPoints;
+    private Transform spawnMin;
+
+    [SerializeField]
+    private Transform spawnMax;
 
     [SerializeField]
     private UiSogulResultPopup uiSogulResultPopup;
@@ -29,7 +32,7 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
     [SerializeField]
     private Animator remainTextAnim;
 
-    private ObscuredInt enemyMaxCount = 25;
+    private ObscuredInt enemyMaxCount = 100;
 
     [SerializeField]
     private TextMeshProUGUI endText;
@@ -70,7 +73,7 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
     }
     private void SetFirstStage()
     {
-        int lastStage = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value - (enemyMaxCount * 10);
+        int lastStage = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value - (enemyMaxCount * 5);
 
         lastStage = Mathf.Max(0, lastStage);
 
@@ -203,7 +206,7 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
     {
         EnemyTableData enemyData = new EnemyTableData();
 
-        int index = Mathf.Min(enemyDeadCount.Value, TableManager.Instance.EnemyTable.dataArray.Length - 1);
+        int index = Mathf.Min(enemyDeadCount.Value + 3000, TableManager.Instance.EnemyTable.dataArray.Length - 1);
 
         var tableData = TableManager.Instance.EnemyTable.dataArray[index];
 
@@ -211,7 +214,7 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
         {
             case EnemyType.Fire0:
                 {
-                    enemyData.Hp = tableData.Hp * enemyDeadCount.Value * 10000;
+                    enemyData.Hp = tableData.Hp * enemyDeadCount.Value * 10000000000000000d;
 
                     enemyData.Attackpower = 0;
 
@@ -222,7 +225,7 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
                 break;
             case EnemyType.Fire1:
                 {
-                    enemyData.Hp = tableData.Hp * enemyDeadCount.Value * 20000;
+                    enemyData.Hp = tableData.Hp * enemyDeadCount.Value * 15000000000000000d;
 
                     enemyData.Attackpower = 0;
 
@@ -233,7 +236,7 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
                 break;
             case EnemyType.Fire2:
                 {
-                    enemyData.Hp = tableData.Hp * enemyDeadCount.Value * 30000;
+                    enemyData.Hp = tableData.Hp * enemyDeadCount.Value * 20000000000000000d;
 
                     enemyData.Attackpower = 0;
 
@@ -250,7 +253,7 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
     private List<Enemy> spawnedEnemyList = new List<Enemy>();
     private void SpawnEnemies()
     {
-        int spawnCount = 8;
+        int spawnCount = 10;
 
         for (int i = 0; i < spawnCount; i++)
         {
@@ -260,7 +263,7 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
 
             var enemyObject = BattleObjectManager.Instance.GetItem($"GumGiSoul/{enemyType.ToString()}") as Enemy;
 
-            enemyObject.transform.position = spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position;
+            enemyObject.transform.position = new Vector3(Random.Range(spawnMin.position.x, spawnMax.position.x), Random.Range(spawnMin.position.y, spawnMax.position.y));
 
             enemyObject.SetReturnCallBack(EnemyRemoveCallBack);
 
@@ -344,8 +347,6 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
             ServerData.userInfoTable.UpData(UserInfoTable.gumGiSoulClear, updateValue, false);
         }
 
-        uiSogulResultPopup.Initialize(updateValue, false, deadFlag);
-
-
+        uiSogulResultPopup.Initialize(updateValue, false, deadFlag, defix: "마리 흡수!!");
     }
 }

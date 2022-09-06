@@ -1330,20 +1330,13 @@ public static class ServerData
             switch (type)
             {
                 case Item_Type.RankFrame1_miniGame:
+                case Item_Type.RankFrame2_miniGame:
+                case Item_Type.RankFrame3_miniGame:
+                case Item_Type.RankFrame4_miniGame:
+                case Item_Type.RankFrame5_miniGame:
                     ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_1_MiniGame;
                     break;
-                case Item_Type.RankFrame2_miniGame:
-                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_2_MiniGame;
-                    break;
-                case Item_Type.RankFrame3_miniGame:
-                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_3_MiniGame;
-                    break;
-                case Item_Type.RankFrame4_miniGame:
-                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_4_MiniGame;
-                    break;
-                case Item_Type.RankFrame5_miniGame:
-                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_5_MiniGame;
-                    break;
+            
                 case Item_Type.RankFrame6_20_miniGame:
                     ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += GameBalance.rankReward_6_20_MiniGame;
                     break;

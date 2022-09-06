@@ -120,15 +120,11 @@ public static class GameBalance
     public readonly static ObscuredInt rankRewardTicket_101_1000_relic_hell = 700;
     public readonly static ObscuredInt rankRewardTicket_1001_10000_relic_hell = 600;
 
-    public readonly static ObscuredInt rankReward_1_MiniGame = 10;
-    public readonly static ObscuredInt rankReward_2_MiniGame = 9;
-    public readonly static ObscuredInt rankReward_3_MiniGame = 8;
-    public readonly static ObscuredInt rankReward_4_MiniGame = 7;
-    public readonly static ObscuredInt rankReward_5_MiniGame = 6;
-    public readonly static ObscuredInt rankReward_6_20_MiniGame = 5;
-    public readonly static ObscuredInt rankReward_21_100_MiniGame = 4;
-    public readonly static ObscuredInt rankReward_101_1000_MiniGame = 3;
-    public readonly static ObscuredInt rankReward_1001_10000_MiniGame = 2;
+    public readonly static ObscuredInt rankReward_1_MiniGame = 20;
+    public readonly static ObscuredInt rankReward_6_20_MiniGame = 15;
+    public readonly static ObscuredInt rankReward_21_100_MiniGame = 14;
+    public readonly static ObscuredInt rankReward_101_1000_MiniGame = 13;
+    public readonly static ObscuredInt rankReward_1001_10000_MiniGame = 12;
 
     public readonly static ObscuredInt rankReward_1_guild = 1200;
     public readonly static ObscuredInt rankReward_2_guild = 1100;

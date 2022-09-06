@@ -30,6 +30,9 @@ public class FlyMove_Normal : EnemyMoveBase
     [SerializeField]
     private bool isDownOnly = false;
 
+    [SerializeField]
+    private bool hold = false;
+
     public void Initialize(Vector3 moveDir, float moveSpeed)
     {
         isDamaged = false;
@@ -51,7 +54,7 @@ public class FlyMove_Normal : EnemyMoveBase
 
         agentHpController.whenEnemyDamaged.AsObservable().Subscribe(e =>
         {
-            if (isDownOnly == false)
+            if (isDownOnly == false && hold == false)
             {
                 isDamaged = true;
                 collider.isTrigger = true;
@@ -70,7 +73,7 @@ public class FlyMove_Normal : EnemyMoveBase
         }
         else
         {
-            if (isDownOnly == false)
+            if (isDownOnly == false && hold == false)
             {
                 float playerDist = Vector3.Distance(playerTr.position, this.transform.position);
 
@@ -83,7 +86,7 @@ public class FlyMove_Normal : EnemyMoveBase
         }
 
 
-        if (isDownOnly == false)
+        if (isDownOnly == false && hold == false)
         {
             viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
         }
@@ -94,7 +97,13 @@ public class FlyMove_Normal : EnemyMoveBase
         this.moveSpeed = moveSpeed;
         this.moveDir = moveDir;
 
-        if (isDownOnly)
+        if (hold)
+        {
+            this.moveSpeed = 0f;
+            this.moveDir = Vector3.zero;
+        }
+
+        if (isDownOnly && hold == false)
         {
             this.moveDir = Vector3.down;
         }
@@ -106,7 +115,7 @@ public class FlyMove_Normal : EnemyMoveBase
 
         //Vector3 refrectDir = this.transform.position - (Vector3)collision.GetContact(0).point;
 
-        if (isDownOnly == false)
+        if (isDownOnly == false && hold == false)
         {
             SetMoveDir(Quaternion.Euler(0f, 0f, Random.Range(200, 340)) * moveDir, this.moveSpeed);
         }

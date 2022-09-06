@@ -174,24 +174,12 @@ public class UiPostView : MonoBehaviour
             switch (type)
             {
                 case Item_Type.RankFrame1_miniGame:
-                    title.SetText("랭킹보상(1위)(미니게임)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_1_MiniGame}개");
-                    break;
                 case Item_Type.RankFrame2_miniGame:
-                    title.SetText("랭킹보상(2위)(미니게임)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_2_MiniGame}개");
-                    break;
                 case Item_Type.RankFrame3_miniGame:
-                    title.SetText("랭킹보상(3위)(미니게임)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_3_MiniGame}개");
-                    break;
                 case Item_Type.RankFrame4_miniGame:
-                    title.SetText("랭킹보상(4위)(미니게임)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_4_MiniGame}개");
-                    break;
                 case Item_Type.RankFrame5_miniGame:
-                    title.SetText("랭킹보상(5위)(미니게임)");
-                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_5_MiniGame}개");
+                    title.SetText("랭킹보상(1~5위)(미니게임)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.MiniGameReward)} {GameBalance.rankReward_1_MiniGame}개");
                     break;
                 case Item_Type.RankFrame6_20_miniGame:
                     title.SetText("랭킹보상(6~20위)(미니게임)");

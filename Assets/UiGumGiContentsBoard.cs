@@ -11,6 +11,7 @@ using static GameManager;
 public class UiGumGiContentsBoard : MonoBehaviour
 {
     public TextMeshProUGUI scoreDescription;
+    public TextMeshProUGUI scoreDescription_soul;
     public Button enterButton;
     public Button registerButton;
 
@@ -30,6 +31,14 @@ public class UiGumGiContentsBoard : MonoBehaviour
             scoreDescription.SetText($"{e}");
 
         }).AddTo(this);
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].AsObservable().Subscribe(e =>
+        {
+
+            scoreDescription_soul.SetText($"최고 점수 : {e}");
+
+        }).AddTo(this);
+
 
 
         ServerData.userInfoTable.TableDatas[UserInfoTable.getGumGi].AsObservable().Subscribe(e =>
@@ -64,6 +73,11 @@ public class UiGumGiContentsBoard : MonoBehaviour
             GameManager.Instance.LoadContents(ContentsType.GumGiSoul);
             enterButton.interactable = false;
         }, () => { });
+    }
+
+    public void OnClickEnterSoulButton_Sansilryung()
+    {
+        PopupManager.Instance.ShowAlarmMessage("업데이트 예정 입니다!");
     }
 
     public void OnClickGetFireButton()

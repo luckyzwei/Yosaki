@@ -13,6 +13,12 @@ public class EnemyHitObject : MonoBehaviour
 
     private Coroutine enableRoutine;
 
+    [SerializeField]
+    private AgentHpController agentHpController;
+
+    [SerializeField]
+    private bool deadWhenTriggered = false;
+
     private IEnumerator EnableRoutine()
     {
         collider.enabled = false;
@@ -30,14 +36,24 @@ public class EnemyHitObject : MonoBehaviour
     {
         if (collision.name.Equals(Tags.Player) == false) return;
 
+        //검기 영혼 지옥
+        if (deadWhenTriggered)
+        {
+            if (agentHpController != null)
+            {
+                agentHpController.UpdateHp(double.MinValue);
+                PopupManager.Instance.ShowAlarmMessage("몸으로 흡수");
+            }
+        }
+
         SetTriggerRoutine();
 
         PlayerStatusController.Instance.UpdateHp(-damage);
     }
 
-    public void SetTriggerRoutine() 
+    public void SetTriggerRoutine()
     {
-        if (enableRoutine == null&&this.gameObject.activeInHierarchy)
+        if (enableRoutine == null && this.gameObject.activeInHierarchy)
         {
             enableRoutine = StartCoroutine(EnableRoutine());
         }

@@ -49,6 +49,7 @@ public class StatusTable
     public const string PetEquip_Level = "PetEquip_Level";
     public const string ChunSlash_memory = "ChunSlash_memory";
     public const string PetAwakeLevel = "PetAwakeLevel";
+    public const string FeelSlash_memory = "FeelSlash_memory";
 
 
     public const string Skill0_AddValue = "Sk0_Add";
@@ -96,6 +97,7 @@ public class StatusTable
         {PetEquip_Level,0},
         {ChunSlash_memory,0},
         {PetAwakeLevel,0},
+        {FeelSlash_memory,0},
 
         {Skill0_AddValue,0},
         {Skill1_AddValue,0},
@@ -275,6 +277,13 @@ public class StatusTable
                         return level * 0.05f;
                     }
                 case ChunSlash_memory:
+                    {
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
+
+                        return level * 0.006f * spcialAbilRatio;
+                    }
+
+                case FeelSlash_memory:
                     {
                         float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
 

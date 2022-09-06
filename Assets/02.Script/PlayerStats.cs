@@ -214,13 +214,19 @@ public static class PlayerStats
     public static float GetGumGiAttackValue()
     {
         int idx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponEnhance].Value;
-        return (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue;
+
+        float ret = (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue;
+
+        return ret + ret * GetGumgiAbilAddValue();
     }
 
     public static float GetGumIgDefenseValue()
     {
         int idx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponEnhance].Value;
-        return (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue2;
+
+        float ret = (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue2;
+
+        return ret + ret * GetGumgiAbilAddValue();
     }
 
     public static float GetCollectionAbilValue(StatusType type)
@@ -985,7 +991,7 @@ public static class PlayerStats
 
         ret += GetTitleAbilValue(StatusType.SuperCritical2DamPer);
 
-
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.FeelSlash_memory);
 
         return ret;
     }
@@ -1807,5 +1813,12 @@ public static class PlayerStats
         return kt * HellRelicAbilValue;
     }
 
+    public const float gumgiSoulAbilValue = 0.1f;
+    public const int gumgiSoulDivideNum = 100;
+    public static float GetGumgiAbilAddValue()
+    {
+        int kt = (int)(ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value / gumgiSoulDivideNum);
+        return kt * gumgiSoulAbilValue;
+    }
 
 }
