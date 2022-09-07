@@ -38,7 +38,10 @@ public class HellWarModeEnemy : BossEnemyBase
     private List<AlarmHitObject> RandomHit;
 
     [SerializeField]
-    private List<AlarmHitObject> RandomHit2;
+    private List<AlarmHitObject> RandomHit2;   
+    
+    [SerializeField]
+    private List<AlarmHitObject> RandomHit3;
 
     [SerializeField]
     private List<AlarmHitObject> RandomHit3_Guild;
@@ -152,10 +155,10 @@ public class HellWarModeEnemy : BossEnemyBase
 
         // enemyHitObjects.ForEach(e => e.SetDamage(1f));
 
-        StartAttackRoutine();
+        //StartAttackRoutine();
     }
 
-    public void StartAttackRoutine() 
+    public void StartAttackRoutine()
     {
         StartCoroutine(AttackRoutine());
     }
@@ -229,31 +232,56 @@ public class HellWarModeEnemy : BossEnemyBase
 
     private void PlayRandomHits()
     {
-        if (RandomHit.Count != 0)
-        {
-            int rankIdx = Random.Range(0, RandomHit.Count);
+        int rand = Random.Range(0, 3);
 
-            for (int i = 0; i < RandomHit.Count; i++)
+        if (rand == 0)
+        {
+            if (RandomHit.Count != 0)
             {
-                if (i != rankIdx)
+                int rankIdx = Random.Range(0, RandomHit.Count);
+
+                for (int i = 0; i < RandomHit.Count; i++)
                 {
-                    RandomHit[i].AttackStart();
+                    if (i == rankIdx)
+                    {
+                        RandomHit[i].AttackStart();
+                    }
+                }
+            }
+        }
+        else if (rand == 1)
+        {
+            if (RandomHit2.Count != 0)
+            {
+                int rankIdx = Random.Range(0, RandomHit2.Count);
+
+                for (int i = 0; i < RandomHit2.Count; i++)
+                {
+                    if (i == rankIdx)
+                    {
+                        RandomHit2[i].AttackStart();
+                    }
+                }
+            }
+        }
+        else 
+        {
+            if (RandomHit3.Count != 0)
+            {
+                int rankIdx = Random.Range(0, RandomHit3.Count);
+
+                for (int i = 0; i < RandomHit3.Count; i++)
+                {
+                    if (i == rankIdx)
+                    {
+                        RandomHit3[i].AttackStart();
+                    }
                 }
             }
         }
 
-        if (RandomHit2.Count != 0)
-        {
-            int rankIdx = Random.Range(0, RandomHit2.Count);
 
-            for (int i = 0; i < RandomHit2.Count; i++)
-            {
-                if (i != rankIdx)
-                {
-                    RandomHit2[i].AttackStart();
-                }
-            }
-        }
+
     }
 
     private IEnumerator GuildBossHit(float delay)

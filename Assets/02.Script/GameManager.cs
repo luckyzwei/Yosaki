@@ -101,6 +101,11 @@ public class GameManager : SingletonMono<GameManager>
         }).AddTo(this);
 
         SettingData.FrameRateOption.AsObservable().Subscribe(SetFrameRate).AddTo(this);
+
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.hellWarScore].Value != 0)
+        {
+            RankManager.Instance.UpdateBoss_Score(ServerData.userInfoTable.TableDatas[UserInfoTable.hellWarScore].Value);
+        }
     }
 
     private void ClearStage()

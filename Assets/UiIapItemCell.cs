@@ -80,6 +80,17 @@ public class UiIapItemCell : MonoBehaviour
         Subscribe();
 
         SetPackageIcon();
+
+        if (productData.Productid.Equals("oneevent"))
+        {
+            var serverTime = ServerData.userInfoTable.currentServerTime;
+
+            if (serverTime.Month == 9 && serverTime.Day > 8)
+            {
+                this.gameObject.SetActive(false);
+            }
+        }
+
     }
 
     private void SetPackageIcon()
@@ -117,7 +128,7 @@ public class UiIapItemCell : MonoBehaviour
                 {
                     priceText.SetText($"무료!");
                 }
-                else 
+                else
                 {
                     if (Application.systemLanguage == SystemLanguage.Korean)
                     {

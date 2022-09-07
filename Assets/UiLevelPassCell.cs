@@ -250,6 +250,10 @@ public class UiLevelPassCell : MonoBehaviour
             {
                 PopupManager.Instance.ShowAlarmMessage("여우패스21이 필요합니다!");
             }
+            else if (passInfo.passGrade == 21)
+            {
+                PopupManager.Instance.ShowAlarmMessage("여우패스22이 필요합니다!");
+            }
 
             return;
         }
@@ -350,6 +354,10 @@ public class UiLevelPassCell : MonoBehaviour
         else if (passInfo.passGrade == 20)
         {
             return ServerData.iapServerTable.TableDatas["levelpass21"].buyCount.Value > 0;
+        }
+        else if (passInfo.passGrade == 21)
+        {
+            return ServerData.iapServerTable.TableDatas["levelpass22"].buyCount.Value > 0;
         }
 
         return hasIapProduct;

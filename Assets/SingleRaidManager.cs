@@ -217,7 +217,16 @@ public class SingleRaidManager : ContentsManagerBase
 
     private void SendScore()
     {
-        RankManager.Instance.UpdateBoss_Score(damageAmount.Value);
+        double reqValue = damageAmount.Value;
+
+        if (reqValue > ServerData.userInfoTable.TableDatas[UserInfoTable.catScore].Value)
+        {
+            ServerData.userInfoTable.TableDatas[UserInfoTable.catScore].Value = reqValue;
+
+            ServerData.userInfoTable.UpData(UserInfoTable.catScore, false);
+        }
+
+        //  RankManager.Instance.UpdateBoss_Score(damageAmount.Value);
 
         //var serverData = ServerData.bossServerTable.TableDatas[bossTableData.Stringid];
 

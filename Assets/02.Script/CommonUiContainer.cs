@@ -9,7 +9,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public List<Sprite> itemGradeFrame;
 
-    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14, CommonString.ItemGrade_15 , CommonString.ItemGrade_16, CommonString.ItemGrade_17 };
+    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14, CommonString.ItemGrade_15, CommonString.ItemGrade_16, CommonString.ItemGrade_17 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae, CommonString.ItemGrade_10_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae };
@@ -285,22 +285,22 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.costume41:
                 return costumeThumbnail[41];
-                break; 
+                break;
             case Item_Type.costume42:
                 return costumeThumbnail[42];
-                break;  
+                break;
             case Item_Type.costume43:
                 return costumeThumbnail[43];
                 break;
             case Item_Type.costume44:
                 return costumeThumbnail[44];
-                break; 
+                break;
             case Item_Type.costume45:
                 return costumeThumbnail[45];
                 break;
             case Item_Type.costume46:
                 return costumeThumbnail[46];
-                break;   
+                break;
             case Item_Type.costume47:
                 return costumeThumbnail[47];
                 break;
@@ -312,12 +312,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.costume50:
                 return costumeThumbnail[50];
-                break; 
-            
+                break;
+
             case Item_Type.costume51:
                 return costumeThumbnail[51];
-                break; 
-            
+                break;
+
             case Item_Type.costume52:
                 return costumeThumbnail[52];
                 break;
@@ -373,6 +373,15 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.RankFrame21_100_relic_hell:
             case Item_Type.RankFrame101_1000_relic_hell:
             case Item_Type.RankFrame1001_10000_relic_hell:
+
+            case Item_Type.RankFrame1_2_war_hell:
+            case Item_Type.RankFrame3_5_war_hell:
+            case Item_Type.RankFrame6_20_war_hell:
+            case Item_Type.RankFrame21_50_war_hell:
+            case Item_Type.RankFrame51_100_war_hell:
+            case Item_Type.RankFrame101_1000_war_hell:
+            case Item_Type.RankFrame1001_10000_war_hell:
+
                 return Hel;
                 break;
 
@@ -487,16 +496,16 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.SP:
                 return SwordPartial;
-                break; 
-            
+                break;
+
             case Item_Type.Hel:
                 return Hel;
-                break;  
-            
+                break;
+
             case Item_Type.Ym:
                 return YeoMarble;
-                break;  
-            
+                break;
+
             case Item_Type.du:
                 return du;
                 break;
@@ -521,13 +530,13 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.RabitNorigae:
                 return RabitNorigae;
-                break;   
+                break;
             case Item_Type.YeaRaeNorigae:
                 return YeaRaeNorigae;
-                break; 
+                break;
             case Item_Type.GangrimNorigae:
                 return GangrimNorigae;
-                break; 
+                break;
             case Item_Type.YeaRaeWeapon:
                 return YeaRaeWeapon;
                 break;
@@ -546,8 +555,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.DogPet:
                 return DogPet;
-                break;  
-            
+                break;
+
             case Item_Type.ChunMaPet:
                 return ChunMaPet;
                 break;
@@ -655,12 +664,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.MihoNorigae:
                 return MihoNorigae;
-                break;    
-            
+                break;
+
             case Item_Type.ChunMaNorigae:
                 return ChunMaNorigae;
-                break;  
-            
+                break;
+
             case Item_Type.gumiho0:
             case Item_Type.gumiho1:
             case Item_Type.gumiho2:
@@ -682,7 +691,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.h6: return CommonResourceContainer.GetHellIconSprite(6);
             case Item_Type.h7: return CommonResourceContainer.GetHellIconSprite(7);
             case Item_Type.h8: return CommonResourceContainer.GetHellIconSprite(8);
-            case Item_Type.h9: return CommonResourceContainer.GetHellIconSprite(9);
+            case Item_Type.h9:
+                return CommonResourceContainer.GetHellIconSprite(9);
                 break;
 
         }

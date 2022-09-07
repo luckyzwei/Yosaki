@@ -27,7 +27,7 @@ public class PlayerNataRotater : MonoBehaviour
         {
 
             rotateObject.SetActive(e == 35);
-            rotateObject_Gang.SetActive(e == 48);
+            rotateObject_Gang.SetActive(e == 48 || e == 51);
 
         }).AddTo(this);
     }

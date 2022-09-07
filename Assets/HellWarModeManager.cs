@@ -7,6 +7,7 @@ using TMPro;
 using CodeStage.AntiCheat.ObscuredTypes;
 using static UiRewardView;
 using BackEnd;
+using System.Linq;
 
 public class HellWarModeManager : ContentsManagerBase
 {
@@ -227,7 +228,10 @@ public class HellWarModeManager : ContentsManagerBase
             ServerData.userInfoTable.TableDatas[UserInfoTable.hellWarScore].Value = reqValue;
 
             ServerData.userInfoTable.UpData(UserInfoTable.hellWarScore, false);
+
+            RankManager.Instance.UpdateBoss_Score(reqValue);
         }
+
 
     }
 
@@ -266,33 +270,55 @@ public class HellWarModeManager : ContentsManagerBase
     }
     private IEnumerator BossRandomActiveRoutine()
     {
-        WaitForSeconds spawnDelay = new WaitForSeconds(10.0f);
+        WaitForSeconds spawnDelay = new WaitForSeconds(9.0f);
+        WaitForSeconds spawnDelay_short = new WaitForSeconds(6.5f);
 
         int idx = 0;
 
+        int prefIdx = 0;
+
+        List<int> randIdx = new List<int>() { 0, 1, 2 };
+
+        randIdx = randIdx.OrderBy(a => System.Guid.NewGuid()).ToList();
+
         while (true)
         {
+            prefIdx = randIdx[idx];
 
             if (contentsState.Value == (int)ContentsState.Fight)
             {
                 for (int i = 0; i < singleRaidEnemy.Count; i++)
                 {
-                    singleRaidEnemy[i].gameObject.SetActive(i == idx);
+                    singleRaidEnemy[i].gameObject.SetActive(i == randIdx[idx]);
 
-                    if (i == idx)
+                    if (i == randIdx[idx])
                     {
                         singleRaidEnemy[i].GetComponent<HellWarModeEnemy>().StartAttackRoutine();
                     }
                 }
             }
 
-            yield return spawnDelay;
+            if (remainSec >= 60)
+            {
+                yield return spawnDelay;
+            }
+            else
+            {
+                yield return spawnDelay_short;
+            }
 
             idx++;
 
             if (idx >= singleRaidEnemy.Count)
             {
                 idx = 0;
+
+                randIdx = randIdx.OrderBy(a => System.Guid.NewGuid()).ToList();
+
+                if (randIdx[idx] == prefIdx)
+                {
+                    idx++;
+                }
             }
         }
     }

@@ -13,9 +13,20 @@ public class UiHellWarModeBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreDescription;
 
+    private static bool registRank = false;
+
     private void Start()
     {
         scoreDescription.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.hellWarScore].Value * GameBalance.BossScoreConvertToOrigin)}");
+
+        if (registRank == false)
+        {
+            if (ServerData.userInfoTable.TableDatas[UserInfoTable.hellWarScore].Value != 0)
+            {
+                RankManager.Instance.UpdateBoss_Score(ServerData.userInfoTable.TableDatas[UserInfoTable.hellWarScore].Value);
+            }
+            registRank = true;
+        }
     }
 
     public void OnClickEnterButton()

@@ -1336,6 +1336,46 @@ public static class ServerData
                 //  LogManager.Instance.SendLogType("RelicReward", type.ToString(), "");
             });
         }
+        //
+        else if (type.IsHellWarItem()) 
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_2_war_hell:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_1_2_war_hell;
+                    break;
+                case Item_Type.RankFrame3_5_war_hell:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_3_5_war_hell;
+                    break;
+                case Item_Type.RankFrame6_20_war_hell:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_6_20_war_hell;
+                    break;
+                case Item_Type.RankFrame21_50_war_hell:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_21_50_war_hell;
+                    break;
+                case Item_Type.RankFrame51_100_war_hell:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_51_100_war_hell;
+                    break;
+                case Item_Type.RankFrame101_1000_war_hell:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_101_1000_war_hell;
+                    break;
+                case Item_Type.RankFrame1001_10000_war_hell:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += GameBalance.rankRewardTicket_1001_10000_war_hell;
+                    break;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
+
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransaction(transactionList, successCallBack: () =>
+            {
+                //  LogManager.Instance.SendLogType("RelicReward", type.ToString(), "");
+            });
+        }
         else if (type.IsMiniGameRewardItem())
         {
             switch (type)

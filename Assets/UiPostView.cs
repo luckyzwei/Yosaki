@@ -85,7 +85,7 @@ public class UiPostView : MonoBehaviour
                     break;
             }
         }
-        else if (type.IsRelicRewardItem()) 
+        else if (type.IsRelicRewardItem())
         {
             switch (type)
             {
@@ -169,7 +169,41 @@ public class UiPostView : MonoBehaviour
                     break;
             }
         }
-        else if (type.IsMiniGameRewardItem()) 
+        else if (type.IsHellWarItem())
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_2_war_hell:
+                    title.SetText("랭킹보상(1~2위)(지옥 탈환전)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_1_2_war_hell}개");
+                    break;
+                case Item_Type.RankFrame3_5_war_hell:
+                    title.SetText("랭킹보상(3~5위)(지옥 탈환전)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_3_5_war_hell}개");
+                    break;
+                case Item_Type.RankFrame6_20_war_hell:
+                    title.SetText("랭킹보상(6~20위)(지옥 탈환전)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_6_20_war_hell}개");
+                    break;
+                case Item_Type.RankFrame21_50_war_hell:
+                    title.SetText("랭킹보상(21~50위)(지옥 탈환전)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_21_50_war_hell}개");
+                    break;
+                case Item_Type.RankFrame51_100_war_hell:
+                    title.SetText("랭킹보상(51_100위)(지옥 탈환전)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_51_100_war_hell}개");
+                    break;
+                case Item_Type.RankFrame101_1000_war_hell:
+                    title.SetText("랭킹보상(101~1000위)(지옥 탈환전)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_101_1000_war_hell}개");
+                    break;
+                case Item_Type.RankFrame1001_10000_war_hell:
+                    title.SetText("랭킹보상(1001~10000위)(지옥 탈환전)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Hel)} {GameBalance.rankRewardTicket_1001_10000_war_hell}개");
+                    break;
+            }
+        }
+        else if (type.IsMiniGameRewardItem())
         {
             switch (type)
             {
@@ -272,7 +306,7 @@ public class UiPostView : MonoBehaviour
                     break;
             }
         }
-        else if (type.IsGangChulItem()) 
+        else if (type.IsGangChulItem())
         {
             switch (type)
             {

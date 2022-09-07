@@ -19,8 +19,12 @@ public class PlayerSusanoView : MonoBehaviour
     {
         UiSusanoBuff.isImmune.AsObservable().Subscribe(e =>
         {
+            if (e)
+            {
+                PopupManager.Instance.ShowAlarmMessage("악귀 무적 효과가 적용 됩니다");
+            }
 
-            this.transform.localScale = e ? Vector3.one * 3 : Vector3.one;
+            this.transform.localScale = e ? Vector3.one * 2.5f : Vector3.one;
 
         }).AddTo(this);
     }

@@ -30,7 +30,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public class RankInfo
     {
-        public RankInfo(string NickName, string GuildName, int Rank, double Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int fightPointIdx,int maskIdx)
+        public RankInfo(string NickName, string GuildName, int Rank, double Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int fightPointIdx, int maskIdx)
         {
 #if UNITY_ANDROID
             this.NickName = NickName;
@@ -64,7 +64,7 @@ public class RankManager : SingletonMono<RankManager>
 #if UNITY_ANDROID
     public const string Rank_Level_Uuid = "c1d70840-de7f-11eb-bc74-95875190be29";
     public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
-    public const string Rank_Boss_Uuid = "5522b420-9305-11ec-b896-5d8902af2d1b";
+    public const string Rank_Boss_Uuid = "d3c49070-2e1c-11ed-96b7-6b63e308d9f4";
     public const string Rank_Real_Boss_Uuid = "7e03f910-9302-11ec-865e-e713a4acb6da";
     public const string Rank_Relic_Uuid = "e24e0610-257c-11ed-9935-efa0a6ef95f0";
     public const string Rank_MiniGame_Uuid = "e1dced80-5954-11ec-b084-d1a61d5ec8e2";
@@ -82,7 +82,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
-    public const string Rank_Boss = "Last_Cat2_And";
+    public const string Rank_Boss = "HellWar_And";
     public const string Rank_Real_Boss = "boss12_And";
     public const string Rank_Relic = "HelRelicRank";
     public const string Rank_MiniGame = "Rank_MiniGame";
@@ -92,7 +92,7 @@ public class RankManager : SingletonMono<RankManager>
 #if UNITY_IOS
     public const string Rank_Level_Uuid = "ea8c9430-38cf-11ec-955f-fb3c68e97f2a";
     public const string Rank_Stage_Uuid = "f865e900-31b6-11ec-b4ab-713be46ddb60";
-    public const string Rank_Boss_Uuid = "5e9279a0-9305-11ec-87d0-e7fba5f2b556";
+    public const string Rank_Boss_Uuid = "e1c32ce0-2e1c-11ed-96b7-6b63e308d9f4";
     public const string Rank_Real_Boss_Uuid = "8c763ee0-9302-11ec-80bd-6747f1381435";
     public const string Rank_Relic_Uuid = "ee37f350-257c-11ed-9935-efa0a6ef95f0";
     public const string Rank_MiniGame_Uuid = "edec1600-5954-11ec-8846-eb56e6e68bb1";
@@ -106,7 +106,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";
-    public const string Rank_Boss = "Last_Cat2_IOS";
+    public const string Rank_Boss = "HellWar_IOS";
     public const string Rank_Real_Boss = "boss12_IOS";
     public const string Rank_Relic = "HelRelicRank_IOS";
     public const string Rank_MiniGame = "Rank_MiniGame_IOS";
@@ -357,13 +357,15 @@ public class RankManager : SingletonMono<RankManager>
     {
         //if (UpdateRank() == false) return;
 
+        if (score == 0) return;
+
         if (this.myRankInfo[RankType.Boss] != null && score < this.myRankInfo[RankType.Boss].Score)
         {
             Debug.LogError("점수가 더 낮음");
             return;
         }
 
-        score *= GameBalance.BossScoreSmallizeValue;
+       // score *= GameBalance.BossScoreSmallizeValue;
 
         Param param = new Param();
         param.Add("Score", score);
@@ -768,7 +770,7 @@ public class RankManager : SingletonMono<RankManager>
 
     private bool UpdateRank()
     {
-        return 
+        return
             !PlayerData.Instance.NickName.Equals("테스트용2")
          && !PlayerData.Instance.NickName.Equals("테스트용3")
             && !PlayerData.Instance.NickName.Equals("테스트용");
