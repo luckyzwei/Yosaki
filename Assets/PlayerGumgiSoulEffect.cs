@@ -14,6 +14,8 @@ public class PlayerGumgiSoulEffect : MonoBehaviour
     {
         int grade = (int)(ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value / PlayerStats.gumgiSoulDivideNum);
 
+        grade = grade / 5;
+
         grade = Mathf.Min(grade, gumgiSoulEffect.Count - 1);
 
         gumgiSoulEffect.ForEach(e => e.SetActive(false));
