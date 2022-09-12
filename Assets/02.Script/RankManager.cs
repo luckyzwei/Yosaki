@@ -359,13 +359,13 @@ public class RankManager : SingletonMono<RankManager>
 
         if (score == 0) return;
 
-        if (this.myRankInfo[RankType.Boss] != null && score < this.myRankInfo[RankType.Boss].Score)
+        if (this.myRankInfo[RankType.Boss] != null && score < this.myRankInfo[RankType.Boss].Score * GameBalance.BossScoreSmallizeValue)
         {
             Debug.LogError("점수가 더 낮음");
             return;
         }
 
-       // score *= GameBalance.BossScoreSmallizeValue;
+        // score *= GameBalance.BossScoreSmallizeValue;
 
         Param param = new Param();
         param.Add("Score", score);
