@@ -586,6 +586,21 @@ public enum TitleMissionId
     Level1800000,//★
     Stage11500,//★
     Stage11600,//★
+    Stage11700,//★
+    Stage11800,//★
+    Stage11900,//★
+    Stage12000,//★
+               //
+    Level1810000,//★
+    Level1820000,//★
+    Level1830000,//★
+    Level1840000,//★
+    Level1850000,//★
+    Level1860000,//★
+    Level1870000,//★
+    Level1880000,//★
+    Level1890000,//★
+    Level1900000,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -1855,6 +1870,47 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Level1800000);
             }
+            //
+            if (e >= 1810000)
+            {
+                ClearTitleMission(TitleMissionId.Level1810000);
+            }
+            if (e >= 1820000)
+            {
+                ClearTitleMission(TitleMissionId.Level1820000);
+            }
+            if (e >= 1830000)
+            {
+                ClearTitleMission(TitleMissionId.Level1830000);
+            }
+            if (e >= 1840000)
+            {
+                ClearTitleMission(TitleMissionId.Level1840000);
+            }
+            if (e >= 1850000)
+            {
+                ClearTitleMission(TitleMissionId.Level1850000);
+            }
+            if (e >= 1860000)
+            {
+                ClearTitleMission(TitleMissionId.Level1860000);
+            }
+            if (e >= 1870000)
+            {
+                ClearTitleMission(TitleMissionId.Level1870000);
+            }
+            if (e >= 1880000)
+            {
+                ClearTitleMission(TitleMissionId.Level1880000);
+            }
+            if (e >= 1890000)
+            {
+                ClearTitleMission(TitleMissionId.Level1890000);
+            }
+            if (e >= 1900000)
+            {
+                ClearTitleMission(TitleMissionId.Level1900000);
+            }
 
         }).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>
@@ -2733,6 +2789,23 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 11600 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage11600);
+            }
+            //
+            if (e >= 11700 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage11700);
+            }
+            if (e >= 11800 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage11800);
+            }
+            if (e >= 11900 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage11900);
+            }
+            if (e >= 12000 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage12000);
             }
 
 
