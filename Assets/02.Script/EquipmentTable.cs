@@ -20,7 +20,7 @@ public class EquipmentTable
     public static string WeaponEnhance = "WeaponEnhance";
     public static string WeaponE_View = "WeaponE_View";
     public static string Weapon_View = "Weapon_View";
-    public static string WeapMagicBook_View = "mv";
+    public static string MagicBook_View = "mv";
 
     public static string FoxMask = "fms";
     public static string FoxMaskView = "fmv";
@@ -38,7 +38,7 @@ public class EquipmentTable
         {WeaponEnhance,0},
         {WeaponE_View,0},
         {Weapon_View,0},
-        {WeapMagicBook_View,0},
+        {MagicBook_View,0},
         {FoxMask,-1},
         {FoxMaskView,-1},
     };
@@ -173,7 +173,7 @@ public class EquipmentTable
                                 tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(curEquip));
                                 paramCount++;
                             }
-                            else if (e.Current.Key == WeapMagicBook_View)
+                            else if (e.Current.Key == MagicBook_View)
                             {
                                 int curEquip = TableDatas[MagicBook].Value;
                                 defultValues.Add(e.Current.Key, curEquip);

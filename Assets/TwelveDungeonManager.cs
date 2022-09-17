@@ -268,7 +268,7 @@ public class TwelveDungeonManager : ContentsManagerBase
         //인만 업데이트
         if (GameManager.Instance.bossId == 11)
         {
-            RankManager.Instance.UpdateRealBoss_Score(damageAmount.Value);
+           // RankManager.Instance.UpdateRealBoss_Score(damageAmount.Value);
         }
         //강철이
         else if (GameManager.Instance.bossId == 20)

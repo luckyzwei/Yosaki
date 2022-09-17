@@ -161,7 +161,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 노리개 외형을 변경 할까요?", () =>
             {
-                ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeapMagicBook_View, magicBookData.Id);
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.MagicBook_View, magicBookData.Id);
             }, () => { });
             //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
         }
@@ -282,7 +282,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             ServerData.magicBookTable.TableDatas[magicBookData.Stringid].hasItem.AsObservable().Subscribe(WhenHasStageChanged).AddTo(this);
             ServerData.magicBookTable.TableDatas[magicBookData.Stringid].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
 
-            ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].AsObservable().Subscribe(WhenEquipMagicBook_ViewChanged).AddTo(this);
+            ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].AsObservable().Subscribe(WhenEquipMagicBook_ViewChanged).AddTo(this);
         }
 
         if (weaponData != null)
@@ -761,7 +761,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 노리개를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
             {
                 ServerData.equipmentTable.ChangeEquip(EquipmentTable.MagicBook, magicBookData.Id);
-                ServerData.equipmentTable.ChangeEquip(EquipmentTable.WeapMagicBook_View, magicBookData.Id);
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.MagicBook_View, magicBookData.Id);
             }, () => { });
 
         }

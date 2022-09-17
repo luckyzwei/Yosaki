@@ -10,9 +10,20 @@ public class PartyRaidManager : SingletonMono<PartyRaidManager>
     [SerializeField]
     private GameObject rootObject;
 
-    public void ActiveRootObject(bool active)
+    [SerializeField]
+    private NetworkManager networkManager;
+    public NetworkManager NetworkManager=> networkManager;
+
+    public void ActivePartyRaidBoard() 
     {
-        rootObject.SetActive(active);
+        rootObject.SetActive(true);
+        networkManager.Connect();
+    }
+
+    public void OnClickCloseButton()
+    {
+        rootObject.SetActive(false);
+        PhotonNetwork.Disconnect();
     }
 
 

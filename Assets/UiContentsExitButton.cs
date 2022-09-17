@@ -21,4 +21,13 @@ public class UiContentsExitButton : MonoBehaviour
         }
 
     }
+
+    public void OnClickExitButton_ForPartyRaid()
+    {
+            PopupManager.Instance.ShowYesNoPopup("알림", "포기하고 나가시겠습니까?", () =>
+            {
+                PartyRaidManager.Instance.OnClickCloseButton();
+                GameManager.Instance.LoadNormalField();
+            }, null);
+    }
 }

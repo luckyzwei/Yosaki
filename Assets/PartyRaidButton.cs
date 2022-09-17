@@ -6,6 +6,6 @@ public class PartyRaidButton : MonoBehaviour
 {
     public void OnClickPartyRaidButton()
     {
-        PartyRaidManager.Instance.ActiveRootObject(true);
+        PartyRaidManager.Instance.ActivePartyRaidBoard();
     }
 }

@@ -40,6 +40,26 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI guildName;
 
+    [SerializeField]
+    private TextMeshProUGUI topRankerScoreText;
+
+    [SerializeField]
+    private TextMeshProUGUI fightText;
+
+    public void UpdatePartyRaidScore(double topRankerScore = 0, bool fightEnd = false) 
+    {
+        if (topRankerScoreText != null)
+        {
+            topRankerScoreText.SetText(Utils.ConvertBigNum(topRankerScore));
+        }
+
+        if (fightText != null)
+        {
+            fightText.color = fightEnd ? Color.yellow : Color.red;
+            fightText.SetText(fightEnd ? "전투완료" : "전투중");
+        }
+    }
+
     public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int fightPoint, string guildName, int maskIdx)
     {
         this.nickName.SetText(nickName);
@@ -125,13 +145,13 @@ public class UiTopRankerCell : MonoBehaviour
             petGraphic.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             petGraphic.GetComponent<RectTransform>().anchoredPosition = new Vector3(44.9f, 74.7f, 0.7f);
         }
-        else if(idx==15)
+        else if (idx == 15)
         {
             petGraphic.startingAnimation = "idel";
             petGraphic.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             petGraphic.GetComponent<RectTransform>().anchoredPosition = new Vector3(44.9f, 138.2f, 0.7f);
         }
-        else if (idx == 16|| idx == 19) 
+        else if (idx == 16 || idx == 19)
         {
             petGraphic.startingAnimation = "idle";
             petGraphic.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);

@@ -71,7 +71,7 @@ public class UiStatusBoard : MonoBehaviour
         int costumeId = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
         int petId = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponId = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
-        int magicBookId = ServerData.equipmentTable.TableDatas[EquipmentTable.WeapMagicBook_View].Value;
+        int magicBookId = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
         topRankerCell.Initialize(string.Empty, string.Empty, costumeId, petId, weaponId, magicBookId, ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value, string.Empty, ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value);
     }
 

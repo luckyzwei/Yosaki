@@ -30,6 +30,13 @@ public class PreSceneStartButton : SingletonMono<PreSceneStartButton>
     }
     public void OnClickStartButton()
     {
+        RequestOneTime();
+
         GameManager.Instance.LoadNormalField();
+    }
+
+    private void RequestOneTime() 
+    {
+        RankManager.Instance.RequestMyRealBossRank();
     }
 }
