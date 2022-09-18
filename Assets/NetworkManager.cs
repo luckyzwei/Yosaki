@@ -29,12 +29,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         public int mask;
         public double score;
         public bool endGame = false;
+        public Vector3 currentPos;
+        public int level;
     }
 
     public ReactiveProperty<PlayerState> playerState = new ReactiveProperty<PlayerState>(PlayerState.Lobby);
 
 
     private Dictionary<int, PlayerInfo> roomPlayerDatas = new Dictionary<int, PlayerInfo>();
+
+    public Dictionary<int, PlayerInfo> RoomPlayerDatas => roomPlayerDatas;
 
     [SerializeField]
     private List<UiTopRankerCell> playerView_Room;
@@ -102,6 +106,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     [SerializeField]
     private GameObject partyRaidResultBoard;
+
+    public ReactiveCommand whenScoreInfoReceived = new ReactiveCommand();
 
 
     #region 방리스트 갱신
@@ -178,9 +184,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         int gumgi = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int mask = ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
         string guildName = GuildManager.Instance.myGuildName;
+        int level = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
         //닉네임,코스튬,무기,마법책,펫,검기,길드명
-        PhotonNetwork.LocalPlayer.NickName = $"{PlayerData.Instance.NickName},{costume},{weapon},{magicbook},{pet},{gumgi},{guildName},{mask}";
+        PhotonNetwork.LocalPlayer.NickName = $"{PlayerData.Instance.NickName},{costume},{weapon},{magicbook},{pet},{gumgi},{guildName},{mask},{level}";
 
         connectMask.SetActive(true);
 
@@ -201,6 +208,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         ret.gumgi = int.Parse(splits[5]);
         ret.guildName = splits[6];
         ret.mask = int.Parse(splits[7]);
+        ret.level = int.Parse(splits[8]);
 
         return ret;
     }
@@ -249,7 +257,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     private void ShowDisconnectMessage(DisconnectCause cause)
     {
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"연결 끊김 {cause.ToString()}", null);
+
 
         switch (cause)
         {
@@ -286,6 +294,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             case DisconnectCause.DisconnectByClientLogic:
                 {
                     //내가 disconnect 호출
+                    return;
                 }
                 break;
             case DisconnectCause.DisconnectByOperationLimit:
@@ -295,6 +304,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             case DisconnectCause.ApplicationQuit:
                 break;
         }
+
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"연결 끊김 {cause.ToString()}", null);
     }
     #endregion
 
@@ -408,11 +419,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 var playerInfo = roomPlayerDatas[keys[i]];
 
                 playerView_Room[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask);
+                playerView_Room[i].SetLevelText(playerInfo.level);
 
                 playerView_Result[i].gameObject.SetActive(true);
 
                 playerView_Result[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask);
-
             }
             else
             {
@@ -456,14 +467,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        PopupManager.Instance.ShowAlarmMessage($"방 생성 실패!\n{message}");
+        PopupManager.Instance.ShowAlarmMessage($"파티 생성 실패!\n{message}");
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         if (message.Equals("No match found") || message.Equals("Game does not exist"))
         {
-            PopupManager.Instance.ShowAlarmMessage($"원정대가 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage($"파티가 없습니다.");
 
         }
         else
@@ -476,7 +487,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         if (message.Equals("Game does not exist"))
         {
-            PopupManager.Instance.ShowAlarmMessage($"원정대가 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage($"파티가 없습니다.");
 
         }
         else
@@ -499,7 +510,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     void RoomRenewal()
     {
-        RoomInfoText.SetText(PhotonNetwork.CurrentRoom.Name + " / " + PhotonNetwork.CurrentRoom.PlayerCount + "명 / " + PhotonNetwork.CurrentRoom.MaxPlayers + "최대");
+        RoomInfoText.SetText(PhotonNetwork.CurrentRoom.Name);
 
         startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
     }
@@ -514,7 +525,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void SendScoreInfo(double score, bool end = false)
     {
-        object[] objects = new object[] { PhotonNetwork.LocalPlayer.ActorNumber, score, end };
+        var playerPos = PlayerMoveController.Instance.transform.position;
+
+        string posInfo = $"{playerPos.x},{playerPos.y}";
+
+        object[] objects = new object[] { PhotonNetwork.LocalPlayer.ActorNumber, score, end, posInfo };
 
         PhotonNetwork.RaiseEvent(SendScore_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
     }
@@ -573,6 +588,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         chatButton.interactable = true;
     }
 
+    private char splitComma = ',';
     public void OnEvent(EventData photonEvent)
     {
         if (photonEvent.Code == SendScore_Event)
@@ -582,12 +598,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             int actorNum = (int)data[0];
             double score = (double)data[1];
             bool endGame = (bool)data[2];
+            string[] currentPos = ((string)data[3]).Split(splitComma);
 
             if (roomPlayerDatas.ContainsKey(actorNum))
             {
                 roomPlayerDatas[actorNum].score = score;
                 roomPlayerDatas[actorNum].endGame = endGame;
+
+                if (currentPos.Length >= 2)
+                {
+                    roomPlayerDatas[actorNum].currentPos = new Vector3(float.Parse(currentPos[0]), float.Parse(currentPos[1]), 0);
+                }
+
                 UpdateScoreBoard();
+
+                whenScoreInfoReceived.Execute();
             }
         }
         else if (photonEvent.Code == StartBossContents_Event)

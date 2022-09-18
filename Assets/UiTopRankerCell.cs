@@ -46,7 +46,10 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI fightText;
 
-    public void UpdatePartyRaidScore(double topRankerScore = 0, bool fightEnd = false) 
+    [SerializeField]
+    private TextMeshProUGUI levelText;
+
+    public void UpdatePartyRaidScore(double topRankerScore = 0, bool fightEnd = false)
     {
         if (topRankerScoreText != null)
         {
@@ -57,6 +60,14 @@ public class UiTopRankerCell : MonoBehaviour
         {
             fightText.color = fightEnd ? Color.yellow : Color.red;
             fightText.SetText(fightEnd ? "전투완료" : "전투중");
+        }
+    }
+
+    public void SetLevelText(int level)
+    {
+        if (levelText != null)
+        {
+            levelText.SetText($"LV:{level}");
         }
     }
 

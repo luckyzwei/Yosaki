@@ -13,10 +13,10 @@ public class PartyRaidBossManager : ContentsManagerBase
 {
     [Header("BossInfo")]
     [SerializeField]
-    private List<BossEnemyBase> singleRaidEnemy;
+    private BossEnemyBase singleRaidEnemy;
 
     [SerializeField]
-    private List<AgentHpController> bossHpController;
+    private AgentHpController bossHpController;
 
     private BossTableData bossTableData;
     private ReactiveProperty<ObscuredDouble> damageAmount = new ReactiveProperty<ObscuredDouble>();
@@ -24,7 +24,7 @@ public class PartyRaidBossManager : ContentsManagerBase
 
     public override Transform GetMainEnemyObjectTransform()
     {
-        return singleRaidEnemy[0].transform;
+        return null;
     }
     public override double GetBossRemainHpRatio()
     {
@@ -112,10 +112,7 @@ public class PartyRaidBossManager : ContentsManagerBase
 
     private void Subscribe()
     {
-        for (int i = 0; i < bossHpController.Count; i++)
-        {
-            bossHpController[i].whenEnemyDamaged.AsObservable().Subscribe(WhenBossDamaged).AddTo(this);
-        }
+        bossHpController.whenEnemyDamaged.AsObservable().Subscribe(WhenBossDamaged).AddTo(this);
 
         PlayerStatusController.Instance.whenPlayerDead.Subscribe(e => { WhenPlayerDead(); }).AddTo(this);
 
@@ -137,11 +134,7 @@ public class PartyRaidBossManager : ContentsManagerBase
     {
         bossRemainHp.Value = float.MaxValue;
 
-        for (int i = 0; i < bossHpController.Count; i++)
-        {
-            bossHpController[i].SetRaidEnemy();
-        }
-
+        bossHpController.SetRaidEnemy();
     }
 
     private void whenDamageAmountChanged(ObscuredDouble hp)
@@ -209,7 +202,7 @@ public class PartyRaidBossManager : ContentsManagerBase
         PartyRaidManager.Instance.NetworkManager.playerState.Value = NetworkManager.PlayerState.End;
 
         //공격루틴 제거 + 클리어면 이펙트 켜주던지.?
-        singleRaidEnemy.ForEach(e => e.gameObject.SetActive(false));
+        singleRaidEnemy.gameObject.SetActive(false);
 
         //타이머 종료
         if (contentsState.Value != (int)ContentsState.TimerEnd)
@@ -256,7 +249,7 @@ public class PartyRaidBossManager : ContentsManagerBase
 
         PartyRaidManager.Instance.NetworkManager.scoreBoardPanel.SetActive(true);
 
-        StartCoroutine(BossRandomActiveRoutine());
+        SpawnBoss();
 
         sendScoreRoutine = StartCoroutine(SendScoreRoutine());
 
@@ -276,7 +269,7 @@ public class PartyRaidBossManager : ContentsManagerBase
     }
     private IEnumerator SendScoreRoutine()
     {
-        var delay = new WaitForSeconds(1f);
+        var delay = new WaitForSeconds(0.3f);
 
         while (true)
         {
@@ -285,59 +278,9 @@ public class PartyRaidBossManager : ContentsManagerBase
         }
 
     }
-    private IEnumerator BossRandomActiveRoutine()
+    private void SpawnBoss()
     {
-        WaitForSeconds spawnDelay = new WaitForSeconds(9.0f);
-        WaitForSeconds spawnDelay_short = new WaitForSeconds(6.5f);
-
-        int idx = 0;
-
-        int prefIdx = 0;
-
-        List<int> randIdx = new List<int>() { 0, 1, 2 };
-
-        randIdx = randIdx.OrderBy(a => System.Guid.NewGuid()).ToList();
-
-        while (true)
-        {
-            prefIdx = randIdx[idx];
-
-            if (contentsState.Value == (int)ContentsState.Fight)
-            {
-                for (int i = 0; i < singleRaidEnemy.Count; i++)
-                {
-                    singleRaidEnemy[i].gameObject.SetActive(i == randIdx[idx]);
-
-                    if (i == randIdx[idx])
-                    {
-                        singleRaidEnemy[i].GetComponent<HellWarModeEnemy>().StartAttackRoutine();
-                    }
-                }
-            }
-
-            if (remainSec >= 60)
-            {
-                yield return spawnDelay;
-            }
-            else
-            {
-                yield return spawnDelay_short;
-            }
-
-            idx++;
-
-            if (idx >= singleRaidEnemy.Count)
-            {
-                idx = 0;
-
-                randIdx = randIdx.OrderBy(a => System.Guid.NewGuid()).ToList();
-
-                if (randIdx[idx] == prefIdx)
-                {
-                    idx++;
-                }
-            }
-        }
+        singleRaidEnemy.gameObject.SetActive(true);
     }
 
     private ObscuredBool direciontEnd = false;

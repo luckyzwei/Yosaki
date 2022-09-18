@@ -8,6 +8,8 @@ public class UiHellBossBoard : MonoBehaviour
     private UiTwelveBossContentsView bossContentsView;  
     [SerializeField]
     private UiTwelveBossContentsView bossContentsView_dukChoon;
+    [SerializeField]
+    private UiTwelveBossContentsView bossContentsView_haeWonMak;
 
     void Start()
     {
@@ -18,5 +20,6 @@ public class UiHellBossBoard : MonoBehaviour
     {
         bossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[52]);
         bossContentsView_dukChoon.Initialize(TableManager.Instance.TwelveBossTable.dataArray[54]);
+        bossContentsView_haeWonMak.Initialize(TableManager.Instance.TwelveBossTable.dataArray[56]);
     }
 }
