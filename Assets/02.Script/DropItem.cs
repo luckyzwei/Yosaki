@@ -94,6 +94,11 @@ public enum Item_Type
     //이덕춘 두루마리
     du,
 
+    Sun0,
+    Sun1,
+    Sun2,
+    Sun3,
+    Sun4,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

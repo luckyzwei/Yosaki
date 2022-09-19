@@ -52,11 +52,24 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
         while (e.MoveNext())
         {
 
-            UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, viewParentWeapon);
+            if (e.Current.Value.Grade != 18) 
+            {
+                UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, viewParentWeapon);
 
-            view.Initialize(e.Current.Value, null, OnClickWeaponView);
+                view.Initialize(e.Current.Value, null, OnClickWeaponView);
 
-            weaponViewContainer.Add(view);
+                weaponViewContainer.Add(view);
+            }
+            else 
+            {
+                UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent);
+
+                view.Initialize(e.Current.Value, null, OnClickWeaponView);
+
+                weaponViewContainer.Add(view);
+            }
+
+       
         }
     }
 

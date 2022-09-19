@@ -121,10 +121,45 @@ public class UiSkillDescriptionPopup : MonoBehaviour
                     ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
                 }
             }  
+            //
+            //
+
             else if (skillTableData.Id == 22)
             {
                 //흑룡 있을때
-                if (ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value != 0)
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Sun0).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 23)
+            {
+                //흑룡 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Sun1).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 24)
+            {
+                //흑룡 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Sun2).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 25)
+            {
+                //흑룡 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Sun3).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 26)
+            {
+                //흑룡 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Sun4).Value != 0)
                 {
                     ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
                 }

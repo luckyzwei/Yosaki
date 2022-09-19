@@ -293,7 +293,24 @@ public static class ServerData
                 break;
             case Item_Type.OrochiSkill:
                 ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value += rewardValue;
-                break; 
+                break;
+            //
+            case Item_Type.Sun0:
+                ServerData.goodsTable.GetTableData(GoodsTable.Sun0).Value += rewardValue;
+                break;
+            case Item_Type.Sun1:
+                ServerData.goodsTable.GetTableData(GoodsTable.Sun1).Value += rewardValue;
+                break;
+            case Item_Type.Sun2:
+                ServerData.goodsTable.GetTableData(GoodsTable.Sun2).Value += rewardValue;
+                break;
+            case Item_Type.Sun3:
+                ServerData.goodsTable.GetTableData(GoodsTable.Sun3).Value += rewardValue;
+                break;
+            case Item_Type.Sun4:
+                ServerData.goodsTable.GetTableData(GoodsTable.Sun4).Value += rewardValue;
+                break;
+            //
             case Item_Type.GangrimSkill:
                 ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value += rewardValue;
                 break;
@@ -624,6 +641,27 @@ public static class ServerData
             case Item_Type.OrochiSkill:
                 passParam.Add(GoodsTable.OrochiSkill, ServerData.goodsTable.GetTableData(GoodsTable.OrochiSkill).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            //
+            case Item_Type.Sun0:
+                passParam.Add(GoodsTable.Sun0, ServerData.goodsTable.GetTableData(GoodsTable.Sun0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Sun1:
+                passParam.Add(GoodsTable.Sun1, ServerData.goodsTable.GetTableData(GoodsTable.Sun1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Sun2:
+                passParam.Add(GoodsTable.Sun2, ServerData.goodsTable.GetTableData(GoodsTable.Sun2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Sun3:
+                passParam.Add(GoodsTable.Sun3, ServerData.goodsTable.GetTableData(GoodsTable.Sun3).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Sun4:
+                passParam.Add(GoodsTable.Sun4, ServerData.goodsTable.GetTableData(GoodsTable.Sun4).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            //
 
             case Item_Type.LeeMuGiStone:
                 passParam.Add(GoodsTable.LeeMuGiStone, ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
@@ -871,6 +909,27 @@ public static class ServerData
             case Item_Type.Aduk:
                 ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value += amount;
                 param.Add(GoodsTable.Aduk, ServerData.goodsTable.GetTableData(GoodsTable.Aduk).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            //
+            case Item_Type.Sun0:
+                ServerData.goodsTable.GetTableData(GoodsTable.Sun0).Value += amount;
+                param.Add(GoodsTable.Sun0, ServerData.goodsTable.GetTableData(GoodsTable.Sun0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.Sun1:
+                ServerData.goodsTable.GetTableData(GoodsTable.Sun1).Value += amount;
+                param.Add(GoodsTable.Sun1, ServerData.goodsTable.GetTableData(GoodsTable.Sun1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.Sun2:
+                ServerData.goodsTable.GetTableData(GoodsTable.Sun2).Value += amount;
+                param.Add(GoodsTable.Sun2, ServerData.goodsTable.GetTableData(GoodsTable.Sun2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.Sun3:
+                ServerData.goodsTable.GetTableData(GoodsTable.Sun3).Value += amount;
+                param.Add(GoodsTable.Sun3, ServerData.goodsTable.GetTableData(GoodsTable.Sun3).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.Sun4:
+                ServerData.goodsTable.GetTableData(GoodsTable.Sun4).Value += amount;
+                param.Add(GoodsTable.Sun4, ServerData.goodsTable.GetTableData(GoodsTable.Sun4).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             //
 

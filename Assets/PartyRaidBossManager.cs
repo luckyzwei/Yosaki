@@ -48,9 +48,6 @@ public class PartyRaidBossManager : ContentsManagerBase
     private ReactiveProperty<ObscuredInt> contentsState = new ReactiveProperty<ObscuredInt>((int)ContentsState.Fight);
 
     [SerializeField]
-    private UiSonBossResultPopup uiBossResultPopup;
-
-    [SerializeField]
     private GameObject statusUi;
 
     [SerializeField]

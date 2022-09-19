@@ -39,4 +39,25 @@ public class Gangrim0 : TraceSlash0
 {
 
 }
+//
+public class Sun0 : Slash0
+{
+
+}
+public class Sun1 : Slash0
+{
+
+}
+public class Sun2 : Slash0
+{
+
+}
+public class Sun3 : Slash0
+{
+
+}
+public class Sun4 : Slash0
+{
+
+}
 

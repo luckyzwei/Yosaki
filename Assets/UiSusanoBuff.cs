@@ -12,6 +12,7 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
     public void ActiveSusanoImmune()
     {
         if (immuneCount > 0) return;
+        if (GameManager.contentsType == GameManager.ContentsType.PartyRaid) return;
 
         int susanoGrade = PlayerStats.GetSusanoGrade();
         if (susanoGrade == -1) return;

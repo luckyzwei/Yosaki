@@ -9,7 +9,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public List<Sprite> itemGradeFrame;
 
-    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14, CommonString.ItemGrade_15, CommonString.ItemGrade_16, CommonString.ItemGrade_17 };
+    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14, CommonString.ItemGrade_15, CommonString.ItemGrade_16, CommonString.ItemGrade_17, CommonString.ItemGrade_18 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae, CommonString.ItemGrade_10_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae };
@@ -143,6 +143,13 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite MihoNorigae;
     public Sprite MihoTail;
     public Sprite ChunMaNorigae;
+
+
+    public Sprite Sun0;
+    public Sprite Sun1;
+    public Sprite Sun2;
+    public Sprite Sun3;
+    public Sprite Sun4;
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -642,6 +649,23 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.OrochiSkill:
                 return OrochiSkill;
                 break;
+            //
+            case Item_Type.Sun0:
+                return Sun0;
+                break;
+            case Item_Type.Sun1:
+                return Sun1;
+                break;
+            case Item_Type.Sun2:
+                return Sun2;
+                break;
+            case Item_Type.Sun3:
+                return Sun3;
+                break;
+            case Item_Type.Sun4:
+                return Sun4;
+                break;
+            //
             case Item_Type.GangrimSkill:
                 return GangrimSkill;
                 break;

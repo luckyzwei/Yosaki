@@ -38,6 +38,7 @@ public static class CommonString
     public static string ItemGrade_15 = "여우검";
     public static string ItemGrade_16 = "지옥";
     public static string ItemGrade_17 = "여래";
+    public static string ItemGrade_18 = "외형";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
@@ -242,6 +243,12 @@ public static class CommonString
             case Item_Type.NataSkill: return "나타 베기";
             case Item_Type.OrochiSkill: return "오로치 베기";
             case Item_Type.GangrimSkill: return "강림 베기";
+                //
+            case Item_Type.Sun0: return "선술1";
+            case Item_Type.Sun1: return "선술2";
+            case Item_Type.Sun2: return "선술3";
+            case Item_Type.Sun3: return "선술4";
+            case Item_Type.Sun4: return "선술5";
 
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
