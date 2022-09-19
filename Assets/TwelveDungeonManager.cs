@@ -131,7 +131,13 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         for (int i = 0; i < mapObjects.Count; i++)
         {
+
             mapObjects[i].gameObject.SetActive(i == id);
+
+            if (i == id) 
+            {
+                break;
+            }
         }
     }
 
