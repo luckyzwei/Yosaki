@@ -81,7 +81,18 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     public void Initialize(SkillTableData skillTableData)
     {
         //신수스킬용
-        if (skillTableData.Id == 15 || skillTableData.Id == 16|| skillTableData.Id == 17 || skillTableData.Id == 20 || skillTableData.Id == 21)
+        if (
+            skillTableData.Id == 15 ||
+            skillTableData.Id == 16|| 
+            skillTableData.Id == 17 || 
+            skillTableData.Id == 20 || 
+            skillTableData.Id == 21||
+            skillTableData.Id == 22||
+            skillTableData.Id == 23||
+            skillTableData.Id == 24||
+            skillTableData.Id == 25||
+            skillTableData.Id == 26
+            )
         {
             if (skillTableData.Id == 15)
             {

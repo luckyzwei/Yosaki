@@ -87,6 +87,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     [SerializeField]
     private TMP_InputField roomNameInput;
 
+    [SerializeField]
+    private TMP_InputField roomNameInput_make;
+
     private Coroutine startGameRoutine;
 
     [SerializeField]
@@ -128,13 +131,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         for (int i = 0; i < CellBtn.Length; i++)
         {
             CellBtn[i].interactable = (multiple + i < roomList.Count) ? true : false;
-            CellBtn[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? roomList[multiple + i].Name : "");
-            CellBtn[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? roomList[multiple + i].PlayerCount + "/" + roomList[multiple + i].MaxPlayers : "");
+            CellBtn[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? roomList[multiple + i].Name : "");
+            CellBtn[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? roomList[multiple + i].PlayerCount + "/" + roomList[multiple + i].MaxPlayers : "");
         }
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+
         int roomCount = roomList.Count;
         for (int i = 0; i < roomCount; i++)
         {
@@ -146,6 +150,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             else if (this.roomList.IndexOf(roomList[i]) != -1) this.roomList.RemoveAt(this.roomList.IndexOf(roomList[i]));
         }
         MyListRenewal();
+
+        roomUpdateButton.interactable = true;
     }
     #endregion
 
@@ -318,9 +324,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     #region 방
     public void CreateRoom()
     {
+        if (string.IsNullOrEmpty(roomNameInput_make.text))
+        {
+            PopupManager.Instance.ShowAlarmMessage($"파티 이름을 입력 해 주세요");
+            return;
+        }
+
+        if (Utils.HasBadWord(roomNameInput_make.text))
+        {
+            PopupManager.Instance.ShowAlarmMessage($"부적절한 이름이 포함되어 있습니다.");
+            return;
+        }
+
         makeRoomButton.interactable = false;
 
-        PhotonNetwork.CreateRoom(PlayerData.Instance.NickName.Replace(CommonString.IOS_nick, ""), new RoomOptions { MaxPlayers = 4, IsVisible = !visibleRoomToggle.isOn });
+        PhotonNetwork.CreateRoom(roomNameInput_make.text, new RoomOptions { MaxPlayers = 4, IsVisible = !visibleRoomToggle.isOn });
     }
 
     //방 참가
@@ -355,7 +373,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         if (string.IsNullOrEmpty(roomNameInput.text))
         {
-            PopupManager.Instance.ShowAlarmMessage("닉네임을 입력 해주세요");
+            PopupManager.Instance.ShowAlarmMessage("파티 이름을 입력 해주세요");
         }
         else
         {
@@ -392,7 +410,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
 
         roomPlayerDatas.Clear();
-
         var players = PhotonNetwork.PlayerList;
 
         if (players != null && players.Length != 0)
@@ -467,7 +484,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        PopupManager.Instance.ShowAlarmMessage($"파티 생성 실패!\n{message}");
+        if (message.Equals("A game with the specified id already exist."))
+        {
+
+            PopupManager.Instance.ShowAlarmMessage($"이미 존재하는 방 입니다!");
+        }
+        else
+        {
+            PopupManager.Instance.ShowAlarmMessage($"파티 생성 실패!\n{message}");
+
+        }
+
+        makeRoomButton.interactable = true;
+
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -488,7 +517,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         if (message.Equals("Game does not exist"))
         {
             PopupManager.Instance.ShowAlarmMessage($"파티가 없습니다.");
-
+        }
+        else if (message.Equals("Game full"))
+        {
+            PopupManager.Instance.ShowAlarmMessage($"인원이 가득 찼습니다.");
         }
         else
         {
@@ -718,6 +750,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
 
         return ret;
+    }
+    [SerializeField]
+    private Button roomUpdateButton;
+
+    public void OnClickRoomUpdate()
+    {
+        roomUpdateButton.interactable = false;
+
+#if UNITY_ANDROID
+        var lobbyType = new TypedLobby("And", LobbyType.Default);
+#endif
+
+#if UNITY_IOS
+        var lobbyType = new TypedLobby("IOS", LobbyType.Default);
+#endif
+
+        PhotonNetwork.GetCustomRoomList(lobbyType, "C0");
     }
 
 

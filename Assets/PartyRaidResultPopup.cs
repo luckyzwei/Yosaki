@@ -35,7 +35,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
               {
                   if (score < double.Parse(serverData.score.Value))
                   {
-                      return;
+                      //return;
                   }
                   else
                   {

@@ -15,7 +15,7 @@ public class UiSansilBoard : MonoBehaviour
         Initialize();
     }
 
-    private void Initialize() 
+    private void Initialize()
     {
         twelveBossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[57]);
     }

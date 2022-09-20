@@ -230,7 +230,6 @@ public class GoodsTable
         else if (idx == 1)
         {
             return Potion_1;
-
         }
         else
         {
