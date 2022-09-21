@@ -240,6 +240,7 @@ public class PartyRaidBossManager : ContentsManagerBase
             yield return null;
         }
 
+
         PartyRaidManager.Instance.NetworkManager.playerState.Value = NetworkManager.PlayerState.Playing;
 
         directionUi.SetActive(false);
@@ -247,6 +248,7 @@ public class PartyRaidBossManager : ContentsManagerBase
         PartyRaidManager.Instance.NetworkManager.scoreBoardPanel.SetActive(true);
 
         SpawnBoss();
+
 
         sendScoreRoutine = StartCoroutine(SendScoreRoutine());
 
@@ -264,6 +266,15 @@ public class PartyRaidBossManager : ContentsManagerBase
 
         TimerEnd();
     }
+    //
+    private IEnumerator BossRandomActiveRoutine()
+    {
+        singleRaidEnemy.GetComponent<HellWarModeEnemy>().StartAttackRoutine();
+
+        yield return null;
+    }
+    //
+
     private IEnumerator SendScoreRoutine()
     {
         var delay = new WaitForSeconds(0.3f);
@@ -278,6 +289,9 @@ public class PartyRaidBossManager : ContentsManagerBase
     private void SpawnBoss()
     {
         singleRaidEnemy.gameObject.SetActive(true);
+
+        StartCoroutine(BossRandomActiveRoutine());
+
     }
 
     private ObscuredBool direciontEnd = false;
