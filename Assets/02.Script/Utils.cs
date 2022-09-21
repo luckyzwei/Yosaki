@@ -107,6 +107,7 @@ public static class Utils
                 type == Item_Type.GangrimNorigae ||
                 type == Item_Type.YeaRaeWeapon ||
                 type == Item_Type.GangrimWeapon ||
+                type == Item_Type.HaeWeapon ||
                 type == Item_Type.SmithFire ||
                 type == Item_Type.Event_Item_Summer ||
                 type == Item_Type.MihoNorigae ||
@@ -115,6 +116,7 @@ public static class Utils
                 type == Item_Type.Hel ||
                 type == Item_Type.Ym ||
                 type == Item_Type.du ||
+                type == Item_Type.Fw ||
                 type == Item_Type.RelicTicket;
     }
 
@@ -125,7 +127,7 @@ public static class Utils
 
     public static bool IsWeaponItem(this Item_Type type)
     {
-        return type >= Item_Type.weapon0 && type <= Item_Type.weapon16;
+        return type >= Item_Type.weapon0 && type <= Item_Type.weapon41;
     }
 
     public static bool IsNorigaeItem(this Item_Type type)
@@ -274,7 +276,7 @@ public static class Utils
     }
 
     #region BigFloat
-    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무" };
+    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무" ,"대","긍"};
     private static double p = (double)Mathf.Pow(10, 4);
     private static List<double> numList = new List<double>();
     private static List<string> numStringList = new List<string>();

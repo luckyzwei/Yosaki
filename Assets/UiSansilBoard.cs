@@ -5,7 +5,7 @@ using UnityEngine;
 public class UiSansilBoard : MonoBehaviour
 {
     [SerializeField]
-    private float needSpAmount = 1000000;
+    private float needKillAmount = 1000000;
 
     [SerializeField]
     private UiTwelveBossContentsView twelveBossContentsView;
@@ -22,9 +22,9 @@ public class UiSansilBoard : MonoBehaviour
 
     private void OnEnable()
     {
-        if (ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value < needSpAmount)
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.gumGiSoulClear).Value < needKillAmount)
         {
-            PopupManager.Instance.ShowAlarmMessage($"검기 {Utils.ConvertBigNum(needSpAmount)}개 이상일때 해금 됩니다.");
+            PopupManager.Instance.ShowAlarmMessage($"검의영혼 점수 {Utils.ConvertBigNum(needKillAmount)} 이상일때 해금 됩니다.");
 
             this.gameObject.SetActive(false);
 

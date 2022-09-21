@@ -99,6 +99,8 @@ public enum Item_Type
     Sun2,
     Sun3,
     Sun4,
+    HaeWeapon,
+    Fw,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -107,7 +109,7 @@ public enum Item_Type
     RankFrame5 = 104,
     RankFrame6_20 = 105,
     RankFrame21_100 = 106,
-    RankFrame101_1000 = 107,
+    RankFrame101_1000 = 107,  
     RankFrame1001_10000 = 108,
 
     RankFrame1_relic = 200,
@@ -202,6 +204,14 @@ public enum Item_Type
     weapon14 = 1014,
     weapon15 = 1015,
     weapon16 = 1016,
+    //
+    weapon37 = 1037,
+    weapon38 = 1038,
+    weapon39 = 1039,
+    weapon40 = 1040,
+    weapon41 = 1041,
+    //
+
     //2000~2100 마도서
     magicBook0 = 2000,
     magicBook1 = 2001,

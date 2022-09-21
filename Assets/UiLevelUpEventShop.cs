@@ -372,6 +372,12 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value += amount;
                     param.Add(GoodsTable.Ym, ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value);
                 }
+                break;   
+            case Item_Type.Fw:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value += amount;
+                    param.Add(GoodsTable.Fw, ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value);
+                }
                 break;
         }
     }

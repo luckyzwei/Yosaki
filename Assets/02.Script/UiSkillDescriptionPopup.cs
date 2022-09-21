@@ -301,7 +301,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
         int addValue = 0;
 
-        if (skillTableData.Skilltype == 0 || skillTableData.Skilltype == 1 || skillTableData.Skilltype == 2 || skillTableData.Skilltype == 4 || skillTableData.Skilltype == 5)
+        if (skillTableData.Skilltype == 0 || skillTableData.Skilltype == 1 || skillTableData.Skilltype == 2 || skillTableData.Skilltype == 4 || skillTableData.Skilltype == 5 || skillTableData.Skilltype == 6)
         {
             addValue = ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value;
             addValue += ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;

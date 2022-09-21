@@ -134,7 +134,7 @@ public class TwelveDungeonManager : ContentsManagerBase
 
             mapObjects[i].gameObject.SetActive(i == id);
 
-            if (i == id) 
+            if (i == id)
             {
                 break;
             }
@@ -274,7 +274,7 @@ public class TwelveDungeonManager : ContentsManagerBase
         //인만 업데이트
         if (GameManager.Instance.bossId == 11)
         {
-           // RankManager.Instance.UpdateRealBoss_Score(damageAmount.Value);
+            // RankManager.Instance.UpdateRealBoss_Score(damageAmount.Value);
         }
         //강철이
         else if (GameManager.Instance.bossId == 20)
@@ -305,7 +305,7 @@ public class TwelveDungeonManager : ContentsManagerBase
         }
 
         //여래 예외처리
-        if (twelveBossTable.Stringid == "b50") 
+        if (twelveBossTable.Stringid == "b50")
         {
 
             var yeoraeData = ServerData.bossServerTable.TableDatas["b51"];
@@ -368,7 +368,17 @@ public class TwelveDungeonManager : ContentsManagerBase
 
         if (twelveBossTable != null)
         {
-            if (twelveBossTable.Id == 15 || twelveBossTable.Id == 16 || twelveBossTable.Id == 17 || twelveBossTable.Id == 18 || twelveBossTable.Id == 20 || twelveBossTable.Id == 52 || twelveBossTable.Id == 54)
+            if (
+                twelveBossTable.Id == 15 ||
+                twelveBossTable.Id == 16 ||
+                twelveBossTable.Id == 17 ||
+                twelveBossTable.Id == 18 ||
+                twelveBossTable.Id == 20 ||
+                twelveBossTable.Id == 52 ||
+                twelveBossTable.Id == 54 ||
+                twelveBossTable.Id == 56 ||
+                twelveBossTable.Id == 57
+                )
             {
                 remainSec *= 0.5f;
             }

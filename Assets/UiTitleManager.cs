@@ -601,6 +601,28 @@ public enum TitleMissionId
     Level1880000,//★
     Level1890000,//★
     Level1900000,//★
+                 //
+    Level1910000,//★
+    Level1920000,//★
+    Level1930000,//★
+    Level1940000,//★
+    Level1950000,//★
+    Level1960000,//★
+    Level1970000,//★
+    Level1980000,//★
+    Level1990000,//★
+    Level2000000,//★
+                 //
+    Level2010000,//★
+    Level2020000,//★
+    Level2030000,//★
+    Level2040000,//★
+    Level2050000,//★
+    Level2060000,//★
+    Level2070000,//★
+    Level2080000,//★
+    Level2090000,//★
+    Level2100000,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -1910,6 +1932,88 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 1900000)
             {
                 ClearTitleMission(TitleMissionId.Level1900000);
+            }
+            //
+            //
+            if (e >= 1910000)
+            {
+                ClearTitleMission(TitleMissionId.Level1910000);
+            }
+            if (e >= 1920000)
+            {
+                ClearTitleMission(TitleMissionId.Level1920000);
+            }
+            if (e >= 1930000)
+            {
+                ClearTitleMission(TitleMissionId.Level1930000);
+            }
+            if (e >= 1940000)
+            {
+                ClearTitleMission(TitleMissionId.Level1940000);
+            }
+            if (e >= 1950000)
+            {
+                ClearTitleMission(TitleMissionId.Level1950000);
+            }
+            if (e >= 1960000)
+            {
+                ClearTitleMission(TitleMissionId.Level1960000);
+            }
+            if (e >= 1970000)
+            {
+                ClearTitleMission(TitleMissionId.Level1970000);
+            }
+            if (e >= 1980000)
+            {
+                ClearTitleMission(TitleMissionId.Level1980000);
+            }
+            if (e >= 1990000)
+            {
+                ClearTitleMission(TitleMissionId.Level1990000);
+            }
+            if (e >= 2000000)
+            {
+                ClearTitleMission(TitleMissionId.Level2000000);
+            }
+            if (e >= 2010000)
+            {
+                ClearTitleMission(TitleMissionId.Level2010000);
+            }
+            if (e >= 2020000)
+            {
+                ClearTitleMission(TitleMissionId.Level2020000);
+            }
+            if (e >= 2030000)
+            {
+                ClearTitleMission(TitleMissionId.Level2030000);
+            }
+            if (e >= 2040000)
+            {
+                ClearTitleMission(TitleMissionId.Level2040000);
+            }
+            if (e >= 2050000)
+            {
+                ClearTitleMission(TitleMissionId.Level2050000);
+            }
+            if (e >= 2060000)
+            {
+                ClearTitleMission(TitleMissionId.Level2060000);
+            }
+            if (e >= 2070000)
+            {
+                ClearTitleMission(TitleMissionId.Level2070000);
+            }
+            if (e >= 2080000)
+            {
+                ClearTitleMission(TitleMissionId.Level2080000);
+            }
+            if (e >= 2090000)
+            {
+                ClearTitleMission(TitleMissionId.Level2090000);
+            }
+            if (e >= 2100000)
+            {
+                ClearTitleMission(TitleMissionId.Level2100000);
             }
 
         }).AddTo(this);

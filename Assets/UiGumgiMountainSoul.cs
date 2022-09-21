@@ -20,10 +20,7 @@ public class UiGumgiMountainSoul : MonoBehaviour
     {
         abilDescription.SetText($"처치 {PlayerStats.gumgiSoulDivideNum}마리당 검기의 능력치가 {PlayerStats.gumgiSoulAbilValue * 100f}% 강화 됩니다!");
 
-        var grade = (int)(ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value / PlayerStats.gumgiSoulDivideNum);
-
         //?? 단게 검기 능력치 +??% 강화됨
-        abilValue.SetText($"{grade}단계 검기 능력치 +{PlayerStats.GetGumgiAbilAddValue() * 100f}% 강화됨");
 
         ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].AsObservable().Subscribe(e =>
         {
@@ -33,6 +30,14 @@ public class UiGumgiMountainSoul : MonoBehaviour
             }
 
             weaponView.Initialize(TableManager.Instance.WeaponData[e], null);
+        }).AddTo(this);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.Fw).AsObservable().Subscribe(e =>
+        {
+            var grade = (int)(ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value / PlayerStats.gumgiSoulDivideNum);
+
+            abilValue.SetText($"{grade}단계 검기 능력치 +{PlayerStats.GetGumgiAbilAddValue() * 100f}% 강화됨");
+
         }).AddTo(this);
     }
 }

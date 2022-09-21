@@ -749,6 +749,12 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
+            if (weaponData.Id >= 37 && weaponData.Id <= 41)
+            {
+                PopupManager.Instance.ShowAlarmMessage("외형 아이템은 장착 하실수 없습니다.");
+                return;
+            }
+
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
             {
                 ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
@@ -802,6 +808,12 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
+            if (weaponData.Id >= 37 && weaponData.Id <= 41)
+            {
+                PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
+                return;
+            }
+
             float currentMagicStoneAmount = ServerData.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
             float levelUpPrice = ServerData.weaponTable.GetWeaponLevelUpPrice(weaponData.Stringid);
 

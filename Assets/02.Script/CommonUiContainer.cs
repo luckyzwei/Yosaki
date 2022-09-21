@@ -96,12 +96,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite GangrimNorigae;
     public Sprite YeaRaeWeapon;
     public Sprite GangrimWeapon;
+    public Sprite HaeWeapon;
     public Sprite RabitPet;
     public Sprite DogPet;
     public Sprite ChunMaPet;
     public Sprite Hel;
     public Sprite YeoMarble;
     public Sprite du;
+    public Sprite Fw;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -514,6 +516,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.Ym:
                 return YeoMarble;
+                break; 
+            
+            case Item_Type.Fw:
+                return Fw;
                 break;
 
             case Item_Type.du:
@@ -552,6 +558,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.GangrimWeapon:
                 return GangrimWeapon;
+                break; 
+            
+            case Item_Type.HaeWeapon:
+                return HaeWeapon;
                 break;
 
             case Item_Type.Sam_Pet:

@@ -53,7 +53,7 @@ public static class CommonString
     public static string ItemGrade_6_Skill = "흑룡";
     public static string ItemGrade_7_Skill = "나타";
     public static string ItemGrade_8_Skill = "오로치";
-    public static string ItemGrade_9_Skill = "강림";
+    public static string ItemGrade_9_Skill = "신선검";
 
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -185,6 +185,14 @@ public static class CommonString
             case Item_Type.MagicStoneBuff: return "기억의파편 버프 +50%(드랍)";
             case Item_Type.weapon12: return "특급 4등급 무기";
             case Item_Type.weapon14: return "특급 2등급 무기";
+                //
+            case Item_Type.weapon37: return "백운선";
+            case Item_Type.weapon38: return "금운선";
+            case Item_Type.weapon39: return "홍접선";
+            case Item_Type.weapon40: return "화접선";
+            case Item_Type.weapon41: return "천성선";
+
+                //
             case Item_Type.magicBook11: return "특급 1등급 노리개";
             case Item_Type.skill3: return "전방베기4형 기술";
             case Item_Type.Dokebi: return "도깨비 뿔";
@@ -276,6 +284,7 @@ public static class CommonString
             case Item_Type.Hel: return "불멸석";
             case Item_Type.Ym: return "염주";
             case Item_Type.du: return "저승 명부";
+            case Item_Type.Fw: return "분홍 꽃";
         }
         return "미등록";
     }

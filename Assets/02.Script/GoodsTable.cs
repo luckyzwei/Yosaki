@@ -109,6 +109,7 @@ public class GoodsTable
     public static string h8 = "h8";
     public static string h9 = "h9";
     public static string Ym = "Ym";
+    //두루마리
     public static string du = "du";
 
 
@@ -117,6 +118,7 @@ public class GoodsTable
     public static string Sun2 = "Sun2";
     public static string Sun3 = "Sun3";
     public static string Sun4 = "Sun4";
+    public static string Fw = "Fw";
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -217,6 +219,7 @@ public class GoodsTable
         {Sun2,0f},
         {Sun3,0f},
         {Sun4,0f},
+        {Fw,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

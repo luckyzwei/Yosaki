@@ -237,10 +237,18 @@ public class TwelveRaidEnemy : BossEnemyBase
 
     private IEnumerator PlayAttackAnim()
     {
+        //산신령 예외
+        if (skeletonAnimation != null)
+        {
+            skeletonAnimation.AnimationName = "attack";
+        }
 
-        skeletonAnimation.AnimationName = "attack";
         yield return new WaitForSeconds(1.5f);
-        skeletonAnimation.AnimationName = "walk";
+
+        if (skeletonAnimation != null)
+        {
+            skeletonAnimation.AnimationName = "walk";
+        }
     }
 
     private IEnumerator PlayAttackAnim_Nata()

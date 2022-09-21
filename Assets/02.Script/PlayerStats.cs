@@ -1877,9 +1877,11 @@ public static class PlayerStats
     public const int gumgiSoulDivideNum = 100;
     public static float GetGumgiAbilAddValue()
     {
-
         int kt = (int)(ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value / gumgiSoulDivideNum);
-        return kt * gumgiSoulAbilValue;
+
+        float addValue = ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value;
+
+        return kt * gumgiSoulAbilValue + addValue * 0.01f;
     }
 
 }

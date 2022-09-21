@@ -14,6 +14,9 @@ public class WeaponEquipView : MonoBehaviour
     private Image weaponImage_long;
 
     [SerializeField]
+    private Image weaponImage_Bu;
+
+    [SerializeField]
     private GameObject newEffect;
 
     void Start()
@@ -31,10 +34,11 @@ public class WeaponEquipView : MonoBehaviour
     {
         weaponImage.sprite = CommonResourceContainer.GetWeaponSprite(idx);
         weaponImage_long.sprite = CommonResourceContainer.GetWeaponSprite(idx);
+        weaponImage_Bu.sprite = CommonResourceContainer.GetWeaponSprite(idx);
 
         weaponImage.gameObject.SetActive(idx < 21);
-        weaponImage_long.gameObject.SetActive(idx >= 21);
-      
+        weaponImage_long.gameObject.SetActive(idx >= 21 && idx < 37);
+        weaponImage_Bu.gameObject.SetActive(idx >= 37 && idx <= 41);
 
         newEffect.gameObject.SetActive(idx == 22);
         //var weaponGrade = TableManager.Instance.WeaponData[idx].Grade;
@@ -45,7 +49,7 @@ public class WeaponEquipView : MonoBehaviour
 
     private void OnDisable()
     {
-        
+
     }
 
 }

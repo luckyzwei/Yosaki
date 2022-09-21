@@ -82,7 +82,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
                 continue;
             }
 
-            //인드라
+            //선술
             if (skillList[i].Skilltype == 6)
             {
                 //나타

@@ -27,7 +27,8 @@ public class PlayerNataRotater : MonoBehaviour
         {
 
             rotateObject.SetActive(e == 35);
-            rotateObject_Gang.SetActive(e == 48 || e == 51);
+            //강림,일직,월직 이펙트
+            rotateObject_Gang.SetActive(e == 48 || e == 51 || e == 53);
 
         }).AddTo(this);
     }

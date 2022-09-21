@@ -29,10 +29,20 @@ public class EnemyHitObject : MonoBehaviour
 
     float percentDamage = 0f;
 
+    private void SetPercentValueByBossId()
+    {
+        if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 57)
+        {
+            this.percentDamage = 1f;
+        }
+    }
+
     public void SetDamage(double damage, float percentDamage = 0f)
     {
         this.damage = damage;
         this.percentDamage = percentDamage;
+
+        SetPercentValueByBossId();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

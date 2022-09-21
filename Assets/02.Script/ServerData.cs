@@ -330,6 +330,9 @@ public static class ServerData
                 break;   
             case Item_Type.Ym:
                 ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value += rewardValue;
+                break;     
+            case Item_Type.Fw:
+                ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value += rewardValue;
                 break;   
             case Item_Type.du:
                 ServerData.goodsTable.GetTableData(GoodsTable.du).Value += rewardValue;
@@ -542,6 +545,9 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam); 
             case Item_Type.Ym:
                 passParam.Add(GoodsTable.Ym, ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);   
+            case Item_Type.Fw:
+                passParam.Add(GoodsTable.Fw, ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam); 
             
             case Item_Type.du:
@@ -811,6 +817,11 @@ public static class ServerData
             case Item_Type.Hel:
                 ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += amount;
                 param.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
+            
+            case Item_Type.Fw:
+                ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value += amount;
+                param.Add(GoodsTable.Fw, ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);   
             
             case Item_Type.Ym:
@@ -999,6 +1010,11 @@ public static class ServerData
             case Item_Type.weapon14:
             case Item_Type.weapon15:
             case Item_Type.weapon16:
+            case Item_Type.weapon37:
+            case Item_Type.weapon38:
+            case Item_Type.weapon39:
+            case Item_Type.weapon40:
+            case Item_Type.weapon41:
                 {
                     string key = type.ToString();
                     ServerData.weaponTable.TableDatas[key].hasItem.Value = 1;
@@ -1657,7 +1673,12 @@ public static class ServerData
 
                 case Item_Type.SulItem:
                     ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += amount;
+                    break; 
+
+                case Item_Type.Fw:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value += amount;
                     break;
+
                 case Item_Type.SP:
                     ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
                     break;     
