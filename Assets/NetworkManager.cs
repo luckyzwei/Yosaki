@@ -16,6 +16,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         Lobby, Room, Loading, Playing, End
     }
 
+    public enum MatchingPlatform
+    {
+        And, IOS
+    }
+
     public class PlayerInfo
     {
         public Player player;
@@ -31,6 +36,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         public bool endGame = false;
         public Vector3 currentPos;
         public int level;
+        public MatchingPlatform platform;
     }
 
     public ReactiveProperty<PlayerState> playerState = new ReactiveProperty<PlayerState>(PlayerState.Lobby);
@@ -111,6 +117,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private GameObject partyRaidResultBoard;
 
     public ReactiveCommand whenScoreInfoReceived = new ReactiveCommand();
+
+    private string AndPlatformKey = "AND";
+    private string IOSPlatformKey = "IOS";
+    private MatchingPlatform myPlatform;
 
 
     #region 방리스트 갱신
@@ -193,13 +203,35 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         int level = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
         //닉네임,코스튬,무기,마법책,펫,검기,길드명
-        PhotonNetwork.LocalPlayer.NickName = $"{PlayerData.Instance.NickName},{costume},{weapon},{magicbook},{pet},{gumgi},{guildName},{mask},{level}";
+        string platform = string.Empty;
+#if UNITY_ANDROID
+        platform = AndPlatformKey;
+        myPlatform = MatchingPlatform.And;
+#endif
+#if UNITY_IOS
+        platform = IOSPlatformKey;
+        myPlatform = MatchingPlatform.IOS;
+#endif
+        PhotonNetwork.LocalPlayer.NickName = $"{PlayerData.Instance.NickName},{costume},{weapon},{magicbook},{pet},{gumgi},{guildName},{mask},{level},{platform}";
 
         connectMask.SetActive(true);
 
         connectButton.interactable = false;
 
         PhotonNetwork.ConnectUsingSettings();
+    }
+
+
+    public MatchingPlatform GetPlayerMatchingPlatform(string nickName)
+    {
+        if (nickName.Contains(AndPlatformKey))
+        {
+            return MatchingPlatform.And;
+        }
+        else
+        {
+            return MatchingPlatform.IOS;
+        }
     }
 
     public PlayerInfo GetPlayerInfo(string msg)
@@ -215,6 +247,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         ret.guildName = splits[6];
         ret.mask = int.Parse(splits[7]);
         ret.level = int.Parse(splits[8]);
+        ret.platform = splits[9] == AndPlatformKey ? MatchingPlatform.And : MatchingPlatform.IOS;
 
         return ret;
     }
@@ -399,7 +432,31 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         ResetRoomState();
         RoomRenewal();
         UpdatePlayerInfoList();
+
+        PlatformCheck();
     }
+
+    private void PlatformCheck()
+    {
+        var e = roomPlayerDatas.GetEnumerator();
+
+        bool hasIosPlatformUser = false;
+
+        while (e.MoveNext())
+        {
+            if (e.Current.Value.platform == MatchingPlatform.IOS) 
+            {
+                hasIosPlatformUser = true;
+                break;
+            }
+        }
+
+        if(hasIosPlatformUser && myPlatform != MatchingPlatform.IOS) 
+        {
+            LeaveRoom();
+        }
+    }
+
 
     public void UpdatePlayerInfoList()
     {
@@ -573,7 +630,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             PopupManager.Instance.ShowYesNoPopup("알림", "토벌을 시작 할까요?", () =>
             {
 
-                if (roomPlayerDatas.Count > 4) 
+                if (roomPlayerDatas.Count > 4)
                 {
                     PopupManager.Instance.ShowAlarmMessage("인원이 초과됐습니다.");
                     return;
