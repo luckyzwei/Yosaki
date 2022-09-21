@@ -438,7 +438,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     private void PlatformCheck()
     {
-
+#if UNITY_ANDROID
         var e = roomPlayerDatas.GetEnumerator();
 
         bool hasIosPlatformUser = false;
@@ -452,15 +452,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             }
         }
 
-        if (
-            (hasIosPlatformUser == true && myPlatform != MatchingPlatform.IOS ||
-            hasIosPlatformUser == false && myPlatform == MatchingPlatform.IOS)
-            )
+        if (hasIosPlatformUser && myPlatform != MatchingPlatform.IOS)
         {
             LeaveRoom();
         }
+#endif
+#if UNITY_IOS
+        var e = roomPlayerDatas.GetEnumerator();
 
+        bool hasAndroidPlatformUser = false;
 
+        while (e.MoveNext())
+        {
+            if (e.Current.Value.platform == MatchingPlatform.And)
+            {
+                hasAndroidPlatformUser = true;
+                break;
+            }
+        }
+
+        if (hasAndroidPlatformUser && myPlatform != MatchingPlatform.And)
+        {
+            LeaveRoom();
+        }
+#endif
     }
 
 
