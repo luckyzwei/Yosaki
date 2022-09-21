@@ -438,23 +438,29 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     private void PlatformCheck()
     {
+
         var e = roomPlayerDatas.GetEnumerator();
 
         bool hasIosPlatformUser = false;
 
         while (e.MoveNext())
         {
-            if (e.Current.Value.platform == MatchingPlatform.IOS) 
+            if (e.Current.Value.platform == MatchingPlatform.IOS)
             {
                 hasIosPlatformUser = true;
                 break;
             }
         }
 
-        if(hasIosPlatformUser && myPlatform != MatchingPlatform.IOS) 
+        if (
+            (hasIosPlatformUser == true && myPlatform != MatchingPlatform.IOS ||
+            hasIosPlatformUser == false && myPlatform == MatchingPlatform.IOS)
+            )
         {
             LeaveRoom();
         }
+
+
     }
 
 
