@@ -59,14 +59,14 @@ public class UiStageRelicCell : MonoBehaviour
         {
             var abilValue = PlayerStats.GetStageRelicHasEffect(abilType);
 
-            relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {abilValue * 100f}%");
+            relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {Utils.ConvertBigNum(abilValue * 100f)}%");
 
         }
         else
         {
             var abilValue = PlayerStats.GetStageRelicHasEffect(abilType);
 
-            relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {abilValue}");
+            relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {Utils.ConvertBigNum(abilValue)}");
         }
     }
 

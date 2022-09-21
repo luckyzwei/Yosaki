@@ -165,11 +165,11 @@ public class UiStatusUpgradeCell : MonoBehaviour
         {
             if (IsMaxLevel() == false)
             {
-                descriptionText.SetText($"{(int)(currentStatusValue)}->{(int)(nextStatusValue)}");
+                descriptionText.SetText($"{Utils.ConvertBigNum(currentStatusValue)}->{Utils.ConvertBigNum(nextStatusValue)}");
             }
             else
             {
-                descriptionText.SetText($"{(int)(currentStatusValue)}(MAX)");
+                descriptionText.SetText($"{Utils.ConvertBigNum(currentStatusValue)}(MAX)");
             }
         }
         //%로 표시
@@ -177,11 +177,11 @@ public class UiStatusUpgradeCell : MonoBehaviour
         {
             if (IsMaxLevel() == false)
             {
-                descriptionText.SetText($"{(currentStatusValue * 100f).ToString("F2")}%->{(nextStatusValue * 100f).ToString("F2")}%");
+                descriptionText.SetText($"{Utils.ConvertBigNum(currentStatusValue * 100f)}%->{Utils.ConvertBigNum(nextStatusValue * 100f)}%");
             }
             else
             {
-                descriptionText.SetText($"{(currentStatusValue * 100f).ToString("F2")}%(MAX)");
+                descriptionText.SetText($"{Utils.ConvertBigNum(currentStatusValue * 100f)}%(MAX)");
             }
         }
 

@@ -269,7 +269,7 @@ public class PartyRaidBossManager : ContentsManagerBase
     //
     private IEnumerator BossRandomActiveRoutine()
     {
-        singleRaidEnemy.GetComponent<HellWarModeEnemy>().StartAttackRoutine();
+        singleRaidEnemy.GetComponent<HellWarModeEnemy>().StartAttackRoutine_PartyRaid();
 
         yield return null;
     }

@@ -35,11 +35,20 @@ public class HellWarModeEnemy : BossEnemyBase
     private List<AlarmHitObject> HitList_3;
 
     [SerializeField]
+    private List<AlarmHitObject> HitList_4;
+
+    [SerializeField]
+    private List<AlarmHitObject> HitList_5;
+
+    [SerializeField]
+    private List<AlarmHitObject> HitList_6;
+
+    [SerializeField]
     private List<AlarmHitObject> RandomHit;
 
     [SerializeField]
-    private List<AlarmHitObject> RandomHit2;   
-    
+    private List<AlarmHitObject> RandomHit2;
+
     [SerializeField]
     private List<AlarmHitObject> RandomHit3;
 
@@ -129,6 +138,50 @@ public class HellWarModeEnemy : BossEnemyBase
         }
     }
 
+    private IEnumerator AttackRoutine_PartyRaid()
+    {
+        UpdateBossDamage();
+        //선딜
+        yield return new WaitForSeconds(2.0f);
+
+        while (true)
+        {
+            Random.InitState((int)System.DateTime.Now.Ticks);
+            int attackType = Random.Range(0, 6);
+
+#if UNITY_EDITOR
+            //  Debug.LogError($"AttackType {attackType}");
+#endif
+
+            if (attackType == 0)
+            {
+                    yield return StartCoroutine(AttackRoutine_2(attackInterval_Real));
+            }
+            else if (attackType == 1)
+            {
+                    yield return StartCoroutine(AttackRoutine_3(attackInterval_Real));
+            }
+            else if (attackType == 2)
+            {
+                    yield return StartCoroutine(AttackRoutine_4(attackInterval_Real));
+            }
+            else if (attackType == 3)
+            {
+                yield return StartCoroutine(AttackRoutine_5(attackInterval_Real));
+            }
+            else if (attackType == 4)
+            {
+                yield return StartCoroutine(AttackRoutine_6(attackInterval_Real));
+            }
+            else if (attackType == 5)
+            {
+                yield return StartCoroutine(AttackRoutine_7(attackInterval_Real));
+            }
+
+            yield return new WaitForSeconds(attackInterval);
+        }
+    }
+
     private IEnumerator PlayAttackAnim()
     {
 
@@ -161,6 +214,11 @@ public class HellWarModeEnemy : BossEnemyBase
     public void StartAttackRoutine()
     {
         StartCoroutine(AttackRoutine());
+    }
+
+    public void StartAttackRoutine_PartyRaid()
+    {
+        StartCoroutine(AttackRoutine_PartyRaid());
     }
 
 
@@ -230,6 +288,53 @@ public class HellWarModeEnemy : BossEnemyBase
         yield return new WaitForSeconds(delay);
     }
 
+    //
+    private IEnumerator AttackRoutine_5(float delay)
+    {
+        //alarmHitObject_4.AttackStart();
+
+        for (int i = 0; i < HitList_4.Count; i++)
+        {
+            HitList_4[i].AttackStart();
+        }
+
+        StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
+
+        PlayRandomHits();
+
+        yield return new WaitForSeconds(delay);
+    }
+    private IEnumerator AttackRoutine_6(float delay)
+    {
+        //alarmHitObject_4.AttackStart();
+
+        for (int i = 0; i < HitList_5.Count; i++)
+        {
+            HitList_5[i].AttackStart();
+        }
+
+        StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
+
+        PlayRandomHits();
+
+        yield return new WaitForSeconds(delay);
+    }
+    private IEnumerator AttackRoutine_7(float delay)
+    {
+        //alarmHitObject_4.AttackStart();
+
+        for (int i = 0; i < HitList_6.Count; i++)
+        {
+            HitList_6[i].AttackStart();
+        }
+
+        StartCoroutine(PlaySoundDelay(1f, "BossSkill3"));
+
+        PlayRandomHits();
+
+        yield return new WaitForSeconds(delay);
+    }
+
     private void PlayRandomHits()
     {
         int rand = Random.Range(0, 3);
@@ -264,7 +369,7 @@ public class HellWarModeEnemy : BossEnemyBase
                 }
             }
         }
-        else 
+        else
         {
             if (RandomHit3.Count != 0)
             {
