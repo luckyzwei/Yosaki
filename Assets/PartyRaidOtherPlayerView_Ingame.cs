@@ -44,7 +44,7 @@ public class PartyRaidOtherPlayerView_Ingame : MonoBehaviour
 
                     playerView_Room[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask);
                 }
-                else 
+                else
                 {
                     playerView_Room[i].gameObject.SetActive(false);
                 }
@@ -68,7 +68,7 @@ public class PartyRaidOtherPlayerView_Ingame : MonoBehaviour
 
                     float prefX = playerView_Room[i].transform.position.x;
 
-                    playerView_Room[i].transform.position = Vector3.Lerp(playerView_Room[i].transform.position, roomPlayerDatas[keys[i]].currentPos + Vector3.down * yOffset, Time.deltaTime * 2f);
+                    playerView_Room[i].transform.position = Vector3.Lerp(playerView_Room[i].transform.position, roomPlayerDatas[keys[i]].currentPos + Vector3.down * yOffset, Time.deltaTime * 3f);
 
                     if (roomPlayerDatas[keys[i]].currentPos.x >= playerView_Room[i].transform.position.x)
                     {
@@ -78,8 +78,13 @@ public class PartyRaidOtherPlayerView_Ingame : MonoBehaviour
                     {
                         flippedObject[i].transform.localScale = new Vector3(Mathf.Abs(flippedObject[i].transform.localScale.x), flippedObject[i].transform.localScale.y, flippedObject[i].transform.localScale.z);
                     }
+
+                    if (roomPlayerDatas[keys[i]].endGame)
+                    {
+                        playerView_Room[i].gameObject.SetActive(false);
+                    }
                 }
-                else 
+                else
                 {
                     playerView_Room[i].gameObject.SetActive(false);
                 }

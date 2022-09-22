@@ -12,9 +12,9 @@ public class UiChildPassInsBuyButton : MonoBehaviour
     [SerializeField]
     private PointerDownEvent OnEvent;
 
-    private ObscuredFloat killAddAmount = 100000000;
+    private ObscuredFloat killAddAmount = 30000000;
 
-    public static readonly string monthInsPassKey = "summerpassins";
+    public static readonly string monthInsPassKey = "chuseokins";
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -30,7 +30,7 @@ public class UiChildPassInsBuyButton : MonoBehaviour
     {
         Subscribe();
 
-       // buttonDesc.SetText($"처치 +{Utils.ConvertBigNum(killAddAmount)}");
+        // buttonDesc.SetText($"처치 +{Utils.ConvertBigNum(killAddAmount)}");
 
         killCountDescription.SetText($"처치수 + {Utils.ConvertBigNum(killAddAmount)}");
     }
@@ -68,12 +68,34 @@ public class UiChildPassInsBuyButton : MonoBehaviour
     public void OnClickBuyButton()
     {
 
+        if (CanBuyProduct() == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("9월 25일 부터 구매 가능합니다!");
+            return;
+        }
+
 #if UNITY_EDITOR || TEST
         GetPackageItem(monthInsPassKey);
         return;
 #endif
 
         IAPManager.Instance.BuyProduct(monthInsPassKey);
+    }
+
+    private bool CanBuyProduct()
+    {
+        var severTime = ServerData.userInfoTable.currentServerTime;
+
+        if (severTime.Month == 9)
+        {
+            return severTime.Day >= 25;
+
+        }
+        else
+        {
+            return true;
+        }
+
     }
 
     public void GetPackageItem(string productId)

@@ -623,6 +623,7 @@ public enum TitleMissionId
     Level2080000,//★
     Level2090000,//★
     Level2100000,//★
+    SainWeapon,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -3083,6 +3084,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e == 1)
             {
                 ClearTitleMission(TitleMissionId.BulWeaponWeapon);
+            }
+        }).AddTo(this);    
+        
+        ServerData.weaponTable.TableDatas["weapon36"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.SainWeapon);
             }
         }).AddTo(this);
    
