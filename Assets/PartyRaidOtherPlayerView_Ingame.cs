@@ -56,7 +56,7 @@ public class PartyRaidOtherPlayerView_Ingame : MonoBehaviour
         }
     }
 
-    private float teleportDistance = 7f;
+    private float teleportDistance = 5f;
 
     private void Update()
     {
