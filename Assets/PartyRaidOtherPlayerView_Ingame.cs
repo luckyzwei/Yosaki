@@ -56,6 +56,8 @@ public class PartyRaidOtherPlayerView_Ingame : MonoBehaviour
         }
     }
 
+    private float teleportDistance = 7f;
+
     private void Update()
     {
         for (int i = 0; i < playerView_Room.Count; i++)
@@ -66,9 +68,19 @@ public class PartyRaidOtherPlayerView_Ingame : MonoBehaviour
                 {
                     playerView_Room[i].gameObject.SetActive(true);
 
-                    float prefX = playerView_Room[i].transform.position.x;
+                    Vector3 playerServerPos = roomPlayerDatas[keys[i]].currentPos + Vector3.down * yOffset;
 
-                    playerView_Room[i].transform.position = Vector3.Lerp(playerView_Room[i].transform.position, roomPlayerDatas[keys[i]].currentPos + Vector3.down * yOffset, Time.deltaTime * 3f);
+                    float distance = Vector3.Distance(playerView_Room[i].transform.position, playerServerPos);
+
+                    if (distance < teleportDistance)
+                    {
+                        playerView_Room[i].transform.position = Vector3.Lerp(playerView_Room[i].transform.position, playerServerPos, Time.deltaTime * 3f);
+                    }
+                    else
+                    {
+                        playerView_Room[i].transform.position = playerServerPos;
+                    }
+
 
                     if (roomPlayerDatas[keys[i]].currentPos.x >= playerView_Room[i].transform.position.x)
                     {

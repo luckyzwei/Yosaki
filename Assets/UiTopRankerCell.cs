@@ -110,6 +110,19 @@ public class UiTopRankerCell : MonoBehaviour
                 weapon.material = CommonUiContainer.Instance.weaponEnhnaceMats[0];
             }
         }
+        //부채
+        if (weaponId >= 37 && weaponId <= 41)
+        {
+            weapon.transform.position = new Vector3(-9f, 117.7f, 0);
+            weapon.transform.rotation = Quaternion.Euler(0f, 0f, 133.9f);
+        }
+        else
+        {
+            weapon.transform.position = new Vector3(-1.4f, 128.4f, 0);
+            weapon.transform.rotation = Quaternion.Euler(0f, 0f, 94f);
+
+        }
+
 
         magicBook.gameObject.SetActive(magicBookId != -1);
 
