@@ -259,15 +259,29 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
         bool spawnDamText = SettingData.ShowDamageFont.Value == 1;
 
+        //데미지는 한프레임에 적용
         for (int hit = 0; hit < hitCount; hit++)
         {
             if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
 
+            agentHpController.UpdateHp(-calculatedDam);
+        }
+
+
+        //이펙트는 최대 10개까지만 출력
+        for (int hit = 0; hit < hitCount && hit < 10; hit++)
+        {
             if (spawnDamText)
             {
                 agentHpController.SpawnDamText(isCritical, isSuperCritical, calculatedDam);
             }
-            agentHpController.UpdateHp(-calculatedDam);
+
+            //사운드
+            //시전할때 사운드 있어서 따로재생X
+            if (hit != 0 && playSound)
+            {
+                SoundManager.Instance.PlaySound(skillInfo.Soundname);
+            }
 
             //이펙트
             if (string.IsNullOrEmpty(skillInfo.Hiteffectname) == false &&
@@ -277,13 +291,6 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                 spawnPos += (Vector3)UnityEngine.Random.insideUnitCircle * 0.5f;
                 spawnPos += (Vector3)Vector3.back;
                 EffectManager.SpawnEffectAllTime(skillInfo.Hiteffectname, spawnPos, limitSpawnSize: true);
-            }
-
-            //사운드
-            //시전할때 사운드 있어서 따로재생X
-            if (hit != 0 && playSound)
-            {
-                SoundManager.Instance.PlaySound(skillInfo.Soundname);
             }
 
             float tick = 0f;
