@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class EffectManager
 {
-    public static PoolItem SpawnEffectAllTime(string effectName, Vector3 position, Transform parent = null, bool limitSpawnSize = false, int limitNum = 15)
+    public static PoolItem SpawnEffectAllTime(string effectName, Vector3 position, Transform parent = null, bool limitSpawnSize = false, int limitNum = 15, bool showFirstSlotEffect = false)
     {
-        if (SettingData.ShowEffect.Value == 0) return null;
+        if (SettingData.ShowEffect.Value == 0 && showFirstSlotEffect == false) return null;
 
         if (limitSpawnSize && BattleObjectManagerAllTime.Instance.HasPool(effectName))
         {

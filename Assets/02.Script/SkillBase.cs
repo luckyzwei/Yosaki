@@ -31,7 +31,7 @@ public abstract class SkillBase
 
     public virtual void UseSkill()
     {
-                                            //인드라 X
+        //인드라 X
         if (skillInfo.Issonskill == false && skillInfo.Id != 18 && skillInfo.Id != 19)
         {
             playerSkillCaster.PlayAttackAnim();
@@ -77,33 +77,39 @@ public abstract class SkillBase
         Vector3 activeEffectSpawnPos = targetTr.position + Vector3.up * 0.5f;
         MoveDirection moveDirection = PlayerMoveController.Instance.MoveDirection;
 
-        if (string.IsNullOrEmpty(skillInfo.Activeeffectname1) == false)
-        {
-            Transform parent = skillInfo.Iseffectrootplayer ? targetTr : null;
-            var effect = EffectManager.SpawnEffectAllTime(skillInfo.Activeeffectname1, activeEffectSpawnPos, parent);
+        bool showFirstSlotEffect = SettingData.ShowEffect.Value == 0 &&
+                                ServerData.skillServerTable.IsFistSlotSkill(skillInfo.Id) &&
+                                SettingData.showOneSkillEffect.Value == 1;
 
-            if (effect != null)
+        if (SettingData.ShowEffect.Value == 0)
+
+            if (string.IsNullOrEmpty(skillInfo.Activeeffectname1) == false)
             {
+                Transform parent = skillInfo.Iseffectrootplayer ? targetTr : null;
+                var effect = EffectManager.SpawnEffectAllTime(skillInfo.Activeeffectname1, activeEffectSpawnPos, parent, showFirstSlotEffect: showFirstSlotEffect);
 
-                if (skillInfo.Iseffectrootplayer == false)
+                if (effect != null)
                 {
-                    effect.transform.position = targetTr.position;
-                    effect.transform.localScale = new Vector3(1f, 1f, 1f);
-                }
-                else
-                {
-                    effect.transform.localScale = new Vector3(Mathf.Abs(effect.transform.localScale.x) * (moveDirection == MoveDirection.Right ? 1f : -1f), effect.transform.localScale.y, effect.transform.localScale.z);
 
+                    if (skillInfo.Iseffectrootplayer == false)
+                    {
+                        effect.transform.position = targetTr.position;
+                        effect.transform.localScale = new Vector3(1f, 1f, 1f);
+                    }
+                    else
+                    {
+                        effect.transform.localScale = new Vector3(Mathf.Abs(effect.transform.localScale.x) * (moveDirection == MoveDirection.Right ? 1f : -1f), effect.transform.localScale.y, effect.transform.localScale.z);
+
+                    }
                 }
             }
-        }
         Vector3 activeEffectSpawnPos2 = targetTr.position + Vector3.up * 0.5f - Vector3.forward * 5f;
 
         if (string.IsNullOrEmpty(skillInfo.Activeeffectname2) == false)
         {
             Transform parent = skillInfo.Iseffectrootplayer ? targetTr : null;
 
-            var effect = EffectManager.SpawnEffectAllTime(skillInfo.Activeeffectname2, activeEffectSpawnPos2, parent);
+            var effect = EffectManager.SpawnEffectAllTime(skillInfo.Activeeffectname2, activeEffectSpawnPos2, parent, showFirstSlotEffect: showFirstSlotEffect);
 
             if (effect != null)
             {

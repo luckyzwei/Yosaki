@@ -83,6 +83,8 @@ public class UiSettingBoard : MonoBehaviour
     private Toggle indra;
     [SerializeField]
     private Toggle dragon;
+    [SerializeField]
+    private Toggle oneSkill;
 
     [SerializeField]
     private Transform playerViewController;
@@ -478,6 +480,18 @@ public class UiSettingBoard : MonoBehaviour
         SettingData.dragon.Value = on ? 1 : 0;
     }
 
+    public void OneSkill(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showOneSkillEffect.Value = on ? 1 : 0;
+    }
+
     public void OnClickStory()
     {
         DialogManager.Instance.SetNextDialog();
@@ -558,6 +572,7 @@ public static class SettingKey
     public static string orb = "orb";
     public static string indra = "indra";
     public static string dragon = "dragon";
+    public static string oneSkill = "oneSkill";
 
 }
 
@@ -594,6 +609,7 @@ public static class SettingData
     public static ReactiveProperty<int> orb = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> indra = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> dragon = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> showOneSkillEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
@@ -685,7 +701,10 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.indra, 1);  
         
         if (PlayerPrefs.HasKey(SettingKey.dragon) == false)
-            PlayerPrefs.SetInt(SettingKey.dragon, 1);
+            PlayerPrefs.SetInt(SettingKey.dragon, 1);  
+        
+        if (PlayerPrefs.HasKey(SettingKey.oneSkill) == false)
+            PlayerPrefs.SetInt(SettingKey.oneSkill, 0);
 
     }
 
@@ -720,6 +739,8 @@ public static class SettingData
         orb.Value = PlayerPrefs.GetInt(SettingKey.orb, 1);
         indra.Value = PlayerPrefs.GetInt(SettingKey.indra, 1);
         dragon.Value = PlayerPrefs.GetInt(SettingKey.dragon, 1);
+
+        showOneSkillEffect.Value = PlayerPrefs.GetInt(SettingKey.oneSkill, 0);
 
         Subscribe();
     }
@@ -837,6 +858,10 @@ public static class SettingData
         dragon.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.dragon, e);
+        });
+        showOneSkillEffect.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.oneSkill, e);
         });
     }
 

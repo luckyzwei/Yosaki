@@ -422,4 +422,14 @@ public class SkillServerTable
             }
         });
     }
+
+    public bool IsFistSlotSkill(int skillId)
+    {
+        int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
+        var selectedSkills = ServerData.skillServerTable.TableDatas[SkillServerTable.GetSkillGroupKey(currentSelectedGroupId)];
+
+        if (selectedSkills.Count > 0 && selectedSkills[0].Value == skillId) return true;
+
+        return false;
+    }
 }
