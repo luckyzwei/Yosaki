@@ -669,6 +669,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void SendChat()
     {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.chatBan).Value == 1f)
+        {
+            PopupManager.Instance.ShowAlarmMessage("채팅이 차단된 상태입니다.");
+            return;
+        }
+
         if (string.IsNullOrEmpty(chatInput.text))
         {
             PopupManager.Instance.ShowAlarmMessage("메세지를 입력해 주세요!");
