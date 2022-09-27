@@ -202,7 +202,7 @@ public class AgentHpController : MonoBehaviour
             spawnPos = this.transform.position;
         }
 
-        if (damTextRoutine == null)
+        if (damTextRoutine == null && isEnemyDead == false)
         {
             damTextRoutine = StartCoroutine(DamTextRoutine());
         }
