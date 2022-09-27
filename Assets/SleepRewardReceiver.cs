@@ -106,6 +106,9 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
 
+        //지옥 추가소환
+        plusSpawnNum += (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
+
         float spawnEnemyNumPerSec = (float)((platformNum * stageTableData.Spawnamountperplatform) + plusSpawnNum) / spawnInterval;
 
         float killedEnemyPerMin = spawnEnemyNumPerSec * 60f;
