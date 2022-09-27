@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_IOS
+using BackEnd;
 using UnityEngine.iOS;
 #endif
 
