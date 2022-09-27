@@ -140,6 +140,7 @@ public class UiSettingBoard : MonoBehaviour
         orb.isOn = PlayerPrefs.GetInt(SettingKey.orb) == 1;
         indra.isOn = PlayerPrefs.GetInt(SettingKey.indra) == 1;
         dragon.isOn = PlayerPrefs.GetInt(SettingKey.dragon) == 1;
+        oneSkill.isOn = PlayerPrefs.GetInt(SettingKey.oneSkill) == 1;
 
         initialized = true;
 
