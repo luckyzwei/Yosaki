@@ -253,6 +253,7 @@ public class HellWarModeManager : ContentsManagerBase
 
         StartCoroutine(BossRandomActiveRoutine());
 
+        AutoManager.Instance.StartAutoWithDelay();
 
         portalObject.gameObject.SetActive(false);
 

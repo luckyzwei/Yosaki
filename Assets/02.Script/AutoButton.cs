@@ -21,7 +21,8 @@ public class AutoButton : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
 
-        if (prefAuto == true)
+        //보스전은 다른데서 자동전투 켜줌
+        if (prefAuto == true && GameManager.contentsType.IsBossContents() == false)
         {
             if (AutoManager.Instance.IsAutoMode == false)
             {

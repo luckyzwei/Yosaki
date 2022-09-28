@@ -151,6 +151,8 @@ public class FoxMaskManager : ContentsManagerBase
         yield return null;
 
         SpawnEnemy();
+
+        AutoManager.Instance.StartAutoWithDelay();
     }
 
 

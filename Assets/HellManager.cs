@@ -243,6 +243,7 @@ public class HellManager : ContentsManagerBase
         directionUi.SetActive(false);
         singleRaidEnemy.gameObject.SetActive(true);
 
+        AutoManager.Instance.StartAutoWithDelay();
 
         portalObject.gameObject.SetActive(false);
 

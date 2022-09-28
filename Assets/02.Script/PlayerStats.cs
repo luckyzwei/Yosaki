@@ -1032,6 +1032,10 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.SuperCritical1Prob);
         ret += GetSinsuEquipEffect(StatusType.SuperCritical1Prob);
 
+#if UNITY_EDITOR
+        return 1f;
+#endif
+
         return ret;
     }
 

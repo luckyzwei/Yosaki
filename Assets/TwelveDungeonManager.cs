@@ -361,6 +361,7 @@ public class TwelveDungeonManager : ContentsManagerBase
         directionUi.SetActive(false);
         singleRaidEnemy.gameObject.SetActive(true);
 
+        AutoManager.Instance.StartAutoWithDelay();
 
         portalObject.gameObject.SetActive(false);
 

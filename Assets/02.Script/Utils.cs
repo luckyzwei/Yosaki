@@ -72,7 +72,7 @@ public static class Utils
                   type == Item_Type.costume51 ||
                   type == Item_Type.costume52 ||
                   type == Item_Type.costume53 ||
-                  type == Item_Type.costume54||
+                  type == Item_Type.costume54 ||
                   type == Item_Type.costume55;
     }
     public static bool IsPetItem(this Item_Type type)
@@ -155,6 +155,17 @@ public static class Utils
             type != StatusType.SkillAttackCount;
     }
 
+    public static bool IsBossContents(this GameManager.ContentsType type)
+    {
+        return type == GameManager.ContentsType.Boss || //O
+            type == GameManager.ContentsType.TwelveDungeon || //O
+            type == GameManager.ContentsType.Son || //O
+            type == GameManager.ContentsType.FoxMask || //O
+            type == GameManager.ContentsType.Susano || //O
+            type == GameManager.ContentsType.Hell || //O
+            type == GameManager.ContentsType.HellWarMode || //O
+            type == GameManager.ContentsType.PartyRaid; //O
+    }
     public static bool IsRankFrameItem(this Item_Type type)
     {
         return type >= Item_Type.RankFrame1 && type <= Item_Type.RankFrame1001_10000;
@@ -278,7 +289,7 @@ public static class Utils
     }
 
     #region BigFloat
-    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무" ,"대","긍"};
+    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "긍" };
     private static double p = (double)Mathf.Pow(10, 4);
     private static List<double> numList = new List<double>();
     private static List<string> numStringList = new List<string>();

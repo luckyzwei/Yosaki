@@ -67,7 +67,7 @@ public class UiTicketBuyShop : MonoBehaviour
             return;
         }
 
-                int currentBlueStoneNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
+                float currentBlueStoneNum = ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         if (currentBlueStoneNum < GameBalance.ticketPrice)
         {

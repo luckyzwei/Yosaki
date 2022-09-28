@@ -249,6 +249,7 @@ public class PartyRaidBossManager : ContentsManagerBase
 
         SpawnBoss();
 
+        AutoManager.Instance.StartAutoWithDelay();
 
         sendScoreRoutine = StartCoroutine(SendScoreRoutine());
 

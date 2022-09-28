@@ -100,7 +100,7 @@ public class SonManager : ContentsManagerBase
     {
         SoundManager.Instance.PlaySound("BossAppear");
 
-        SetBossHp();
+        SpawnBoss();
     }
 
     private void Subscribe()
@@ -122,7 +122,7 @@ public class SonManager : ContentsManagerBase
         }
     }
 
-    private void SetBossHp()
+    private void SpawnBoss()
     {
         bossRemainHp.Value = float.MaxValue;
 
@@ -133,6 +133,9 @@ public class SonManager : ContentsManagerBase
         singleRaidEnemy.gameObject.SetActive(false);
         bossHpController = singleRaidEnemy.GetComponent<AgentHpController>();
         bossHpController.SetRaidEnemy();
+
+        //
+
     }
 
     private void whenDamageAmountChanged(ObscuredDouble hp)
@@ -147,7 +150,7 @@ public class SonManager : ContentsManagerBase
 
         if (hp <= 0f && contentsState.Value == (int)ContentsState.Fight)
         {
-           // WhenBossDead();
+            // WhenBossDead();
         }
     }
 
@@ -216,7 +219,7 @@ public class SonManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if(reqValue > ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value) 
+        if (reqValue > ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value)
         {
             ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value = reqValue;
 
@@ -248,6 +251,8 @@ public class SonManager : ContentsManagerBase
 
         float remainSec = playTime;
 
+        AutoManager.Instance.StartAutoWithDelay();
+
         while (remainSec >= 0)
         {
             timerText.SetText($"남은시간 : {(int)remainSec}");
@@ -258,6 +263,8 @@ public class SonManager : ContentsManagerBase
 
         TimerEnd();
     }
+
+
 
     private ObscuredBool direciontEnd = false;
 

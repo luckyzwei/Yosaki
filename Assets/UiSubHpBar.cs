@@ -10,13 +10,14 @@ public class UiSubHpBar : SingletonMono<UiSubHpBar>
     [SerializeField]
     private Image greyRenderer;
 
-    private Coroutine greyRoutine;
+    private float fixedLerpSpeed = 5f;
 
-    private float decreaseTime = 1f;
 
     private void OnEnable()
     {
         ResetGauge();
+
+        StartCoroutine(GreyRoutine());
     }
 
 
@@ -28,23 +29,14 @@ public class UiSubHpBar : SingletonMono<UiSubHpBar>
 
     private IEnumerator GreyRoutine()
     {
-        float tick = 0f;
-
-        float greenFillAmount = greenRenderer.fillAmount;
-
-        while (tick < decreaseTime)
+        while (true)
         {
-            tick += Time.deltaTime;
-
-            float lerpValue = Mathf.Lerp(greyRenderer.fillAmount, greenFillAmount, tick / decreaseTime);
+            float lerpValue = Mathf.Lerp(greyRenderer.fillAmount, greenRenderer.fillAmount, Time.deltaTime * fixedLerpSpeed);
 
             greyRenderer.fillAmount = lerpValue;
 
             yield return null;
         }
-
-        greyRenderer.fillAmount = greenRenderer.fillAmount;
-        greyRoutine = null;
     }
 
     public void UpdateGauge(double currentHp, double maxHp)
@@ -52,15 +44,5 @@ public class UiSubHpBar : SingletonMono<UiSubHpBar>
         if (maxHp == 0f) return;
 
         greenRenderer.fillAmount = (float)(currentHp / maxHp);
-
-        if (greyRoutine != null)
-        {
-            StopCoroutine(greyRoutine);
-        }
-
-        if (this.gameObject.activeInHierarchy)
-        {
-            greyRoutine = StartCoroutine(GreyRoutine());
-        }
     }
 }

@@ -435,4 +435,15 @@ public class AutoManager : Singleton<AutoManager>
 
         return neariestTarget;
     }
+
+    public void StartAutoWithDelay() 
+    {
+        CoroutineExecuter.Instance.StartCoroutine(AutoSkillRoutine());
+    }
+
+    private IEnumerator AutoSkillRoutine()
+    {
+        yield return null;
+        AutoManager.Instance.SetAuto(true);
+    }
 }
