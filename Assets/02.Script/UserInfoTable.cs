@@ -128,6 +128,7 @@ public class UserInfoTable
     public const string hellWarScore = "hws";
     public const string catScore = "csc";
     public const string hellScore = "hels";
+    public const string chunScore = "chun";
     public const string susanoScore = "susa";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
     public const string buffAwake = "buffAwake";
@@ -277,6 +278,7 @@ public class UserInfoTable
         {foxMask,0},
         {relicPackReset,0},
         {hellScore,0},
+        {chunScore,0},
         {oneAttenEvent,0},
         {titleRefund,0},
         {oneAttenEvent_one,0},

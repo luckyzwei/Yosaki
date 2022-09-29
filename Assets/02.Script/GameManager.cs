@@ -13,9 +13,9 @@ public class GameManager : SingletonMono<GameManager>
     }
     public enum ContentsType
     {
-        NormalField, 
-        FireFly, 
-        Boss, 
+        NormalField,
+        FireFly,
+        Boss,
         InfiniteTower,
         Dokebi,
         TwelveDungeon,
@@ -31,7 +31,8 @@ public class GameManager : SingletonMono<GameManager>
         HellRelic,
         GumGiSoul,
         HellWarMode,
-        PartyRaid
+        PartyRaid,
+        Chun
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;
