@@ -278,7 +278,7 @@ public class PartyRaidBossManager : ContentsManagerBase
 
     private IEnumerator SendScoreRoutine()
     {
-        var delay = new WaitForSeconds(0.1f);
+        var delay = new WaitForSeconds(0.05f);
 
         while (true)
         {
