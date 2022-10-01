@@ -259,12 +259,16 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
         bool spawnDamText = SettingData.ShowDamageFont.Value == 1;
 
-        //데미지는 한프레임에 적용
-        for (int hit = 0; hit < hitCount; hit++)
-        {
-            if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false) yield break;
+        double totalDamage = calculatedDam * hitCount;
 
-            agentHpController.UpdateHp(-calculatedDam);
+        //데미지는 한프레임에 적용
+        if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false)
+        {
+            yield break;
+        }
+        else
+        {
+            agentHpController.UpdateHp(-totalDamage);
         }
 
 

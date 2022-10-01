@@ -102,6 +102,7 @@ public class UserInfoTable
     public const string smithClear = "smithClear";
     public const string gumGiClear = "gumGiClear";
     public const string gumGiSoulClear = "gsc";
+    public const string flowerClear = "fc";
 
 
     //6월월간
@@ -128,7 +129,7 @@ public class UserInfoTable
     public const string hellWarScore = "hws";
     public const string catScore = "csc";
     public const string hellScore = "hels";
-    public const string chunScore = "chun";
+    public const string chunClear = "chun";
     public const string susanoScore = "susa";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
     public const string buffAwake = "buffAwake";
@@ -142,6 +143,7 @@ public class UserInfoTable
     public const string smithExp = "smith";
     public const string getSmith = "getSmith";
     public const string getGumGi = "getGumGi";
+    public const string getFlower = "getc";
     public const string sendPetExp = "sendPetExp";
 
     public const string exchangeCount = "ex_0";
@@ -226,6 +228,7 @@ public class UserInfoTable
         {smithClear,0f},
         {gumGiSoulClear,0f},
         {gumGiClear,0f},
+        {flowerClear,0f},
 
 
         {yomul0_buff,0f},
@@ -268,6 +271,7 @@ public class UserInfoTable
         {smithExp,0},
         {getSmith,0},
         {getGumGi,0},
+        {getFlower,0},
         {sendPetExp,0},
         {exchangeCount,0},
         {exchangeCount_1,0},
@@ -278,7 +282,7 @@ public class UserInfoTable
         {foxMask,0},
         {relicPackReset,0},
         {hellScore,0},
-        {chunScore,0},
+        {chunClear,0},
         {oneAttenEvent,0},
         {titleRefund,0},
         {oneAttenEvent_one,0},
@@ -947,10 +951,6 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
-#if UNITY_EDITOR
-        return false;
-#endif
-
         return currentServerTime.Month == 9;
     }
 }

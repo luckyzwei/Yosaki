@@ -216,11 +216,11 @@ public class ChunManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable.TableDatas[UserInfoTable.chunScore].Value)
+        if (reqValue > ServerData.userInfoTable.TableDatas[UserInfoTable.chunClear].Value)
         {
-            ServerData.userInfoTable.TableDatas[UserInfoTable.chunScore].Value = reqValue;
+            ServerData.userInfoTable.TableDatas[UserInfoTable.chunClear].Value = reqValue;
 
-            ServerData.userInfoTable.UpData(UserInfoTable.chunScore, false);
+            ServerData.userInfoTable.UpData(UserInfoTable.chunClear, false);
         }
 
 

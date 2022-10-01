@@ -333,6 +333,9 @@ public static class ServerData
                 break;     
             case Item_Type.Fw:
                 ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value += rewardValue;
+                break;  
+            case Item_Type.Cw:
+                ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += rewardValue;
                 break;   
             case Item_Type.du:
                 ServerData.goodsTable.GetTableData(GoodsTable.du).Value += rewardValue;
@@ -550,6 +553,11 @@ public static class ServerData
             case Item_Type.Ym:
                 passParam.Add(GoodsTable.Ym, ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);   
+            
+            case Item_Type.Cw:
+                passParam.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
+                
             case Item_Type.Fw:
                 passParam.Add(GoodsTable.Fw, ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam); 
@@ -821,6 +829,11 @@ public static class ServerData
             case Item_Type.Hel:
                 ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += amount;
                 param.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
+
+                   case Item_Type.Cw:
+                ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += amount;
+                param.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
             
             case Item_Type.Fw:
@@ -1666,6 +1679,10 @@ public static class ServerData
                     break;
                 case Item_Type.Event_Item_0:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += amount;
+                    break; 
+                
+                case Item_Type.Cw:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += amount;
                     break;
 
                 case Item_Type.Event_Item_1:

@@ -101,6 +101,7 @@ public enum Item_Type
     Sun4,
     HaeWeapon,
     Fw,
+    Cw,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
