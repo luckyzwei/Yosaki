@@ -1436,6 +1436,27 @@ public static class PlayerStats
         return ret;
     }
 
+    public static float GetChunAbilHasEffect(StatusType statusType, int addLevel = 0)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.chunAbilBase.dataArray;
+
+        int currentLevel = (int)ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value + addLevel;
+
+        for (int i = 0; i < tableDatas.Length; i++)
+        {
+            if (currentLevel < tableDatas[i].Unlocklevel) continue;
+            if (statusType != (StatusType)tableDatas[i].Abiltype) continue;
+
+            int calculatedLevel = currentLevel - tableDatas[i].Unlocklevel;
+
+            ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
+        }
+
+        return ret;
+    }
+
     public static float GetSmithValue(StatusType statusType)
     {
         int currentExp = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.smithExp].Value;

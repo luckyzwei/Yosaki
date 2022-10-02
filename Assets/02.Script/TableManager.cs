@@ -651,5 +651,7 @@ public class TableManager : SingletonMono<TableManager>
     public HellReward hellReward;
     public DragonBall dragonBall;
     public ChuSeokAtten chuSeokAtten;
+    public ChunAbilBase chunAbilBase;
+
 }
 
