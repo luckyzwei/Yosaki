@@ -43,6 +43,12 @@ public class SeletableTab : MonoBehaviour
 
     public void OnSelect(int select)
     {
+        if (select == -1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("업데이트 예정 입니다!");
+            return;
+        }
+
         for (int i = 0; i < tabs.Count; i++)
         {
             if (tabTexts.Count == tabs.Count)
@@ -52,6 +58,7 @@ public class SeletableTab : MonoBehaviour
                     tabTexts[i].color = i == select ? enableColor_text : disableColor_text;
                 }
             }
+
             if (useButtonColor)
             {
                 tabs[i].color = i == select ? enableColor : disableColor;

@@ -283,6 +283,15 @@ public static class CommonString
             case Item_Type.h7: return TableManager.Instance.hellAbil.dataArray[7].Name;
             case Item_Type.h8: return TableManager.Instance.hellAbil.dataArray[8].Name;
             case Item_Type.h9: return TableManager.Instance.hellAbil.dataArray[9].Name;
+                //
+            case Item_Type.c0: return TableManager.Instance.hellAbil.dataArray[0].Name;
+            case Item_Type.c1: return TableManager.Instance.hellAbil.dataArray[1].Name;
+            case Item_Type.c2: return TableManager.Instance.hellAbil.dataArray[2].Name;
+            case Item_Type.c3: return TableManager.Instance.hellAbil.dataArray[3].Name;
+            case Item_Type.c4: return TableManager.Instance.hellAbil.dataArray[4].Name;
+            case Item_Type.c5: return TableManager.Instance.hellAbil.dataArray[5].Name;
+            case Item_Type.c6: return TableManager.Instance.hellAbil.dataArray[6].Name;
+
             case Item_Type.Hel: return "불멸석";
             case Item_Type.Ym: return "염주";
             case Item_Type.du: return "저승 명부";

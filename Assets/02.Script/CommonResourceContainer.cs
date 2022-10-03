@@ -10,6 +10,7 @@ public static class CommonResourceContainer
     private static List<Sprite> maskSprites;
     private static List<Sprite> hellIcons;
     private static List<Sprite> dragonBall;
+    private static List<Sprite> chunIcons;
 
     public static Sprite GetRandomWeaponSprite()
     {
@@ -135,6 +136,34 @@ public static class CommonResourceContainer
         if (idx < hellIcons.Count)
         {
             return hellIcons[idx];
+        }
+        else
+        {
+            Debug.LogError($"Weapon icon {idx} is not exist");
+            return null;
+        }
+    }
+
+    public static Sprite GetChunIconSprite(int idx)
+    {
+        if (chunIcons == null)
+        {
+            var maksIcons = Resources.LoadAll<Sprite>("ChunIcons/");
+            chunIcons = maksIcons.ToList();
+
+
+            chunIcons.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
+        }
+
+        if (idx < chunIcons.Count)
+        {
+            return chunIcons[idx];
         }
         else
         {

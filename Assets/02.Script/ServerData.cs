@@ -62,6 +62,7 @@ public static class ServerData
     public static SulPassServerTable sulPassServerTable { get; private set; } = new SulPassServerTable();
     public static BokPassServerTable bokPassServerTable { get; private set; } = new BokPassServerTable();
     public static OneYearPassServerTable oneYearPassServerTable { get; private set; } = new OneYearPassServerTable();
+    public static RankTable_ChunmaTop rankTable_ChunmaTop { get; private set; } = new RankTable_ChunmaTop();
 
     #region string
     public static string inDate_str = "inDate";
@@ -147,6 +148,8 @@ public static class ServerData
         bokPassServerTable.Initialize();
 
         oneYearPassServerTable.Initialize();
+
+        rankTable_ChunmaTop.Initialize();
     }
 
     public static void GetUserInfo()
@@ -1217,6 +1220,63 @@ public static class ServerData
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.h9).Value += amount;
                     param.Add(GoodsTable.h9, ServerData.goodsTable.GetTableData(GoodsTable.h9).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            //
+            case Item_Type.c0:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.c0).Value += amount;
+                    param.Add(GoodsTable.c0, ServerData.goodsTable.GetTableData(GoodsTable.c0).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.c1:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.c1).Value += amount;
+                    param.Add(GoodsTable.c1, ServerData.goodsTable.GetTableData(GoodsTable.c1).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.c2:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.c2).Value += amount;
+                    param.Add(GoodsTable.c2, ServerData.goodsTable.GetTableData(GoodsTable.c2).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.c3:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.c3).Value += amount;
+                    param.Add(GoodsTable.c3, ServerData.goodsTable.GetTableData(GoodsTable.c3).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.c4:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.c4).Value += amount;
+                    param.Add(GoodsTable.c4, ServerData.goodsTable.GetTableData(GoodsTable.c4).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.c5:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.c5).Value += amount;
+                    param.Add(GoodsTable.c5, ServerData.goodsTable.GetTableData(GoodsTable.c5).Value);
+
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                }
+                break;
+            case Item_Type.c6:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.c6).Value += amount;
+                    param.Add(GoodsTable.c6, ServerData.goodsTable.GetTableData(GoodsTable.c6).Value);
 
                     return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
                 }

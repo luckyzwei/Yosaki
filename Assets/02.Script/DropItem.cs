@@ -333,6 +333,15 @@ public enum Item_Type
     h8 = 6008,
     h9 = 6009,
 
+    //천계 칠션녀 전용템
+    c0 =7000,
+    c1 =7001,
+    c2 =7002,
+    c3 =7003,
+    c4 =7004,
+    c5 =7005,
+    c6 =7006,
+
 }
 
 public class DropItem : PoolItem

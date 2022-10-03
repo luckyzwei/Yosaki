@@ -738,8 +738,16 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.h6: return CommonResourceContainer.GetHellIconSprite(6);
             case Item_Type.h7: return CommonResourceContainer.GetHellIconSprite(7);
             case Item_Type.h8: return CommonResourceContainer.GetHellIconSprite(8);
-            case Item_Type.h9:
-                return CommonResourceContainer.GetHellIconSprite(9);
+            case Item_Type.h9: return CommonResourceContainer.GetHellIconSprite(9);
+                break;
+
+            case Item_Type.c0: return CommonResourceContainer.GetChunIconSprite(0);
+            case Item_Type.c1: return CommonResourceContainer.GetChunIconSprite(1);
+            case Item_Type.c2: return CommonResourceContainer.GetChunIconSprite(2);
+            case Item_Type.c3: return CommonResourceContainer.GetChunIconSprite(3);
+            case Item_Type.c4: return CommonResourceContainer.GetChunIconSprite(4);
+            case Item_Type.c5: return CommonResourceContainer.GetChunIconSprite(5);
+            case Item_Type.c6: return CommonResourceContainer.GetChunIconSprite(6);
                 break;
 
         }

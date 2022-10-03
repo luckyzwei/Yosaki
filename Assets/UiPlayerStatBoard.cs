@@ -108,9 +108,15 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         //description1 += $"{CommonString.GetStatusName(StatusType.MagicStoneAddPer)} : {PlayerStats.GetMagicStonePlusValue() * 100f}\n";
 
         int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
-        description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical3DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical3DamPer() * 100f)}\n";
-        description2 += $"요괴 추가소환 : {plusSpawnNum}\n";
 
+        //지옥베기
+        description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical3DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical3DamPer() * 100f)}\n";
+
+        description2 += $"요괴 추가소환 : {plusSpawnNum}\n";
+        //천상베기
+        description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical4DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical4DamPer() * 100f)}\n";
+
+        
 
         descriptionBoard1.SetText(description1);
         descriptionBoard2.SetText(description2);

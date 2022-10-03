@@ -39,6 +39,7 @@ public enum StatusType
     DecreaseBossHp,
     OneYearBuff,
     SuperCritical3DamPer,
+    SuperCritical4DamPer,
 }
 
 
@@ -1079,6 +1080,15 @@ public static class PlayerStats
         return ret;
     }
 
+    public static float GetSuperCritical4DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetChunMarkValue();
+
+        return ret;
+    }
+
     public static float GetHellMarkValue()
     {
         float ret = 0f;
@@ -1121,6 +1131,41 @@ public static class PlayerStats
         if (ServerData.goodsTable.GetTableData(GoodsTable.h9).Value == 1)
         {
             ret += TableManager.Instance.hellAbil.dataArray[9].Abilbasevalue;
+        }
+
+        return ret;
+    }
+
+    public static float GetChunMarkValue()
+    {
+        float ret = 0f;
+        if (ServerData.goodsTable.GetTableData(GoodsTable.c0).Value == 1)
+        {
+            ret += TableManager.Instance.chunMarkAbil.dataArray[0].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.c1).Value == 1)
+        {
+            ret += TableManager.Instance.chunMarkAbil.dataArray[1].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.c2).Value == 1)
+        {
+            ret += TableManager.Instance.chunMarkAbil.dataArray[2].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.c3).Value == 1)
+        {
+            ret += TableManager.Instance.chunMarkAbil.dataArray[3].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.c4).Value == 1)
+        {
+            ret += TableManager.Instance.chunMarkAbil.dataArray[4].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.c5).Value == 1)
+        {
+            ret += TableManager.Instance.chunMarkAbil.dataArray[5].Abilbasevalue;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.c6).Value == 1)
+        {
+            ret += TableManager.Instance.chunMarkAbil.dataArray[6].Abilbasevalue;
         }
 
         return ret;

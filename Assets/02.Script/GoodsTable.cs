@@ -121,6 +121,14 @@ public class GoodsTable
     public static string Fw = "Fw";
     public static string Cw = "Cw"; //천계꽃
 
+    public static string c0 = "c0"; //천계꽃
+    public static string c1 = "c1"; //천계꽃
+    public static string c2 = "c2"; //천계꽃
+    public static string c3 = "c3"; //천계꽃
+    public static string c4 = "c4"; //천계꽃
+    public static string c5 = "c5"; //천계꽃
+    public static string c6 = "c6"; //천계꽃
+
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
         {Gold,GameBalance.StartingMoney},
@@ -222,6 +230,15 @@ public class GoodsTable
         {Sun4,0f},
         {Fw,0f},
         {Cw,0f},
+        //
+
+        {c0,0f},
+        {c1,0f},
+        {c2,0f},
+        {c3,0f},
+        {c4,0f},
+        {c5,0f},
+        {c6,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
