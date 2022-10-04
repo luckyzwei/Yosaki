@@ -67,7 +67,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Level_Uuid = "c1d70840-de7f-11eb-bc74-95875190be29";
     public const string Rank_Stage_Uuid = "68d8acb0-de81-11eb-9e66-25cb0ae9020d";
     public const string Rank_Boss_Uuid = "d3c49070-2e1c-11ed-96b7-6b63e308d9f4";
-    public const string Rank_Real_Boss_Uuid = "9cbe6510-36b4-11ed-b34f-2b62d1d7bd9a";
+    public const string Rank_Real_Boss_Uuid = "3c3b18e0-433f-11ed-b7bf-19cd1c47b16d";
     public const string Rank_Relic_Uuid = "e24e0610-257c-11ed-9935-efa0a6ef95f0";
     public const string Rank_MiniGame_Uuid = "e1dced80-5954-11ec-b084-d1a61d5ec8e2";
     public const string Rank_Guild_Uuid = "ff017920-698b-11ec-b243-8d1fccc57e3d";
@@ -77,13 +77,13 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_GangChul_Boss_Uuid = "9d88e4d0-b76f-11ec-8ef8-7f0c591b422a";
     public const string Rank_GangChul_Guild_Boss_Uuid = "be9d79d0-b754-11ec-8ef8-7f0c591b422a";
     public const string Rank_Guild_Reset_GangChul_Uuid = "a1a406a0-b754-11ec-8ac4-7dc9d81a6e2f";
-    public const string Rank_ChunmaTop_Uuid = "a1a406a0-b754-11ec-8ac4-7dc9d81a6e2f";
+    public const string Rank_ChunmaTop_Uuid = "8f5ebfc0-4341-11ed-844a-55337d4fa4d7";
 
     //
     public const string Rank_Level_TableName = "Rank_Level";
     public const string Rank_Stage = "Rank_Stage";
     public const string Rank_Boss = "HellWar_And";
-    public const string Rank_Real_Boss = "ChunMa_And";
+    public const string Rank_Real_Boss = "Party_Solo_And";
     public const string Rank_Relic = "HelRelicRank";
     public const string Rank_MiniGame = "Rank_MiniGame";
     public const string Rank_GangChul = "Guild_Boss_And";
@@ -94,7 +94,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Level_Uuid = "ea8c9430-38cf-11ec-955f-fb3c68e97f2a";
     public const string Rank_Stage_Uuid = "f865e900-31b6-11ec-b4ab-713be46ddb60";
     public const string Rank_Boss_Uuid = "e1c32ce0-2e1c-11ed-96b7-6b63e308d9f4";
-    public const string Rank_Real_Boss_Uuid = "aa3cfc10-36b4-11ed-99be-5bf2e93d0d4a";
+    public const string Rank_Real_Boss_Uuid = "483029b0-433f-11ed-b7bf-19cd1c47b16d";
     public const string Rank_Relic_Uuid = "ee37f350-257c-11ed-9935-efa0a6ef95f0";
     public const string Rank_MiniGame_Uuid = "edec1600-5954-11ec-8846-eb56e6e68bb1";
     public const string Rank_Guild_Uuid = "10619010-698c-11ec-b243-8d1fccc57e3d";
@@ -104,13 +104,13 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_GangChul_Boss_Uuid = "c09780d0-b76f-11ec-8ac4-7dc9d81a6e2f";
     public const string Rank_GangChul_Guild_Boss_Uuid = "c7a57cd0-b754-11ec-8ef8-7f0c591b422a";
     public const string Rank_Guild_Reset_GangChul_Uuid = "ac06b7a0-b754-11ec-8ac4-7dc9d81a6e2f";
-    public const string Rank_ChunmaTop_Uuid = "a1a406a0-b754-11ec-8ac4-7dc9d81a6e2f";
+    public const string Rank_ChunmaTop_Uuid = "aa2dfff0-4341-11ed-844a-55337d4fa4d7";
 
 
     public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";
     public const string Rank_Boss = "HellWar_IOS";
-    public const string Rank_Real_Boss = "ChunMa_IOS";
+    public const string Rank_Real_Boss = "Party_Solo_IOS";
     public const string Rank_Relic = "HelRelicRank_IOS";
     public const string Rank_MiniGame = "Rank_MiniGame_IOS";
     public const string Rank_GangChul = "Guild_Boss_IOS";
@@ -193,7 +193,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateUserRank_Level()
     {
-        if (UpdateRank() == false) return;
+      //  if (UpdateRank() == false) return;
 
         Param param = new Param();
         param.Add("Level", ServerData.statusTable.GetTableData(StatusTable.Level).Value);
@@ -275,7 +275,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateStage_Score(double score)
     {
-        if (UpdateRank() == false) return;
+      //  if (UpdateRank() == false) return;
         Param param = new Param();
         param.Add("Score", score);
 
@@ -360,7 +360,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateBoss_Score(double score)
     {
-        if (UpdateRank() == false) return;
+       // if (UpdateRank() == false) return;
 
         if (score == 0) return;
 
@@ -544,7 +544,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRealBoss_Score_GangChul(double score)
     {
-        if (UpdateRank() == false) return;
+     //   if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.GangChul] != null && score < this.myRankInfo[RankType.GangChul].Score)
         {
             Debug.LogError("점수가 더 낮음");
@@ -634,7 +634,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateChunmaTop(double score)
     {
-        if (UpdateRank() == false) return;
+     //   if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.ChunmaTop] != null && score < this.myRankInfo[RankType.ChunmaTop].Score)
         {
             Debug.LogError("점수가 더 낮음");
@@ -655,7 +655,7 @@ public class RankManager : SingletonMono<RankManager>
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
 
-        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_ChunmaTop_Uuid, Rank_ChunmaTop, RankTable_Real_Boss_GangChul.Indate, param, bro =>
+        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_ChunmaTop_Uuid, Rank_ChunmaTop, RankTable_ChunmaTop.Indate, param, bro =>
         {
             // 이후처리
             if (bro.IsSuccess())

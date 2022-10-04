@@ -102,6 +102,9 @@ public enum Item_Type
     HaeWeapon,
     Fw,
     Cw,
+    ChunNorigae0,
+    ChunNorigae1,
+    ChunNorigae2,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -110,7 +113,7 @@ public enum Item_Type
     RankFrame5 = 104,
     RankFrame6_20 = 105,
     RankFrame21_100 = 106,
-    RankFrame101_1000 = 107,  
+    RankFrame101_1000 = 107,
     RankFrame1001_10000 = 108,
 
     RankFrame1_relic = 200,
@@ -304,6 +307,10 @@ public enum Item_Type
     costume54 = 1255,
     costume55 = 1256,
 
+    costume56 = 1257,
+    costume57 = 1258,
+    costume58 = 1259,
+
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,
@@ -334,13 +341,13 @@ public enum Item_Type
     h9 = 6009,
 
     //천계 칠션녀 전용템
-    c0 =7000,
-    c1 =7001,
-    c2 =7002,
-    c3 =7003,
-    c4 =7004,
-    c5 =7005,
-    c6 =7006,
+    c0 = 7000,
+    c1 = 7001,
+    c2 = 7002,
+    c3 = 7003,
+    c4 = 7004,
+    c5 = 7005,
+    c6 = 7006,
 
 }
 

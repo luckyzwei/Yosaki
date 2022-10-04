@@ -31,14 +31,14 @@ public class UiChunMaTopRankerBoard : MonoBehaviour
 
     private void OnEnable()
     {
-        UiTopRankerView_GangChul.Instance.DisableAllCell();
+        UiTopRankerView_Chunma.Instance.DisableAllCell();
         SetTitle();
         LoadRankInfo();
     }
 
     private void SetTitle()
     {
-        title.SetText($"랭킹({CommonString.RankPrefix_GangChul})");
+        title.SetText($"랭킹({CommonString.RankPrefix_ChunMaTop})");
     }
 
     private void Start()
@@ -48,15 +48,15 @@ public class UiChunMaTopRankerBoard : MonoBehaviour
 
     private void Subscribe()
     {
-        RankManager.Instance.WhenMyRealGangChulBossRankLoadComplete.AsObservable().Subscribe(e =>
+        RankManager.Instance.WhenMyChunMaTopRankLoadComplete.AsObservable().Subscribe(e =>
         {
             if (e != null)
             {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName, e.maskIdx, isGangChul: true);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.fightPointIdx, e.GuildName, e.maskIdx, rankType: UiRankView.RankType.ChunMa);
             }
             else
             {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1, string.Empty, -1, isGangChul: true);
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1, string.Empty, -1, rankType: UiRankView.RankType.ChunMa);
             }
 
 
@@ -67,8 +67,8 @@ public class UiChunMaTopRankerBoard : MonoBehaviour
         rankViewParent.gameObject.SetActive(false);
         loadingMask.SetActive(false);
         failObject.SetActive(false);
-        RankManager.Instance.GetRankerList(RankManager.Rank_GangChul_Boss_Uuid, 100, WhenAllRankerLoadComplete);
-        RankManager.Instance.RequestMyRealBossGangChulRank();
+        RankManager.Instance.GetRankerList(RankManager.Rank_ChunmaTop_Uuid, 4, WhenAllRankerLoadComplete);
+        RankManager.Instance.RequestChunMaTopRank();
     }
 
     private void WhenAllRankerLoadComplete(BackendReturnObject bro)
@@ -141,7 +141,7 @@ public class UiChunMaTopRankerBoard : MonoBehaviour
                             guildName = splitData[7];
                         }
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint, guildName, maskIdx, isGangChul: true);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, fightPoint, guildName, maskIdx, rankType: UiRankView.RankType.ChunMa);
                     }
                     else
                     {

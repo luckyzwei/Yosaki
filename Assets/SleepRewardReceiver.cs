@@ -174,7 +174,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += sleepRewardInfo.eventItem;
         }
 
-      //  ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += sleepRewardInfo.springItem;
+        //  ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += sleepRewardInfo.springItem;
         ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += sleepRewardInfo.springItem;
 
 
@@ -194,7 +194,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
 
         ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value += sleepRewardInfo.killCount;
-        ServerData.userInfoTable.TableDatas[UserInfoTable.attenCountOne].Value += sleepRewardInfo.killCount;
+        //ServerData.userInfoTable.TableDatas[UserInfoTable.attenCountOne].Value += sleepRewardInfo.killCount;
 
         Param goodsParam = new Param();
         goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);
@@ -208,7 +208,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
         }
 
-     //   goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
+        //   goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
         goodsParam.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
 
         goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
@@ -228,7 +228,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
 
         userInfoParam.Add(UserInfoTable.killCountTotalChild, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value);
-        userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.TableDatas[UserInfoTable.attenCountOne].Value);
+        // userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.TableDatas[UserInfoTable.attenCountOne].Value);
 
 
         yield return new WaitForSeconds(0.5f);
@@ -265,6 +265,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
               LogManager.Instance.SendLogType("SleepReward", "Get", elapsedSeconds.ToString());
               UiExpGauge.Instance.WhenGrowthValueChanged();
               DailyMissionManager.SyncAllMissions();
+              UiTutorialManager.Instance.SetClear(TutorialStep.GetSleepReward);
           });
     }
 

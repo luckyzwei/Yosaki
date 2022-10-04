@@ -612,8 +612,8 @@ public class ChildPassServerTable
     public const string tableName = "ChildPass";
 
 
-    public static string childFree = "f4";
-    public static string childAd = "a4";
+    public static string childFree = "f5";
+    public static string childAd = "a5";
 
     public static string childFree_Atten = "atf";
     public static string childAd_Atten = "ata";

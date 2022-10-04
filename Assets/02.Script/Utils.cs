@@ -73,7 +73,10 @@ public static class Utils
                   type == Item_Type.costume52 ||
                   type == Item_Type.costume53 ||
                   type == Item_Type.costume54 ||
-                  type == Item_Type.costume55;
+                  type == Item_Type.costume55 ||
+                  type == Item_Type.costume56 ||
+                  type == Item_Type.costume57 ||
+                  type == Item_Type.costume58;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -107,6 +110,11 @@ public static class Utils
                 type == Item_Type.RabitNorigae ||
                 type == Item_Type.YeaRaeNorigae ||
                 type == Item_Type.GangrimNorigae ||
+
+                type == Item_Type.ChunNorigae0 ||
+                type == Item_Type.ChunNorigae1 ||
+                type == Item_Type.ChunNorigae2 ||
+
                 type == Item_Type.YeaRaeWeapon ||
                 type == Item_Type.GangrimWeapon ||
                 type == Item_Type.HaeWeapon ||

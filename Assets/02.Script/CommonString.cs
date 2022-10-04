@@ -47,6 +47,7 @@ public static class CommonString
     public static string ItemGrade_10_Norigae = "영물";
     public static string ItemGrade_11_Norigae = "지옥";
     public static string ItemGrade_12_Norigae = "여래";
+    public static string ItemGrade_13_Norigae = "천상계";
 
     public static string ItemGrade_4_Skill = "주작";
     public static string ItemGrade_5_Skill = "청룡";
@@ -74,6 +75,7 @@ public static class CommonString
     public static string RankPrefix_Relic = "영혼의숲(지옥)";
     public static string RankPrefix_MiniGame = "미니게임";
     public static string RankPrefix_GangChul = "강철이";
+    public static string RankPrefix_ChunMaTop = "십만대산";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
 
@@ -178,6 +180,9 @@ public static class CommonString
             case Item_Type.costume53: return TableManager.Instance.Costume.dataArray[53].Name;
             case Item_Type.costume54: return TableManager.Instance.Costume.dataArray[54].Name;
             case Item_Type.costume55: return TableManager.Instance.Costume.dataArray[55].Name;
+            case Item_Type.costume56: return TableManager.Instance.Costume.dataArray[56].Name;
+            case Item_Type.costume57: return TableManager.Instance.Costume.dataArray[57].Name;
+            case Item_Type.costume58: return TableManager.Instance.Costume.dataArray[58].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;

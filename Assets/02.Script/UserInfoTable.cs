@@ -109,10 +109,10 @@ public class UserInfoTable
     public const string killCountTotal = "k10";
     //7월월간
     public const string killCountTotal2 = "k9w";
-    public const string killCountTotalChild = "cuk";
+    public const string killCountTotalChild = "fal"; //한가위
     public const string attenCountBok = "kb";
     public const string attenCountChuSeok = "kchu";
-    public const string attenCountOne = "oy";
+    public const string attenCountOne = "oy"; //일주년
 
     public const string relicKillCount = "relicKillCount";
     public const string hellRelicKillCount = "hrk";
@@ -473,7 +473,7 @@ public class UserInfoTable
         }
 
         UpData(killCountTotalChild, false);
-        UpData(attenCountOne, false);
+        //UpData(attenCountOne, false);
     }
     private void UpdatejumpCount()
     {
@@ -930,7 +930,7 @@ public class UserInfoTable
             }
 
             tableDatas[killCountTotalChild].Value += updateRequireNum;
-            tableDatas[attenCountOne].Value += updateRequireNum;
+            //tableDatas[attenCountOne].Value += updateRequireNum;
         }
 
     }

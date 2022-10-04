@@ -51,6 +51,12 @@ public class UiSleepRewardIndicator : MonoBehaviour
             return;
         }
 
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value == -1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("첫번째 스테이지 에서는 받으실 수 없습니다.");
+            return;
+        }
+
         button.interactable = false;
 
         SleepRewardReceiver.Instance.SetElapsedSecond(elapsedTime);

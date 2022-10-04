@@ -23,7 +23,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
               double score = PartyRaidManager.Instance.NetworkManager.GetTotalScore();
 
               //랭킹등록
-              RankManager.Instance.UpdateRealBoss_Score(score);
+              RankManager.Instance.UpdateChunmaTop(score);
 
               //로컬 점수 등록
 

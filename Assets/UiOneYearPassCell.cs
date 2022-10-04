@@ -175,7 +175,7 @@ public class UiOneYearPassCell : MonoBehaviour
 
         //킬카운트
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value);
+        //userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
@@ -201,7 +201,7 @@ public class UiOneYearPassCell : MonoBehaviour
 
         //킬카운트
         Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value);
+        //userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>

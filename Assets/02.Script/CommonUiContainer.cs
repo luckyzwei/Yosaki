@@ -12,7 +12,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14, CommonString.ItemGrade_15, CommonString.ItemGrade_16, CommonString.ItemGrade_17, CommonString.ItemGrade_18 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
-    private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae, CommonString.ItemGrade_10_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae };
+    private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae, CommonString.ItemGrade_10_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae, CommonString.ItemGrade_13_Norigae };
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
     private List<string> itemGradeName_Skill = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill, CommonString.ItemGrade_6_Skill, CommonString.ItemGrade_7_Skill, CommonString.ItemGrade_8_Skill, CommonString.ItemGrade_9_Skill };
@@ -94,6 +94,11 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite RabitNorigae;
     public Sprite YeaRaeNorigae;
     public Sprite GangrimNorigae;
+
+    public Sprite ChunNorigae0;
+    public Sprite ChunNorigae1;
+    public Sprite ChunNorigae2;
+
     public Sprite YeaRaeWeapon;
     public Sprite GangrimWeapon;
     public Sprite HaeWeapon;
@@ -330,16 +335,28 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.costume52:
                 return costumeThumbnail[52];
-                break;   
+                break;
             case Item_Type.costume53:
                 return costumeThumbnail[53];
-                break; 
+                break;
             case Item_Type.costume54:
                 return costumeThumbnail[54];
-                break; 
+                break;
             case Item_Type.costume55:
                 return costumeThumbnail[55];
                 break;
+
+            //
+            case Item_Type.costume56:
+                return costumeThumbnail[56];
+                break;
+            case Item_Type.costume57:
+                return costumeThumbnail[57];
+                break;
+            case Item_Type.costume58:
+                return costumeThumbnail[58];
+                break;
+            //
 
 
             case Item_Type.RankFrame1:
@@ -523,11 +540,11 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.Ym:
                 return YeoMarble;
-                break; 
-            
+                break;
+
             case Item_Type.Fw:
                 return Fw;
-                break;  
+                break;
             case Item_Type.Cw:
                 return Cw;
                 break;
@@ -563,13 +580,24 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.GangrimNorigae:
                 return GangrimNorigae;
                 break;
-            case Item_Type.YeaRaeWeapon:
-                return YeaRaeWeapon;
+
+            case Item_Type.ChunNorigae0:
+                return ChunNorigae0;
                 break;
+
+            case Item_Type.ChunNorigae1:
+                return ChunNorigae1;
+                break;
+
+            case Item_Type.ChunNorigae2:
+                return ChunNorigae2;
+                break;
+
+
             case Item_Type.GangrimWeapon:
                 return GangrimWeapon;
-                break; 
-            
+                break;
+
             case Item_Type.HaeWeapon:
                 return HaeWeapon;
                 break;
@@ -738,7 +766,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.h6: return CommonResourceContainer.GetHellIconSprite(6);
             case Item_Type.h7: return CommonResourceContainer.GetHellIconSprite(7);
             case Item_Type.h8: return CommonResourceContainer.GetHellIconSprite(8);
-            case Item_Type.h9: return CommonResourceContainer.GetHellIconSprite(9);
+            case Item_Type.h9:
+                return CommonResourceContainer.GetHellIconSprite(9);
                 break;
 
             case Item_Type.c0: return CommonResourceContainer.GetChunIconSprite(0);
@@ -747,7 +776,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.c3: return CommonResourceContainer.GetChunIconSprite(3);
             case Item_Type.c4: return CommonResourceContainer.GetChunIconSprite(4);
             case Item_Type.c5: return CommonResourceContainer.GetChunIconSprite(5);
-            case Item_Type.c6: return CommonResourceContainer.GetChunIconSprite(6);
+            case Item_Type.c6:
+                return CommonResourceContainer.GetChunIconSprite(6);
                 break;
 
         }

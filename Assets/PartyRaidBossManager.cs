@@ -208,13 +208,16 @@ public class PartyRaidBossManager : ContentsManagerBase
         }
 
         //점수 전송
-        SendScore();
+        SendLastScore();
 
         //보상팝업
         ShowResultPopup();
+
+        //개인랭킹 등록
+        SendPrivateScore();
     }
 
-    private void SendScore()
+    private void SendLastScore()
     {
         StopCoroutine(sendScoreRoutine);
         //end
@@ -233,6 +236,13 @@ public class PartyRaidBossManager : ContentsManagerBase
         PartyRaidManager.Instance.NetworkManager.scoreBoardPanel.SetActive(false);
 
     }
+
+    private void SendPrivateScore()
+    {
+        RankManager.Instance.UpdateRealBoss_Score(damageAmount.Value);
+    }
+
+
     protected override IEnumerator ModeTimer()
     {
         while (direciontEnd == false)

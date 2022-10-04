@@ -172,7 +172,7 @@ public class UiChildPassCell : MonoBehaviour
         }
         else
         {
-            PopupManager.Instance.ShowAlarmMessage($"한가위 패스권이 필요합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"가을 패스권이 필요합니다.");
         }
     }
 
