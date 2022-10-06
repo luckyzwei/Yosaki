@@ -66,6 +66,7 @@ public static class PlayerStats
 
         double feelMulDam = GetSuperCritical2DamPer();
         double hellDam = GetSuperCritical3DamPer();
+        double chunSangDam = GetSuperCritical4DamPer();
 
         double totalPower =
           ((baseAttack + baseAttack * baseAttackPer)
@@ -84,7 +85,8 @@ public static class PlayerStats
         totalPower += totalPower * GetSuperCriticalDamPer() * superCriticalProb;
 
         totalPower += totalPower * feelMulDam;
-        totalPower += totalPower * hellDam; ;
+        totalPower += totalPower * hellDam;
+        totalPower += (totalPower * chunSangDam);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -266,6 +268,7 @@ public static class PlayerStats
         ret += GetMaskAttackAddPerDam();
         ret += GetRelicReleaseValue();
         ret += GetHellAbilHasEffect(StatusType.AttackAddPer);
+        ret += GetChunAbilHasEffect(StatusType.AttackAddPer);
 
         return ret;
     }
@@ -599,6 +602,8 @@ public static class PlayerStats
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.SkillCoolTime);
         ret += GetBuffValue(StatusType.SkillCoolTime);
         ret += GetYomulUpgradeValue(StatusType.SkillCoolTime);
+
+        ret += IsChunAttackSpeedAwake() ? 0.05f : 0f;
 
         return ret;
     }
@@ -1085,6 +1090,10 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetChunMarkValue();
+
+        ret += GetChunAbilHasEffect(StatusType.SuperCritical4DamPer);
+
+        ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical4DamPer);
 
         return ret;
     }
@@ -1952,6 +1961,24 @@ public static class PlayerStats
         float addValue = ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value;
 
         return kt * gumgiSoulAbilValue + addValue * 0.01f;
+    }
+
+    public static bool IsChunQuickMoveAwake()
+    {
+        return false;
+
+        var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
+        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[0].Requirespeicalabilflower;
+        return chunFlowerNum >= requireFlower;
+    }
+
+    public static bool IsChunAttackSpeedAwake()
+    {
+        return false;
+
+        var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
+        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[2].Requirespeicalabilflower;
+        return chunFlowerNum >= requireFlower;
     }
 
 }

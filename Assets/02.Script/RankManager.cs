@@ -275,7 +275,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateStage_Score(double score)
     {
-      //  if (UpdateRank() == false) return;
+        if (UpdateRank() == false) return;
         Param param = new Param();
         param.Add("Score", score);
 

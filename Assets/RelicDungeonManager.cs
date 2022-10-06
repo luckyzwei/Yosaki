@@ -163,20 +163,7 @@ public class RelicDungeonManager : ContentsManagerBase
 
     public double GetEnemyHp()
     {
-        int enemyTableIdx = spawnCount * 2;
-
-        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
-
-        //최대층
-        if (enemyTableIdx == TableManager.Instance.EnemyTable.dataArray.Length - 1)
-        {
-            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (spawnCount * 0.6f);
-        }
-        else
-        {
-            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * 1000;
-        }
-
+        return System.Math.Pow(1.0144, spawnCount);
     }
 
     public int GetEnemyDefense()

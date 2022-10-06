@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChunAbilMarkDescriptionBoard : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class ChunAbilMarkDescriptionBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI specialLockObject;
 
+    [SerializeField]
+    private Image abilIcon;
+
     private void Start()
     {
         Initialize(0);
@@ -34,6 +38,8 @@ public class ChunAbilMarkDescriptionBoard : MonoBehaviour
     public void Initialize(int idx)
     {
         var tableData = TableManager.Instance.chunMarkAbil.dataArray[idx];
+
+        lockObject.gameObject.SetActive(ServerData.goodsTable.GetTableData(tableData.Goods).Value == 0 && tableData.Islock == false);
 
         nameDescription.SetText(tableData.Name);
 
@@ -47,9 +53,10 @@ public class ChunAbilMarkDescriptionBoard : MonoBehaviour
 
         var goods = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
 
-        float needAmount = tableData.Requirespeicalabilflower;
 
-        specialLockObject.SetText(tableData.Requirespeicalabilflower < goods ? $"비활성화\n({CommonString.GetItemName(Item_Type.Cw)}{Utils.ConvertBigNum(needAmount)}이상 필요)" : "활성화됨");
+        specialLockObject.SetText(tableData.Requirespeicalabilflower > goods ? $"<color=red>비활성화\n({CommonString.GetItemName(Item_Type.Cw)}{Utils.ConvertBigNum(tableData.Requirespeicalabilflower)}이상 필요)" : "<color=yellow>활성화됨");
+
+        abilIcon.sprite = CommonResourceContainer.GetChunIconSprite(idx);
     }
 
 }

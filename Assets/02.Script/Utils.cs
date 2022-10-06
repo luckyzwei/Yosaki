@@ -115,6 +115,10 @@ public static class Utils
                 type == Item_Type.ChunNorigae1 ||
                 type == Item_Type.ChunNorigae2 ||
 
+                type == Item_Type.ChunSun0 ||
+                type == Item_Type.ChunSun1 ||
+                type == Item_Type.ChunSun2 ||
+
                 type == Item_Type.YeaRaeWeapon ||
                 type == Item_Type.GangrimWeapon ||
                 type == Item_Type.HaeWeapon ||
@@ -138,7 +142,7 @@ public static class Utils
 
     public static bool IsWeaponItem(this Item_Type type)
     {
-        return type >= Item_Type.weapon0 && type <= Item_Type.weapon41;
+        return type >= Item_Type.weapon0 && type <= Item_Type.weapon42;
     }
 
     public static bool IsNorigaeItem(this Item_Type type)

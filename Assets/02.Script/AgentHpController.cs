@@ -176,6 +176,9 @@ public class AgentHpController : MonoBehaviour
         //지옥 데미지
         value += value * PlayerStats.GetSuperCritical3DamPer();
 
+        //천상베기 데미지
+        value += value * PlayerStats.GetSuperCritical4DamPer();
+
         ///
     }
     private Vector3 damTextspawnPos;

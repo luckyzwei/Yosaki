@@ -21,10 +21,18 @@ public class UiChunFlowerBoard : MonoBehaviour
 
     public TextMeshProUGUI getButtonDesc;
 
+
     private void Start()
     {
         Initialize();
         Subscribe();
+        SetFlowerReward();
+    }
+
+    //기능 보류
+    private void SetFlowerReward()
+    {
+        //chunFlowerReward.Initialize(TableManager.Instance.TwelveBossTable.dataArray[65]);
     }
 
     private void Subscribe()
@@ -71,7 +79,7 @@ public class UiChunFlowerBoard : MonoBehaviour
 
     private void Initialize()
     {
-        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.chunClear].Value)}");
+        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.flowerClear].Value)}");
     }
 
     public void OnClickEnterButton()
@@ -81,7 +89,7 @@ public class UiChunFlowerBoard : MonoBehaviour
             GameManager.Instance.LoadContents(GameManager.ContentsType.ChunFlower);
         }, () => { });
     }
-   
+
 
 #if UNITY_EDITOR
     private void Update()
@@ -127,7 +135,7 @@ public class UiChunFlowerBoard : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SmithFire)} {score}개 획득!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Cw)} {score}개 획득!", null);
             });
         }, null);
     }

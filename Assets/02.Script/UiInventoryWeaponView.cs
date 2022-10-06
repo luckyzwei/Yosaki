@@ -813,7 +813,7 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            if (weaponData.Id >= 37 && weaponData.Id <= 41)
+            if (weaponData.Id >= 37 && weaponData.Id <= 42)
             {
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
                 return;

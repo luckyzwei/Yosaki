@@ -28,6 +28,9 @@ public class UiPackageShop : MonoBehaviour
     [SerializeField]
     private Transform springEventParent;
 
+    [SerializeField]
+    private Transform chunFlower;
+
     private void Start()
     {
         Initialize();
@@ -41,11 +44,11 @@ public class UiPackageShop : MonoBehaviour
         {
             if (e.Current.Value.Active == false) continue;
 
-            if (e.Current.Value.SHOPCATEGORY == ShopCategory.Gem) 
+            if (e.Current.Value.SHOPCATEGORY == ShopCategory.Gem)
             {
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, gemCategoryParent);
                 cell.Initialize(e.Current.Value);
-                
+
             }
             else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit1)
             {
@@ -76,6 +79,11 @@ public class UiPackageShop : MonoBehaviour
             else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Event3)
             {
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, springEventParent);
+                cell.Initialize(e.Current.Value);
+            }  
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.ChunFlower)
+            {
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, chunFlower);
                 cell.Initialize(e.Current.Value);
             }
         }

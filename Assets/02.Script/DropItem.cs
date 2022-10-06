@@ -105,6 +105,9 @@ public enum Item_Type
     ChunNorigae0,
     ChunNorigae1,
     ChunNorigae2,
+    ChunSun0,
+    ChunSun1,
+    ChunSun2,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -214,6 +217,7 @@ public enum Item_Type
     weapon39 = 1039,
     weapon40 = 1040,
     weapon41 = 1041,
+    weapon42 = 1042,
     //
 
     //2000~2100 마도서

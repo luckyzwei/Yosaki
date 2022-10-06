@@ -69,11 +69,11 @@ public class ChunFlowerManager : SingletonMono<GumGiSoulManager>
 
     private void SetEndText()
     {
-        endText.SetText($"요괴 {enemyMaxCount}초과시 종료");
+        endText.SetText($"천계꽃 {enemyMaxCount}초과시 종료");
     }
     private void SetFirstStage()
     {
-        int lastStage = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.flowerClear].Value - (enemyMaxCount * 5);
+        int lastStage = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.flowerClear].Value - (enemyMaxCount * 2);
 
         lastStage = Mathf.Max(0, lastStage);
 
@@ -83,7 +83,7 @@ public class ChunFlowerManager : SingletonMono<GumGiSoulManager>
 
         enemyDeadCount.AsObservable().Subscribe(e =>
         {
-            enemyKillCount.SetText($"{e} 처치!");
+            enemyKillCount.SetText($"{e} 획득!");
         }).AddTo(this);
     }
 
@@ -162,7 +162,7 @@ public class ChunFlowerManager : SingletonMono<GumGiSoulManager>
 
         remainTimeObject.SetActive(true);
 
-        PopupManager.Instance.ShowAlarmMessage("검의산 영혼들이 나타납니다.");
+        PopupManager.Instance.ShowAlarmMessage("천계의 꽃들이 나타납니다.");
 
         startTimerObject.gameObject.SetActive(false);
 
@@ -175,7 +175,7 @@ public class ChunFlowerManager : SingletonMono<GumGiSoulManager>
     [SerializeField]
     private TextMeshProUGUI currentWaveText;
 
-    private WaitForSeconds spawnDelay = new WaitForSeconds(0.9f);
+    private WaitForSeconds spawnDelay = new WaitForSeconds(0.4f);
 
     private IEnumerator MainGameRoutine()
     {
@@ -206,7 +206,7 @@ public class ChunFlowerManager : SingletonMono<GumGiSoulManager>
     {
         EnemyTableData enemyData = new EnemyTableData();
 
-        enemyData.Hp = System.Math.Pow(2d, enemyDeadCount.Value);
+        enemyData.Hp = System.Math.Pow(1.1, enemyDeadCount.Value);
 
         enemyData.Attackpower = 0;
 
@@ -257,7 +257,7 @@ public class ChunFlowerManager : SingletonMono<GumGiSoulManager>
     private static string PlayStr = "Play";
     private void UpdateRemainEnemy()
     {
-        remainEnemyText.SetText($"남은 영혼:{spawnedEnemyList.Count}/{enemyMaxCount}");
+        remainEnemyText.SetText($"남은 꽃:{spawnedEnemyList.Count}/{enemyMaxCount}");
 
         if (remainTextAnim != null)
         {
@@ -299,15 +299,15 @@ public class ChunFlowerManager : SingletonMono<GumGiSoulManager>
 
         StopGameRoutines();
 
-        int pref = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value;
+        int pref = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.flowerClear].Value;
 
         int updateValue = enemyDeadCount.Value;
 
         if (updateValue > pref)
         {
-            ServerData.userInfoTable.UpData(UserInfoTable.gumGiSoulClear, updateValue, false);
+            ServerData.userInfoTable.UpData(UserInfoTable.flowerClear, updateValue, false);
         }
 
-        uiSogulResultPopup.Initialize(updateValue, false, deadFlag, defix: "마리 흡수!!");
+        uiSogulResultPopup.Initialize(updateValue, false, deadFlag, defix: "개 획득!!");
     }
 }

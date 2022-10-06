@@ -98,6 +98,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite ChunNorigae0;
     public Sprite ChunNorigae1;
     public Sprite ChunNorigae2;
+    
+    public Sprite ChunSun0;
+    public Sprite ChunSun1;
+    public Sprite ChunSun2;
 
     public Sprite YeaRaeWeapon;
     public Sprite GangrimWeapon;
@@ -592,6 +596,21 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.ChunNorigae2:
                 return ChunNorigae2;
                 break;
+            //
+            case Item_Type.ChunSun0:
+                return ChunSun0;
+                break;
+
+            case Item_Type.ChunSun1:
+                return ChunSun1;
+                break;
+
+            case Item_Type.ChunSun2:
+                return ChunSun2;
+                break;
+
+
+            //
 
 
             case Item_Type.GangrimWeapon:

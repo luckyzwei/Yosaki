@@ -542,6 +542,9 @@ public class ChatManager : SingletonMono<ChatManager>
             case RankType.MiniGame:
                 return CommonString.RankPrefix_MiniGame;
                 break;
+            case RankType.ChunmaTop:
+                return CommonString.RankPrefix_ChunMaTop;
+                break;
         }
 
         return "미등록";

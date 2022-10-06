@@ -135,6 +135,10 @@ public class UiPensionObjectView : MonoBehaviour
         else if (pensionKey == "hellpension")
         {
             itemType = Item_Type.Hel;
+        } 
+        else if (pensionKey == "chunpension")
+        {
+            itemType = Item_Type.Cw;
         }
 
         List<TransactionValue> transactions = new List<TransactionValue>();

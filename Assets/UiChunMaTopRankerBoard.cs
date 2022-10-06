@@ -31,7 +31,7 @@ public class UiChunMaTopRankerBoard : MonoBehaviour
 
     private void OnEnable()
     {
-        UiTopRankerView_Chunma.Instance.DisableAllCell();
+        //UiTopRankerView_Chunma.Instance.DisableAllCell();
         SetTitle();
         LoadRankInfo();
     }

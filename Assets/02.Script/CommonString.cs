@@ -71,11 +71,11 @@ public static class CommonString
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "지옥탈환전(지옥)";
-    public static string RankPrefix_Real_Boss = "십만대산";
+    public static string RankPrefix_Real_Boss = "십만대산(개인)";
     public static string RankPrefix_Relic = "영혼의숲(지옥)";
     public static string RankPrefix_MiniGame = "미니게임";
     public static string RankPrefix_GangChul = "강철이";
-    public static string RankPrefix_ChunMaTop = "십만대산";
+    public static string RankPrefix_ChunMaTop = "십만대산(파티)";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
 
@@ -198,6 +198,7 @@ public static class CommonString
             case Item_Type.weapon39: return "홍접선";
             case Item_Type.weapon40: return "화접선";
             case Item_Type.weapon41: return "천성선";
+            case Item_Type.weapon42: return "천공선";
 
                 //
             case Item_Type.magicBook11: return "특급 1등급 노리개";
@@ -414,6 +415,9 @@ public static class CommonString
                 break;   
             case StatusType.SuperCritical3DamPer:
                 return "지옥베기 피해(%)";
+                break;
+            case StatusType.SuperCritical4DamPer:
+                return "천상베기 피해(%)";
                 break;
         }
 

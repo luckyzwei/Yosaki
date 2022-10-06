@@ -28,6 +28,7 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
     private const float quickMoveDelaySec = 0.5f;
     private const float quickMoveDelaySec_Awake = 0.25f;
     private const float quickMoveDelaySec_New_Weapon = 0.16f;
+    private const float quickMoveDelaySec_ChunAwake = 0.11f;
 
     [SerializeField]
     private Image quickMoveDelayGauge;
@@ -149,8 +150,13 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
 
         bool marbleAwake = ServerData.userInfoTable.TableDatas[UserInfoTable.marbleAwake].Value == 1f;
         bool hasNewWaepon = ServerData.weaponTable.TableDatas[newWeaponKey1].hasItem.Value == 1 || ServerData.weaponTable.TableDatas[newWeaponKey2].hasItem.Value == 1;
+        bool awakeChunAbil = PlayerStats.IsChunQuickMoveAwake();
 
-        if (hasNewWaepon)
+        if (awakeChunAbil)
+        {
+            delay = quickMoveDelaySec_ChunAwake;
+        }
+        else if (hasNewWaepon)
         {
             delay = quickMoveDelaySec_New_Weapon;
         }

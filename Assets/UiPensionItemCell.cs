@@ -128,6 +128,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             itemType = Item_Type.Hel;
         }
+        else if (pensionKey == "chunpension")
+        {
+            itemType = Item_Type.Cw;
+        }
         else
         {
             itemType = Item_Type.SmithFire;

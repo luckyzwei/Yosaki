@@ -39,6 +39,7 @@ public class WeaponEquipView : MonoBehaviour
         weaponImage.gameObject.SetActive(idx < 21);
         weaponImage_long.gameObject.SetActive(idx >= 21 && idx < 37);
         weaponImage_Bu.gameObject.SetActive(idx >= 37 && idx <= 41);
+        weaponImage_long.gameObject.SetActive(idx >= 42);
 
         newEffect.gameObject.SetActive(idx == 22);
         //var weaponGrade = TableManager.Instance.WeaponData[idx].Grade;
