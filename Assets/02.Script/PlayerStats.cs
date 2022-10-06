@@ -1819,6 +1819,11 @@ public static class PlayerStats
         if (ServerData.costumeServerTable.TableDatas[hellCostumeKey1].hasCostume.Value == true)
         {
             ret += 0.1f;
+        } 
+        
+        if (IsChunCostumeBossHpDec())
+        {
+            ret += 0.05f;
         }
 
         return ret;
@@ -1965,8 +1970,6 @@ public static class PlayerStats
 
     public static bool IsChunQuickMoveAwake()
     {
-        return false;
-
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[0].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
@@ -1974,10 +1977,15 @@ public static class PlayerStats
 
     public static bool IsChunAttackSpeedAwake()
     {
-        return false;
-
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[2].Requirespeicalabilflower;
+        return chunFlowerNum >= requireFlower;
+    }
+
+    public static bool IsChunCostumeBossHpDec()
+    {
+        var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
+        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[3].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
     }
 

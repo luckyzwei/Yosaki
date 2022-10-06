@@ -20,10 +20,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
     {
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"점수를 등록하고 나갈가요?\n<color=red>(주의)현재 결과화면에 기록된 점수의 합으로 등록 됩니다.\n총 : {Utils.ConvertBigNum(PartyRaidManager.Instance.NetworkManager.GetTotalScore())}점", () =>
           {
-              double score = PartyRaidManager.Instance.NetworkManager.GetTotalScore();
-
-              //랭킹등록
-              RankManager.Instance.UpdateChunmaTop(score);
+              double totalScore = PartyRaidManager.Instance.NetworkManager.GetTotalScore();
 
               //로컬 점수 등록
 
@@ -33,20 +30,26 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
 
               if (string.IsNullOrEmpty(serverData.score.Value) == false)
               {
-                  if (score < double.Parse(serverData.score.Value))
+                  if (totalScore < double.Parse(serverData.score.Value))
                   {
                       //return;
                   }
                   else
                   {
-                      serverData.score.Value = score.ToString();
+                      //랭킹등록
+                      RankManager.Instance.UpdateChunmaTop(totalScore);
+
+                      serverData.score.Value = totalScore.ToString();
 
                       ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
                   }
               }
               else
               {
-                  serverData.score.Value = score.ToString();
+                  //랭킹등록
+                  RankManager.Instance.UpdateChunmaTop(totalScore);
+
+                  serverData.score.Value = totalScore.ToString();
 
                   ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
               }
@@ -56,8 +59,6 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
 
               //로비로 이동하기
               GameManager.Instance.LoadNormalField();
-
-              
 
 
           }, () => { });

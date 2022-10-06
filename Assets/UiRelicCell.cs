@@ -64,7 +64,7 @@ public class UiRelicCell : MonoBehaviour
             {
                 var abilValue = PlayerStats.GetRelicHasEffect(abilType);
 
-                relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {abilValue * 100f}%");
+                relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {Utils.ConvertBigNum(abilValue * 100f)}%");
 
             }
             else

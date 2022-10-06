@@ -109,6 +109,12 @@ public class UiCollectionEventCellSummer : MonoBehaviour
 
     public void OnClickExchangeButton()
     {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            PopupManager.Instance.ShowAlarmMessage("인터넷 연결을 확인해 주세요!");
+            return;
+        }
+
 
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
         {
