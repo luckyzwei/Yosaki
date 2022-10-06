@@ -265,7 +265,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
               LogManager.Instance.SendLogType("SleepReward", "Get", elapsedSeconds.ToString());
               UiExpGauge.Instance.WhenGrowthValueChanged();
               DailyMissionManager.SyncAllMissions();
-              UiTutorialManager.Instance.SetClear(TutorialStep.GetSleepReward);
+             // UiTutorialManager.Instance.SetClear(TutorialStep.GetSleepReward);
           });
     }
 

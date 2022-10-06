@@ -28,8 +28,7 @@ public enum TutorialStep
     PlayFireFly = 16384,//★
     BuyTicket = 32768,//★
     PlayCatContents = 65536,//★
-    GetSleepReward = 131072,//★
-    Clear = 262144
+    Clear = 131072,//★
 }
 
 public class UiTutorialManager : SingletonMono<UiTutorialManager>
@@ -87,7 +86,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
 
             ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(e =>
             {
-                if (e >= 12)
+                if (e >= 10)
                 {
                     SetClear(TutorialStep.Level20);
                 }
@@ -122,7 +121,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
 
     public void OnClickReward()
     {
-        if ((TutorialStep)tutorialStep.Value == TutorialStep.GetSleepReward)
+        if ((TutorialStep)tutorialStep.Value == TutorialStep.PlayCatContents)
         {
             PopupManager.Instance.ShowReviewPopup();
         }
@@ -203,7 +202,7 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
                 return "오른쪽 상단 <color=yellow>기술메뉴</color> 에서\n기술을 배워보세요.";
                 break;
             case TutorialStep.Level20:
-                return $"<color=yellow>레벨 12</color>을 달성해 해보세요\n보상:{CommonString.GetItemName(Item_Type.Jade)}{lastRewardGemNum}개";
+                return $"<color=yellow>레벨 10</color>을 달성해 해보세요\n보상:{CommonString.GetItemName(Item_Type.Jade)}{lastRewardGemNum}개";
                 break;
             case TutorialStep.Clear:
                 break;
@@ -222,9 +221,9 @@ public class UiTutorialManager : SingletonMono<UiTutorialManager>
             case TutorialStep.PlayCatContents:
                 return "오른쪽 상단 <color=yellow>요괴 사냥</color> 메뉴에서\n고양이 요괴전을 플레이 해보세요";
                 break;
-            case TutorialStep.GetSleepReward:
-                return "왼쪽 중단의 오프라인 휴식 보상을\n획득 해보세요!";
-                break;
+            //case TutorialStep.GetSleepReward:
+            //    return "왼쪽 중단의 오프라인 휴식 보상을\n획득 해보세요!";
+            //    break;
                 //case TutorialStep._1_MoveField:
                 //    return "맵 오른쪽 끝의 <color=#00ffffff>파란색</color> 포탈을\n이용해 사냥터로 이동하세요\n<color=yellow>(포탈에서 왼쪽패드의</color>\n<color=yellow>위쪽 버튼 입력)</color>";
                 //    break;
