@@ -188,7 +188,19 @@ public class HellRelicDungeonManager : ContentsManagerBase
 
     public double GetEnemyHp(int randIdx)
     {
-        return System.Math.Pow(1.02085, spawnCount);
+        int enemyTableIdx = spawnCount * 2 + 4500 /*+ (randIdx * 200)*/;
+
+        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
+
+        //최대층
+        if (enemyTableIdx >= TableManager.Instance.EnemyTable.dataArray.Length - 1)
+        {
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (spawnCount * 0.035f);
+        }
+        else
+        {
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * 1000;
+        }
     }
 
     public int GetEnemyDefense()

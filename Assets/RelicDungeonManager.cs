@@ -58,7 +58,7 @@ public class RelicDungeonManager : ContentsManagerBase
 
     private void SetPrefData()
     {
-        enemyDeadCount.Value = Mathf.Max(0, (int)ServerData.userInfoTable.TableDatas[UserInfoTable.relicKillCount].Value - 300);
+        enemyDeadCount.Value = Mathf.Max(0, (int)ServerData.userInfoTable.TableDatas[UserInfoTable.relicKillCount].Value - 100);
         spawnCount = enemyDeadCount.Value;
     }
 
@@ -110,7 +110,7 @@ public class RelicDungeonManager : ContentsManagerBase
 
             ServerData.userInfoTable.UpData(UserInfoTable.relicKillCount, false);
 
-           // RankManager.Instance.UpdateRelic_Score(enemyDeadCount.Value);
+            // RankManager.Instance.UpdateRelic_Score(enemyDeadCount.Value);
         }
 
     }
@@ -163,7 +163,20 @@ public class RelicDungeonManager : ContentsManagerBase
 
     public double GetEnemyHp()
     {
-        return System.Math.Pow(1.0144, spawnCount);
+        int enemyTableIdx = spawnCount * 2;
+
+        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
+
+        //최대층
+        if (enemyTableIdx >= TableManager.Instance.EnemyTable.dataArray.Length - 1)
+        {
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (spawnCount * 0.029f);
+        }
+        else
+        {
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * 1000;
+        }
+
     }
 
     public int GetEnemyDefense()
