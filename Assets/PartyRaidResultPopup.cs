@@ -28,6 +28,10 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
 
               var serverData = ServerData.bossServerTable.TableDatas[twelveBossTable.Stringid];
 
+
+              //랭킹등록
+              RankManager.Instance.UpdateChunmaTop(totalScore);
+
               if (string.IsNullOrEmpty(serverData.score.Value) == false)
               {
                   if (totalScore < double.Parse(serverData.score.Value))
@@ -36,8 +40,6 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
                   }
                   else
                   {
-                      //랭킹등록
-                      RankManager.Instance.UpdateChunmaTop(totalScore);
 
                       serverData.score.Value = totalScore.ToString();
 
@@ -46,8 +48,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
               }
               else
               {
-                  //랭킹등록
-                  RankManager.Instance.UpdateChunmaTop(totalScore);
+                  
 
                   serverData.score.Value = totalScore.ToString();
 
