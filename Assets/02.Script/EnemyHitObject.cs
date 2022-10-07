@@ -36,9 +36,9 @@ public class EnemyHitObject : MonoBehaviour
             this.percentDamage = 1f;
         }
         //선녀들
-        else if (GameManager.Instance.bossId == 58 ||
+        else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && (GameManager.Instance.bossId == 58 ||
          GameManager.Instance.bossId == 59 ||
-         GameManager.Instance.bossId == 60) 
+         GameManager.Instance.bossId == 60))
         {
             this.percentDamage = 0.6f;
         }
