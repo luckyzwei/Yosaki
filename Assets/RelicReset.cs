@@ -5,76 +5,80 @@ using UnityEngine;
 
 public class RelicReset : MonoBehaviour
 {
-    //void Start()
-    //{
-    //    ResetAll();
-    //}
+    void Start()
+    {
+        ResetAll();
+    }
 
-    //private void ResetAll() 
-    //{
-    //    if (ServerData.userInfoTable.TableDatas[UserInfoTable.relicReset].Value == 1) return;
+    private void ResetAll()
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.relicReset].Value == 1) return;
 
-    //    if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < 1000) 
-    //    {
-    //        List<TransactionValue> transactions = new List<TransactionValue>();
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.hellRelicKillCount).Value < 10000)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
 
-    //        ServerData.userInfoTable.GetTableData(UserInfoTable.relicReset).Value = 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.relicReset).Value = 1;
 
-    //        Param userInfoParam = new Param();
-    //        userInfoParam.Add(UserInfoTable.relicReset, ServerData.userInfoTable.GetTableData(UserInfoTable.relicReset).Value);
-    //        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.relicReset, ServerData.userInfoTable.GetTableData(UserInfoTable.relicReset).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-    //        ServerData.SendTransaction(transactions, successCallBack: () =>
-    //        {
-    //        });
-    //    }
-    //    else 
-    //    {
-    //        var tableDatas = TableManager.Instance.RelicTable.dataArray;
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+            });
+        }
+        else
+        {
+            var tableDatas = TableManager.Instance.RelicTable.dataArray;
 
-    //        List<TransactionValue> transactions = new List<TransactionValue>();
+            List<TransactionValue> transactions = new List<TransactionValue>();
 
-    //        Param relicParam = new Param();
+            Param relicParam = new Param();
 
-    //        for (int i = 0; i < tableDatas.Length; i++)
-    //        {
-    //            ServerData.relicServerTable.TableDatas[tableDatas[i].Stringid].level.Value = 0;
+            for (int i = 0; i < tableDatas.Length; i++)
+            {
+                ServerData.relicServerTable.TableDatas[tableDatas[i].Stringid].level.Value = 0;
 
-    //            relicParam.Add(tableDatas[i].Stringid, ServerData.relicServerTable.TableDatas[tableDatas[i].Stringid].ConvertToString());
-    //        }
+                relicParam.Add(tableDatas[i].Stringid, ServerData.relicServerTable.TableDatas[tableDatas[i].Stringid].ConvertToString());
+            }
 
-    //        transactions.Add(TransactionValue.SetUpdate(RelicServerTable.tableName, RelicServerTable.Indate, relicParam));
+            transactions.Add(TransactionValue.SetUpdate(RelicServerTable.tableName, RelicServerTable.Indate, relicParam));
 
-    //        ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value = 0;
 
-    //        int usedTicketNum = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.usedRelicTicketNum).Value;
-    //        int prefticketNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value;
+            int usedTicketNum = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.usedRelicTicketNum).Value;
 
-    //        ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += usedTicketNum;
+            ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += usedTicketNum;
 
-    //        ServerData.userInfoTable.GetTableData(UserInfoTable.usedRelicTicketNum).Value = 0;
-    //        ServerData.userInfoTable.GetTableData(UserInfoTable.relicReset).Value = 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.usedRelicTicketNum).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.relicReset).Value = 1;
 
-    //        Param goodsParam = new Param();
-    //        goodsParam.Add(GoodsTable.Relic, ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value);
-    //        goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+            ServerData.userInfoTable.GetTableData(UserInfoTable.relicKillCount).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.hellRelicKillCount).Value = 0;
 
-    //        Param userInfoParam = new Param();
-    //        userInfoParam.Add(UserInfoTable.usedRelicTicketNum, ServerData.userInfoTable.GetTableData(UserInfoTable.usedRelicTicketNum).Value);
-    //        userInfoParam.Add(UserInfoTable.relicReset, ServerData.userInfoTable.GetTableData(UserInfoTable.relicReset).Value);
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.Relic, ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value);
+            goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
 
-    //        transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.usedRelicTicketNum, ServerData.userInfoTable.GetTableData(UserInfoTable.usedRelicTicketNum).Value);
+            userInfoParam.Add(UserInfoTable.relicReset, ServerData.userInfoTable.GetTableData(UserInfoTable.relicReset).Value);
+            userInfoParam.Add(UserInfoTable.relicKillCount, ServerData.userInfoTable.GetTableData(UserInfoTable.relicKillCount).Value);
+            userInfoParam.Add(UserInfoTable.hellRelicKillCount, ServerData.userInfoTable.GetTableData(UserInfoTable.hellRelicKillCount).Value);
 
-    //        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-    //        ServerData.SendTransaction(transactions, successCallBack: () =>
-    //        {
-    //            PopupManager.Instance.ShowAlarmMessage($"버그로 영혼의숲 능력치가 초기화 됐습니다..\n영혼의숲 능력치를 다시 찍어주세요!");
-    //        });
-    //    }
-        
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowConfirmPopup("알림", $"영혼의숲,<color=red>지옥영혼의숲이</color> 초기화 됐습니다..\n영혼의숲 능력치를 다시 찍어주세요!", null);
+            });
+        }
 
 
-     
-    //}
+
+
+    }
 }

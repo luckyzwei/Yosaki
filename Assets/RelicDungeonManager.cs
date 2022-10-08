@@ -167,10 +167,23 @@ public class RelicDungeonManager : ContentsManagerBase
 
         enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
 
+        bool isMax = enemyTableIdx == TableManager.Instance.EnemyTable.dataArray.Length - 1;
+
+        double addValue = 0d;
+
+        if (isMax)
+        {
+            addValue = (spawnCount * 2) - enemyTableIdx;
+            addValue *= 0.02f;
+        }
+
         //최대층
         if (enemyTableIdx >= TableManager.Instance.EnemyTable.dataArray.Length - 1)
         {
-            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (spawnCount * 0.029f);
+#if UNITY_EDITOR
+            Debug.LogError($"add {addValue} : {TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (addValue * 2f)}");
+#endif
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (addValue * 2f);
         }
         else
         {
