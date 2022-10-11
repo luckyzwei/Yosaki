@@ -72,8 +72,4 @@ public class TwelveBossTableData
   string[] cutstring = new string[0];
   public string[] Cutstring { get {return cutstring; } set { this.cutstring = value;} }
   
-  [SerializeField]
-  float hellpower;
-  public float Hellpower { get {return hellpower; } set { this.hellpower = value;} }
-  
 }
