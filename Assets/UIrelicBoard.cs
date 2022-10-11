@@ -137,7 +137,7 @@ public class UIrelicBoard : MonoBehaviour
     {
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "모든 능력치를 초기화 합니까?", () =>
          {
-             int refundCount = 0;
+             float refundCount = 0;
 
              var tableDatas = TableManager.Instance.RelicTable.dataArray;
 

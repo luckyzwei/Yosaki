@@ -141,7 +141,7 @@ public class UiRelicCell : MonoBehaviour
             return;
         }
 
-        int upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
+        float upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
 
         upgradeableNum = Mathf.Min(upgradeableNum, 5000);
 
@@ -176,7 +176,7 @@ public class UiRelicCell : MonoBehaviour
             return;
         }
 
-        int upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
+        float upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
 
         upgradeableNum = Mathf.Min(upgradeableNum, 30000);
 
@@ -211,7 +211,7 @@ public class UiRelicCell : MonoBehaviour
             return;
         }
 
-        int upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
+        float upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
 
         upgradeableNum = Mathf.Min(upgradeableNum, currentRelicNum);
 

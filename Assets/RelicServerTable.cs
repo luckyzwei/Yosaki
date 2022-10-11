@@ -10,7 +10,7 @@ using UniRx;
 public class RelicServerData
 {
     public int idx;
-    public ReactiveProperty<int> level;
+    public ReactiveProperty<float> level;
 
     public string ConvertToString()
     {
@@ -55,7 +55,7 @@ public class RelicServerTable : MonoBehaviour
                 {
                     var relicData = new RelicServerData();
                     relicData.idx = table[i].Id;
-                    relicData.level = new ReactiveProperty<int>(0);
+                    relicData.level = new ReactiveProperty<float>(0);
 
                     defultValues.Add(table[i].Stringid, relicData.ConvertToString());
                     tableDatas.Add(table[i].Stringid, relicData);
@@ -107,7 +107,7 @@ public class RelicServerTable : MonoBehaviour
                         var splitData = value.Split(',');
 
                         relicData.idx = int.Parse(splitData[0]);
-                        relicData.level = new ReactiveProperty<int>(int.Parse(splitData[1]));
+                        relicData.level = new ReactiveProperty<float>(float.Parse(splitData[1]));
 
                         tableDatas.Add(table[i].Stringid, relicData);
                     }
@@ -116,7 +116,7 @@ public class RelicServerTable : MonoBehaviour
 
                         var relicData = new RelicServerData();
                         relicData.idx = table[i].Id;
-                        relicData.level = new ReactiveProperty<int>(0);
+                        relicData.level = new ReactiveProperty<float>(0);
 
                         defultValues.Add(table[i].Stringid, relicData.ConvertToString());
 
@@ -178,7 +178,7 @@ public class StageRelicServerTable : MonoBehaviour
                 {
                     var relicData = new RelicServerData();
                     relicData.idx = table[i].Id;
-                    relicData.level = new ReactiveProperty<int>(0);
+                    relicData.level = new ReactiveProperty<float>(0);
 
                     defultValues.Add(table[i].Stringid, relicData.ConvertToString());
                     tableDatas.Add(table[i].Stringid, relicData);
@@ -230,7 +230,7 @@ public class StageRelicServerTable : MonoBehaviour
                         var splitData = value.Split(',');
 
                         relicData.idx = int.Parse(splitData[0]);
-                        relicData.level = new ReactiveProperty<int>(int.Parse(splitData[1]));
+                        relicData.level = new ReactiveProperty<float>(float.Parse(splitData[1]));
 
                         tableDatas.Add(table[i].Stringid, relicData);
                     }
@@ -239,7 +239,7 @@ public class StageRelicServerTable : MonoBehaviour
 
                         var relicData = new RelicServerData();
                         relicData.idx = table[i].Id;
-                        relicData.level = new ReactiveProperty<int>(0);
+                        relicData.level = new ReactiveProperty<float>(0);
 
                         defultValues.Add(table[i].Stringid, relicData.ConvertToString());
 

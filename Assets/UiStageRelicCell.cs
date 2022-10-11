@@ -38,7 +38,7 @@ public class UiStageRelicCell : MonoBehaviour
         return relicServerData.level.Value >= relicLocalData.Maxlevel;
     }
 
-    private void UpdateDescription(int level)
+    private void UpdateDescription(float level)
     {
         if (levelText == null || priceText == null || relicDescription == null || relicLocalData == null) return;
 
@@ -132,7 +132,7 @@ public class UiStageRelicCell : MonoBehaviour
             return;
         }
 
-        int upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
+        float upgradeableNum = relicLocalData.Maxlevel - relicServerData.level.Value;
 
         upgradeableNum = Mathf.Min(upgradeableNum, 1000);
 

@@ -29,8 +29,8 @@ public class RelicTableData
   public float Abilvalue { get {return abilvalue; } set { this.abilvalue = value;} }
   
   [SerializeField]
-  int maxlevel;
-  public int Maxlevel { get {return maxlevel; } set { this.maxlevel = value;} }
+  float maxlevel;
+  public float Maxlevel { get {return maxlevel; } set { this.maxlevel = value;} }
   
   [SerializeField]
   int requirerelic;
