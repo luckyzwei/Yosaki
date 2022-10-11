@@ -1978,14 +1978,14 @@ public static class PlayerStats
     public static bool IsChunAttackSpeedAwake()
     {
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
-        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[2].Requirespeicalabilflower;
+        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[1].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
     }
 
     public static bool IsChunCostumeBossHpDec()
     {
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
-        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[3].Requirespeicalabilflower;
+        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[2].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
     }
 
