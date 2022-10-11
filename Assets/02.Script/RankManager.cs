@@ -193,7 +193,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateUserRank_Level()
     {
-      //  if (UpdateRank() == false) return;
+        if (UpdateRank() == false) return;
 
         Param param = new Param();
         param.Add("Level", ServerData.statusTable.GetTableData(StatusTable.Level).Value);
@@ -360,7 +360,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateBoss_Score(double score)
     {
-       // if (UpdateRank() == false) return;
+        if (UpdateRank() == false) return;
 
         if (score == 0) return;
 
@@ -454,7 +454,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRealBoss_Score(double score)
     {
-        //if (UpdateRank() == false) return;
+        if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.Real_Boss] != null && score < this.myRankInfo[RankType.Real_Boss].Score)
         {
             Debug.LogError("점수가 더 낮음");
@@ -544,7 +544,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRealBoss_Score_GangChul(double score)
     {
-     //   if (UpdateRank() == false) return;
+        if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.GangChul] != null && score < this.myRankInfo[RankType.GangChul].Score)
         {
             Debug.LogError("점수가 더 낮음");
@@ -634,7 +634,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateChunmaTop(double score)
     {
-     //   if (UpdateRank() == false) return;
+        if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.ChunmaTop] != null && score < this.myRankInfo[RankType.ChunmaTop].Score)
         {
             Debug.LogError("점수가 더 낮음");
@@ -722,7 +722,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void UpdateRelic_Score(double score)
     {
-        //if (UpdateRank() == false) return;
+        if (UpdateRank() == false) return;
         if (this.myRankInfo[RankType.Relic] != null && score < this.myRankInfo[RankType.Relic].Score)
         {
             Debug.LogError("점수가 더 낮음");
