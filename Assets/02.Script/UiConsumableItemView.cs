@@ -25,8 +25,6 @@ public class UiConsumableItemView : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI amountText;
 
-    private List<string> syncDatList = new List<string>();
-
     private void Start()
     {
         Initialize();
@@ -68,10 +66,6 @@ public class UiConsumableItemView : MonoBehaviour
             return;
         }
 
-        syncDatList.Clear();
-        syncDatList.Add(GoodsTable.Jade);
-        syncDatList.Add(goodsId);
-
         //로컬
         data.Value += amount;
 
@@ -82,8 +76,6 @@ public class UiConsumableItemView : MonoBehaviour
         {
             CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
         }
-
-        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncDataRoutineWeapon());
 
         if (goodsId.Equals("Potion_1") || goodsId.Equals("Potion_2"))
         {
@@ -97,8 +89,6 @@ public class UiConsumableItemView : MonoBehaviour
     private IEnumerator SyncDataRoutineWeapon()
     {
         yield return syncWaitTime;
-
-        ServerData.goodsTable.SyncAllData(syncDatList);
 
         syncRoutine = null;
     }

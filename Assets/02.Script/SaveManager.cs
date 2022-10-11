@@ -104,6 +104,91 @@ public class SaveManager : SingletonMono<SaveManager>
         }
     }
 
+    private List<string> ignoreSyncGoodsList = new List<string>()
+    {
+        GoodsTable.DokebiKey,
+        GoodsTable.WeaponUpgradeStone,
+        GoodsTable.YomulExchangeStone,
+        GoodsTable.TigerStone,
+        GoodsTable.RabitStone,
+        GoodsTable.DragonStone,
+        GoodsTable.SnakeStone,
+        GoodsTable.HorseStone,
+        GoodsTable.SheepStone,
+        GoodsTable.MonkeyStone,
+        GoodsTable.CockStone,
+        GoodsTable.DogStone,
+        GoodsTable.PigStone,
+
+        GoodsTable.Asura0,
+        GoodsTable.Asura1,
+        GoodsTable.Asura2,
+        GoodsTable.Asura3,
+        GoodsTable.Asura4,
+        GoodsTable.Asura5,
+
+        GoodsTable.Indra0,
+        GoodsTable.Indra1,
+        GoodsTable.Indra2,
+        GoodsTable.IndraPower,
+        GoodsTable.Aduk,
+
+        GoodsTable.SinSkill0,
+        GoodsTable.SinSkill1,
+        GoodsTable.SinSkill2,
+        GoodsTable.SinSkill3,
+
+        GoodsTable.LeeMuGiStone,
+        GoodsTable.ZangStone,
+
+
+        GoodsTable.Hae_Norigae,
+        GoodsTable.Hae_Pet,
+        GoodsTable.NataSkill,
+        GoodsTable.OrochiSkill,
+        GoodsTable.GangrimSkill,
+
+        GoodsTable.OrochiTooth0,
+        GoodsTable.OrochiTooth1,
+
+        GoodsTable.gumiho0,
+        GoodsTable.gumiho1,
+        GoodsTable.gumiho2,
+        GoodsTable.gumiho3,
+        GoodsTable.gumiho4,
+        GoodsTable.gumiho5,
+        GoodsTable.gumiho6,
+        GoodsTable.gumiho7,
+        GoodsTable.gumiho8,
+
+        GoodsTable.h0,
+        GoodsTable.h1,
+        GoodsTable.h2,
+        GoodsTable.h3,
+        GoodsTable.h4,
+        GoodsTable.h5,
+        GoodsTable.h6,
+        GoodsTable.h7,
+        GoodsTable.h8,
+        GoodsTable.h9,
+        GoodsTable.Ym,
+        GoodsTable.du,
+
+        GoodsTable.Sun0,
+        GoodsTable.Sun1,
+        GoodsTable.Sun2,
+        GoodsTable.Sun3,
+        GoodsTable.Sun4,
+
+        GoodsTable.c0,
+        GoodsTable.c1,
+        GoodsTable.c2,
+        GoodsTable.c3,
+        GoodsTable.c4,
+        GoodsTable.c5,
+        GoodsTable.c6,
+    };
+
     //SendQueue에서 저장
     public void SyncDatasInQueue()
     {
@@ -112,7 +197,7 @@ public class SaveManager : SingletonMono<SaveManager>
             GrowthManager.Instance.SyncLevelUpDatas();
         }
 
-        ServerData.goodsTable.SyncAllData();
+        ServerData.goodsTable.SyncAllData(ignoreSyncGoodsList);
 
         ServerData.userInfoTable.AutoUpdateRoutine();
 

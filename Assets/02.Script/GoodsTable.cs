@@ -574,14 +574,14 @@ public class GoodsTable
         });
     }
 
-    public void SyncAllData(List<string> syncData = null)
+    public void SyncAllData(List<string> ignoreList = null)
     {
         Param param = new Param();
 
         var e = tableDatas.GetEnumerator();
         while (e.MoveNext())
         {
-            if (syncData != null && syncData.Contains(e.Current.Key) == false) continue;
+            if (ignoreList != null && ignoreList.Contains(e.Current.Key) == true) continue;
             param.Add(e.Current.Key, e.Current.Value.Value);
         }
 
