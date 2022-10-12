@@ -16,6 +16,12 @@ public class UiChunGirlBoard : MonoBehaviour
     [SerializeField]
     private UiTwelveBossContentsView chunGirl_2;
 
+    [SerializeField]
+    private UiTwelveBossContentsView chunGirl_3;
+
+    [SerializeField]
+    private UiTwelveBossContentsView chunGirl_4;
+
     void Start()
     {
         Initialize();
@@ -28,5 +34,9 @@ public class UiChunGirlBoard : MonoBehaviour
         chunGirl_1.Initialize(TableManager.Instance.TwelveBossTable.dataArray[59]);
 
         chunGirl_2.Initialize(TableManager.Instance.TwelveBossTable.dataArray[60]);
+
+        chunGirl_3.Initialize(TableManager.Instance.TwelveBossTable.dataArray[61]);
+
+        chunGirl_4.Initialize(TableManager.Instance.TwelveBossTable.dataArray[62]);
     }
 }
