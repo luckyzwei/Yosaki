@@ -339,7 +339,12 @@ public static class ServerData
                 break;  
             case Item_Type.Cw:
                 ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += rewardValue;
+                break;  
+
+            case Item_Type.Event_Fall:
+                ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += rewardValue;
                 break;   
+
             case Item_Type.du:
                 ServerData.goodsTable.GetTableData(GoodsTable.du).Value += rewardValue;
                 break;
@@ -566,6 +571,10 @@ public static class ServerData
             
             case Item_Type.Cw:
                 passParam.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
+            
+            case Item_Type.Event_Fall:
+                passParam.Add(GoodsTable.Event_Fall, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
                 
             case Item_Type.Fw:
@@ -834,6 +843,11 @@ public static class ServerData
             case Item_Type.SP:
                 ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += amount;
                 param.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);  
+            
+            case Item_Type.Event_Fall:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value += amount;
+                param.Add(GoodsTable.Event_Fall, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);   
             
             case Item_Type.Hel:
@@ -1738,7 +1752,12 @@ public static class ServerData
                     break;
                 case Item_Type.Songpyeon:
                     ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += amount;
+                    break;  
+
+                case Item_Type.Event_Fall:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value += amount;
                     break;
+
                 case Item_Type.Relic:
                     ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value += amount;
                     break;

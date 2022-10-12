@@ -303,6 +303,7 @@ public static class CommonString
             case Item_Type.du: return "저승 명부";
             case Item_Type.Fw: return "분홍 꽃";
             case Item_Type.Cw: return "천계 꽃";
+            case Item_Type.Event_Fall: return "곶감";
         }
         return "미등록";
     }

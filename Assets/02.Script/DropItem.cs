@@ -108,6 +108,7 @@ public enum Item_Type
     ChunSun0,
     ChunSun1,
     ChunSun2,
+    Event_Fall,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

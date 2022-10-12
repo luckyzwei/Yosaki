@@ -128,6 +128,7 @@ public class GoodsTable
     public static string c4 = "c4"; //천계꽃
     public static string c5 = "c5"; //천계꽃
     public static string c6 = "c6"; //천계꽃
+    public static string Event_Fall = "Event_Fall"; //천계꽃
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -239,6 +240,8 @@ public class GoodsTable
         {c4,0f},
         {c5,0f},
         {c6,0f},
+
+        {Event_Fall,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

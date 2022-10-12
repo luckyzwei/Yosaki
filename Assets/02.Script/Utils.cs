@@ -132,6 +132,7 @@ public static class Utils
                 type == Item_Type.du ||
                 type == Item_Type.Fw ||
                 type == Item_Type.Cw ||
+                type == Item_Type.Event_Fall ||
                 type == Item_Type.RelicTicket;
     }
 
