@@ -47,7 +47,7 @@ public class UiRelicCell : MonoBehaviour
     {
         relicServerData.level.AsObservable().Subscribe(level =>
         {
-            levelText.SetText($"LV:{level.ToString()}");
+            levelText.SetText($"LV:{Utils.ConvertBigNum(level)}");
 
             if (IsMaxLevel() == false)
             {
