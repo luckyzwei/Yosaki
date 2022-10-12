@@ -193,7 +193,7 @@ public class RelicDungeonManager : ContentsManagerBase
     {
         int enemyTableIdx = spawnCount * 2;
 
-        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
+        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, 12400);
 
         return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Defense;
     }

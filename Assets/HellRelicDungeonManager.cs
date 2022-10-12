@@ -217,7 +217,7 @@ public class HellRelicDungeonManager : ContentsManagerBase
     {
         int enemyTableIdx = spawnCount * 2 + 4500;
 
-        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
+        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, 12400);
 
         return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Defense;
     }
