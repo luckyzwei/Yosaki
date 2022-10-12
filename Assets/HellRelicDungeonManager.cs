@@ -190,9 +190,9 @@ public class HellRelicDungeonManager : ContentsManagerBase
     {
         int enemyTableIdx = spawnCount * 2 + 4500 /*+ (randIdx * 200)*/;
 
-        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, TableManager.Instance.EnemyTable.dataArray.Length - 1);
+        enemyTableIdx = Mathf.Clamp(enemyTableIdx, 100, 12400);
 
-        bool isMax = enemyTableIdx == TableManager.Instance.EnemyTable.dataArray.Length - 1;
+        bool isMax = enemyTableIdx == 12400;
 
         double addValue = 0d;
 
@@ -203,12 +203,8 @@ public class HellRelicDungeonManager : ContentsManagerBase
         }
 
         //최대층
-        if (enemyTableIdx >= TableManager.Instance.EnemyTable.dataArray.Length - 1)
+        if (enemyTableIdx >= 12400)
         {
-#if UNITY_EDITOR
-            Debug.LogError($"add {addValue} : {TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (addValue * 2f)}");
-#endif
-
             return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (addValue * 2f);
         }
         else
