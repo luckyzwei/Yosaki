@@ -128,7 +128,8 @@ public class GoodsTable
     public static string c4 = "c4"; //천계꽃
     public static string c5 = "c5"; //천계꽃
     public static string c6 = "c6"; //천계꽃
-    public static string Event_Fall = "Event_Fall"; //천계꽃
+
+    public static string Event_Fall = "Event_Fall"; //곶감
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -364,7 +365,7 @@ public class GoodsTable
     static int eventItemAddNum_Spring = 0;
     public void GetSpringEventItem(float amount)
     {
-        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Item_Summer)} 획득(+{(int)amount})");
+        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Fall)} 획득(+{(int)amount})");
 
         eventItemAddNum_Spring += (int)amount;
 
@@ -375,7 +376,7 @@ public class GoodsTable
         else
         {
             //tableDatas[Event_Item_1].Value += eventItemAddNum_Spring;
-            tableDatas[Event_Item_Summer].Value += eventItemAddNum_Spring;
+            tableDatas[Event_Fall].Value += eventItemAddNum_Spring;
             eventItemAddNum_Spring = 0;
         }
     }
@@ -622,7 +623,7 @@ public class GoodsTable
         }
 
         //goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
-        goodsParam.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
+        goodsParam.Add(GoodsTable.Event_Fall, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value);
 
         goodsParam.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);
         goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);

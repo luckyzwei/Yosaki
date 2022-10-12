@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackEnd;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class ContinueOpenButton : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     [SerializeField]
     private PointerDownEvent OnEvent;
+    public PointerDownEvent onEvent => OnEvent;
 
     private Coroutine autoClickRoutine;
 
@@ -116,4 +118,5 @@ public class ContinueOpenButton : MonoBehaviour, IPointerDownHandler, IPointerUp
         StopAutoClickRoutine();
         SetButtonColor(originColor);
     }
+
 }

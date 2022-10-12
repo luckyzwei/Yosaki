@@ -653,6 +653,9 @@ public class TableManager : SingletonMono<TableManager>
     public ChuSeokAtten chuSeokAtten;
     public ChunAbilBase chunAbilBase;
     public ChunMarkAbil chunMarkAbil;
+    public FallCollection fallCollection;
+
+
 
 }
 
