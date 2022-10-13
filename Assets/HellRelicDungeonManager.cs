@@ -211,6 +211,7 @@ public class HellRelicDungeonManager : ContentsManagerBase
         {
             return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * 1000;
         }
+        //
     }
 
     public int GetEnemyDefense()
