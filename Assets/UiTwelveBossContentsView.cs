@@ -28,6 +28,24 @@ public class UiTwelveBossContentsView : MonoBehaviour
     [SerializeField]
     private GameObject buttons;
 
+    [SerializeField]
+    private bool initByInspector = false;
+
+    [SerializeField]
+    private int bossId = 0;
+
+    private void Start()
+    {
+        InitByInspector();
+    }
+
+    private void InitByInspector()
+    {
+        if (initByInspector)
+        {
+            Initialize(TableManager.Instance.TwelveBossTable.dataArray[bossId]);
+        }
+    }
 
     public void Initialize(TwelveBossTableData bossTableData)
     {
