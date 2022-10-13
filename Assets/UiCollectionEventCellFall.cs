@@ -68,12 +68,15 @@ public class UiCollectionEventCellFall : MonoBehaviour
             if (e == false)
             {
                 price.SetText(Utils.ConvertBigNum(tableData.Price));
-                goldPrice.SetText("1개");
+                if (goldPrice != null)
+                {
+                    goldPrice.SetText("1개");
+                }
             }
             else
             {
                 price.SetText("보유중!");
-                goldPrice.SetText("보유중!");
+                goldButton.gameObject.SetActive(false);
             }
 
         }).AddTo(this);
