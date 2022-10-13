@@ -179,6 +179,8 @@ public class UiCollectionEventCellSummer : MonoBehaviour
     {
         yield return syncDelay;
 
+
+       
         List<TransactionValue> transactions = new List<TransactionValue>();
 
         if (IsCostumeItem())
@@ -191,8 +193,7 @@ public class UiCollectionEventCellSummer : MonoBehaviour
 
             Param goodsParam = new Param();
 
-
-
+            goodsParam.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
