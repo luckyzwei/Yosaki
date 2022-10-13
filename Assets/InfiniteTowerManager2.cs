@@ -154,6 +154,9 @@ public class InfiniteTowerManager2 : ContentsManagerBase
         yield return null;
 
         SpawnEnemy();
+
+        AutoManager.Instance.StartAutoWithDelay();
+
     }
 
 
