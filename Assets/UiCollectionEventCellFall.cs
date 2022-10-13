@@ -24,6 +24,9 @@ public class UiCollectionEventCellFall : MonoBehaviour
     private TextMeshProUGUI price;
 
     [SerializeField]
+    private TextMeshProUGUI goldPrice;
+
+    [SerializeField]
     private Image itemIcon;
 
     [SerializeField]
@@ -31,7 +34,8 @@ public class UiCollectionEventCellFall : MonoBehaviour
 
     [SerializeField]
     ContinueOpenButton button;
-
+    [SerializeField]
+    ContinueOpenButton goldButton;
     [SerializeField]
     private SkeletonGraphic skeletonGraphic;
 
@@ -64,10 +68,12 @@ public class UiCollectionEventCellFall : MonoBehaviour
             if (e == false)
             {
                 price.SetText(Utils.ConvertBigNum(tableData.Price));
+                goldPrice.SetText("1개");
             }
             else
             {
                 price.SetText("보유중!");
+                goldPrice.SetText("보유중!");
             }
 
         }).AddTo(this);
@@ -75,10 +81,13 @@ public class UiCollectionEventCellFall : MonoBehaviour
 
     private void Initialize()
     {
-        if (button == null)
+        if (button != null)
         { 
-            button = GetComponentInChildren<ContinueOpenButton>();
             button.onEvent.AddListener(OnClickExchangeButton);
+        }
+        if( goldButton != null)
+        {
+            goldButton.onEvent.AddListener(OnClickExchangeGoldButton);
         }
         tableData = TableManager.Instance.fallCollection.dataArray[tableId];
 
@@ -173,7 +182,64 @@ public class UiCollectionEventCellFall : MonoBehaviour
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
 
     }
+    public void OnClickExchangeGoldButton()
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            PopupManager.Instance.ShowAlarmMessage("인터넷 연결을 확인해 주세요!");
+            return;
+        }
 
+
+        if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
+        {
+            if (ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value >= tableData.Exchangemaxcount)
+            {
+                PopupManager.Instance.ShowAlarmMessage("더이상 교환하실 수 없습니다.");
+                return;
+            }
+        }
+
+        if (IsCostumeItem())
+        {
+            string itemKey = ((Item_Type)tableData.Itemtype).ToString();
+
+            if (ServerData.costumeServerTable.TableDatas[itemKey].hasCostume.Value)
+            {
+                PopupManager.Instance.ShowAlarmMessage("이미 보유하고 있습니다!");
+                return;
+            }
+        }
+
+
+        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value;
+
+        if (currentEventItemNum < 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Fall_Gold)}이 부족합니다.");
+            return;
+        }
+
+        PopupManager.Instance.ShowAlarmMessage("교환 완료");
+
+        //로컬
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value -= 1;
+
+        if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
+        {
+            ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value++;
+        }
+
+        ServerData.AddLocalValue((Item_Type)tableData.Itemtype, tableData.Itemvalue);
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
+    }
     private bool IsCostumeItem()
     {
         return ((Item_Type)tableData.Itemtype).IsCostumeItem();
@@ -214,6 +280,8 @@ public class UiCollectionEventCellFall : MonoBehaviour
 
 
             goodsParam.Add(GoodsTable.Event_Fall, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value);
+
+            goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
 
             goodsParam.Add(itemKey, ServerData.goodsTable.GetTableData(itemKey).Value);
 

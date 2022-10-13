@@ -33,6 +33,10 @@ public class UiCollectionEventFall : MonoBehaviour
         {
             ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value += 1000000;
         }
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value += 10;
+        }
     }
 #endif
 

@@ -130,6 +130,7 @@ public class GoodsTable
     public static string c6 = "c6"; //천계꽃
 
     public static string Event_Fall = "Event_Fall"; //곶감
+    public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -243,6 +244,7 @@ public class GoodsTable
         {c6,0f},
 
         {Event_Fall,0f},
+        {Event_Fall_Gold,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -380,6 +382,7 @@ public class GoodsTable
             eventItemAddNum_Spring = 0;
         }
     }
+
     //
 
     static int sulAddNum = 0;
@@ -624,6 +627,7 @@ public class GoodsTable
 
         //goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
         goodsParam.Add(GoodsTable.Event_Fall, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value);
+        goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
 
         goodsParam.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);
         goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);

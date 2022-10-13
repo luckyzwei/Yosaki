@@ -342,7 +342,10 @@ public static class ServerData
                 break;  
 
             case Item_Type.Event_Fall:
-                ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += rewardValue;
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value += rewardValue;
+                break;   
+            case Item_Type.Event_Fall_Gold:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value += rewardValue;
                 break;   
 
             case Item_Type.du:
@@ -575,6 +578,9 @@ public static class ServerData
             
             case Item_Type.Event_Fall:
                 passParam.Add(GoodsTable.Event_Fall, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.Event_Fall_Gold:
+                passParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
                 
             case Item_Type.Fw:
@@ -848,6 +854,10 @@ public static class ServerData
             case Item_Type.Event_Fall:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value += amount;
                 param.Add(GoodsTable.Event_Fall, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
+            case Item_Type.Event_Fall_Gold:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value += amount;
+                param.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);   
             
             case Item_Type.Hel:

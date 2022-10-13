@@ -117,7 +117,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Fw;
     public Sprite Cw;
     public Sprite Event_Fall;
-
+    public Sprite Event_Fall_Gold;
+   
     public List<SkeletonDataAsset> enemySpineAssets;
 
     public Sprite GuildReward;
@@ -151,6 +152,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Event_Item_Summer;
     public Sprite NataWeapon;
     public Sprite OrochiWeapon;
+    public Sprite ChunWeapon0;
+    public Sprite ChunWeapon1;
+
     public Sprite NataSkill;
     public Sprite OrochiSkill;
     public Sprite GangrimSkill;
@@ -166,6 +170,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Sun3;
     public Sprite Sun4;
 
+    
     public Sprite GetItemIcon(Item_Type type)
     {
         switch (type)
@@ -558,6 +563,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Event_Fall:
                 return Event_Fall;
                 break;
+            case Item_Type.Event_Fall_Gold:
+                return Event_Fall_Gold;
+                break;
 
             case Item_Type.du:
                 return du;
@@ -766,6 +774,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.MihoWeapon:
                 return MihoWeapon;
+                break;
+            case Item_Type.ChunWeapon0:
+                return ChunWeapon0;
+                break;
+            case Item_Type.ChunWeapon1:
+                return ChunWeapon1;
                 break;
 
             case Item_Type.MihoNorigae:
