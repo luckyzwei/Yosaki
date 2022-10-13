@@ -109,6 +109,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite RabitPet;
     public Sprite DogPet;
     public Sprite ChunMaPet;
+    public Sprite ChunPet0;
+    public Sprite ChunPet1;
     public Sprite Hel;
     public Sprite YeoMarble;
     public Sprite du;
@@ -640,6 +642,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.ChunMaPet:
                 return ChunMaPet;
+                break;
+            case Item_Type.ChunPet0:
+                return ChunPet0;
+                break;
+            case Item_Type.ChunPet1:
+                return ChunPet1;
                 break;
 
             case Item_Type.GuildReward:
