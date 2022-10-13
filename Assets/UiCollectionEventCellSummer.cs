@@ -178,8 +178,6 @@ public class UiCollectionEventCellSummer : MonoBehaviour
     public IEnumerator SyncRoutine()
     {
         yield return syncDelay;
-
-
        
         List<TransactionValue> transactions = new List<TransactionValue>();
 

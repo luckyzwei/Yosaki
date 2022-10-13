@@ -208,7 +208,27 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         norigaeDescription.gameObject.SetActive(true);
 
-        suhoSinDescription.gameObject.SetActive(magicBookData != null && (magicBookData.Id == 22 || magicBookData.Id == 23 || magicBookData.Id == 24 || magicBookData.Id == 25 || magicBookData.Id == 26 || magicBookData.Id == 27 || magicBookData.Id == 28 || magicBookData.Id == 29 || magicBookData.Id == 30 || magicBookData.Id == 31 || magicBookData.Id == 32 || magicBookData.Id == 33));
+        suhoSinDescription.gameObject.SetActive(magicBookData != null &&
+            (magicBookData.Id == 22 ||
+            magicBookData.Id == 23 ||
+            magicBookData.Id == 24 ||
+            magicBookData.Id == 25 ||
+            magicBookData.Id == 26 ||
+            magicBookData.Id == 27 ||
+            magicBookData.Id == 28 ||
+            magicBookData.Id == 29 ||
+            magicBookData.Id == 30 ||
+            magicBookData.Id == 31 ||
+            magicBookData.Id == 32 ||
+            magicBookData.Id == 33 ||
+            //
+            magicBookData.Id == 34 ||
+            magicBookData.Id == 35 ||
+            magicBookData.Id == 36 ||
+            magicBookData.Id == 37 ||
+            magicBookData.Id == 38 ||
+            magicBookData.Id == 39
+            ));
         foxNorigaeGetButton.SetActive(false);
 
         if (magicBookData != null)
@@ -227,7 +247,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             }
             else if (magicBookData.Id == 30 || magicBookData.Id == 31)
             {
-                suhoSinDescription.SetText($"요괴지옥\n지옥불꽃에서\n획득!");
+                suhoSinDescription.SetText($"요괴지옥\n지옥불꽃에서 획득!");
             }
             else if (magicBookData.Id == 32)
             {
@@ -237,6 +257,22 @@ public class UiInventoryWeaponView : MonoBehaviour
             {
                 suhoSinDescription.SetText($"요괴지옥\n강림도령에서 획득!");
             }
+            else if (magicBookData.Id == 34)
+            {
+                suhoSinDescription.SetText($"요괴지옥\n지옥불꽃에서 획득!");
+            }
+            //
+            else if (
+                magicBookData.Id == 35 ||
+                magicBookData.Id == 36 ||
+                magicBookData.Id == 37 ||
+                magicBookData.Id == 38 ||
+                magicBookData.Id == 39
+                )
+            {
+                suhoSinDescription.SetText($"천상계\n칠선녀에서 획득!");
+            }
+
 
             foxNorigaeGetButton.SetActive(magicBookData.Id == 28);
         }
@@ -379,7 +415,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             weaponLockObject.SetActive(false);
 
             //필멸2 필멸3  (23,24)
-            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29 || weaponData.Id == 30 || weaponData.Id == 31 || weaponData.Id == 32 || weaponData.Id == 33 || weaponData.Id == 34 || weaponData.Id == 43 || weaponData.Id == 44)
+            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29 || weaponData.Id == 30 || weaponData.Id == 31 || weaponData.Id == 32 || weaponData.Id == 33 || weaponData.Id == 34 || weaponData.Id == 35 || weaponData.Id == 36 || weaponData.Id == 43 || weaponData.Id == 44)
             {
                 hasMask.SetActive(false);
 
@@ -435,6 +471,16 @@ public class UiInventoryWeaponView : MonoBehaviour
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
                     weaponLockDescription.SetText($"요괴지옥\n강림도령에서 획득!");
+                }
+                if (weaponData.Id == 35)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"요괴지옥\n지옥불꽃에서 획득!");
+                }
+                if (weaponData.Id == 36)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"요괴지옥\n지옥불꽃에서 획득!");
                 }
                 if (weaponData.Id == 43)
                 {
