@@ -14,7 +14,13 @@ public class UiBossWarning : MonoBehaviour
 
     private void SetBossIcon()
     {
-
-        bossIcon.sprite = CommonUiContainer.Instance.bossIcon[GameManager.Instance.bossId];
+        if (GameManager.Instance.bossId < CommonUiContainer.Instance.bossIcon.Count)
+        {
+            bossIcon.sprite = CommonUiContainer.Instance.bossIcon[GameManager.Instance.bossId];
+        }
+        else
+        {
+            bossIcon.gameObject.SetActive(false);
+        }                    
     }
 }

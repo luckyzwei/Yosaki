@@ -354,6 +354,10 @@ public enum Item_Type
     c5 = 7005,
     c6 = 7006,
 
+    ChunWeapon0 = 7007,
+    ChunPet0 = 7008,
+    ChunWeapon1 = 7009,
+    ChunPet1 = 7010,
 }
 
 public class DropItem : PoolItem

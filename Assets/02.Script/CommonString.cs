@@ -39,6 +39,7 @@ public static class CommonString
     public static string ItemGrade_16 = "지옥";
     public static string ItemGrade_17 = "여래";
     public static string ItemGrade_18 = "외형";
+    public static string ItemGrade_19 = "천상계";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";

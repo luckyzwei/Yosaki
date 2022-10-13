@@ -379,7 +379,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             weaponLockObject.SetActive(false);
 
             //필멸2 필멸3  (23,24)
-            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29 || weaponData.Id == 30 || weaponData.Id == 31 || weaponData.Id == 32 || weaponData.Id == 33 || weaponData.Id == 34)
+            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29 || weaponData.Id == 30 || weaponData.Id == 31 || weaponData.Id == 32 || weaponData.Id == 33 || weaponData.Id == 34 || weaponData.Id == 43 || weaponData.Id == 44)
             {
                 hasMask.SetActive(false);
 
@@ -435,6 +435,16 @@ public class UiInventoryWeaponView : MonoBehaviour
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
                     weaponLockDescription.SetText($"요괴지옥\n강림도령에서 획득!");
+                }
+                if (weaponData.Id == 43)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"천상계\n개에서 획득!");
+                }
+                if (weaponData.Id == 44)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"천상계\n고양이에서 획득!");
                 }
             }
 
