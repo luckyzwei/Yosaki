@@ -128,7 +128,7 @@ public class UiPetView : MonoBehaviour
 
         tutorialObject.SetActive(petData.PETGETTYPE == PetGetType.Gem && petData.Price == 0f);
 
-        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19);
+        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19 || petData.Id == 20 || petData.Id == 21);
 
         if (leemugiPetObject != null)
             leemugiPetObject.SetActive(petData.Id == 12);
@@ -169,11 +169,11 @@ public class UiPetView : MonoBehaviour
 
             if (petData.Id < 12)
             {
-                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue1 + maxLevel * petData.Hasaddvalue1) * (isPercent ? 100 : 1f)}</color>)\n";
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum((value) * (isPercent ? 100 : 1f))}(<color=red>MAX:{Utils.ConvertBigNum((petData.Hasvalue1 + maxLevel * petData.Hasaddvalue1) * (isPercent ? 100 : 1f))}</color>)\n";
             }
             else
             {
-                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}\n";
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum((value) * (isPercent ? 100 : 1f))}\n";
             }
         }
 
@@ -189,11 +189,11 @@ public class UiPetView : MonoBehaviour
 
             if (petData.Id < 12)
             {
-                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue2 + maxLevel * petData.Hasaddvalue2) * (isPercent ? 100 : 1f)}</color>)\n";
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum((value) * (isPercent ? 100 : 1f))}(<color=red>MAX:{Utils.ConvertBigNum((petData.Hasvalue2 + maxLevel * petData.Hasaddvalue2) * (isPercent ? 100 : 1f))}</color>)\n";
             }
             else
             {
-                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}\n";
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum((value) * (isPercent ? 100 : 1f))}\n";
             }
         }
 
@@ -209,11 +209,11 @@ public class UiPetView : MonoBehaviour
 
             if (petData.Id < 12)
             {
-                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue3 + maxLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f)}</color>)\n";
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum((value) * (isPercent ? 100 : 1f))}(<color=red>MAX:{Utils.ConvertBigNum((petData.Hasvalue3 + maxLevel * petData.Hasaddvalue3) * (isPercent ? 100 : 1f))}</color>)\n";
             }
             else
             {
-                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}\n";
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum((value) * (isPercent ? 100 : 1f))}\n";
             }
         }
 
@@ -229,11 +229,11 @@ public class UiPetView : MonoBehaviour
 
             if (petData.Id < 12)
             {
-                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}(<color=red>MAX:{(petData.Hasvalue4 + maxLevel * petData.Hasaddvalue4) * (isPercent ? 100 : 1f)}</color>)";
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum((value) * (isPercent ? 100 : 1f))}(<color=red>MAX:{Utils.ConvertBigNum((petData.Hasvalue4 + maxLevel * petData.Hasaddvalue4) * (isPercent ? 100 : 1f))}</color>)";
             }
             else
             {
-                abilityStr += $"{CommonString.GetStatusName(statusType)} : {(value) * (isPercent ? 100 : 1f)}";
+                abilityStr += $"{CommonString.GetStatusName(statusType)} : {Utils.ConvertBigNum((value) * (isPercent ? 100 : 1f))}";
             }
         }
 
@@ -440,9 +440,13 @@ public class UiPetView : MonoBehaviour
 
                 var prefPetData = TableManager.Instance.PetTable.dataArray[prefPetId];
 
-                if (petData.Id == 14|| petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19)
+                if (petData.Id == 14 || petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19)
                 {
                     buttonDescription.SetText($"수호신 컨텐츠\n에서 획득!");
+                }
+                else if (petData.Id == 20 || petData.Id == 21)
+                {
+                    buttonDescription.SetText($"천상계 컨텐츠\n에서 획득!");
                 }
                 else
                 {
@@ -513,10 +517,14 @@ public class UiPetView : MonoBehaviour
             //미보유
             else
             {
-                if (petServerData.idx == 14|| petServerData.idx == 15 || petServerData.idx == 16 || petServerData.idx == 17 || petServerData.idx == 18 || petServerData.idx == 19)
+                if (petServerData.idx == 14 || petServerData.idx == 15 || petServerData.idx == 16 || petServerData.idx == 17 || petServerData.idx == 18 || petServerData.idx == 19)
                 {
                     PopupManager.Instance.ShowAlarmMessage("수호신 컨텐츠에서 획득 가능");
 
+                }
+                else if (petServerData.idx == 20 || petServerData.idx == 21)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("천상계 컨텐츠에서 획득 가능");
                 }
                 else
                 {

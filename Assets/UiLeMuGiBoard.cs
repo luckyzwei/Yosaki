@@ -29,7 +29,13 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
     private UiPetView uiPetViewPrefeab_Dog; 
     
     [SerializeField]
-    private UiPetView uiPetViewPrefeab_Horse;
+    private UiPetView uiPetViewPrefeab_Horse;   
+    
+    [SerializeField]
+    private UiPetView uiPetViewPrefeab_ChunDog; 
+    
+    [SerializeField]
+    private UiPetView uiPetViewPrefeab_ChunCat;
 
     [SerializeField]
     private Transform petViewParent;
@@ -119,6 +125,26 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
             else if (e.Current.Value.Id == 19)
             {
                 var petView = Instantiate<UiPetView>(uiPetViewPrefeab_Horse, petViewParent);
+
+                petView.gameObject.SetActive(true);
+
+                petView.transform.localPosition = Vector3.zero;
+
+                petView.Initialize(e.Current.Value);
+            }
+            else if (e.Current.Value.Id == 20)
+            {
+                var petView = Instantiate<UiPetView>(uiPetViewPrefeab_ChunDog, petViewParent);
+
+                petView.gameObject.SetActive(true);
+
+                petView.transform.localPosition = Vector3.zero;
+
+                petView.Initialize(e.Current.Value);
+            }
+            else if (e.Current.Value.Id == 21)
+            {
+                var petView = Instantiate<UiPetView>(uiPetViewPrefeab_ChunCat, petViewParent);
 
                 petView.gameObject.SetActive(true);
 
