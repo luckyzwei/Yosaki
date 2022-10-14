@@ -153,7 +153,7 @@ public class UserInfoTable
     public const string exchangeCount_3 = "ex_3";
     public const string exchangeCount_4 = "ex_4";
     public const string exchangeCount_5 = "ex_5";
-    
+
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
@@ -162,6 +162,9 @@ public class UserInfoTable
     public const string titleRefund = "tii";
     public const string oneAttenEvent_one = "oo";
     public const string relicReset = "rele";
+
+    public const string recommendCount = "recommendCount";
+    public const string canRecommend = "canRecommend";
 
 
     public double currentServerDate;
@@ -297,6 +300,9 @@ public class UserInfoTable
         {titleRefund,0},
         {oneAttenEvent_one,0},
         {relicReset,0},
+
+        {recommendCount,0},
+        {canRecommend,1},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -672,8 +678,8 @@ public class UserInfoTable
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.hellpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.hellpensionAttendance).Value++;
-            }  
-            
+            }
+
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.chunpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.chunpensionAttendance).Value++;
@@ -765,6 +771,10 @@ public class UserInfoTable
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 0f;
             userInfoParam.Add(UserInfoTable.chatFrame, ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
+
+            //추천권 초기화
+            ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommend).Value = 1f;
+            userInfoParam.Add(UserInfoTable.canRecommend, ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommend).Value);
         }
 
         //손오공
