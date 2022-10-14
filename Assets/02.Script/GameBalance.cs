@@ -225,6 +225,7 @@ public static class GameBalance
     public readonly static ObscuredInt fireExchangeMaxCount = 10;
 
     public static ObscuredFloat forestValue = 1f;
+    public static ObscuredInt recommendCountPerWeek = 3;
 
     public static int GetSonIdx()
     {

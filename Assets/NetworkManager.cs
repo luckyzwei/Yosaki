@@ -632,6 +632,31 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     byte SendScore_Event = 0;
     byte StartBossContents_Event = 1;
     byte SendChat_Event = 2;
+    byte SendRecommend_Event = 3;
+
+    public void SendRecommend(string nickName)
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.canRecommendCount].Value <= 0)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"이번주는 더이상 추천하실 수 없습니다\n매주 {GameBalance.recommendCountPerWeek}회 추천 가능!", null);
+            return;
+        }
+
+#if !UNITY_EDITOR
+        if (Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(Utils.GetOriginNickName(nickName))) 
+        {
+            PopupManager.Instance.ShowAlarmMessage("자기 자신은 추천 하실 수 없습니다.");
+            return;
+        }
+#endif
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.canRecommendCount].Value--;
+        ServerData.userInfoTable.UpData(UserInfoTable.canRecommendCount, false);
+
+        object[] objects = new object[] { Utils.GetOriginNickName(nickName), Utils.GetOriginNickName(PlayerData.Instance.NickName) };
+
+        PhotonNetwork.RaiseEvent(SendRecommend_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+    }
 
     public void SendScoreInfo(double score, bool end = false)
     {
@@ -762,6 +787,36 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             }
 
             UpdateChatText();
+        }
+        else if (photonEvent.Code == SendRecommend_Event)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+
+            string targetNickName = (string)data[0];
+
+            string recommendedNickName = (string)data[1];
+
+            if (Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(targetNickName))
+            {
+                PopupManager.Instance.ShowAlarmMessage($"{recommendedNickName}님에게 추천 받았습니다!");
+
+                var rewardData = ServerData.bossServerTable.TableDatas["b68"];
+
+                if (string.IsNullOrEmpty(rewardData.score.Value))
+                {
+                    rewardData.score.Value = "1";
+                }
+                else
+                {
+                    int prefScore = int.Parse(rewardData.score.Value);
+
+                    prefScore++;
+
+                    rewardData.score.Value = prefScore.ToString();
+                }
+
+                ServerData.bossServerTable.UpdateData("b68");
+            }
         }
     }
 

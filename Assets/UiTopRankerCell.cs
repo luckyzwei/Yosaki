@@ -49,6 +49,9 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI levelText;
 
+    [SerializeField]
+    private GameObject partyRaidRecommendButton;
+
     public void UpdatePartyRaidScore(double topRankerScore = 0, bool fightEnd = false)
     {
         if (topRankerScoreText != null)
@@ -151,6 +154,27 @@ public class UiTopRankerCell : MonoBehaviour
         }
 
 
+        //십만대산용
+        if (partyRaidRecommendButton != null)
+        {
+            bool isMyNickName = Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(nickName);
+
+            partyRaidRecommendButton.SetActive(!isMyNickName);
+
+#if UNITY_EDITOR
+            //테스트용
+            partyRaidRecommendButton.SetActive(true);
+#endif
+        }
+    }
+
+    public void OnClickRecommendButton()
+    {
+        PopupManager.Instance.ShowAlarmMessage($"{this.nickName.text}님을 추천 합니다.");
+
+        PartyRaidManager.Instance.NetworkManager.SendRecommend(this.nickName.text);
+
+        partyRaidRecommendButton.SetActive(false);
     }
 
     private void SetPetSpine(int idx)

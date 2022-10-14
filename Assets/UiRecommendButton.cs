@@ -7,16 +7,5 @@ using UnityEngine.UI;
 
 public class UiRecommendButton : MonoBehaviour
 {
-    
-    
-
-    [SerializeField]
-    private TextMeshProUGUI nickName;
-
-    public void IncreaseRecommendCount()
-    {
-        PartyRaidManager.Instance.NetworkManager.SendRecommend(nickName.text.ToString());
-
-        this.gameObject.SetActive(false);
-    }
+   
 }

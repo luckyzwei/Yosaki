@@ -435,5 +435,10 @@ public static class Utils
         return false;
     }
 
+    public static string GetOriginNickName(string nickName)
+    {
+        return nickName.Replace(CommonString.IOS_nick, "");
+    }
+
 
 }

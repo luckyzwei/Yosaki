@@ -163,8 +163,7 @@ public class UserInfoTable
     public const string oneAttenEvent_one = "oo";
     public const string relicReset = "rele";
 
-    public const string recommendCount = "recommendCount";
-    public const string canRecommend = "canRecommend";
+    public const string canRecommendCount = "canRecommendCount";
 
 
     public double currentServerDate;
@@ -301,8 +300,7 @@ public class UserInfoTable
         {oneAttenEvent_one,0},
         {relicReset,0},
 
-        {recommendCount,0},
-        {canRecommend,1},
+        {canRecommendCount,GameBalance.recommendCountPerWeek},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -773,8 +771,8 @@ public class UserInfoTable
             userInfoParam.Add(UserInfoTable.chatFrame, ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
 
             //추천권 초기화
-            ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommend).Value = 1f;
-            userInfoParam.Add(UserInfoTable.canRecommend, ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommend).Value);
+            ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommendCount).Value = GameBalance.recommendCountPerWeek;
+            userInfoParam.Add(UserInfoTable.canRecommendCount, ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommendCount).Value);
         }
 
         //손오공
