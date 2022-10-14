@@ -176,7 +176,7 @@ public class UiBokPassCell : MonoBehaviour
         }
     }
 
-    private bool HasPassItem()
+    static public bool HasPassItem()
     {
         bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiBokPassBuyButton.bokPassKey].buyCount.Value > 0;
 

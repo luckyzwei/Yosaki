@@ -5,6 +5,7 @@ using BackEnd;
 using LitJson;
 using System;
 using UniRx;
+using System.Linq;
 
 public class DailyPassServerTable
 {
@@ -848,6 +849,32 @@ public class BokPassServerTable
         });
     }
 
+    public bool AttendanceBokPassAllReceived()
+    {
+        var receivedFreeRewardList = ServerData.bokPassServerTable.TableDatas[BokPassServerTable.childFree].Value;
+
+        var receivedAdRewardList = ServerData.bokPassServerTable.TableDatas[BokPassServerTable.childAd].Value;
+
+        
+        var freeRewards = receivedFreeRewardList.Split(',');
+
+        var adRewards = receivedAdRewardList.Split(',');
+ 
+        var tableData = TableManager.Instance.bokPass.dataArray;
+
+        
+        if(tableData.Length>freeRewards.Length-1)
+        {
+            return false;
+        }
+
+        if(tableData.Length>adRewards.Length-1)
+        {
+            return false;
+        }
+
+        return true;
+    }
     //
 
 }
