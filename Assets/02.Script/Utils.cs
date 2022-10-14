@@ -76,7 +76,10 @@ public static class Utils
                   type == Item_Type.costume55 ||
                   type == Item_Type.costume56 ||
                   type == Item_Type.costume57 ||
-                  type == Item_Type.costume58;
+                  type == Item_Type.costume58 ||
+                  type == Item_Type.costume59 ||
+                  type == Item_Type.costume60 ||
+                  type == Item_Type.costume61;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -116,6 +119,8 @@ public static class Utils
                 type == Item_Type.ChunNorigae0 ||
                 type == Item_Type.ChunNorigae1 ||
                 type == Item_Type.ChunNorigae2 ||
+                type == Item_Type.ChunNorigae3 ||
+                type == Item_Type.ChunNorigae4 ||
 
                 type == Item_Type.ChunSun0 ||
                 type == Item_Type.ChunSun1 ||

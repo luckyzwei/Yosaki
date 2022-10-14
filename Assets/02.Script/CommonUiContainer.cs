@@ -98,6 +98,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite ChunNorigae0;
     public Sprite ChunNorigae1;
     public Sprite ChunNorigae2;
+    public Sprite ChunNorigae3;
+    public Sprite ChunNorigae4;
     
     public Sprite ChunSun0;
     public Sprite ChunSun1;
@@ -368,6 +370,16 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.costume58:
                 return costumeThumbnail[58];
                 break;
+
+            case Item_Type.costume59:
+                return costumeThumbnail[59];
+                break;
+            case Item_Type.costume60:
+                return costumeThumbnail[60];
+                break;
+            case Item_Type.costume61:
+                return costumeThumbnail[61];
+                break;
             //
 
 
@@ -609,6 +621,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.ChunNorigae2:
                 return ChunNorigae2;
+                break;
+
+            case Item_Type.ChunNorigae3:
+                return ChunNorigae3;
+                break;
+
+            case Item_Type.ChunNorigae4:
+                return ChunNorigae4;
                 break;
             //
             case Item_Type.ChunSun0:

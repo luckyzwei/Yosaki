@@ -110,6 +110,8 @@ public enum Item_Type
     ChunSun2,
     Event_Fall,
     Event_Fall_Gold,
+    ChunNorigae3,
+    ChunNorigae4,
 
     RankFrame1 = 100,
     RankFrame2 = 101,
@@ -316,6 +318,10 @@ public enum Item_Type
     costume56 = 1257,
     costume57 = 1258,
     costume58 = 1259,
+
+    costume59 = 1260,
+    costume60 = 1261,
+    costume61 = 1262,
 
     pet0 = 1301,
     pet1 = 1302,
