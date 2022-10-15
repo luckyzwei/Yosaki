@@ -5,7 +5,10 @@ using UnityEngine;
 public class UiChunmaRewardBoard : MonoBehaviour
 {
     [SerializeField]
-    private UiTwelveBossContentsView bossContentsView_Horse;
+    private UiTwelveBossContentsView bossContentsView_Normal;
+
+    [SerializeField]
+    private UiTwelveBossContentsView bossContentsView_Recommend;
 
     private void Start()
     {
@@ -14,7 +17,9 @@ public class UiChunmaRewardBoard : MonoBehaviour
 
     private void Initialize()
     {
-        bossContentsView_Horse.Initialize(TableManager.Instance.TwelveBossTable.dataArray[55]);
+        bossContentsView_Normal.Initialize(TableManager.Instance.TwelveBossTable.dataArray[55]);
+
+        bossContentsView_Recommend.Initialize(TableManager.Instance.TwelveBossTable.dataArray[68]);
     }
 
 

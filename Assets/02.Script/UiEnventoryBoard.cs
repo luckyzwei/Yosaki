@@ -22,6 +22,9 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
     [SerializeField]
     private Transform equipViewParent;
 
+    [SerializeField]
+    private Transform equipViewParent_Recommend;
+
     public void AllUpgradeWeapon(int myIdx)
     {
         for (int i = 0; i <= myIdx; i++)
@@ -52,7 +55,29 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
         while (e.MoveNext())
         {
 
-            if (e.Current.Value.Grade != 18) 
+            if (e.Current.Value.Grade == 18 || e.Current.Value.Grade == 20)
+            {
+                if (e.Current.Value.Grade == 18)
+                {
+                    UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent);
+
+                    view.Initialize(e.Current.Value, null, OnClickWeaponView);
+
+                    weaponViewContainer.Add(view);
+                }
+
+                if (e.Current.Value.Grade == 20)
+                {
+                    UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent_Recommend);
+
+                    view.Initialize(e.Current.Value, null, OnClickWeaponView);
+
+                    weaponViewContainer.Add(view);
+
+                }
+
+            }
+            else
             {
                 UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, viewParentWeapon);
 
@@ -60,16 +85,8 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
                 weaponViewContainer.Add(view);
             }
-            else 
-            {
-                UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent);
 
-                view.Initialize(e.Current.Value, null, OnClickWeaponView);
 
-                weaponViewContainer.Add(view);
-            }
-
-       
         }
     }
 
