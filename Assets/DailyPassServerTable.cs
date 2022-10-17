@@ -884,8 +884,9 @@ public class OneYearPassServerTable
     public const string tableName = "onePass";
 
 
-    public static string childFree = "f3";
-    public static string childAd = "a3";
+    //2022가을 사용중
+    public static string childFree = "f4";
+    public static string childAd = "a4";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {

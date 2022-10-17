@@ -6,7 +6,7 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-public class UiCollectionEventCellFall : MonoBehaviour
+public class UiCollectionFallEventCell : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI itemName;
@@ -172,6 +172,10 @@ public class UiCollectionEventCellFall : MonoBehaviour
         //로컬
         ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value -= tableData.Price;
 
+        ServerData.userInfoTable.GetTableData(UserInfoTable.usedFallCollectionCount).Value += tableData.Price;
+
+        
+
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
         {
             ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value++;
@@ -297,12 +301,16 @@ public class UiCollectionEventCellFall : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         }
 
+            Param userInfoParam = new Param();
+
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
         {
-            Param userInfoParam = new Param();
             userInfoParam.Add(tableData.Exchangekey, ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value);
-            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
         }
+        userInfoParam.Add(UserInfoTable.usedFallCollectionCount, ServerData.userInfoTable.TableDatas[UserInfoTable.usedFallCollectionCount].Value);
+
+        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {

@@ -4,10 +4,10 @@ using TMPro;
 using UnityEngine;
 using UniRx;
 
-public class UiOneYearKillIndicator : MonoBehaviour
+public class UiFallEventUsedCollection : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI killCountText;
+    private TextMeshProUGUI usedCountText;
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class UiOneYearKillIndicator : MonoBehaviour
     {
         ServerData.userInfoTable.GetTableData(UserInfoTable.usedFallCollectionCount).AsObservable().Subscribe(e =>
         {
-            killCountText.SetText($"처치 : {Utils.ConvertBigNum(e)}");
+            usedCountText.SetText($"사용한 곶감의 수 : {Utils.ConvertBigNum(e)}");
         }).AddTo(this);
     }
 }

@@ -113,7 +113,8 @@ public class UserInfoTable
     public const string killCountTotalChild = "fal"; //가을훈련
     public const string attenCountBok = "kb";
     public const string attenCountChuSeok = "kchu";
-    public const string attenCountOne = "oy"; //일주년
+    public const string usedFallCollectionCount = "ufc"; //곶감사용
+    
 
     public const string relicKillCount = "relicKillCount";
     public const string hellRelicKillCount = "hrk";
@@ -255,7 +256,7 @@ public class UserInfoTable
         {killCountTotal2,0f},
         {killCountTotalChild,0f},
         {attenCountBok,1f},
-        {attenCountOne,0f},
+        {usedFallCollectionCount,0f},
         {attenCountChuSeok,1f},
         {yomul6_buff,0f},
         {sonScore,0f},

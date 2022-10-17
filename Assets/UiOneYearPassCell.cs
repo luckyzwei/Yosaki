@@ -74,7 +74,7 @@ public class UiOneYearPassCell : MonoBehaviour
         }).AddTo(disposables);
 
         //킬카운트 변경될때
-        ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.usedFallCollectionCount).AsObservable().Subscribe(e =>
         {
             if (this.gameObject.activeInHierarchy)
             {
@@ -154,9 +154,35 @@ public class UiOneYearPassCell : MonoBehaviour
     //광고아님
     public void OnClickAdRewardButton()
     {
+        if (CanGetReward() == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("출석이 부족합니다.");
+            return;
+        }
 
+        if (HasReward(passInfo.rewardType_IAP_Key, passInfo.id)) 
+        {
+            PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
+            return;
+        }
+
+        PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
+        if (HasPassItem())
+        {
+            GetAdReward();
+        }
+       else
+        {
+            PopupManager.Instance.ShowAlarmMessage($"곶감 패스권이 필요합니다.");
+        }
     }
 
+    static public bool HasPassItem()
+    {
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiFallEventPassBuyButton.fallPassKey].buyCount.Value > 0;
+
+        return hasIapProduct;
+    }
     private void GetFreeReward()
     {
         //로컬
@@ -214,7 +240,7 @@ public class UiOneYearPassCell : MonoBehaviour
 
     private bool CanGetReward()
     {
-        int killCountTotalBok = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value;
+        int killCountTotalBok = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.usedFallCollectionCount).Value;
         return killCountTotalBok >= passInfo.require;
     }
     private void OnEnable()

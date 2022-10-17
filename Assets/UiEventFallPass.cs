@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
-public class UiOneYearAtten : MonoBehaviour
+public class UiEventFallPass : MonoBehaviour
 {
     [SerializeField]
     private UiOneYearPassCell uiPassCellPrefab;
@@ -113,18 +113,18 @@ public class UiOneYearAtten : MonoBehaviour
             }
 
             ////유료보상
-            //if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
-            //{
-            //    if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
-            //    {
-            //        hasCostumeItem = true;
-            //        break;
-            //    }
+            if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
 
-            //    ad += $",{tableData[i].Id}";
-            //    ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
-            //    rewardedNum++;
-            //}
+                ad += $",{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+                rewardedNum++;
+            }
         }
 
         if (hasCostumeItem)
@@ -136,6 +136,7 @@ public class UiOneYearAtten : MonoBehaviour
         if (rewardedNum > 0)
         {
             ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree].Value = free;
+            ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd].Value = ad;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -152,6 +153,7 @@ public class UiOneYearAtten : MonoBehaviour
             Param passParam = new Param();
 
             passParam.Add(OneYearPassServerTable.childFree, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree].Value);
+            passParam.Add(OneYearPassServerTable.childAd, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd].Value);
 
             transactions.Add(TransactionValue.SetUpdate(OneYearPassServerTable.tableName, OneYearPassServerTable.Indate, passParam));
 
@@ -167,6 +169,12 @@ public class UiOneYearAtten : MonoBehaviour
         }
     }
 
+        private bool HasPassItem()
+    {
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiFallEventPassBuyButton.fallPassKey].buyCount.Value > 0;
+        
+        return hasIapProduct;
+    }
 
     private bool CanGetReward(int require)
     {
