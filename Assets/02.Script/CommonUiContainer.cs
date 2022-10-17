@@ -100,7 +100,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite ChunNorigae2;
     public Sprite ChunNorigae3;
     public Sprite ChunNorigae4;
-    
+
     public Sprite ChunSun0;
     public Sprite ChunSun1;
     public Sprite ChunSun2;
@@ -120,7 +120,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Cw;
     public Sprite Event_Fall;
     public Sprite Event_Fall_Gold;
-   
+
     public List<SkeletonDataAsset> enemySpineAssets;
 
     public Sprite GuildReward;
@@ -165,6 +165,11 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite MihoTail;
     public Sprite ChunMaNorigae;
 
+    public Sprite RecommendWeapon0;
+    public Sprite RecommendWeapon1;
+    public Sprite RecommendWeapon2;
+    public Sprite RecommendWeapon3;
+    public Sprite RecommendWeapon4;
 
     public Sprite Sun0;
     public Sprite Sun1;
@@ -172,7 +177,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Sun3;
     public Sprite Sun4;
 
-    
+
     public Sprite GetItemIcon(Item_Type type)
     {
         switch (type)
@@ -571,7 +576,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.Cw:
                 return Cw;
-                break; 
+                break;
             case Item_Type.Event_Fall:
                 return Event_Fall;
                 break;
@@ -808,6 +813,22 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.ChunMaNorigae:
                 return ChunMaNorigae;
+                break;
+
+            case Item_Type.RecommendWeapon0:
+                return RecommendWeapon0;
+                break;
+            case Item_Type.RecommendWeapon1:
+                return RecommendWeapon1;
+                break;
+            case Item_Type.RecommendWeapon2:
+                return RecommendWeapon2;
+                break;
+            case Item_Type.RecommendWeapon3:
+                return RecommendWeapon3;
+                break;
+            case Item_Type.RecommendWeapon4:
+                return RecommendWeapon4;
                 break;
 
             case Item_Type.gumiho0:

@@ -1376,6 +1376,168 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
+        //--------------------------------------
+        else if (type == Item_Type.RecommendWeapon0)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.weaponTable.TableDatas["weapon45"].amount.Value += 1;
+            ServerData.weaponTable.TableDatas["weapon45"].hasItem.Value = 1;
+
+            Param weaponParam = new Param();
+
+            weaponParam.Add("weapon45", ServerData.weaponTable.TableDatas["weapon45"].ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "십만대산 명예무기 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+        }
+        else if (type == Item_Type.RecommendWeapon1)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.weaponTable.TableDatas["weapon46"].amount.Value += 1;
+            ServerData.weaponTable.TableDatas["weapon46"].hasItem.Value = 1;
+
+            Param weaponParam = new Param();
+
+            weaponParam.Add("weapon46", ServerData.weaponTable.TableDatas["weapon46"].ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "십만대산 명예무기 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+        }
+        else if (type == Item_Type.RecommendWeapon2)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.weaponTable.TableDatas["weapon47"].amount.Value += 1;
+            ServerData.weaponTable.TableDatas["weapon47"].hasItem.Value = 1;
+
+            Param weaponParam = new Param();
+
+            weaponParam.Add("weapon47", ServerData.weaponTable.TableDatas["weapon47"].ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "십만대산 명예무기 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+        }
+        else if (type == Item_Type.RecommendWeapon3)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.weaponTable.TableDatas["weapon48"].amount.Value += 1;
+            ServerData.weaponTable.TableDatas["weapon48"].hasItem.Value = 1;
+
+            Param weaponParam = new Param();
+
+            weaponParam.Add("weapon48", ServerData.weaponTable.TableDatas["weapon48"].ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "십만대산 명예무기 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+        }
+        else if (type == Item_Type.RecommendWeapon4)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.weaponTable.TableDatas["weapon49"].amount.Value += 1;
+            ServerData.weaponTable.TableDatas["weapon49"].hasItem.Value = 1;
+
+            Param weaponParam = new Param();
+
+            weaponParam.Add("weapon49", ServerData.weaponTable.TableDatas["weapon49"].ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "십만대산 명예무기 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+        }
+        //----------------------------------------
         else if (type == Item_Type.Kirin_Pet)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();

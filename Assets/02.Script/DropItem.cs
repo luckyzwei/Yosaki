@@ -366,12 +366,11 @@ public enum Item_Type
     ChunWeapon1 = 7009,
     ChunPet1 = 7010,
 
-
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
     RecommendWeapon2 = 8002,
     RecommendWeapon3 = 8003,
-    RecommendWeapon4 = 8005,
+    RecommendWeapon4 = 8004,
 }
 
 public class DropItem : PoolItem
