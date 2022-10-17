@@ -77,6 +77,7 @@ public class UiCollectionEventCellFall : MonoBehaviour
             {
                 price.SetText("보유중!");
                 goldButton.gameObject.SetActive(false);
+                goldButton.onEvent.RemoveListener(OnClickExchangeGoldButton);
             }
 
         }).AddTo(this);
@@ -129,6 +130,7 @@ public class UiCollectionEventCellFall : MonoBehaviour
 
     public void OnClickExchangeButton()
     {
+  
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             PopupManager.Instance.ShowAlarmMessage("인터넷 연결을 확인해 주세요!");
@@ -187,6 +189,9 @@ public class UiCollectionEventCellFall : MonoBehaviour
     }
     public void OnClickExchangeGoldButton()
     {
+        //if (goldButton.gameObject.activeSelf == false)
+        //    return;
+
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             PopupManager.Instance.ShowAlarmMessage("인터넷 연결을 확인해 주세요!");
