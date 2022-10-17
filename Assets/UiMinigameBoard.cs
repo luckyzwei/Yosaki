@@ -9,6 +9,9 @@ using BackEnd;
 public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
 {
     [SerializeField]
+    AbbObject abbObject;
+
+    [SerializeField]
     private List<GameObject> bulletSpawnPosits;
 
     [SerializeField]
@@ -78,6 +81,8 @@ public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
                     break;
                 case MiniGameState.Playing:
                     {
+                        abbObject.enabled = false;
+
                         ResetGame();
 
                         if (gameRoutine != null)
@@ -97,6 +102,8 @@ public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
                     break;
                 case MiniGameState.End:
                     {
+                        abbObject.enabled = true;
+
                         StopAllRoutines();
                     }
                     break;
