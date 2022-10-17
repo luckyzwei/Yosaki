@@ -131,6 +131,7 @@ public class GoodsTable
 
     public static string Event_Fall = "Event_Fall"; //곶감
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
+    public static string FoxMaskPartial = "FoxMaskPartial"; //황금 곶감
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -244,7 +245,8 @@ public class GoodsTable
         {c6,0f},
 
         {Event_Fall,0f},
-        {Event_Fall_Gold,0f}
+        {Event_Fall_Gold,0f},
+        {FoxMaskPartial,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

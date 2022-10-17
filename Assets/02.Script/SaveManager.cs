@@ -187,6 +187,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.c4,
         GoodsTable.c5,
         GoodsTable.c6,
+        GoodsTable.FoxMaskPartial,
     };
 
     //SendQueue에서 저장

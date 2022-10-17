@@ -339,6 +339,9 @@ public static class ServerData
                 break;  
             case Item_Type.Cw:
                 ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += rewardValue;
+                break; 
+            case Item_Type.FoxMaskPartial:
+                ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += rewardValue;
                 break;  
 
             case Item_Type.Event_Fall:
@@ -869,6 +872,11 @@ public static class ServerData
             case Item_Type.Hel:
                 ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += amount;
                 param.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
+            
+            case Item_Type.FoxMaskPartial:
+                ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += amount;
+                param.Add(GoodsTable.FoxMaskPartial, ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
 
                    case Item_Type.Cw:
@@ -1782,6 +1790,10 @@ public static class ServerData
                     break;
                 case Item_Type.Event_Item_0:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += amount;
+                    break; 
+                
+                case Item_Type.FoxMaskPartial:
+                    ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += amount;
                     break; 
                 
                 case Item_Type.Cw:

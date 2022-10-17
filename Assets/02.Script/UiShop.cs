@@ -337,6 +337,13 @@ public class UiShop : SingletonMono<UiShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += amount;
                     param.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
                 }
+                break;  
+            
+            case Item_Type.FoxMaskPartial:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += amount;
+                    param.Add(GoodsTable.FoxMaskPartial, ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value);
+                }
                 break; 
 
             case Item_Type.Event_Fall:

@@ -129,6 +129,10 @@ public class TwelveDungeonManager : ContentsManagerBase
             id -= 8;
         }
 
+#if UNITY_EDITOR
+        Debug.LogError($"Map id {id}");
+#endif
+
         for (int i = 0; i < mapObjects.Count; i++)
         {
 
@@ -381,7 +385,7 @@ public class TwelveDungeonManager : ContentsManagerBase
                 twelveBossTable.Id == 57 ||
                 twelveBossTable.Id == 58 ||
                 twelveBossTable.Id == 59 ||
-                twelveBossTable.Id == 60 
+                twelveBossTable.Id == 60
                 )
             {
                 remainSec *= 0.5f;

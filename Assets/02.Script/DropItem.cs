@@ -112,6 +112,7 @@ public enum Item_Type
     Event_Fall_Gold,
     ChunNorigae3,
     ChunNorigae4,
+    FoxMaskPartial,
 
     RankFrame1 = 100,
     RankFrame2 = 101,

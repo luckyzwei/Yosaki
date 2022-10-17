@@ -32,7 +32,7 @@ public class GameManager : SingletonMono<GameManager>
         GumGiSoul,
         HellWarMode,
         PartyRaid,
-        ChunFlower
+        ChunFlower,
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;
