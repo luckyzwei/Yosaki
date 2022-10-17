@@ -7,11 +7,6 @@ using UniRx;
 
 public class PostManager : SingletonMono<PostManager>
 {
-    public enum PostType
-    {
-        Android, IOS
-    }
-
     public class PostInfo
     {
         public string Indate;
@@ -34,11 +29,6 @@ public class PostManager : SingletonMono<PostManager>
 
     public void RefreshPost(bool retry = false)
     {
-        bool isAndroid = true;
-
-#if UNITY_IOS
-        isAndroid = false;
-#endif
 
         // example
         Backend.Social.Post.GetPostListV2((bro) =>
@@ -69,12 +59,17 @@ public class PostManager : SingletonMono<PostManager>
                             post.titleText = postInfo["title"][ServerData.format_string].ToString();
                             post.contentText = postInfo["content"][ServerData.format_string].ToString();
 
-                            if (post.titleText.Contains("IOS"))
+                            if (post.titleText.Contains("AND"))
                             {
-                                if (isAndroid == false)
-                                {
-                                    postList.Add(post);
-                                }
+#if UNITY_ANDROID
+                                postList.Add(post);
+#endif
+                            }
+                            else if (post.titleText.Contains("IOS"))
+                            {
+#if UNITY_IOS
+                                postList.Add(post);
+#endif
                             }
                             else
                             {
@@ -92,12 +87,17 @@ public class PostManager : SingletonMono<PostManager>
                             post.titleText = postInfo["title"][ServerData.format_string].ToString();
                             post.contentText = postInfo["content"][ServerData.format_string].ToString();
 
-                            if (post.titleText.Contains("IOS"))
+                            if (post.titleText.Contains("AND"))
                             {
-                                if (isAndroid == false)
-                                {
-                                    postList.Add(post);
-                                }
+#if UNITY_ANDROID
+                                postList.Add(post);
+#endif
+                            }
+                            else if (post.titleText.Contains("IOS"))
+                            {
+#if UNITY_IOS
+                                postList.Add(post);
+#endif
                             }
                             else
                             {
