@@ -28,6 +28,9 @@ public class UiRewardCollection : MonoBehaviour
     [SerializeField]
     private Button chunFlowerButton;
 
+    [SerializeField]
+    private Button hellRelicButton;
+
     private void Start()
     {
         Subscribe();
@@ -44,6 +47,7 @@ public class UiRewardCollection : MonoBehaviour
             gumGiButton.interactable = e >= 50000;
             hellFireButton.interactable = e >= 50000;
             chunFlowerButton.interactable = e >= 200000;
+            hellRelicButton.interactable = e >= 50000;
 
         }).AddTo(this);
     }
