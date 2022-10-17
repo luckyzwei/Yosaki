@@ -541,6 +541,9 @@ public static class PlayerStats
 
         ret += GetWeaponEquipPercentValue(StatusType.SkillDamage);
         ret += GetMagicBookEquipPercentValue(StatusType.SkillDamage);
+        ret += GetMagicBookHasPercentValue(StatusType.SkillDamage);
+
+
         ret += ServerData.statusTable.GetStatusValue(StatusTable.SkillDamage_memory);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.SkillDamage);
         ret += GetSkillCollectionValue(StatusType.SkillDamage);
