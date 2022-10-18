@@ -1958,7 +1958,7 @@ public static class PlayerStats
         return TableManager.Instance.dragonBall.dataArray[idx].Abilvalue0;
     }
 
-    public const float HellRelicAbilValue = 0.1f;
+    public const float HellRelicAbilValue = 0.5f;
     public const int HellRelicAbilDivide = 100;
     public static float GetHellRelicAbilValue()
     {

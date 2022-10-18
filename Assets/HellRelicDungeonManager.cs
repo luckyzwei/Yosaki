@@ -198,14 +198,13 @@ public class HellRelicDungeonManager : ContentsManagerBase
 
         if (isMax)
         {
-            addValue = (spawnCount * 2) - enemyTableIdx;
-            addValue *= 0.03f;
+            addValue = (spawnCount) - enemyTableIdx + 8450;
         }
 
         //최대층
         if (enemyTableIdx >= 12400)
         {
-            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (addValue * 2f);
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (addValue * 1.8f);
         }
         else
         {
