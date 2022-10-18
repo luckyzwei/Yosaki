@@ -146,6 +146,11 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             equipButton.gameObject.SetActive(false);
         }
+
+        if (weaponData != null && weaponData.Id >= 45 && weaponData.Id <= 49)
+        {
+            equipButton.gameObject.SetActive(false);
+        }
     }
 
     public void OnClickWeaponViewButton()
@@ -829,6 +834,11 @@ public class UiInventoryWeaponView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 장착 하실수 없습니다.");
                 return;
             }
+            if (weaponData.Id >= 45 && weaponData.Id <= 49)
+            {
+                PopupManager.Instance.ShowAlarmMessage("외형 아이템은 장착 하실수 없습니다.");
+                return;
+            }
 
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
             {
@@ -884,6 +894,12 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (weaponData != null)
         {
             if (weaponData.Id >= 37 && weaponData.Id <= 42)
+            {
+                PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
+                return;
+            }
+
+            if (weaponData.Id >= 45 && weaponData.Id <= 49)
             {
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
                 return;
