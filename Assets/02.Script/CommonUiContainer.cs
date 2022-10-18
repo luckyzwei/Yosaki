@@ -658,6 +658,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
             case Item_Type.GangrimWeapon:
                 return GangrimWeapon;
+                break;   
+            
+            case Item_Type.YeaRaeWeapon:
+                return YeaRaeWeapon;
                 break;
 
             case Item_Type.HaeWeapon:
