@@ -386,6 +386,8 @@ public class TwelveDungeonManager : ContentsManagerBase
                 twelveBossTable.Id == 58 ||
                 twelveBossTable.Id == 59 ||
                 twelveBossTable.Id == 60 ||
+                twelveBossTable.Id == 61 ||
+                twelveBossTable.Id == 62 ||
                 twelveBossTable.Id == 66 ||
                 twelveBossTable.Id == 67 ||
                 twelveBossTable.Id == 69
