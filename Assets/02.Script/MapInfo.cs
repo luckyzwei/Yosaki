@@ -167,7 +167,7 @@ public class MapInfo : SingletonMono<MapInfo>
 
             if(PlayerStats.IsChunMonsterSpawnAdd())
             {
-                chunPlusSpawnNum = 10;
+                chunPlusSpawnNum = 5;
             }
 
             int spawnNum = maxEnemy - spawnedEnemyList.Count + plusSpawnNum + hellPlusSpawnNum + chunPlusSpawnNum;

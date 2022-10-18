@@ -112,7 +112,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         //천계 추가소환
         if (PlayerStats.IsChunMonsterSpawnAdd())
         {
-            plusSpawnNum += 10;
+            plusSpawnNum += 5;
         }
 
 
