@@ -109,7 +109,14 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         //지옥 추가소환
         plusSpawnNum += (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
 
-        float spawnEnemyNumPerSec = (float)((platformNum * stageTableData.Spawnamountperplatform) + plusSpawnNum) / spawnInterval;
+        //천계 추가소환
+        if (PlayerStats.IsChunMonsterSpawnAdd())
+        {
+            plusSpawnNum += 10;
+        }
+
+
+            float spawnEnemyNumPerSec = (float)((platformNum * stageTableData.Spawnamountperplatform) + plusSpawnNum) / spawnInterval;
 
         float killedEnemyPerMin = spawnEnemyNumPerSec * 60f;
 

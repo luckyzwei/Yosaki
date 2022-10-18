@@ -1511,6 +1511,15 @@ public static class PlayerStats
             ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
         }
 
+        if(statusType==StatusType.SuperCritical4DamPer)
+        {
+            if (IsChunFlowerDamageEnhance())
+            {
+                ret += 0.000015f* currentLevel;
+                
+            }
+        }
+
         return ret;
     }
 
@@ -1824,7 +1833,7 @@ public static class PlayerStats
             ret += 0.1f;
         } 
         
-        if (IsChunCostumeBossHpDec())
+        if (IsChunBossHpDec())
         {
             ret += 0.05f;
         }
@@ -1991,10 +2000,23 @@ public static class PlayerStats
         return chunFlowerNum >= requireFlower;
     }
 
-    public static bool IsChunCostumeBossHpDec()
+    public static bool IsChunBossHpDec()
     {
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[2].Requirespeicalabilflower;
+        return chunFlowerNum >= requireFlower;
+    }
+    public static bool IsChunMonsterSpawnAdd()
+    {
+        var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
+        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[3].Requirespeicalabilflower;
+        return chunFlowerNum >= requireFlower;
+    }  
+    
+    public static bool IsChunFlowerDamageEnhance()
+    {
+        var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
+        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[4].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
     }
 

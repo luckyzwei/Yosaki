@@ -162,7 +162,15 @@ public class MapInfo : SingletonMono<MapInfo>
             //명부 추가소환
             int hellPlusSpawnNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
 
-            int spawnNum = maxEnemy - spawnedEnemyList.Count + plusSpawnNum + hellPlusSpawnNum;
+            //천상계 꽃 추가소환
+            int chunPlusSpawnNum = 0;
+
+            if(PlayerStats.IsChunMonsterSpawnAdd())
+            {
+                chunPlusSpawnNum = 10;
+            }
+
+            int spawnNum = maxEnemy - spawnedEnemyList.Count + plusSpawnNum + hellPlusSpawnNum + chunPlusSpawnNum;
 
             while (canSpawnEnemy == false)
             {
