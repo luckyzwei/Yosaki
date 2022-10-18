@@ -154,6 +154,7 @@ public class UserInfoTable
     public const string exchangeCount_3 = "ex_3";
     public const string exchangeCount_4 = "ex_4";
     public const string exchangeCount_5 = "ex_5";
+    public const string exchangeCount_6 = "ex_6";
 
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
@@ -289,6 +290,7 @@ public class UserInfoTable
         {exchangeCount_3,0},
         {exchangeCount_4,0},
         {exchangeCount_5,0},
+        {exchangeCount_6,0},
         {monthreset,0},
         {refundFox,0},
         {sendGangChul,0},
