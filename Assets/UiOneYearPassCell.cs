@@ -166,7 +166,7 @@ public class UiOneYearPassCell : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
+        
         if (HasPassItem())
         {
             GetAdReward();
@@ -174,7 +174,9 @@ public class UiOneYearPassCell : MonoBehaviour
        else
         {
             PopupManager.Instance.ShowAlarmMessage($"곶감 패스권이 필요합니다.");
+            return;
         }
+        PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
     }
 
     static public bool HasPassItem()

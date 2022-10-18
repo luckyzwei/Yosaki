@@ -64,6 +64,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public GameObject RoomPanel;
     public Text ListText;
     public TextMeshProUGUI RoomInfoText;
+    public TextMeshProUGUI RecommendCount;
+    public TextMeshProUGUI RecommendCountDescription;
 
     public GameObject scoreBoardPanel;
 
@@ -428,7 +430,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         makeRoomButton.interactable = true;
         playerState.Value = PlayerState.Room;
         startGameButton.interactable = true;
-
+        RecommendCount.text = "추천 가능 수 : " + ServerData.userInfoTable.TableDatas[UserInfoTable.canRecommendCount].Value.ToString();
+        RecommendCountDescription.text = "매 주 "+GameBalance.recommendCountPerWeek.ToString() + "만큼 추천 가능합니다!";
         ResetRoomState();
         RoomRenewal();
         UpdatePlayerInfoList();

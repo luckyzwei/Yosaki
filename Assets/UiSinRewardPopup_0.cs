@@ -21,6 +21,9 @@ public class UiSinRewardPopup_0 : SingletonMono<UiSinRewardPopup_0>
     private Transform cellParent;
 
     [SerializeField]
+    private TextMeshProUGUI RecommendCount;
+
+    [SerializeField]
     private TextMeshProUGUI damText;
 
     public int bossId = 13;
@@ -44,7 +47,15 @@ public class UiSinRewardPopup_0 : SingletonMono<UiSinRewardPopup_0>
             currentDamage = double.Parse(bossServerData.score.Value);
         }
 
-        damText.SetText($"최고 피해량 : {Utils.ConvertBigNum(currentDamage)}");
+        if (damText != null)
+        {
+            damText.SetText($"최고 피해량 : {Utils.ConvertBigNum(currentDamage)}");
+        }
+
+        if (RecommendCount != null)
+        {
+            RecommendCount.SetText($"받은 추천 : {ServerData.bossServerTable.TableDatas["b68"].score.Value}");
+        }
 
         if (rootObject != null)
         {
