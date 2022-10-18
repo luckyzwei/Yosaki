@@ -643,13 +643,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             return;
         }
 
-#if !UNITY_EDITOR
         if (Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(Utils.GetOriginNickName(nickName))) 
         {
             PopupManager.Instance.ShowAlarmMessage("자기 자신은 추천 하실 수 없습니다.");
             return;
         }
-#endif
+
+        Debug.LogError("Send Recommend@@@");
 
         ServerData.userInfoTable.TableDatas[UserInfoTable.canRecommendCount].Value--;
         ServerData.userInfoTable.UpData(UserInfoTable.canRecommendCount, false);
@@ -799,6 +799,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
             if (Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(targetNickName))
             {
+                Debug.LogError("추천 받음");
+
                 PopupManager.Instance.ShowAlarmMessage($"{recommendedNickName}님에게 추천 받았습니다!");
 
                 var rewardData = ServerData.bossServerTable.TableDatas["b68"];

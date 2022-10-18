@@ -160,11 +160,6 @@ public class UiTopRankerCell : MonoBehaviour
             bool isMyNickName = Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(nickName);
 
             partyRaidRecommendButton.SetActive(!isMyNickName);
-
-#if UNITY_EDITOR
-            //테스트용
-            partyRaidRecommendButton.SetActive(true);
-#endif
         }
     }
 
@@ -175,6 +170,8 @@ public class UiTopRankerCell : MonoBehaviour
         PartyRaidManager.Instance.NetworkManager.SendRecommend(this.nickName.text);
 
         partyRaidRecommendButton.SetActive(false);
+
+     
     }
 
     private void SetPetSpine(int idx)
