@@ -631,6 +631,12 @@ public enum TitleMissionId
 
     Stage12500,//★
     Stage12600,//★
+
+    Stage12700,//★
+    Stage12800,//★
+    ChunWeapon0,//★
+    ChunWeapon1,//★
+
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -2946,6 +2952,15 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Stage12600);
             }
+            if (e >= 12700 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage12700);
+            }
+
+            if (e >= 12800 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage12800);
+            }
 
 
         }).AddTo(this);
@@ -3126,6 +3141,22 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e == 1)
             {
                 ClearTitleMission(TitleMissionId.SainWeapon);
+            }
+        }).AddTo(this);
+        
+        ServerData.weaponTable.TableDatas["weapon43"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.ChunWeapon0);
+            }
+        }).AddTo(this);
+        
+        ServerData.weaponTable.TableDatas["weapon44"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.ChunWeapon1);
             }
         }).AddTo(this);
    
