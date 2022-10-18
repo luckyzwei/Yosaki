@@ -6,6 +6,7 @@ using UniRx;
 using System.Linq;
 using BackEnd;
 using TMPro;
+using System;
 
 public class UiOneYearPassCell : MonoBehaviour
 {
@@ -76,14 +77,11 @@ public class UiOneYearPassCell : MonoBehaviour
         //킬카운트 변경될때
         ServerData.userInfoTable.GetTableData(UserInfoTable.usedFallCollectionCount).AsObservable().Subscribe(e =>
         {
-            if (this.gameObject.activeInHierarchy)
-            {
-                lockIcon_Free.SetActive(!CanGetReward());
-                lockIcon_Ad.SetActive(!CanGetReward());
-                gaugeImage.SetActive(CanGetReward());
-            }
+
         }).AddTo(disposables);
     }
+
+    
 
     public void Initialize(PassInfo passInfo)
     {
@@ -98,6 +96,8 @@ public class UiOneYearPassCell : MonoBehaviour
         Subscribe();
 
         RefreshParent();
+
+        RefreshData();
     }
 
     private void SetAmount()
@@ -248,7 +248,18 @@ public class UiOneYearPassCell : MonoBehaviour
     private void OnEnable()
     {
         RefreshParent();
+        RefreshData();
+
     }
+
+    private void RefreshData()
+    {
+        if (passInfo == null) return;
+        lockIcon_Free.SetActive(!CanGetReward());
+        lockIcon_Ad.SetActive(!CanGetReward());
+        gaugeImage.SetActive(CanGetReward());
+    }
+
     public void RefreshParent()
     {
         if (passInfo == null) return;
