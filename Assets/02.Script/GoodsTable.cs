@@ -131,7 +131,7 @@ public class GoodsTable
 
     public static string Event_Fall = "Event_Fall"; //곶감
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
-    public static string FoxMaskPartial = "FoxMaskPartial"; //황금 곶감
+    public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {

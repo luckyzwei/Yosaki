@@ -1863,7 +1863,7 @@ public static class PlayerStats
         int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMask].Value;
         if (equipId == -1) return 0f;
 
-        return (float)TableManager.Instance.FoxMask.dataArray[equipId].Abilvalue;
+        return (float)TableManager.Instance.FoxMask.dataArray[equipId].Abilvalue * (1 + GetFoxMaskAbilPlusValue());
     }
 
     public static void ResetAbilDic()
@@ -1924,6 +1924,12 @@ public static class PlayerStats
     public static float GetSonAbilPlusValue()
     {
         return yeoRaeMarbleValue * ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value;
+    }
+
+    public static float foxMaskPartialValue = 0.015f;
+    public static float GetFoxMaskAbilPlusValue()
+    {
+        return foxMaskPartialValue * ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value;
     }
 
     public static int GetCurrentDragonIdx()
