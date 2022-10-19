@@ -174,14 +174,12 @@ public class RelicDungeonManager : ContentsManagerBase
         if (isMax)
         {
             addValue = (spawnCount) - enemyTableIdx + 6200;
-            Debug.LogError(addValue);
         }
 
         //최대층
         if (enemyTableIdx >= 12400)
         {
-           Debug.LogError(TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (addValue * 12f));
-            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (addValue * 12f);
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (System.Math.Pow(1.0015d, addValue));
         }
         else
         {

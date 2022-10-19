@@ -204,7 +204,7 @@ public class HellRelicDungeonManager : ContentsManagerBase
         //최대층
         if (enemyTableIdx >= 12400)
         {
-            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (addValue * 5f);
+            return TableManager.Instance.EnemyTable.dataArray[enemyTableIdx].Hp * (System.Math.Pow(1.002d, addValue));
         }
         else
         {
