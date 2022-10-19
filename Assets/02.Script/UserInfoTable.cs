@@ -163,7 +163,7 @@ public class UserInfoTable
     public const string oneAttenEvent = "oe";
     public const string titleRefund = "tii";
     public const string oneAttenEvent_one = "oo";
-    public const string relicReset = "rele";
+    public const string relicReset = "rkrk";
 
     public const string canRecommendCount = "canRecommendCount";
 

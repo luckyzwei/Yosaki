@@ -1098,6 +1098,8 @@ public static class PlayerStats
 
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical4DamPer);
 
+        ret += GetWeaponEquipPercentValue(StatusType.SuperCritical4DamPer);
+
         return ret;
     }
 

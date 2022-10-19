@@ -14,7 +14,7 @@ public class RelicReset : MonoBehaviour
     {
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.relicReset].Value == 1) return;
 
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.hellRelicKillCount).Value < 10000)
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.hellRelicKillCount).Value < 4000)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
