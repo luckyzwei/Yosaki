@@ -42,7 +42,7 @@ public class UiStageRelicCell : MonoBehaviour
     {
         if (levelText == null || priceText == null || relicDescription == null || relicLocalData == null) return;
 
-        levelText.SetText($"LV:{level.ToString()}");
+        levelText.SetText($"LV:{Utils.ConvertBigNum(level)}");
 
         if (IsMaxLevel() == false)
         {
