@@ -320,4 +320,9 @@ public class UiRewardCollection : MonoBehaviour
     {
 
     }
+
+    public void OnClickTrainingReward()
+    {
+        RewardPopupManager.Instance.OnclickButton();
+    }
 }
