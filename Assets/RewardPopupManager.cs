@@ -14,7 +14,10 @@ public class RewardPopupManager : SingletonMono<RewardPopupManager>
 
     public void OnclickButton()
     {
-        mainTabButtons.OnClickButton();
+        if (mainTabButtons != null)
+        {
+            mainTabButtons.OnClickButton();
+        }
     }
     // Start is called before the first frame update
 

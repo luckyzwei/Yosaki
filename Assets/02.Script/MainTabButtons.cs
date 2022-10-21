@@ -34,10 +34,12 @@ public class MainTabButtons : MonoBehaviour
 
         if (popupObject == null)
         {
+            
             popupObject = Instantiate<GameObject>(popupPrefab, popupParents == null ? InGameCanvas.Instance.transform : popupParents);
         }
         else
         {
+            popupObject.transform.SetAsLastSibling();
             popupObject.SetActive(true);
         }
 
