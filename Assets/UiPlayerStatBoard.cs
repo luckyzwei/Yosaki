@@ -107,7 +107,16 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         ////기억의파편 추가 획득
         //description1 += $"{CommonString.GetStatusName(StatusType.MagicStoneAddPer)} : {PlayerStats.GetMagicStonePlusValue() * 100f}\n";
 
-        int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
+        int hellPlusSpawnNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
+
+        int chunPlusSpawnNum = 0;
+
+        if (PlayerStats.IsChunMonsterSpawnAdd())
+        {
+            chunPlusSpawnNum = 5;
+        }
+
+        int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value) + hellPlusSpawnNum + chunPlusSpawnNum;
 
         //지옥베기
         description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical3DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical3DamPer() * 100f)}\n";
