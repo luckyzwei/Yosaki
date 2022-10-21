@@ -165,7 +165,7 @@ public class UserInfoTable
     public const string oneAttenEvent_one = "oo";
     public const string relicReset = "rkrk";
 
-    public const string canRecommendCount = "canRecommendCount";
+    public const string canRecommendCount = "canRecommendCount2";
 
 
     public double currentServerDate;

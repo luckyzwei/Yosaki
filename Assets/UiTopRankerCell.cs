@@ -52,6 +52,11 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private GameObject partyRaidRecommendButton;
 
+    [SerializeField]
+    private GameObject leaveObject;
+
+    public string recNickName { get; private set; }
+
     public void UpdatePartyRaidScore(double topRankerScore = 0, bool fightEnd = false)
     {
         if (topRankerScoreText != null)
@@ -76,6 +81,7 @@ public class UiTopRankerCell : MonoBehaviour
 
     public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int fightPoint, string guildName, int maskIdx)
     {
+        this.recNickName = nickName;
         this.nickName.SetText(nickName);
         this.rankText.SetText(rankText);
         SetCostumeSpine(costumeId);
@@ -161,17 +167,28 @@ public class UiTopRankerCell : MonoBehaviour
 
             partyRaidRecommendButton.SetActive(!isMyNickName);
         }
+
+        if (leaveObject != null)
+        {
+            leaveObject.SetActive(false);
+        }
+    }
+
+    public void OnPlayerLeftInPartyRaid()
+    {
+        partyRaidRecommendButton.SetActive(false);
+        leaveObject.SetActive(true);
     }
 
     public void OnClickRecommendButton()
     {
-        PopupManager.Instance.ShowAlarmMessage($"{this.nickName.text}님을 추천 합니다.");
+        PopupManager.Instance.ShowAlarmMessage($"{recNickName}님을 추천 합니다.");
 
-        PartyRaidManager.Instance.NetworkManager.SendRecommend(this.nickName.text);
+        PartyRaidManager.Instance.NetworkManager.SendRecommend(recNickName);
 
         partyRaidRecommendButton.SetActive(false);
 
-     
+
     }
 
     private void SetPetSpine(int idx)

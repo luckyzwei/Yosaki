@@ -37,6 +37,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         public Vector3 currentPos;
         public int level;
         public MatchingPlatform platform;
+        public bool leftRoom = false;
     }
 
     public ReactiveProperty<PlayerState> playerState = new ReactiveProperty<PlayerState>(PlayerState.Lobby);
@@ -429,7 +430,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         makeRoomButton.interactable = true;
         playerState.Value = PlayerState.Room;
         startGameButton.interactable = true;
-        
+
         ResetRoomState();
         RoomRenewal();
         UpdatePlayerInfoList();
@@ -616,7 +617,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         UpdatePlayerInfoList();
+        UpdateRecommendButton(otherPlayer);
         RoomRenewal();
+    }
+
+    private void UpdateRecommendButton(Player otherPlayer)
+    {
+        if (roomPlayerDatas.ContainsKey(otherPlayer.ActorNumber))
+        {
+            for (int i = 0; i < playerView_Result.Count; i++)
+            {
+                if (Utils.GetOriginNickName(roomPlayerDatas[otherPlayer.ActorNumber].nickName).Equals(Utils.GetOriginNickName(playerView_Result[i].recNickName)))
+                {
+                    playerView_Result[i].OnPlayerLeftInPartyRaid();
+                    break;
+                }
+            }
+        }
     }
 
     void RoomRenewal()
@@ -643,7 +660,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             return;
         }
 
-        if (Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(Utils.GetOriginNickName(nickName))) 
+        if (Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(Utils.GetOriginNickName(nickName)))
         {
             PopupManager.Instance.ShowAlarmMessage("자기 자신은 추천 하실 수 없습니다.");
             return;
