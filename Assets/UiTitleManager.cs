@@ -634,8 +634,23 @@ public enum TitleMissionId
 
     Stage12700,//★
     Stage12800,//★
+ 
     ChunWeapon0,//★
     ChunWeapon1,//★
+
+    Stage12900,//★
+    Stage13000,//★
+
+    Level2110000,//★
+    Level2120000,//★
+    Level2130000,//★
+    Level2140000,//★
+    Level2150000,//★
+    Level2160000,//★
+    Level2170000,//★
+    Level2180000,//★
+    Level2190000,//★
+    Level2200000,//★
 
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
@@ -2029,6 +2044,48 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Level2100000);
             }
+            //
+            if (e >= 2110000)
+            {
+                ClearTitleMission(TitleMissionId.Level2110000);
+            }
+            if (e >= 2120000)
+            {
+                ClearTitleMission(TitleMissionId.Level2120000);
+            }
+            if (e >= 2130000)
+            {
+                ClearTitleMission(TitleMissionId.Level2130000);
+            }
+            if (e >= 2140000)
+            {
+                ClearTitleMission(TitleMissionId.Level2140000);
+            }
+            if (e >= 2150000)
+            {
+                ClearTitleMission(TitleMissionId.Level2150000);
+            }
+            if (e >= 2160000)
+            {
+                ClearTitleMission(TitleMissionId.Level2160000);
+            }
+            if (e >= 2170000)
+            {
+                ClearTitleMission(TitleMissionId.Level2170000);
+            }
+            if (e >= 2180000)
+            {
+                ClearTitleMission(TitleMissionId.Level2180000);
+            }
+            if (e >= 2190000)
+            {
+                ClearTitleMission(TitleMissionId.Level2190000);
+            }
+            if (e >= 2200000)
+            {
+                ClearTitleMission(TitleMissionId.Level2200000);
+            }
+
 
         }).AddTo(this);
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>
@@ -2960,6 +3017,18 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 12800 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage12800);
+            }
+
+            //
+
+            if (e >= 12900 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage12900);
+            }
+
+            if (e >= 13000 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage13000);
             }
 
 
