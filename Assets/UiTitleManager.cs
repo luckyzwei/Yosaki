@@ -652,6 +652,18 @@ public enum TitleMissionId
     Level2190000,//★
     Level2200000,//★
 
+
+    Level2210000,//★
+    Level2220000,//★
+    Level2230000,//★
+    Level2240000,//★
+    Level2250000,//★
+    Level2260000,//★
+    Level2270000,//★
+    Level2280000,//★
+    Level2290000,//★
+    Level2300000,//★
+
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -2084,6 +2096,47 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 2200000)
             {
                 ClearTitleMission(TitleMissionId.Level2200000);
+            }
+            //
+            if (e >= 2210000)
+            {
+                ClearTitleMission(TitleMissionId.Level2210000);
+            }
+            if (e >= 2220000)
+            {
+                ClearTitleMission(TitleMissionId.Level2220000);
+            }
+            if (e >= 2230000)
+            {
+                ClearTitleMission(TitleMissionId.Level2230000);
+            }
+            if (e >= 2240000)
+            {
+                ClearTitleMission(TitleMissionId.Level2240000);
+            }
+            if (e >= 2250000)
+            {
+                ClearTitleMission(TitleMissionId.Level2250000);
+            }
+            if (e >= 2260000)
+            {
+                ClearTitleMission(TitleMissionId.Level2260000);
+            }
+            if (e >= 2270000)
+            {
+                ClearTitleMission(TitleMissionId.Level2270000);
+            }
+            if (e >= 2280000)
+            {
+                ClearTitleMission(TitleMissionId.Level2280000);
+            }
+            if (e >= 2290000)
+            {
+                ClearTitleMission(TitleMissionId.Level2290000);
+            }
+            if (e >= 2300000)
+            {
+                ClearTitleMission(TitleMissionId.Level2300000);
             }
 
 
