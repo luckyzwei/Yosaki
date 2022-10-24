@@ -40,6 +40,7 @@ public enum StatusType
     OneYearBuff,
     SuperCritical3DamPer,
     SuperCritical4DamPer,
+    MonthBuff,
 }
 
 

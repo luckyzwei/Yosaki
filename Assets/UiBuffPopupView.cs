@@ -53,6 +53,9 @@ public class UiBuffPopupView : MonoBehaviour
     [SerializeField]
     private GameObject oneYearImage;
 
+    [SerializeField]
+    private GameObject monthImage;
+
     private bool initialized = false;
 
 
@@ -77,6 +80,11 @@ public class UiBuffPopupView : MonoBehaviour
         if (guildImage != null)
         {
             guildImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Guild);
+        }
+
+        if (monthImage != null)
+        {
+            monthImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Month);
         }
 
         if (oneYearImage != null)

@@ -431,6 +431,9 @@ public static class CommonString
                 break;
             case StatusType.SuperCritical4DamPer:
                 return "천상베기 피해(%)";
+                break; 
+            case StatusType.MonthBuff:
+                return "월간훈련 버프";
                 break;
         }
 
