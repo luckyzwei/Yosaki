@@ -274,7 +274,9 @@ public class UiBuffPopupView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage($"문파의 명성이 부족합니다.(명성 {getLevel}이상)");
             }
         }
-        else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.OneYear || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Chuseok)
+        else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.OneYear
+            || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Chuseok
+            || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Month)
         {
             BuffGetRoutine();
         }
@@ -299,6 +301,16 @@ public class UiBuffPopupView : MonoBehaviour
 
         }
 
+        //월간패스 유료버프
+        if (buffTableData.Stringid.Equals("ma11"))
+        {
+            if (ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("월간 패스권이 필요 합니다.");
+                return;
+            }
+
+        }
         ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value++;
         ServerData.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.Value += buffTableData.Buffseconds;
 

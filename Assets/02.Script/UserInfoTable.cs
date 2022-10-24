@@ -68,8 +68,8 @@ public class UserInfoTable
     public const string guild_buff2 = "guild_buff2";
     public const string guild_buff3 = "guild_buff3";
     public const string one_Buff = "ob";
-    public const string chu_Buff = "ch";
-    public const string chu_Buff2 = "ch2";
+    public const string mf11_Buff = "mf11";
+    public const string ma11_Buff = "ma11";
 
     public const string yomul0_buff = "yomul0_buff";
     public const string yomul1_buff = "yomul1_buff";
@@ -210,8 +210,8 @@ public class UserInfoTable
         {guild_buff2,0f},
         {guild_buff3,0f},
         {one_Buff,0f},
-        {chu_Buff,0f},
-        {chu_Buff2,0f},
+        {mf11_Buff,0f},
+        {ma11_Buff,0f},
 
         {bonusDungeonMaxKillCount,0f},
         {wingPackageRewardReceive,0f},
@@ -642,8 +642,8 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff2).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff3).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.one_Buff).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.chu_Buff).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.chu_Buff2).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.mf11_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.ma11_Buff).Value = 0;
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value = 0;
@@ -752,8 +752,8 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.guild_buff2, ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff2).Value);
         userInfoParam.Add(UserInfoTable.guild_buff3, ServerData.userInfoTable.GetTableData(UserInfoTable.guild_buff3).Value);
         userInfoParam.Add(UserInfoTable.one_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.one_Buff).Value);
-        userInfoParam.Add(UserInfoTable.chu_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.chu_Buff).Value);
-        userInfoParam.Add(UserInfoTable.chu_Buff2, ServerData.userInfoTable.GetTableData(UserInfoTable.chu_Buff2).Value);
+        userInfoParam.Add(UserInfoTable.mf11_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.mf11_Buff).Value);
+        userInfoParam.Add(UserInfoTable.ma11_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.ma11_Buff).Value);
 
         userInfoParam.Add(UserInfoTable.yomul0_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul1_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value);
@@ -981,6 +981,7 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
-        return currentServerTime.Month == 9;
+        return true;
+        //return currentServerTime.Month == 9;
     }
 }

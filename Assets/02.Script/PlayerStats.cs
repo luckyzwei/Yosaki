@@ -744,11 +744,11 @@ public static class PlayerStats
     }
 
 
-    //추석이벤트 키값
-    private static string ch = "ch";
+    //월간 패스 키값
+    private static string mf11 = "mf11";
     private static float GetChuSeokBuffValue(StatusType status)
     {
-        if (ServerData.buffServerTable.TableDatas[ch].remainSec.Value <= 0f) return 0f;
+        if (ServerData.buffServerTable.TableDatas[mf11].remainSec.Value <= 0f) return 0f;
 
         switch (status)
         {
@@ -771,10 +771,10 @@ public static class PlayerStats
         return 0f;
     }
 
-    private static string ch2 = "ch2";
+    private static string ma11 = "ma11";
     private static float GetChuSeokBuffValue2(StatusType status)
     {
-        if (ServerData.buffServerTable.TableDatas[ch2].remainSec.Value <= 0f) return 0f;
+        if (ServerData.buffServerTable.TableDatas[ma11].remainSec.Value <= 0f) return 0f;
 
         switch (status)
         {
