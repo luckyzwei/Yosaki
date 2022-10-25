@@ -109,12 +109,12 @@ public class UserInfoTable
     //6월월간
     public const string killCountTotal = "k10";
     //7월월간
-    public const string killCountTotal2 = "k9w";
+    public const string killCountTotal2 = "k11";
     public const string killCountTotalChild = "fal"; //가을훈련
     public const string attenCountBok = "kb";
     public const string attenCountChuSeok = "kchu";
     public const string usedFallCollectionCount = "ufc"; //곶감사용
-    
+
 
     public const string relicKillCount = "relicKillCount";
     public const string hellRelicKillCount = "hrk";
@@ -981,7 +981,6 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
-        return true;
-        //return currentServerTime.Month == 9;
+       return currentServerTime.Month == 11;
     }
 }
