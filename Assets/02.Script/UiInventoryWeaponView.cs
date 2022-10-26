@@ -232,7 +232,9 @@ public class UiInventoryWeaponView : MonoBehaviour
             magicBookData.Id == 36 ||
             magicBookData.Id == 37 ||
             magicBookData.Id == 38 ||
-            magicBookData.Id == 39
+            magicBookData.Id == 39 ||
+            magicBookData.Id == 40 ||
+            magicBookData.Id == 41
             ));
         foxNorigaeGetButton.SetActive(false);
 
@@ -272,7 +274,9 @@ public class UiInventoryWeaponView : MonoBehaviour
                 magicBookData.Id == 36 ||
                 magicBookData.Id == 37 ||
                 magicBookData.Id == 38 ||
-                magicBookData.Id == 39
+                magicBookData.Id == 39 ||
+                magicBookData.Id == 40 ||
+                magicBookData.Id == 41
                 )
             {
                 suhoSinDescription.SetText($"천상계\n칠선녀에서 획득!");
@@ -420,13 +424,13 @@ public class UiInventoryWeaponView : MonoBehaviour
             weaponLockObject.SetActive(false);
 
             //필멸2 필멸3  (23,24)
-            if (weaponData.Id == 23 || weaponData.Id == 24 || weaponData.Id == 25 || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29 || weaponData.Id == 30 || weaponData.Id == 31 || weaponData.Id == 32 || weaponData.Id == 33 || weaponData.Id == 34 || weaponData.Id == 35 || weaponData.Id == 36 || weaponData.Id == 43 
-                || weaponData.Id == 44
-                || weaponData.Id == 45
-                || weaponData.Id == 46
-                || weaponData.Id == 47
-                || weaponData.Id == 48
-                || weaponData.Id == 49
+            if (weaponData.Id == 23|| weaponData.Id == 24 || weaponData.Id == 25
+                || weaponData.Id == 26 || weaponData.Id == 27 || weaponData.Id == 28 || weaponData.Id == 29 || weaponData.Id == 30
+                || weaponData.Id == 31 || weaponData.Id == 32 || weaponData.Id == 33 || weaponData.Id == 34 || weaponData.Id == 35 
+                || weaponData.Id == 36 
+                || weaponData.Id == 43 || weaponData.Id == 44 || weaponData.Id == 45
+                || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49 || weaponData.Id == 50
+                || weaponData.Id == 51
                 )
             {
                 hasMask.SetActive(false);
@@ -505,13 +509,6 @@ public class UiInventoryWeaponView : MonoBehaviour
                     weaponLockDescription.SetText($"천상계\n고양이에서 획득!");
                 }
 
-                //
-                if (weaponData.Id == 45 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49)
-                {
-                    weaponLockObject.gameObject.SetActive(state == 0);
-                    weaponLockDescription.SetText($"십만대산\n추천보상으로 획득!");
-                }
-
                 if (weaponData.Id == 50)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
@@ -522,6 +519,14 @@ public class UiInventoryWeaponView : MonoBehaviour
                     weaponLockObject.gameObject.SetActive(state == 0);
                     weaponLockDescription.SetText($"천상계\n바람에서 획득!");
                 }
+                //
+                if (weaponData.Id == 45 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"십만대산\n추천보상으로 획득!");
+                }
+
+
             }
 
         }
