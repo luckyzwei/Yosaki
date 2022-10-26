@@ -91,7 +91,12 @@ public class UiSkillDescriptionPopup : MonoBehaviour
             skillTableData.Id == 23||
             skillTableData.Id == 24||
             skillTableData.Id == 25||
-            skillTableData.Id == 26
+            skillTableData.Id == 26||
+            skillTableData.Id == 27||
+            skillTableData.Id == 28||
+            skillTableData.Id == 29||
+            skillTableData.Id == 30||
+            skillTableData.Id == 31
             )
         {
             if (skillTableData.Id == 15)

@@ -57,6 +57,7 @@ public static class CommonString
     public static string ItemGrade_7_Skill = "나타";
     public static string ItemGrade_8_Skill = "오로치";
     public static string ItemGrade_9_Skill = "신선검";
+    public static string ItemGrade_10_Skill = "천계검";
 
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";

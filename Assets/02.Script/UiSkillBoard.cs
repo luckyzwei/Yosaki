@@ -25,6 +25,9 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
     
     [SerializeField]
     private Transform skillCellParent_Sun;
+    
+    [SerializeField]
+    private Transform skillCellParent_Chun;
 
     [SerializeField]
     private UiPassiveSkillCell passiveSkillCellPrefab;
@@ -82,8 +85,19 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
                 continue;
             }
 
+            //천계술
+            if (skillList[i].Skilltype == 7)
+            {
+
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Chun);
+
+                cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
+
+                skillCells.Add(cell);
+
+            }    
             //선술
-            if (skillList[i].Skilltype == 6)
+            else if (skillList[i].Skilltype == 6)
             {
                 //나타
 
