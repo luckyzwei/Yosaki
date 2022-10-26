@@ -12,6 +12,9 @@ public class UiBuffPopup : MonoBehaviour
     [SerializeField]
     private Transform buffViewParent;
 
+    [SerializeField]
+    private List<UiBuffPopupView> monthBuff = new List<UiBuffPopupView>();
+
     void Start()
     {
         Initialize();
@@ -27,11 +30,30 @@ public class UiBuffPopup : MonoBehaviour
             if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Yomul) continue;
             if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.OneYear) continue;
             if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Chuseok) continue;
-           // if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Month) continue;
 
 
             var cell = Instantiate<UiBuffPopupView>(uiBuffPopupView, buffViewParent);
             cell.Initalize(tableDatas[i]);
+
+            if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Month)
+            {
+                monthBuff.Add(cell);
+            }
+        }
+
+        RefreshMonthBuff();
+    }
+
+    private void OnEnable()
+    {
+        RefreshMonthBuff();
+    }
+
+    private void RefreshMonthBuff()
+    {
+        for (int i = 0; i < monthBuff.Count; i++)
+        {
+            monthBuff[i].gameObject.SetActive(ServerData.userInfoTable.IsMonthlyPass2());
         }
     }
 }

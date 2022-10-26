@@ -981,6 +981,6 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
-       return currentServerTime.Month == 11;
+        return currentServerTime.Month == 11;
     }
 }
