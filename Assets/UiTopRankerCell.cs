@@ -55,7 +55,13 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private GameObject leaveObject;
 
+    [SerializeField]
+    private bool isPartyRaidPlayer = false;
+
     public string recNickName { get; private set; }
+
+    [SerializeField]
+    private BoneFollowerGraphic boneFollowerGraphic_Weapon;
 
     public void UpdatePartyRaidScore(double topRankerScore = 0, bool fightEnd = false)
     {
@@ -119,18 +125,37 @@ public class UiTopRankerCell : MonoBehaviour
                 weapon.material = CommonUiContainer.Instance.weaponEnhnaceMats[0];
             }
         }
-        //부채
-        if (weaponId >= 37 && weaponId <= 41)
-        {
-            weapon.transform.position = new Vector3(-9f, 117.7f, 0);
-            weapon.transform.rotation = Quaternion.Euler(0f, 0f, 133.9f);
-        }
-        else
-        {
-            weapon.transform.position = new Vector3(-1.4f, 128.4f, 0);
-            weapon.transform.rotation = Quaternion.Euler(0f, 0f, 94f);
 
+        if (isPartyRaidPlayer == false) 
+        {
+            //부채
+            if (weaponId >= 37 && weaponId <= 41)
+            {
+                weapon.transform.position = new Vector3(-9f, 117.7f, 0);
+                weapon.transform.rotation = Quaternion.Euler(0f, 0f, 133.9f);
+            }
+            else
+            {
+                weapon.transform.position = new Vector3(-1.4f, 128.4f, 0);
+                weapon.transform.rotation = Quaternion.Euler(0f, 0f, 94f);
+
+            }
         }
+        else 
+        {
+            //부채
+            if (weaponId >= 37 && weaponId <= 41)
+            {
+                weapon.transform.localPosition = new Vector3(-1.5f, 46f, 0);
+                weapon.transform.localRotation = Quaternion.Euler(0f, 0f, -382.72f);
+            }
+            else
+            {
+                weapon.transform.localPosition = new Vector3(71.9f, -65.6f, 0);
+                weapon.transform.localRotation = Quaternion.Euler(0f, 0f, -270.1f);
+            }
+        }
+
 
 
         magicBook.gameObject.SetActive(magicBookId != -1);
@@ -171,6 +196,11 @@ public class UiTopRankerCell : MonoBehaviour
         if (leaveObject != null)
         {
             leaveObject.SetActive(false);
+        }
+
+        if (boneFollowerGraphic_Weapon != null)
+        {
+            boneFollowerGraphic_Weapon.SetBone("bone15");
         }
     }
 
