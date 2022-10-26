@@ -357,6 +357,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
 
     #region 방
+    public void JoinOrCreateGuildRoom()
+    {
+        if (GuildManager.Instance.hasGuild.Value == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"문파가 없습니다");
+            return;
+        }
+
+        PhotonNetwork.JoinOrCreateRoom(GuildManager.Instance.myGuildName + CommonString.GuildText, new RoomOptions { MaxPlayers = 10, IsVisible = false }, lobbyType);
+
+    }
     public void CreateRoom()
     {
         if (string.IsNullOrEmpty(roomNameInput_make.text))
@@ -365,7 +376,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             return;
         }
 
-        if (Utils.HasBadWord(roomNameInput_make.text))
+        if (Utils.HasBadWord(roomNameInput_make.text) || roomNameInput_make.text.Contains(CommonString.GuildText))
         {
             PopupManager.Instance.ShowAlarmMessage($"부적절한 이름이 포함되어 있습니다.");
             return;
@@ -436,6 +447,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         UpdatePlayerInfoList();
 
         PlatformCheck();
+        GuildCheck();
+    }
+
+    private void GuildCheck()
+    {
+        if (PhotonNetwork.CurrentRoom.Name.Contains(CommonString.GuildText) == false) return;
+
+        if (string.IsNullOrEmpty(GuildManager.Instance.myGuildName)) 
+        {
+            LeaveRoom();
+            return;
+        }
+
+        if (PhotonNetwork.CurrentRoom.Name.Contains(GuildManager.Instance.myGuildName) == false) 
+        {
+            LeaveRoom();
+            return;
+        }
     }
 
     private void PlatformCheck()
@@ -919,16 +948,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     [SerializeField]
     private Button roomUpdateButton;
 
+    TypedLobby lobbyType;
+
     public void OnClickRoomUpdate()
     {
         roomUpdateButton.interactable = false;
 
 #if UNITY_ANDROID
-        var lobbyType = new TypedLobby("And", LobbyType.Default);
+        lobbyType = new TypedLobby("And", LobbyType.Default);
 #endif
 
 #if UNITY_IOS
-        var lobbyType = new TypedLobby("IOS", LobbyType.Default);
+        lobbyType = new TypedLobby("IOS", LobbyType.Default);
 #endif
 
         PhotonNetwork.GetCustomRoomList(lobbyType, "C0");

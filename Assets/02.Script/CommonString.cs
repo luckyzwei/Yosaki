@@ -69,6 +69,7 @@ public static class CommonString
     public static string ChatConnectString = "채팅 채널에 입장했습니다.";
 
     public static char ChatSplitChar = '◙';
+    public static string GuildText = "문파";
 
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
@@ -202,7 +203,7 @@ public static class CommonString
             case Item_Type.MagicStoneBuff: return "기억의파편 버프 +50%(드랍)";
             case Item_Type.weapon12: return "특급 4등급 무기";
             case Item_Type.weapon14: return "특급 2등급 무기";
-                //
+            //
             case Item_Type.weapon37: return "백운선";
             case Item_Type.weapon38: return "금운선";
             case Item_Type.weapon39: return "홍접선";
@@ -210,7 +211,7 @@ public static class CommonString
             case Item_Type.weapon41: return "천성선";
             case Item_Type.weapon42: return "천공선";
 
-                //
+            //
             case Item_Type.magicBook11: return "특급 1등급 노리개";
             case Item_Type.skill3: return "전방베기4형 기술";
             case Item_Type.Dokebi: return "도깨비 뿔";
@@ -269,20 +270,20 @@ public static class CommonString
             case Item_Type.NataSkill: return "나타 베기";
             case Item_Type.OrochiSkill: return "오로치 베기";
             case Item_Type.GangrimSkill: return "강림 베기";
-                //
+            //
             case Item_Type.Sun0: return "선술1";
             case Item_Type.Sun1: return "선술2";
             case Item_Type.Sun2: return "선술3";
             case Item_Type.Sun3: return "선술4";
             case Item_Type.Sun4: return "선술5";
 
-                //
+            //
             case Item_Type.Chun0: return "천계술1";
             case Item_Type.Chun1: return "천계술2";
             case Item_Type.Chun2: return "천계술3";
             case Item_Type.Chun3: return "천계술4";
             case Item_Type.Chun4: return "천계술5";
-                //
+            //
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
 
@@ -306,7 +307,7 @@ public static class CommonString
             case Item_Type.h7: return TableManager.Instance.hellAbil.dataArray[7].Name;
             case Item_Type.h8: return TableManager.Instance.hellAbil.dataArray[8].Name;
             case Item_Type.h9: return TableManager.Instance.hellAbil.dataArray[9].Name;
-                //
+            //
             case Item_Type.c0: return TableManager.Instance.hellAbil.dataArray[0].Name;
             case Item_Type.c1: return TableManager.Instance.hellAbil.dataArray[1].Name;
             case Item_Type.c2: return TableManager.Instance.hellAbil.dataArray[2].Name;
@@ -432,13 +433,13 @@ public static class CommonString
                 break;
             case StatusType.DecreaseBossHp:
                 return "스테이지 보스 체력 감소(%)";
-                break;   
+                break;
             case StatusType.SuperCritical3DamPer:
                 return "지옥베기 피해(%)";
                 break;
             case StatusType.SuperCritical4DamPer:
                 return "천상베기 피해(%)";
-                break; 
+                break;
             case StatusType.MonthBuff:
                 return "월간훈련 버프";
                 break;
