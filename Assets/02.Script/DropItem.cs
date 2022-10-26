@@ -114,6 +114,7 @@ public enum Item_Type
     ChunNorigae4,
     FoxMaskPartial,
 
+
     RankFrame1 = 100,
     RankFrame2 = 101,
     RankFrame3 = 102,
@@ -371,12 +372,26 @@ public enum Item_Type
     ChunPet0 = 7008,
     ChunWeapon1 = 7009,
     ChunPet1 = 7010,
+    ChunWeapon2 = 7011,
+    ChunPet2 = 7012,
+    ChunWeapon3 = 7013,
+    ChunPet3 = 7014,
 
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
     RecommendWeapon2 = 8002,
     RecommendWeapon3 = 8003,
     RecommendWeapon4 = 8004,
+
+    ChunNorigae5 = 8500,
+    ChunNorigae6 = 8501,
+    
+    Chun0 = 8700,
+    Chun1 = 8701,
+    Chun2 = 8702,
+    Chun3 = 8703,
+    Chun4 = 8704,
+
 }
 
 public class DropItem : PoolItem

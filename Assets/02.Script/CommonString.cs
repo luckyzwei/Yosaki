@@ -276,6 +276,13 @@ public static class CommonString
             case Item_Type.Sun3: return "선술4";
             case Item_Type.Sun4: return "선술5";
 
+                //
+            case Item_Type.Chun0: return "천계술1";
+            case Item_Type.Chun1: return "천계술2";
+            case Item_Type.Chun2: return "천계술3";
+            case Item_Type.Chun3: return "천계술4";
+            case Item_Type.Chun4: return "천계술5";
+                //
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
 

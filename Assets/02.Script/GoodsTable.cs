@@ -118,6 +118,15 @@ public class GoodsTable
     public static string Sun2 = "Sun2";
     public static string Sun3 = "Sun3";
     public static string Sun4 = "Sun4";
+
+    public static string Chun0 = "Chun0";
+    public static string Chun1 = "Chun1";
+    public static string Chun2 = "Chun2";
+    public static string Chun3 = "Chun3";
+    public static string Chun4 = "Chun4";
+
+
+
     public static string Fw = "Fw";
     public static string Cw = "Cw"; //천계꽃
 
@@ -232,6 +241,13 @@ public class GoodsTable
         {Sun2,0f},
         {Sun3,0f},
         {Sun4,0f},
+        
+        {Chun0,0f},
+        {Chun1,0f},
+        {Chun2,0f},
+        {Chun3,0f},
+        {Chun4,0f},
+
         {Fw,0f},
         {Cw,0f},
         //

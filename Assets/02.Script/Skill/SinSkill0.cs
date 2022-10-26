@@ -59,5 +59,24 @@ public class Sun3 : TraceSlash0
 public class Sun4 : TraceSlash0
 {
 
+}public class Chun0 : TraceSlash0
+{
+
+}
+public class Chun1 : TraceSlash0
+{
+
+}
+public class Chun2 : TraceSlash0
+{
+
+}
+public class Chun3 : TraceSlash0
+{
+
+}
+public class Chun4 : TraceSlash0
+{
+
 }
 

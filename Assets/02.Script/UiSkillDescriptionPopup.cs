@@ -175,6 +175,46 @@ public class UiSkillDescriptionPopup : MonoBehaviour
                     ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
                 }
             }
+            else if (skillTableData.Id == 27)
+            {
+                //천계검 1형 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Chun0).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 28)
+            {
+                //천계검 2형 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Chun1).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 29)
+            {
+                //천계검 3형 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Chun2).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 30)
+            {
+                //천계검 4형 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Chun3).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 31)
+            {
+                //천계검 5형 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.Chun4).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
         }
         //
 

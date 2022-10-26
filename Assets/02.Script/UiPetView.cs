@@ -444,7 +444,7 @@ public class UiPetView : MonoBehaviour
                 {
                     buttonDescription.SetText($"수호신 컨텐츠\n에서 획득!");
                 }
-                else if (petData.Id == 20 || petData.Id == 21)
+                else if (petData.Id == 20 || petData.Id == 21|| petData.Id == 22 || petData.Id == 23)
                 {
                     buttonDescription.SetText($"천상계 컨텐츠\n에서 획득!");
                 }

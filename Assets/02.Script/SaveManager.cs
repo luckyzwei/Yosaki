@@ -180,6 +180,12 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.Sun3,
         GoodsTable.Sun4,
 
+        GoodsTable.Chun0,
+        GoodsTable.Chun1,
+        GoodsTable.Chun2,
+        GoodsTable.Chun3,
+        GoodsTable.Chun4,
+
         GoodsTable.c0,
         GoodsTable.c1,
         GoodsTable.c2,

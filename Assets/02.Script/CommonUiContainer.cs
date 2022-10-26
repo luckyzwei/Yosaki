@@ -100,6 +100,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite ChunNorigae2;
     public Sprite ChunNorigae3;
     public Sprite ChunNorigae4;
+    public Sprite ChunNorigae5;
+    public Sprite ChunNorigae6;
 
     public Sprite ChunSun0;
     public Sprite ChunSun1;
@@ -113,6 +115,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite ChunMaPet;
     public Sprite ChunPet0;
     public Sprite ChunPet1;
+    public Sprite ChunPet2;
+    public Sprite ChunPet3;
     public Sprite Hel;
     public Sprite YeoMarble;
     public Sprite du;
@@ -157,6 +161,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite OrochiWeapon;
     public Sprite ChunWeapon0;
     public Sprite ChunWeapon1;
+    public Sprite ChunWeapon2;
+    public Sprite ChunWeapon3;
 
     public Sprite NataSkill;
     public Sprite OrochiSkill;
@@ -177,6 +183,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Sun2;
     public Sprite Sun3;
     public Sprite Sun4;
+
+    public Sprite Chun0;
+    public Sprite Chun1;
+    public Sprite Chun2;
+    public Sprite Chun3;
+    public Sprite Chun4;
 
 
     public Sprite GetItemIcon(Item_Type type)
@@ -651,6 +663,14 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.ChunNorigae4:
                 return ChunNorigae4;
                 break;
+
+            case Item_Type.ChunNorigae5:
+                return ChunNorigae5;
+                break;
+
+            case Item_Type.ChunNorigae6:
+                return ChunNorigae6;
+                break;
             //
             case Item_Type.ChunSun0:
                 return ChunSun0;
@@ -701,6 +721,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.ChunPet1:
                 return ChunPet1;
+                break;
+            case Item_Type.ChunPet2:
+                return ChunPet2;
+                break;
+            case Item_Type.ChunPet3:
+                return ChunPet3;
                 break;
 
             case Item_Type.GuildReward:
@@ -798,6 +824,22 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return Sun4;
                 break;
             //
+            case Item_Type.Chun0:
+                return Chun0;
+                break;
+            case Item_Type.Chun1:
+                return Chun1;
+                break;
+            case Item_Type.Chun2:
+                return Chun2;
+                break;
+            case Item_Type.Chun3:
+                return Chun3;
+                break;
+            case Item_Type.Chun4:
+                return Chun4;
+                break;
+            //
             case Item_Type.GangrimSkill:
                 return GangrimSkill;
                 break;
@@ -825,6 +867,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.ChunWeapon1:
                 return ChunWeapon1;
+                break;
+            case Item_Type.ChunWeapon2:
+                return ChunWeapon2;
+                break;
+            case Item_Type.ChunWeapon3:
+                return ChunWeapon3;
                 break;
 
             case Item_Type.MihoNorigae:

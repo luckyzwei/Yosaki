@@ -321,6 +321,37 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                 }
                 break;
             //
+            case Item_Type.Chun0:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Chun0).Value += amount;
+                    param.Add(GoodsTable.Chun0, ServerData.goodsTable.GetTableData(GoodsTable.Chun0).Value);
+                }
+                break;
+            case Item_Type.Chun1:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Chun1).Value += amount;
+                    param.Add(GoodsTable.Chun1, ServerData.goodsTable.GetTableData(GoodsTable.Chun1).Value);
+                }
+                break;
+            case Item_Type.Chun2:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Chun2).Value += amount;
+                    param.Add(GoodsTable.Chun2, ServerData.goodsTable.GetTableData(GoodsTable.Chun2).Value);
+                }
+                break;
+            case Item_Type.Chun3:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Chun3).Value += amount;
+                    param.Add(GoodsTable.Chun3, ServerData.goodsTable.GetTableData(GoodsTable.Chun3).Value);
+                }
+                break;
+            case Item_Type.Chun4:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Chun4).Value += amount;
+                    param.Add(GoodsTable.Chun4, ServerData.goodsTable.GetTableData(GoodsTable.Chun4).Value);
+                }
+                break;
+            //
             case Item_Type.GangrimSkill:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value += amount;

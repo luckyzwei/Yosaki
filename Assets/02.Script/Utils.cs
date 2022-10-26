@@ -115,6 +115,8 @@ public static class Utils
                 type == Item_Type.ChunMaPet ||
                 type == Item_Type.ChunPet0 ||
                 type == Item_Type.ChunPet1 ||
+                type == Item_Type.ChunPet2 ||
+                type == Item_Type.ChunPet3 ||
                 type == Item_Type.RabitPet ||
                 type == Item_Type.RabitNorigae ||
                 type == Item_Type.YeaRaeNorigae ||
