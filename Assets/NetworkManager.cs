@@ -452,15 +452,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     private void GuildCheck()
     {
-        if (PhotonNetwork.CurrentRoom.Name.Contains(CommonString.GuildText) == false) return;
+        if (IsGuildBoss() == false) return;
 
-        if (string.IsNullOrEmpty(GuildManager.Instance.myGuildName)) 
+        if (string.IsNullOrEmpty(GuildManager.Instance.myGuildName))
         {
             LeaveRoom();
             return;
         }
 
-        if (PhotonNetwork.CurrentRoom.Name.Contains(GuildManager.Instance.myGuildName) == false) 
+        if (PhotonNetwork.CurrentRoom.Name.Contains(GuildManager.Instance.myGuildName) == false)
         {
             LeaveRoom();
             return;
@@ -929,7 +929,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         LobbyPanel.SetActive(false);
         playerState.Value = PlayerState.Playing;
 
-        GameManager.Instance.LoadContents(GameManager.ContentsType.PartyRaid);
+        if (IsGuildBoss())
+        {
+            GameManager.Instance.LoadContents(GameManager.ContentsType.PartyRaid_Guild);
+        }
+        else
+        {
+            GameManager.Instance.LoadContents(GameManager.ContentsType.PartyRaid);
+        }
+    }
+
+    public bool IsGuildBoss()
+    {
+        return PhotonNetwork.CurrentRoom.Name.Contains(CommonString.GuildText);
     }
 
     public double GetTotalScore()

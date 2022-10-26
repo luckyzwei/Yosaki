@@ -33,6 +33,7 @@ public class GameManager : SingletonMono<GameManager>
         HellWarMode,
         PartyRaid,
         ChunFlower,
+        PartyRaid_Guild,
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;

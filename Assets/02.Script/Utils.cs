@@ -193,7 +193,8 @@ public static class Utils
             type == GameManager.ContentsType.Susano || //O
             type == GameManager.ContentsType.Hell || //O
             type == GameManager.ContentsType.HellWarMode || //O
-            type == GameManager.ContentsType.PartyRaid; //O
+            type == GameManager.ContentsType.PartyRaid || //O
+            type == GameManager.ContentsType.PartyRaid_Guild; //O
     }
     public static bool IsRankFrameItem(this Item_Type type)
     {
