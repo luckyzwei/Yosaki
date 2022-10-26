@@ -117,6 +117,8 @@ public class RelicDungeonManager : ContentsManagerBase
 
     private IEnumerator EnemySpawnRoutine()
     {
+        AutoManager.Instance.StartAutoWithDelay();
+
         while (true)
         {
             float t = 0f;
