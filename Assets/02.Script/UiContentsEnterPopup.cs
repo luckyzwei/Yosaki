@@ -241,7 +241,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
         int clearCount = GameBalance.bonusDungeonEnterCount - (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 <color=yellow>{killCount}</color>로 <color=yellow>{clearCount}회</color> 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy * clearCount}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy * clearCount}개", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 <color=yellow>{killCount}</color>로 <color=yellow>{clearCount}회</color> 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor((float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value / GameBalance.bandiPlusStageDevideValue)) * clearCount}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy * clearCount * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor((float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value / GameBalance.bandiPlusStageDevideValue))}개", () =>
         {
             enterButton.interactable = false;
 
