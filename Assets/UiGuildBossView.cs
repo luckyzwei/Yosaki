@@ -11,11 +11,17 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
     [SerializeField]
     private UiTwelveBossContentsView bossContentsView;
 
+
+    [SerializeField]
+    private UiTwelveBossContentsView uiTwelveBossContentsView_PartyRaid;
+
     public ObscuredInt rewardGrade = 0;
     public ObscuredInt rewardGrade_GangChul = 0;
 
     [SerializeField]
     private UiTwelveBossRewardView uiTwelveBossRewardView;
+
+
     private List<UiTwelveBossRewardView> uiTwelveBossRewardViews = new List<UiTwelveBossRewardView>();
 
     [SerializeField]
@@ -78,7 +84,11 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
     private void Initialize()
     {
+
         bossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[12]);
+
+        uiTwelveBossContentsView_PartyRaid.Initialize(TableManager.Instance.TwelveBossTable.dataArray[73]);
+
     }
 
     public void RecordGuildScoreButton()
