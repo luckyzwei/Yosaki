@@ -8,6 +8,7 @@ using ExitGames.Client.Photon;
 using TMPro;
 using UniRx;
 using System.Linq;
+using static GameManager;
 
 public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
@@ -123,6 +124,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private string AndPlatformKey = "AND";
     private string IOSPlatformKey = "IOS";
     private MatchingPlatform myPlatform;
+
+    public ContentsType contentsType;
 
 
     #region 방리스트 갱신
@@ -276,6 +279,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         playerState.Value = PlayerState.Lobby;
 
         roomList.Clear();
+
+        CheckGuildRaidEnter();
+    }
+
+    private void CheckGuildRaidEnter()
+    {
+        if (contentsType == ContentsType.PartyRaid_Guild)
+        {
+            JoinOrCreateGuildRoom();
+        }
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -431,6 +444,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     //방 나가기
     public void LeaveRoom()
     {
+        contentsType = ContentsType.PartyRaid;
         PhotonNetwork.LeaveRoom();
     }
 

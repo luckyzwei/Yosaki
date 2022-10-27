@@ -28,10 +28,10 @@ public class UiGangChulView : SingletonMono<UiGangChulView>
 
     private void Subscribe()
     {
-        GuildManager.Instance.hasGuild.AsObservable().Subscribe(e =>
-        {
-            guildRecordObject.SetActive(e);
-        }).AddTo(this);
+        //GuildManager.Instance.hasGuild.AsObservable().Subscribe(e =>
+        //{
+        //    guildRecordObject.SetActive(e);
+        //}).AddTo(this);
     }
     private void OnEnable()
     {
@@ -130,7 +130,7 @@ public class UiGangChulView : SingletonMono<UiGangChulView>
 
                 ServerData.SendTransaction(transactions, successCallBack: () =>
                 {
-                    var bro2 = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_Guild_Reset_GangChul_Uuid, goodsType.goods7, 1);
+                    var bro2 = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_Party_Guild_Uuid, goodsType.goods7, 1);
 
                     if (bro2.IsSuccess())
                     {

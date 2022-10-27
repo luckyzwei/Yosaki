@@ -75,8 +75,8 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Guild_Reset_Uuid_Feed = "0fdf35b0-9115-11ec-a581-736e2455e958";
 
     public const string Rank_GangChul_Boss_Uuid = "9d88e4d0-b76f-11ec-8ef8-7f0c591b422a";
-    public const string Rank_GangChul_Guild_Boss_Uuid = "be9d79d0-b754-11ec-8ef8-7f0c591b422a";
-    public const string Rank_Guild_Reset_GangChul_Uuid = "a1a406a0-b754-11ec-8ac4-7dc9d81a6e2f";
+    public const string Rank_GangChul_Guild_Boss_Uuid = "a16b1790-559d-11ed-9936-adc34f7d653d";
+    public const string Rank_Party_Guild_Uuid = "a1a406a0-b754-11ec-8ac4-7dc9d81a6e2f";
     public const string Rank_ChunmaTop_Uuid = "8f5ebfc0-4341-11ed-844a-55337d4fa4d7";
 
     //
@@ -102,8 +102,8 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Guild_Reset_Uuid_Feed = "41c34620-9115-11ec-a581-736e2455e958";
 
     public const string Rank_GangChul_Boss_Uuid = "c09780d0-b76f-11ec-8ac4-7dc9d81a6e2f";
-    public const string Rank_GangChul_Guild_Boss_Uuid = "c7a57cd0-b754-11ec-8ef8-7f0c591b422a";
-    public const string Rank_Guild_Reset_GangChul_Uuid = "ac06b7a0-b754-11ec-8ac4-7dc9d81a6e2f";
+    public const string Rank_GangChul_Guild_Boss_Uuid = "b7238c20-559d-11ed-9936-adc34f7d653d";
+    public const string Rank_Party_Guild_Uuid = "ac06b7a0-b754-11ec-8ac4-7dc9d81a6e2f";
     public const string Rank_ChunmaTop_Uuid = "aa2dfff0-4341-11ed-844a-55337d4fa4d7";
 
 

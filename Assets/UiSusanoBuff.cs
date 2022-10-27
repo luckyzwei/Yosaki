@@ -13,6 +13,7 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
     {
         if (immuneCount > 0) return;
         if (GameManager.contentsType == GameManager.ContentsType.PartyRaid) return;
+        if (GameManager.contentsType == GameManager.ContentsType.PartyRaid_Guild) return;
         //산신령
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 57) return;
 
