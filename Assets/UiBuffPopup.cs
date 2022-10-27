@@ -14,6 +14,11 @@ public class UiBuffPopup : MonoBehaviour
 
     [SerializeField]
     private List<UiBuffPopupView> monthBuff = new List<UiBuffPopupView>();
+    
+    [SerializeField]
+    private List<UiBuffPopupView> coldBuff = new List<UiBuffPopupView>();
+
+
 
     void Start()
     {
@@ -30,15 +35,21 @@ public class UiBuffPopup : MonoBehaviour
             if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Yomul) continue;
             if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.OneYear) continue;
             if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Chuseok) continue;
+            
 
-
-            var cell = Instantiate<UiBuffPopupView>(uiBuffPopupView, buffViewParent);
+                var cell = Instantiate<UiBuffPopupView>(uiBuffPopupView, buffViewParent);
             cell.Initalize(tableDatas[i]);
 
             if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Month)
             {
                 monthBuff.Add(cell);
             }
+            if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Cold)
+            {
+                coldBuff.Add(cell);
+            }
+            
+           
         }
 
         RefreshMonthBuff();

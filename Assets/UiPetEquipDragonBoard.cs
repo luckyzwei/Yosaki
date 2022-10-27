@@ -10,7 +10,10 @@ public class UiPetEquipDragonBoard : MonoBehaviour
     private TextMeshProUGUI gradeText;
 
     [SerializeField]
-    private TextMeshProUGUI abilDescription;
+    private TextMeshProUGUI abil0Description;
+    
+    [SerializeField]
+    private TextMeshProUGUI abil1Description;
 
     [SerializeField]
     private TextMeshProUGUI currentAwakeLevel;
@@ -35,7 +38,9 @@ public class UiPetEquipDragonBoard : MonoBehaviour
 
         dragonIcon.sprite = CommonResourceContainer.GetDragonBallSprite(currentIdx);
 
-        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)tableData.Abiltype0)}\n{PlayerStats.GetDragonBallAbilValue() * 100f}%");
+        abil0Description.SetText($"{CommonString.GetStatusName((StatusType)tableData.Abiltype0)}\n{PlayerStats.GetDragonBallAbil0Value() * 100f}%");
+
+        abil1Description.SetText($"{CommonString.GetStatusName((StatusType)tableData.Abiltype1)}\n{PlayerStats.GetDragonBallAbil1Value() * 100f}%");
 
         gradeText.SetText($"{currentIdx + 1}단계");
     }

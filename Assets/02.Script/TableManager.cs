@@ -633,6 +633,7 @@ public class TableManager : SingletonMono<TableManager>
     public GumGiTable gumGiTable;
 
     public ChildPass childPass;
+    public ColdSeasonPass coldSeasonPass;
 
     public FoxMask FoxMask;
 
@@ -651,6 +652,8 @@ public class TableManager : SingletonMono<TableManager>
     public HellReward hellReward;
     public DragonBall dragonBall;
     public ChuSeokAtten chuSeokAtten;
+    public ColdSeasonAtten coldSeasonAtten;
+
     public ChunAbilBase chunAbilBase;
     public ChunMarkAbil chunMarkAbil;
     public FallCollection fallCollection;

@@ -797,6 +797,7 @@ public static class PlayerStats
         }
         return 0f;
     }
+    
 
     public static float GetExpPlusValueExclusiveBuff()
     {
@@ -1078,7 +1079,7 @@ public static class PlayerStats
 
         ret += GetHellAbilHasEffect(StatusType.SuperCritical3DamPer);
 
-        ret += GetDragonBallAbilValue();
+        ret += GetDragonBallAbil0Value();
 
         ret += GetHellRelicAbilValue();
 
@@ -1096,6 +1097,8 @@ public static class PlayerStats
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical4DamPer);
 
         ret += GetWeaponEquipPercentValue(StatusType.SuperCritical4DamPer);
+
+        ret += GetDragonBallAbil1Value();
 
         return ret;
     }
@@ -1957,13 +1960,21 @@ public static class PlayerStats
         return idx;
     }
 
-    public static float GetDragonBallAbilValue()
+    public static float GetDragonBallAbil0Value()
     {
         int idx = GetCurrentDragonIdx();
 
         if (idx == -1) return 0f;
 
         return TableManager.Instance.dragonBall.dataArray[idx].Abilvalue0;
+    }
+    public static float GetDragonBallAbil1Value()
+    {
+        int idx = GetCurrentDragonIdx();
+
+        if (idx == -1) return 0f;
+
+        return TableManager.Instance.dragonBall.dataArray[idx].Abilvalue1;
     }
 
     public const float HellRelicAbilValue = 0.5f;

@@ -1,11 +1,9 @@
 ﻿using System.Collections;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UniRx;
-
-public class ChildKillCountIndicator : MonoBehaviour
+public class ColdSeasonAttenCountIndicator : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI killCountText;
@@ -17,9 +15,9 @@ public class ChildKillCountIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalChild).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountColdSeason).AsObservable().Subscribe(e =>
         {
-            killCountText.SetText($"처치 : {Utils.ConvertBigNum(e)}");
+            killCountText.SetText($"{Utils.ConvertBigNum(e)}일차");
         }).AddTo(this);
     }
 }

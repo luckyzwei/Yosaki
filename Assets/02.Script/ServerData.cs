@@ -63,6 +63,7 @@ public static class ServerData
     public static BokPassServerTable bokPassServerTable { get; private set; } = new BokPassServerTable();
     public static OneYearPassServerTable oneYearPassServerTable { get; private set; } = new OneYearPassServerTable();
     public static RankTable_ChunmaTop rankTable_ChunmaTop { get; private set; } = new RankTable_ChunmaTop();
+    public static ColdSeasonPassServerTable coldSeasonPassServerTable { get; private set; } = new ColdSeasonPassServerTable();
 
     #region string
     public static string inDate_str = "inDate";
@@ -150,6 +151,8 @@ public static class ServerData
         oneYearPassServerTable.Initialize();
 
         rankTable_ChunmaTop.Initialize();
+
+        coldSeasonPassServerTable.Initialize();
     }
 
     public static void GetUserInfo()

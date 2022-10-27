@@ -55,6 +55,9 @@ public class UiBuffPopupView : MonoBehaviour
 
     [SerializeField]
     private GameObject monthImage;
+    
+    [SerializeField]
+    private GameObject coldImage;
 
     private bool initialized = false;
 
@@ -87,6 +90,7 @@ public class UiBuffPopupView : MonoBehaviour
             monthImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Month);
         }
 
+
         if (oneYearImage != null)
         {
             oneYearImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.OneYear);
@@ -96,6 +100,11 @@ public class UiBuffPopupView : MonoBehaviour
         if (yomulDesc != null)
         {
             yomulDesc.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul);
+        }
+
+        if (coldImage != null)
+        {
+            coldImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Cold);
         }
 
         if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul)
@@ -284,7 +293,9 @@ public class UiBuffPopupView : MonoBehaviour
         }
         else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.OneYear
             || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Chuseok
-            || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Month)
+            || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Month
+            || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Cold
+            )
         {
             BuffGetRoutine();
         }

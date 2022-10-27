@@ -71,6 +71,9 @@ public class UserInfoTable
     public const string mf11_Buff = "mf11";
     public const string ma11_Buff = "ma11";
 
+    public const string cold0_Buff = "cold0"; //혹한기버프
+    public const string cold1_Buff = "cold1";
+
     public const string yomul0_buff = "yomul0_buff";
     public const string yomul1_buff = "yomul1_buff";
     public const string yomul2_buff = "yomul2_buff";
@@ -111,8 +114,11 @@ public class UserInfoTable
     //7월월간
     public const string killCountTotal2 = "k11";
     public const string killCountTotalChild = "fal"; //가을훈련
+    public const string killCountTotalColdSeason = "cold"; //혹한기
     public const string attenCountBok = "kb";
     public const string attenCountChuSeok = "kchu";
+    public const string attenCountColdSeason = "kcold";
+
     public const string usedFallCollectionCount = "ufc"; //곶감사용
 
 
@@ -212,6 +218,9 @@ public class UserInfoTable
         {one_Buff,0f},
         {mf11_Buff,0f},
         {ma11_Buff,0f},
+        
+        {cold0_Buff,0f},
+        {cold1_Buff,0f},
 
         {bonusDungeonMaxKillCount,0f},
         {wingPackageRewardReceive,0f},
@@ -256,9 +265,11 @@ public class UserInfoTable
         {yomul5_buff,0f},
         {killCountTotal2,0f},
         {killCountTotalChild,0f},
+        {killCountTotalColdSeason,0f},
         {attenCountBok,1f},
         {usedFallCollectionCount,0f},
         {attenCountChuSeok,1f},
+        {attenCountColdSeason,1f},
         {yomul6_buff,0f},
         {sonScore,0f},
         {hellWarScore,0f},
@@ -491,6 +502,7 @@ public class UserInfoTable
         }
 
         UpData(killCountTotalChild, false);
+        UpData(killCountTotalColdSeason, false);
         //UpData(attenCountOne, false);
     }
     private void UpdatejumpCount()
@@ -644,6 +656,8 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.one_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.mf11_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.ma11_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.cold0_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.cold1_Buff).Value = 0;
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value = 0;
@@ -665,6 +679,7 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountChuSeok).Value++;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountColdSeason).Value++;
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f)
             {
@@ -721,6 +736,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.attendanceCount_Seol, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value);
         userInfoParam.Add(UserInfoTable.attenCountBok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value);
         userInfoParam.Add(UserInfoTable.attenCountChuSeok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountChuSeok).Value);
+        userInfoParam.Add(UserInfoTable.attenCountColdSeason, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountColdSeason).Value);
 
         userInfoParam.Add(UserInfoTable.oakpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);
@@ -754,6 +770,8 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.one_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.one_Buff).Value);
         userInfoParam.Add(UserInfoTable.mf11_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.mf11_Buff).Value);
         userInfoParam.Add(UserInfoTable.ma11_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.ma11_Buff).Value);
+        userInfoParam.Add(UserInfoTable.cold0_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.cold0_Buff).Value);
+        userInfoParam.Add(UserInfoTable.cold1_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.cold1_Buff).Value);
 
         userInfoParam.Add(UserInfoTable.yomul0_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul1_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value);
@@ -960,6 +978,7 @@ public class UserInfoTable
             }
 
             tableDatas[killCountTotalChild].Value += updateRequireNum;
+            tableDatas[killCountTotalColdSeason].Value += updateRequireNum;
             //tableDatas[attenCountOne].Value += updateRequireNum;
         }
 
