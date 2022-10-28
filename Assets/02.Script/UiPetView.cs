@@ -522,7 +522,7 @@ public class UiPetView : MonoBehaviour
                     PopupManager.Instance.ShowAlarmMessage("수호신 컨텐츠에서 획득 가능");
 
                 }
-                else if (petServerData.idx == 20 || petServerData.idx == 21)
+                else if (petServerData.idx == 20 || petServerData.idx == 21 || petServerData.idx == 22 || petServerData.idx == 23)
                 {
                     PopupManager.Instance.ShowAlarmMessage("천상계 컨텐츠에서 획득 가능");
                 }
