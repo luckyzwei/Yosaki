@@ -128,7 +128,7 @@ public class UiPetView : MonoBehaviour
 
         tutorialObject.SetActive(petData.PETGETTYPE == PetGetType.Gem && petData.Price == 0f);
 
-        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19 || petData.Id == 20 || petData.Id == 21);
+        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19 || petData.Id == 20 || petData.Id == 21 || petData.Id == 22 || petData.Id == 23);
 
         if (leemugiPetObject != null)
             leemugiPetObject.SetActive(petData.Id == 12);
