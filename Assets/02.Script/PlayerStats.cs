@@ -1993,7 +1993,14 @@ public static class PlayerStats
 
         float addValue = ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value;
 
-        return kt * gumgiSoulAbilValue + addValue * 0.01f;
+        //천상계 마크
+        float addValue2 = 0;
+        if (PlayerStats.IsChunFlowerGumgiEnhance())
+        {
+            addValue2= TableManager.Instance.chunMarkAbil.dataArray[6].Abilbasevalue;
+        }
+
+            return kt * gumgiSoulAbilValue + (addValue * 0.01f) + addValue2;
     }
 
     public static bool IsChunQuickMoveAwake()
@@ -2027,6 +2034,18 @@ public static class PlayerStats
     {
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[4].Requirespeicalabilflower;
+        return chunFlowerNum >= requireFlower;
+    }   
+    public static bool IsChunFlowerCostumeEnhance()
+    {
+        var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
+        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[5].Requirespeicalabilflower;
+        return chunFlowerNum >= requireFlower;
+    }   
+    public static bool IsChunFlowerGumgiEnhance()
+    {
+        var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
+        var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[6].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
     }
 
