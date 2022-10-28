@@ -362,6 +362,9 @@ public static class ServerData
                 break; 
             case Item_Type.FoxMaskPartial:
                 ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += rewardValue;
+                break;   
+            case Item_Type.Mileage:
+                ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += rewardValue;
                 break;  
 
             case Item_Type.Event_Fall:
@@ -927,6 +930,11 @@ public static class ServerData
             case Item_Type.FoxMaskPartial:
                 ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += amount;
                 param.Add(GoodsTable.FoxMaskPartial, ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
+
+            case Item_Type.Mileage:
+                ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += amount;
+                param.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
 
                    case Item_Type.Cw:
@@ -1866,6 +1874,9 @@ public static class ServerData
                 
                 case Item_Type.FoxMaskPartial:
                     ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += amount;
+                    break;                 
+                case Item_Type.Mileage:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += amount;
                     break; 
                 
                 case Item_Type.Cw:

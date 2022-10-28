@@ -346,6 +346,13 @@ public class UiShop : SingletonMono<UiShop>
                 }
                 break; 
 
+            case Item_Type.Mileage:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += amount;
+                    param.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
+                }
+                break; 
+
             case Item_Type.Event_Fall:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value += amount;

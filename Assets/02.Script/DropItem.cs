@@ -386,12 +386,13 @@ public enum Item_Type
     ChunNorigae5 = 8500,
     ChunNorigae6 = 8501,
     
-    Chun0 = 8700,
+    Chun0 = 8700, // 천계기술
     Chun1 = 8701,
     Chun2 = 8702,
     Chun3 = 8703,
     Chun4 = 8704,
 
+    Mileage = 9000,
 }
 
 public class DropItem : PoolItem
