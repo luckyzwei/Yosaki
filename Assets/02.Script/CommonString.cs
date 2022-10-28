@@ -324,7 +324,7 @@ public static class CommonString
             case Item_Type.Cw: return "천계 꽃";
             case Item_Type.Event_Fall: return "곶감";
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
-            case Item_Type.FoxMaskPartial: return "미정";
+            case Item_Type.FoxMaskPartial: return "나무조각";
         }
         return "미등록";
     }
