@@ -512,12 +512,12 @@ public class UiInventoryWeaponView : MonoBehaviour
                 if (weaponData.Id == 50)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
-                    weaponLockDescription.SetText($"천상계\n번개에서 획득!");
+                    weaponLockDescription.SetText($"천상계\n천둥오리에서 획득!");
                 }
                 if (weaponData.Id == 51)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
-                    weaponLockDescription.SetText($"천상계\n바람에서 획득!");
+                    weaponLockDescription.SetText($"천상계\n근두운에서 획득!");
                 }
                 //
                 if (weaponData.Id == 45 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49)
