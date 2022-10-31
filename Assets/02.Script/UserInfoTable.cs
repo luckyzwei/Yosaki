@@ -172,7 +172,7 @@ public class UserInfoTable
     public const string relicReset = "rkrk";
 
     public const string canRecommendCount = "canRecommendCount2";
-    public const string mileageRefund = "mrf";
+    public const string mileageRefund = "mr";
 
 
     public double currentServerDate;
@@ -1002,6 +1002,9 @@ public class UserInfoTable
 
     public bool IsMonthlyPass2()
     {
+#if UNITY_EDITOR
+        return true;
+#endif
         return currentServerTime.Month == 11;
     }
 }
