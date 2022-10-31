@@ -332,7 +332,16 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         equipButton.interactable = awakeNum != 0;
 
+        if(((StatusType)skillTableData.Haseffecttype).IsPercentStat())
+        {
+        hasEffectDesc.SetText($"보유효과 : {CommonString.GetStatusName((StatusType)skillTableData.Haseffecttype)} {Utils.SmallFloatToDecimalFloat(awakeNum * skillTableData.Haseffectvalue*100f)}%\n(기술 각성시 보유 효과가 증가합니다))");
+
+        }
+        else
+        {
+
         hasEffectDesc.SetText($"보유효과 : {CommonString.GetStatusName((StatusType)skillTableData.Haseffecttype)} {awakeNum * skillTableData.Haseffectvalue}\n(기술 각성시 보유 효과가 증가합니다))");
+        }
     }
 
     private void WhenSkillUpgraded(int skillLevel)

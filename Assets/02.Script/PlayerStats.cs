@@ -41,6 +41,7 @@ public enum StatusType
     SuperCritical3DamPer,
     SuperCritical4DamPer,
     MonthBuff,
+    FlowerHasValueUpgrade,
 }
 
 
@@ -499,7 +500,7 @@ public static class PlayerStats
             if (tableDatas[i].Haseffecttype != (int)type) continue;
 
             int awakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][tableDatas[i].Id].Value;
-
+            
             if (awakeNum == 0) continue;
 
 
@@ -1518,10 +1519,15 @@ public static class PlayerStats
             if (IsChunFlowerDamageEnhance())
             {
                 ret += 0.000015f* currentLevel;
-                
-            }
-        }
 
+                //0.01       1퍼
+                //0.0001 0.01퍼
+                //0.000015 0.0015퍼
+            }
+
+            ret += GetSkillHasValue(StatusType.FlowerHasValueUpgrade) * currentLevel;
+
+        }
         return ret;
     }
 

@@ -319,6 +319,22 @@ public static class Utils
         return calenderCalc.GetWeekOfYear(currentDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday) - calenderCalc.GetWeekOfYear(startDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
     }
 
+    public static float SmallFloatToDecimalFloat(float _float,int essenceNum=1)
+    {
+        int count = 0;
+        float result = _float;
+        //essenceNum =  보관할 숫자 수 
+        while (_float < Mathf.Pow(10,essenceNum-1))
+        {
+            _float *= 10f;
+            count++;
+        }
+
+        float devideNum = Mathf.Pow(10, count);
+        result = Mathf.Round(_float) / devideNum;
+        return result;
+    }
+
     #region BigFloat
     private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "긍" };
     private static double p = (double)Mathf.Pow(10, 4);

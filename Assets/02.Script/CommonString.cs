@@ -445,6 +445,9 @@ public static class CommonString
             case StatusType.MonthBuff:
                 return "월간훈련 버프";
                 break;
+            case StatusType.FlowerHasValueUpgrade:
+                return "천계 꽃 레벨당 천상베기 증가";
+                break;
         }
 
         return "등록필요";

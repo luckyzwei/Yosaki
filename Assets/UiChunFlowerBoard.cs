@@ -34,7 +34,10 @@ public class UiChunFlowerBoard : MonoBehaviour
     {
         //chunFlowerReward.Initialize(TableManager.Instance.TwelveBossTable.dataArray[65]);
     }
-
+    private void OnEnable()
+    {
+        UpdateAbilText1((int)ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
+    }
     private void Subscribe()
     {
         ServerData.goodsTable.GetTableData(GoodsTable.Cw).AsObservable().Subscribe(level =>
