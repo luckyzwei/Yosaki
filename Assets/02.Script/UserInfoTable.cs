@@ -173,6 +173,7 @@ public class UserInfoTable
 
     public const string canRecommendCount = "canRecommendCount2";
     public const string mileageRefund = "mr";
+    public const string marRelicRefund = "mrrf";
 
 
     public double currentServerDate;
@@ -317,6 +318,7 @@ public class UserInfoTable
 
         {canRecommendCount,GameBalance.recommendCountPerWeek},
         {mileageRefund,0},
+        {marRelicRefund,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
