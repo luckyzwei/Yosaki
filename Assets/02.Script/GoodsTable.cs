@@ -14,11 +14,11 @@ public class GoodsTable
     public static string Indate;
     public const string tableName = "Goods";
     public static string Gold = "Gold";
-    public static string Jade = "Jade";
+    public static string Jade = "Jade"; //옥
     public static string GrowthStone = "GrowthStone";
     public static string Ticket = "Ticket";
     public static string BonusSpinKey = "BonusSpin";
-    public static string MarbleKey = "Marble";
+    public static string MarbleKey = "Marble"; //여우구슬
     public static string DokebiKey = "Dokebi2";
     public static string SkillPartion = "SkillPartion";
     public static string WeaponUpgradeStone = "WeaponUpgradeStone";
