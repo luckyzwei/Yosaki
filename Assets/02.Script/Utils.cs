@@ -319,12 +319,14 @@ public static class Utils
         return calenderCalc.GetWeekOfYear(currentDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday) - calenderCalc.GetWeekOfYear(startDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
     }
 
-    public static float SmallFloatToDecimalFloat(float _float,int essenceNum=1)
+    public static float SmallFloatToDecimalFloat(float _float, int essenceNum = 1)
     {
+        if (_float == 0) return 0f;
+
         int count = 0;
         float result = _float;
         //essenceNum =  보관할 숫자 수 
-        while (_float < Mathf.Pow(10,essenceNum-1))
+        while (_float < Mathf.Pow(10, essenceNum - 1))
         {
             _float *= 10f;
             count++;

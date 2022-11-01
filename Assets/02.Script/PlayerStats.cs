@@ -500,7 +500,7 @@ public static class PlayerStats
             if (tableDatas[i].Haseffecttype != (int)type) continue;
 
             int awakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][tableDatas[i].Id].Value;
-            
+
             if (awakeNum == 0) continue;
 
 
@@ -798,7 +798,7 @@ public static class PlayerStats
         }
         return 0f;
     }
-    
+
 
     public static float GetExpPlusValueExclusiveBuff()
     {
@@ -1514,11 +1514,11 @@ public static class PlayerStats
             ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
         }
 
-        if(statusType==StatusType.SuperCritical4DamPer)
+        if (statusType == StatusType.SuperCritical4DamPer)
         {
             if (IsChunFlowerDamageEnhance())
             {
-                ret += 0.000015f* currentLevel;
+                ret += 0.000015f * currentLevel;
 
                 //0.01       1퍼
                 //0.0001 0.01퍼
@@ -1839,8 +1839,8 @@ public static class PlayerStats
         if (ServerData.costumeServerTable.TableDatas[hellCostumeKey1].hasCostume.Value == true)
         {
             ret += 0.1f;
-        } 
-        
+        }
+
         if (IsChunBossHpDec())
         {
             ret += 0.05f;
@@ -2003,10 +2003,10 @@ public static class PlayerStats
         float addValue2 = 0;
         if (PlayerStats.IsChunFlowerGumgiEnhance())
         {
-            addValue2= TableManager.Instance.chunMarkAbil.dataArray[6].Abilbasevalue;
+            addValue2 = TableManager.Instance.chunMarkAbil.dataArray[6].Abilbasevalue;
         }
 
-            return kt * gumgiSoulAbilValue + (addValue * 0.01f) + addValue2;
+        return kt * gumgiSoulAbilValue + (addValue * 0.01f) + addValue2;
     }
 
     public static bool IsChunQuickMoveAwake()
@@ -2034,22 +2034,24 @@ public static class PlayerStats
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[3].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
-    }  
-    
+    }
+
     public static bool IsChunFlowerDamageEnhance()
     {
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[4].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
-    }   
+    }
     public static bool IsChunFlowerCostumeEnhance()
     {
+        return false;
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[5].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
-    }   
+    }
     public static bool IsChunFlowerGumgiEnhance()
     {
+        return false;
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[6].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;

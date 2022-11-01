@@ -58,44 +58,44 @@ public class UiMarbleRelicRefund : MonoBehaviour
 
         //
 
-        int _1DiffMarble = 6;
+        float _1DiffMarble = 24000000;
 
-        int _2DiffMarble = 16;
+        float _2DiffMarble = 48000000;
 
-        int _3DiffMarble = 27;
+        float _3DiffMarble = 110000000;
         
 
 
-        int marble1_MarbleAdd = marblePack1buyCount * _1DiffMarble;
-        
+        float marble1_MarbleAdd = marblePack1buyCount * _1DiffMarble;
 
-        int marble2_MarbleAdd = marblePack2buyCount * _2DiffMarble;
-        
 
-        int marble3_MarbleAdd = marblePack3buyCount * _3DiffMarble;
+        float marble2_MarbleAdd = marblePack2buyCount * _2DiffMarble;
+
+
+        float marble3_MarbleAdd = marblePack3buyCount * _3DiffMarble;
 
 
         float addMarbleTotal = marble1_MarbleAdd + marble2_MarbleAdd + marble3_MarbleAdd;
 
-        
+
 
         //
 
-        int _1DiffRelic = 6;
+        float _1DiffRelic = 70;
 
-        int _2DiffRelic = 16;
+        float _2DiffRelic = 200;
 
-        int _3DiffRelic = 27;
+        float _3DiffRelic = 400;
 
-        int _4DiffRelic = 40;
+        float _4DiffRelic = 1500;
 
-        int relic1_RelicAdd = relicPack1buyCount * _1DiffRelic;
-        
+        float relic1_RelicAdd = relicPack1buyCount * _1DiffRelic;
 
-        int relic2_RelicAdd = relicPack2buyCount * _2DiffRelic;
-        int relic3_RelicAdd = relicPack3buyCount * _3DiffRelic;
 
-        int relic4_RelicAdd = relicPack4buyCount * _4DiffRelic;
+        float relic2_RelicAdd = relicPack2buyCount * _2DiffRelic;
+        float relic3_RelicAdd = relicPack3buyCount * _3DiffRelic;
+
+        float relic4_RelicAdd = relicPack4buyCount * _4DiffRelic;
 
         float addRelicTotal = relic1_RelicAdd + relic2_RelicAdd + relic3_RelicAdd + relic4_RelicAdd;
         LogManager.Instance.SendLogType("MarRelicRefund", "Marble", $"{marblePack1buyCount},{marblePack2buyCount},{marblePack3buyCount}");
@@ -129,7 +129,7 @@ public class UiMarbleRelicRefund : MonoBehaviour
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
 
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
+        PopupManager.Instance.ShowConfirmPopup("여우구슬/영혼열쇠 세트 소급",
             $"여우구슬 {addMarbleTotal}개 소급됨\n"+$"영혼열쇠 {addRelicTotal}개 소급됨" ,null);
         });
 

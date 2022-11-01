@@ -45,6 +45,9 @@ public class UiMileageRefund : MonoBehaviour
                 if (localTableData[i].Rewardtypes[j] == 9000)
                 {
                     int buyCount = serverTable[localTableData[i].Productid].buyCount.Value;
+
+                    if (buyCount == 0) continue;
+
                     int mileageNum = localTableData[i].Rewardvalues[j] * buyCount;
 
                     mileageTotalNum += mileageNum;

@@ -22,7 +22,7 @@ public class UiSkillCraftBoard : MonoBehaviour
         for (int i = 0; i < skillTableDatas.Length; i++)
         {
             if (skillTableDatas[i].Issonskill == true) continue;
-            if (skillTableDatas[i].Skilltype == 4 || skillTableDatas[i].Skilltype == 5 || skillTableDatas[i].Skilltype == 6) continue;
+            if (skillTableDatas[i].Skilltype == 4 || skillTableDatas[i].Skilltype == 5 || skillTableDatas[i].Skilltype == 6 || skillTableDatas[i].Skilltype == 7) continue;
 
             var cell = Instantiate<UiMagicbookCraftCell>(craftCell, craftParent);
 
