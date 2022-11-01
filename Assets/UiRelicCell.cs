@@ -37,6 +37,9 @@ public class UiRelicCell : MonoBehaviour
     [SerializeField]
     private GameObject lockMask_San;
 
+    [SerializeField]
+    private GameObject lockMask_Chasa;
+
     private bool subscribed = false;
     private bool IsMaxLevel()
     {
@@ -105,6 +108,18 @@ public class UiRelicCell : MonoBehaviour
             {
                 lockMask_San.SetActive(e < 1);
             }).AddTo(this);
+        }
+        //사인검
+        if (relicLocalData.Id == 8)
+        {
+            lockMask.SetActive(false);
+
+
+            ServerData.weaponTable.TableDatas["weapon36"].hasItem.AsObservable().Subscribe(e =>
+            {
+               lockMask_Chasa.SetActive(e < 1);
+            }).AddTo(this);
+            
         }
     }
 

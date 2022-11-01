@@ -1076,6 +1076,8 @@ public static class PlayerStats
 
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical3DamPer);
 
+        ret += GetRelicHasEffect(StatusType.SuperCritical3DamPer);
+
         ret += GetHellMarkValue();
 
         ret += GetHellAbilHasEffect(StatusType.SuperCritical3DamPer);
