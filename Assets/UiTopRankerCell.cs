@@ -126,7 +126,7 @@ public class UiTopRankerCell : MonoBehaviour
             }
         }
 
-        if (isPartyRaidPlayer == false) 
+        if (isPartyRaidPlayer == false)
         {
             //부채
             if (weaponId >= 37 && weaponId <= 41)
@@ -141,7 +141,7 @@ public class UiTopRankerCell : MonoBehaviour
 
             }
         }
-        else 
+        else
         {
             //부채
             if (weaponId >= 37 && weaponId <= 41)
@@ -188,9 +188,16 @@ public class UiTopRankerCell : MonoBehaviour
         //십만대산용
         if (partyRaidRecommendButton != null)
         {
-            bool isMyNickName = Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(nickName);
+            if (GameManager.contentsType != GameManager.ContentsType.PartyRaid_Guild)
+            {
+                bool isMyNickName = Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(nickName);
 
-            partyRaidRecommendButton.SetActive(!isMyNickName);
+                partyRaidRecommendButton.SetActive(!isMyNickName);
+            }
+            else
+            {
+                partyRaidRecommendButton.SetActive(false);
+            }
         }
 
         if (leaveObject != null)
@@ -212,6 +219,12 @@ public class UiTopRankerCell : MonoBehaviour
 
     public void OnClickRecommendButton()
     {
+        if (GameManager.contentsType == GameManager.ContentsType.PartyRaid_Guild)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"대산군에서는 추천을 하실 수 없습니다.");
+            return;
+        }
+
         PopupManager.Instance.ShowAlarmMessage($"{recNickName}님을 추천 합니다.");
 
         PartyRaidManager.Instance.NetworkManager.SendRecommend(recNickName);
