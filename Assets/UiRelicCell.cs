@@ -148,7 +148,7 @@ public class UiRelicCell : MonoBehaviour
             return;
         }
 
-        int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
+        float currentRelicNum = ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
 
         if (currentRelicNum < 0)
         {
@@ -183,7 +183,7 @@ public class UiRelicCell : MonoBehaviour
             return;
         }
 
-        int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
+        float currentRelicNum = ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
 
         if (currentRelicNum < 0)
         {
@@ -218,7 +218,7 @@ public class UiRelicCell : MonoBehaviour
             return;
         }
 
-        int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
+        float currentRelicNum = ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
 
         if (currentRelicNum == 0)
         {
@@ -250,7 +250,7 @@ public class UiRelicCell : MonoBehaviour
             return;
         }
 
-        int currentRelicNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
+        float currentRelicNum = ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value;
 
         if (currentRelicNum == 0)
         {
