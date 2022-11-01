@@ -81,7 +81,8 @@ public class UiGuildMemberCell : MonoBehaviour
 
     public void UpdateGuildBossObject(bool donated)
     {
-        guildBossObejct.gameObject.SetActive(donated);
+        //강철이 삭제
+        guildBossObejct.gameObject.SetActive(false);
     }
 
     public void UpdateDonatedObject_PetExp(bool donated)
