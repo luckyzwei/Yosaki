@@ -12,7 +12,7 @@ public class UiColdSeasonPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string coldseasonPassKey = "coldseasonpass";
+    public static readonly string coldseasonPassKey = "coldseasonpass0";
 
     private Button buyButton;
 
