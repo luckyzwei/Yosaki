@@ -269,7 +269,7 @@ public class UiTopRankerCell : MonoBehaviour
             petGraphic.GetComponent<RectTransform>().anchoredPosition = new Vector3(58.1f, 144.6f, 0.0f);
         }
         //고양이
-        else if (idx == 21)
+        else if (idx == 21 || idx == 22 || idx == 23)
         {
             petGraphic.startingAnimation = "walk";
             petGraphic.transform.localScale = new Vector3(0.2f, 0.2f, 0.14f);

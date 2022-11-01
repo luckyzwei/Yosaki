@@ -275,7 +275,7 @@ public static class PlayerStats
         return ret;
     }
 
-    public static ObscuredFloat relicReleaseValue = 10000f;
+    public static ObscuredFloat relicReleaseValue = 30000f;
 
     public static float GetRelicReleaseValue()
     {
