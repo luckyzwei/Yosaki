@@ -31,14 +31,20 @@ public class EnemyHitObject : MonoBehaviour
 
     private void SetPercentValueByBossId()
     {
-        if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 57)
+        if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && (GameManager.Instance.bossId == 57||
+            GameManager.Instance.bossId == 72))
         {
             this.percentDamage = 1f;
         }
         //선녀들
         else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && (GameManager.Instance.bossId == 58 ||
          GameManager.Instance.bossId == 59 ||
-         GameManager.Instance.bossId == 60))
+         GameManager.Instance.bossId == 60 ||
+         GameManager.Instance.bossId == 61 ||
+         GameManager.Instance.bossId == 62 ||
+         GameManager.Instance.bossId == 63 ||
+         GameManager.Instance.bossId == 64
+         ))
         {
             this.percentDamage = 0.6f;
         }
