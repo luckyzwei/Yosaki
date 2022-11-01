@@ -199,6 +199,15 @@ public enum Item_Type
     RankFrame101_1000_war_hell = 814,
     RankFrame1001_10000_war_hell = 815,
 
+    RankFrameParty1guild_new = 850,
+    RankFrameParty2guild_new = 851,
+    RankFrameParty3guild_new = 852,
+    RankFrameParty4guild_new = 853,
+    RankFrameParty5guild_new = 854,
+    RankFrameParty6_20_guild_new = 855,
+    RankFrameParty21_50_guild_new = 856,
+    RankFrameParty51_100_guild_new = 857,
+
     //1000~1100 무기
     weapon0 = 1000,
     weapon1 = 1001,

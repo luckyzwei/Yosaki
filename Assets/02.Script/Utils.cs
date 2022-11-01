@@ -227,7 +227,9 @@ public static class Utils
     public static bool IsGuildRewardItem(this Item_Type type)
     {
         return (type >= Item_Type.RankFrame1_guild && type <= Item_Type.RankFrame101_1000_guild) ||
-            (type >= Item_Type.RankFrame1guild_new && type <= Item_Type.RankFrame51_100_guild_new);
+            (type >= Item_Type.RankFrame1guild_new && type <= Item_Type.RankFrame51_100_guild_new) ||
+            (type >= Item_Type.RankFrameParty1guild_new && type <= Item_Type.RankFrameParty51_100_guild_new)
+            ;
     }
 
     public static bool IsGangChulItem(this Item_Type type)

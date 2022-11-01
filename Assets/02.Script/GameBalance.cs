@@ -153,6 +153,15 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_21_50_guild_new = 100;
     public readonly static ObscuredInt rankReward_51_100_guild_new = 50;
 
+    public readonly static ObscuredInt rankRewardParty_1_guild_new = 400;
+    public readonly static ObscuredInt rankRewardParty_2_guild_new = 350;
+    public readonly static ObscuredInt rankRewardParty_3_guild_new = 300;
+    public readonly static ObscuredInt rankRewardParty_4_guild_new = 250;
+    public readonly static ObscuredInt rankRewardParty_5_guild_new = 200;
+    public readonly static ObscuredInt rankRewardParty_6_20_guild_new = 150;
+    public readonly static ObscuredInt rankRewardParty_21_50_guild_new = 100;
+    public readonly static ObscuredInt rankRewardParty_51_100_guild_new = 50;
+
     public readonly static ObscuredInt rankReward_1_new_boss = 3000;
     public readonly static ObscuredInt rankReward_2_new_boss = 2800;
     public readonly static ObscuredInt rankReward_3_new_boss = 2600;

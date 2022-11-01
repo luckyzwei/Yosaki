@@ -1751,6 +1751,32 @@ public static class ServerData
                 case Item_Type.RankFrame51_100_guild_new:
                     ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankReward_51_100_guild_new;
                     break;
+
+                //
+                case Item_Type.RankFrameParty1guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankRewardParty_1_guild_new;
+                    break;
+                case Item_Type.RankFrameParty2guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankRewardParty_2_guild_new;
+                    break;
+                case Item_Type.RankFrameParty3guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankRewardParty_3_guild_new;
+                    break;
+                case Item_Type.RankFrameParty4guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankRewardParty_4_guild_new;
+                    break;
+                case Item_Type.RankFrameParty5guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankRewardParty_5_guild_new;
+                    break;
+                case Item_Type.RankFrameParty6_20_guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankRewardParty_6_20_guild_new;
+                    break;
+                case Item_Type.RankFrameParty21_50_guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankRewardParty_21_50_guild_new;
+                    break;
+                case Item_Type.RankFrameParty51_100_guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += GameBalance.rankRewardParty_51_100_guild_new;
+                    break;
             }
 
 

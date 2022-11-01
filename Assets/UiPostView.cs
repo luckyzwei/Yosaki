@@ -304,6 +304,41 @@ public class UiPostView : MonoBehaviour
                     title.SetText("강철이 보상(50~100위)(문파)");
                     description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankReward_51_100_guild_new}개");
                     break;
+
+                //
+
+                case Item_Type.RankFrameParty1guild_new:
+                    title.SetText("대산군 보상(1위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankRewardParty_1_guild_new}개");
+                    break;
+                case Item_Type.RankFrameParty2guild_new:
+                    title.SetText("대산군 보상(2위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankRewardParty_2_guild_new}개");
+                    break;
+                case Item_Type.RankFrameParty3guild_new:
+                    title.SetText("대산군 보상(3위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankRewardParty_3_guild_new}개");
+                    break;
+                case Item_Type.RankFrameParty4guild_new:
+                    title.SetText("대산군 보상(4위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankRewardParty_4_guild_new}개");
+                    break;
+                case Item_Type.RankFrameParty5guild_new:
+                    title.SetText("대산군 보상(5위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankRewardParty_5_guild_new}개");
+                    break;
+                case Item_Type.RankFrameParty6_20_guild_new:
+                    title.SetText("대산군 보상(6~10위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankRewardParty_6_20_guild_new}개");
+                    break;
+                case Item_Type.RankFrameParty21_50_guild_new:
+                    title.SetText("대산군 보상(11~50위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankRewardParty_21_50_guild_new}개");
+                    break;
+                case Item_Type.RankFrameParty51_100_guild_new:
+                    title.SetText("대산군 보상(50~100위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankRewardParty_51_100_guild_new}개");
+                    break;
             }
         }
         else if (type.IsGangChulItem())

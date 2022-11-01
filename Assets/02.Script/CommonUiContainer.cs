@@ -516,6 +516,17 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return GuildReward;
                 break;
 
+            case Item_Type.RankFrameParty1guild_new:
+            case Item_Type.RankFrameParty2guild_new:
+            case Item_Type.RankFrameParty3guild_new:
+            case Item_Type.RankFrameParty4guild_new:
+            case Item_Type.RankFrameParty5guild_new:
+            case Item_Type.RankFrameParty6_20_guild_new:
+            case Item_Type.RankFrameParty21_50_guild_new:
+            case Item_Type.RankFrameParty51_100_guild_new:
+                return GuildReward;
+                break;
+
             case Item_Type.RankFrame1_boss_new:
             case Item_Type.RankFrame2_boss_new:
             case Item_Type.RankFrame3_boss_new:

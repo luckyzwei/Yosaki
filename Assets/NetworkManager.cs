@@ -737,11 +737,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             PopupManager.Instance.ShowYesNoPopup("알림", "토벌을 시작 할까요?", () =>
             {
 
-                if (roomPlayerDatas.Count > 4)
+                if (IsGuildBoss() == false) 
                 {
-                    PopupManager.Instance.ShowAlarmMessage("인원이 초과됐습니다.");
-                    return;
+                    if (roomPlayerDatas.Count > 4)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage("인원이 초과됐습니다.");
+                        return;
+                    }
                 }
+                else 
+                {
+                    if (roomPlayerDatas.Count > 10)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage("인원이 초과됐습니다.");
+                        return;
+                    }
+                }
+
+             
 
                 startGameButton.interactable = false;
                 PhotonNetwork.CurrentRoom.IsOpen = false;
