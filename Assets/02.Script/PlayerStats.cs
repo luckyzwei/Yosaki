@@ -1943,7 +1943,7 @@ public static class PlayerStats
         return yeoRaeMarbleValue * ServerData.goodsTable.GetTableData(GoodsTable.Ym).Value;
     }
 
-    public static float foxMaskPartialValue = 0.015f;
+    public static float foxMaskPartialValue = 0.02f;
     public static float GetFoxMaskAbilPlusValue()
     {
         return foxMaskPartialValue * ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value;
