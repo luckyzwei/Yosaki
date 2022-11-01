@@ -130,7 +130,7 @@ public class UiMarbleRelicRefund : MonoBehaviour
         {
 
         PopupManager.Instance.ShowConfirmPopup("여우구슬/영혼열쇠 세트 소급",
-            $"여우구슬 {addMarbleTotal}개 소급됨\n"+$"영혼열쇠 {addRelicTotal}개 소급됨" ,null);
+            $"여우구슬 {Utils.ConvertBigNum(addMarbleTotal)}개 소급됨\n"+$"영혼열쇠 {addRelicTotal}개 소급됨" ,null);
         });
 
 

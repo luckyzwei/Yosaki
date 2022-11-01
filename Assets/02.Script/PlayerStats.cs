@@ -2044,14 +2044,13 @@ public static class PlayerStats
     }
     public static bool IsChunFlowerCostumeEnhance()
     {
-        return false;
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[5].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
     }
+
     public static bool IsChunFlowerGumgiEnhance()
     {
-        return false;
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[6].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
