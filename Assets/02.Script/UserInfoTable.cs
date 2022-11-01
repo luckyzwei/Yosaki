@@ -175,6 +175,10 @@ public class UserInfoTable
     public const string mileageRefund = "mr";
     public const string marRelicRefund = "mrrf";
 
+    public const string exchangeCount_0_Mileage = "mff";
+    public const string exchangeCount_1_Mileage = "mgg";
+    public const string exchangeCount_2_Mileage = "mbu";
+    public const string exchangeCount_3_Mileage = "mcu";
 
     public double currentServerDate;
     public double attendanceUpdatedTime;
@@ -319,6 +323,11 @@ public class UserInfoTable
         {canRecommendCount,GameBalance.recommendCountPerWeek},
         {mileageRefund,0},
         {marRelicRefund,0},
+
+        {exchangeCount_0_Mileage,0},
+        {exchangeCount_1_Mileage,0},
+        {exchangeCount_2_Mileage,0},
+        {exchangeCount_3_Mileage,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -798,6 +807,17 @@ public class UserInfoTable
             //추천권 초기화
             ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommendCount).Value = GameBalance.recommendCountPerWeek;
             userInfoParam.Add(UserInfoTable.canRecommendCount, ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommendCount).Value);
+
+            //마일리지 상점 초기화
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_2_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_3_Mileage).Value = 0;
+
+            userInfoParam.Add(UserInfoTable.exchangeCount_0_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_1_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_2_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_2_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_3_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_3_Mileage).Value);
         }
 
         //손오공
