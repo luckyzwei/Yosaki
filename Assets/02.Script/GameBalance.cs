@@ -224,8 +224,8 @@ public static class GameBalance
 
     public readonly static ObscuredInt fireExchangeMaxCount = 10;
 
-    public readonly static ObscuredInt bandiPlusStageJadeValue = 1;
-    public readonly static ObscuredInt bandiPlusStageMarbleValue = 1;
+    public readonly static ObscuredInt bandiPlusStageJadeValue = 2;
+    public readonly static ObscuredInt bandiPlusStageMarbleValue = 2;
     public readonly static ObscuredInt bandiPlusStageDevideValue = 1000;
 
     public static ObscuredFloat forestValue = 1f;
