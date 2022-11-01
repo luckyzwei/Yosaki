@@ -134,14 +134,14 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
 
     private void RecordGuildRaidScore()
     {
-        bool canRecord = ServerData.userInfoTable.CanRecordGuildScore();
+        bool isRankUpdateTime = ServerData.userInfoTable.IsRankUpdateTime();
 
 #if UNITY_EDITOR
-        canRecord = true;
+        isRankUpdateTime = false;
 #endif
-        if (canRecord == false)
+        if (isRankUpdateTime == true)
         {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "오후11시~ 다음날 오전5시 까지는\n점수를 등록할 수 없습니다!", null);
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "오전4시 ~ 5시는에는 랭킹을 등록하실 수 없습니다.", null);
             return;
         }
 

@@ -281,6 +281,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         roomList.Clear();
 
         CheckGuildRaidEnter();
+
+        CheckPlayerLevel();
+    }
+
+    private void CheckPlayerLevel()
+    {
+        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < 100000)
+        {
+            PartyRaidManager.Instance.OnClickCloseButton();
+        }
     }
 
     private void CheckGuildRaidEnter()
@@ -737,7 +747,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             PopupManager.Instance.ShowYesNoPopup("알림", "토벌을 시작 할까요?", () =>
             {
 
-                if (IsGuildBoss() == false) 
+                if (IsGuildBoss() == false)
                 {
                     if (roomPlayerDatas.Count > 4)
                     {
@@ -745,7 +755,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                         return;
                     }
                 }
-                else 
+                else
                 {
                     if (roomPlayerDatas.Count > 10)
                     {
@@ -754,7 +764,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     }
                 }
 
-             
+
 
                 startGameButton.interactable = false;
                 PhotonNetwork.CurrentRoom.IsOpen = false;

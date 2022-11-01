@@ -953,6 +953,14 @@ public class UserInfoTable
         return true;
     }
 
+    public bool IsRankUpdateTime()
+    {
+        if (currentServerTime.Hour == 4 || currentServerTime.Hour == 5)
+            return false;
+
+        return true;
+    }
+
     public bool IsHotTime()
     {
 #if UNITY_EDITOR
