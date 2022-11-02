@@ -31,7 +31,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
     public ReactiveProperty<int> attenUserNum = new ReactiveProperty<int>();
 
-    public GuildMemberInfo myMemberInfo { get; private set; }
+    public GuildMemberInfo myMemberInfo { get; set; }
 
     public UiGuildMemberCell GetMemberCell(string nickName)
     {

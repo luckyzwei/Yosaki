@@ -30,6 +30,7 @@ public class UiGuildInfoBoard : MonoBehaviour
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "탈퇴 완료", null);
                 GuildManager.Instance.ChangeHasGuildState(false);
+                UiGuildMemberList.Instance.myMemberInfo = null;
 
             }
             else
