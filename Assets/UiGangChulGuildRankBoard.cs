@@ -20,7 +20,7 @@ public class UiGangChulGuildRankBoard : MonoBehaviour
     {
         RefreshObject.SetActive(true);
 
-        Backend.URank.Guild.GetRankList(RankManager.Rank_GangChul_Guild_Boss_Uuid, 100, bro =>
+        Backend.URank.Guild.GetRankList(RankManager.Rank_Party_Guild_Uuid, 100, bro =>
         {
             if (bro.IsSuccess())
             {
