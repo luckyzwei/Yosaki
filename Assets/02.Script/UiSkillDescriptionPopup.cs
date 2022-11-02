@@ -334,7 +334,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         if(((StatusType)skillTableData.Haseffecttype).IsPercentStat())
         {
-        hasEffectDesc.SetText($"보유효과 : {CommonString.GetStatusName((StatusType)skillTableData.Haseffecttype)} {Utils.SmallFloatToDecimalFloat(awakeNum * skillTableData.Haseffectvalue*100f)}%\n(기술 각성시 보유 효과가 증가합니다))");
+        hasEffectDesc.SetText($"보유효과 : {CommonString.GetStatusName((StatusType)skillTableData.Haseffecttype)} {Utils.SmallFloatToDecimalFloat(awakeNum * skillTableData.Haseffectvalue*100f,2)}%\n(기술 각성시 보유 효과가 증가합니다))");
 
         }
         else
