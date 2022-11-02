@@ -28,24 +28,27 @@ public class PartyRaidButton : MonoBehaviour
 
     public void OnClickPartyRaidButton()
     {
-        if (GuildManager.Instance.hasGuild.Value == false)
-        {
-            PopupManager.Instance.ShowAlarmMessage("문파에 가입되어 있어야 합니다.");
-            return;
-        }
-
-        int dogFeedCount = GetDogFeedCount();
-
-        if (dogFeedCount < GameBalance.sanGoonDogFeedCount)
-        {
-            PopupManager.Instance.ShowAlarmMessage($"견공에게 먹이를 3회 이상 줘야 합니다.\n현재 {dogFeedCount}회");
-            return;
-        }
-
         if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < 100000)
         {
             PopupManager.Instance.ShowAlarmMessage("레벨 10만부터 입장하실 수 있습니다.");
             return;
+        }
+
+        if (contentsType == ContentsType.PartyRaid_Guild) 
+        {
+            if (GuildManager.Instance.hasGuild.Value == false)
+            {
+                PopupManager.Instance.ShowAlarmMessage("문파에 가입되어 있어야 합니다.");
+                return;
+            }
+
+            int dogFeedCount = GetDogFeedCount();
+
+            if (dogFeedCount < GameBalance.sanGoonDogFeedCount)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"견공에게 먹이를 3회 이상 줘야 합니다.\n현재 {dogFeedCount}회");
+                return;
+            }
         }
 
         PartyRaidManager.Instance.NetworkManager.contentsType = contentsType;
