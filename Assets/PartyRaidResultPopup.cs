@@ -116,7 +116,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
     {
         double totalScore = PartyRaidManager.Instance.NetworkManager.GetTotalScore();
 
-        int ret = 0;
+        int ret = -1;
 
         var tableData = TableManager.Instance.TwelveBossTable.dataArray[73];
 
@@ -127,6 +127,11 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
                 ret = i;
                 break;
             }
+        }
+
+        if (ret == -1)
+        {
+            ret = tableData.Rewardcut.Length - 1;
         }
 
         return ret;
