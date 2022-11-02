@@ -131,7 +131,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
 
         if (ret == -1)
         {
-            ret = tableData.Rewardcut.Length - 1;
+            ret = tableData.Rewardcut.Length;
         }
 
         return ret;
