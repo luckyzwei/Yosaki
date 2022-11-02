@@ -11,19 +11,9 @@ public class PartyRaidButton : MonoBehaviour
 
     private int GetDogFeedCount()
     {
-        var guildInfoBro = Backend.Social.Guild.GetMyGuildGoodsV3();
+        if (UiGuildMemberList.Instance.myMemberInfo == null) return 0;
 
-        if (guildInfoBro.IsSuccess())
-        {
-            var returnValue = guildInfoBro.GetReturnValuetoJSON();
-
-            int currentScore = int.Parse(returnValue["goods"]["totalGoods5Amount"]["N"].ToString());
-
-            return currentScore / 10;
-
-        }
-
-        return 0;
+        return UiGuildMemberList.Instance.myMemberInfo.donateDogFeedAmount / 10;
     }
 
     public void OnClickPartyRaidButton()
@@ -34,7 +24,7 @@ public class PartyRaidButton : MonoBehaviour
             return;
         }
 
-        if (contentsType == ContentsType.PartyRaid_Guild) 
+        if (contentsType == ContentsType.PartyRaid_Guild)
         {
             if (GuildManager.Instance.hasGuild.Value == false)
             {

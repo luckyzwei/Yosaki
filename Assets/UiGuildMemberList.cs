@@ -31,6 +31,8 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
     public ReactiveProperty<int> attenUserNum = new ReactiveProperty<int>();
 
+    public GuildMemberInfo myMemberInfo { get; private set; }
+
     public UiGuildMemberCell GetMemberCell(string nickName)
     {
         nickName = nickName.Replace(CommonString.IOS_nick, "");
@@ -170,6 +172,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     string lastLogin = data["lastLogin"]["S"].ToString();
                     string gamerIndate = data["gamerInDate"]["S"].ToString();
                     int donateGoods = int.Parse(data["totalGoods3Amount"]["N"].ToString());
+                    int donateDogFeedAmounts = int.Parse(data["totalGoods5Amount"]["N"].ToString());
                     bool todayDonated = int.Parse(data["totalGoods9Amount"]["N"].ToString()) >= 1;
                     bool todayDonatedPetExp = int.Parse(data["totalGoods8Amount"]["N"].ToString()) >= 1;
                     bool todayGuildBoss = int.Parse(data["totalGoods6Amount"]["N"].ToString()) >= 1;
@@ -180,7 +183,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
                     }
 
-                    var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp, todayGuildBoss);
+                    var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp, todayGuildBoss, donateDogFeedAmounts);
 
                     memberCells[i].Initialize(memberData);
                     memberCells[i].transform.SetAsFirstSibling();
@@ -188,6 +191,11 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     if (findMyData == false)
                     {
                         findMyData = nickName.Replace(CommonString.IOS_nick, "").Equals(myNickName);
+                    }
+
+                    if(nickName.Replace(CommonString.IOS_nick, "").Equals(myNickName)) 
+                    {
+                        this.myMemberInfo = memberData;
                     }
 
                 }
@@ -215,6 +223,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     string lastLogin = data["lastLogin"]["S"].ToString();
                     string gamerIndate = data["gamerInDate"]["S"].ToString();
                     int donateGoods = int.Parse(data["totalGoods3Amount"]["N"].ToString());
+                    int donateDogFeedAmount = int.Parse(data["totalGoods5Amount"]["N"].ToString());
                     bool todayDonated = int.Parse(data["totalGoods9Amount"]["N"].ToString()) >= 1;
                     bool todayDonatedPetExp = int.Parse(data["totalGoods8Amount"]["N"].ToString()) >= 1;
                     bool todayGuildBoss = int.Parse(data["totalGoods6Amount"]["N"].ToString()) >= 1;
@@ -222,9 +231,11 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                     //내꺼찾음
                     if (nickName.Replace(CommonString.IOS_nick, "").Equals(myNickName))
                     {
-                        var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp, todayGuildBoss);
+                        var memberData = new GuildMemberInfo(nickName, position, lastLogin, gamerIndate, donateGoods, todayDonated, todayDonatedPetExp, todayGuildBoss, donateDogFeedAmount);
                         memberCells[0].Initialize(memberData);
                         memberCells[0].transform.SetAsFirstSibling();
+
+                        this.myMemberInfo = memberData;
                         break;
                     }
                 }

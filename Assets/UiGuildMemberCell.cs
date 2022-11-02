@@ -44,13 +44,14 @@ public class UiGuildMemberCell : MonoBehaviour
         public string gamerIndate { get; private set; }
 
         public int donateGoods { get; private set; }
+        public int donateDogFeedAmount { get; private set; }
 
         public bool todayDonated { get; private set; } = false;
         public bool todayDonatedPetExp { get; private set; }
         public bool todayGuildBoss { get; private set; }
 
 
-        public GuildMemberInfo(string nickName, string position, string lastLogin, string gamerIndate, int donateGoods, bool todayDonated, bool todayDonatedPetExp, bool todayGuildBoss)
+        public GuildMemberInfo(string nickName, string position, string lastLogin, string gamerIndate, int donateGoods, bool todayDonated, bool todayDonatedPetExp, bool todayGuildBoss, int donateDogFeedAmount)
         {
             this.nickName = nickName;
 
@@ -71,6 +72,10 @@ public class UiGuildMemberCell : MonoBehaviour
             this.todayDonatedPetExp = todayDonatedPetExp;
 
             this.todayGuildBoss = todayGuildBoss;
+
+            this.todayGuildBoss = todayGuildBoss;
+
+            this.donateDogFeedAmount = donateDogFeedAmount;
         }
     }
 
