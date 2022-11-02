@@ -875,6 +875,7 @@ public class UserInfoTable
         //길드보상 초기화
         ServerData.bossServerTable.TableDatas["boss12"].rewardedId.Value = string.Empty;
         ServerData.bossServerTable.TableDatas["boss20"].rewardedId.Value = string.Empty;
+        ServerData.bossServerTable.TableDatas["b73"].rewardedId.Value = string.Empty;
 
 
 
@@ -882,6 +883,7 @@ public class UserInfoTable
 
         bossParam.Add("boss12", ServerData.bossServerTable.TableDatas["boss12"].ConvertToString());
         bossParam.Add("boss20", ServerData.bossServerTable.TableDatas["boss20"].ConvertToString());
+        bossParam.Add("b73", ServerData.bossServerTable.TableDatas["b73"].ConvertToString());
 
         if (weekChanged)
         {
