@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using TMPro;
+using System;
+using UnityEngine.Events;
 
 public class UiPartyRaidRewardBoard : MonoBehaviour
 {
