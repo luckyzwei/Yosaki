@@ -134,7 +134,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
             ret = tableData.Rewardcut.Length;
         }
 
-        return ret;
+        return ret + 30;
     }
 
     private void RecordGuildRaidScore()
