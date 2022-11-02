@@ -44,7 +44,7 @@ public class UiGuildMemberCell : MonoBehaviour
         public string gamerIndate { get; private set; }
 
         public int donateGoods { get; private set; }
-        public int donateDogFeedAmount { get; private set; }
+        public int donateDogFeedAmount { get; set; }
 
         public bool todayDonated { get; private set; } = false;
         public bool todayDonatedPetExp { get; private set; }

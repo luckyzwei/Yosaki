@@ -151,6 +151,11 @@ public class UiGuildPetBoard : MonoBehaviour
                               memberCell.UpdateDonatedObject_PetExp(true);
                           }
 
+                          if (UiGuildMemberList.Instance.myMemberInfo != null)
+                          {
+                              UiGuildMemberList.Instance.myMemberInfo.donateDogFeedAmount += 10;
+                          }
+
                       }
                       else
                       {
