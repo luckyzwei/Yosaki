@@ -370,7 +370,7 @@ public class CostumeServerTable
         {
             if(PlayerStats.IsChunFlowerCostumeEnhance())
             {
-                return abilValues[(int)type] * (1 + TableManager.Instance.chunMarkAbil.dataArray[5].Abilbasevalue);
+                return abilValues[(int)type] * (1 + TableManager.Instance.chunMarkAbil.dataArray[5].Abiladdvalue);
             }
             else
             {

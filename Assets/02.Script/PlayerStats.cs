@@ -2005,7 +2005,7 @@ public static class PlayerStats
         float addValue2 = 0;
         if (PlayerStats.IsChunFlowerGumgiEnhance())
         {
-            addValue2 = TableManager.Instance.chunMarkAbil.dataArray[6].Abilbasevalue;
+            addValue2 = TableManager.Instance.chunMarkAbil.dataArray[6].Abiladdvalue;
         }
 
         return kt * gumgiSoulAbilValue + (addValue * 0.01f) + addValue2;
