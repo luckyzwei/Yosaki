@@ -330,6 +330,16 @@ public class UiBuffPopupView : MonoBehaviour
             }
 
         }
+        //혹한기 패스 유료버프
+        if (buffTableData.Stringid.Equals("cold1"))
+        {
+            if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.coldseasonPassKey].buyCount.Value == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("월간 패스권이 필요 합니다.");
+                return;
+            }
+
+        }
         ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value++;
         ServerData.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.Value += buffTableData.Buffseconds;
 
