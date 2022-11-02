@@ -118,7 +118,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
 
         int ret = -1;
 
-        var tableData = TableManager.Instance.TwelveBossTable.dataArray[73];
+        var tableData = TableManager.Instance.TwelveBossTable.dataArray[74];
 
         for (int i = 0; i < tableData.Rewardcut.Length; i++)
         {
