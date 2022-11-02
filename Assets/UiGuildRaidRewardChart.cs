@@ -18,7 +18,7 @@ public class UiGuildRaidRewardChart : MonoBehaviour
 
     private void Iniaitlize()
     {
-        var tableData = TableManager.Instance.TwelveBossTable.dataArray[73];
+        var tableData = TableManager.Instance.TwelveBossTable.dataArray[74];
 
         for (int i = 0; i < tableData.Cutstring.Length; i++)
         {
