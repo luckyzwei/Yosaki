@@ -281,16 +281,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         roomList.Clear();
 
         CheckGuildRaidEnter();
-
-        CheckPlayerLevel();
-    }
-
-    private void CheckPlayerLevel()
-    {
-        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < 100000)
-        {
-            PartyRaidManager.Instance.OnClickCloseButton();
-        }
     }
 
     private void CheckGuildRaidEnter()

@@ -124,7 +124,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
         {
             if (totalScore < tableData.Rewardcut[i])
             {
-                ret = i + 1;
+                ret = i;
                 break;
             }
         }
@@ -156,63 +156,55 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
         recordButton.gameObject.SetActive(false);
 
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{totalScore}점 점수를 추가합니까?",
-            () =>
+        if (totalScore == 0)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "추가할 점수가 없습니다.", null);
+            recordButton.gameObject.SetActive(true);
+            return;
+        }
+
+        var guildInfoBro = Backend.Social.Guild.GetMyGuildGoodsV3();
+
+        if (guildInfoBro.IsSuccess())
+        {
+            var returnValue = guildInfoBro.GetReturnValuetoJSON();
+
+            int currentScore = int.Parse(returnValue["goods"]["totalGoods7Amount"]["N"].ToString());
+
+            int interval = totalScore - currentScore;
+
+            if (interval > 0)
             {
-                if (totalScore == 0)
+                var bro2 = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_Party_Guild_Uuid, goodsType.goods7, interval);
+
+                if (bro2.IsSuccess())
                 {
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "추가할 점수가 없습니다.", null);
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "점수 추가 완료!", null);
                     recordButton.gameObject.SetActive(true);
                     return;
-                }
-
-                var guildInfoBro = Backend.Social.Guild.GetMyGuildGoodsV3();
-
-                if (guildInfoBro.IsSuccess())
-                {
-                    var returnValue = guildInfoBro.GetReturnValuetoJSON();
-
-                    int currentScore = int.Parse(returnValue["goods"]["totalGoods7Amount"]["N"].ToString());
-
-                    int interval = totalScore - currentScore;
-
-                    if (interval > 0)
-                    {
-                        var bro2 = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_Party_Guild_Uuid, goodsType.goods7, interval);
-
-                        if (bro2.IsSuccess())
-                        {
-                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "점수 추가 완료!", null);
-                            recordButton.gameObject.SetActive(true);
-                            return;
-                        }
-                        else
-                        {
-                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n점수 갱신 시간이 아닙니다.\n({bro2.GetStatusCode()})", null);
-                            recordButton.gameObject.SetActive(true);
-                            return;
-                        }
-                    }
-                    //낮은점수
-                    else
-                    {
-                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"최고점수를 갱신하지 못했습니다\n최고점수 {currentScore}점", null);
-                        recordButton.gameObject.SetActive(true);
-                        return;
-                    }
-
                 }
                 else
                 {
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "오류가 발생했습니다. 잠시후 다시 시도해 주세요.", null);
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 추가에 실패했습니다\n점수 갱신 시간이 아닙니다.\n({bro2.GetStatusCode()})", null);
                     recordButton.gameObject.SetActive(true);
                     return;
                 }
-
-            }, () =>
+            }
+            //낮은점수
+            else
             {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"최고점수를 갱신하지 못했습니다\n최고점수 {currentScore}점", null);
+                recordButton.gameObject.SetActive(true);
+                return;
+            }
 
-            });
+        }
+        else
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "오류가 발생했습니다. 잠시후 다시 시도해 주세요.", null);
+            recordButton.gameObject.SetActive(true);
+            return;
+        }
     }
 
     public void LeaveRoom()

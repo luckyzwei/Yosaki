@@ -240,6 +240,8 @@ public static class GameBalance
     public static ObscuredFloat forestValue = 1f;
     public static ObscuredInt recommendCountPerWeek = 3;
 
+    public static ObscuredInt sanGoonDogFeedCount = 3;
+
     public static int GetSonIdx()
     {
         int level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;
