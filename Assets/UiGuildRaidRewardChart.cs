@@ -23,7 +23,7 @@ public class UiGuildRaidRewardChart : MonoBehaviour
         for (int i = 0; i < tableData.Cutstring.Length; i++)
         {
             var uiText = Instantiate<UiText>(uiTextPrefab, parent);
-            uiText.Initialize($"{tableData.Cutstring[i]}({i + 1}점)");
+            uiText.Initialize($"{tableData.Cutstring[i]}({i + 31}점)");
         }
     }
 
