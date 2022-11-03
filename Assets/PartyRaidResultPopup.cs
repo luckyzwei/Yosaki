@@ -29,7 +29,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
         if (PartyRaidManager.Instance.NetworkManager.IsGuildBoss() == false)
         {
             recordButton.SetActive(true);
-            leaveOnlyButton.SetActive(true);
+            leaveOnlyButton.SetActive(false);
         }
         else
         {
