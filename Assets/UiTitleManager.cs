@@ -664,6 +664,12 @@ public enum TitleMissionId
     Level2290000,//★
     Level2300000,//★
 
+    Stage13100,//★
+    Stage13200,//★
+
+    ChunWeapon2,//★
+    ChunWeapon3,//★
+
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -3085,6 +3091,17 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             }
 
 
+            if (e >= 13100 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage13100);
+            }
+
+            if (e >= 13200 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage13200);
+            }
+
+
         }).AddTo(this);
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(e =>
@@ -3281,7 +3298,24 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
                 ClearTitleMission(TitleMissionId.ChunWeapon1);
             }
         }).AddTo(this);
-   
+
+
+        ServerData.weaponTable.TableDatas["weapon50"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.ChunWeapon2);
+            }
+        }).AddTo(this);
+
+        ServerData.weaponTable.TableDatas["weapon51"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.ChunWeapon3);
+            }
+        }).AddTo(this);
+
         //
         //노리개
 
