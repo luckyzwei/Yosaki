@@ -142,9 +142,9 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
         bool isRankUpdateTime = ServerData.userInfoTable.IsRankUpdateTime();
 
 #if UNITY_EDITOR
-        isRankUpdateTime = false;
+        isRankUpdateTime = true;
 #endif
-        if (isRankUpdateTime == true)
+        if (isRankUpdateTime == false)
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "오전4시 ~ 5시는에는 랭킹을 등록하실 수 없습니다.", null);
             return;
