@@ -37,7 +37,7 @@ public class UserInfoTable
     public const string dailyTicketBuyCount = "dailyTicketBuyCount";
     public const string receivedTicketReward = "receivedTicketReward";
 
-    public const string bonusDungeonEnterCount = "bonusDungeonEnterCount5";
+    public const string bonusDungeonEnterCount = "bonudun6";
 
     public const string dokebiKillCount0 = "dokebiKillCount4";
     public const string dokebiKillCount1 = "dokebiKillCount5";

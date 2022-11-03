@@ -245,8 +245,10 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
         {
             enterButton.interactable = false;
 
-            int rewardNumJade = killCount * GameBalance.bonusDungeonGemPerEnemy * clearCount;
-            int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy * clearCount;
+            int stageValue = (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor((float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value / GameBalance.bandiPlusStageDevideValue));
+
+            int rewardNumJade = killCount * GameBalance.bonusDungeonGemPerEnemy * clearCount * stageValue;
+            int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy * clearCount * stageValue;
             ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value += clearCount;
             ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardNumJade;
             ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += rewardNumMarble;
