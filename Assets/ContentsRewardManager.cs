@@ -14,12 +14,12 @@ public class ContentsRewardManager : SingletonMono<ContentsRewardManager>
 
     public int GetDefenseReward_BlueStone(int enemyNum)
     {
-        return enemyNum * GameBalance.bonusDungeonGemPerEnemy * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) / GameBalance.bandiPlusStageDevideValue));
+        return enemyNum * GameBalance.bonusDungeonGemPerEnemy * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)+2) / GameBalance.bandiPlusStageDevideValue);
     }
 
     public int GetDefenseReward_Marble(int enemyNum)
     {
-        return enemyNum * GameBalance.bonusDungeonMarblePerEnemy * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) / GameBalance.bandiPlusStageDevideValue));
+        return enemyNum * GameBalance.bonusDungeonMarblePerEnemy * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)+2) / GameBalance.bandiPlusStageDevideValue);
     }
     private IEnumerator RandomizeRoutine()
     {

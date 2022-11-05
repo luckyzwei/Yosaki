@@ -241,44 +241,44 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
 
         int clearCount = GameBalance.bonusDungeonEnterCount - (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 <color=yellow>{killCount}</color>로 <color=yellow>{clearCount}회</color> 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor((float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value / GameBalance.bandiPlusStageDevideValue)) * clearCount}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy * clearCount * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor((float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value / GameBalance.bandiPlusStageDevideValue))}개", () =>
-        {
-            enterButton.interactable = false;
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 <color=yellow>{killCount}</color>로 <color=yellow>{clearCount}회</color> 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy * (GameBalance.bandiPlusStageJadeValue * Mathf.Max(1000f, (int)Mathf.Floor((float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value+2)) / GameBalance.bandiPlusStageDevideValue) * clearCount}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy * clearCount * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value+2)) / GameBalance.bandiPlusStageDevideValue)}개", () =>
+          {
+              enterButton.interactable = false;
 
-            int stageValue = (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor((float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value / GameBalance.bandiPlusStageDevideValue));
+              int stageValue = (GameBalance.bandiPlusStageMarbleValue * Mathf.Max(1000,(int)Mathf.Floor((float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)+2) / GameBalance.bandiPlusStageDevideValue);
 
-            int rewardNumJade = killCount * GameBalance.bonusDungeonGemPerEnemy * clearCount * stageValue;
-            int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy * clearCount * stageValue;
-            ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value += clearCount;
-            ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardNumJade;
-            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += rewardNumMarble;
+              int rewardNumJade = killCount * GameBalance.bonusDungeonGemPerEnemy * clearCount * stageValue;
+              int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy * clearCount * stageValue;
+              ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value += clearCount;
+              ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardNumJade;
+              ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += rewardNumMarble;
 
             //데이터 싱크
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
-            Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
-            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
-            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+              Param goodsParam = new Param();
+              goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+              goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+              transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-            Param userInfoParam = new Param();
-            userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
-            transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+              Param userInfoParam = new Param();
+              userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
+              transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-            ServerData.SendTransaction(transactionList,
-                successCallBack: () =>
-                {
-                    DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
-                },
-                completeCallBack: () =>
-                {
-                    enterButton.interactable = true;
-                });
+              ServerData.SendTransaction(transactionList,
+                  successCallBack: () =>
+                  {
+                      DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
+                  },
+                  completeCallBack: () =>
+                  {
+                      enterButton.interactable = true;
+                  });
 
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{clearCount}회 소탕 완료!\n{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!", null);
-            SoundManager.Instance.PlaySound("GoldUse");
+              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{clearCount}회 소탕 완료!\n{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!", null);
+              SoundManager.Instance.PlaySound("GoldUse");
 
 
-        }, null);
+          }, null);
     }
 }
