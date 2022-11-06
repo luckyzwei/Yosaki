@@ -180,7 +180,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
 
             if (interval > 0)
             {
-                var bro2 = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_Party_Guild_Uuid, goodsType.goods7, interval);
+                var bro2 = Backend.URank.Guild.ContributeGuildGoods(RankManager.Rank_GangChul_Guild_Boss_Uuid, goodsType.goods7, interval);
 
                 if (bro2.IsSuccess())
                 {
