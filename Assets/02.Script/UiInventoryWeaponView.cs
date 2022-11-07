@@ -503,7 +503,7 @@ public class UiInventoryWeaponView : MonoBehaviour
                 if (weaponData.Id == 36)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
-                    weaponLockDescription.SetText($"요괴지옥\n지옥불꽃에서 획득!");
+                    weaponLockDescription.SetText($"지옥 보스전\n일직차사에서 획득!");
                 }
                 if (weaponData.Id == 43)
                 {
