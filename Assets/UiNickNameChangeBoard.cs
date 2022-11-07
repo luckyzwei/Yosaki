@@ -41,7 +41,11 @@ public class UiNickNameChangeBoard : MonoBehaviour
             PopupManager.Instance.ShowAlarmMessage("현재 닉네임 입니다.");
             return;
         }
-
+        if(ServerData.userInfoTable.GetTableData(UserInfoTable.nickNameChange).Value!=0)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"닉네임은 한 달에 한번만 변경 가능합니다.");
+            return;
+        }
         if (ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value < GameBalance.nickNameChangeFee)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
@@ -81,7 +85,8 @@ public class UiNickNameChangeBoard : MonoBehaviour
             ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value -= GameBalance.nickNameChangeFee;
             ServerData.goodsTable.UpData(GoodsTable.Jade, false);
 
-
+            ServerData.userInfoTable.GetTableData(UserInfoTable.nickNameChange).Value++;
+            ServerData.userInfoTable.UpData(UserInfoTable.nickNameChange, false);
         }
         else
         {

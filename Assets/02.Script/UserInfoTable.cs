@@ -180,6 +180,10 @@ public class UserInfoTable
     public const string exchangeCount_2_Mileage = "mbu";
     public const string exchangeCount_3_Mileage = "mcu";
 
+    public const string nickNameChange = "nickNameChange";
+
+
+    
     public double currentServerDate;
     public double attendanceUpdatedTime;
     public DateTime currentServerTime { get; private set; }
@@ -328,6 +332,8 @@ public class UserInfoTable
         {exchangeCount_1_Mileage,0},
         {exchangeCount_2_Mileage,0},
         {exchangeCount_3_Mileage,0},
+
+        {nickNameChange,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -592,6 +598,10 @@ public class UserInfoTable
                 if (savedDate.Day != currentServerTime.Day)
                 {
                     Debug.LogError("@@@Day Changed!");
+                    if(savedDate.Month!=currentServerTime.Month)
+                    {
+                        Debug.LogError("@@@Month Changed!");
+                    }
                     //날짜 바뀜
                     DateChanged(currentServerTime.Day, savedWeek != currentWeek, savedDate.Month != currentServerTime.Month);
                     attendanceUpdatedTime = currentServerTime.Day;
@@ -683,7 +693,11 @@ public class UserInfoTable
         //
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (double)currentServerDate;
-
+        //월간 초기화
+        if (monthChanged)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.nickNameChange).Value = 0;
+        }
         //두번타는거 방지
         if (attendanceUpdatedTime != day)
         {
@@ -785,7 +799,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.ma11_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.ma11_Buff).Value);
         userInfoParam.Add(UserInfoTable.cold0_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.cold0_Buff).Value);
         userInfoParam.Add(UserInfoTable.cold1_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.cold1_Buff).Value);
-
+        
         userInfoParam.Add(UserInfoTable.yomul0_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul1_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul2_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul2_buff).Value);
@@ -794,6 +808,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.yomul5_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul5_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul6_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul6_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul7_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul7_buff).Value);
+        userInfoParam.Add(UserInfoTable.nickNameChange, ServerData.userInfoTable.GetTableData(UserInfoTable.nickNameChange).Value);
 
         //요괴소굴
         Param yoguiSogulParam = new Param();
@@ -890,6 +905,8 @@ public class UserInfoTable
             ServerData.bossServerTable.TableDatas["b53"].rewardedId.Value = string.Empty;
             bossParam.Add("b53", ServerData.bossServerTable.TableDatas["b53"].ConvertToString());
         }
+        
+        
 
         transactionList.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
