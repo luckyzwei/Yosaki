@@ -99,12 +99,12 @@ public class UiPetView : MonoBehaviour
         skeletonGraphic.SetMaterialDirty();
     }
 
-
     private bool initialized = false;
 
     public void Initialize(PetTableData petData)
     {
         this.petData = petData;
+
         this.petServerData = ServerData.petTable.TableDatas[petData.Stringid];
 
         SetPetSpine(petData.Id);

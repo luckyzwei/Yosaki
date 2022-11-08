@@ -658,6 +658,7 @@ public class TableManager : SingletonMono<TableManager>
     public ChunMarkAbil chunMarkAbil;
     public FallCollection fallCollection;
     public MileageReward mileageReward;
+    public PetHome petHome;
 
 
 
