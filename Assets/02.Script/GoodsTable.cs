@@ -142,6 +142,8 @@ public class GoodsTable
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
     public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
 
+    public static string DokebiFire = "DokebiFire"; //도깨비 마을 재화
+
     public static string Mileage = "Mileage"; //마일리지
 
 
@@ -267,6 +269,9 @@ public class GoodsTable
         {Event_Fall,0f},
         {Event_Fall_Gold,0f},
         {FoxMaskPartial,0f},
+
+        {DokebiFire,0f},
+
         {Mileage,0f}
     };
 

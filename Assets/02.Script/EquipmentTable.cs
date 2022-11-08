@@ -25,6 +25,9 @@ public class EquipmentTable
     public static string FoxMask = "fms";
     public static string FoxMaskView = "fmv";
 
+    public static string DokebiHorn = "DokebiHorn";
+    public static string DokebiHornView = "DokebiHornView";
+
     private Dictionary<string, int> tableSchema = new Dictionary<string, int>()
     {
         {Weapon,0},
@@ -41,6 +44,8 @@ public class EquipmentTable
         {MagicBook_View,0},
         {FoxMask,-1},
         {FoxMaskView,-1},
+        {DokebiHorn,-1},
+        {DokebiHornView,-1},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<int>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<int>>();

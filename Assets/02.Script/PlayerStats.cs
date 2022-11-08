@@ -42,6 +42,8 @@ public enum StatusType
     SuperCritical4DamPer,
     MonthBuff,
     FlowerHasValueUpgrade,
+    SuperCritical5DamPer,
+    DokebiFireHasValueUpgrade,
 }
 
 
@@ -1105,6 +1107,21 @@ public static class PlayerStats
 
         return ret;
     }
+    public static float GetSuperCritical5DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetDokebiMarkValue();
+
+        ret += GetDokebiAbilHasEffect(StatusType.SuperCritical5DamPer);
+
+        ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical5DamPer);
+
+        ret += GetWeaponEquipPercentValue(StatusType.SuperCritical5DamPer);
+
+
+        return ret;
+    }
 
     public static float GetHellMarkValue()
     {
@@ -1185,6 +1202,12 @@ public static class PlayerStats
             ret += TableManager.Instance.chunMarkAbil.dataArray[6].Abilbasevalue;
         }
 
+        return ret;
+    }
+    public static float GetDokebiMarkValue()
+    {
+        float ret = 0f;
+        
         return ret;
     }
 
@@ -1528,6 +1551,40 @@ public static class PlayerStats
             }
 
             ret += GetSkillHasValue(StatusType.FlowerHasValueUpgrade) * currentLevel;
+
+        }
+        return ret;
+    }
+    public static float GetDokebiAbilHasEffect(StatusType statusType, int addLevel = 0)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.dokebiAbilBase.dataArray;
+
+        int currentLevel = (int)ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value + addLevel;
+
+        for (int i = 0; i < tableDatas.Length; i++)
+        {
+            if (currentLevel < tableDatas[i].Unlocklevel) continue;
+            if (statusType != (StatusType)tableDatas[i].Abiltype) continue;
+
+            int calculatedLevel = currentLevel - tableDatas[i].Unlocklevel;
+
+            ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
+        }
+
+        if (statusType == StatusType.SuperCritical5DamPer)
+        {
+            if (IsChunFlowerDamageEnhance())
+            {
+                ret += 0.000015f * currentLevel;
+
+                //0.01       1퍼
+                //0.0001 0.01퍼
+                //0.000015 0.0015퍼
+            }
+
+            ret += GetSkillHasValue(StatusType.DokebiFireHasValueUpgrade) * currentLevel;
 
         }
         return ret;

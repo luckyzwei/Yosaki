@@ -655,6 +655,7 @@ public class TableManager : SingletonMono<TableManager>
     public ColdSeasonAtten coldSeasonAtten;
 
     public ChunAbilBase chunAbilBase;
+    public DokebiAbilBase dokebiAbilBase;
     public ChunMarkAbil chunMarkAbil;
     public FallCollection fallCollection;
     public MileageReward mileageReward;

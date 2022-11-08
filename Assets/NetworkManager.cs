@@ -33,6 +33,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         public int gumgi;
         public string guildName;
         public int mask;
+        public int horn;
         public double score;
         public bool endGame = false;
         public Vector3 currentPos;
@@ -204,6 +205,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         int pet = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int gumgi = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int mask = ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int horn = ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
         string guildName = GuildManager.Instance.myGuildName;
         int level = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
@@ -558,12 +560,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 var playerInfo = roomPlayerDatas[keys[i]];
 
-                playerView_Room[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask);
+                playerView_Room[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask,playerInfo.horn);
                 playerView_Room[i].SetLevelText(playerInfo.level);
 
                 playerView_Result[i].gameObject.SetActive(true);
 
-                playerView_Result[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask);
+                playerView_Result[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask, playerInfo.horn);
             }
             else
             {

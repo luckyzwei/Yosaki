@@ -85,7 +85,7 @@ public class UiTopRankerCell : MonoBehaviour
         }
     }
 
-    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int fightPoint, string guildName, int maskIdx)
+    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx,int hornIdx)
     {
         this.recNickName = nickName;
         this.nickName.SetText(nickName);
@@ -116,9 +116,9 @@ public class UiTopRankerCell : MonoBehaviour
         {
             weapon.sprite = CommonResourceContainer.GetWeaponSprite(weaponId);
 
-            if (fightPoint < CommonUiContainer.Instance.weaponEnhnaceMats.Count)
+            if (gumgiIdx < CommonUiContainer.Instance.weaponEnhnaceMats.Count)
             {
-                weapon.material = CommonUiContainer.Instance.weaponEnhnaceMats[fightPoint];
+                weapon.material = CommonUiContainer.Instance.weaponEnhnaceMats[gumgiIdx];
             }
             else
             {

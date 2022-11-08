@@ -363,6 +363,11 @@ public static class ServerData
             case Item_Type.FoxMaskPartial:
                 ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += rewardValue;
                 break;   
+            case Item_Type.DokebiFire:
+                ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += rewardValue;
+                break;   
+
+
             case Item_Type.Mileage:
                 ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += rewardValue;
                 break;  
@@ -615,6 +620,10 @@ public static class ServerData
             
             case Item_Type.Cw:
                 passParam.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
+            
+            case Item_Type.DokebiFire:
+                passParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
             
             case Item_Type.Event_Fall:
@@ -937,9 +946,14 @@ public static class ServerData
                 param.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
 
-                   case Item_Type.Cw:
+            case Item_Type.Cw:
                 ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += amount;
                 param.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
+            
+            case Item_Type.DokebiFire:
+                ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += amount;
+                param.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
             
             case Item_Type.Fw:
@@ -1907,6 +1921,9 @@ public static class ServerData
                 
                 case Item_Type.Cw:
                     ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += amount;
+                    break;
+                case Item_Type.DokebiFire:
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += amount;
                     break;
 
                 case Item_Type.Event_Item_1:

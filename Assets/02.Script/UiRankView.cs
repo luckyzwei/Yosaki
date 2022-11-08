@@ -29,7 +29,7 @@ public class UiRankView : MonoBehaviour
 
     public static int rank1Count = 0;
 
-    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int fightpoint, string guildName, int maskIdx, RankType rankType = RankType.Normal)
+    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx, int hornIdx,RankType rankType = RankType.Normal)
     {
         this.text1.SetText(text1);
         this.text2.SetText(text2);
@@ -126,7 +126,7 @@ public class UiRankView : MonoBehaviour
             if (rankerCell != null)
             {
                 rankerCell.gameObject.SetActive(true);
-                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName, maskIdx);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx, hornIdx);
             }
         }
         else if (rankType == RankType.GangChul)
@@ -210,7 +210,7 @@ public class UiRankView : MonoBehaviour
             if (rankerCell != null)
             {
                 rankerCell.gameObject.SetActive(true);
-                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName, maskIdx);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx, hornIdx);
             }
         }
         else if (rankType == RankType.ChunMa)
@@ -298,7 +298,7 @@ public class UiRankView : MonoBehaviour
             if (rankerCell != null)
             {
                 rankerCell.gameObject.SetActive(true);
-                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, fightpoint, guildName, maskIdx);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx,hornIdx);
             }
         }
 

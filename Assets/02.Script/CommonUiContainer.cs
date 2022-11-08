@@ -125,6 +125,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Event_Fall;
     public Sprite Event_Fall_Gold;
     public Sprite FoxMaskPartial;
+    public Sprite DokebiFire;
     public Sprite Mileage;
 
     public List<SkeletonDataAsset> enemySpineAssets;
@@ -622,6 +623,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break; 
             case Item_Type.FoxMaskPartial:
                 return FoxMaskPartial;
+                break;
+            case Item_Type.DokebiFire:
+                return DokebiFire;
                 break;
             case Item_Type.Mileage:
                 return Mileage;

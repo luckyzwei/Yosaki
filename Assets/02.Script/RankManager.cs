@@ -31,7 +31,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public class RankInfo
     {
-        public RankInfo(string NickName, string GuildName, int Rank, double Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int fightPointIdx, int maskIdx)
+        public RankInfo(string NickName, string GuildName, int Rank, double Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int gumgiIdx, int maskIdx,int hornIdx)
         {
 #if UNITY_ANDROID
             this.NickName = NickName;
@@ -46,9 +46,10 @@ public class RankManager : SingletonMono<RankManager>
             this.petIddx = petIddx;
             this.weaponIdx = weaponIdx;
             this.magicbookIdx = magicbookIdx;
-            this.fightPointIdx = fightPointIdx;
+            this.gumgiIdx = gumgiIdx;
             this.GuildName = GuildName;
             this.maskIdx = maskIdx;
+            this.hornIdx = hornIdx;
         }
 
         public string NickName;
@@ -59,8 +60,10 @@ public class RankManager : SingletonMono<RankManager>
         public int petIddx;
         public int weaponIdx;
         public int magicbookIdx;
-        public int fightPointIdx;
+        public int gumgiIdx;
         public int maskIdx;
+        public int hornIdx;
+
     }
 
 #if UNITY_ANDROID
@@ -170,8 +173,9 @@ public class RankManager : SingletonMono<RankManager>
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
-                int fightPoint = int.Parse(splitData[4]);
+                int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
+                int hornIdx = int.Parse(splitData[8]);
 
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
@@ -179,7 +183,7 @@ public class RankManager : SingletonMono<RankManager>
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, level, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, level, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
             }
         }
 
@@ -204,8 +208,9 @@ public class RankManager : SingletonMono<RankManager>
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
         int weaponEnhance = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{weaponEnhance}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{weaponEnhance}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Level_Uuid, Rank_Level_TableName, RankTable_Level.Indate, param, bro =>
         {
@@ -252,15 +257,16 @@ public class RankManager : SingletonMono<RankManager>
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
-                int fightPoint = int.Parse(splitData[4]);
+                int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
+                int hornIdx = int.Parse(splitData[8]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
             }
         }
 
@@ -283,10 +289,11 @@ public class RankManager : SingletonMono<RankManager>
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
-        int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
+        int gumgiIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Stage_Uuid, Rank_Stage, RankTable_Stage.Indate, param, bro =>
         {
@@ -335,15 +342,16 @@ public class RankManager : SingletonMono<RankManager>
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
-                int fightPoint = int.Parse(splitData[4]);
+                int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
+                int hornIdx = int.Parse(splitData[8]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
             }
         }
 
@@ -379,10 +387,11 @@ public class RankManager : SingletonMono<RankManager>
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
-        int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
+        int gumgiIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Boss_Uuid, Rank_Boss, RankTable_Boss.Indate, param, bro =>
         {
@@ -430,8 +439,9 @@ public class RankManager : SingletonMono<RankManager>
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
-                int fightPoint = int.Parse(splitData[4]);
+                int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
+                int hornIdx = int.Parse(splitData[8]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
@@ -439,7 +449,7 @@ public class RankManager : SingletonMono<RankManager>
                 }
 
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
             }
         }
 
@@ -470,10 +480,11 @@ public class RankManager : SingletonMono<RankManager>
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
-        int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
+        int gumgiIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Real_Boss_Uuid, Rank_Real_Boss, RankTable_Real_Boss.Indate, param, bro =>
         {
@@ -520,8 +531,9 @@ public class RankManager : SingletonMono<RankManager>
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
-                int fightPoint = int.Parse(splitData[4]);
+                int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
+                int hornIdx = int.Parse(splitData[8]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
@@ -529,7 +541,7 @@ public class RankManager : SingletonMono<RankManager>
                 }
 
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
             }
         }
 
@@ -560,10 +572,11 @@ public class RankManager : SingletonMono<RankManager>
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
-        int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
+        int gumgiIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_GangChul_Boss_Uuid, Rank_GangChul, RankTable_Real_Boss_GangChul.Indate, param, bro =>
         {
@@ -610,8 +623,9 @@ public class RankManager : SingletonMono<RankManager>
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
-                int fightPoint = int.Parse(splitData[4]);
+                int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
+                int hornIdx = int.Parse(splitData[8]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
@@ -619,7 +633,7 @@ public class RankManager : SingletonMono<RankManager>
                 }
 
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx);
             }
         }
 
@@ -650,10 +664,11 @@ public class RankManager : SingletonMono<RankManager>
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
-        int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
+        int gumgiIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_ChunmaTop_Uuid, Rank_ChunmaTop, RankTable_ChunmaTop.Indate, param, bro =>
         {
@@ -699,15 +714,16 @@ public class RankManager : SingletonMono<RankManager>
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
-                int fightPoint = int.Parse(splitData[4]);
+                int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
+                int hornIdx = int.Parse(splitData[8]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
             }
         }
 
@@ -736,10 +752,11 @@ public class RankManager : SingletonMono<RankManager>
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
-        int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
+        int gumgiIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Relic_Uuid, Rank_Relic, RankTable_YoguiSogul.Indate, param, bro =>
         {
@@ -792,15 +809,16 @@ public class RankManager : SingletonMono<RankManager>
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
                 int magicBookId = int.Parse(splitData[3]);
-                int fightPoint = int.Parse(splitData[4]);
+                int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
+                int hornIdx = int.Parse(splitData[8]);
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, fightPoint, maskIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
             }
 
             if (myRankInfo != null)
@@ -841,10 +859,11 @@ public class RankManager : SingletonMono<RankManager>
         int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
-        int fightPoint = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
+        int gumgiIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
         int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{fightPoint}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_MiniGame_Uuid, Rank_MiniGame, RankTable_MiniGame.Indate, param, bro =>
         {

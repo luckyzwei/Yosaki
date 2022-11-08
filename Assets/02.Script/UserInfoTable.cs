@@ -107,6 +107,7 @@ public class UserInfoTable
     public const string gumGiClear = "gumGiClear";
     public const string gumGiSoulClear = "gsc";
     public const string flowerClear = "fc";
+    public const string DokebiFireClear = "DokebiFireClear";
 
 
     //6월월간
@@ -152,6 +153,7 @@ public class UserInfoTable
     public const string getSmith = "getSmith";
     public const string getGumGi = "getGumGi";
     public const string getFlower = "getc";
+    public const string getDokebiFire = "getDokebiFire";
     public const string sendPetExp = "sendPetExp";
 
     public const string exchangeCount = "ex_0";
@@ -259,6 +261,7 @@ public class UserInfoTable
         {gumGiSoulClear,0f},
         {gumGiClear,0f},
         {flowerClear,0f},
+        {DokebiFireClear,0f},
 
 
         {yomul0_buff,0f},
@@ -304,6 +307,7 @@ public class UserInfoTable
         {getSmith,0},
         {getGumGi,0},
         {getFlower,0},
+        {getDokebiFire,0},
         {sendPetExp,0},
         {exchangeCount,0},
         {exchangeCount_1,0},
@@ -665,6 +669,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.oneAttenEvent).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getFlower).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value = 0;
 
         //버프
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
@@ -781,6 +786,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.sendGangChul, ServerData.userInfoTable.GetTableData(UserInfoTable.sendGangChul).Value);
         userInfoParam.Add(UserInfoTable.getSmith, ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value);
         userInfoParam.Add(UserInfoTable.getFlower, ServerData.userInfoTable.GetTableData(UserInfoTable.getFlower).Value);
+        userInfoParam.Add(UserInfoTable.getDokebiFire, ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value);
         userInfoParam.Add(UserInfoTable.getGumGi, ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value);
         userInfoParam.Add(UserInfoTable.sendPetExp, ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value);
         userInfoParam.Add(UserInfoTable.oneAttenEvent, ServerData.userInfoTable.GetTableData(UserInfoTable.oneAttenEvent).Value);

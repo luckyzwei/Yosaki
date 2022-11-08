@@ -408,6 +408,7 @@ public enum Item_Type
     Chun4 = 8704,
 
     Mileage = 9000,
+    DokebiFire = 9001,
 }
 
 public class DropItem : PoolItem

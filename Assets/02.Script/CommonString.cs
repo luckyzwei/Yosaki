@@ -325,6 +325,7 @@ public static class CommonString
             case Item_Type.Event_Fall: return "곶감";
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
             case Item_Type.FoxMaskPartial: return "나무조각";
+            case Item_Type.DokebiFire: return "도깨비불";
             case Item_Type.Mileage: return "마일리지";
         }
         return "미등록";
@@ -447,6 +448,12 @@ public static class CommonString
                 break;
             case StatusType.FlowerHasValueUpgrade:
                 return "천계 꽃 레벨당 천상베기 증가";
+                break;
+            case StatusType.SuperCritical5DamPer:
+                return "도깨비참수 피해(%)";
+                break;
+            case StatusType.DokebiFireHasValueUpgrade:
+                return "도깨비 불 개수당 도깨비참수 증가";
                 break;
         }
 
