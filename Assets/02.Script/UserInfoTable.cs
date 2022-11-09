@@ -28,6 +28,7 @@ public class UserInfoTable
     public const string passSelectedIdx = "passSelectedIdx";
     public const string currentFloorIdx = "currentFloorIdx";
     public const string currentFloorIdx2 = "cf2";
+    public const string currentFloorIdx3 = "cf3";
 
     public const string receiveReviewReward = "receiveReviewReward";
 
@@ -206,6 +207,7 @@ public class UserInfoTable
         {passSelectedIdx,0f},
         {currentFloorIdx,0f},
         {currentFloorIdx2,0f},
+        {currentFloorIdx3,0f},
         {receiveReviewReward,0f},
         {dailyEnemyKillCount,0f},
         {dailyTicketBuyCount,0f},
