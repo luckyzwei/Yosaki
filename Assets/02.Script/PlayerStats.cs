@@ -1207,7 +1207,7 @@ public static class PlayerStats
     public static float GetDokebiMarkValue()
     {
         float ret = 0f;
-        
+
         return ret;
     }
 
@@ -2113,6 +2113,44 @@ public static class PlayerStats
         var chunFlowerNum = ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value;
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[6].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
+    }
+
+    public static int GetPetHomeHasCount()
+    {
+        int ret = 0;
+
+        var tableData = TableManager.Instance.PetTable.dataArray;
+
+        for (int i = 8; i < tableData.Length; i++)
+        {
+            if (ServerData.petTable.TableDatas[tableData[i].Stringid].hasItem.Value == 1)
+            {
+                ret++;
+            }
+        }
+
+        return ret;
+    }
+
+    public static float GetPetHomeAbilValue(StatusType type)
+    {
+        float ret = 0f;
+
+        int petHomeHasCount = GetPetHomeHasCount();
+
+        var tableData = TableManager.Instance.petHome.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (petHomeHasCount <= i) break;
+
+            if (tableData[i].Abiltype == (int)type)
+            {
+                ret += tableData[i].Abilvalue;
+            }
+        }
+
+        return ret;
     }
 
 }

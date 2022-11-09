@@ -68,7 +68,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         //description1 += $"{CommonString.GetStatusName(StatusType.MpRecover)} : {PlayerStats.GetMpRecover() * 100f}\n";
 
         //골드 추가 획득
-        description1 += $"{CommonString.GetStatusName(StatusType.GoldGainPer)} : {PlayerStats.GetGoldPlusValue() * 100f}\n";
+        description1 += $"{CommonString.GetStatusName(StatusType.GoldGainPer)} : {Utils.ConvertBigNum(PlayerStats.GetGoldPlusValue() * 100f) }\n";
 
         //경험치 추가 획득
         description2 += $"{CommonString.GetStatusName(StatusType.ExpGainPer)} : {PlayerStats.GetExpPlusValue() * 100f}\n";

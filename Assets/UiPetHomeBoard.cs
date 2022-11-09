@@ -14,6 +14,12 @@ public class UiPetHomeBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI abilDescription;
 
+    [SerializeField]
+    private TextMeshProUGUI rewardDescription;
+
+    [SerializeField]
+    private TextMeshProUGUI petHasCount;
+
     private void Start()
     {
         Initialize();
@@ -28,7 +34,7 @@ public class UiPetHomeBoard : MonoBehaviour
     {
         var tableData = TableManager.Instance.PetTable.dataArray;
 
-        for (int i = 0; i < tableData.Length; i++)
+        for (int i = 8; i < tableData.Length; i++)
         {
             var cell = Instantiate<UiPetHomeView>(petHomeViewPrefab, cellParent);
 
@@ -39,5 +45,9 @@ public class UiPetHomeBoard : MonoBehaviour
     private void UpdateDescription()
     {
         abilDescription.SetText("");
+
+        rewardDescription.SetText("");
+
+        petHasCount.SetText($"환수 보유 {PlayerStats.GetPetHomeHasCount()}");
     }
 }
