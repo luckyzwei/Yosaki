@@ -62,11 +62,11 @@ public class UiDokebiFireBoard : MonoBehaviour
 
             if (type == StatusType.AttackAddPer)
             {
-                abilDesc += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(PlayerStats.GetDokebiAbilHasEffect(type))}\n";
+                abilDesc += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(PlayerStats.GetDokebiFireAbilHasEffect(type))}\n";
             }
             else
             {
-                abilDesc += $"{CommonString.GetStatusName(type)} {PlayerStats.GetDokebiAbilHasEffect(type) * 100f}\n";
+                abilDesc += $"{CommonString.GetStatusName(type)} {PlayerStats.GetDokebiFireAbilHasEffect(type) * 100f}\n";
             }
         }
 

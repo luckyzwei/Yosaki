@@ -206,7 +206,7 @@ public class DokebiFireManager : SingletonMono<GumGiSoulManager>
     {
         EnemyTableData enemyData = new EnemyTableData();
 
-        enemyData.Hp = System.Math.Pow(1.1, enemyDeadCount.Value);
+        enemyData.Hp = System.Math.Pow(1.1, enemyDeadCount.Value) * 2;
 
         enemyData.Attackpower = 0;
 
@@ -222,7 +222,7 @@ public class DokebiFireManager : SingletonMono<GumGiSoulManager>
 
         for (int i = 0; i < spawnCount; i++)
         {
-            var enemyObject = BattleObjectManager.Instance.GetItem($"GumGiSoul/Normal") as Enemy;
+            var enemyObject = BattleObjectManager.Instance.GetItem($"GumGiSoul/DokebiFire") as Enemy;
 
             enemyObject.transform.position = new Vector3(Random.Range(spawnMin.position.x, spawnMax.position.x), Random.Range(spawnMin.position.y, spawnMax.position.y));
 
@@ -308,6 +308,6 @@ public class DokebiFireManager : SingletonMono<GumGiSoulManager>
             ServerData.userInfoTable.UpData(UserInfoTable.DokebiFireClear, updateValue, false);
         }
 
-        uiSogulResultPopup.Initialize(updateValue, false, deadFlag, defix: "개 획득!!");
+        uiSogulResultPopup.Initialize(updateValue, false, deadFlag, defix: "개 달성!!");
     }
 }

@@ -1126,7 +1126,7 @@ public static class PlayerStats
 
         ret += GetDokebiMarkValue();
 
-        ret += GetDokebiAbilHasEffect(StatusType.SuperCritical5DamPer);
+        ret += GetDokebiFireAbilHasEffect(StatusType.SuperCritical5DamPer);
 
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical5DamPer);
 
@@ -1568,7 +1568,7 @@ public static class PlayerStats
         }
         return ret;
     }
-    public static float GetDokebiAbilHasEffect(StatusType statusType, int addLevel = 0)
+    public static float GetDokebiFireAbilHasEffect(StatusType statusType, int addLevel = 0)
     {
         float ret = 0f;
 
