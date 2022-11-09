@@ -28,4 +28,12 @@ public class PetHomeData
   float rewardvalue;
   public float Rewardvalue { get {return rewardvalue; } set { this.rewardvalue = value;} }
   
+  [SerializeField]
+  string name;
+  public string Name { get {return name; } set { this.name = value;} }
+  
+  [SerializeField]
+  string description;
+  public string Description { get {return description; } set { this.description = value;} }
+  
 }

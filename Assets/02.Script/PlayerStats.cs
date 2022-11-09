@@ -697,6 +697,8 @@ public static class PlayerStats
         ret += GetTitleAbilValue(StatusType.GoldGainPer);
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
         ret += GetGuildPetEffect(StatusType.GoldGainPer);
+
+  
         return ret;
     }
     public static float GetExpPlusValue()
@@ -715,6 +717,23 @@ public static class PlayerStats
         ret += GetOneYearBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
+
+        ret += GetPetHomeAbilValue(StatusType.ExpGainPer);
+
+        return ret;
+    }
+
+    public static float GetExpPlusValueExclusiveBuff()
+    {
+        float ret = 0f;
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.ExpGain_memory);
+        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.ExpGainPer);
+        ret += GetMarbleValue(StatusType.ExpGainPer);
+        ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
+
+        ret += GetTitleAbilValue(StatusType.ExpGainPer);
+        ret += GetGuildPetEffect(StatusType.ExpGainPer);
+        ret += GetPetHomeAbilValue(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -802,19 +821,7 @@ public static class PlayerStats
     }
 
 
-    public static float GetExpPlusValueExclusiveBuff()
-    {
-        float ret = 0f;
-        ret += ServerData.statusTable.GetStatusValue(StatusTable.ExpGain_memory);
-        ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.ExpGainPer);
-        ret += GetMarbleValue(StatusType.ExpGainPer);
-        ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
-
-        ret += GetTitleAbilValue(StatusType.ExpGainPer);
-        ret += GetGuildPetEffect(StatusType.ExpGainPer);
-
-        return ret;
-    }
+ 
     public static float GetMagicStonePlusValue()
     {
         float ret = 0f;
@@ -1067,6 +1074,8 @@ public static class PlayerStats
 
         ret += ServerData.statusTable.GetStatusValue(StatusTable.FeelSlash_memory);
 
+        ret += GetPetHomeAbilValue(StatusType.SuperCritical2DamPer);
+
         return ret;
     }
 
@@ -1088,6 +1097,8 @@ public static class PlayerStats
 
         ret += GetHellRelicAbilValue();
 
+        ret += GetPetHomeAbilValue(StatusType.SuperCritical3DamPer);
+
         return ret;
     }
 
@@ -1104,6 +1115,8 @@ public static class PlayerStats
         ret += GetWeaponEquipPercentValue(StatusType.SuperCritical4DamPer);
 
         ret += GetDragonBallAbil1Value();
+
+        ret += GetPetHomeAbilValue(StatusType.SuperCritical4DamPer);
 
         return ret;
     }
