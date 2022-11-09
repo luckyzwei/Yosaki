@@ -1088,72 +1088,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &819283210
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 819283213}
-  - component: {fileID: 819283212}
-  - component: {fileID: 819283211}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &819283211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819283210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &819283212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819283210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &819283213
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819283210}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -740, y: -360, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2095839431}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &845306823
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,7 +1792,7 @@ MonoBehaviour:
   childPass: {fileID: 11400000, guid: 6456a58b5e1038749bef219efd64c281, type: 2}
   coldSeasonPass: {fileID: 11400000, guid: 17ad6cdeecfd7e94e84ae3d7e32cd07b, type: 2}
   FoxMask: {fileID: 11400000, guid: 0e521ed9e14d25f40bfe413430d4640f, type: 2}
-  DokebiHorn: {fileID: 11400000, guid: e6a7484d71bdb45488c06d9cba196013, type: 2}
+  DokebiHorn: {fileID: 0}
   summerCollection: {fileID: 11400000, guid: 138daa099c26ac34d9b9b7905018bb65, type: 2}
   susanoTable: {fileID: 11400000, guid: 9681ce9b8dab24e479bc55bc2d5da53e, type: 2}
   bokPass: {fileID: 11400000, guid: 690aca3da4a7daa448baff3e60fc4b44, type: 2}
@@ -1991,7 +1925,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d6ec835aa31131449bc34ecf6ac9fded, type: 3}
   - {fileID: 21300000, guid: d6ec835aa31131449bc34ecf6ac9fded, type: 3}
   - {fileID: 21300000, guid: b57ac018c278b1e40aa5081ca859d2a1, type: 3}
-  - {fileID: 21300000, guid: 66c0a6145a0e31e4ea213b4ce93f5a9c, type: 3}
   itemGradeColor:
   - {r: 0.42352945, g: 0.34117648, b: 0.24705884, a: 1}
   - {r: 0.36862746, g: 0.8000001, b: 0.23529413, a: 1}
@@ -2015,7 +1948,6 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0.5568628, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0.91372555, a: 1}
-  - {r: 0.47450984, g: 0, b: 1, a: 1}
   costumeThumbnail:
   - {fileID: 21300000, guid: e1fdee06b1ace764e99a14c848a213ad, type: 3}
   - {fileID: 21300000, guid: be316b91f67a3bc458b47904aec3c83a, type: 3}
@@ -2183,9 +2115,6 @@ MonoBehaviour:
   ChunNorigae4: {fileID: 21300000, guid: 759688be6c6ddf94ca4168965bc280a8, type: 3}
   ChunNorigae5: {fileID: 21300000, guid: 042d4528e53888c4281222ac248b33b0, type: 3}
   ChunNorigae6: {fileID: 21300000, guid: 51fded1c9be76cb4e91a4e9b00ec2724, type: 3}
-  DokebiNorigae0: {fileID: 21300000, guid: bf9e7f7d4c35b4c4494ee502b6fb7062, type: 3}
-  DokebiNorigae1: {fileID: 21300000, guid: 1d34ff1eac73116458b734a9d7fd553c, type: 3}
-  DokebiNorigae2: {fileID: 21300000, guid: 5ac56abc72310764c8c099489b3d06cc, type: 3}
   ChunSun0: {fileID: 21300000, guid: 4f63300c771529e49801fd1615d788fa, type: 3}
   ChunSun1: {fileID: 21300000, guid: e785d28ef5135714bbc245dafaa158e3, type: 3}
   ChunSun2: {fileID: 21300000, guid: 52ad30337e6bb1f4fb00a32d5bb21019, type: 3}
@@ -2265,9 +2194,6 @@ MonoBehaviour:
   ChunWeapon1: {fileID: 21300000, guid: 52ad30337e6bb1f4fb00a32d5bb21019, type: 3}
   ChunWeapon2: {fileID: 21300000, guid: d498a699c7e53b341986b0c35f02e27a, type: 3}
   ChunWeapon3: {fileID: 21300000, guid: 913588fea0742814e99035f229996d6f, type: 3}
-  DokebiWeapon0: {fileID: 21300000, guid: 9ccbd261bb8f9bc4e83987d3a08a7a9d, type: 3}
-  DokebiWeapon1: {fileID: 21300000, guid: 16182a759216ca14183d71dfe95bd9ab, type: 3}
-  DokebiWeapon2: {fileID: 21300000, guid: ae2711fb8f5a1e541b77d287f3caeec8, type: 3}
   NataSkill: {fileID: 21300000, guid: ffb2316e10d65634eb2778da8e86bfc8, type: 3}
   OrochiSkill: {fileID: 21300000, guid: bb0a7d588821a834289dc833bb262371, type: 3}
   GangrimSkill: {fileID: 21300000, guid: 14eb64f14abdfc54ebbbb7c6705f1e6f, type: 3}
@@ -3220,7 +3146,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 464004352}
-  - {fileID: 819283213}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
