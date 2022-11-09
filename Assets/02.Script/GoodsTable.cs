@@ -143,6 +143,7 @@ public class GoodsTable
     public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
 
     public static string DokebiFire = "DokebiFire"; //도깨비 마을 재화
+    public static string DokebiFireKey = "DokebiFireKey"; //도깨비 불 입장권
 
     public static string Mileage = "Mileage"; //마일리지
 
@@ -271,6 +272,7 @@ public class GoodsTable
         {FoxMaskPartial,0f},
 
         {DokebiFire,0f},
+        {DokebiFireKey,0f},
 
         {Mileage,0f}
     };

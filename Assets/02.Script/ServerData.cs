@@ -365,8 +365,11 @@ public static class ServerData
                 break;   
             case Item_Type.DokebiFire:
                 ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += rewardValue;
-                break;   
-
+                break;  
+            case Item_Type.DokebiFireKey:
+                ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += rewardValue;
+                break;  
+   
 
             case Item_Type.Mileage:
                 ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += rewardValue;
@@ -584,7 +587,7 @@ public static class ServerData
             case Item_Type.RelicTicket:
                 passParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
-
+                
             case Item_Type.Event_Item_0:
                 passParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
@@ -624,6 +627,10 @@ public static class ServerData
             
             case Item_Type.DokebiFire:
                 passParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
+             
+            case Item_Type.DokebiFireKey:
+                passParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
             
             case Item_Type.Event_Fall:
@@ -887,7 +894,7 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += amount;
                 param.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
-
+                
             case Item_Type.StageRelic:
                 ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;
                 param.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
@@ -954,6 +961,11 @@ public static class ServerData
             case Item_Type.DokebiFire:
                 ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += amount;
                 param.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
+            
+            case Item_Type.DokebiFireKey:
+                ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += amount;
+                param.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param); 
             
             case Item_Type.Fw:
@@ -1924,6 +1936,9 @@ public static class ServerData
                     break;
                 case Item_Type.DokebiFire:
                     ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += amount;
+                    break;
+                case Item_Type.DokebiFireKey:
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += amount;
                     break;
 
                 case Item_Type.Event_Item_1:

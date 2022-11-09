@@ -346,6 +346,13 @@ public class UiShop : SingletonMono<UiShop>
                 }
                 break;  
             
+            case Item_Type.DokebiFireKey:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += amount;
+                    param.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
+                }
+                break;  
+            
             case Item_Type.FoxMaskPartial:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += amount;
