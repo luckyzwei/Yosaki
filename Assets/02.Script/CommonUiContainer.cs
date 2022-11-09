@@ -9,10 +9,20 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public List<Sprite> itemGradeFrame;
 
-    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5, CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10, CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14, CommonString.ItemGrade_15, CommonString.ItemGrade_16, CommonString.ItemGrade_17, CommonString.ItemGrade_18, CommonString.ItemGrade_19, CommonString.ItemGrade_20 };
+    private List<string> itemGradeName_Weapon = new List<string>() { CommonString.ItemGrade_0, 
+        CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5,
+        CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10,
+        CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14, CommonString.ItemGrade_15, 
+        CommonString.ItemGrade_16, CommonString.ItemGrade_17, CommonString.ItemGrade_18, CommonString.ItemGrade_19, CommonString.ItemGrade_20 ,
+        CommonString.ItemGrade_21 , CommonString.ItemGrade_22 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
-    private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae, CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae, CommonString.ItemGrade_10_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae, CommonString.ItemGrade_13_Norigae };
+    private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, 
+        CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5_Norigae,
+        CommonString.ItemGrade_6_Norigae, CommonString.ItemGrade_7_Norigae, CommonString.ItemGrade_8_Norigae, CommonString.ItemGrade_9_Norigae, CommonString.ItemGrade_10_Norigae, 
+        CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_11_Norigae, 
+        CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae, CommonString.ItemGrade_13_Norigae, CommonString.ItemGrade_22_Norigae, CommonString.ItemGrade_22_Norigae,
+        CommonString.ItemGrade_22_Norigae, CommonString.ItemGrade_22_Norigae };
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
     private List<string> itemGradeName_Skill = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill, CommonString.ItemGrade_6_Skill, CommonString.ItemGrade_7_Skill, CommonString.ItemGrade_8_Skill, CommonString.ItemGrade_9_Skill, CommonString.ItemGrade_10_Skill };
@@ -103,6 +113,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite ChunNorigae5;
     public Sprite ChunNorigae6;
 
+    public Sprite DokebiNorigae0;
+    public Sprite DokebiNorigae1;
+    public Sprite DokebiNorigae2;
+
     public Sprite ChunSun0;
     public Sprite ChunSun1;
     public Sprite ChunSun2;
@@ -165,6 +179,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite ChunWeapon1;
     public Sprite ChunWeapon2;
     public Sprite ChunWeapon3;
+
+    public Sprite DokebiWeapon0;
+    public Sprite DokebiWeapon1;
+    public Sprite DokebiWeapon2;
 
     public Sprite NataSkill;
     public Sprite OrochiSkill;
@@ -697,6 +715,16 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return ChunNorigae6;
                 break;
             //
+            case Item_Type.DokebiNorigae0:
+                return DokebiNorigae0;
+                break;
+            case Item_Type.DokebiNorigae1:
+                return DokebiNorigae1;
+                break;
+            case Item_Type.DokebiNorigae2:
+                return DokebiNorigae2;
+                break;
+            //
             case Item_Type.ChunSun0:
                 return ChunSun0;
                 break;
@@ -898,6 +926,15 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.ChunWeapon3:
                 return ChunWeapon3;
+                break;
+            case Item_Type.DokebiWeapon0:
+                return DokebiWeapon0;
+                break;
+            case Item_Type.DokebiWeapon1:
+                return DokebiWeapon1;
+                break;
+            case Item_Type.DokebiWeapon2:
+                return DokebiWeapon2;
                 break;
 
             case Item_Type.MihoNorigae:

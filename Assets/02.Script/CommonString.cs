@@ -41,6 +41,8 @@ public static class CommonString
     public static string ItemGrade_18 = "외형";
     public static string ItemGrade_19 = "천상계";
     public static string ItemGrade_20 = "십만대산";
+    public static string ItemGrade_21 = "???";
+    public static string ItemGrade_22 = "도깨비";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
@@ -50,6 +52,7 @@ public static class CommonString
     public static string ItemGrade_11_Norigae = "지옥";
     public static string ItemGrade_12_Norigae = "여래";
     public static string ItemGrade_13_Norigae = "천상계";
+    public static string ItemGrade_22_Norigae = "도깨비";
 
     public static string ItemGrade_4_Skill = "주작";
     public static string ItemGrade_5_Skill = "청룡";

@@ -130,6 +130,10 @@ public static class Utils
                 type == Item_Type.ChunNorigae5 ||
                 type == Item_Type.ChunNorigae6 ||
 
+                type == Item_Type.DokebiNorigae0 ||
+                type == Item_Type.DokebiNorigae1 ||
+                type == Item_Type.DokebiNorigae2 ||
+
                 type == Item_Type.ChunSun0 ||
                 type == Item_Type.ChunSun1 ||
                 type == Item_Type.ChunSun2 ||

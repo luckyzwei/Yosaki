@@ -386,6 +386,14 @@ public enum Item_Type
     ChunWeapon3 = 7013,
     ChunPet3 = 7014,
 
+    DokebiWeapon0 = 7020,
+    DokebiWeapon1 = 7021,
+    DokebiWeapon2 = 7022,
+
+    DokebiNorigae0 = 7030,
+    DokebiNorigae1 = 7031,
+    DokebiNorigae2 = 7032,
+
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
     RecommendWeapon2 = 8002,
