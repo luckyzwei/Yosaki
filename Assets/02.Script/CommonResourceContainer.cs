@@ -8,6 +8,7 @@ public static class CommonResourceContainer
     private static List<Sprite> weaponSprites;
     private static List<Sprite> magicBookSprites;
     private static List<Sprite> maskSprites;
+    private static List<Sprite> hornSprites;
     private static List<Sprite> hellIcons;
     private static List<Sprite> dragonBall;
     private static List<Sprite> chunIcons;
@@ -80,6 +81,33 @@ public static class CommonResourceContainer
         if (idx < maskSprites.Count)
         {
             return maskSprites[idx];
+        }
+        else
+        {
+            Debug.LogError($"Weapon icon {idx} is not exist");
+            return null;
+        }
+    }
+    public static Sprite GetHornSprite(int idx)
+    {
+        if (hornSprites == null)
+        {
+            var hornIcons = Resources.LoadAll<Sprite>("DokebiHorn/");
+            hornSprites = hornIcons.ToList();
+
+
+            hornSprites.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
+        }
+
+        if (idx < hornSprites.Count)
+        {
+            return hornSprites[idx];
         }
         else
         {

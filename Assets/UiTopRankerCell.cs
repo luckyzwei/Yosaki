@@ -27,6 +27,9 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private Image mask;
 
+    [SerializeField]
+    private Image horn;
+
 
     [SerializeField]
     private GameObject yomulObject;
@@ -110,6 +113,16 @@ public class UiTopRankerCell : MonoBehaviour
         else
         {
             mask.gameObject.SetActive(false);
+        }
+        
+        if (hornIdx != -1)
+        {
+            horn.gameObject.SetActive(true);
+            horn.sprite = CommonResourceContainer.GetHornSprite(hornIdx);
+        }
+        else
+        {
+            horn.gameObject.SetActive(false);
         }
 
         if (weaponId != -1)

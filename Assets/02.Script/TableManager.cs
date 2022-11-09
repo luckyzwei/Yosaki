@@ -636,6 +636,7 @@ public class TableManager : SingletonMono<TableManager>
     public ColdSeasonPass coldSeasonPass;
 
     public FoxMask FoxMask;
+    public DokebiHorn DokebiHorn;
 
     [SerializeField]
     private SummerCollection summerCollection;

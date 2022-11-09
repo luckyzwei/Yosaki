@@ -167,6 +167,7 @@ public class UserInfoTable
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
+    public const string dokebiHorn = "dokebiHorn";
     public const string relicPackReset = "rr";
     public const string oneAttenEvent = "oe";
     public const string titleRefund = "tii";
@@ -320,6 +321,7 @@ public class UserInfoTable
         {refundFox,0},
         {sendGangChul,0},
         {foxMask,0},
+        {dokebiHorn,0},
         {relicPackReset,0},
         {hellScore,0},
         {chunClear,0},

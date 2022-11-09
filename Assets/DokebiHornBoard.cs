@@ -10,7 +10,7 @@ public class DokebiHornBoard : MonoBehaviour
     private Transform cellParent;
 
     [SerializeField]
-    private UiMaskView uiHornView;
+    private UiHornView uiHornView;
 
     [SerializeField]
     private TextMeshProUGUI currentFloor;
@@ -26,7 +26,7 @@ public class DokebiHornBoard : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.userInfoTable.TableDatas[UserInfoTable.foxMask].AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.TableDatas[UserInfoTable.dokebiHorn].AsObservable().Subscribe(e =>
         {
             currentFloor.SetText($"{e + 1}단계 입장");
         }).AddTo(this);
@@ -34,36 +34,36 @@ public class DokebiHornBoard : MonoBehaviour
 
     private void Initialize()
     {
-        var tableData = TableManager.Instance.FoxMask.dataArray;
+        var tableData = TableManager.Instance.DokebiHorn.dataArray;
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            var cell = Instantiate<UiMaskView>(uiHornView, cellParent);
+            var cell = Instantiate<UiHornView>(uiHornView, cellParent);
 
             cell.Initialize(tableData[i]);
         }
     }
 
-    public void OnClickEnterButton()
-    {
-        int currentIdx = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.foxMask].Value;
+    //public void OnClickEnterButton()
+    //{
+    //    int currentIdx = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.dokebiHorn].Value;
 
-        if (currentIdx >= TableManager.Instance.FoxMask.dataArray.Length)
-        {
-            PopupManager.Instance.ShowAlarmMessage("업데이트 예정 입니다!");
-            return;
-        }
+    //    if (currentIdx >= TableManager.Instance.DokebiHorn.dataArray.Length)
+    //    {
+    //        PopupManager.Instance.ShowAlarmMessage("업데이트 예정 입니다!");
+    //        return;
+    //    }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{currentIdx + 1}단계\n도전 할까요?", () =>
-          {
+    //    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{currentIdx + 1}단계\n도전 할까요?", () =>
+    //      {
 
-              GameManager.Instance.LoadContents(GameManager.ContentsType.FoxMask);
+    //          GameManager.Instance.LoadContents(GameManager.ContentsType.DokebiFire);
 
-          }, null);
-    }
+    //      }, null);
+    //}
 
     public void OnClickUpEquipButton()
     {
-        ServerData.equipmentTable.ChangeEquip(EquipmentTable.FoxMaskView, -1);
+        ServerData.equipmentTable.ChangeEquip(EquipmentTable.DokebiHornView, -1);
     }
 }
