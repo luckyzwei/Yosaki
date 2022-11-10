@@ -185,6 +185,7 @@ public class UserInfoTable
     public const string exchangeCount_3_Mileage = "mcu";
 
     public const string nickNameChange = "nickNameChange";
+    public const string getPetHome = "gph";
 
 
     
@@ -341,6 +342,7 @@ public class UserInfoTable
         {exchangeCount_3_Mileage,0},
 
         {nickNameChange,0},
+        {getPetHome,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -672,6 +674,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.oneAttenEvent).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getFlower).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.getPetHome).Value = 0;
 
         //버프
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
@@ -792,6 +795,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.getGumGi, ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value);
         userInfoParam.Add(UserInfoTable.sendPetExp, ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value);
         userInfoParam.Add(UserInfoTable.oneAttenEvent, ServerData.userInfoTable.GetTableData(UserInfoTable.oneAttenEvent).Value);
+        userInfoParam.Add(UserInfoTable.getPetHome, ServerData.userInfoTable.GetTableData(UserInfoTable.getPetHome).Value);
 
         userInfoParam.Add(UserInfoTable.buff_gold1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);
         userInfoParam.Add(UserInfoTable.buff_gold2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);

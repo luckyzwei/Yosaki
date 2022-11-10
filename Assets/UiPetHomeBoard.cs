@@ -1,7 +1,10 @@
+using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiPetHomeBoard : MonoBehaviour
 {
@@ -20,9 +23,74 @@ public class UiPetHomeBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI petHasCount;
 
+    [SerializeField]
+    private Button getPetHomeButton;
+
     private void Start()
     {
         Initialize();
+    }
+
+    private void Subscribe()
+    {
+        ServerData.userInfoTable.TableDatas[UserInfoTable.getPetHome].AsObservable().Subscribe(e =>
+        {
+            getPetHomeButton.interactable = e == 0;
+        }).AddTo(this);
+    }
+
+    public void OnClickGetPetHomeRewardButton()
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.getPetHome].Value == 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("보상은 하루에 한번 받으실 수 있습니다.");
+            return;
+        }
+
+        var tableData = TableManager.Instance.petHome.dataArray;
+
+        int petCount = PlayerStats.GetPetHomeHasCount();
+
+        int rewardCount = 0;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (petCount <= i) break;
+
+            ServerData.AddLocalValue((Item_Type)tableData[i].Rewardtype, tableData[i].Rewardvalue);
+
+            rewardCount++;
+        }
+
+        if (rewardCount == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("보상이 없습니다");
+            return;
+        }
+
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        Param goodsParam = new Param();
+        goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+        goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+        goodsParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
+        goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
+        goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
+        goodsParam.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.getPetHome].Value = 0;
+        Param userInfoParam = new Param();
+        userInfoParam.Add(UserInfoTable.getPetHome, ServerData.userInfoTable.TableDatas[UserInfoTable.getPetHome].Value);
+
+
+        transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+        {
+            PopupManager.Instance.ShowAlarmMessage("보상을 전부 수령했습니다");
+        });
+
     }
 
     private void OnEnable()
