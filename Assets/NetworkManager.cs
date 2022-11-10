@@ -9,6 +9,7 @@ using TMPro;
 using UniRx;
 using System.Linq;
 using static GameManager;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
@@ -149,6 +150,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             CellBtn[i].interactable = (multiple + i < roomList.Count) ? true : false;
             CellBtn[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? roomList[multiple + i].Name : "");
             CellBtn[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? roomList[multiple + i].PlayerCount + "/" + roomList[multiple + i].MaxPlayers : "");
+
+            if (roomList[multiple + i].CustomProperties != null && roomList[multiple + i].CustomProperties.ContainsKey(0))
+            {
+                CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? (string)roomList[multiple + i].CustomProperties[0] + "/" + roomList[multiple + i].MaxPlayers : "");
+            }
+            else
+            {
+                CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText("");
+            }
         }
     }
 
@@ -399,7 +409,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
         makeRoomButton.interactable = false;
 
-        PhotonNetwork.CreateRoom(roomNameInput_make.text, new RoomOptions { MaxPlayers = 4, IsVisible = !visibleRoomToggle.isOn });
+
+        var customProperty = new Hashtable();
+
+        customProperty.Add(0, Utils.GetOriginNickName(PlayerData.Instance.NickName));
+
+        PhotonNetwork.CreateRoom(roomNameInput_make.text, new RoomOptions { MaxPlayers = 4, IsVisible = !visibleRoomToggle.isOn, CustomRoomProperties = customProperty });
     }
 
     //방 참가
@@ -560,7 +575,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 var playerInfo = roomPlayerDatas[keys[i]];
 
-                playerView_Room[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask,playerInfo.horn);
+                playerView_Room[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask, playerInfo.horn);
                 playerView_Room[i].SetLevelText(playerInfo.level);
 
                 playerView_Result[i].gameObject.SetActive(true);
