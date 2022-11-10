@@ -151,9 +151,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             CellBtn[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? roomList[multiple + i].Name : "");
             CellBtn[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? roomList[multiple + i].PlayerCount + "/" + roomList[multiple + i].MaxPlayers : "");
 
-            if (multiple + i < roomList.Count && roomList[multiple + i].CustomProperties != null && roomList[multiple + i].CustomProperties.ContainsKey(0))
+            if (multiple + i < roomList.Count &&
+                roomList[multiple + i].CustomProperties != null &&
+               roomList[multiple + i].CustomProperties.Count != 0 &&
+                roomList[multiple + i].CustomProperties.ContainsKey(0))
             {
-                CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? (string)roomList[multiple + i].CustomProperties[0] + "/" + roomList[multiple + i].MaxPlayers : "");
+                CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? (string)roomList[multiple + i].CustomProperties["master"] + "/" + roomList[multiple + i].MaxPlayers : "");
                 CellBtn[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().SetText("방장");
             }
             else
@@ -412,9 +415,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         makeRoomButton.interactable = false;
 
 
-        var customProperty = new Hashtable();
-
-        customProperty.Add(0, Utils.GetOriginNickName(PlayerData.Instance.NickName));
+        var customProperty = new Hashtable() { { "master", Utils.GetOriginNickName(PlayerData.Instance.NickName) } };
 
         PhotonNetwork.CreateRoom(roomNameInput_make.text, new RoomOptions { MaxPlayers = 4, IsVisible = !visibleRoomToggle.isOn, CustomRoomProperties = customProperty });
     }
