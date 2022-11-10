@@ -327,4 +327,40 @@ public class UiRewardCollection : MonoBehaviour
     {
         RewardPopupManager.Instance.OnclickButton();
     }
+    public void OnClickDokebiReward()
+    {
+        if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value < 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFireKey)}이 부족합니다!");
+            return;
+        }
+
+        int score = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.DokebiFireClear].Value;
+
+        if (score == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
+            return;
+        }
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?", () =>
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value -= 1;
+            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
+            goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score}개 획득!", null);
+            });
+        }, null);
+    }
 }
