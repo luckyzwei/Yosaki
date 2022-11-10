@@ -17,6 +17,9 @@ public class UiDokebiFireBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI dokebiAbilText1;
 
+    [SerializeField]
+    private TextMeshProUGUI dokebiFireKeyButtonText;
+
 
 
 
@@ -46,7 +49,8 @@ public class UiDokebiFireBoard : MonoBehaviour
         }).AddTo(this);
 
         ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).AsObservable().Subscribe(e =>
-        {            
+        {
+            
         }).AddTo(this);
     }
 
@@ -78,6 +82,7 @@ public class UiDokebiFireBoard : MonoBehaviour
     private void Initialize()
     {
         scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.DokebiFireClear].Value)}");
+        dokebiFireKeyButtonText.SetText($"{GameBalance.DokebiKeyUseCount}번 소탕");
     }
 
     public void OnClickDokebiEnterButton()
@@ -158,6 +163,43 @@ public class UiDokebiFireBoard : MonoBehaviour
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score * ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value}개 획득 합니까?\n<color=red>({score} * {ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value} 획득 가능)</color>", () =>
         {
             int clearCount = (int)ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value;
+            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score * clearCount;
+            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value -= clearCount;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
+            goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
+                        
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score * clearCount}개 획득!", null);
+            });
+        }, null);
+    }
+    public void OnClickGetManyDokebiFireButton()
+    {
+        if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value < GameBalance.DokebiKeyUseCount)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFireKey)}이 부족합니다!");
+            return;
+        }
+
+        int score = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.DokebiFireClear].Value;
+
+        if (score == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
+            return;
+        }
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score * GameBalance.DokebiKeyUseCount}개 획득 합니까?\n<color=red>({score} * {GameBalance.DokebiKeyUseCount} 획득 가능)</color>", () =>
+        {
+            int clearCount = GameBalance.DokebiKeyUseCount;
             ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score * clearCount;
             ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value -= clearCount;
 
