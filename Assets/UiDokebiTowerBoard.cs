@@ -70,4 +70,14 @@ public class UiDokebiTowerBoard : MonoBehaviour
 
 
     }
+
+    public void OnClickEnterButton()
+    {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "입장 할까요?", () =>
+        {
+
+            GameManager.Instance.LoadContents(GameManager.ContentsType.DokebiTower);
+
+        }, () => { });
+    }
 }

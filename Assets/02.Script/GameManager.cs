@@ -35,7 +35,7 @@ public class GameManager : SingletonMono<GameManager>
         ChunFlower,
         PartyRaid_Guild,
         DokebiFire,
-        HellTower,
+        DokebiTower,
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;
