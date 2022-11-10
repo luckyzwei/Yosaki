@@ -426,6 +426,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         string[] propertiesListedInLobby = new string[1];
         propertiesListedInLobby[0] = "M";
 
+        roomOption.CustomRoomProperties = hashtables;
         roomOption.CustomRoomPropertiesForLobby = propertiesListedInLobby;
 
         PhotonNetwork.CreateRoom(roomNameInput_make.text, roomOption);
