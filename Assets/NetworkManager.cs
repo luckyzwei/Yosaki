@@ -153,10 +153,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
             if (multiple + i < roomList.Count &&
                 roomList[multiple + i].CustomProperties != null &&
-               roomList[multiple + i].CustomProperties.Count != 0 &&
-                roomList[multiple + i].CustomProperties.ContainsKey(0))
+               roomList[multiple + i].CustomProperties.Count != 0)
             {
-                CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? (string)roomList[multiple + i].CustomProperties["master"] + "/" + roomList[multiple + i].MaxPlayers : "");
+                CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? (string)roomList[multiple + i].CustomProperties["M"] + "/" + roomList[multiple + i].MaxPlayers : "");
                 CellBtn[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().SetText("방장");
             }
             else
@@ -420,8 +419,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         roomOption.MaxPlayers = 4;
         roomOption.IsVisible = !visibleRoomToggle.isOn;
 
-        var customProperty = new Hashtable() { { "master", Utils.GetOriginNickName(PlayerData.Instance.NickName) } };
-        roomOption.CustomRoomProperties = customProperty;
+
+        Hashtable hashtables = new Hashtable();
+        hashtables.Add("M", Utils.GetOriginNickName(PlayerData.Instance.NickName));
+
+        string[] propertiesListedInLobby = new string[1];
+        propertiesListedInLobby[0] = "M";
+
+        roomOption.CustomRoomPropertiesForLobby = propertiesListedInLobby;
 
         PhotonNetwork.CreateRoom(roomNameInput_make.text, roomOption);
     }
