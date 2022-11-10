@@ -415,9 +415,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         makeRoomButton.interactable = false;
 
 
-        var customProperty = new Hashtable() { { "master", Utils.GetOriginNickName(PlayerData.Instance.NickName) } };
 
-        PhotonNetwork.CreateRoom(roomNameInput_make.text, new RoomOptions { MaxPlayers = 4, IsVisible = !visibleRoomToggle.isOn, CustomRoomProperties = customProperty });
+        RoomOptions roomOption = new RoomOptions();
+        roomOption.MaxPlayers = 4;
+        roomOption.IsVisible = !visibleRoomToggle.isOn;
+
+        var customProperty = new Hashtable() { { "master", Utils.GetOriginNickName(PlayerData.Instance.NickName) } };
+        roomOption.CustomRoomProperties = customProperty;
+
+        PhotonNetwork.CreateRoom(roomNameInput_make.text, roomOption);
     }
 
     //방 참가
