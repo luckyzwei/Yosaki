@@ -151,13 +151,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             CellBtn[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? roomList[multiple + i].Name : "");
             CellBtn[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? roomList[multiple + i].PlayerCount + "/" + roomList[multiple + i].MaxPlayers : "");
 
-            if (roomList[multiple + i].CustomProperties != null && roomList[multiple + i].CustomProperties.ContainsKey(0))
+            if (multiple + i < roomList.Count && roomList[multiple + i].CustomProperties != null && roomList[multiple + i].CustomProperties.ContainsKey(0))
             {
                 CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? (string)roomList[multiple + i].CustomProperties[0] + "/" + roomList[multiple + i].MaxPlayers : "");
+                CellBtn[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().SetText("방장");
             }
             else
             {
                 CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText("");
+                CellBtn[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().SetText("");
             }
         }
     }
