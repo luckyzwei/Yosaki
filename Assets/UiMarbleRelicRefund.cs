@@ -21,17 +21,17 @@ public class UiMarbleRelicRefund : MonoBehaviour
             return;
         }
 
-        int marblePack1buyCount = ServerData.iAPServerTableTotal.TableDatas["marblepackage1"].buyCount.Value;
-        int marblePack2buyCount = ServerData.iAPServerTableTotal.TableDatas["marblepackage2"].buyCount.Value;
-        int marblePack3buyCount = ServerData.iAPServerTableTotal.TableDatas["marblepackage3"].buyCount.Value;
+        int monthlypackage1buyCount = ServerData.iAPServerTableTotal.TableDatas["monthlypackage1"].buyCount.Value;
+        //int marblePack1buyCount = ServerData.iAPServerTableTotal.TableDatas["monthlypackage1"].buyCount.Value;
+        //int marblePack2buyCount = ServerData.iAPServerTableTotal.TableDatas["marblepackage2"].buyCount.Value;
+        //int marblePack3buyCount = ServerData.iAPServerTableTotal.TableDatas["marblepackage3"].buyCount.Value;
 
-        int relicPack1buyCount = ServerData.iAPServerTableTotal.TableDatas["relic1"].buyCount.Value;
-        int relicPack2buyCount = ServerData.iAPServerTableTotal.TableDatas["relic2"].buyCount.Value;
-        int relicPack3buyCount = ServerData.iAPServerTableTotal.TableDatas["relic3"].buyCount.Value;
-        int relicPack4buyCount = ServerData.iAPServerTableTotal.TableDatas["relic4"].buyCount.Value;
+        //int relicPack1buyCount = ServerData.iAPServerTableTotal.TableDatas["relic1"].buyCount.Value;
+        //int relicPack2buyCount = ServerData.iAPServerTableTotal.TableDatas["relic2"].buyCount.Value;
+        //int relicPack3buyCount = ServerData.iAPServerTableTotal.TableDatas["relic3"].buyCount.Value;
+        //int relicPack4buyCount = ServerData.iAPServerTableTotal.TableDatas["relic4"].buyCount.Value;
 
-        if (marblePack1buyCount == 0 && marblePack2buyCount == 0 && marblePack3buyCount == 0 && 
-            relicPack1buyCount == 0 && relicPack2buyCount == 0 && relicPack3buyCount == 0 && relicPack4buyCount == 0)
+        if (monthlypackage1buyCount == 0)
         {
 
             ServerData.userInfoTable.GetTableData(UserInfoTable.marRelicRefund).Value = 1;
@@ -58,56 +58,61 @@ public class UiMarbleRelicRefund : MonoBehaviour
 
         //
 
-        float _1DiffMarble = 24000000;
+        float _1DiffMileage = 5;
 
-        float _2DiffMarble = 48000000;
+        //float _1DiffMarble = 24000000;
 
-        float _3DiffMarble = 110000000;
+        //float _2DiffMarble = 48000000;
+
+        //float _3DiffMarble = 110000000;
         
 
 
-        float marble1_MarbleAdd = marblePack1buyCount * _1DiffMarble;
+        float monthly1_MileageAdd = monthlypackage1buyCount * _1DiffMileage;
+
+        //float marble1_MarbleAdd = marblePack1buyCount * _1DiffMarble;
 
 
-        float marble2_MarbleAdd = marblePack2buyCount * _2DiffMarble;
+        //float marble2_MarbleAdd = marblePack2buyCount * _2DiffMarble;
 
 
-        float marble3_MarbleAdd = marblePack3buyCount * _3DiffMarble;
+        //float marble3_MarbleAdd = marblePack3buyCount * _3DiffMarble;
 
 
-        float addMarbleTotal = marble1_MarbleAdd + marble2_MarbleAdd + marble3_MarbleAdd;
+        //float addMarbleTotal = marble1_MarbleAdd + marble2_MarbleAdd + marble3_MarbleAdd;
 
 
 
         //
 
-        float _1DiffRelic = 70;
+        //float _1DiffRelic = 70;
 
-        float _2DiffRelic = 200;
+        //float _2DiffRelic = 200;
 
-        float _3DiffRelic = 400;
+        //float _3DiffRelic = 400;
 
-        float _4DiffRelic = 1500;
+        //float _4DiffRelic = 1500;
 
-        float relic1_RelicAdd = relicPack1buyCount * _1DiffRelic;
+        //float relic1_RelicAdd = relicPack1buyCount * _1DiffRelic;
 
 
-        float relic2_RelicAdd = relicPack2buyCount * _2DiffRelic;
-        float relic3_RelicAdd = relicPack3buyCount * _3DiffRelic;
+        //float relic2_RelicAdd = relicPack2buyCount * _2DiffRelic;
+        //float relic3_RelicAdd = relicPack3buyCount * _3DiffRelic;
 
-        float relic4_RelicAdd = relicPack4buyCount * _4DiffRelic;
+        //float relic4_RelicAdd = relicPack4buyCount * _4DiffRelic;
 
-        float addRelicTotal = relic1_RelicAdd + relic2_RelicAdd + relic3_RelicAdd + relic4_RelicAdd;
-        LogManager.Instance.SendLogType("MarRelicRefund", "Marble", $"{marblePack1buyCount},{marblePack2buyCount},{marblePack3buyCount}");
-        LogManager.Instance.SendLogType("MarRelicRefund", "Relic", $"{relicPack1buyCount},{relicPack2buyCount},{relicPack3buyCount},{relicPack4buyCount}");
+        //float addRelicTotal = relic1_RelicAdd + relic2_RelicAdd + relic3_RelicAdd + relic4_RelicAdd;
+        //LogManager.Instance.SendLogType("MarRelicRefund", "Marble", $"{marblePack1buyCount},{marblePack2buyCount},{marblePack3buyCount}");
+        //LogManager.Instance.SendLogType("MarRelicRefund", "Relic", $"{relicPack1buyCount},{relicPack2buyCount},{relicPack3buyCount},{relicPack4buyCount}");
+        // LogManager.Instance.SendLogType("MarRelicRefund", "Milegage", $"{monthlypackage1buyCount}");
         
         //
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
-        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += addMarbleTotal;
+        ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += monthly1_MileageAdd;
 
-        ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += addRelicTotal;
+        //ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += addRelicTotal;
 
 
 
@@ -115,8 +120,8 @@ public class UiMarbleRelicRefund : MonoBehaviour
         ServerData.userInfoTable.TableDatas[UserInfoTable.marRelicRefund].Value = 1;
 
         Param goodsParam = new Param();
-        goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
-        goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+        goodsParam.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
+        //goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
         
 
         Param userInfoParam = new Param();
@@ -129,8 +134,8 @@ public class UiMarbleRelicRefund : MonoBehaviour
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
 
-        PopupManager.Instance.ShowConfirmPopup("여우구슬/영혼열쇠 세트 소급",
-            $"여우구슬 {Utils.ConvertBigNum(addMarbleTotal)}개 소급됨\n"+$"영혼열쇠 {addRelicTotal}개 소급됨" ,null);
+        PopupManager.Instance.ShowConfirmPopup("월간 세트 마일리지 추가 소급",
+            $"마일리지 {Utils.ConvertBigNum(monthly1_MileageAdd)}개 소급됨" ,null);
         });
 
 

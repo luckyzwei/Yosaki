@@ -142,7 +142,7 @@ public class GoodsTable
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
     public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
 
-    public static string DokebiFire = "DokebiFire"; //도깨비 마을 재화
+    public static string DokebiFire = "DokebiFire"; //신도깨비전 재화
     public static string DokebiFireKey = "DokebiFireKey"; //도깨비 불 입장권
 
     public static string Mileage = "Mileage"; //마일리지

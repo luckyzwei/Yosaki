@@ -177,7 +177,7 @@ public class UserInfoTable
 
     public const string canRecommendCount = "canRecommendCount2";
     public const string mileageRefund = "mr";
-    public const string marRelicRefund = "marRelicRe";
+    public const string marRelicRefund = "marRelicRe2";
 
     public const string exchangeCount_0_Mileage = "mff";
     public const string exchangeCount_1_Mileage = "mgg";
