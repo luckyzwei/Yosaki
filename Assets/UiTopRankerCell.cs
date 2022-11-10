@@ -117,8 +117,11 @@ public class UiTopRankerCell : MonoBehaviour
         
         if (hornIdx != -1)
         {
-            horn.gameObject.SetActive(true);
-            horn.sprite = CommonResourceContainer.GetHornSprite(hornIdx);
+            if (horn != null)
+            {
+                horn.gameObject.SetActive(true);
+                horn.sprite = CommonResourceContainer.GetHornSprite(hornIdx);
+            }
         }
         else
         {
