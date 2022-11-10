@@ -697,6 +697,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul5_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul6_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul7_buff).Value = 0;
+        
         //
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (double)currentServerDate;
@@ -891,8 +892,8 @@ public class UserInfoTable
         Param goodsParam = new Param();
 
         goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+        
 
-        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         //길드보상 초기화
         ServerData.bossServerTable.TableDatas["boss12"].rewardedId.Value = string.Empty;
@@ -911,10 +912,14 @@ public class UserInfoTable
         {
             ServerData.bossServerTable.TableDatas["b53"].rewardedId.Value = string.Empty;
             bossParam.Add("b53", ServerData.bossServerTable.TableDatas["b53"].ConvertToString());
+
+            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += GameBalance.WeeklyDokebiKeyGetCount;
+            goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
         }
         
         
 
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactionList.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
         ServerData.SendTransaction(transactionList, false);

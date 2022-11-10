@@ -272,7 +272,7 @@ public class GoodsTable
         {FoxMaskPartial,0f},
 
         {DokebiFire,0f},
-        {DokebiFireKey,0f},
+        {DokebiFireKey,GameBalance.WeeklyDokebiKeyGetCount},
 
         {Mileage,0f}
     };
