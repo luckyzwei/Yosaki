@@ -29,6 +29,7 @@ public class UiPetHomeBoard : MonoBehaviour
     private void Start()
     {
         Initialize();
+        Subscribe();
     }
 
     private void Subscribe()
@@ -78,7 +79,7 @@ public class UiPetHomeBoard : MonoBehaviour
         goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
         goodsParam.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
 
-        ServerData.userInfoTable.TableDatas[UserInfoTable.getPetHome].Value = 0;
+        ServerData.userInfoTable.TableDatas[UserInfoTable.getPetHome].Value = 1;
         Param userInfoParam = new Param();
         userInfoParam.Add(UserInfoTable.getPetHome, ServerData.userInfoTable.TableDatas[UserInfoTable.getPetHome].Value);
 
@@ -152,10 +153,5 @@ public class UiPetHomeBoard : MonoBehaviour
         }
 
         rewardDescription.SetText(description);
-    }
-
-    public void OnClickRewardButton()
-    {
-
     }
 }
