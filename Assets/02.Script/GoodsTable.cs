@@ -147,6 +147,8 @@ public class GoodsTable
 
     public static string Mileage = "Mileage"; //마일리지
 
+    public static string HellUp = "HellUp"; //마일리지
+
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -274,7 +276,8 @@ public class GoodsTable
         {DokebiFire,0f},
         {DokebiFireKey,GameBalance.WeeklyDokebiKeyGetCount},
 
-        {Mileage,0f}
+        {Mileage,0f},
+        {HellUp,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

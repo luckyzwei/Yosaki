@@ -26,6 +26,8 @@ public class UiPetHomeBoard : MonoBehaviour
     [SerializeField]
     private Button getPetHomeButton;
 
+    [SerializeField]
+    private TextMeshProUGUI rewardButtonDescription;
     private void Start()
     {
         Initialize();
@@ -36,7 +38,11 @@ public class UiPetHomeBoard : MonoBehaviour
     {
         ServerData.userInfoTable.TableDatas[UserInfoTable.getPetHome].AsObservable().Subscribe(e =>
         {
+
             getPetHomeButton.interactable = e == 0;
+
+            rewardButtonDescription.SetText(e == 0 ? "보상 받기" : "오늘 받음");
+
         }).AddTo(this);
     }
 
@@ -113,11 +119,46 @@ public class UiPetHomeBoard : MonoBehaviour
 
     private void UpdateDescription()
     {
-        abilDescription.SetText("");
+        SetAbilText();
 
         SetRewardText();
 
         petHasCount.SetText($"환수 보유 {PlayerStats.GetPetHomeHasCount()}");
+    }
+
+    private void SetAbilText()
+    {
+        int petHomeHasCount = PlayerStats.GetPetHomeHasCount();
+
+        var tableData = TableManager.Instance.petHome.dataArray;
+
+        Dictionary<StatusType, float> rewards = new Dictionary<StatusType, float>();
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (petHomeHasCount <= i) break;
+
+            StatusType abilType = (StatusType)tableData[i].Abiltype;
+            float abilValue = tableData[i].Rewardvalue;
+
+            if (rewards.ContainsKey(abilType) == false)
+            {
+                rewards.Add(abilType, 0f);
+            }
+
+            rewards[abilType] += abilValue;
+        }
+
+        var e = rewards.GetEnumerator();
+
+        string description = "";
+
+        while (e.MoveNext())
+        {
+            description += $"{CommonString.GetStatusName(e.Current.Key)} {Utils.ConvertBigNum(e.Current.Value)}% 증가\n";
+        }
+
+        abilDescription.SetText(description);
     }
 
     private void SetRewardText()

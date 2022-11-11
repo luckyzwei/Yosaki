@@ -100,4 +100,12 @@ public class PetTableData
   float upgradepowvalue;
   public float Upgradepowvalue { get {return upgradepowvalue; } set { this.upgradepowvalue = value;} }
   
+  [SerializeField]
+  int getrewardtype;
+  public int Getrewardtype { get {return getrewardtype; } set { this.getrewardtype = value;} }
+  
+  [SerializeField]
+  float getrewardvalue;
+  public float Getrewardvalue { get {return getrewardvalue; } set { this.getrewardvalue = value;} }
+  
 }

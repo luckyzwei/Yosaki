@@ -19,6 +19,7 @@ public class EtcServerTable
     public const string guildAttenReward = "gar";
     public const string hellReward = "hr";
     public const string DokebiHornReward = "dokebiHornReward";
+    public const string PetHomeReward = "PetHomeReward";
 
 
     private Dictionary<string, ReactiveProperty<string>> tableSchema = new Dictionary<string, ReactiveProperty<string>>()
@@ -30,6 +31,7 @@ public class EtcServerTable
         {guildAttenReward,new ReactiveProperty<string>(string.Empty)},
         {hellReward,new ReactiveProperty<string>(string.Empty)},
         {DokebiHornReward,new ReactiveProperty<string>(string.Empty)},
+        {PetHomeReward,new ReactiveProperty<string>(string.Empty)},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -55,6 +57,14 @@ public class EtcServerTable
 
         return rewards.Contains(stageId.ToString());
     }
+
+    public bool HasPetHomeReward(float id)
+    {
+        var rewards = tableDatas[PetHomeReward].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(id.ToString());
+    }
+
     public bool DokebiHornRewarded(float stageId)
     {
         var rewards = tableDatas[DokebiHornReward].Value.Split(BossServerTable.rewardSplit).ToList();

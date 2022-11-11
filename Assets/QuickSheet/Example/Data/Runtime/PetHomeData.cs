@@ -36,4 +36,12 @@ public class PetHomeData
   string description;
   public string Description { get {return description; } set { this.description = value;} }
   
+  [SerializeField]
+  int getrewardtype;
+  public int Getrewardtype { get {return getrewardtype; } set { this.getrewardtype = value;} }
+  
+  [SerializeField]
+  float getrewardvalue;
+  public float Getrewardvalue { get {return getrewardvalue; } set { this.getrewardvalue = value;} }
+  
 }
