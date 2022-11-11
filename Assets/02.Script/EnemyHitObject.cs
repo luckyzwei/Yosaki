@@ -30,10 +30,18 @@ public class EnemyHitObject : MonoBehaviour
         enableRoutine = null;
     }
 
+    private void Start()
+    {
+        if (isDieInstantly)
+        {
+            this.percentDamage = 1f;
+        }
+    }
     float percentDamage = 0f;
 
     private void SetPercentValueByBossId()
     {
+
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && (GameManager.Instance.bossId == 57||
             GameManager.Instance.bossId == 72))
         {
@@ -51,6 +59,7 @@ public class EnemyHitObject : MonoBehaviour
         {
             this.percentDamage = 0.6f;
         }
+
     }
 
     public void SetDamage(double damage, float percentDamage = 0f)
@@ -65,10 +74,7 @@ public class EnemyHitObject : MonoBehaviour
     {
         if (collision.name.Equals(Tags.Player) == false) return;
 
-        if(isDieInstantly)
-        {
-            this.percentDamage = 1f;
-        }
+
         //검기 영혼 지옥
         if (deadWhenTriggered)
         {
