@@ -116,6 +116,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiNorigae0;
     public Sprite DokebiNorigae1;
     public Sprite DokebiNorigae2;
+    
+    public Sprite DokebiHorn0;
+    public Sprite DokebiHorn1;
+    public Sprite DokebiHorn2;
 
     public Sprite ChunSun0;
     public Sprite ChunSun1;
@@ -723,6 +727,17 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.DokebiNorigae2:
                 return DokebiNorigae2;
+                break;
+            //
+            //
+            case Item_Type.DokebiHorn0:
+                return DokebiHorn0;
+                break;
+            case Item_Type.DokebiHorn1:
+                return DokebiHorn1;
+                break;
+            case Item_Type.DokebiHorn2:
+                return DokebiHorn2;
                 break;
             //
             case Item_Type.ChunSun0:

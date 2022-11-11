@@ -19,6 +19,9 @@ public class EnemyHitObject : MonoBehaviour
     [SerializeField]
     private bool deadWhenTriggered = false;
 
+    [SerializeField]
+    private bool isDieInstantly = false;
+
     private IEnumerator EnableRoutine()
     {
         collider.enabled = false;
@@ -62,6 +65,10 @@ public class EnemyHitObject : MonoBehaviour
     {
         if (collision.name.Equals(Tags.Player) == false) return;
 
+        if(isDieInstantly)
+        {
+            this.percentDamage = 1f;
+        }
         //검기 영혼 지옥
         if (deadWhenTriggered)
         {

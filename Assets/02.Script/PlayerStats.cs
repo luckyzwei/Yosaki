@@ -1126,6 +1126,8 @@ public static class PlayerStats
 
         ret += GetDokebiMarkValue();
 
+        ret += GetDokebiHornCritical5Add();
+
         ret += GetDokebiFireAbilHasEffect(StatusType.SuperCritical5DamPer);
 
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical5DamPer);
@@ -1588,14 +1590,7 @@ public static class PlayerStats
 
         if (statusType == StatusType.SuperCritical5DamPer)
         {
-            if (IsChunFlowerDamageEnhance())
-            {
-                ret += 0.000015f * currentLevel;
 
-                //0.01       1퍼
-                //0.0001 0.01퍼
-                //0.000015 0.0015퍼
-            }
 
             ret += GetSkillHasValue(StatusType.DokebiFireHasValueUpgrade) * currentLevel;
 
@@ -1954,6 +1949,14 @@ public static class PlayerStats
 
         return (float)TableManager.Instance.FoxMask.dataArray[equipId].Abilvalue * (1 + GetFoxMaskAbilPlusValue());
     }
+    public static float GetDokebiHornCritical5Add()
+    {
+        int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHorn].Value;
+        if (equipId == -1) return 0f;
+
+        return (float)TableManager.Instance.DokebiHorn.dataArray[equipId].Abilvalue;
+    }
+
 
     public static void ResetAbilDic()
     {
@@ -2020,6 +2023,7 @@ public static class PlayerStats
     {
         return foxMaskPartialValue * ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value;
     }
+    
 
     public static int GetCurrentDragonIdx()
     {

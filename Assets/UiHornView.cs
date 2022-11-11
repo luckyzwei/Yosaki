@@ -36,6 +36,8 @@ public class UiHornView : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI nameDescription;
 
+    private bool isUnlock = false;
+
     public void Initialize(DokebiHornData dokebiHornData)
     {
         this.dokebiHornData = dokebiHornData;
@@ -53,11 +55,27 @@ public class UiHornView : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.userInfoTable.TableDatas[UserInfoTable.dokebiHorn].AsObservable().Subscribe(e =>
+        ServerData.etcServerTable.TableDatas[EtcServerTable.DokebiHornReward].AsObservable().Subscribe(e =>
         {
-            lockObject.SetActive(e <= this.dokebiHornData.Id);
+            var list = e.Split(BossServerTable.rewardSplit);
+            if(list.Length <= 1)
+            {
+                return;
+            }
+            for (int i = 0; i <list.Length; i++)
+            {
+                if(string.IsNullOrEmpty(list[i]))
+                {
+                    continue;
+                }    
+                if (int.Parse(list[i]) == this.dokebiHornData.Id)
+                {
+                    lockObject.SetActive(false);
+                    isUnlock = true;
+                    return;
+                }
+            }
         }).AddTo(this);
-
         ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHorn].AsObservable().Subscribe(e =>
         {
             equipImage.sprite = e == dokebiHornData.Id ? unEquipSprite : equipSprite;
@@ -69,14 +87,9 @@ public class UiHornView : MonoBehaviour
         }).AddTo(this);
     }
 
-    private bool IsUnlock()
-    {
-        return ServerData.userInfoTable.TableDatas[UserInfoTable.dokebiHorn].Value < dokebiHornData.Id;
-    }
-
     public void OnClickEquipButton()
     {
-        if (IsUnlock())
+        if (!isUnlock)
         {
             return;
         }
@@ -88,7 +101,7 @@ public class UiHornView : MonoBehaviour
     }
     public void OnClickEquipViewButton()
     {
-        if (IsUnlock())
+        if (!isUnlock)
         {
             return;
         }

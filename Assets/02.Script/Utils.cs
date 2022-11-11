@@ -133,6 +133,11 @@ public static class Utils
                 type == Item_Type.DokebiNorigae0 ||
                 type == Item_Type.DokebiNorigae1 ||
                 type == Item_Type.DokebiNorigae2 ||
+                
+
+                type == Item_Type.DokebiHorn0 ||
+                type == Item_Type.DokebiHorn1 ||
+                type == Item_Type.DokebiHorn2 ||
 
                 type == Item_Type.ChunSun0 ||
                 type == Item_Type.ChunSun1 ||

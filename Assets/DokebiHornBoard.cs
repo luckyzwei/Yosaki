@@ -19,17 +19,6 @@ public class DokebiHornBoard : MonoBehaviour
     {
 
         Initialize();
-
-        Subscribe();
-
-    }
-
-    private void Subscribe()
-    {
-        ServerData.userInfoTable.TableDatas[UserInfoTable.dokebiHorn].AsObservable().Subscribe(e =>
-        {
-            currentFloor.SetText($"{e + 1}단계 입장");
-        }).AddTo(this);
     }
 
     private void Initialize()
@@ -43,24 +32,6 @@ public class DokebiHornBoard : MonoBehaviour
             cell.Initialize(tableData[i]);
         }
     }
-
-    //public void OnClickEnterButton()
-    //{
-    //    int currentIdx = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.dokebiHorn].Value;
-
-    //    if (currentIdx >= TableManager.Instance.DokebiHorn.dataArray.Length)
-    //    {
-    //        PopupManager.Instance.ShowAlarmMessage("업데이트 예정 입니다!");
-    //        return;
-    //    }
-
-    //    PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{currentIdx + 1}단계\n도전 할까요?", () =>
-    //      {
-
-    //          GameManager.Instance.LoadContents(GameManager.ContentsType.DokebiFire);
-
-    //      }, null);
-    //}
 
     public void OnClickUpEquipButton()
     {

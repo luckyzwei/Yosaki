@@ -394,6 +394,10 @@ public enum Item_Type
     DokebiNorigae1 = 7031,
     DokebiNorigae2 = 7032,
 
+    DokebiHorn0 =  7100,
+    DokebiHorn1 =  7101,
+    DokebiHorn2 =  7102,
+
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
     RecommendWeapon2 = 8002,
