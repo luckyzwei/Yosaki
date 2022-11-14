@@ -698,7 +698,7 @@ public static class PlayerStats
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
         ret += GetGuildPetEffect(StatusType.GoldGainPer);
 
-  
+
         return ret;
     }
     public static float GetExpPlusValue()
@@ -821,7 +821,7 @@ public static class PlayerStats
     }
 
 
- 
+
     public static float GetMagicStonePlusValue()
     {
         float ret = 0f;
@@ -1533,6 +1533,11 @@ public static class PlayerStats
             ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
         }
 
+
+        float hellPowerAddValue = GetHellPowerAddValue();
+
+        ret = ret * (1 + hellPowerAddValue);
+
         return ret;
     }
 
@@ -2023,7 +2028,7 @@ public static class PlayerStats
     {
         return foxMaskPartialValue * ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value;
     }
-    
+
 
     public static int GetCurrentDragonIdx()
     {
@@ -2168,6 +2173,15 @@ public static class PlayerStats
         }
 
         return ret;
+    }
+
+    public const float hellPowerStoneAddPer = 0.005f;
+
+    public static float GetHellPowerAddValue()
+    {
+        var goodsNum = ServerData.goodsTable.GetTableData(GoodsTable.HellPower).Value;
+
+        return goodsNum * hellPowerStoneAddPer;
     }
 
 }

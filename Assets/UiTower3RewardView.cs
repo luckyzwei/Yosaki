@@ -34,7 +34,7 @@ public class UiTower3RewardView : MonoBehaviour
 
         rewardIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)towerTableData.Rewardtype);
 
-        rewardDescription.SetText($"{Utils.ConvertBigNum(towerTableData.Rewardvalue)}");
+        rewardDescription.SetText($"{Utils.ConvertBigNum(towerTableData.Rewardvalue)}°³");
 
         UpdateButtonState();
     }
