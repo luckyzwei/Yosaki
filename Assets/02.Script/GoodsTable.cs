@@ -278,7 +278,7 @@ public class GoodsTable
         {DokebiFireKey,GameBalance.WeeklyDokebiKeyGetCount},
 
         {Mileage,0f},
-        {HellUp,0f}
+        {HellUp,0f},
         {HellPower,0f}
     };
 

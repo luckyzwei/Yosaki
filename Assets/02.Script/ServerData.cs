@@ -371,7 +371,9 @@ public static class ServerData
                 break;  
             case Item_Type.DokebiFireKey:
                 ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += rewardValue;
-                break;  
+                break;      
+            
+         
    
 
             case Item_Type.Mileage:

@@ -145,6 +145,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite FoxMaskPartial;
     public Sprite DokebiFire;
     public Sprite Mileage;
+    public Sprite HellPower;
+    public Sprite DokebiFireKey;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -648,6 +650,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.DokebiFire:
                 return DokebiFire;
+                break;   
+            case Item_Type.HellPower:
+                return HellPower;
+                break; 
+            case Item_Type.DokebiFireKey:
+                return DokebiFireKey;
                 break;
             case Item_Type.Mileage:
                 return Mileage;
