@@ -447,7 +447,8 @@ public class UiInventoryWeaponView : MonoBehaviour
                 || weaponData.Id == 43 || weaponData.Id == 44 || weaponData.Id == 45
                 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49 || weaponData.Id == 50
                 || weaponData.Id == 51 || weaponData.Id == 52 || weaponData.Id == 53 || weaponData.Id == 54 || weaponData.Id == 55
-                || weaponData.Id == 56 || weaponData.Id == 57 || weaponData.Id == 58 || weaponData.Id == 59 
+                || weaponData.Id == 56 || weaponData.Id == 57 || weaponData.Id == 58 || weaponData.Id == 59 || weaponData.Id == 60
+                || weaponData.Id == 61 || weaponData.Id == 62 
 
                 )
             {
@@ -554,7 +555,8 @@ public class UiInventoryWeaponView : MonoBehaviour
                 }
                 //
                 if (weaponData.Id == 45 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49||
-                    weaponData.Id == 52 || weaponData.Id == 53 || weaponData.Id == 54 || weaponData.Id == 55 || weaponData.Id == 56)
+                    weaponData.Id == 52 || weaponData.Id == 53 || weaponData.Id == 54 || weaponData.Id == 55 || weaponData.Id == 56||
+                    weaponData.Id == 60 || weaponData.Id == 61 || weaponData.Id == 62)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
                     weaponLockDescription.SetText($"십만대산\n추천보상으로 획득!");
