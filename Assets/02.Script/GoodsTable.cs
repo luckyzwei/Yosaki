@@ -148,6 +148,7 @@ public class GoodsTable
     public static string Mileage = "Mileage"; //마일리지
 
     public static string HellUp = "HellUp"; //마일리지
+    public static string HellPower = "Help"; //마일리지
 
 
 
@@ -278,6 +279,7 @@ public class GoodsTable
 
         {Mileage,0f},
         {HellUp,0f}
+        {HellPower,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

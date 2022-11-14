@@ -422,6 +422,7 @@ public enum Item_Type
     Mileage = 9000,
     DokebiFire = 9001,
     DokebiFireKey = 9002,
+    HellPower = 9003,
 }
 
 public class DropItem : PoolItem
