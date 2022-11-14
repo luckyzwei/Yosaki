@@ -200,7 +200,7 @@ public static class GameBalance
 
     public readonly static ObscuredInt DailyRelicTicketGetCount = 3;
     public readonly static ObscuredInt WeeklyDokebiKeyGetCount = 10;
-    public readonly static ObscuredInt DokebiKeyUseCount = 10;
+    public readonly static ObscuredInt DokebiKeyUseCount = 5;
     public readonly static ObscuredInt StageRelicUnlockLevel = 3000;
     public readonly static ObscuredFloat StageRelicUpgradePrice = 1000;
 

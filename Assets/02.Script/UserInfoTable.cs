@@ -990,7 +990,7 @@ public class UserInfoTable
 
     public bool IsRankUpdateTime()
     {
-        if (currentServerTime.Hour == 4 || currentServerTime.Hour == 5)
+        if (currentServerTime.Hour == 4)
             return false;
 
         return true;
