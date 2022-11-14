@@ -853,7 +853,112 @@ public class UiTwelveBossRewardView : MonoBehaviour
 
         }
         //
+        else if (type == Item_Type.costume66)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
 
+            //
+            var costumeServerData = ServerData.costumeServerTable.TableDatas["costume66"];
+
+            costumeServerData.hasCostume.Value = true;
+
+            Param costumeParam = new Param();
+
+            costumeParam.Add("costume66", costumeServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "적도깨비 호연 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+
+        }
+        else if (type == Item_Type.costume67)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            //
+            var costumeServerData = ServerData.costumeServerTable.TableDatas["costume67"];
+
+            costumeServerData.hasCostume.Value = true;
+
+            Param costumeParam = new Param();
+
+            costumeParam.Add("costume67", costumeServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "황도깨비 호연 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+
+        }
+        else if (type == Item_Type.costume68)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            //
+            var costumeServerData = ServerData.costumeServerTable.TableDatas["costume68"];
+
+            costumeServerData.hasCostume.Value = true;
+
+            Param costumeParam = new Param();
+
+            costumeParam.Add("costume68", costumeServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "청도깨비 호연 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+
+        }
+        //
         else if (type == Item_Type.costume51)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();

@@ -198,6 +198,9 @@ public static class CommonString
             case Item_Type.costume63: return TableManager.Instance.Costume.dataArray[63].Name;
             case Item_Type.costume64: return TableManager.Instance.Costume.dataArray[64].Name;
             case Item_Type.costume65: return TableManager.Instance.Costume.dataArray[65].Name;
+            case Item_Type.costume66: return TableManager.Instance.Costume.dataArray[66].Name;
+            case Item_Type.costume67: return TableManager.Instance.Costume.dataArray[67].Name;
+            case Item_Type.costume68: return TableManager.Instance.Costume.dataArray[68].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;

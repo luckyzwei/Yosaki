@@ -339,6 +339,11 @@ public enum Item_Type
     costume64 = 1265,
     costume65 = 1266,
 
+    //도깨비
+    costume66 = 1267,
+    costume67 = 1268,
+    costume68 = 1269,
+
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,
