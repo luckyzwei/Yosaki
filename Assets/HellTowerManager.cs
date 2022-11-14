@@ -172,9 +172,9 @@ public class HellTowerManager : ContentsManagerBase
 
             var enemyObject = BattleObjectManager.Instance.GetItem(poolName) as Enemy;
 
-            Vector3 spawnPos = enemySpawnPos.position + Random.Range(-2f, 2f) * Vector3.right;
+            enemyObject.transform.SetParent(enemySpawnPos.transform);
 
-            enemyObject.transform.position = spawnPos + (Vector3)Random.insideUnitCircle;
+            enemyObject.transform.localPosition = Vector3.zero;
 
             enemyObject.transform.localScale = Vector3.one * 1.3f;
 
