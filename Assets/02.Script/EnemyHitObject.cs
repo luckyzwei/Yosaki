@@ -20,7 +20,7 @@ public class EnemyHitObject : MonoBehaviour
     private bool deadWhenTriggered = false;
 
     [SerializeField]
-    private bool isDieInstantly = false;
+    private float fixedPercendDam = 0f;
 
     private IEnumerator EnableRoutine()
     {
@@ -32,9 +32,9 @@ public class EnemyHitObject : MonoBehaviour
 
     private void Start()
     {
-        if (isDieInstantly)
+        if (fixedPercendDam != 0)
         {
-            this.percentDamage = 1f;
+            this.percentDamage = fixedPercendDam;
         }
     }
     float percentDamage = 0f;
@@ -42,7 +42,7 @@ public class EnemyHitObject : MonoBehaviour
     private void SetPercentValueByBossId()
     {
 
-        if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && (GameManager.Instance.bossId == 57||
+        if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && (GameManager.Instance.bossId == 57 ||
             GameManager.Instance.bossId == 72))
         {
             this.percentDamage = 1f;
