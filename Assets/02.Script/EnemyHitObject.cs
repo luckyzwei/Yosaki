@@ -47,18 +47,21 @@ public class EnemyHitObject : MonoBehaviour
         {
             this.percentDamage = 1f;
         }
-        //선녀들
+        //선녀들 & 도깨비들
         else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && (GameManager.Instance.bossId == 58 ||
          GameManager.Instance.bossId == 59 ||
          GameManager.Instance.bossId == 60 ||
          GameManager.Instance.bossId == 61 ||
          GameManager.Instance.bossId == 62 ||
          GameManager.Instance.bossId == 63 ||
-         GameManager.Instance.bossId == 64
+         GameManager.Instance.bossId == 64 ||
+         GameManager.Instance.bossId == 75 ||
+         GameManager.Instance.bossId == 76 ||
+         GameManager.Instance.bossId == 77
          ))
         {
             this.percentDamage = 0.6f;
-        }
+        } 
 
     }
 

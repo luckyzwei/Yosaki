@@ -17,17 +17,23 @@ public class UiDokebiFireBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI dokebiAbilText1;
 
-    [SerializeField]
-    private TextMeshProUGUI dokebiFireKeyButtonText;
 
+    public Button registerButton;
+    
+    
+    
 
+    public TextMeshProUGUI getButtonDesc;
 
+    public TMP_InputField inputField;
 
     private void Start()
     {
         Initialize();
         Subscribe();
         SetFlowerReward();
+
+
     }
 
     //기능 보류
@@ -38,6 +44,11 @@ public class UiDokebiFireBoard : MonoBehaviour
     private void OnEnable()
     {
         UpdateAbilText1((int)ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
+
+        if (inputField!=null)
+        {
+            inputField.text = $"소탕 횟수 입력";
+        }
     }
     private void Subscribe()
     {
@@ -48,9 +59,11 @@ public class UiDokebiFireBoard : MonoBehaviour
 
         }).AddTo(this);
 
-        ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.TableDatas[UserInfoTable.getDokebiFire].AsObservable().Subscribe(e =>
         {
-            
+            registerButton.interactable = e == 0;
+
+            getButtonDesc.SetText(e == 0 ? "획득" : "오늘 획득함");
         }).AddTo(this);
     }
 
@@ -82,7 +95,7 @@ public class UiDokebiFireBoard : MonoBehaviour
     private void Initialize()
     {
         scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.DokebiFireClear].Value)}");
-        dokebiFireKeyButtonText.SetText($"{GameBalance.DokebiKeyUseCount}번 소탕");
+
     }
 
     public void OnClickDokebiEnterButton()
@@ -110,9 +123,9 @@ public class UiDokebiFireBoard : MonoBehaviour
 
     public void OnClickGetDokebiFireButton()
     {
-        if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value < 1)
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFireKey)}이 부족합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFire)}는 하루에 한번만 획득 가능합니다!");
             return;
         }
 
@@ -126,16 +139,18 @@ public class UiDokebiFireBoard : MonoBehaviour
 
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?", () =>
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value -= 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value = 1;
             ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.getDokebiFire, ServerData.userInfoTable.TableDatas[UserInfoTable.getDokebiFire].Value);
 
             Param goodsParam = new Param();
             goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
-            goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
-                        
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
@@ -183,39 +198,69 @@ public class UiDokebiFireBoard : MonoBehaviour
     }
     public void OnClickGetManyDokebiFireButton()
     {
-        if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value < GameBalance.DokebiKeyUseCount)
+
+        if (!string.IsNullOrEmpty(inputField.text))
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFireKey)}이 부족합니다!");
-            return;
-        }
-
-        int score = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.DokebiFireClear].Value;
-
-        if (score == 0)
-        {
-            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
-            return;
-        }
-
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score * GameBalance.DokebiKeyUseCount}개 획득 합니까?\n<color=red>({score} * {GameBalance.DokebiKeyUseCount} 획득 가능)</color>", () =>
-        {
-            int clearCount = GameBalance.DokebiKeyUseCount;
-            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score * clearCount;
-            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value -= clearCount;
-
-            List<TransactionValue> transactions = new List<TransactionValue>();
-
-
-            Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
-            goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
-                        
-            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-
-            ServerData.SendTransaction(transactions, successCallBack: () =>
+            if (int.TryParse(inputField.text, out int result))
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score * clearCount}개 획득!", null);
-            });
-        }, null);
+                if(result < 1)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("올바른 개수가 아닙니다.");
+                    return;
+                }
+                if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value < result)
+                {
+                    PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFireKey)}이 부족합니다!");
+                    return;
+                }
+
+                int score = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.DokebiFireClear].Value;
+
+                if (score == 0)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
+                    return;
+                }
+                
+
+                PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score * result}개 획득 합니까?\n<color=red>({score} x {result} 획득 가능)</color>", () =>
+                {
+                    if (result < 1)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage("올바른 개수가 아닙니다.");
+                        return;
+                    }
+                    if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value < result)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFireKey)}이 부족합니다!");
+                        return;
+                    }
+
+
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score * result;
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value -= result;
+
+                    List<TransactionValue> transactions = new List<TransactionValue>();
+
+
+                    Param goodsParam = new Param();
+                    goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
+                    goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
+
+                    transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+                    ServerData.SendTransaction(transactions, successCallBack: () =>
+                    {
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score * result}개 획득!", null);
+                    });
+                }, null);
+            }
+            else
+            {
+                PopupManager.Instance.ShowAlarmMessage("올바른 개수가 아닙니다.");
+            }
+        }
+
+
     }
 }

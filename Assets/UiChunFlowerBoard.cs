@@ -27,6 +27,8 @@ public class UiChunFlowerBoard : MonoBehaviour
         Initialize();
         Subscribe();
         SetFlowerReward();
+
+
     }
 
     //기능 보류

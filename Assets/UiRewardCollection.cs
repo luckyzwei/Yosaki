@@ -329,9 +329,9 @@ public class UiRewardCollection : MonoBehaviour
     }
     public void OnClickDokebiReward()
     {
-        if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value < 1)
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFireKey)}이 부족합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFire)}는 하루에 한번만 획득 가능합니다!");
             return;
         }
 
@@ -345,16 +345,18 @@ public class UiRewardCollection : MonoBehaviour
 
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?", () =>
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value -= 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value = 1;
             ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.getDokebiFire, ServerData.userInfoTable.TableDatas[UserInfoTable.getDokebiFire].Value);
 
             Param goodsParam = new Param();
             goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
-            goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
 
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             ServerData.SendTransaction(transactions, successCallBack: () =>

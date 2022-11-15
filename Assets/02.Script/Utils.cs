@@ -160,6 +160,7 @@ public static class Utils
                 type == Item_Type.Fw ||
                 type == Item_Type.Cw ||
                 type == Item_Type.DokebiFire ||
+                type == Item_Type.DokebiFireKey ||
                 type == Item_Type.FoxMaskPartial ||
                 type == Item_Type.Mileage ||
                 type == Item_Type.Event_Fall ||
