@@ -458,10 +458,10 @@ public static class CommonString
                 return "천계 꽃 레벨당 천상베기 증가";
                 break;
             case StatusType.SuperCritical5DamPer:
-                return "도깨비참수 피해(%)";
+                return "귀신베기 피해(%)";
                 break;
             case StatusType.DokebiFireHasValueUpgrade:
-                return "도깨비 불 개수당 도깨비참수 증가";
+                return "도깨비 불 개수당  증가";
                 break;
         }
 

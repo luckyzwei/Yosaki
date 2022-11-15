@@ -71,6 +71,7 @@ public static class PlayerStats
         double feelMulDam = GetSuperCritical2DamPer();
         double hellDam = GetSuperCritical3DamPer();
         double chunSangDam = GetSuperCritical4DamPer();
+        double dokebiDam = GetSuperCritical5DamPer();
 
         double totalPower =
           ((baseAttack + baseAttack * baseAttackPer)
@@ -91,6 +92,7 @@ public static class PlayerStats
         totalPower += totalPower * feelMulDam;
         totalPower += totalPower * hellDam;
         totalPower += (totalPower * chunSangDam);
+        totalPower += (totalPower * dokebiDam);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -2179,6 +2181,8 @@ public static class PlayerStats
 
     public static float GetHellPowerAddValue()
     {
+        return 0f;
+
         var goodsNum = ServerData.goodsTable.GetTableData(GoodsTable.HellPower).Value;
 
         return goodsNum * hellPowerStoneAddPer;
