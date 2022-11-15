@@ -88,7 +88,7 @@ public class UiTopRankerCell : MonoBehaviour
         }
     }
 
-    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx,int hornIdx)
+    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx, int hornIdx)
     {
         this.recNickName = nickName;
         this.nickName.SetText(nickName);
@@ -114,7 +114,7 @@ public class UiTopRankerCell : MonoBehaviour
         {
             mask.gameObject.SetActive(false);
         }
-        
+
         if (hornIdx != -1)
         {
             if (horn != null)
@@ -125,7 +125,10 @@ public class UiTopRankerCell : MonoBehaviour
         }
         else
         {
-            horn.gameObject.SetActive(false);
+            if (horn != null)
+            {
+                horn.gameObject.SetActive(false);
+            }
         }
 
         if (weaponId != -1)

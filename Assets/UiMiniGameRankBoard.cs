@@ -52,11 +52,11 @@ public class UiMiniGameRankBoard : MonoBehaviour
         {
             if (e != null)
             {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score.ToString("F2")}초", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.gumgiIdx, e.GuildName,e.maskIdx,e.hornIdx);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score.ToString("F2")}초", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.gumgiIdx, e.GuildName, e.maskIdx, e.hornIdx);
             }
             else
             {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1,string.Empty,-1,-1);
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1, string.Empty, -1, -1);
             }
 
 
@@ -108,7 +108,15 @@ public class UiMiniGameRankBoard : MonoBehaviour
                         int magicBookId = int.Parse(splitData[3]);
                         int gumgiIdx = int.Parse(splitData[4]);
                         int maskIdx = int.Parse(splitData[6]);
-                        int hornIdx = int.Parse(splitData[8]);
+                        int hornIdx = -1;
+
+                        if (splitData.Length >= 9)
+                        {
+                            if (int.TryParse(splitData[8], out var result))
+                            {
+                                hornIdx = result;
+                            }
+                        }
 
                         Color color1 = Color.white;
                         Color color2 = Color.white;
@@ -138,7 +146,7 @@ public class UiMiniGameRankBoard : MonoBehaviour
                             guildName = splitData[7];
                         }
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{score.ToString("F2")}초", rank, costumeId, petId, weaponId, magicBookId, gumgiIdx,guildName, maskIdx,hornIdx);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{score.ToString("F2")}초", rank, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx, hornIdx);
                     }
                     else
                     {

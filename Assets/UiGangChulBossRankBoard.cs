@@ -111,7 +111,12 @@ public class UiGangChulBossRankBoard : MonoBehaviour
                         int magicBookId = int.Parse(splitData[3]);
                         int gumgiIdx = int.Parse(splitData[4]);
                         int maskIdx = int.Parse(splitData[6]);
-                        int hornIdx = int.Parse(splitData[8]);
+                        int hornIdx = -1;
+
+                        if (splitData.Length >= 9)
+                        {
+                            hornIdx = int.Parse(splitData[8]);
+                        }
 
                         Color color1 = Color.white;
                         Color color2 = Color.white;

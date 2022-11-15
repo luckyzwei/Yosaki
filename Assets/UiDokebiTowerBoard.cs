@@ -37,7 +37,7 @@ public class UiDokebiTowerBoard : MonoBehaviour
         if (IsAllClear() == false)
         {
             int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx3).Value;
-            currentStageText.SetText($"{currentFloor + 1}Ãþ µµÀü");
+            currentStageText.SetText($"{currentFloor + 1}Ãþ ÀÔÀå");
         }
         else
         {

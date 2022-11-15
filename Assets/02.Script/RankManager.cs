@@ -31,7 +31,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public class RankInfo
     {
-        public RankInfo(string NickName, string GuildName, int Rank, double Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int gumgiIdx, int maskIdx,int hornIdx)
+        public RankInfo(string NickName, string GuildName, int Rank, double Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int gumgiIdx, int maskIdx, int hornIdx)
         {
 #if UNITY_ANDROID
             this.NickName = NickName;
@@ -175,7 +175,12 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
-                int hornIdx = int.Parse(splitData[8]);
+                int hornIdx = -1;
+
+                if (splitData.Length >= 9)
+                {
+                    hornIdx = int.Parse(splitData[8]);
+                }
 
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
@@ -183,7 +188,7 @@ public class RankManager : SingletonMono<RankManager>
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, level, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, level, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx);
             }
         }
 
@@ -259,14 +264,21 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
-                int hornIdx = int.Parse(splitData[8]);
+
+                int hornIdx = -1;
+
+                if (splitData.Length >= 9)
+                {
+                    hornIdx = int.Parse(splitData[8]);
+                }
+
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx);
             }
         }
 
@@ -344,14 +356,19 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
-                int hornIdx = int.Parse(splitData[8]);
+                int hornIdx = -1;
+
+                if (splitData.Length >= 9)
+                {
+                    hornIdx = int.Parse(splitData[8]);
+                }
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx);
             }
         }
 
@@ -441,7 +458,12 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
-                int hornIdx = int.Parse(splitData[8]);
+                int hornIdx = -1;
+
+                if (splitData.Length >= 9)
+                {
+                    hornIdx = int.Parse(splitData[8]);
+                }
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
@@ -449,7 +471,7 @@ public class RankManager : SingletonMono<RankManager>
                 }
 
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx);
             }
         }
 
@@ -533,7 +555,12 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
-                int hornIdx = int.Parse(splitData[8]);
+                int hornIdx = -1;
+
+                if (splitData.Length >= 9)
+                {
+                    hornIdx = int.Parse(splitData[8]);
+                }
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
@@ -541,7 +568,7 @@ public class RankManager : SingletonMono<RankManager>
                 }
 
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx);
             }
         }
 
@@ -625,7 +652,12 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
-                int hornIdx = int.Parse(splitData[8]);
+                int hornIdx = -1;
+
+                if (splitData.Length >= 9)
+                {
+                    hornIdx = int.Parse(splitData[8]);
+                }
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
@@ -716,14 +748,19 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
-                int hornIdx = int.Parse(splitData[8]);
+                int hornIdx = -1;
+
+                if (splitData.Length >= 9)
+                {
+                    hornIdx = int.Parse(splitData[8]);
+                }
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx);
             }
         }
 
@@ -811,14 +848,19 @@ public class RankManager : SingletonMono<RankManager>
                 int magicBookId = int.Parse(splitData[3]);
                 int gumgiIdx = int.Parse(splitData[4]);
                 int maskIdx = int.Parse(splitData[6]);
-                int hornIdx = int.Parse(splitData[8]);
+                int hornIdx = -1;
+
+                if (splitData.Length >= 9)
+                {
+                    hornIdx = int.Parse(splitData[8]);
+                }
                 string guildName = string.Empty;
                 if (splitData.Length >= 8)
                 {
                     guildName = splitData[7];
                 }
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx,hornIdx);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx);
             }
 
             if (myRankInfo != null)
@@ -863,7 +905,7 @@ public class RankManager : SingletonMono<RankManager>
         int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
         int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_MiniGame_Uuid, Rank_MiniGame, RankTable_MiniGame.Indate, param, bro =>
         {

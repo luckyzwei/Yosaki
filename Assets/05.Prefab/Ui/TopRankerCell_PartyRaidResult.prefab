@@ -1069,6 +1069,7 @@ GameObject:
   - component: {fileID: 7830500358493994777}
   - component: {fileID: 776642926962238858}
   - component: {fileID: 2506497792778702721}
+  - component: {fileID: 811742540385303025}
   m_Layer: 0
   m_Name: Horn
   m_TagString: Untagged
@@ -1092,7 +1093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13.419598, y: -1.4661865}
+  m_AnchoredPosition: {x: 28.6, y: 6.6}
   m_SizeDelta: {x: 64.264404, y: 64.264404}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &776642926962238858
@@ -1133,6 +1134,32 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &811742540385303025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5033567087446461454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19b7e2285c104f6ca47d583f3e5444f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectFactor: 0.5
+  m_Width: 0.25
+  m_Rotation: 135
+  m_Softness: 1
+  m_Brightness: 0.555
+  m_Gloss: 1
+  m_EffectArea: 0
+  m_Player:
+    play: 1
+    initialPlayDelay: 0
+    duration: 0.3
+    loop: 1
+    loopDelay: 0
+    updateMode: 0
 --- !u!1 &5360037918598566507
 GameObject:
   m_ObjectHideFlags: 0
