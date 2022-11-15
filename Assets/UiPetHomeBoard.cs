@@ -128,7 +128,7 @@ public class UiPetHomeBoard : MonoBehaviour
 
         SetRewardText();
 
-        petHasCount.SetText($"환수 보유 {PlayerStats.GetPetHomeHasCount()}");
+        petHasCount.SetText($"현재 보유 : {PlayerStats.GetPetHomeHasCount()}");
     }
 
     private void SetAbilText()
@@ -160,7 +160,7 @@ public class UiPetHomeBoard : MonoBehaviour
 
         while (e.MoveNext())
         {
-            description += $"{CommonString.GetStatusName(e.Current.Key)} {e.Current.Value * 100f}% 증가\n";
+            description += $"{CommonString.GetStatusName(e.Current.Key)} {Utils.ConvertBigNum(e.Current.Value * 100f)} 증가\n";
         }
 
         if (rewards.Count == 0)
@@ -176,7 +176,7 @@ public class UiPetHomeBoard : MonoBehaviour
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            abils += $"보유 {i + 1} : {CommonString.GetStatusName((StatusType)tableData[i].Abiltype)} {tableData[i].Abilvalue * 100f}%\n";
+            abils += $"보유 {i + 1} : {CommonString.GetStatusName((StatusType)tableData[i].Abiltype)} {Utils.ConvertBigNum(tableData[i].Abilvalue * 100f)}\n";
         }
 
         abils += "<color=red>모든 효과는 중첩됩니다!</color>";
