@@ -28,6 +28,11 @@ public class UiPetHomeBoard : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI rewardButtonDescription;
+
+    [SerializeField]
+    private TextMeshProUGUI abilList;
+
+
     private void Start()
     {
         Initialize();
@@ -139,7 +144,7 @@ public class UiPetHomeBoard : MonoBehaviour
             if (petHomeHasCount <= i) break;
 
             StatusType abilType = (StatusType)tableData[i].Abiltype;
-            float abilValue = tableData[i].Rewardvalue;
+            float abilValue = tableData[i].Abilvalue;
 
             if (rewards.ContainsKey(abilType) == false)
             {
@@ -155,10 +160,29 @@ public class UiPetHomeBoard : MonoBehaviour
 
         while (e.MoveNext())
         {
-            description += $"{CommonString.GetStatusName(e.Current.Key)} {Utils.ConvertBigNum(e.Current.Value)}% 증가\n";
+            description += $"{CommonString.GetStatusName(e.Current.Key)} {e.Current.Value * 100f}% 증가\n";
         }
 
-        abilDescription.SetText(description);
+        if (rewards.Count == 0)
+        {
+            abilDescription.SetText("환수가 없습니다.");
+        }
+        else
+        {
+            abilDescription.SetText(description);
+        }
+
+        string abils = string.Empty;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            abils += $"보유 {i + 1} : {CommonString.GetStatusName((StatusType)tableData[i].Abiltype)} {tableData[i].Abilvalue * 100f}%\n";
+        }
+
+        abils += "<color=red>모든 효과는 중첩됩니다!</color>";
+
+
+        abilList.SetText(abils);
     }
 
     private void SetRewardText()
@@ -193,6 +217,15 @@ public class UiPetHomeBoard : MonoBehaviour
             description += $"{CommonString.GetItemName(e.Current.Key)} {Utils.ConvertBigNum(e.Current.Value)}개\n";
         }
 
-        rewardDescription.SetText(description);
+        if (rewards.Count == 0) 
+        {
+            rewardDescription.SetText("환수가 없습니다.");
+        }
+        else 
+        {
+            rewardDescription.SetText(description);
+        }
+
+     
     }
 }
