@@ -196,6 +196,11 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.FoxMaskPartial,
         GoodsTable.Event_Fall_Gold,
         GoodsTable.Mileage,
+
+        GoodsTable.HellUp,
+        GoodsTable.HellPower,
+        GoodsTable.DokebiFire,
+        GoodsTable.DokebiFireKey,
     };
 
     //SendQueue에서 저장

@@ -332,7 +332,7 @@ public static class CommonString
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
             case Item_Type.FoxMaskPartial: return "나무조각";
             case Item_Type.DokebiFire: return "도깨비불";
-            case Item_Type.DokebiFireKey: return "도깨비불 입장권";
+            case Item_Type.DokebiFireKey: return "도깨비불 소탕권";
             case Item_Type.Mileage: return "마일리지";
             case Item_Type.HellPower: return "지옥강화석";
         }

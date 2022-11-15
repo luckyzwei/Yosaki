@@ -125,8 +125,6 @@ public class GoodsTable
     public static string Chun3 = "Chun3";
     public static string Chun4 = "Chun4";
 
-
-
     public static string Fw = "Fw";
     public static string Cw = "Cw"; //천계꽃
 
