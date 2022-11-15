@@ -21,6 +21,22 @@ public class UiContentsExitButton : MonoBehaviour
         }
 
     }
+    public void OnClickNextStageButton()
+    {
+        
+        if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx3).Value  < (TableManager.Instance.towerTable3.dataArray.Length))
+        {
+            if (GameManager.contentsType == GameManager.ContentsType.DokebiTower)
+            {
+                GameManager.Instance.LoadContents(GameManager.ContentsType.DokebiTower);
+            }
+            else
+            {
+                return;
+            }
+        }
+        
+    }
 
     public void OnClickExitButton_ForPartyRaid()
     {

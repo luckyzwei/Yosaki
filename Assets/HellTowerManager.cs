@@ -19,7 +19,7 @@ public class HellTowerManager : ContentsManagerBase
     private List<RewardData> rewardDatas;
 
     [SerializeField]
-    private UiInfinityTowerResult uiInfinityTowerResult;
+    private UiHellTowerResult uiInfinityTowerResult;
 
     public UnityEvent retryFunc;
 

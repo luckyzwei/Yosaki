@@ -194,6 +194,7 @@ public class UserInfoTable
     public DateTime currentServerTime { get; private set; }
     public ReactiveCommand whenServerTimeUpdated = new ReactiveCommand();
 
+
     private Dictionary<string, double> tableSchema = new Dictionary<string, double>()
     {
         {Hp,100f},
