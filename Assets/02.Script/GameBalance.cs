@@ -240,7 +240,7 @@ public static class GameBalance
     public readonly static ObscuredInt bandiPlusStageDevideValue = 1000;
 
     public static ObscuredFloat forestValue = 1f;
-    public static ObscuredInt recommendCountPerWeek = 3;
+    public static ObscuredInt recommendCountPerWeek = 5;
 
     public static ObscuredInt sanGoonDogFeedCount = 3;
 
