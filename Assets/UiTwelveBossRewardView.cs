@@ -883,7 +883,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "적도깨비 호연 획득!!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "혈량 호연 획득!!", null);
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
 
@@ -918,7 +918,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "황도깨비 호연 획득!!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "뇌량 호연 획득!!", null);
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
 
@@ -953,7 +953,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "청도깨비 호연 획득!!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "암량 호연 획득!!", null);
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
 
@@ -1975,7 +1975,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "천계검3 획득!!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "번개검 획득!!", null);
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
@@ -2007,7 +2007,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "천계검4 획득!!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "구름검 획득!!", null);
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
@@ -2040,7 +2040,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "도깨비검0 획득!!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "혈량검 획득!!", null);
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
@@ -2072,7 +2072,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "도깨비검1 획득!!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "뇌량검 획득!!", null);
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
@@ -2104,7 +2104,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "도깨비검2 획득!!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "암량검 획득!!", null);
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }

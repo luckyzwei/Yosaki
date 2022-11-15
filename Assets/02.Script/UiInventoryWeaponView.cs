@@ -541,17 +541,17 @@ public class UiInventoryWeaponView : MonoBehaviour
                 if (weaponData.Id == 57)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
-                    weaponLockDescription.SetText($"도깨비나라\n적도깨비에서 획득!");
+                    weaponLockDescription.SetText($"도깨비나라\n혈량에서 획득!");
                 }
                 if (weaponData.Id == 58)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
-                    weaponLockDescription.SetText($"도깨비나라\n황도깨비에서 획득!");
+                    weaponLockDescription.SetText($"도깨비나라\n뇌량에서 획득!");
                 }
                 if (weaponData.Id == 59)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
-                    weaponLockDescription.SetText($"도깨비나라\n청도깨비에서 획득!");
+                    weaponLockDescription.SetText($"도깨비나라\n암량에서 획득!");
                 }
                 //
                 if (weaponData.Id == 45 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49||
