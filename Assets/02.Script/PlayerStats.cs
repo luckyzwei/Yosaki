@@ -2158,8 +2158,6 @@ public static class PlayerStats
 
     public static float GetPetHomeAbilValue(StatusType type)
     {
-        return 0f;
-
         float ret = 0f;
 
         int petHomeHasCount = GetPetHomeHasCount();
