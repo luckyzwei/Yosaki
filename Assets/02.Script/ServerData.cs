@@ -349,7 +349,7 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += rewardValue;
                 break; 
             case Item_Type.HellPower:
-                ServerData.goodsTable.GetTableData(GoodsTable.HellPower).Value += rewardValue;
+                ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value += rewardValue;
                 break;   
             case Item_Type.Hel:
                 ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += rewardValue;
@@ -623,7 +623,7 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam); 
             
             case Item_Type.HellPower:
-                passParam.Add(GoodsTable.HellPower, ServerData.goodsTable.GetTableData(GoodsTable.HellPower).Value);
+                passParam.Add(GoodsTable.HellPowerUp, ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.SP:
@@ -940,8 +940,8 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);     
             
             case Item_Type.HellPower:
-                ServerData.goodsTable.GetTableData(GoodsTable.HellPower).Value += amount;
-                param.Add(GoodsTable.HellPower, ServerData.goodsTable.GetTableData(GoodsTable.HellPower).Value);
+                ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value += amount;
+                param.Add(GoodsTable.HellPowerUp, ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.SP:
@@ -1968,7 +1968,7 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
                     break;   
                 case Item_Type.HellPower:
-                    ServerData.goodsTable.GetTableData(GoodsTable.HellPower).Value += amount;
+                    ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value += amount;
                     break;
 
                 case Item_Type.SulItem:

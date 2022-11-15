@@ -197,8 +197,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.Event_Fall_Gold,
         GoodsTable.Mileage,
 
-        GoodsTable.HellUp,
-        GoodsTable.HellPower,
+        GoodsTable.HellPowerUp,
         GoodsTable.DokebiFire,
         GoodsTable.DokebiFireKey,
     };

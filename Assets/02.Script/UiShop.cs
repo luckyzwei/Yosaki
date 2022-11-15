@@ -314,8 +314,8 @@ public class UiShop : SingletonMono<UiShop>
                 break; 
             case Item_Type.HellPower:
                 {
-                    ServerData.goodsTable.GetTableData(GoodsTable.HellPower).Value += amount;
-                    param.Add(GoodsTable.HellPower, ServerData.goodsTable.GetTableData(GoodsTable.HellPower).Value);
+                    ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value += amount;
+                    param.Add(GoodsTable.HellPowerUp, ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value);
                 }
                 break;   
             case Item_Type.Hel:

@@ -2158,8 +2158,6 @@ public static class PlayerStats
 
     public static float GetPetHomeAbilValue(StatusType type)
     {
-        return 0f;
-
         float ret = 0f;
 
         int petHomeHasCount = GetPetHomeHasCount();
@@ -2179,13 +2177,11 @@ public static class PlayerStats
         return ret;
     }
 
-    public const float hellPowerStoneAddPer = 0.005f;
+    public const float hellPowerStoneAddPer = 0.007f;
 
     public static float GetHellPowerAddValue()
     {
-        return 0f;
-
-        var goodsNum = ServerData.goodsTable.GetTableData(GoodsTable.HellPower).Value;
+        var goodsNum = ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value;
 
         return goodsNum * hellPowerStoneAddPer;
     }

@@ -41,7 +41,7 @@ public class UiHellFireBoard : MonoBehaviour
         }).AddTo(this);
 
 
-        ServerData.goodsTable.GetTableData(GoodsTable.HellPower).AsObservable().Subscribe(level =>
+        ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).AsObservable().Subscribe(level =>
         {
             UpdateAbilText1((int)ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
         }).AddTo(this);
