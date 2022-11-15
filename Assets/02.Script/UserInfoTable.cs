@@ -918,7 +918,7 @@ public class UserInfoTable
             ServerData.bossServerTable.TableDatas["b53"].rewardedId.Value = string.Empty;
             bossParam.Add("b53", ServerData.bossServerTable.TableDatas["b53"].ConvertToString());
 
-            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += GameBalance.WeeklyDokebiKeyGetCount;
+            
             goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
         }
         
