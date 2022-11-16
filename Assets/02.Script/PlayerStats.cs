@@ -1579,6 +1579,8 @@ public static class PlayerStats
     }
     public static float GetDokebiFireAbilHasEffect(StatusType statusType, int addLevel = 0)
     {
+        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < 500000) return 0f;
+
         float ret = 0f;
 
         var tableDatas = TableManager.Instance.dokebiAbilBase.dataArray;
