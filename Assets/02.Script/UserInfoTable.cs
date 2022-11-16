@@ -177,7 +177,7 @@ public class UserInfoTable
     public const string oneAttenEvent_one = "oo";
     public const string relicReset = "rkrk";
 
-    public const string canRecommendCount = "canRecommendCount2";
+    public const string canRecommendCount = "canRecommendCount3";
     public const string mileageRefund = "mr";
     public const string marRelicRefund = "marRelicRe2";
 
