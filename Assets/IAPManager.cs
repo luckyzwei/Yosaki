@@ -18,7 +18,7 @@ using BackEnd;
 
 public enum BuyType
 {
-    NoLimit, DayOfOne, WeekOfTwo, MonthOfOne, AllTimeOne, MonthOfFive, WeekOfFive, DayOfFive, MonthOfTen, Pension, Fixed
+    NoLimit, DayOfOne, WeekOfTwo, MonthOfOne, AllTimeOne, MonthOfFive, WeekOfFive, DayOfFive, MonthOfTen, Pension, Fixed,WeekOfOne
 }
 public enum ShopCategory
 {

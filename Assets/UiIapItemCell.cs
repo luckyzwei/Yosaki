@@ -377,6 +377,9 @@ public class UiIapItemCell : MonoBehaviour
             case BuyType.WeekOfFive:
                 return 5;
                 break;
+            case BuyType.WeekOfOne:
+                return 1;
+                break;
             case BuyType.DayOfFive:
                 return 5;
             case BuyType.MonthOfTen:
@@ -438,6 +441,9 @@ public class UiIapItemCell : MonoBehaviour
                 break;
             case BuyType.WeekOfFive:
                 return "주 5회 구매가능";
+                break;
+            case BuyType.WeekOfOne:
+                return "주 1회 구매가능";
                 break;
             case BuyType.DayOfFive:
                 return "일 5회 구매가능";
