@@ -233,7 +233,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         platform = IOSPlatformKey;
         myPlatform = MatchingPlatform.IOS;
 #endif
-        PhotonNetwork.LocalPlayer.NickName = $"{PlayerData.Instance.NickName},{costume},{weapon},{magicbook},{pet},{gumgi},{guildName},{mask},{level},{platform}";
+        PhotonNetwork.LocalPlayer.NickName = $"{PlayerData.Instance.NickName},{costume},{weapon},{magicbook},{pet},{gumgi},{guildName},{mask},{level},{platform},{horn}";
 
         connectMask.SetActive(true);
 
@@ -270,6 +270,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         ret.level = int.Parse(splits[8]);
         ret.platform = splits[9] == AndPlatformKey ? MatchingPlatform.And : MatchingPlatform.IOS;
 
+        if (splits.Length >= 11)
+        { 
+            ret.horn = int.Parse(splits[10]); 
+        }
+        
         return ret;
     }
 
