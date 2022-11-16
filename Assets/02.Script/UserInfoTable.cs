@@ -100,6 +100,7 @@ public class UserInfoTable
     public const string marblepensionAttendance = "marblepension";
     public const string hellpensionAttendance = "hellpension";
     public const string chunpensionAttendance = "chunpension";
+    public const string dokebipensionAttendance = "dokebipension";
 
     public const string marblePackChange = "marblePackChange";
 
@@ -260,6 +261,7 @@ public class UserInfoTable
         {marblepensionAttendance,0f},
         {hellpensionAttendance,0f},
         {chunpensionAttendance,0f},
+        {dokebipensionAttendance,0f},
 
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
