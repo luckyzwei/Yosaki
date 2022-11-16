@@ -206,7 +206,13 @@ public class DokebiFireManager : SingletonMono<GumGiSoulManager>
     {
         EnemyTableData enemyData = new EnemyTableData();
 
-        enemyData.Hp = System.Math.Pow(1.1, enemyDeadCount.Value) * 2;
+        double originValue = 1.0033d;
+        double addValue = 0.0002d;
+        double calValue = originValue + addValue * (enemyDeadCount.Value / 100);
+
+        enemyData.Hp = TableManager.Instance.EnemyTable.dataArray[10800].Hp * (System.Math.Pow(calValue, enemyDeadCount.Value + 5000))*10000f;
+
+        Debug.LogError(enemyData.Hp);
 
         enemyData.Attackpower = 0;
 
