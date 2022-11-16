@@ -18,7 +18,10 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
         //산신령
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon &&
             (GameManager.Instance.bossId == 57||
-            GameManager.Instance.bossId == 72
+            GameManager.Instance.bossId == 72|| // 서재
+            GameManager.Instance.bossId == 75 ||//도깨비나라
+            GameManager.Instance.bossId == 76 ||
+            GameManager.Instance.bossId == 77
             )) return;
 
         int susanoGrade = PlayerStats.GetSusanoGrade();
