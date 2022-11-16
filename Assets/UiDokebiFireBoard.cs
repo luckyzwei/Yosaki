@@ -257,7 +257,7 @@ public class UiDokebiFireBoard : MonoBehaviour
             }
             else
             {
-                PopupManager.Instance.ShowAlarmMessage("올바른 개수가 아닙니다.");
+                PopupManager.Instance.ShowAlarmMessage("소탕 횟수를 입력해주세요.");
             }
         }
 
