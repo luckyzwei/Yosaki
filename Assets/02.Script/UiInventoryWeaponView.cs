@@ -160,6 +160,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (weaponData != null && weaponData.Id >= 60 && weaponData.Id <= 62)
         {
             equipButton.gameObject.SetActive(false);
+            //
         }
     }
 
