@@ -188,7 +188,7 @@ public class UserInfoTable
 
     public const string nickNameChange = "nickNameChange";
     public const string getPetHome = "gph";
-
+    public const string dokebiPensionReset = "doke";
 
     
     public double currentServerDate;
@@ -348,6 +348,7 @@ public class UserInfoTable
 
         {nickNameChange,0},
         {getPetHome,0},
+        {dokebiPensionReset,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -743,6 +744,11 @@ public class UserInfoTable
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.chunpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.chunpensionAttendance).Value++;
+            }  
+            
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.dokebipensionAttendance].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.dokebipensionAttendance).Value++;
             }
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
@@ -790,6 +796,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.weaponpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.weaponpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.hellpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.hellpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.chunpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.chunpensionAttendance).Value);
+        userInfoParam.Add(UserInfoTable.dokebipensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebipensionAttendance).Value);
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
