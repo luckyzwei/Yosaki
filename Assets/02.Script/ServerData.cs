@@ -464,6 +464,7 @@ public static class ServerData
             case Item_Type.costume66:
             case Item_Type.costume67:
             case Item_Type.costume68:
+            case Item_Type.costume69:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -583,6 +584,7 @@ public static class ServerData
             case Item_Type.costume66:
             case Item_Type.costume67:
             case Item_Type.costume68:
+            case Item_Type.costume69:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);

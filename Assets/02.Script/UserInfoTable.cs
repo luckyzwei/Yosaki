@@ -113,7 +113,7 @@ public class UserInfoTable
 
 
     //6월월간
-    public const string killCountTotal = "k10";
+    public const string killCountTotal = "k12";
     //7월월간
     public const string killCountTotal2 = "k11";
     public const string killCountTotalChild = "fal"; //가을훈련
@@ -1082,7 +1082,7 @@ public class UserInfoTable
     public bool IsMonthlyPass2()
     {
 #if UNITY_EDITOR
-        return true;
+        return false;
 #endif
         return currentServerTime.Month == 11;
     }

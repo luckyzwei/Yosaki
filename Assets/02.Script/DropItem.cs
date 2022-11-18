@@ -344,6 +344,9 @@ public enum Item_Type
     costume67 = 1268,
     costume68 = 1269,
 
+    //월간 코스튬
+    costume69 = 1270,
+
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,
@@ -422,6 +425,9 @@ public enum Item_Type
     ChunNorigae5 = 8500,
     ChunNorigae6 = 8501,
     
+    MonthNorigae12 = 8600,
+
+
     Chun0 = 8700, // 천계기술
     Chun1 = 8701,
     Chun2 = 8702,
