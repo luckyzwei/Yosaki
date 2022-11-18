@@ -480,6 +480,7 @@ public static class ServerData
 
 
 
+
             case Item_Type.GuildReward:
                 ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += rewardValue;
                 break;

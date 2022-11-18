@@ -336,6 +336,7 @@ public static class CommonString
             case Item_Type.DokebiFireKey: return "도깨비불 소탕권";
             case Item_Type.Mileage: return "마일리지";
             case Item_Type.HellPower: return "지옥강화석";
+            case Item_Type.MonthNorigae0: return "12월 월간 노리개";
         }
         return "미등록";
     }

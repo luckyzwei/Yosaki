@@ -425,7 +425,7 @@ public enum Item_Type
     ChunNorigae5 = 8500,
     ChunNorigae6 = 8501,
     
-    MonthNorigae12 = 8600,
+    MonthNorigae0 = 8600,
 
 
     Chun0 = 8700, // 천계기술

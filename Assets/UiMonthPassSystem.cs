@@ -90,7 +90,7 @@ public class UiMonthPassSystem : MonoBehaviour
         string ad = ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAdReward].Value;
 
         bool hasCostumeItem = false;
-
+        bool hasPassItem = false;
         for (int i = 0; i < tableData.Length; i++)
         {
             bool canGetReward = CanGetReward(tableData[i].Unlockamount);
@@ -103,6 +103,11 @@ public class UiMonthPassSystem : MonoBehaviour
                 if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
                 {
                     hasCostumeItem = true;
+                    break;
+                }
+                if (((Item_Type)(tableData[i].Reward1)).IsPassItem())
+                {
+                    hasPassItem = true;
                     break;
                 }
 
@@ -129,6 +134,11 @@ public class UiMonthPassSystem : MonoBehaviour
         if (hasCostumeItem)
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 아이템은 직접 수령해야 합니다.", null);
+            return;
+        }
+        if (hasPassItem)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "패스 보상 장비는 직접 수령해야 합니다.", null);
             return;
         }
 

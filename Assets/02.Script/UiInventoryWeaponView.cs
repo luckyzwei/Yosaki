@@ -141,6 +141,10 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             equipButton.gameObject.SetActive(false);
         }
+        if (magicBookData != null && magicBookData.Id == 45)
+        {
+            equipButton.gameObject.SetActive(false);
+        }
 
         if (weaponData != null && weaponData.Id >= 37 && weaponData.Id <= 42)
         {
@@ -248,7 +252,8 @@ public class UiInventoryWeaponView : MonoBehaviour
             magicBookData.Id == 41 ||
             magicBookData.Id == 42 ||
             magicBookData.Id == 43 ||
-            magicBookData.Id == 44
+            magicBookData.Id == 44 ||
+            magicBookData.Id == 45
             ));
         foxNorigaeGetButton.SetActive(false);
 
@@ -302,6 +307,12 @@ public class UiInventoryWeaponView : MonoBehaviour
                 )
             {
                 suhoSinDescription.SetText($"도깨비 나라\n도깨비 보스에서 획득!");
+            }
+            else if (
+                magicBookData.Id == 45
+                )
+            {
+                suhoSinDescription.SetText($"월간 패스\n12월 월간패스 보상에서 획득!");
             }
 
 
@@ -1013,6 +1024,12 @@ public class UiInventoryWeaponView : MonoBehaviour
         }
         else
         {
+            if (magicBookData.Id == 23 || magicBookData.Id == 45)
+            {
+                PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
+                return;
+            }
+
             float currentMagicStoneAmount = ServerData.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
             float levelUpPrice = ServerData.magicBookTable.GetMagicBookLevelUpPrice(magicBookData.Stringid);
 

@@ -96,6 +96,11 @@ public static class Utils
                   type == Item_Type.pet2 ||
                   type == Item_Type.pet3;
     }
+
+    public static bool IsPassItem(this Item_Type type)
+    {
+        return type == Item_Type.MonthNorigae0;
+    }
     public static bool IsGoodsItem(this Item_Type type)
     {
         return type == Item_Type.Gold ||
@@ -137,6 +142,8 @@ public static class Utils
                 type == Item_Type.DokebiNorigae0 ||
                 type == Item_Type.DokebiNorigae1 ||
                 type == Item_Type.DokebiNorigae2 ||
+
+                type == Item_Type.MonthNorigae0 ||
                 
 
                 type == Item_Type.DokebiHorn0 ||

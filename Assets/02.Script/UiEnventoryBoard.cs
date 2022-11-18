@@ -96,7 +96,9 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
         while (e.MoveNext())
         {
-            if (e.Current.Value.Id == 23)
+            if (e.Current.Value.Id == 23||
+                e.Current.Value.Id == 45
+                )
             {
                 UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent);
 

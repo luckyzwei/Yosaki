@@ -116,6 +116,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiNorigae0;
     public Sprite DokebiNorigae1;
     public Sprite DokebiNorigae2;
+
+    public Sprite MonthNorigae0;
     
     public Sprite DokebiHorn0;
     public Sprite DokebiHorn1;
@@ -751,6 +753,10 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.DokebiNorigae2:
                 return DokebiNorigae2;
+                break;
+            //
+            case Item_Type.MonthNorigae0:
+                return MonthNorigae0;
                 break;
             //
             //
