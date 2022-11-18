@@ -720,6 +720,11 @@ public static class PlayerStats
         ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
 
+        ret += GetMonthlyFreeBuffValue(StatusType.ExpGainPer);
+        ret += GetMonthlyAdBuffValue(StatusType.ExpGainPer);
+        
+
+
         ret += GetPetHomeAbilValue(StatusType.ExpGainPer);
 
         return ret;
@@ -822,6 +827,60 @@ public static class PlayerStats
         return 0f;
     }
 
+    
+    //월간 패스 키값
+    private static string mf12 = "mf12";
+    private static float GetMonthlyFreeBuffValue(StatusType status)
+    {
+        if (ServerData.buffServerTable.TableDatas[mf12].remainSec.Value <= 0f) return 0f;
+
+        switch (status)
+        {
+            case StatusType.ExpGainPer:
+                {
+                    return 150f;
+                }
+                break;
+            case StatusType.MagicStoneAddPer:
+                {
+                    return 400f;
+                }
+                break;
+            case StatusType.MarbleAddPer:
+                {
+                    return 100f;
+                }
+                break;
+        }
+        return 0f;
+    }
+
+    private static string ma12 = "ma12";
+    private static float GetMonthlyAdBuffValue(StatusType status)
+    {
+        if (ServerData.buffServerTable.TableDatas[ma12].remainSec.Value <= 0f) return 0f;
+
+        switch (status)
+        {
+            case StatusType.ExpGainPer:
+                {
+                    return 200f;
+                }
+                break;
+            case StatusType.MagicStoneAddPer:
+                {
+                    return 500f;
+                }
+                break;
+            case StatusType.MarbleAddPer:
+                {
+                    return 200f;
+                }
+                break;
+        }
+        return 0f;
+    }
+
 
 
     public static float GetMagicStonePlusValue()
@@ -833,6 +892,10 @@ public static class PlayerStats
         ret += GetOneYearBuffValue(StatusType.MagicStoneAddPer);
         ret += GetChuSeokBuffValue(StatusType.MagicStoneAddPer);
         ret += GetChuSeokBuffValue2(StatusType.MagicStoneAddPer);
+
+
+        ret += GetMonthlyFreeBuffValue(StatusType.MagicStoneAddPer);
+        ret += GetMonthlyAdBuffValue(StatusType.MagicStoneAddPer);
 
         return ret;
     }
@@ -846,6 +909,9 @@ public static class PlayerStats
         ret += GetOneYearBuffValue(StatusType.MarbleAddPer);
         ret += GetChuSeokBuffValue(StatusType.MarbleAddPer);
         ret += GetChuSeokBuffValue2(StatusType.MarbleAddPer);
+
+        ret += GetMonthlyFreeBuffValue(StatusType.MarbleAddPer);
+        ret += GetMonthlyAdBuffValue(StatusType.MarbleAddPer);
 
         return ret;
     }

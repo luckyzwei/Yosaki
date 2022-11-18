@@ -325,17 +325,25 @@ public class UiBuffPopupView : MonoBehaviour
         {
             if (ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value == 0)
             {
-                PopupManager.Instance.ShowAlarmMessage("월간 패스권이 필요 합니다.");
+                PopupManager.Instance.ShowAlarmMessage("11월 월간 패스권이 필요 합니다.");
                 return;
             }
-
+        }
+        //월간패스 유료버프
+        if (buffTableData.Stringid.Equals("ma12"))
+        {
+            if (ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey].buyCount.Value == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("12월 월간 패스권이 필요 합니다.");
+                return;
+            }
         }
         //혹한기 패스 유료버프
         if (buffTableData.Stringid.Equals("cold1"))
         {
             if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.coldseasonPassKey].buyCount.Value == 0)
             {
-                PopupManager.Instance.ShowAlarmMessage("월간 패스권이 필요 합니다.");
+                PopupManager.Instance.ShowAlarmMessage("혹한기 패스권이 필요 합니다.");
                 return;
             }
 

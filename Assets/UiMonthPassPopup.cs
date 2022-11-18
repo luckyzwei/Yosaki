@@ -6,10 +6,16 @@ public class UiMonthPassPopup : MonoBehaviour
 {
 
     [SerializeField]
-    private UiBuffPopupView uiBuffPopupView_Month;
+    private UiBuffPopupView uiBuffPopupView_Free_Month_1;
 
     [SerializeField]
-    private UiBuffPopupView uiBuffPopupView_Month_2;
+    private UiBuffPopupView uiBuffPopupViewAd_Month_1;
+
+    [SerializeField]
+    private UiBuffPopupView uiBuffPopupView_Free_Month_2;
+
+    [SerializeField]
+    private UiBuffPopupView uiBuffPopupViewAd_Month_2;
 
 
     [SerializeField]
@@ -23,9 +29,13 @@ public class UiMonthPassPopup : MonoBehaviour
     {
         var tableDatas = TableManager.Instance.BuffTable.dataArray;
 
-        uiBuffPopupView_Month.Initalize(tableDatas[17]);
+        uiBuffPopupView_Free_Month_1.Initalize(tableDatas[21]);
 
-        uiBuffPopupView_Month_2.Initalize(tableDatas[18]);
+        uiBuffPopupViewAd_Month_1.Initalize(tableDatas[22]);
+
+        uiBuffPopupView_Free_Month_2.Initalize(tableDatas[17]);
+
+        uiBuffPopupViewAd_Month_2.Initalize(tableDatas[18]);
     }
 
     private void OnEnable()

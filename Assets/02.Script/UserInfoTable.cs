@@ -72,6 +72,9 @@ public class UserInfoTable
     public const string mf11_Buff = "mf11";
     public const string ma11_Buff = "ma11";
 
+    public const string mf12_Buff = "mf12";
+    public const string ma12_Buff = "ma12";
+
     public const string cold0_Buff = "cold0"; //혹한기버프
     public const string cold1_Buff = "cold1";
 
@@ -237,6 +240,9 @@ public class UserInfoTable
         {one_Buff,0f},
         {mf11_Buff,0f},
         {ma11_Buff,0f},
+
+        {mf12_Buff,0f},
+        {ma12_Buff,0f},
 
         {cold0_Buff,0f},
         {cold1_Buff,0f},
@@ -696,6 +702,8 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.one_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.mf11_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.ma11_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.mf12_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.ma12_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.cold0_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.cold1_Buff).Value = 0;
 
@@ -823,6 +831,8 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.one_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.one_Buff).Value);
         userInfoParam.Add(UserInfoTable.mf11_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.mf11_Buff).Value);
         userInfoParam.Add(UserInfoTable.ma11_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.ma11_Buff).Value);
+        userInfoParam.Add(UserInfoTable.mf12_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.mf12_Buff).Value);
+        userInfoParam.Add(UserInfoTable.ma12_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.ma12_Buff).Value);
         userInfoParam.Add(UserInfoTable.cold0_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.cold0_Buff).Value);
         userInfoParam.Add(UserInfoTable.cold1_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.cold1_Buff).Value);
         
