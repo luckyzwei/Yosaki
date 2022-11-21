@@ -1094,6 +1094,7 @@ public class UserInfoTable
 #if UNITY_EDITOR
         return false;
 #endif
-        return currentServerTime.Month == 11;
+        //홀수 달의 경우 true
+        return (currentServerTime.Month %2) == 1;
     }
 }
