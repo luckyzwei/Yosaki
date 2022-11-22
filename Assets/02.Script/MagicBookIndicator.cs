@@ -54,6 +54,17 @@ public class MagicBookIndicator : MonoBehaviour
 
         magicBookIcon.sprite = CommonResourceContainer.GetMagicBookSprite(idx);
 
+        //새 아닐때
+        if (Utils.IsBirdNorigae(idx) == false)
+        {
+            magicBookIcon.transform.localPosition = new Vector3(120f, 0f, 0f);
+        }
+        //새
+        else
+        {
+            magicBookIcon.transform.localPosition = new Vector3(-693f, -33f, 0f);
+        }
+
         if (idx < 16)
         {
             sinMulEffect.ForEach(e => e.SetActive(false));

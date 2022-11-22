@@ -179,6 +179,17 @@ public class UiTopRankerCell : MonoBehaviour
 
         magicBook.gameObject.SetActive(magicBookId != -1);
 
+        if (Utils.IsBirdNorigae(magicBookId))
+        {
+            magicBook.GetComponent<Animator>().enabled = false;
+            magicBook.transform.localPosition = new Vector3(-3.7f, 189.5f, 0f);
+        }
+        else
+        {
+            magicBook.GetComponent<Animator>().enabled = true;
+
+        }
+
         if (magicBookId != -1)
         {
             magicBook.sprite = CommonResourceContainer.GetMagicBookSprite(magicBookId);
