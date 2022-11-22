@@ -720,8 +720,8 @@ public static class PlayerStats
         ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
 
-        ret += GetMonthlyFreeBuffValue(StatusType.ExpGainPer);
-        ret += GetMonthlyAdBuffValue(StatusType.ExpGainPer);
+       // ret += GetMonthlyFreeBuffValue(StatusType.ExpGainPer);
+       // ret += GetMonthlyAdBuffValue(StatusType.ExpGainPer);
         
 
 
@@ -894,8 +894,8 @@ public static class PlayerStats
         ret += GetChuSeokBuffValue2(StatusType.MagicStoneAddPer);
 
 
-        ret += GetMonthlyFreeBuffValue(StatusType.MagicStoneAddPer);
-        ret += GetMonthlyAdBuffValue(StatusType.MagicStoneAddPer);
+      //  ret += GetMonthlyFreeBuffValue(StatusType.MagicStoneAddPer);
+      //  ret += GetMonthlyAdBuffValue(StatusType.MagicStoneAddPer);
 
         return ret;
     }
@@ -910,8 +910,8 @@ public static class PlayerStats
         ret += GetChuSeokBuffValue(StatusType.MarbleAddPer);
         ret += GetChuSeokBuffValue2(StatusType.MarbleAddPer);
 
-        ret += GetMonthlyFreeBuffValue(StatusType.MarbleAddPer);
-        ret += GetMonthlyAdBuffValue(StatusType.MarbleAddPer);
+      //  ret += GetMonthlyFreeBuffValue(StatusType.MarbleAddPer);
+       // ret += GetMonthlyAdBuffValue(StatusType.MarbleAddPer);
 
         return ret;
     }

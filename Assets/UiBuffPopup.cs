@@ -64,7 +64,7 @@ public class UiBuffPopup : MonoBehaviour
     {
         for (int i = 0; i < monthBuff.Count; i++)
         {
-            monthBuff[i].gameObject.SetActive(ServerData.userInfoTable.IsMonthlyPass2());
+           // monthBuff[i].gameObject.SetActive(ServerData.userInfoTable.IsMonthlyPass2());
         }
     }
 }

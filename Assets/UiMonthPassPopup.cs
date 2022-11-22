@@ -29,13 +29,14 @@ public class UiMonthPassPopup : MonoBehaviour
     {
         var tableDatas = TableManager.Instance.BuffTable.dataArray;
 
-        uiBuffPopupView_Free_Month_1.Initalize(tableDatas[21]);
-
-        uiBuffPopupViewAd_Month_1.Initalize(tableDatas[22]);
 
         uiBuffPopupView_Free_Month_2.Initalize(tableDatas[17]);
 
         uiBuffPopupViewAd_Month_2.Initalize(tableDatas[18]);
+
+        uiBuffPopupView_Free_Month_1.Initalize(tableDatas[17]);
+
+        uiBuffPopupViewAd_Month_1.Initalize(tableDatas[18]);
     }
 
     private void OnEnable()
