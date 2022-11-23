@@ -36,4 +36,8 @@ public class EventMissionData
   bool enable;
   public bool Enable { get {return enable; } set { this.enable = value;} }
   
+  [SerializeField]
+  int dailymaxclear;
+  public int Dailymaxclear { get {return dailymaxclear; } set { this.dailymaxclear = value;} }
+  
 }
