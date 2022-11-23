@@ -686,7 +686,8 @@ public class TableManager : SingletonMono<TableManager>
     public FallCollection fallCollection;
     public MileageReward mileageReward;
     public PetHome petHome;
-    public TowerTable3 towerTable3; 
+    public TowerTable3 towerTable3;
+    public TowerTable4 towerTable4;
 
 
 }
