@@ -50,6 +50,8 @@ public class DokebiDungeonManager : ContentsManagerBase
 
     protected override void TimerEnd()
     {
+        EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearOni, 1);
+
         base.TimerEnd();
 
         StopCoroutine(spawnRoutine);

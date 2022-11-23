@@ -161,6 +161,7 @@ public class Enemy : PoolItem
 
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.KillEnemy, (int)GameManager.Instance.CurrentStageData.Marbleamount);
 
+
        // EffectManager.SpawnEffectAllTime(DeadEfxName, this.transform.position + Vector3.up * 1f);
 
         SpawnDropItem();

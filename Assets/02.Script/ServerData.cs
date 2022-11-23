@@ -91,6 +91,7 @@ public static class ServerData
         weaponTable.Initialize();
         skillServerTable.Initialize();
         dailyMissionTable.Initialize();
+        eventMissionTable.Initialize();
         //collectionTable.Initialize();
         equipmentTable.Initialize();
         magicBookTable.Initialize();

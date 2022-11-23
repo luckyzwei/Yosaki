@@ -263,6 +263,8 @@ public class GameManager : SingletonMono<GameManager>
             }
 
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
+
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearBandit, 1);
         }
 
         if (type != ContentsType.NormalField)

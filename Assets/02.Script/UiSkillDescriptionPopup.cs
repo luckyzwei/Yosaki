@@ -574,6 +574,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         //일일미션
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.SkillAwake, 1);
+        
     }
 
     private void OnDisable()

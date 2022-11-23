@@ -104,6 +104,8 @@ public class UiRewardCollection : MonoBehaviour
                     // enterButton.interactable = true;
                 });
 
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearBandit, clearCount);
+
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{clearCount}회 소탕 완료!\n{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!", null);
             SoundManager.Instance.PlaySound("GoldUse");
 
@@ -175,6 +177,8 @@ public class UiRewardCollection : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearOni, clearCount);
+
                 PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Dokebi)} {rewardNum * clearCount}개 획득!");
 
                 //사운드

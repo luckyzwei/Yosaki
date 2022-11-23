@@ -17,6 +17,13 @@ public class UiEventMissionBoard : MonoBehaviour
         Initialize();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value += 1000;
+        }
+    }
     private void Initialize()
     {
         var tableData = TableManager.Instance.EventMission.dataArray;

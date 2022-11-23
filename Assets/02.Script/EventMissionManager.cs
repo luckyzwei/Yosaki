@@ -4,8 +4,7 @@ using UnityEngine;
 
 public enum EventMissionKey
 {
-    KillEnemy,//몬스터잡기 ★
-    ClearBandi,//반딧불전
+    ClearBandit,//반딧불전
     ClearOni,//도깨비전
     ClearCat,//고양이 요괴전
     AbilUpgrade,//능력치레벨업 ★
@@ -21,14 +20,12 @@ public static class EventMissionManager
 
     private static WaitForSeconds syncDelay_slow = new WaitForSeconds(300.0f);
 
-    public static void UpdateEventMission(EventMissionKey missionKey, int count)
+    public static void UpdateEventMissionClear(EventMissionKey missionKey, int count)
     {
-
-
         string key = TableManager.Instance.EventMissionDatas[(int)missionKey].Stringid;
 
         //로컬 데이터 갱신
-        ServerData.eventMissionTable.UpdateMissionData(key, count);
+        ServerData.eventMissionTable.UpdateMissionClearCount(key, count);
 
 
 
@@ -45,7 +42,28 @@ public static class EventMissionManager
 
         SyncRoutines[missionKey] = CoroutineExecuter.Instance.StartCoroutine(SyncToServerRoutine(key, missionKey));
     }
+    public static void UpdateEventMissionReward(EventMissionKey missionKey, int count)
+    {
+        string key = TableManager.Instance.EventMissionDatas[(int)missionKey].Stringid;
 
+        //로컬 데이터 갱신
+        ServerData.eventMissionTable.UpdateMissionRewardCount(key, count);
+
+
+
+        //서버저장
+        if (SyncRoutines.ContainsKey(missionKey) == false)
+        {
+            SyncRoutines.Add(missionKey, null);
+        }
+
+        if (SyncRoutines[missionKey] != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(SyncRoutines[missionKey]);
+        }
+
+        SyncRoutines[missionKey] = CoroutineExecuter.Instance.StartCoroutine(SyncToServerRoutine(key, missionKey));
+    }
     private static string Mission0 = "Mission0";
 
     private static string Mission1 = "Mission1";

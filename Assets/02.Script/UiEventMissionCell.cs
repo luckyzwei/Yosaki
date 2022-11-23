@@ -20,7 +20,13 @@ public class UiEventMissionCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI rewardNum;
 
+    [SerializeField]
+    private TextMeshProUGUI exchangeNum;
+
     private EventMissionData tableData;
+
+    [SerializeField]
+    private GameObject lockMask;
 
     private int getAmountFactor;
     public void Initialize(EventMissionData tableData)
@@ -32,6 +38,14 @@ public class UiEventMissionCell : MonoBehaviour
         }
 
         this.tableData = tableData;
+        //if (ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount == null)
+        //{
+
+        //}
+        //else
+        //{
+            exchangeNum.SetText($"수령 가능 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
+        //}
 
         title.SetText(tableData.Title);
 
@@ -40,27 +54,46 @@ public class UiEventMissionCell : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.eventMissionTable.TableDatas[tableData.Stringid].AsObservable().Subscribe(WhenMissionAccountChanged).AddTo(this);
+        ServerData.eventMissionTable.TableDatas[tableData.Stringid].clearCount.Subscribe(WhenMissionCountChanged).AddTo(this);
+        ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount.Subscribe(e=>
+        {
+            if(e>=TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear)
+            {
+                lockMask.SetActive(true);
+                exchangeNum.SetText($"수령 가능 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
+            }
+        }).AddTo(this);
+        
+        
     }
 
     private void OnEnable()
     {
         if (tableData != null)
         {
-            WhenMissionAccountChanged(ServerData.eventMissionTable.TableDatas[tableData.Stringid].Value);
+            WhenMissionCountChanged(ServerData.eventMissionTable.TableDatas[tableData.Stringid].clearCount.Value);
         }
     }
 
-    private void WhenMissionAccountChanged(int account)
+    private void WhenMissionCountChanged(int count)
     {
         if (this.gameObject.activeInHierarchy == false) return;
 
-        gaugeText.SetText($"{account}/{tableData.Rewardrequire}");
 
-        getButton.interactable = account >= tableData.Rewardrequire;
+        gaugeText.SetText($"{count}/{tableData.Rewardrequire}");
 
-        getAmountFactor = account / tableData.Rewardrequire;
+        getButton.interactable = count >= tableData.Rewardrequire;
 
+
+        if ((count / tableData.Rewardrequire) > (TableManager.Instance.EventMissionDatas[tableData.Id].Dailymaxclear - ServerData.eventMissionTable.CheckMissionRewardCount(tableData.Stringid)))
+        {
+            getAmountFactor = TableManager.Instance.EventMissionDatas[tableData.Id].Dailymaxclear - ServerData.eventMissionTable.CheckMissionRewardCount(tableData.Stringid);
+        }
+        else
+        {
+            getAmountFactor = count / tableData.Rewardrequire;
+        }
+        
         rewardNum.SetText($"{getAmountFactor * tableData.Rewardvalue }개");
 
         if (getButton.interactable)
@@ -77,10 +110,12 @@ public class UiEventMissionCell : MonoBehaviour
         int amountFactor = getAmountFactor;
         int rewardGemNum = tableData.Rewardvalue * amountFactor;
         //로컬 갱신
-        DailyMissionManager.UpdateDailyMission((DailyMissionKey)(tableData.Id), -tableData.Rewardrequire * amountFactor);
-        ServerData.goodsTable.AddLocalData(GoodsTable.Jade, rewardGemNum);
+        EventMissionManager.UpdateEventMissionClear((EventMissionKey)(tableData.Id), -tableData.Rewardrequire * amountFactor);
+        EventMissionManager.UpdateEventMissionReward((EventMissionKey)(tableData.Id), amountFactor);
+        
+        ServerData.goodsTable.AddLocalData(GoodsTable.Event_XMas, rewardGemNum);
 
-        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)} {rewardGemNum}개 획득!!");
+        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_XMas)} {rewardGemNum}개 획득!!");
         SoundManager.Instance.PlaySound("GoldUse");
 
         if (SyncRoutine != null)
@@ -101,15 +136,15 @@ public class UiEventMissionCell : MonoBehaviour
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
-        Param dailyMissionParam = new Param();
+        Param eventMissionParam = new Param();
         Param goodsParam = new Param();
 
         //미션 카운트 차감
-        dailyMissionParam.Add(tableData.Stringid, ServerData.dailyMissionTable.TableDatas[tableData.Stringid].Value);
-        transactionList.Add(TransactionValue.SetUpdate(DailyMissionTable.tableName, DailyMissionTable.Indate, dailyMissionParam));
+        eventMissionParam.Add(tableData.Stringid, ServerData.eventMissionTable.TableDatas[tableData.Stringid]);
+        transactionList.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
 
         //재화 추가
-        goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+        goodsParam.Add(GoodsTable.Event_XMas, ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         ServerData.SendTransaction(transactionList);

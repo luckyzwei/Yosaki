@@ -970,6 +970,7 @@ public class UserInfoTable
     public void ClearDailyMission()
     {
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.Attendance, 1);
+        EventMissionManager.UpdateEventMissionClear(EventMissionKey.Attendance, 1);
     }
 
     public bool HasRemoveAd()

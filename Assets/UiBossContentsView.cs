@@ -137,6 +137,7 @@ public class UiBossContentsView : MonoBehaviour
          }
         , successCallBack: () =>
         {
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearCat, clearAmount);
             clearButton.interactable = true;
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.RewardedBossContents, clearAmount);
             WhenClearSuccess(rewardList);

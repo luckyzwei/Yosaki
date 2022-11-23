@@ -195,6 +195,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.c6,
         GoodsTable.FoxMaskPartial,
         GoodsTable.Event_Fall_Gold,
+        GoodsTable.Event_XMas,
         GoodsTable.Mileage,
 
         GoodsTable.HellPowerUp,
