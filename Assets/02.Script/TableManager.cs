@@ -154,6 +154,29 @@ public class TableManager : SingletonMono<TableManager>
             return dailyMissionDatas;
         }
     }
+    [SerializeField]
+    private EventMission eventMission;
+
+    public EventMission EventMission => eventMission;
+
+    private Dictionary<int, EventMissionData> eventMissionDatas;
+    public Dictionary<int, EventMissionData> EventMissionDatas
+    {
+        get
+        {
+            if (eventMissionDatas == null)
+            {
+                eventMissionDatas = new Dictionary<int, EventMissionData>();
+
+                for (int i = 0; i < eventMission.dataArray.Length; i++)
+                {
+                    eventMissionDatas.Add(eventMission.dataArray[i].Id, eventMission.dataArray[i]);
+                }
+            }
+
+            return eventMissionDatas;
+        }
+    }
     //
 
 
@@ -644,6 +667,8 @@ public class TableManager : SingletonMono<TableManager>
     public SummerCollection SummerCollection => summerCollection;
 
     public SusanoTable susanoTable;
+    public OkTable okTable;
+    public YumTable yumTable;
 
     public BokPass bokPass;
     public GuildBook guildBook;

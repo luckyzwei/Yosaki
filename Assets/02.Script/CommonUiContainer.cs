@@ -116,12 +116,16 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiNorigae0;
     public Sprite DokebiNorigae1;
     public Sprite DokebiNorigae2;
+    public Sprite DokebiNorigae3;
+    public Sprite DokebiNorigae4;
 
     public Sprite MonthNorigae0;
     
     public Sprite DokebiHorn0;
     public Sprite DokebiHorn1;
     public Sprite DokebiHorn2;
+    public Sprite DokebiHorn3;
+    public Sprite DokebiHorn4;
 
     public Sprite ChunSun0;
     public Sprite ChunSun1;
@@ -144,6 +148,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Cw;
     public Sprite Event_Fall;
     public Sprite Event_Fall_Gold;
+    public Sprite Event_XMas;
     public Sprite FoxMaskPartial;
     public Sprite DokebiFire;
     public Sprite Mileage;
@@ -191,6 +196,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiWeapon0;
     public Sprite DokebiWeapon1;
     public Sprite DokebiWeapon2;
+    public Sprite DokebiWeapon3;
+    public Sprite DokebiWeapon4;
 
     public Sprite NataSkill;
     public Sprite OrochiSkill;
@@ -461,6 +468,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.costume69:
                 return costumeThumbnail[69];
                 break;
+            case Item_Type.costume70:
+                return costumeThumbnail[70];
+                break;
+            case Item_Type.costume71:
+                return costumeThumbnail[71];
+                break;
 
 
             case Item_Type.RankFrame1:
@@ -684,6 +697,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Event_Fall_Gold:
                 return Event_Fall_Gold;
                 break;
+            case Item_Type.Event_XMas:
+                return Event_XMas;
+                break;
 
             case Item_Type.du:
                 return du;
@@ -754,6 +770,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.DokebiNorigae2:
                 return DokebiNorigae2;
                 break;
+            case Item_Type.DokebiNorigae3:
+                return DokebiNorigae3;
+                break;
+            case Item_Type.DokebiNorigae4:
+                return DokebiNorigae4;
+                break;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -768,6 +790,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.DokebiHorn2:
                 return DokebiHorn2;
+                break;
+            case Item_Type.DokebiHorn3:
+                return DokebiHorn3;
+                break;
+            case Item_Type.DokebiHorn4:
+                return DokebiHorn4;
                 break;
             //
             case Item_Type.ChunSun0:
@@ -980,6 +1008,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.DokebiWeapon2:
                 return DokebiWeapon2;
+                break;
+            case Item_Type.DokebiWeapon3:
+                return DokebiWeapon3;
+                break;
+            case Item_Type.DokebiWeapon4:
+                return DokebiWeapon4;
                 break;
 
             case Item_Type.MihoNorigae:

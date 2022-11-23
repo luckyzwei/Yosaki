@@ -138,6 +138,8 @@ public class GoodsTable
 
     public static string Event_Fall = "Event_Fall"; //곶감
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
+    public static string Event_XMas = "Event_XMas"; //크리스마스 재화
+
     public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
 
     public static string DokebiFire = "DokebiFire"; //도깨비 나라 재화

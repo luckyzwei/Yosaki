@@ -386,6 +386,12 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
                 }
                 break;
+            case Item_Type.Event_XMas:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value += amount;
+                    param.Add(GoodsTable.Event_XMas, ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value);
+                }
+                break;
 
             case Item_Type.du:
                 {

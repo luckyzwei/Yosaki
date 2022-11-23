@@ -60,7 +60,9 @@ public class EnemyHitObject : MonoBehaviour
          // 도깨비들
          GameManager.Instance.bossId == 75 || 
          GameManager.Instance.bossId == 76 ||
-         GameManager.Instance.bossId == 77
+         GameManager.Instance.bossId == 77 ||
+         GameManager.Instance.bossId == 78 ||
+         GameManager.Instance.bossId == 79 
          //
          ))
         {

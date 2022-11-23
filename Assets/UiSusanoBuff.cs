@@ -21,7 +21,9 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
             GameManager.Instance.bossId == 72|| // 서재
             GameManager.Instance.bossId == 75 ||//도깨비나라
             GameManager.Instance.bossId == 76 ||
-            GameManager.Instance.bossId == 77
+            GameManager.Instance.bossId == 77 ||
+            GameManager.Instance.bossId == 78 ||
+            GameManager.Instance.bossId == 79
             )) return;
 
         int susanoGrade = PlayerStats.GetSusanoGrade();

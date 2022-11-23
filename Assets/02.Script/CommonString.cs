@@ -202,6 +202,8 @@ public static class CommonString
             case Item_Type.costume67: return TableManager.Instance.Costume.dataArray[67].Name;
             case Item_Type.costume68: return TableManager.Instance.Costume.dataArray[68].Name;
             case Item_Type.costume69: return TableManager.Instance.Costume.dataArray[69].Name;
+            case Item_Type.costume70: return TableManager.Instance.Costume.dataArray[70].Name;
+            case Item_Type.costume71: return TableManager.Instance.Costume.dataArray[71].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -331,6 +333,7 @@ public static class CommonString
             case Item_Type.Cw: return "천계 꽃";
             case Item_Type.Event_Fall: return "곶감";
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
+            case Item_Type.Event_XMas: return "크리스마스 버선";
             case Item_Type.FoxMaskPartial: return "나무조각";
             case Item_Type.DokebiFire: return "도깨비불";
             case Item_Type.DokebiFireKey: return "도깨비불 소탕권";

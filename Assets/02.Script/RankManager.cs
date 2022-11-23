@@ -677,7 +677,7 @@ public class RankManager : SingletonMono<RankManager>
             this.myRankInfo[RankType.ChunmaTop] = myRankInfo;
         }
     }
-
+    //십만대산 개인
     public void UpdateChunmaTop(double score)
     {
         if (UpdateRank() == false) return;

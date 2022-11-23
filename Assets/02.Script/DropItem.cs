@@ -347,6 +347,10 @@ public enum Item_Type
     //월간 코스튬
     costume69 = 1270,
 
+    //도깨비
+    costume70 = 1271,
+    costume71 = 1272,
+
     pet0 = 1301,
     pet1 = 1302,
     pet2 = 1303,
@@ -397,14 +401,20 @@ public enum Item_Type
     DokebiWeapon0 = 7020,
     DokebiWeapon1 = 7021,
     DokebiWeapon2 = 7022,
+    DokebiWeapon3 = 7023,
+    DokebiWeapon4 = 7024,
 
     DokebiNorigae0 = 7030,
     DokebiNorigae1 = 7031,
     DokebiNorigae2 = 7032,
+    DokebiNorigae3 = 7033,
+    DokebiNorigae4 = 7034,
 
     DokebiHorn0 =  7100,
     DokebiHorn1 =  7101,
     DokebiHorn2 =  7102,
+    DokebiHorn3 =  7103,
+    DokebiHorn4 =  7104,
 
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
@@ -434,10 +444,13 @@ public enum Item_Type
     Chun3 = 8703,
     Chun4 = 8704,
 
+    Event_XMas = 8800,
+
     Mileage = 9000,
     DokebiFire = 9001,
     DokebiFireKey = 9002,
     HellPower = 9003,
+
 }
 
 public class DropItem : PoolItem

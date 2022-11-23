@@ -1167,6 +1167,8 @@ public static class PlayerStats
 
         ret += GetPetHomeAbilValue(StatusType.SuperCritical3DamPer);
 
+        ret += GetYumAbil(StatusType.SuperCritical3DamPer);
+
         return ret;
     }
 
@@ -1185,6 +1187,10 @@ public static class PlayerStats
         ret += GetDragonBallAbil1Value();
 
         ret += GetPetHomeAbilValue(StatusType.SuperCritical4DamPer);
+
+        ret += GetOkAbil(StatusType.SuperCritical4DamPer);
+
+
 
         return ret;
     }
@@ -2060,6 +2066,42 @@ public static class PlayerStats
 
         return grade;
     }
+    public static int GetYumGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.yumTable.dataArray;
+
+        var score = ServerData.userInfoTable.TableDatas[UserInfoTable.yumScore].Value * GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
+        public static int GetOkGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.okTable.dataArray;
+
+        var score = ServerData.userInfoTable.TableDatas[UserInfoTable.okScore].Value * GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
 
     public static float GetSusanoAbil(StatusType type)
     {
@@ -2082,6 +2124,54 @@ public static class PlayerStats
             return tableData.Abilvalue1;
 
         }
+
+        return 0f;
+    }
+    public static float GetYumAbil(StatusType type)
+    {
+
+        int grade = GetYumGrade();
+
+        if (grade == -1) return 0f;
+
+        var tableData = TableManager.Instance.yumTable.dataArray[grade];
+        //지옥베기
+        if (type == StatusType.SuperCritical3DamPer)
+        {
+
+            return tableData.Abilvalue0;
+
+        }
+        //else if (type == StatusType.PenetrateDefense)
+        //{
+
+        //    return tableData.Abilvalue1;
+
+        //}
+
+        return 0f;
+    }
+    public static float GetOkAbil(StatusType type)
+    {
+
+        int grade = GetOkGrade();
+
+        if (grade == -1) return 0f;
+
+        var tableData = TableManager.Instance.okTable.dataArray[grade];
+
+        if (type == StatusType.SuperCritical4DamPer)
+        {
+
+            return tableData.Abilvalue0;
+
+        }
+        //else if (type == StatusType.PenetrateDefense)
+        //{
+
+        //    return tableData.Abilvalue1;
+
+        //}
 
         return 0f;
     }

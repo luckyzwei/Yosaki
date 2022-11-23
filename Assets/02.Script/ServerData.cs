@@ -15,6 +15,7 @@ public static class ServerData
     public static WeaponTable weaponTable { get; private set; } = new WeaponTable();
     public static SkillServerTable skillServerTable { get; private set; } = new SkillServerTable();
     public static DailyMissionTable dailyMissionTable { get; private set; } = new DailyMissionTable();
+    public static EventMissionTable eventMissionTable { get; private set; } = new EventMissionTable();
     public static CollectionTable collectionTable { get; private set; } = new CollectionTable();
     public static EquipmentTable equipmentTable { get; private set; } = new EquipmentTable();
     public static MagicBookTable magicBookTable { get; private set; } = new MagicBookTable();
@@ -386,6 +387,9 @@ public static class ServerData
             case Item_Type.Event_Fall_Gold:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value += rewardValue;
                 break;   
+            case Item_Type.Event_XMas:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value += rewardValue;
+                break;   
 
             case Item_Type.du:
                 ServerData.goodsTable.GetTableData(GoodsTable.du).Value += rewardValue;
@@ -465,6 +469,8 @@ public static class ServerData
             case Item_Type.costume67:
             case Item_Type.costume68:
             case Item_Type.costume69:
+            case Item_Type.costume70:
+            case Item_Type.costume71:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -586,6 +592,8 @@ public static class ServerData
             case Item_Type.costume67:
             case Item_Type.costume68:
             case Item_Type.costume69:
+            case Item_Type.costume70:
+            case Item_Type.costume71:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -656,6 +664,9 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.Event_Fall_Gold:
                 passParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
+            case Item_Type.Event_XMas:
+                passParam.Add(GoodsTable.Event_XMas, ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);  
                 
             case Item_Type.Fw:
@@ -959,6 +970,10 @@ public static class ServerData
             case Item_Type.Event_Fall_Gold:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value += amount;
                 param.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);   
+            case Item_Type.Event_XMas:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value += amount;
+                param.Add(GoodsTable.Event_XMas, ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);   
             
             case Item_Type.Hel:

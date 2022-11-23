@@ -16,6 +16,12 @@ public class UiDokebiBossBoard : MonoBehaviour
     [SerializeField]
     private UiTwelveBossContentsView dokebiBoss_2;
 
+    [SerializeField]
+    private UiTwelveBossContentsView dokebiBoss_3;
+
+    [SerializeField]
+    private UiTwelveBossContentsView dokebiBoss_4;
+
     void Start()
     {
         Initialize();
@@ -28,6 +34,10 @@ public class UiDokebiBossBoard : MonoBehaviour
         dokebiBoss_1.Initialize(TableManager.Instance.TwelveBossTable.dataArray[76]);
 
         dokebiBoss_2.Initialize(TableManager.Instance.TwelveBossTable.dataArray[77]);
+
+        dokebiBoss_3.Initialize(TableManager.Instance.TwelveBossTable.dataArray[78]);
+
+        dokebiBoss_4.Initialize(TableManager.Instance.TwelveBossTable.dataArray[79]);
 
     }
 }

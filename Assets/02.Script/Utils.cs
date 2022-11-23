@@ -87,7 +87,9 @@ public static class Utils
                   type == Item_Type.costume66 ||
                   type == Item_Type.costume67 ||
                   type == Item_Type.costume68 ||
-                  type == Item_Type.costume69;
+                  type == Item_Type.costume69 ||
+                  type == Item_Type.costume70 ||
+                  type == Item_Type.costume71;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -142,6 +144,8 @@ public static class Utils
                 type == Item_Type.DokebiNorigae0 ||
                 type == Item_Type.DokebiNorigae1 ||
                 type == Item_Type.DokebiNorigae2 ||
+                type == Item_Type.DokebiNorigae3 ||
+                type == Item_Type.DokebiNorigae4 ||
 
                 type == Item_Type.MonthNorigae0 ||
 
@@ -149,6 +153,8 @@ public static class Utils
                 type == Item_Type.DokebiHorn0 ||
                 type == Item_Type.DokebiHorn1 ||
                 type == Item_Type.DokebiHorn2 ||
+                type == Item_Type.DokebiHorn3 ||
+                type == Item_Type.DokebiHorn4 ||
 
                 type == Item_Type.ChunSun0 ||
                 type == Item_Type.ChunSun1 ||
@@ -173,6 +179,7 @@ public static class Utils
                 type == Item_Type.Mileage ||
                 type == Item_Type.Event_Fall ||
                 type == Item_Type.Event_Fall_Gold ||
+                type == Item_Type.Event_XMas ||
                 type == Item_Type.RelicTicket;
     }
 
@@ -219,6 +226,8 @@ public static class Utils
             type == GameManager.ContentsType.Hell || //O
             type == GameManager.ContentsType.HellWarMode || //O
             type == GameManager.ContentsType.PartyRaid || //O
+            type == GameManager.ContentsType.Yum||
+            type == GameManager.ContentsType.Ok||
             type == GameManager.ContentsType.PartyRaid_Guild; //O
     }
     public static bool IsRankFrameItem(this Item_Type type)

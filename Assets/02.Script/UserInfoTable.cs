@@ -145,6 +145,8 @@ public class UserInfoTable
     public const string hellScore = "hels";
     public const string chunClear = "chun";
     public const string susanoScore = "susa";
+    public const string yumScore = "yumScore";
+    public const string okScore = "okScore";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
     public const string buffAwake = "buffAwake";
     public const string petAwake = "petAwake";
@@ -173,6 +175,7 @@ public class UserInfoTable
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
+    public const string partyRaidDuo = "partyRaidDuo";
     public const string dokebiHorn = "dokebiHorn";
     public const string relicPackReset = "rr";
     public const string oneAttenEvent = "oe";
@@ -302,6 +305,8 @@ public class UserInfoTable
         {hellWarScore,0f},
         {catScore,0f},
         {susanoScore,0f},
+        {yumScore,0f},
+        {okScore,0f},
         {sleepRewardSavedTime,0f},
         {yomul7_buff,0f},
         {attendanceCount_100Day,1f},
@@ -334,6 +339,7 @@ public class UserInfoTable
         {refundFox,0},
         {sendGangChul,0},
         {foxMask,0},
+        {partyRaidDuo,0},
         {dokebiHorn,0},
         {relicPackReset,0},
         {hellScore,0},

@@ -1745,6 +1745,7 @@ MonoBehaviour:
   weaponTable: {fileID: 11400000, guid: bf3eab36591b0454385c1255473acc6e, type: 2}
   stageMapTable: {fileID: 11400000, guid: 3b10fdfe3d84c1348af6e483ba61bafe, type: 2}
   dailyMission: {fileID: 11400000, guid: ae340058442db344e86a7c00dd847acd, type: 2}
+  eventMission: {fileID: 11400000, guid: 75d70f036c23bee4f9f8b4d1f7c5a60f, type: 2}
   statusTable: {fileID: 11400000, guid: 617c791785eebca4b85763e92bea2883, type: 2}
   weaponEffectTable: {fileID: 11400000, guid: d9971833b3673e84588af90c513dafec, type: 2}
   magicBookTable: {fileID: 11400000, guid: aaaadf6819116674395aaa3d48c9d764, type: 2}
@@ -1795,6 +1796,8 @@ MonoBehaviour:
   DokebiHorn: {fileID: 11400000, guid: e6a7484d71bdb45488c06d9cba196013, type: 2}
   summerCollection: {fileID: 11400000, guid: 138daa099c26ac34d9b9b7905018bb65, type: 2}
   susanoTable: {fileID: 11400000, guid: 9681ce9b8dab24e479bc55bc2d5da53e, type: 2}
+  okTable: {fileID: 11400000, guid: 9167131db922443499a78f069e808df2, type: 2}
+  yumTable: {fileID: 11400000, guid: f49cd257347743849a359e03803516a9, type: 2}
   bokPass: {fileID: 11400000, guid: 690aca3da4a7daa448baff3e60fc4b44, type: 2}
   guildBook: {fileID: 11400000, guid: ecc868abcde562b40a102d4802ff671c, type: 2}
   oneYearAtten: {fileID: 11400000, guid: c35e0b8a0f5d0aa448d602aa5dc1f4dd, type: 2}
@@ -2022,6 +2025,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7b486f0bc6eeb5c449de52a46ffbdc47, type: 3}
   - {fileID: 21300000, guid: af74e637b658a9f4dae50bc38bab60db, type: 3}
   - {fileID: 21300000, guid: e1fdee06b1ace764e99a14c848a213ad, type: 3}
+  - {fileID: 21300000, guid: e1fdee06b1ace764e99a14c848a213ad, type: 3}
+  - {fileID: 21300000, guid: e1fdee06b1ace764e99a14c848a213ad, type: 3}
   rankFrame:
   - {fileID: 21300000, guid: 180b014bbd854ff4c8d26a3bc3108a29, type: 3}
   - {fileID: 21300000, guid: 045aff0737bd68d449d44a4a9bb5b849, type: 3}
@@ -2125,10 +2130,14 @@ MonoBehaviour:
   DokebiNorigae0: {fileID: 21300000, guid: bf9e7f7d4c35b4c4494ee502b6fb7062, type: 3}
   DokebiNorigae1: {fileID: 21300000, guid: 1d34ff1eac73116458b734a9d7fd553c, type: 3}
   DokebiNorigae2: {fileID: 21300000, guid: 5ac56abc72310764c8c099489b3d06cc, type: 3}
-  MonthNorigae0: {fileID: 21300000, guid: a7bc2bf6e9494be48a6179562779f044, type: 3}
+  DokebiNorigae3: {fileID: 21300000, guid: b2a94924c9e4e084e85fc66af6faa93f, type: 3}
+  DokebiNorigae4: {fileID: 21300000, guid: 1200b89d25e954744b0a78c251f5de9a, type: 3}
+  MonthNorigae0: {fileID: 21300000, guid: b8e4966468cd428418fa5447c72fabe7, type: 3}
   DokebiHorn0: {fileID: 21300000, guid: 92f9f58d12795c74ba90cc7fbf939313, type: 3}
   DokebiHorn1: {fileID: 21300000, guid: 6b45cec8b763a8a4dbe42106090790b3, type: 3}
   DokebiHorn2: {fileID: 21300000, guid: b9a7ada2415dc2c41af80d8e59d7a05c, type: 3}
+  DokebiHorn3: {fileID: 21300000, guid: 92f9f58d12795c74ba90cc7fbf939313, type: 3}
+  DokebiHorn4: {fileID: 21300000, guid: 92f9f58d12795c74ba90cc7fbf939313, type: 3}
   ChunSun0: {fileID: 21300000, guid: 4f63300c771529e49801fd1615d788fa, type: 3}
   ChunSun1: {fileID: 21300000, guid: e785d28ef5135714bbc245dafaa158e3, type: 3}
   ChunSun2: {fileID: 21300000, guid: 52ad30337e6bb1f4fb00a32d5bb21019, type: 3}
@@ -2149,6 +2158,7 @@ MonoBehaviour:
   Cw: {fileID: 21300000, guid: bff428fb78fe93b4ea1dfc4e51aabb1a, type: 3}
   Event_Fall: {fileID: 21300000, guid: 5ab2824b6a27d1c4fb0a913402f088ae, type: 3}
   Event_Fall_Gold: {fileID: 21300000, guid: 1d092eb7a781a5b48b0afc61e1055f11, type: 3}
+  Event_XMas: {fileID: 0}
   FoxMaskPartial: {fileID: 21300000, guid: 3a533ea12e235f34c933c4c952e86390, type: 3}
   DokebiFire: {fileID: 21300000, guid: 49f456d0b10e5274dbc4098b38cadbbf, type: 3}
   Mileage: {fileID: 21300000, guid: 1828831b1893ae547a81572d1224ecdd, type: 3}
@@ -2213,6 +2223,8 @@ MonoBehaviour:
   DokebiWeapon0: {fileID: 21300000, guid: 9ccbd261bb8f9bc4e83987d3a08a7a9d, type: 3}
   DokebiWeapon1: {fileID: 21300000, guid: 16182a759216ca14183d71dfe95bd9ab, type: 3}
   DokebiWeapon2: {fileID: 21300000, guid: ae2711fb8f5a1e541b77d287f3caeec8, type: 3}
+  DokebiWeapon3: {fileID: 21300000, guid: 831d1a4bdcc88c0458cbab50b6a96397, type: 3}
+  DokebiWeapon4: {fileID: 21300000, guid: 588f53af2d5b94a43b20abee29397e2c, type: 3}
   NataSkill: {fileID: 21300000, guid: ffb2316e10d65634eb2778da8e86bfc8, type: 3}
   OrochiSkill: {fileID: 21300000, guid: bb0a7d588821a834289dc833bb262371, type: 3}
   GangrimSkill: {fileID: 21300000, guid: 14eb64f14abdfc54ebbbb7c6705f1e6f, type: 3}
@@ -2405,6 +2417,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3806c9c4fd8fef943ad2a06bf8d4f259, type: 2}
   - {fileID: 11400000, guid: be9d2f17f867f8945acef2c3fa9ef9ef, type: 2}
   - {fileID: 11400000, guid: ebe131642b3cdcf4d976814e8029634c, type: 2}
+  - {fileID: 11400000, guid: 561113b4488441d4284e04577c41df75, type: 2}
+  - {fileID: 11400000, guid: 561113b4488441d4284e04577c41df75, type: 2}
   - {fileID: 11400000, guid: 561113b4488441d4284e04577c41df75, type: 2}
   petCostumeList:
   - {fileID: 11400000, guid: 3d9145f3f8361c944acb6cd70679d6e2, type: 2}
@@ -3361,7 +3375,7 @@ PrefabInstance:
     - target: {fileID: 1330659541251243652, guid: c80780283cb97bf45b4a3f8e82d68fcc,
         type: 3}
       propertyPath: editorLoginId
-      value: clone1
+      value: a_8846847867697156085
       objectReference: {fileID: 0}
     - target: {fileID: 1330659541251243652, guid: c80780283cb97bf45b4a3f8e82d68fcc,
         type: 3}
@@ -4476,6 +4490,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683965126923983406, guid: e9e39df58ca955644902e8c58c2df5d8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -222.00024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683965126923983406, guid: e9e39df58ca955644902e8c58c2df5d8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -185.45007
       objectReference: {fileID: 0}
     - target: {fileID: 1738237361616981039, guid: e9e39df58ca955644902e8c58c2df5d8,
         type: 3}
