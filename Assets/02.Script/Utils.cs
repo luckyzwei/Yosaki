@@ -226,8 +226,8 @@ public static class Utils
             type == GameManager.ContentsType.Hell || //O
             type == GameManager.ContentsType.HellWarMode || //O
             type == GameManager.ContentsType.PartyRaid || //O
-            type == GameManager.ContentsType.Yum||
-            type == GameManager.ContentsType.Ok||
+            type == GameManager.ContentsType.Yum ||
+            type == GameManager.ContentsType.Ok ||
             type == GameManager.ContentsType.PartyRaid_Guild; //O
     }
     public static bool IsRankFrameItem(this Item_Type type)
@@ -505,6 +505,11 @@ public static class Utils
     public static bool IsBirdNorigae(int idx)
     {
         return idx == 45;
+    }
+
+    public static bool IsPartyTowerMaxFloor(int idx)
+    {
+        return ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value == TableManager.Instance.towerTable4.dataArray.Length;
     }
 
 

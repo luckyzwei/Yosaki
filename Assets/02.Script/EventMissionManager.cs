@@ -8,7 +8,7 @@ public enum EventMissionKey
     ClearOni,//도깨비전
     ClearCat,//고양이 요괴전
     AbilUpgrade,//능력치레벨업 ★
-    SkillUpgrade,//스킬 레벨업 ★
+    PassiveSkillUpgrade,//스킬 레벨업 ★
     Attendance,//출석 ★
 }
 
@@ -64,6 +64,8 @@ public static class EventMissionManager
 
         SyncRoutines[missionKey] = CoroutineExecuter.Instance.StartCoroutine(SyncToServerRoutine(key, missionKey));
     }
+
+
     private static string Mission0 = "Mission0";
 
     private static string Mission1 = "Mission1";
@@ -72,14 +74,9 @@ public static class EventMissionManager
 
     private static IEnumerator SyncToServerRoutine(string key, EventMissionKey missionKey)
     {
-        if (key.Equals(Mission0) || key.Equals(Mission1))
-        {
-            yield return syncDelay_slow;
-        }
-        else
-        {
+
             yield return syncDelay;
-        }
+
 
 
         ServerData.eventMissionTable.SyncToServerEach(key);

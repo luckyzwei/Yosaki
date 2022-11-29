@@ -6,23 +6,22 @@ using UniRx;
 public class UiPartyRaidRoomObject : MonoBehaviour
 {
     [SerializeField]
-    public TextMeshProUGUI RecommendCount;
-    [SerializeField]
-    public TextMeshProUGUI RecommendCountDescription;
+    public TextMeshProUGUI description;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        Subscribe();
-        
-        RecommendCountDescription.text = "추천은 결과창에서 가능합니다!\n매 주 " + GameBalance.recommendCountPerWeek.ToString() + " 번 추천 가능합니다!";
-    }
-
-    private void Subscribe()
-    {
-        ServerData.userInfoTable.TableDatas[UserInfoTable.canRecommendCount].AsObservable().Subscribe(e=>
+        if (PartyRaidManager.Instance.NetworkManager.IsPartyTowerBoss() == true)
         {
-            RecommendCount.text = "추천 가능 수 : " + ServerData.userInfoTable.TableDatas[UserInfoTable.canRecommendCount].Value.ToString();
-        }).AddTo(this);
+            description.SetText(string.Empty);
+        }
+        else if (PartyRaidManager.Instance.NetworkManager.IsGuildBoss() == true)
+        {
+            description.SetText(string.Empty);
+        }
+        else
+        {
+            int recCount = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.canRecommendCount].Value;
+            description.SetText($"매주{GameBalance.recommendCountPerWeek}회 다른 유저를 추천하실 수 있습니다.\n남은 추천 : {ServerData.userInfoTable.TableDatas[UserInfoTable.canRecommendCount].Value}");
+        }
     }
 }

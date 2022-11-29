@@ -27,6 +27,10 @@ public class EventMissionTable
     private ReactiveDictionary<string, EventMissionServerData> tableDatas = new ReactiveDictionary<string, EventMissionServerData>();
     public ReactiveDictionary<string, EventMissionServerData> TableDatas => tableDatas;
 
+    public bool CheckMissionAttendance()
+    {
+        return tableDatas["Mission6"].clearCount.Value==0;
+    }
     public int CheckMissionClearCount(string key)
     {
         return tableDatas[key].clearCount.Value;
@@ -43,6 +47,7 @@ public class EventMissionTable
     {
         tableDatas[key].rewardCount.Value += amount;
     }
+
 
     public void Initialize()
     {
@@ -165,7 +170,7 @@ public class EventMissionTable
             }
         });
     }
-
+  
     public void SyncToServerEach(string key)
     {
         Param param = new Param();

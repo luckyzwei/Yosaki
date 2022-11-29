@@ -218,7 +218,8 @@ public class UiTopRankerCell : MonoBehaviour
         //십만대산용
         if (partyRaidRecommendButton != null)
         {
-            if (GameManager.contentsType != GameManager.ContentsType.PartyRaid_Guild)
+            if (GameManager.contentsType != GameManager.ContentsType.PartyRaid_Guild && 
+                GameManager.contentsType != GameManager.ContentsType.Online_Tower)
             {
                 bool isMyNickName = Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(nickName);
 
@@ -252,6 +253,12 @@ public class UiTopRankerCell : MonoBehaviour
         if (GameManager.contentsType == GameManager.ContentsType.PartyRaid_Guild)
         {
             PopupManager.Instance.ShowAlarmMessage($"대산군에서는 추천을 하실 수 없습니다.");
+            return;
+        }
+
+        if (GameManager.contentsType == GameManager.ContentsType.Online_Tower)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"동굴에서는 추천을 하실 수 없습니다.");
             return;
         }
 

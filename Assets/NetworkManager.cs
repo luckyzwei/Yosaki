@@ -10,6 +10,7 @@ using UniRx;
 using System.Linq;
 using static GameManager;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using System;
 
 public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
@@ -96,6 +97,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private Toggle visibleRoomToggle;
 
     [SerializeField]
+    private Toggle visibleRoomToggle_PartyTower;
+
+    [SerializeField]
     private TMP_InputField roomNameInput;
 
     [SerializeField]
@@ -121,6 +125,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     [SerializeField]
     private GameObject partyRaidResultBoard;
 
+    [SerializeField]
+    private GameObject uiPartyTowerBoard;
+
     public ReactiveCommand whenScoreInfoReceived = new ReactiveCommand();
 
     private string AndPlatformKey = "AND";
@@ -128,7 +135,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private MatchingPlatform myPlatform;
 
     public ContentsType contentsType;
-
+    public int partyRaidTargetFloor { get; private set; }
 
     #region 방리스트 갱신
     // ◀버튼 -2 , ▶버튼 -1 , 셀 숫자
@@ -155,13 +162,48 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 roomList[multiple + i].CustomProperties != null &&
                roomList[multiple + i].CustomProperties.Count != 0)
             {
-                CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? (string)roomList[multiple + i].CustomProperties["M"]:"");
+                CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText((multiple + i < roomList.Count) ? (string)roomList[multiple + i].CustomProperties["M"] : "");
                 CellBtn[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().SetText("방장 : ");
+
+                if (roomList[multiple + i].CustomProperties.Count >= 2)
+                {
+                    CellBtn[i].transform.GetChild(5).GetComponent<TextMeshProUGUI>().SetText($"{(int)roomList[multiple + i].CustomProperties["F"]}층");
+                }
+                else
+                {
+                    CellBtn[i].transform.GetChild(5).GetComponent<TextMeshProUGUI>().SetText("");
+                }
             }
             else
             {
                 CellBtn[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().SetText("");
                 CellBtn[i].transform.GetChild(4).GetComponent<TextMeshProUGUI>().SetText("");
+                CellBtn[i].transform.GetChild(5).GetComponent<TextMeshProUGUI>().SetText("");
+            }
+        }
+    }
+
+    public void SendAutoRecommend()
+    {
+        //방장일떄만
+        if (PhotonNetwork.IsMasterClient)
+        {
+            string recNickName = string.Empty;
+
+            var e = RoomPlayerDatas.GetEnumerator();
+
+            while (e.MoveNext())
+            {
+                if (Utils.GetOriginNickName(PlayerData.Instance.NickName) != Utils.GetOriginNickName(e.Current.Value.nickName))
+                {
+                    recNickName = Utils.GetOriginNickName(e.Current.Value.nickName);
+                    break;
+                }
+            }
+
+            if (string.IsNullOrEmpty(recNickName) == false)
+            {
+                PartyRaidManager.Instance.NetworkManager.SendRecommend_PartyTower(recNickName);
             }
         }
     }
@@ -271,10 +313,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         ret.platform = splits[9] == AndPlatformKey ? MatchingPlatform.And : MatchingPlatform.IOS;
 
         if (splits.Length >= 11)
-        { 
-            ret.horn = int.Parse(splits[10]); 
+        {
+            ret.horn = int.Parse(splits[10]);
         }
-        
+
         return ret;
     }
 
@@ -390,7 +432,52 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     }
 
 
+
     #region 방
+
+    public void MakePartyTowerRoom()
+    {
+        int currentFloor = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value;
+
+        if (Utils.IsPartyTowerMaxFloor(currentFloor))
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고 단계 입니다. 다음 업데이트를 기다려주세요");
+            return;
+        }
+
+
+
+        uiPartyTowerBoard.SetActive(false);
+
+        RoomOptions roomOption = new RoomOptions();
+
+        if (HasTowerRecommendCount())
+        {
+            roomOption.MaxPlayers = 2;
+        }
+        else
+        {
+            roomOption.MaxPlayers = 1;
+        }
+
+        roomOption.IsVisible = !visibleRoomToggle_PartyTower.isOn;
+
+
+        Hashtable hashtables = new Hashtable();
+        hashtables.Add("M", Utils.GetOriginNickName(PlayerData.Instance.NickName));
+        hashtables.Add("F", currentFloor + 1);
+
+        string[] propertiesListedInLobby = new string[2];
+        propertiesListedInLobby[0] = "M";
+        propertiesListedInLobby[1] = "F";
+
+        roomOption.CustomRoomProperties = hashtables;
+        roomOption.CustomRoomPropertiesForLobby = propertiesListedInLobby;
+
+
+        PhotonNetwork.CreateRoom(CommonString.PartyTowerText + $" {Utils.GetOriginNickName(PlayerData.Instance.NickName)}의 도전", roomOption, lobbyType);
+    }
+
     public void JoinOrCreateGuildRoom()
     {
         if (GuildManager.Instance.hasGuild.Value == false)
@@ -410,7 +497,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             return;
         }
 
-        if (Utils.HasBadWord(roomNameInput_make.text) || roomNameInput_make.text.Contains(CommonString.GuildText))
+        if (Utils.HasBadWord(roomNameInput_make.text) || roomNameInput_make.text.Contains(CommonString.GuildText) || roomNameInput_make.text.Contains(CommonString.PartyTowerText))
         {
             PopupManager.Instance.ShowAlarmMessage($"부적절한 이름이 포함되어 있습니다.");
             return;
@@ -699,6 +786,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         UpdatePlayerInfoList();
         UpdateRecommendButton(otherPlayer);
         RoomRenewal();
+        PlayerLeft(otherPlayer);
+    }
+
+    private void PlayerLeft(Player otherPlayer) 
+    {
+        var playerInfoData = GetPlayerInfo(otherPlayer.NickName);
+
+        if (roomPlayerDatas.ContainsKey(otherPlayer.ActorNumber)) 
+        {
+            roomPlayerDatas[otherPlayer.ActorNumber].endGame = true;
+        }
     }
 
     private void UpdateRecommendButton(Player otherPlayer)
@@ -731,6 +829,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     byte StartBossContents_Event = 1;
     byte SendChat_Event = 2;
     byte SendRecommend_Event = 3;
+    byte StartPartyTower_Event = 4;
+    byte SendPartyTowerRecommend = 5;
 
     public void SendRecommend(string nickName)
     {
@@ -756,6 +856,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         PhotonNetwork.RaiseEvent(SendRecommend_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
     }
 
+    public void SendRecommend_PartyTower(string nickName)
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerRecommend].Value <= 0)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"이번주는 더이상 추천하실 수 없습니다\n매주 {GameBalance.recommendCountPerWeek_PartyTower}회 추천 가능!", null);
+            return;
+        }
+
+        if (Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(Utils.GetOriginNickName(nickName)))
+        {
+            PopupManager.Instance.ShowAlarmMessage("자기 자신은 추천 하실 수 없습니다.");
+            return;
+        }
+
+        Debug.LogError("Send Recommend@@@");
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerRecommend].Value--;
+        ServerData.userInfoTable.UpData(UserInfoTable.partyTowerRecommend, false);
+
+        object[] objects = new object[] { Utils.GetOriginNickName(nickName), Utils.GetOriginNickName(PlayerData.Instance.NickName) };
+
+        PhotonNetwork.RaiseEvent(SendPartyTowerRecommend, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+    }
+
     public void SendScoreInfo(double score, bool end = false)
     {
         var playerPos = PlayerMoveController.Instance.transform.position;
@@ -774,15 +898,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             PopupManager.Instance.ShowYesNoPopup("알림", "토벌을 시작 할까요?", () =>
             {
 
-                if (IsGuildBoss() == false)
+                if (IsPartyTowerBoss())
                 {
-                    if (roomPlayerDatas.Count > 4)
+                    if (roomPlayerDatas.Count > 2)
                     {
                         PopupManager.Instance.ShowAlarmMessage("인원이 초과됐습니다.");
                         return;
                     }
                 }
-                else
+                else if (IsGuildBoss())
                 {
                     if (roomPlayerDatas.Count > 10)
                     {
@@ -790,17 +914,35 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                         return;
                     }
                 }
+                else
+                {
+                    if (roomPlayerDatas.Count > 4)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage("인원이 초과됐습니다.");
+                        return;
+                    }
+                }
 
-
-
-                startGameButton.interactable = false;
-                PhotonNetwork.CurrentRoom.IsOpen = false;
-                PhotonNetwork.CurrentRoom.IsVisible = false;
-                object[] objects = new object[] { "게임시작알림" };
-                PhotonNetwork.RaiseEvent(StartBossContents_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+                if (IsPartyTowerBoss() == true)
+                {
+                    SendPartyTowerStart();
+                }
+                else
+                {
+                    SendGameStartAlarm();
+                }
 
             }, null);
         }
+    }
+
+    private void SendGameStartAlarm()
+    {
+        startGameButton.interactable = false;
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+        object[] objects = new object[] { "게임시작알림" };
+        PhotonNetwork.RaiseEvent(StartBossContents_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
     }
 
     public void SendChat()
@@ -839,6 +981,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         StartCoroutine(ChatCoolRoutine());
     }
 
+    private void SendPartyTowerStart()
+    {
+        int currentFloor = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value;
+
+        if (Utils.IsPartyTowerMaxFloor(currentFloor))
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고 단계 입니다. 다음 업데이트를 기다려주세요");
+            return;
+        }
+
+        startGameButton.interactable = false;
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+
+        object[] objects = new object[] { currentFloor };
+
+        PhotonNetwork.RaiseEvent(StartPartyTower_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+    }
+
     private IEnumerator ChatCoolRoutine()
     {
         chatButton.interactable = false;
@@ -861,7 +1022,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             if (roomPlayerDatas.ContainsKey(actorNum))
             {
                 roomPlayerDatas[actorNum].score = score;
-                roomPlayerDatas[actorNum].endGame = endGame;
+
+                if (roomPlayerDatas[actorNum].endGame == false)
+                {
+                    roomPlayerDatas[actorNum].endGame = endGame;
+                }
 
                 if (currentPos.Length >= 2)
                 {
@@ -871,12 +1036,32 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 UpdateScoreBoard();
 
                 whenScoreInfoReceived.Execute();
+
+                if (endGame)
+                {
+                    PartyRaidManager.Instance.NetworkManager.UpdateResultScore();
+                }
             }
         }
         else if (photonEvent.Code == StartBossContents_Event)
         {
             // logText.SetText($"게임시작 알림 받음!");
             Debug.LogError($"게임시작 알림 받음!");
+
+            if (startGameRoutine == null)
+            {
+                startGameRoutine = StartCoroutine(StartGameRoutine());
+            }
+        }
+        else if (photonEvent.Code == StartPartyTower_Event)
+        {
+            Debug.LogError($"게임시작 알림 받음!");
+
+            object[] data = (object[])photonEvent.CustomData;
+
+            int targetFloor = (int)data[0];
+
+            partyRaidTargetFloor = targetFloor;
 
             if (startGameRoutine == null)
             {
@@ -900,6 +1085,38 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             UpdateChatText();
         }
         else if (photonEvent.Code == SendRecommend_Event)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+
+            string targetNickName = (string)data[0];
+
+            string recommendedNickName = (string)data[1];
+
+            if (Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(targetNickName))
+            {
+                Debug.LogError("추천 받음");
+
+                PopupManager.Instance.ShowAlarmMessage($"{recommendedNickName}님에게 추천 받았습니다!");
+
+                var rewardData = ServerData.bossServerTable.TableDatas["b68"];
+
+                if (string.IsNullOrEmpty(rewardData.score.Value))
+                {
+                    rewardData.score.Value = "1";
+                }
+                else
+                {
+                    int prefScore = int.Parse(rewardData.score.Value);
+
+                    prefScore++;
+
+                    rewardData.score.Value = prefScore.ToString();
+                }
+
+                ServerData.bossServerTable.UpdateData("b68");
+            }
+        }
+        else if (photonEvent.Code == SendPartyTowerRecommend)
         {
             object[] data = (object[])photonEvent.CustomData;
 
@@ -974,6 +1191,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
         int startTime = 5;
 
+        if (IsSinglePlay())
+        {
+            startTime = 1;
+        }
+
         while (true)
         {
             for (int i = 0; i < startTime; i++)
@@ -997,6 +1219,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             GameManager.Instance.LoadContents(GameManager.ContentsType.PartyRaid_Guild);
         }
+        if (IsPartyTowerBoss())
+        {
+            GameManager.Instance.LoadContents(GameManager.ContentsType.Online_Tower);
+        }
         else
         {
             GameManager.Instance.LoadContents(GameManager.ContentsType.PartyRaid);
@@ -1006,6 +1232,33 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public bool IsGuildBoss()
     {
         return PhotonNetwork.CurrentRoom.Name.Contains(CommonString.GuildText);
+    }
+
+    public bool IsPartyTowerBoss()
+    {
+        return PhotonNetwork.CurrentRoom.Name[0] == CommonString.PartyTowerText[0] && PhotonNetwork.CurrentRoom.Name[1] == CommonString.PartyTowerText[1];
+    }
+
+    public bool IsNormalBoss()
+    {
+        return IsGuildBoss() == false && IsPartyTowerBoss() == false;
+    }
+
+    public bool IsAllPlayerEnd()
+    {
+        bool ret = true;
+
+        var e = roomPlayerDatas.GetEnumerator();
+
+        while (e.MoveNext())
+        {
+            if (e.Current.Value.endGame == false)
+            {
+                ret = false;
+            }
+        }
+
+        return ret;
     }
 
     public double GetTotalScore()
@@ -1043,4 +1296,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
 
     #endregion
+
+    private bool IsSinglePlay()
+    {
+        return roomPlayerDatas.Count == 1;
+    }
+
+    private bool HasTowerRecommendCount()
+    {
+        return ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerRecommend].Value > 0;
+    }
 }

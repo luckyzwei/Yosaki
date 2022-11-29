@@ -172,6 +172,12 @@ public class UserInfoTable
     public const string exchangeCount_5 = "ex_5";
     public const string exchangeCount_6 = "ex_6";
 
+    public const string xMasExchangeCount_0 = "xMas_ex_0";
+    public const string xMasExchangeCount_1 = "xMas_ex_1";
+    public const string xMasExchangeCount_2 = "xMas_ex_2";
+    public const string xMasExchangeCount_3 = "xMas_ex_3";
+    public const string xMasExchangeCount_4 = "xMas_ex_4";
+
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
@@ -195,6 +201,8 @@ public class UserInfoTable
     public const string nickNameChange = "nickNameChange";
     public const string getPetHome = "gph";
     public const string dokebiPensionReset = "doke";
+    public const string partyTowerRecommend = "partyTowerRec";
+    public const string partyTowerFloor = "partyTowerFloor";
 
     
     public double currentServerDate;
@@ -335,6 +343,11 @@ public class UserInfoTable
         {exchangeCount_4,0},
         {exchangeCount_5,0},
         {exchangeCount_6,0},
+        {xMasExchangeCount_0,0},
+        {xMasExchangeCount_1,0},
+        {xMasExchangeCount_2,0},
+        {xMasExchangeCount_3,0},
+        {xMasExchangeCount_4,0},
         {monthreset,0},
         {refundFox,0},
         {sendGangChul,0},
@@ -361,6 +374,8 @@ public class UserInfoTable
         {nickNameChange,0},
         {getPetHome,0},
         {dokebiPensionReset,0},
+        {partyTowerRecommend,GameBalance.recommendCountPerWeek_PartyTower},
+        {partyTowerFloor,0},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -663,9 +678,24 @@ public class UserInfoTable
     {
         WhenDateChanged.Execute();
 
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+        //
+        var table = TableManager.Instance.EventMission.dataArray;
+
+        Param eventMissionParam = new Param();
+        for (int i = 0; i < table.Length; i++)
+        {
+            ServerData.eventMissionTable.TableDatas[table[i].Stringid].clearCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas[table[i].Stringid].rewardCount.Value = 0;
+
+            eventMissionParam.Add(table[i].Stringid, ServerData.eventMissionTable.TableDatas[table[i].Stringid].ConvertToString());
+        }
+        transactionList.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
+
+        //
         ClearDailyMission();
 
-        List<TransactionValue> transactionList = new List<TransactionValue>();
 
         //일일초기화
         Param dailyPassParam = new Param();
@@ -674,6 +704,7 @@ public class UserInfoTable
         dailyPassParam.Add(DailyPassServerTable.DailypassAdReward, ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassAdReward].Value);
         transactionList.Add(TransactionValue.SetUpdate(DailyPassServerTable.tableName, DailyPassServerTable.Indate, dailyPassParam));
 
+       
         //일일초기화
         Param userInfoParam = new Param();
         ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value = 0;
@@ -723,6 +754,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul7_buff).Value = 0;
         
         //
+
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (double)currentServerDate;
         //월간 초기화
@@ -865,6 +897,9 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommendCount).Value = GameBalance.recommendCountPerWeek;
             userInfoParam.Add(UserInfoTable.canRecommendCount, ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommendCount).Value);
 
+            ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerRecommend).Value = GameBalance.recommendCountPerWeek_PartyTower;
+            userInfoParam.Add(UserInfoTable.partyTowerRecommend, ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerRecommend).Value);
+
             //마일리지 상점 초기화
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1_Mileage).Value = 0;
@@ -956,6 +991,9 @@ public class UserInfoTable
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactionList.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
+
+
+
         ServerData.SendTransaction(transactionList, false);
     }
     private void WeekChanged()
@@ -970,7 +1008,9 @@ public class UserInfoTable
     public void ClearDailyMission()
     {
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.Attendance, 1);
+
         EventMissionManager.UpdateEventMissionClear(EventMissionKey.Attendance, 1);
+
     }
 
     public bool HasRemoveAd()

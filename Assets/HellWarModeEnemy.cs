@@ -155,15 +155,15 @@ public class HellWarModeEnemy : BossEnemyBase
 
             if (attackType == 0)
             {
-                    yield return StartCoroutine(AttackRoutine_2(attackInterval_Real));
+                yield return StartCoroutine(AttackRoutine_2(attackInterval_Real));
             }
             else if (attackType == 1)
             {
-                    yield return StartCoroutine(AttackRoutine_3(attackInterval_Real));
+                yield return StartCoroutine(AttackRoutine_3(attackInterval_Real));
             }
             else if (attackType == 2)
             {
-                    yield return StartCoroutine(AttackRoutine_4(attackInterval_Real));
+                yield return StartCoroutine(AttackRoutine_4(attackInterval_Real));
             }
             else if (attackType == 3)
             {
@@ -218,7 +218,10 @@ public class HellWarModeEnemy : BossEnemyBase
 
     public void StartAttackRoutine_PartyRaid()
     {
-        StartCoroutine(AttackRoutine_PartyRaid());
+        if (this.gameObject.activeInHierarchy)
+        {
+            StartCoroutine(AttackRoutine_PartyRaid());
+        }
     }
 
 

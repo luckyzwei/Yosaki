@@ -7,7 +7,7 @@ using UnityEngine;
 
 public enum ContentsState
 {
-    Fight, Dead, TimerEnd, Clear
+    Fight, Dead, TimerEnd, Clear, AllPlayerEnd
 }
 
 public class ContentsManagerBase : SingletonMono<ContentsManagerBase>
@@ -70,7 +70,10 @@ public class ContentsManagerBase : SingletonMono<ContentsManagerBase>
 
     protected void StopTimer()
     {
-        StopCoroutine(timerRoutine);
+        if (timerRoutine != null)
+        {
+            StopCoroutine(timerRoutine);
+        }
     }
 
     private void SetCameraCollider()

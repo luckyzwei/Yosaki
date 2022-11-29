@@ -124,6 +124,11 @@ public class UiMonthPassSystem : MonoBehaviour
                     hasCostumeItem = true;
                     break;
                 }
+                if (((Item_Type)(tableData[i].Reward2)).IsPassItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
 
                 ad += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);

@@ -269,7 +269,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
                   successCallBack: () =>
                   {
                       DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
-                      EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearBandit, 1);
+                      EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearBandit, clearCount);
                   },
                   completeCallBack: () =>
                   {

@@ -9,7 +9,7 @@ public class UiDokebiPensionReset : MonoBehaviour
     private void Start()
     {
 #if UNITY_ANDROID
-        Check();
+        //Check();
 #endif
     }
 

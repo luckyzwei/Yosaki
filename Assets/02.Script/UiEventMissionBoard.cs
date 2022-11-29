@@ -33,7 +33,7 @@ public class UiEventMissionBoard : MonoBehaviour
             var cell = Instantiate<UiEventMissionCell>(missionCell, cellParent);
 
             cell.Initialize(tableData[i]);
-
+            
             cellContainer.Add(tableData[i].Id, cell);
         }
     }

@@ -15,6 +15,9 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
         if (GameManager.contentsType == GameManager.ContentsType.PartyRaid) return;
         if (GameManager.contentsType == GameManager.ContentsType.PartyRaid_Guild) return;
         if (GameManager.contentsType == GameManager.ContentsType.DokebiTower) return;
+        if (GameManager.contentsType == GameManager.ContentsType.Ok) return;
+        if (GameManager.contentsType == GameManager.ContentsType.Yum) return;
+        if (GameManager.contentsType == GameManager.ContentsType.Online_Tower) return;
         //산신령
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon &&
             (GameManager.Instance.bossId == 57||

@@ -212,7 +212,7 @@ public class UiPassiveSkillCell : MonoBehaviour
         //로컬
         ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value++;
         skillPoint.Value--;
-
+        EventMissionManager.UpdateEventMissionClear(EventMissionKey.PassiveSkillUpgrade, 1);
         if (syncRoutine != null)
         {
             CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
@@ -255,7 +255,7 @@ public class UiPassiveSkillCell : MonoBehaviour
         //로컬
         ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value += upgradableAmount;
         skillPoint.Value -= upgradableAmount;
-
+        EventMissionManager.UpdateEventMissionClear(EventMissionKey.PassiveSkillUpgrade, upgradableAmount);
         if (syncRoutine != null)
         {
             CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
@@ -296,7 +296,7 @@ public class UiPassiveSkillCell : MonoBehaviour
         //로컬
         ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value += upgradableAmount;
         skillPoint.Value -= upgradableAmount;
-
+        EventMissionManager.UpdateEventMissionClear(EventMissionKey.PassiveSkillUpgrade, upgradableAmount);
         if (syncRoutine != null)
         {
             CoroutineExecuter.Instance.StopCoroutine(syncRoutine);

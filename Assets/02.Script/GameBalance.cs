@@ -227,6 +227,8 @@ public static class GameBalance
     public readonly static ObscuredFloat GuildMakePrice = 100000000;
     public readonly static ObscuredInt GuildMemberMax = 20;
 
+    public readonly static ObscuredFloat gumgiAttackValue200 = 4000000000;
+
     public readonly static ObscuredInt GuildCreateMinLevel = 5000;
     public readonly static ObscuredInt GuildEnterMinLevel = 1000;
 
@@ -239,8 +241,11 @@ public static class GameBalance
     public readonly static ObscuredInt bandiPlusStageMarbleValue = 2;
     public readonly static ObscuredInt bandiPlusStageDevideValue = 1000;
 
+    public readonly static ObscuredInt gumgiDefenseValue200 = 4000;
+
     public static ObscuredFloat forestValue = 1f;
     public static ObscuredInt recommendCountPerWeek = 5;
+    public static ObscuredInt recommendCountPerWeek_PartyTower = 5;
 
     public static ObscuredInt sanGoonDogFeedCount = 3;
 

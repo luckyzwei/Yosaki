@@ -28,6 +28,7 @@ public class UiEventMissionCell : MonoBehaviour
     [SerializeField]
     private GameObject lockMask;
 
+
     private int getAmountFactor;
     public void Initialize(EventMissionData tableData)
     {
@@ -38,14 +39,8 @@ public class UiEventMissionCell : MonoBehaviour
         }
 
         this.tableData = tableData;
-        //if (ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount == null)
-        //{
 
-        //}
-        //else
-        //{
-            exchangeNum.SetText($"수령 가능 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
-        //}
+        exchangeNum.SetText($"수령 가능 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
 
         title.SetText(tableData.Title);
 
@@ -54,17 +49,19 @@ public class UiEventMissionCell : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.eventMissionTable.TableDatas[tableData.Stringid].clearCount.Subscribe(WhenMissionCountChanged).AddTo(this);
-        ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount.Subscribe(e=>
+        ServerData.eventMissionTable.TableDatas[tableData.Stringid].clearCount.AsObservable().Subscribe(WhenMissionCountChanged).AddTo(this);
+        ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount.AsObservable().Subscribe(e=>
         {
+             exchangeNum.SetText($"수령 가능 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
             if(e>=TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear)
             {
                 lockMask.SetActive(true);
-                exchangeNum.SetText($"수령 가능 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
+            }
+            else
+            {
+                lockMask.SetActive(false);
             }
         }).AddTo(this);
-        
-        
     }
 
     private void OnEnable()
@@ -73,6 +70,7 @@ public class UiEventMissionCell : MonoBehaviour
         {
             WhenMissionCountChanged(ServerData.eventMissionTable.TableDatas[tableData.Stringid].clearCount.Value);
         }
+
     }
 
     private void WhenMissionCountChanged(int count)
@@ -94,12 +92,14 @@ public class UiEventMissionCell : MonoBehaviour
             getAmountFactor = count / tableData.Rewardrequire;
         }
         
-        rewardNum.SetText($"{getAmountFactor * tableData.Rewardvalue }개");
-
-        if (getButton.interactable)
-        {
-            this.transform.SetAsFirstSibling();
-        }
+        rewardNum.SetText($"{Mathf.Max(getAmountFactor,1) * tableData.Rewardvalue }개");
+        //if (getButton.interactable)
+        //{
+        //    if (!lockMask.activeSelf)
+        //    {
+        //        this.transform.SetAsFirstSibling();
+        //    }
+        //}
     }
 
     private Coroutine SyncRoutine;
@@ -123,9 +123,12 @@ public class UiEventMissionCell : MonoBehaviour
             CoroutineExecuter.Instance.StopCoroutine(SyncRoutine);
         }
 
-        SyncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncDataRoutine());
-
-        this.transform.SetAsLastSibling();
+            SyncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncDataRoutine());
+        
+        //if(ServerData.eventMissionTable.CheckMissionRewardCount(tableData.Stringid) >=TableManager.Instance.EventMissionDatas[tableData.Id].Dailymaxclear )
+        //{
+        //this.transform.SetAsLastSibling();
+        //}
 
         // UiTutorialManager.Instance.SetClear(TutorialStep._7_MissionReward);
     }
@@ -140,7 +143,7 @@ public class UiEventMissionCell : MonoBehaviour
         Param goodsParam = new Param();
 
         //미션 카운트 차감
-        eventMissionParam.Add(tableData.Stringid, ServerData.eventMissionTable.TableDatas[tableData.Stringid]);
+        eventMissionParam.Add(tableData.Stringid, ServerData.eventMissionTable.TableDatas[tableData.Stringid].ConvertToString());
         transactionList.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
 
         //재화 추가

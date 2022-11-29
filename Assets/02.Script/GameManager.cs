@@ -38,6 +38,7 @@ public class GameManager : SingletonMono<GameManager>
         DokebiTower,
         Yum,
         Ok,
+        Online_Tower,
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;

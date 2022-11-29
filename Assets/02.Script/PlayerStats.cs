@@ -221,19 +221,27 @@ public static class PlayerStats
     }
 
     public static float GetGumGiAttackValue()
-    {
-        int idx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponEnhance].Value;
+    {        
+        float ret = (float)TableManager.Instance.gumGiTable.dataArray[200].Abilvalue;
 
-        float ret = (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue;
+        if(ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value >= TableManager.Instance.gumGiTable.dataArray[200].Require)
+        {
+            int over200 = Mathf.Max(0,((int)ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value - TableManager.Instance.gumGiTable.dataArray[200].Require) / 50000);
+            ret += over200 * GameBalance.gumgiAttackValue200;
+        }
 
         return ret + ret * GetGumgiAbilAddValue();
     }
 
     public static float GetGumIgDefenseValue()
     {
-        int idx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponEnhance].Value;
+        float ret = (float)TableManager.Instance.gumGiTable.dataArray[200].Abilvalue2;
 
-        float ret = (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue2;
+        if (ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value >= TableManager.Instance.gumGiTable.dataArray[200].Require)
+        {
+            int over200 = Mathf.Max(0, ((int)ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value - TableManager.Instance.gumGiTable.dataArray[200].Require) / 50000);
+            ret += over200 * GameBalance.gumgiDefenseValue200;
+        }
 
         return ret + ret * GetGumgiAbilAddValue();
     }
@@ -2203,6 +2211,12 @@ public static class PlayerStats
                 idx = i;
             }
         }
+
+        return idx;
+    }
+    public static int GetCurrentGumgiIdx()
+    {
+        int idx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponEnhance].Value;
 
         return idx;
     }

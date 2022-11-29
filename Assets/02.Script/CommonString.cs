@@ -74,6 +74,7 @@ public static class CommonString
 
     public static char ChatSplitChar = '◙';
     public static string GuildText = "문파";
+    public static string PartyTowerText = "동굴";
 
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";

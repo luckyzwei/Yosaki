@@ -684,6 +684,7 @@ public class TableManager : SingletonMono<TableManager>
     public DokebiAbilBase dokebiAbilBase;
     public ChunMarkAbil chunMarkAbil;
     public FallCollection fallCollection;
+    public XMasCollection xMasCollection;
     public MileageReward mileageReward;
     public PetHome petHome;
     public TowerTable3 towerTable3;

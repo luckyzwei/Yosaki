@@ -11,7 +11,7 @@ public class UiMarbleRelicRefund : MonoBehaviour
 
     private void Start()
     {
-        Check();
+      //  Check();
     }
 
     private void Check()

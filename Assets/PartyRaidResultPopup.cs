@@ -20,23 +20,49 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
     private GameObject leaveOnlyButton;
 
     [SerializeField]
+    private GameObject leaveOnlyButton_Tower;
+
+    [SerializeField]
     private GameObject rewardChartButton;
 
     private void UpdateButton()
     {
         rewardChartButton.SetActive(PartyRaidManager.Instance.NetworkManager.IsGuildBoss());
 
-        if (PartyRaidManager.Instance.NetworkManager.IsGuildBoss() == false)
+        if (PartyRaidManager.Instance.NetworkManager.IsNormalBoss() == true)
         {
             recordButton.SetActive(true);
             leaveOnlyButton.SetActive(false);
         }
-        else
+        else if (PartyRaidManager.Instance.NetworkManager.IsGuildBoss())
         {
             recordButton.SetActive(PhotonNetwork.IsMasterClient);
             leaveOnlyButton.SetActive(!PhotonNetwork.IsMasterClient);
         }
+        else if (PartyRaidManager.Instance.NetworkManager.IsPartyTowerBoss())
+        {
+            recordButton.SetActive(false);
+            leaveOnlyButton.SetActive(false);
+        }
 
+        if (OnlineTowerManager.Instance != null) 
+        {
+            if (OnlineTowerManager.Instance.GetComponent<OnlineTowerManager>().allPlayerEnd) 
+            {
+                leaveOnlyButton_Tower.SetActive(true);
+            }
+        }
+    }
+
+    public void ExitButtonActive()
+    {
+        Debug.LogError("ExitButtonActive");
+        leaveOnlyButton_Tower.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        leaveOnlyButton_Tower.SetActive(false);
     }
 
 
