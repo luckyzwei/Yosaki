@@ -350,6 +350,10 @@ public enum Item_Type
     //도깨비
     costume70 = 1271,
     costume71 = 1272,
+    
+    //크리스마스 코스튬
+    costume72 = 1273,
+    costume73 = 1274,
 
     pet0 = 1301,
     pet1 = 1302,

@@ -660,6 +660,7 @@ public class TableManager : SingletonMono<TableManager>
 
     public FoxMask FoxMask;
     public DokebiHorn DokebiHorn;
+    public CaveBelt CaveBelt;
 
     [SerializeField]
     private SummerCollection summerCollection;
@@ -688,7 +689,7 @@ public class TableManager : SingletonMono<TableManager>
     public MileageReward mileageReward;
     public PetHome petHome;
     public TowerTable3 towerTable3;
-    public TowerTable4 towerTable4;
+    public TowerTable4 towerTableMulti;
 
 
 }

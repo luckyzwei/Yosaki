@@ -1,4 +1,4 @@
-using BackEnd;
+ï»¿using BackEnd;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -63,11 +63,11 @@ public class UiPetHomeView : MonoBehaviour
 
             if (e == 0)
             {
-                hasDescription.SetText($"<color=yellow>¹Ìº¸À¯</color>");
+                hasDescription.SetText($"<color=yellow>ë¯¸ë³´ìœ </color>");
             }
             else
             {
-                hasDescription.SetText($"<color=yellow>º¸À¯Áß</color>");
+                hasDescription.SetText($"<color=yellow>ë³´ìœ ì¤‘</color>");
             }
         }).AddTo(this);
 
@@ -78,7 +78,7 @@ public class UiPetHomeView : MonoBehaviour
 
             rewardButton.interactable = !hasReward;
 
-            rewardDescription.SetText(!hasReward ? "º¸»ó¼ö·É" : "¼ö·É¿Ï·á");
+            rewardDescription.SetText(!hasReward ? "ë³´ìƒìˆ˜ë ¹" : "ìˆ˜ë ¹ì™„ë£Œ");
 
         }).AddTo(this);
 
@@ -113,7 +113,7 @@ public class UiPetHomeView : MonoBehaviour
     {
         if (ServerData.etcServerTable.HasPetHomeReward(petData.Id))
         {
-            PopupManager.Instance.ShowAlarmMessage("ÀÌ¹Ì º¸»óÀ» ¹Ş¾Ò½À´Ï´Ù!");
+            PopupManager.Instance.ShowAlarmMessage("ì´ë¯¸ ë³´ìƒì„ ë°›ì•˜ìŠµë‹ˆë‹¤!");
             return;
         }
 
@@ -134,7 +134,7 @@ public class UiPetHomeView : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            PopupManager.Instance.ShowAlarmMessage("º¸»óÀ» È¹µæÇß½À´Ï´Ù!");
+            PopupManager.Instance.ShowAlarmMessage("ë³´ìƒì„ íšë“í–ˆìŠµë‹ˆë‹¤!");
         });
 
     }

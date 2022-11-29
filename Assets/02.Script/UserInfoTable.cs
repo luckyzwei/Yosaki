@@ -181,6 +181,7 @@ public class UserInfoTable
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
+    public const string caveBelt = "caveBelt";
     public const string partyRaidDuo = "partyRaidDuo";
     public const string dokebiHorn = "dokebiHorn";
     public const string relicPackReset = "rr";
@@ -352,6 +353,7 @@ public class UserInfoTable
         {refundFox,0},
         {sendGangChul,0},
         {foxMask,0},
+        {caveBelt,0},
         {partyRaidDuo,0},
         {dokebiHorn,0},
         {relicPackReset,0},

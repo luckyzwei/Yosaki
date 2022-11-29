@@ -475,7 +475,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         roomOption.CustomRoomPropertiesForLobby = propertiesListedInLobby;
 
 
-        PhotonNetwork.CreateRoom(CommonString.PartyTowerText + $" {Utils.GetOriginNickName(PlayerData.Instance.NickName)}의 도전", roomOption, lobbyType);
+        PhotonNetwork.CreateRoom(CommonString.PartyTowerText + $" {Utils.GetOriginNickName(PlayerData.Instance.NickName)}", roomOption, lobbyType);
     }
 
     public void JoinOrCreateGuildRoom()

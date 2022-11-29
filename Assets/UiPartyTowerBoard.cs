@@ -45,7 +45,7 @@ public class UiPartyTowerBoard : MonoBehaviour
     {
         int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value;
 
-        return currentFloor >= TableManager.Instance.towerTable4.dataArray.Length;
+        return currentFloor >= TableManager.Instance.towerTableMulti.dataArray.Length;
     }
 
     private void SetStageText()
@@ -73,13 +73,13 @@ public class UiPartyTowerBoard : MonoBehaviour
         {
             int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value;
 
-            if (currentFloor >= TableManager.Instance.towerTable4.dataArray.Length)
+            if (currentFloor >= TableManager.Instance.towerTableMulti.dataArray.Length)
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"잘못된 데이터 idx : {currentFloor}", null);
                 return;
             }
 
-            var towerTableData = TableManager.Instance.towerTable4.dataArray[currentFloor];
+            var towerTableData = TableManager.Instance.towerTableMulti.dataArray[currentFloor];
 
             uiTower4RewardView.UpdateRewardView(towerTableData.Id);
         }

@@ -387,7 +387,7 @@ public class OnlineTowerManager : ContentsManagerBase
         {
             int stageId = PartyRaidManager.Instance.NetworkManager.partyRaidTargetFloor;
 
-            var TowerTableData4 = TableManager.Instance.towerTable4.dataArray[stageId];
+            var TowerTableData4 = TableManager.Instance.towerTableMulti.dataArray[stageId];
 
             bossMaxHp = TowerTableData4.Hp;
         }
@@ -449,7 +449,7 @@ public class OnlineTowerManager : ContentsManagerBase
         //보상지급
         int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value;
 
-        var TowerTableData4 = TableManager.Instance.towerTable4.dataArray[currentFloor];
+        var TowerTableData4 = TableManager.Instance.towerTableMulti.dataArray[currentFloor];
 
         rewardDatas = new List<RewardData>();
 

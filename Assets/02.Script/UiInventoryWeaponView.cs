@@ -578,12 +578,12 @@ public class UiInventoryWeaponView : MonoBehaviour
                 if (weaponData.Id == 63)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
-                    weaponLockDescription.SetText($"도깨비나라\n사량에서 획득!");
+                    weaponLockDescription.SetText($"도깨비나라\n화량에서 획득!");
                 }
                 if (weaponData.Id == 64)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
-                    weaponLockDescription.SetText($"도깨비나라\n오량에서 획득!");
+                    weaponLockDescription.SetText($"도깨비나라\n설량에서 획득!");
                 }
                 //
                 if (weaponData.Id == 45 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49||

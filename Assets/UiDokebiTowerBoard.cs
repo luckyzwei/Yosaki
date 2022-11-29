@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -37,11 +37,11 @@ public class UiDokebiTowerBoard : MonoBehaviour
         if (IsAllClear() == false)
         {
             int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx3).Value;
-            currentStageText.SetText($"{currentFloor + 1}Ãþ ÀÔÀå");
+            currentStageText.SetText($"{currentFloor + 1}ì¸µ ìž…ìž¥");
         }
         else
         {
-            currentStageText.SetText($"¾÷µ¥ÀÌÆ® ¿¹Á¤ ÀÔ´Ï´Ù");
+            currentStageText.SetText($"ì—…ë°ì´íŠ¸ ì˜ˆì • ìž…ë‹ˆë‹¤");
         }
 
     }
@@ -59,7 +59,7 @@ public class UiDokebiTowerBoard : MonoBehaviour
 
             if (currentFloor >= TableManager.Instance.towerTable3.dataArray.Length)
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"Àß¸øµÈ µ¥ÀÌÅÍ idx : {currentFloor}", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"ìž˜ëª»ëœ ë°ì´í„° idx : {currentFloor}", null);
                 return;
             }
 
@@ -73,7 +73,7 @@ public class UiDokebiTowerBoard : MonoBehaviour
 
     public void OnClickEnterButton()
     {
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "ÀÔÀå ÇÒ±î¿ä?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "ìž…ìž¥ í• ê¹Œìš”?", () =>
         {
 
             GameManager.Instance.LoadContents(GameManager.ContentsType.DokebiTower);

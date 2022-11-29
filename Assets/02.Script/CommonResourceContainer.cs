@@ -8,6 +8,7 @@ public static class CommonResourceContainer
     private static List<Sprite> weaponSprites;
     private static List<Sprite> magicBookSprites;
     private static List<Sprite> maskSprites;
+    private static List<Sprite> beltSprites;
     private static List<Sprite> hornSprites;
     private static List<Sprite> hellIcons;
     private static List<Sprite> dragonBall;
@@ -81,6 +82,33 @@ public static class CommonResourceContainer
         if (idx < maskSprites.Count)
         {
             return maskSprites[idx];
+        }
+        else
+        {
+            Debug.LogError($"Weapon icon {idx} is not exist");
+            return null;
+        }
+    }
+    public static Sprite GetBeltSprite(int idx)
+    {
+        if (beltSprites == null)
+        {
+            var beltIcons = Resources.LoadAll<Sprite>("CaveBelt/");
+            beltSprites = beltIcons.ToList();
+
+
+            beltSprites.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
+        }
+
+        if (idx < beltSprites.Count)
+        {
+            return beltSprites[idx];
         }
         else
         {

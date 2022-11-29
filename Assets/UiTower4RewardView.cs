@@ -23,6 +23,9 @@ public class UiTower4RewardView : MonoBehaviour
     [SerializeField]
     private Button rightButton;
 
+    [SerializeField]
+    private GameObject rewardedIcon;
+
     private int currentId;
 
     public void UpdateRewardView(int idx)
@@ -31,7 +34,7 @@ public class UiTower4RewardView : MonoBehaviour
 
         stageDescription.SetText($"{currentId + 1}Ãþ º¸»ó");
 
-        var towerTableData = TableManager.Instance.towerTable4.dataArray[idx];
+        var towerTableData = TableManager.Instance.towerTableMulti.dataArray[idx];
 
         rewardIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)towerTableData.Rewardtype);
 
@@ -54,7 +57,7 @@ public class UiTower4RewardView : MonoBehaviour
     {
         currentId++;
 
-        currentId = Mathf.Min(currentId, TableManager.Instance.towerTable4.dataArray.Length - 1);
+        currentId = Mathf.Min(currentId, TableManager.Instance.towerTableMulti.dataArray.Length - 1);
 
         UpdateRewardView(currentId);
 
@@ -64,6 +67,10 @@ public class UiTower4RewardView : MonoBehaviour
     public void UpdateButtonState()
     {
         leftButton.interactable = currentId != 0;
-        rightButton.interactable = currentId != TableManager.Instance.towerTable4.dataArray.Length - 1;
+        rightButton.interactable = currentId != TableManager.Instance.towerTableMulti.dataArray.Length - 1;
+
+        int myCurrentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value;
+
+        rewardedIcon.SetActive(currentId < myCurrentFloor);
     }
 }

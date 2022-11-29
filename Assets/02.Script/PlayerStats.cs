@@ -214,6 +214,7 @@ public static class PlayerStats
 
         ret += GetStageRelicHasEffect(StatusType.AttackAdd);
         ret += GetSonAbilHasEffect(StatusType.AttackAdd);
+        ret += GetCaveBeltAttackAdd();
 
         ret += GetGumGiAttackValue();
 
@@ -1188,6 +1189,8 @@ public static class PlayerStats
 
         ret += GetChunAbilHasEffect(StatusType.SuperCritical4DamPer);
 
+        ret += GetRelicHasEffect(StatusType.SuperCritical4DamPer);
+
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical4DamPer);
 
         ret += GetWeaponEquipPercentValue(StatusType.SuperCritical4DamPer);
@@ -2044,6 +2047,13 @@ public static class PlayerStats
         if (equipId == -1) return 0f;
 
         return (float)TableManager.Instance.DokebiHorn.dataArray[equipId].Abilvalue;
+    }
+    public static float GetCaveBeltAttackAdd()
+    {
+        int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.CaveBelt].Value;
+        if (equipId == -1) return 0f;
+
+        return (float)TableManager.Instance.CaveBelt.dataArray[equipId].Abilvalue;
     }
 
 

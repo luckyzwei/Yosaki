@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -28,13 +28,13 @@ public class UiTower3RewardView : MonoBehaviour
     {
         currentId = idx;
 
-        stageDescription.SetText($"{currentId + 1}√˛ ∫∏ªÛ");
+        stageDescription.SetText($"{currentId + 1}Ï∏µ Î≥¥ÏÉÅ");
 
         var towerTableData = TableManager.Instance.towerTable3.dataArray[idx];
 
         rewardIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)towerTableData.Rewardtype);
 
-        rewardDescription.SetText($"{Utils.ConvertBigNum(towerTableData.Rewardvalue)}∞≥");
+        rewardDescription.SetText($"{Utils.ConvertBigNum(towerTableData.Rewardvalue)}Í∞ú");
 
         UpdateButtonState();
     }

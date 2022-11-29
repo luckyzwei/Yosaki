@@ -1,4 +1,4 @@
-using BackEnd;
+ï»¿using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -46,7 +46,7 @@ public class UiPetHomeBoard : MonoBehaviour
 
             getPetHomeButton.interactable = e == 0;
 
-            rewardButtonDescription.SetText(e == 0 ? "º¸»ó ¹Ş±â" : "¿À´Ã ¹ŞÀ½");
+            rewardButtonDescription.SetText(e == 0 ? "ë³´ìƒ ë°›ê¸°" : "ì˜¤ëŠ˜ ë°›ìŒ");
 
         }).AddTo(this);
     }
@@ -55,7 +55,7 @@ public class UiPetHomeBoard : MonoBehaviour
     {
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.getPetHome].Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage("º¸»óÀº ÇÏ·ç¿¡ ÇÑ¹ø ¹ŞÀ¸½Ç ¼ö ÀÖ½À´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage("ë³´ìƒì€ í•˜ë£¨ì— í•œë²ˆ ë°›ìœ¼ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
             return;
         }
 
@@ -76,7 +76,7 @@ public class UiPetHomeBoard : MonoBehaviour
 
         if (rewardCount == 0)
         {
-            PopupManager.Instance.ShowAlarmMessage("º¸»óÀÌ ¾ø½À´Ï´Ù");
+            PopupManager.Instance.ShowAlarmMessage("ë³´ìƒì´ ì—†ìŠµë‹ˆë‹¤");
             return;
         }
 
@@ -100,7 +100,7 @@ public class UiPetHomeBoard : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            PopupManager.Instance.ShowAlarmMessage("º¸»óÀ» ÀüºÎ ¼ö·ÉÇß½À´Ï´Ù");
+            PopupManager.Instance.ShowAlarmMessage("ë³´ìƒì„ ì „ë¶€ ìˆ˜ë ¹í–ˆìŠµë‹ˆë‹¤");
         });
 
     }
@@ -128,7 +128,7 @@ public class UiPetHomeBoard : MonoBehaviour
 
         SetRewardText();
 
-        petHasCount.SetText($"ÇöÀç º¸À¯ : {PlayerStats.GetPetHomeHasCount()}");
+        petHasCount.SetText($"í˜„ì¬ ë³´ìœ  : {PlayerStats.GetPetHomeHasCount()}");
     }
 
     private void SetAbilText()
@@ -160,12 +160,12 @@ public class UiPetHomeBoard : MonoBehaviour
 
         while (e.MoveNext())
         {
-            description += $"{CommonString.GetStatusName(e.Current.Key)} {Utils.ConvertBigNum(e.Current.Value * 100f)} Áõ°¡\n";
+            description += $"{CommonString.GetStatusName(e.Current.Key)} {Utils.ConvertBigNum(e.Current.Value * 100f)} ì¦ê°€\n";
         }
 
         if (rewards.Count == 0)
         {
-            abilDescription.SetText("È¯¼ö°¡ ¾ø½À´Ï´Ù.");
+            abilDescription.SetText("í™˜ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.");
         }
         else
         {
@@ -176,10 +176,10 @@ public class UiPetHomeBoard : MonoBehaviour
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            abils += $"º¸À¯ {i + 1} : {CommonString.GetStatusName((StatusType)tableData[i].Abiltype)} {Utils.ConvertBigNum(tableData[i].Abilvalue * 100f)}\n";
+            abils += $"ë³´ìœ  {i + 1} : {CommonString.GetStatusName((StatusType)tableData[i].Abiltype)} {Utils.ConvertBigNum(tableData[i].Abilvalue * 100f)}\n";
         }
 
-        abils += "<color=red>¸ğµç È¿°ú´Â ÁßÃ¸µË´Ï´Ù!</color>";
+        abils += "<color=red>ëª¨ë“  íš¨ê³¼ëŠ” ì¤‘ì²©ë©ë‹ˆë‹¤!</color>";
 
 
         abilList.SetText(abils);
@@ -214,12 +214,12 @@ public class UiPetHomeBoard : MonoBehaviour
 
         while (e.MoveNext())
         {
-            description += $"{CommonString.GetItemName(e.Current.Key)} {Utils.ConvertBigNum(e.Current.Value)}°³\n";
+            description += $"{CommonString.GetItemName(e.Current.Key)} {Utils.ConvertBigNum(e.Current.Value)}ê°œ\n";
         }
 
         if (rewards.Count == 0) 
         {
-            rewardDescription.SetText("È¯¼ö°¡ ¾ø½À´Ï´Ù.");
+            rewardDescription.SetText("í™˜ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.");
         }
         else 
         {

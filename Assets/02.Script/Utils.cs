@@ -89,7 +89,9 @@ public static class Utils
                   type == Item_Type.costume68 ||
                   type == Item_Type.costume69 ||
                   type == Item_Type.costume70 ||
-                  type == Item_Type.costume71;
+                  type == Item_Type.costume71 ||
+                  type == Item_Type.costume72 ||
+                  type == Item_Type.costume73;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -509,7 +511,7 @@ public static class Utils
 
     public static bool IsPartyTowerMaxFloor(int idx)
     {
-        return ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value == TableManager.Instance.towerTable4.dataArray.Length;
+        return ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value == TableManager.Instance.towerTableMulti.dataArray.Length;
     }
 
 
