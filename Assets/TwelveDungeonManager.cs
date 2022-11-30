@@ -398,7 +398,9 @@ public class TwelveDungeonManager : ContentsManagerBase
                 twelveBossTable.Id == 72 ||
                 twelveBossTable.Id == 75 ||
                 twelveBossTable.Id == 76 ||
-                twelveBossTable.Id == 77 
+                twelveBossTable.Id == 77 ||
+                twelveBossTable.Id == 78 ||
+                twelveBossTable.Id == 79
                 )
             {
                 remainSec *= 0.5f;

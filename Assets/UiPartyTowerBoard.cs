@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UniRx;
@@ -35,11 +35,11 @@ public class UiPartyTowerBoard : MonoBehaviour
     {
         ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerRecommend].AsObservable().Subscribe(e =>
         {
-            helpDescription.SetText($"³²Àº µµ¿ò ¿äÃ»±Ç : {e}°³");
+            helpDescription.SetText($"ë‚¨ì€ ë„ì›€ ìš”ì²­ê¶Œ : {e}ê°œ");
         }).AddTo(this);
         ServerData.userInfoTable.TableDatas[UserInfoTable.receivedPartyTowerTicket].AsObservable().Subscribe(e =>
         {
-            adTicketDescription.SetText(e == 0 ? $"¿äÃ»±Ç È¹µæ\n(1ÁÖ 1È¸)" : $"È¹µæ ¿Ï·á");
+            adTicketDescription.SetText(e == 0 ? $"ìš”ì²­ê¶Œ íšë“\n(1ì£¼ 1íšŒ)" : $"íšë“ ì™„ë£Œ");
         }).AddTo(this);
 
     }
@@ -54,7 +54,7 @@ public class UiPartyTowerBoard : MonoBehaviour
         bool received = ServerData.userInfoTable.GetTableData(UserInfoTable.receivedPartyTowerTicket).Value == 1;
         if (received)
         {
-            PopupManager.Instance.ShowAlarmMessage("ÀÏÁÖÀÏ¿¡ ÇÑ ¹ø È¹µæ °¡´ÉÇÕ´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage("ì¼ì£¼ì¼ì— í•œ ë²ˆ íšë“ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
             return;
         }
 
@@ -63,7 +63,11 @@ public class UiPartyTowerBoard : MonoBehaviour
 
     private void RewardAdFinished()
     {
-
+        //ÀÌ¹Ì ¹Þ¾ÒÀ¸¸é
+        if(ServerData.userInfoTable.GetTableData(UserInfoTable.receivedPartyTowerTicket).Value==1)
+        {
+            return;
+        }    
         ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerRecommend].Value++;
         ServerData.userInfoTable.GetTableData(UserInfoTable.receivedPartyTowerTicket).Value = 1f;
 
@@ -89,11 +93,11 @@ public class UiPartyTowerBoard : MonoBehaviour
         if (IsAllClear() == false)
         {
             int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value;
-            currentStageText.SetText($"{currentFloor + 1}Ãþ");
+            currentStageText.SetText($"{currentFloor + 1}ì¸µ");
         }
         else
         {
-            currentStageText.SetText($"¾÷µ¥ÀÌÆ® ¿¹Á¤ ÀÔ´Ï´Ù");
+            currentStageText.SetText($"ì—…ë°ì´íŠ¸ ì˜ˆì • ìž…ë‹ˆë‹¤");
         }
 
     }
@@ -111,7 +115,7 @@ public class UiPartyTowerBoard : MonoBehaviour
 
             if (currentFloor >= TableManager.Instance.towerTableMulti.dataArray.Length)
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"Àß¸øµÈ µ¥ÀÌÅÍ idx : {currentFloor}", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"ìž˜ëª»ëœ ë°ì´í„° idx : {currentFloor}", null);
                 return;
             }
 
@@ -125,7 +129,7 @@ public class UiPartyTowerBoard : MonoBehaviour
 
     public void OnClickEnterButton()
     {
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "ÀÔÀå ÇÒ±î¿ä?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "ìž…ìž¥ í• ê¹Œìš”?", () =>
         {
 
             GameManager.Instance.LoadContents(GameManager.ContentsType.DokebiTower);
