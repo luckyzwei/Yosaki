@@ -320,7 +320,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         SoundManager.Instance.PlayButtonSound();
 
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.AbilUpgrade, 1);
-        EventMissionManager.UpdateEventMissionClear(EventMissionKey.AbilUpgrade, 1);
+        
 
         UsePoint();
 

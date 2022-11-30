@@ -181,7 +181,6 @@ public class UserInfoTable
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
-    public const string caveBelt = "caveBelt";
     public const string partyRaidDuo = "partyRaidDuo";
     public const string dokebiHorn = "dokebiHorn";
     public const string relicPackReset = "rr";
@@ -205,6 +204,7 @@ public class UserInfoTable
     public const string partyTowerRecommend = "partyTowerRec";
     public const string partyTowerFloor = "partyTowerFloor";
 
+    public const string receivedPartyTowerTicket = "receivedPartyTowerTicket";
     
     public double currentServerDate;
     public double attendanceUpdatedTime;
@@ -353,7 +353,6 @@ public class UserInfoTable
         {refundFox,0},
         {sendGangChul,0},
         {foxMask,0},
-        {caveBelt,0},
         {partyRaidDuo,0},
         {dokebiHorn,0},
         {relicPackReset,0},
@@ -378,6 +377,7 @@ public class UserInfoTable
         {dokebiPensionReset,0},
         {partyTowerRecommend,GameBalance.recommendCountPerWeek_PartyTower},
         {partyTowerFloor,0},
+        {receivedPartyTowerTicket,0f},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -902,6 +902,10 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerRecommend).Value = GameBalance.recommendCountPerWeek_PartyTower;
             userInfoParam.Add(UserInfoTable.partyTowerRecommend, ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerRecommend).Value);
 
+            //십만동굴 ad초기화
+            ServerData.userInfoTable.GetTableData(UserInfoTable.receivedPartyTowerTicket).Value = 0;
+            userInfoParam.Add(UserInfoTable.receivedPartyTowerTicket, ServerData.userInfoTable.GetTableData(UserInfoTable.receivedPartyTowerTicket).Value);
+
             //마일리지 상점 초기화
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1_Mileage).Value = 0;
@@ -1011,7 +1015,7 @@ public class UserInfoTable
     {
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.Attendance, 1);
 
-        EventMissionManager.UpdateEventMissionClear(EventMissionKey.Attendance, 1);
+        
 
     }
 

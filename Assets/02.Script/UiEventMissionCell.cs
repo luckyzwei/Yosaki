@@ -40,7 +40,7 @@ public class UiEventMissionCell : MonoBehaviour
 
         this.tableData = tableData;
 
-        exchangeNum.SetText($"수령 가능 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
+        exchangeNum.SetText($"매일 교환 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
 
         title.SetText(tableData.Title);
 
@@ -52,7 +52,7 @@ public class UiEventMissionCell : MonoBehaviour
         ServerData.eventMissionTable.TableDatas[tableData.Stringid].clearCount.AsObservable().Subscribe(WhenMissionCountChanged).AddTo(this);
         ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount.AsObservable().Subscribe(e=>
         {
-             exchangeNum.SetText($"수령 가능 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
+             exchangeNum.SetText($"매일 교환 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
             if(e>=TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear)
             {
                 lockMask.SetActive(true);

@@ -232,6 +232,7 @@ public class UiRewardCollection : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearSwordPartial, 1);
                 LogManager.Instance.SendLogType("GumGi", "_", score.ToString());
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SP)} {score}개 획득!", null);
             });
@@ -277,6 +278,7 @@ public class UiRewardCollection : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearChunFlower, 1);
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Cw)} {score}개 획득!", null);
             });
         }, null);
@@ -365,6 +367,7 @@ public class UiRewardCollection : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearDokebiFire, 1);
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score}개 획득!", null);
             });
         }, null);

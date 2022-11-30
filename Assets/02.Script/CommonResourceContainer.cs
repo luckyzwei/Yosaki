@@ -91,6 +91,8 @@ public static class CommonResourceContainer
     }
     public static Sprite GetBeltSprite(int idx)
     {
+        idx = idx / 3;
+
         if (beltSprites == null)
         {
             var beltIcons = Resources.LoadAll<Sprite>("CaveBelt/");

@@ -122,6 +122,7 @@ public class UiHellFireBoard : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 //  LogManager.Instance.SendLogType("Son", "all", "");
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearHell, 1);
                 PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
                 SoundManager.Instance.PlaySound("Reward");
             });

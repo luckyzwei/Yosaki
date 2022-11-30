@@ -7,9 +7,10 @@ public enum EventMissionKey
     ClearBandit,//반딧불전
     ClearOni,//도깨비전
     ClearCat,//고양이 요괴전
-    AbilUpgrade,//능력치레벨업 ★
-    PassiveSkillUpgrade,//스킬 레벨업 ★
-    Attendance,//출석 ★
+    ClearSwordPartial,//검조각 보상 ★
+    ClearHell,//불멸석 보상 ★
+    ClearChunFlower,//천계꽃 보상 ★
+    ClearDokebiFire,//도깨비나라 보상 ★
 }
 
 public static class EventMissionManager
@@ -66,22 +67,18 @@ public static class EventMissionManager
     }
 
 
-    private static string Mission0 = "Mission0";
-
-    private static string Mission1 = "Mission1";
-
 
 
     private static IEnumerator SyncToServerRoutine(string key, EventMissionKey missionKey)
     {
 
-            yield return syncDelay;
-
+   
 
 
         ServerData.eventMissionTable.SyncToServerEach(key);
 
         SyncRoutines[missionKey] = null;
+        yield return null;
     }
 
     public static void SyncAllMissions()

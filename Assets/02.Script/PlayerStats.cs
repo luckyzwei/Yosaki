@@ -222,8 +222,11 @@ public static class PlayerStats
     }
 
     public static float GetGumGiAttackValue()
-    {        
-        float ret = (float)TableManager.Instance.gumGiTable.dataArray[200].Abilvalue;
+    {
+        int idx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponEnhance].Value;
+
+        float ret = (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue;
+
 
         if(ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value >= TableManager.Instance.gumGiTable.dataArray[200].Require)
         {
@@ -236,7 +239,9 @@ public static class PlayerStats
 
     public static float GetGumIgDefenseValue()
     {
-        float ret = (float)TableManager.Instance.gumGiTable.dataArray[200].Abilvalue2;
+        int idx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponEnhance].Value;
+
+        float ret = (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue2;
 
         if (ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value >= TableManager.Instance.gumGiTable.dataArray[200].Require)
         {

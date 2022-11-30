@@ -12,6 +12,23 @@ public class UiEventMissionBoard : MonoBehaviour
 
     private Dictionary<int, UiEventMissionCell> cellContainer = new Dictionary<int, UiEventMissionCell>();
 
+    private void OnEnable()
+    {
+        CheckEventEnd();
+    }
+
+    private void CheckEventEnd() 
+    {
+        var severTime = ServerData.userInfoTable.currentServerTime;
+
+        if (severTime.Month == 1 && severTime.Day > 5)
+        {
+            this.gameObject.SetActive(false);
+            PopupManager.Instance.ShowAlarmMessage("이벤트가 종료됐습니다.");
+            return;
+        }
+    }
+
     private void Awake()
     {
         Initialize();

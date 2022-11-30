@@ -53,7 +53,7 @@ public class UiBeltView : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.userInfoTable.TableDatas[UserInfoTable.caveBelt].AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].AsObservable().Subscribe(e =>
         {
             lockObject.SetActive(e <= this.caveBeltData.Id);
         }).AddTo(this);
@@ -71,7 +71,7 @@ public class UiBeltView : MonoBehaviour
 
     private bool IsUnlock()
     {
-        return ServerData.userInfoTable.TableDatas[UserInfoTable.caveBelt].Value < caveBeltData.Id;
+        return ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value < caveBeltData.Id;
     }
 
     public void OnClickEquipButton()

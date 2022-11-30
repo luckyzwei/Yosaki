@@ -511,7 +511,7 @@ public class UiSettingBoard : MonoBehaviour
         }, () => { });
     }
 
-    private float AutoSaveDelay = 3600f;
+    private float AutoSaveDelay = 60f;
     private Coroutine autoSaveRoutine = null;
     private IEnumerator AutoSaveRoutine()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UniRx;
+using BackEnd;
 using UnityEngine;
 using UnityEngine.UI;
 using static UiRewardView;
@@ -22,6 +23,9 @@ public class UiPartyTowerBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI helpDescription;
 
+    [SerializeField]
+    private TextMeshProUGUI adTicketDescription;
+
     private void Start()
     {
         Subscribe();
@@ -33,12 +37,44 @@ public class UiPartyTowerBoard : MonoBehaviour
         {
             helpDescription.SetText($"≥≤¿∫ µµøÚ ø‰√ª±« : {e}∞≥");
         }).AddTo(this);
+        ServerData.userInfoTable.TableDatas[UserInfoTable.receivedPartyTowerTicket].AsObservable().Subscribe(e =>
+        {
+            adTicketDescription.SetText(e == 0 ? $"ø‰√ª±« »πµÊ\n(1¡÷ 1»∏)" : $"»πµÊ øœ∑·");
+        }).AddTo(this);
+
     }
 
     void OnEnable()
     {
         SetStageText();
         SetReward();
+    }
+    public void OnClickAdButton()
+    {
+        bool received = ServerData.userInfoTable.GetTableData(UserInfoTable.receivedPartyTowerTicket).Value == 1;
+        if (received)
+        {
+            PopupManager.Instance.ShowAlarmMessage("¿œ¡÷¿œø° «— π¯ »πµÊ ∞°¥…«’¥œ¥Ÿ.");
+            return;
+        }
+
+        AdManager.Instance.ShowRewardedReward(RewardAdFinished);
+    }
+
+    private void RewardAdFinished()
+    {
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerRecommend].Value++;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.receivedPartyTowerTicket).Value = 1f;
+
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+     
+        Param userInfoParam = new Param();
+        userInfoParam.Add(UserInfoTable.receivedPartyTowerTicket, ServerData.userInfoTable.GetTableData(UserInfoTable.receivedPartyTowerTicket).Value);
+        userInfoParam.Add(UserInfoTable.partyTowerRecommend, ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerRecommend).Value);
+        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+        ServerData.SendTransaction(transactionList);
     }
 
     private bool IsAllClear()
@@ -53,7 +89,7 @@ public class UiPartyTowerBoard : MonoBehaviour
         if (IsAllClear() == false)
         {
             int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value;
-            currentStageText.SetText($"{currentFloor + 1}√˛ ¿‘¿Â");
+            currentStageText.SetText($"{currentFloor + 1}√˛");
         }
         else
         {

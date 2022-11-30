@@ -140,6 +140,7 @@ public class UiChunFlowerBoard : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearChunFlower, 1);
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Cw)} {score}개 획득!", null);
             });
         }, null);

@@ -435,7 +435,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     #region 방
 
-    public void MakePartyTowerRoom()
+    public void MakePartyTowerRoom(int maxNum)
     {
         int currentFloor = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value;
 
@@ -445,6 +445,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             return;
         }
 
+        if (maxNum > 1 && HasTowerRecommendCount() == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("도움 요청권이 없습니다. 혼자 플레이만 가능합니다.");
+            return;
+        }
 
 
         uiPartyTowerBoard.SetActive(false);
@@ -453,7 +458,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
         if (HasTowerRecommendCount())
         {
-            roomOption.MaxPlayers = 2;
+            roomOption.MaxPlayers = (byte)maxNum;
         }
         else
         {
@@ -789,11 +794,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         PlayerLeft(otherPlayer);
     }
 
-    private void PlayerLeft(Player otherPlayer) 
+    private void PlayerLeft(Player otherPlayer)
     {
         var playerInfoData = GetPlayerInfo(otherPlayer.NickName);
 
-        if (roomPlayerDatas.ContainsKey(otherPlayer.ActorNumber)) 
+        if (roomPlayerDatas.ContainsKey(otherPlayer.ActorNumber))
         {
             roomPlayerDatas[otherPlayer.ActorNumber].endGame = true;
         }

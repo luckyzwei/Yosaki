@@ -67,7 +67,7 @@ public class UiTicketBuyShop : MonoBehaviour
             return;
         }
 
-                float currentBlueStoneNum = ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
+        float currentBlueStoneNum = ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value;
 
         if (currentBlueStoneNum < GameBalance.ticketPrice)
         {
@@ -83,7 +83,7 @@ public class UiTicketBuyShop : MonoBehaviour
     public void OnClickAdButton()
     {
         bool received = ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value == 1;
-        if (received) 
+        if (received)
         {
             PopupManager.Instance.ShowAlarmMessage("내일 다시 획득 가능합니다.");
             return;
@@ -94,6 +94,8 @@ public class UiTicketBuyShop : MonoBehaviour
 
     private void RewardAdFinished()
     {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value == 1f) return;
+
         UiTutorialManager.Instance.SetClear(TutorialStep.BuyTicket);
 
         ServerData.goodsTable.GetTableData(GoodsTable.Ticket).Value++;
@@ -125,7 +127,7 @@ public class UiTicketBuyShop : MonoBehaviour
             StopCoroutine(syncToServerRoutine);
         }
 
-        syncToServerRoutine =CoroutineExecuter.Instance.StartCoroutine(SyncToServer());
+        syncToServerRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncToServer());
     }
 
     private IEnumerator SyncToServer()
