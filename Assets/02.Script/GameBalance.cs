@@ -245,7 +245,7 @@ public static class GameBalance
 
     public static ObscuredFloat forestValue = 1f;
     public static ObscuredInt recommendCountPerWeek = 5;
-    public static ObscuredInt recommendCountPerWeek_PartyTower = 5;
+    public static ObscuredInt recommendCountPerWeek_PartyTower = 4;
 
     public static ObscuredInt sanGoonDogFeedCount = 3;
 

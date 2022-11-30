@@ -46,6 +46,11 @@ public class UiPartyTowerBoard : MonoBehaviour
 
     void OnEnable()
     {
+        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < 300000)
+        {
+            PopupManager.Instance.ShowAlarmMessage("레벨 30만부터 입장하실 수 있습니다.");
+            this.gameObject.SetActive(false);
+        }
         SetStageText();
         SetReward();
     }
@@ -63,7 +68,7 @@ public class UiPartyTowerBoard : MonoBehaviour
 
     private void RewardAdFinished()
     {
-        //�̹� �޾�����
+        //�̹� �޾�����
         if(ServerData.userInfoTable.GetTableData(UserInfoTable.receivedPartyTowerTicket).Value==1)
         {
             return;
