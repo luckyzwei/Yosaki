@@ -76,7 +76,7 @@ public class EventMissionTable
                 {
                     var missionData = new EventMissionServerData();
                     missionData.idx = table[i].Id;
-                    missionData.clearCount = new ReactiveProperty<int>(0);
+                    missionData.clearCount = new ReactiveProperty<int>(1);
                     missionData.rewardCount = new ReactiveProperty<int>(0);
                    
 
