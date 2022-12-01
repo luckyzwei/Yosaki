@@ -75,6 +75,9 @@ public class UiMileageRefund : MonoBehaviour
 
         if (mileageTotalNum == 0)
         {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.mileageRefund).Value = 1;
+            ServerData.userInfoTable.UpData(UserInfoTable.mileageRefund, false);
+
             rootObject.SetActive(false);
         }
         else
