@@ -1541,7 +1541,7 @@ public static class PlayerStats
     }
 
     public const float divideNum = 500f;
-    public const float divideAbilValue = 0.2f;
+    public const float divideAbilValue = 0.5f;
     public static float GetStageRelicHasEffect(StatusType statusType)
     {
         float ret = 0f;

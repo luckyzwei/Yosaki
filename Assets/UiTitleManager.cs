@@ -708,6 +708,17 @@ public enum TitleMissionId
     DokebiWeapon3,//★
     DokebiWeapon4,//★
 
+
+    Level2510000,//★
+    Level2520000,//★
+    Level2530000,//★
+    Level2540000,//★
+    Level2550000,//★
+    Level2560000,//★
+    Level2570000,//★
+    Level2580000,//★
+    Level2590000,//★
+    Level2600000,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -2261,6 +2272,46 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 2500000)
             {
                 ClearTitleMission(TitleMissionId.Level2500000);
+            }
+            if (e >= 2510000)
+            {
+                ClearTitleMission(TitleMissionId.Level2510000);
+            }
+            if (e >= 2520000)
+            {
+                ClearTitleMission(TitleMissionId.Level2520000);
+            }
+            if (e >= 2530000)
+            {
+                ClearTitleMission(TitleMissionId.Level2530000);
+            }
+            if (e >= 2540000)
+            {
+                ClearTitleMission(TitleMissionId.Level2540000);
+            }
+            if (e >= 2550000)
+            {
+                ClearTitleMission(TitleMissionId.Level2550000);
+            }
+            if (e >= 2560000)
+            {
+                ClearTitleMission(TitleMissionId.Level2560000);
+            }
+            if (e >= 2570000)
+            {
+                ClearTitleMission(TitleMissionId.Level2570000);
+            }
+            if (e >= 2580000)
+            {
+                ClearTitleMission(TitleMissionId.Level2580000);
+            }
+            if (e >= 2590000)
+            {
+                ClearTitleMission(TitleMissionId.Level2590000);
+            }
+            if (e >= 2600000)
+            {
+                ClearTitleMission(TitleMissionId.Level2600000);
             }
 
 

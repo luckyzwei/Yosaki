@@ -1224,7 +1224,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             GameManager.Instance.LoadContents(GameManager.ContentsType.PartyRaid_Guild);
         }
-        if (IsPartyTowerBoss())
+        else if (IsPartyTowerBoss())
         {
             GameManager.Instance.LoadContents(GameManager.ContentsType.Online_Tower);
         }

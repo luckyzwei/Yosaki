@@ -1,4 +1,4 @@
-using Cinemachine;
+ï»¿using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -228,7 +228,7 @@ public class OnlineTowerManager : ContentsManagerBase
     }
 
     #region EndConditions
-    //Å¬¸®¾îÁ¶°Ç1 ÇÃ·¹ÀÌ¾î »ç¸Á
+    //í´ë¦¬ì–´ì¡°ê±´1 í”Œë ˆì´ì–´ ì‚¬ë§
     private void WhenPlayerDead()
     {
         if (contentsState.Value != (int)ContentsState.Fight) return;
@@ -236,10 +236,10 @@ public class OnlineTowerManager : ContentsManagerBase
         contentsState.Value = (int)ContentsState.Dead;
     }
 
-    //Å¬¸®¾îÁ¶°Ç1 º¸½º Ã³Ä¡ ¼º°ø
+    //í´ë¦¬ì–´ì¡°ê±´1 ë³´ìŠ¤ ì²˜ì¹˜ ì„±ê³µ
     private void WhenBossDead()
     {
-        //Å¬¸®¾î Ã¼Å©
+        //í´ë¦¬ì–´ ì²´í¬
         contentsState.Value = (int)ContentsState.Clear;
 
         //SendClearInfo();
@@ -257,7 +257,7 @@ public class OnlineTowerManager : ContentsManagerBase
     //    }
     //}
 
-    //Å¬¸®¾îÁ¶°Ç1 Å¸ÀÌ¸Ó Á¾·á
+    //í´ë¦¬ì–´ì¡°ê±´1 íƒ€ì´ë¨¸ ì¢…ë£Œ
     protected override void TimerEnd()
     {
         base.TimerEnd();
@@ -340,7 +340,7 @@ public class OnlineTowerManager : ContentsManagerBase
         while (remainSec >= 0)
         {
 
-            timerText.SetText($"³²Àº½Ã°£ : {(int)remainSec}");
+            timerText.SetText($"ë‚¨ì€ì‹œê°„ : {(int)remainSec}");
 
             yield return null;
 
@@ -406,7 +406,7 @@ public class OnlineTowerManager : ContentsManagerBase
 
     private void CheckEndGame()
     {
-        //º¸»óÆË¾÷
+        //ë³´ìƒíŒì—…
         if (PartyRaidManager.Instance.NetworkManager.IsAllPlayerEnd())
         {
             AllPlayerEnd();
@@ -430,23 +430,23 @@ public class OnlineTowerManager : ContentsManagerBase
             }
             else
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"ÇöÀç ´Ü°è¿¡¼­´Â º¸»óÀ» ¹ŞÀ¸½Ç ¼ö ¾ø½À´Ï´Ù.\nÅ¬¸®¾î : {PartyRaidManager.Instance.NetworkManager.partyRaidTargetFloor + 1} ÇöÀç ³» Ãş¼ö : {ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value + 1}\n°°Àº Ãş¼ö ÀÏ¶§¸¸ º¸»óÀ» ¹ŞÀ¸½Ç ¼ö ÀÖ½À´Ï´Ù.", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"í˜„ì¬ ë‹¨ê³„ì—ì„œëŠ” ë³´ìƒì„ ë°›ìœ¼ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\ní´ë¦¬ì–´ : {PartyRaidManager.Instance.NetworkManager.partyRaidTargetFloor + 1} í˜„ì¬ ë‚´ ì¸µìˆ˜ : {ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value + 1}\nê°™ì€ ì¸µìˆ˜ ì¼ë•Œë§Œ ë³´ìƒì„ ë°›ìœ¼ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.", null);
             }
         }
     }
-    //null ÀÏ¶§ Å¬¸®¾î ¸øÇÑ°Å
+    //null ì¼ë•Œ í´ë¦¬ì–´ ëª»í•œê±°
     private List<RewardData> rewardDatas;
 
     private bool rewarded = false;
 
     private void SetClear()
     {
-        //Áßº¹ÁøÀÔ ¹æÁö
+        //ì¤‘ë³µì§„ì… ë°©ì§€
         if (rewarded) return;
 
         rewarded = true;
 
-        //º¸»óÁö±Ş
+        //ë³´ìƒì§€ê¸‰
         int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value;
 
         var TowerTableData4 = TableManager.Instance.towerTableMulti.dataArray[currentFloor];
@@ -461,7 +461,7 @@ public class OnlineTowerManager : ContentsManagerBase
 
         HashSet<int> syncDataList = new HashSet<int>();
 
-        //µ¥ÀÌÅÍ Àû¿ë(·ÎÄÃ)
+        //ë°ì´í„° ì ìš©(ë¡œì»¬)
         for (int i = 0; i < rewardDatas.Count; i++)
         {
             if (syncDataList.Contains((int)rewardDatas[i].itemType) == true)
@@ -476,12 +476,12 @@ public class OnlineTowerManager : ContentsManagerBase
 
             ServerData.AddLocalValue(rewardDatas[i].itemType, rewardDatas[i].amount);
 
-            //¼­¹ö Æ®·¢Àè¼Ç
+            //ì„œë²„ íŠ¸ë™ì­ì…˜
             var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)rewardDatas[i].itemType);
             transactionList.Add(rewardTransactionValue);
         }
 
-        //´Ü°è»ó½Â
+        //ë‹¨ê³„ìƒìŠ¹
         ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value = PartyRaidManager.Instance.NetworkManager.partyRaidTargetFloor + 1;
 
         Param floorParam = new Param();
@@ -492,10 +492,10 @@ public class OnlineTowerManager : ContentsManagerBase
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value}Ãş Å¬¸®¾î!\n{CommonString.GetItemName((Item_Type)TowerTableData4.Rewardtype)} {Utils.ConvertBigNum(TowerTableData4.Rewardvalue)}°³ È¹µæ!", null);
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value}ì¸µ í´ë¦¬ì–´!\n{CommonString.GetItemName((Item_Type)TowerTableData4.Rewardtype)} {Utils.ConvertBigNum(TowerTableData4.Rewardvalue)}ê°œ íšë“!", null);
         });
 
-        //ÃßÃµ 1È¸
+        //ì¶”ì²œ 1íšŒ
 
     }
 
