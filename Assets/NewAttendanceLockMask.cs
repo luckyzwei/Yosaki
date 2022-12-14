@@ -20,8 +20,13 @@ public class NewAttendanceLockMask : MonoBehaviour
 
     public void AttendStartButton()
     {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value == 1)
+        {
+            return; 
+        }
+
         ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value = 1;
-        rootObject.gameObject.SetActive(false);
+       
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
@@ -30,6 +35,12 @@ public class NewAttendanceLockMask : MonoBehaviour
 
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        ServerData.SendTransaction(transactionList, false);
+        rootObject.gameObject.SetActive(false);
+
+        ServerData.SendTransaction(transactionList, successCallBack:()=>
+        {
+            SoundManager.Instance.PlaySound("Reward");
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "출석 시작!!", null);
+        });
     }
 }

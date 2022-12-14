@@ -50,7 +50,7 @@ public class UiNewAttendSystem : MonoBehaviour
             {
                 var passInfo = new PassInfo();
                 int adjustCount = 0;
-                if (ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value > 20)
+                if (ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value > 10)
                 {
                     adjustCount += (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value - 10;
                 }

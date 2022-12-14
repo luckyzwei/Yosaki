@@ -45,9 +45,11 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
             leaveOnlyButton.SetActive(false);
         }
 
-        if (OnlineTowerManager.Instance != null) 
+        if (OnlineTowerManager.Instance != null)
         {
-            if (OnlineTowerManager.Instance.GetComponent<OnlineTowerManager>().allPlayerEnd) 
+            var onlineTowerManager = OnlineTowerManager.Instance.GetComponent<OnlineTowerManager>();
+
+            if (onlineTowerManager != null && onlineTowerManager.allPlayerEnd)
             {
                 leaveOnlyButton_Tower.SetActive(true);
             }

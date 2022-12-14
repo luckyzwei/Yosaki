@@ -22,7 +22,7 @@ public class UiWinterPassPopup : MonoBehaviour
 
         uiBuffPopupView_WinterPass_0.Initalize(tableDatas[21]);
 
-        uiBuffPopupView_WinterPass_1.Initalize(tableDatas[22]);
+        uiBuffPopupView_WinterPass_1.Initalize(tableDatas[22]); ;
     }
 
     private void OnEnable()

@@ -6,6 +6,34 @@ public class UiContentsExitButton : MonoBehaviour
 {
     [SerializeField]
     private bool ShowWarningMessage = true;
+    [SerializeField]
+    private GameObject buttonRootObject;
+
+    private void OnEnable()
+    {
+        if (buttonRootObject != null)
+        {
+            buttonRootObject.SetActive(NextStageCheck());
+        }
+    }
+    private bool NextStageCheck()
+    {
+        if (GameManager.contentsType == GameManager.ContentsType.InfiniteTower2 || GameManager.contentsType == GameManager.ContentsType.DokebiTower ||
+            GameManager.contentsType == GameManager.ContentsType.FoxMask || GameManager.contentsType == GameManager.ContentsType.Yum ||
+            GameManager.contentsType == GameManager.ContentsType.Ok || GameManager.contentsType == GameManager.ContentsType.Do ||
+            GameManager.contentsType == GameManager.ContentsType.GradeTest)
+        {
+            return true;
+        }
+        //산신령 & 서재 & 지키미
+        if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 57)||
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 72)||
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 82))
+        {
+            return true;
+        }
+        return false;
+    }
     public void OnClickExitButton()
     {
         if (ShowWarningMessage == true)
@@ -19,7 +47,6 @@ public class UiContentsExitButton : MonoBehaviour
         {
             GameManager.Instance.LoadNormalField();
         }
-
     }
     public void OnClickNextStageButton()
     {
@@ -69,8 +96,30 @@ public class UiContentsExitButton : MonoBehaviour
         {
                 GameManager.Instance.LoadContents(GameManager.ContentsType.GradeTest);
         }
+        //산신령
+        else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon&&GameManager.Instance.bossId==57)
+        {
+                GameManager.Instance.SetBossId(57);
+                GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
+        }
+        //서재
+        else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon&&GameManager.Instance.bossId==72)
+        {
+                GameManager.Instance.SetBossId(72);
+                GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
+        }
+        //도깨비숲 지키미
+        else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon&&GameManager.Instance.bossId==82)
+        {
+                GameManager.Instance.SetBossId(82);
+                GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
+        }
         else
         {
+            if(buttonRootObject!=null)
+            {
+                buttonRootObject.SetActive(false);
+            }
             return;
         }
 
