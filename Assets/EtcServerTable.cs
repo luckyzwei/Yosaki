@@ -37,11 +37,22 @@ public class EtcServerTable
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
     public Dictionary<string, ReactiveProperty<string>> TableDatas => tableDatas;
 
-    public bool YoguiSoguilRewarded(int stageId) 
+    public bool YoguiSoguilRewarded(int stageId)
     {
         var rewards = tableDatas[yoguiSogulReward].Value.Split(BossServerTable.rewardSplit).ToList();
 
         return rewards.Contains(stageId.ToString());
+    }
+
+    public List<int> GetYoguiSoguilRewardedList()
+    {
+        var rewards = tableDatas[yoguiSogulReward].Value
+       .Split(BossServerTable.rewardSplit)
+       .Where(e => string.IsNullOrEmpty(e) == false)
+       .Select(e => int.Parse(e))
+       .ToList();
+
+        return rewards;
     }
 
     public bool SonRewarded(float stageId)
@@ -50,6 +61,18 @@ public class EtcServerTable
 
         return rewards.Contains(stageId.ToString());
     }
+
+    public List<int> GetSonRewardedIdxList()
+    {
+        var rewards = tableDatas[sonReward].Value
+            .Split(BossServerTable.rewardSplit)
+            .Where(e => string.IsNullOrEmpty(e) == false)
+            .Select(e => int.Parse(e))
+            .ToList();
+
+        return rewards;
+    }
+
 
     public bool HellRewarded(float stageId)
     {

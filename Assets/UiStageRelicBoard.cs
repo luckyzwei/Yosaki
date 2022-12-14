@@ -3,21 +3,29 @@ using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-public class UiStageRelicBoard : MonoBehaviour
+public class UiStageRelicBoard : SingletonMono<UiStageRelicBoard>
 {
     [SerializeField]
     private Transform cellParents;
+    [SerializeField]
+    private Transform cellParents_GoodsRelic;
 
     [SerializeField]
     private UiStageRelicCell uiRelicCell;
+    [SerializeField]
+    private UiStageRelicCell uiRelicCell_GoodsRelic;
+
+    public ReactiveCommand whenRelicLevelUpButtonClicked = new ReactiveCommand();
 
     //[SerializeField]
     //private TextMeshProUGUI bestScoreText;
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         Initialize();
     }
 
@@ -36,7 +44,7 @@ public class UiStageRelicBoard : MonoBehaviour
 
         for (int i = 0; i < tableDatas.Length; i++)
         {
-            var cell = Instantiate<UiStageRelicCell>(uiRelicCell, cellParents);
+            var cell = Instantiate<UiStageRelicCell>(string.IsNullOrEmpty(tableDatas[i].Requiregoods) ? uiRelicCell : uiRelicCell_GoodsRelic, string.IsNullOrEmpty(tableDatas[i].Requiregoods) ? cellParents : cellParents_GoodsRelic);
 
             cell.Initialize(tableDatas[i]);
         }

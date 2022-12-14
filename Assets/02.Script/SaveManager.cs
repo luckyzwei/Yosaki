@@ -185,6 +185,12 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.Chun2,
         GoodsTable.Chun3,
         GoodsTable.Chun4,
+        
+        GoodsTable.DokebiSkill0,
+        GoodsTable.DokebiSkill1,
+        GoodsTable.DokebiSkill2,
+        GoodsTable.DokebiSkill3,
+        GoodsTable.DokebiSkill4,
 
         GoodsTable.c0,
         GoodsTable.c1,

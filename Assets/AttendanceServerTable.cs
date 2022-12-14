@@ -14,10 +14,17 @@ public class AttendanceServerTable
     public const string rewardKey = "rewardKey2";
     public const string rewardKey_100 = "rewardKey_100";
 
+
+    public static string attendFree = "free0";
+    public static string attendAd = "ad0";
+
+
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
         {rewardKey,""},
         {rewardKey_100,""},
+        {attendFree,""},
+        {attendAd,""},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();

@@ -77,21 +77,52 @@ public class UiGuildTwelveRewardPopup : SingletonMono<UiGuildTwelveRewardPopup>
 
     public void OnClickAllReceiveButton()
     {
+        if(double.TryParse(ServerData.bossServerTable.TableDatas["boss12"].score.Value,out double score)==false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("점수를 등록해주세요!");
+            return;
+        }
+
+        var tableData = TableManager.Instance.BossTable.dataArray[12];
+
+        var gumihoRewardedIdxList = ServerData.bossServerTable.GetGuildBossRewardedIdxList();
+
         int rewardCount = 0;
+
+        string addStringValue = string.Empty;
 
         for (int i = 0; i < uiTwelveBossRewardViews.Count; i++)
         {
-            bool hasReward = uiTwelveBossRewardViews[i].GetRewardByScript();
-
-            if (hasReward)
+            if(score< uiTwelveBossRewardViews[i].RewardInfo.damageCut)
             {
-                rewardCount++;
+                break;
             }
+            else
+            {
+                if(gumihoRewardedIdxList.Contains(uiTwelveBossRewardViews[i].RewardInfo.idx) ==false)
+                {
+                    
+                    float amount = uiTwelveBossRewardViews[i].RewardInfo.rewardAmount;
+
+                    addStringValue += $"{BossServerTable.rewardSplit}{uiTwelveBossRewardViews[i].RewardInfo.idx}";
+
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += (int)amount;
+
+                    rewardCount++;
+                }
+            }
+           // bool hasReward = uiTwelveBossRewardViews[i].GetRewardByScript();
+
+            //if (hasReward)
+            //{
+            //    rewardCount++;
+            //}
         }
 
         if (rewardCount != 0)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
+            ServerData.bossServerTable.TableDatas["boss12"].rewardedId.Value += addStringValue;
 
             Param bossParam = new Param();
             bossParam.Add("boss12", ServerData.bossServerTable.TableDatas["boss12"].ConvertToString());

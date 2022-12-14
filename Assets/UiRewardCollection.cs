@@ -175,9 +175,10 @@ public class UiRewardCollection : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearOni, clearCount);
+
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearOni, clearCount);
 
                 PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Dokebi)} {rewardNum * clearCount}개 획득!");
 
@@ -230,9 +231,10 @@ public class UiRewardCollection : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearSwordPartial, 1);
+
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearSwordPartial, 1);
                 LogManager.Instance.SendLogType("GumGi", "_", score.ToString());
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SP)} {score}개 획득!", null);
             });
@@ -275,10 +277,10 @@ public class UiRewardCollection : MonoBehaviour
 
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearChunFlower, 1);
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearChunFlower, 1);
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Cw)} {score}개 획득!", null);
             });
         }, null);
@@ -365,9 +367,10 @@ public class UiRewardCollection : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearDokebiFire, 1);
+
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearDokebiFire, 1);
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score}개 획득!", null);
             });
         }, null);

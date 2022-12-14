@@ -164,14 +164,41 @@ public class UiSonBoard : MonoBehaviour
 
     public void OnClickAllReceiveButton()
     {
-        bool hasreward = false;
-        for (int i = 0; i < rewardCells.Count; i++)
+        double score = ServerData.userInfoTable.TableDatas[UserInfoTable.sonScore].Value * GameBalance.BossScoreConvertToOrigin;
+
+        var tableData = TableManager.Instance.SonReward.dataArray;
+
+        var sonRewardedIdxList = ServerData.etcServerTable.GetSonRewardedIdxList();
+
+        int rewardCount = 0;
+
+        string addStringValue = string.Empty;
+
+        for (int i = 0; i < tableData.Length; i++)
         {
-            hasreward |= rewardCells[i].OnClickGetButtonByScript();
+            if (score < tableData[i].Score)
+            {
+                break;
+            }
+            else
+            {
+                if (sonRewardedIdxList.Contains(tableData[i].Id) == false)
+                {
+                    float amount = tableData[i].Rewardvalue;
+
+                    addStringValue += $"{BossServerTable.rewardSplit}{tableData[i].Id}";
+
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += (int)amount;
+
+                    rewardCount++;
+                }
+            }
         }
 
-        if (hasreward)
+        if (rewardCount > 0)
         {
+            ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value += addStringValue;
+
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             Param rewardParam = new Param();
@@ -181,7 +208,9 @@ public class UiSonBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, rewardParam));
 
             Param goodsParam = new Param();
+
             goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
@@ -204,6 +233,7 @@ public class UiSonBoard : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value = string.Empty;
             ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += 2000;
         }
     }

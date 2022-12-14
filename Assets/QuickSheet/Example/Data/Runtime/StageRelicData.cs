@@ -52,4 +52,20 @@ public class StageRelicData
   float prob;
   public float Prob { get {return prob; } set { this.prob = value;} }
   
+  [SerializeField]
+  bool canlevelup;
+  public bool Canlevelup { get {return canlevelup; } set { this.canlevelup = value;} }
+  
+  [SerializeField]
+  string requiregoods;
+  public string Requiregoods { get {return requiregoods; } set { this.requiregoods = value;} }
+  
+  [SerializeField]
+  float requiregoodsvalue;
+  public float Requiregoodsvalue { get {return requiregoodsvalue; } set { this.requiregoodsvalue = value;} }
+  
+  [SerializeField]
+  bool istotalskill;
+  public bool Istotalskill { get {return istotalskill; } set { this.istotalskill = value;} }
+  
 }

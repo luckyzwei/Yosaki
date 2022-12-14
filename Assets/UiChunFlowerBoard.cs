@@ -137,10 +137,10 @@ public class UiChunFlowerBoard : MonoBehaviour
 
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearChunFlower, 1);
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearChunFlower, 1);
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Cw)} {score}개 획득!", null);
             });
         }, null);

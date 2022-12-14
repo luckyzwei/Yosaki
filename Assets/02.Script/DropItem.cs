@@ -5,6 +5,7 @@ using UnityEngine;
 //순서 절대바뀌면안됨
 public enum Item_Type
 {
+    None = -1,
     Gold,
     Jade,
     GrowthStone,
@@ -350,10 +351,14 @@ public enum Item_Type
     //도깨비
     costume70 = 1271,
     costume71 = 1272,
-    
+
     //크리스마스 코스튬
     costume72 = 1273,
     costume73 = 1274,
+
+    //도깨비
+    costume74 = 1275,
+    costume75 = 1276,
 
     pet0 = 1301,
     pet1 = 1302,
@@ -407,18 +412,24 @@ public enum Item_Type
     DokebiWeapon2 = 7022,
     DokebiWeapon3 = 7023,
     DokebiWeapon4 = 7024,
+    DokebiWeapon5 = 7025,
+    DokebiWeapon6 = 7026,
 
     DokebiNorigae0 = 7030,
     DokebiNorigae1 = 7031,
     DokebiNorigae2 = 7032,
     DokebiNorigae3 = 7033,
     DokebiNorigae4 = 7034,
+    DokebiNorigae5 = 7035,
+    DokebiNorigae6 = 7036,
 
-    DokebiHorn0 =  7100,
-    DokebiHorn1 =  7101,
-    DokebiHorn2 =  7102,
-    DokebiHorn3 =  7103,
-    DokebiHorn4 =  7104,
+    DokebiHorn0 = 7100,
+    DokebiHorn1 = 7101,
+    DokebiHorn2 = 7102,
+    DokebiHorn3 = 7103,
+    DokebiHorn4 = 7104,
+    DokebiHorn5 = 7105,
+    DokebiHorn6 = 7106,
 
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
@@ -438,7 +449,7 @@ public enum Item_Type
 
     ChunNorigae5 = 8500,
     ChunNorigae6 = 8501,
-    
+
     MonthNorigae0 = 8600,
 
 
@@ -447,6 +458,12 @@ public enum Item_Type
     Chun2 = 8702,
     Chun3 = 8703,
     Chun4 = 8704,
+
+    DokebiSkill0 = 8710, // 도깨비 기술
+    DokebiSkill1 = 8711,
+    DokebiSkill2 = 8712,
+    DokebiSkill3 = 8713,
+    DokebiSkill4 = 8714,
 
     Event_XMas = 8800,
 

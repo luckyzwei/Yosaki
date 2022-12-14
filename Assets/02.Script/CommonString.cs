@@ -61,6 +61,7 @@ public static class CommonString
     public static string ItemGrade_8_Skill = "오로치";
     public static string ItemGrade_9_Skill = "신선검";
     public static string ItemGrade_10_Skill = "천계검";
+    public static string ItemGrade_11_Skill = "도깨비검";
 
     public static string GoldItemName = "골드";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -208,6 +209,8 @@ public static class CommonString
             case Item_Type.costume72: return TableManager.Instance.Costume.dataArray[72].Name;
 
             case Item_Type.costume73: return TableManager.Instance.Costume.dataArray[73].Name;
+            case Item_Type.costume74: return TableManager.Instance.Costume.dataArray[74].Name;
+            case Item_Type.costume75: return TableManager.Instance.Costume.dataArray[75].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -297,6 +300,13 @@ public static class CommonString
             case Item_Type.Chun2: return "천계술3";
             case Item_Type.Chun3: return "천계술4";
             case Item_Type.Chun4: return "천계술5";
+            //
+            //
+            case Item_Type.DokebiSkill0: return "도깨비술1";
+            case Item_Type.DokebiSkill1: return "도깨비술2";
+            case Item_Type.DokebiSkill2: return "도깨비술3";
+            case Item_Type.DokebiSkill3: return "도깨비술4";
+            case Item_Type.DokebiSkill4: return "도깨비술5";
             //
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
@@ -464,13 +474,16 @@ public static class CommonString
                 return "월간훈련 버프";
                 break;
             case StatusType.FlowerHasValueUpgrade:
-                return "천계 꽃 레벨당 천상베기 증가";
+                return "천계 꽃 레벨당 천상베기 피해량 증가(%)";
+                break;
+            case StatusType.HellHasValueUpgrade:
+                return "지옥불꽃 레벨당 지옥베기 피해량 증가(%)";
                 break;
             case StatusType.SuperCritical5DamPer:
                 return "귀신베기 피해(%)";
                 break;
             case StatusType.DokebiFireHasValueUpgrade:
-                return "도깨비 불 개수당  증가";
+                return "도깨비 불 레벨당 귀신베기 피해량 증가(%)";
                 break;
         }
 

@@ -109,13 +109,16 @@ public class UiGachaResultView : SingletonMono<UiGachaResultView>
 
         rootObject.SetActive(true);
 
-        int interval = results.Count - GachaResultViewCellContainer.Count;
+        int interval = Mathf.Min(results.Count, 100) - GachaResultViewCellContainer.Count;
+
+        interval = Mathf.Min(interval, 100);
 
         for (int i = 0; i < interval; i++)
         {
             var cell = Instantiate<GachaResultViewCell>(GachaResultViewCellPrefab, cellParent);
             GachaResultViewCellContainer.Add(cell);
         }
+
 
         this.results = results;
 
@@ -131,7 +134,10 @@ public class UiGachaResultView : SingletonMono<UiGachaResultView>
         if (isAuto == false)
         {
             WaitForSeconds delay = new WaitForSeconds(0.01f);
-            for (int i = 0; i < GachaResultViewCellContainer.Count; i++)
+
+            int loopNum = Mathf.Min(GachaResultViewCellContainer.Count, 100);
+
+            for (int i = 0; i < loopNum; i++)
             {
                 GachaResultViewCellContainer[i].gameObject.SetActive(i < results.Count);
 

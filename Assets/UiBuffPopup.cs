@@ -17,6 +17,9 @@ public class UiBuffPopup : MonoBehaviour
     
     [SerializeField]
     private List<UiBuffPopupView> coldBuff = new List<UiBuffPopupView>();
+    
+    [SerializeField]
+    private List<UiBuffPopupView> winterBuff = new List<UiBuffPopupView>();
 
 
 
@@ -47,6 +50,10 @@ public class UiBuffPopup : MonoBehaviour
             if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Cold)
             {
                 coldBuff.Add(cell);
+            }
+            if (tableDatas[i].BUFFTYPEENUM == BuffTypeEnum.Winter)
+            {
+                winterBuff.Add(cell);
             }
             
            

@@ -71,10 +71,6 @@ public static class EventMissionManager
 
     private static IEnumerator SyncToServerRoutine(string key, EventMissionKey missionKey)
     {
-
-   
-
-
         ServerData.eventMissionTable.SyncToServerEach(key);
 
         SyncRoutines[missionKey] = null;

@@ -255,7 +255,9 @@ public class UiInventoryWeaponView : MonoBehaviour
             magicBookData.Id == 44 ||
             magicBookData.Id == 45 ||
             magicBookData.Id == 46 ||
-            magicBookData.Id == 47 
+            magicBookData.Id == 47 ||
+            magicBookData.Id == 48 ||
+            magicBookData.Id == 49 
             ));
         foxNorigaeGetButton.SetActive(false);
 
@@ -307,7 +309,9 @@ public class UiInventoryWeaponView : MonoBehaviour
                 magicBookData.Id == 43 ||
                 magicBookData.Id == 44 ||
                 magicBookData.Id == 46 ||
-                magicBookData.Id == 47 
+                magicBookData.Id == 47 ||
+                magicBookData.Id == 48 ||
+                magicBookData.Id == 49 
 
                 )
             {
@@ -470,7 +474,8 @@ public class UiInventoryWeaponView : MonoBehaviour
                 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49 || weaponData.Id == 50
                 || weaponData.Id == 51 || weaponData.Id == 52 || weaponData.Id == 53 || weaponData.Id == 54 || weaponData.Id == 55
                 || weaponData.Id == 56 || weaponData.Id == 57 || weaponData.Id == 58 || weaponData.Id == 59 || weaponData.Id == 60
-                || weaponData.Id == 61 || weaponData.Id == 62 || weaponData.Id == 63 || weaponData.Id == 64
+                || weaponData.Id == 61 || weaponData.Id == 62 || weaponData.Id == 63 || weaponData.Id == 64 ||weaponData.Id == 65
+                || weaponData.Id == 66 
 
                 )
             {
@@ -584,6 +589,16 @@ public class UiInventoryWeaponView : MonoBehaviour
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
                     weaponLockDescription.SetText($"도깨비나라\n설량에서 획득!");
+                }
+                if (weaponData.Id == 65)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"도깨비나라\n미량에서 획득!");
+                }
+                if (weaponData.Id == 66)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"도깨비나라\n흑량에서 획득!");
                 }
                 //
                 if (weaponData.Id == 45 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49||

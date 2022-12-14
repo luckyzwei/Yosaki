@@ -25,7 +25,11 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_22_Norigae, CommonString.ItemGrade_22_Norigae };
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
-    private List<string> itemGradeName_Skill = new List<string>() { CommonString.ItemGrade_0, CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill, CommonString.ItemGrade_6_Skill, CommonString.ItemGrade_7_Skill, CommonString.ItemGrade_8_Skill, CommonString.ItemGrade_9_Skill, CommonString.ItemGrade_10_Skill };
+    private List<string> itemGradeName_Skill = new List<string>() { 
+        CommonString.ItemGrade_0,
+        CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4_Skill, CommonString.ItemGrade_5_Skill,
+        CommonString.ItemGrade_6_Skill, CommonString.ItemGrade_7_Skill, CommonString.ItemGrade_8_Skill, CommonString.ItemGrade_9_Skill, CommonString.ItemGrade_10_Skill,
+        CommonString.ItemGrade_11_Skill };
     public List<string> ItemGradeName_Skill => itemGradeName_Skill;
 
     public List<Color> itemGradeColor;
@@ -118,6 +122,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiNorigae2;
     public Sprite DokebiNorigae3;
     public Sprite DokebiNorigae4;
+    public Sprite DokebiNorigae5;
+    public Sprite DokebiNorigae6;
 
     public Sprite MonthNorigae0;
     
@@ -126,6 +132,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiHorn2;
     public Sprite DokebiHorn3;
     public Sprite DokebiHorn4;
+    public Sprite DokebiHorn5;
+    public Sprite DokebiHorn6;
 
     public Sprite ChunSun0;
     public Sprite ChunSun1;
@@ -198,6 +206,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiWeapon2;
     public Sprite DokebiWeapon3;
     public Sprite DokebiWeapon4;
+    public Sprite DokebiWeapon5;
+    public Sprite DokebiWeapon6;
 
     public Sprite NataSkill;
     public Sprite OrochiSkill;
@@ -234,6 +244,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Chun2;
     public Sprite Chun3;
     public Sprite Chun4;
+
+    public Sprite DokebiSkill0;
+    public Sprite DokebiSkill1;
+    public Sprite DokebiSkill2;
+    public Sprite DokebiSkill3;
+    public Sprite DokebiSkill4;
 
 
     public Sprite GetItemIcon(Item_Type type)
@@ -479,6 +495,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.costume73:
                 return costumeThumbnail[73];
+                break;
+            case Item_Type.costume74:
+                return costumeThumbnail[74];
+                break;
+            case Item_Type.costume75:
+                return costumeThumbnail[75];
                 break;
 
 
@@ -782,6 +804,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.DokebiNorigae4:
                 return DokebiNorigae4;
                 break;
+            case Item_Type.DokebiNorigae5:
+                return DokebiNorigae5;
+                break;
+            case Item_Type.DokebiNorigae6:
+                return DokebiNorigae6;
+                break;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -802,6 +830,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.DokebiHorn4:
                 return DokebiHorn4;
+                break;
+            case Item_Type.DokebiHorn5:
+                return DokebiHorn5;
+                break;
+            case Item_Type.DokebiHorn6:
+                return DokebiHorn6;
                 break;
             //
             case Item_Type.ChunSun0:
@@ -972,6 +1006,23 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return Chun4;
                 break;
             //
+            //
+            case Item_Type.DokebiSkill0:
+                return DokebiSkill0;
+                break;
+            case Item_Type.DokebiSkill1:
+                return DokebiSkill1;
+                break;
+            case Item_Type.DokebiSkill2:
+                return DokebiSkill2;
+                break;
+            case Item_Type.DokebiSkill3:
+                return DokebiSkill3;
+                break;
+            case Item_Type.DokebiSkill4:
+                return DokebiSkill4;
+                break;
+            //
             case Item_Type.GangrimSkill:
                 return GangrimSkill;
                 break;
@@ -1020,6 +1071,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.DokebiWeapon4:
                 return DokebiWeapon4;
+                break;
+            case Item_Type.DokebiWeapon5:
+                return DokebiWeapon5;
+                break;
+            case Item_Type.DokebiWeapon6:
+                return DokebiWeapon6;
                 break;
 
             case Item_Type.MihoNorigae:

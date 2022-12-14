@@ -108,10 +108,10 @@ public class UiHellRewardCell : MonoBehaviour
 
         transactions.Add(ServerData.GetItemTypeTransactionValueForAttendance(type, (int)amount));
 
+        EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearHell, 1);
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
             //LogManager.Instance.SendLogType("Son", "reward", tableData.Id.ToString());
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearHell, 1);
             PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
             SoundManager.Instance.PlaySound("Reward");
             rewardButton.interactable = true;

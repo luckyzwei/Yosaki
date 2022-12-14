@@ -1,4 +1,5 @@
 ﻿using BackEnd;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -32,6 +33,12 @@ public class UiStageRelicCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI lockText;
 
+    [SerializeField]
+    private GameObject lockMask_Goods;
+
+    [SerializeField]
+    private TextMeshProUGUI lockText_Goods;
+
     private bool subscribed = false;
     private bool IsMaxLevel()
     {
@@ -41,6 +48,11 @@ public class UiStageRelicCell : MonoBehaviour
     private void UpdateDescription(float level)
     {
         if (levelText == null || priceText == null || relicDescription == null || relicLocalData == null) return;
+
+        if (relicLocalData.Istotalskill)
+        {
+            level = ServerData.stageRelicServerTable.GetTotalStageRelicLevel();
+        }
 
         levelText.SetText($"LV:{Utils.ConvertBigNum(level)}");
 
@@ -59,8 +71,14 @@ public class UiStageRelicCell : MonoBehaviour
         {
             var abilValue = PlayerStats.GetStageRelicHasEffect(abilType);
 
-            relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {Utils.ConvertBigNum(abilValue * 100f)}%");
-
+            if (relicLocalData.Istotalskill == false)
+            {
+                relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {Utils.ConvertBigNum(abilValue * 100f)}%");
+            }
+            else
+            {
+                relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {abilValue * 100f}%");
+            }
         }
         else
         {
@@ -94,6 +112,32 @@ public class UiStageRelicCell : MonoBehaviour
                 lockText.SetText($"{TableManager.Instance.StageRelic.dataArray[relicLocalData.Requirerelic].Name} {relicLocalData.Requirelevel}레벨 필요");
             }).AddTo(this);
         }
+
+        if (string.IsNullOrEmpty(relicLocalData.Requiregoods) == false)
+        {
+            Item_Type goodsType = Utils.EnumUtil<Item_Type>.Parse(relicLocalData.Requiregoods);
+            lockText_Goods.SetText($"{CommonString.GetItemName(goodsType)} {Utils.ConvertBigNum(relicLocalData.Requiregoodsvalue)}개 이상일때 해금");
+
+            ServerData.goodsTable.GetTableData(relicLocalData.Requiregoods).AsObservable().Subscribe(e =>
+            {
+                lockMask_Goods.gameObject.SetActive(e < relicLocalData.Requiregoodsvalue);
+            }).AddTo(this);
+
+        }
+        else
+        {
+            lockMask_Goods.gameObject.SetActive(false);
+        }
+
+        if (relicLocalData.Istotalskill)
+        {
+            UiStageRelicBoard.Instance.whenRelicLevelUpButtonClicked.AsObservable().Subscribe(e =>
+            {
+
+                UpdateDescription(0f);
+
+            }).AddTo(this);
+        }
     }
 
     public void Initialize(StageRelicData relicLocalData)
@@ -105,7 +149,8 @@ public class UiStageRelicCell : MonoBehaviour
         relicName.SetText(this.relicLocalData.Name);
         relicName.color = CommonUiContainer.Instance.itemGradeColor[relicLocalData.Grade + 1];
 
-        if (CommonUiContainer.Instance.stageRelicIconList.Count != 0)
+        if (CommonUiContainer.Instance.stageRelicIconList.Count != 0 &&
+            this.relicLocalData.Id < CommonUiContainer.Instance.stageRelicIconList.Count)
         {
             relicIcon.sprite = CommonUiContainer.Instance.stageRelicIconList[this.relicLocalData.Id];
         }
@@ -253,7 +298,7 @@ public class UiStageRelicCell : MonoBehaviour
               //  LogManager.Instance.SendLogType("StageRelic", relicLocalData.Stringid, ServerData.stageRelicServerTable.TableDatas[relicLocalData.Stringid].level.Value.ToString());
           });
 
-
+        UiStageRelicBoard.Instance.whenRelicLevelUpButtonClicked.Execute();
 
     }
 }

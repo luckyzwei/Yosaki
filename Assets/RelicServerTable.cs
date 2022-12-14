@@ -262,4 +262,18 @@ public class StageRelicServerTable : MonoBehaviour
             }
         });
     }
+
+    public float GetTotalStageRelicLevel()
+    {
+        float ret = 0f;
+
+        var tableData = TableManager.Instance.StageRelic.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            ret += ServerData.stageRelicServerTable.TableDatas[tableData[i].Stringid].level.Value;
+        }
+
+        return ret;
+    }
 }

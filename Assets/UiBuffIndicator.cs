@@ -6,7 +6,7 @@ using UniRx;
 
 public enum BuffTypeEnum
 {
-    Normal, Yomul, Guild,OneYear,Chuseok,Month,Cold
+    Normal, Yomul, Guild,OneYear,Chuseok,Month,Cold,Winter
 }
 
 public class UiBuffIndicator : MonoBehaviour

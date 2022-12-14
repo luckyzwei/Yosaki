@@ -52,7 +52,7 @@ public class UserInfoTable
     public const string tutorialClearFlags = "tutorialClearFlags";
 
     public const string managerDescriptionFlags = "managerDescriptionFlags";
-    public const string attendanceCount = "attendanceCount2";
+    public const string attendanceCount = "ac1";
     public const string attendanceCount_100Day = "attendanceCount_100Day";
     public const string attendanceCount_Seol = "atten_Seol";
 
@@ -77,6 +77,9 @@ public class UserInfoTable
 
     public const string cold0_Buff = "cold0"; //혹한기버프
     public const string cold1_Buff = "cold1";
+
+    public const string winter0_Buff = "winter0"; //겨울훈련 버프
+    public const string winter1_Buff = "winter1";
 
     public const string yomul0_buff = "yomul0_buff";
     public const string yomul1_buff = "yomul1_buff";
@@ -120,6 +123,7 @@ public class UserInfoTable
     //7월월간
     public const string killCountTotal2 = "k11";
     public const string killCountTotalChild = "fal"; //가을훈련
+    public const string killCountTotalWinterPass = "KillCountWinterPass"; //가을훈련
     public const string killCountTotalColdSeason = "cold"; //혹한기
     public const string attenCountBok = "kb";
     public const string attenCountChuSeok = "kchu";
@@ -128,8 +132,8 @@ public class UserInfoTable
     public const string usedFallCollectionCount = "ufc"; //곶감사용
 
 
-    public const string relicKillCount = "relicKillCount";
-    public const string hellRelicKillCount = "hrk";
+    public const string relicKillCount = "relicKillCount"; // 영숲
+    public const string hellRelicKillCount = "hrk"; // 지옥영숲
 
     public const string usedRelicTicketNum = "usedRelicTicketNum";
 
@@ -145,8 +149,10 @@ public class UserInfoTable
     public const string hellScore = "hels";
     public const string chunClear = "chun";
     public const string susanoScore = "susa";
+    public const string gradeScore = "grade";
     public const string yumScore = "yumScore";
     public const string okScore = "okScore";
+    public const string doScore = "doScore";
     public const string sleepRewardSavedTime = "sleepRewardSavedTime";
     public const string buffAwake = "buffAwake";
     public const string petAwake = "petAwake";
@@ -161,7 +167,7 @@ public class UserInfoTable
     public const string getGumGi = "getGumGi";
     public const string getFlower = "getc";
     public const string getDokebiFire = "getDokebiFire";
-    
+
     public const string sendPetExp = "sendPetExp";
 
     public const string exchangeCount = "ex_0";
@@ -182,7 +188,6 @@ public class UserInfoTable
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
     public const string partyRaidDuo = "partyRaidDuo";
-    public const string dokebiHorn = "dokebiHorn";
     public const string relicPackReset = "rr";
     public const string oneAttenEvent = "oe";
     public const string titleRefund = "tii";
@@ -192,6 +197,8 @@ public class UserInfoTable
     public const string canRecommendCount = "canRecommendCount3";
     public const string mileageRefund = "mr";
     public const string marRelicRefund = "marRelicRe2";
+
+    public const string purchaseRefund0 = "purchaseRefund0";
 
     public const string exchangeCount_0_Mileage = "mff";
     public const string exchangeCount_1_Mileage = "mgg";
@@ -205,7 +212,7 @@ public class UserInfoTable
     public const string partyTowerFloor = "partyTowerFloor";
 
     public const string receivedPartyTowerTicket = "receivedPartyTowerTicket";
-    
+
     public double currentServerDate;
     public double attendanceUpdatedTime;
     public DateTime currentServerTime { get; private set; }
@@ -236,7 +243,7 @@ public class UserInfoTable
         {tutorialCurrentStep,2f},
         {tutorialClearFlags,0f},
         {managerDescriptionFlags,0f},
-        {attendanceCount,1f},
+        {attendanceCount,0f},
         {marbleAwake,-1f},
         {resetStat,0f},
         //버프
@@ -258,6 +265,9 @@ public class UserInfoTable
 
         {cold0_Buff,0f},
         {cold1_Buff,0f},
+
+        {winter0_Buff,0f},
+        {winter1_Buff,0f},
 
         {bonusDungeonMaxKillCount,0f},
         {wingPackageRewardReceive,0f},
@@ -304,6 +314,7 @@ public class UserInfoTable
         {yomul5_buff,0f},
         {killCountTotal2,0f},
         {killCountTotalChild,0f},
+        {killCountTotalWinterPass,0f},
         {killCountTotalColdSeason,0f},
         {attenCountBok,1f},
         {usedFallCollectionCount,0f},
@@ -314,8 +325,10 @@ public class UserInfoTable
         {hellWarScore,0f},
         {catScore,0f},
         {susanoScore,0f},
+        {gradeScore,0f},
         {yumScore,0f},
         {okScore,0f},
+        {doScore,0f},
         {sleepRewardSavedTime,0f},
         {yomul7_buff,0f},
         {attendanceCount_100Day,1f},
@@ -354,7 +367,6 @@ public class UserInfoTable
         {sendGangChul,0},
         {foxMask,0},
         {partyRaidDuo,0},
-        {dokebiHorn,0},
         {relicPackReset,0},
         {hellScore,0},
         {chunClear,0},
@@ -366,6 +378,7 @@ public class UserInfoTable
         {canRecommendCount,GameBalance.recommendCountPerWeek},
         {mileageRefund,0},
         {marRelicRefund,0},
+        {purchaseRefund0,0},
 
         {exchangeCount_0_Mileage,0},
         {exchangeCount_1_Mileage,0},
@@ -564,7 +577,8 @@ public class UserInfoTable
             UpData(killCountTotal2, false);
         }
 
-        UpData(killCountTotalChild, false);
+        //UpData(killCountTotalChild, false);
+        UpData(killCountTotalWinterPass, false);
         UpData(killCountTotalColdSeason, false);
         //UpData(attenCountOne, false);
     }
@@ -642,7 +656,7 @@ public class UserInfoTable
                 if (savedDate.Day != currentServerTime.Day)
                 {
                     Debug.LogError("@@@Day Changed!");
-                    if(savedDate.Month!=currentServerTime.Month)
+                    if (savedDate.Month != currentServerTime.Month)
                     {
                         Debug.LogError("@@@Month Changed!");
                     }
@@ -706,7 +720,7 @@ public class UserInfoTable
         dailyPassParam.Add(DailyPassServerTable.DailypassAdReward, ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassAdReward].Value);
         transactionList.Add(TransactionValue.SetUpdate(DailyPassServerTable.tableName, DailyPassServerTable.Indate, dailyPassParam));
 
-       
+
         //일일초기화
         Param userInfoParam = new Param();
         ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value = 0;
@@ -745,6 +759,8 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.ma12_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.cold0_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.cold1_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.winter0_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.winter1_Buff).Value = 0;
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value = 0;
@@ -754,7 +770,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul5_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul6_buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.yomul7_buff).Value = 0;
-        
+
         //
 
 
@@ -767,7 +783,12 @@ public class UserInfoTable
         //두번타는거 방지
         if (attendanceUpdatedTime != day)
         {
-            ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
+
+            if (ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value != 0)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount).Value++;
+            }
+
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value++;
@@ -792,8 +813,8 @@ public class UserInfoTable
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.chunpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.chunpensionAttendance).Value++;
-            }  
-            
+            }
+
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.dokebipensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.dokebipensionAttendance).Value++;
@@ -875,7 +896,9 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.ma12_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.ma12_Buff).Value);
         userInfoParam.Add(UserInfoTable.cold0_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.cold0_Buff).Value);
         userInfoParam.Add(UserInfoTable.cold1_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.cold1_Buff).Value);
-        
+        userInfoParam.Add(UserInfoTable.winter0_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.winter0_Buff).Value);
+        userInfoParam.Add(UserInfoTable.winter1_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.winter1_Buff).Value);
+
         userInfoParam.Add(UserInfoTable.yomul0_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul0_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul1_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul1_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul2_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul2_buff).Value);
@@ -967,7 +990,7 @@ public class UserInfoTable
         Param goodsParam = new Param();
 
         goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
-        
+
 
 
         //길드보상 초기화
@@ -988,11 +1011,11 @@ public class UserInfoTable
             ServerData.bossServerTable.TableDatas["b53"].rewardedId.Value = string.Empty;
             bossParam.Add("b53", ServerData.bossServerTable.TableDatas["b53"].ConvertToString());
 
-            
+
             goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
         }
-        
-        
+
+
 
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactionList.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
@@ -1015,7 +1038,7 @@ public class UserInfoTable
     {
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.Attendance, 1);
 
-        
+
 
     }
 
@@ -1121,7 +1144,8 @@ public class UserInfoTable
                 tableDatas[killCountTotal2].Value += updateRequireNum;
             }
 
-            tableDatas[killCountTotalChild].Value += updateRequireNum;
+            //tableDatas[killCountTotalChild].Value += updateRequireNum;
+            tableDatas[killCountTotalWinterPass].Value += updateRequireNum;
             tableDatas[killCountTotalColdSeason].Value += updateRequireNum;
             //tableDatas[attenCountOne].Value += updateRequireNum;
         }
@@ -1148,6 +1172,6 @@ public class UserInfoTable
         return false;
 #endif
         //홀수 달의 경우 true
-        return (currentServerTime.Month %2) == 1;
+        return (currentServerTime.Month % 2) == 1;
     }
 }

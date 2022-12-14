@@ -33,17 +33,18 @@ public enum StatusType
     SuperCritical1Prob,
     SuperCritical1DamPer,
     MarbleAddPer,
-    SuperCritical2DamPer,
+    SuperCritical2DamPer,//필멸
     //Smith
     growthStoneUp, WeaponHasUp, NorigaeHasUp, PetEquipHasUp, PetEquipProbUp,
     DecreaseBossHp,
     OneYearBuff,
-    SuperCritical3DamPer,
-    SuperCritical4DamPer,
+    SuperCritical3DamPer,//지옥
+    SuperCritical4DamPer,//천상
     MonthBuff,
     FlowerHasValueUpgrade,
-    SuperCritical5DamPer,
+    SuperCritical5DamPer,//도깨비
     DokebiFireHasValueUpgrade,
+    HellHasValueUpgrade,
 }
 
 
@@ -228,9 +229,9 @@ public static class PlayerStats
         float ret = (float)TableManager.Instance.gumGiTable.dataArray[idx].Abilvalue;
 
 
-        if(ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value >= TableManager.Instance.gumGiTable.dataArray[200].Require)
+        if (ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value >= TableManager.Instance.gumGiTable.dataArray[200].Require)
         {
-            int over200 = Mathf.Max(0,((int)ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value - TableManager.Instance.gumGiTable.dataArray[200].Require) / 50000);
+            int over200 = Mathf.Max(0, ((int)ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value - TableManager.Instance.gumGiTable.dataArray[200].Require) / 50000);
             ret += over200 * GameBalance.gumgiAttackValue200;
         }
 
@@ -734,9 +735,9 @@ public static class PlayerStats
         ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
 
-       // ret += GetMonthlyFreeBuffValue(StatusType.ExpGainPer);
-       // ret += GetMonthlyAdBuffValue(StatusType.ExpGainPer);
-        
+        // ret += GetMonthlyFreeBuffValue(StatusType.ExpGainPer);
+        // ret += GetMonthlyAdBuffValue(StatusType.ExpGainPer);
+
 
 
         ret += GetPetHomeAbilValue(StatusType.ExpGainPer);
@@ -841,7 +842,7 @@ public static class PlayerStats
         return 0f;
     }
 
-    
+
     //월간 패스 키값
     private static string mf12 = "mf12";
     private static float GetMonthlyFreeBuffValue(StatusType status)
@@ -908,8 +909,8 @@ public static class PlayerStats
         ret += GetChuSeokBuffValue2(StatusType.MagicStoneAddPer);
 
 
-      //  ret += GetMonthlyFreeBuffValue(StatusType.MagicStoneAddPer);
-      //  ret += GetMonthlyAdBuffValue(StatusType.MagicStoneAddPer);
+        //  ret += GetMonthlyFreeBuffValue(StatusType.MagicStoneAddPer);
+        //  ret += GetMonthlyAdBuffValue(StatusType.MagicStoneAddPer);
 
         return ret;
     }
@@ -924,8 +925,8 @@ public static class PlayerStats
         ret += GetChuSeokBuffValue(StatusType.MarbleAddPer);
         ret += GetChuSeokBuffValue2(StatusType.MarbleAddPer);
 
-      //  ret += GetMonthlyFreeBuffValue(StatusType.MarbleAddPer);
-       // ret += GetMonthlyAdBuffValue(StatusType.MarbleAddPer);
+        //  ret += GetMonthlyFreeBuffValue(StatusType.MarbleAddPer);
+        // ret += GetMonthlyAdBuffValue(StatusType.MarbleAddPer);
 
         return ret;
     }
@@ -1158,6 +1159,8 @@ public static class PlayerStats
 
         ret += GetPetHomeAbilValue(StatusType.SuperCritical2DamPer);
 
+        ret += GetGradeTestAbilValue(StatusType.SuperCritical2DamPer);
+
         return ret;
     }
 
@@ -1183,6 +1186,10 @@ public static class PlayerStats
 
         ret += GetYumAbil(StatusType.SuperCritical3DamPer);
 
+        ret += GetStageRelicHasEffect(StatusType.SuperCritical3DamPer);
+
+
+
         return ret;
     }
 
@@ -1206,6 +1213,10 @@ public static class PlayerStats
 
         ret += GetOkAbil(StatusType.SuperCritical4DamPer);
 
+        ret += GetStageRelicHasEffect(StatusType.SuperCritical4DamPer);
+
+
+
 
 
         return ret;
@@ -1223,6 +1234,10 @@ public static class PlayerStats
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical5DamPer);
 
         ret += GetWeaponEquipPercentValue(StatusType.SuperCritical5DamPer);
+
+        ret += GetDoAbil(StatusType.SuperCritical5DamPer);
+
+        ret += GetStageRelicHasEffect(StatusType.SuperCritical5DamPer);
 
 
         return ret;
@@ -1552,17 +1567,31 @@ public static class PlayerStats
         }
         else
         {
+            float totalLevel = ServerData.stageRelicServerTable.GetTotalStageRelicLevel();
+
             var tableDatas = TableManager.Instance.StageRelic.dataArray;
 
             for (int i = 0; i < tableDatas.Length; i++)
             {
                 var serverData = ServerData.stageRelicServerTable.TableDatas[tableDatas[i].Stringid];
 
-                if (serverData.level.Value == 0) continue;
-
                 if (tableDatas[i].Abiltype != (int)statusType) continue;
 
-                ret += serverData.level.Value * tableDatas[i].Abilvalue;
+                if (serverData.level.Value == 0 && tableDatas[i].Istotalskill == false) continue;
+
+                if (tableDatas[i].Istotalskill)
+                {
+                    //언락 체크
+                    if (ServerData.goodsTable.GetTableData(tableDatas[i].Requiregoods).Value >= tableDatas[i].Requiregoodsvalue)
+                    {
+                        ret += totalLevel * tableDatas[i].Abilvalue;
+                    }
+                }
+                else
+                {
+                    ret += serverData.level.Value * tableDatas[i].Abilvalue;
+                }
+
             }
 
             stageRelicValue.Add(statusType, ret);
@@ -1620,7 +1649,7 @@ public static class PlayerStats
 
             int calculatedLevel = currentLevel - tableDatas[i].Unlocklevel;
 
-            ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
+            ret += tableDatas[i].Abilvalue + calculatedLevel * (tableDatas[i].Abiladdvalue + GetHellFireHasAddValue());
         }
 
 
@@ -1660,7 +1689,7 @@ public static class PlayerStats
                 //0.000015 0.0015퍼
             }
 
-            ret += GetSkillHasValue(StatusType.FlowerHasValueUpgrade) * currentLevel;
+            ret += GetChunFlowerHasAddValue() * currentLevel;
 
         }
         return ret;
@@ -1687,11 +1716,9 @@ public static class PlayerStats
 
         if (statusType == StatusType.SuperCritical5DamPer)
         {
-
-
-            ret += GetSkillHasValue(StatusType.DokebiFireHasValueUpgrade) * currentLevel;
-
+            ret += GetDokebiFireHasAddValue() * currentLevel;
         }
+
         return ret;
     }
 
@@ -2089,6 +2116,25 @@ public static class PlayerStats
 
         return grade;
     }
+
+    public static int GetGradeTestGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.gradeTestTable.dataArray;
+
+        var score = ServerData.userInfoTable.TableDatas[UserInfoTable.gradeScore].Value * GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
     public static int GetYumGrade()
     {
         int grade = -1;
@@ -2107,13 +2153,31 @@ public static class PlayerStats
 
         return grade;
     }
-        public static int GetOkGrade()
+    public static int GetOkGrade()
     {
         int grade = -1;
 
         var tableData = TableManager.Instance.okTable.dataArray;
 
         var score = ServerData.userInfoTable.TableDatas[UserInfoTable.okScore].Value * GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
+    public static int GetDoGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.doTable.dataArray;
+
+        var score = ServerData.userInfoTable.TableDatas[UserInfoTable.doScore].Value * GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
         {
@@ -2184,6 +2248,30 @@ public static class PlayerStats
         var tableData = TableManager.Instance.okTable.dataArray[grade];
 
         if (type == StatusType.SuperCritical4DamPer)
+        {
+
+            return tableData.Abilvalue0;
+
+        }
+        //else if (type == StatusType.PenetrateDefense)
+        //{
+
+        //    return tableData.Abilvalue1;
+
+        //}
+
+        return 0f;
+    }
+    public static float GetDoAbil(StatusType type)
+    {
+
+        int grade = GetDoGrade();
+
+        if (grade == -1) return 0f;
+
+        var tableData = TableManager.Instance.doTable.dataArray[grade];
+
+        if (type == StatusType.SuperCritical5DamPer)
         {
 
             return tableData.Abilvalue0;
@@ -2371,6 +2459,60 @@ public static class PlayerStats
         var goodsNum = ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value;
 
         return goodsNum * hellPowerStoneAddPer;
+    }
+
+    public static float GetGradeTestAbilValue(StatusType statusType)
+    {
+        int currentGrade = GetGradeTestGrade();
+
+        if (currentGrade == -1) return 0f;
+
+        var tableData = TableManager.Instance.gradeTestTable.dataArray[currentGrade];
+
+        if (tableData.Abiltype.Length != tableData.Abilvalue.Length) return 0f;
+
+        float ret = 0f;
+
+        for (int i = 0; i < tableData.Abiltype.Length; i++)
+        {
+            if (tableData.Abiltype[i] == (int)statusType)
+            {
+                ret += tableData.Abilvalue[i];
+            }
+        }
+
+        return ret;
+    }
+
+    public static float GetChunFlowerHasAddValue()
+    {
+        float ret = 0f;
+
+        ret += GetSkillHasValue(StatusType.FlowerHasValueUpgrade);
+
+        ret += GetGradeTestAbilValue(StatusType.FlowerHasValueUpgrade);
+
+        return ret;
+    }
+
+    public static float GetHellFireHasAddValue()
+    {
+        float ret = 0f;
+
+        ret += GetGradeTestAbilValue(StatusType.HellHasValueUpgrade);
+
+        return ret;
+    }
+
+    public static float GetDokebiFireHasAddValue()
+    {
+        float ret = 0f;
+
+        ret += GetSkillHasValue(StatusType.DokebiFireHasValueUpgrade);
+
+        ret += GetGradeTestAbilValue(StatusType.DokebiFireHasValueUpgrade);
+
+        return ret;
     }
 
 }

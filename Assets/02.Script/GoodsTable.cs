@@ -97,7 +97,7 @@ public class GoodsTable
     public static string gumiho7 = "g7";
     public static string gumiho8 = "g8";
 
-    public static string Hel = "Hel";
+    public const string Hel = "Hel";
     public static string h0 = "h0";
     public static string h1 = "h1";
     public static string h2 = "h2";
@@ -125,8 +125,14 @@ public class GoodsTable
     public static string Chun3 = "Chun3";
     public static string Chun4 = "Chun4";
 
+    public static string DokebiSkill0 = "DokebiSkill0";
+    public static string DokebiSkill1 = "DokebiSkill1";
+    public static string DokebiSkill2 = "DokebiSkill2";
+    public static string DokebiSkill3 = "DokebiSkill3";
+    public static string DokebiSkill4 = "DokebiSkill4";
+
     public static string Fw = "Fw";
-    public static string Cw = "Cw"; //천계꽃
+    public const string Cw = "Cw"; //천계꽃
 
     public static string c0 = "c0"; //천계꽃
     public static string c1 = "c1"; //천계꽃
@@ -142,7 +148,7 @@ public class GoodsTable
 
     public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
 
-    public static string DokebiFire = "DokebiFire"; //도깨비 나라 재화
+    public const string DokebiFire = "DokebiFire"; //도깨비 나라 재화
     public static string DokebiFireKey = "DokebiFireKey"; //도깨비 불 입장권
 
     public static string Mileage = "Mileage"; //마일리지
@@ -256,6 +262,12 @@ public class GoodsTable
         {Chun2,0f},
         {Chun3,0f},
         {Chun4,0f},
+        
+        {DokebiSkill0,0f},
+        {DokebiSkill1,0f},
+        {DokebiSkill2,0f},
+        {DokebiSkill3,0f},
+        {DokebiSkill4,0f},
 
         {Fw,0f},
         {Cw,0f},

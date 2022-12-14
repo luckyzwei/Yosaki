@@ -265,11 +265,11 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
               userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
               transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearBandit, clearCount);
               ServerData.SendTransaction(transactionList,
                   successCallBack: () =>
                   {
                       DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
-                      EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearBandit, clearCount);
                   },
                   completeCallBack: () =>
                   {

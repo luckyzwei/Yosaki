@@ -91,7 +91,9 @@ public static class Utils
                   type == Item_Type.costume70 ||
                   type == Item_Type.costume71 ||
                   type == Item_Type.costume72 ||
-                  type == Item_Type.costume73;
+                  type == Item_Type.costume73 ||
+                  type == Item_Type.costume74 ||
+                  type == Item_Type.costume75;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -148,6 +150,8 @@ public static class Utils
                 type == Item_Type.DokebiNorigae2 ||
                 type == Item_Type.DokebiNorigae3 ||
                 type == Item_Type.DokebiNorigae4 ||
+                type == Item_Type.DokebiNorigae5 ||
+                type == Item_Type.DokebiNorigae6 ||
 
                 type == Item_Type.MonthNorigae0 ||
 
@@ -157,6 +161,8 @@ public static class Utils
                 type == Item_Type.DokebiHorn2 ||
                 type == Item_Type.DokebiHorn3 ||
                 type == Item_Type.DokebiHorn4 ||
+                type == Item_Type.DokebiHorn5 ||
+                type == Item_Type.DokebiHorn6 ||
 
                 type == Item_Type.ChunSun0 ||
                 type == Item_Type.ChunSun1 ||
@@ -230,6 +236,7 @@ public static class Utils
             type == GameManager.ContentsType.PartyRaid || //O
             type == GameManager.ContentsType.Yum ||
             type == GameManager.ContentsType.Ok ||
+            type == GameManager.ContentsType.Do ||
             type == GameManager.ContentsType.PartyRaid_Guild; //O
     }
     public static bool IsRankFrameItem(this Item_Type type)
@@ -375,7 +382,7 @@ public static class Utils
     }
 
     #region BigFloat
-    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업" };
+    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업","긍", "갈", "라" };
     private static double p = (double)Mathf.Pow(10, 4);
     private static List<double> numList = new List<double>();
     private static List<string> numStringList = new List<string>();
@@ -389,7 +396,7 @@ public static class Utils
             data *= -1f;
         }
 #endif
-
+        //
         if (data == 0f)
         {
             return zeroString;
@@ -514,5 +521,12 @@ public static class Utils
         return ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value == TableManager.Instance.towerTableMulti.dataArray.Length;
     }
 
+    public static class EnumUtil<T>
+    {
+        public static T Parse(string s)
+        {
+            return (T)Enum.Parse(typeof(T), s);
+        }
+    }
 
 }

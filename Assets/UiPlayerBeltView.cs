@@ -13,10 +13,9 @@ public class UiPlayerBeltView : MonoBehaviour
     [SerializeField]
     private Image icon;
 
-    // Start is called before the first frame update
     IEnumerator Start()
     {
-        yield return null;
+        yield return new WaitForSeconds(1.0f);
 
         boneFollowerGraphic.SetBone("bone");
 
@@ -36,6 +35,13 @@ public class UiPlayerBeltView : MonoBehaviour
             {
                 icon.gameObject.SetActive(false);
             }
+
+        }).AddTo(this);
+
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
+        {
+
+            boneFollowerGraphic.SetBone("bone");
 
         }).AddTo(this);
     }

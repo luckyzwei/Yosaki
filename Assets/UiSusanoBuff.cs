@@ -17,7 +17,9 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
         if (GameManager.contentsType == GameManager.ContentsType.DokebiTower) return;
         if (GameManager.contentsType == GameManager.ContentsType.Ok) return;
         if (GameManager.contentsType == GameManager.ContentsType.Yum) return;
+        if (GameManager.contentsType == GameManager.ContentsType.Do) return;
         if (GameManager.contentsType == GameManager.ContentsType.Online_Tower) return;
+        if (GameManager.contentsType == GameManager.ContentsType.GradeTest) return;
         //산신령
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon &&
             (GameManager.Instance.bossId == 57||
@@ -26,7 +28,11 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
             GameManager.Instance.bossId == 76 ||
             GameManager.Instance.bossId == 77 ||
             GameManager.Instance.bossId == 78 ||
-            GameManager.Instance.bossId == 79
+            GameManager.Instance.bossId == 79 ||
+            GameManager.Instance.bossId == 80 ||
+            GameManager.Instance.bossId == 81 ||
+            GameManager.Instance.bossId == 82   //도깨비 지킴이
+
             )) return;
 
         int susanoGrade = PlayerStats.GetSusanoGrade();

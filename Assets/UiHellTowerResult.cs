@@ -43,11 +43,9 @@ public class UiHellTowerResult : MonoBehaviour
             case ContentsState.Dead:
                 stageChangeText.SetText("재도전");
                 return "실패!";
-                break;
             case ContentsState.TimerEnd:
                 stageChangeText.SetText("재도전");
                 return "시간초과!";
-                break;
             case ContentsState.Clear:
                 if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx3).Value < (TableManager.Instance.towerTable3.dataArray.Length))
                 {
@@ -58,7 +56,6 @@ public class UiHellTowerResult : MonoBehaviour
                     stageChangeButton.SetActive(false);
                 }
                 return "클리어!!";
-                break;
         }
 
         return "미등록";

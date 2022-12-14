@@ -105,6 +105,39 @@ public class UiMonthPassSystem2 : MonoBehaviour
                     hasCostumeItem = true;
                     break;
                 }
+            }
+
+            //유료보상
+            if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+            }
+        }
+
+        if (hasCostumeItem)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 아이템은 직접 수령해야 합니다.", null);
+            return;
+        }
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            bool canGetReward = CanGetReward(tableData[i].Unlockamount);
+
+            if (canGetReward == false) break;
+
+            //무료보상
+            if (HasReward(splitData_Free, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
 
                 free += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
@@ -126,11 +159,7 @@ public class UiMonthPassSystem2 : MonoBehaviour
             }
         }
 
-        if (hasCostumeItem)
-        {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 아이템은 직접 수령해야 합니다.", null);
-            return;
-        }
+   
 
         if (rewardedNum > 0)
         {

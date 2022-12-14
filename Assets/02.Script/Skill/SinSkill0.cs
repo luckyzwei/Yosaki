@@ -80,3 +80,24 @@ public class Chun4 : TraceSlash0
 
 }
 
+public class DokebiSkill0 : TraceSlash0
+{
+
+}
+public class DokebiSkill1 : TraceSlash0
+{
+
+}
+public class DokebiSkill2 : TraceSlash0
+{
+
+}
+public class DokebiSkill3 : TraceSlash0
+{
+
+}
+public class DokebiSkill4 : TraceSlash0
+{
+
+}
+

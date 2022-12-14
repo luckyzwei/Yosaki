@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
-
+using System.Linq;
 [System.Serializable]
 public class BossServerData
 {
@@ -155,5 +155,16 @@ public class BossServerTable
 
             }
         });
+    }
+
+    public List<int> GetGuildBossRewardedIdxList()
+    {
+        var rewards = ServerData.bossServerTable.TableDatas["boss12"].rewardedId.Value
+            .Split(BossServerTable.rewardSplit)
+            .Where(e => string.IsNullOrEmpty(e) == false)
+            .Select(e => int.Parse(e))
+            .ToList();
+
+        return rewards;
     }
 }

@@ -27,6 +27,12 @@ public class PlayerNataRotater : MonoBehaviour
     private GameObject dokebi4;
 
     [SerializeField]
+    private GameObject dokebi5;
+
+    [SerializeField]
+    private GameObject dokebi6;
+
+    [SerializeField]
     private float rotateSpeed = 0f;
 
     private float currentAngle;
@@ -46,6 +52,8 @@ public class PlayerNataRotater : MonoBehaviour
             dokebi2.SetActive(e == 68);
             dokebi3.SetActive(e == 70);
             dokebi4.SetActive(e == 71);
+            dokebi5.SetActive(e == 74);
+            dokebi6.SetActive(e == 75);
 
             rotateObject.SetActive(e == 35);
             //강림,일직,월직 이펙트
@@ -91,6 +99,15 @@ public class PlayerNataRotater : MonoBehaviour
         if (dokebi4.activeInHierarchy)
         {
             dokebi4.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+        }
+        if (dokebi5.activeInHierarchy)
+        {
+            dokebi5.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+        }
+        
+        if (dokebi6.activeInHierarchy)
+        {
+            dokebi6.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
         }
 
  

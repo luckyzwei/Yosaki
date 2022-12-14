@@ -16,6 +16,8 @@ public class UiSettingBoard : MonoBehaviour
     private Slider vierSlider;
     [SerializeField]
     private Slider uiVierSlider;
+    [SerializeField]
+    private Slider jotStickSlider;
 
     [SerializeField]
     private List<Toggle> graphicOptionToggle;
@@ -56,6 +58,9 @@ public class UiSettingBoard : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI uiViewDesc;
+
+    [SerializeField]
+    private TextMeshProUGUI uiJoyStickDesc;
 
     //
     [SerializeField]
@@ -108,6 +113,7 @@ public class UiSettingBoard : MonoBehaviour
         efxSlider.value = PlayerPrefs.GetFloat(SettingKey.efxVolume);
         vierSlider.value = PlayerPrefs.GetFloat(SettingKey.view);
         uiVierSlider.value = PlayerPrefs.GetFloat(SettingKey.uiView);
+        jotStickSlider.value = PlayerPrefs.GetFloat(SettingKey.joyStick);
 
         graphicOptionToggle[PlayerPrefs.GetInt(SettingKey.GraphicOption)].isOn = true;
 
@@ -153,6 +159,7 @@ public class UiSettingBoard : MonoBehaviour
         sfxDesc.SetText(((int)(efxSlider.value * 100)).ToString());
         viewDesc.SetText(((int)(vierSlider.value * 100)).ToString());
         uiViewDesc.SetText(((int)(uiVierSlider.value * 100)).ToString());
+        uiJoyStickDesc.SetText(((int)(jotStickSlider.value * 100)).ToString());
     }
 
 
@@ -175,6 +182,13 @@ public class UiSettingBoard : MonoBehaviour
         if (initialized == false) return;
         SettingData.view.Value = value;
         viewDesc.SetText(((int)(value * 100)).ToString());
+    }  
+    
+    public void WhenJoyStickSliderChanged(float value)
+    {
+        if (initialized == false) return;
+        SettingData.joyStick.Value = value;
+        uiJoyStickDesc.SetText(((int)(value * 100)).ToString());
     }
 
     public void WhenUiViewSliderChanged(float value)
@@ -548,6 +562,7 @@ public static class SettingKey
     public static string efxVolume = "efxVolume";
     public static string view = "view";
     public static string uiView = "uiView";
+    public static string joyStick = "joyStick";
     public static string GraphicOption = "GraphicOption";
     public static string FrameRateOption = "FrameRateOption";
     public static string ShowDamageFont = "ShowDamageFont";
@@ -584,6 +599,7 @@ public static class SettingData
     public static ReactiveProperty<float> efxVolume = new ReactiveProperty<float>();
     public static ReactiveProperty<float> view = new ReactiveProperty<float>();
     public static ReactiveProperty<float> uiView = new ReactiveProperty<float>();
+    public static ReactiveProperty<float> joyStick = new ReactiveProperty<float>();
     public static ReactiveProperty<int> GraphicOption = new ReactiveProperty<int>(); //하중상최상
     public static ReactiveProperty<int> FrameRateOption = new ReactiveProperty<int>(); //30 45 60
     public static ReactiveProperty<int> ShowDamageFont = new ReactiveProperty<int>();
@@ -650,10 +666,13 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.PotionUseHpOption, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.uiView) == false)
-            PlayerPrefs.SetFloat(SettingKey.uiView, 0f);
+            PlayerPrefs.SetFloat(SettingKey.uiView, 0f); 
+        
+        if (PlayerPrefs.HasKey(SettingKey.joyStick) == false)
+            PlayerPrefs.SetFloat(SettingKey.joyStick, 0f);
 
         if (PlayerPrefs.HasKey(SettingKey.GachaWhiteEffect) == false)
-            PlayerPrefs.SetInt(SettingKey.uiView, 1);
+            PlayerPrefs.SetInt(SettingKey.GachaWhiteEffect, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.ShowSleepPush) == false)
             PlayerPrefs.SetInt(SettingKey.ShowSleepPush, 1);
@@ -721,6 +740,7 @@ public static class SettingData
         GlowEffect.Value = PlayerPrefs.GetInt(SettingKey.GlowEffect, 1);
         PotionUseHpOption.Value = PlayerPrefs.GetInt(SettingKey.PotionUseHpOption, 1);
         uiView.Value = PlayerPrefs.GetFloat(SettingKey.uiView, 0f);
+        joyStick.Value = PlayerPrefs.GetFloat(SettingKey.joyStick, 0f);
         GachaWhiteEffect.Value = PlayerPrefs.GetInt(SettingKey.GachaWhiteEffect, 1);
         ShowSleepPush.Value = PlayerPrefs.GetInt(SettingKey.ShowSleepPush, 1);
         YachaEffect.Value = PlayerPrefs.GetInt(SettingKey.YachaEffect, 1);
@@ -761,6 +781,11 @@ public static class SettingData
         view.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetFloat(SettingKey.view, e);
+        }); ;
+
+        joyStick.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetFloat(SettingKey.joyStick, e);
         });
 
         uiView.AsObservable().Subscribe(e =>

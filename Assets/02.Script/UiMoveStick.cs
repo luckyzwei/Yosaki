@@ -74,6 +74,12 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
         //{
         //    autoToggleObject.SetActive(e == 1);
         //}).AddTo(this);
+
+        SettingData.joyStick.AsObservable().Subscribe(e =>
+        {
+            this.transform.localScale = new Vector3(Mathf.Lerp(1.3f, 2f, e), Mathf.Lerp(1.3f, 2f, e), Mathf.Lerp(1.3f, 2f, e));
+
+        }).AddTo(this);
     }
 
     private void WhenAutoModeChanged(bool auto)

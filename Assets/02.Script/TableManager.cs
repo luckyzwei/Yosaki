@@ -655,6 +655,7 @@ public class TableManager : SingletonMono<TableManager>
 
     public GumGiTable gumGiTable;
 
+    public WinterPass winterPass;
     public ChildPass childPass;
     public ColdSeasonPass coldSeasonPass;
 
@@ -670,6 +671,8 @@ public class TableManager : SingletonMono<TableManager>
     public SusanoTable susanoTable;
     public OkTable okTable;
     public YumTable yumTable;
+    public DoTable doTable;
+
 
     public BokPass bokPass;
     public GuildBook guildBook;
@@ -690,6 +693,7 @@ public class TableManager : SingletonMono<TableManager>
     public PetHome petHome;
     public TowerTable3 towerTable3;
     public TowerTable4 towerTableMulti;
+    public GradeTestTable gradeTestTable;
 
 
 }

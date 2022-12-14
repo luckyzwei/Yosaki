@@ -719,6 +719,16 @@ public enum TitleMissionId
     Level2580000,//★
     Level2590000,//★
     Level2600000,//★
+
+
+    DokebiWeapon5,//★
+    DokebiWeapon6,//★
+
+
+    Stage13700,//★
+    Stage13800,//★
+
+
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -3287,6 +3297,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Stage13600);
             }
+            if (e >= 13700 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage13700);
+            }
+            if (e >= 13800 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage13800);
+            }
 
 
         }).AddTo(this);
@@ -3540,6 +3558,22 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e == 1)
             {
                 ClearTitleMission(TitleMissionId.DokebiWeapon4);
+            }
+        }).AddTo(this);
+        
+        ServerData.weaponTable.TableDatas["weapon65"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.DokebiWeapon5);
+            }
+        }).AddTo(this);
+        
+        ServerData.weaponTable.TableDatas["weapon66"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.DokebiWeapon6);
             }
         }).AddTo(this);
 

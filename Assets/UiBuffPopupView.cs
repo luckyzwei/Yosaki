@@ -59,6 +59,9 @@ public class UiBuffPopupView : MonoBehaviour
     [SerializeField]
     private GameObject coldImage;
 
+    [SerializeField]
+    private GameObject winterImage;
+
     private bool initialized = false;
 
 
@@ -105,6 +108,11 @@ public class UiBuffPopupView : MonoBehaviour
         if (coldImage != null)
         {
             coldImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Cold);
+        }
+
+        if (winterImage != null)
+        {
+            winterImage.gameObject.SetActive(buffTableData.BUFFTYPEENUM == BuffTypeEnum.Winter);
         }
 
         if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul)
@@ -295,6 +303,8 @@ public class UiBuffPopupView : MonoBehaviour
             || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Chuseok
             || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Month
             || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Cold
+            || buffTableData.BUFFTYPEENUM == BuffTypeEnum.Winter
+            
             )
         {
             BuffGetRoutine();
@@ -347,6 +357,16 @@ public class UiBuffPopupView : MonoBehaviour
             if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.coldseasonPassKey].buyCount.Value == 0)
             {
                 PopupManager.Instance.ShowAlarmMessage("혹한기 패스권이 필요 합니다.");
+                return;
+            }
+
+        }
+        //혹한기 패스 유료버프
+        if (buffTableData.Stringid.Equals("winter1"))
+        {
+            if (ServerData.iapServerTable.TableDatas[UiWinterPassBuyButton.productKey].buyCount.Value == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("겨울 훈련권이 필요 합니다.");
                 return;
             }
 

@@ -96,7 +96,12 @@ public class UiSkillDescriptionPopup : MonoBehaviour
             skillTableData.Id == 28||
             skillTableData.Id == 29||
             skillTableData.Id == 30||
-            skillTableData.Id == 31
+            skillTableData.Id == 31||
+            skillTableData.Id == 32||
+            skillTableData.Id == 33||
+            skillTableData.Id == 34||
+            skillTableData.Id == 35||
+            skillTableData.Id == 36
             )
         {
             if (skillTableData.Id == 15)
@@ -216,6 +221,46 @@ public class UiSkillDescriptionPopup : MonoBehaviour
             {
                 //천계검 5형 있을때
                 if (ServerData.goodsTable.GetTableData(GoodsTable.Chun4).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 32)
+            {
+                //도깨비검 1형 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill0).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 33)
+            {
+                //도깨비검 2형 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill1).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 34)
+            {
+                //도깨비검 3형 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill2).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 35)
+            {
+                //도깨비검 4형 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill3).Value != 0)
+                {
+                    ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
+                }
+            }
+            else if (skillTableData.Id == 36)
+            {
+                //도깨비검 5형 있을때
+                if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill4).Value != 0)
                 {
                     ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillTableData.Id].Value = 1;
                 }
@@ -355,7 +400,8 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
         int addValue = 0;
 
-        if (skillTableData.Skilltype == 0 || skillTableData.Skilltype == 1 || skillTableData.Skilltype == 2 || skillTableData.Skilltype == 4 || skillTableData.Skilltype == 5 || skillTableData.Skilltype == 6 || skillTableData.Skilltype == 7)
+        if (skillTableData.Skilltype == 0 || skillTableData.Skilltype == 1 || skillTableData.Skilltype == 2 || skillTableData.Skilltype == 4 || skillTableData.Skilltype == 5
+            || skillTableData.Skilltype == 6 || skillTableData.Skilltype == 7|| skillTableData.Skilltype == 8)
         {
             addValue = ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value;
             addValue += ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;

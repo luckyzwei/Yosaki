@@ -516,6 +516,38 @@ public class UiShop : SingletonMono<UiShop>
                 }
                 break;
             //
+            //
+            case Item_Type.DokebiSkill0:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill0).Value += amount;
+                    param.Add(GoodsTable.DokebiSkill0, ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill0).Value);
+                }
+                break;
+            case Item_Type.DokebiSkill1:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill1).Value += amount;
+                    param.Add(GoodsTable.DokebiSkill1, ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill1).Value);
+                }
+                break;
+            case Item_Type.DokebiSkill2:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill2).Value += amount;
+                    param.Add(GoodsTable.DokebiSkill2, ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill2).Value);
+                }
+                break;
+            case Item_Type.DokebiSkill3:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill3).Value += amount;
+                    param.Add(GoodsTable.DokebiSkill3, ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill3).Value);
+                }
+                break;
+            case Item_Type.DokebiSkill4:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill4).Value += amount;
+                    param.Add(GoodsTable.DokebiSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill4).Value);
+                }
+                break;
+            //
             case Item_Type.GangrimSkill:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value += amount;

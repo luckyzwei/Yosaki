@@ -123,11 +123,11 @@ public class UiEventMissionCell : MonoBehaviour
             CoroutineExecuter.Instance.StopCoroutine(SyncRoutine);
         }
 
-            SyncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncDataRoutine());
+        SyncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncDataRoutine());
         
         //if(ServerData.eventMissionTable.CheckMissionRewardCount(tableData.Stringid) >=TableManager.Instance.EventMissionDatas[tableData.Id].Dailymaxclear )
         //{
-        //this.transform.SetAsLastSibling();
+        //this.transform.SetAsLastSibling();;
         //}
 
         // UiTutorialManager.Instance.SetClear(TutorialStep._7_MissionReward);

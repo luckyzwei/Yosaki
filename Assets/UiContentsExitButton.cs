@@ -23,19 +23,59 @@ public class UiContentsExitButton : MonoBehaviour
     }
     public void OnClickNextStageButton()
     {
-        
-        if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx3).Value  < (TableManager.Instance.towerTable3.dataArray.Length))
+
+
+        //if (GameManager.contentsType == GameManager.ContentsType.InfiniteTower)
+        //{
+        //    if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value < (TableManager.Instance.TowerTable.dataArray.Length))
+        //    {
+        //        GameManager.Instance.LoadContents(GameManager.ContentsType.InfiniteTower);
+        //    }
+        //}
+        if (GameManager.contentsType == GameManager.ContentsType.InfiniteTower2)
         {
-            if (GameManager.contentsType == GameManager.ContentsType.DokebiTower)
+            if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx2).Value < (TableManager.Instance.TowerTable2.dataArray.Length))
+            {
+                GameManager.Instance.LoadContents(GameManager.ContentsType.InfiniteTower2);
+            }
+        }
+        else if (GameManager.contentsType == GameManager.ContentsType.DokebiTower)
+        {
+            if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx3).Value < (TableManager.Instance.towerTable3.dataArray.Length))
             {
                 GameManager.Instance.LoadContents(GameManager.ContentsType.DokebiTower);
             }
-            else
+        }
+        else if (GameManager.contentsType == GameManager.ContentsType.FoxMask)
+        {
+            if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.foxMask).Value < (TableManager.Instance.FoxMask.dataArray.Length))
             {
-                return;
+                GameManager.Instance.LoadContents(GameManager.ContentsType.FoxMask);
             }
         }
-        
+        else if (GameManager.contentsType == GameManager.ContentsType.Yum)
+        {
+                GameManager.Instance.LoadContents(GameManager.ContentsType.Yum);
+        }
+        else if (GameManager.contentsType == GameManager.ContentsType.Ok)
+        {
+                GameManager.Instance.LoadContents(GameManager.ContentsType.Ok);
+        }
+        else if (GameManager.contentsType == GameManager.ContentsType.Do)
+        {
+                GameManager.Instance.LoadContents(GameManager.ContentsType.Do);
+        }
+        else if (GameManager.contentsType == GameManager.ContentsType.GradeTest)
+        {
+                GameManager.Instance.LoadContents(GameManager.ContentsType.GradeTest);
+        }
+        else
+        {
+            return;
+        }
+
+
+
     }
 
     public void OnClickExitButton_ForPartyRaid()
