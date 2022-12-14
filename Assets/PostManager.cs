@@ -113,7 +113,7 @@ public class PostManager : SingletonMono<PostManager>
             {
                 if (retry)
                 {
-                    PopupManager.Instance.ShowYesNoPopup("우편 갱신 실패", "재시도 합까요?", () =>
+                    PopupManager.Instance.ShowYesNoPopup("우편 갱신 실패", "재시도 할까요?", () =>
                     {
                         RefreshPost(retry);
                     }, null);
