@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -40,7 +40,7 @@ public class UiGradeTestDescription : MonoBehaviour
 
         equipFrame.gameObject.SetActive(idx == PlayerStats.GetGradeTestGrade());
 
-        gradeText.SetText($"{idx + 1}´Ü°è");
+        gradeText.SetText($"{idx + 1}ë‹¨ê³„");
 
         string description = string.Empty;
 
@@ -48,7 +48,7 @@ public class UiGradeTestDescription : MonoBehaviour
         {
             for (int i = 0; i < tableData.Abiltype.Length; i++)
             {
-                description += $"{CommonString.GetStatusName((StatusType)tableData.Abiltype[i])} {(tableData.Abilvalue[i]*100).ToString()} Áõ°¡\n";
+                description += $"{CommonString.GetStatusName((StatusType)tableData.Abiltype[i])} {(tableData.Abilvalue[i]*100).ToString()} ì¦ê°€\n";
             }
         }
 
@@ -67,7 +67,7 @@ public class UiGradeTestDescription : MonoBehaviour
 
         if (currentIdx == -1)
         {
-            PopupManager.Instance.ShowAlarmMessage("Ã³À½ ´Ü°è ÀÔ´Ï´Ù!");
+            PopupManager.Instance.ShowAlarmMessage("ì²˜ìŒ ë‹¨ê³„ ìž…ë‹ˆë‹¤!");
         }
     }
 
@@ -75,7 +75,7 @@ public class UiGradeTestDescription : MonoBehaviour
     {
         if (currentIdx == TableManager.Instance.gradeTestTable.dataArray.Length - 1)
         {
-            PopupManager.Instance.ShowAlarmMessage("¾÷µ¥ÀÌÆ® ¿¹Á¤ ÀÔ´Ï´Ù!");
+            PopupManager.Instance.ShowAlarmMessage("ì—…ë°ì´íŠ¸ ì˜ˆì • ìž…ë‹ˆë‹¤!");
         }
 
         currentIdx++;

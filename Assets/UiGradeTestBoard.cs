@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -36,17 +36,17 @@ public class UiGradeTestBoard : MonoBehaviour
 
     private void Initialize()
     {
-        scoreText.SetText($"ÃÖ°í Á¡¼ö : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.gradeScore].Value * GameBalance.BossScoreConvertToOrigin)}");
+        scoreText.SetText($"ìµœê³  ì ìˆ˜ : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.gradeScore].Value * GameBalance.BossScoreConvertToOrigin)}");
 
         int grade = PlayerStats.GetGradeTestGrade();
 
         if (grade != -1)
         {
-            gradeText.SetText($"{grade + 1}´Ü°è");
+            gradeText.SetText($"{grade + 1}ë‹¨ê³„");
         }
         else
         {
-            gradeText.SetText("¾øÀ½");
+            gradeText.SetText("ì—†ìŒ");
         }
 
 
@@ -55,7 +55,7 @@ public class UiGradeTestBoard : MonoBehaviour
     public void OnClickEnterButton()
 
     {
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "ÀÔÀå ÇÏ½Ã°Ú½À´Ï±î?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "ìž…ìž¥ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?", () =>
         {
             GameManager.Instance.LoadContents(GameManager.ContentsType.GradeTest);
         }, () => { });

@@ -63,15 +63,7 @@ public class UiWinterPassSystem : MonoBehaviour
                 passInfo.rewardTypeValue_IAP = tableData[i].Reward2_Value;
                 passInfo.rewardType_IAP_Key = ChildPassServerTable.childAd;
 
-                if (tableData[i].Reward1 == (int)Item_Type.DokebiFire)
-                {
-                    uiPassCellContainer[i].gameObject.SetActive(false);
-                }
-                else
-                {
-                    uiPassCellContainer[i].gameObject.SetActive(true);
-                    uiPassCellContainer[i].Initialize(passInfo);
-                }
+                uiPassCellContainer[i].Initialize(passInfo);
             }
             else
             {
