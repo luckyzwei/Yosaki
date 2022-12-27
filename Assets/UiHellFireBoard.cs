@@ -99,14 +99,41 @@ public class UiHellFireBoard : MonoBehaviour
 
     public void OnClickAllReceiveButton()
     {
-        bool hasreward = false;
-        for (int i = 0; i < rewardCells.Count; i++)
+        double score = ServerData.userInfoTable.TableDatas[UserInfoTable.hellScore].Value * GameBalance.BossScoreConvertToOrigin;
+
+        var tableData = TableManager.Instance.hellReward.dataArray;
+
+        var sonRewardedIdxList = ServerData.etcServerTable.GetHellRewardedIdxList();
+
+        int rewardCount = 0;
+
+        string addStringValue = string.Empty;
+
+        for (int i = 0; i < tableData.Length; i++)
         {
-            hasreward |= rewardCells[i].OnClickGetButtonByScript();
+            if (score < tableData[i].Score)
+            {
+                break;
+            }
+            else
+            {
+                if (sonRewardedIdxList.Contains(tableData[i].Id) == false)
+                {
+                    float amount = tableData[i].Rewardvalue;
+
+                    addStringValue += $"{BossServerTable.rewardSplit}{tableData[i].Id}";
+
+                    ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += (int)amount;
+
+                    rewardCount++;
+                }
+            }
         }
 
-        if (hasreward)
+        if (rewardCount > 0)
         {
+            ServerData.etcServerTable.TableDatas[EtcServerTable.hellReward].Value += addStringValue;
+
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             Param rewardParam = new Param();
@@ -116,13 +143,13 @@ public class UiHellFireBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, rewardParam));
 
             Param goodsParam = new Param();
+
             goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
+
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearHell, 1);
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                //  LogManager.Instance.SendLogType("Son", "all", "");
                 PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
                 SoundManager.Instance.PlaySound("Reward");
             });
@@ -131,6 +158,41 @@ public class UiHellFireBoard : MonoBehaviour
         {
             PopupManager.Instance.ShowAlarmMessage("받을 수 있는 보상이 없습니다.");
         }
+
+        /////////////
+        
+        //bool hasreward = false;
+        //for (int i = 0; i < rewardCells.Count; i++)
+        //{
+        //    hasreward |= rewardCells[i].OnClickGetButtonByScript();
+        //}
+
+        //if (hasreward)
+        //{
+        //    List<TransactionValue> transactions = new List<TransactionValue>();
+
+        //    Param rewardParam = new Param();
+
+        //    rewardParam.Add(EtcServerTable.hellReward, ServerData.etcServerTable.TableDatas[EtcServerTable.hellReward].Value);
+
+        //    transactions.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, rewardParam));
+
+        //    Param goodsParam = new Param();
+        //    goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
+        //    transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+        //    EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearHell, 1);
+        //    ServerData.SendTransaction(transactions, successCallBack: () =>
+        //    {
+        //        //  LogManager.Instance.SendLogType("Son", "all", "");
+        //        PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
+        //        SoundManager.Instance.PlaySound("Reward");
+        //    });
+        //}
+        //else
+        //{
+        //    PopupManager.Instance.ShowAlarmMessage("받을 수 있는 보상이 없습니다.");
+        //}
 
     }
 

@@ -72,6 +72,16 @@ public class EtcServerTable
 
         return rewards;
     }
+    public List<int> GetHellRewardedIdxList()
+    {
+        var rewards = tableDatas[hellReward].Value
+            .Split(BossServerTable.rewardSplit)
+            .Where(e => string.IsNullOrEmpty(e) == false)
+            .Select(e => int.Parse(e))
+            .ToList();
+
+        return rewards;
+    }
 
 
     public bool HellRewarded(float stageId)

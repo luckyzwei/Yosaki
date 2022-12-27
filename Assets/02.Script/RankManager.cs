@@ -72,7 +72,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss_Uuid = "d3c49070-2e1c-11ed-96b7-6b63e308d9f4";
     public const string Rank_Real_Boss_Uuid = "3c3b18e0-433f-11ed-b7bf-19cd1c47b16d";
     public const string Rank_Relic_Uuid = "e24e0610-257c-11ed-9935-efa0a6ef95f0";
-    public const string Rank_MiniGame_Uuid = "e1dced80-5954-11ec-b084-d1a61d5ec8e2";
+    public const string Rank_MiniGame_Uuid = "dd0a3b90-8285-11ed-bd0d-ebd5b059561f";
     public const string Rank_Guild_Uuid = "ff017920-698b-11ec-b243-8d1fccc57e3d";
     public const string Rank_Guild_Reset_Uuid = "be50a6d0-698b-11ec-b243-8d1fccc57e3d";
     public const string Rank_Guild_Reset_Uuid_Feed = "0fdf35b0-9115-11ec-a581-736e2455e958";
@@ -88,7 +88,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss = "HellWar_And";
     public const string Rank_Real_Boss = "Party_Solo_And";
     public const string Rank_Relic = "HelRelicRank";
-    public const string Rank_MiniGame = "Rank_MiniGame";
+    public const string Rank_MiniGame = "Rank_MiniGame2";
     public const string Rank_GangChul = "Guild_Boss_And";
     public const string Rank_ChunmaTop = "Party_Top_AND";
 #endif
@@ -99,7 +99,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss_Uuid = "e1c32ce0-2e1c-11ed-96b7-6b63e308d9f4";
     public const string Rank_Real_Boss_Uuid = "483029b0-433f-11ed-b7bf-19cd1c47b16d";
     public const string Rank_Relic_Uuid = "ee37f350-257c-11ed-9935-efa0a6ef95f0";
-    public const string Rank_MiniGame_Uuid = "edec1600-5954-11ec-8846-eb56e6e68bb1";
+    public const string Rank_MiniGame_Uuid = "e817ab80-8285-11ed-bd0d-ebd5b059561f";
     public const string Rank_Guild_Uuid = "10619010-698c-11ec-b243-8d1fccc57e3d";
     public const string Rank_Guild_Reset_Uuid = "d248cdc0-698b-11ec-b243-8d1fccc57e3d";
     public const string Rank_Guild_Reset_Uuid_Feed = "41c34620-9115-11ec-a581-736e2455e958";
@@ -115,7 +115,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Boss = "HellWar_IOS";
     public const string Rank_Real_Boss = "Party_Solo_IOS";
     public const string Rank_Relic = "HelRelicRank_IOS";
-    public const string Rank_MiniGame = "Rank_MiniGame_IOS";
+    public const string Rank_MiniGame = "Rank_MiniGame2_IOS";
     public const string Rank_GangChul = "Guild_Boss_IOS";
     public const string Rank_ChunmaTop = "Party_Top_IOS";
 

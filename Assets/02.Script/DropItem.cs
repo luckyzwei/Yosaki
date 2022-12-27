@@ -68,7 +68,7 @@ public enum Item_Type
     KirinNorigae,
     Kirin_Pet,
     IndraPower,
-    Event_Item_Summer,
+    Event_Item_SnowMan,
     NataWeapon,
     RabitNorigae,
     RabitPet,
@@ -116,6 +116,7 @@ public enum Item_Type
     FoxMaskPartial,
 
 
+
     RankFrame1 = 100,
     RankFrame2 = 101,
     RankFrame3 = 102,
@@ -145,6 +146,16 @@ public enum Item_Type
     RankFrame21_100_miniGame = 306,
     RankFrame101_1000_miniGame = 307,
     RankFrame1001_10000_miniGame = 308,
+
+    RankFrame1_new_miniGame = 309,
+    RankFrame2_new_miniGame = 310,
+    RankFrame3_new_miniGame = 311,
+    RankFrame4_new_miniGame = 312,
+    RankFrame5_new_miniGame = 313,
+    RankFrame6_20_new_miniGame = 314,
+    RankFrame21_100_new_miniGame = 315,
+    RankFrame101_1000_new_miniGame = 316,
+    RankFrame1001_10000_new_miniGame = 317,
 
     RankFrame1_guild = 400,
     RankFrame2_guild = 401,
@@ -359,6 +370,10 @@ public enum Item_Type
     //도깨비
     costume74 = 1275,
     costume75 = 1276,
+    //이벤트 검은토끼 + 눈사람
+    costume76 = 1277,
+    costume77 = 1278,
+    //
 
     pet0 = 1301,
     pet1 = 1302,
@@ -423,6 +438,16 @@ public enum Item_Type
     DokebiNorigae5 = 7035,
     DokebiNorigae6 = 7036,
 
+    SasinsuWeapon0 = 7040,
+    SasinsuWeapon1 = 7041,
+    SasinsuWeapon2 = 7042,
+    SasinsuWeapon3 = 7043,
+
+    SasinsuPet0 = 7050,
+    SasinsuPet1 = 7051,
+    SasinsuPet2 = 7052,
+    SasinsuPet3 = 7053,
+
     DokebiHorn0 = 7100,
     DokebiHorn1 = 7101,
     DokebiHorn2 = 7102,
@@ -447,10 +472,18 @@ public enum Item_Type
     RecommendWeapon11 = 8011,
     RecommendWeapon12 = 8012,
 
+    RecommendWeapon13 = 8013,
+    RecommendWeapon14 = 8014,
+    RecommendWeapon15 = 8015,
+    RecommendWeapon16 = 8016,
+    RecommendWeapon17 = 8017,
+    RecommendWeapon18 = 8018,
+
     ChunNorigae5 = 8500,
     ChunNorigae6 = 8501,
 
     MonthNorigae0 = 8600,
+    MonthNorigae1 = 8601,
 
 
     Chun0 = 8700, // 천계기술
@@ -471,7 +504,9 @@ public enum Item_Type
     DokebiFire = 9001,
     DokebiFireKey = 9002,
     HellPower = 9003,
-
+    DokebiTreasure = 9004,
+    SusanoTreasure = 9005,
+    MiniGameReward2 = 9006,
 }
 
 public class DropItem : PoolItem

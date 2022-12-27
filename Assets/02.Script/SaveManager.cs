@@ -207,6 +207,8 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.HellPowerUp,
         GoodsTable.DokebiFire,
         GoodsTable.DokebiFireKey,
+        GoodsTable.DokebiTreasure,
+        GoodsTable.SusanoTreasure,
     };
 
     //SendQueue에서 저장

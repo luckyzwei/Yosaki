@@ -25,6 +25,9 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
     [SerializeField]
     private Transform equipViewParent_Recommend;
 
+    [SerializeField]
+    private Transform equipViewParent_Sasinsu;
+
     public void AllUpgradeWeapon(int myIdx)
     {
         for (int i = 0; i <= myIdx; i++)
@@ -55,8 +58,9 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
         while (e.MoveNext())
         {
 
-            if (e.Current.Value.Grade == 18 || e.Current.Value.Grade == 20)
+            if (e.Current.Value.Grade == 18 || e.Current.Value.Grade == 20|| e.Current.Value.Grade == 23)
             {
+                //유료 외형무기 등급
                 if (e.Current.Value.Grade == 18)
                 {
                     UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent);
@@ -65,10 +69,20 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
                     weaponViewContainer.Add(view);
                 }
-
+                //추천용 무기
                 if (e.Current.Value.Grade == 20)
                 {
                     UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent_Recommend);
+
+                    view.Initialize(e.Current.Value, null, OnClickWeaponView);
+
+                    weaponViewContainer.Add(view);
+
+                }
+                //사신수 무기
+                if (e.Current.Value.Grade == 23)
+                {
+                    UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent_Sasinsu);
 
                     view.Initialize(e.Current.Value, null, OnClickWeaponView);
 
@@ -97,7 +111,8 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
         while (e.MoveNext())
         {
             if (e.Current.Value.Id == 23||
-                e.Current.Value.Id == 45
+                e.Current.Value.Id == 45||
+                e.Current.Value.Id == 50
                 )
             {
                 UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent);
@@ -139,7 +154,8 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
         while (e.MoveNext())
         {
             //이무기는 생성X
-            if (e.Current.Value.Id >= 12) break;
+            if (e.Current.Value.Id >= 28) break;
+            if (e.Current.Value.Id >= 12&&e.Current.Value.Id<=23) continue;
 
             var petView = Instantiate<UiPetView>(uiPetViewPrefeab, petViewParent);
 

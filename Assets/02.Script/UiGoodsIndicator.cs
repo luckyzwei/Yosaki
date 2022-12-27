@@ -19,9 +19,12 @@ public class UiGoodsIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.goodsTable.GetTableData(goodsKey).AsObservable().Subscribe(goods =>
+        if (ServerData.goodsTable.TableDatas.ContainsKey(goodsKey))
         {
-            goodsText.SetText($"{Utils.ConvertBigNum(goods).ToString()}");
-        }).AddTo(this);
+            ServerData.goodsTable.GetTableData(goodsKey).AsObservable().Subscribe(goods =>
+            {
+                goodsText.SetText($"{Utils.ConvertBigNum(goods).ToString()}");
+            }).AddTo(this);
+        }
     }
 }

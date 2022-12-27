@@ -29,6 +29,9 @@ public class WeaponView : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI gradeNumText;
 
+    [SerializeField]
+    private GameObject gradeNumObject;
+
     private WeaponData weaponData;
     private MagicBookData magicBookData;
     private SkillTableData skillData;
@@ -85,43 +88,77 @@ public class WeaponView : MonoBehaviour
 
         this.gradeText.color = (CommonUiContainer.Instance.itemGradeColor[grade]);
 
-        int gradeText = 4 - (id % 4);
+        
+            int gradeText = 4 - (id % 4);
 
-        if (magicBookData == null)
+        if (magicBookData != null)
         {
-            gradeNumText.SetText($"{gradeText}등급");
-        }
-        else
-        {
-            if (magicBookData.Id / 4 != 4)
+            if (id <= 19)
             {
-                gradeNumText.SetText($"{gradeText}등급");
+                if (magicBookData.Id / 4 != 4)
+                {
+                    gradeNumText.SetText($"{gradeText}등급");
+                }
+                else
+                {
+                    int remain = magicBookData.Id % 4;
 
+                    if (remain == 0)
+                    {
+                        gradeNumText.SetText($"<color=green>현무</color>");
+                    }
+                    else if (remain == 1)
+                    {
+                        gradeNumText.SetText($"<color=white>백호</color>");
+                    }
+                    else if (remain == 2)
+                    {
+                        gradeNumText.SetText($"<color=red>주작</color>");
+                    }
+                    else if (remain == 3)
+                    {
+                        gradeNumText.SetText($"<color=blue>청룡</color>");
+                    }
+                }
             }
             else
             {
-                int remain = magicBookData.Id % 4;
-
-                if (remain == 0)
+                if (gradeNumObject != null)
                 {
-                    gradeNumText.SetText($"<color=green>현무</color>");
-                }
-                else if (remain == 1)
-                {
-                    gradeNumText.SetText($"<color=white>백호</color>");
-                }
-                else if (remain == 2)
-                {
-                    gradeNumText.SetText($"<color=red>주작</color>");
-                }
-                else if (remain == 3)
-                {
-                    gradeNumText.SetText($"<color=blue>청룡</color>");
+                    gradeNumObject.SetActive(false);
                 }
             }
         }
-
-        bg.sprite = CommonUiContainer.Instance.itemGradeFrame[grade];
+        //무기
+        else if (weaponData != null)
+        {
+            if (id <= 19)
+            {
+                    gradeNumText.SetText($"{gradeText}등급");
+            }
+            else
+            {
+                if (gradeNumObject != null)
+                {
+                    gradeNumObject.SetActive(false);
+                }
+            }
+        }
+        //스킬
+        else {
+            if (id <= 14)
+            {
+                    gradeNumText.SetText($"{gradeText}등급");
+            }
+            else
+            {
+                if (gradeNumObject != null)
+                {
+                    gradeNumObject.SetActive(false);
+                }
+            }
+        }
+            bg.sprite = CommonUiContainer.Instance.itemGradeFrame[grade];
 
         if (weaponData != null)
         {

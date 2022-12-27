@@ -47,10 +47,11 @@ public class GoodsTable
     //할로윈 도깨비
     public static string Event_Item_0 = "Event_Item_1";
     public static string Event_Item_1 = "Event2";
-    public static string Event_Item_Summer = "Event3";
+    public static string Event_Item_SnowMan = "SnowMan";//수박이었음
     public static string StageRelic = "StageRelic";
     public static string Peach = "PeachReal";
     public static string MiniGameReward = "MiniGameReward";
+    public static string MiniGameReward2 = "mgr2";
     public static string GuildReward = "GuildReward";
     public static string SulItem = "SulItem";
     public static string SmithFire = "SmithFire";
@@ -147,13 +148,16 @@ public class GoodsTable
     public static string Event_XMas = "Event_XMas"; //크리스마스 재화
 
     public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
+    public static string SusanoTreasure = "ST"; // 악귀퇴치 재화
+
 
     public const string DokebiFire = "DokebiFire"; //도깨비 나라 재화
     public static string DokebiFireKey = "DokebiFireKey"; //도깨비 불 입장권
 
     public static string Mileage = "Mileage"; //마일리지
 
-    public static string HellPowerUp = "HellPowerUp"; //마일리지
+    public static string HellPowerUp = "HellPowerUp";
+    public static string DokebiTreasure = "DT";
 
 
 
@@ -181,7 +185,7 @@ public class GoodsTable
         {RabitStone,0f},
         {Event_Item_0,0f},
         {Event_Item_1,0f},
-        {Event_Item_Summer,0f},
+        {Event_Item_SnowMan,0f},
         {DragonStone,0f},
         {StageRelic,0f},
         {SnakeStone,0f},
@@ -190,6 +194,7 @@ public class GoodsTable
         {SheepStone,0f},
         {MonkeyStone,0f},
         {MiniGameReward,0f},
+        {MiniGameReward2,0f},
         {GuildReward,0f},
         {CockStone,0f},
         {DogStone,0f},
@@ -256,13 +261,13 @@ public class GoodsTable
         {Sun2,0f},
         {Sun3,0f},
         {Sun4,0f},
-        
+
         {Chun0,0f},
         {Chun1,0f},
         {Chun2,0f},
         {Chun3,0f},
         {Chun4,0f},
-        
+
         {DokebiSkill0,0f},
         {DokebiSkill1,0f},
         {DokebiSkill2,0f},
@@ -290,10 +295,13 @@ public class GoodsTable
         {DokebiFireKey,0f},
 
         {Mileage,0f},
-        {HellPowerUp,0f}
+        {HellPowerUp,0f},
+        {DokebiTreasure,0f},
+        {SusanoTreasure,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
+    public ReactiveDictionary<string, ReactiveProperty<float>> TableDatas => tableDatas;
 
     public static string GetPosionKey(int idx)
     {
@@ -395,7 +403,7 @@ public class GoodsTable
     static int eventItemAddNum = 0;
     public void GetEventItem(float amount)
     {
-        SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Item_0)} 획득(+{(int)amount})");
+
 
         eventItemAddNum += (int)amount;
 
@@ -405,7 +413,7 @@ public class GoodsTable
         }
         else
         {
-            tableDatas[Event_Item_0].Value += eventItemAddNum;
+            tableDatas[Event_Item_SnowMan].Value += eventItemAddNum;
             eventItemAddNum = 0;
         }
     }
@@ -666,14 +674,20 @@ public class GoodsTable
         goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
 
-        if (ServerData.userInfoTable.CanSpawnEventItem())
-        {
-            goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
-        }
+        //if (ServerData.userInfoTable.CanSpawnEventItem())
+        //{
+        //    goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
+        //}
 
         //goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
-        goodsParam.Add(GoodsTable.Event_Fall, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value);
-        goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
+
+        if (ServerData.userInfoTable.CanSpawnGotGamEventItem())
+        {
+            goodsParam.Add(GoodsTable.Event_Fall, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value);
+        }
+
+        goodsParam.Add(GoodsTable.Event_Item_SnowMan, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value);
+
         goodsParam.Add(GoodsTable.Event_XMas, ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value);
 
         goodsParam.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);

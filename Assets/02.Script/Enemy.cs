@@ -198,6 +198,8 @@ public class Enemy : PoolItem
 
     private void GetSpringEventItem() 
     {
+        if (ServerData.userInfoTable.CanSpawnGotGamEventItem() == false) return;
+
         ServerData.goodsTable.GetSpringEventItem(GameManager.Instance.CurrentStageData.Marbleamount);
     }
 

@@ -43,6 +43,7 @@ public static class CommonString
     public static string ItemGrade_20 = "십만대산";
     public static string ItemGrade_21 = "???";
     public static string ItemGrade_22 = "도깨비";
+    public static string ItemGrade_23 = "사신수";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
@@ -211,6 +212,8 @@ public static class CommonString
             case Item_Type.costume73: return TableManager.Instance.Costume.dataArray[73].Name;
             case Item_Type.costume74: return TableManager.Instance.Costume.dataArray[74].Name;
             case Item_Type.costume75: return TableManager.Instance.Costume.dataArray[75].Name;
+            case Item_Type.costume76: return TableManager.Instance.Costume.dataArray[76].Name;
+            case Item_Type.costume77: return TableManager.Instance.Costume.dataArray[77].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -252,6 +255,7 @@ public static class CommonString
             case Item_Type.SheepStone: return "폭주석";
             case Item_Type.MonkeyStone: return "지배석";
             case Item_Type.MiniGameReward: return "뽑기권";
+            case Item_Type.MiniGameReward2: return "신 뽑기권";
             case Item_Type.GuildReward: return "요괴석";
             case Item_Type.CockStone: return "태양석";
             case Item_Type.DogStone: return "천공석";
@@ -283,7 +287,7 @@ public static class CommonString
             case Item_Type.SP: return "검조각";
             case Item_Type.Hae_Norigae: return "해태 노리개 조각";
             case Item_Type.Hae_Pet: return "아기 해태 구슬";
-            case Item_Type.Event_Item_Summer: return "수박";
+            case Item_Type.Event_Item_SnowMan: return "눈사람";
             case Item_Type.NataSkill: return "나타 베기";
             case Item_Type.OrochiSkill: return "오로치 베기";
             case Item_Type.GangrimSkill: return "강림 베기";
@@ -354,8 +358,14 @@ public static class CommonString
             case Item_Type.Mileage: return "마일리지";
             case Item_Type.HellPower: return "지옥강화석";
             case Item_Type.MonthNorigae0: return "12월 월간 노리개";
+            case Item_Type.MonthNorigae1: return "1월 월간 노리개";
+            case Item_Type.DokebiTreasure: return "도깨비 보물";
+            case Item_Type.SusanoTreasure: return "악귀 보물";
+
         }
+
         return "미등록";
+
     }
 
     public static string GetStatusName(StatusType type)
@@ -481,6 +491,9 @@ public static class CommonString
                 break;
             case StatusType.SuperCritical5DamPer:
                 return "귀신베기 피해(%)";
+                break;
+            case StatusType.SuperCritical6DamPer:
+                return "신수베기 피해(%)";
                 break;
             case StatusType.DokebiFireHasValueUpgrade:
                 return "도깨비 불 레벨당 귀신베기 피해량 증가(%)";

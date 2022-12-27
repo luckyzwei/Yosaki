@@ -89,7 +89,10 @@ public class UiSettingBoard : MonoBehaviour
     [SerializeField]
     private Toggle dragon;
     [SerializeField]
-    private Toggle oneSkill;
+    private Toggle oneSkill; 
+    
+    [SerializeField]
+    private Toggle showOtherPlayer;
 
     [SerializeField]
     private Transform playerViewController;
@@ -147,6 +150,7 @@ public class UiSettingBoard : MonoBehaviour
         indra.isOn = PlayerPrefs.GetInt(SettingKey.indra) == 1;
         dragon.isOn = PlayerPrefs.GetInt(SettingKey.dragon) == 1;
         oneSkill.isOn = PlayerPrefs.GetInt(SettingKey.oneSkill) == 1;
+        showOtherPlayer.isOn = PlayerPrefs.GetInt(SettingKey.showOtherPlayer) == 1;
 
         initialized = true;
 
@@ -182,8 +186,8 @@ public class UiSettingBoard : MonoBehaviour
         if (initialized == false) return;
         SettingData.view.Value = value;
         viewDesc.SetText(((int)(value * 100)).ToString());
-    }  
-    
+    }
+
     public void WhenJoyStickSliderChanged(float value)
     {
         if (initialized == false) return;
@@ -505,6 +509,18 @@ public class UiSettingBoard : MonoBehaviour
         }
 
         SettingData.showOneSkillEffect.Value = on ? 1 : 0;
+    }   
+    
+    public void PartyOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showOtherPlayer.Value = on ? 1 : 0;
     }
 
     public void OnClickStory()
@@ -589,6 +605,7 @@ public static class SettingKey
     public static string indra = "indra";
     public static string dragon = "dragon";
     public static string oneSkill = "oneSkill";
+    public static string showOtherPlayer = "showOtherPlayer";
 
 }
 
@@ -628,6 +645,8 @@ public static class SettingData
     public static ReactiveProperty<int> dragon = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> showOneSkillEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
+    public static ReactiveProperty<int> showOtherPlayer = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
 
@@ -666,8 +685,8 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.PotionUseHpOption, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.uiView) == false)
-            PlayerPrefs.SetFloat(SettingKey.uiView, 0f); 
-        
+            PlayerPrefs.SetFloat(SettingKey.uiView, 0f);
+
         if (PlayerPrefs.HasKey(SettingKey.joyStick) == false)
             PlayerPrefs.SetFloat(SettingKey.joyStick, 0f);
 
@@ -718,13 +737,16 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.orb, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.indra) == false)
-            PlayerPrefs.SetInt(SettingKey.indra, 1);  
-        
+            PlayerPrefs.SetInt(SettingKey.indra, 1);
+
         if (PlayerPrefs.HasKey(SettingKey.dragon) == false)
-            PlayerPrefs.SetInt(SettingKey.dragon, 1);  
-        
+            PlayerPrefs.SetInt(SettingKey.dragon, 1);
+
         if (PlayerPrefs.HasKey(SettingKey.oneSkill) == false)
-            PlayerPrefs.SetInt(SettingKey.oneSkill, 0);
+            PlayerPrefs.SetInt(SettingKey.oneSkill, 0);    
+        
+        if (PlayerPrefs.HasKey(SettingKey.showOtherPlayer) == false)
+            PlayerPrefs.SetInt(SettingKey.showOtherPlayer, 1);
 
     }
 
@@ -761,7 +783,10 @@ public static class SettingData
         indra.Value = PlayerPrefs.GetInt(SettingKey.indra, 1);
         dragon.Value = PlayerPrefs.GetInt(SettingKey.dragon, 1);
 
+
         showOneSkillEffect.Value = PlayerPrefs.GetInt(SettingKey.oneSkill, 0);
+
+        showOtherPlayer.Value = PlayerPrefs.GetInt(SettingKey.showOtherPlayer, 1);
 
         Subscribe();
     }
@@ -888,6 +913,11 @@ public static class SettingData
         showOneSkillEffect.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.oneSkill, e);
+        });
+
+        showOtherPlayer.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showOtherPlayer, e);
         });
     }
 

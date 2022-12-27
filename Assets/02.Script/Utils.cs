@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.Globalization;
+using Firebase.Analytics;
 
 public static class Utils
 {
@@ -93,7 +94,9 @@ public static class Utils
                   type == Item_Type.costume72 ||
                   type == Item_Type.costume73 ||
                   type == Item_Type.costume74 ||
-                  type == Item_Type.costume75;
+                  type == Item_Type.costume75 ||
+                  type == Item_Type.costume76 ||
+                  type == Item_Type.costume77;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -105,7 +108,8 @@ public static class Utils
 
     public static bool IsPassItem(this Item_Type type)
     {
-        return type == Item_Type.MonthNorigae0;
+        return type == Item_Type.MonthNorigae0 ||
+                type == Item_Type.MonthNorigae1;
     }
     public static bool IsGoodsItem(this Item_Type type)
     {
@@ -132,6 +136,10 @@ public static class Utils
                 type == Item_Type.ChunPet1 ||
                 type == Item_Type.ChunPet2 ||
                 type == Item_Type.ChunPet3 ||
+                type == Item_Type.SasinsuPet0 ||
+                type == Item_Type.SasinsuPet1 ||
+                type == Item_Type.SasinsuPet2 ||
+                type == Item_Type.SasinsuPet3 ||
                 type == Item_Type.RabitPet ||
                 type == Item_Type.RabitNorigae ||
                 type == Item_Type.YeaRaeNorigae ||
@@ -154,6 +162,7 @@ public static class Utils
                 type == Item_Type.DokebiNorigae6 ||
 
                 type == Item_Type.MonthNorigae0 ||
+                type == Item_Type.MonthNorigae1 ||
 
 
                 type == Item_Type.DokebiHorn0 ||
@@ -172,18 +181,18 @@ public static class Utils
                 type == Item_Type.GangrimWeapon ||
                 type == Item_Type.HaeWeapon ||
                 type == Item_Type.SmithFire ||
-                type == Item_Type.Event_Item_Summer ||
+                type == Item_Type.Event_Item_SnowMan ||
                 type == Item_Type.MihoNorigae ||
                 type == Item_Type.MihoWeapon ||
                 type == Item_Type.ChunMaNorigae ||
-                type == Item_Type.Hel ||
-                type == Item_Type.Ym ||
+                type == Item_Type.Hel || type == Item_Type.Ym ||
                 type == Item_Type.du ||
                 type == Item_Type.Fw ||
                 type == Item_Type.Cw ||
                 type == Item_Type.DokebiFire ||
                 type == Item_Type.DokebiFireKey ||
                 type == Item_Type.FoxMaskPartial ||
+                type == Item_Type.SusanoTreasure ||
                 type == Item_Type.Mileage ||
                 type == Item_Type.Event_Fall ||
                 type == Item_Type.Event_Fall_Gold ||
@@ -262,6 +271,11 @@ public static class Utils
     public static bool IsMiniGameRewardItem(this Item_Type type)
     {
         return type >= Item_Type.RankFrame1_miniGame && type <= Item_Type.RankFrame1001_10000_miniGame;
+    }
+
+    public static bool IsMiniGameRewardItem2(this Item_Type type)
+    {
+        return type >= Item_Type.RankFrame1_new_miniGame && type <= Item_Type.RankFrame1001_10000_new_miniGame;
     }
 
     public static bool IsGuildRewardItem(this Item_Type type)
@@ -382,7 +396,7 @@ public static class Utils
     }
 
     #region BigFloat
-    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업","긍", "갈", "라" };
+    private static string[] goldUnitArr = new string[] { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍", "갈", "라" };
     private static double p = (double)Mathf.Pow(10, 4);
     private static List<double> numList = new List<double>();
     private static List<string> numStringList = new List<string>();
@@ -529,4 +543,28 @@ public static class Utils
         }
     }
 
+    public static float GetDokebiTreasureAddValue()
+    {
+        return ServerData.goodsTable.GetTableData(GoodsTable.DokebiTreasure).Value * GameBalance.dokebiTreasureAddValue;
+    }
+
+    public static string GetGoodsNameByType(Item_Type type)
+    {
+        switch (type)
+        {
+            case Item_Type.Marble: return GoodsTable.MarbleKey;
+            case Item_Type.PeachReal: return GoodsTable.Peach;
+            case Item_Type.RelicTicket: return GoodsTable.RelicTicket;
+            case Item_Type.GrowthStone: return GoodsTable.GrowthStone;
+            case Item_Type.Ticket: return GoodsTable.Ticket;
+        }
+
+        return string.Empty;
+    }
+
+    public static void SendFirebaseEvent(string message)
+    {
+        FirebaseAnalytics.LogEvent(message);
+        Debug.LogError($"Firebase log sended : {message}");
+    }
 }

@@ -182,6 +182,9 @@ public class AgentHpController : MonoBehaviour
         //도깨비참수 데미지
         value += value * PlayerStats.GetSuperCritical5DamPer();
 
+        //신수베기 데미지
+        value += value * PlayerStats.GetSuperCritical6DamPer();
+
         ///
     }
     private Vector3 damTextspawnPos;

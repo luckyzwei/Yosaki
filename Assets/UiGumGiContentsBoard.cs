@@ -96,10 +96,10 @@ public class UiGumGiContentsBoard : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?\n<color=red>(하루 한번만 획득 가능)</color>", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?\n<color=red>(하루 한번만 획득 가능)</color>\n{CommonString.GetItemName(Item_Type.DokebiTreasure)}로 추가획득 : {Utils.GetDokebiTreasureAddValue()}", () =>
         {
             ServerData.userInfoTable.TableDatas[UserInfoTable.getGumGi].Value = 1;
-            ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += score;
+            ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += score + Utils.GetDokebiTreasureAddValue();
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -117,7 +117,7 @@ public class UiGumGiContentsBoard : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 LogManager.Instance.SendLogType("GumGi", "_", score.ToString());
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SP)} {score}개 획득!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SP)} {score + Utils.GetDokebiTreasureAddValue()}개 획득!", null);
             });
         }, null);
     }

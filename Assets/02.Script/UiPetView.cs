@@ -9,7 +9,7 @@ using BackEnd;
 
 public enum PetGetType
 {
-    Ad, Gem, Shop, Evolution
+    Ad, Gem, Shop, Evolution ,Sasinsu
 }
 
 public class UiPetView : MonoBehaviour
@@ -128,7 +128,10 @@ public class UiPetView : MonoBehaviour
 
         tutorialObject.SetActive(petData.PETGETTYPE == PetGetType.Gem && petData.Price == 0f);
 
-        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15 || petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19 || petData.Id == 20 || petData.Id == 21 || petData.Id == 22 || petData.Id == 23);
+        normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15 ||
+            petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19 || petData.Id == 20 
+            || petData.Id == 21 || petData.Id == 22 || petData.Id == 23|| petData.Id == 24|| petData.Id == 25
+            || petData.Id == 26 || petData.Id == 27);
 
         if (leemugiPetObject != null)
             leemugiPetObject.SetActive(petData.Id == 12);
@@ -147,6 +150,24 @@ public class UiPetView : MonoBehaviour
             normalPetObject.SetActive(ServerData.petTable.TableDatas["pet13"].hasItem.Value == 1);
             goldDragonGetDescription.SetText($"필멸 여의주 LV :{GameBalance.GoldGetLevel}에 획득 가능");
         }
+
+        //if(petData.Id ==24)
+        //{
+        //    normalPetObject.SetActive(ServerData.petTable.TableDatas["pet24"].hasItem.Value == 1);
+        //}
+        //if(petData.Id ==25)
+        //{
+        //    normalPetObject.SetActive(ServerData.petTable.TableDatas["pet25"].hasItem.Value == 1);
+        //}
+        //if(petData.Id ==26)
+        //{
+        //    normalPetObject.SetActive(ServerData.petTable.TableDatas["pet26"].hasItem.Value == 1);
+        //}
+        //if(petData.Id ==27)
+        //{
+        //    normalPetObject.SetActive(ServerData.petTable.TableDatas["pet27"].hasItem.Value == 1);
+        //}
+
     }
 
     private void SetAbilityText()
@@ -448,10 +469,27 @@ public class UiPetView : MonoBehaviour
                 {
                     buttonDescription.SetText($"천상계 컨텐츠\n에서 획득!");
                 }
+
                 else
                 {
                     buttonDescription.SetText($"{prefPetData.Name}\n각성시 획득");
                 }
+            }
+        }
+        else if(petData.PETGETTYPE ==PetGetType.Sasinsu)
+        {
+            //보유
+            if (petServerData.hasItem.Value == 1)
+            {
+                buttonDescription.SetText("장착하기");
+            }
+            //미보유
+            else if (petData.Id == 24 || petData.Id == 25 || petData.Id == 26 || petData.Id == 27)
+            {
+                //int prefPetId = petData.Id - 16;
+                //var prefPetData = TableManager.Instance.PetTable.dataArray[prefPetId];
+                //buttonDescription.SetText($"{prefPetData.Name} 각성 후 \n 별자리 컨텐츠에서 획득!");
+                buttonDescription.SetText($"사신수 별자리\n컨텐츠에서 획득!");
             }
         }
 
@@ -534,6 +572,62 @@ public class UiPetView : MonoBehaviour
 
             }
         }
+        else if (petData.PETGETTYPE == PetGetType.Sasinsu)
+        {
+            if (petServerData.hasItem.Value == 1)
+            {
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
+            }
+            //미보유
+            else
+            {
+                if (petServerData.idx == 24 || petServerData.idx == 25 || petServerData.idx == 26 || petServerData.idx == 27)
+                {
+
+                    if (petServerData.idx == 24)
+                    {
+                        if (ServerData.petTable.TableDatas["pet8"].hasItem.Value != 1)
+                        {
+                            PopupManager.Instance.ShowAlarmMessage($"{TableManager.Instance.PetTable.dataArray[8].Name}이 필요합니다.");
+                            return;
+                        }
+                    }
+                    else if (petServerData.idx == 25)
+                    {
+                        if (ServerData.petTable.TableDatas["pet9"].hasItem.Value != 1)
+                        {
+                            PopupManager.Instance.ShowAlarmMessage($"{TableManager.Instance.PetTable.dataArray[9].Name}가 필요합니다.");
+                            return;
+                        }
+                    }
+                    else if (petServerData.idx == 26)
+                    {
+                        if (ServerData.petTable.TableDatas["pet10"].hasItem.Value != 1)
+                        {
+                            PopupManager.Instance.ShowAlarmMessage($"{TableManager.Instance.PetTable.dataArray[10].Name}이 필요합니다.");
+                            return;
+                        }
+                    }
+                    else if(petServerData.idx == 27)
+                    {
+                        if (ServerData.petTable.TableDatas["pet11"].hasItem.Value != 1)
+                        {
+                            PopupManager.Instance.ShowAlarmMessage($"{TableManager.Instance.PetTable.dataArray[11].Name}이 필요합니다.");
+                            return;
+                        }
+                    }
+                    if(ServerData.sasinsuServerTable.TableDatas[$"b{petServerData.idx - 24}"].score.Value < TableManager.Instance.sasinsuTable.dataArray[petServerData.idx - 24].Score[6])
+                    {
+                        PopupManager.Instance.ShowAlarmMessage($"별자리 컨텐츠 {TableManager.Instance.sasinsuTable.dataArray[petServerData.idx - 24].Name}에서 마지막 별자리 달성시 획득 가능!");
+                        return;
+                    }
+                    else
+                    {
+                        BuyPetRoutine();
+                    }
+                }
+            }
+        }
 
         UpdateUi();
     }
@@ -566,7 +660,21 @@ public class UiPetView : MonoBehaviour
             ServerData.SendTransaction(transactionList, successCallBack: UpdateUi);
             ServerData.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
         }
+        //사신수
+        else if (petData.PETGETTYPE==PetGetType.Sasinsu)
+        {
+            
+            ServerData.petTable.TableDatas[petData.Stringid].hasItem.Value = 1;
 
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param petParam = new Param();
+            petParam.Add(petData.Stringid, ServerData.petTable.TableDatas[petData.Stringid].ConvertToString());
+            transactionList.Add(TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, petParam));
+
+            ServerData.SendTransaction(transactionList, successCallBack: UpdateUi);
+            ServerData.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
+        }
     }
 
     public void BuyFreePet()

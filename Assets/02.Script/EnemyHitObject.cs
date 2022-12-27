@@ -43,7 +43,7 @@ public class EnemyHitObject : MonoBehaviour
     {
 
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && (GameManager.Instance.bossId == 57 ||
-            GameManager.Instance.bossId == 72 || GameManager.Instance.bossId == 82))
+            GameManager.Instance.bossId == 72 || GameManager.Instance.bossId == 82 || GameManager.Instance.bossId == 83))
         {
             this.percentDamage = 1f;
         }
@@ -69,8 +69,15 @@ public class EnemyHitObject : MonoBehaviour
          ))
         {
             this.percentDamage = 0.6f;
-        } 
+        }
 
+        //사신수
+        if (GameManager.contentsType == GameManager.ContentsType.Sasinsu && (GameManager.Instance.bossId == 0 ||
+            GameManager.Instance.bossId == 1 ||GameManager.Instance.bossId == 2 ||GameManager.Instance.bossId == 3)
+            )
+        {
+            this.percentDamage = 0.5f;
+        }
     }
 
     public void SetDamage(double damage, float percentDamage = 0f)

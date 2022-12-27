@@ -41,6 +41,7 @@ public class GameManager : SingletonMono<GameManager>
         Online_Tower,
         GradeTest,
         Do,
+        Sasinsu,
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;

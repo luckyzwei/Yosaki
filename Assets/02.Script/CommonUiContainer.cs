@@ -14,7 +14,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_6, CommonString.ItemGrade_7, CommonString.ItemGrade_8, CommonString.ItemGrade_9, CommonString.ItemGrade_10,
         CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14, CommonString.ItemGrade_15, 
         CommonString.ItemGrade_16, CommonString.ItemGrade_17, CommonString.ItemGrade_18, CommonString.ItemGrade_19, CommonString.ItemGrade_20 ,
-        CommonString.ItemGrade_21 , CommonString.ItemGrade_22 };
+        CommonString.ItemGrade_21 , CommonString.ItemGrade_22 , CommonString.ItemGrade_23 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, 
@@ -84,6 +84,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DogStone;
     public Sprite PigStone;
     public Sprite MiniGameTicket;
+    public Sprite MiniGameTicket2;
 
     public Sprite Songpyeon;
 
@@ -126,6 +127,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiNorigae6;
 
     public Sprite MonthNorigae0;
+    public Sprite MonthNorigae1;
     
     public Sprite DokebiHorn0;
     public Sprite DokebiHorn1;
@@ -149,6 +151,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite ChunPet1;
     public Sprite ChunPet2;
     public Sprite ChunPet3;
+
+    public Sprite SasinsuPet0;
+    public Sprite SasinsuPet1;
+    public Sprite SasinsuPet2;
+    public Sprite SasinsuPet3;
+
     public Sprite Hel;
     public Sprite YeoMarble;
     public Sprite du;
@@ -162,6 +170,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite Mileage;
     public Sprite HellPower;
     public Sprite DokebiFireKey;
+    public Sprite DokebiTreasure;
+    public Sprite SusanoTreasure;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -193,7 +203,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite SinSkill3;
     public Sprite LeeMuGiStone;
     public Sprite IndraWeapon;
-    public Sprite Event_Item_Summer;
+    public Sprite Event_Item_SnowMan;
     public Sprite NataWeapon;
     public Sprite OrochiWeapon;
     public Sprite ChunWeapon0;
@@ -208,6 +218,13 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiWeapon4;
     public Sprite DokebiWeapon5;
     public Sprite DokebiWeapon6;
+
+
+    public Sprite SasinsuWeapon0;
+    public Sprite SasinsuWeapon1;
+    public Sprite SasinsuWeapon2;
+    public Sprite SasinsuWeapon3;
+    
 
     public Sprite NataSkill;
     public Sprite OrochiSkill;
@@ -232,6 +249,13 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite RecommendWeapon10;
     public Sprite RecommendWeapon11;
     public Sprite RecommendWeapon12;
+
+    public Sprite RecommendWeapon13;
+    public Sprite RecommendWeapon14;
+    public Sprite RecommendWeapon15;
+    public Sprite RecommendWeapon16;
+    public Sprite RecommendWeapon17;
+    public Sprite RecommendWeapon18;
 
     public Sprite Sun0;
     public Sprite Sun1;
@@ -501,6 +525,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.costume75:
                 return costumeThumbnail[75];
+                break;  
+            case Item_Type.costume76:
+                return costumeThumbnail[76];
+                break;   
+            case Item_Type.costume77:
+                return costumeThumbnail[77];
                 break;
 
 
@@ -576,6 +606,18 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.RankFrame101_1000_miniGame:
             case Item_Type.RankFrame1001_10000_miniGame:
                 return MiniGameTicket;
+                break;
+
+            case Item_Type.RankFrame1_new_miniGame:
+            case Item_Type.RankFrame2_new_miniGame:
+            case Item_Type.RankFrame3_new_miniGame:
+            case Item_Type.RankFrame4_new_miniGame:
+            case Item_Type.RankFrame5_new_miniGame:
+            case Item_Type.RankFrame6_20_new_miniGame:
+            case Item_Type.RankFrame21_100_new_miniGame:
+            case Item_Type.RankFrame101_1000_new_miniGame:
+            case Item_Type.RankFrame1001_10000_new_miniGame:
+                return MiniGameTicket2;
                 break;
 
             case Item_Type.RankFrame1_guild:
@@ -669,6 +711,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.MiniGameReward:
                 return MiniGameTicket;
                 break;
+            case Item_Type.MiniGameReward2:
+                return MiniGameTicket2;
+                break;
             case Item_Type.Relic:
                 return relic;
                 break;
@@ -712,6 +757,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;   
             case Item_Type.HellPower:
                 return HellPower;
+                break;  
+            case Item_Type.DokebiTreasure:
+                return DokebiTreasure;
+                break; 
+            case Item_Type.SusanoTreasure:
+                return SusanoTreasure;
                 break; 
             case Item_Type.DokebiFireKey:
                 return DokebiFireKey;
@@ -814,6 +865,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
                 break;
+            case Item_Type.MonthNorigae1:
+                return MonthNorigae1;
+                break;
             //
             //
             case Item_Type.DokebiHorn0:
@@ -894,6 +948,18 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.ChunPet3:
                 return ChunPet3;
                 break;
+            case Item_Type.SasinsuPet0:
+                return SasinsuPet0;
+                break;
+            case Item_Type.SasinsuPet1:
+                return SasinsuPet1;
+                break;
+            case Item_Type.SasinsuPet2:
+                return SasinsuPet2;
+                break;
+            case Item_Type.SasinsuPet3:
+                return SasinsuPet3;
+                break;
 
             case Item_Type.GuildReward:
                 return GuildReward;
@@ -954,8 +1020,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.Event_Item_1:
                 return springIcon;
                 break;
-            case Item_Type.Event_Item_Summer:
-                return Event_Item_Summer;
+            case Item_Type.Event_Item_SnowMan:
+                return Event_Item_SnowMan;
                 break;
             //
             case Item_Type.SinSkill0:
@@ -1079,6 +1145,19 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return DokebiWeapon6;
                 break;
 
+            case Item_Type.SasinsuWeapon0:
+                return SasinsuWeapon0;
+                break;
+            case Item_Type.SasinsuWeapon1:
+                return SasinsuWeapon1;
+                break;
+            case Item_Type.SasinsuWeapon2:
+                return SasinsuWeapon2;
+                break;
+            case Item_Type.SasinsuWeapon3:
+                return SasinsuWeapon3;
+                break;
+
             case Item_Type.MihoNorigae:
                 return MihoNorigae;
                 break;
@@ -1125,6 +1204,24 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.RecommendWeapon12:
                 return RecommendWeapon12;
+                break;   
+            case Item_Type.RecommendWeapon13:
+                return RecommendWeapon13;
+                break;
+            case Item_Type.RecommendWeapon14:
+                return RecommendWeapon14;
+                break;
+            case Item_Type.RecommendWeapon15:
+                return RecommendWeapon15;
+                break;
+            case Item_Type.RecommendWeapon16:
+                return RecommendWeapon16;
+                break;
+            case Item_Type.RecommendWeapon17:
+                return RecommendWeapon17;
+                break;
+            case Item_Type.RecommendWeapon18:
+                return RecommendWeapon18;
                 break;
 
             case Item_Type.gumiho0:

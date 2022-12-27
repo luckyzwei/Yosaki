@@ -90,6 +90,7 @@ public class UiMonthPassSystem2 : MonoBehaviour
         string ad = ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value;
 
         bool hasCostumeItem = false;
+        bool hasPassItem = false;
 
         for (int i = 0; i < tableData.Length; i++)
         {
@@ -103,6 +104,11 @@ public class UiMonthPassSystem2 : MonoBehaviour
                 if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
                 {
                     hasCostumeItem = true;
+                    break;
+                }
+                if (((Item_Type)(tableData[i].Reward1)).IsPassItem())
+                {
+                    hasPassItem = true;
                     break;
                 }
             }
@@ -115,6 +121,11 @@ public class UiMonthPassSystem2 : MonoBehaviour
                     hasCostumeItem = true;
                     break;
                 }
+                if (((Item_Type)(tableData[i].Reward2)).IsPassItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
             }
         }
 
@@ -123,7 +134,11 @@ public class UiMonthPassSystem2 : MonoBehaviour
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 아이템은 직접 수령해야 합니다.", null);
             return;
         }
-
+        if (hasPassItem)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "패스 보상 장비는 직접 수령해야 합니다.", null);
+            return;
+        }
         for (int i = 0; i < tableData.Length; i++)
         {
             bool canGetReward = CanGetReward(tableData[i].Unlockamount);
@@ -138,7 +153,11 @@ public class UiMonthPassSystem2 : MonoBehaviour
                     hasCostumeItem = true;
                     break;
                 }
-
+                if (((Item_Type)(tableData[i].Reward1)).IsPassItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
                 free += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
                 rewardedNum++;
@@ -152,7 +171,11 @@ public class UiMonthPassSystem2 : MonoBehaviour
                     hasCostumeItem = true;
                     break;
                 }
-
+                if (((Item_Type)(tableData[i].Reward2)).IsPassItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
                 ad += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
                 rewardedNum++;
@@ -177,6 +200,7 @@ public class UiMonthPassSystem2 : MonoBehaviour
             goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
             goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
             goodsParam.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
+            goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 

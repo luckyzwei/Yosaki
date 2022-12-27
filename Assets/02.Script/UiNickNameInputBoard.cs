@@ -136,6 +136,7 @@ public class UiNickNameInputBoard : SingletonMono<UiNickNameInputBoard>
     {
         DialogManager.Instance.SetNextDialog();
         Destroy(this.gameObject);
+        Utils.SendFirebaseEvent("Sign In_Yosaki");
     }
 
     private bool CanMakeNickName()

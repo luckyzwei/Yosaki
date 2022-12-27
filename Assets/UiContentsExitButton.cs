@@ -21,7 +21,7 @@ public class UiContentsExitButton : MonoBehaviour
         if (GameManager.contentsType == GameManager.ContentsType.InfiniteTower2 || GameManager.contentsType == GameManager.ContentsType.DokebiTower ||
             GameManager.contentsType == GameManager.ContentsType.FoxMask || GameManager.contentsType == GameManager.ContentsType.Yum ||
             GameManager.contentsType == GameManager.ContentsType.Ok || GameManager.contentsType == GameManager.ContentsType.Do ||
-            GameManager.contentsType == GameManager.ContentsType.GradeTest)
+            GameManager.contentsType == GameManager.ContentsType.GradeTest || GameManager.contentsType==GameManager.ContentsType.Sasinsu)
         {
             return true;
         }
@@ -113,6 +113,12 @@ public class UiContentsExitButton : MonoBehaviour
         {
                 GameManager.Instance.SetBossId(82);
                 GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
+        }
+        //사신수
+        else if (GameManager.contentsType == GameManager.ContentsType.Sasinsu)
+        {
+            GameManager.Instance.SetBossId(GameManager.Instance.bossId);
+            GameManager.Instance.LoadContents(GameManager.ContentsType.Sasinsu);
         }
         else
         {

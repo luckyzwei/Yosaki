@@ -258,8 +258,8 @@ public class MonthlyPassServerTable2
     public const string tableName = "MonthlyPass2";
 
 
-    public static string MonthlypassFreeReward = "f11";
-    public static string MonthlypassAdReward = "a11";
+    public static string MonthlypassFreeReward = "f12";
+    public static string MonthlypassAdReward = "a12";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
@@ -1008,10 +1008,16 @@ public class OneYearPassServerTable
     public static string childFree = "f4";
     public static string childAd = "a4";
 
+    //2022눈사람 사용중
+    public static string childFree_Snow = "fn0";
+    public static string childAd_Snow = "fn1";
+
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
         { childFree,string.Empty},
-        { childAd,string.Empty}
+        { childAd,string.Empty},
+        { childFree_Snow,string.Empty},
+        { childAd_Snow,string.Empty}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();

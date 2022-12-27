@@ -167,4 +167,14 @@ public class BossServerTable
 
         return rewards;
     }
+    public List<int> GetGuildRaidBossRewardedIdxList()
+    {
+        var rewards = ServerData.bossServerTable.TableDatas["b73"].rewardedId.Value
+            .Split(BossServerTable.rewardSplit)
+            .Where(e => string.IsNullOrEmpty(e) == false)
+            .Select(e => int.Parse(e))
+            .ToList();
+
+        return rewards;
+    }
 }

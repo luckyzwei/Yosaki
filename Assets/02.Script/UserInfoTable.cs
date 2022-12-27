@@ -121,7 +121,7 @@ public class UserInfoTable
     //6월월간
     public const string killCountTotal = "k12";
     //7월월간
-    public const string killCountTotal2 = "k11";
+    public const string killCountTotal2 = "k13";
     public const string killCountTotalChild = "fal"; //가을훈련
     public const string killCountTotalWinterPass = "KillCountWinterPass"; //가을훈련
     public const string killCountTotalColdSeason = "cold"; //혹한기
@@ -130,6 +130,7 @@ public class UserInfoTable
     public const string attenCountColdSeason = "kcold";
 
     public const string usedFallCollectionCount = "ufc"; //곶감사용
+    public const string usedSnowManCollectionCount = "usc"; //눈사람사용
 
 
     public const string relicKillCount = "relicKillCount"; // 영숲
@@ -184,10 +185,15 @@ public class UserInfoTable
     public const string xMasExchangeCount_3 = "xMas_ex_3";
     public const string xMasExchangeCount_4 = "xMas_ex_4";
 
+    public const string snow_exchangeCount_0 = "co0";
+    public const string snow_exchangeCount_1 = "co1";
+    public const string snow_exchangeCount_2 = "co2";
+    public const string snow_exchangeCount_3 = "co3";
+    public const string snow_exchangeCount_4 = "co4";
+
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
     public const string foxMask = "fm";
-    public const string partyRaidDuo = "partyRaidDuo";
     public const string relicPackReset = "rr";
     public const string oneAttenEvent = "oe";
     public const string titleRefund = "tii";
@@ -204,6 +210,7 @@ public class UserInfoTable
     public const string exchangeCount_1_Mileage = "mgg";
     public const string exchangeCount_2_Mileage = "mbu";
     public const string exchangeCount_3_Mileage = "mcu";
+    public const string exchangeCount_4_Mileage = "mdo";
 
     public const string nickNameChange = "nickNameChange";
     public const string getPetHome = "gph";
@@ -318,6 +325,7 @@ public class UserInfoTable
         {killCountTotalColdSeason,0f},
         {attenCountBok,1f},
         {usedFallCollectionCount,0f},
+        {usedSnowManCollectionCount,0f},
         {attenCountChuSeok,1f},
         {attenCountColdSeason,1f},
         {yomul6_buff,0f},
@@ -366,7 +374,6 @@ public class UserInfoTable
         {refundFox,0},
         {sendGangChul,0},
         {foxMask,0},
-        {partyRaidDuo,0},
         {relicPackReset,0},
         {hellScore,0},
         {chunClear,0},
@@ -384,6 +391,7 @@ public class UserInfoTable
         {exchangeCount_1_Mileage,0},
         {exchangeCount_2_Mileage,0},
         {exchangeCount_3_Mileage,0},
+        {exchangeCount_4_Mileage,0},
 
         {nickNameChange,0},
         {getPetHome,0},
@@ -391,6 +399,12 @@ public class UserInfoTable
         {partyTowerRecommend,GameBalance.recommendCountPerWeek_PartyTower},
         {partyTowerFloor,0},
         {receivedPartyTowerTicket,0f},
+
+        {snow_exchangeCount_0,0f},
+        {snow_exchangeCount_1,0f},
+        {snow_exchangeCount_2,0f},
+        {snow_exchangeCount_3,0f},
+        {snow_exchangeCount_4,0f},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -934,11 +948,13 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_2_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_3_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_4_Mileage).Value = 0;
 
             userInfoParam.Add(UserInfoTable.exchangeCount_0_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_1_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_2_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_2_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_3_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_3_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_4_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_4_Mileage).Value);
         }
 
         //손오공
@@ -1056,6 +1072,13 @@ public class UserInfoTable
 
         return false;
     }
+
+    public bool CanSpawnGotGamEventItem()
+    {
+        if (currentServerTime.Month == 12 && currentServerTime.Day < 30) return true;
+
+        return false;
+    }
     public bool CanMakeEventItem()
     {
         //if (currentServerTime.Month == 11) return true;
@@ -1169,7 +1192,7 @@ public class UserInfoTable
     public bool IsMonthlyPass2()
     {
 #if UNITY_EDITOR
-        return false;
+        return true;
 #endif
         //홀수 달의 경우 true
         return (currentServerTime.Month % 2) == 1;

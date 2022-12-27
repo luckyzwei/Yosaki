@@ -33,6 +33,7 @@ public static class ServerData
     public static IAPServerTable iapServerTable { get; private set; } = new IAPServerTable();
 
     public static BossServerTable bossServerTable { get; private set; } = new BossServerTable();
+    public static SasinsuTable sasinsuServerTable { get; private set; } = new SasinsuTable();
     public static AttendanceServerTable attendanceServerTable { get; private set; } = new AttendanceServerTable();
 
     // public static FieldBossServerTable fieldBossTable { get; private set; } = new FieldBossServerTable();
@@ -108,6 +109,7 @@ public static class ServerData
         iapServerTable.Initialize();
         //rankTable_InfinityTower.Initialize();
         bossServerTable.Initialize();
+        sasinsuServerTable.Initialize();
         attendanceServerTable.Initialize();
         //fieldBossTable.Initialize();
         buffServerTable.Initialize();
@@ -214,6 +216,30 @@ public static class ServerData
         SendTransaction(transactionList, retry: false);
     }
 
+    public static void AddParam(Param param, string key, float value)
+    {
+        param.Add(key, value);
+    }
+
+    public static void AddParam(Param param, Item_Type key)
+    {
+        var stringKey = Utils.GetGoodsNameByType(key);
+
+        if (string.IsNullOrEmpty(stringKey))
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,$"stringKey is null",null);
+            return;
+        }
+
+        if(!ServerData.goodsTable.TableDatas.ContainsKey(stringKey))
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"stringKey is not exist", null);
+            return;
+        }
+
+        param.Add(stringKey, ServerData.goodsTable.GetTableData(stringKey).Value);
+    }
+
     public static void AddLocalValue(Item_Type type, float rewardValue)
     {
         switch (type)
@@ -247,8 +273,8 @@ public static class ServerData
             case Item_Type.Event_Item_1:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += rewardValue;
                 break;
-            case Item_Type.Event_Item_Summer:
-                ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += rewardValue;
+            case Item_Type.Event_Item_SnowMan:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value += rewardValue;
                 break;
 
             case Item_Type.SulItem:
@@ -370,6 +396,14 @@ public static class ServerData
             case Item_Type.HellPower:
                 ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value += rewardValue;
                 break;
+
+            case Item_Type.DokebiTreasure:
+                ServerData.goodsTable.GetTableData(GoodsTable.DokebiTreasure).Value += rewardValue;
+                break;
+            case Item_Type.SusanoTreasure:
+                ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).Value += rewardValue;
+                break;
+
             case Item_Type.Hel:
                 ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += rewardValue;
                 break;
@@ -493,6 +527,8 @@ public static class ServerData
             case Item_Type.costume73:
             case Item_Type.costume74:
             case Item_Type.costume75:
+            case Item_Type.costume76:
+            case Item_Type.costume77:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.RelicTicket:
@@ -620,6 +656,8 @@ public static class ServerData
             case Item_Type.costume73:
             case Item_Type.costume74:
             case Item_Type.costume75:
+            case Item_Type.costume76:
+            case Item_Type.costume77:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -643,8 +681,8 @@ public static class ServerData
             case Item_Type.Event_Item_1:
                 passParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
-            case Item_Type.Event_Item_Summer:
-                passParam.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
+            case Item_Type.Event_Item_SnowMan:
+                passParam.Add(GoodsTable.Event_Item_SnowMan, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.SulItem:
@@ -657,6 +695,10 @@ public static class ServerData
 
             case Item_Type.PeachReal:
                 passParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.DokebiTreasure:
+                passParam.Add(GoodsTable.DokebiTreasure, ServerData.goodsTable.GetTableData(GoodsTable.DokebiTreasure).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.HellPower:
@@ -965,6 +1007,10 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value += amount;
                 param.Add(GoodsTable.MiniGameReward, ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.MiniGameReward2:
+                ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward2).Value += amount;
+                param.Add(GoodsTable.MiniGameReward2, ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.RelicTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += amount;
@@ -985,9 +1031,9 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += amount;
                 param.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
-            case Item_Type.Event_Item_Summer:
-                ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
-                param.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
+            case Item_Type.Event_Item_SnowMan:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value += amount;
+                param.Add(GoodsTable.Event_Item_SnowMan, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.SulItem:
@@ -998,6 +1044,11 @@ public static class ServerData
             case Item_Type.PeachReal:
                 ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;
                 param.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.DokebiTreasure:
+                ServerData.goodsTable.GetTableData(GoodsTable.DokebiTreasure).Value += amount;
+                param.Add(GoodsTable.DokebiTreasure, ServerData.goodsTable.GetTableData(GoodsTable.DokebiTreasure).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.HellPower:
@@ -1031,6 +1082,11 @@ public static class ServerData
             case Item_Type.FoxMaskPartial:
                 ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += amount;
                 param.Add(GoodsTable.FoxMaskPartial, ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.SusanoTreasure:
+                ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).Value += amount;
+                param.Add(GoodsTable.SusanoTreasure, ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.Mileage:
@@ -1815,12 +1871,48 @@ public static class ServerData
                     break;
             }
 
-
-
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
             Param goodsParam = new Param();
             goodsParam.Add(GoodsTable.MiniGameReward, ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward).Value);
+
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransaction(transactionList, successCallBack: () =>
+            {
+                // LogManager.Instance.SendLogType("MiniReward", type.ToString(), "");
+            });
+        }
+        else if (type.IsMiniGameRewardItem2())
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_new_miniGame:
+                case Item_Type.RankFrame2_new_miniGame:
+                case Item_Type.RankFrame3_new_miniGame:
+                case Item_Type.RankFrame4_new_miniGame:
+                case Item_Type.RankFrame5_new_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward2).Value += GameBalance.rankReward_new_1_MiniGame;
+                    break;
+
+                case Item_Type.RankFrame6_20_new_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward2).Value += GameBalance.rankReward_new_6_20_MiniGame;
+                    break;
+                case Item_Type.RankFrame21_100_new_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward2).Value += GameBalance.rankReward_new_21_100_MiniGame;
+                    break;
+                case Item_Type.RankFrame101_1000_new_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward2).Value += GameBalance.rankReward_new_101_1000_MiniGame;
+                    break;
+                case Item_Type.RankFrame1001_10000_new_miniGame:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward2).Value += GameBalance.rankReward_new_1001_10000_MiniGame;
+                    break;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.MiniGameReward2, ServerData.goodsTable.GetTableData(GoodsTable.MiniGameReward2).Value);
 
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
@@ -2048,11 +2140,18 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += amount;
                     break;
 
+                case Item_Type.DokebiTreasure:
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiTreasure).Value += amount;
+                    break;
+                case Item_Type.SusanoTreasure:
+                    ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).Value += amount;
+                    break;
+
                 case Item_Type.Event_Item_1:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value += amount;
                     break;
-                case Item_Type.Event_Item_Summer:
-                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
+                case Item_Type.Event_Item_SnowMan:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value += amount;
                     break;
                 case Item_Type.HellPower:
                     ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value += amount;

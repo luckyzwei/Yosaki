@@ -70,47 +70,47 @@ public class UiRewardCollection : MonoBehaviour
 
         int clearCount = GameBalance.bonusDungeonEnterCount - (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 <color=yellow>{killCount}</color>로 <color=yellow>{clearCount}회</color> 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)+2) / GameBalance.bandiPlusStageDevideValue) * clearCount}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)+2) / GameBalance.bandiPlusStageDevideValue) * clearCount}개", () =>
-        {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 <color=yellow>{killCount}</color>로 <color=yellow>{clearCount}회</color> 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount}개", () =>
+            {
             // enterButton.interactable = false;
 
 
-            int rewardNumJade = (killCount * GameBalance.bonusDungeonGemPerEnemy) * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)+2) / GameBalance.bandiPlusStageDevideValue) * clearCount;
-            int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)+2) / GameBalance.bandiPlusStageDevideValue) * clearCount;
-            ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value += clearCount;
+            int rewardNumJade = (killCount * GameBalance.bonusDungeonGemPerEnemy) * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount;
+                int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount;
+                ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value += clearCount;
 
-            ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardNumJade;
-            ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += rewardNumMarble;
+                ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardNumJade;
+                ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += rewardNumMarble;
 
             //데이터 싱크
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
-            Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
-            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
-            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+                Param goodsParam = new Param();
+                goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+                goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+                transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-            Param userInfoParam = new Param();
-            userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
-            transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+                Param userInfoParam = new Param();
+                userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
+                transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-            ServerData.SendTransaction(transactionList,
-                successCallBack: () =>
-                {
-                    DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
-                },
-                completeCallBack: () =>
-                {
+                ServerData.SendTransaction(transactionList,
+                    successCallBack: () =>
+                    {
+                        DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
+                    },
+                    completeCallBack: () =>
+                    {
                     // enterButton.interactable = true;
                 });
 
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearBandit, clearCount);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearBandit, clearCount);
 
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{clearCount}회 소탕 완료!\n{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!", null);
-            SoundManager.Instance.PlaySound("GoldUse");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{clearCount}회 소탕 완료!\n{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!", null);
+                SoundManager.Instance.PlaySound("GoldUse");
 
 
-        }, null);
+            }, null);
 
     }//★
 
@@ -215,10 +215,10 @@ public class UiRewardCollection : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?\n<color=red>(하루 한번만 획득 가능)</color>", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?\n<color=red>(하루 한번만 획득 가능)</color>\n{CommonString.GetItemName(Item_Type.DokebiTreasure)}로 추가획득 : {Utils.GetDokebiTreasureAddValue()}", () =>
         {
             ServerData.userInfoTable.TableDatas[UserInfoTable.getGumGi].Value = 1;
-            ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += score;
+            ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += score + Utils.GetDokebiTreasureAddValue();
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -236,7 +236,7 @@ public class UiRewardCollection : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 LogManager.Instance.SendLogType("GumGi", "_", score.ToString());
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SP)} {score}개 획득!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SP)} {score + Utils.GetDokebiTreasureAddValue()}개 획득!", null);
             });
         }, null);
     }
@@ -262,10 +262,10 @@ public class UiRewardCollection : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?\n<color=red>(하루 한번만 획득 가능)</color>", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?\n<color=red>(하루 한번만 획득 가능)</color>\n{CommonString.GetItemName(Item_Type.DokebiTreasure)}로 추가획득 : {Utils.GetDokebiTreasureAddValue()}", () =>
         {
             ServerData.userInfoTable.TableDatas[UserInfoTable.getFlower].Value = 1;
-            ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += score;
+            ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += score + Utils.GetDokebiTreasureAddValue();
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -281,7 +281,7 @@ public class UiRewardCollection : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Cw)} {score}개 획득!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Cw)} {score + Utils.GetDokebiTreasureAddValue()}개 획득!", null);
             });
         }, null);
     }
@@ -351,10 +351,10 @@ public class UiRewardCollection : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?\n{CommonString.GetItemName(Item_Type.DokebiTreasure)}로 추가획득 : {Utils.GetDokebiTreasureAddValue()}", () =>
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value = 1;
-            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score;
+            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score + Utils.GetDokebiTreasureAddValue();
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -371,7 +371,7 @@ public class UiRewardCollection : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score}개 획득!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score + Utils.GetDokebiTreasureAddValue()}개 획득!", null);
             });
         }, null);
     }

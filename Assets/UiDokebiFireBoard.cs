@@ -137,10 +137,10 @@ public class UiDokebiFireBoard : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?\n{CommonString.GetItemName(Item_Type.DokebiTreasure)}로 추가획득 : {Utils.GetDokebiTreasureAddValue()}", () =>
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value = 1;
-            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score;
+            ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += score+Utils.GetDokebiTreasureAddValue();
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -156,7 +156,7 @@ public class UiDokebiFireBoard : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score}개 획득!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score + Utils.GetDokebiTreasureAddValue()}개 획득!", null);
             });
         }, null);
     }

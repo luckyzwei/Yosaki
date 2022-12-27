@@ -177,10 +177,10 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     param.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
                 }
                 break;   
-            case Item_Type.Event_Item_Summer:
+            case Item_Type.Event_Item_SnowMan:
                 {
-                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
-                    param.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value += amount;
+                    param.Add(GoodsTable.Event_Item_SnowMan, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value);
                 }
                 break;
 

@@ -45,6 +45,7 @@ public enum StatusType
     SuperCritical5DamPer,//도깨비
     DokebiFireHasValueUpgrade,
     HellHasValueUpgrade,
+    SuperCritical6DamPer,//신수
 }
 
 
@@ -73,6 +74,7 @@ public static class PlayerStats
         double hellDam = GetSuperCritical3DamPer();
         double chunSangDam = GetSuperCritical4DamPer();
         double dokebiDam = GetSuperCritical5DamPer();
+        double sinsuDam = GetSuperCritical6DamPer();
 
         double totalPower =
           ((baseAttack + baseAttack * baseAttackPer)
@@ -1242,6 +1244,14 @@ public static class PlayerStats
 
         return ret;
     }
+    public static float GetSuperCritical6DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetPetHomeAbilValue(StatusType.SuperCritical6DamPer);
+
+        return ret;
+    }
 
     public static float GetHellMarkValue()
     {
@@ -2189,7 +2199,24 @@ public static class PlayerStats
 
         return grade;
     }
+    public static int GetBlackGrade()
+    {
+        int grade = -1;
 
+        var tableData = TableManager.Instance.sasinsuTable.dataArray;
+
+        var score = ServerData.sasinsuServerTable.TableDatas["b0"].score.Value * GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData[0].Score.Length; i++)
+        {
+            if (score >= tableData[0].Score[i])
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
     public static float GetSusanoAbil(StatusType type)
     {
 
@@ -2198,18 +2225,14 @@ public static class PlayerStats
         if (grade == -1) return 0f;
 
         var tableData = TableManager.Instance.susanoTable.dataArray[grade];
-
+        
         if (type == StatusType.CriticalDam)
         {
-
-            return tableData.Abilvalue0;
-
+            return tableData.Abilvalue0 + tableData.Abilvalue0 * GetSusanoUpgradeAbilPlusValue();
         }
         else if (type == StatusType.PenetrateDefense)
         {
-
-            return tableData.Abilvalue1;
-
+            return tableData.Abilvalue1 + tableData.Abilvalue1 * GetSusanoUpgradeAbilPlusValue()/100;
         }
 
         return 0f;
@@ -2298,6 +2321,11 @@ public static class PlayerStats
     public static float GetFoxMaskAbilPlusValue()
     {
         return foxMaskPartialValue * ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value;
+    }
+        public static float susanoUpgradelValue = 0.02f;
+    public static float GetSusanoUpgradeAbilPlusValue()
+    {
+        return susanoUpgradelValue * ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).Value;
     }
 
 

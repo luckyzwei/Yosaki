@@ -158,7 +158,7 @@ public class GradeTestManager : ContentsManagerBase
         bossRemainHp.Value += damage;
     }
     #region EndConditions
-    //Å¬¸®¾îÁ¶°Ç1 ÇÃ·¹ÀÌ¾î »ç¸Á
+    //í´ë¦¬ì–´ì¡°ê±´1 í”Œë ˆì´ì–´ ì‚¬ë§
     private void WhenPlayerDead()
     {
         if (contentsState.Value != (int)ContentsState.Fight) return;
@@ -166,10 +166,10 @@ public class GradeTestManager : ContentsManagerBase
         contentsState.Value = (int)ContentsState.Dead;
     }
 
-    //Å¬¸®¾îÁ¶°Ç1 º¸½º Ã³Ä¡ ¼º°ø
+    //í´ë¦¬ì–´ì¡°ê±´1 ë³´ìŠ¤ ì²˜ì¹˜ ì„±ê³µ
     private void WhenBossDead()
     {
-        //Å¬¸®¾î Ã¼Å©
+        //í´ë¦¬ì–´ ì²´í¬
         contentsState.Value = (int)ContentsState.Clear;
 
         //SendClearInfo();
@@ -187,7 +187,7 @@ public class GradeTestManager : ContentsManagerBase
     //    }
     //}
 
-    //Å¬¸®¾îÁ¶°Ç1 Å¸ÀÌ¸Ó Á¾·á
+    //í´ë¦¬ì–´ì¡°ê±´1 íƒ€ì´ë¨¸ ì¢…ë£Œ
     protected override void TimerEnd()
     {
         base.TimerEnd();
@@ -197,19 +197,19 @@ public class GradeTestManager : ContentsManagerBase
 
     private void EndBossMode()
     {
-        //°ø°İ·çÆ¾ Á¦°Å + Å¬¸®¾î¸é ÀÌÆåÆ® ÄÑÁÖ´øÁö.?
+        //ê³µê²©ë£¨í‹´ ì œê±° + í´ë¦¬ì–´ë©´ ì´í™íŠ¸ ì¼œì£¼ë˜ì§€.?
         singleRaidEnemy.gameObject.SetActive(false);
 
-        //Å¸ÀÌ¸Ó Á¾·á
+        //íƒ€ì´ë¨¸ ì¢…ë£Œ
         if (contentsState.Value != (int)ContentsState.TimerEnd)
         {
             StopTimer();
         }
 
-        //Á¡¼ö Àü¼Û
+        //ì ìˆ˜ ì „ì†¡
         SendScore();
 
-        //º¸»óÆË¾÷
+        //ë³´ìƒíŒì—…
         ShowResultPopup();
     }
 
@@ -229,7 +229,7 @@ public class GradeTestManager : ContentsManagerBase
 
     private void ShowResultPopup()
     {
-        //°á°ú UI
+        //ê²°ê³¼ UI
         uiBossResultPopup.gameObject.SetActive(true);
         statusUi.SetActive(false);
         uiBossResultPopup.Initialize(damageAmount.Value);
@@ -252,7 +252,7 @@ public class GradeTestManager : ContentsManagerBase
 
         while (remainSec >= 0)
         {
-            timerText.SetText($"³²Àº½Ã°£ : {(int)remainSec}");
+            timerText.SetText($"ë‚¨ì€ì‹œê°„ : {(int)remainSec}");
             yield return null;
             remainSec -= Time.deltaTime;
             this.remainSec = remainSec;

@@ -307,6 +307,7 @@ public class UiCollectionFallEventCell : MonoBehaviour
         {
             userInfoParam.Add(tableData.Exchangekey, ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value);
         }
+
         userInfoParam.Add(UserInfoTable.usedFallCollectionCount, ServerData.userInfoTable.TableDatas[UserInfoTable.usedFallCollectionCount].Value);
 
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));

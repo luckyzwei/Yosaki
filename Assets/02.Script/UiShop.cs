@@ -232,10 +232,10 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
                 }
                 break;
-            case Item_Type.Event_Item_Summer:
+            case Item_Type.Event_Item_SnowMan:
                 {
-                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += amount;
-                    param.Add(GoodsTable.Event_Item_Summer, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value);
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value += amount;
+                    param.Add(GoodsTable.Event_Item_SnowMan, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value);
                 }
                 break;
 
@@ -318,6 +318,14 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.HellPowerUp, ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value);
                 }
                 break;   
+            
+            case Item_Type.DokebiTreasure:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiTreasure).Value += amount;
+                    param.Add(GoodsTable.DokebiTreasure, ServerData.goodsTable.GetTableData(GoodsTable.DokebiTreasure).Value);
+                }
+                break; 
+                
             case Item_Type.Hel:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += amount;
@@ -363,6 +371,13 @@ public class UiShop : SingletonMono<UiShop>
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value += amount;
                     param.Add(GoodsTable.FoxMaskPartial, ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value);
+                }
+                break; 
+                        
+            case Item_Type.SusanoTreasure:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).Value += amount;
+                    param.Add(GoodsTable.SusanoTreasure, ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).Value);
                 }
                 break; 
 

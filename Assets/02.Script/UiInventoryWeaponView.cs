@@ -166,6 +166,11 @@ public class UiInventoryWeaponView : MonoBehaviour
             equipButton.gameObject.SetActive(false);
             //
         }
+        if (weaponData != null && weaponData.Id >= 67 && weaponData.Id <= 70)
+        {
+            equipButton.gameObject.SetActive(false);
+            //
+        }
     }
 
     public void OnClickWeaponViewButton()
@@ -257,7 +262,8 @@ public class UiInventoryWeaponView : MonoBehaviour
             magicBookData.Id == 46 ||
             magicBookData.Id == 47 ||
             magicBookData.Id == 48 ||
-            magicBookData.Id == 49 
+            magicBookData.Id == 49 ||
+            magicBookData.Id == 50 
             ));
         foxNorigaeGetButton.SetActive(false);
 
@@ -322,6 +328,12 @@ public class UiInventoryWeaponView : MonoBehaviour
                 )
             {
                 suhoSinDescription.SetText($"월간 패스\n12월 월간패스 보상에서 획득!");
+            }
+            else if (
+                magicBookData.Id == 50
+                )
+            {
+                suhoSinDescription.SetText($"월간 패스\n1월 월간패스 보상에서 획득!");
             }
 
 
@@ -475,7 +487,9 @@ public class UiInventoryWeaponView : MonoBehaviour
                 || weaponData.Id == 51 || weaponData.Id == 52 || weaponData.Id == 53 || weaponData.Id == 54 || weaponData.Id == 55
                 || weaponData.Id == 56 || weaponData.Id == 57 || weaponData.Id == 58 || weaponData.Id == 59 || weaponData.Id == 60
                 || weaponData.Id == 61 || weaponData.Id == 62 || weaponData.Id == 63 || weaponData.Id == 64 ||weaponData.Id == 65
-                || weaponData.Id == 66 
+                || weaponData.Id == 66 || weaponData.Id == 67 || weaponData.Id == 68 || weaponData.Id == 69 || weaponData.Id == 70
+                || weaponData.Id == 71 || weaponData.Id == 72 || weaponData.Id == 73 || weaponData.Id == 74 || weaponData.Id == 75
+                || weaponData.Id == 76
 
                 )
             {
@@ -601,9 +615,32 @@ public class UiInventoryWeaponView : MonoBehaviour
                     weaponLockDescription.SetText($"도깨비나라\n흑량에서 획득!");
                 }
                 //
+                if (weaponData.Id == 67)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"사신수\n현무에서 획득!");
+                }
+                if (weaponData.Id == 68)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"사신수\n백호에서 획득!");
+                }
+                if (weaponData.Id == 69)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"사신수\n주작에서 획득!");
+                }
+                if (weaponData.Id == 70)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"사신수\n청룡에서 획득!");
+                }
+
+                //
                 if (weaponData.Id == 45 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49||
                     weaponData.Id == 52 || weaponData.Id == 53 || weaponData.Id == 54 || weaponData.Id == 55 || weaponData.Id == 56||
-                    weaponData.Id == 60 || weaponData.Id == 61 || weaponData.Id == 62)
+                    weaponData.Id == 60 || weaponData.Id == 61 || weaponData.Id == 62 || weaponData.Id == 71 || weaponData.Id == 72
+                    || weaponData.Id == 73 || weaponData.Id == 74 || weaponData.Id == 75 || weaponData.Id == 76)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
                     weaponLockDescription.SetText($"십만대산\n추천보상으로 획득!");
@@ -950,6 +987,12 @@ public class UiInventoryWeaponView : MonoBehaviour
                 return;
             }
 
+            if (weaponData.Id >= 71 && weaponData.Id <= 76)
+            {
+                PopupManager.Instance.ShowAlarmMessage("외형 아이템은 장착 하실수 없습니다.");
+                return;
+            }
+
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
             {
                 ServerData.equipmentTable.ChangeEquip(EquipmentTable.Weapon, weaponData.Id);
@@ -1021,6 +1064,17 @@ public class UiInventoryWeaponView : MonoBehaviour
             }
 
             if (weaponData.Id >= 60 && weaponData.Id <= 62)
+            {
+                PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
+                return;
+            }
+            if (weaponData.Id >= 67 && weaponData.Id <= 70)
+            {
+                PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
+                return;
+            }
+
+            if (weaponData.Id >= 71 && weaponData.Id <= 76)
             {
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
                 return;

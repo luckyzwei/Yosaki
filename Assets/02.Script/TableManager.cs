@@ -672,6 +672,8 @@ public class TableManager : SingletonMono<TableManager>
     public OkTable okTable;
     public YumTable yumTable;
     public DoTable doTable;
+    //사신수
+    public SasinsuTable sasinsuTable;
 
 
     public BokPass bokPass;
@@ -694,7 +696,8 @@ public class TableManager : SingletonMono<TableManager>
     public TowerTable3 towerTable3;
     public TowerTable4 towerTableMulti;
     public GradeTestTable gradeTestTable;
-
+    public CommonCollectionEvent commoncollectionEvent;
+    public SnowManAtten snowManAtten;
 
 }
 

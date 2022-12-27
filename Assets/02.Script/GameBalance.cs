@@ -135,6 +135,12 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_101_1000_MiniGame = 13;
     public readonly static ObscuredInt rankReward_1001_10000_MiniGame = 12;
 
+    public readonly static ObscuredInt rankReward_new_1_MiniGame = 20;
+    public readonly static ObscuredInt rankReward_new_6_20_MiniGame = 15;
+    public readonly static ObscuredInt rankReward_new_21_100_MiniGame = 14;
+    public readonly static ObscuredInt rankReward_new_101_1000_MiniGame = 13;
+    public readonly static ObscuredInt rankReward_new_1001_10000_MiniGame = 12;
+
     public readonly static ObscuredInt rankReward_1_guild = 1200;
     public readonly static ObscuredInt rankReward_2_guild = 1100;
     public readonly static ObscuredInt rankReward_3_guild = 1000;
@@ -199,7 +205,7 @@ public static class GameBalance
 
 
     public readonly static ObscuredInt DailyRelicTicketGetCount = 3;
-    
+
     public readonly static ObscuredInt DokebiKeyUseCount = 5;
     public readonly static ObscuredInt StageRelicUnlockLevel = 3000;
     public readonly static ObscuredFloat StageRelicUpgradePrice = 1000;
@@ -248,6 +254,7 @@ public static class GameBalance
     public static ObscuredInt recommendCountPerWeek_PartyTower = 4;
 
     public static ObscuredInt sanGoonDogFeedCount = 3;
+    public static ObscuredInt dokebiTreasureAddValue = 1;
 
     public static int GetSonIdx()
     {

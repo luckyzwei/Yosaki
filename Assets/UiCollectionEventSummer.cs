@@ -31,7 +31,7 @@ public class UiCollectionEventSummer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_Summer).Value += 1000000;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value += 1000000;
         }
     }
 #endif

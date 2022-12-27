@@ -128,6 +128,9 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
             //도깨비참수
         description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical5DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical5DamPer() * 100f)}\n";
 
+            //신수베기
+        description1 += $"{CommonString.GetStatusName(StatusType.SuperCritical6DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical6DamPer() * 100f)}\n";
+
         
 
         descriptionBoard1.SetText(description1);
