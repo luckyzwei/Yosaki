@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -33,7 +33,7 @@ public class UiSnowManEventBuyButton : MonoBehaviour
 
         ServerData.iapServerTable.TableDatas[fallPassKey].buyCount.AsObservable().Subscribe(e =>
         {
-            descText.SetText(e >= 1 ? "±¸¸Å¿Ï·á" : "ÆĞ½º±Ç ±¸¸Å");
+            descText.SetText(e >= 1 ? "êµ¬ë§¤ì™„ë£Œ" : "íŒ¨ìŠ¤ê¶Œ êµ¬ë§¤");
             this.gameObject.SetActive(e <= 0);
         }).AddTo(disposable);
 
@@ -58,7 +58,7 @@ public class UiSnowManEventBuyButton : MonoBehaviour
     {
         if (ServerData.iapServerTable.TableDatas[fallPassKey].buyCount.Value >= 1)
         {
-            PopupManager.Instance.ShowAlarmMessage("ÀÌ¹Ì ±¸¸Å Çß½À´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage("ì´ë¯¸ êµ¬ë§¤ í–ˆìŠµë‹ˆë‹¤.");
             return;
         }
 
@@ -79,17 +79,17 @@ public class UiSnowManEventBuyButton : MonoBehaviour
 
         if (TableManager.Instance.InAppPurchaseData.TryGetValue(productId, out var tableData) == false)
         {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"µî·ÏµÇÁö ¾ÊÀº »óÇ° id {productId}", null);
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"ë“±ë¡ë˜ì§€ ì•Šì€ ìƒí’ˆ id {productId}", null);
             return;
         }
         else
         {
-            // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} ±¸¸Å ¼º°ø!", null);
+            // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} êµ¬ë§¤ ì„±ê³µ!", null);
         }
 
         if (tableData.Productid != fallPassKey) return;
 
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"±¸¸Å ¼º°ø!", null);
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"êµ¬ë§¤ ì„±ê³µ!", null);
 
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
 

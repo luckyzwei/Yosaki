@@ -1,4 +1,4 @@
-using BackEnd;
+ï»¿using BackEnd;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,7 +54,7 @@ public class UiCollectionEventCommonView : MonoBehaviour
             ServerData.userInfoTable.TableDatas[tableData.Exchangekey].AsObservable().Subscribe(e =>
             {
 
-                buyCountDesc.SetText($"±³È¯ °¡´É : {e}/{tableData.Exchangemaxcount}");
+                buyCountDesc.SetText($"êµí™˜ ê°€ëŠ¥ : {e}/{tableData.Exchangemaxcount}");
 
             }).AddTo(this);
         }
@@ -71,7 +71,7 @@ public class UiCollectionEventCommonView : MonoBehaviour
             }
             else
             {
-                price.SetText("º¸À¯Áß!");
+                price.SetText("ë³´ìœ ì¤‘!");
             }
 
         }).AddTo(this);
@@ -89,7 +89,7 @@ public class UiCollectionEventCommonView : MonoBehaviour
             price.SetText(Utils.ConvertBigNum(tableData.Price));
         }
 
-        //½ºÆÄÀÎ
+        //ìŠ¤íŒŒì¸
         if (IsCostumeItem())
         {
             string itemKey = ((Item_Type)tableData.Itemtype).ToString();
@@ -103,13 +103,13 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
             if (itemAmount_Costume != null)
             {
-                itemAmount_Costume.SetText($"(´É·ÂÄ¡ ½½·Ô{costumeTable.Slotnum}°³)");
+                itemAmount_Costume.SetText($"(ëŠ¥ë ¥ì¹˜ ìŠ¬ë¡¯{costumeTable.Slotnum}ê°œ)");
             }
         }
 
         itemIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableData.Itemtype);
 
-        itemAmount.SetText(Utils.ConvertBigNum(tableData.Itemvalue) + "°³");
+        itemAmount.SetText(Utils.ConvertBigNum(tableData.Itemvalue) + "ê°œ");
 
         itemName.SetText(CommonString.GetItemName((Item_Type)tableData.Itemtype));
     }
@@ -118,7 +118,7 @@ public class UiCollectionEventCommonView : MonoBehaviour
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
-            PopupManager.Instance.ShowAlarmMessage("ÀÎÅÍ³İ ¿¬°áÀ» È®ÀÎÇØ ÁÖ¼¼¿ä!");
+            PopupManager.Instance.ShowAlarmMessage("ì¸í„°ë„· ì—°ê²°ì„ í™•ì¸í•´ ì£¼ì„¸ìš”!");
             return;
         }
 
@@ -127,7 +127,7 @@ public class UiCollectionEventCommonView : MonoBehaviour
         {
             if (ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value >= tableData.Exchangemaxcount)
             {
-                PopupManager.Instance.ShowAlarmMessage("´õÀÌ»ó ±³È¯ÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.");
+                PopupManager.Instance.ShowAlarmMessage("ë”ì´ìƒ êµí™˜í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
                 return;
             }
         }
@@ -138,7 +138,7 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
             if (ServerData.costumeServerTable.TableDatas[itemKey].hasCostume.Value)
             {
-                PopupManager.Instance.ShowAlarmMessage("ÀÌ¹Ì º¸À¯ÇÏ°í ÀÖ½À´Ï´Ù!");
+                PopupManager.Instance.ShowAlarmMessage("ì´ë¯¸ ë³´ìœ í•˜ê³  ìˆìŠµë‹ˆë‹¤!");
                 return;
             }
         }
@@ -148,15 +148,15 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
         if (currentEventItemNum < tableData.Price)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(goodsType)}°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(goodsType)}ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
             return;
         }
 
-        PopupManager.Instance.ShowAlarmMessage("±³È¯ ¿Ï·á");
+        PopupManager.Instance.ShowAlarmMessage("êµí™˜ ì™„ë£Œ");
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.usedSnowManCollectionCount).Value += tableData.Price;
 
-        //·ÎÄÃ
+        //ë¡œì»¬
         ServerData.goodsTable.GetTableData(goodsName).Value -= tableData.Price;
 
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
@@ -236,7 +236,7 @@ public class UiCollectionEventCommonView : MonoBehaviour
         {
             if (IsCostumeItem())
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "¿ÜÇü È¹µæ!!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "ì™¸í˜• íšë“!!", null);
             }
             else
             {

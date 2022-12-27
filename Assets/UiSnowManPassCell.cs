@@ -58,7 +58,7 @@ public class UiSnowManPassCell : MonoBehaviour
     {
         disposables.Clear();
 
-        //¹«·áº¸»ó µ¥ÀÌÅÍ º¯°æ½Ã
+        //ë¬´ë£Œë³´ìƒ ë°ì´í„° ë³€ê²½ì‹œ
         ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Subscribe(e =>
         {
             bool rewarded = HasReward(passInfo.rewardType_Free_Key, passInfo.id);
@@ -66,7 +66,7 @@ public class UiSnowManPassCell : MonoBehaviour
 
         }).AddTo(disposables);
 
-        //±¤°íº¸»ó µ¥ÀÌÅÍ º¯°æ½Ã
+        //ê´‘ê³ ë³´ìƒ ë°ì´í„° ë³€ê²½ì‹œ
         ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Subscribe(e =>
         {
             bool rewarded = HasReward(passInfo.rewardType_IAP_Key, passInfo.id);
@@ -74,7 +74,7 @@ public class UiSnowManPassCell : MonoBehaviour
 
         }).AddTo(disposables);
 
-        //Å³Ä«¿îÆ® º¯°æµÉ¶§
+        //í‚¬ì¹´ìš´íŠ¸ ë³€ê²½ë ë•Œ
         ServerData.userInfoTable.GetTableData(UserInfoTable.usedSnowManCollectionCount).AsObservable().Subscribe(e =>
         {
 
@@ -135,34 +135,34 @@ public class UiSnowManPassCell : MonoBehaviour
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("Ãâ¼®ÀÌ ºÎÁ·ÇÕ´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage("ì¶œì„ì´ ë¶€ì¡±í•©ë‹ˆë‹¤.");
             return;
         }
 
         if (HasReward(passInfo.rewardType_Free_Key, passInfo.id))
         {
-            PopupManager.Instance.ShowAlarmMessage("ÀÌ¹Ì º¸»óÀ» ¹Ş¾Ò½À´Ï´Ù!");
+            PopupManager.Instance.ShowAlarmMessage("ì´ë¯¸ ë³´ìƒì„ ë°›ì•˜ìŠµë‹ˆë‹¤!");
             return;
         }
 
-        PopupManager.Instance.ShowAlarmMessage("º¸»óÀ» ¼ö·ÉÇß½À´Ï´Ù!");
+        PopupManager.Instance.ShowAlarmMessage("ë³´ìƒì„ ìˆ˜ë ¹í–ˆìŠµë‹ˆë‹¤!");
 
         GetFreeReward();
 
     }
 
-    //±¤°í¾Æ´Ô
+    //ê´‘ê³ ì•„ë‹˜
     public void OnClickAdRewardButton()
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("Ãâ¼®ÀÌ ºÎÁ·ÇÕ´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage("ì¶œì„ì´ ë¶€ì¡±í•©ë‹ˆë‹¤.");
             return;
         }
 
         if (HasReward(passInfo.rewardType_IAP_Key, passInfo.id))
         {
-            PopupManager.Instance.ShowAlarmMessage("ÀÌ¹Ì º¸»óÀ» ¹Ş¾Ò½À´Ï´Ù!");
+            PopupManager.Instance.ShowAlarmMessage("ì´ë¯¸ ë³´ìƒì„ ë°›ì•˜ìŠµë‹ˆë‹¤!");
             return;
         }
 
@@ -173,10 +173,10 @@ public class UiSnowManPassCell : MonoBehaviour
         }
         else
         {
-            PopupManager.Instance.ShowAlarmMessage($"´«»ç¶÷ ÆĞ½º±ÇÀÌ ÇÊ¿äÇÕ´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage($"ëˆˆì‚¬ëŒ íŒ¨ìŠ¤ê¶Œì´ í•„ìš”í•©ë‹ˆë‹¤.");
             return;
         }
-        PopupManager.Instance.ShowAlarmMessage("º¸»óÀ» ¼ö·ÉÇß½À´Ï´Ù!");
+        PopupManager.Instance.ShowAlarmMessage("ë³´ìƒì„ ìˆ˜ë ¹í–ˆìŠµë‹ˆë‹¤!");
     }
 
     static public bool HasPassItem()
@@ -187,13 +187,13 @@ public class UiSnowManPassCell : MonoBehaviour
     }
     private void GetFreeReward()
     {
-        //·ÎÄÃ
+        //ë¡œì»¬
         ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
-        //ÆĞ½º º¸»ó
+        //íŒ¨ìŠ¤ ë³´ìƒ
         Param passParam = new Param();
         passParam.Add(passInfo.rewardType_Free_Key, ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value);
         transactionList.Add(TransactionValue.SetUpdate(OneYearPassServerTable.tableName, OneYearPassServerTable.Indate, passParam));
@@ -201,25 +201,25 @@ public class UiSnowManPassCell : MonoBehaviour
         var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
         transactionList.Add(rewardTransactionValue);
 
-        //Å³Ä«¿îÆ®
+        //í‚¬ì¹´ìš´íŠ¸
         Param userInfoParam = new Param();
         //userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
-            //  LogManager.Instance.SendLogType("¿ù°£", "¹«·á", $"{passInfo.id}");
+            //  LogManager.Instance.SendLogType("ì›”ê°„", "ë¬´ë£Œ", $"{passInfo.id}");
         });
     }
     private void GetAdReward()
     {
-        //·ÎÄÃ
+        //ë¡œì»¬
         ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
-        //ÆĞ½º º¸»ó
+        //íŒ¨ìŠ¤ ë³´ìƒ
         Param passParam = new Param();
         passParam.Add(passInfo.rewardType_IAP_Key, ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value);
         transactionList.Add(TransactionValue.SetUpdate(OneYearPassServerTable.tableName, OneYearPassServerTable.Indate, passParam));
@@ -227,17 +227,17 @@ public class UiSnowManPassCell : MonoBehaviour
         var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_IAP);
         transactionList.Add(rewardTransactionValue);
 
-        //Å³Ä«¿îÆ®
+        //í‚¬ì¹´ìš´íŠ¸
         Param userInfoParam = new Param();
         //userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         ServerData.SendTransaction(transactionList, successCallBack: () =>
         {
-            //   LogManager.Instance.SendLogType("¿ù°£", "À¯·á", $"{passInfo.id}");
+            //   LogManager.Instance.SendLogType("ì›”ê°„", "ìœ ë£Œ", $"{passInfo.id}");
         });
 
-        PopupManager.Instance.ShowAlarmMessage("º¸»óÀ» ¼ö·ÉÇß½À´Ï´Ù!");
+        PopupManager.Instance.ShowAlarmMessage("ë³´ìƒì„ ìˆ˜ë ¹í–ˆìŠµë‹ˆë‹¤!");
     }
 
     private bool CanGetReward()

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -22,9 +22,9 @@ public class UiCollectionEventCommon : MonoBehaviour
         string description = string.Empty;
 
         description = "-";
-        //description += $"<color=red>º¢²É È¹µæ 3¿ù 31ÀÏ±îÁö</color>\n";
-        //description += $"<color=red>¾ÆÀÌÅÛ Á¦ÀÛ 3¿ù 31ÀÏ±îÁö</color>\n";
-        //description += $"<color=red>»óÇ° ÆÇ¸Å 3¿ù 31ÀÏ±îÁö</color>";
+        //description += $"<color=red>ë²šê½ƒ íšë“ 3ì›” 31ì¼ê¹Œì§€</color>\n";
+        //description += $"<color=red>ì•„ì´í…œ ì œì‘ 3ì›” 31ì¼ê¹Œì§€</color>\n";
+        //description += $"<color=red>ìƒí’ˆ íŒë§¤ 3ì›” 31ì¼ê¹Œì§€</color>";
 
         eventDescription.SetText(description);
     }

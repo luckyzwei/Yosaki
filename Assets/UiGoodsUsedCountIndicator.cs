@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -26,7 +26,7 @@ public class UiGoodsUsedCountIndicator : MonoBehaviour
     {
         ServerData.userInfoTable.GetTableData(usedGoodsKey).AsObservable().Subscribe(e =>
         {
-            usedCountText.SetText($"±³È¯ÇÑ {usedGoodsName} ¼ö : {Utils.ConvertBigNum(e)}");
+            usedCountText.SetText($"êµí™˜í•œ {usedGoodsName} ìˆ˜ : {Utils.ConvertBigNum(e)}");
         }).AddTo(this);
     }
 }

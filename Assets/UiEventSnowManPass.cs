@@ -98,7 +98,7 @@ public class UiEventSnowManPass : MonoBehaviour
 
             if (canGetReward == false) break;
 
-            //¹«·áº¸»ó
+            //ë¬´ë£Œë³´ìƒ
             if (HasReward(splitData_Free, tableData[i].Id) == false)
             {
                 if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
@@ -112,7 +112,7 @@ public class UiEventSnowManPass : MonoBehaviour
                 rewardedNum++;
             }
 
-            ////À¯·áº¸»ó
+            ////ìœ ë£Œë³´ìƒ
             if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
             {
                 if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
@@ -129,7 +129,7 @@ public class UiEventSnowManPass : MonoBehaviour
 
         if (hasCostumeItem)
         {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "¿ÜÇü ¾ÆÀÌÅÛÀº Á÷Á¢ ¼ö·ÉÇØ¾ß ÇÕ´Ï´Ù.", null);
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "ì™¸í˜• ì•„ì´í…œì€ ì§ì ‘ ìˆ˜ë ¹í•´ì•¼ í•©ë‹ˆë‹¤.", null);
             return;
         }
 
@@ -163,13 +163,13 @@ public class UiEventSnowManPass : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "º¸»óÀ» ÀüºÎ ¼ö·ÉÇß½À´Ï´Ù", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "ë³´ìƒì„ ì „ë¶€ ìˆ˜ë ¹í–ˆìŠµë‹ˆë‹¤", null);
                 //LogManager.Instance.SendLogType("ChildPass", "A", "A");
             });
         }
         else
         {
-            PopupManager.Instance.ShowAlarmMessage("¼ö·ÉÇÒ º¸»óÀÌ ¾ø½À´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage("ìˆ˜ë ¹í•  ë³´ìƒì´ ì—†ìŠµë‹ˆë‹¤.");
         }
     }
 
