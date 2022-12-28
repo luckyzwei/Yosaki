@@ -145,6 +145,10 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             equipButton.gameObject.SetActive(false);
         }
+        if (magicBookData != null && magicBookData.Id == 50)
+        {
+            equipButton.gameObject.SetActive(false);
+        }
 
         if (weaponData != null && weaponData.Id >= 37 && weaponData.Id <= 42)
         {
@@ -1108,7 +1112,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         }
         else
         {
-            if (magicBookData.Id == 23 || magicBookData.Id == 45)
+            if (magicBookData.Id == 23 || magicBookData.Id == 45 || magicBookData.Id == 50)
             {
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
                 return;

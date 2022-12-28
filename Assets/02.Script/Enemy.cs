@@ -168,9 +168,11 @@ public class Enemy : PoolItem
 
         GetPetUpgradeGem();
 
+        //눈사람
         GetEventItem();
 
-        GetSpringEventItem();
+        //곶감
+       // GetSpringEventItem();
 
         GetSulItem();
 

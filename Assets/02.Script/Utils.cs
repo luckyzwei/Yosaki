@@ -527,7 +527,7 @@ public static class Utils
 
     public static bool IsBirdNorigae(int idx)
     {
-        return idx == 45;
+        return idx == 45 || idx == 50;
     }
 
     public static bool IsPartyTowerMaxFloor(int idx)

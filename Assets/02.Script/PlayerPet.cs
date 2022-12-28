@@ -79,7 +79,7 @@ public class PlayerPet : SingletonMono<PlayerPet>
             skeletonAnimation.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             skeletonAnimation.transform.localPosition = new Vector3(0.05f, 0.6f, 0f);
         }
-        else if (idx == 16|| idx == 19)
+        else if (idx == 16 || idx == 19)
         {
             skeletonAnimation.transform.localScale = new Vector3(0.42f, 0.42f, 0.42f);
             skeletonAnimation.transform.localPosition = new Vector3(0.26f, 0.58f, 0.0f);
@@ -101,7 +101,13 @@ public class PlayerPet : SingletonMono<PlayerPet>
             skeletonAnimation.transform.localScale = new Vector3(0.6f, 0.6f, 0.4f);
             skeletonAnimation.transform.localPosition = new Vector3(0.3f, 0.96f, 0.0f);
         }
+        else if (idx >= 24 && idx <= 27)
+        {
+            skeletonAnimation.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            skeletonAnimation.transform.localPosition = new Vector3(0.129f, -0.582f, 0.0f);
+        }
     }
+    //
 
     public void WhenPetEquipIdxChanged(int idx)
     {

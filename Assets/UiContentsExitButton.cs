@@ -25,10 +25,11 @@ public class UiContentsExitButton : MonoBehaviour
         {
             return true;
         }
-        //산신령 & 서재 & 지키미
+        //산신령 & 서재 & 지키미 & 보도
         if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 57)||
             (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 72)||
-            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 82))
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 82)||
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 83))
         {
             return true;
         }
@@ -112,6 +113,11 @@ public class UiContentsExitButton : MonoBehaviour
         else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon&&GameManager.Instance.bossId==82)
         {
                 GameManager.Instance.SetBossId(82);
+                GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
+        }        //도깨비숲 지키미
+        else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon&&GameManager.Instance.bossId==83)
+        {
+                GameManager.Instance.SetBossId(83);
                 GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
         }
         //사신수

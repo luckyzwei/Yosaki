@@ -160,6 +160,7 @@ public class UiDokebiFireBoard : MonoBehaviour
             });
         }, null);
     }
+
     public void OnClickGetAllDokebiFireButton()
     {
         if (ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value < 1)
@@ -168,7 +169,7 @@ public class UiDokebiFireBoard : MonoBehaviour
             return;
         }
 
-        int score = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.DokebiFireClear].Value;
+        int score = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.DokebiFireClear].Value + (int)Utils.GetDokebiTreasureAddValue();
 
         if (score == 0)
         {

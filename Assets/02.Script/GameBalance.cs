@@ -233,7 +233,7 @@ public static class GameBalance
     public readonly static ObscuredFloat GuildMakePrice = 100000000;
     public readonly static ObscuredInt GuildMemberMax = 20;
 
-    public readonly static ObscuredFloat gumgiAttackValue200 = 4000000000;
+    public readonly static ObscuredFloat gumgiAttackValue200 = 10000000000;
 
     public readonly static ObscuredInt GuildCreateMinLevel = 5000;
     public readonly static ObscuredInt GuildEnterMinLevel = 1000;

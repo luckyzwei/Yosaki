@@ -26,6 +26,9 @@ public class TwelveRaidEnemy : BossEnemyBase
     private float attackInterval_Real = 2f;
 
     [SerializeField]
+    private List<AlarmHitObject> AnimationHitList;
+
+    [SerializeField]
     private List<AlarmHitObject> HitList_1;
 
     [SerializeField]
@@ -142,6 +145,12 @@ public class TwelveRaidEnemy : BossEnemyBase
 
             enemyHitObjects.ForEach(e => e.SetDamage(gangChulDam));
         }
+
+        //악의씨앗
+        else if (GameManager.Instance.bossId == 84)
+        {
+            enemyHitObjects.ForEach(e => e.SetDamage(1, 0.4f));
+        }
         else
         {
             var bossTableData = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];
@@ -154,6 +163,11 @@ public class TwelveRaidEnemy : BossEnemyBase
 
             enemyHitObjects.ForEach(e => e.SetDamage((float)damage));
         }
+    }
+
+    public void AnimationPatternAttack(int index)
+    {
+        AnimationHitList[index].AttackStart();
     }
 
     private IEnumerator BossAttackPowerUpdateRoutine()

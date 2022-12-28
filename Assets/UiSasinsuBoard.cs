@@ -35,12 +35,25 @@ public class UiSasinsuBoard : MonoBehaviour
     private UiSasinsuDescription star6;
 
     [SerializeField]
+    private TextMeshProUGUI totalAbilAddValue;
+
+    [SerializeField]
     private int sasinIndex = 0;
     private void Start()
     {
         Initialize();
     }
 
+    private void OnEnable()
+    {
+        UpdateToalAbilAddValue();
+    }
+
+    private void UpdateToalAbilAddValue()
+    {
+        totalAbilAddValue.SetText($"총 :{Utils.ConvertBigNum(PlayerStats.GetSasinsuStarAddValue() * 100f)}% 적용됨");
+    }
+    //
 
     private void Initialize()
     {
@@ -52,7 +65,7 @@ public class UiSasinsuBoard : MonoBehaviour
         star5.Initialize(5, sasinIndex);
         star6.Initialize(6, sasinIndex);
 
-        star0.OnClickButton();
+        SasinScoreCheck();
         ShowDescription();
     }
 
@@ -78,8 +91,54 @@ public class UiSasinsuBoard : MonoBehaviour
         Initialize();
 
     }
+    public void OnClickRewardButton()
+    {
+        sasinsuRewardBoard.SetSasinIdx(sasinIndex);
+    }
 
+    private void SasinScoreCheck()
+    {
+        int check = -1;
+        for (int i = TableManager.Instance.sasinsuTable.dataArray[sasinIndex].Score.Length - 1; i >= 0; i--)
+        {
+            if (ServerData.sasinsuServerTable.TableDatas[$"b{sasinIndex}"].score.Value >= TableManager.Instance.sasinsuTable.dataArray[sasinIndex].Score[i])
+            {
+                check = i;
+                break;
+            }
+        }
+        switch (check)
+        {
+            case 0:
+                star0.OnClickButton();
+                break;
+            case 1:
+                star1.OnClickButton();
+                break;
 
+            case 2:
+                star2.OnClickButton();
+                break;
+
+            case 3:
+                star3.OnClickButton();
+                break;
+
+            case 4:
+                star4.OnClickButton();
+                break;
+
+            case 5:
+                star5.OnClickButton();
+                break;
+            case 6:
+                star6.OnClickButton();
+                break;
+            default:
+                star0.OnClickButton();
+                break;
+        }
+    }
 
     private void ShowDescription()
     {
@@ -87,22 +146,22 @@ public class UiSasinsuBoard : MonoBehaviour
         {
             case 0:
                 scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.sasinsuServerTable.TableDatas["b0"].score.Value)}");
-                sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n등록된 점수에 맞는 효과가 플레이어에게 적용 됩니다!");
+                sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n단계별 효과가 누적되어 적용 됩니다!");
                 weaponView.Initialize(TableManager.Instance.WeaponData[67], null);
                 break;
             case 1:
                 scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.sasinsuServerTable.TableDatas["b1"].score.Value)}");
-                sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n등록된 점수에 맞는 효과가 플레이어에게 적용 됩니다!");
+                sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n단계별 효과가 누적되어 적용 됩니다!");
                 weaponView.Initialize(TableManager.Instance.WeaponData[68], null);
                 break;
             case 2:
                 scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.sasinsuServerTable.TableDatas["b2"].score.Value)}");
-                sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n등록된 점수에 맞는 효과가 플레이어에게 적용 됩니다!");
+                sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n단계별 효과가 누적되어 적용 됩니다!");
                 weaponView.Initialize(TableManager.Instance.WeaponData[69], null);
                 break;
             case 3:
                 scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.sasinsuServerTable.TableDatas["b3"].score.Value)}");
-                sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n등록된 점수에 맞는 효과가 플레이어에게 적용 됩니다!");
+                sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n단계별 효과가 누적되어 적용 됩니다!");
                 weaponView.Initialize(TableManager.Instance.WeaponData[70], null);
                 break;
         }

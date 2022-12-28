@@ -35,10 +35,12 @@ public class UiSasinsuDescription : MonoBehaviour
         abilDescription.SetText($"{CommonString.GetStatusName((StatusType)tableData.Abiltype0[starIdx])}{Utils.ConvertBigNum(tableData.Abilvalue0[starIdx] * 100f)}");
 
         gradeDescription.SetText($"{tableData.Name} {starIdx+1}단계");
-
-        damageCutDescription.SetText($"{Utils.ConvertBigNum(tableData.Score[starIdx])}점 이상 기록시");
-
-       // image.sprite = Resources.Load<Sprite>($"SasinsuStars/{starType}");
+#if UNITY_EDITOR
+        damageCutDescription.SetText($"{Utils.ConvertBigNum(tableData.Score[starIdx])} 이상 기록시");
+#else
+        damageCutDescription.SetText($"{tableData.Scoredescription[starIdx]} 이상 기록시");
+#endif
+        // image.sprite = Resources.Load<Sprite>($"SasinsuStars/{starType}");
         SetImageColor();
     }
 

@@ -403,8 +403,6 @@ public class GoodsTable
     static int eventItemAddNum = 0;
     public void GetEventItem(float amount)
     {
-
-
         eventItemAddNum += (int)amount;
 
         if (eventItemAddNum < updateRequireNum)

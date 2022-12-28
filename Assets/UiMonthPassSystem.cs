@@ -216,7 +216,7 @@ public class UiMonthPassSystem : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
-                LogManager.Instance.SendLogType("MonthPass", "A", "A");
+              //  LogManager.Instance.SendLogType("MonthPass", "A", "A");//
             });
         }
         else

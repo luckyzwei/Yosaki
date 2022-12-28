@@ -96,6 +96,7 @@ public static class PlayerStats
         totalPower += totalPower * hellDam;
         totalPower += (totalPower * chunSangDam);
         totalPower += (totalPower * dokebiDam);
+        totalPower += (totalPower * sinsuDam);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -1250,6 +1251,8 @@ public static class PlayerStats
 
         ret += GetPetHomeAbilValue(StatusType.SuperCritical6DamPer);
 
+        ret += GetSasinsuStarAddValue();
+
         return ret;
     }
 
@@ -2310,7 +2313,7 @@ public static class PlayerStats
         return 0f;
     }
 
-    public static float yeoRaeMarbleValue = 0.05f;
+    public static float yeoRaeMarbleValue = 0.1f;
 
     public static float GetSonAbilPlusValue()
     {
@@ -2322,7 +2325,7 @@ public static class PlayerStats
     {
         return foxMaskPartialValue * ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value;
     }
-        public static float susanoUpgradelValue = 0.02f;
+        public static float susanoUpgradelValue = 0.025f;
     public static float GetSusanoUpgradeAbilPlusValue()
     {
         return susanoUpgradelValue * ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).Value;
@@ -2539,6 +2542,27 @@ public static class PlayerStats
         ret += GetSkillHasValue(StatusType.DokebiFireHasValueUpgrade);
 
         ret += GetGradeTestAbilValue(StatusType.DokebiFireHasValueUpgrade);
+
+        return ret;
+    }
+    
+    public static float GetSasinsuStarAddValue()
+    {
+        float ret = 0f;
+
+        var tableData = TableManager.Instance.sasinsuTable.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            for (int j = 0; j < tableData[i].Score.Length; j++)
+            {
+                if(tableData[i].Score[j] < ServerData.sasinsuServerTable.TableDatas[$"b{i}"].score.Value)
+                {
+                    ret += tableData[i].Abilvalue0[j];
+                }
+            }
+        }
+        
 
         return ret;
     }

@@ -218,7 +218,7 @@ public class UiTopRankerCell : MonoBehaviour
         //십만대산용
         if (partyRaidRecommendButton != null)
         {
-            if (GameManager.contentsType != GameManager.ContentsType.PartyRaid_Guild && 
+            if (GameManager.contentsType != GameManager.ContentsType.PartyRaid_Guild &&
                 GameManager.contentsType != GameManager.ContentsType.Online_Tower)
             {
                 bool isMyNickName = Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(nickName);
@@ -324,6 +324,13 @@ public class UiTopRankerCell : MonoBehaviour
             petGraphic.startingAnimation = "walk";
             petGraphic.transform.localScale = new Vector3(0.2f, 0.2f, 0.14f);
             petGraphic.GetComponent<RectTransform>().anchoredPosition = new Vector3(58.1f, 144.6f, 0.0f);
+        }
+        //신규 사신수
+        else if (idx >= 24 && idx <= 27)
+        {
+            petGraphic.startingAnimation = "idle";
+            petGraphic.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+            petGraphic.GetComponent<RectTransform>().anchoredPosition = new Vector3(54.1f, 120.5f, 0.0f);
         }
 
         petGraphic.gameObject.SetActive(true);

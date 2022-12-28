@@ -37,6 +37,9 @@ public class UiCollectionEventCommonView : MonoBehaviour
     private Item_Type goodsType;
 
     [SerializeField]
+    private GameObject goldButton;
+
+    [SerializeField]
     private SkeletonGraphic skeletonGraphic;
 
     private CommonCollectionEventData tableData;
@@ -72,6 +75,10 @@ public class UiCollectionEventCommonView : MonoBehaviour
             else
             {
                 price.SetText("보유중!");
+                if (goldButton != null)
+                {
+                    goldButton.SetActive(false);
+                }
             }
 
         }).AddTo(this);
@@ -114,8 +121,11 @@ public class UiCollectionEventCommonView : MonoBehaviour
         itemName.SetText(CommonString.GetItemName((Item_Type)tableData.Itemtype));
     }
 
-    public void OnClickExchangeButton()
+    public void OnClickExchangeGoldButton()
     {
+        if (goldButton.gameObject.activeSelf == false)
+            return;
+
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             PopupManager.Instance.ShowAlarmMessage("인터넷 연결을 확인해 주세요!");
@@ -144,11 +154,70 @@ public class UiCollectionEventCommonView : MonoBehaviour
         }
 
 
+        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value;
+
+        if (currentEventItemNum < 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Fall_Gold)}이 부족합니다.");
+            return;
+        }
+
+        PopupManager.Instance.ShowAlarmMessage("교환 완료");
+
+        //로컬
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value -= 1;
+
+        if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
+        {
+            ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value++;
+        }
+
+        ServerData.AddLocalValue((Item_Type)tableData.Itemtype, tableData.Itemvalue);
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
+    }
+    public void OnClickExchangeButton()
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            PopupManager.Instance.ShowAlarmMessage("인터넷 연결을 확인해 주세요!");
+            return;
+        }
+
+
+
+        if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
+        {
+            if (ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value >= tableData.Exchangemaxcount)
+            {
+                PopupManager.Instance.ShowAlarmMessage("더이상 교환하실 수 없습니다.");
+                return;
+            }
+        }
+
+        if (IsCostumeItem())
+        {
+            string itemKey = ((Item_Type)tableData.Itemtype).ToString();
+
+            if (ServerData.costumeServerTable.TableDatas[itemKey].hasCostume.Value)
+            {
+                PopupManager.Instance.ShowAlarmMessage("이미 보유하고 있습니다!");
+                return;
+            }
+        }
+
+
         int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(goodsName).Value;
 
         if (currentEventItemNum < tableData.Price)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(goodsType)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(goodsType)}이(가) 부족합니다.");
             return;
         }
 

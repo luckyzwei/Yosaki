@@ -360,7 +360,7 @@ public static class CommonString
             case Item_Type.MonthNorigae0: return "12월 월간 노리개";
             case Item_Type.MonthNorigae1: return "1월 월간 노리개";
             case Item_Type.DokebiTreasure: return "도깨비 보물";
-            case Item_Type.SusanoTreasure: return "악귀 보물";
+            case Item_Type.SusanoTreasure: return "악의 씨앗";
 
         }
 

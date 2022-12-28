@@ -403,7 +403,9 @@ public class TwelveDungeonManager : ContentsManagerBase
                 twelveBossTable.Id == 79 ||
                 twelveBossTable.Id == 80 ||
                 twelveBossTable.Id == 81 ||
-                twelveBossTable.Id == 82 
+                twelveBossTable.Id == 82 ||
+                twelveBossTable.Id == 83 ||
+                twelveBossTable.Id == 84
                 )
             {
                 remainSec *= 0.5f;

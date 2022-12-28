@@ -9,7 +9,7 @@ using BackEnd;
 
 public enum PetGetType
 {
-    Ad, Gem, Shop, Evolution ,Sasinsu
+    Ad, Gem, Shop, Evolution, Sasinsu
 }
 
 public class UiPetView : MonoBehaviour
@@ -86,8 +86,15 @@ public class UiPetView : MonoBehaviour
     private void SetPetSpine(int idx)
     {
         skeletonGraphic.Clear();
+
         skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[idx];
-        if (idx != 15)
+
+        if (idx >= 24 && idx <= 27)
+        {
+            skeletonGraphic.startingAnimation = "idle";
+
+        }
+        else if (idx != 15)
         {
             skeletonGraphic.startingAnimation = "walk";
         }
@@ -95,6 +102,13 @@ public class UiPetView : MonoBehaviour
         {
             skeletonGraphic.startingAnimation = "idel";
         }
+
+        //백호각성
+        if (idx == 25 || idx == 26)
+        {
+            skeletonGraphic.transform.localPosition = new Vector3(-8f, -257f, 0f);
+        }
+
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
     }
@@ -129,8 +143,8 @@ public class UiPetView : MonoBehaviour
         tutorialObject.SetActive(petData.PETGETTYPE == PetGetType.Gem && petData.Price == 0f);
 
         normalPetObject.SetActive(petData.Id < 12 || petData.Id == 14 || petData.Id == 15 ||
-            petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19 || petData.Id == 20 
-            || petData.Id == 21 || petData.Id == 22 || petData.Id == 23|| petData.Id == 24|| petData.Id == 25
+            petData.Id == 16 || petData.Id == 17 || petData.Id == 18 || petData.Id == 19 || petData.Id == 20
+            || petData.Id == 21 || petData.Id == 22 || petData.Id == 23 || petData.Id == 24 || petData.Id == 25
             || petData.Id == 26 || petData.Id == 27);
 
         if (leemugiPetObject != null)
@@ -465,7 +479,7 @@ public class UiPetView : MonoBehaviour
                 {
                     buttonDescription.SetText($"수호신 컨텐츠\n에서 획득!");
                 }
-                else if (petData.Id == 20 || petData.Id == 21|| petData.Id == 22 || petData.Id == 23)
+                else if (petData.Id == 20 || petData.Id == 21 || petData.Id == 22 || petData.Id == 23)
                 {
                     buttonDescription.SetText($"천상계 컨텐츠\n에서 획득!");
                 }
@@ -476,7 +490,7 @@ public class UiPetView : MonoBehaviour
                 }
             }
         }
-        else if(petData.PETGETTYPE ==PetGetType.Sasinsu)
+        else if (petData.PETGETTYPE == PetGetType.Sasinsu)
         {
             //보유
             if (petServerData.hasItem.Value == 1)
@@ -608,7 +622,7 @@ public class UiPetView : MonoBehaviour
                             return;
                         }
                     }
-                    else if(petServerData.idx == 27)
+                    else if (petServerData.idx == 27)
                     {
                         if (ServerData.petTable.TableDatas["pet11"].hasItem.Value != 1)
                         {
@@ -616,7 +630,7 @@ public class UiPetView : MonoBehaviour
                             return;
                         }
                     }
-                    if(ServerData.sasinsuServerTable.TableDatas[$"b{petServerData.idx - 24}"].score.Value < TableManager.Instance.sasinsuTable.dataArray[petServerData.idx - 24].Score[6])
+                    if (ServerData.sasinsuServerTable.TableDatas[$"b{petServerData.idx - 24}"].score.Value < TableManager.Instance.sasinsuTable.dataArray[petServerData.idx - 24].Score[6])
                     {
                         PopupManager.Instance.ShowAlarmMessage($"별자리 컨텐츠 {TableManager.Instance.sasinsuTable.dataArray[petServerData.idx - 24].Name}에서 마지막 별자리 달성시 획득 가능!");
                         return;
@@ -661,9 +675,9 @@ public class UiPetView : MonoBehaviour
             ServerData.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
         }
         //사신수
-        else if (petData.PETGETTYPE==PetGetType.Sasinsu)
+        else if (petData.PETGETTYPE == PetGetType.Sasinsu)
         {
-            
+
             ServerData.petTable.TableDatas[petData.Stringid].hasItem.Value = 1;
 
             List<TransactionValue> transactionList = new List<TransactionValue>();
