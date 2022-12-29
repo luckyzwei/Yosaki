@@ -219,6 +219,7 @@ public class UserInfoTable
     public const string partyTowerFloor = "partyTowerFloor";
 
     public const string receivedPartyTowerTicket = "receivedPartyTowerTicket";
+    public const string chrisRefund = "crr";
 
     public double currentServerDate;
     public double attendanceUpdatedTime;
@@ -405,6 +406,7 @@ public class UserInfoTable
         {snow_exchangeCount_2,0f},
         {snow_exchangeCount_3,0f},
         {snow_exchangeCount_4,0f},
+        {chrisRefund,0f},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
