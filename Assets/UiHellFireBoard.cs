@@ -29,42 +29,10 @@ public class UiHellFireBoard : MonoBehaviour
     {
         Initialize();
         Subscribe();
-        CheckChrisEvent();
+      
     }
 
-    private void CheckChrisEvent()
-    {
-        if (ServerData.goodsTable.TableDatas[GoodsTable.Hel].Value == 0)
-        {
-            ServerData.userInfoTable.TableDatas[UserInfoTable.chrisRefund].Value = 1;
-
-            ServerData.userInfoTable.UpData(UserInfoTable.chrisRefund, false);
-
-            return;
-        }
-
-        if (ServerData.userInfoTable.TableDatas[UserInfoTable.chrisRefund].Value == 1) return;
-
-        ServerData.userInfoTable.TableDatas[UserInfoTable.chrisRefund].Value = 1;
-
-        ServerData.eventMissionTable.TableDatas["Mission5"].clearCount.Value = 1;
-
-        List<TransactionValue> transactions = new List<TransactionValue>();
-
-        Param userinfoParam = new Param();
-
-        userinfoParam.Add(UserInfoTable.chrisRefund, ServerData.userInfoTable.TableDatas[UserInfoTable.chrisRefund].Value);
-
-        Param eventParam = new Param();
-
-        eventParam.Add("Mission5", ServerData.eventMissionTable.TableDatas["Mission5"].ConvertToString());
-
-        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.tableName, userinfoParam));
-        transactions.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.tableName, eventParam));
-
-        ServerData.SendTransaction(transactions);
-    }
-
+   
     private void Subscribe()
     {
         ServerData.goodsTable.GetTableData(GoodsTable.Hel).AsObservable().Subscribe(level =>
