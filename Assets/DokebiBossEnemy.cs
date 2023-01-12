@@ -26,6 +26,9 @@ public class DokebiBossEnemy : BossEnemyBase
     private float attackInterval_Real = 2f;
 
     [SerializeField]
+    private List<AlarmHitObject> AnimHitList_1;
+
+    [SerializeField]
     private List<AlarmHitObject> HitList_1;
 
     [SerializeField]
@@ -403,6 +406,12 @@ public class DokebiBossEnemy : BossEnemyBase
 
     private int idx2 = 0;
     private int idx3 = 0;
+
+    public void AnimAttackPattern(int index)
+    {
+        AnimHitList_1[index].AttackStart();
+    }
+
     private void PlayRandomHits_Guild()
     {
         int rankIdx = Random.Range(0, RandomHit.Count);

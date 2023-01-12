@@ -6,7 +6,7 @@ using UnityEngine;
 public class SaveManager : SingletonMono<SaveManager>
 {
 
-    private WaitForSeconds updateDelay = new WaitForSeconds(500.0f);
+    private WaitForSeconds updateDelay = new WaitForSeconds(1000.0f);
 
     private WaitForSeconds updateDelay_DailyMission = new WaitForSeconds(7000.0f);
 
@@ -91,7 +91,7 @@ public class SaveManager : SingletonMono<SaveManager>
         while (true)
         {
             SyncDatasInQueue();
-            yield return updateDelay;
+            yield return updateDelay; ;
         }
     }
 
@@ -201,14 +201,17 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.c6,
         GoodsTable.FoxMaskPartial,
         GoodsTable.Event_Fall_Gold,
-        GoodsTable.Event_XMas,
+        GoodsTable.Event_NewYear,
         GoodsTable.Mileage,
 
         GoodsTable.HellPowerUp,
         GoodsTable.DokebiFire,
         GoodsTable.DokebiFireKey,
+        GoodsTable.DokebiFireEnhance,
         GoodsTable.DokebiTreasure,
         GoodsTable.SusanoTreasure,
+        GoodsTable.SumiFire,
+        GoodsTable.SumiFireKey,
     };
 
     //SendQueue에서 저장

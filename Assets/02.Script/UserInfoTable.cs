@@ -29,6 +29,7 @@ public class UserInfoTable
     public const string currentFloorIdx = "currentFloorIdx";
     public const string currentFloorIdx2 = "cf2";
     public const string currentFloorIdx3 = "cf3";
+    public const string currentFloorIdx4 = "cf4";
 
     public const string receiveReviewReward = "receiveReviewReward";
 
@@ -97,6 +98,7 @@ public class UserInfoTable
     public const string selectedSkillGroupId = "selectedSkillGroupId";
     public const string dokebiEnterCount = "dec3";
     public const string chatFrame = "chatFrame";
+    public const string hellMark = "hellMedal";
 
     public const string freeWeapon = "freeWeapon";
     public const string freeNorigae = "freeNorigae";
@@ -107,13 +109,17 @@ public class UserInfoTable
     public const string hellpensionAttendance = "hellpension";
     public const string chunpensionAttendance = "chunpension";
     public const string dokebipensionAttendance = "dokebipension";
+    public const string sumipensionAttendance = "sumipension";
 
     public const string marblePackChange = "marblePackChange";
 
     public const string yoguiSogulLastClear = "yoguiSogulLastClear";
     public const string smithClear = "smithClear";
     public const string gumGiClear = "gumGiClear";
+    public const string sumiFireClear = "sfc";
     public const string gumGiSoulClear = "gsc";
+    public const string smithTreeClear = "stc";
+    public const string sonCloneClear = "sccc";
     public const string flowerClear = "fc";
     public const string DokebiFireClear = "DokebiFireClear";
 
@@ -166,6 +172,7 @@ public class UserInfoTable
     public const string smithExp = "smith";
     public const string getSmith = "getSmith";
     public const string getGumGi = "getGumGi";
+    public const string getSumiFire = "gsf";
     public const string getFlower = "getc";
     public const string getDokebiFire = "getDokebiFire";
 
@@ -178,12 +185,6 @@ public class UserInfoTable
     public const string exchangeCount_4 = "ex_4";
     public const string exchangeCount_5 = "ex_5";
     public const string exchangeCount_6 = "ex_6";
-
-    public const string xMasExchangeCount_0 = "xMas_ex_0";
-    public const string xMasExchangeCount_1 = "xMas_ex_1";
-    public const string xMasExchangeCount_2 = "xMas_ex_2";
-    public const string xMasExchangeCount_3 = "xMas_ex_3";
-    public const string xMasExchangeCount_4 = "xMas_ex_4";
 
     public const string snow_exchangeCount_0 = "co0";
     public const string snow_exchangeCount_1 = "co1";
@@ -212,6 +213,12 @@ public class UserInfoTable
     public const string exchangeCount_3_Mileage = "mcu";
     public const string exchangeCount_4_Mileage = "mdo";
 
+    public const string ny_ex_0 = "ny_ex_0";
+    public const string ny_ex_1 = "ny_ex_1";
+    public const string ny_ex_2 = "ny_ex_2";
+    public const string ny_ex_3 = "ny_ex_3";
+    public const string ny_ex_4 = "ny_ex_4";
+
     public const string nickNameChange = "nickNameChange";
     public const string getPetHome = "gph";
     public const string dokebiPensionReset = "doke";
@@ -219,7 +226,7 @@ public class UserInfoTable
     public const string partyTowerFloor = "partyTowerFloor";
 
     public const string receivedPartyTowerTicket = "receivedPartyTowerTicket";
-    public const string chrisRefund = "crr";
+    public const string dailySleepRewardReceiveCount = "dss";
 
     public double currentServerDate;
     public double attendanceUpdatedTime;
@@ -242,6 +249,7 @@ public class UserInfoTable
         {currentFloorIdx,0f},
         {currentFloorIdx2,0f},
         {currentFloorIdx3,0f},
+        {currentFloorIdx4,0f},
         {receiveReviewReward,0f},
         {dailyEnemyKillCount,0f},
         {dailyTicketBuyCount,0f},
@@ -286,6 +294,7 @@ public class UserInfoTable
         {dokebiKillCount1,0f},
         {dokebiKillCount2,0f},
         {chatFrame,0f},
+        {hellMark,0f},
 
         {freeWeapon,0f},
         {freeNorigae,0f},
@@ -298,11 +307,14 @@ public class UserInfoTable
         {hellpensionAttendance,0f},
         {chunpensionAttendance,0f},
         {dokebipensionAttendance,0f},
+        {sumipensionAttendance,0f},
 
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
         {smithClear,0f},
         {gumGiSoulClear,0f},
+        {smithTreeClear,0f},
+        {sonCloneClear,0f},
         {gumGiClear,0f},
         {flowerClear,0f},
         {DokebiFireClear,0f},
@@ -356,6 +368,7 @@ public class UserInfoTable
         {smithExp,0},
         {getSmith,0},
         {getGumGi,0},
+        {getSumiFire,0},
         {getFlower,0},
         {getDokebiFire,0},
         {sendPetExp,0},
@@ -366,11 +379,7 @@ public class UserInfoTable
         {exchangeCount_4,0},
         {exchangeCount_5,0},
         {exchangeCount_6,0},
-        {xMasExchangeCount_0,0},
-        {xMasExchangeCount_1,0},
-        {xMasExchangeCount_2,0},
-        {xMasExchangeCount_3,0},
-        {xMasExchangeCount_4,0},
+ 
         {monthreset,0},
         {refundFox,0},
         {sendGangChul,0},
@@ -393,6 +402,13 @@ public class UserInfoTable
         {exchangeCount_2_Mileage,0},
         {exchangeCount_3_Mileage,0},
         {exchangeCount_4_Mileage,0},
+        
+
+        {ny_ex_0,0},
+        {ny_ex_1,0},
+        {ny_ex_2,0},
+        {ny_ex_3,0},
+        {ny_ex_4,0},
 
         {nickNameChange,0},
         {getPetHome,0},
@@ -406,7 +422,8 @@ public class UserInfoTable
         {snow_exchangeCount_2,0f},
         {snow_exchangeCount_3,0f},
         {snow_exchangeCount_4,0f},
-        {chrisRefund,0f},
+        {dailySleepRewardReceiveCount,0f},
+        {sumiFireClear,0f},
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -753,10 +770,12 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.oneAttenEvent).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getFlower).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getPetHome).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailySleepRewardReceiveCount).Value = 0;
 
         //버프
         ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value = 0;
@@ -836,6 +855,11 @@ public class UserInfoTable
                 ServerData.userInfoTable.GetTableData(UserInfoTable.dokebipensionAttendance).Value++;
             }
 
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.sumipensionAttendance].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.sumipensionAttendance).Value++;
+            }
+
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.relicpensionAttendance).Value++;
@@ -882,6 +906,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.hellpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.hellpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.chunpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.chunpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.dokebipensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebipensionAttendance).Value);
+        userInfoParam.Add(UserInfoTable.sumipensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.sumipensionAttendance).Value);
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
@@ -891,10 +916,12 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.getSmith, ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value);
         userInfoParam.Add(UserInfoTable.getFlower, ServerData.userInfoTable.GetTableData(UserInfoTable.getFlower).Value);
         userInfoParam.Add(UserInfoTable.getDokebiFire, ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value);
+        userInfoParam.Add(UserInfoTable.getSumiFire, ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value);
         userInfoParam.Add(UserInfoTable.getGumGi, ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value);
         userInfoParam.Add(UserInfoTable.sendPetExp, ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value);
         userInfoParam.Add(UserInfoTable.oneAttenEvent, ServerData.userInfoTable.GetTableData(UserInfoTable.oneAttenEvent).Value);
         userInfoParam.Add(UserInfoTable.getPetHome, ServerData.userInfoTable.GetTableData(UserInfoTable.getPetHome).Value);
+        userInfoParam.Add(UserInfoTable.dailySleepRewardReceiveCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dailySleepRewardReceiveCount).Value);
 
         userInfoParam.Add(UserInfoTable.buff_gold1, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold1).Value);
         userInfoParam.Add(UserInfoTable.buff_gold2, ServerData.userInfoTable.GetTableData(UserInfoTable.buff_gold2).Value);
@@ -925,14 +952,16 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.yomul7_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul7_buff).Value);
         userInfoParam.Add(UserInfoTable.nickNameChange, ServerData.userInfoTable.GetTableData(UserInfoTable.nickNameChange).Value);
 
-        //요괴소굴
-        Param yoguiSogulParam = new Param();
 
         //채팅 테두리 초기화
         if (weekChanged)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 0f;
             userInfoParam.Add(UserInfoTable.chatFrame, ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
+
+
+            ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 0f;
+            userInfoParam.Add(UserInfoTable.hellMark, ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value);
 
             //추천권 초기화
             ServerData.userInfoTable.GetTableData(UserInfoTable.canRecommendCount).Value = GameBalance.recommendCountPerWeek;
@@ -959,23 +988,7 @@ public class UserInfoTable
             userInfoParam.Add(UserInfoTable.exchangeCount_4_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_4_Mileage).Value);
         }
 
-        //손오공
-        ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value = string.Empty;
-        ServerData.etcServerTable.TableDatas[EtcServerTable.hellReward].Value = string.Empty;
-        yoguiSogulParam.Add(EtcServerTable.sonReward, ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value);
-        yoguiSogulParam.Add(EtcServerTable.hellReward, ServerData.etcServerTable.TableDatas[EtcServerTable.hellReward].Value);
-        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-
-        //로컬
-        ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value = string.Empty;
-        yoguiSogulParam.Add(EtcServerTable.yoguiSogulReward, ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value);
-
-        ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value = string.Empty;
-        yoguiSogulParam.Add(EtcServerTable.guildAttenReward, ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value);
-
-        transactionList.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, yoguiSogulParam));
-
-        Param iapParam = null;
+         Param iapParam = null;
 
         var iapTable = TableManager.Instance.InAppPurchase.dataArray;
 
@@ -1024,6 +1037,26 @@ public class UserInfoTable
         bossParam.Add("boss20", ServerData.bossServerTable.TableDatas["boss20"].ConvertToString());
         bossParam.Add("b73", ServerData.bossServerTable.TableDatas["b73"].ConvertToString());
 
+        //요괴소굴
+        Param yoguiSogulParam = new Param();
+
+        //손오공
+        ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value = string.Empty;
+        ServerData.etcServerTable.TableDatas[EtcServerTable.hellReward].Value = string.Empty;
+        yoguiSogulParam.Add(EtcServerTable.sonReward, ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value);
+        yoguiSogulParam.Add(EtcServerTable.hellReward, ServerData.etcServerTable.TableDatas[EtcServerTable.hellReward].Value);
+        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+        //로컬
+        ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value = string.Empty;
+        yoguiSogulParam.Add(EtcServerTable.yoguiSogulReward, ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value);
+
+        ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value = string.Empty;
+        yoguiSogulParam.Add(EtcServerTable.guildAttenReward, ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value);
+
+        
+
+        //주간초기화
         if (weekChanged)
         {
             ServerData.bossServerTable.TableDatas["b53"].rewardedId.Value = string.Empty;
@@ -1031,10 +1064,15 @@ public class UserInfoTable
 
 
             goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
+
+            ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value = string.Empty;
+            
+            yoguiSogulParam.Add(EtcServerTable.chunmaTopScore, ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value);
         }
 
 
 
+        transactionList.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, yoguiSogulParam));
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         transactionList.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
@@ -1200,3 +1238,4 @@ public class UserInfoTable
         return (currentServerTime.Month % 2) == 1;
     }
 }
+//

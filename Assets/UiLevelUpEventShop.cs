@@ -454,11 +454,23 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += amount;
                     param.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
                 }
+                break;   
+            case Item_Type.SumiFire:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += amount;
+                    param.Add(GoodsTable.SumiFire, ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
+                }
                 break;
             case Item_Type.DokebiFireKey:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += amount;
                     param.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
+                }
+                break;   
+            case Item_Type.SumiFireKey:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value += amount;
+                    param.Add(GoodsTable.SumiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value);
                 }
                 break;
         }

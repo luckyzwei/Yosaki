@@ -18,6 +18,7 @@ public class UiSmithBoard : MonoBehaviour
     public TextMeshProUGUI levelUpDesc;
     public TextMeshProUGUI expDescription;
     public TextMeshProUGUI abilDescription;
+    public TextMeshProUGUI smithTreeAddLevel;
 
     private void Start()
     {
@@ -54,6 +55,16 @@ public class UiSmithBoard : MonoBehaviour
             UpdateAbilDescription();
 
         }).AddTo(this);
+
+        ServerData.userInfoTable.TableDatas[UserInfoTable.smithTreeClear].AsObservable().Subscribe(e =>
+        {
+
+            int addAmount = (int)(e * GameBalance.smithTreeAddValue);
+
+            smithTreeAddLevel.SetText($"장작 효과 : +{addAmount}");
+
+        }).AddTo(this);
+        
     }
 
     private void UpdateAbilDescription()
@@ -77,12 +88,22 @@ public class UiSmithBoard : MonoBehaviour
             enterButton.interactable = false;
         }, () => { });
     }
+    //
+
+    public void OnClickEnterTreeButton() 
+    {
+        PopupManager.Instance.ShowYesNoPopup("알림", "입장 할까요?", () =>
+        {
+            GameManager.Instance.LoadContents(ContentsType.SmithTree);
+            enterButton.interactable = false;
+        }, () => { });
+    }
 
     public void OnClickGetFireButton()
     {
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.getSmith].Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SmithFire)}는 하루에 한번만 획득 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SmithFire)}은 하루에 한번만 획득 가능합니다!");
             return;
         }
 

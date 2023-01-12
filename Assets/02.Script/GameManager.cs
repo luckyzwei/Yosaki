@@ -42,6 +42,10 @@ public class GameManager : SingletonMono<GameManager>
         GradeTest,
         Do,
         Sasinsu,
+        SumiFire,
+        SumisanTower,
+        SmithTree,
+        SonClone,
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;

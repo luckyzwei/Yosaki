@@ -125,7 +125,7 @@ public class UiDokebiFireBoard : MonoBehaviour
     {
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFire)}는 하루에 한번만 획득 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFire)}은 하루에 한번만 획득 가능합니다!");
             return;
         }
 

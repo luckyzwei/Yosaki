@@ -66,6 +66,11 @@ public class UiStatusBoard : MonoBehaviour
         UpdatePlayerView();
     }
 
+    private void OnDisable()
+    {
+        PlayerStats.ResetAbilDic();
+    }
+
     private void UpdatePlayerView()
     {
         int costumeId = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;

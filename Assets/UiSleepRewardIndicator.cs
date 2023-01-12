@@ -6,7 +6,7 @@ using UniRx;
 using System;
 using UnityEngine.UI;
 
-public class UiSleepRewardIndicator : MonoBehaviour
+public class UiSleepRewardIndicator : SingletonMono<UiSleepRewardIndicator>
 {
     [SerializeField]
     private Transform rootObject;
@@ -63,5 +63,11 @@ public class UiSleepRewardIndicator : MonoBehaviour
 
     }
 
+    public void ActiveButton()
+    {
+        button.interactable = true;
+    }
+
+ 
 
 }

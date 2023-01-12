@@ -99,17 +99,17 @@ public class BeeBossEnemy : BossEnemyBase
 
     public void SpawnEnemy()
     {
-        SoundManager.Instance.PlaySound("MobSpawn");
-        var enemy = BattleObjectManager.Instance.GetItem(poolName).GetComponent<BeeBossEnemyMini>();
+//        SoundManager.Instance.PlaySound("MobSpawn");
+//        var enemy = BattleObjectManager.Instance.GetItem(poolName).GetComponent<BeeBossEnemyMini>();
 
-        enemy.transform.position = this.transform.position;
+//        enemy.transform.position = this.transform.position;
 
-        int hp = (int)(SingleRaidManager.Instance.GetBossRemainHpRatio() * 100f) + 15;
+//        int hp = (int)(SingleRaidManager.Instance.GetBossRemainHpRatio() * 100f) + 15;
 
-        enemy.Initialize(hp, 5f, currentDamage * 0.3f, Random.insideUnitCircle, null);
+//        enemy.Initialize(hp, 5f, currentDamage * 0.3f, Random.insideUnitCircle, null);
 
-#if UNITY_EDITOR
-        Debug.LogError($"Spawn enemy hp {hp}");
-#endif
+//#if UNITY_EDITOR
+//        Debug.LogError($"Spawn enemy hp {hp}");
+//#endif
     }
 }

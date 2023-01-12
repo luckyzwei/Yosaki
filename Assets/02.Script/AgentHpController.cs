@@ -18,6 +18,9 @@ public class AgentHpController : MonoBehaviour
     [SerializeField]
     private EnemyHpBar enemyHpBar;
 
+    [SerializeField]
+    private bool ReverseDamage = false;
+
     private EnemyMoveController enemyMoveController;
 
     private bool isEnemyDead = false;
@@ -185,6 +188,9 @@ public class AgentHpController : MonoBehaviour
         //신수베기 데미지
         value += value * PlayerStats.GetSuperCritical6DamPer();
 
+        //수미베기
+        value += value * PlayerStats.GetSuperCritical7DamPer();
+
         ///
     }
     private Vector3 damTextspawnPos;
@@ -299,15 +305,24 @@ public class AgentHpController : MonoBehaviour
 
         if (isEnemyDead == true) return;
 
+        if(ReverseDamage)
+        {
+            value *= -1f;
+        }
+
         if (value < 0f)
         {
             WhenAgentDamaged.Execute(-value);
+        
         }
 
         //GetHitGold(value);
+        if (value < 0)
+        {
+            currentHp.Value += value;
+        }
 
-        currentHp.Value += value;
-
+        
         whenEnemyDamaged.Execute(value);
 
         if (currentHp.Value <= 0 && isRaidEnemy == false)

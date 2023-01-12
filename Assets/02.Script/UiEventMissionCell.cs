@@ -62,6 +62,14 @@ public class UiEventMissionCell : MonoBehaviour
                 lockMask.SetActive(false);
             }
         }).AddTo(this);
+        ServerData.iapServerTable.TableDatas[UiNewYearPassBuyButton.productKey].buyCount.AsObservable().Subscribe(e =>
+        {
+            if (tableData != null)
+            {
+                WhenMissionCountChanged(ServerData.eventMissionTable.TableDatas[tableData.Stringid].clearCount.Value);
+            }
+        }
+        ).AddTo(this);
     }
 
     private void OnEnable()
@@ -91,8 +99,14 @@ public class UiEventMissionCell : MonoBehaviour
         {
             getAmountFactor = count / tableData.Rewardrequire;
         }
-        
-        rewardNum.SetText($"{Mathf.Max(getAmountFactor,1) * tableData.Rewardvalue }개");
+
+        int passBonus = 0;
+        if (ServerData.iapServerTable.TableDatas[UiNewYearPassBuyButton.productKey].buyCount.Value > 0)
+        {
+            passBonus = tableData.Rewardvalue;
+        }
+
+        rewardNum.SetText($"{Mathf.Max(getAmountFactor,1) * tableData.Rewardvalue +passBonus  }개");
         //if (getButton.interactable)
         //{
         //    if (!lockMask.activeSelf)
@@ -107,15 +121,22 @@ public class UiEventMissionCell : MonoBehaviour
 
     public void OnClickGetButton()
     {
+        
+
         int amountFactor = getAmountFactor;
         int rewardGemNum = tableData.Rewardvalue * amountFactor;
+
+        if(ServerData.iapServerTable.TableDatas[UiNewYearPassBuyButton.productKey].buyCount.Value>0)
+        {
+            rewardGemNum *= 2;
+        }
         //로컬 갱신
         EventMissionManager.UpdateEventMissionClear((EventMissionKey)(tableData.Id), -tableData.Rewardrequire * amountFactor);
         EventMissionManager.UpdateEventMissionReward((EventMissionKey)(tableData.Id), amountFactor);
         
-        ServerData.goodsTable.AddLocalData(GoodsTable.Event_XMas, rewardGemNum);
+        ServerData.goodsTable.AddLocalData(GoodsTable.Event_NewYear, rewardGemNum);
 
-        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_XMas)} {rewardGemNum}개 획득!!");
+        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_NewYear)} {rewardGemNum}개 획득!!");
         SoundManager.Instance.PlaySound("GoldUse");
 
         if (SyncRoutine != null)
@@ -147,7 +168,7 @@ public class UiEventMissionCell : MonoBehaviour
         transactionList.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
 
         //재화 추가
-        goodsParam.Add(GoodsTable.Event_XMas, ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value);
+        goodsParam.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         ServerData.SendTransaction(transactionList);

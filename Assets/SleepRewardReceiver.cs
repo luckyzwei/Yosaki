@@ -61,7 +61,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
     public SleepRewardInfo sleepRewardInfo { get; private set; }
 
-    private bool SetComplete = false;
+    public bool SetComplete = false;
     public void SetElapsedSecond(int elapsedSeconds)
     {
         if (SetComplete == true) return;

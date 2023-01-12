@@ -136,6 +136,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             itemType = Item_Type.DokebiFire;
         }
+        else if (pensionKey == "sumipension")
+        {
+            itemType = Item_Type.SumiFire;
+        }
         else
         {
             itemType = Item_Type.SmithFire;

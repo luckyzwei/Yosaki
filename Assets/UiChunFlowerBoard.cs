@@ -110,7 +110,7 @@ public class UiChunFlowerBoard : MonoBehaviour
     {
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.getFlower].Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Cw)}는 하루에 한번만 획득 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Cw)}은 하루에 한번만 획득 가능합니다!");
             return;
         }
 

@@ -20,6 +20,7 @@ public class EtcServerTable
     public const string hellReward = "hr";
     public const string DokebiHornReward = "dokebiHornReward";
     public const string PetHomeReward = "PetHomeReward";
+    public const string chunmaTopScore = "chunmaTopScore";
 
 
     private Dictionary<string, ReactiveProperty<string>> tableSchema = new Dictionary<string, ReactiveProperty<string>>()
@@ -32,11 +33,23 @@ public class EtcServerTable
         {hellReward,new ReactiveProperty<string>(string.Empty)},
         {DokebiHornReward,new ReactiveProperty<string>(string.Empty)},
         {PetHomeReward,new ReactiveProperty<string>(string.Empty)},
+        {chunmaTopScore,new ReactiveProperty<string>(string.Empty)},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
     public Dictionary<string, ReactiveProperty<string>> TableDatas => tableDatas;
+    public void UpdateData(string key)
+    {
+        Param defultValues = new Param();
 
+        //hasitem 1
+        defultValues.Add(key, tableDatas[key].Value);
+
+        SendQueue.Enqueue(Backend.GameData.Update, tableName, Indate, defultValues, e =>
+        {
+
+        });
+    }
     public bool YoguiSoguilRewarded(int stageId)
     {
         var rewards = tableDatas[yoguiSogulReward].Value.Split(BossServerTable.rewardSplit).ToList();

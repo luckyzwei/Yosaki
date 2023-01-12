@@ -21,7 +21,9 @@ public class UiContentsExitButton : MonoBehaviour
         if (GameManager.contentsType == GameManager.ContentsType.InfiniteTower2 || GameManager.contentsType == GameManager.ContentsType.DokebiTower ||
             GameManager.contentsType == GameManager.ContentsType.FoxMask || GameManager.contentsType == GameManager.ContentsType.Yum ||
             GameManager.contentsType == GameManager.ContentsType.Ok || GameManager.contentsType == GameManager.ContentsType.Do ||
-            GameManager.contentsType == GameManager.ContentsType.GradeTest || GameManager.contentsType==GameManager.ContentsType.Sasinsu)
+            GameManager.contentsType == GameManager.ContentsType.GradeTest || GameManager.contentsType==GameManager.ContentsType.Sasinsu||
+            GameManager.contentsType == GameManager.ContentsType.SumisanTower
+            )
         {
             return true;
         }
@@ -29,7 +31,16 @@ public class UiContentsExitButton : MonoBehaviour
         if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 57)||
             (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 72)||
             (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 82)||
-            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 83))
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 83)
+            )
+        {
+            return true;
+        }
+        //도깨비 보스 & 수미산 사천왕
+        if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 85) ||
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 86) ||
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 87) 
+            )
         {
             return true;
         }
@@ -83,52 +94,47 @@ public class UiContentsExitButton : MonoBehaviour
         }
         else if (GameManager.contentsType == GameManager.ContentsType.Yum)
         {
-                GameManager.Instance.LoadContents(GameManager.ContentsType.Yum);
+            GameManager.Instance.LoadContents(GameManager.ContentsType.Yum);
         }
         else if (GameManager.contentsType == GameManager.ContentsType.Ok)
         {
-                GameManager.Instance.LoadContents(GameManager.ContentsType.Ok);
+            GameManager.Instance.LoadContents(GameManager.ContentsType.Ok);
         }
         else if (GameManager.contentsType == GameManager.ContentsType.Do)
         {
-                GameManager.Instance.LoadContents(GameManager.ContentsType.Do);
+            GameManager.Instance.LoadContents(GameManager.ContentsType.Do);
         }
         else if (GameManager.contentsType == GameManager.ContentsType.GradeTest)
         {
-                GameManager.Instance.LoadContents(GameManager.ContentsType.GradeTest);
+            GameManager.Instance.LoadContents(GameManager.ContentsType.GradeTest);
         }
-        //산신령
-        else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon&&GameManager.Instance.bossId==57)
+
+        else if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon) &&(
+            (GameManager.Instance.bossId == 57)||
+            (GameManager.Instance.bossId == 72)||
+            (GameManager.Instance.bossId == 82)||
+            (GameManager.Instance.bossId == 83)||
+            (GameManager.Instance.bossId == 85)||
+            (GameManager.Instance.bossId == 86)||
+            (GameManager.Instance.bossId == 87))
+            )
         {
-                GameManager.Instance.SetBossId(57);
-                GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
+            GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
         }
-        //서재
-        else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon&&GameManager.Instance.bossId==72)
-        {
-                GameManager.Instance.SetBossId(72);
-                GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
-        }
-        //도깨비숲 지키미
-        else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon&&GameManager.Instance.bossId==82)
-        {
-                GameManager.Instance.SetBossId(82);
-                GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
-        }        //도깨비숲 지키미
-        else if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon&&GameManager.Instance.bossId==83)
-        {
-                GameManager.Instance.SetBossId(83);
-                GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);
-        }
+
         //사신수
         else if (GameManager.contentsType == GameManager.ContentsType.Sasinsu)
         {
             GameManager.Instance.SetBossId(GameManager.Instance.bossId);
             GameManager.Instance.LoadContents(GameManager.ContentsType.Sasinsu);
         }
+        else if (GameManager.contentsType == GameManager.ContentsType.SumisanTower)
+        {
+            GameManager.Instance.LoadContents(GameManager.ContentsType.SumisanTower);
+        }
         else
         {
-            if(buttonRootObject!=null)
+            if (buttonRootObject != null)
             {
                 buttonRootObject.SetActive(false);
             }

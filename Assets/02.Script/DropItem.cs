@@ -166,6 +166,7 @@ public enum Item_Type
     RankFrame21_100_guild = 406,
     RankFrame101_1000_guild = 407,
 
+    MagicStoneBuff = 500,
     //신규
     RankFrame1guild_new = 600,
     RankFrame2guild_new = 601,
@@ -191,7 +192,21 @@ public enum Item_Type
     RankFrame500_1000_boss_new = 712,
     RankFrame1000_3000_boss_new = 713,
 
-    MagicStoneBuff = 500,
+    RankFrame1_boss_GangChul         = 720,
+    RankFrame2_boss_GangChul         = 721,
+    RankFrame3_boss_GangChul         = 722,
+    RankFrame4_boss_GangChul         = 723,
+    RankFrame5_boss_GangChul         = 724,
+    RankFrame6_10_boss_GangChul      = 725,
+    RankFrame10_30_boss_GangChul     = 726,
+    RankFrame30_50_boss_GangChul     = 727,
+    RankFrame50_70_boss_GangChul     = 728,
+    RankFrame70_100_boss_GangChul    = 729,
+    RankFrame100_200_boss_GangChul   = 730,
+    RankFrame200_500_boss_GangChul   = 731,
+    RankFrame500_1000_boss_GangChul  = 732,
+    RankFrame1000_3000_boss_GangChul = 733,
+
 
     RankFrame1_relic_hell = 800,
     RankFrame2_relic_hell = 801,
@@ -219,6 +234,17 @@ public enum Item_Type
     RankFrameParty6_20_guild_new = 855,
     RankFrameParty21_50_guild_new = 856,
     RankFrameParty51_100_guild_new = 857,
+
+
+    PartyRaidRankFrame1 = 860,
+    PartyRaidRankFrame2 = 861,
+    PartyRaidRankFrame3 = 862,
+    PartyRaidRankFrame4 = 863,
+    PartyRaidRankFrame5 = 864,
+    PartyRaidRankFrame6_20 = 865,
+    PartyRaidRankFrame21_100 = 866,
+    PartyRaidRankFrame101_1000 = 867,
+    PartyRaidRankFrame1001_10000 = 868,
 
     //1000~1100 무기
     weapon0 = 1000,
@@ -373,6 +399,12 @@ public enum Item_Type
     //이벤트 검은토끼 + 눈사람
     costume76 = 1277,
     costume77 = 1278,
+    //도깨비 3보스
+    costume78 = 1279,
+    costume79 = 1280,
+    costume80 = 1281,
+    //수미산
+    costume81 = 1282, //지국천왕
     //
 
     pet0 = 1301,
@@ -430,6 +462,10 @@ public enum Item_Type
     DokebiWeapon5 = 7025,
     DokebiWeapon6 = 7026,
 
+    DokebiWeapon7 = 7027,
+    DokebiWeapon8 = 7028,
+    DokebiWeapon9 = 7029,
+
     DokebiNorigae0 = 7030,
     DokebiNorigae1 = 7031,
     DokebiNorigae2 = 7032,
@@ -437,6 +473,10 @@ public enum Item_Type
     DokebiNorigae4 = 7034,
     DokebiNorigae5 = 7035,
     DokebiNorigae6 = 7036,
+
+    DokebiNorigae7 = 7037,
+    DokebiNorigae8 = 7038,
+    DokebiNorigae9 = 7039,
 
     SasinsuWeapon0 = 7040,
     SasinsuWeapon1 = 7041,
@@ -455,6 +495,15 @@ public enum Item_Type
     DokebiHorn4 = 7104,
     DokebiHorn5 = 7105,
     DokebiHorn6 = 7106,
+
+    DokebiHorn7 = 7107,
+    DokebiHorn8 = 7108,
+    DokebiHorn9 = 7109,
+
+
+    SumisanWeapon0 = 7120,
+
+    SumisanNorigae0 = 7130,
 
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
@@ -484,6 +533,7 @@ public enum Item_Type
 
     MonthNorigae0 = 8600,
     MonthNorigae1 = 8601,
+    weapon81 = 8602,
 
 
     Chun0 = 8700, // 천계기술
@@ -498,7 +548,7 @@ public enum Item_Type
     DokebiSkill3 = 8713,
     DokebiSkill4 = 8714,
 
-    Event_XMas = 8800,
+    Event_NewYear = 8800,
 
     Mileage = 9000,
     DokebiFire = 9001,
@@ -507,8 +557,11 @@ public enum Item_Type
     DokebiTreasure = 9004,
     SusanoTreasure = 9005,
     MiniGameReward2 = 9006,
+    DokebiFireEnhance = 9007,
+    SumiFire = 9008,
+    SumiFireKey = 9009,
 }
-
+//
 public class DropItem : PoolItem
 {
     [SerializeField]

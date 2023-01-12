@@ -31,6 +31,12 @@ public class UiRewardCollection : MonoBehaviour
     [SerializeField]
     private Button hellRelicButton;
 
+    [SerializeField]
+    private Button dokebiClearButton;
+
+    [SerializeField]
+    private Button sumiClearButton;
+
     private void Start()
     {
         Subscribe();
@@ -48,6 +54,8 @@ public class UiRewardCollection : MonoBehaviour
             hellFireButton.interactable = e >= 50000;
             chunFlowerButton.interactable = e >= 200000;
             hellRelicButton.interactable = e >= 50000;
+            dokebiClearButton.interactable = e >= 500000;
+            sumiClearButton.interactable = e >= 1000000;
 
         }).AddTo(this);
     }
@@ -72,18 +80,18 @@ public class UiRewardCollection : MonoBehaviour
 
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"처치 <color=yellow>{killCount}</color>로 <color=yellow>{clearCount}회</color> 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount}개", () =>
             {
-            // enterButton.interactable = false;
+                // enterButton.interactable = false;
 
 
-            int rewardNumJade = (killCount * GameBalance.bonusDungeonGemPerEnemy) * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount;
+                int rewardNumJade = (killCount * GameBalance.bonusDungeonGemPerEnemy) * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount;
                 int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount;
                 ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value += clearCount;
 
                 ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardNumJade;
                 ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += rewardNumMarble;
 
-            //데이터 싱크
-            List<TransactionValue> transactionList = new List<TransactionValue>();
+                //데이터 싱크
+                List<TransactionValue> transactionList = new List<TransactionValue>();
 
                 Param goodsParam = new Param();
                 goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
@@ -101,8 +109,8 @@ public class UiRewardCollection : MonoBehaviour
                     },
                     completeCallBack: () =>
                     {
-                    // enterButton.interactable = true;
-                });
+                        // enterButton.interactable = true;
+                    });
 
                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearBandit, clearCount);
 
@@ -203,7 +211,7 @@ public class UiRewardCollection : MonoBehaviour
     {
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.getGumGi].Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SP)}는 하루에 한번만 획득 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SP)}은 하루에 한번만 획득 가능합니다!");
             return;
         }
 
@@ -250,7 +258,7 @@ public class UiRewardCollection : MonoBehaviour
     {
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.getFlower].Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Cw)}는 하루에 한번만 획득 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Cw)}은 하루에 한번만 획득 가능합니다!");
             return;
         }
 
@@ -290,7 +298,7 @@ public class UiRewardCollection : MonoBehaviour
     {
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.getSmith].Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SmithFire)}는 하루에 한번만 획득 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SmithFire)}은 하루에 한번만 획득 가능합니다!");
             return;
         }
 
@@ -335,11 +343,12 @@ public class UiRewardCollection : MonoBehaviour
     {
         RewardPopupManager.Instance.OnclickButton();
     }
+
     public void OnClickDokebiReward()
     {
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFire)}는 하루에 한번만 획득 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DokebiFire)}은 하루에 한번만 획득 가능합니다!");
             return;
         }
 
@@ -372,6 +381,47 @@ public class UiRewardCollection : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiFire)} {score + Utils.GetDokebiTreasureAddValue()}개 획득!", null);
+            });
+        }, null);
+    }
+
+    public void OnClickSumiReward()
+    {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value == 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SumiFire)}은 하루에 한번만 획득 가능합니다!");
+            return;
+        }
+
+        int score = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.sumiFireClear].Value;
+
+        if (score == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
+            return;
+        }
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}개 획득 합니까?\n{CommonString.GetItemName(Item_Type.DokebiTreasure)}로 추가획득 : {Utils.GetDokebiTreasureAddValue()}", () =>
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value = 1;
+            ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += score + Utils.GetDokebiTreasureAddValue();
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.getSumiFire, ServerData.userInfoTable.TableDatas[UserInfoTable.getSumiFire].Value);
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.SumiFire, ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearSumiFire, 1);
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SumiFire)} {score + Utils.GetDokebiTreasureAddValue()}개 획득!", null);
             });
         }, null);
     }

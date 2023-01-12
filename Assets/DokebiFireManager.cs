@@ -7,7 +7,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DokebiFireManager : SingletonMono<GumGiSoulManager>
+public class DokebiFireManager : SingletonMono<DokebiFireManager>
 {
     [SerializeField]
     private PolygonCollider2D cameracollider;

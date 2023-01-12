@@ -22,7 +22,7 @@ public class SusanoUpgradeAbil : MonoBehaviour
 
         ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).AsObservable().Subscribe(e =>
         {
-            marbleDescription.SetText($"{CommonString.GetItemName(Item_Type.SusanoTreasure)} 1개당 악귀퇴치 보유효과 {PlayerStats.susanoUpgradelValue * 100f}% 증가\n<color=yellow>({PlayerStats.GetSusanoUpgradeAbilPlusValue() * 100f}% 강화됨)");
+            marbleDescription.SetText($"{CommonString.GetItemName(Item_Type.SusanoTreasure)} 1개당 악귀퇴치 크리티컬 데미지 효과 {PlayerStats.susanoUpgradelValue * 100f}% 증가\n<color=yellow>({PlayerStats.GetSusanoUpgradeAbilPlusValue() * 100f}% 강화됨)");
         }).AddTo(this);
 
     }

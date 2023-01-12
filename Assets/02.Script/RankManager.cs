@@ -83,14 +83,14 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_ChunmaTop_Uuid = "8f5ebfc0-4341-11ed-844a-55337d4fa4d7";
 
     //
-    public const string Rank_Level_TableName = "Rank_Level";
-    public const string Rank_Stage = "Rank_Stage";
-    public const string Rank_Boss = "HellWar_And";
-    public const string Rank_Real_Boss = "Party_Solo_And";
-    public const string Rank_Relic = "HelRelicRank";
-    public const string Rank_MiniGame = "Rank_MiniGame2";
-    public const string Rank_GangChul = "Guild_Boss_And";
-    public const string Rank_ChunmaTop = "Party_Top_AND";
+    public const string Rank_Level_TableName = "Rank_Level"; //레벨
+    public const string Rank_Stage = "Rank_Stage"; //스테이지
+    public const string Rank_Boss = "HellWar_And"; //지옥탈환전
+    public const string Rank_Real_Boss = "Party_Solo_And"; //십만대산 개인
+    public const string Rank_Relic = "HelRelicRank"; //지옥 영혼의숲
+    public const string Rank_MiniGame = "Rank_MiniGame2"; //미니게임
+    public const string Rank_GangChul = "Guild_Boss_And"; // 대산군
+    public const string Rank_ChunmaTop = "Party_Top_AND"; // 십만대산 파티
 #endif
 
 #if UNITY_IOS
@@ -687,7 +687,8 @@ public class RankManager : SingletonMono<RankManager>
             return;
         }
 
-        score *= GameBalance.BossScoreSmallizeValue;
+         score *= GameBalance.BossScoreSmallizeValue;
+
 
         Param param = new Param();
         param.Add("Score", score);

@@ -1,4 +1,5 @@
-﻿using Spine.Unity;
+﻿using Photon.Pun;
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -54,6 +55,9 @@ public class UiTopRankerCell : MonoBehaviour
 
     [SerializeField]
     private GameObject partyRaidRecommendButton;
+
+    [SerializeField]
+    private GameObject kickButton;
 
     [SerializeField]
     private GameObject leaveObject;
@@ -240,12 +244,23 @@ public class UiTopRankerCell : MonoBehaviour
         {
             boneFollowerGraphic_Weapon.SetBone("bone15");
         }
+
+        if (kickButton != null)
+        {
+            kickButton.gameObject.SetActive(PhotonNetwork.IsMasterClient &&
+                !Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(Utils.GetOriginNickName(nickName)));
+        }
     }
 
     public void OnPlayerLeftInPartyRaid()
     {
         partyRaidRecommendButton.SetActive(false);
         leaveObject.SetActive(true);
+    }
+
+    public void OnClickKickButton()
+    {
+        PartyRaidManager.Instance.NetworkManager.SendKickPlayer(recNickName);
     }
 
     public void OnClickRecommendButton()

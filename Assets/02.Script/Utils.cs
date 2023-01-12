@@ -106,10 +106,14 @@ public static class Utils
                   type == Item_Type.pet3;
     }
 
-    public static bool IsPassItem(this Item_Type type)
+    public static bool IsPassNorigaeItem(this Item_Type type)
     {
         return type == Item_Type.MonthNorigae0 ||
                 type == Item_Type.MonthNorigae1;
+    }
+    public static bool IsPassWeaponItem(this Item_Type type)
+    {
+        return type == Item_Type.weapon81;
     }
     public static bool IsGoodsItem(this Item_Type type)
     {
@@ -161,6 +165,12 @@ public static class Utils
                 type == Item_Type.DokebiNorigae5 ||
                 type == Item_Type.DokebiNorigae6 ||
 
+                type == Item_Type.DokebiNorigae7 ||
+                type == Item_Type.DokebiNorigae8 ||
+                type == Item_Type.DokebiNorigae9 ||
+
+                type == Item_Type.SumisanNorigae0||
+
                 type == Item_Type.MonthNorigae0 ||
                 type == Item_Type.MonthNorigae1 ||
 
@@ -172,6 +182,9 @@ public static class Utils
                 type == Item_Type.DokebiHorn4 ||
                 type == Item_Type.DokebiHorn5 ||
                 type == Item_Type.DokebiHorn6 ||
+                type == Item_Type.DokebiHorn7 ||
+                type == Item_Type.DokebiHorn8 ||
+                type == Item_Type.DokebiHorn9 ||
 
                 type == Item_Type.ChunSun0 ||
                 type == Item_Type.ChunSun1 ||
@@ -196,7 +209,9 @@ public static class Utils
                 type == Item_Type.Mileage ||
                 type == Item_Type.Event_Fall ||
                 type == Item_Type.Event_Fall_Gold ||
-                type == Item_Type.Event_XMas ||
+                type == Item_Type.Event_NewYear ||
+                type == Item_Type.SumiFire ||
+                type == Item_Type.SumiFireKey ||
                 type == Item_Type.RelicTicket;
     }
 
@@ -252,6 +267,10 @@ public static class Utils
     {
         return type >= Item_Type.RankFrame1 && type <= Item_Type.RankFrame1001_10000;
     }
+    public static bool IsPartyRaidRankFrameItem(this Item_Type type)
+    {
+        return type >= Item_Type.PartyRaidRankFrame1 && type <= Item_Type.PartyRaidRankFrame1001_10000;
+    }
 
     public static bool IsRelicRewardItem(this Item_Type type)
     {
@@ -289,6 +308,10 @@ public static class Utils
     public static bool IsGangChulItem(this Item_Type type)
     {
         return type >= Item_Type.RankFrame1_boss_new && type <= Item_Type.RankFrame1000_3000_boss_new;
+    }
+    public static bool IsRealGangChulItem(this Item_Type type)
+    {
+        return type >= Item_Type.RankFrame1_boss_GangChul && type <= Item_Type.RankFrame1000_3000_boss_GangChul;
     }
 
     public static int GetRandomIdx(List<float> inputDatas)

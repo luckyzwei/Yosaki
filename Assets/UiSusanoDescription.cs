@@ -38,8 +38,12 @@ public class UiSusanoDescription : MonoBehaviour
         if (idx == -1) idx = 0;
 
         var tableData = TableManager.Instance.susanoTable.dataArray[idx];
-
+#if UNITY_EDITOR
         unlockDesc.SetText($"{Utils.ConvertBigNum(tableData.Score)}");
+#else 
+        unlockDesc.SetText($"{tableData.Scoredescription}");
+#endif
+
 
         equipFrame.gameObject.SetActive(idx == PlayerStats.GetSusanoGrade());
 

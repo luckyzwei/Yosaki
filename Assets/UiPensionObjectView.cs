@@ -144,6 +144,10 @@ public class UiPensionObjectView : MonoBehaviour
         {
             itemType = Item_Type.DokebiFire;
         }
+        else if (pensionKey == "sumipension")
+        {
+            itemType = Item_Type.SumiFire;
+        }
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 

@@ -85,6 +85,48 @@ public class UiPostView : MonoBehaviour
                     break;
             }
         }
+        else if(type.IsPartyRaidRankFrameItem())
+        {
+            switch (type)
+            {
+                  case Item_Type.PartyRaidRankFrame1:
+                    title.SetText("십만대산 개인 랭킹보상(1위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.DokebiFire)} {GameBalance.partyRaidRankRewardTicket_1}개\n채팅 아이콘(1등급)");
+                    break;
+                case Item_Type.PartyRaidRankFrame2:
+                    title.SetText("십만대산 개인 랭킹보상(2위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.DokebiFire)} {GameBalance.partyRaidRankRewardTicket_2}개\n채팅 아이콘(2등급)");
+                    break;
+                case Item_Type.PartyRaidRankFrame3:
+                    title.SetText("십만대산 개인 랭킹보상(3위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.DokebiFire)} {GameBalance.partyRaidRankRewardTicket_3}개\n채팅 아이콘(3등급)");
+                    break;
+                case Item_Type.PartyRaidRankFrame4:
+                    title.SetText("십만대산 개인 랭킹보상(4위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.DokebiFire)} {GameBalance.partyRaidRankRewardTicket_4}개\n채팅 아이콘(4등급)");
+                    break;
+                case Item_Type.PartyRaidRankFrame5:
+                    title.SetText("십만대산 개인 랭킹보상(5위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.DokebiFire)} {GameBalance.partyRaidRankRewardTicket_5}개\n채팅 아이콘(5등급)");
+                    break;
+                case Item_Type.PartyRaidRankFrame6_20:
+                    title.SetText("십만대산 개인 랭킹보상(6~20위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.DokebiFire)} {GameBalance.partyRaidRankRewardTicket_6_20}개\n채팅 아이콘(6등급)");
+                    break;
+                case Item_Type.PartyRaidRankFrame21_100:
+                    title.SetText("십만대산 개인 랭킹보상(21~100위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.DokebiFire)} {GameBalance.partyRaidRankRewardTicket_21_100}개\n채팅 아이콘(7등급)");
+                    break;
+                case Item_Type.PartyRaidRankFrame101_1000:
+                    title.SetText("십만대산 개인 랭킹보상(101~1000위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.DokebiFire)} {GameBalance.partyRaidRankRewardTicket_101_1000}개\n채팅 아이콘(8등급)");
+                    break;
+                case Item_Type.PartyRaidRankFrame1001_10000:
+                    title.SetText("십만대산 개인 랭킹보상(1001~10000위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.DokebiFire)} {GameBalance.partyRaidRankRewardTicket_1001_10000}개\n채팅 아이콘(9등급)");
+                    break;
+            }
+        }
         else if (type.IsRelicRewardItem())
         {
             switch (type)
@@ -430,6 +472,68 @@ public class UiPostView : MonoBehaviour
                 case Item_Type.RankFrame1000_3000_boss_new:
                     title.SetText("강철이 참여 보상");
                     description.SetText($"{CommonString.GetItemName(Item_Type.PeachReal)} {GameBalance.rankReward_1000_3000_new_boss}개");
+                    break;
+            }
+        }
+        else if (type.IsRealGangChulItem())
+        {
+            switch (type)
+            {
+                case Item_Type.RankFrame1_boss_GangChul:
+                    title.SetText("강철이 보상(1위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_1_new_boss}개");
+                    break;
+                case Item_Type.RankFrame2_boss_GangChul:
+                    title.SetText("강철이 보상(2위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_2_new_boss}개");
+                    break;
+                case Item_Type.RankFrame3_boss_GangChul:
+                    title.SetText("강철이 보상(3위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_3_new_boss}개");
+                    break;
+                case Item_Type.RankFrame4_boss_GangChul:
+                    title.SetText("강철이 보상(4위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_4_new_boss}개");
+                    break;
+                case Item_Type.RankFrame5_boss_GangChul:
+                    title.SetText("강철이 보상(5위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_5_new_boss}개");
+                    break;
+                case Item_Type.RankFrame6_10_boss_GangChul:
+                    title.SetText("강철이 보상(6~10위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_6_10_new_boss}개");
+                    break;
+                case Item_Type.RankFrame10_30_boss_GangChul:
+                    title.SetText("강철이 보상(10~30위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_10_30_new_boss}개");
+                    break;
+                case Item_Type.RankFrame30_50_boss_GangChul:
+                    title.SetText("강철이 보상(30~50위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_30_50_new_boss}개");
+                    break;
+                case Item_Type.RankFrame50_70_boss_GangChul:
+                    title.SetText("강철이 보상(50~70위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_50_70_new_boss}개");
+                    break;
+                case Item_Type.RankFrame70_100_boss_GangChul:
+                    title.SetText("강철이 보상(70~100위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_70_100_new_boss}개");
+                    break;
+                case Item_Type.RankFrame100_200_boss_GangChul:
+                    title.SetText("강철이 보상(100~200위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_100_200_new_boss}개");
+                    break;
+                case Item_Type.RankFrame200_500_boss_GangChul:
+                    title.SetText("강철이 보상(200~500위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_200_500_new_boss}개");
+                    break;
+                case Item_Type.RankFrame500_1000_boss_GangChul:
+                    title.SetText("강철이 보상(500~1000위)(개인)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_500_1000_new_boss}개");
+                    break;
+                case Item_Type.RankFrame1000_3000_boss_GangChul:
+                    title.SetText("강철이 참여 보상");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.Cw)} {GameBalance.rankReward_1000_3000_new_boss}개");
                     break;
             }
         }

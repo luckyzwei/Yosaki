@@ -113,8 +113,24 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
 
         var serverData = ServerData.bossServerTable.TableDatas[twelveBossTable.Stringid];
 
-        //랭킹등록
-        RankManager.Instance.UpdateChunmaTop(totalScore);
+
+        /////
+
+        if ((string.IsNullOrEmpty(ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value)) ||
+            double.Parse(ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value) < totalScore)
+        {
+            ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value = totalScore.ToString();
+            //랭킹등록
+            RankManager.Instance.UpdateChunmaTop(totalScore);
+        }
+        else
+        {
+            Debug.LogError("점수가 더 낮음");
+            return;
+        }
+
+        ServerData.etcServerTable.UpdateData(EtcServerTable.chunmaTopScore);
+        
 
         if (string.IsNullOrEmpty(serverData.score.Value) == false)
         {

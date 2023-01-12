@@ -22,6 +22,7 @@ public class PensionServerTable
     public static string hellpension = "hellpension";
     public static string chunpension = "chunpension";
     public static string dokebipension = "dokebipension";
+    public static string sumipension = "sumipension";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
@@ -33,7 +34,8 @@ public class PensionServerTable
         { weaponpension,string.Empty},
         { hellpension,string.Empty},
         { chunpension,string.Empty},
-        { dokebipension,string.Empty}
+        { dokebipension,string.Empty},
+        { sumipension,string.Empty}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();

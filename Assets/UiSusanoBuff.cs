@@ -21,6 +21,7 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
         if (GameManager.contentsType == GameManager.ContentsType.Sasinsu) return;
         if (GameManager.contentsType == GameManager.ContentsType.Online_Tower) return;
         if (GameManager.contentsType == GameManager.ContentsType.GradeTest) return;
+        if (GameManager.contentsType == GameManager.ContentsType.SumisanTower) return;
         //산신령
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon &&
             (GameManager.Instance.bossId == 57 ||
@@ -33,7 +34,10 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
             GameManager.Instance.bossId == 80 ||
             GameManager.Instance.bossId == 81 ||
             GameManager.Instance.bossId == 82 ||
-              GameManager.Instance.bossId == 83
+            GameManager.Instance.bossId == 83 ||
+            GameManager.Instance.bossId == 85 ||
+            GameManager.Instance.bossId == 86 ||
+            GameManager.Instance.bossId == 87 
             //도깨비 지킴이
 
             )) return;

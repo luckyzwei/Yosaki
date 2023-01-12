@@ -835,7 +835,29 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     byte SendChat_Event = 2;
     byte SendRecommend_Event = 3;
     byte StartPartyTower_Event = 4;
-    byte SendPartyTowerRecommend = 5;
+    byte SendPartyTowerRecommend_Event = 5;
+    byte SendKickPlayer_Event = 6;
+
+    public void SendKickPlayer(string nickName)
+    {
+        if (PhotonNetwork.IsMasterClient == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("방장만 추방하실 수 있습니다.");
+            return;
+        }
+
+        if (Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(Utils.GetOriginNickName(nickName)))
+        {
+            PopupManager.Instance.ShowAlarmMessage("자기 자신은 추방하실 수 없습니다.");
+            return;
+        }
+
+        Debug.LogError($"Send Kick {nickName}");
+
+        object[] objects = new object[] { Utils.GetOriginNickName(nickName) };
+
+        PhotonNetwork.RaiseEvent(SendKickPlayer_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+    }
 
     public void SendRecommend(string nickName)
     {
@@ -882,7 +904,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
         object[] objects = new object[] { Utils.GetOriginNickName(nickName), Utils.GetOriginNickName(PlayerData.Instance.NickName) };
 
-        PhotonNetwork.RaiseEvent(SendPartyTowerRecommend, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent(SendPartyTowerRecommend_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
     }
 
     public void SendScoreInfo(double score, bool end = false)
@@ -1089,6 +1111,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
             UpdateChatText();
         }
+        else if (photonEvent.Code == SendKickPlayer_Event)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+
+            string targetNickName = (string)data[0];
+
+            //내가 강퇴 대상일때
+            if (Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(targetNickName))
+            {
+                PopupManager.Instance.ShowAlarmMessage("어떤 힘이 당신을 로비로 이끌었습니다.");
+                LeaveRoom();
+            }
+        }
         else if (photonEvent.Code == SendRecommend_Event)
         {
             object[] data = (object[])photonEvent.CustomData;
@@ -1121,7 +1156,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 ServerData.bossServerTable.UpdateData("b68");
             }
         }
-        else if (photonEvent.Code == SendPartyTowerRecommend)
+        else if (photonEvent.Code == SendPartyTowerRecommend_Event)
         {
             object[] data = (object[])photonEvent.CustomData;
 

@@ -17,17 +17,17 @@ public class TwelveDungeonManager : ContentsManagerBase
 
     private TwelveBossTableData twelveBossTable;
     private ReactiveProperty<ObscuredDouble> damageAmount = new ReactiveProperty<ObscuredDouble>();
-    private ReactiveProperty<ObscuredDouble> bossRemainHp = new ReactiveProperty<ObscuredDouble>();
+
+
+    [SerializeField]
+    bool Reverse = false;
 
     public override Transform GetMainEnemyObjectTransform()
     {
         return singleRaidEnemy.transform;
     }
-    public override double GetBossRemainHpRatio()
-    {
-        return damageAmount.Value / bossRemainHp.Value;
-    }
-    public double BossRemainHp => bossRemainHp.Value;
+ 
+
 
     public override double GetDamagedAmount()
     {
@@ -94,7 +94,6 @@ public class TwelveDungeonManager : ContentsManagerBase
     private void RandomizeKey()
     {
         damageAmount.Value.RandomizeCryptoKey();
-        bossRemainHp.Value.RandomizeCryptoKey();
         contentsState.Value.RandomizeCryptoKey();
     }
     #endregion
@@ -151,7 +150,7 @@ public class TwelveDungeonManager : ContentsManagerBase
         PlayerStatusController.Instance.whenPlayerDead.Subscribe(e => { WhenPlayerDead(); }).AddTo(this);
 
         damageAmount.AsObservable().Subscribe(whenDamageAmountChanged).AddTo(this);
-        bossRemainHp.AsObservable().Subscribe(WhenBossDamaged).AddTo(this);
+
 
         contentsState.AsObservable().Subscribe(WhenBossModeStateChanged).AddTo(this);
     }
@@ -167,8 +166,7 @@ public class TwelveDungeonManager : ContentsManagerBase
     private void SetBossHp()
     {
         twelveBossTable = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];
-        bossRemainHp.Value = double.MaxValue;
-
+       
         var prefab = Resources.Load<BossEnemyBase>($"TwelveBoss/{GameManager.Instance.bossId}");
 
         //아수라,인드라,구미호
@@ -198,20 +196,17 @@ public class TwelveDungeonManager : ContentsManagerBase
         damagedAnim.SetTrigger(DamageAnimName);
     }
 
-    private void WhenBossDamaged(ObscuredDouble hp)
-    {
-        //  bossHpBar.UpdateHpBar(hp, bossTableData.Hp);
 
-        if (hp <= 0f && contentsState.Value == (int)ContentsState.Fight)
-        {
-            // WhenBossDead();
-        }
-    }
 
     private void WhenBossDamaged(double damage)
     {
         damageAmount.Value -= damage;
-        bossRemainHp.Value += damage;
+            
+        if (damageAmount.Value < 0)
+        {
+            damageAmount.Value = 0; 
+        }
+
     }
     #region EndConditions
     //클리어조건1 플레이어 사망
@@ -405,7 +400,10 @@ public class TwelveDungeonManager : ContentsManagerBase
                 twelveBossTable.Id == 81 ||
                 twelveBossTable.Id == 82 ||
                 twelveBossTable.Id == 83 ||
-                twelveBossTable.Id == 84
+                twelveBossTable.Id == 84 ||
+                twelveBossTable.Id == 85 ||
+                twelveBossTable.Id == 86 ||
+                twelveBossTable.Id == 87 
                 )
             {
                 remainSec *= 0.5f;

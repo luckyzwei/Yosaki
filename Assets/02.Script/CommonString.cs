@@ -44,6 +44,7 @@ public static class CommonString
     public static string ItemGrade_21 = "???";
     public static string ItemGrade_22 = "도깨비";
     public static string ItemGrade_23 = "사신수";
+    public static string ItemGrade_24 = "수미산";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
@@ -54,6 +55,7 @@ public static class CommonString
     public static string ItemGrade_12_Norigae = "여래";
     public static string ItemGrade_13_Norigae = "천상계";
     public static string ItemGrade_22_Norigae = "도깨비";
+    public static string ItemGrade_24_Norigae = "수미산";
 
     public static string ItemGrade_4_Skill = "주작";
     public static string ItemGrade_5_Skill = "청룡";
@@ -95,6 +97,9 @@ public static class CommonString
     public static string IOS_loginType = "IOS_LoginType";
     public static string SavedLoginTypeKey = "SavedLoginTypeKey";
     public static string SavedLoginPassWordKey = "SavedLoginPassWordKey";
+    public static string weapon78Key = "weapon78";
+    public static string weapon79Key = "weapon79";
+
 
     public static string GetContentsName(ContentsType contentsType)
     {
@@ -214,6 +219,10 @@ public static class CommonString
             case Item_Type.costume75: return TableManager.Instance.Costume.dataArray[75].Name;
             case Item_Type.costume76: return TableManager.Instance.Costume.dataArray[76].Name;
             case Item_Type.costume77: return TableManager.Instance.Costume.dataArray[77].Name;
+            case Item_Type.costume78: return TableManager.Instance.Costume.dataArray[78].Name;
+            case Item_Type.costume79: return TableManager.Instance.Costume.dataArray[79].Name;
+            case Item_Type.costume80: return TableManager.Instance.Costume.dataArray[80].Name;
+            case Item_Type.costume81: return TableManager.Instance.Costume.dataArray[81].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -351,7 +360,7 @@ public static class CommonString
             case Item_Type.Cw: return "천계 꽃";
             case Item_Type.Event_Fall: return "곶감";
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
-            case Item_Type.Event_XMas: return "크리스마스 버선";
+            case Item_Type.Event_NewYear: return "떡국";
             case Item_Type.FoxMaskPartial: return "나무조각";
             case Item_Type.DokebiFire: return "도깨비불";
             case Item_Type.DokebiFireKey: return "도깨비불 소탕권";
@@ -361,11 +370,65 @@ public static class CommonString
             case Item_Type.MonthNorigae1: return "1월 월간 노리개";
             case Item_Type.DokebiTreasure: return "도깨비 보물";
             case Item_Type.SusanoTreasure: return "악의 씨앗";
+            case Item_Type.DokebiFireEnhance: return "우두머리 불꽃";
+            case Item_Type.SumiFire: return "수미꽃";
+            case Item_Type.SumiFireKey: return "수미꽃 소탕권";
+            case Item_Type.weapon81: return "설날 외형 무기";
 
         }
 
         return "미등록";
 
+    }
+
+    public static string GetHellMarkAbilName(int grade)
+    {
+        switch (grade)
+        {
+            case 0:
+                {
+                    return "없음";
+                }
+                break;
+            case 1:
+                {
+                    return "산원 증표";
+                }
+                break;
+            case 2:
+                {
+                    return "별장 증표";
+                }
+                break;
+            case 3:
+                {
+                    return "낭장 증표";
+                }
+                break;
+            case 4:
+                {
+                    return "중랑장 증표";
+                }
+                break;
+            case 5:
+                {
+                    return "섭장군 증표";
+                }
+                break;
+            case 6:
+                {
+                    return "대장군 증표";
+                }
+                break;
+            case 7:
+                {
+                    return "상장군 증표";
+                }
+                break;
+
+            default:
+                return "미등록";
+        }
     }
 
     public static string GetStatusName(StatusType type)
@@ -494,6 +557,9 @@ public static class CommonString
                 break;
             case StatusType.SuperCritical6DamPer:
                 return "신수베기 피해(%)";
+                break;
+            case StatusType.SuperCritical7DamPer:
+                return "금강베기 피해(%)";
                 break;
             case StatusType.DokebiFireHasValueUpgrade:
                 return "도깨비 불 레벨당 귀신베기 피해량 증가(%)";

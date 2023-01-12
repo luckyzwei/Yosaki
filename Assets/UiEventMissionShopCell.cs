@@ -55,22 +55,38 @@ public class UiEventMissionShopCell : MonoBehaviour
             }).AddTo(this);
         }
 
-        if (IsCostumeItem() == false) return;
+        if (IsCostumeItem() == false && IsPassWeaponItem()==false) return;
 
         string itemKey = ((Item_Type)tableData.Itemtype).ToString();
 
-        ServerData.costumeServerTable.TableDatas[itemKey].hasCostume.AsObservable().Subscribe(e =>
+        if (IsCostumeItem())
         {
-            if (e == false)
+            ServerData.costumeServerTable.TableDatas[itemKey].hasCostume.AsObservable().Subscribe(e =>
             {
-                price.SetText(Utils.ConvertBigNum(tableData.Price));
-            }
-            else
+                if (e == false)
+                {
+                    price.SetText(Utils.ConvertBigNum(tableData.Price));
+                }
+                else
+                {
+                    price.SetText("보유중!");
+                }
+            }).AddTo(this);
+        }
+        else if(IsPassWeaponItem())
+        {
+            ServerData.weaponTable.TableDatas[itemKey].hasItem.AsObservable().Subscribe(e =>
             {
-                price.SetText("보유중!");
-            }
-
-        }).AddTo(this);
+                if (e == 0)
+                {
+                    price.SetText(Utils.ConvertBigNum(tableData.Price));
+                }
+                else
+                {
+                    price.SetText("보유중!");
+                }
+            }).AddTo(this);
+        }
     }
 
     private void Initialize()
@@ -142,21 +158,32 @@ public class UiEventMissionShopCell : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("이미 보유하고 있습니다!");
                 return;
             }
+        } 
+        if (IsPassWeaponItem())
+        {
+            string itemKey = ((Item_Type)tableData.Itemtype).ToString();
+
+            //무기
+            if (ServerData.weaponTable.TableDatas[itemKey].hasItem.Value==1)
+            {
+                PopupManager.Instance.ShowAlarmMessage("이미 보유하고 있습니다!");
+                return;
+            }
         }
 
 
-        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value;
+        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value;
 
         if (currentEventItemNum < tableData.Price)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_XMas)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_NewYear)}이 부족합니다.");
             return;
         }
 
         PopupManager.Instance.ShowAlarmMessage("교환 완료");
 
         //로컬
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value -= tableData.Price;
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value -= tableData.Price;
 
 
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
@@ -179,6 +206,10 @@ public class UiEventMissionShopCell : MonoBehaviour
     {
         return ((Item_Type)tableData.Itemtype).IsCostumeItem();
     }
+    private bool IsPassWeaponItem()
+    {
+        return ((Item_Type)tableData.Itemtype).IsPassWeaponItem();
+    }
 
     private Coroutine syncRoutine;
 
@@ -200,13 +231,30 @@ public class UiEventMissionShopCell : MonoBehaviour
 
             Param goodsParam = new Param();
 
-            goodsParam.Add(GoodsTable.Event_XMas, ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value);
+            goodsParam.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
 
             
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+        }
+        else if(IsPassWeaponItem())
+        {
+            Param weaponParam = new Param();
+
+            string weaponKey = ((Item_Type)tableData.Itemtype).ToString();
+
+            weaponParam.Add(weaponKey.ToString(), ServerData.weaponTable.TableDatas[weaponKey].ConvertToString());
+
+            Param goodsParam = new Param();
+
+            goodsParam.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
+
+
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
         }
         else
         {
@@ -215,7 +263,7 @@ public class UiEventMissionShopCell : MonoBehaviour
             Param goodsParam = new Param();
 
 
-            goodsParam.Add(GoodsTable.Event_XMas, ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value);
+            goodsParam.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
 
      
             goodsParam.Add(itemKey, ServerData.goodsTable.GetTableData(itemKey).Value);
@@ -238,6 +286,10 @@ public class UiEventMissionShopCell : MonoBehaviour
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 획득!!", null);
             }
+            else if(IsPassWeaponItem())
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "패스 무기 획득!!", null);
+            }            
             else
             {
 

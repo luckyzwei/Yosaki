@@ -86,6 +86,19 @@ public class UiPackageShop : MonoBehaviour
                         continue;
                     }
                 }
+#if UNITY_EDITOR
+#else
+
+                if (e.Current.Value.Productid == "newyearset0" || e.Current.Value.Productid == "newyearset1" )
+                {
+                    //1월 20일 전에는 생성 x
+                    if (ServerData.userInfoTable.currentServerTime.Month == 1 &&
+                        ServerData.userInfoTable.currentServerTime.Day < 20)
+                    {
+                        continue;
+                    }
+                }
+#endif
 
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, springEventParent);
                 cell.Initialize(e.Current.Value);

@@ -100,6 +100,16 @@ public static class GameBalance
     public readonly static ObscuredInt rankRewardTicket_101_1000 = 1100;
     public readonly static ObscuredInt rankRewardTicket_1001_10000 = 1000;
 
+    public readonly static ObscuredInt partyRaidRankRewardTicket_1 = 6000;
+    public readonly static ObscuredInt partyRaidRankRewardTicket_2 = 5500;
+    public readonly static ObscuredInt partyRaidRankRewardTicket_3 = 5000;
+    public readonly static ObscuredInt partyRaidRankRewardTicket_4 = 4000;
+    public readonly static ObscuredInt partyRaidRankRewardTicket_5 = 3500;
+    public readonly static ObscuredInt partyRaidRankRewardTicket_6_20 = 3000;
+    public readonly static ObscuredInt partyRaidRankRewardTicket_21_100 = 2500;
+    public readonly static ObscuredInt partyRaidRankRewardTicket_101_1000 = 1500;
+    public readonly static ObscuredInt partyRaidRankRewardTicket_1001_10000 = 1000;
+
     public readonly static ObscuredInt rankRewardTicket_1_relic = 120;
     public readonly static ObscuredInt rankRewardTicket_2_relic = 110;
     public readonly static ObscuredInt rankRewardTicket_3_relic = 100;
@@ -250,11 +260,20 @@ public static class GameBalance
     public readonly static ObscuredInt gumgiDefenseValue200 = 4000;
 
     public static ObscuredFloat forestValue = 1f;
+    public static ObscuredFloat dokebiImmuneTime = 1f;
     public static ObscuredInt recommendCountPerWeek = 5;
     public static ObscuredInt recommendCountPerWeek_PartyTower = 4;
 
     public static ObscuredInt sanGoonDogFeedCount = 3;
     public static ObscuredInt dokebiTreasureAddValue = 1;
+
+    public static ObscuredFloat fastSleepRewardTimeValue = 3600;
+    public static ObscuredInt fastSleepRewardMaxCount = 5;
+
+    public static ObscuredFloat smithTreeAddValue = 100;
+    public static ObscuredInt sonCloneAddValue = 10000;
+
+    public static List<float> warMarkAbils = new List<float>() { 0f, 400f, 500f, 600f, 700f, 800f, 900f, 1000f };
 
     public static int GetSonIdx()
     {

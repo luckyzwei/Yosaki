@@ -145,7 +145,7 @@ public class GoodsTable
 
     public static string Event_Fall = "Event_Fall"; //곶감
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
-    public static string Event_XMas = "Event_XMas"; //크리스마스 재화
+    public static string Event_NewYear = "Event_NewYear"; //신년재화
 
     public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
     public static string SusanoTreasure = "ST"; // 악귀퇴치 재화
@@ -158,6 +158,9 @@ public class GoodsTable
 
     public static string HellPowerUp = "HellPowerUp";
     public static string DokebiTreasure = "DT";
+    public static string DokebiFireEnhance = "DFE";
+    public static string SumiFire = "SumiFire";
+    public static string SumiFireKey = "SumiFireKey";
 
 
 
@@ -288,16 +291,19 @@ public class GoodsTable
 
         {Event_Fall,0f},
         {Event_Fall_Gold,0f},
-        {Event_XMas,0f},
+        {Event_NewYear,0f},
         {FoxMaskPartial,0f},
 
         {DokebiFire,0f},
         {DokebiFireKey,0f},
+        {DokebiFireEnhance,0f},
 
         {Mileage,0f},
         {HellPowerUp,0f},
         {DokebiTreasure,0f},
-        {SusanoTreasure,0f}
+        {SusanoTreasure,0f},
+        {SumiFire,0f},
+        {SumiFireKey,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -686,7 +692,7 @@ public class GoodsTable
 
         goodsParam.Add(GoodsTable.Event_Item_SnowMan, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value);
 
-        goodsParam.Add(GoodsTable.Event_XMas, ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value);
+        goodsParam.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
 
         goodsParam.Add(GoodsTable.SulItem, ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value);
         goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);

@@ -324,6 +324,12 @@ public class UiShop : SingletonMono<UiShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.DokebiTreasure).Value += amount;
                     param.Add(GoodsTable.DokebiTreasure, ServerData.goodsTable.GetTableData(GoodsTable.DokebiTreasure).Value);
                 }
+                break;             
+            case Item_Type.DokebiFireEnhance:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireEnhance).Value += amount;
+                    param.Add(GoodsTable.DokebiFireEnhance, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireEnhance).Value);
+                }
                 break; 
                 
             case Item_Type.Hel:
@@ -359,11 +365,24 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
                 }
                 break;  
+            case Item_Type.SumiFire:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += amount;
+                    param.Add(GoodsTable.SumiFire, ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
+                }
+                break;  
             
             case Item_Type.DokebiFireKey:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += amount;
                     param.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
+                }
+                break;  
+            
+            case Item_Type.SumiFireKey:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value += amount;
+                    param.Add(GoodsTable.SumiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value);
                 }
                 break;  
             
@@ -401,10 +420,10 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
                 }
                 break;
-            case Item_Type.Event_XMas:
+            case Item_Type.Event_NewYear:
                 {
-                    ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value += amount;
-                    param.Add(GoodsTable.Event_XMas, ServerData.goodsTable.GetTableData(GoodsTable.Event_XMas).Value);
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value += amount;
+                    param.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
                 }
                 break;
 

@@ -695,9 +695,11 @@ public class TableManager : SingletonMono<TableManager>
     public PetHome petHome;
     public TowerTable3 towerTable3;
     public TowerTable4 towerTableMulti;
+    public TowerTable5 sumisanTowerTable;
     public GradeTestTable gradeTestTable;
     public CommonCollectionEvent commoncollectionEvent;
     public SnowManAtten snowManAtten;
+    public SumiAbilBase sumiAbilBase;
 
 }
 

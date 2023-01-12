@@ -32,8 +32,8 @@ public class SusanoUpgradeDescription : MonoBehaviour
             {
                 var tableData = TableManager.Instance.susanoTable.dataArray[grade];
                 marbleDescription.SetText(
-                    $"{CommonString.GetStatusName((StatusType)tableData.Abiltype1)}  {Utils.ConvertBigNum(tableData.Abilvalue0 * PlayerStats.GetSusanoUpgradeAbilPlusValue() * 100f)}%\n" +
-                    $"{CommonString.GetStatusName((StatusType)tableData.Abiltype2)}  {tableData.Abilvalue1 * PlayerStats.GetSusanoUpgradeAbilPlusValue() * 100}% 강화됨)"
+                    $"{CommonString.GetStatusName((StatusType)tableData.Abiltype1)}  {Utils.ConvertBigNum(tableData.Abilvalue0 * PlayerStats.GetSusanoUpgradeAbilPlusValue() * 100f)}%"
+                    //$"{CommonString.GetStatusName((StatusType)tableData.Abiltype2)}  {tableData.Abilvalue1 * PlayerStats.GetSusanoUpgradeAbilPlusValue() * 100}% 강화됨)"
                     );
             }
         }).AddTo(this);

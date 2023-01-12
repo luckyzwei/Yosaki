@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameManager;
@@ -12,6 +13,9 @@ public class UiHellWarModeBoard : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI scoreDescription;
+
+    [SerializeField]
+    private TextMeshProUGUI markApplyDescription;
 
     private static bool registRank = false;
 
@@ -27,6 +31,33 @@ public class UiHellWarModeBoard : MonoBehaviour
             }
             registRank = true;
         }
+
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        ServerData.userInfoTable.TableDatas[UserInfoTable.hellMark].AsObservable().Subscribe(e =>
+        {
+            if (e != 0)
+            {
+                int idx = (int)e;
+
+                if (idx < GameBalance.warMarkAbils.Count)
+                {
+                    markApplyDescription.SetText($"{CommonString.GetHellMarkAbilName(idx)} 적용 : 경험치 획득(%) +{GameBalance.warMarkAbils[idx] * 100f}");
+                }
+                else
+                {
+                    markApplyDescription.SetText($"증표 없음");
+                }
+            }
+            else
+            {
+                markApplyDescription.SetText($"증표 없음");
+            }
+
+        }).AddTo(this);
     }
 
     public void OnClickEnterButton()

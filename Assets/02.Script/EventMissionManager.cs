@@ -11,6 +11,7 @@ public enum EventMissionKey
     ClearHell,//불멸석 보상 ★
     ClearChunFlower,//천계꽃 보상 ★
     ClearDokebiFire,//도깨비나라 보상 ★
+    ClearSumiFire,//수미산 보상 ★
 }
 
 public static class EventMissionManager

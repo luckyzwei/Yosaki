@@ -46,6 +46,7 @@ public enum StatusType
     DokebiFireHasValueUpgrade,
     HellHasValueUpgrade,
     SuperCritical6DamPer,//신수
+    SuperCritical7DamPer,//수미베기
 }
 
 
@@ -75,6 +76,7 @@ public static class PlayerStats
         double chunSangDam = GetSuperCritical4DamPer();
         double dokebiDam = GetSuperCritical5DamPer();
         double sinsuDam = GetSuperCritical6DamPer();
+        double sumiDam = GetSuperCritical7DamPer();
 
         double totalPower =
           ((baseAttack + baseAttack * baseAttackPer)
@@ -97,6 +99,7 @@ public static class PlayerStats
         totalPower += (totalPower * chunSangDam);
         totalPower += (totalPower * dokebiDam);
         totalPower += (totalPower * sinsuDam);
+        totalPower += (totalPower * sumiDam);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -132,7 +135,6 @@ public static class PlayerStats
         ret += GetMagicBookHasPercentValue(StatusType.Damdecrease);
         ret += GetSinsuEquipEffect(StatusType.Damdecrease);
         ret += GetRelicHasEffect(StatusType.Damdecrease);
-
         return ret;
     }
     public static float GetBossDamAddValue()
@@ -293,6 +295,7 @@ public static class PlayerStats
         ret += GetRelicReleaseValue();
         ret += GetHellAbilHasEffect(StatusType.AttackAddPer);
         ret += GetChunAbilHasEffect(StatusType.AttackAddPer);
+        ret += GetDokebiFireAbilHasEffect(StatusType.AttackAddPer);
 
         return ret;
     }
@@ -726,24 +729,22 @@ public static class PlayerStats
         float ret = 0f;
         ret += ServerData.statusTable.GetStatusValue(StatusTable.ExpGain_memory);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.ExpGainPer);
-        ret += GetBuffValue(StatusType.ExpGainPer);
         ret += GetMarbleValue(StatusType.ExpGainPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.ExpGainPer);
 
         ret += GetTitleAbilValue(StatusType.ExpGainPer);
-        ret += GetHotTimeBuffEffect(StatusType.ExpGainPer);
         ret += GetGuildPetEffect(StatusType.ExpGainPer);
+        ret += GetPetHomeAbilValue(StatusType.ExpGainPer);
+        ret += GetMarkBuffAddValue();
 
+        ret += GetBuffValue(StatusType.ExpGainPer);
+        ret += GetHotTimeBuffEffect(StatusType.ExpGainPer);
         ret += GetOneYearBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
 
-        // ret += GetMonthlyFreeBuffValue(StatusType.ExpGainPer);
-        // ret += GetMonthlyAdBuffValue(StatusType.ExpGainPer);
-
-
-
-        ret += GetPetHomeAbilValue(StatusType.ExpGainPer);
+        
+        ret += GetWeaponHasPercentValue(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -759,8 +760,18 @@ public static class PlayerStats
         ret += GetTitleAbilValue(StatusType.ExpGainPer);
         ret += GetGuildPetEffect(StatusType.ExpGainPer);
         ret += GetPetHomeAbilValue(StatusType.ExpGainPer);
+        ret += GetMarkBuffAddValue();
 
         return ret;
+    }
+
+    public static float GetMarkBuffAddValue()
+    {
+        int idx = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.hellMark].Value;
+        if (idx == 0) return 0f;
+        if (idx >= GameBalance.warMarkAbils.Count) return 0f;
+
+        return GameBalance.warMarkAbils[idx];
     }
 
     //1주년 버프 키값
@@ -1191,7 +1202,7 @@ public static class PlayerStats
 
         ret += GetStageRelicHasEffect(StatusType.SuperCritical3DamPer);
 
-
+        ret += GetSumiTowerEffect(StatusType.SuperCritical3DamPer);
 
         return ret;
     }
@@ -1218,7 +1229,7 @@ public static class PlayerStats
 
         ret += GetStageRelicHasEffect(StatusType.SuperCritical4DamPer);
 
-
+        ret += GetSumiTowerEffect(StatusType.SuperCritical4DamPer);
 
 
 
@@ -1242,9 +1253,25 @@ public static class PlayerStats
 
         ret += GetStageRelicHasEffect(StatusType.SuperCritical5DamPer);
 
+        ret += GetRelicHasEffect(StatusType.SuperCritical5DamPer);
+
+        ret += GetSumiTowerEffect(StatusType.SuperCritical5DamPer);
 
         return ret;
     }
+
+    public static float GetSuperCritical7DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetSumiFireAbilHasEffect(StatusType.SuperCritical7DamPer);
+
+        ret += GetSumiTowerEffect(StatusType.SuperCritical7DamPer);
+
+        return ret;
+    }
+
+
     public static float GetSuperCritical6DamPer()
     {
         float ret = 0f;
@@ -1538,7 +1565,7 @@ public static class PlayerStats
 
     private static bool ActiveSmithValue(StatusType statustype)
     {
-        return statustype != StatusType.Damdecrease && statustype != StatusType.SuperCritical1Prob;
+        return statustype != StatusType.Damdecrease && statustype != StatusType.SuperCritical1Prob && statustype != StatusType.ExpGainPer;
     }
 
     public static float GetRelicHasEffect(StatusType statusType)
@@ -1631,6 +1658,8 @@ public static class PlayerStats
         var tableDatas = TableManager.Instance.SonAbil.dataArray;
 
         int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value + addLevel;
+
+        currentLevel += (int)ServerData.userInfoTable.TableDatas[UserInfoTable.sonCloneClear].Value * GameBalance.sonCloneAddValue;
 
         for (int i = 0; i < tableDatas.Length; i++)
         {
@@ -1732,12 +1761,65 @@ public static class PlayerStats
             ret += GetDokebiFireHasAddValue() * currentLevel;
         }
 
+        return ret + ret * GetDokebiFireEnhanceAbilPlusValue();
+    }
+
+    public static float GetSumiFireAbilHasEffect(StatusType statusType, int addLevel = 0)
+    {
+        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < 1000000) return 0f;
+
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.sumiAbilBase.dataArray;
+
+        int currentLevel = (int)ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value + addLevel;
+
+        for (int i = 0; i < tableDatas.Length; i++)
+        {
+            if (currentLevel < tableDatas[i].Unlocklevel) continue;
+            if (statusType != (StatusType)tableDatas[i].Abiltype) continue;
+
+            int calculatedLevel = currentLevel - tableDatas[i].Unlocklevel;
+
+            ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
+        }
+
+        //if (statusType == StatusType.SuperCritical5DamPer)
+        //{
+        //    ret += GetDokebiFireHasAddValue() * currentLevel;
+        //}
+
+        return ret;
+    }
+    public static float GetSumiTowerEffect(StatusType statusType, int addLevel = 0)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.sumisanTowerTable.dataArray;
+
+        int currentLevel = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx4).Value;
+
+        if (currentLevel == 0)
+        {
+            return 0f;
+        }
+
+        for (int i = 0; i < currentLevel; i++)
+        {
+            if ((StatusType)tableDatas[i].Rewardtype == statusType)
+            {
+                ret += tableDatas[i].Rewardvalue;
+            }
+        }
+
         return ret;
     }
 
     public static float GetSmithValue(StatusType statusType)
     {
         int currentExp = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.smithExp].Value;
+
+        currentExp += (int)ServerData.userInfoTable.TableDatas[UserInfoTable.smithTreeClear].Value * (int)GameBalance.smithTreeAddValue;
 
         if (statusType == StatusType.growthStoneUp)
         {
@@ -2148,6 +2230,7 @@ public static class PlayerStats
 
         return grade;
     }
+
     public static int GetYumGrade()
     {
         int grade = -1;
@@ -2228,14 +2311,14 @@ public static class PlayerStats
         if (grade == -1) return 0f;
 
         var tableData = TableManager.Instance.susanoTable.dataArray[grade];
-        
+
         if (type == StatusType.CriticalDam)
         {
             return tableData.Abilvalue0 + tableData.Abilvalue0 * GetSusanoUpgradeAbilPlusValue();
         }
         else if (type == StatusType.PenetrateDefense)
         {
-            return tableData.Abilvalue1 + tableData.Abilvalue1 * GetSusanoUpgradeAbilPlusValue()/100;
+            return tableData.Abilvalue1;
         }
 
         return 0f;
@@ -2325,11 +2408,16 @@ public static class PlayerStats
     {
         return foxMaskPartialValue * ServerData.goodsTable.GetTableData(GoodsTable.FoxMaskPartial).Value;
     }
-        public static float susanoUpgradelValue = 0.025f;
+    public static float susanoUpgradelValue = 0.025f;
     public static float GetSusanoUpgradeAbilPlusValue()
     {
         return susanoUpgradelValue * ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).Value;
     }
+    public static float dokebiUpgradeValue = 0.0025f;
+    public static float GetDokebiFireEnhanceAbilPlusValue()
+    {
+        return dokebiUpgradeValue * ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireEnhance).Value;
+    }//
 
 
     public static int GetCurrentDragonIdx()
@@ -2545,7 +2633,7 @@ public static class PlayerStats
 
         return ret;
     }
-    
+
     public static float GetSasinsuStarAddValue()
     {
         float ret = 0f;
@@ -2556,13 +2644,13 @@ public static class PlayerStats
         {
             for (int j = 0; j < tableData[i].Score.Length; j++)
             {
-                if(tableData[i].Score[j] < ServerData.sasinsuServerTable.TableDatas[$"b{i}"].score.Value)
+                if (tableData[i].Score[j] < ServerData.sasinsuServerTable.TableDatas[$"b{i}"].score.Value)
                 {
                     ret += tableData[i].Abilvalue0[j];
                 }
             }
         }
-        
+
 
         return ret;
     }

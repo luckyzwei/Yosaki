@@ -322,13 +322,19 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
     {
         if (hp.Value <= 0)
         {
-            if (GameManager.Instance.IsNormalField == false && UiSusanoBuff.isImmune.Value == false)
+            if(GameManager.Instance.IsNormalField ==false &&UiDokebiBuff.isImmune.Value==false)
+            {
+                UiDokebiBuff.Instance.ActiveDokebiImmune();
+            }
+
+            if (GameManager.Instance.IsNormalField == false && UiSusanoBuff.isImmune.Value == false &&UiDokebiBuff.isImmune.Value==false)
             {
                 UiSusanoBuff.Instance.ActiveSusanoImmune();
             }
 
-            if (UiSusanoBuff.isImmune.Value == false)
+            if (UiSusanoBuff.isImmune.Value == false && UiDokebiBuff.isImmune.Value==false)
             {
+                
                 whenPlayerDead.Execute();
                 UiAutoBoss.Instance.WhenToggleChanged(false);
             }

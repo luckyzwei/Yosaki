@@ -35,9 +35,11 @@ public class UiGradeTestDescription : MonoBehaviour
         if (idx == -1) idx = 0;
 
         var tableData = TableManager.Instance.gradeTestTable.dataArray[idx];
-
+#if UNITY_EDITOR
         unlockDesc.SetText($"{Utils.ConvertBigNum(tableData.Score)}");
-
+#else 
+        unlockDesc.SetText($"{tableData.Scoredescription}");
+#endif
         equipFrame.gameObject.SetActive(idx == PlayerStats.GetGradeTestGrade());
 
         gradeText.SetText($"{idx + 1}단계");

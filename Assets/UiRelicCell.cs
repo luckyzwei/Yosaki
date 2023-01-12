@@ -43,6 +43,9 @@ public class UiRelicCell : MonoBehaviour
     [SerializeField]
     private GameObject lockMask_Chun;
 
+    [SerializeField]
+    private GameObject lockMask_Dokebi;
+
     private bool subscribed = false;
     private bool IsMaxLevel()
     {
@@ -132,6 +135,17 @@ public class UiRelicCell : MonoBehaviour
             ServerData.weaponTable.TableDatas["weapon50"].hasItem.AsObservable().Subscribe(e =>
             {
                lockMask_Chun.SetActive(e < 1);
+            }).AddTo(this);
+            
+        }
+        if (relicLocalData.Id == 10)
+        {
+            lockMask.SetActive(false);
+
+
+            ServerData.weaponTable.TableDatas["weapon77"].hasItem.AsObservable().Subscribe(e =>
+            {
+               lockMask_Dokebi.SetActive(e < 1);
             }).AddTo(this);
             
         }
