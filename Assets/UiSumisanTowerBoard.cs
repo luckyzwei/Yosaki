@@ -103,6 +103,10 @@ public class UiSumisanTowerBoard : MonoBehaviour
 
     public void OnClickEnterButton()
     {
+        if(IsAllClear())
+        {
+            return;
+        }
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "입장 할까요?", () =>
         {
 
