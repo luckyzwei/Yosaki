@@ -276,6 +276,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite RecommendWeapon16;
     public Sprite RecommendWeapon17;
     public Sprite RecommendWeapon18;
+    public Sprite RecommendWeapon19;
+    public Sprite RecommendWeapon20;
 
     public Sprite weapon81;
 
@@ -1354,6 +1356,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.RecommendWeapon18:
                 return RecommendWeapon18;
+                break;
+            case Item_Type.RecommendWeapon19:
+                return RecommendWeapon19;
+                break;
+            case Item_Type.RecommendWeapon20:
+                return RecommendWeapon20;
                 break;
             case Item_Type.weapon81:
                 return weapon81;

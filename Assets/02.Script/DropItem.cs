@@ -527,6 +527,8 @@ public enum Item_Type
     RecommendWeapon16 = 8016,
     RecommendWeapon17 = 8017,
     RecommendWeapon18 = 8018,
+    RecommendWeapon19 = 8019,
+    RecommendWeapon20 = 8020,
 
     ChunNorigae5 = 8500,
     ChunNorigae6 = 8501,

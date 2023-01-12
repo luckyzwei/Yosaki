@@ -27,7 +27,7 @@ public class UiEventMissionBoard : MonoBehaviour
         if (severTime.Month == 1 && severTime.Day < 20)
         {
             this.gameObject.SetActive(false);
-            PopupManager.Instance.ShowAlarmMessage("1월 20일 이벤트 시작!");
+            PopupManager.Instance.ShowAlarmMessage("1월 20일 부터 이벤트 시작!");
             return;
         }
 #endif

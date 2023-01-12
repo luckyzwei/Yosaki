@@ -519,7 +519,7 @@ public class UiInventoryWeaponView : MonoBehaviour
                 || weaponData.Id == 66 || weaponData.Id == 67 || weaponData.Id == 68 || weaponData.Id == 69 || weaponData.Id == 70
                 || weaponData.Id == 71 || weaponData.Id == 72 || weaponData.Id == 73 || weaponData.Id == 74 || weaponData.Id == 75
                 || weaponData.Id == 76 || weaponData.Id == 77 || weaponData.Id == 78 || weaponData.Id == 79|| weaponData.Id == 80
-                || weaponData.Id == 81
+                || weaponData.Id == 81 || weaponData.Id == 82 || weaponData.Id == 83
 
                 )
             {
@@ -690,7 +690,7 @@ public class UiInventoryWeaponView : MonoBehaviour
                 if (weaponData.Id == 45 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49||
                     weaponData.Id == 52 || weaponData.Id == 53 || weaponData.Id == 54 || weaponData.Id == 55 || weaponData.Id == 56||
                     weaponData.Id == 60 || weaponData.Id == 61 || weaponData.Id == 62 || weaponData.Id == 71 || weaponData.Id == 72
-                    || weaponData.Id == 73 || weaponData.Id == 74 || weaponData.Id == 75 || weaponData.Id == 76)
+                    || weaponData.Id == 73 || weaponData.Id == 74 || weaponData.Id == 75 || weaponData.Id == 76 || weaponData.Id == 82 || weaponData.Id == 83)
                 {
                     weaponLockObject.gameObject.SetActive(state == 0);
                     weaponLockDescription.SetText($"십만대산\n추천보상으로 획득!");
@@ -1046,11 +1046,12 @@ public class UiInventoryWeaponView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 장착 하실수 없습니다.");
                 return;
             }
-            if (weaponData.Id == 81)
+            if (weaponData.Id >= 81 && weaponData.Id < 84)
             {
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 장착 하실수 없습니다.");
                 return;
             }
+          
 
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
             {
@@ -1138,7 +1139,7 @@ public class UiInventoryWeaponView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
                 return;
             }
-            if (weaponData.Id >= 81)
+            if (weaponData.Id >= 81 && weaponData.Id < 84)
             {
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
                 return;

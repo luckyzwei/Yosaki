@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -34,7 +34,7 @@ public class UiSumisanFireBoard : MonoBehaviour
 
     }
 
-    //±â´É º¸·ù
+    //ê¸°ëŠ¥ ë³´ë¥˜
     private void SetFlowerReward()
     {
         //chunFlowerReward.Initialize(TableManager.Instance.TwelveBossTable.dataArray[65]);
@@ -45,7 +45,7 @@ public class UiSumisanFireBoard : MonoBehaviour
 
         if (inputField != null)
         {
-            inputField.text = $"¼ÒÅÁ È½¼ö ÀÔ·Â";
+            inputField.text = $"ì†Œíƒ• íšŸìˆ˜ ì…ë ¥";
         }
     }
     private void Subscribe()
@@ -61,7 +61,7 @@ public class UiSumisanFireBoard : MonoBehaviour
         {
             registerButton.interactable = e == 0;
 
-            getButtonDesc.SetText(e == 0 ? "È¹µæ" : "¿À´Ã È¹µæÇÔ");
+            getButtonDesc.SetText(e == 0 ? "íšë“" : "ì˜¤ëŠ˜ íšë“í•¨");
         }).AddTo(this);
     }
 
@@ -92,13 +92,13 @@ public class UiSumisanFireBoard : MonoBehaviour
 
     private void Initialize()
     {
-        scoreText.SetText($"ÃÖ°í Á¡¼ö : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.sumiFireClear].Value)}");
+        scoreText.SetText($"ìµœê³  ì ìˆ˜ : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.sumiFireClear].Value)}");
 
     }
 
     public void OnClickDokebiEnterButton()
     {
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "ÀÔÀå ÇÏ½Ã°Ú½À´Ï±î?", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "ì…ì¥ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?", () =>
         {
             GameManager.Instance.LoadContents(GameManager.ContentsType.SumiFire);
         }, () => { });
@@ -123,7 +123,7 @@ public class UiSumisanFireBoard : MonoBehaviour
     {
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value == 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SumiFire)}Àº ÇÏ·ç¿¡ ÇÑ¹ø¸¸ È¹µæ °¡´ÉÇÕ´Ï´Ù!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SumiFire)}ì€ í•˜ë£¨ì— í•œë²ˆë§Œ íšë“ ê°€ëŠ¥í•©ë‹ˆë‹¤!");
             return;
         }
 
@@ -131,11 +131,11 @@ public class UiSumisanFireBoard : MonoBehaviour
 
         if (score == 0)
         {
-            PopupManager.Instance.ShowAlarmMessage("Á¡¼ö°¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage("ì ìˆ˜ê°€ ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}°³ È¹µæ ÇÕ´Ï±î?\n{CommonString.GetItemName(Item_Type.DokebiTreasure)}·Î Ãß°¡È¹µæ : {Utils.GetDokebiTreasureAddValue()}", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score}ê°œ íšë“ í•©ë‹ˆê¹Œ?\n{CommonString.GetItemName(Item_Type.DokebiTreasure)}ë¡œ ì¶”ê°€íšë“ : {Utils.GetDokebiTreasureAddValue()}", () =>
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value = 1;
             ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += score + Utils.GetDokebiTreasureAddValue();
@@ -155,7 +155,7 @@ public class UiSumisanFireBoard : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SumiFire)} {score + Utils.GetDokebiTreasureAddValue()}°³ È¹µæ!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SumiFire)} {score + Utils.GetDokebiTreasureAddValue()}ê°œ íšë“!", null);
             });
         }, null);
     }
@@ -164,7 +164,7 @@ public class UiSumisanFireBoard : MonoBehaviour
     {
         if (ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value < 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SumiFireKey)}ÀÌ ºÎÁ·ÇÕ´Ï´Ù!");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SumiFireKey)}ì´ ë¶€ì¡±í•©ë‹ˆë‹¤!");
             return;
         }
 
@@ -172,11 +172,11 @@ public class UiSumisanFireBoard : MonoBehaviour
 
         if (score == 0)
         {
-            PopupManager.Instance.ShowAlarmMessage("Á¡¼ö°¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage("ì ìˆ˜ê°€ ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score * ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value}°³ È¹µæ ÇÕ´Ï±î?\n<color=red>({score} * {ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value} È¹µæ °¡´É)</color>", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score * ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value}ê°œ íšë“ í•©ë‹ˆê¹Œ?\n<color=red>({score} * {ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value} íšë“ ê°€ëŠ¥)</color>", () =>
         {
             int clearCount = (int)ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value;
             ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += score * clearCount;
@@ -193,7 +193,7 @@ public class UiSumisanFireBoard : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SumiFire)} {score * clearCount}°³ È¹µæ!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SumiFire)} {score * clearCount}ê°œ íšë“!", null);
             });
         }, null);
     }
@@ -206,12 +206,12 @@ public class UiSumisanFireBoard : MonoBehaviour
             {
                 if (result < 1)
                 {
-                    PopupManager.Instance.ShowAlarmMessage("¿Ã¹Ù¸¥ °³¼ö°¡ ¾Æ´Õ´Ï´Ù.");
+                    PopupManager.Instance.ShowAlarmMessage("ì˜¬ë°”ë¥¸ ê°œìˆ˜ê°€ ì•„ë‹™ë‹ˆë‹¤.");
                     return;
                 }
                 if (ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value < result)
                 {
-                    PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SumiFireKey)}ÀÌ ºÎÁ·ÇÕ´Ï´Ù!");
+                    PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SumiFireKey)}ì´ ë¶€ì¡±í•©ë‹ˆë‹¤!");
                     return;
                 }
 
@@ -219,21 +219,21 @@ public class UiSumisanFireBoard : MonoBehaviour
 
                 if (score == 0)
                 {
-                    PopupManager.Instance.ShowAlarmMessage("Á¡¼ö°¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+                    PopupManager.Instance.ShowAlarmMessage("ì ìˆ˜ê°€ ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
                     return;
                 }
 
 
-                PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score * result}°³ È¹µæ ÇÕ´Ï±î?\n<color=red>({score} x {result} È¹µæ °¡´É)</color>", () =>
+                PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score * result}ê°œ íšë“ í•©ë‹ˆê¹Œ?\n<color=red>({score} x {result} íšë“ ê°€ëŠ¥)</color>", () =>
                 {
                     if (result < 1)
                     {
-                        PopupManager.Instance.ShowAlarmMessage("¿Ã¹Ù¸¥ °³¼ö°¡ ¾Æ´Õ´Ï´Ù.");
+                        PopupManager.Instance.ShowAlarmMessage("ì˜¬ë°”ë¥¸ ê°œìˆ˜ê°€ ì•„ë‹™ë‹ˆë‹¤.");
                         return;
                     }
                     if (ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value < result)
                     {
-                        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SumiFireKey)}ÀÌ ºÎÁ·ÇÕ´Ï´Ù!");
+                        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.SumiFireKey)}ì´ ë¶€ì¡±í•©ë‹ˆë‹¤!");
                         return;
                     }
 
@@ -252,13 +252,13 @@ public class UiSumisanFireBoard : MonoBehaviour
 
                     ServerData.SendTransaction(transactions, successCallBack: () =>
                     {
-                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SumiFire)} {score * result}°³ È¹µæ!", null);
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SumiFire)} {score * result}ê°œ íšë“!", null);
                     });
                 }, null);
             }
             else
             {
-                PopupManager.Instance.ShowAlarmMessage("¼ÒÅÁ È½¼ö¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+                PopupManager.Instance.ShowAlarmMessage("ì†Œíƒ• íšŸìˆ˜ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
             }
         }
 
