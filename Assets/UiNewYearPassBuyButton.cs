@@ -38,7 +38,7 @@ public class UiNewYearPassBuyButton : MonoBehaviour
 
         ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).AsObservable().Subscribe(e =>
         {
-            GetEventItemCount.SetText($"획득량 : {ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value} 개");
+            GetEventItemCount.SetText($"구매시 즉시 추가획득 : {ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value} 개");
         }).AddTo(disposable);
 
         ServerData.iapServerTable.TableDatas[productKey].buyCount.AsObservable().Subscribe(e =>
