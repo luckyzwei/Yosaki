@@ -182,14 +182,8 @@ public static class PlayerStats
             }
         }
 
-        if (statusType != StatusType.IgnoreDefense && statusType != StatusType.PenetrateDefense)
-        {
-            ret = ret + ret * GetPassiveAdvanceValue();
-        }
-        else
-        {
-            ret = ret + ret * GetPassiveAdvanceValue() * 0.5f;
-        }
+        ret = ret + ret * GetPassiveAdvanceValue();
+
 
 
         return ret;
