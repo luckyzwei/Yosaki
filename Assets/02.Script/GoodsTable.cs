@@ -146,6 +146,7 @@ public class GoodsTable
     public static string Event_Fall = "Event_Fall"; //곶감
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
     public static string Event_NewYear = "Event_NewYear"; //신년재화
+    public static string Event_NewYear_All = "Event_NewYear_All"; //신년재화 총수급량
 
     public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
     public static string SusanoTreasure = "ST"; // 악귀퇴치 재화
@@ -292,6 +293,7 @@ public class GoodsTable
         {Event_Fall,0f},
         {Event_Fall_Gold,0f},
         {Event_NewYear,0f},
+        {Event_NewYear_All,0f},
         {FoxMaskPartial,0f},
 
         {DokebiFire,0f},

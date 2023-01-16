@@ -202,6 +202,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.FoxMaskPartial,
         GoodsTable.Event_Fall_Gold,
         GoodsTable.Event_NewYear,
+        GoodsTable.Event_NewYear_All,
         GoodsTable.Mileage,
 
         GoodsTable.HellPowerUp,

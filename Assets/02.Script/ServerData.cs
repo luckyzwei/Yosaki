@@ -452,6 +452,9 @@ public static class ServerData
             case Item_Type.Event_NewYear:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value += rewardValue;
                 break;
+            case Item_Type.Event_NewYear_All:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value += rewardValue;
+                break;
 
             case Item_Type.du:
                 ServerData.goodsTable.GetTableData(GoodsTable.du).Value += rewardValue;
@@ -768,6 +771,9 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.Event_NewYear:
                 passParam.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.Event_NewYear_All:
+                passParam.Add(GoodsTable.Event_NewYear_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.Fw:
@@ -1110,6 +1116,10 @@ public static class ServerData
             case Item_Type.Event_NewYear:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value += amount;
                 param.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.Event_NewYear_All:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value += amount;
+                param.Add(GoodsTable.Event_NewYear_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.Hel:
@@ -1822,6 +1832,7 @@ public static class ServerData
                 //LogManager.Instance.SendLogType("RankReward", type.ToString(), "");
             });
         }
+
         else if (type.IsRelicRewardItem())
         {
             switch (type)
@@ -2398,6 +2409,10 @@ public static class ServerData
 
                 case Item_Type.Event_NewYear:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value += amount;
+                    break;
+                    
+                case Item_Type.Event_NewYear_All:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value += amount;
                     break;
 
                 case Item_Type.GuildReward:

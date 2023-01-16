@@ -17,6 +17,9 @@ public class UiNewYearPassBuyButton : MonoBehaviour
 
     private Button buyButton;
 
+    [SerializeField]
+    private TextMeshProUGUI GetEventItemCount;
+
     void Start()
     {
         Subscribe();
@@ -33,9 +36,18 @@ public class UiNewYearPassBuyButton : MonoBehaviour
 
         disposable.Clear();
 
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).AsObservable().Subscribe(e =>
+        {
+            GetEventItemCount.SetText($"획득량 : {ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value} 개");
+        }).AddTo(disposable);
+
         ServerData.iapServerTable.TableDatas[productKey].buyCount.AsObservable().Subscribe(e =>
         {
             descText.SetText(e >= 1 ? "구매완료" : "떡국패스 구매");
+            if (e >= 1)
+            {
+                GetEventItemCount.SetText(""); 
+            }
            // this.gameObject.SetActive(e <= 0);
         }).AddTo(disposable);
 
@@ -91,7 +103,11 @@ public class UiNewYearPassBuyButton : MonoBehaviour
 
         if (tableData.Productid != productKey) return;
 
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!\n 떡국 {ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value}개 획득!", null);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value += ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value;
+
+        ServerData.goodsTable.UpData(GoodsTable.Event_NewYear,false);
 
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
 

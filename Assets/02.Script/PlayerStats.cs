@@ -184,9 +184,13 @@ public static class PlayerStats
 
         if (statusType != StatusType.IgnoreDefense && statusType != StatusType.PenetrateDefense)
         {
-
             ret = ret + ret * GetPassiveAdvanceValue();
         }
+        else
+        {
+            ret = ret + ret * GetPassiveAdvanceValue() * 0.5f;
+        }
+
 
         return ret;
     }
@@ -743,7 +747,7 @@ public static class PlayerStats
         ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
 
-        
+
         ret += GetWeaponHasPercentValue(StatusType.ExpGainPer);
 
         return ret;

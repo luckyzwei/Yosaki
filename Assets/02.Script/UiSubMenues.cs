@@ -4,4 +4,9 @@ using UnityEngine;
 
 public class UiSubMenues : SingletonMono<UiSubMenues>
 {
+
+    public void ActiveOnlineRaidLobby() 
+    {
+        PartyRaidManager.Instance.ActivePartyRaidBoard();
+    }
 }

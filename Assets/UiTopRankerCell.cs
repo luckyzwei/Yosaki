@@ -63,6 +63,9 @@ public class UiTopRankerCell : MonoBehaviour
     private GameObject leaveObject;
 
     [SerializeField]
+    private GameObject masterText;
+
+    [SerializeField]
     private bool isPartyRaidPlayer = false;
 
     public string recNickName { get; private set; }
@@ -249,6 +252,11 @@ public class UiTopRankerCell : MonoBehaviour
         {
             kickButton.gameObject.SetActive(PhotonNetwork.IsMasterClient &&
                 !Utils.GetOriginNickName(PlayerData.Instance.NickName).Equals(Utils.GetOriginNickName(nickName)));
+        }
+
+        if (masterText != null)
+        {
+            masterText.gameObject.SetActive(PartyRaidManager.Instance.NetworkManager.IsMasterClient(nickName));
         }
     }
 

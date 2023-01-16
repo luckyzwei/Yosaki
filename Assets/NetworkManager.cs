@@ -50,6 +50,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private Dictionary<int, PlayerInfo> roomPlayerDatas = new Dictionary<int, PlayerInfo>();
 
     public Dictionary<int, PlayerInfo> RoomPlayerDatas => roomPlayerDatas;
+    public bool IsMasterClient(string nickName)
+    {
+        if (roomPlayerDatas.Count == 0) return false;
+
+        var e = roomPlayerDatas.GetEnumerator();
+        while (e.MoveNext())
+        {
+            return Utils.GetOriginNickName(e.Current.Value.nickName).Equals(Utils.GetOriginNickName(nickName));
+            break;
+        }
+
+        return false;
+    }
 
     [SerializeField]
     private List<UiTopRankerCell> playerView_Room;

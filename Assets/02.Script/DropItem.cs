@@ -551,6 +551,7 @@ public enum Item_Type
     DokebiSkill4 = 8714,
 
     Event_NewYear = 8800,
+    Event_NewYear_All = 8801, // 총 습득량
 
     Mileage = 9000,
     DokebiFire = 9001,

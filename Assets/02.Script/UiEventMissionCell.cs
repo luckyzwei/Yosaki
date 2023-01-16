@@ -130,6 +130,10 @@ public class UiEventMissionCell : MonoBehaviour
         {
             rewardGemNum *= 2;
         }
+        else
+        {
+            ServerData.goodsTable.AddLocalData(GoodsTable.Event_NewYear_All, rewardGemNum);
+        }
         //로컬 갱신
         EventMissionManager.UpdateEventMissionClear((EventMissionKey)(tableData.Id), -tableData.Rewardrequire * amountFactor);
         EventMissionManager.UpdateEventMissionReward((EventMissionKey)(tableData.Id), amountFactor);
@@ -169,6 +173,10 @@ public class UiEventMissionCell : MonoBehaviour
 
         //재화 추가
         goodsParam.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
+        if (ServerData.iapServerTable.TableDatas[UiNewYearPassBuyButton.productKey].buyCount.Value == 0)
+        {
+            goodsParam.Add(GoodsTable.Event_NewYear_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value);
+        }
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         ServerData.SendTransaction(transactionList);
