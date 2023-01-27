@@ -774,6 +774,7 @@ public enum TitleMissionId
 
 
 
+
     Stage14300,//★
     Stage14400,//★
 
@@ -788,7 +789,26 @@ public enum TitleMissionId
     Level2880000,//★
     Level2890000,//★
     Level2900000,//★
+    
+    SumisanWeapon1,//★
 
+
+
+    Level2910000,//★
+    Level2920000,//★
+    Level2930000,//★
+    Level2940000,//★
+    Level2950000,//★
+    Level2960000,//★
+    Level2970000,//★
+    Level2980000,//★
+    Level2990000,//★
+    Level3000000,//★
+
+
+
+    Stage14500,//★
+    Stage14600,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -2503,6 +2523,46 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Level2900000);
             }
+            if (e >= 2910000)
+            {
+                ClearTitleMission(TitleMissionId.Level2910000);
+            }
+            if (e >= 2920000)
+            {
+                ClearTitleMission(TitleMissionId.Level2920000);
+            }
+            if (e >= 2930000)
+            {
+                ClearTitleMission(TitleMissionId.Level2930000);
+            }
+            if (e >= 2940000)
+            {
+                ClearTitleMission(TitleMissionId.Level2940000);
+            }
+            if (e >= 2950000)
+            {
+                ClearTitleMission(TitleMissionId.Level2950000);
+            }
+            if (e >= 2960000)
+            {
+                ClearTitleMission(TitleMissionId.Level2960000);
+            }
+            if (e >= 2970000)
+            {
+                ClearTitleMission(TitleMissionId.Level2970000);
+            }
+            if (e >= 2980000)
+            {
+                ClearTitleMission(TitleMissionId.Level2980000);
+            }
+            if (e >= 2990000)
+            {
+                ClearTitleMission(TitleMissionId.Level2990000);
+            }
+            if (e >= 3000000)
+            {
+                ClearTitleMission(TitleMissionId.Level3000000);
+            }
 
 
         }).AddTo(this);
@@ -3509,6 +3569,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             {
                 ClearTitleMission(TitleMissionId.Stage14400);
             }
+            if (e >= 14500 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage14500);
+            }
+            if (e >= 14600 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage14600);
+            }
 
 
         }).AddTo(this);
@@ -3806,6 +3874,13 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e == 1)
             {
                 ClearTitleMission(TitleMissionId.SumisanWeapon0);
+            }
+        }).AddTo(this);
+        ServerData.weaponTable.TableDatas["weapon84"].hasItem.AsObservable().Subscribe(e =>
+        {
+            if (e == 1)
+            {
+                ClearTitleMission(TitleMissionId.SumisanWeapon1);
             }
         }).AddTo(this);
 

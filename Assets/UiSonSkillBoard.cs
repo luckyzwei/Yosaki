@@ -23,7 +23,7 @@ public class UiSonSkillBoard : SingletonMono<UiSkillBoard>
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            if (tableData[i].Issonskill == false) continue;
+            if (tableData[i].SKILLCASTTYPE != SkillCastType.Son) continue;
 
             var cell = Instantiate<UiSonSkillCell>(uiSonSkillCell, skillCellParent);
 

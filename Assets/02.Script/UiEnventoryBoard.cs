@@ -6,11 +6,15 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 {
     [SerializeField]
     private UiInventoryWeaponView uiInventoryWeaponViewPrefab;
+    [SerializeField]
+    private UiInventoryWeaponView uiInventoryRingViewPrefab;
 
     [SerializeField]
     private Transform viewParentWeapon;
     [SerializeField]
     private Transform viewParentMagicBook;
+    [SerializeField]
+    private Transform viewParentNewGacha;
 
 
     [SerializeField]
@@ -18,6 +22,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
     private List<UiInventoryWeaponView> weaponViewContainer = new List<UiInventoryWeaponView>();
     private List<UiInventoryWeaponView> magicBookViewContainer = new List<UiInventoryWeaponView>();
+    private List<UiInventoryWeaponView> newGachaViewContainer = new List<UiInventoryWeaponView>();
 
     [SerializeField]
     private Transform equipViewParent;
@@ -43,11 +48,19 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
             magicBookViewContainer[i].OnClickUpgradeButton();
         }
     }
+    public void AllUpgradeNewGacha(int myIdx)
+    {
+        for (int i = 0; i <= myIdx; i++)
+        {
+            newGachaViewContainer[i].OnClickUpgradeButton();
+        }
+    }
 
     public void Start()
     {
         MakeWeaponBoard();
         MakeMagicBookBoard();
+        MakeNewGachaBoard();
         MakePetBoard();
     }
 
@@ -65,7 +78,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
                 {
                     UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent);
 
-                    view.Initialize(e.Current.Value, null, OnClickWeaponView);
+                    view.Initialize(e.Current.Value, null, null, OnClickWeaponView);
 
                     weaponViewContainer.Add(view);
                 }
@@ -74,7 +87,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
                 {
                     UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent_Recommend);
 
-                    view.Initialize(e.Current.Value, null, OnClickWeaponView);
+                    view.Initialize(e.Current.Value, null, null, OnClickWeaponView);
 
                     weaponViewContainer.Add(view);
 
@@ -84,7 +97,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
                 {
                     UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent_Sasinsu);
 
-                    view.Initialize(e.Current.Value, null, OnClickWeaponView);
+                    view.Initialize(e.Current.Value, null, null, OnClickWeaponView);
 
                     weaponViewContainer.Add(view);
 
@@ -95,7 +108,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
             {
                 UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, viewParentWeapon);
 
-                view.Initialize(e.Current.Value, null, OnClickWeaponView);
+                view.Initialize(e.Current.Value, null, null, OnClickWeaponView);
 
                 weaponViewContainer.Add(view);
             }
@@ -110,14 +123,11 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
         while (e.MoveNext())
         {
-            if (e.Current.Value.Id == 23||
-                e.Current.Value.Id == 45||
-                e.Current.Value.Id == 50
-                )
+            if (e.Current.Value.MAGICBOOKTYPE == MagicBookType.View)
             {
                 UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, equipViewParent);
 
-                view.Initialize(null, e.Current.Value, OnClickWeaponView);
+                view.Initialize(null, e.Current.Value,null, OnClickWeaponView);
 
                 magicBookViewContainer.Add(view);
             }
@@ -126,10 +136,26 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
                 UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryWeaponViewPrefab, viewParentMagicBook);
 
-                view.Initialize(null, e.Current.Value, OnClickWeaponView);
+                view.Initialize(null, e.Current.Value, null, OnClickWeaponView);
 
                 magicBookViewContainer.Add(view);
             }
+
+        }
+    }
+    private void MakeNewGachaBoard()
+    {
+        var e = TableManager.Instance.NewGachaData.GetEnumerator();
+
+        while (e.MoveNext())
+        {
+
+                UiInventoryWeaponView view = Instantiate<UiInventoryWeaponView>(uiInventoryRingViewPrefab, viewParentNewGacha);
+
+                view.Initialize(null, null, e.Current.Value, OnClickWeaponView);
+
+                newGachaViewContainer.Add(view);
+         
 
         }
     }
@@ -155,7 +181,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
         {
             //이무기는 생성X
             if (e.Current.Value.Id >= 28) break;
-            if (e.Current.Value.Id >= 12&&e.Current.Value.Id<=23) continue;
+            if (e.Current.Value.Id >= 12 && e.Current.Value.Id <= 23) continue;
 
             var petView = Instantiate<UiPetView>(uiPetViewPrefeab, petViewParent);
 

@@ -51,7 +51,7 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
 
             for (int i = 0; i < skillTableDatas.Count; i++)
             {
-                if (skillTableDatas[i].Issonskill == false) continue;
+                if (skillTableDatas[i].SKILLCASTTYPE != SkillCastType.Son) continue;
                 if (sonLevel < skillTableDatas[i].Sonunlocklevel) continue;
                 if (AutoManager.Instance.canAttack == false && GameManager.Instance.IsNormalField == true) continue;
 

@@ -51,6 +51,11 @@ public class StatusTable
     public const string PetAwakeLevel = "PetAwakeLevel";
     public const string FeelSlash_memory = "FeelSlash_memory";
 
+    public const string ZSlash_memory = "ZSlash_memory";
+    public const string Cslash_memory = "Cslash_memory";
+    public const string GiSlash_memory = "GiSlash_memory";
+    public const string Gum_memory = "Gum_memory";
+
 
     public const string Skill0_AddValue = "Sk0_Add";
     public const string Skill1_AddValue = "Sk1_Add";
@@ -98,6 +103,11 @@ public class StatusTable
         {ChunSlash_memory,0},
         {PetAwakeLevel,0},
         {FeelSlash_memory,0},
+
+        {ZSlash_memory,0},
+        {Cslash_memory,0},
+        {GiSlash_memory,0},
+        {Gum_memory,0},
 
         {Skill0_AddValue,0},
         {Skill1_AddValue,0},
@@ -289,7 +299,31 @@ public class StatusTable
 
                         return level * 0.0025f * spcialAbilRatio;
                     }
+                //
+                case ZSlash_memory:
+                    {
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
 
+                        return level * 0.00001f * spcialAbilRatio;
+                    }
+                case Cslash_memory:
+                    {
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
+
+                        return level * 0.000008f * spcialAbilRatio;
+                    }
+                case GiSlash_memory:
+                    {
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
+
+                        return level * 0.000004f * spcialAbilRatio;
+                    }
+                case Gum_memory:
+                    {
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
+
+                        return level * 0.00000004f * spcialAbilRatio;
+                    }
                 #endregion
                 default:
                     {

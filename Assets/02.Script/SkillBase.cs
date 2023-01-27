@@ -32,7 +32,7 @@ public abstract class SkillBase
     public virtual void UseSkill()
     {
         //인드라 X
-        if (skillInfo.Issonskill == false && skillInfo.Id != 18 && skillInfo.Id != 19)
+        if (skillInfo.SKILLCASTTYPE == SkillCastType.Player && skillInfo.Id != 18 && skillInfo.Id != 19)
         {
             playerSkillCaster.PlayAttackAnim();
         }
@@ -72,7 +72,20 @@ public abstract class SkillBase
 
     private void SpawnActiveEffect()
     {
-        Transform targetTr = skillInfo.Issonskill == false ? PlayerMoveController.Instance.transform : SonSkillCaster.Instance.transform;
+        Transform targetTr = null;
+
+        if (skillInfo.SKILLCASTTYPE == SkillCastType.Player)
+        {
+            targetTr = PlayerMoveController.Instance.transform;
+        }
+        else if (skillInfo.SKILLCASTTYPE == SkillCastType.Son)
+        {
+            targetTr = SonSkillCaster.Instance.transform;
+        }
+        else//사천왕
+        {
+            targetTr = FourSkillCaster.Instance.transform;
+        }
 
         Vector3 activeEffectSpawnPos = targetTr.position + Vector3.up * 0.5f;
         MoveDirection moveDirection = PlayerMoveController.Instance.MoveDirection;

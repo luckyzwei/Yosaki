@@ -326,10 +326,24 @@ public class CostumeServerTable
         });
     }
 
+    public int GetCostumeHasAmount()
+    {
+        var serverData = ServerData.costumeServerTable.TableDatas;
+        var tableData = TableManager.Instance.Costume.dataArray;
+        int costumeCount = 0;
+        for (int i = 0; i < serverData.Count; i++)
+        {
+            if (serverData[tableData[i].Stringid].hasCostume.Value == true)
+            {
+                costumeCount++;
+             }
+        }
+        return costumeCount;
+    }
     public void ApplyAbilityByCurrentSelectedPreset()
     {
         string currentSelectedData = ServerData.costumePreset.TableDatas[ServerData.equipmentTable.GetCurrentCostumePresetKey()];
-
+        
         var costumeAbilities = currentSelectedData.Split(SplitText);
 
         for (int i = 0; i < costumeAbilities.Length; i++)
@@ -337,7 +351,7 @@ public class CostumeServerTable
             if (string.IsNullOrEmpty(costumeAbilities[i])) continue;
 
             var costumeTableData = TableManager.Instance.Costume.dataArray[i];
-
+            
             tableDatas[costumeTableData.Stringid].abilityIdx = CostumeServerData.GetCostumeAbilOnly(costumeAbilities[i]);
             tableDatas[costumeTableData.Stringid].lockIdx = CostumeServerData.GetCostumeLockOnly(costumeAbilities[i]);
         }
@@ -370,11 +384,11 @@ public class CostumeServerTable
         {
             if(PlayerStats.IsChunFlowerCostumeEnhance())
             {
-                return abilValues[(int)type] * (1 + TableManager.Instance.chunMarkAbil.dataArray[5].Abiladdvalue);
+                return (abilValues[(int)type] * (PlayerStats.IsCostumeCollectionEnhance() + TableManager.Instance.chunMarkAbil.dataArray[5].Abiladdvalue));
             }
             else
             {
-                return abilValues[(int)type];
+                return abilValues[(int)type] * PlayerStats.IsCostumeCollectionEnhance();
             }            
         }
         else

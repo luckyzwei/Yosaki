@@ -340,15 +340,20 @@ public class SkillServerTable
     {
         var tableData = TableManager.Instance.SkillData[idx];
 
-        if (tableData.Issonskill == false)
+        if (tableData.SKILLCASTTYPE == SkillCastType.Player)
         {
             int originLevel = tableDatas[SkillLevel][idx].Value;
 
             return originLevel;
         }
-        else
+        else if(tableData.SKILLCASTTYPE == SkillCastType.Son)
         {
             return ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value - tableData.Sonunlocklevel;
+        }
+        //사천왕
+        else
+        {
+            return ServerData.goodsTable.GetFourSkillHasCount() - tableData.Sonunlocklevel;
         }
 
     }

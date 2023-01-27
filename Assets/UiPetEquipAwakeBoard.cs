@@ -215,6 +215,11 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
     {
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "모든 여우구슬로 강화 할까요?", () =>
         {
+            int prefDragonBall = PlayerStats.GetCurrentDragonIdx();
+
+            int prefFoxCup = PlayerStats.GetCurrentFoxCupIdx();
+
+
             float currentMarble = ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value;
 
             if (currentMarble < GetMarbleUpgradePrice())
@@ -252,7 +257,23 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
 
                 LogManager.Instance.SendLogType("PetEquip", "all", $"pref {ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value - upgradableNum} +{upgradableNum}");
 
+                int currentDragonBall = PlayerStats.GetCurrentDragonIdx();
+
+                int currentFoxCup = PlayerStats.GetCurrentFoxCupIdx();
+
+                if (prefDragonBall < currentDragonBall)
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "용보주 단계 상승!", null);
+                }
+
+                if (prefFoxCup < currentFoxCup)
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "여우 호리병 단계 상승!", null);
+                }
+
             });
+
+
         }, null);
     }
     //

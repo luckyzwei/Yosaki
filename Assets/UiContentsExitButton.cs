@@ -39,7 +39,8 @@ public class UiContentsExitButton : MonoBehaviour
         //도깨비 보스 & 수미산 사천왕
         if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 85) ||
             (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 86) ||
-            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 87) 
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 87) || 
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 88)  
             )
         {
             return true;
@@ -116,7 +117,9 @@ public class UiContentsExitButton : MonoBehaviour
             (GameManager.Instance.bossId == 83)||
             (GameManager.Instance.bossId == 85)||
             (GameManager.Instance.bossId == 86)||
-            (GameManager.Instance.bossId == 87))
+            (GameManager.Instance.bossId == 87)||
+            (GameManager.Instance.bossId == 88)
+            )
             )
         {
             GameManager.Instance.LoadContents(GameManager.ContentsType.TwelveDungeon);

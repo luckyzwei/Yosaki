@@ -16,11 +16,15 @@ public class MagicBookServerData
     public ReactiveProperty<int> amount;
     public ReactiveProperty<int> collectLevel;
 
+    public ReactiveProperty<int> getReward0;
+    public ReactiveProperty<int> getReward1;
+
     public string ConvertToString()
     {
-        return $"{idx},{hasItem.Value},{level.Value},{amount.Value},{collectLevel.Value}";
+        return $"{idx},{hasItem.Value},{level.Value},{amount.Value},{collectLevel.Value},{getReward0.Value},{getReward1.Value}";
     }
 }
+
 
 public class MagicBookTable
 {
@@ -116,6 +120,9 @@ public class MagicBookTable
                     magicBookData.amount = new ReactiveProperty<int>(0);
                     magicBookData.collectLevel = new ReactiveProperty<int>(0);
 
+                    magicBookData.getReward0 = new ReactiveProperty<int>(0);
+                    magicBookData.getReward1 = new ReactiveProperty<int>(0);
+
                     tableDatas.Add(table[i].Stringid, magicBookData);
                     defultValues.Add(table[i].Stringid, magicBookData.ConvertToString());
                 }
@@ -178,7 +185,18 @@ public class MagicBookTable
                         {
                             magicBook.collectLevel = new ReactiveProperty<int>(0);
                         }
-
+                        if (splitData.Length >= 6)
+                        {
+                            magicBook.getReward0 = new ReactiveProperty<int>(int.Parse(splitData[5]));
+                            magicBook.getReward1 = new ReactiveProperty<int>(int.Parse(splitData[6]));
+                        }
+                        else
+                        {
+                            magicBook.getReward0 = new ReactiveProperty<int>(0);
+                            magicBook.getReward1 = new ReactiveProperty<int>(0);
+                            paramCount++;
+                            defultValues.Add(table[i].Stringid, magicBook.ConvertToString());
+                        }
                         tableDatas.Add(table[i].Stringid, magicBook);
                     }
                     else
@@ -190,6 +208,8 @@ public class MagicBookTable
                         magicBookData.level = new ReactiveProperty<int>(0);
                         magicBookData.amount = new ReactiveProperty<int>(0);
                         magicBookData.collectLevel = new ReactiveProperty<int>(0);
+                        magicBookData.getReward0 = new ReactiveProperty<int>(0);
+                        magicBookData.getReward1 = new ReactiveProperty<int>(0);
 
                         tableDatas.Add(table[i].Stringid, magicBookData);
                         defultValues.Add(table[i].Stringid, magicBookData.ConvertToString());

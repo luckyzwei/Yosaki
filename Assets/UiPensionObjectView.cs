@@ -147,6 +147,10 @@ public class UiPensionObjectView : MonoBehaviour
         else if (pensionKey == "sumipension")
         {
             itemType = Item_Type.SumiFire;
+        }    
+        else if (pensionKey == "ringpension")
+        {
+            itemType = Item_Type.NewGachaEnergy;
         }
 
         List<TransactionValue> transactions = new List<TransactionValue>();

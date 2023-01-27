@@ -20,6 +20,7 @@ public class UiSumisanBossBoard : MonoBehaviour
     {
         
         sumisanBoss[0].Initialize(TableManager.Instance.TwelveBossTable.dataArray[87]);
+        sumisanBoss[1].Initialize(TableManager.Instance.TwelveBossTable.dataArray[88]);
          
     }
 }

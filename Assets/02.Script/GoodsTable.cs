@@ -132,6 +132,12 @@ public class GoodsTable
     public static string DokebiSkill3 = "DokebiSkill3";
     public static string DokebiSkill4 = "DokebiSkill4";
 
+
+    public static string FourSkill0 = "FS0";
+    public static string FourSkill1 = "FS1";
+    public static string FourSkill2 = "FS2";
+    public static string FourSkill3 = "FS3";
+
     public static string Fw = "Fw";
     public const string Cw = "Cw"; //천계꽃
 
@@ -162,6 +168,7 @@ public class GoodsTable
     public static string DokebiFireEnhance = "DFE";
     public static string SumiFire = "SumiFire";
     public static string SumiFireKey = "SumiFireKey";
+    public static string NewGachaEnergy = "NGE";
 
 
 
@@ -278,6 +285,11 @@ public class GoodsTable
         {DokebiSkill3,0f},
         {DokebiSkill4,0f},
 
+        {FourSkill0,0f},
+        {FourSkill1,0f},
+        {FourSkill2,0f},
+        {FourSkill3,0f},
+
         {Fw,0f},
         {Cw,0f},
         //
@@ -305,7 +317,8 @@ public class GoodsTable
         {DokebiTreasure,0f},
         {SusanoTreasure,0f},
         {SumiFire,0f},
-        {SumiFireKey,0f}
+        {SumiFireKey,0f},
+        {NewGachaEnergy,0f}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -424,6 +437,30 @@ public class GoodsTable
         }
     }
     //
+
+    public int GetFourSkillHasCount()
+    {
+        int fourLevel = 0;
+
+        if (ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).Value == 1)
+        {
+            fourLevel++;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).Value == 1)
+        {
+            fourLevel++;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).Value == 1)
+        {
+            fourLevel++;
+        }
+        if (ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).Value == 1)
+        {
+            fourLevel++;
+        }
+        return fourLevel;
+    }
+
     static int eventItemAddNum_Spring = 0;
     public void GetSpringEventItem(float amount)
     {

@@ -27,15 +27,23 @@ public class UiPetHomeView : MonoBehaviour
 
     [SerializeField]
     private Image rewardIcon;
+    [SerializeField]
+    private Image reward1Icon;
 
     [SerializeField]
     private TextMeshProUGUI rewardValue;
+    [SerializeField]
+    private TextMeshProUGUI reward1Value;
 
     [SerializeField]
     private Button rewardButton;
+    [SerializeField]
+    private Button reward1Button;
 
     [SerializeField]
     private TextMeshProUGUI rewardDescription;
+    [SerializeField]
+    private TextMeshProUGUI reward1Description;
 
 
     public void Initialize(PetTableData petData)
@@ -49,8 +57,10 @@ public class UiPetHomeView : MonoBehaviour
         petName.SetText($"{petData.Name}");
 
         rewardIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)petData.Getrewardtype);
+        reward1Icon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)petData.Getrewardtype1);
 
         rewardValue.SetText(Utils.ConvertBigNum(petData.Getrewardvalue));
+        reward1Value.SetText(Utils.ConvertBigNum(petData.Getrewardvalue1));
 
         Subscribe();
     }
@@ -79,6 +89,16 @@ public class UiPetHomeView : MonoBehaviour
             rewardButton.interactable = !hasReward;
 
             rewardDescription.SetText(!hasReward ? "보상수령" : "수령완료");
+
+        }).AddTo(this);
+        ServerData.etcServerTable.TableDatas[EtcServerTable.PetHomeReward1].AsObservable().Subscribe(e =>
+        {
+
+            bool hasReward = ServerData.etcServerTable.HasPetHomeReward1(petData.Id);
+
+            reward1Button.interactable = !hasReward;
+
+            reward1Description.SetText(!hasReward ? "보상수령" : "수령완료");
 
         }).AddTo(this);
 
@@ -135,6 +155,41 @@ public class UiPetHomeView : MonoBehaviour
 
         Param etcParam = new Param();
         etcParam.Add(EtcServerTable.PetHomeReward, ServerData.etcServerTable.TableDatas[EtcServerTable.PetHomeReward].Value);
+
+        transactions.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, etcParam));
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+        {
+            PopupManager.Instance.ShowAlarmMessage("보상을 획득했습니다!");
+        });
+
+    }
+    public void OnClickGetAdRewardButton()
+    {
+        if (ServerData.etcServerTable.HasPetHomeReward1(petData.Id))
+        {
+            PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
+            return;
+        }
+
+        if (ServerData.iapServerTable.TableDatas[UiEquipmentCollectionPassBuyButton.collectionPassKey].buyCount.Value < 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("도감 패스권이 필요합니다.");
+            return;
+        }
+
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        Item_Type rewardType = (Item_Type)petData.Getrewardtype;
+
+        float rewardValue = petData.Getrewardvalue;
+
+        transactions.Add(ServerData.GetItemTypeTransactionValueForAttendance(rewardType, rewardValue));
+
+        ServerData.etcServerTable.TableDatas[EtcServerTable.PetHomeReward1].Value += $"{BossServerTable.rewardSplit}{petData.Id}";
+
+        Param etcParam = new Param();
+        etcParam.Add(EtcServerTable.PetHomeReward1, ServerData.etcServerTable.TableDatas[EtcServerTable.PetHomeReward1].Value);
 
         transactions.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, etcParam));
 

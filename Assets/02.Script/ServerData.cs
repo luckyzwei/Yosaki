@@ -14,6 +14,7 @@ public static class ServerData
     public static GoodsTable goodsTable { get; private set; } = new GoodsTable();
     public static WeaponTable weaponTable { get; private set; } = new WeaponTable();
     public static SkillServerTable skillServerTable { get; private set; } = new SkillServerTable();
+    public static NewGachaServerTable newGachaServerTable { get; private set; } = new NewGachaServerTable();
     public static DailyMissionTable dailyMissionTable { get; private set; } = new DailyMissionTable();
     public static EventMissionTable eventMissionTable { get; private set; } = new EventMissionTable();
     public static CollectionTable collectionTable { get; private set; } = new CollectionTable();
@@ -96,6 +97,7 @@ public static class ServerData
         //collectionTable.Initialize();
         equipmentTable.Initialize();
         magicBookTable.Initialize();
+        newGachaServerTable.Initialize();
         petTable.Initialize();
         userInfoTable.Initialize();
         rankTables_level.Initialize();
@@ -378,6 +380,20 @@ public static class ServerData
             case Item_Type.DokebiSkill4:
                 ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill4).Value += rewardValue;
                 break;
+            //            
+            case Item_Type.FourSkill0:
+                ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).Value += rewardValue;
+                break;
+            case Item_Type.FourSkill1:
+                ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).Value += rewardValue;
+                break;
+            case Item_Type.FourSkill2:
+                ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).Value += rewardValue;
+                break;
+            case Item_Type.FourSkill3:
+                ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).Value += rewardValue;
+                break;
+
             //
             case Item_Type.GangrimSkill:
                 ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value += rewardValue;
@@ -434,6 +450,9 @@ public static class ServerData
             
             case Item_Type.SumiFireKey:
                 ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value += rewardValue;
+                break;
+            case Item_Type.NewGachaEnergy:
+                ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += rewardValue;
                 break;
 
 
@@ -546,6 +565,8 @@ public static class ServerData
             case Item_Type.costume79:
             case Item_Type.costume80:
             case Item_Type.costume81:
+            case Item_Type.costume82:
+            case Item_Type.costume83:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -682,6 +703,8 @@ public static class ServerData
             case Item_Type.costume79:
             case Item_Type.costume80:
             case Item_Type.costume81:
+            case Item_Type.costume82:
+            case Item_Type.costume83:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -750,9 +773,16 @@ public static class ServerData
             case Item_Type.SumiFire:
                 passParam.Add(GoodsTable.SumiFire, ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            
+            case Item_Type.NewGachaEnergy:
+                passParam.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.DokebiFire:
                 passParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+                    case Item_Type.Mileage:
+                passParam.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
                    case Item_Type.SumiFireKey:
@@ -939,6 +969,23 @@ public static class ServerData
             case Item_Type.DokebiSkill4:
                 passParam.Add(GoodsTable.DokebiSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill4).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            //           //
+            case Item_Type.FourSkill0:
+                passParam.Add(GoodsTable.FourSkill0, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.FourSkill1:
+                passParam.Add(GoodsTable.FourSkill1, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.FourSkill2:
+                passParam.Add(GoodsTable.FourSkill2, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.FourSkill3:
+                passParam.Add(GoodsTable.FourSkill3, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
             //
 
             case Item_Type.LeeMuGiStone:
@@ -1146,6 +1193,11 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += amount;
                 param.Add(GoodsTable.SumiFire, ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                            
+            case Item_Type.NewGachaEnergy:
+                ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += amount;
+                param.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.Cw:
                 ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += amount;
@@ -1333,6 +1385,23 @@ public static class ServerData
             case Item_Type.DokebiSkill4:
                 ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill4).Value += amount;
                 param.Add(GoodsTable.DokebiSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill4).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            //            //
+            case Item_Type.FourSkill0:
+                ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).Value += amount;
+                param.Add(GoodsTable.FourSkill0, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.FourSkill1:
+                ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).Value += amount;
+                param.Add(GoodsTable.FourSkill1, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.FourSkill2:
+                ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).Value += amount;
+                param.Add(GoodsTable.FourSkill2, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.FourSkill3:
+                ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).Value += amount;
+                param.Add(GoodsTable.FourSkill3, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             //
 
@@ -2317,6 +2386,10 @@ public static class ServerData
                 
                 case Item_Type.SumiFire:
                     ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += amount;
+                    break;
+                
+                case Item_Type.NewGachaEnergy:
+                    ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += amount;
                     break;
 
                 case Item_Type.FoxMaskPartial:

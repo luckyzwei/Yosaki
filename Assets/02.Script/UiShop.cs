@@ -16,7 +16,35 @@ public class UiShop : SingletonMono<UiShop>
     {
         Subscribe();
     }
-
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value += 100000000000000000000000000000000000000f;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += 1000;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value -= 10000;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += 10000;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value -= 100000;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad6))
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += 100000;
+        }
+    }
+#endif
     private void Subscribe()
     {
         IAPManager.Instance.WhenBuyComplete.AsObservable().Subscribe(e =>
@@ -365,6 +393,12 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
                 }
                 break;  
+            case Item_Type.Mileage:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += amount;
+                    param.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
+                }
+                break;  
             case Item_Type.SumiFire:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += amount;
@@ -399,14 +433,6 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.SusanoTreasure, ServerData.goodsTable.GetTableData(GoodsTable.SusanoTreasure).Value);
                 }
                 break; 
-
-            case Item_Type.Mileage:
-                {
-                    ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += amount;
-                    param.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
-                }
-                break; 
-
             case Item_Type.Event_Fall:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall).Value += amount;
@@ -587,6 +613,32 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.DokebiSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill4).Value);
                 }
                 break;
+            // //
+            case Item_Type.FourSkill0:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).Value += amount;
+                    param.Add(GoodsTable.FourSkill0, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).Value);
+                }
+                break;
+            case Item_Type.FourSkill1:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).Value += amount;
+                    param.Add(GoodsTable.FourSkill1, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).Value);
+                }
+                break;
+            case Item_Type.FourSkill2:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).Value += amount;
+                    param.Add(GoodsTable.FourSkill2, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).Value);
+                }
+                break;
+            case Item_Type.FourSkill3:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).Value += amount;
+                    param.Add(GoodsTable.FourSkill3, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).Value);
+                }
+                break;
+ 
             //
             case Item_Type.GangrimSkill:
                 {

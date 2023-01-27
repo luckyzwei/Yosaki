@@ -12,6 +12,7 @@ public static class CommonResourceContainer
     private static List<Sprite> hornSprites;
     private static List<Sprite> hellIcons;
     private static List<Sprite> dragonBall;
+    private static List<Sprite> foxCup;
     private static List<Sprite> chunIcons;
 
     public static Sprite GetRandomWeaponSprite()
@@ -174,6 +175,34 @@ public static class CommonResourceContainer
         }
     }
 
+    public static Sprite GetFoxCupSprite(int idx)
+    {
+        if (foxCup == null)
+        {
+            var maksIcons = Resources.LoadAll<Sprite>("FoxCup/");
+            foxCup = maksIcons.ToList();
+
+
+            foxCup.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
+        }
+
+        if (idx < foxCup.Count)
+        {
+            return foxCup[idx];
+        }
+        else
+        {
+            Debug.LogError($"Weapon icon {idx} is not exist");
+            return null;
+        }
+    }
+
     public static Sprite GetHellIconSprite(int idx)
     {
         if (hellIcons == null)
@@ -284,6 +313,15 @@ public static class CommonResourceContainer
     public static Sprite GetSkillIconSprite(SkillTableData skillData)
     {
         return Resources.Load<Sprite>($"SkillIcon/{skillData.Skillicon}");
+    }
+    public static Sprite GetNewGachaIconSprite(int idx)
+    {
+        return GetNewGachaIconSprite(TableManager.Instance.NewGachaData[idx]);
+    }
+
+    public static Sprite GetNewGachaIconSprite(NewGachaTableData newGachaData)
+    {
+        return Resources.Load<Sprite>($"NewGachaIcon/{newGachaData.Skillicon}");
     }
 
     public static Sprite GetPassiveSkillIconSprite(int idx)

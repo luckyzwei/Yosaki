@@ -64,8 +64,14 @@ public class UiSusanoDescription : MonoBehaviour
         {
             immuneDescription.SetText($"피해면역 {tableData.Buffsec}초");
         }
-
-        image.sprite = Resources.Load<Sprite>($"Susano/{idx / 3}");
+        if (idx < 110)
+        {
+            image.sprite = Resources.Load<Sprite>($"Susano/{idx / 3}"); 
+        }
+        else
+        {
+            image.sprite = Resources.Load<Sprite>($"Susano/{66}");
+        }
     }
 
     public void OnClickLeftButton()

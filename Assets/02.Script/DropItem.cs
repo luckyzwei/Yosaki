@@ -406,6 +406,8 @@ public enum Item_Type
     //수미산
     costume81 = 1282, //지국천왕
     //
+    costume82 = 1283, //광목천왕
+    costume83 = 1284, //2월 외형
 
     pet0 = 1301,
     pet1 = 1302,
@@ -502,8 +504,10 @@ public enum Item_Type
 
 
     SumisanWeapon0 = 7120,
+    SumisanWeapon1 = 7121,
 
     SumisanNorigae0 = 7130,
+    SumisanNorigae1 = 7131,
 
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
@@ -536,6 +540,7 @@ public enum Item_Type
     MonthNorigae0 = 8600,
     MonthNorigae1 = 8601,
     weapon81 = 8602,
+    MonthNorigae2 = 8603,
 
 
     Chun0 = 8700, // 천계기술
@@ -550,6 +555,11 @@ public enum Item_Type
     DokebiSkill3 = 8713,
     DokebiSkill4 = 8714,
 
+    FourSkill0 = 8720, //사천왕기술
+    FourSkill1 = 8721, 
+    FourSkill2 = 8722, 
+    FourSkill3 = 8723, 
+
     Event_NewYear = 8800,
     Event_NewYear_All = 8801, // 총 습득량
 
@@ -563,6 +573,7 @@ public enum Item_Type
     DokebiFireEnhance = 9007,
     SumiFire = 9008,
     SumiFireKey = 9009,
+    NewGachaEnergy = 9010,
 }
 //
 public class DropItem : PoolItem

@@ -96,7 +96,13 @@ public static class Utils
                   type == Item_Type.costume74 ||
                   type == Item_Type.costume75 ||
                   type == Item_Type.costume76 ||
-                  type == Item_Type.costume77;
+                  type == Item_Type.costume77 ||
+                  type == Item_Type.costume78 ||
+                  type == Item_Type.costume79 ||
+                  type == Item_Type.costume80 ||
+                  type == Item_Type.costume81 ||
+                  type == Item_Type.costume82 ||
+                  type == Item_Type.costume83;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -109,7 +115,8 @@ public static class Utils
     public static bool IsPassNorigaeItem(this Item_Type type)
     {
         return type == Item_Type.MonthNorigae0 ||
-                type == Item_Type.MonthNorigae1;
+                type == Item_Type.MonthNorigae1 ||
+                type == Item_Type.MonthNorigae2;
     }
     public static bool IsPassWeaponItem(this Item_Type type)
     {
@@ -173,6 +180,7 @@ public static class Utils
 
                 type == Item_Type.MonthNorigae0 ||
                 type == Item_Type.MonthNorigae1 ||
+                type == Item_Type.MonthNorigae2 ||
 
 
                 type == Item_Type.DokebiHorn0 ||

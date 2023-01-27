@@ -37,7 +37,8 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
             GameManager.Instance.bossId == 83 ||
             GameManager.Instance.bossId == 85 ||
             GameManager.Instance.bossId == 86 ||
-            GameManager.Instance.bossId == 87 
+            GameManager.Instance.bossId == 87 ||
+            GameManager.Instance.bossId == 88
             //도깨비 지킴이
 
             )) return;

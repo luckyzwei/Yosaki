@@ -176,10 +176,12 @@ public static class PlayerStats
 
             int level = serverData.level.Value;
 
+
             if (level != 0)
             {
                 ret += level * tableData[i].Abilityvalue;
             }
+
         }
 
         ret = ret + ret * GetPassiveAdvanceValue();
@@ -221,6 +223,7 @@ public static class PlayerStats
         ret += GetCaveBeltAttackAdd();
 
         ret += GetGumGiAttackValue();
+        ret += GetWeaponCollectionHasValue(StatusType.AttackAdd);
 
         return ret;
     }
@@ -294,7 +297,7 @@ public static class PlayerStats
         ret += GetHellAbilHasEffect(StatusType.AttackAddPer);
         ret += GetChunAbilHasEffect(StatusType.AttackAddPer);
         ret += GetDokebiFireAbilHasEffect(StatusType.AttackAddPer);
-
+        ret += GetMagicBookCollectionHasValue(StatusType.AttackAddPer);
         return ret;
     }
 
@@ -394,6 +397,50 @@ public static class PlayerStats
 
         }
 
+
+        return ret;
+    }
+    public static float GetWeaponCollectionHasValue(StatusType type)
+    {
+        var tableData = TableManager.Instance.WeaponTable.dataArray;
+
+        var serverData = ServerData.weaponTable.TableDatas;
+
+        float ret = 0f;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].WEAPONTYPE == WeaponType.Basic) continue;
+            if (tableData[i].WEAPONTYPE == WeaponType.View) continue;
+            if (serverData[tableData[i].Stringid].hasItem.Value == 0) continue;
+
+            if ((StatusType)tableData[i].Collectioneffecttype == type)
+            {
+                ret += tableData[i].Collectioneffectvalue;
+            }
+        }
+
+        return ret;
+    }
+    public static float GetMagicBookCollectionHasValue(StatusType type)
+    {
+        var tableData = TableManager.Instance.MagicBookTable.dataArray;
+
+        var serverData = ServerData.magicBookTable.TableDatas;
+
+        float ret = 0f;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].MAGICBOOKTYPE == MagicBookType.Basic) continue;
+            if (tableData[i].MAGICBOOKTYPE == MagicBookType.View) continue;
+            if (serverData[tableData[i].Stringid].hasItem.Value == 0) continue;
+
+            if ((StatusType)tableData[i].Collectioneffecttype == type)
+            {
+                ret += tableData[i].Collectioneffectvalue;
+            }
+        }
 
         return ret;
     }
@@ -1202,6 +1249,8 @@ public static class PlayerStats
 
         ret += GetSumiTowerEffect(StatusType.SuperCritical3DamPer);
 
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.ZSlash_memory);
+
         return ret;
     }
 
@@ -1229,7 +1278,7 @@ public static class PlayerStats
 
         ret += GetSumiTowerEffect(StatusType.SuperCritical4DamPer);
 
-
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Cslash_memory);
 
         return ret;
     }
@@ -1255,6 +1304,10 @@ public static class PlayerStats
 
         ret += GetSumiTowerEffect(StatusType.SuperCritical5DamPer);
 
+        ret += GetFoxCupAbilValue(GetCurrentFoxCupIdx(), 0);
+
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.GiSlash_memory);
+
         return ret;
     }
 
@@ -1262,9 +1315,17 @@ public static class PlayerStats
     {
         float ret = 0f;
 
+        ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical7DamPer);
+
+        ret += GetWeaponEquipPercentValue(StatusType.SuperCritical7DamPer);
+
         ret += GetSumiFireAbilHasEffect(StatusType.SuperCritical7DamPer);
 
         ret += GetSumiTowerEffect(StatusType.SuperCritical7DamPer);
+
+        ret += GetFoxCupAbilValue(GetCurrentFoxCupIdx(), 2);
+
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Gum_memory);
 
         return ret;
     }
@@ -1277,6 +1338,8 @@ public static class PlayerStats
         ret += GetPetHomeAbilValue(StatusType.SuperCritical6DamPer);
 
         ret += GetSasinsuStarAddValue();
+
+        ret += GetFoxCupAbilValue(GetCurrentFoxCupIdx(), 1);
 
         return ret;
     }
@@ -1582,8 +1645,17 @@ public static class PlayerStats
 
             ret += serverData.level.Value * tableDatas[i].Abilvalue;
         }
-
-        return ret;
+        if (statusType == StatusType.Hp ||
+            statusType == StatusType.HpAddPer ||
+            statusType == StatusType.Damdecrease
+            )
+        {
+            return ret;
+        }
+        else
+        {
+            return ret * GetSpecialAbilRing();
+        }
     }
 
     private static Dictionary<StatusType, float> stageRelicValue = new Dictionary<StatusType, float>();
@@ -2159,6 +2231,19 @@ public static class PlayerStats
 
     }
 
+    public static float GetSpecialAbilRing()
+    {
+        if (ServerData.equipmentTable.TableDatas[EquipmentTable.SoulRing].Value >= 0)
+        {
+            return (float)TableManager.Instance.NewGachaTable.dataArray[ServerData.equipmentTable.TableDatas[EquipmentTable.SoulRing].Value].Specialadd;
+        }
+        else
+        {
+            return 1f;
+        }
+
+    }
+
     public static float GetMaskAttackAddPerDam()
     {
         int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMask].Value;
@@ -2227,6 +2312,11 @@ public static class PlayerStats
         }
 
         return grade;
+    }
+
+    public static int GetRingGrade()
+    {
+        return ServerData.equipmentTable.TableDatas[EquipmentTable.SoulRing].Value;
     }
 
     public static int GetYumGrade()
@@ -2418,6 +2508,23 @@ public static class PlayerStats
     }//
 
 
+    public static int GetCurrentFoxCupIdx()
+    {
+        var tableData = TableManager.Instance.foxCup.dataArray;
+        int currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+        int idx = -1;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (currentPetEquipGrade >= tableData[i].Require)
+            {
+                idx = i;
+            }
+        }
+
+        return idx;
+    }
+
     public static int GetCurrentDragonIdx()
     {
         var tableData = TableManager.Instance.dragonBall.dataArray;
@@ -2434,6 +2541,7 @@ public static class PlayerStats
 
         return idx;
     }
+
     public static int GetCurrentGumgiIdx()
     {
         int idx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponEnhance].Value;
@@ -2457,6 +2565,26 @@ public static class PlayerStats
 
         return TableManager.Instance.dragonBall.dataArray[idx].Abilvalue1;
     }
+    //
+    public static float GetFoxCupAbilValue(int idx, int abilIdx)
+    {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getFoxCup).Value == 0) return 0f;
+        if (idx == -1) return 0f;
+
+        switch (abilIdx)
+        {
+            case 0: { return TableManager.Instance.foxCup.dataArray[idx].Abilvalue0; } break;
+            case 1: { return TableManager.Instance.foxCup.dataArray[idx].Abilvalue1; } break;
+            case 2: { return TableManager.Instance.foxCup.dataArray[idx].Abilvalue2; } break;
+            case 3: { return TableManager.Instance.foxCup.dataArray[idx].Abilvalue3; } break;
+            case 4: { return TableManager.Instance.foxCup.dataArray[idx].Abilvalue4; } break;
+            case 5: { return TableManager.Instance.foxCup.dataArray[idx].Abilvalue5; } break;
+        }
+
+        return 0f;
+    }
+
+    //
 
     public const float HellRelicAbilValue = 0.5f;
     public const int HellRelicAbilDivide = 100;
@@ -2523,6 +2651,26 @@ public static class PlayerStats
         var requireFlower = TableManager.Instance.chunMarkAbil.dataArray[5].Requirespeicalabilflower;
         return chunFlowerNum >= requireFlower;
     }
+    public static float IsCostumeCollectionEnhance()
+    {
+        float ret = 1f;
+
+        var costumeNum = ServerData.costumeServerTable.GetCostumeHasAmount();
+        var tableData = TableManager.Instance.costumeCollection.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].Require < costumeNum)
+            {
+                ret = tableData[i].Plusvalue;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return ret;
+    }
 
     public static bool IsChunFlowerGumgiEnhance()
     {
@@ -2547,6 +2695,7 @@ public static class PlayerStats
 
         return ret;
     }
+
 
     public static float GetPetHomeAbilValue(StatusType type)
     {
@@ -2600,6 +2749,68 @@ public static class PlayerStats
 
         return ret;
     }
+    public static float GetRingEquipAbilValue(StatusType type)
+    {
+        int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.SoulRing].Value;
+
+        var e = TableManager.Instance.NewGachaData.GetEnumerator();
+
+        float ret = 0f;
+        while (e.MoveNext())
+        {
+            if (e.Current.Value.Id != equipId) continue;
+            if (TableManager.Instance.WeaponEffectDatas.TryGetValue(e.Current.Value.Effectid, out var effectData) == false) continue;
+
+            int currentLevel = ServerData.newGachaServerTable.GetNewGachaData(e.Current.Value.Stringid).level.Value;
+
+            if (effectData.Equipeffecttype1 == (int)type)
+            {
+                ret += effectData.Equipeffectbase1;
+                ret += currentLevel * effectData.Equipeffectvalue1;
+            }
+            if (effectData.Equipeffecttype2 == (int)type)
+            {
+                ret += effectData.Equipeffectbase2;
+                ret += currentLevel * effectData.Equipeffectvalue2;
+            }
+
+            break;
+        }
+
+        return ret;
+    }
+
+    public static float GetRingHasPercentValue(StatusType type)
+    {
+        var e = TableManager.Instance.NewGachaData.GetEnumerator();
+
+        float ret = 0f;
+        while (e.MoveNext())
+        {
+            if (TableManager.Instance.WeaponEffectDatas.TryGetValue(e.Current.Value.Effectid, out var effectData) == false) continue;
+
+            var weaponServertable = ServerData.newGachaServerTable.TableDatas[e.Current.Value.Stringid];
+
+            if (weaponServertable.hasItem.Value == 0) continue;
+
+            int currentLevel = ServerData.newGachaServerTable.GetNewGachaData(e.Current.Value.Stringid).level.Value;
+
+            if (effectData.Haseffecttype1 == (int)type)
+            {
+                ret += effectData.Haseffectbase1;
+                ret += currentLevel * effectData.Haseffectvalue1;
+            }
+            if (effectData.Haseffecttype2 == (int)type)
+            {
+                ret += effectData.Haseffectbase2;
+                ret += currentLevel * effectData.Haseffectvalue2;
+            }
+        }
+
+
+
+        return ret;
+    }
 
     public static float GetChunFlowerHasAddValue()
     {
@@ -2609,6 +2820,8 @@ public static class PlayerStats
 
         ret += GetGradeTestAbilValue(StatusType.FlowerHasValueUpgrade);
 
+        ret += GetRingEquipAbilValue(StatusType.FlowerHasValueUpgrade);
+
         return ret;
     }
 
@@ -2617,6 +2830,8 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetGradeTestAbilValue(StatusType.HellHasValueUpgrade);
+
+        ret += GetRingEquipAbilValue(StatusType.HellHasValueUpgrade);
 
         return ret;
     }
@@ -2628,6 +2843,8 @@ public static class PlayerStats
         ret += GetSkillHasValue(StatusType.DokebiFireHasValueUpgrade);
 
         ret += GetGradeTestAbilValue(StatusType.DokebiFireHasValueUpgrade);
+
+        ret += GetRingEquipAbilValue(StatusType.DokebiFireHasValueUpgrade);
 
         return ret;
     }

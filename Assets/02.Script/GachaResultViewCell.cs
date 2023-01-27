@@ -23,9 +23,9 @@ public class GachaResultViewCell : MonoBehaviour
     [SerializeField]
     private Image openMask;
 
-    public void Initialzie(WeaponData weaponData, MagicBookData magicBookData, SkillTableData skillData, int amount)
+    public void Initialzie(WeaponData weaponData, MagicBookData magicBookData, SkillTableData skillData,NewGachaTableData newGachaData, int amount)
     {
-        weaponView.Initialize(weaponData, magicBookData, skillData);
+        weaponView.Initialize(weaponData, magicBookData, skillData, newGachaData);
         amountText.SetText($"{amount}개");
 
         if (weaponData != null)
@@ -65,6 +65,18 @@ public class GachaResultViewCell : MonoBehaviour
             }
 
             openMask.color = CommonUiContainer.Instance.itemGradeColor[skillData.Skillgrade];
+        }
+        else if (newGachaData != null)
+        {
+            // rareEffect.gameObject.SetActive(magicBookData.Grade == 2);
+            //uniqueEffect.gameObject.SetActive(magicBookData.Grade == 3);
+
+      
+            SoundManager.Instance.PlaySound(GetUniqueKey);
+            PopupManager.Instance.ShowWhiteEffect();
+       
+
+            openMask.color = CommonUiContainer.Instance.itemGradeColor[newGachaData.Id];
         }
     }
 }

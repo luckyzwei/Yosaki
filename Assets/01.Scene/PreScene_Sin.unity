@@ -1743,6 +1743,7 @@ MonoBehaviour:
   m_DontDestroy: 1
   enemyTable: {fileID: 11400000, guid: 853a8879486bbaa4ea255f586b38e5bb, type: 2}
   skillTable: {fileID: 11400000, guid: b5b860507a5ab9840b777cb029cb08e0, type: 2}
+  newGachaTable: {fileID: 11400000, guid: 49c7198896e651c4fb4a712050478fd7, type: 2}
   weaponTable: {fileID: 11400000, guid: bf3eab36591b0454385c1255473acc6e, type: 2}
   stageMapTable: {fileID: 11400000, guid: 3b10fdfe3d84c1348af6e483ba61bafe, type: 2}
   dailyMission: {fileID: 11400000, guid: ae340058442db344e86a7c00dd847acd, type: 2}
@@ -1827,6 +1828,9 @@ MonoBehaviour:
     type: 2}
   snowManAtten: {fileID: 11400000, guid: d048814d5bf2f674eb582fcbaf540a97, type: 2}
   sumiAbilBase: {fileID: 11400000, guid: 5ee117dea48084340a1ed98cabf6d001, type: 2}
+  foxCup: {fileID: 11400000, guid: d9df896dc98b7de47a583b40928b6854, type: 2}
+  dayOfWeekDungeon: {fileID: 11400000, guid: 7efec847c70c6324a8952357eb487187, type: 2}
+  costumeCollection: {fileID: 11400000, guid: 87777896ee9890d459a61c88f83f7565, type: 2}
 --- !u!224 &1672999882 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3778453797765526293, guid: 341961fb75a51fb4c844909972cb6b1a,
@@ -2054,6 +2058,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8bab02014c6bb444692a56d6b1d82679, type: 3}
   - {fileID: 21300000, guid: 1dd3ee7817b10de4e8610ede2211e7c3, type: 3}
   - {fileID: 21300000, guid: 3beacf794fab4c64bbb014b043319a80, type: 3}
+  - {fileID: 21300000, guid: dcc91d5957f82654c9fe2e2686e9620a, type: 3}
+  - {fileID: 21300000, guid: f77d0a29d39f28446a79b3b80f006ea0, type: 3}
   rankFrame:
   - {fileID: 21300000, guid: 180b014bbd854ff4c8d26a3bc3108a29, type: 3}
   - {fileID: 21300000, guid: 045aff0737bd68d449d44a4a9bb5b849, type: 3}
@@ -2166,8 +2172,10 @@ MonoBehaviour:
   DokebiNorigae8: {fileID: 21300000, guid: d03808150a926d34f8c8960636e8b065, type: 3}
   DokebiNorigae9: {fileID: 21300000, guid: 4b560a04a2e827b41bc580da5d647a4b, type: 3}
   SumisanNorigae0: {fileID: 21300000, guid: 76c4b37eeb43d4d44b0fa30c9d15930b, type: 3}
+  SumisanNorigae1: {fileID: 21300000, guid: 21511e0736175bc4a83b9a47452525fe, type: 3}
   MonthNorigae0: {fileID: 21300000, guid: b8e4966468cd428418fa5447c72fabe7, type: 3}
   MonthNorigae1: {fileID: 21300000, guid: 534227b3d8d3ed346912306890c7d5ee, type: 3}
+  MonthNorigae2: {fileID: 21300000, guid: e5a11b2c900be0a478a8bef1cd907e2d, type: 3}
   DokebiHorn0: {fileID: 21300000, guid: 92f9f58d12795c74ba90cc7fbf939313, type: 3}
   DokebiHorn1: {fileID: 21300000, guid: 6b45cec8b763a8a4dbe42106090790b3, type: 3}
   DokebiHorn2: {fileID: 21300000, guid: b9a7ada2415dc2c41af80d8e59d7a05c, type: 3}
@@ -2213,6 +2221,7 @@ MonoBehaviour:
   SusanoTreasure: {fileID: 21300000, guid: e6003eb4cf98f1045b30517e1f0e4a32, type: 3}
   SumiFire: {fileID: 21300000, guid: 717b0c3f3e20a0c40a1bb756cc7c8a37, type: 3}
   SumiFireKey: {fileID: 21300000, guid: f56de93e9b3508c4f8cad40db0d52d67, type: 3}
+  NewGachaEnergy: {fileID: 21300000, guid: 9b3fb5643279b8d4892d74d675004783, type: 3}
   enemySpineAssets:
   - {fileID: 11400000, guid: d43e1532e76e82d498f78f121b929a76, type: 2}
   - {fileID: 11400000, guid: d43e1532e76e82d498f78f121b929a76, type: 2}
@@ -2280,6 +2289,7 @@ MonoBehaviour:
   DokebiWeapon8: {fileID: 21300000, guid: d244d1d2f0786c148b0cba989d7cd023, type: 3}
   DokebiWeapon9: {fileID: 21300000, guid: 2d5a3e70124d383489b7509994fd4efc, type: 3}
   SumisanWeapon0: {fileID: 21300000, guid: c29023c38f40dbe4d980d47dcf7d02be, type: 3}
+  SumisanWeapon1: {fileID: 21300000, guid: 6aa450841a0876c4c8d35a1c54a23e84, type: 3}
   SasinsuWeapon0: {fileID: 21300000, guid: 67dd94ade483c4b44aee5c156d25a693, type: 3}
   SasinsuWeapon1: {fileID: 21300000, guid: 17c3ac1d97cc67943950cbc2949bc16b, type: 3}
   SasinsuWeapon2: {fileID: 21300000, guid: 9b70f07332df7224bb73e780ecab54e5, type: 3}
@@ -2328,6 +2338,10 @@ MonoBehaviour:
   DokebiSkill2: {fileID: 21300000, guid: 4c10317a8f3c9db49a639b50377c012e, type: 3}
   DokebiSkill3: {fileID: 21300000, guid: afdba12bb6035cc478a8f69e7caba3f2, type: 3}
   DokebiSkill4: {fileID: 21300000, guid: 989f4fa31fa6c7441be711b3ff432bc0, type: 3}
+  FourSkill0: {fileID: 21300000, guid: 5809bbbfbdf7dd0429741e1abebfb326, type: 3}
+  FourSkill1: {fileID: 21300000, guid: 37880b789f28a7f4896ae276a34c24b7, type: 3}
+  FourSkill2: {fileID: 21300000, guid: 71ceb080da955f3499645e15021791a0, type: 3}
+  FourSkill3: {fileID: 21300000, guid: 596931143cbc76a41b75957bb0f198fe, type: 3}
   HellMark0: {fileID: 0}
   HellMark1: {fileID: 21300000, guid: 8521f1823f0d56640bce58bdd5673fe0, type: 3}
   HellMark2: {fileID: 21300000, guid: 8521f1823f0d56640bce58bdd5673fe0, type: 3}
@@ -2365,6 +2379,22 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1e40b497436b11945895a6dfb0effced, type: 3}
   - {fileID: 21300000, guid: f5e2488b38436f2438cc7f8882c19cb1, type: 3}
   - {fileID: 21300000, guid: f5e2488b38436f2438cc7f8882c19cb1, type: 3}
+  - {fileID: 21300000, guid: c045b393c282c424c80d2eae04ea8278, type: 3}
+  - {fileID: 21300000, guid: 353c9c6484da13544855da5c81ba6029, type: 3}
+  - {fileID: 21300000, guid: f860dea1f8e360c45b2333efe137d75e, type: 3}
+  - {fileID: 21300000, guid: a16ca08932193bb4890affd51e6db71d, type: 3}
+  - {fileID: 21300000, guid: 17a0cc9955ccda54fa6fae59e3302a59, type: 3}
+  - {fileID: 21300000, guid: 184852d0c676f5d44b346fd3c4ed2703, type: 3}
+  - {fileID: 21300000, guid: 247de9137c0558241932d3c2b64b9767, type: 3}
+  - {fileID: 21300000, guid: a16ca08932193bb4890affd51e6db71d, type: 3}
+  - {fileID: 21300000, guid: 2e3d8d772d0f1ad45a713be90c871008, type: 3}
+  - {fileID: 21300000, guid: f860dea1f8e360c45b2333efe137d75e, type: 3}
+  - {fileID: 21300000, guid: a16ca08932193bb4890affd51e6db71d, type: 3}
+  - {fileID: 21300000, guid: 184852d0c676f5d44b346fd3c4ed2703, type: 3}
+  - {fileID: 21300000, guid: 184852d0c676f5d44b346fd3c4ed2703, type: 3}
+  - {fileID: 21300000, guid: 247de9137c0558241932d3c2b64b9767, type: 3}
+  - {fileID: 21300000, guid: c045b393c282c424c80d2eae04ea8278, type: 3}
+  - {fileID: 21300000, guid: e045517f19d76bd4ca4c23ca055741aa, type: 3}
   loadingTipIcon: []
   bossIcon:
   - {fileID: 21300000, guid: d6dc0f811384f6d40ab29a86c0f4eeb8, type: 3}
@@ -2511,6 +2541,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 81a73c77ba7587648839f0f90756c4c9, type: 2}
   - {fileID: 11400000, guid: 39c2bc8bce9e9b746be00628f111fabf, type: 2}
   - {fileID: 11400000, guid: bf0eefd1c691b2f49b5b15998ae50111, type: 2}
+  - {fileID: 11400000, guid: 0a8ab9da66815994386f3efd7bb8b5cd, type: 2}
+  - {fileID: 11400000, guid: 137d8880242e1f5468c2ab8d1edd7c22, type: 2}
   petCostumeList:
   - {fileID: 11400000, guid: 3d9145f3f8361c944acb6cd70679d6e2, type: 2}
   - {fileID: 11400000, guid: 206e7bbe5e49e2f4bb8859c83698d1d7, type: 2}
@@ -4610,7 +4642,7 @@ PrefabInstance:
     - target: {fileID: 1683965126923983406, guid: e9e39df58ca955644902e8c58c2df5d8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -222.00024
+      value: -222
       objectReference: {fileID: 0}
     - target: {fileID: 1683965126923983406, guid: e9e39df58ca955644902e8c58c2df5d8,
         type: 3}

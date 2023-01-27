@@ -60,6 +60,31 @@ public class TableManager : SingletonMono<TableManager>
     }
 
     [SerializeField]
+    private NewGachaTable newGachaTable;
+    public NewGachaTable NewGachaTable => newGachaTable;
+    private Dictionary<int, NewGachaTableData> newGachaData = null;
+    public Dictionary<int, NewGachaTableData> NewGachaData
+    {
+        get
+        {
+            LoadNewGachaData();
+            return newGachaData;
+        }
+    }
+
+    private void LoadNewGachaData()
+    {
+        if (newGachaData != null) return;
+
+        newGachaData = new Dictionary<int, NewGachaTableData>();
+
+        for (int i = 0; i < newGachaTable.dataArray.Length; i++)
+        {
+            newGachaData.Add(newGachaTable.dataArray[i].Id, newGachaTable.dataArray[i]);
+        }
+    }
+
+    [SerializeField]
     private Weapon weaponTable;
     public Weapon WeaponTable => weaponTable;
 
@@ -700,6 +725,9 @@ public class TableManager : SingletonMono<TableManager>
     public CommonCollectionEvent commoncollectionEvent;
     public SnowManAtten snowManAtten;
     public SumiAbilBase sumiAbilBase;
+    public FoxCup foxCup;
+    public DayOfWeekDungeon dayOfWeekDungeon;
+    public CostumeCollection costumeCollection;
 
 }
 

@@ -209,7 +209,11 @@ public class UiStageCell : MonoBehaviour
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(topClearStageId =>
         {
+#if UNITY_EDITOR
+            lockMask.SetActive(false);
+#else
             lockMask.SetActive(stageMapData.Id - 1 > topClearStageId);
+#endif
 
         }).AddTo(compositDisposable);
 

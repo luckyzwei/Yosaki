@@ -20,7 +20,10 @@ public class EtcServerTable
     public const string hellReward = "hr";
     public const string DokebiHornReward = "dokebiHornReward";
     public const string PetHomeReward = "PetHomeReward";
+    public const string PetHomeReward1 = "PetHomeReward1";
     public const string chunmaTopScore = "chunmaTopScore";
+    public const string CostumeCollectionFreeReward = "CCFR";
+    public const string CostumeCollectionAdReward = "CCAR";
 
 
     private Dictionary<string, ReactiveProperty<string>> tableSchema = new Dictionary<string, ReactiveProperty<string>>()
@@ -33,7 +36,10 @@ public class EtcServerTable
         {hellReward,new ReactiveProperty<string>(string.Empty)},
         {DokebiHornReward,new ReactiveProperty<string>(string.Empty)},
         {PetHomeReward,new ReactiveProperty<string>(string.Empty)},
+        {PetHomeReward1,new ReactiveProperty<string>(string.Empty)},
         {chunmaTopScore,new ReactiveProperty<string>(string.Empty)},
+        {CostumeCollectionFreeReward,new ReactiveProperty<string>(string.Empty)},
+        {CostumeCollectionAdReward,new ReactiveProperty<string>(string.Empty)},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -107,6 +113,24 @@ public class EtcServerTable
     public bool HasPetHomeReward(float id)
     {
         var rewards = tableDatas[PetHomeReward].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(id.ToString());
+    }
+    public bool HasPetHomeReward1(float id)
+    {
+        var rewards = tableDatas[PetHomeReward1].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(id.ToString());
+    }
+    public bool HasCostumeColectionFreeReward(float id)
+    {
+        var rewards = tableDatas[CostumeCollectionFreeReward].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(id.ToString());
+    }
+    public bool HasCostumeColectionAdReward(float id)
+    {
+        var rewards = tableDatas[CostumeCollectionAdReward].Value.Split(BossServerTable.rewardSplit).ToList();
 
         return rewards.Contains(id.ToString());
     }

@@ -76,4 +76,8 @@ public class StageMapData
   int relicspawnamount;
   public int Relicspawnamount { get {return relicspawnamount; } set { this.relicspawnamount = value;} }
   
+  [SerializeField]
+  int newgachaenegy;
+  public int Newgachaenegy { get {return newgachaenegy; } set { this.newgachaenegy = value;} }
+  
 }

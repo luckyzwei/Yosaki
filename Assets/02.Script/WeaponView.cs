@@ -35,6 +35,7 @@ public class WeaponView : MonoBehaviour
     private WeaponData weaponData;
     private MagicBookData magicBookData;
     private SkillTableData skillData;
+    private NewGachaTableData newGachaData;
 
     private bool initialized = false;
 
@@ -49,7 +50,7 @@ public class WeaponView : MonoBehaviour
     [SerializeField]
     private UIShiny uishiny;
 
-    public void Initialize(WeaponData weaponData, MagicBookData magicBookData, SkillTableData skillData = null)
+    public void Initialize(WeaponData weaponData, MagicBookData magicBookData, SkillTableData skillData = null, NewGachaTableData newGachaData = null)
     {
         weaponMagicBookObject.SetActive(skillData == null);
 
@@ -58,6 +59,7 @@ public class WeaponView : MonoBehaviour
         this.weaponData = weaponData;
         this.magicBookData = magicBookData;
         this.skillData = skillData;
+        this.newGachaData = newGachaData;
 
         int grade = 0;
         int id = 0;
@@ -83,8 +85,21 @@ public class WeaponView : MonoBehaviour
             skillIcon.sprite = CommonResourceContainer.GetSkillIconSprite(id);
             this.gradeText.SetText(CommonUiContainer.Instance.ItemGradeName_Skill[grade]);
         }
-
-        lvText.gameObject.SetActive(skillData == null);
+        else if (newGachaData != null)
+        {
+            grade = newGachaData.Grade;
+            id = newGachaData.Id;
+            weaponIcon.sprite = CommonResourceContainer.GetNewGachaIconSprite(id);
+            this.gradeText.SetText(CommonUiContainer.Instance.ItemGradeName_NewGacha[grade]);
+        }
+        if (skillData != null || newGachaData != null)
+        {
+            lvText.gameObject.SetActive(false);
+        }
+        else
+        {
+            lvText.gameObject.SetActive(true);
+        }
 
         this.gradeText.color = (CommonUiContainer.Instance.itemGradeColor[grade]);
 
@@ -145,7 +160,7 @@ public class WeaponView : MonoBehaviour
             }
         }
         //스킬
-        else {
+        else if (skillData !=null){
             if (id <= 14)
             {
                     gradeNumText.SetText($"{gradeText}등급");
@@ -158,6 +173,11 @@ public class WeaponView : MonoBehaviour
                 }
             }
         }
+        // 신규장비
+        else
+        {
+            gradeNumText.SetText($"{gradeText}등급");
+        }
             bg.sprite = CommonUiContainer.Instance.itemGradeFrame[grade];
 
         if (weaponData != null)
@@ -168,9 +188,13 @@ public class WeaponView : MonoBehaviour
         {
             SubscribeMagicBook();
         }
-        else
+        else if (skillData != null)
         {
             SubscribeSkill();
+        }
+        else
+        {
+            SubscribeNewGacha();
         }
 
         //uishiny.width = ((float)grade / 3f) * 0.6f;
@@ -206,6 +230,16 @@ public class WeaponView : MonoBehaviour
     }
 
 
+    private void SubscribeNewGacha()
+    {
+        disposable.Clear();
+
+        ServerData.newGachaServerTable.TableDatas[newGachaData.Stringid].amount.AsObservable().Subscribe(WhenCountChanged).AddTo(disposable);
+
+        ServerData.newGachaServerTable.TableDatas[newGachaData.Stringid].level.AsObservable().Subscribe(WhenLevelChanged).AddTo(disposable);
+
+    }
+
     private void WhenLevelChanged(int level)
     {
         lvText.SetText($"Lv.{level}");
@@ -228,11 +262,16 @@ public class WeaponView : MonoBehaviour
             int require = magicBookData.Id < 16 ? magicBookData.Requireupgrade : 1;
             amountText.SetText($"({ServerData.magicBookTable.GetCurrentMagicBookCount(magicBookData.Stringid)}/{require})");
         }
-        else
+        else if (skillData != null)
         {
             int skillAwakeNum = ServerData.skillServerTable.TableDatas[SkillServerTable.SkillAwakeNum][skillData.Id].Value;
             int requireNum = skillAwakeNum == 0 ? 1 : 10;
             amountText.SetText($"({ServerData.skillServerTable.TableDatas[SkillServerTable.SkillHasAmount][skillData.Id].Value}/{requireNum})");
+        }
+        else if( newGachaData!=null)
+        {
+            int require = newGachaData.Requireupgrade;
+            amountText.SetText($"({ServerData.newGachaServerTable.GetCurrentNewGachaCount(newGachaData.Stringid)}/{require})");
         }
     }
 

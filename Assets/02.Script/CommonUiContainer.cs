@@ -33,6 +33,11 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_11_Skill };
     public List<string> ItemGradeName_Skill => itemGradeName_Skill;
 
+    private List<string> itemGradeName_NewGacha= new List<string>() { 
+        CommonString.ItemGrade_0,
+        CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5};
+    public List<string> ItemGradeName_NewGacha => itemGradeName_NewGacha;
+
     public List<Color> itemGradeColor;
 
     [SerializeField]
@@ -132,9 +137,11 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiNorigae9;
 
     public Sprite SumisanNorigae0;
+    public Sprite SumisanNorigae1;
 
     public Sprite MonthNorigae0;
     public Sprite MonthNorigae1;
+    public Sprite MonthNorigae2;
     
     public Sprite DokebiHorn0;
     public Sprite DokebiHorn1;
@@ -186,6 +193,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite SusanoTreasure;
     public Sprite SumiFire;
     public Sprite SumiFireKey;
+    public Sprite NewGachaEnergy;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -238,6 +246,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiWeapon9;
 
     public Sprite SumisanWeapon0;
+    public Sprite SumisanWeapon1;
     
 
     public Sprite SasinsuWeapon0;
@@ -298,6 +307,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite DokebiSkill2;
     public Sprite DokebiSkill3;
     public Sprite DokebiSkill4;
+
+
+    public Sprite FourSkill0;
+    public Sprite FourSkill1;
+    public Sprite FourSkill2;
+    public Sprite FourSkill3;
 
     public Sprite HellMark0;
     public Sprite HellMark1;
@@ -577,6 +592,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.costume81:
                 return costumeThumbnail[81];
                 break;
+            case Item_Type.costume82:
+                return costumeThumbnail[82];
+                break;
+            case Item_Type.costume83:
+                return costumeThumbnail[83];
+                break;
 
 
             case Item_Type.RankFrame1:
@@ -846,6 +867,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;   
             case Item_Type.SumiFire:
                 return SumiFire;
+                break;
+            case Item_Type.NewGachaEnergy:
+                return NewGachaEnergy;
                 break;   
             case Item_Type.HellPower:
                 return HellPower;
@@ -974,12 +998,18 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.SumisanNorigae0:
                 return SumisanNorigae0;
                 break;
+            case Item_Type.SumisanNorigae1:
+                return SumisanNorigae1;
+                break;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
                 break;
             case Item_Type.MonthNorigae1:
                 return MonthNorigae1;
+                break;
+            case Item_Type.MonthNorigae2:
+                return MonthNorigae2;
                 break;
             //
             //
@@ -1211,6 +1241,20 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 return DokebiSkill4;
                 break;
             //
+            //
+            case Item_Type.FourSkill0:
+                return FourSkill0;
+                break;
+            case Item_Type.FourSkill1:
+                return FourSkill1;
+                break;
+            case Item_Type.FourSkill2:
+                return FourSkill2;
+                break;
+            case Item_Type.FourSkill3:
+                return FourSkill3;
+                break;
+            //
             case Item_Type.GangrimSkill:
                 return GangrimSkill;
                 break;
@@ -1277,6 +1321,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.SumisanWeapon0:
                 return SumisanWeapon0;
+                break;
+            case Item_Type.SumisanWeapon1:
+                return SumisanWeapon1;
                 break;
 
             case Item_Type.SasinsuWeapon0:

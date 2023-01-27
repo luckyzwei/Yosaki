@@ -27,6 +27,7 @@ public class UiPlayerViewController : MonoBehaviour
 
     [SerializeField]
     private GameObject tailObject;
+
     //
     [SerializeField]
     private GameObject hyonMu;
@@ -41,7 +42,18 @@ public class UiPlayerViewController : MonoBehaviour
     [SerializeField]
     private GameObject dragon;
 
+    //
+    [SerializeField]
+    private SpriteRenderer fourObject;
+    //
+    [SerializeField]
+    private GameObject fourObject_EFX;
 
+    [SerializeField]
+    private GameObject showFoxCup;
+
+    [SerializeField]
+    private GameObject showRingEffect;
     void Start()
     {
         Subscribe();
@@ -119,6 +131,21 @@ public class UiPlayerViewController : MonoBehaviour
         {
             dragon.SetActive(e == 1);
 
+        }).AddTo(this);
+        SettingData.fourView.AsObservable().Subscribe(e =>
+        {
+            fourObject.enabled = e == 1;
+            fourObject_EFX.SetActive(e == 1);
+        }).AddTo(this);
+
+        SettingData.showFoxCup.AsObservable().Subscribe(e =>
+        {
+            showFoxCup.gameObject.SetActive(e == 1);
+        }).AddTo(this);
+
+        SettingData.showRingEffect.AsObservable().Subscribe(e =>
+        {
+            showRingEffect.gameObject.SetActive(e == 1);
         }).AddTo(this);
     }
 

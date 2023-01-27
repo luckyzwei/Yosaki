@@ -37,6 +37,14 @@ public class UiRewardCollection : MonoBehaviour
     [SerializeField]
     private Button sumiClearButton;
 
+    [SerializeField]
+    private Button newGachaButton;
+
+    [SerializeField]
+    private GameObject Bandi0;
+    [SerializeField]
+    private GameObject Bandi1;
+
     private void Start()
     {
         Subscribe();
@@ -57,6 +65,19 @@ public class UiRewardCollection : MonoBehaviour
             dokebiClearButton.interactable = e >= 500000;
             sumiClearButton.interactable = e >= 1000000;
 
+            if (e >= GameBalance.banditUpgradeLevel)
+            {
+                Bandi0.SetActive(false);
+            }
+            else
+            {
+                Bandi1.SetActive(false);
+            }
+        }).AddTo(this);
+
+        ServerData.userInfoTable.GetTableData(UserInfoTable.relicKillCount).AsObservable().Subscribe(e =>
+        {
+            newGachaButton.interactable = e >= 25000;
         }).AddTo(this);
     }
 
@@ -120,6 +141,76 @@ public class UiRewardCollection : MonoBehaviour
 
             }, null);
 
+    }//★
+
+    public void OnClickDayofWeekReward()
+    {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDayOfWeek).Value == 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"요일 보상은 하루에 한번만 획득 가능합니다!");
+            return;
+        }
+
+        int score = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.DayOfWeekClear].Value;
+
+        if (score == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
+            return;
+        }
+
+
+        var tabledata = TableManager.Instance.dayOfWeekDungeon.dataArray;
+
+
+        float multipleValue = 0f;
+        for (int i = 0; i < tabledata[GetDayOfweek()].Score.Length; i++)
+        {
+            //통과
+            if (tabledata[GetDayOfweek()].Score[i] <= ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)
+            {
+                multipleValue = tabledata[GetDayOfweek()].Rewardvalue[i];
+            }
+            //정지
+            else
+            {
+                if (i == 0)
+                {
+                    multipleValue = 1f;
+                }
+                break;
+            }
+        }
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{score * multipleValue}개 획득 합니까?", () =>
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.getDayOfWeek).Value = 1;
+
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.getDayOfWeek, ServerData.userInfoTable.TableDatas[UserInfoTable.getDayOfWeek].Value);
+
+
+
+            ServerData.goodsTable.GetTableData(tabledata[GetDayOfweek()].Rewardstring).Value += score * multipleValue;
+            Param goodsParam = new Param();
+            goodsParam.Add(tabledata[GetDayOfweek()].Rewardstring, ServerData.goodsTable.GetTableData(tabledata[GetDayOfweek()].Rewardstring).Value);
+
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 10);
+
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearBandit, 1);
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName((Item_Type)tabledata[GetDayOfweek()].Rewardtype)} {score * multipleValue}개 획득!", null);
+            });
+        }, null);
     }//★
 
     public void OnClickOniReward()
@@ -422,6 +513,53 @@ public class UiRewardCollection : MonoBehaviour
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SumiFire)} {score + Utils.GetDokebiTreasureAddValue()}개 획득!", null);
+            });
+        }, null);
+    }
+
+    private int GetDayOfweek()
+    {
+        var serverTime = ServerData.userInfoTable.currentServerTime;
+        return (int)serverTime.DayOfWeek;
+    }
+
+
+    public void OnClickGetNewGachaButton()
+    {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getRingGoods).Value == 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.NewGachaEnergy)}은 하루에 한번만 획득 가능합니다!");
+            return;
+        }
+
+        //int amount = GameBalance.getRingGoodsAmount;
+        int amount = GameBalance.getRingGoodsAmount * (int)Mathf.Floor(Mathf.Max(1, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.relicKillCount).Value));
+
+        if (amount == 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
+            return;
+        }
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{amount}개 획득 합니까?", () =>
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.getRingGoods).Value = 1;
+            ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += amount;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.getRingGoods, ServerData.userInfoTable.TableDatas[UserInfoTable.getRingGoods].Value);
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.NewGachaEnergy)} {amount}개 획득!", null);
             });
         }, null);
     }

@@ -22,6 +22,7 @@ public class UserInfoTable
     public const string gachaNum_Weapon = "gachaNum_Weapon";
     public const string gachaNum_Norigae = "gachaNum_Norigae";
     public const string gachaNum_Skill = "gachaNum_Skill";
+    public const string gachaNum_NewGacha = "GNNG";
 
     public const string hackingCount = "hackingCount";
 
@@ -103,6 +104,7 @@ public class UserInfoTable
     public const string freeWeapon = "freeWeapon";
     public const string freeNorigae = "freeNorigae";
     public const string freeSkill = "freeSkill";
+    public const string freeNewGacha = "FNG";
 
     public const string oakpensionAttendance = "oakpension";
     public const string marblepensionAttendance = "marblepension";
@@ -110,6 +112,7 @@ public class UserInfoTable
     public const string chunpensionAttendance = "chunpension";
     public const string dokebipensionAttendance = "dokebipension";
     public const string sumipensionAttendance = "sumipension";
+    public const string ringpensionAttendance = "ringpension";
 
     public const string marblePackChange = "marblePackChange";
 
@@ -122,10 +125,12 @@ public class UserInfoTable
     public const string sonCloneClear = "sccc";
     public const string flowerClear = "fc";
     public const string DokebiFireClear = "DokebiFireClear";
+    public const string DayOfWeekClear = "dowc";
+
 
 
     //6월월간
-    public const string killCountTotal = "k12";
+    public const string killCountTotal = "k14";
     //7월월간
     public const string killCountTotal2 = "k13";
     public const string killCountTotalChild = "fal"; //가을훈련
@@ -175,6 +180,8 @@ public class UserInfoTable
     public const string getSumiFire = "gsf";
     public const string getFlower = "getc";
     public const string getDokebiFire = "getDokebiFire";
+    public const string getRingGoods = "grg";
+    public const string getDayOfWeek = "gdow";
 
     public const string sendPetExp = "sendPetExp";
 
@@ -228,6 +235,8 @@ public class UserInfoTable
     public const string receivedPartyTowerTicket = "receivedPartyTowerTicket";
     public const string dailySleepRewardReceiveCount = "dss";
 
+    public const string getFoxCup = "gfc";
+
     public double currentServerDate;
     public double attendanceUpdatedTime;
     public DateTime currentServerTime { get; private set; }
@@ -244,6 +253,7 @@ public class UserInfoTable
         {gachaNum_Weapon,0f},
         {gachaNum_Norigae,0f},
         {gachaNum_Skill,0f},
+        {gachaNum_NewGacha,0f},
         {hackingCount,0f},
         {passSelectedIdx,0f},
         {currentFloorIdx,0f},
@@ -299,6 +309,7 @@ public class UserInfoTable
         {freeWeapon,0f},
         {freeNorigae,0f},
         {freeSkill,0f},
+        {freeNewGacha,0f},
 
         {dokebiKillCount3,0f},
 
@@ -308,6 +319,7 @@ public class UserInfoTable
         {chunpensionAttendance,0f},
         {dokebipensionAttendance,0f},
         {sumipensionAttendance,0f},
+        {ringpensionAttendance,0f},
 
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
@@ -318,6 +330,8 @@ public class UserInfoTable
         {gumGiClear,0f},
         {flowerClear,0f},
         {DokebiFireClear,0f},
+        {DayOfWeekClear,0f},
+        {getFoxCup,0f},
 
 
         {yomul0_buff,0f},
@@ -371,6 +385,8 @@ public class UserInfoTable
         {getSumiFire,0},
         {getFlower,0},
         {getDokebiFire,0},
+        {getRingGoods,0},
+        {getDayOfWeek,0},
         {sendPetExp,0},
         {exchangeCount,0},
         {exchangeCount_1,0},
@@ -765,6 +781,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.freeNewGacha).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.sendGangChul).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value = 0;
@@ -774,6 +791,8 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.oneAttenEvent).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getFlower).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.getRingGoods).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.getDayOfWeek).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.getPetHome).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.dailySleepRewardReceiveCount).Value = 0;
 
@@ -858,6 +877,11 @@ public class UserInfoTable
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.sumipensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.sumipensionAttendance).Value++;
+            } 
+            
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.ringpensionAttendance].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.ringpensionAttendance).Value++;
             }
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
@@ -907,17 +931,21 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.chunpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.chunpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.dokebipensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebipensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.sumipensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.sumipensionAttendance).Value);
+        userInfoParam.Add(UserInfoTable.ringpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.ringpensionAttendance).Value);
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
         userInfoParam.Add(UserInfoTable.freeNorigae, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Value);
         userInfoParam.Add(UserInfoTable.freeSkill, ServerData.userInfoTable.GetTableData(UserInfoTable.freeSkill).Value);
+        userInfoParam.Add(UserInfoTable.freeNewGacha, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNewGacha).Value);
         userInfoParam.Add(UserInfoTable.SendGuildPoint, ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value);
         userInfoParam.Add(UserInfoTable.sendGangChul, ServerData.userInfoTable.GetTableData(UserInfoTable.sendGangChul).Value);
         userInfoParam.Add(UserInfoTable.getSmith, ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value);
         userInfoParam.Add(UserInfoTable.getFlower, ServerData.userInfoTable.GetTableData(UserInfoTable.getFlower).Value);
         userInfoParam.Add(UserInfoTable.getDokebiFire, ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value);
+        userInfoParam.Add(UserInfoTable.getRingGoods, ServerData.userInfoTable.GetTableData(UserInfoTable.getRingGoods).Value);
         userInfoParam.Add(UserInfoTable.getSumiFire, ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value);
         userInfoParam.Add(UserInfoTable.getGumGi, ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value);
+        userInfoParam.Add(UserInfoTable.getDayOfWeek, ServerData.userInfoTable.GetTableData(UserInfoTable.getDayOfWeek).Value);
         userInfoParam.Add(UserInfoTable.sendPetExp, ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value);
         userInfoParam.Add(UserInfoTable.oneAttenEvent, ServerData.userInfoTable.GetTableData(UserInfoTable.oneAttenEvent).Value);
         userInfoParam.Add(UserInfoTable.getPetHome, ServerData.userInfoTable.GetTableData(UserInfoTable.getPetHome).Value);
@@ -1135,7 +1163,7 @@ public class UserInfoTable
         if (currentServerTime.Month == 12) return true;
         if (currentServerTime.Month == 1) return true;
         if (currentServerTime.Month == 2) return true;
-
+        
         return false;
     }
 
@@ -1232,7 +1260,7 @@ public class UserInfoTable
     public bool IsMonthlyPass2()
     {
 #if UNITY_EDITOR
-        return true;
+        return false;
 #endif
         //홀수 달의 경우 true
         return (currentServerTime.Month % 2) == 1;

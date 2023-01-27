@@ -104,4 +104,32 @@ public class MagicBookData
   double goldabilratio;
   public double Goldabilratio { get {return goldabilratio; } set { this.goldabilratio = value;} }
   
+  [SerializeField]
+  int rewardtype0;
+  public int Rewardtype0 { get {return rewardtype0; } set { this.rewardtype0 = value;} }
+  
+  [SerializeField]
+  float rewardvalue0;
+  public float Rewardvalue0 { get {return rewardvalue0; } set { this.rewardvalue0 = value;} }
+  
+  [SerializeField]
+  int rewardtype1;
+  public int Rewardtype1 { get {return rewardtype1; } set { this.rewardtype1 = value;} }
+  
+  [SerializeField]
+  float rewardvalue1;
+  public float Rewardvalue1 { get {return rewardvalue1; } set { this.rewardvalue1 = value;} }
+  
+  [SerializeField]
+  MagicBookType magicbooktype;
+  public MagicBookType MAGICBOOKTYPE { get {return magicbooktype; } set { this.magicbooktype = value;} }
+  
+  [SerializeField]
+  int collectioneffecttype;
+  public int Collectioneffecttype { get {return collectioneffecttype; } set { this.collectioneffecttype = value;} }
+  
+  [SerializeField]
+  float collectioneffectvalue;
+  public float Collectioneffectvalue { get {return collectioneffectvalue; } set { this.collectioneffectvalue = value;} }
+  
 }

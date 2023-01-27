@@ -140,8 +140,8 @@ public class MonthlyPassServerTable
     public const string tableName = "MonthlyPass";
 
 
-    public static string MonthlypassFreeReward = "f7";
-    public static string MonthlypassAdReward = "a7";
+    public static string MonthlypassFreeReward = "f8";
+    public static string MonthlypassAdReward = "a8";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {

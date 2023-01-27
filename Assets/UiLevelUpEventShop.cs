@@ -383,6 +383,31 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     param.Add(GoodsTable.DokebiSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DokebiSkill4).Value);
                 }
                 break;
+            //            //
+            case Item_Type.FourSkill0:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).Value += amount;
+                    param.Add(GoodsTable.FourSkill0, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).Value);
+                }
+                break;
+            case Item_Type.FourSkill1:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).Value += amount;
+                    param.Add(GoodsTable.FourSkill1, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).Value);
+                }
+                break;
+            case Item_Type.FourSkill2:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).Value += amount;
+                    param.Add(GoodsTable.FourSkill2, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).Value);
+                }
+                break;
+            case Item_Type.FourSkill3:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).Value += amount;
+                    param.Add(GoodsTable.FourSkill3, ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).Value);
+                }
+                break;
             //
             case Item_Type.GangrimSkill:
                 {
@@ -459,6 +484,12 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += amount;
                     param.Add(GoodsTable.SumiFire, ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
+                }
+                break;
+            case Item_Type.NewGachaEnergy:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += amount;
+                    param.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
                 }
                 break;
             case Item_Type.DokebiFireKey:

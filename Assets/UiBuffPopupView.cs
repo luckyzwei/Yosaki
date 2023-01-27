@@ -345,7 +345,7 @@ public class UiBuffPopupView : MonoBehaviour
             {
                 if (ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey].buyCount.Value == 0)
                 {
-                    PopupManager.Instance.ShowAlarmMessage("12월 월간 패스권이 필요 합니다.");
+                    PopupManager.Instance.ShowAlarmMessage("2월 월간 패스권이 필요 합니다.");
                     return;
                 }
             }

@@ -140,6 +140,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             itemType = Item_Type.SumiFire;
         }
+        else if (pensionKey == "ringpension")
+        {
+            itemType = Item_Type.NewGachaEnergy;
+        }
         else
         {
             itemType = Item_Type.SmithFire;

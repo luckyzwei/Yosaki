@@ -25,6 +25,7 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     private WeaponData weaponData;
     private MagicBookData magicBookData;
+    private NewGachaTableData newGachaData;
 
     [SerializeField]
     private GameObject upgradeButton;
@@ -82,6 +83,12 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI magicBookViewEquipDesc;
+    
+    [SerializeField]
+    private Image newGachaViewEquipButton;
+
+    [SerializeField]
+    private TextMeshProUGUI newGachaViewEquipDesc;
 
     [SerializeField]
     private Sprite weaponViewEquipDisable;
@@ -206,10 +213,11 @@ public class UiInventoryWeaponView : MonoBehaviour
         }
     }
 
-    public void Initialize(WeaponData weaponData, MagicBookData magicBookData, Action<WeaponData, MagicBookData> onClickCallBack)
+    public void Initialize(WeaponData weaponData, MagicBookData magicBookData,NewGachaTableData newGachaTableData, Action<WeaponData, MagicBookData> onClickCallBack)
     {
         this.weaponData = weaponData;
         this.magicBookData = magicBookData;
+        this.newGachaData = newGachaTableData;
 
         this.onClickCallBack = onClickCallBack;
 
@@ -276,7 +284,9 @@ public class UiInventoryWeaponView : MonoBehaviour
             magicBookData.Id == 51 ||
             magicBookData.Id == 52 ||
             magicBookData.Id == 53 ||
-            magicBookData.Id == 54
+            magicBookData.Id == 54 ||
+            magicBookData.Id == 55 ||
+            magicBookData.Id == 56 
             ));
         foxNorigaeGetButton.SetActive(false);
 
@@ -348,6 +358,12 @@ public class UiInventoryWeaponView : MonoBehaviour
             {
                 suhoSinDescription.SetText($"월간 패스\n1월 월간패스 보상에서 획득!");
             }
+            else if (
+                magicBookData.Id == 56
+                )
+            {
+                suhoSinDescription.SetText($"월간 패스\n2월 월간패스 보상에서 획득!");
+            }
 
             else if (
                magicBookData.Id == 51 ||
@@ -356,14 +372,15 @@ public class UiInventoryWeaponView : MonoBehaviour
 
                )
             {
-                suhoSinDescription.SetText($"도깨비 나라\n신신도깨비 보스에서 획득!");
+                suhoSinDescription.SetText($"도깨비 나라\n도깨비 우두머리에서 획득!");
             }
             else if (
-               magicBookData.Id == 54 
+               magicBookData.Id == 54 ||
+               magicBookData.Id == 55 
 
                )
             {
-                suhoSinDescription.SetText($"수미산\n수미산 보스에서 획득!");
+                suhoSinDescription.SetText($"수미산\n사천왕에서 획득!");
             }
 
             foxNorigaeGetButton.SetActive(magicBookData.Id == 28);
@@ -377,6 +394,10 @@ public class UiInventoryWeaponView : MonoBehaviour
         if (weaponData != null)
         {
             norigaeDescription.SetText($"무공비급 강화\n{weaponData.Specialadd}배");
+        }
+        if (newGachaData != null)
+        {
+            norigaeDescription.SetText($"영혼의숲 능력치\n{newGachaData.Specialadd}배 상승\n<color=red>(공격 능력치)");
         }
 
         if (weaponData != null)
@@ -417,14 +438,26 @@ public class UiInventoryWeaponView : MonoBehaviour
 
             ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].AsObservable().Subscribe(WhenEquipMagicBook_ViewChanged).AddTo(this);
         }
+        else if(newGachaData !=null)
+        {
+            ServerData.equipmentTable.TableDatas[EquipmentTable.SoulRing].AsObservable().Subscribe(WhenEquipNewGachaChanged).AddTo(this);
+            ServerData.newGachaServerTable.TableDatas[newGachaData.Stringid].hasItem.AsObservable().Subscribe(WhenHasStageChanged).AddTo(this);
+            ServerData.newGachaServerTable.TableDatas[newGachaData.Stringid].amount.AsObservable().Subscribe(WhenAmountChanged).AddTo(this);
+
+        }
+
 
         if (weaponData != null)
         {
             ServerData.weaponTable.TableDatas[weaponData.Stringid].level.AsObservable().Subscribe(WhenItemLevelChanged).AddTo(this);
         }
-        else
+        else if(magicBookData !=null)
         {
             ServerData.magicBookTable.TableDatas[magicBookData.Stringid].level.AsObservable().Subscribe(WhenItemLevelChanged).AddTo(this);
+        }
+        else if(newGachaData !=null)
+        {
+            ServerData.newGachaServerTable.TableDatas[newGachaData.Stringid].level.AsObservable().Subscribe(WhenItemLevelChanged).AddTo(this);
         }
     }
 
@@ -438,11 +471,11 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     private void UpdateLevelUpUi()
     {
-        if (weaponData == null && magicBookData == null) return;
+        if (weaponData == null && magicBookData == null && newGachaData == null) return;
 
         if ((weaponData != null && ServerData.weaponTable.TableDatas[weaponData.Stringid].level.Value >= weaponData.Maxlevel) ||
-            (magicBookData != null && ServerData.magicBookTable.TableDatas[magicBookData.Stringid].level.Value >= magicBookData.Maxlevel)
-            )
+            (magicBookData != null && ServerData.magicBookTable.TableDatas[magicBookData.Stringid].level.Value >= magicBookData.Maxlevel)||
+            (newGachaData != null && ServerData.newGachaServerTable.TableDatas[newGachaData.Stringid].level.Value >= newGachaData.Maxlevel))
         {
             levelUpButton.interactable = false;
             levelUpPrice.SetText("최대레벨");
@@ -458,9 +491,14 @@ public class UiInventoryWeaponView : MonoBehaviour
             price = ServerData.weaponTable.GetWeaponLevelUpPrice(weaponData.Stringid);
             currentMagicStoneAmount = ServerData.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
         }
-        else
+        else if(magicBookData!=null)
         {
             price = ServerData.magicBookTable.GetMagicBookLevelUpPrice(magicBookData.Stringid);
+            currentMagicStoneAmount = ServerData.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
+        }
+        else
+        {
+            price = ServerData.newGachaServerTable.GetNewGachaLevelUpPrice(newGachaData.Stringid);
             currentMagicStoneAmount = ServerData.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
         }
 
@@ -479,6 +517,10 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             upgradeButton.SetActive(amount >= magicBookData.Requireupgrade && magicBookData.Id < 15);
         }
+        else if (newGachaData != null)
+        {
+            upgradeButton.SetActive(amount >= newGachaData.Requireupgrade);
+        }
     }
 
     private void WhenHasStageChanged(int state)
@@ -489,6 +531,7 @@ public class UiInventoryWeaponView : MonoBehaviour
 
         levelUpButton.gameObject.SetActive(state == 1);
 
+        
         if (weaponData != null)
         {
             weaponViewEquipButton.gameObject.SetActive(state == 1);
@@ -519,7 +562,7 @@ public class UiInventoryWeaponView : MonoBehaviour
                 || weaponData.Id == 66 || weaponData.Id == 67 || weaponData.Id == 68 || weaponData.Id == 69 || weaponData.Id == 70
                 || weaponData.Id == 71 || weaponData.Id == 72 || weaponData.Id == 73 || weaponData.Id == 74 || weaponData.Id == 75
                 || weaponData.Id == 76 || weaponData.Id == 77 || weaponData.Id == 78 || weaponData.Id == 79|| weaponData.Id == 80
-                || weaponData.Id == 81 || weaponData.Id == 82 || weaponData.Id == 83
+                || weaponData.Id == 81 || weaponData.Id == 82 || weaponData.Id == 83 ||weaponData.Id == 84 
 
                 )
             {
@@ -685,6 +728,11 @@ public class UiInventoryWeaponView : MonoBehaviour
                     weaponLockObject.gameObject.SetActive(state == 0);
                     weaponLockDescription.SetText($"수미산\n지국천왕에서 획득!");
                 }
+                if (weaponData.Id == 84)
+                {
+                    weaponLockObject.gameObject.SetActive(state == 0);
+                    weaponLockDescription.SetText($"수미산\n광목천왕에서 획득!");
+                }
 
                 //
                 if (weaponData.Id == 45 || weaponData.Id == 46 || weaponData.Id == 47 || weaponData.Id == 48 || weaponData.Id == 49||
@@ -704,7 +752,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             }
 
         }
-        else
+        else if(magicBookData!=null)
         {
             feelMul2Lock.SetActive(false);
             feelMul3Lock.SetActive(false);
@@ -719,6 +767,24 @@ public class UiInventoryWeaponView : MonoBehaviour
             weaponLockObject.SetActive(false);
 
             magicBookViewEquipButton.gameObject.SetActive(state == 1);
+            weaponViewEquipButton.gameObject.SetActive(false);
+        }
+        else//스킬데이타 + ring
+        {
+            levelUpButton.gameObject.SetActive(false);
+            feelMul2Lock.SetActive(false);
+            feelMul3Lock.SetActive(false);
+            feelMul4Lock.SetActive(false);
+            indraLock.SetActive(false);
+            nataLock.SetActive(false);
+            orochiLock.SetActive(false);
+            feelPaeLock.SetActive(false);
+            gumihoWeaponLock.SetActive(false);
+            hellWeaponLock.SetActive(false);
+            yeoRaeWeaponLock.SetActive(false);
+            weaponLockObject.SetActive(false);
+
+            magicBookViewEquipButton.gameObject.SetActive(false);
             weaponViewEquipButton.gameObject.SetActive(false);
         }
 
@@ -747,9 +813,16 @@ public class UiInventoryWeaponView : MonoBehaviour
             magicBookViewEquipButton.sprite = (idx == this.magicBookData.Id ? weaponViewEquipDisable : weaponViewEquipEnable);
         }
     }
+
     private void WhenEquipMagicBookChanged(int idx)
     {
         equipText.SetActive(idx == this.magicBookData.Id);
+
+        UpdateEquipButton();
+    }
+    private void WhenEquipNewGachaChanged(int idx)
+    {
+        equipText.SetActive(idx == this.newGachaData.Id);
 
         UpdateEquipButton();
     }
@@ -789,7 +862,7 @@ public class UiInventoryWeaponView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("더이상 승급이 불가능 합니다.");
             }
         }
-        else
+        else if(magicBookData !=null)
         {
             int amount = ServerData.magicBookTable.TableDatas[magicBookData.Stringid].amount.Value;
 
@@ -817,6 +890,33 @@ public class UiInventoryWeaponView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("더이상 승급이 불가능 합니다.");
             }
         }
+        else if(newGachaData !=null)
+        {
+            int amount = ServerData.newGachaServerTable.TableDatas[newGachaData.Stringid].amount.Value;
+
+            if (amount < newGachaData.Requireupgrade)
+            {
+                return;
+            }
+
+            if (TableManager.Instance.NewGachaData.TryGetValue(newGachaData.Id + 1, out var nextNewGacha))
+            {
+                int currentWeaponCount = ServerData.newGachaServerTable.GetCurrentNewGachaCount(newGachaData.Stringid);
+                int nextWeaponCount = ServerData.newGachaServerTable.GetCurrentNewGachaCount(nextNewGacha.Stringid);
+
+                int upgradeNum = currentWeaponCount / newGachaData.Requireupgrade;
+
+                ServerData.newGachaServerTable.UpData(newGachaData, upgradeNum * newGachaData.Requireupgrade * -1);
+                ServerData.newGachaServerTable.UpData(nextNewGacha, upgradeNum);
+
+                ServerData.newGachaServerTable.SyncToServerAll(new List<int>() { newGachaData.Id, nextNewGacha.Id });
+            }
+            else
+            {
+                //맥스레벨 처리
+                PopupManager.Instance.ShowAlarmMessage("더이상 승급이 불가능 합니다.");
+            }
+        }
     }
 
     public void OnClickAllUpgradeButton()
@@ -827,9 +927,13 @@ public class UiInventoryWeaponView : MonoBehaviour
             {
                 UiEnventoryBoard.Instance.AllUpgradeWeapon(weaponData.Id);
             }
-            else
+            else if(magicBookData!=null)
             {
                 UiEnventoryBoard.Instance.AllUpgradeMagicBook(magicBookData.Id);
+            }
+            else
+            {
+                UiEnventoryBoard.Instance.AllUpgradeNewGacha(newGachaData.Id);
             }
 
         }, null);
@@ -837,7 +941,7 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     private void SetCurrentWeapon()
     {
-        weaponView.Initialize(weaponData, magicBookData);
+        weaponView.Initialize(weaponData, magicBookData, null, newGachaData);
 
         //currentCompareView.Initialize(weaponData, magicBookData);
 
@@ -867,33 +971,72 @@ public class UiInventoryWeaponView : MonoBehaviour
             weaponLevel = ServerData.weaponTable.TableDatas[this.weaponData.Stringid].level.Value;
             stringid = this.weaponData.Stringid;
         }
+        else if(magicBookData!=null)
+        {
+            effectData = TableManager.Instance.WeaponEffectDatas[this.magicBookData.Magicbookeffectid];
+            weaponLevel = ServerData.magicBookTable.TableDatas[this.magicBookData.Stringid].level.Value;
+            stringid = this.magicBookData.Stringid;
+        }
+        else if(newGachaData !=null)
+        {
+            effectData = TableManager.Instance.WeaponEffectDatas[this.newGachaData.Effectid];
+            weaponLevel = ServerData.newGachaServerTable.TableDatas[this.newGachaData.Stringid].level.Value;
+            stringid = this.newGachaData.Stringid;
+        }
         else
         {
             effectData = TableManager.Instance.WeaponEffectDatas[this.magicBookData.Magicbookeffectid];
             weaponLevel = ServerData.magicBookTable.TableDatas[this.magicBookData.Stringid].level.Value;
             stringid = this.magicBookData.Stringid;
-
         }
-
         string description = string.Empty;
 
         description += "<color=#ff00ffff>장착 효과</color>\n";
 
-        float equipValue1 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1);
-        float equipValue1_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1, magicBookData.Maxlevel);
+        float equipValue1 = 0f, equipValue1_max = 0f, equipValue2 = 0f, equipValue2_max = 0f;
+        float hasValue1 = 0f, hasValue2 = 0f, hasValue3 = 0f, hasValue1_max = 0f, hasValue2_max = 0f, hasValue3_max = 0f;
+        if (weaponData != null)
+        {
+            equipValue1 = ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1);
+            equipValue1_max = ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1, this.weaponData.Maxlevel);
+            equipValue2 = ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2);
+            equipValue2_max = ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2, this.weaponData.Maxlevel);
 
-        float equipValue2 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2);
-        float equipValue2_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2, magicBookData.Maxlevel);
+            hasValue1 = ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1);
+            hasValue1_max = ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1, this.weaponData.Maxlevel);
+            hasValue2 = ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2);
+            hasValue2_max = ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, this.weaponData.Maxlevel);
+            hasValue3 = ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3);
+            hasValue3_max = ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3, this.weaponData.Maxlevel);
+        }
+        else if (magicBookData != null)
+        {
+            equipValue1 = ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1);
+            equipValue1_max = ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1, this.magicBookData.Maxlevel);
+            equipValue2 = ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2);
+            equipValue2_max = ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2, this.magicBookData.Maxlevel);
 
-        float hasValue1 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1);
-        float hasValue1_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1, magicBookData.Maxlevel);
+            hasValue1 = ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1);
+            hasValue1_max = ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1, this.magicBookData.Maxlevel);
+            hasValue2 = ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2);
+            hasValue2_max = ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, this.magicBookData.Maxlevel);
+            hasValue3 = ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3);
+            hasValue3_max = ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3, this.magicBookData.Maxlevel);
+        }
+        else
+        {
+            equipValue1 = ServerData.newGachaServerTable.GetNewGachaEffectValue(this.newGachaData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1);
+            equipValue1_max = ServerData.newGachaServerTable.GetNewGachaEffectValue(this.newGachaData.Stringid, effectData.Equipeffectbase1, effectData.Equipeffectvalue1, this.newGachaData.Maxlevel);
+            equipValue2 = ServerData.newGachaServerTable.GetNewGachaEffectValue(this.newGachaData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2);
+            equipValue2_max = ServerData.newGachaServerTable.GetNewGachaEffectValue(this.newGachaData.Stringid, effectData.Equipeffectbase2, effectData.Equipeffectvalue2, this.newGachaData.Maxlevel);
 
-        float hasValue2 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2);
-        float hasValue2_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, magicBookData.Maxlevel);
-
-        float hasValue3 = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3);
-        float hasValue3_max = weaponData != null ? ServerData.weaponTable.GetWeaponEffectValue(this.weaponData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3, this.weaponData.Maxlevel) : ServerData.magicBookTable.GetMagicBookEffectValue(this.magicBookData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3, magicBookData.Maxlevel);
-
+            hasValue1 = ServerData.newGachaServerTable.GetNewGachaEffectValue(this.newGachaData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1);
+            hasValue1_max = ServerData.newGachaServerTable.GetNewGachaEffectValue(this.newGachaData.Stringid, effectData.Haseffectbase1, effectData.Haseffectvalue1, this.newGachaData.Maxlevel);
+            hasValue2 = ServerData.newGachaServerTable.GetNewGachaEffectValue(this.newGachaData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2);
+            hasValue2_max = ServerData.newGachaServerTable.GetNewGachaEffectValue(this.newGachaData.Stringid, effectData.Haseffectbase2, effectData.Haseffectvalue2, this.newGachaData.Maxlevel);
+            hasValue3 = ServerData.newGachaServerTable.GetNewGachaEffectValue(this.newGachaData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3);
+            hasValue3_max = ServerData.newGachaServerTable.GetNewGachaEffectValue(this.newGachaData.Stringid, effectData.Haseffectbase3, effectData.Haseffectvalue3, this.newGachaData.Maxlevel);
+        }
 
         if (effectData.Equipeffecttype1 != -1)
         {
@@ -904,16 +1047,28 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value = equipValue1 * 100f;
                 float value_max = equipValue1_max * 100f;
 
-
-                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                if (newGachaData != null)
+                {
+                    description += $"{CommonString.GetStatusName(type)} {(value.ToString())}\n";
+                }
+                else
+                {
+                    description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                }
             }
             else
             {
                 float value = equipValue1;
                 float value_max = equipValue1_max;
 
-
-                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                if (newGachaData != null)
+                {
+                    description += $"{CommonString.GetStatusName(type)} {(value.ToString())}\n";
+                }
+                else
+                {
+                    description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                }
             }
 
         }
@@ -927,16 +1082,28 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value = equipValue2 * 100f;
                 float value_max = equipValue2_max * 100f;
 
-
-                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                if (newGachaData != null)
+                {
+                    description += $"{CommonString.GetStatusName(type)} {(value.ToString())}\n";
+                }
+                else
+                {
+                    description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                }
             }
             else
             {
                 float value = equipValue2;
                 float value_max = equipValue2_max;
 
-
-                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                if (newGachaData != null)
+                {
+                    description += $"{CommonString.GetStatusName(type)} {(value.ToString())}\n";
+                }
+                else
+                {
+                    description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                }
             }
 
         }
@@ -952,16 +1119,28 @@ public class UiInventoryWeaponView : MonoBehaviour
                 float value = hasValue1 * 100f;
                 float value_max = hasValue1_max * 100f;
 
-
-                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                if (newGachaData != null)
+                {
+                    description += $"{CommonString.GetStatusName(type)} {(value.ToString())}\n";
+                }
+                else
+                {
+                    description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                }
             }
             else
             {
                 float value = hasValue1;
                 float value_max = hasValue1_max;
 
-
-                description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                if (newGachaData != null)
+                {
+                    description += $"{CommonString.GetStatusName(type)} {(value.ToString())}\n";
+                }
+                else
+                {
+                    description += $"{CommonString.GetStatusName(type)} {Utils.ConvertBigNum(value)}\n";
+                }
             }
         }
 
@@ -1051,7 +1230,7 @@ public class UiInventoryWeaponView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 장착 하실수 없습니다.");
                 return;
             }
-          
+
 
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 무기를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
             {
@@ -1060,7 +1239,7 @@ public class UiInventoryWeaponView : MonoBehaviour
             }, () => { });
             //   UiTutorialManager.Instance.SetClear(TutorialStep._10_EquipWeapon);
         }
-        else
+        else if (magicBookData != null)
         {
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 노리개를 변경 할까요?\n(외형도 함께 변경 됩니다.)", () =>
             {
@@ -1069,13 +1248,20 @@ public class UiInventoryWeaponView : MonoBehaviour
             }, () => { });
 
         }
+        else
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "정말로 반지를 변경 할까요?", () =>
+            {
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.SoulRing, newGachaData.Id);
+            }, () => { });
+        }
 
         UpdateEquipButton();
     }
 
     private void UpdateEquipButton()
     {
-        int id = this.weaponData != null ? weaponData.Id : magicBookData.Id;
+        int id = this.weaponData != null ? weaponData.Id : this.magicBookData != null ? magicBookData.Id : newGachaData.Id;
 
         int has = 0;
 
@@ -1083,18 +1269,24 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             has = ServerData.weaponTable.GetWeaponData(weaponData.Stringid).hasItem.Value;
         }
-        else
+        else if(magicBookData!=null)
         {
             has = ServerData.magicBookTable.GetMagicBookData(magicBookData.Stringid).hasItem.Value;
         }
+        else
+        {
+            has = ServerData.newGachaServerTable.GetNewGachaData(newGachaData.Stringid).hasItem.Value;
+        }
 
         SetEquipButton(has == 1);
-
-        levelUpButton.gameObject.SetActive(has == 1);
+        if (newGachaData == null)
+        {
+            levelUpButton.gameObject.SetActive(has == 1);
+        }
 
         if (equipButton.gameObject.activeSelf)
         {
-            string key = weaponData != null ? EquipmentTable.Weapon : EquipmentTable.MagicBook;
+            string key = weaponData != null ? EquipmentTable.Weapon : magicBookData != null ? EquipmentTable.MagicBook : EquipmentTable.SoulRing;
             int equipIdx = ServerData.equipmentTable.TableDatas[key].Value;
 
             equipButton.interactable = equipIdx != id;
@@ -1171,9 +1363,9 @@ public class UiInventoryWeaponView : MonoBehaviour
             //서버에 반영
             SyncServerRoutineWeapon();
         }
-        else
+        else if(magicBookData!=null)
         {
-            if (magicBookData.Id == 23 || magicBookData.Id == 45 || magicBookData.Id == 50)
+            if (magicBookData.MAGICBOOKTYPE == MagicBookType.View)
             {
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
                 return;
@@ -1202,6 +1394,10 @@ public class UiInventoryWeaponView : MonoBehaviour
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.MagicBookLevelUp, 1);
             //서버에 반영
             SyncServerRoutineMagicBook();
+        }
+        else
+        {
+
         }
 
     }

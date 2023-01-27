@@ -192,6 +192,11 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.DokebiSkill3,
         GoodsTable.DokebiSkill4,
 
+        GoodsTable.FourSkill0,
+        GoodsTable.FourSkill1,
+        GoodsTable.FourSkill2,
+        GoodsTable.FourSkill3,
+
         GoodsTable.c0,
         GoodsTable.c1,
         GoodsTable.c2,
@@ -213,6 +218,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.SusanoTreasure,
         GoodsTable.SumiFire,
         GoodsTable.SumiFireKey,
+        GoodsTable.NewGachaEnergy,
     };
 
     //SendQueue에서 저장

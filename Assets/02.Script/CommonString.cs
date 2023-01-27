@@ -223,6 +223,8 @@ public static class CommonString
             case Item_Type.costume79: return TableManager.Instance.Costume.dataArray[79].Name;
             case Item_Type.costume80: return TableManager.Instance.Costume.dataArray[80].Name;
             case Item_Type.costume81: return TableManager.Instance.Costume.dataArray[81].Name;
+            case Item_Type.costume82: return TableManager.Instance.Costume.dataArray[82].Name;
+            case Item_Type.costume83: return TableManager.Instance.Costume.dataArray[83].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -321,6 +323,11 @@ public static class CommonString
             case Item_Type.DokebiSkill3: return "도깨비술4";
             case Item_Type.DokebiSkill4: return "도깨비술5";
             //
+            case Item_Type.FourSkill0: return "사천왕 기술1";
+            case Item_Type.FourSkill1: return "사천왕 기술2";
+            case Item_Type.FourSkill2: return "사천왕 기술3";
+            case Item_Type.FourSkill3: return "사천왕 기술4";
+            //
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
 
@@ -369,11 +376,13 @@ public static class CommonString
             case Item_Type.HellPower: return "지옥강화석";
             case Item_Type.MonthNorigae0: return "12월 월간 노리개";
             case Item_Type.MonthNorigae1: return "1월 월간 노리개";
+            case Item_Type.MonthNorigae2: return "2월 월간 노리개";
             case Item_Type.DokebiTreasure: return "도깨비 보물";
             case Item_Type.SusanoTreasure: return "악의 씨앗";
             case Item_Type.DokebiFireEnhance: return "우두머리 불꽃";
             case Item_Type.SumiFire: return "수미꽃";
             case Item_Type.SumiFireKey: return "수미꽃 소탕권";
+            case Item_Type.NewGachaEnergy: return "영혼석";
             case Item_Type.weapon81: return "설날 외형 무기";
 
         }

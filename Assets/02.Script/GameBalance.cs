@@ -273,6 +273,11 @@ public static class GameBalance
     public static ObscuredFloat smithTreeAddValue = 100;
     public static ObscuredInt sonCloneAddValue = 10000;
 
+    public static ObscuredInt getRingGoodsAmount = 1;
+
+    public static ObscuredInt banditUpgradeLevel = 1000000;
+    public static ObscuredInt costumeCollectionUnlockNum = 20;
+
     public static List<float> warMarkAbils = new List<float>() { 0f, 400f, 500f, 600f, 700f, 800f, 900f, 1000f };
 
     public static int GetSonIdx()

@@ -89,10 +89,18 @@ public class UiSettingBoard : MonoBehaviour
     [SerializeField]
     private Toggle dragon;
     [SerializeField]
-    private Toggle oneSkill; 
-    
+    private Toggle oneSkill;
+    //
+    [SerializeField]
+    private Toggle fourView;
     [SerializeField]
     private Toggle showOtherPlayer;
+
+    [SerializeField]
+    private Toggle showFoxCup;
+
+    [SerializeField]
+    private Toggle showRingEffect;
 
     [SerializeField]
     private Transform playerViewController;
@@ -150,7 +158,14 @@ public class UiSettingBoard : MonoBehaviour
         indra.isOn = PlayerPrefs.GetInt(SettingKey.indra) == 1;
         dragon.isOn = PlayerPrefs.GetInt(SettingKey.dragon) == 1;
         oneSkill.isOn = PlayerPrefs.GetInt(SettingKey.oneSkill) == 1;
+
+        //
+
+        fourView.isOn = PlayerPrefs.GetInt(SettingKey.fourView) == 1;
         showOtherPlayer.isOn = PlayerPrefs.GetInt(SettingKey.showOtherPlayer) == 1;
+
+        showFoxCup.isOn = PlayerPrefs.GetInt(SettingKey.showFoxCup) == 1;
+        showRingEffect.isOn = PlayerPrefs.GetInt(SettingKey.showRingEffect) == 1;
 
         initialized = true;
 
@@ -509,8 +524,19 @@ public class UiSettingBoard : MonoBehaviour
         }
 
         SettingData.showOneSkillEffect.Value = on ? 1 : 0;
-    }   
-    
+    }
+
+    public void FourView(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.fourView.Value = on ? 1 : 0;
+    }
     public void PartyOnOff(bool on)
     {
         if (initialized == false) return;
@@ -522,6 +548,32 @@ public class UiSettingBoard : MonoBehaviour
 
         SettingData.showOtherPlayer.Value = on ? 1 : 0;
     }
+
+    //
+    public void ShowFoxCupOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showFoxCup.Value = on ? 1 : 0;
+    }
+
+    public void ShowRingEffectOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showRingEffect.Value = on ? 1 : 0;
+    }
+    //
 
     public void OnClickStory()
     {
@@ -605,7 +657,12 @@ public static class SettingKey
     public static string indra = "indra";
     public static string dragon = "dragon";
     public static string oneSkill = "oneSkill";
+
+    public static string fourView = "fourView";
     public static string showOtherPlayer = "showOtherPlayer";
+
+    public static string showFoxCup = "showFoxCup";
+    public static string showRingEffect = "showRingEffect";
 
 }
 
@@ -645,7 +702,12 @@ public static class SettingData
     public static ReactiveProperty<int> dragon = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> showOneSkillEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
+    public static ReactiveProperty<int> fourView = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+
     public static ReactiveProperty<int> showOtherPlayer = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+
+    public static ReactiveProperty<int> showFoxCup = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> showRingEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
@@ -702,11 +764,10 @@ public static class SettingData
         if (PlayerPrefs.HasKey(SettingKey.HpBar) == false)
             PlayerPrefs.SetInt(SettingKey.HpBar, 1);
 
-        if (PlayerPrefs.HasKey(SettingKey.ViewEnemy) == false)
-            PlayerPrefs.SetInt(SettingKey.ViewEnemy, 1);
         //
         if (PlayerPrefs.HasKey(SettingKey.sonView) == false)
             PlayerPrefs.SetInt(SettingKey.sonView, 1);
+
 
         if (PlayerPrefs.HasKey(SettingKey.dogView) == false)
             PlayerPrefs.SetInt(SettingKey.dogView, 1);
@@ -743,10 +804,24 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.dragon, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.oneSkill) == false)
-            PlayerPrefs.SetInt(SettingKey.oneSkill, 0);    
-        
+            PlayerPrefs.SetInt(SettingKey.oneSkill, 0);
+        //
+
+
+        if (PlayerPrefs.HasKey(SettingKey.fourView) == false)
+            PlayerPrefs.SetInt(SettingKey.fourView, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.ViewEnemy) == false)
+            PlayerPrefs.SetInt(SettingKey.ViewEnemy, 1);
+
         if (PlayerPrefs.HasKey(SettingKey.showOtherPlayer) == false)
             PlayerPrefs.SetInt(SettingKey.showOtherPlayer, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.showFoxCup) == false)
+            PlayerPrefs.SetInt(SettingKey.showFoxCup, 1);
+
+        if (PlayerPrefs.HasKey(SettingKey.showRingEffect) == false)
+            PlayerPrefs.SetInt(SettingKey.showRingEffect, 1);
 
     }
 
@@ -770,6 +845,7 @@ public static class SettingData
         ViewEnemy.Value = PlayerPrefs.GetInt(SettingKey.ViewEnemy, 1);
         //
         sonView.Value = PlayerPrefs.GetInt(SettingKey.sonView, 1);
+        fourView.Value = PlayerPrefs.GetInt(SettingKey.fourView, 1);
         dogView.Value = PlayerPrefs.GetInt(SettingKey.dogView, 1);
         marbleCircleView.Value = PlayerPrefs.GetInt(SettingKey.marbleCircleView, 1);
         asuarView.Value = PlayerPrefs.GetInt(SettingKey.asuarView, 1);
@@ -787,6 +863,9 @@ public static class SettingData
         showOneSkillEffect.Value = PlayerPrefs.GetInt(SettingKey.oneSkill, 0);
 
         showOtherPlayer.Value = PlayerPrefs.GetInt(SettingKey.showOtherPlayer, 1);
+
+        showFoxCup.Value = PlayerPrefs.GetInt(SettingKey.showFoxCup, 1);
+        showRingEffect.Value = PlayerPrefs.GetInt(SettingKey.showRingEffect, 1);
 
         Subscribe();
     }
@@ -914,11 +993,27 @@ public static class SettingData
         {
             PlayerPrefs.SetInt(SettingKey.oneSkill, e);
         });
+        //
+        fourView.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.fourView, e);
+        });
 
         showOtherPlayer.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showOtherPlayer, e);
         });
+
+        showFoxCup.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showFoxCup, e);
+        });
+
+        showRingEffect.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showRingEffect, e);
+        });
+
     }
 
     public static void SetGraphicOption(int option)

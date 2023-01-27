@@ -55,8 +55,14 @@ public class UiGradeTestDescription : MonoBehaviour
         }
 
         abilDescription.SetText(description);
-
-        image.sprite = Resources.Load<Sprite>($"GradeTest/{idx}");
+        if (idx < 25)
+        {
+            image.sprite = Resources.Load<Sprite>($"GradeTest/{idx}");
+        }
+        else
+        {
+            image.sprite = Resources.Load<Sprite>($"GradeTest/{26}");
+        }
     }
 
     public void OnClickLeftButton()

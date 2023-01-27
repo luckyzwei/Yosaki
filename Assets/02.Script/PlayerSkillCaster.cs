@@ -5,9 +5,16 @@ using System.Linq;
 using UnityEngine;
 using UniRx;
 using CodeStage.AntiCheat.ObscuredTypes;
-
+public enum SkillCastType
+{
+    Player,
+    Son,
+    Four,
+}
 public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 {
+
+
     [SerializeField]
     private PlayerMoveController playerMoveController;
     public PlayerMoveController PlayerMoveController => playerMoveController;
