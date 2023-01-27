@@ -9,6 +9,6 @@ public class DayOfWeekResultPopup : MonoBehaviour
 
     public void Initialize(int killCount)
     {
-        enemyKillCountTxt.SetText($"{killCount} óġ �Ϸ�"!);
+        enemyKillCountTxt.SetText($"{killCount} 처치 완료"!);
     }
 }

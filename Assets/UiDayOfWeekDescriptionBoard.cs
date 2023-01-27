@@ -18,17 +18,17 @@ public class UiDayOfWeekDescriptionBoard : MonoBehaviour
 
         List<float> multipleValue = new List<float>() { 1, 1, 1, 1, 1, 1, 1 };
         
-        //i´Â ¿äÀÏ
+        //iëŠ” ìš”ì¼
         for (int i = 0; i < rewardCountTxt.Count; i++)
         {
-            //j´Â ¿äÀÏÀÇ j¹øÂ° Á¡¼ö
+            //jëŠ” ìš”ì¼ì˜ jë²ˆì§¸ ì ìˆ˜
             for(int j  = 0; j < tableData[i].Score.Length; j++)
             {
                 if (tableData[i].Score[j] <= ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)
                 {
                     multipleValue[i] = tableData[i].Rewardvalue[j];
                 }
-                //Á¤Áö
+                //ì •ì§€
                 else
                 {
                     break;
@@ -36,7 +36,7 @@ public class UiDayOfWeekDescriptionBoard : MonoBehaviour
             }
             if (ServerData.userInfoTable.GetTableData(UserInfoTable.DayOfWeekClear).Value == 0)
             {
-                rewardCountTxt[i].SetText($"Á¡¼ö ¹Ìµî·Ï");
+                rewardCountTxt[i].SetText($"ì ìˆ˜ ë¯¸ë“±ë¡");
             }
             else
             {
