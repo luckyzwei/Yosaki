@@ -25,11 +25,11 @@ public class UiFoxCupButton : MonoBehaviour
         {
             if (e == 0)
             {
-                buttonText.SetText("»πµÊ");
+                buttonText.SetText("ÌöçÎìù");
             }
             else 
             {
-                buttonText.SetText("∫∏¡÷"); 
+                buttonText.SetText("Î≥¥Ï£º"); 
             }
         }).AddTo(this);
     }
@@ -41,13 +41,13 @@ public class UiFoxCupButton : MonoBehaviour
             if (lockCount <= ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.getFoxCup).Value = 1;
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"ø©øÏ »£∏Æ∫¥ »πµÊ!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"Ïó¨Ïö∞ Ìò∏Î¶¨Î≥ë ÌöçÎìù!", null);
                 ServerData.userInfoTable.UpData(UserInfoTable.getFoxCup, false);
                 return;
             }
             else
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"»Øºˆ ¿Â∫Ò ∞≠»≠ \n {lockCount} ø° «ÿ±›!", null);
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"ÌôòÏàò Ïû•ÎπÑ Í∞ïÌôî \n {lockCount} Ïóê Ìï¥Í∏à!", null);
                 return;
             }
         }

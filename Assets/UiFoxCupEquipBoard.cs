@@ -40,13 +40,13 @@ public class UiFoxCupEquipBoard : MonoBehaviour
 
         currentSelectedObejct.SetActive(currentIdx == PlayerStats.GetCurrentFoxCupIdx());
 
-        currentAwakeLevel.SetText($"ÇöÀç °­È­µµ : + {ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value}°­");
+        currentAwakeLevel.SetText($"í˜„ì¬ ê°•í™”ë„ : + {ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value}ê°•");
 
         var tableData = TableManager.Instance.foxCup.dataArray[currentIdx];
 
         dragonIcon.sprite = CommonResourceContainer.GetFoxCupSprite(currentIdx);
 
-        requireText.SetText($"°­È­ {tableData.Require} ÇÊ¿ä");
+        requireText.SetText($"ê°•í™” {tableData.Require} í•„ìš”");
 
         string description = string.Empty;
 
@@ -66,7 +66,7 @@ public class UiFoxCupEquipBoard : MonoBehaviour
 
         abilDescription.SetText(description);
 
-        gradeText.SetText($"{currentIdx + 1}´Ü°è");
+        gradeText.SetText($"{currentIdx + 1}ë‹¨ê³„");
     }
 
     public void OnClickRightButton()
