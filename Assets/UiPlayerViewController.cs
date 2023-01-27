@@ -132,11 +132,12 @@ public class UiPlayerViewController : MonoBehaviour
             dragon.SetActive(e == 1);
 
         }).AddTo(this);
-        SettingData.fourView.AsObservable().Subscribe(e =>
-        {
-            fourObject.enabled = e == 1;
-            fourObject_EFX.SetActive(e == 1);
-        }).AddTo(this);
+        //SettingData.fourView.AsObservable().Subscribe(e =>
+        //{
+            
+        //    fourObject.enabled = e == 1;
+        //    fourObject_EFX.SetActive(e == 1);
+        //}).AddTo(this);
 
         SettingData.showFoxCup.AsObservable().Subscribe(e =>
         {
