@@ -16,7 +16,7 @@ public class PlayerDokebiImmuneView : MonoBehaviour
 
     private void Subscribe()
     {
-        //도깨비버프
+        //도깨비버프q
         UiDokebiBuff.isImmune.AsObservable().Subscribe(e =>
         {
             icon.SetActive(e);

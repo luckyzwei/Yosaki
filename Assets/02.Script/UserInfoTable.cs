@@ -210,7 +210,7 @@ public class UserInfoTable
 
     public const string canRecommendCount = "canRecommendCount3";
     public const string mileageRefund = "mr";
-    public const string marRelicRefund = "marRelicRe2";
+    public const string marRelicRefund = "marRelicRe3";
 
     public const string purchaseRefund0 = "purchaseRefund0";
 

@@ -64,13 +64,13 @@ public class UiSusanoDescription : MonoBehaviour
         {
             immuneDescription.SetText($"피해면역 {tableData.Buffsec}초");
         }
-        if (idx < 110)
+        if (idx < 109)
         {
             image.sprite = Resources.Load<Sprite>($"Susano/{idx / 3}"); 
         }
         else
         {
-            image.sprite = Resources.Load<Sprite>($"Susano/{66}");
+            image.sprite = Resources.Load<Sprite>($"Susano/36");
         }
     }
 

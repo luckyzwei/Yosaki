@@ -53,11 +53,13 @@ public class UiContentsExitButton : MonoBehaviour
         {
             PopupManager.Instance.ShowYesNoPopup("알림", "포기하고 나가시겠습니까?", () =>
             {
+                BuffOff();
                 GameManager.Instance.LoadNormalField();
             }, null);
         }
         else
         {
+            BuffOff();
             GameManager.Instance.LoadNormalField();
         }
     }
@@ -152,8 +154,17 @@ public class UiContentsExitButton : MonoBehaviour
     {
             PopupManager.Instance.ShowYesNoPopup("알림", "포기하고 나가시겠습니까?", () =>
             {
+                BuffOff();
+
                 PartyRaidManager.Instance.OnClickCloseButton();
                 GameManager.Instance.LoadNormalField();
             }, null);
+    }
+
+
+    private void BuffOff()
+    {
+        UiSusanoBuff.isImmune.Value = false;
+        UiDokebiBuff.isImmune.Value = false;
     }
 }

@@ -25,7 +25,14 @@ public class UiGradeTestFrameView : MonoBehaviour
         }
 
         icon.enabled = true;
-        icon.sprite = Resources.Load<Sprite>($"GradeTest/{currentIdx}");
+        if (currentIdx < 17)
+        {
+            icon.sprite = Resources.Load<Sprite>($"GradeTest/{currentIdx}");
+        }
+        else
+        {
+            icon.sprite = Resources.Load<Sprite>($"GradeTest/{17}");
+        }
     }
 
 }

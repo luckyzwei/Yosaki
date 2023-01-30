@@ -340,7 +340,14 @@ public static class CommonResourceContainer
 
         if (susanoIdx != -1)
         {
-            return Resources.Load<Sprite>($"Susano/{susanoIdx / 3}");
+            if (susanoIdx < 109)
+            {
+                return Resources.Load<Sprite>($"Susano/{susanoIdx / 3}");
+            }
+            else
+            {
+                return Resources.Load<Sprite>($"Susano/36");
+            }
         }
 
         return null;

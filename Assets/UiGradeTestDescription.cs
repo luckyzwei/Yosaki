@@ -55,13 +55,13 @@ public class UiGradeTestDescription : MonoBehaviour
         }
 
         abilDescription.SetText(description);
-        if (idx < 25)
+        if (idx < 17)
         {
             image.sprite = Resources.Load<Sprite>($"GradeTest/{idx}");
         }
         else
         {
-            image.sprite = Resources.Load<Sprite>($"GradeTest/{26}");
+            image.sprite = Resources.Load<Sprite>($"GradeTest/{17}");
         }
     }
 
