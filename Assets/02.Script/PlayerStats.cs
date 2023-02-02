@@ -2660,7 +2660,7 @@ public static class PlayerStats
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            if (tableData[i].Require < costumeNum)
+            if (tableData[i].Require <= costumeNum)
             {
                 ret = tableData[i].Plusvalue;
             }

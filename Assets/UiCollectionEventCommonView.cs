@@ -283,6 +283,7 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
             Param goodsParam = new Param();
 
+
             goodsParam.Add(goodsName, ServerData.goodsTable.GetTableData(goodsName).Value);
 
             goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
