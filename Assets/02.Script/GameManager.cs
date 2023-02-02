@@ -47,6 +47,7 @@ public class GameManager : SingletonMono<GameManager>
         SmithTree,
         SonClone,
         DayOfWeekDungeon,
+        Online_Tower2,
     }
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;

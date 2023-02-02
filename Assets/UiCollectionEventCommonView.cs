@@ -271,6 +271,8 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
             goodsParam.Add(goodsName, ServerData.goodsTable.GetTableData(goodsName).Value);
 
+            goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
+
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
@@ -281,8 +283,9 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
             Param goodsParam = new Param();
 
-
             goodsParam.Add(goodsName, ServerData.goodsTable.GetTableData(goodsName).Value);
+
+            goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
 
             goodsParam.Add(itemKey, ServerData.goodsTable.GetTableData(itemKey).Value);
 
