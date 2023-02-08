@@ -815,6 +815,11 @@ public enum TitleMissionId
 
     SumisanWeapon2,//★
     SumisanWeapon3,//★
+
+
+
+    Stage14900,//★
+    Stage15000,//★
 }
 public class UiTitleManager : SingletonMono<UiTitleManager>
 {
@@ -3590,6 +3595,14 @@ public class UiTitleManager : SingletonMono<UiTitleManager>
             if (e >= 14800 - 1)
             {
                 ClearTitleMission(TitleMissionId.Stage14800);
+            }
+            if (e >= 14900 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage14900);
+            }
+            if (e >= 15000 - 1)
+            {
+                ClearTitleMission(TitleMissionId.Stage15000);
             }
 
 
