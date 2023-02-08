@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -259,9 +259,12 @@ public class UiInventoryWeaponView : MonoBehaviour
             magicBookData.Id == 53 ||
             magicBookData.Id == 54 ||
             magicBookData.Id == 55 ||
-            magicBookData.Id == 56
+            magicBookData.Id == 56 ||
+            magicBookData.Id == 57 ||
+            magicBookData.Id == 58 
             ));
         foxNorigaeGetButton.SetActive(false);
+        
 
         if (magicBookData != null)
         {
@@ -349,7 +352,9 @@ public class UiInventoryWeaponView : MonoBehaviour
             }
             else if (
                magicBookData.Id == 54 ||
-               magicBookData.Id == 55
+               magicBookData.Id == 55 ||
+               magicBookData.Id == 57 ||
+               magicBookData.Id == 58
 
                )
             {
@@ -1508,6 +1513,7 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     private void SetParent()
     {
+        //정렬
         if (weaponData != null)
         {
             //요물 야차만
@@ -1517,6 +1523,13 @@ public class UiInventoryWeaponView : MonoBehaviour
                 {
                     this.transform.SetAsFirstSibling();
                 }
+            }
+        }
+        if (magicBookData != null)
+        {
+            if (ServerData.magicBookTable.TableDatas[magicBookData.Stringid].hasItem.Value == 1)
+            {
+                this.transform.SetAsFirstSibling();
             }
         }
     }

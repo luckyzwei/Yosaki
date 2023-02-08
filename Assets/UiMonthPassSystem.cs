@@ -82,6 +82,8 @@ public class UiMonthPassSystem : MonoBehaviour
         List<int> splitData_Free = GetSplitData(MonthlyPassServerTable.MonthlypassFreeReward);
         List<int> splitData_Ad = GetSplitData(MonthlyPassServerTable.MonthlypassAdReward);
 
+        List<int> rewardTypeList = new List<int>();
+
         var tableData = TableManager.Instance.MonthlyPass.dataArray;
 
         int rewardedNum = 0;
@@ -162,6 +164,12 @@ public class UiMonthPassSystem : MonoBehaviour
 
                 free += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
+                if(rewardTypeList.Contains(tableData[i].Reward1)==false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward1);
+                }
+                
+
                 rewardedNum++;
             }
 
@@ -181,10 +189,16 @@ public class UiMonthPassSystem : MonoBehaviour
 
                 ad += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward2) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward2);
+                }
+
                 rewardedNum++;
             }
         }
 
+        
 
         if (rewardedNum > 0)
         {
@@ -193,17 +207,25 @@ public class UiMonthPassSystem : MonoBehaviour
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
+            var e = rewardTypeList.GetEnumerator();
+
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
-            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
-            goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
-            goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
-            goodsParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
-            goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
-            goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
-            goodsParam.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
-            goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
-            goodsParam.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+            while(e.MoveNext())
+            {
+                goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
+            }
+
+            //goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+            //goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+            //goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+            //goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+            //goodsParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
+            //goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
+            //goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
+            //goodsParam.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
+            //goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
+            //goodsParam.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+            //goodsParam.Add(GoodsTable.SumiFire, ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 

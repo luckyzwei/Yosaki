@@ -75,7 +75,7 @@ public class UiDailyMissionCell : MonoBehaviour
     public void OnClickGetButton()
     {
         int amountFactor = getAmountFactor;
-        int rewardGemNum = tableData.Rewardvalue * amountFactor;
+        float rewardGemNum = (float)tableData.Rewardvalue * (float)amountFactor;
         //로컬 갱신
         DailyMissionManager.UpdateDailyMission((DailyMissionKey)(tableData.Id), -tableData.Rewardrequire * amountFactor);
         ServerData.goodsTable.AddLocalData(GoodsTable.Jade, rewardGemNum);

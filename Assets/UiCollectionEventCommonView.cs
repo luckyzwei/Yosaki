@@ -283,7 +283,6 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
             Param goodsParam = new Param();
 
-
             goodsParam.Add(goodsName, ServerData.goodsTable.GetTableData(goodsName).Value);
 
             goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
@@ -292,6 +291,8 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         }
+
+
 
         Param userInfoParam = new Param();
 

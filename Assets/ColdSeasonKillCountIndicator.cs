@@ -16,7 +16,7 @@ public class ColdSeasonKillCountIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalColdSeason).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalSeason).AsObservable().Subscribe(e =>
         {
             killCountText.SetText($"처치 : {Utils.ConvertBigNum(e)}");
         }).AddTo(this);

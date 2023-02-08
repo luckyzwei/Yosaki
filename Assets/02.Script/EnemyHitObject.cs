@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,9 +41,8 @@ public class EnemyHitObject : MonoBehaviour
 
     private void SetPercentValueByBossId()
     {
-
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && (GameManager.Instance.bossId == 57 ||
-            GameManager.Instance.bossId == 72 || GameManager.Instance.bossId == 82 || GameManager.Instance.bossId == 83))
+            GameManager.Instance.bossId == 72 || GameManager.Instance.bossId == 82 || GameManager.Instance.bossId == 83 || GameManager.Instance.bossId == 92))
         {
             this.percentDamage = 1f;
         }
@@ -83,10 +82,18 @@ public class EnemyHitObject : MonoBehaviour
     public void SetDamage(double damage, float percentDamage = 0f)
     {
         this.damage = damage;
-        this.percentDamage = percentDamage;
+        if(GameManager.contentsType==GameManager.ContentsType.OldDokebi2)
+        {
+            //퍼뎀초기화 안함.
+        }
+        else
+        {
+            this.percentDamage = percentDamage;
+        }
 
         SetPercentValueByBossId();
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

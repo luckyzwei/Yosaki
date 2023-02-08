@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
@@ -79,6 +79,7 @@ public static class CommonString
     public static char ChatSplitChar = '◙';
     public static string GuildText = "문파";
     public static string PartyTowerText = "동굴";
+    public static string PartyTower2Text = "그림자 동굴";
 
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
@@ -225,6 +226,9 @@ public static class CommonString
             case Item_Type.costume81: return TableManager.Instance.Costume.dataArray[81].Name;
             case Item_Type.costume82: return TableManager.Instance.Costume.dataArray[82].Name;
             case Item_Type.costume83: return TableManager.Instance.Costume.dataArray[83].Name;
+            case Item_Type.costume84: return TableManager.Instance.Costume.dataArray[84].Name;
+            case Item_Type.costume85: return TableManager.Instance.Costume.dataArray[85].Name;
+            case Item_Type.costume86: return TableManager.Instance.Costume.dataArray[86].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -384,6 +388,7 @@ public static class CommonString
             case Item_Type.SumiFireKey: return "수미꽃 소탕권";
             case Item_Type.NewGachaEnergy: return "영혼석";
             case Item_Type.weapon81: return "설날 외형 무기";
+            case Item_Type.DokebiBundle: return "도깨비 보물상자";
 
         }
 

@@ -19,6 +19,7 @@ public class StatusTable
     public const string tableName = "Status";
     public const string Level = "Level";
     public const string SkillPoint = "SkillPoint";
+    public const string Skill2Point = "Skill2Point";
     public const string StatPoint = "StatPoint";
     public const string Memory = "memory";
 
@@ -70,6 +71,7 @@ public class StatusTable
     {
         {Level,1},
         {SkillPoint,GameBalance.SkillPointGet},
+        {Skill2Point,0},
         {StatPoint,0},
         {Memory,0},
 
@@ -322,7 +324,7 @@ public class StatusTable
                     {
                         float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
 
-                        return level * 0.00000004f * spcialAbilRatio;
+                        return level * 0.00000008f * spcialAbilRatio;
                     }
                 #endregion
                 default:

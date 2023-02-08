@@ -202,7 +202,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         //ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value += sleepRewardInfo.killCount;
         ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalWinterPass].Value += sleepRewardInfo.killCount;
-        ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalColdSeason].Value += sleepRewardInfo.killCount;
+        ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason].Value += sleepRewardInfo.killCount;
         //ServerData.userInfoTable.TableDatas[UserInfoTable.attenCountOne].Value += sleepRewardInfo.killCount;
 
         Param goodsParam = new Param();
@@ -238,7 +238,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         //userInfoParam.Add(UserInfoTable.killCountTotalChild, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value);
         userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalWinterPass].Value);
-        userInfoParam.Add(UserInfoTable.killCountTotalColdSeason, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalColdSeason].Value);
+        userInfoParam.Add(UserInfoTable.killCountTotalSeason, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason].Value);
         // userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.TableDatas[UserInfoTable.attenCountOne].Value);
 
 

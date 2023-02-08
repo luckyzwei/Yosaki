@@ -15,7 +15,7 @@ public class ColdSeasonAttenCountIndicator : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountColdSeason).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountSeason).AsObservable().Subscribe(e =>
         {
             killCountText.SetText($"{Utils.ConvertBigNum(e)}일차");
         }).AddTo(this);

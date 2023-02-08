@@ -736,10 +736,10 @@ public class ColdSeasonPassServerTable
     public const string tableName = "ColdSeason";
 
 
-    public static string coldseasonFree = "f1";
-    public static string coldseasonAd = "a1";
+    public static string coldseasonFree = "f2";
+    public static string coldseasonAd = "a2";
 
-    public static string coldseasonFree_Atten = "fa1";
+    public static string coldseasonFree_Atten = "fa2";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
@@ -862,10 +862,16 @@ public class BokPassServerTable
     public static string childFree = "f3";
     public static string childAd = "a3";
 
+    public static string springFree = "ff0";
+    public static string springAd = "aa0";
+
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
         { childFree,string.Empty},
-        { childAd,string.Empty}
+        { childAd,string.Empty},
+
+        { springFree,string.Empty},
+        { springAd,string.Empty}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -975,20 +981,20 @@ public class BokPassServerTable
 
         var receivedAdRewardList = ServerData.bokPassServerTable.TableDatas[BokPassServerTable.childAd].Value;
 
-        
+
         var freeRewards = receivedFreeRewardList.Split(',');
 
         var adRewards = receivedAdRewardList.Split(',');
- 
+
         var tableData = TableManager.Instance.bokPass.dataArray;
 
-        
-        if(tableData.Length>freeRewards.Length-1)
+
+        if (tableData.Length > freeRewards.Length - 1)
         {
             return false;
         }
 
-        if(tableData.Length>adRewards.Length-1)
+        if (tableData.Length > adRewards.Length - 1)
         {
             return false;
         }

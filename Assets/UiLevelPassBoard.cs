@@ -92,6 +92,8 @@ public class UiLevelPassBoard : MonoBehaviour
         string free = ServerData.newLevelPass.TableDatas[NewLevelPass.freeReward].Value;
         string ad = ServerData.newLevelPass.TableDatas[NewLevelPass.premiumReward].Value;
 
+        List<int> rewardTypeList = new List<int>();
+
         for (int i = 0; i < tableData.Length; i++)
         {
             bool canGetReward = CanGetReward(tableData[i].Unlocklevel);
@@ -103,6 +105,10 @@ public class UiLevelPassBoard : MonoBehaviour
             {
                 free += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1_Free, tableData[i].Reward1_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward1_Free) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward1_Free);
+                }
                 rewardedNum++;
             }
 
@@ -111,6 +117,11 @@ public class UiLevelPassBoard : MonoBehaviour
             {
                 ad += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2_Pass, tableData[i].Reward2_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward2_Pass) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward2_Pass);
+                }
+
                 rewardedNum++;
             }
         }
@@ -122,12 +133,18 @@ public class UiLevelPassBoard : MonoBehaviour
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
+            var e = rewardTypeList.GetEnumerator();
+
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
-            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
-            goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
-            goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
-            goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
+            while (e.MoveNext())
+            {
+                goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
+            }
+            //goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
+            //goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+            //goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+            //goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
+            //goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param passParam = new Param();

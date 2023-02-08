@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
@@ -77,8 +77,10 @@ public class UserInfoTable
     public const string mf12_Buff = "mf12";
     public const string ma12_Buff = "ma12";
 
-    public const string cold0_Buff = "cold0"; //혹한기버프
-    public const string cold1_Buff = "cold1";
+    public const string season0_Buff = "cold0"; //혹한기버프
+    public const string season1_Buff = "cold1";
+    public const string season2_Buff = "season2"; //혹한기버프
+    public const string season3_Buff = "season3";
 
     public const string winter0_Buff = "winter0"; //겨울훈련 버프
     public const string winter1_Buff = "winter1";
@@ -117,6 +119,7 @@ public class UserInfoTable
     public const string marblePackChange = "marblePackChange";
 
     public const string yoguiSogulLastClear = "yoguiSogulLastClear";
+    public const string oldDokebi2LastClear = "oldlc";
     public const string smithClear = "smithClear";
     public const string gumGiClear = "gumGiClear";
     public const string sumiFireClear = "sfc";
@@ -135,10 +138,11 @@ public class UserInfoTable
     public const string killCountTotal2 = "k13";
     public const string killCountTotalChild = "fal"; //가을훈련
     public const string killCountTotalWinterPass = "KillCountWinterPass"; //가을훈련
-    public const string killCountTotalColdSeason = "cold"; //혹한기
+    public const string killCountTotalSeason = "ks1"; //혹한기 다음거
     public const string attenCountBok = "kb";
+    public const string attenCountSpring = "acs";
     public const string attenCountChuSeok = "kchu";
-    public const string attenCountColdSeason = "kcold";
+    public const string attenCountSeason = "as1";
 
     public const string usedFallCollectionCount = "ufc"; //곶감사용
     public const string usedSnowManCollectionCount = "usc"; //눈사람사용
@@ -182,6 +186,7 @@ public class UserInfoTable
     public const string getDokebiFire = "getDokebiFire";
     public const string getRingGoods = "grg";
     public const string getDayOfWeek = "gdow";
+    public const string getDokebiBundle = "gdb";
 
     public const string sendPetExp = "sendPetExp";
 
@@ -231,6 +236,7 @@ public class UserInfoTable
     public const string dokebiPensionReset = "doke";
     public const string partyTowerRecommend = "partyTowerRec";
     public const string partyTowerFloor = "partyTowerFloor";
+    public const string partyTowerFloor2 = "ptf2";
 
     public const string receivedPartyTowerTicket = "receivedPartyTowerTicket";
     public const string dailySleepRewardReceiveCount = "dss";
@@ -289,8 +295,10 @@ public class UserInfoTable
         {mf12_Buff,0f},
         {ma12_Buff,0f},
 
-        {cold0_Buff,0f},
-        {cold1_Buff,0f},
+        {season0_Buff,0f},
+        {season1_Buff,0f},
+        {season2_Buff,0f},
+        {season3_Buff,0f},
 
         {winter0_Buff,0f},
         {winter1_Buff,0f},
@@ -323,6 +331,7 @@ public class UserInfoTable
 
         {marblePackChange,0f},
         {yoguiSogulLastClear,0f},
+        {oldDokebi2LastClear,0f},
         {smithClear,0f},
         {gumGiSoulClear,0f},
         {smithTreeClear,0f},
@@ -349,12 +358,13 @@ public class UserInfoTable
         {killCountTotal2,0f},
         {killCountTotalChild,0f},
         {killCountTotalWinterPass,0f},
-        {killCountTotalColdSeason,0f},
+        {killCountTotalSeason,0f},
         {attenCountBok,1f},
+        {attenCountSpring,1f},
         {usedFallCollectionCount,0f},
         {usedSnowManCollectionCount,0f},
         {attenCountChuSeok,1f},
-        {attenCountColdSeason,1f},
+        {attenCountSeason,1f},
         {yomul6_buff,0f},
         {sonScore,0f},
         {hellWarScore,0f},
@@ -387,6 +397,7 @@ public class UserInfoTable
         {getDokebiFire,0},
         {getRingGoods,0},
         {getDayOfWeek,0},
+        {getDokebiBundle,0},
         {sendPetExp,0},
         {exchangeCount,0},
         {exchangeCount_1,0},
@@ -431,6 +442,7 @@ public class UserInfoTable
         {dokebiPensionReset,0},
         {partyTowerRecommend,GameBalance.recommendCountPerWeek_PartyTower},
         {partyTowerFloor,0},
+        {partyTowerFloor2,0},
         {receivedPartyTowerTicket,0f},
 
         {snow_exchangeCount_0,0f},
@@ -628,7 +640,7 @@ public class UserInfoTable
 
         //UpData(killCountTotalChild, false);
         UpData(killCountTotalWinterPass, false);
-        UpData(killCountTotalColdSeason, false);
+        UpData(killCountTotalSeason, false);
         //UpData(attenCountOne, false);
     }
     private void UpdatejumpCount()
@@ -811,8 +823,10 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.ma11_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.mf12_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.ma12_Buff).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.cold0_Buff).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.cold1_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.season0_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.season1_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.season2_Buff).Value = 0;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.season3_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.winter0_Buff).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.winter1_Buff).Value = 0;
 
@@ -847,7 +861,7 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value++;
             ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountChuSeok).Value++;
-            ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountColdSeason).Value++;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountSeason).Value++;
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.oakpensionAttendance].buyCount.Value > 0f)
             {
@@ -919,7 +933,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.attendanceCount_Seol, ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_Seol).Value);
         userInfoParam.Add(UserInfoTable.attenCountBok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountBok).Value);
         userInfoParam.Add(UserInfoTable.attenCountChuSeok, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountChuSeok).Value);
-        userInfoParam.Add(UserInfoTable.attenCountColdSeason, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountColdSeason).Value);
+        userInfoParam.Add(UserInfoTable.attenCountSeason, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountSeason).Value);
 
         userInfoParam.Add(UserInfoTable.oakpensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.oakpensionAttendance).Value);
         userInfoParam.Add(UserInfoTable.marblepensionAttendance, ServerData.userInfoTable.GetTableData(UserInfoTable.marblepensionAttendance).Value);
@@ -965,8 +979,10 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.ma11_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.ma11_Buff).Value);
         userInfoParam.Add(UserInfoTable.mf12_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.mf12_Buff).Value);
         userInfoParam.Add(UserInfoTable.ma12_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.ma12_Buff).Value);
-        userInfoParam.Add(UserInfoTable.cold0_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.cold0_Buff).Value);
-        userInfoParam.Add(UserInfoTable.cold1_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.cold1_Buff).Value);
+        userInfoParam.Add(UserInfoTable.season0_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.season0_Buff).Value);
+        userInfoParam.Add(UserInfoTable.season1_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.season1_Buff).Value);
+        userInfoParam.Add(UserInfoTable.season2_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.season2_Buff).Value);
+        userInfoParam.Add(UserInfoTable.season3_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.season3_Buff).Value);
         userInfoParam.Add(UserInfoTable.winter0_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.winter0_Buff).Value);
         userInfoParam.Add(UserInfoTable.winter1_Buff, ServerData.userInfoTable.GetTableData(UserInfoTable.winter1_Buff).Value);
 
@@ -1059,11 +1075,13 @@ public class UserInfoTable
 
 
 
+
         Param bossParam = new Param();
 
         bossParam.Add("boss12", ServerData.bossServerTable.TableDatas["boss12"].ConvertToString());
         bossParam.Add("boss20", ServerData.bossServerTable.TableDatas["boss20"].ConvertToString());
         bossParam.Add("b73", ServerData.bossServerTable.TableDatas["b73"].ConvertToString());
+
 
         //요괴소굴
         Param yoguiSogulParam = new Param();
@@ -1078,6 +1096,9 @@ public class UserInfoTable
         //로컬
         ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value = string.Empty;
         yoguiSogulParam.Add(EtcServerTable.yoguiSogulReward, ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value);
+
+        ServerData.etcServerTable.TableDatas[EtcServerTable.oldDokebi2Reward].Value = string.Empty;
+        yoguiSogulParam.Add(EtcServerTable.oldDokebi2Reward, ServerData.etcServerTable.TableDatas[EtcServerTable.oldDokebi2Reward].Value);
 
         ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value = string.Empty;
         yoguiSogulParam.Add(EtcServerTable.guildAttenReward, ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value);
@@ -1096,6 +1117,10 @@ public class UserInfoTable
             ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value = string.Empty;
             
             yoguiSogulParam.Add(EtcServerTable.chunmaTopScore, ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value);
+
+            //그림자보스
+            //ServerData.bossServerTable.TableDatas["b91"].rewardedId.Value = string.Empty;
+            //bossParam.Add("b91", ServerData.bossServerTable.TableDatas["b91"].ConvertToString());
         }
 
 
@@ -1237,7 +1262,7 @@ public class UserInfoTable
 
             //tableDatas[killCountTotalChild].Value += updateRequireNum;
             tableDatas[killCountTotalWinterPass].Value += updateRequireNum;
-            tableDatas[killCountTotalColdSeason].Value += updateRequireNum;
+            tableDatas[killCountTotalSeason].Value += updateRequireNum;
             //tableDatas[attenCountOne].Value += updateRequireNum;
         }
 

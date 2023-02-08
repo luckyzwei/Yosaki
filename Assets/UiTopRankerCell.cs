@@ -1,4 +1,4 @@
-﻿using Photon.Pun;
+using Photon.Pun;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -73,7 +73,7 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private BoneFollowerGraphic boneFollowerGraphic_Weapon;
 
-    public void UpdatePartyRaidScore(double topRankerScore = 0, bool fightEnd = false)
+    public void UpdatePartyRaidScore(double topRankerScore = 0, bool fightEnd = false, bool retireGame = false)
     {
         if (topRankerScoreText != null)
         {
@@ -82,10 +82,19 @@ public class UiTopRankerCell : MonoBehaviour
 
         if (fightText != null)
         {
-            fightText.color = fightEnd ? Color.yellow : Color.red;
-            fightText.SetText(fightEnd ? "전투완료" : "전투중");
+            if (retireGame == false)
+            {
+                fightText.color = fightEnd ? Color.yellow : Color.red;
+                fightText.SetText(fightEnd ? "전투완료" : "전투중");
+            }
+            else
+            {
+                fightText.color = Color.red;
+                fightText.SetText("클리어 실패");
+            }
         }
     }
+
 
     public void SetLevelText(int level)
     {
@@ -279,7 +288,8 @@ public class UiTopRankerCell : MonoBehaviour
             return;
         }
 
-        if (GameManager.contentsType == GameManager.ContentsType.Online_Tower)
+        if (GameManager.contentsType == GameManager.ContentsType.Online_Tower ||
+            GameManager.contentsType == GameManager.ContentsType.Online_Tower2)
         {
             PopupManager.Instance.ShowAlarmMessage($"동굴에서는 추천을 하실 수 없습니다.");
             return;

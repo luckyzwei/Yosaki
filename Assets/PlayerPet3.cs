@@ -17,13 +17,7 @@ public class PlayerPet3 : MonoBehaviour
     private Transform target;
 
     [SerializeField]
-    private Animator animator;
-
-    [SerializeField]
-    private GameObject rendererObject;
-
-    [SerializeField]
-    private List<GameObject> effects;
+    private List<GameObject> rendererObjects;
 
     private void Awake()
     {
@@ -34,42 +28,36 @@ public class PlayerPet3 : MonoBehaviour
     private void Subscribe()
     {
 
-        ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).AsObservable().Subscribe(level =>
+        ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).AsObservable().Subscribe(e =>
         {
-            rendererObject.SetActive(HasFourSkillCheck());
-            
-            int idx = GameBalance.GetSonIdx();
-
-            animator.runtimeAnimatorController = CommonUiContainer.Instance.sonAnimators[GameBalance.GetSonIdx()];
-
-            for (int i = 0; i < effects.Count; i++)
-            {
-                effects[i].SetActive(i == idx);
-            }
+            rendererObjects[0].SetActive(e == 1);
 
         }).AddTo(this);
-    }
 
-    private bool HasFourSkillCheck()
-    {
-        if(ServerData.goodsTable.GetTableData(GoodsTable.FourSkill0).Value==1||
-            ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).Value == 1 ||
-            ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).Value == 1 ||
-            ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).Value == 1
-            )
+        ServerData.goodsTable.GetTableData(GoodsTable.FourSkill1).AsObservable().Subscribe(e =>
         {
-            return true;
-        }
-        else
+            rendererObjects[1].SetActive(e == 1);
+
+        }).AddTo(this);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.FourSkill2).AsObservable().Subscribe(e =>
         {
-            return false;
-        }    
+            rendererObjects[2].SetActive(e == 1);
+
+        }).AddTo(this);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.FourSkill3).AsObservable().Subscribe(e =>
+        {
+            rendererObjects[3].SetActive(e == 1);
+
+        }).AddTo(this);
     }
 
     private void Initialize()
     {
         this.transform.parent = null;
     }
+
 
     private void OnEnable()
     {

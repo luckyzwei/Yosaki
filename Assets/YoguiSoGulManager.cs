@@ -355,7 +355,7 @@ public class YoguiSoGulManager : SingletonMono<YoguiSoGulManager>
         SoundManager.Instance.PlaySound("Reward");
 
         StopGameRoutines();
-
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearBackgui);
         if (clearLastStage == false)
         {
             int pref = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value;

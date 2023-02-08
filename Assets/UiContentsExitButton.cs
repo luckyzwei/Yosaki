@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,16 +21,16 @@ public class UiContentsExitButton : MonoBehaviour
         if (GameManager.contentsType == GameManager.ContentsType.InfiniteTower2 || GameManager.contentsType == GameManager.ContentsType.DokebiTower ||
             GameManager.contentsType == GameManager.ContentsType.FoxMask || GameManager.contentsType == GameManager.ContentsType.Yum ||
             GameManager.contentsType == GameManager.ContentsType.Ok || GameManager.contentsType == GameManager.ContentsType.Do ||
-            GameManager.contentsType == GameManager.ContentsType.GradeTest || GameManager.contentsType==GameManager.ContentsType.Sasinsu||
+            GameManager.contentsType == GameManager.ContentsType.GradeTest || GameManager.contentsType == GameManager.ContentsType.Sasinsu ||
             GameManager.contentsType == GameManager.ContentsType.SumisanTower
             )
         {
             return true;
         }
         //산신령 & 서재 & 지키미 & 보도
-        if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 57)||
-            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 72)||
-            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 82)||
+        if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 57) ||
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 72) ||
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 82) ||
             (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 83)
             )
         {
@@ -39,9 +39,12 @@ public class UiContentsExitButton : MonoBehaviour
         //도깨비 보스 & 수미산 사천왕
         if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 85) ||
             (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 86) ||
-            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 87) || 
-            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 88)  
-            )
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 87) ||
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 88) ||
+            (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && GameManager.Instance.bossId == 92))
+
+
+
         {
             return true;
         }
@@ -112,14 +115,14 @@ public class UiContentsExitButton : MonoBehaviour
             GameManager.Instance.LoadContents(GameManager.ContentsType.GradeTest);
         }
 
-        else if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon) &&(
-            (GameManager.Instance.bossId == 57)||
-            (GameManager.Instance.bossId == 72)||
-            (GameManager.Instance.bossId == 82)||
-            (GameManager.Instance.bossId == 83)||
-            (GameManager.Instance.bossId == 85)||
-            (GameManager.Instance.bossId == 86)||
-            (GameManager.Instance.bossId == 87)||
+        else if ((GameManager.contentsType == GameManager.ContentsType.TwelveDungeon) && (
+            (GameManager.Instance.bossId == 57) ||
+            (GameManager.Instance.bossId == 72) ||
+            (GameManager.Instance.bossId == 82) ||
+            (GameManager.Instance.bossId == 83) ||
+            (GameManager.Instance.bossId == 85) ||
+            (GameManager.Instance.bossId == 86) ||
+            (GameManager.Instance.bossId == 87) ||
             (GameManager.Instance.bossId == 88)
             )
             )
@@ -152,13 +155,13 @@ public class UiContentsExitButton : MonoBehaviour
 
     public void OnClickExitButton_ForPartyRaid()
     {
-            PopupManager.Instance.ShowYesNoPopup("알림", "포기하고 나가시겠습니까?", () =>
-            {
-                BuffOff();
+        PopupManager.Instance.ShowYesNoPopup("알림", "포기하고 나가시겠습니까?", () =>
+        {
+            BuffOff();
 
-                PartyRaidManager.Instance.OnClickCloseButton();
-                GameManager.Instance.LoadNormalField();
-            }, null);
+            PartyRaidManager.Instance.OnClickCloseButton();
+            GameManager.Instance.LoadNormalField();
+        }, null);
     }
 
 

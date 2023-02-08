@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -39,7 +39,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
             recordButton.SetActive(PhotonNetwork.IsMasterClient);
             leaveOnlyButton.SetActive(!PhotonNetwork.IsMasterClient);
         }
-        else if (PartyRaidManager.Instance.NetworkManager.IsPartyTowerBoss())
+        else if (PartyRaidManager.Instance.NetworkManager.IsPartyTowerBoss() || PartyRaidManager.Instance.NetworkManager.IsPartyTower2Boss())
         {
             recordButton.SetActive(false);
             leaveOnlyButton.SetActive(false);
@@ -53,6 +53,11 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
             {
                 leaveOnlyButton_Tower.SetActive(true);
             }
+        }
+
+        if (PartyRaidManager.Instance.NetworkManager.IsPartyTower2Boss()) 
+        {
+            leaveOnlyButton_Tower.SetActive(true);
         }
     }
 

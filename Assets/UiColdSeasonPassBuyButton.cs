@@ -12,7 +12,7 @@ public class UiColdSeasonPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string coldseasonPassKey = "coldseasonpass0";
+    public static readonly string seasonPassKey = "seasonpass1";
 
     private Button buyButton;
 
@@ -32,7 +32,7 @@ public class UiColdSeasonPassBuyButton : MonoBehaviour
 
         disposable.Clear();
 
-        ServerData.iapServerTable.TableDatas[coldseasonPassKey].buyCount.AsObservable().Subscribe(e =>
+        ServerData.iapServerTable.TableDatas[seasonPassKey].buyCount.AsObservable().Subscribe(e =>
         {
             descText.SetText(e >= 1 ? "구매완료" : "패스권 구매");
             this.gameObject.SetActive(e <= 0);
@@ -57,18 +57,18 @@ public class UiColdSeasonPassBuyButton : MonoBehaviour
 
     public void OnClickBuyButton()
     {
-        if (ServerData.iapServerTable.TableDatas[coldseasonPassKey].buyCount.Value >= 1)
+        if (ServerData.iapServerTable.TableDatas[seasonPassKey].buyCount.Value >= 1)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 구매 했습니다.");
             return;
         }
 
 #if UNITY_EDITOR|| TEST
-        GetPackageItem(coldseasonPassKey);
+        GetPackageItem(seasonPassKey);
         return;
 #endif
 
-        IAPManager.Instance.BuyProduct(coldseasonPassKey);
+        IAPManager.Instance.BuyProduct(seasonPassKey);
     }
 
     public void GetPackageItem(string productId)
@@ -88,7 +88,7 @@ public class UiColdSeasonPassBuyButton : MonoBehaviour
             // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} 구매 성공!", null);
         }
 
-        if (tableData.Productid != coldseasonPassKey) return;
+        if (tableData.Productid != seasonPassKey) return;
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
 

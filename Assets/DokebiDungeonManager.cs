@@ -56,6 +56,8 @@ public class DokebiDungeonManager : ContentsManagerBase
 
         StopCoroutine(spawnRoutine);
 
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearOni);
+
         resultPopup.Initialize(enemyDeadCount.Value);
 
         resultPopup.gameObject.SetActive(true);

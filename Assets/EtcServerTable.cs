@@ -14,6 +14,7 @@ public class EtcServerTable
     public const string tableName = "Etc";
     public const string email = "email";
     public const string yoguiSogulReward = "ys";
+    public const string oldDokebi2Reward = "od";
     public const string sonReward = "sonRewardReal";
     public const string iosCoupon = "iosCoupon";
     public const string guildAttenReward = "gar";
@@ -24,12 +25,15 @@ public class EtcServerTable
     public const string chunmaTopScore = "chunmaTopScore";
     public const string CostumeCollectionFreeReward = "CCFR";
     public const string CostumeCollectionAdReward = "CCAR";
+    public const string GuideMissionReward = "GMR";
+    public const string GuideMissionClear = "GMC";
 
 
     private Dictionary<string, ReactiveProperty<string>> tableSchema = new Dictionary<string, ReactiveProperty<string>>()
     {
         {email,new ReactiveProperty<string>(GoogleManager.email)},
         {yoguiSogulReward,new ReactiveProperty<string>(string.Empty)},
+        {oldDokebi2Reward,new ReactiveProperty<string>(string.Empty)},
         {sonReward,new ReactiveProperty<string>(string.Empty)},
         {iosCoupon,new ReactiveProperty<string>(string.Empty)},
         {guildAttenReward,new ReactiveProperty<string>(string.Empty)},
@@ -40,6 +44,8 @@ public class EtcServerTable
         {chunmaTopScore,new ReactiveProperty<string>(string.Empty)},
         {CostumeCollectionFreeReward,new ReactiveProperty<string>(string.Empty)},
         {CostumeCollectionAdReward,new ReactiveProperty<string>(string.Empty)},
+        {GuideMissionReward,new ReactiveProperty<string>(string.Empty)},
+        {GuideMissionClear,new ReactiveProperty<string>(string.Empty)},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -62,10 +68,39 @@ public class EtcServerTable
 
         return rewards.Contains(stageId.ToString());
     }
+    
+    public bool OldDokebi2Rewarded(int stageId)
+    {
+        var rewards = tableDatas[oldDokebi2Reward].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(stageId.ToString());
+    }
+    public bool GuideMissionRewarded(int stageId)
+    {
+        var rewards = tableDatas[GuideMissionReward].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(stageId.ToString());
+    }
+    public bool GuideMissionCleared(int stageId)
+    {
+        var rewards = tableDatas[GuideMissionClear].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(stageId.ToString());
+    }
 
     public List<int> GetYoguiSoguilRewardedList()
     {
         var rewards = tableDatas[yoguiSogulReward].Value
+       .Split(BossServerTable.rewardSplit)
+       .Where(e => string.IsNullOrEmpty(e) == false)
+       .Select(e => int.Parse(e))
+       .ToList();
+
+        return rewards;
+    }
+    public List<int> GetOldDokebi2RewardedList()
+    {
+        var rewards = tableDatas[oldDokebi2Reward].Value
        .Split(BossServerTable.rewardSplit)
        .Where(e => string.IsNullOrEmpty(e) == false)
        .Select(e => int.Parse(e))
@@ -268,5 +303,14 @@ public class EtcServerTable
 
             }
         });
+    }
+
+    public void UpdateGuideMissionClear(GuideMissionKey key)
+    {
+        ServerData.etcServerTable.TableDatas[GuideMissionClear].Value += $"{BossServerTable.rewardSplit}{(int)key}";
+    }
+    public void UpdateGuideMissionReward(GuideMissionKey key)
+    {
+        ServerData.etcServerTable.TableDatas[GuideMissionReward].Value += $"{BossServerTable.rewardSplit}{(int)key}";
     }
 }

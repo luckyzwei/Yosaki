@@ -138,6 +138,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public Sprite SumisanNorigae0;
     public Sprite SumisanNorigae1;
+    public Sprite SumisanNorigae2;
+    public Sprite SumisanNorigae3;
 
     public Sprite MonthNorigae0;
     public Sprite MonthNorigae1;
@@ -194,6 +196,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     public Sprite SumiFire;
     public Sprite SumiFireKey;
     public Sprite NewGachaEnergy;
+    public Sprite DokebiBundle;
 
     public List<SkeletonDataAsset> enemySpineAssets;
 
@@ -247,6 +250,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public Sprite SumisanWeapon0;
     public Sprite SumisanWeapon1;
+    public Sprite SumisanWeapon2;
+    public Sprite SumisanWeapon3;
     
 
     public Sprite SasinsuWeapon0;
@@ -598,6 +603,15 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.costume83:
                 return costumeThumbnail[83];
                 break;
+            case Item_Type.costume84:
+                return costumeThumbnail[84];
+                break;
+            case Item_Type.costume85:
+                return costumeThumbnail[85];
+                break;
+            case Item_Type.costume86:
+                return costumeThumbnail[86];
+                break;
 
 
             case Item_Type.RankFrame1:
@@ -871,6 +885,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
             case Item_Type.NewGachaEnergy:
                 return NewGachaEnergy;
                 break;   
+            case Item_Type.DokebiBundle:
+                return DokebiBundle;
+                break;   
             case Item_Type.HellPower:
                 return HellPower;
                 break;  
@@ -1000,6 +1017,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.SumisanNorigae1:
                 return SumisanNorigae1;
+                break;
+            case Item_Type.SumisanNorigae2:
+                return SumisanNorigae2;
+                break;
+            case Item_Type.SumisanNorigae3:
+                return SumisanNorigae3;
                 break;
             //
             case Item_Type.MonthNorigae0:
@@ -1324,6 +1347,12 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
                 break;
             case Item_Type.SumisanWeapon1:
                 return SumisanWeapon1;
+                break;
+            case Item_Type.SumisanWeapon2:
+                return SumisanWeapon2;
+                break;
+            case Item_Type.SumisanWeapon3:
+                return SumisanWeapon3;
                 break;
 
             case Item_Type.SasinsuWeapon0:

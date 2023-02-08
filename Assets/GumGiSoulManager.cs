@@ -338,6 +338,8 @@ public class GumGiSoulManager : SingletonMono<GumGiSoulManager>
 
         StopGameRoutines();
 
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearSwordPartial);
+
         int pref = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiSoulClear].Value;
 
         int updateValue = enemyDeadCount.Value;

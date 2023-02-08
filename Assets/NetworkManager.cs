@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -37,11 +37,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         public int mask;
         public int horn;
         public double score;
+        public double score2;
         public bool endGame = false;
         public Vector3 currentPos;
         public int level;
         public MatchingPlatform platform;
-        public bool leftRoom = false;
+        public bool retireGame = false;
     }
 
     public ReactiveProperty<PlayerState> playerState = new ReactiveProperty<PlayerState>(PlayerState.Lobby);
@@ -113,6 +114,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private Toggle visibleRoomToggle_PartyTower;
 
     [SerializeField]
+    private Toggle visibleRoomToggle_PartyTower2;
+
+    [SerializeField]
     private TMP_InputField roomNameInput;
 
     [SerializeField]
@@ -142,6 +146,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private GameObject uiPartyTowerBoard;
 
     public ReactiveCommand whenScoreInfoReceived = new ReactiveCommand();
+    public ReactiveCommand whenMiddleRetireReceived = new ReactiveCommand();
 
     private string AndPlatformKey = "AND";
     private string IOSPlatformKey = "IOS";
@@ -149,6 +154,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public ContentsType contentsType;
     public int partyRaidTargetFloor { get; private set; }
+    public int partyRaidTargetFloor2 { get; private set; }
+
+    public ReactiveProperty<int> middleBossClearCount = new ReactiveProperty<int>(0);
 
     #region 방리스트 갱신
     // ◀버튼 -2 , ▶버튼 -1 , 셀 숫자
@@ -388,7 +396,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private void ShowDisconnectMessage(DisconnectCause cause)
     {
 
-
         switch (cause)
         {
             case DisconnectCause.None:
@@ -447,6 +454,34 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
 
     #region 방
+
+    public void MakePartyTowerRoom2(int maxNum, int stageNum)
+    {
+        this.partyRaidTargetFloor2 = stageNum;
+
+        uiPartyTowerBoard.SetActive(false);
+
+        RoomOptions roomOption = new RoomOptions();
+
+        roomOption.MaxPlayers = (byte)maxNum;
+
+        roomOption.IsVisible = !visibleRoomToggle_PartyTower2.isOn;
+
+
+        Hashtable hashtables = new Hashtable();
+        hashtables.Add("M", Utils.GetOriginNickName(PlayerData.Instance.NickName));
+        hashtables.Add("F", partyRaidTargetFloor2 + 1);
+
+        string[] propertiesListedInLobby = new string[2];
+        propertiesListedInLobby[0] = "M";
+        propertiesListedInLobby[1] = "F";
+
+        roomOption.CustomRoomProperties = hashtables;
+        roomOption.CustomRoomPropertiesForLobby = propertiesListedInLobby;
+
+
+        PhotonNetwork.CreateRoom(CommonString.PartyTower2Text + $" {Utils.GetOriginNickName(PlayerData.Instance.NickName)}", roomOption, lobbyType);
+    }
 
     public void MakePartyTowerRoom(int maxNum)
     {
@@ -728,7 +763,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 playerView_Result[i].gameObject.SetActive(true);
 
-                playerView_Result[i].UpdatePartyRaidScore(playerInfo.score, playerInfo.endGame);
+                playerView_Result[i].UpdatePartyRaidScore(playerInfo.score, playerInfo.endGame, playerInfo.retireGame);
 
             }
             else
@@ -799,13 +834,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         RoomRenewal();
     }
 
+    public ReactiveCommand whenPlayerLeaved = new ReactiveCommand();
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         UpdatePlayerInfoList();
         UpdateRecommendButton(otherPlayer);
         RoomRenewal();
         PlayerLeft(otherPlayer);
+
+        whenPlayerLeaved.Execute();
     }
+
 
     private void PlayerLeft(Player otherPlayer)
     {
@@ -850,6 +889,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     byte StartPartyTower_Event = 4;
     byte SendPartyTowerRecommend_Event = 5;
     byte SendKickPlayer_Event = 6;
+    byte StartPartyTower2_Event = 7;
+    byte StartPartyTower2_MiddleClear_Event = 8;
+    byte SendScore_Event2 = 9;
+    byte MiddleBossRetire = 10;
 
     public void SendKickPlayer(string nickName)
     {
@@ -931,6 +974,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         PhotonNetwork.RaiseEvent(SendScore_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
     }
 
+    public void SendScoreInfo2(double score, bool end = false)
+    {
+        var playerPos = PlayerMoveController.Instance.transform.position;
+
+        string posInfo = $"{playerPos.x},{playerPos.y}";
+
+        object[] objects = new object[] { PhotonNetwork.LocalPlayer.ActorNumber, score, end, posInfo };
+
+        PhotonNetwork.RaiseEvent(SendScore_Event2, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+    }
+
     public void SendStartGameAlarm()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -944,6 +998,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     {
                         PopupManager.Instance.ShowAlarmMessage("인원이 초과됐습니다.");
                         return;
+                    }
+                }
+                else if (IsPartyTower2Boss())
+                {
+                    if (roomPlayerDatas.Count != 2)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage("2인으로만 플레이 가능 합니다.");
+#if !UNITY_EDITOR
+                        return;
+#endif
                     }
                 }
                 else if (IsGuildBoss())
@@ -966,6 +1030,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 if (IsPartyTowerBoss() == true)
                 {
                     SendPartyTowerStart();
+                }
+                else if (IsPartyTower2Boss() == true)
+                {
+                    SendPartyTower2Start();
                 }
                 else
                 {
@@ -1040,6 +1108,34 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         PhotonNetwork.RaiseEvent(StartPartyTower_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
     }
 
+    private void SendPartyTower2Start()
+    {
+        startGameButton.interactable = false;
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+
+        object[] objects = new object[] { partyRaidTargetFloor2 };
+
+        PhotonNetwork.RaiseEvent(StartPartyTower2_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+    }
+
+    public void SendPartyTower2MiddleClear()
+    {
+        object[] objects = new object[] { partyRaidTargetFloor2 };
+
+        PhotonNetwork.RaiseEvent(StartPartyTower2_MiddleClear_Event, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+    }
+
+    public void SendPartyTower2MiddleBossRetired()
+    {
+
+        if (roomPlayerDatas[PhotonNetwork.LocalPlayer.ActorNumber].retireGame == true) return;
+
+        object[] objects = new object[] { PhotonNetwork.LocalPlayer.ActorNumber };
+
+        PhotonNetwork.RaiseEvent(MiddleBossRetire, objects, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+    }
+
     private IEnumerator ChatCoolRoutine()
     {
         chatButton.interactable = false;
@@ -1062,6 +1158,39 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             if (roomPlayerDatas.ContainsKey(actorNum))
             {
                 roomPlayerDatas[actorNum].score = score;
+
+                if (roomPlayerDatas[actorNum].endGame == false)
+                {
+                    roomPlayerDatas[actorNum].endGame = endGame;
+                }
+
+                if (currentPos.Length >= 2)
+                {
+                    roomPlayerDatas[actorNum].currentPos = new Vector3(float.Parse(currentPos[0]), float.Parse(currentPos[1]), 0);
+                }
+
+                UpdateScoreBoard();
+
+                whenScoreInfoReceived.Execute();
+
+                if (endGame)
+                {
+                    PartyRaidManager.Instance.NetworkManager.UpdateResultScore();
+                }
+            }
+        }
+        if (photonEvent.Code == SendScore_Event2)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+
+            int actorNum = (int)data[0];
+            double score = (double)data[1];
+            bool endGame = (bool)data[2];
+            string[] currentPos = ((string)data[3]).Split(splitComma);
+
+            if (roomPlayerDatas.ContainsKey(actorNum))
+            {
+                roomPlayerDatas[actorNum].score2 = score;
 
                 if (roomPlayerDatas[actorNum].endGame == false)
                 {
@@ -1108,6 +1237,63 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 startGameRoutine = StartCoroutine(StartGameRoutine());
             }
         }
+        else if (photonEvent.Code == StartPartyTower2_Event)
+        {
+            Debug.LogError($"게임시작 알림 받음!");
+
+            middleBossClearCount.Value = 0;
+
+            object[] data = (object[])photonEvent.CustomData;
+
+            int targetFloor = (int)data[0];
+
+            partyRaidTargetFloor2 = targetFloor;
+
+            if (startGameRoutine == null)
+            {
+                startGameRoutine = StartCoroutine(StartGameRoutine());
+            }
+        }
+        else if (photonEvent.Code == StartPartyTower2_MiddleClear_Event)
+        {
+            middleBossClearCount.Value++;
+            Debug.LogError($"중간보스 클리어 받음 카운트 : {middleBossClearCount.Value}");
+        }
+        else if (photonEvent.Code == MiddleBossRetire)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+
+            int actorNum = (int)data[0];
+
+            if (roomPlayerDatas.ContainsKey(actorNum))
+            {
+                roomPlayerDatas[actorNum].retireGame = true;
+
+                UpdateScoreBoard();
+
+                whenScoreInfoReceived.Execute();
+            }
+
+            //중간보스 실패 메세지 받았을때
+            whenMiddleRetireReceived.Execute();
+        }
+        else if (photonEvent.Code == StartPartyTower2_Event)
+        {
+            Debug.LogError($"게임시작 알림 받음!");
+
+            object[] data = (object[])photonEvent.CustomData;
+
+            int targetFloor = (int)data[0];
+
+            partyRaidTargetFloor2 = targetFloor;
+
+            if (startGameRoutine == null)
+            {
+                startGameRoutine = StartCoroutine(StartGameRoutine());
+            }
+        }
+
+
         else if (photonEvent.Code == SendChat_Event)
         {
             object[] data = (object[])photonEvent.CustomData;
@@ -1276,6 +1462,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             GameManager.Instance.LoadContents(GameManager.ContentsType.Online_Tower);
         }
+        else if (IsPartyTower2Boss())
+        {
+            GameManager.Instance.LoadContents(GameManager.ContentsType.Online_Tower2);
+        }
         else
         {
             GameManager.Instance.LoadContents(GameManager.ContentsType.PartyRaid);
@@ -1290,6 +1480,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public bool IsPartyTowerBoss()
     {
         return PhotonNetwork.CurrentRoom.Name[0] == CommonString.PartyTowerText[0] && PhotonNetwork.CurrentRoom.Name[1] == CommonString.PartyTowerText[1];
+    }
+
+    public bool IsPartyTower2Boss()
+    {
+        return PhotonNetwork.CurrentRoom.Name[0] == CommonString.PartyTower2Text[0] && PhotonNetwork.CurrentRoom.Name[1] == CommonString.PartyTower2Text[1] && PhotonNetwork.CurrentRoom.Name[2] == CommonString.PartyTower2Text[2];
     }
 
     public bool IsNormalBoss()
@@ -1327,6 +1522,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
         return ret;
     }
+
+    public double GetTotalScore2()
+    {
+        double ret = 0f;
+
+        var e = roomPlayerDatas.GetEnumerator();
+
+        while (e.MoveNext())
+        {
+            ret += e.Current.Value.score2;
+        }
+
+        return ret;
+    }
     [SerializeField]
     private Button roomUpdateButton;
 
@@ -1359,4 +1568,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         return ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerRecommend].Value > 0;
     }
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            middleBossClearCount.Value++;
+        }
+    }
+#endif
 }

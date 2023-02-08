@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb48042ea4766146a34f02167cfbe92, type: 3}
+  m_Name: PassiveSkill2
+  m_EditorClassIdentifier: 
+  SheetName: Assets/06.Table/PassiveSkill2.xlsx
+  WorksheetName: PassiveSkill2
+  dataArray:
+  - id: 0
+    stringid: passive0
+    requiremagicbookidx: -1
+    abilitytype: 41
+    abilityvalue: 0.0000004
+    maxlevel: 100
+    skillname: "\uC9C0\uC625 \uD6C8\uB828"
+    issinpassive: 0
+    needpassivekey: 
+    needpassivevalue: 0
+  - id: 1
+    stringid: passive1
+    requiremagicbookidx: -1
+    abilitytype: 38
+    abilityvalue: 0.0000007
+    maxlevel: 100
+    skillname: "\uCC9C\uC0C1 \uD6C8\uB828"
+    issinpassive: 0
+    needpassivekey: passive0
+    needpassivevalue: 100
+  - id: 2
+    stringid: passive2
+    requiremagicbookidx: -1
+    abilitytype: 40
+    abilityvalue: 0.0000004
+    maxlevel: 200
+    skillname: "\uB3C4\uAE68\uBE44 \uD6C8\uB828"
+    issinpassive: 0
+    needpassivekey: passive1
+    needpassivevalue: 100

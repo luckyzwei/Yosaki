@@ -84,6 +84,7 @@ public class UiSmithBoard : MonoBehaviour
     {
         PopupManager.Instance.ShowYesNoPopup("알림", "입장 할까요?", () =>
         {
+
             GameManager.Instance.LoadContents(ContentsType.Smith);
             enterButton.interactable = false;
         }, () => { });

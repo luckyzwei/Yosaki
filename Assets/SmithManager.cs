@@ -333,7 +333,7 @@ public class SmithManager : SingletonMono<SmithManager>
     private void EndGame()
     {
         SoundManager.Instance.PlaySound("Reward");
-
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearSmith);
         StopGameRoutines();
 
         int pref = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.smithClear].Value;

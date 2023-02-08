@@ -1,4 +1,4 @@
-﻿using CodeStage.AntiCheat.ObscuredTypes;
+using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -277,6 +277,13 @@ public static class GameBalance
 
     public static ObscuredInt banditUpgradeLevel = 1000000;
     public static ObscuredInt costumeCollectionUnlockNum = 20;
+
+    public static ObscuredInt passive2UnlockLevel = 1500000;
+    public static ObscuredInt passive2PointDivideNum = 10000;
+
+    public static ObscuredInt shadowCostumeGetLevel = 12;
+
+
 
     public static List<float> warMarkAbils = new List<float>() { 0f, 400f, 500f, 600f, 700f, 800f, 900f, 1000f };
 

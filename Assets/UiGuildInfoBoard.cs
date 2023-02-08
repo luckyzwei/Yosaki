@@ -13,6 +13,9 @@ public class UiGuildInfoBoard : MonoBehaviour
     private void OnEnable()
     {
         SetGuildTitle();
+      
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.JoinGuild);
+        
     }
 
 

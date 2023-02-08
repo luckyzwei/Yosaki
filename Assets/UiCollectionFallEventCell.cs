@@ -86,10 +86,10 @@ public class UiCollectionFallEventCell : MonoBehaviour
     private void Initialize()
     {
         if (button != null)
-        { 
+        {
             button.onEvent.AddListener(OnClickExchangeButton);
         }
-        if( goldButton != null)
+        if (goldButton != null)
         {
             goldButton.onEvent.AddListener(OnClickExchangeGoldButton);
         }
@@ -130,7 +130,7 @@ public class UiCollectionFallEventCell : MonoBehaviour
 
     public void OnClickExchangeButton()
     {
-  
+
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             PopupManager.Instance.ShowAlarmMessage("인터넷 연결을 확인해 주세요!");
@@ -174,7 +174,7 @@ public class UiCollectionFallEventCell : MonoBehaviour
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.usedFallCollectionCount).Value += tableData.Price;
 
-        
+
 
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
         {
@@ -301,7 +301,7 @@ public class UiCollectionFallEventCell : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         }
 
-            Param userInfoParam = new Param();
+        Param userInfoParam = new Param();
 
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
         {

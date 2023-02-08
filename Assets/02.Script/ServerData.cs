@@ -41,6 +41,7 @@ public static class ServerData
 
     public static BuffServerTable buffServerTable { get; private set; } = new BuffServerTable();
     public static PassiveServerTable passiveServerTable { get; private set; } = new PassiveServerTable();
+    public static Passive2ServerTable passive2ServerTable { get; private set; } = new Passive2ServerTable();
 
     public static MarbleServerTable marbleServerTable { get; private set; } = new MarbleServerTable();
     public static EtcServerTable etcServerTable { get; private set; } = new EtcServerTable();
@@ -116,6 +117,7 @@ public static class ServerData
         //fieldBossTable.Initialize();
         buffServerTable.Initialize();
         passiveServerTable.Initialize();
+        passive2ServerTable.Initialize();
         //rankTables_Boss1.Initialize();
         marbleServerTable.Initialize();
         etcServerTable.Initialize();
@@ -454,6 +456,9 @@ public static class ServerData
             case Item_Type.NewGachaEnergy:
                 ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += rewardValue;
                 break;
+            case Item_Type.DokebiBundle:
+                ServerData.goodsTable.GetTableData(GoodsTable.DokebiBundle).Value += rewardValue;
+                break;
 
 
 
@@ -567,6 +572,9 @@ public static class ServerData
             case Item_Type.costume81:
             case Item_Type.costume82:
             case Item_Type.costume83:
+            case Item_Type.costume84:
+            case Item_Type.costume85:
+            case Item_Type.costume86:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -705,6 +713,9 @@ public static class ServerData
             case Item_Type.costume81:
             case Item_Type.costume82:
             case Item_Type.costume83:
+            case Item_Type.costume84:
+            case Item_Type.costume85:
+            case Item_Type.costume86:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -751,7 +762,7 @@ public static class ServerData
             case Item_Type.DokebiFireEnhance:
                 passParam.Add(GoodsTable.DokebiFireEnhance, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireEnhance).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
-
+                
             case Item_Type.HellPower:
                 passParam.Add(GoodsTable.HellPowerUp, ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
@@ -776,6 +787,10 @@ public static class ServerData
             
             case Item_Type.NewGachaEnergy:
                 passParam.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+                
+            case Item_Type.DokebiBundle:
+                passParam.Add(GoodsTable.DokebiBundle, ServerData.goodsTable.GetTableData(GoodsTable.DokebiBundle).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.DokebiFire:
@@ -1141,7 +1156,7 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireEnhance).Value += amount;
                 param.Add(GoodsTable.DokebiFireEnhance, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireEnhance).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
-
+                
             case Item_Type.HellPower:
                 ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value += amount;
                 param.Add(GoodsTable.HellPowerUp, ServerData.goodsTable.GetTableData(GoodsTable.HellPowerUp).Value);
@@ -1197,6 +1212,11 @@ public static class ServerData
             case Item_Type.NewGachaEnergy:
                 ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += amount;
                 param.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+                
+            case Item_Type.DokebiBundle:
+                ServerData.goodsTable.GetTableData(GoodsTable.DokebiBundle).Value += amount;
+                param.Add(GoodsTable.DokebiBundle, ServerData.goodsTable.GetTableData(GoodsTable.DokebiBundle).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.Cw:
@@ -2390,6 +2410,10 @@ public static class ServerData
                 
                 case Item_Type.NewGachaEnergy:
                     ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += amount;
+                    break;
+                    
+                case Item_Type.DokebiBundle:
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiBundle).Value += amount;
                     break;
 
                 case Item_Type.FoxMaskPartial:

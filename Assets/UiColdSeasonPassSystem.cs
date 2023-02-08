@@ -25,7 +25,7 @@ public class UiColdSeasonPassSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalColdSeason).Value += 1000000;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalSeason).Value += 1000000;
         }
     }
 #endif
@@ -83,6 +83,8 @@ public class UiColdSeasonPassSystem : MonoBehaviour
         List<int> splitData_Free = GetSplitData(ColdSeasonPassServerTable.coldseasonFree);
         List<int> splitData_Ad = GetSplitData(ColdSeasonPassServerTable.coldseasonAd);
 
+        List<int> rewardTypeList = new List<int>();
+
         var tableData = TableManager.Instance.coldSeasonPass.dataArray;
 
         int rewardedNum = 0;
@@ -109,6 +111,10 @@ public class UiColdSeasonPassSystem : MonoBehaviour
 
                 free += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward1) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward1);
+                }
                 rewardedNum++;
             }
 
@@ -123,6 +129,12 @@ public class UiColdSeasonPassSystem : MonoBehaviour
 
                 ad += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+
+                if (rewardTypeList.Contains(tableData[i].Reward1) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward1);
+                }
+
                 rewardedNum++;
             }
         }
@@ -139,17 +151,13 @@ public class UiColdSeasonPassSystem : MonoBehaviour
             ServerData.coldSeasonPassServerTable.TableDatas[ColdSeasonPassServerTable.coldseasonAd].Value = ad;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
+            var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
-            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
-            goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
-            goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
-            goodsParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
-            goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
-            goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
-            goodsParam.Add(GoodsTable.Fw, ServerData.goodsTable.GetTableData(GoodsTable.Fw).Value);
-
+            while (e.MoveNext())
+            {
+                goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
+            }
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param passParam = new Param();
@@ -174,7 +182,7 @@ public class UiColdSeasonPassSystem : MonoBehaviour
 
     private bool CanGetReward(int require)
     {
-        int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalColdSeason).Value;
+        int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalSeason).Value;
         return killCountTotal >= require;
     }
     public bool HasReward(List<int> splitData, int id)
@@ -184,7 +192,7 @@ public class UiColdSeasonPassSystem : MonoBehaviour
 
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.coldseasonPassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }

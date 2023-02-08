@@ -208,6 +208,8 @@ public class SonManager : ContentsManagerBase
             StopTimer();
         }
 
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearSon);
+
         //점수 전송
         SendScore();
 

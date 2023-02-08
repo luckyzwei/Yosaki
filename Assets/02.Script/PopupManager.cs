@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,7 +32,14 @@ public class PopupManager : SingletonMono<PopupManager>
     [SerializeField]
     private GameObject chatBoard;
 
-    public void SetChatBoardPopupManager() 
+    public bool ignoreAlarmMessage { get; private set; }
+
+    public void SetIgnoreAlarmMessage(bool ignore)
+    {
+        ignoreAlarmMessage = ignore;
+    }
+
+    public void SetChatBoardPopupManager()
     {
         chatBoard.SetActive(false);
         chatBoard.transform.SetParent(this.transform);
@@ -42,7 +49,7 @@ public class PopupManager : SingletonMono<PopupManager>
         rc.offsetMax = Vector3.zero;
         rc.localScale = Vector3.one;
     }
-    public void SetChatBoardMainGameCanvas() 
+    public void SetChatBoardMainGameCanvas()
     {
         chatBoard.SetActive(true);
         chatBoard.transform.SetParent(MessageBoardParent.Instance.transform);
@@ -60,6 +67,23 @@ public class PopupManager : SingletonMono<PopupManager>
 
     public void ShowAlarmMessage(string description)
     {
+        if (ignoreAlarmMessage == true) return;
+
+        var alarmMessage = Instantiate<UiAlarmMessage>(alarmMessagePrefab, this.transform);
+        alarmMessage.Initialize(description);
+    }
+
+    public void ShowAlarmMessage(string description, float delay)
+    {
+        if (ignoreAlarmMessage == true) return;
+
+        StartCoroutine(SlowAlarmRoutine(description, delay));
+    }
+
+    IEnumerator SlowAlarmRoutine(string description, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         var alarmMessage = Instantiate<UiAlarmMessage>(alarmMessagePrefab, this.transform);
         alarmMessage.Initialize(description);
     }

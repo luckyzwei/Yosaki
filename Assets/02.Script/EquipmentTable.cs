@@ -20,6 +20,14 @@ public enum MagicBookType
     Hell,
     View,
 }
+public enum RingType
+{
+    Basic,
+    Normal,
+    Hell,
+    View,
+}
+
 
 
 public class EquipmentTable

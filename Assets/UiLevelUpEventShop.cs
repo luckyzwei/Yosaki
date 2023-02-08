@@ -492,6 +492,12 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     param.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
                 }
                 break;
+            case Item_Type.DokebiBundle:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DokebiBundle).Value += amount;
+                    param.Add(GoodsTable.DokebiBundle, ServerData.goodsTable.GetTableData(GoodsTable.DokebiBundle).Value);
+                }
+                break;
             case Item_Type.DokebiFireKey:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value += amount;

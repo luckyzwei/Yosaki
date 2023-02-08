@@ -202,6 +202,29 @@ public class TableManager : SingletonMono<TableManager>
             return eventMissionDatas;
         }
     }
+    [SerializeField]
+    private GuideMission guideMission;
+
+    public GuideMission GuideMission => guideMission;
+
+    private Dictionary<int, GuideMissionData> guideMissionDatas;
+    public Dictionary<int, GuideMissionData> GuideMissionDatas
+    {
+        get
+        {
+            if (guideMissionDatas == null)
+            {
+                guideMissionDatas = new Dictionary<int, GuideMissionData>();
+
+                for (int i = 0; i < eventMission.dataArray.Length; i++)
+                {
+                    guideMissionDatas.Add(eventMission.dataArray[i].Id, guideMission.dataArray[i]);
+                }
+            }
+
+            return guideMissionDatas;
+        }
+    }
     //
 
 
@@ -498,6 +521,10 @@ public class TableManager : SingletonMono<TableManager>
     public BonusRoulette BonusRoulette => bonusRoulette;
 
     [SerializeField]
+    private OldDokebiBonusRoulette oldDokebiBonusRoulette;
+    public OldDokebiBonusRoulette OldDokebiBonusRoulette => oldDokebiBonusRoulette;
+
+    [SerializeField]
     private InAppPurchase inAppPurchase;
     public InAppPurchase InAppPurchase => inAppPurchase;
 
@@ -550,6 +577,11 @@ public class TableManager : SingletonMono<TableManager>
     private PassiveSkill passiveSkill;
 
     public PassiveSkill PassiveSkill => passiveSkill;
+
+    [SerializeField]
+    private PassiveSkill2 passiveSkill2;
+
+    public PassiveSkill2 PassiveSkill2 => passiveSkill2;
 
     [SerializeField]
     private MarbleTable marbleTable;
@@ -612,6 +644,11 @@ public class TableManager : SingletonMono<TableManager>
     private YoguiSogulTable yoguisogulTable;
 
     public YoguiSogulTable YoguisogulTable => yoguisogulTable;
+
+    [SerializeField]
+    private OldDokebi2Table oldDokebiTable;
+
+    public OldDokebi2Table OldDokebiTable => oldDokebiTable;
 
     [SerializeField]
     private PetEquipment petEquipment;
@@ -728,6 +765,8 @@ public class TableManager : SingletonMono<TableManager>
     public FoxCup foxCup;
     public DayOfWeekDungeon dayOfWeekDungeon;
     public CostumeCollection costumeCollection;
+    public TwoCave twoCave;
+    public SpringAtten springAtten;
 
 }
 

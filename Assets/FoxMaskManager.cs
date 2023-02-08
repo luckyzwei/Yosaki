@@ -132,6 +132,8 @@ public class FoxMaskManager : ContentsManagerBase
             StopTimer();
         }
 
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearFoxMask);
+
         //보상팝업
         ShowResultPopup();
     }

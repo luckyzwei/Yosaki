@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,13 +18,11 @@ public class DokebiEnterView : MonoBehaviour
     private RectTransform popupBg;
 
     [SerializeField]
-    private float popupOriginWidth;
-
-    [SerializeField]
-    private float popupDokebiWidth;
-
-    [SerializeField]
     private List<Button> dokebiEnterButtons;
+
+    [SerializeField]
+    private TextMeshProUGUI oldDokebiScore;
+
 
     private void Start()
     {
@@ -37,6 +35,12 @@ public class DokebiEnterView : MonoBehaviour
         {
             enterCountText.SetText($"오늘 입장({(int)e}/{GameBalance.dokebiEnterCount})");
         }).AddTo(this);
+
+        ServerData.userInfoTable.GetTableData(UserInfoTable.oldDokebi2LastClear).AsObservable().Subscribe(e => 
+        {
+            oldDokebiScore.SetText($"현재 클리어 층 : {e}");
+        }).AddTo(this);
+
     }
 
     public void OnClickEnterButton(int idx)
@@ -70,19 +74,52 @@ public class DokebiEnterView : MonoBehaviour
               dokebiEnterButtons.ForEach(e => e.interactable = true);
           });
     }
+    public void OnClickEnterOldDokebi2Button(int idx)
+    {
+        dokebiEnterButtons.ForEach(e => e.interactable = false);
+
+        GameManager.Instance.LoadContents(GameManager.ContentsType.OldDokebi2);
+    }
+
+    public void OnClickOldDokebi2RewardButton()
+    {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiBundle).Value > 0)
+        {
+            //이미 받음
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"오늘 {CommonString.GetItemName(Item_Type.DokebiBundle)}를 이미 수령하였습니다!", null);
+            return;
+        }
+
+        ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiBundle).Value = 1;
+
+        int score = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.oldDokebi2LastClear).Value;
+
+        ServerData.goodsTable.GetTableData(GoodsTable.DokebiBundle).Value += score;
+
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+        Param userInfoParam = new Param();
+        userInfoParam.Add(UserInfoTable.getDokebiBundle, ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiBundle).Value);
+
+        Param goodsParam = new Param();
+        goodsParam.Add(GoodsTable.DokebiBundle, ServerData.goodsTable.GetTableData(GoodsTable.DokebiBundle).Value);
+
+        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
 
+        ServerData.SendTransaction(transactionList,
+          successCallBack: () =>
+          {
+              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.DokebiBundle)} {score} 개 획득!!", null);
+          });
+    }
     private void OnEnable()
     {
         enterButton.SetActive(false);
 
-        popupBg.sizeDelta = new Vector2(popupDokebiWidth, popupBg.sizeDelta.y);
     }
 
-    private void OnDisable()
-    {
-        popupBg.sizeDelta = new Vector2(popupOriginWidth, popupBg.sizeDelta.y);
-    }
 
     public void OnClickInstantClearButton(int idx)
     {
@@ -123,6 +160,8 @@ public class DokebiEnterView : MonoBehaviour
 
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Dokebi)} <color=yellow>{defeatCount}</color>개로 <color=yellow>{clearCount}회</color> 소탕 합니까?", () =>
          {
+             GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearOni);
+
              int rewardNum = defeatCount;
 
              ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value += rewardNum * clearCount;
@@ -141,8 +180,7 @@ public class DokebiEnterView : MonoBehaviour
 
              transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
              transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearOni, clearCount);
+             EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearOni, clearCount);
              ServerData.SendTransaction(transactions, successCallBack: () =>
              {
                  PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Dokebi)} {rewardNum * clearCount}개 획득!");

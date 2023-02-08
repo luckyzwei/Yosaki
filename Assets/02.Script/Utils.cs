@@ -102,7 +102,10 @@ public static class Utils
                   type == Item_Type.costume80 ||
                   type == Item_Type.costume81 ||
                   type == Item_Type.costume82 ||
-                  type == Item_Type.costume83;
+                  type == Item_Type.costume83 ||
+                  type == Item_Type.costume84 ||
+                  type == Item_Type.costume85 
+                  ;
     }
     public static bool IsPetItem(this Item_Type type)
     {
@@ -220,7 +223,9 @@ public static class Utils
                 type == Item_Type.Event_NewYear ||
                 type == Item_Type.SumiFire ||
                 type == Item_Type.SumiFireKey ||
-                type == Item_Type.RelicTicket;
+                type == Item_Type.RelicTicket ||
+                type == Item_Type.NewGachaEnergy 
+                ;
     }
 
     public static bool IsStatusItem(this Item_Type type)

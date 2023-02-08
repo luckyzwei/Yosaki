@@ -74,7 +74,7 @@ public class UiColdSeasonAttenCell : MonoBehaviour
         //}).AddTo(disposables);
 
         //킬카운트 변경될때
-        ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountColdSeason).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountSeason).AsObservable().Subscribe(e =>
         {
             if (this.gameObject.activeInHierarchy)
             {
@@ -178,7 +178,7 @@ public class UiColdSeasonAttenCell : MonoBehaviour
 
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.coldseasonPassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }
@@ -230,7 +230,7 @@ public class UiColdSeasonAttenCell : MonoBehaviour
 
     private bool CanGetReward()
     {
-        int attenCountColdSeason = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountColdSeason).Value;
+        int attenCountColdSeason = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountSeason).Value;
         return attenCountColdSeason >= passInfo.require;
     }
 

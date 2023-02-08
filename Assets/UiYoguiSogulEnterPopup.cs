@@ -52,6 +52,7 @@ public class UiYoguiSogulEnterPopup : MonoBehaviour
 
     public void OnClickAllReceiveButton()
     {
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearBackgui);
 
         int lastClearStageId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value;
 

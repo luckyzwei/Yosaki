@@ -169,6 +169,7 @@ public class GoodsTable
     public static string SumiFire = "SumiFire";
     public static string SumiFireKey = "SumiFireKey";
     public static string NewGachaEnergy = "NGE";
+    public static string DokebiBundle = "DB";
 
 
 
@@ -318,7 +319,8 @@ public class GoodsTable
         {SusanoTreasure,0f},
         {SumiFire,0f},
         {SumiFireKey,0f},
-        {NewGachaEnergy,0f}
+        {NewGachaEnergy,0f},
+        {DokebiBundle,0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -760,5 +762,340 @@ public class GoodsTable
         transactions.Add(TransactionValue.SetUpdate(GrowthTable.tableName, GrowthTable.Indate, growthParam));
 
         var bro = Backend.GameData.TransactionWrite(transactions);
+    }
+    public ReactiveProperty<float> GetTableData(Item_Type key)
+    {
+        string stringKey = ItemTypeToServerString(key);
+        return tableDatas[stringKey];
+    }
+    public string ItemTypeToServerString(Item_Type type)
+    {
+        switch (type)
+        {
+            case Item_Type.Gold:
+                {
+                    return GoodsTable.Gold;
+                }
+            case Item_Type.Jade:
+                {
+                    return GoodsTable.Jade;
+                }
+            case Item_Type.GrowthStone:
+                {
+                    return GoodsTable.GrowthStone;
+                }
+            case Item_Type.Ticket:
+                {
+                    return GoodsTable.Ticket;
+                }
+                
+            case Item_Type.Marble:
+                {
+                    return GoodsTable.MarbleKey;
+                }
+                
+            case Item_Type.Songpyeon:
+                {
+                    return GoodsTable.Songpyeon;
+                }
+                
+            case Item_Type.RelicTicket:
+                {
+                    return GoodsTable.RelicTicket;
+                }
+                
+            case Item_Type.Event_Item_0:
+                {
+                    return GoodsTable.Event_Item_0;
+                }
+                
+
+            case Item_Type.Event_Item_1:
+                {
+                    return GoodsTable.Event_Item_1;
+                }
+                
+            case Item_Type.Event_Item_SnowMan:
+                {
+                    return GoodsTable.Event_Item_SnowMan;
+                }
+                
+
+            case Item_Type.SulItem:
+                {
+                    return GoodsTable.SulItem;
+                }
+                
+
+            case Item_Type.FeelMulStone:
+                {
+                    return GoodsTable.FeelMulStone;
+                }
+                
+
+            case Item_Type.Asura0:
+                {
+                    return GoodsTable.Asura0;
+                }
+                
+
+            case Item_Type.Asura1:
+                {
+                    return GoodsTable.Asura1;
+                }
+                
+
+            case Item_Type.Asura2:
+                {
+                    return GoodsTable.Asura2;
+                }
+                
+
+            case Item_Type.Asura3:
+                {
+                    return GoodsTable.Asura3;
+                }
+                
+            case Item_Type.Asura4:
+                {
+                    return GoodsTable.Asura4;
+                }
+                
+
+            case Item_Type.Asura5:
+                {
+                    return GoodsTable.Asura5;
+                }
+                
+            case Item_Type.Aduk:
+                {
+                    return GoodsTable.Aduk;
+                }
+                
+
+            case Item_Type.LeeMuGiStone:
+                {
+                    return GoodsTable.LeeMuGiStone;
+                }
+                
+
+            //
+            case Item_Type.SinSkill0:
+                {
+                    return GoodsTable.SinSkill0;
+                }
+                
+            case Item_Type.SinSkill1:
+                {
+                    return GoodsTable.SinSkill1;
+                }
+                
+            case Item_Type.SinSkill2:
+                {
+                    return GoodsTable.SinSkill2;
+                }
+                
+            case Item_Type.SinSkill3:
+                {
+                    return GoodsTable.SinSkill3;
+                }
+                
+            case Item_Type.NataSkill:
+                {
+                    return GoodsTable.NataSkill;
+                }
+                
+            case Item_Type.OrochiSkill:
+                {
+                    return GoodsTable.OrochiSkill;
+                }
+                
+            //
+            case Item_Type.Sun0:
+                {
+                    return GoodsTable.Sun0;
+                }
+                
+            case Item_Type.Sun1:
+                {
+                    return GoodsTable.Sun1;
+                }
+                
+            case Item_Type.Sun2:
+                {
+                    return GoodsTable.Sun2;
+                }
+                
+            case Item_Type.Sun3:
+                {
+                    return GoodsTable.Sun3;
+                }
+                
+            case Item_Type.Sun4:
+                {
+                    return GoodsTable.Sun4;
+                }
+                
+            //
+            case Item_Type.Chun0:
+                {
+                    return GoodsTable.Chun0;
+                }
+                
+            case Item_Type.Chun1:
+                {
+                    return GoodsTable.Chun1;
+                }
+                
+            case Item_Type.Chun2:
+                {
+                    return GoodsTable.Chun2;
+                }
+                
+            case Item_Type.Chun3:
+                {
+                    return GoodsTable.Chun3;
+                }
+                
+            case Item_Type.Chun4:
+                {
+                    return GoodsTable.Chun4;
+                }
+                
+            case Item_Type.DokebiSkill0:
+                {
+                    return GoodsTable.DokebiSkill0;
+                }
+                
+            case Item_Type.DokebiSkill1:
+                {
+                    return GoodsTable.DokebiSkill1;
+                }
+                
+            case Item_Type.DokebiSkill2:
+                {
+                    return GoodsTable.DokebiSkill2;
+                }
+                
+            case Item_Type.DokebiSkill3:
+                {
+                    return GoodsTable.DokebiSkill3;
+                }
+                
+            case Item_Type.DokebiSkill4:
+                {
+                    return GoodsTable.DokebiSkill4;
+                }
+                
+            //            //
+            case Item_Type.FourSkill0:
+                {
+                    return GoodsTable.FourSkill0;
+                }
+                
+            case Item_Type.FourSkill1:
+                {
+                    return GoodsTable.FourSkill1;
+                }
+                
+            case Item_Type.FourSkill2:
+                {
+                    return GoodsTable.FourSkill2;
+                }
+                
+            case Item_Type.FourSkill3:
+                {
+                    return GoodsTable.FourSkill3;
+                }
+                
+            //
+            case Item_Type.GangrimSkill:
+                {
+                    return GoodsTable.GangrimSkill;
+                }
+                
+            //
+
+            case Item_Type.SmithFire:
+                {
+                    return GoodsTable.SmithFire;
+                }
+                
+
+            case Item_Type.StageRelic:
+                {
+                    return GoodsTable.StageRelic;
+                }
+                
+
+            case Item_Type.PeachReal:
+                {
+                    return GoodsTable.Peach;
+                }
+                
+            case Item_Type.GuildReward:
+                {
+                    return GoodsTable.GuildReward;
+                }
+                
+            case Item_Type.SP:
+                {
+                    return GoodsTable.SwordPartial;
+                }
+                
+            case Item_Type.Hel:
+                {
+                    return GoodsTable.Hel;
+                }
+                
+            case Item_Type.Ym:
+                {
+                    return GoodsTable.Ym;
+                }
+                
+            case Item_Type.Fw:
+                {
+                    return GoodsTable.Fw;
+                }
+                
+
+            case Item_Type.Cw:
+                {
+                    return GoodsTable.Cw;
+                }
+                
+            case Item_Type.DokebiFire:
+                {
+                    return GoodsTable.DokebiFire;
+                }
+                
+            case Item_Type.SumiFire:
+                {
+                    return GoodsTable.SumiFire;
+                }
+                
+            case Item_Type.NewGachaEnergy:
+                {
+                    return GoodsTable.NewGachaEnergy;
+                }
+                
+            case Item_Type.DokebiBundle:
+                {
+                    return GoodsTable.DokebiBundle;
+                }
+                
+            case Item_Type.DokebiFireKey:
+                {
+                    return GoodsTable.DokebiFireKey;
+                }
+                
+            case Item_Type.SumiFireKey:
+                {
+                    return GoodsTable.SumiFireKey;
+                }
+                
+            default:
+                return type.ToString();
+        }
     }
 }

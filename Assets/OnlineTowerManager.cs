@@ -444,6 +444,8 @@ public class OnlineTowerManager : ContentsManagerBase
         //중복진입 방지
         if (rewarded) return;
 
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearCave);
+
         rewarded = true;
 
         //보상지급

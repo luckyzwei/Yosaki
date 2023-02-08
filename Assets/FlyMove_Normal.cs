@@ -70,6 +70,7 @@ public class FlyMove_Normal : EnemyMoveBase
         {
             rb.velocity = moveDir.normalized * moveSpeed;
 
+
         }
         else
         {

@@ -419,6 +419,12 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.SumiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.SumiFireKey).Value);
                 }
                 break;  
+            case Item_Type.NewGachaEnergy:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += amount;
+                    param.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+                }
+                break;  
             
             case Item_Type.FoxMaskPartial:
                 {

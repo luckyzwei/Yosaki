@@ -1,4 +1,4 @@
-﻿using BackEnd;
+using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
@@ -9,6 +9,9 @@ public class UiRewardCollection : MonoBehaviour
 {
     [SerializeField]
     private Button oniButton;
+
+    [SerializeField]
+    private Button oniButton2;
 
     [SerializeField]
     private Button baekGuiButton;
@@ -64,6 +67,8 @@ public class UiRewardCollection : MonoBehaviour
             hellRelicButton.interactable = e >= 50000;
             dokebiClearButton.interactable = e >= 500000;
             sumiClearButton.interactable = e >= 1000000;
+            oniButton2.interactable = e >= 500000;
+
 
             if (e >= GameBalance.banditUpgradeLevel)
             {
@@ -255,6 +260,8 @@ public class UiRewardCollection : MonoBehaviour
 
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.Dokebi)} <color=yellow>{defeatCount}</color>개로 <color=yellow>{clearCount}회</color> 소탕 합니까?", () =>
         {
+            GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearOni);
+
             int rewardNum = defeatCount;
 
             ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value += rewardNum * clearCount;
@@ -275,7 +282,6 @@ public class UiRewardCollection : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
             EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearOni, clearCount);
-
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
 

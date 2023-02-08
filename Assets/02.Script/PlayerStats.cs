@@ -1,4 +1,4 @@
-﻿using CodeStage.AntiCheat.ObscuredTypes;
+using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -190,7 +190,34 @@ public static class PlayerStats
 
         return ret;
     }
+    public static float GetPassiveSkill2Value(StatusType statusType)
+    {
+        float ret = 0f;
 
+        var tableData = TableManager.Instance.PassiveSkill2.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].Abilitytype != (int)statusType) continue;
+
+            var serverData = ServerData.passive2ServerTable.TableDatas[tableData[i].Stringid];
+
+            int level = serverData.level.Value;
+
+
+            if (level != 0)
+            {
+                ret += level * tableData[i].Abilityvalue;
+            }
+
+        }
+
+        
+
+
+
+        return ret;
+    }
     public static float GetPassiveAdvanceValue()
     {
         int floor = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value;
@@ -422,6 +449,28 @@ public static class PlayerStats
 
         return ret;
     }
+    public static float GetRingCollectionHasValue(StatusType type)
+    {
+        var tableData = TableManager.Instance.NewGachaTable.dataArray;
+
+        var serverData = ServerData.newGachaServerTable.TableDatas;
+
+        float ret = 0f;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].RINGTYPE == RingType.Basic) continue;
+            if (tableData[i].RINGTYPE == RingType.View) continue;
+            if (serverData[tableData[i].Stringid].hasItem.Value == 0) continue;
+
+            if ((StatusType)tableData[i].Collectioneffecttype == type)
+            {
+                ret += tableData[i].Collectioneffectvalue;
+            }
+        }
+
+        return ret;
+    }
     public static float GetMagicBookCollectionHasValue(StatusType type)
     {
         var tableData = TableManager.Instance.MagicBookTable.dataArray;
@@ -579,7 +628,6 @@ public static class PlayerStats
 
         return ret;
     }
-
     public static float GetMarbleValue(StatusType type)
     {
         float ret = 0f;
@@ -729,6 +777,7 @@ public static class PlayerStats
         ret += GetSonAbilHasEffect(StatusType.CriticalDam);
         ret += GetSinsuEquipEffect(StatusType.CriticalDam);
         ret += GetSusanoAbil(StatusType.CriticalDam);
+        ret += GetRingCollectionHasValue(StatusType.CriticalDam);
 
         return ret;
     }
@@ -739,16 +788,13 @@ public static class PlayerStats
         float ret = 0f;
         ret += ServerData.statusTable.GetStatusValue(StatusTable.GoldGain_memory);
         ret += ServerData.costumeServerTable.GetCostumeAbility(StatusType.GoldGainPer);
-        ret += GetBuffValue(StatusType.GoldGainPer);
         ret += ServerData.petTable.GetStatusValue(StatusType.GoldGainPer);
+        ret += GetBuffValue(StatusType.GoldGainPer);
         ret += GetMarbleValue(StatusType.GoldGainPer);
         ret += GetMagicBookHasPercentValue(StatusType.GoldGainPer);
 
         ret += GetTitleAbilValue(StatusType.GoldGainPer);
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
-
-        ret += GetBuffValue(StatusType.GoldGainPer);
-        ret += GetTitleAbilValue(StatusType.GoldGainPer);
         ret += GetGuildPetEffect(StatusType.GoldGainPer);
 
         return ret;
@@ -781,14 +827,13 @@ public static class PlayerStats
         ret += GetGuildPetEffect(StatusType.ExpGainPer);
         ret += GetPetHomeAbilValue(StatusType.ExpGainPer);
         ret += GetMarkBuffAddValue();
-
+        //
         ret += GetBuffValue(StatusType.ExpGainPer);
         ret += GetHotTimeBuffEffect(StatusType.ExpGainPer);
         ret += GetOneYearBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
-
-
+        //
         ret += GetWeaponHasPercentValue(StatusType.ExpGainPer);
 
         return ret;
@@ -806,6 +851,8 @@ public static class PlayerStats
         ret += GetGuildPetEffect(StatusType.ExpGainPer);
         ret += GetPetHomeAbilValue(StatusType.ExpGainPer);
         ret += GetMarkBuffAddValue();
+
+        ret += GetWeaponHasPercentValue(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -1326,6 +1373,8 @@ public static class PlayerStats
         ret += GetFoxCupAbilValue(GetCurrentFoxCupIdx(), 2);
 
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Gum_memory);
+
+        ret += GetStageRelicHasEffect(StatusType.SuperCritical7DamPer);
 
         return ret;
     }
@@ -2263,7 +2312,7 @@ public static class PlayerStats
         int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.CaveBelt].Value;
         if (equipId == -1) return 0f;
 
-        return (float)TableManager.Instance.CaveBelt.dataArray[equipId].Abilvalue;
+        return (float)TableManager.Instance.CaveBelt.dataArray[equipId].Abilvalue * (1 + GetTwoCaveBeltAbilPlusValue());
     }
 
 
@@ -2506,6 +2555,27 @@ public static class PlayerStats
     {
         return dokebiUpgradeValue * ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireEnhance).Value;
     }//
+    public static float GetTwoCaveBeltAbilPlusValue()
+    {
+        string bossKey = "b91";
+        if(string.IsNullOrEmpty(ServerData.bossServerTable.TableDatas[bossKey].score.Value))
+        {
+            return 0f;
+        }
+        int.TryParse(ServerData.bossServerTable.TableDatas[bossKey].score.Value, out var score);
+        return TableManager.Instance.twoCave.dataArray[score-1].Beltaddvalue;
+    }
+    //public static float GetTwoCaveExpAbilPlusValue()
+    //{
+    //    string bossKey = "b91";
+    //    if (string.IsNullOrEmpty(ServerData.bossServerTable.TableDatas[bossKey].score.Value))
+    //    {
+    //        return 0f;
+    //    }
+    //    int.TryParse(ServerData.bossServerTable.TableDatas[bossKey].score.Value, out var score);
+    //    return TableManager.Instance.twoCave.dataArray[score-1].Expaddvalue;
+    //}
+
 
 
     public static int GetCurrentFoxCupIdx()
@@ -2822,6 +2892,9 @@ public static class PlayerStats
 
         ret += GetRingEquipAbilValue(StatusType.FlowerHasValueUpgrade);
 
+        ret += GetPassiveSkill2Value(StatusType.FlowerHasValueUpgrade);
+
+
         return ret;
     }
 
@@ -2832,6 +2905,8 @@ public static class PlayerStats
         ret += GetGradeTestAbilValue(StatusType.HellHasValueUpgrade);
 
         ret += GetRingEquipAbilValue(StatusType.HellHasValueUpgrade);
+
+        ret += GetPassiveSkill2Value(StatusType.HellHasValueUpgrade);
 
         return ret;
     }
@@ -2845,6 +2920,8 @@ public static class PlayerStats
         ret += GetGradeTestAbilValue(StatusType.DokebiFireHasValueUpgrade);
 
         ret += GetRingEquipAbilValue(StatusType.DokebiFireHasValueUpgrade);
+
+        ret += GetPassiveSkill2Value(StatusType.DokebiFireHasValueUpgrade);
 
         return ret;
     }

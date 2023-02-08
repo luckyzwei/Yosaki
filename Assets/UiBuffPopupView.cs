@@ -192,6 +192,8 @@ public class UiBuffPopupView : MonoBehaviour
     {
         if (initialized == false) return;
 
+        BuffEndCheck();
+
         WhenRemainSecChanged(ServerData.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.Value);
     }
 
@@ -259,10 +261,25 @@ public class UiBuffPopupView : MonoBehaviour
 
         if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Normal)
         {
-            AdManager.Instance.ShowRewardedReward(() =>
+            //모두버튼일때
+            if (PopupManager.Instance.ignoreAlarmMessage) 
             {
-                BuffGetRoutine();
-            });
+                //광고제거 있어야지만 작동
+                if (AdManager.Instance.HasRemoveAdProduct()) 
+                {
+                    AdManager.Instance.ShowRewardedReward(() =>
+                    {
+                        BuffGetRoutine();
+                    });
+                }
+            }
+            else 
+            {
+                AdManager.Instance.ShowRewardedReward(() =>
+                {
+                    BuffGetRoutine();
+                });
+            }
         }
         else if (buffTableData.BUFFTYPEENUM == BuffTypeEnum.Yomul)
         {
@@ -352,21 +369,11 @@ public class UiBuffPopupView : MonoBehaviour
         }
 
         //혹한기 패스 유료버프
-        if (buffTableData.Stringid.Equals("cold1"))
+        if (buffTableData.Stringid.Equals("season3"))
         {
-            if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.coldseasonPassKey].buyCount.Value == 0)
+            if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value == 0)
             {
-                PopupManager.Instance.ShowAlarmMessage("혹한기 패스권이 필요 합니다.");
-                return;
-            }
-
-        }
-        //혹한기 패스 유료버프
-        if (buffTableData.Stringid.Equals("winter1"))
-        {
-            if (ServerData.iapServerTable.TableDatas[UiWinterPassBuyButton.productKey].buyCount.Value == 0)
-            {
-                PopupManager.Instance.ShowAlarmMessage("겨울 훈련권이 필요 합니다.");
+                PopupManager.Instance.ShowAlarmMessage("봄 훈련 패스권이 필요 합니다.");
                 return;
             }
 
@@ -392,5 +399,30 @@ public class UiBuffPopupView : MonoBehaviour
           {
               //LogManager.Instance.SendLog("버프 획득", $"{buffTableData.Stringid}");
           });
+    }
+
+    private void BuffEndCheck()
+    {
+        var severTime = ServerData.userInfoTable.currentServerTime;
+
+
+        //봄훈련 무료버프
+        if (buffTableData.Stringid.Equals("season2"))
+        {
+            if (severTime.Month >= 4)
+            {
+                this.gameObject.SetActive(false);
+                return;
+            }
+        }
+        //봄훈련 유료버프
+        else if (buffTableData.Stringid.Equals("season3"))
+        {
+            if (severTime.Month >= 4)
+            {
+                this.gameObject.SetActive(false);
+                return;
+            }            
+        }
     }
 }

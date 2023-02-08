@@ -14,11 +14,11 @@ public class NewGachaServerData
     public ReactiveProperty<int> hasItem;
     public ReactiveProperty<int> level;
     public ReactiveProperty<int> amount;
-    public ReactiveProperty<int> collectLevel;
-
+    public ReactiveProperty<int> getReward0;
+    public ReactiveProperty<int> getReward1;
     public string ConvertToString()
     {
-        return $"{idx},{hasItem.Value},{level.Value},{amount.Value},{collectLevel.Value}";
+        return $"{idx},{hasItem.Value},{level.Value},{amount.Value},{getReward0.Value},{getReward1.Value}";
     }
 }
 
@@ -72,8 +72,8 @@ public class NewGachaServerTable
                     newGachaData.hasItem = new ReactiveProperty<int>(0);
                     newGachaData.level = new ReactiveProperty<int>(0);
                     newGachaData.amount = new ReactiveProperty<int>(0);
-                    newGachaData.collectLevel = new ReactiveProperty<int>(0);
-
+                    newGachaData.getReward0 = new ReactiveProperty<int>(0);
+                    newGachaData.getReward1 = new ReactiveProperty<int>(0);
                     tableDatas.Add(table[i].Stringid, newGachaData);
                     defultValues.Add(table[i].Stringid, newGachaData.ConvertToString());
                 }
@@ -128,13 +128,18 @@ public class NewGachaServerTable
                         newGacha.level = new ReactiveProperty<int>(int.Parse(splitData[2]));
                         newGacha.amount = new ReactiveProperty<int>(int.Parse(splitData[3]));
 
-                        if (splitData.Length >= 5)
+
+                        if (splitData.Length < 6)
                         {
-                            newGacha.collectLevel = new ReactiveProperty<int>(int.Parse(splitData[4]));
+                            newGacha.getReward0 = new ReactiveProperty<int>(0);
+                            newGacha.getReward1 = new ReactiveProperty<int>(0);
+                            paramCount++;
+                            defultValues.Add(table[i].Stringid, newGacha.ConvertToString());
                         }
                         else
                         {
-                            newGacha.collectLevel = new ReactiveProperty<int>(0);
+                            newGacha.getReward0 = new ReactiveProperty<int>(int.Parse(splitData[4]));
+                            newGacha.getReward1 = new ReactiveProperty<int>(int.Parse(splitData[5]));
                         }
 
                         tableDatas.Add(table[i].Stringid, newGacha);
@@ -147,7 +152,8 @@ public class NewGachaServerTable
                         newGachaData.hasItem = new ReactiveProperty<int>(0);
                         newGachaData.level = new ReactiveProperty<int>(0);
                         newGachaData.amount = new ReactiveProperty<int>(0);
-                        newGachaData.collectLevel = new ReactiveProperty<int>(0);
+                        newGachaData.getReward0 = new ReactiveProperty<int>(0);
+                        newGachaData.getReward1 = new ReactiveProperty<int>(0);
 
                         tableDatas.Add(table[i].Stringid, newGachaData);
                         defultValues.Add(table[i].Stringid, newGachaData.ConvertToString());

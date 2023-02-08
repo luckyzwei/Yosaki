@@ -206,6 +206,8 @@ public class GradeTestManager : ContentsManagerBase
             StopTimer();
         }
 
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearGradeTest);
+
         //점수 전송
         SendScore();
 

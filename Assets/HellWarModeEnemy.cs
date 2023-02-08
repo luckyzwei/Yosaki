@@ -202,7 +202,7 @@ public class HellWarModeEnemy : BossEnemyBase
     {
         enemyHitObjects = GetComponentsInChildren<AlarmHitObject>(true).ToList();
 
-        agentHpController.SetHp(float.MaxValue);
+        agentHpController.SetHp(double.MaxValue);
 
         agentHpController.SetDefense(0);
 

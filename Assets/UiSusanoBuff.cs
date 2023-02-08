@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UniRx;
@@ -22,6 +22,8 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
         if (GameManager.contentsType == GameManager.ContentsType.Online_Tower) return;
         if (GameManager.contentsType == GameManager.ContentsType.GradeTest) return;
         if (GameManager.contentsType == GameManager.ContentsType.SumisanTower) return;
+        if (GameManager.contentsType == GameManager.ContentsType.OldDokebi2) return;
+        if (GameManager.contentsType == GameManager.ContentsType.Online_Tower2) return;
         //산신령
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon &&
             (GameManager.Instance.bossId == 57 ||
@@ -38,7 +40,10 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
             GameManager.Instance.bossId == 85 ||
             GameManager.Instance.bossId == 86 ||
             GameManager.Instance.bossId == 87 ||
-            GameManager.Instance.bossId == 88
+            GameManager.Instance.bossId == 88 ||
+            GameManager.Instance.bossId == 89 ||
+            GameManager.Instance.bossId == 90 ||
+            GameManager.Instance.bossId == 92
             //도깨비 지킴이
 
             )) return;

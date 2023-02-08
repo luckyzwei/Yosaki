@@ -86,6 +86,8 @@ public class RelicDungeonManager : ContentsManagerBase
     {
         UpdateRank();
 
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearRelic);
+
         modeState = ModeState.End;
 
         StopCoroutine(spawnRoutine);

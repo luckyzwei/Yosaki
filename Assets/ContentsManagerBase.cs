@@ -7,7 +7,7 @@ using UnityEngine;
 
 public enum ContentsState
 {
-    Fight, Dead, TimerEnd, Clear, AllPlayerEnd
+    Fight, Dead, TimerEnd, Clear, AllPlayerEnd, Retire
 }
 
 public class ContentsManagerBase : SingletonMono<ContentsManagerBase>

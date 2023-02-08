@@ -56,7 +56,6 @@ public class FoxMaskBoard : MonoBehaviour
 
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{currentIdx + 1}단계\n도전 할까요?", () =>
           {
-
               GameManager.Instance.LoadContents(GameManager.ContentsType.FoxMask);
 
           }, null);

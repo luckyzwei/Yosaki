@@ -408,6 +408,11 @@ public enum Item_Type
     //
     costume82 = 1283, //광목천왕
     costume83 = 1284, //2월 외형
+    
+    costume84 = 1285, //증장천왕
+    costume85 = 1286, //다문천왕
+
+    costume86 = 1287, //그림자동굴
 
     pet0 = 1301,
     pet1 = 1302,
@@ -505,9 +510,13 @@ public enum Item_Type
 
     SumisanWeapon0 = 7120,
     SumisanWeapon1 = 7121,
+    SumisanWeapon2 = 7122,
+    SumisanWeapon3 = 7123,
 
     SumisanNorigae0 = 7130,
     SumisanNorigae1 = 7131,
+    SumisanNorigae2 = 7132,
+    SumisanNorigae3 = 7133,
 
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
@@ -574,6 +583,7 @@ public enum Item_Type
     SumiFire = 9008,
     SumiFireKey = 9009,
     NewGachaEnergy = 9010,
+    DokebiBundle = 9011,
 }
 //
 public class DropItem : PoolItem

@@ -219,6 +219,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.SumiFire,
         GoodsTable.SumiFireKey,
         GoodsTable.NewGachaEnergy,
+        GoodsTable.DokebiBundle,
     };
 
     //SendQueue에서 저장

@@ -6,6 +6,7 @@ using UnityEngine;
 public static class CommonResourceContainer
 {
     private static List<Sprite> weaponSprites;
+    private static List<Sprite> ringSprites;
     private static List<Sprite> magicBookSprites;
     private static List<Sprite> maskSprites;
     private static List<Sprite> beltSprites;
@@ -59,6 +60,33 @@ public static class CommonResourceContainer
         else
         {
             Debug.LogError($"Weapon icon {idx} is not exist");
+            return null;
+        }
+    }
+    public static Sprite GetRingSprite(int idx)
+    {
+        if (ringSprites == null)
+        {
+            var ringIcons = Resources.LoadAll<Sprite>("NewGachaIcon/");
+            ringSprites = ringIcons.ToList();
+
+
+            ringSprites.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
+        }
+
+        if (idx < ringSprites.Count)
+        {
+            return ringSprites[idx];
+        }
+        else
+        {
+            Debug.LogError($"Ring icon {idx} is not exist");
             return null;
         }
     }
@@ -170,6 +198,7 @@ public static class CommonResourceContainer
         }
         else
         {
+            return dragonBall[dragonBall.Count - 1]; ;
             Debug.LogError($"Weapon icon {idx} is not exist");
             return null;
         }
@@ -198,6 +227,7 @@ public static class CommonResourceContainer
         }
         else
         {
+            return foxCup[foxCup.Count - 1]; ;
             Debug.LogError($"Weapon icon {idx} is not exist");
             return null;
         }
@@ -328,10 +358,18 @@ public static class CommonResourceContainer
     {
         return GetPassiveSkillIconSprite(TableManager.Instance.PassiveSkill.dataArray[idx]);
     }
+    public static Sprite GetPassiveSkill2IconSprite(int idx)
+    {
+        return GetPassiveSkill2IconSprite(TableManager.Instance.PassiveSkill2.dataArray[idx]);
+    }
 
     public static Sprite GetPassiveSkillIconSprite(PassiveSkillData skillData)
     {
         return Resources.Load<Sprite>($"PassiveSkillIcon/{skillData.Id}");
+    }
+    public static Sprite GetPassiveSkill2IconSprite(PassiveSkill2Data skillData)
+    {
+        return Resources.Load<Sprite>($"PassiveSkill2Icon/{skillData.Id}");
     }
 
     public static Sprite GetSusanoIcon()

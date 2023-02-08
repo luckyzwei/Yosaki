@@ -53,11 +53,15 @@ public class BuffTableData
   public int Guildlevel { get {return guildlevel; } set { this.guildlevel = value;} }
   
   [SerializeField]
-  int buffusecount;
-  public int Buffusecount { get {return buffusecount; } set { this.buffusecount = value;} }
+  string buffusecount;
+  public string Buffusecount { get {return buffusecount; } set { this.buffusecount = value;} }
   
   [SerializeField]
-  float buffaddvalue;
-  public float Buffaddvalue { get {return buffaddvalue; } set { this.buffaddvalue = value;} }
+  string buffaddvalue;
+  public string Buffaddvalue { get {return buffaddvalue; } set { this.buffaddvalue = value;} }
+  
+  [SerializeField]
+  bool isactive;
+  public bool Isactive { get {return isactive; } set { this.isactive = value;} }
   
 }

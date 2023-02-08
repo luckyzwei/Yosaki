@@ -93,7 +93,7 @@ public class PartyRaidOtherPlayerView_Ingame : MonoBehaviour
                             flippedObject[i].transform.localScale = new Vector3(Mathf.Abs(flippedObject[i].transform.localScale.x), flippedObject[i].transform.localScale.y, flippedObject[i].transform.localScale.z);
                         }
 
-                        if (roomPlayerDatas[keys[i]].endGame)
+                        if (roomPlayerDatas[keys[i]].endGame || roomPlayerDatas[keys[i]].retireGame)
                         {
                             playerView_Room[i].gameObject.SetActive(false);
                         }

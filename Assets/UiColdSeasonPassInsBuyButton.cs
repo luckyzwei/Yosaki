@@ -115,9 +115,9 @@ public class UiColdSeasonPassInsBuyButton : MonoBehaviour
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
 
-        ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalColdSeason).Value += killAddAmount;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalSeason).Value += killAddAmount;
 
-        ServerData.userInfoTable.UpData(UserInfoTable.killCountTotalColdSeason, false);
+        ServerData.userInfoTable.UpData(UserInfoTable.killCountTotalSeason, false);
 
         OnEvent?.Invoke();
     }

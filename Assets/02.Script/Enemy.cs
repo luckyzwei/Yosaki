@@ -14,6 +14,7 @@ public class Enemy : PoolItem
 
     private EnemyMoveController enemyMoveController;
     private FlyMove_Normal flyMove_normal;
+    private OldDokebi2_FlyMove_Normal oldDokebi_flyMove_normal;
 
     private Action<Enemy> returnCallBack;
 
@@ -64,7 +65,14 @@ public class Enemy : PoolItem
         }
         else
         {
-            flyMove_normal = GetComponent<FlyMove_Normal>();
+            if(GameManager.contentsType==GameManager.ContentsType.OldDokebi2)
+            {
+                oldDokebi_flyMove_normal = GetComponent<OldDokebi2_FlyMove_Normal>();
+            }
+            else
+            {
+                flyMove_normal = GetComponent<FlyMove_Normal>();
+            }
         }
 
         enemyHitObject = GetComponentInChildren<EnemyHitObject>();
@@ -118,7 +126,14 @@ public class Enemy : PoolItem
 
         if (isFlyingEnemy)
         {
-            flyMove_normal.Initialize(Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f)) * Vector3.right, tableData.Movespeed);
+            if (GameManager.contentsType == GameManager.ContentsType.OldDokebi2)
+            {
+                oldDokebi_flyMove_normal.Initialize(Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f)) * Vector3.right, tableData.Movespeed);
+            }
+            else
+            {
+                flyMove_normal.Initialize(Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f)) * Vector3.right, tableData.Movespeed);
+            }
         }
 
         if (enemyMoveController != null)

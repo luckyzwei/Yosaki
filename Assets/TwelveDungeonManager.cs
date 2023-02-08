@@ -258,7 +258,14 @@ public class TwelveDungeonManager : ContentsManagerBase
         {
             StopTimer();
         }
-
+        if (GameManager.Instance.bossId == 20)
+        {
+            GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearGangChul);
+        }
+        else if (GameManager.Instance.bossId == 55)
+        {
+            GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearChunma);
+        }
         //점수 전송
         SendScore();
 
@@ -404,7 +411,10 @@ public class TwelveDungeonManager : ContentsManagerBase
                 twelveBossTable.Id == 85 ||
                 twelveBossTable.Id == 86 ||
                 twelveBossTable.Id == 87 ||
-                twelveBossTable.Id == 88
+                twelveBossTable.Id == 88 ||
+                twelveBossTable.Id == 89 ||
+                twelveBossTable.Id == 90 ||
+                twelveBossTable.Id == 92
 
                 )
             {

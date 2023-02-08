@@ -47,11 +47,11 @@ public class UiYoguiSogulRewardCell : MonoBehaviour
 
         itemIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableData.Rewardtype);
 
-        itemDescription.SetText($"{CommonString.GetItemName((Item_Type)tableData.Rewardtype)}({tableData.Stage + 1}단계)");
+        itemDescription.SetText($"{CommonString.GetItemName((Item_Type)tableData.Rewardtype)}({tableData.Stage}단계)");
 
         rewardAmount.SetText($"{Utils.ConvertBigNum(tableData.Rewardvalue)}개");
 
-        lockDescription.SetText($"{tableData.Stage + 1}단계 돌파시 해금");
+        lockDescription.SetText($"{tableData.Stage}단계 돌파시 해금");
 
         Subscribe();
     }

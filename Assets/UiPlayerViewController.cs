@@ -42,10 +42,6 @@ public class UiPlayerViewController : MonoBehaviour
     [SerializeField]
     private GameObject dragon;
 
-    //
-    [SerializeField]
-    private SpriteRenderer fourObject;
-    //
     [SerializeField]
     private GameObject fourObject_EFX;
 
@@ -132,12 +128,10 @@ public class UiPlayerViewController : MonoBehaviour
             dragon.SetActive(e == 1);
 
         }).AddTo(this);
-        //SettingData.fourView.AsObservable().Subscribe(e =>
-        //{
-            
-        //    fourObject.enabled = e == 1;
-        //    fourObject_EFX.SetActive(e == 1);
-        //}).AddTo(this);
+        SettingData.fourView.AsObservable().Subscribe(e =>
+        {
+            fourObject_EFX.SetActive(e == 1);
+        }).AddTo(this);
 
         SettingData.showFoxCup.AsObservable().Subscribe(e =>
         {

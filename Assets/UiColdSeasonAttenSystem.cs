@@ -25,7 +25,7 @@ public class UiColdSeasonAttenSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountColdSeason).Value += 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountSeason).Value += 1;
         }
     }
 #endif
@@ -174,7 +174,7 @@ public class UiColdSeasonAttenSystem : MonoBehaviour
 
     private bool CanGetReward(int require)
     {
-        int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountColdSeason).Value;
+        int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountSeason).Value;
         return killCountTotal >= require;
     }
     public bool HasReward(List<int> splitData, int id)
@@ -184,7 +184,7 @@ public class UiColdSeasonAttenSystem : MonoBehaviour
 
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.coldseasonPassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }
