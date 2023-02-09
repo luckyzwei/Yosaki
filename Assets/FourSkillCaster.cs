@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class FourSkillCaster : SingletonMono<SonSkillCaster>
 {
+    public Transform skillSpawnPos;
 
     private Coroutine skillRoutine;
 
@@ -43,7 +44,6 @@ public class FourSkillCaster : SingletonMono<SonSkillCaster>
         var skillTableDatas = TableManager.Instance.SkillData;
 
         var fourSkills = skillTableDatas.Where(e => e.Value.SKILLCASTTYPE == SkillCastType.Four).Select(e => e.Value).ToList();
-
 
         while (true)
         {
