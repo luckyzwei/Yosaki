@@ -30,7 +30,7 @@ public static class GuideMissionManager
 
             var tableData = TableManager.Instance.GuideMission.dataArray[(int)missionKey];
 
-            PopupManager.Instance.ShowAlarmMessage($"요린이 임무 클리어!({tableData.Name})", 1.0f);
+            PopupManager.Instance.ShowAlarmMessage($"요린이 임무 클리어!({tableData.Name})", 0.5f);
         }
         else
         {

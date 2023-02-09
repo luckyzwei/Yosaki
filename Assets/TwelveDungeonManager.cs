@@ -262,10 +262,6 @@ public class TwelveDungeonManager : ContentsManagerBase
         {
             GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearGangChul);
         }
-        else if (GameManager.Instance.bossId == 55)
-        {
-            GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearChunma);
-        }
         //점수 전송
         SendScore();
 

@@ -98,6 +98,7 @@ public class PartyRaidBossManager : ContentsManagerBase
         Initialize();
         Subscribe();
 
+        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearChunma);
 
     }
     private void Initialize()
@@ -196,6 +197,7 @@ public class PartyRaidBossManager : ContentsManagerBase
 
     private void EndBossMode()
     {
+
         PartyRaidManager.Instance.NetworkManager.playerState.Value = NetworkManager.PlayerState.End;
 
         //공격루틴 제거 + 클리어면 이펙트 켜주던지.?
