@@ -62,7 +62,7 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
                 PlayerSkillCaster.Instance.UseSkill(sonSkills[i].Id);
             }
 
-            yield return new WaitForSeconds(1.0f);
+            yield return null;
         }
     }
 
