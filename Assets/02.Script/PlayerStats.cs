@@ -2555,14 +2555,15 @@ public static class PlayerStats
     {
         return dokebiUpgradeValue * ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireEnhance).Value;
     }//
+    public static string caveBossKey = "b91";
     public static float GetTwoCaveBeltAbilPlusValue()
     {
-        string bossKey = "b91";
-        if(string.IsNullOrEmpty(ServerData.bossServerTable.TableDatas[bossKey].score.Value))
+
+        if(string.IsNullOrEmpty(ServerData.bossServerTable.TableDatas[caveBossKey].score.Value))
         {
             return 0f;
         }
-        int.TryParse(ServerData.bossServerTable.TableDatas[bossKey].score.Value, out var score);
+        int.TryParse(ServerData.bossServerTable.TableDatas[caveBossKey].score.Value, out var score);
         return TableManager.Instance.twoCave.dataArray[score-1].Beltaddvalue;
     }
     //public static float GetTwoCaveExpAbilPlusValue()
