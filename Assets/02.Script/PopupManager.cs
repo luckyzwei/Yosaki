@@ -78,7 +78,7 @@ public class PopupManager : SingletonMono<PopupManager>
         if (ignoreAlarmMessage == true) return;
 
         StartCoroutine(SlowAlarmRoutine(description, delay));
-    }
+    }//1497
 
     IEnumerator SlowAlarmRoutine(string description, float delay)
     {

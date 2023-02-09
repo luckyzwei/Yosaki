@@ -1,7 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using System.Linq;
 
 public class SonSkillCaster : SingletonMono<SonSkillCaster>
 {
@@ -45,28 +46,21 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
     {
         var skillTableDatas = TableManager.Instance.SkillData;
 
+        var sonSkills = skillTableDatas.Where(e => e.Value.SKILLCASTTYPE == SkillCastType.Son).Select(e=>e.Value).ToList();
+
         while (true)
         {
             int sonLevel = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;
 
-            for (int i = 0; i < skillTableDatas.Count; i++)
+            for(int i=0;i< sonSkills.Count; i++) 
             {
-                if (skillTableDatas[i].SKILLCASTTYPE != SkillCastType.Son) continue;
-                if (sonLevel < skillTableDatas[i].Sonunlocklevel) continue;
+                if (sonLevel < sonSkills[i].Sonunlocklevel) continue;
                 if (AutoManager.Instance.canAttack == false && GameManager.Instance.IsNormalField == true) continue;
 
-                PlayerSkillCaster.Instance.UseSkill(skillTableDatas[i].Id);
+                PlayerSkillCaster.Instance.UseSkill(sonSkills[i].Id);
             }
 
             yield return null;
-
-            //float tick = 0.1f;
-
-            //while (tick >= 0.1f)
-            //{
-            //    yield return null;
-            //    tick -= Time.deltaTime;
-            //}
         }
     }
 
