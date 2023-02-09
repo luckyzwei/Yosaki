@@ -123,7 +123,9 @@ public class UiContentsExitButton : MonoBehaviour
             (GameManager.Instance.bossId == 85) ||
             (GameManager.Instance.bossId == 86) ||
             (GameManager.Instance.bossId == 87) ||
-            (GameManager.Instance.bossId == 88)
+            (GameManager.Instance.bossId == 88) ||
+               (GameManager.Instance.bossId == 92) 
+            
             )
             )
         {
