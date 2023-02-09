@@ -2558,7 +2558,6 @@ public static class PlayerStats
     public static string caveBossKey = "b91";
     public static float GetTwoCaveBeltAbilPlusValue()
     {
-
         if(string.IsNullOrEmpty(ServerData.bossServerTable.TableDatas[caveBossKey].score.Value))
         {
             return 0f;
