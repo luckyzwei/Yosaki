@@ -1489,7 +1489,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             PhotonNetwork.CurrentRoom.Name[2] == CommonString.PartyTower2Text[2] &&
             PhotonNetwork.CurrentRoom.Name[3] == CommonString.PartyTower2Text[3] &&
             PhotonNetwork.CurrentRoom.Name[4] == CommonString.PartyTower2Text[4] &&
-            PhotonNetwork.CurrentRoom.Name[5] == CommonString.PartyTower2Text[5]
+            PhotonNetwork.CurrentRoom.Name[5] == CommonString.PartyTower2Text[5];
     }
 
     public bool IsNormalBoss()
