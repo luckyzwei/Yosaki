@@ -40,4 +40,16 @@ public class XMasCollectionData
   int exchangemaxcount;
   public int Exchangemaxcount { get {return exchangemaxcount; } set { this.exchangemaxcount = value;} }
   
+  [SerializeField]
+  bool lastexchange;
+  public bool Lastexchange { get {return lastexchange; } set { this.lastexchange = value;} }
+  
+  [SerializeField]
+  CommonTableEventType commontableeventtype;
+  public CommonTableEventType COMMONTABLEEVENTTYPE { get {return commontableeventtype; } set { this.commontableeventtype = value;} }
+  
+  [SerializeField]
+  bool active;
+  public bool Active { get {return active; } set { this.active = value;} }
+  
 }

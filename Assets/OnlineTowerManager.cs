@@ -1,4 +1,4 @@
-﻿using Cinemachine;
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -432,6 +432,8 @@ public class OnlineTowerManager : ContentsManagerBase
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"현재 단계에서는 보상을 받으실 수 없습니다.\n클리어 : {PartyRaidManager.Instance.NetworkManager.partyRaidTargetFloor + 1} 현재 내 층수 : {ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value + 1}\n같은 층수 일때만 보상을 받으실 수 있습니다.", null);
             }
+
+            GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearCave);
         }
     }
     //null 일때 클리어 못한거
@@ -444,7 +446,7 @@ public class OnlineTowerManager : ContentsManagerBase
         //중복진입 방지
         if (rewarded) return;
 
-        GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearCave);
+       
 
         rewarded = true;
 

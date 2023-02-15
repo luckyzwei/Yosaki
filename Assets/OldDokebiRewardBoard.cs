@@ -35,7 +35,7 @@ public class OldDokebiRewardBoard : MonoBehaviour
             cellLists.Add(cell);
         }
 
-        lastClearStageDesc.SetText($"ÃÖ°í ´Ü°è : {(int)(ServerData.userInfoTable.TableDatas[UserInfoTable.oldDokebi2LastClear].Value)}");
+        lastClearStageDesc.SetText($"ìµœê³  ë‹¨ê³„ : {(int)(ServerData.userInfoTable.TableDatas[UserInfoTable.oldDokebi2LastClear].Value)}");
     }
 
     public void OnClickAllReceiveButton()
@@ -89,13 +89,13 @@ public class OldDokebiRewardBoard : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowAlarmMessage("º¸»óÀ» ¹Ş¾Ò½À´Ï´Ù!");
+                PopupManager.Instance.ShowAlarmMessage("ë³´ìƒì„ ë°›ì•˜ìŠµë‹ˆë‹¤!");
                 SoundManager.Instance.PlaySound("Reward");
             });
         }
         else
         {
-            PopupManager.Instance.ShowAlarmMessage("¹ŞÀ» ¼ö ÀÖ´Â º¸»óÀÌ ¾ø½À´Ï´Ù.");
+            PopupManager.Instance.ShowAlarmMessage("ë°›ì„ ìˆ˜ ìˆëŠ” ë³´ìƒì´ ì—†ìŠµë‹ˆë‹¤.");
         }
     }
 }

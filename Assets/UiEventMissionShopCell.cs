@@ -1,4 +1,4 @@
-﻿using BackEnd;
+using BackEnd;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,6 +35,9 @@ public class UiEventMissionShopCell : MonoBehaviour
     [SerializeField]
     private SkeletonGraphic skeletonGraphic;
 
+    [SerializeField]
+    private GameObject allExchangeLockMask;
+
     private XMasCollectionData tableData;
 
     private void Start()
@@ -55,7 +58,20 @@ public class UiEventMissionShopCell : MonoBehaviour
             }).AddTo(this);
         }
 
-        if (IsCostumeItem() == false && IsPassWeaponItem()==false) return;
+        if (tableData.Lastexchange &&
+          tableData.COMMONTABLEEVENTTYPE == CommonTableEventType.DdukGuk &&
+          allExchangeLockMask != null)
+        {
+            ServerData.userInfoTable.DDukGukCollectionComplete.AsObservable().Subscribe(e =>
+            {
+
+                allExchangeLockMask.SetActive(e == false);
+
+            }).AddTo(this);
+        }
+
+
+        if (IsCostumeItem() == false && IsPassWeaponItem() == false) return;
 
         string itemKey = ((Item_Type)tableData.Itemtype).ToString();
 
@@ -73,7 +89,7 @@ public class UiEventMissionShopCell : MonoBehaviour
                 }
             }).AddTo(this);
         }
-        else if(IsPassWeaponItem())
+        else if (IsPassWeaponItem())
         {
             ServerData.weaponTable.TableDatas[itemKey].hasItem.AsObservable().Subscribe(e =>
             {
@@ -92,7 +108,7 @@ public class UiEventMissionShopCell : MonoBehaviour
     private void Initialize()
     {
         if (button != null)
-        { 
+        {
             button.onEvent.AddListener(OnClickExchangeButton);
         }
         tableData = TableManager.Instance.xMasCollection.dataArray[tableId];
@@ -132,10 +148,19 @@ public class UiEventMissionShopCell : MonoBehaviour
 
     public void OnClickExchangeButton()
     {
-  
+
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             PopupManager.Instance.ShowAlarmMessage("인터넷 연결을 확인해 주세요!");
+            return;
+        }
+
+        if (tableData.COMMONTABLEEVENTTYPE == CommonTableEventType.DdukGuk &&
+         tableData.Lastexchange == true &&
+         ServerData.userInfoTable.SnowCollectionComplete.Value == false
+         )
+        {
+            PopupManager.Instance.ShowAlarmMessage("다른 재화 상품을 전부 교환해야 합니다.");
             return;
         }
 
@@ -158,13 +183,13 @@ public class UiEventMissionShopCell : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("이미 보유하고 있습니다!");
                 return;
             }
-        } 
+        }
         if (IsPassWeaponItem())
         {
             string itemKey = ((Item_Type)tableData.Itemtype).ToString();
 
             //무기
-            if (ServerData.weaponTable.TableDatas[itemKey].hasItem.Value==1)
+            if (ServerData.weaponTable.TableDatas[itemKey].hasItem.Value == 1)
             {
                 PopupManager.Instance.ShowAlarmMessage("이미 보유하고 있습니다!");
                 return;
@@ -201,7 +226,7 @@ public class UiEventMissionShopCell : MonoBehaviour
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
 
     }
-   
+
     private bool IsCostumeItem()
     {
         return ((Item_Type)tableData.Itemtype).IsCostumeItem();
@@ -233,13 +258,13 @@ public class UiEventMissionShopCell : MonoBehaviour
 
             goodsParam.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
 
-            
+
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
         }
-        else if(IsPassWeaponItem())
+        else if (IsPassWeaponItem())
         {
             Param weaponParam = new Param();
 
@@ -260,18 +285,23 @@ public class UiEventMissionShopCell : MonoBehaviour
         {
             string itemKey = ((Item_Type)tableData.Itemtype).ToString();
 
+            if ((Item_Type)tableData.Itemtype == Item_Type.NewGachaEnergy)
+            {
+                itemKey = GoodsTable.NewGachaEnergy;
+            }
+
             Param goodsParam = new Param();
 
 
             goodsParam.Add(GoodsTable.Event_NewYear, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear).Value);
 
-     
+
             goodsParam.Add(itemKey, ServerData.goodsTable.GetTableData(itemKey).Value);
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         }
 
-            Param userInfoParam = new Param();
+        Param userInfoParam = new Param();
 
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
         {
@@ -286,10 +316,10 @@ public class UiEventMissionShopCell : MonoBehaviour
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 획득!!", null);
             }
-            else if(IsPassWeaponItem())
+            else if (IsPassWeaponItem())
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "패스 무기 획득!!", null);
-            }            
+            }
             else
             {
 
@@ -297,5 +327,10 @@ public class UiEventMissionShopCell : MonoBehaviour
 
             //   LogManager.Instance.SendLogType("chuseokExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
         });
+
+        if (tableData.COMMONTABLEEVENTTYPE == CommonTableEventType.DdukGuk)
+        {
+            ServerData.userInfoTable.UpdateDdukGukCollectionComplete();
+        }
     }
 }

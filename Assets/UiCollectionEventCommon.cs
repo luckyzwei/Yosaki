@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,6 +15,8 @@ public class UiCollectionEventCommon : MonoBehaviour
     private void Start()
     {
         SetDescriptionText();
+
+        ServerData.userInfoTable.UpdateSnowCollectionComplete();
     }
 
     private void SetDescriptionText()

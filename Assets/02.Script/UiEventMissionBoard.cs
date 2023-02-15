@@ -1,4 +1,4 @@
-﻿using BackEnd;
+using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,7 +43,7 @@ public class UiEventMissionBoard : MonoBehaviour
     private void Awake()
     {
         Initialize();
-       // CheckChrisEvent();
+        // CheckChrisEvent();
     }
     //private void CheckChrisEvent()
     //{
@@ -92,6 +92,8 @@ public class UiEventMissionBoard : MonoBehaviour
 
     private void Initialize()
     {
+        ServerData.userInfoTable.UpdateDdukGukCollectionComplete();
+
         var tableData = TableManager.Instance.EventMission.dataArray;
 
         for (int i = 0; i < tableData.Length; i++)

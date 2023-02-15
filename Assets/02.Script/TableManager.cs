@@ -1,4 +1,4 @@
-﻿using CodeStage.AntiCheat.ObscuredTypes;
+using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -770,3 +770,8 @@ public class TableManager : SingletonMono<TableManager>
 
 }
 
+
+public enum CommonTableEventType
+{
+    SnowMan, Namul, Wind , DdukGuk
+}

@@ -1,4 +1,4 @@
-﻿using BackEnd;
+using BackEnd;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,7 +42,11 @@ public class UiCollectionEventCommonView : MonoBehaviour
     [SerializeField]
     private SkeletonGraphic skeletonGraphic;
 
+    [SerializeField]
+    private GameObject allExchangeLockMask;
+
     private CommonCollectionEventData tableData;
+
 
     private void Start()
     {
@@ -58,6 +62,18 @@ public class UiCollectionEventCommonView : MonoBehaviour
             {
 
                 buyCountDesc.SetText($"교환 가능 : {e}/{tableData.Exchangemaxcount}");
+
+            }).AddTo(this);
+        }
+
+        if (tableData.Lastexchange &&
+           tableData.COMMONTABLEEVENTTYPE == CommonTableEventType.SnowMan &&
+           allExchangeLockMask != null)
+        {
+            ServerData.userInfoTable.SnowCollectionComplete.AsObservable().Subscribe(e =>
+            {
+
+                allExchangeLockMask.SetActive(e == false);
 
             }).AddTo(this);
         }
@@ -82,6 +98,8 @@ public class UiCollectionEventCommonView : MonoBehaviour
             }
 
         }).AddTo(this);
+
+
     }
 
     private void Initialize()
@@ -190,6 +208,14 @@ public class UiCollectionEventCommonView : MonoBehaviour
             return;
         }
 
+        if (tableData.COMMONTABLEEVENTTYPE == CommonTableEventType.SnowMan &&
+            tableData.Lastexchange == true &&
+            ServerData.userInfoTable.SnowCollectionComplete.Value == false
+            )
+        {
+            PopupManager.Instance.ShowAlarmMessage("다른 재화 상품을 전부 교환해야 합니다.");
+            return;
+        }
 
 
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
@@ -281,6 +307,12 @@ public class UiCollectionEventCommonView : MonoBehaviour
         {
             string itemKey = ((Item_Type)tableData.Itemtype).ToString();
 
+            if ((Item_Type)tableData.Itemtype == Item_Type.NewGachaEnergy)
+            {
+                itemKey = GoodsTable.NewGachaEnergy;
+            }
+
+
             Param goodsParam = new Param();
 
             goodsParam.Add(goodsName, ServerData.goodsTable.GetTableData(goodsName).Value);
@@ -319,5 +351,11 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
             //   LogManager.Instance.SendLogType("chuseokExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
         });
+
+        if (tableData.COMMONTABLEEVENTTYPE == CommonTableEventType.SnowMan)
+        {
+            ServerData.userInfoTable.UpdateSnowCollectionComplete();
+        }
+
     }
 }

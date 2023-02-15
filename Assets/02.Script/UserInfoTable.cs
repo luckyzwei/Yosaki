@@ -203,6 +203,7 @@ public class UserInfoTable
     public const string snow_exchangeCount_2 = "co2";
     public const string snow_exchangeCount_3 = "co3";
     public const string snow_exchangeCount_4 = "co4";
+    public const string snow_exchangeCount_5 = "co5";
 
     public const string refundFox = "rf";
     public const string sendGangChul = "sg";
@@ -230,6 +231,7 @@ public class UserInfoTable
     public const string ny_ex_2 = "ny_ex_2";
     public const string ny_ex_3 = "ny_ex_3";
     public const string ny_ex_4 = "ny_ex_4";
+    public const string ny_ex_5 = "ny_ex_5";
 
     public const string nickNameChange = "nickNameChange";
     public const string getPetHome = "gph";
@@ -406,7 +408,7 @@ public class UserInfoTable
         {exchangeCount_4,0},
         {exchangeCount_5,0},
         {exchangeCount_6,0},
- 
+
         {monthreset,0},
         {refundFox,0},
         {sendGangChul,0},
@@ -429,13 +431,14 @@ public class UserInfoTable
         {exchangeCount_2_Mileage,0},
         {exchangeCount_3_Mileage,0},
         {exchangeCount_4_Mileage,0},
-        
 
         {ny_ex_0,0},
         {ny_ex_1,0},
         {ny_ex_2,0},
         {ny_ex_3,0},
         {ny_ex_4,0},
+        {ny_ex_5,0},
+
 
         {nickNameChange,0},
         {getPetHome,0},
@@ -450,6 +453,7 @@ public class UserInfoTable
         {snow_exchangeCount_2,0f},
         {snow_exchangeCount_3,0f},
         {snow_exchangeCount_4,0f},
+        {snow_exchangeCount_5,0f},
         {dailySleepRewardReceiveCount,0f},
         {sumiFireClear,0f},
     };
@@ -891,8 +895,8 @@ public class UserInfoTable
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.sumipensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.sumipensionAttendance).Value++;
-            } 
-            
+            }
+
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.ringpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.ringpensionAttendance).Value++;
@@ -1032,7 +1036,7 @@ public class UserInfoTable
             userInfoParam.Add(UserInfoTable.exchangeCount_4_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_4_Mileage).Value);
         }
 
-         Param iapParam = null;
+        Param iapParam = null;
 
         var iapTable = TableManager.Instance.InAppPurchase.dataArray;
 
@@ -1103,7 +1107,7 @@ public class UserInfoTable
         ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value = string.Empty;
         yoguiSogulParam.Add(EtcServerTable.guildAttenReward, ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value);
 
-        
+
 
         //주간초기화
         if (weekChanged)
@@ -1115,7 +1119,7 @@ public class UserInfoTable
             goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
 
             ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value = string.Empty;
-            
+
             yoguiSogulParam.Add(EtcServerTable.chunmaTopScore, ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value);
 
             //그림자보스
@@ -1188,7 +1192,7 @@ public class UserInfoTable
         if (currentServerTime.Month == 12) return true;
         if (currentServerTime.Month == 1) return true;
         if (currentServerTime.Month == 2) return true;
-        
+
         return false;
     }
 
@@ -1289,6 +1293,72 @@ public class UserInfoTable
 #endif
         //홀수 달의 경우 true
         return (currentServerTime.Month % 2) == 1;
+    }
+
+    public ReactiveProperty<bool> SnowCollectionComplete = new ReactiveProperty<bool>(false);
+
+    public void UpdateSnowCollectionComplete()
+    {
+        if (SnowCollectionComplete.Value == true) return;
+
+        var tableData = TableManager.Instance.commoncollectionEvent.dataArray;
+
+        bool allComplete = true;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].COMMONTABLEEVENTTYPE != CommonTableEventType.SnowMan) continue;
+
+            if (tableData[i].Active == false) continue;
+
+            if (tableData[i].Lastexchange == true) continue;
+
+            if (string.IsNullOrEmpty(tableData[i].Exchangekey) == true) continue;
+
+            if(this.tableDatas[tableData[i].Exchangekey].Value < tableData[i].Exchangemaxcount) 
+            {
+                allComplete = false;
+                break;
+            }
+        }
+
+        if (allComplete)
+        {
+            SnowCollectionComplete.Value = true;
+        }
+    }
+
+    public ReactiveProperty<bool> DDukGukCollectionComplete = new ReactiveProperty<bool>(false);
+
+    public void UpdateDdukGukCollectionComplete()
+    {
+        if (DDukGukCollectionComplete.Value == true) return;
+
+        var tableData = TableManager.Instance.xMasCollection.dataArray;
+
+        bool allComplete = true;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].COMMONTABLEEVENTTYPE != CommonTableEventType.DdukGuk) continue;
+
+            if (tableData[i].Active == false) continue;
+
+            if (tableData[i].Lastexchange == true) continue;
+
+            if (string.IsNullOrEmpty(tableData[i].Exchangekey) == true) continue;
+
+            if (this.tableDatas[tableData[i].Exchangekey].Value < tableData[i].Exchangemaxcount)
+            {
+                allComplete = false;
+                break;
+            }
+        }
+
+        if (allComplete)
+        {
+            DDukGukCollectionComplete.Value = true;
+        }
     }
 }
 //
