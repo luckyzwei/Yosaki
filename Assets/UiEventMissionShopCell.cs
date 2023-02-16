@@ -157,7 +157,7 @@ public class UiEventMissionShopCell : MonoBehaviour
 
         if (tableData.COMMONTABLEEVENTTYPE == CommonTableEventType.DdukGuk &&
          tableData.Lastexchange == true &&
-         ServerData.userInfoTable.SnowCollectionComplete.Value == false
+         ServerData.userInfoTable.DDukGukCollectionComplete.Value == false
          )
         {
             PopupManager.Instance.ShowAlarmMessage("다른 재화 상품을 전부 교환해야 합니다.");
